@@ -1,0 +1,19 @@
+---
+stages:
+  - build
+#  - release
+#  - deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:$CI_BUILD_REF
+  CONTAINER_STAGING_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:staging
+  CONTAINER_RELEASE_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:latest
+
+build docker image:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+  tags:
+    - docker-ct-builder-ext
