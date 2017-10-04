@@ -1,3 +1,9 @@
+
+FROM node:6
+EXPOSE 3000
+
+
+
 FROM node:latest
 
 WORKDIR /root/
