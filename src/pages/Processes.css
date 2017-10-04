@@ -1,0 +1,151 @@
+.mod-processes {
+  max-width: 1680px;
+  margin: 0 auto 15px auto;
+  padding: 0 15px; }
+  .mod-processes .card {
+    background-color: white;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 0 15px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
+    padding-bottom: 15px; }
+  .mod-processes .options {
+    display: flex;
+    padding: 25px 0;
+    flex-direction: row;
+    align-items: center; }
+  .mod-processes section.search {
+    position: relative;
+    flex-grow: 5; }
+    .mod-processes section.search input {
+      padding: 12px;
+      margin-left: auto;
+      margin-top: 0;
+      border: 1px solid #d9d9d8;
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
+      font-size: 14px;
+      width: 100%;
+      height: 100%; }
+    .mod-processes section.search i.fa-search {
+      color: #61bbd4;
+      position: absolute;
+      right: 14px;
+      top: 8px;
+      font-size: 24px; }
+  .mod-processes a.button {
+    margin-top: 1px; }
+    .mod-processes a.button i.fa-plus {
+      font-size: inherit;
+      margin-left: 10px;
+      margin-top: 4px; }
+  .mod-processes section.processes {
+    display: flex;
+    padding: 0 20px 20px 20px;
+    background-color: white; }
+    .mod-processes section.processes a.new {
+      margin-left: 25px; }
+      .mod-processes section.processes a.new i.fa-plus {
+        margin-left: 35px; }
+  .mod-processes table.processes {
+    width: 100%;
+    word-break: break-all; }
+    .mod-processes table.processes td, .mod-processes table.processes th {
+      text-align: left; }
+    .mod-processes table.processes tr {
+      border-bottom: 1px solid #eff2f3; }
+    .mod-processes table.processes thead th {
+      cursor: pointer; }
+    .mod-processes table.processes thead th.assignee {
+      width: 10%; }
+    .mod-processes table.processes thead th.step {
+      width: 15%; }
+    .mod-processes table.processes thead th.customer {
+      width: 10%; }
+    .mod-processes table.processes thead th.product {
+      width: 15%; }
+    .mod-processes table.processes thead th.workflow_name {
+      width: 15%; }
+    .mod-processes table.processes thead th.started {
+      width: 15%; }
+    .mod-processes table.processes thead th.last_modified {
+      width: 15%; }
+    .mod-processes table.processes thead th.actions {
+      text-align: right;
+      width: 5%; }
+    .mod-processes table.processes thead span {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: larger;
+      color: #a6b6be;
+      padding: 7px 2px 7px 0; }
+    .mod-processes table.processes thead i.fa {
+      float: right;
+      margin-right: 15px;
+      color: #a6b6be; }
+    .mod-processes table.processes tbody tr {
+      cursor: pointer; }
+      .mod-processes table.processes tbody tr:hover {
+        background-color: #F9FCFD; }
+        .mod-processes table.processes tbody tr:hover td.actions i.fa-ellipsis-h {
+          color: #4DB2CF; }
+    .mod-processes table.processes tbody td {
+      word-break: break-word;
+      word-wrap: break-word;
+      padding: 5px 0px; }
+      .mod-processes table.processes tbody td i.fa-info-circle {
+        color: #4DB2CF;
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: bold; }
+      .mod-processes table.processes tbody td div.tool-tip {
+        box-shadow: 1px 2px 6px 1px #d9d9d8;
+        padding: 10px !important;
+        font-size: 14px !important;
+        pointer-events: auto !important;
+        color: #565656 !important;
+        background-color: white !important;
+        max-width: 390px; }
+        .mod-processes table.processes tbody td div.tool-tip.show {
+          opacity: 1 !important; }
+        @media (max-width: 767px) {
+          .mod-processes table.processes tbody td div.tool-tip {
+            max-width: 200px; } }
+        .mod-processes table.processes tbody td div.tool-tip span {
+          text-transform: none; }
+          .mod-processes table.processes tbody td div.tool-tip span.label {
+            font-weight: bold;
+            display: block;
+            padding: 3px 0; }
+          .mod-processes table.processes tbody td div.tool-tip span.value {
+            font-weight: normal;
+            float: right;
+            padding: 0 0 0 60px; }
+    .mod-processes table.processes tbody td.assignee {
+      color: #4DB2CF;
+      font-weight: bold;
+      padding-right: 15px; }
+    .mod-processes table.processes tbody td.actions {
+      cursor: pointer;
+      text-align: right;
+      font-size: 18px;
+      position: relative; }
+    @media (max-width: 767px) {
+      .mod-processes table.processes thead {
+        display: none; }
+      .mod-processes table.processes tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #d9d9d8; }
+      .mod-processes table.processes td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dotted #f0fafe;
+        padding: 8px 0; }
+        .mod-processes table.processes td:before {
+          content: attr(data-label);
+          float: left;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 14px;
+          color: #a6b6be; } }

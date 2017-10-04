@@ -1,0 +1,6 @@
+@import "../stylesheets/mixins.scss";
+
+section.help {
+    @include page;
+
+}

@@ -1,0 +1,29 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/buttons.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-new-process {
+  @include page;
+
+  .card {
+    @include card;
+    padding-bottom: 15px;
+  }
+  section.form-step {
+    padding: 20px 0;
+    h3 {
+      font-size: larger;
+      margin-bottom: 15px;
+      color: $darker-blue;
+    }
+
+    section.form-divider {
+      border-bottom: 1px solid $lightest-grey;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+  }
+
+}
+

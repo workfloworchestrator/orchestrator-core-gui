@@ -1,0 +1,33 @@
+div.flash {
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 6;
+  opacity: .9;
+  transition: top 150ms ease-in-out; }
+  div.flash.hide {
+    transition: top 1000ms ease-in-out;
+    top: -80px; }
+  div.flash.info {
+    background-color: #238f20; }
+  div.flash.warning {
+    background-color: #fd8a25; }
+  div.flash.error {
+    background-color: #B62222; }
+  div.flash .message-container {
+    max-width: 1680px;
+    margin: 0 auto;
+    position: relative; }
+    div.flash .message-container p {
+      padding: 10px 25px 10px 15px;
+      text-transform: uppercase;
+      font-weight: bold; }
+    div.flash .message-container a.close {
+      text-decoration: none;
+      position: absolute;
+      right: 10px;
+      top: -5px;
+      color: white;
+      font-size: larger;
+      padding: 6px; }

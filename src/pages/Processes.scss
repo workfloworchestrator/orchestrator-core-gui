@@ -1,0 +1,194 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+.mod-processes {
+  @include page;
+
+  .card {
+    @include card;
+    padding-bottom: 15px;
+  }
+  .options {
+    display: flex;
+    padding: 25px 0;
+    flex-direction: row;
+    align-items: center;
+  }
+  section.search {
+    position: relative;
+    flex-grow: 5;
+
+    input {
+      padding: 12px;
+      margin-left: auto;
+      margin-top: 0;
+      border: 1px solid $lighter-grey;
+      border-bottom-left-radius: $br;
+      border-top-left-radius: $br;
+      font-size: 14px;
+      width: 100%;
+      height: 100%;
+    }
+
+    i.fa-search {
+      color: lighten($blue, 5);
+      position: absolute;
+      right: 14px;
+      top: 8px;
+      font-size: 24px;
+    }
+  }
+  a.button {
+    margin-top: 1px;
+    i.fa-plus {
+      font-size: inherit;
+      margin-left: 10px;
+      margin-top: 4px;
+    }
+
+  }
+
+  section.processes {
+    display: flex;
+    padding: 0 20px 20px 20px;
+    background-color: white;
+
+    a.new {
+      margin-left: 25px;
+      i.fa-plus {
+        margin-left: 35px;
+      }
+    }
+
+  }
+
+  table.processes {
+    width: 100%;
+    word-break: break-all;
+    td, th {
+      text-align: left;
+    }
+    tr {
+      border-bottom: 1px solid $light-grey;
+    }
+    thead {
+      th {
+        cursor: pointer;
+      }
+      th.assignee {
+        width: 10%;
+      }
+      th.step {
+        width: 15%;
+      }
+      th.customer {
+        width: 10%;
+      }
+      th.product {
+        width: 15%;
+      }
+      th.workflow_name {
+        width: 15%;
+      }
+      th.started{
+        width: 15%;
+      }
+      th.last_modified  {
+        width: 15%;
+      }
+      th.actions {
+        text-align: right;
+        width: 5%;
+      }
+      span {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: larger;
+        color: $medium-grey;
+        padding: 7px 2px 7px 0;
+      }
+      i.fa {
+        float: right;
+        margin-right: 15px;
+        color: $medium-grey;
+      }
+    }
+    tbody {
+      tr {
+        cursor: pointer;
+        &:hover {
+          background-color: $hover;
+          td.actions i.fa-ellipsis-h {
+            color: $blue;
+          }
+        }
+      }
+      td {
+        i.fa-info-circle {
+          @include info-icon;
+        }
+        word-break: break-word;
+        word-wrap: break-word;
+        padding: 5px 0px;
+
+        div.tool-tip {
+          @include tool-tip;
+          span {
+            text-transform: none;
+            &.label {
+              font-weight: bold;
+              display: block;
+              padding: 3px 0;
+            }
+            &.value {
+              font-weight: normal;
+              float: right;
+              padding: 0 0 0 60px;
+            }
+          }
+        }
+      }
+      td.assignee {
+        color: $blue;
+        font-weight: bold;
+        padding-right: 15px;
+      }
+      td.actions {
+        cursor: pointer;
+        text-align: right;
+        font-size: 18px;
+        position: relative;
+
+      }
+    }
+
+    @include phone {
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid $lighter-grey;
+      }
+      td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dotted $light-blue;
+        padding: 8px 0;
+
+        &:before {
+          content: attr(data-label);
+          float: left;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 14px;
+          color: $medium-grey;
+        }
+      }
+
+    }
+
+  }
+}
+

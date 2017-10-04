@@ -1,0 +1,91 @@
+.flash.hide + div.header-container .header {
+  margin: 0 auto;
+  transition: margin-top 500ms ease-in-out; }
+
+.header-container {
+  background-color: white; }
+  .header-container .header {
+    max-width: 1680px;
+    margin: 40px auto 0 auto;
+    padding: 19px 15px 40px 15px;
+    position: relative;
+    transition: margin 150ms ease-in-out; }
+    @media (max-width: 767px) {
+      .header-container .header {
+        margin: 85px auto 0 auto; } }
+    .header-container .header a {
+      color: #4DB2CF;
+      font-weight: bold;
+      text-decoration: none; }
+      .header-container .header a:hover, .header-container .header a:visited {
+        text-decoration: none; }
+    .header-container .header a.logo {
+      position: absolute;
+      top: 12px; }
+      @media (max-width: 767px) {
+        .header-container .header a.logo {
+          position: initial; } }
+      .header-container .header a.logo img {
+        height: 60px; }
+    .header-container .header ul.links {
+      display: flex;
+      align-items: center;
+      font-size: larger;
+      list-style: none; }
+      .header-container .header ul.links li {
+        display: inline-block;
+        margin-right: 15px; }
+        .header-container .header ul.links li i.fa-caret-up, .header-container .header ul.links li i.fa-caret-down {
+          margin-left: 10px;
+          margin-right: 30px; }
+        .header-container .header ul.links li i.fa-user-circle-o {
+          font-size: larger;
+          margin-right: 10px; }
+        .header-container .header ul.links li.title {
+          margin-left: 360px;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-size: 21px;
+          color: #4DB2CF; }
+          @media (max-width: 767px) {
+            .header-container .header ul.links li.title {
+              margin-left: 0; } }
+        .header-container .header ul.links li.profile {
+          margin-left: auto; }
+          @media (max-width: 767px) {
+            .header-container .header ul.links li.profile {
+              display: none; } }
+        .header-container .header ul.links li.border-left {
+          border-left: 1px solid #4DB2CF;
+          padding-left: 15px; }
+          @media (max-width: 767px) {
+            .header-container .header ul.links li.border-left {
+              display: none; } }
+      .header-container .header ul.links a.welcome-link {
+        position: relative;
+        cursor: pointer; }
+      .header-container .header ul.links ul.user-profile {
+        position: absolute;
+        z-index: 2;
+        padding: 10px;
+        list-style: none;
+        width: 430px;
+        top: 50px;
+        right: 40px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); }
+        @media (max-width: 767px) {
+          .header-container .header ul.links ul.user-profile {
+            display: none; } }
+        .header-container .header ul.links ul.user-profile li.user-attribute {
+          font-style: italic;
+          font-size: 13px;
+          margin-bottom: 5px;
+          display: block; }
+          .header-container .header ul.links ul.user-profile li.user-attribute span.user-key {
+            display: inline-block;
+            margin-right: 5px; }
+          .header-container .header ul.links ul.user-profile li.user-attribute span.value {
+            font-style: normal;
+            float: right; }

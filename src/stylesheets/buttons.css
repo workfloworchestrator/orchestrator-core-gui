@@ -1,0 +1,50 @@
+.button {
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  background-color: white;
+  color: #4DB2CF;
+  border: 1px solid #d9d9d8;
+  border-radius: 3px;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none; }
+  .button:hover, .button:visited {
+    text-decoration: none; }
+  .button:not(:last-child) {
+    margin-right: 15px; }
+  .button.disabled {
+    cursor: no-drop; }
+  .button i {
+    margin-left: 10px;
+    color: #a6b6be; }
+  .button.blue {
+    background-color: #4DB2CF;
+    color: white;
+    border: none; }
+    .button.blue.error {
+      background-color: #B62222; }
+    .button.blue i {
+      color: white; }
+  .button.grey {
+    background-color: #d9d9d8;
+    color: white;
+    border: none; }
+    .button.grey i {
+      color: white; }
+  .button.red {
+    background-color: #B62222;
+    color: white;
+    border: none; }
+  .button.green {
+    background-color: #33CD2E;
+    color: white;
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+    .button.green i {
+      color: white;
+      margin: 0;
+      font-size: larger; }
