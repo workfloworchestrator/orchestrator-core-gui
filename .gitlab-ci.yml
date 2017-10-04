@@ -1,8 +1,8 @@
 ---
 stages:
   - build
-#  - release
-#  - deploy
+  - release
+  - deploy
 
 variables:
   CONTAINER_TEST_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:$CI_BUILD_REF
@@ -17,3 +17,51 @@ build docker image:
     - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-ct-builder-ext
+
+release image staging:
+  stage: release
+  image: docker:latest
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_STAGING_IMAGE
+    - docker push $CONTAINER_STAGING_IMAGE
+  tags:
+    - docker-ct-builder-ext
+  only:
+    - staging@SURFnetNOC/workflows-client
+
+release image prod:
+  stage: release
+  image: docker:latest
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  tags:
+    - docker-ct-builder-ext
+  only:
+    - master@SURFnetNOC/workflows-client
+
+deploy to staging:
+  stage: deploy
+  script:
+    - ssh deploy@swarm-01-auto-prd.surf.net  "sudo docker service update --image $CONTAINER_STAGING_IMAGE workflows-client-stg"
+  environment:
+    name: staging
+    url: https://workflows.staging.automation.surf.net/
+  tags:
+    - shell-ext
+  only:
+    - staging@SURFnetNOC/workflows-client
+
+#deploy to prod:
+#  stage: deploy
+#  script:
+#    - ssh deploy@swarm-01-auto-prd.surf.net  "sudo docker service update --image $CONTAINER_RELEASE_IMAGE workflows-client"
+#  environment:
+#    name: prod
+#    url: https://workflows.automation.surf.net/
+#  tags:
+#    - shell-ext
+#  only:
+#    - master@SURFnetNOC/workflows
