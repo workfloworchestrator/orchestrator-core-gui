@@ -59,17 +59,22 @@ I18n.translations.en = {
         },
         product: "Product",
         product_info: "Search and select the product",
-        customer_id: "Customer",
-        customer_id_info: "Search and select the customer for the product",
-        source_msp: "Source Multi-service port",
-        source_msp_info: "The source MSP",
-        destination_msp: "Destination Multi-service port",
-        destination_msp_info: "The destination MSP",
+        owner: "Customer",
+        owner_info: "Search and select the customer for the product",
+        source: "Source Multi-service port",
+        source_info: "The source MSP",
+        destination: "Destination Multi-service port",
+        destination_info: "The destination MSP",
         capacity: "Capacity",
         capacity_info: "Integer marking the capacity of the lightpath",
-        vlan_id: "VLAN",
-        vlan_id_info: "VLAN range",
-        new_process: "New process"
+        vlan: "VLAN",
+        vlan_info: "VLAN range",
+        emails: "Emails",
+        emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
+        new_process: "New process",
+        flash: {
+            create: "Created process for {{ name }}"
+        }
     },
     clipboard: {
         copied: "Copied!",

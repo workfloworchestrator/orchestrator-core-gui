@@ -25,17 +25,6 @@ em {
   }
 }
 
-.validity-input-wrapper {
-  position: relative;
-
-  i {
-    position: absolute;
-    right: 5px;
-    top: 6px;
-    font-size: large;
-  }
-}
-
 input[type=text], input[type=email], textarea {
   display: block;
   width: 100%;

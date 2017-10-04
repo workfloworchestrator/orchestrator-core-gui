@@ -40,7 +40,7 @@ export default class NewProcess extends React.PureComponent {
             startProcess({organisation: organisation, product: product})
                 .then(result => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: product}));
+                    setFlash(I18n.t("process.flash.create", {name: product}));
                 });
         }
     };
@@ -77,8 +77,8 @@ export default class NewProcess extends React.PureComponent {
                     <section className="form-step">
                         <h3>{I18n.t("process.new_process")}</h3>
                         <section className="form-divider">
-                            <label htmlFor="customer">{I18n.t("process.customer_id")}</label>
-                            <em>{I18n.t("process.customer_id_info")}</em>
+                            <label htmlFor="customer">{I18n.t("process.owner")}</label>
+                            <em>{I18n.t("process.owner_info")}</em>
                             <div className="validity-input-wrapper">
                                 <OrganisationSelect organisations={this.props.organisations}
                                                     onChange={this.changeOrganisation}
