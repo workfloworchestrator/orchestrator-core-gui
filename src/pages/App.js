@@ -12,7 +12,7 @@ import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import {config, me, organisations, redirectToAuthorizationServer, reportError, subscriptions, products} from "../api";
+import {config, me, organisations, products, redirectToAuthorizationServer, reportError, subscriptions} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import ProcessDetail from "./ProcessDetail";
@@ -137,7 +137,8 @@ class App extends React.PureComponent {
                         <Route exact path="/" render={() => <Redirect to="/processes"/>}/>
                         <ProtectedRoute path="/processes"
                                         currentUser={currentUser} configuration={configuration}
-                                        render={props => <Processes currentUser={currentUser} {...props}/>}/>
+                                        render={props => <Processes currentUser={currentUser} {...props}
+                                                                    organisations={organisations}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <NewProcess currentUser={currentUser} products={products}
