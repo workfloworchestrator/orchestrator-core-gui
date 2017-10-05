@@ -108,6 +108,7 @@ export default class Processes extends React.PureComponent {
                 {this.sortColumnIcon(name, sorted)}
             </th>
         };
+        
         if (processes.length !== 0) {
             return (
                 <table className="processes">
