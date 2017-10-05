@@ -22,3 +22,5 @@ yarn-error.log*
 
 # we use sass
 *.css
+
+.idea/
