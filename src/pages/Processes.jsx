@@ -71,7 +71,7 @@ export default class Processes extends React.PureComponent {
         return null;
     };
 
-    renderDate = epoch => new Date(epoch).toLocaleString();
+    renderDate = epoch => new Date(epoch * 1000).toLocaleString();
 
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";

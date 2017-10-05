@@ -11,6 +11,7 @@ import "./ProcessDetail.css";
 import OrganisationSelect from "../components/OrganisationSelect";
 import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
+import EmailInput from "../components/EmailInput";
 
 export default class NewProcess extends React.PureComponent {
 
@@ -23,7 +24,8 @@ export default class NewProcess extends React.PureComponent {
             leavePage: true,
             errors: {},
             organisation: "",
-            product: ""
+            product: "",
+            emails: []
 
         };
     }
@@ -35,12 +37,12 @@ export default class NewProcess extends React.PureComponent {
 
     submit = e => {
         stop(e);
-        const {organisation, product} = this.state;
-        if (!isEmpty(organisation) && !isEmpty(product)) {
-            startProcess({organisation: organisation, product: product})
-                .then(result => {
+        const {organisation, product, emails} = this.state;
+        if (!isEmpty(organisation) && !isEmpty(product) && !isEmpty(emails)) {
+            startProcess({organisation: organisation, product: product, emails: emails.join(",")})
+                .then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: product}));
+                    setFlash(I18n.t("process.flash.create", {name: product}));
                 });
         }
     };
@@ -48,6 +50,8 @@ export default class NewProcess extends React.PureComponent {
     changeOrganisation = option => this.setState({organisation: option.value});
 
     changeProduct = option => this.setState({product: option.value});
+
+    changeEmails = emails => this.setState({emails: emails});
 
     renderButtons = () => {
         const {organisation, product} = this.state;
@@ -65,7 +69,7 @@ export default class NewProcess extends React.PureComponent {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction,
-            leavePage, organisation, product
+            leavePage, organisation, product, emails
         } = this.state;
         return (
             <div className="mod-new-process">
@@ -77,13 +81,12 @@ export default class NewProcess extends React.PureComponent {
                     <section className="form-step">
                         <h3>{I18n.t("process.new_process")}</h3>
                         <section className="form-divider">
-                            <label htmlFor="customer">{I18n.t("process.customer_id")}</label>
-                            <em>{I18n.t("process.customer_id_info")}</em>
+                            <label htmlFor="customer">{I18n.t("process.organisation")}</label>
+                            <em>{I18n.t("process.organisation_info")}</em>
                             <div className="validity-input-wrapper">
                                 <OrganisationSelect organisations={this.props.organisations}
                                                     onChange={this.changeOrganisation}
                                                     organisation={organisation}/>
-
                             </div>
                         </section>
                         <section className="form-divider">
@@ -93,7 +96,14 @@ export default class NewProcess extends React.PureComponent {
                                 <ProductSelect products={this.props.products}
                                                onChange={this.changeProduct}
                                                product={product}/>
-
+                            </div>
+                        </section>
+                        <section className="form-divider">
+                            <label htmlFor="email">{I18n.t("process.emails")}</label>
+                            <em>{I18n.t("process.emails_info")}</em>
+                            <div className="validity-input-wrapper">
+                                <EmailInput emails={emails} onChangeEmails={this.changeEmails}
+                                            placeholder={""} multipleEmails={true} emailRequired={true}/>
                             </div>
                         </section>
                         {this.renderButtons()}

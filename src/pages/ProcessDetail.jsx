@@ -13,6 +13,7 @@ import MultiServicePointSelect from "../components/MultiServicePointSelect";
 import Highlight from "react-highlight";
 import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
+import EmailInput from "../components/EmailInput";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -45,7 +46,7 @@ export default class ProcessDetail extends React.PureComponent {
                 }
             }).then(processInstance => {
             const step = processInstance.steps.find(step => step.status === "pending");
-            const stepUserInput = step && step.user_input;
+            const stepUserInput = step && step.form;
             const {configuration, currentUser} = this.props;
             const requiredTeamMembership = configuration[processInstance.assignee];
             /**
@@ -75,12 +76,13 @@ export default class ProcessDetail extends React.PureComponent {
 
     submit = e => {
         stop(e);
+        const id = this.state.process.id;
         const userInput = this.userInput();
         if (this.validateAllUserInput()) {
-            resumeProcess(userInput)
+            resumeProcess(id, userInput)
                 .then(result => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: result.name}));
+                    setFlash(I18n.t("process.flash.update", {name: this.state.process.workflow}));
                 });
         }
     };
@@ -112,7 +114,7 @@ export default class ProcessDetail extends React.PureComponent {
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
 
-    userInput = () => this.state.process.steps.find(step => step.status === "pending").user_input;
+    userInput = () => this.state.process.steps.find(step => step.status === "pending").form;
 
     userInputValue = name => {
         const userInput = this.userInput();
@@ -135,12 +137,20 @@ export default class ProcessDetail extends React.PureComponent {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
-
     };
 
+    changeArrayInput = name => arr => {
+        const value = (arr || []).join(",");
+        this.changeUserInput(name, value);
+        this.validateUserInput(name)({target: {value: value}});
+    };
+
+
     doValidateUserInput = (userInput, value, errors) => {
-        if (userInput.type === "int") {
+        if (userInput.type === "int" || userInput.type === "capacity") {
             errors[userInput.name] = !/^\+?(0|[1-9]\d*)$/.test(value)
+        } else if (userInput.type === "emails") {
+            errors[userInput.name] = isEmpty(value);
         } else {
             errors[userInput.name] = isEmpty(value);
         }
@@ -173,25 +183,35 @@ export default class ProcessDetail extends React.PureComponent {
         const name = userInput.name;
         switch (userInput.type) {
             case "string" :
-            case "int" :
+            case "capacity" :
             case "vlan" :
+            case "ims_id":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
-                                                msps={this.props.multiServicePoints} organisations={this.props.organisations}/>;
-            case "customer_id" :
+                                                msps={this.props.multiServicePoints}
+                                                organisations={this.props.organisations}/>;
+            case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
                                            organisation={userInput.value}/>;
-            case "product_id" :
+            case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
+            case "emails" :
+                return <EmailInput emails={this.userInputToEmail(userInput.value)} onChangeEmails={this.changeArrayInput(name)}
+                                   placeholder={""} multipleEmails={true} emailRequired={true}/>
+            case "email" :
+                return <EmailInput emails={this.userInputToEmail(userInput.value)} onChangeEmails={this.changeArrayInput(name)}
+                                   placeholder={""} multipleEmails={false} />
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
     };
+
+    userInputToEmail = (input) => input ? input.split(",") : [];
 
     renderUserInput = (process, step, stepUserInput) => {
         return (
@@ -222,7 +242,8 @@ export default class ProcessDetail extends React.PureComponent {
         <span key={tab} className={tab === selectedTab ? "active" : ""}
               onClick={this.switchTab(tab)}>
             {I18n.t(`process.tabs.${tab}`)}
-        </span>;
+        </span>
+    ;
 
     render() {
         const {
