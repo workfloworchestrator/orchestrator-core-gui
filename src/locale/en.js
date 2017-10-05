@@ -59,8 +59,8 @@ I18n.translations.en = {
         },
         product: "Product",
         product_info: "Search and select the product",
-        owner: "Customer",
-        owner_info: "Search and select the customer for the product",
+        organisation: "Customer",
+        organisation_info: "Search and select the customer for the product",
         source: "Source Multi-service port",
         source_info: "The source MSP",
         destination: "Destination Multi-service port",
@@ -71,9 +71,12 @@ I18n.translations.en = {
         vlan_info: "VLAN range",
         emails: "Emails",
         emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
+        ims_id: "IMS identifier",
+        ims_id_info: "The IMS identifier stored in the IMS database",
         new_process: "New process",
         flash: {
-            create: "Created process for {{ name }}"
+            create: "Created process for {{name}}",
+            update: "Resumed process {{name}}"
         }
     },
     clipboard: {

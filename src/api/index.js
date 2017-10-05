@@ -56,13 +56,13 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
         .then(validateResponse(showErrorDialog));
 }
 
-function fetchJson(path, options = {}, headers = {}, showErrorDialog = true) {
+function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
     return validFetch(path, options, headers, showErrorDialog)
-        .then(res => res.json());
+        .then(res => result ? res.json() : {});
 }
 
-function postPutJson(path, body, method) {
-    return fetchJson(path, {method: method, body: JSON.stringify(body)});
+function postPutJson(path, body, method, result = true) {
+    return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, true, result);
 }
 
 //API
@@ -90,8 +90,8 @@ export function startProcess(process) {
     return postPutJson("processes", process, "post");
 }
 
-export function resumeProcess(process) {
-    return postPutJson("processes", process, "put");
+export function resumeProcess(pid, userInput) {
+    return postPutJson(`processes/${pid}/resume`, {user_input: userInput}, "put", false);
 }
 
 export function reportError(error) {

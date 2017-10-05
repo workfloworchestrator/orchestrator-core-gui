@@ -76,12 +76,13 @@ export default class ProcessDetail extends React.PureComponent {
 
     submit = e => {
         stop(e);
+        const id = this.state.process.id;
         const userInput = this.userInput();
         if (this.validateAllUserInput()) {
-            resumeProcess(userInput)
+            resumeProcess(id, userInput)
                 .then(result => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: result.name}));
+                    setFlash(I18n.t("process.flash.update", {name: this.state.process.workflow}));
                 });
         }
     };
@@ -184,6 +185,7 @@ export default class ProcessDetail extends React.PureComponent {
             case "string" :
             case "capacity" :
             case "vlan" :
+            case "ims_id":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "msp" :
