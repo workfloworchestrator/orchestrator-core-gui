@@ -178,6 +178,7 @@ export default class Processes extends React.PureComponent {
 
 Processes.propTypes = {
     history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object.isRequired,
+    organisations: PropTypes.array.isRequired
 };
 
