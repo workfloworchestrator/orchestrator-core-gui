@@ -138,6 +138,7 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/processes"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Processes currentUser={currentUser} {...props}
+                                                                    products={products}
                                                                     organisations={organisations}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
