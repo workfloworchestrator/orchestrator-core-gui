@@ -117,7 +117,7 @@ export default class Processes extends React.PureComponent {
     };
 
     renderProcessesTable(processes, actions, sorted) {
-        const columns = ["assignee", "step", "customer", "product", "workflow_name", "started", "last_modified", "actions"];
+        const columns = ["assignee", "step", "status", "customer", "product", "workflow_name", "started", "last_modified", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -136,7 +136,8 @@ export default class Processes extends React.PureComponent {
                     {processes.map((process, index) =>
                         <tr key={`${process.id}_${index}`} onClick={this.showProcess(process)}>
                             <td data-label={I18n.t("processes.assignee")} className="assignee">{process.assignee}</td>
-                            <td data-label={I18n.t("processes.step")} className="status">{process.step}</td>
+                            <td data-label={I18n.t("processes.step")} className="step">{process.step}</td>
+                            <td data-label={I18n.t("processes.status")} className="status">{process.status}</td>
                             <td data-label={I18n.t("processes.customer")}
                                 className="customer">{process.customer_name}</td>
                             <td data-label={I18n.t("processes.product")} className="product">{process.product_name}</td>
@@ -145,7 +146,7 @@ export default class Processes extends React.PureComponent {
                             <td data-label={I18n.t("processes.started")}
                                 className="started">{this.renderDate(process.started)}</td>
                             <td data-label={I18n.t("processes.last_modified")}
-                                className="product">{this.renderDate(process.last_modified)}</td>
+                                className="last_modified">{this.renderDate(process.last_modified)}</td>
                             <td data-label={I18n.t("processes.actions")} className="actions"
                                 onClick={this.toggleActions(process, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>

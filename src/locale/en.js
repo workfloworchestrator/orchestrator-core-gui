@@ -35,6 +35,7 @@ I18n.translations.en = {
         notFound: "No Workflow found",
         assignee: "Assignee",
         step: "Step",
+        status: "Status",
         customer: "Customer",
         product: "product",
         workflow_name: "Workflow",
