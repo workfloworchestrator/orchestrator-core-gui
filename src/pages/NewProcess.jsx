@@ -42,7 +42,9 @@ export default class NewProcess extends React.PureComponent {
             startProcess({organisation: organisation, product: product, emails: emails.join(",")})
                 .then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.create", {name: product}));
+                    const {products} =this.props;
+                    const name = products.find(prod => prod.identifier === product).name
+                    setFlash(I18n.t("process.flash.create", {name: name}));
                 });
         }
     };

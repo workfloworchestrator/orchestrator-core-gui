@@ -75,8 +75,8 @@ I18n.translations.en = {
         ims_id_info: "The IMS identifier stored in the IMS database",
         new_process: "New process",
         flash: {
-            create: "Created process for {{name}}",
-            update: "Resumed process {{name}}"
+            create: "Created process for workflow {{name}}",
+            update: "Resumed process for workflow {{name}}"
         }
     },
     clipboard: {

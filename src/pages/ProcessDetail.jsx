@@ -76,13 +76,13 @@ export default class ProcessDetail extends React.PureComponent {
 
     submit = e => {
         stop(e);
-        const id = this.state.process.id;
+        const {process} = this.state;
         const userInput = this.userInput();
         if (this.validateAllUserInput()) {
-            resumeProcess(id, userInput)
-                .then(result => {
+            resumeProcess(process.id, userInput)
+                .then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: this.state.process.workflow}));
+                    setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
                 });
         }
     };
