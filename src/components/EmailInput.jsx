@@ -85,7 +85,7 @@ export default class EmailInput extends React.PureComponent {
         const {email} = this.state;
 
         return (
-            <section className="form-divider email-input">
+            <section className="email-input">
                 {!disabled && <div className="validity-input-wrapper">
                     <input placeholder={placeholder}
                            type="email"
