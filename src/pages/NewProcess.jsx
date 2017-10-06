@@ -90,20 +90,20 @@ export default class NewProcess extends React.PureComponent {
                             </div>
                         </section>
                         <section className="form-divider">
+                            <label htmlFor="email">{I18n.t("process.emails")}</label>
+                            <em>{I18n.t("process.emails_info")}</em>
+                            <div className="validity-input-wrapper">
+                                <EmailInput emails={emails} onChangeEmails={this.changeEmails}
+                                            placeholder={""} multipleEmails={true} emailRequired={true}/>
+                            </div>
+                        </section>
+                        <section className="form-divider">
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
                             <div className="validity-input-wrapper">
                                 <ProductSelect products={this.props.products}
                                                onChange={this.changeProduct}
                                                product={product}/>
-                            </div>
-                        </section>
-                        <section className="form-divider">
-                            <label htmlFor="email">{I18n.t("process.emails")}</label>
-                            <em>{I18n.t("process.emails_info")}</em>
-                            <div className="validity-input-wrapper">
-                                <EmailInput emails={emails} onChangeEmails={this.changeEmails}
-                                            placeholder={""} multipleEmails={true} emailRequired={true}/>
                             </div>
                         </section>
                         {this.renderButtons()}

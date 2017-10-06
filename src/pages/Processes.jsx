@@ -34,7 +34,11 @@ export default class Processes extends React.PureComponent {
     }
 
     componentDidMount = () => processes()
-        .then(results => this.setState({processes: results, filteredProcesses: results}));
+        .then(results => {
+            const {organisations} = this.props;
+            results.forEach(process => process.customer_name = this.organisationNameByUuid(process.customer, organisations));
+            this.setState({processes: results, filteredProcesses: results})
+        });
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
@@ -52,7 +56,7 @@ export default class Processes extends React.PureComponent {
         let processes = [...this.state.processes];
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["assignee", "step", "customer", "product", "workflow_name"];
+            const searchable = ["assignee", "step", "customer_name", "product", "workflow_name"];
             processes = processes.filter(process => searchable
                 .map(search => process[search].toLowerCase().indexOf(queryToLower))
                 .some(indexOf => indexOf > -1)
@@ -92,6 +96,11 @@ export default class Processes extends React.PureComponent {
         });
     };
 
+    organisationNameByUuid = (uuid, organisations) => {
+        const organisation = organisations.find(org => org.uuid === uuid);
+        return organisation ? organisation.name : uuid;
+    };
+
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
             return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
@@ -99,7 +108,7 @@ export default class Processes extends React.PureComponent {
         return <i/>;
     };
 
-    renderProcessesTable(processes, actions, sorted) {
+    renderProcessesTable(processes, actions, sorted, organisations) {
         const columns = ["assignee", "step", "customer", "product", "workflow_name", "started", "last_modified", "actions"];
         const th = index => {
             const name = columns[index];
@@ -108,7 +117,7 @@ export default class Processes extends React.PureComponent {
                 {this.sortColumnIcon(name, sorted)}
             </th>
         };
-        
+
         if (processes.length !== 0) {
             return (
                 <table className="processes">
@@ -120,7 +129,8 @@ export default class Processes extends React.PureComponent {
                         <tr key={`${process.id}_${index}`} onClick={this.showProcess(process)}>
                             <td data-label={I18n.t("processes.assignee")} className="assignee">{process.assignee}</td>
                             <td data-label={I18n.t("processes.step")} className="status">{process.step}</td>
-                            <td data-label={I18n.t("processes.customer")} className="customer">{process.customer}</td>
+                            <td data-label={I18n.t("processes.customer")}
+                                className="customer">{process.customer_name}</td>
                             <td data-label={I18n.t("processes.product")} className="product">{process.product}</td>
                             <td data-label={I18n.t("processes.workflow_name")}
                                 className="workflow_name">{process.workflow_name}</td>
@@ -148,6 +158,7 @@ export default class Processes extends React.PureComponent {
             filteredProcesses, actions, query, confirmationDialogOpen, confirmationDialogAction,
             confirmationDialogQuestion, sorted
         } = this.state;
+        const {organisations} = this.props;
         return (
             <div className="mod-processes">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -170,7 +181,7 @@ export default class Processes extends React.PureComponent {
                     </div>
                 </div>
                 <section className="processes">
-                    {this.renderProcessesTable(filteredProcesses, actions, sorted)}
+                    {this.renderProcessesTable(filteredProcesses, actions, sorted, organisations)}
                 </section>
             </div>
         );
