@@ -80,6 +80,16 @@ I18n.translations.en = {
             update: "Resumed process for workflow {{name}}"
         }
     },
+    filter: {
+        CHANGES: "Changes",
+        NOC: "NOC",
+        KLANT_SUPPORT: "Klant Support",
+        SYSTEM: "System",
+        label: "ASSIGNEE",
+        all: "ALL",
+        selected: "FILTERED",
+
+    },
     clipboard: {
         copied: "Copied!",
         copy: "Copy to clipboard"
