@@ -46,8 +46,18 @@ I18n.translations.en = {
         submit: "Submit",
         cancel: "Cancel",
         remove: "Delete",
-        deleteConfirmation: "Are you sure you want to delete {{name}}?",
-        no_found: "No processes"
+        details: "Details",
+        abort: "Abort",
+        resume: "Resume",
+        deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
+        abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
+        resumeConfirmation: "Are you sure you want to resume {{name}} process for {{customer}}?",
+        no_found: "No processes",
+        flash: {
+            delete: "Process {{name}} is deleted",
+            abort: "Process {{name}} is aborted",
+            resume: "Process {{name}} is resumed"
+        }
     },
     process: {
         cancel: "Cancel",
@@ -73,6 +83,7 @@ I18n.translations.en = {
         emails: "Emails",
         emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
         ims_id: "IMS identifier",
+        ims_invalid_id: "Invalid / empty IMS port ID. The database data is corrupt / invalid",
         ims_id_info: "The IMS identifier stored in the IMS database",
         new_process: "New process",
         flash: {

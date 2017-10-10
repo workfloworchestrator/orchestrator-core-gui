@@ -2,12 +2,14 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {processes} from "../api";
+import {processes, deleteProcess, abortProcess, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./Processes.css";
 import FilterDropDown from "../components/FilterDropDown";
+import DropDownActions from "../components/DropDownActions";
+import {setFlash} from "../utils/Flash";
 
 export default class Processes extends React.PureComponent {
 
@@ -92,8 +94,77 @@ export default class Processes extends React.PureComponent {
         this.setState({actions: {show: newShow, id: process.id}});
     };
 
-    renderActions = (process, actions) => e => {
-        return null;
+    handleDeleteProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.deleteConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
+            deleteProcess(process.id).then(() => {
+                this.componentDidMount();
+                setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
+            })
+        );
+    };
+
+    handleAbortProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.abortConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
+            abortProcess(process.id).then(() => {
+                this.componentDidMount();
+                setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
+            })
+        );
+    };
+
+    handleResumeProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.resumeConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
+            resumeProcess(process.id).then(() => {
+                this.componentDidMount();
+                setFlash(I18n.t("processes.flash.resume", {name: process.product_name}));
+            })
+        );
+    };
+
+    confirmation = (question, action) => this.setState({
+        confirmationDialogOpen: true,
+        confirmationDialogQuestion: question,
+        confirmationDialogAction: () => {
+            this.cancelConfirmation();
+            action();
+        }
+    });
+
+
+    renderActions = (process, actions) => {
+        const actionId = process.id;
+        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
+            return null;
+        }
+        const options = [];
+        //TODO scope on the context of logged in-user and current status of process
+        options.push({
+            icon: "fa fa-search-plus",
+            label: "details",
+            action: this.showProcess(process)
+        });
+        options.push({
+            icon: "fa fa-hourglass-half",
+            label: "resume",
+            action: this.handleResumeProcess(process)
+        });
+        options.push({
+            icon: "fa fa-trash",
+            label: "remove",
+            action: this.handleDeleteProcess(process),
+            danger: true
+        });
+        options.push({
+            icon: "fa fa-window-close",
+            label: "abort",
+            action: this.handleAbortProcess(process),
+            danger: true
+        });
+
+        return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
 
     renderDate = epoch => new Date(epoch * 1000).toLocaleString();

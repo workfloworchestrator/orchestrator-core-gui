@@ -82,16 +82,24 @@ export function processes() {
     return fetchJson("processes");
 }
 
-export function process(id) {
-    return fetchJson("processes/" + id);
+export function deleteProcess(processId) {
+    return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
+}
+
+export function abortProcess(processId) {
+    return fetchJson(`processes/${processId}/abort`, {method: "PUT"}, {}, true, false);
+}
+
+export function process(processId) {
+    return fetchJson("processes/" + processId);
 }
 
 export function startProcess(process) {
     return postPutJson("processes", process, "post");
 }
 
-export function resumeProcess(pid, userInput) {
-    return postPutJson(`processes/${pid}/resume`, {user_input: userInput}, "put", false);
+export function resumeProcess(processId, userInput) {
+    return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", false);
 }
 
 export function reportError(error) {
