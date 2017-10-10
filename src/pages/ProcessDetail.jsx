@@ -31,7 +31,6 @@ export default class ProcessDetail extends React.PureComponent {
             leavePage: true,
             errors: {},
             isNew: true,
-            userInputAllowed: true,
             stepUserInput: []
         };
     }
@@ -45,18 +44,22 @@ export default class ProcessDetail extends React.PureComponent {
                     throw err;
                 }
             }).then(processInstance => {
-            const step = processInstance.steps.find(step => step.status === "pending");
-            const stepUserInput = step && step.form;
-            const {configuration, currentUser} = this.props;
-            const requiredTeamMembership = configuration[processInstance.assignee];
             /**
              * This is the hook to enforce the correct membership for editing the user_input. For now we
              * don't enforce anything.
              * TODO
              */
+            const {configuration, currentUser} = this.props;
             const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
-            const tabs = (stepUserInput && userInputAllowed ? this.state.tabs : ["process"]);
-            const selectedTab = (stepUserInput && userInputAllowed ? "user_input" : "process" );
+
+            let stepUserInput = [];
+            if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
+                const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");
+                stepUserInput = step && step.form;
+            }
+            const requiredTeamMembership = configuration[processInstance.assignee];
+            const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
+            const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
             //Pre-fill the value of the user_input if the current_state already contains the value
             const state = processInstance.current_state || {};
             if (!isEmpty(state) && !isEmpty(stepUserInput)) {
@@ -64,7 +67,7 @@ export default class ProcessDetail extends React.PureComponent {
             }
             this.setState({
                 process: processInstance, loaded: true, isNew: false, stepUserInput: stepUserInput,
-                userInputAllowed: userInputAllowed, tabs: tabs, selectedTab: selectedTab
+                tabs: tabs, selectedTab: selectedTab
             })
         });
     };
@@ -201,11 +204,13 @@ export default class ProcessDetail extends React.PureComponent {
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
             case "emails" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)} onChangeEmails={this.changeArrayInput(name)}
+                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                                   onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true} emailRequired={true}/>
             case "email" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)} onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={false} />
+                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                                   onChangeEmails={this.changeArrayInput(name)}
+                                   placeholder={""} multipleEmails={false}/>
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -248,12 +253,12 @@ export default class ProcessDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, process, tabs, confirmationDialogOpen, confirmationDialogAction, cancelDialogAction,
-            leavePage, stepUserInput, userInputAllowed, selectedTab
+            leavePage, stepUserInput, selectedTab
         } = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
-        const renderStepForm = renderContent && stepUserInput && userInputAllowed;
+        const renderStepForm = renderContent && !isEmpty(stepUserInput);
         return (
             <div className="mod-process-detail">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}

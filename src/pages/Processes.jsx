@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {processes, deleteProcess, abortProcess, resumeProcess} from "../api";
+import {abortProcess, deleteProcess, processes, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -85,7 +85,8 @@ export default class Processes extends React.PureComponent {
 
         this.setState({
             query: query,
-            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, this.state.sorted, filterAttributes)});
+            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, this.state.sorted, filterAttributes)
+        });
     }, 250);
 
     toggleActions = (process, actions) => e => {
@@ -96,31 +97,40 @@ export default class Processes extends React.PureComponent {
 
     handleDeleteProcess = process => e => {
         stop(e);
-        this.confirmation(I18n.t("processes.deleteConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
-            deleteProcess(process.id).then(() => {
-                this.componentDidMount();
-                setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
-            })
+        this.confirmation(I18n.t("processes.deleteConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                deleteProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
+                })
         );
     };
 
     handleAbortProcess = process => e => {
         stop(e);
-        this.confirmation(I18n.t("processes.abortConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
-            abortProcess(process.id).then(() => {
-                this.componentDidMount();
-                setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
-            })
+        this.confirmation(I18n.t("processes.abortConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                abortProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
+                })
         );
     };
 
     handleResumeProcess = process => e => {
         stop(e);
-        this.confirmation(I18n.t("processes.resumeConfirmation", {name: process.product_name, customer: process.customer_name}), () =>
-            resumeProcess(process.id).then(() => {
-                this.componentDidMount();
-                setFlash(I18n.t("processes.flash.resume", {name: process.product_name}));
-            })
+        this.confirmation(I18n.t("processes.resumeConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                resumeProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.resume", {name: process.product_name}));
+                })
         );
     };
 
@@ -141,6 +151,13 @@ export default class Processes extends React.PureComponent {
         }
         const options = [];
         //TODO scope on the context of logged in-user and current status of process
+        /*
+        failed     -> retry, abort, delete
+        aborted    -> delete
+        running    -> ???
+        completed  -> delete
+        suspended  -> resume=details, abort, delete
+         */
         options.push({
             icon: "fa fa-search-plus",
             label: "details",
