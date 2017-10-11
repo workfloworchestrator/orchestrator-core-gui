@@ -112,6 +112,11 @@ I18n.translations.en = {
         label: "ASSIGNEE",
         all: "ALL",
         selected: "FILTERED",
+        aborted: "Aborted",
+        completed: "Completed",
+        suspended: "Suspended",
+        running: "Running",
+
 
     },
     clipboard: {

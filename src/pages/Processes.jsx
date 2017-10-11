@@ -22,12 +22,21 @@ export default class Processes extends React.PureComponent {
             query: "",
             actions: {show: false, id: ""},
             sorted: {name: "assignee", descending: true},
-            filterAttributes: [
+            filterAttributesAssignee: [
                 {name: "CHANGES", selected: true, count: 0},
                 {name: "KLANT_SUPPORT", selected: true, count: 0},
                 {name: "NOC", selected: true, count: 0},
                 {name: "SYSTEM", selected: true, count: 0}
             ],
+            filterAttributesStatus: [
+                {name: "aborted", selected: true, count: 0},
+                {name: "complete", selected: true, count: 0},
+                {name: "running", selected: true, count: 0},
+                {name: "suspended", selected: true, count: 0},
+                {name: "success", selected: true, count: 0},
+
+            ],
+
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -42,13 +51,18 @@ export default class Processes extends React.PureComponent {
                 process.customer_name = this.organisationNameByUuid(process.customer, organisations);
                 process.product_name = this.productNameById(process.product, products);
             });
-            const newFilterAttributes = [...this.state.filterAttributes];
-            newFilterAttributes.forEach(attr => attr.count = results
+            const newFilterAttributesAssignee = [...this.state.filterAttributesAssignee];
+            newFilterAttributesAssignee.forEach(attr => attr.count = results
                 .filter(process => process.assignee === attr.name).length);
+
+            const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
+            newFilterAttributesStatus.forEach(attr => attr.count = results
+                .filter(process => process.status === attr.name).length);
 
             this.setState({
                 processes: results, filteredProcesses: results,
-                filterAttributes: newFilterAttributes.filter(attr => attr.count > 0)
+                filterAttributesAssignee: newFilterAttributesAssignee.filter(attr => attr.count > 0),
+                filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
             })
         });
 
@@ -64,7 +78,7 @@ export default class Processes extends React.PureComponent {
         this.delayedSearch(query);
     };
 
-    doSearchAndSortAndFilter = (query, processes, sorted, filterAttributes) => {
+    doSearchAndSortAndFilter = (query, processes, sorted, filterAttributesAssignee, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable = ["assignee", "step", "customer_name", "product_name", "workflow_name"];
@@ -75,17 +89,21 @@ export default class Processes extends React.PureComponent {
             processes.sort(this.sortBy(sorted.name));
         }
         processes = processes.filter(process =>
-            filterAttributes.filter(attr => attr.name === process.assignee)[0].selected);
+            filterAttributesAssignee.filter(attr => attr.name === process.assignee)[0].selected);
+        processes = processes.filter(process =>
+            filterAttributesStatus.filter(attr => attr.name === process.status)[0].selected);
         return sorted.descending ? processes : processes.reverse();
     };
 
     delayedSearch = debounce(query => {
         const processes = [...this.state.processes];
-        const {filterAttributes} = this.state;
+        const {filterAttributesAssignee} = this.state;
+        const {filterAttributesStatus} = this.state;
+
 
         this.setState({
             query: query,
-            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, this.state.sorted, filterAttributes)
+            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, this.state.sorted, filterAttributesAssignee, filterAttributesStatus)
         });
     }, 250);
 
@@ -222,19 +240,26 @@ export default class Processes extends React.PureComponent {
     };
 
     filter = item => {
-        const {processes, filterAttributes, sorted, query} = this.state;
-        const newFilterAttributes = [...filterAttributes];
-        newFilterAttributes.forEach(attr => {
+        const {processes, filterAttributesAssignee, filterAttributesStatus, sorted, query} = this.state;
+        const newFilterAttributesAssignee = [...filterAttributesAssignee];
+        newFilterAttributesAssignee.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
+        const newFilterAttributesStatus = [...filterAttributesStatus];
+        newFilterAttributesStatus.forEach(attr => {
             if (attr.name === item.name) {
                 attr.selected = !attr.selected;
             }
         });
         this.setState({
-            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, sorted, newFilterAttributes),
-            filterAttributes: newFilterAttributes
+            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, sorted, newFilterAttributesAssignee, newFilterAttributesStatus),
+            filterAttributesAssignee: newFilterAttributesAssignee,
+            filterAttributesStatus: newFilterAttributesStatus
+
         });
     };
-
 
     organisationNameByUuid = (uuid, organisations) => {
         const organisation = organisations.find(org => org.uuid === uuid);
@@ -302,7 +327,7 @@ export default class Processes extends React.PureComponent {
     render() {
         const {
             filteredProcesses, actions, query, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, sorted, filterAttributes
+            confirmationDialogQuestion, sorted, filterAttributesAssignee, filterAttributesStatus
         } = this.state;
         const {organisations} = this.props;
         return (
@@ -313,7 +338,9 @@ export default class Processes extends React.PureComponent {
                                     question={confirmationDialogQuestion}/>
                 <div className="card">
                     <div className="options">
-                        <FilterDropDown items={filterAttributes} filterBy={this.filter}/>
+                        <FilterDropDown items={filterAttributesAssignee} filterBy={this.filter}/>
+                        <FilterDropDown items={filterAttributesStatus} filterBy={this.filter}/>
+
                         <section className="search">
                             <input className="allowed"
                                    placeholder={I18n.t("processes.searchPlaceHolder")}
