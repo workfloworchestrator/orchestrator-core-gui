@@ -82,7 +82,7 @@ I18n.translations.en = {
         capacity: "Capacity",
         capacity_info: "Integer marking the capacity of the lightpath",
         vlan: "VLAN",
-        vlan_info: "VLAN range",
+        vlan_info: "VLAN range - must be integer",
         emails: "Emails",
         emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
         location_code: "Location code",
