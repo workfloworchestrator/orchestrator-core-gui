@@ -189,7 +189,6 @@ export default class ProcessDetail extends React.PureComponent {
             case "capacity" :
             case "vlan" :
             case "guid":
-            case "ims_free_port":
             case "port":
             case "ieee_interface_type":
             case "ims_port_id":
