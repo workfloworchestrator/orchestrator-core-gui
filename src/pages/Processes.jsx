@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {abortProcess, deleteProcess, processes, resumeProcess} from "../api";
+import {abortProcess, deleteProcess, processes, retryProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -121,15 +121,15 @@ export default class Processes extends React.PureComponent {
         );
     };
 
-    handleResumeProcess = process => e => {
+    handleRetryProcess = process => e => {
         stop(e);
-        this.confirmation(I18n.t("processes.resumeConfirmation", {
+        this.confirmation(I18n.t("processes.retryConfirmation", {
                 name: process.product_name,
                 customer: process.customer_name
             }), () =>
-                resumeProcess(process.id).then(() => {
+                retryProcess(process.id).then(() => {
                     this.componentDidMount();
-                    setFlash(I18n.t("processes.flash.resume", {name: process.product_name}));
+                    setFlash(I18n.t("processes.flash.retry", {name: process.product_name}));
                 })
         );
     };
@@ -149,38 +149,54 @@ export default class Processes extends React.PureComponent {
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
-        const options = [];
-        //TODO scope on the context of logged in-user and current status of process
-        /*
-        failed     -> retry, abort, delete
-        aborted    -> delete
-        running    -> ???
-        completed  -> delete
-        suspended  -> resume=details, abort, delete
-         */
-        options.push({
+        //TODO scope on the context of logged in-user
+        const details = {
             icon: "fa fa-search-plus",
             label: "details",
             action: this.showProcess(process)
-        });
-        options.push({
-            icon: "fa fa-hourglass-half",
-            label: "resume",
-            action: this.handleResumeProcess(process)
-        });
-        options.push({
+        };
+        const userInput = {
+            icon: "fa fa-pencil-square-o",
+            label: "user_input",
+            action: this.showProcess(process)
+        };
+        const retry = {
+            icon: "fa fa-refresh",
+            label: "retry",
+            action: this.handleRetryProcess(process)
+        };
+        const _delete = {
             icon: "fa fa-trash",
-            label: "remove",
+            label: "delete",
             action: this.handleDeleteProcess(process),
             danger: true
-        });
-        options.push({
+        };
+        const abort = {
             icon: "fa fa-window-close",
             label: "abort",
             action: this.handleAbortProcess(process),
             danger: true
-        });
-
+        };
+        let options = [];
+        const status = process.status;
+        switch (status) {
+            case "failed":
+                options = [details, retry, abort, _delete];
+                break;
+            case "aborted":
+                options = [details, _delete];
+                break;
+            case "running": //??
+                options = [details, abort, _delete];
+                break;
+            case "completed":
+                options = [details, _delete];
+                break;
+            case "suspended":
+                options = [userInput, abort, _delete];
+                break;
+            default : throw new Error(`Unknown process status: ${status}`)
+        }
         return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
 

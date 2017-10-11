@@ -102,6 +102,10 @@ export function resumeProcess(processId, userInput) {
     return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", false);
 }
 
+export function retryProcess(processId) {
+    return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
+}
+
 export function reportError(error) {
     return postPutJson("user/error", error, "post");
 }

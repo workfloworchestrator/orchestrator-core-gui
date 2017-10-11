@@ -45,18 +45,19 @@ I18n.translations.en = {
         none: "",
         submit: "Submit",
         cancel: "Cancel",
-        remove: "Delete",
+        delete: "Delete",
         details: "Details",
+        user_input: "User input",
         abort: "Abort",
-        resume: "Resume",
+        retry: "Retry",
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
         abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
-        resumeConfirmation: "Are you sure you want to resume {{name}} process for {{customer}}?",
+        retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
         no_found: "No processes",
         flash: {
             delete: "Process {{name}} is deleted",
             abort: "Process {{name}} is aborted",
-            resume: "Process {{name}} is resumed"
+            retry: "Process {{name}} has been retried"
         }
     },
     process: {
