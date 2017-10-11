@@ -12,7 +12,17 @@ import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import {config, me, organisations, products, redirectToAuthorizationServer, reportError, subscriptions} from "../api";
+import {
+    config,
+    ieeeInterfaceTypes,
+    me,
+    organisations,
+    products,
+    redirectToAuthorizationServer,
+    reportError,
+    subscriptions,
+    workflows
+} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import ProcessDetail from "./ProcessDetail";
@@ -29,6 +39,8 @@ class App extends React.PureComponent {
             configuration: {},
             organisations: [],
             multiServicePoints: [],
+            ieeeInterfaceTypes: [],
+            workflows: [],
             products: [],
             error: false,
             errorDialogOpen: false,
@@ -97,13 +109,17 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions("MSP"), products()]).then(result => {
-                    const [currentUser, allOrganisations, multiServicePoints, allProducts] = result;
+                Promise.all([me(), organisations(), subscriptions("MSP"), products()], workflows(), ieeeInterfaceTypes()).then(result => {
+                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allWorkflows, allIeeeInterfaceTypes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
-                            loading: false, currentUser: currentUser,
-                            configuration: configuration, organisations: allOrganisations,
+                            loading: false,
+                            currentUser: currentUser,
+                            configuration: configuration,
+                            organisations: allOrganisations,
                             multiServicePoints: multiServicePoints,
+                            workflows: allWorkflows,
+                            ieeeInterfaceTypes: allIeeeInterfaceTypes,
                             products: allProducts
                         });
                     } else {
@@ -120,7 +136,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, multiServicePoints, products} = this.state;
+        const {currentUser, configuration, organisations, multiServicePoints, products, workflows, ieeeInterfaceTypes} = this.state;
 
         return (
             <Router>
@@ -142,12 +158,21 @@ class App extends React.PureComponent {
                                                                     organisations={organisations}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
-                                        render={props => <NewProcess currentUser={currentUser} products={products}
-                                                                     organisations={organisations} {...props}/>}/>
+                                        render={props => <NewProcess currentUser={currentUser}
+                                                                     products={products}
+                                                                     organisations={organisations}
+                                                                     workflows={workflows}
+                                                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                                                     {...props}
+                                                                     />}/>
                         <Route path="/process/:id"
-                               render={props => <ProcessDetail currentUser={currentUser} organisations={organisations}
-                                                               configuration={configuration} products={products}
+                               render={props => <ProcessDetail currentUser={currentUser}
+                                                               organisations={organisations}
+                                                               configuration={configuration}
+                                                               products={products}
                                                                multiServicePoints={multiServicePoints}
+                                                               workflows={workflows}
+                                                               ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>

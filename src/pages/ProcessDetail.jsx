@@ -189,6 +189,8 @@ export default class ProcessDetail extends React.PureComponent {
             case "capacity" :
             case "vlan" :
             case "guid":
+            case "ims_free_port":
+            case "port":
             case "ieee_interface_type":
             case "ims_port_id":
             case "ims_id":
@@ -284,6 +286,8 @@ ProcessDetail.propTypes = {
     configuration: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    multiServicePoints: PropTypes.array.isRequired
+    multiServicePoints: PropTypes.array.isRequired,
+    workflows: PropTypes.array.isRequired,
+    ieeeInterfaceTypes: PropTypes.array.isRequired
 };
 

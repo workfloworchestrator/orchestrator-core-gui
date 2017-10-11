@@ -78,6 +78,18 @@ export function products() {
     return fetchJson("products")
 }
 
+export function ieeeInterfaceTypes() {
+    return fetchJson("ims/ieee_interface_types")
+}
+
+export function workflows() {
+    return fetchJson("workflows")
+}
+
+export function initialInput(workflowKey) {
+    return fetchJson(`workflows/${workflowKey}`)
+}
+
 export function processes() {
     return fetchJson("processes");
 }

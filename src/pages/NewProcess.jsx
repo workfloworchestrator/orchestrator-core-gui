@@ -120,6 +120,9 @@ NewProcess.propTypes = {
     history: PropTypes.object.isRequired,
     currentUser: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    workflows: PropTypes.array.isRequired,
+    ieeeInterfaceTypes: PropTypes.array.isRequired
+
 };
 
