@@ -188,6 +188,9 @@ export default class ProcessDetail extends React.PureComponent {
             case "string" :
             case "capacity" :
             case "vlan" :
+            case "guid":
+            case "ieee_interface_type":
+            case "ims_port_id":
             case "ims_id":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
