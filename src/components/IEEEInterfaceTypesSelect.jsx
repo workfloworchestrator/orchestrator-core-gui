@@ -17,7 +17,7 @@ export default function IEEEInterfaceTypesSelectSelect({onChange, interfaceType,
     );
 }
 
-ProductSelect.propTypes = {
+IEEEInterfaceTypesSelectSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     interfaceTypes: PropTypes.array.isRequired,
     interfaceType: PropTypes.string,

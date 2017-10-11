@@ -16,6 +16,7 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "lodash.escape": "^4.0.1",
+    "lodash.isequal": "^4.5.0",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
     "prop-types": "^15.6.0",

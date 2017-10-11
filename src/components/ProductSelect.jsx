@@ -9,7 +9,7 @@ export default function ProductSelect({onChange, product, products, disabled}) {
         <Select className="select-product"
                 onChange={onChange}
                 options={products.map(aProduct => {
-                    return {value: aProduct.identifier, label: aProduct.name};
+                    return {value: aProduct.identifier, label: aProduct.name, workflow: aProduct.workflow};
                 })}
                 value={product}
                 searchable={true}

@@ -20,8 +20,7 @@ import {
     products,
     redirectToAuthorizationServer,
     reportError,
-    subscriptions,
-    workflows
+    subscriptions
 } from "../api";
 import "../locale/en";
 import "../locale/nl";
@@ -40,7 +39,6 @@ class App extends React.PureComponent {
             organisations: [],
             multiServicePoints: [],
             ieeeInterfaceTypes: [],
-            workflows: [],
             products: [],
             error: false,
             errorDialogOpen: false,
@@ -109,8 +107,8 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions("MSP"), products()], workflows(), ieeeInterfaceTypes()).then(result => {
-                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allWorkflows, allIeeeInterfaceTypes] = result;
+                Promise.all([me(), organisations(), subscriptions("MSP"), products(), ieeeInterfaceTypes()]).then(result => {
+                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
                             loading: false,
@@ -118,7 +116,6 @@ class App extends React.PureComponent {
                             configuration: configuration,
                             organisations: allOrganisations,
                             multiServicePoints: multiServicePoints,
-                            workflows: allWorkflows,
                             ieeeInterfaceTypes: allIeeeInterfaceTypes,
                             products: allProducts
                         });
@@ -136,7 +133,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, multiServicePoints, products, workflows, ieeeInterfaceTypes} = this.state;
+        const {currentUser, configuration, organisations, multiServicePoints, products, ieeeInterfaceTypes} = this.state;
 
         return (
             <Router>
@@ -161,8 +158,8 @@ class App extends React.PureComponent {
                                         render={props => <NewProcess currentUser={currentUser}
                                                                      products={products}
                                                                      organisations={organisations}
-                                                                     workflows={workflows}
                                                                      ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                                                     multiServicePoints={multiServicePoints}
                                                                      {...props}
                                                                      />}/>
                         <Route path="/process/:id"
@@ -171,7 +168,6 @@ class App extends React.PureComponent {
                                                                configuration={configuration}
                                                                products={products}
                                                                multiServicePoints={multiServicePoints}
-                                                               workflows={workflows}
                                                                ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                {...props}/>}/>
                         <Route path="/help"

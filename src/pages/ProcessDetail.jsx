@@ -2,18 +2,13 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import ConfirmationDialog from "../components/ConfirmationDialog";
-
 import {process, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import "./ProcessDetail.css";
-import OrganisationSelect from "../components/OrganisationSelect";
-import MultiServicePointSelect from "../components/MultiServicePointSelect";
 import Highlight from "react-highlight";
 import "highlight.js/styles/default.css";
-import ProductSelect from "../components/ProductSelect";
-import EmailInput from "../components/EmailInput";
+import ProcessStep from "../components/ProcessStep";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -25,12 +20,6 @@ export default class ProcessDetail extends React.PureComponent {
             tabs: ["user_input", "process"],
             selectedTab: "process",
             loaded: false,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
-            cancelDialogAction: () => this.props.history.push("/processes"),
-            leavePage: true,
-            errors: {},
-            isNew: true,
             stepUserInput: []
         };
     }
@@ -66,48 +55,19 @@ export default class ProcessDetail extends React.PureComponent {
                 stepUserInput.forEach(userInput => userInput.value = state[userInput.name]);
             }
             this.setState({
-                process: processInstance, loaded: true, isNew: false, stepUserInput: stepUserInput,
+                process: processInstance, loaded: true, stepUserInput: stepUserInput,
                 tabs: tabs, selectedTab: selectedTab
             })
         });
     };
 
-    cancel = e => {
-        stop(e);
-        this.setState({confirmationDialogOpen: true});
-    };
-
-    submit = e => {
-        stop(e);
+    validSubmit = stepUserInput => {
         const {process} = this.state;
-        const userInput = this.userInput();
-        if (this.validateAllUserInput()) {
-            resumeProcess(process.id, userInput)
-                .then(() => {
-                    this.props.history.push(`/processes`);
-                    setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
-                });
-        }
-    };
-
-    validateAllUserInput = () => {
-        const errors = {...this.state.errors};
-        const userInput = this.userInput();
-        userInput.forEach(input => this.doValidateUserInput(input, input.value, errors));
-        this.setState({errors: errors});
-        return !Object.keys(errors).some(key => errors[key]);
-    };
-
-    renderButtons = () => {
-        const invalid = this.isInvalid();
-        return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
-                {I18n.t("process.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
-                {I18n.t("process.submit")}
-            </a>
-        </section>);
+        resumeProcess(process.id, stepUserInput)
+            .then(() => {
+                this.props.history.push(`/processes`);
+                setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
+            });
     };
 
     switchTab = tab => e => {
@@ -115,122 +75,9 @@ export default class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
-
-    userInput = () => this.state.process.steps.find(step => step.status === "pending").form;
-
-    userInputValue = name => {
-        const userInput = this.userInput();
-        return userInput.find(input => input.name === name).value || "";
-    };
-
-
-    changeUserInput = (name, value) => {
-        const userInput = [...this.userInput()];
-        userInput.find(input => input.name === name).value = value;
-        this.setState({process: {...this.state.process, user_input: userInput}});
-    };
-
-    changeStringInput = name => e => {
-        const value = e.target.value;
-        this.changeUserInput(name, value);
-    };
-
-    changeSelectInput = name => option => {
-        const value = option ? option.value : null;
-        this.changeUserInput(name, value);
-        this.validateUserInput(name)({target: {value: value}});
-    };
-
-    changeArrayInput = name => arr => {
-        const value = (arr || []).join(",");
-        this.changeUserInput(name, value);
-        this.validateUserInput(name)({target: {value: value}});
-    };
-
-
-    doValidateUserInput = (userInput, value, errors) => {
-        if (userInput.type === "int" || userInput.type === "capacity") {
-            errors[userInput.name] = !/^\+?(0|[1-9]\d*)$/.test(value)
-        } else if (userInput.type === "emails") {
-            errors[userInput.name] = isEmpty(value);
-        } else {
-            errors[userInput.name] = isEmpty(value);
-        }
-    };
-
-    validateUserInput = name => e => {
-        const value = e.target.value;
-        const userInput = this.userInput().find(input => input.name === name);
-        const errors = {...this.state.errors};
-        this.doValidateUserInput(userInput, value, errors);
-        this.setState({errors: errors});
-    };
-
-    renderInput = userInput => {
-        const name = userInput.name;
-        return (
-            <section key={name} className="form-divider">
-                <label htmlFor="name">{I18n.t(`process.${name}`)}</label>
-                <em>{I18n.t(`process.${name}_info`)}</em>
-                <div className="validity-input-wrapper">
-                    {this.chooseInput(userInput)}
-                </div>
-                {this.state.errors[name] &&
-                <em className="error">{I18n.t("process.format_error")}</em>}
-            </section>);
-
-    };
-
-    chooseInput = userInput => {
-        const name = userInput.name;
-        switch (userInput.type) {
-            case "string" :
-            case "capacity" :
-            case "vlan" :
-            case "guid":
-            case "port":
-            case "ieee_interface_type":
-            case "ims_port_id":
-            case "ims_id":
-                return <input type="text" id={name} name={name} value={this.userInputValue(name)}
-                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
-            case "msp" :
-                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
-                                                msps={this.props.multiServicePoints}
-                                                organisations={this.props.organisations}/>;
-            case "organisation" :
-                return <OrganisationSelect key={name} organisations={this.props.organisations}
-                                           onChange={this.changeSelectInput(name)}
-                                           organisation={userInput.value}/>;
-            case "product" :
-                return <ProductSelect products={this.props.products}
-                                      onChange={this.changeSelectInput(name)}
-                                      product={userInput.value}/>;
-            case "emails" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
-                                   onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={true} emailRequired={true}/>
-            case "email" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
-                                   onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={false}/>
-            default:
-                throw new Error(`Invalid / unknown type ${userInput.type}`);
-        }
-    };
-
-    userInputToEmail = (input) => input ? input.split(",") : [];
-
-    renderUserInput = (process, step, stepUserInput) => {
-        return (
-            <section className="form-step">
-                <h3>{I18n.t("process.userInput", {name: step.name, product: process.product})}</h3>
-                {stepUserInput.map(input => this.renderInput(input))}
-            </section>)
-    };
-
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput) => {
+        const {ieeeInterfaceTypes, products, organisations, multiServicePoints, history} = this.props;
+        const productName = products.find(prod => prod.identifier === process.product).name
         if (selectedTab === "process") {
             return <section className="card">
                 <section className="process-detail">
@@ -241,8 +88,10 @@ export default class ProcessDetail extends React.PureComponent {
             </section>;
         } else {
             return <section className="card">
-                {this.renderUserInput(process, step, stepUserInput)}
-                {this.renderButtons()}
+                <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
+                <ProcessStep ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
+                             products={products} organisations={organisations} history={history}
+                             multiServicePoints={multiServicePoints} validSubmit={this.validSubmit}/>
             </section>;
         }
     };
@@ -255,20 +104,13 @@ export default class ProcessDetail extends React.PureComponent {
     ;
 
     render() {
-        const {
-            loaded, notFound, process, tabs, confirmationDialogOpen, confirmationDialogAction, cancelDialogAction,
-            leavePage, stepUserInput, selectedTab
-        } = this.state;
+        const {loaded, notFound, process, tabs, stepUserInput, selectedTab} = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         const renderStepForm = renderContent && !isEmpty(stepUserInput);
         return (
             <div className="mod-process-detail">
-                <ConfirmationDialog isOpen={confirmationDialogOpen}
-                                    cancel={cancelDialogAction}
-                                    confirm={confirmationDialogAction}
-                                    leavePage={leavePage}/>
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
@@ -286,7 +128,6 @@ ProcessDetail.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
-    workflows: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired
 };
 
