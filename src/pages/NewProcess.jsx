@@ -23,13 +23,14 @@ export default class NewProcess extends React.Component {
     validSubmit = stepUserInput => {
         if (!isEmpty(this.state.product)) {
             const product = {name: "product", type: "product", value: this.state.product};
-            stepUserInput.push(product);
+            //create a copy to prevent re-rendering
+            let processInput = [...stepUserInput];
+            processInput.push(product);
 
-            const processInput = stepUserInput.reduce((acc, input) => {
+            processInput = processInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
                 return acc;
             }, {});
-            debugger;
             startProcess(processInput)
                 .then(() => {
                     this.props.history.push(`/processes`);
