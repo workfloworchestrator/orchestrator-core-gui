@@ -36,7 +36,6 @@ export default class Processes extends React.PureComponent {
                 {name: "success", selected: true, count: 0},
 
             ],
-
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -257,7 +256,6 @@ export default class Processes extends React.PureComponent {
             filteredProcesses: this.doSearchAndSortAndFilter(query, processes, sorted, newFilterAttributesAssignee, newFilterAttributesStatus),
             filterAttributesAssignee: newFilterAttributesAssignee,
             filterAttributesStatus: newFilterAttributesStatus
-
         });
     };
 
