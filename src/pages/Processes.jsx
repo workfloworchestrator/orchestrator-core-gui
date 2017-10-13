@@ -336,9 +336,12 @@ export default class Processes extends React.PureComponent {
                                     question={confirmationDialogQuestion}/>
                 <div className="card">
                     <div className="options">
-                        <FilterDropDown items={filterAttributesAssignee} filterBy={this.filter} label='Assignee'/>
-                        <FilterDropDown items={filterAttributesStatus} filterBy={this.filter} label='Status'/>
-
+                        <FilterDropDown items={filterAttributesAssignee}
+                                        filterBy={this.filter}
+                                        label={I18n.t("processes.assignee")}/>
+                        <FilterDropDown items={filterAttributesStatus}
+                                        filterBy={this.filter}
+                                        label={I18n.t("processes.status")}/>
                         <section className="search">
                             <input className="allowed"
                                    placeholder={I18n.t("processes.searchPlaceHolder")}
