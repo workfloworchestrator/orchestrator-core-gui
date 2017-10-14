@@ -55,7 +55,7 @@ export default class NewProcess extends React.Component {
 
     render() {
         const {product, stepUserInput} = this.state;
-        const {organisations, products, ieeeInterfaceTypes, multiServicePoints, history} = this.props;
+        const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
         return (
             <div className="mod-new-process">
                 <section className="card">
@@ -71,9 +71,14 @@ export default class NewProcess extends React.Component {
                             </div>
                         </section>
                         {!isEmpty(stepUserInput) &&
-                        <ProcessStep stepUserInput={stepUserInput} multiServicePoints={multiServicePoints}
-                                     history={history} organisations={organisations} products={products}
-                                     ieeeInterfaceTypes={ieeeInterfaceTypes} validSubmit={this.validSubmit}/>}
+                        <ProcessStep stepUserInput={stepUserInput}
+                                     multiServicePoints={multiServicePoints}
+                                     history={history}
+                                     organisations={organisations}
+                                     products={products}
+                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                     locationCodes={locationCodes}
+                                     validSubmit={this.validSubmit}/>}
                     </section>
                 </section>
             </div>
@@ -88,5 +93,6 @@ NewProcess.propTypes = {
     products: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
+    locationCodes: PropTypes.array.isRequired,
 };
 

@@ -82,6 +82,10 @@ export function ieeeInterfaceTypes() {
     return fetchJson("ims/ieee_interface_types")
 }
 
+export function locationCodes() {
+    return fetchJson("ims/location_codes")
+}
+
 export function initialWorkflowInput(workflowKey) {
     return fetchJson(`workflows/${workflowKey}`)
 }

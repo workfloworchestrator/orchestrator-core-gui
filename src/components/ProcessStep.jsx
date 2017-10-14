@@ -12,6 +12,7 @@ import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
+import LocationCodeSelect from "./LocationCodeSelect";
 
 import "./ProcessStep.css";
 
@@ -167,15 +168,19 @@ export default class ProcessStep extends React.Component {
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={true} emailRequired={true}/>
+                                   placeholder={""} multipleEmails={true} emailRequired={true}/>;
             case "email" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={false}/>
+                                   placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
                 return <IEEEInterfaceTypesSelectSelect onChange={this.changeSelectInput(name)}
-                                                interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                interfaceType={userInput.value}/>
+                                                       interfaceTypes={this.props.ieeeInterfaceTypes}
+                                                       interfaceType={userInput.value}/>;
+            case "location_code":
+                return <LocationCodeSelect onChange={this.changeSelectInput(name)}
+                                           locationCodes={this.props.locationCodes}
+                                           locationCode={userInput.value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -209,6 +214,7 @@ ProcessStep.propTypes = {
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired,
+    locationCodes: PropTypes.array.isRequired,
     validSubmit: PropTypes.func.isRequired
 };
 

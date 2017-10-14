@@ -15,6 +15,7 @@ import Navigation from "../components/Navigation";
 import {
     config,
     ieeeInterfaceTypes,
+    locationCodes,
     me,
     organisations,
     products,
@@ -27,6 +28,7 @@ import "../locale/nl";
 import ProcessDetail from "./ProcessDetail";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+console.log(locationCodes());
 
 class App extends React.PureComponent {
 
@@ -39,6 +41,7 @@ class App extends React.PureComponent {
             organisations: [],
             multiServicePoints: [],
             ieeeInterfaceTypes: [],
+            locationCodes: [],
             products: [],
             error: false,
             errorDialogOpen: false,
@@ -107,8 +110,8 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions("MSP"), products(), ieeeInterfaceTypes()]).then(result => {
-                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes] = result;
+                Promise.all([me(), organisations(), subscriptions("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
+                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
                             loading: false,
@@ -117,6 +120,7 @@ class App extends React.PureComponent {
                             organisations: allOrganisations,
                             multiServicePoints: multiServicePoints,
                             ieeeInterfaceTypes: allIeeeInterfaceTypes,
+                            locationCodes: allLocationCodes,
                             products: allProducts
                         });
                     } else {
@@ -133,7 +137,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, multiServicePoints, products, ieeeInterfaceTypes} = this.state;
+        const {currentUser, configuration, organisations, multiServicePoints, products, ieeeInterfaceTypes, locationCodes} = this.state;
 
         return (
             <Router>
@@ -160,6 +164,7 @@ class App extends React.PureComponent {
                                                                      organisations={organisations}
                                                                      ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                      multiServicePoints={multiServicePoints}
+                                                                     locationCodes={locationCodes}
                                                                      {...props}
                                                                      />}/>
                         <Route path="/process/:id"
@@ -169,6 +174,7 @@ class App extends React.PureComponent {
                                                                products={products}
                                                                multiServicePoints={multiServicePoints}
                                                                ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                                               locationCodes={locationCodes}
                                                                {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
