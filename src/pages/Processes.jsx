@@ -29,12 +29,11 @@ export default class Processes extends React.PureComponent {
                 {name: "SYSTEM", selected: true, count: 0}
             ],
             filterAttributesStatus: [
+                {name: "failed", selected: true, count: 0},
                 {name: "aborted", selected: true, count: 0},
-                {name: "complete", selected: true, count: 0},
+                {name: "completed", selected: true, count: 0},
                 {name: "running", selected: true, count: 0},
-                {name: "suspended", selected: true, count: 0},
-                {name: "success", selected: true, count: 0},
-
+                {name: "suspended", selected: true, count: 0}
             ],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,

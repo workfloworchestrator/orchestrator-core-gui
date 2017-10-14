@@ -116,8 +116,7 @@ I18n.translations.en = {
         completed: "Completed",
         suspended: "Suspended",
         running: "Running",
-
-
+        failed: "Failed"
     },
     clipboard: {
         copied: "Copied!",
