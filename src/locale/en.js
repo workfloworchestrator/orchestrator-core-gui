@@ -111,7 +111,7 @@ I18n.translations.en = {
         copied: "Copied",
         raw: "Show raw JSON",
         details: "Show details",
-        stateChanges: "Show state delta's",
+        stateChanges: "Show state input",
         wording: "Process {{product}} for {{customer}}",
         summary: {
             status: "Status",
