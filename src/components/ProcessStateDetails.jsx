@@ -104,7 +104,10 @@ export default class ProcessStateDetails extends React.PureComponent {
                 if (isEmpty(step.form)) {
                     return null;
                 }
-                json = step.form;
+                json = step.form.reduce((acc, field) => {
+                    acc[field.name] = "";
+                    return acc;
+                },{});
                 break;
             case "failed" :
                 json = step.state;
