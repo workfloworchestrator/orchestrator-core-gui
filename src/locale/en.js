@@ -28,7 +28,7 @@ I18n.translations.en = {
 
     processes: {
         changes: "Changes",
-        noc: "NOC",
+        noc: "NOC Engineers",
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
         new: "New Process",
