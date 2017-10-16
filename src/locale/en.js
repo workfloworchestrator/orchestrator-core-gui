@@ -98,6 +98,7 @@ I18n.translations.en = {
         ieee_interface_type_info: "The IEEE interface type",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+        noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
         flash: {
             create: "Created process for workflow {{name}}",

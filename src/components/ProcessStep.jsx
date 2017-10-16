@@ -14,6 +14,7 @@ import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
 
 import "./ProcessStep.css";
+import CheckBox from "./CheckBox";
 
 
 export default class ProcessStep extends React.Component {
@@ -88,6 +89,13 @@ export default class ProcessStep extends React.Component {
         this.changeUserInput(name, value);
     };
 
+    changeBooleanInput = name => e => {
+        const value = e.target.checked;
+        this.changeUserInput(name, value);
+        const {stepUserInput} = this.state;
+        this.validateAllUserInput(stepUserInput);
+    };
+
     changeSelectInput = name => option => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
@@ -108,8 +116,7 @@ export default class ProcessStep extends React.Component {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
-        }
-        else if (type === "emails") {
+        } else if (type === "emails") {
             errors[name] = isEmpty(value);
         } else {
             errors[name] = isEmpty(value);
@@ -126,10 +133,11 @@ export default class ProcessStep extends React.Component {
 
     renderInput = userInput => {
         const name = userInput.name;
+        const isBoolean = userInput.type === "boolean";
         return (
             <section key={name} className="form-divider">
-                <label htmlFor="name">{I18n.t(`process.${name}`)}</label>
-                <em>{I18n.t(`process.${name}_info`)}</em>
+                {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
+                {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
                 <div className="validity-input-wrapper">
                     {this.chooseInput(userInput)}
                 </div>
@@ -167,15 +175,19 @@ export default class ProcessStep extends React.Component {
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={true} emailRequired={true}/>
+                                   placeholder={""} multipleEmails={true} emailRequired={true}/>;
             case "email" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={false}/>
+                                   placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
                 return <IEEEInterfaceTypesSelectSelect onChange={this.changeSelectInput(name)}
-                                                interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                interfaceType={userInput.value}/>
+                                                       interfaceTypes={this.props.ieeeInterfaceTypes}
+                                                       interfaceType={userInput.value}/>;
+            case "boolean":
+                return <CheckBox name={userInput.name} value={userInput.value || false}
+                                 onChange={this.changeBooleanInput(userInput.name)}
+                                 info={I18n.t(`process.${userInput.name}`)}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
