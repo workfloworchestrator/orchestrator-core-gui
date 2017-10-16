@@ -6,9 +6,10 @@ import {process, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import "./ProcessDetail.css";
-import Highlight from "react-highlight";
 import "highlight.js/styles/default.css";
-import ProcessStep from "../components/ProcessStep";
+import UserInputForm from "../components/UserInputForm";
+import ProcessStateDetails from "../components/ProcessStateDetails";
+import {organisationNameByUuid, productNameById} from "../utils/Lookups";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -38,7 +39,11 @@ export default class ProcessDetail extends React.PureComponent {
              * don't enforce anything.
              * TODO
              */
-            const {configuration, currentUser} = this.props;
+            const {configuration, currentUser, organisations, products} = this.props;
+
+            processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
+            processInstance.productName = productNameById(processInstance.product, products);
+
             const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
 
             let stepUserInput = [];
@@ -80,16 +85,12 @@ export default class ProcessDetail extends React.PureComponent {
         const productName = products.find(prod => prod.identifier === process.product).name
         if (selectedTab === "process") {
             return <section className="card">
-                <section className="process-detail">
-                    <Highlight className="JSON">
-                        {JSON.stringify(process, null, 4)}
-                    </Highlight>
-                </section>
+                <ProcessStateDetails process={process}/>
             </section>;
         } else {
             return <section className="card">
                 <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
-                <ProcessStep ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
+                <UserInputForm ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
                              products={products} organisations={organisations} history={history}
                              multiServicePoints={multiServicePoints} validSubmit={this.validSubmit}/>
             </section>;

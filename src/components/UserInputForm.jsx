@@ -13,11 +13,11 @@ import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
 
-import "./ProcessStep.css";
+import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
 
 
-export default class ProcessStep extends React.Component {
+export default class UserInputForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -214,7 +214,7 @@ export default class ProcessStep extends React.Component {
     }
 }
 
-ProcessStep.propTypes = {
+UserInputForm.propTypes = {
     history: PropTypes.object.isRequired,
     stepUserInput: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,

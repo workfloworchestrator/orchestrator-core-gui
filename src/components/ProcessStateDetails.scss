@@ -1,0 +1,114 @@
+@import "../stylesheets/mixins.scss";
+
+//process statuses
+$failed: $red;
+$aborted: $orange;
+$completed: $gold;
+$running: $dark-green;
+$suspended: $darker-blue;
+
+section.process-state-detail {
+    padding: 15px 0 10px 0;
+    pre {
+        width: 100%;
+    }
+
+    span.copy-to-clipboard-container {
+        color: $blue;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    @include copy-icon-pulse;
+
+    section.header-information {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        ul {
+            list-style: none;
+            li {
+                display: inline-block;
+                &.toggle-details, &.toggle-state-changes {
+                    margin-right: 50px;
+                }
+            }
+            &:last-child {
+                margin-left: auto;
+            }
+        }
+    }
+    span.process-status {
+        &.failed {
+            background-color: $failed;
+        }
+        &.aborted {
+            background-color: $aborted;
+        }
+        &.completed {
+            background-color: $completed;
+        }
+        &.running {
+            background-color: $running;
+        }
+        &.suspended {
+            background-color: $suspended;
+        }
+    }
+    section.process-summary {
+        margin: 0 0 20px 0;
+        padding: 25px 0;
+        border-top: 1px solid $light-grey;
+        border-bottom: 1px solid $light-grey;
+        table {
+            td {
+                font-size: larger;
+                &.title {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    color: #a6b6be;
+                    padding: 3px 40px 3px 15px;
+                }
+            }
+        }
+    }
+
+    section.steps {
+        display: flex;
+        flex-direction: column;
+
+        .details-container{
+            display: flex;
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            width: 180px;
+            min-width: 180px;
+            text-align: center;
+            .step-divider {
+                i.fa-arrow-down {
+                    font-size: 30px;
+                    margin: 10px 0;
+                    color: $darker-blue;
+                }
+            }
+        }
+        .state-changes {
+            display: flex;
+            pre {
+                margin-bottom: 10px;
+            }
+            i.fa-arrow-left {
+                font-size: 30px;
+                margin: 20px;
+                color: $darker-blue;
+            }
+
+        }
+    }
+
+}
+

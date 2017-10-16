@@ -10,7 +10,7 @@ import "./Processes.css";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-
+import {renderDate, organisationNameByUuid, productNameById} from "../utils/Lookups";
 export default class Processes extends React.PureComponent {
 
     constructor(props) {
@@ -46,8 +46,8 @@ export default class Processes extends React.PureComponent {
         .then(results => {
             const {organisations, products} = this.props;
             results.forEach(process => {
-                process.customer_name = this.organisationNameByUuid(process.customer, organisations);
-                process.product_name = this.productNameById(process.product, products);
+                process.customer_name = organisationNameByUuid(process.customer, organisations);
+                process.product_name = productNameById(process.product, products);
             });
             const newFilterAttributesAssignee = [...this.state.filterAttributesAssignee];
             newFilterAttributesAssignee.forEach(attr => attr.count = results
@@ -219,8 +219,6 @@ export default class Processes extends React.PureComponent {
         return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
 
-    renderDate = epoch => new Date(epoch * 1000).toLocaleString();
-
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
@@ -261,16 +259,6 @@ export default class Processes extends React.PureComponent {
         });
     };
 
-    organisationNameByUuid = (uuid, organisations) => {
-        const organisation = organisations.find(org => org.uuid === uuid);
-        return organisation ? organisation.name : uuid;
-    };
-
-    productNameById = (id, products) => {
-        const product = products.find(prod => prod.identifier === id);
-        return product ? product.name : id;
-    };
-
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
             return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
@@ -306,9 +294,9 @@ export default class Processes extends React.PureComponent {
                             <td data-label={I18n.t("processes.workflow_name")}
                                 className="workflow_name">{process.workflow_name}</td>
                             <td data-label={I18n.t("processes.started")}
-                                className="started">{this.renderDate(process.started)}</td>
+                                className="started">{renderDate(process.started)}</td>
                             <td data-label={I18n.t("processes.last_modified")}
-                                className="last_modified">{this.renderDate(process.last_modified)}</td>
+                                className="last_modified">{renderDate(process.last_modified)}</td>
                             <td data-label={I18n.t("processes.actions")} className="actions"
                                 onClick={this.toggleActions(process, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>

@@ -28,6 +28,7 @@ I18n.translations.en = {
 
     processes: {
         changes: "Changes",
+        system: "System",
         noc: "NOC Engineers",
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
@@ -80,7 +81,7 @@ I18n.translations.en = {
         destination: "Destination Multi-service port",
         destination_info: "The destination MSP",
         capacity: "Capacity",
-        capacity_info: "Integer marking the capacity of the lightpath",
+        capacity_info: "The capacity / speed of the lightpath",
         vlan: "VLAN",
         vlan_info: "VLAN range - must be integer",
         emails: "Emails",
@@ -104,6 +105,22 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         }
+    },
+    process_state: {
+        copy: "Copy to clipboard",
+        copied: "Copied",
+        raw: "Show raw JSON",
+        details: "Show details",
+        stateChanges: "Show state delta's",
+        wording: "Process {{product}} for {{customer}}",
+        summary: {
+            status: "Status",
+            assignee: "Assignee",
+            step: "Last step executed",
+            started: "Started",
+            last_modified: "Last updated"
+        }
+
     },
     filter: {
         CHANGES: "Changes",
