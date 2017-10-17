@@ -14,10 +14,11 @@ import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
 
-import "./ProcessStep.css";
+import "./UserInputForm.css";
+import CheckBox from "./CheckBox";
 
 
-export default class ProcessStep extends React.Component {
+export default class UserInputForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -89,6 +90,13 @@ export default class ProcessStep extends React.Component {
         this.changeUserInput(name, value);
     };
 
+    changeBooleanInput = name => e => {
+        const value = e.target.checked;
+        this.changeUserInput(name, value);
+        const {stepUserInput} = this.state;
+        this.validateAllUserInput(stepUserInput);
+    };
+
     changeSelectInput = name => option => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
@@ -105,12 +113,11 @@ export default class ProcessStep extends React.Component {
     doValidateUserInput = (userInput, value, errors) => {
         const type = userInput.type;
         const name = userInput.name;
-        if (type === "int" || type === "vlan") {
+        if (type === "int" || type === "vlan" || type === "capacity") {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
-        }
-        else if (type === "emails") {
+        } else if (type === "emails") {
             errors[name] = isEmpty(value);
         } else {
             errors[name] = isEmpty(value);
@@ -127,10 +134,11 @@ export default class ProcessStep extends React.Component {
 
     renderInput = userInput => {
         const name = userInput.name;
+        const isBoolean = userInput.type === "boolean";
         return (
             <section key={name} className="form-divider">
-                <label htmlFor="name">{I18n.t(`process.${name}`)}</label>
-                <em>{I18n.t(`process.${name}_info`)}</em>
+                {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
+                {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
                 <div className="validity-input-wrapper">
                     {this.chooseInput(userInput)}
                 </div>
@@ -177,6 +185,10 @@ export default class ProcessStep extends React.Component {
                 return <IEEEInterfaceTypesSelectSelect onChange={this.changeSelectInput(name)}
                                                        interfaceTypes={this.props.ieeeInterfaceTypes}
                                                        interfaceType={userInput.value}/>;
+            case "boolean":
+                return <CheckBox name={userInput.name} value={userInput.value || false}
+                                 onChange={this.changeBooleanInput(userInput.name)}
+                                 info={I18n.t(`process.${userInput.name}`)}/>;
             case "location_code":
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
@@ -207,7 +219,7 @@ export default class ProcessStep extends React.Component {
     }
 }
 
-ProcessStep.propTypes = {
+UserInputForm.propTypes = {
     history: PropTypes.object.isRequired,
     stepUserInput: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,

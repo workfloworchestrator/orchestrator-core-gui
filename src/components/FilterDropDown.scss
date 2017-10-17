@@ -51,6 +51,7 @@ section.filter-drop-down {
       display: flex;
       color: $medium-grey;
       align-items: center;
+      cursor: pointer;
 
       label {
           margin-left: auto;

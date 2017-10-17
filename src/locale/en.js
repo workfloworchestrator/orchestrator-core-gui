@@ -28,7 +28,8 @@ I18n.translations.en = {
 
     processes: {
         changes: "Changes",
-        noc: "NOC",
+        system: "System",
+        noc: "NOC Engineers",
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
         new: "New Process",
@@ -80,7 +81,7 @@ I18n.translations.en = {
         destination: "Destination Multi-service port",
         destination_info: "The destination MSP",
         capacity: "Capacity",
-        capacity_info: "Integer marking the capacity of the lightpath",
+        capacity_info: "The capacity / speed of the lightpath in megabit per second",
         vlan: "VLAN",
         vlan_info: "VLAN range - must be integer",
         emails: "Emails",
@@ -98,11 +99,30 @@ I18n.translations.en = {
         ieee_interface_type_info: "The IEEE interface type",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+        service_id: "IMS service id",
+        service_id_info: "IMS service id",
+        noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
         flash: {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         }
+    },
+    process_state: {
+        copy: "Copy to clipboard",
+        copied: "Copied",
+        raw: "Show raw JSON",
+        details: "Show details",
+        stateChanges: "Show state input",
+        wording: "Process {{product}} for {{customer}}",
+        summary: {
+            status: "Status",
+            assignee: "Assignee",
+            step: "Last step executed",
+            started: "Started",
+            last_modified: "Last updated"
+        }
+
     },
     filter: {
         CHANGES: "Changes",
@@ -115,8 +135,7 @@ I18n.translations.en = {
         completed: "Completed",
         suspended: "Suspended",
         running: "Running",
-
-
+        failed: "Failed"
     },
     clipboard: {
         copied: "Copied!",

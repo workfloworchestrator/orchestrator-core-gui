@@ -14,9 +14,9 @@ export default class FilterDropDown extends React.PureComponent {
     }
 
     renderDropDownItem = (item, filterBy) => {
-        const name = I18n.t(`filter.${item.name.replace(/ /g,"_")}`);
+        const name = I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
         return (
-            <li key={item.name}>
+            <li key={item.name} onClick={() => filterBy(item)}>
                 <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)}/>
                 <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
             </li>

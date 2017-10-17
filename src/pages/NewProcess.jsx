@@ -8,7 +8,7 @@ import {setFlash} from "../utils/Flash";
 import "./ProcessDetail.css";
 import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
-import ProcessStep from "../components/ProcessStep";
+import UserInputForm from "../components/UserInputForm";
 
 export default class NewProcess extends React.Component {
 
@@ -71,7 +71,7 @@ export default class NewProcess extends React.Component {
                             </div>
                         </section>
                         {!isEmpty(stepUserInput) &&
-                        <ProcessStep stepUserInput={stepUserInput}
+                        <UserInputForm stepUserInput={stepUserInput}
                                      multiServicePoints={multiServicePoints}
                                      history={history}
                                      organisations={organisations}
