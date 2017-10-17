@@ -112,7 +112,7 @@ export default class UserInputForm extends React.Component {
     doValidateUserInput = (userInput, value, errors) => {
         const type = userInput.type;
         const name = userInput.name;
-        if (type === "int" || type === "vlan") {
+        if (type === "int" || type === "vlan" || type === "capacity") {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
