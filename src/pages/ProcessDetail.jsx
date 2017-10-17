@@ -76,7 +76,7 @@ export default class ProcessDetail extends React.PureComponent {
     };
 
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput) => {
-        const {ieeeInterfaceTypes, products, organisations, multiServicePoints, history} = this.props;
+        const {locationCodes, ieeeInterfaceTypes, products, organisations, multiServicePoints, history} = this.props;
         const productName = products.find(prod => prod.identifier === process.product).name
         if (selectedTab === "process") {
             return <section className="card">
@@ -89,9 +89,14 @@ export default class ProcessDetail extends React.PureComponent {
         } else {
             return <section className="card">
                 <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
-                <ProcessStep ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
-                             products={products} organisations={organisations} history={history}
-                             multiServicePoints={multiServicePoints} validSubmit={this.validSubmit}/>
+                <ProcessStep locationCodes={locationCodes}
+                             ieeeInterfaceTypes={ieeeInterfaceTypes}
+                             stepUserInput={stepUserInput}
+                             products={products}
+                             organisations={organisations}
+                             history={history}
+                             multiServicePoints={multiServicePoints}
+                             validSubmit={this.validSubmit}/>
             </section>;
         }
     };
@@ -128,6 +133,7 @@ ProcessDetail.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired
+    ieeeInterfaceTypes: PropTypes.array.isRequired,
+    locationCodes: PropTypes.array.isRequired,
 };
 
