@@ -123,7 +123,7 @@ export function retryProcess(processId) {
 }
 
 export function validations() {
-    return validFetch("products/validations");
+    return fetchJson("products/validations");
 }
 
 export function validation(productId) {
