@@ -80,14 +80,11 @@ export function products() {
 
 export function ieeeInterfaceTypes() {
     //todo: make this dynamic so it work for other workflows ass well. Using product ID for MSP 100G
-    //return fetchJson("ims/ieee_interface_types/97e81247-2148-4b5d-aa3e-748a4225eaa9")
-    //Defaults are gone again?
-    return fetchJson("ims/ieee_interface_types")
+    return fetchJson("ims/ieee_interface_types/MSP100G")
 }
 
 export function locationCodes() {
-    //todo: change to crm/
-    return fetchJson("ims/location_codes")
+    return fetchJson("crm/location_codes");
 }
 
 export function initialWorkflowInput(workflowKey) {

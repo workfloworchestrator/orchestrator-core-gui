@@ -103,6 +103,7 @@ I18n.translations.en = {
         service_id_info: "IMS service id",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
+        configuration_ready: 'Configuration ready',
         flash: {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
