@@ -23,7 +23,7 @@ I18n.translations.en = {
 
     navigation: {
         processes: "Processes",
-        help: "Help"
+        validations: "Validations"
     },
 
     processes: {

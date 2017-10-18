@@ -7,6 +7,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "../pages/NotFound";
 import Help from "../pages/Help";
 import Processes from "../pages/Processes";
+import Validations from "../pages/Validations";
 import NewProcess from "../pages/NewProcess";
 import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
@@ -153,6 +154,10 @@ class App extends React.PureComponent {
                                         render={props => <Processes currentUser={currentUser} {...props}
                                                                     products={products}
                                                                     organisations={organisations}/>}/>
+                        <ProtectedRoute path="/validations"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <Validations {...props}
+                                                                    products={products}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <NewProcess currentUser={currentUser}

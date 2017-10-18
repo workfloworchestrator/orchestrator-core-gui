@@ -1,0 +1,18 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+.mod-validations {
+    @include page;
+
+    .card {
+        @include card;
+        padding-bottom: 15px;
+    }
+    section.validations {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px 20px 20px;
+        background-color: white;
+    }
+}
+

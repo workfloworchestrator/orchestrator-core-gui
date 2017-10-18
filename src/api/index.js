@@ -114,6 +114,14 @@ export function retryProcess(processId) {
     return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
 }
 
+export function validations() {
+    return validFetch("products/validations");
+}
+
+export function validation(productId) {
+    return validFetch(`products/${productId}/validate`);
+}
+
 export function reportError(error) {
     return postPutJson("user/error", error, "post");
 }
