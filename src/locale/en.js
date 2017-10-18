@@ -125,6 +125,14 @@ I18n.translations.en = {
         }
 
     },
+    validations: {
+        help: "Explain",
+        product: "Product",
+        description: "Description",
+        workflow: "Workflow",
+        resource_blocks: "Resource blocks",
+        resource_types: "Resource types"
+    },
     filter: {
         CHANGES: "Changes",
         NOC: "NOC",
