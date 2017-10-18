@@ -7,6 +7,8 @@ export default class IEEEInterfaceTypesSelect extends React.PureComponent {
 
     render() {
         const {onChange, interfaceType, interfaceTypes, disabled} = this.props;
+        console.log(this.state)
+        console.log(this.props)
         return (
             <Select className="select-interface-type"
                     onChange={onChange}

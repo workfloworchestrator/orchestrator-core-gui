@@ -19,6 +19,8 @@ import LocationCodeSelect from "./LocationCodeSelect";
 import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
 
+import {ieeeInterfaceTypesForProductTag} from "../api";
+
 
 export default class UserInputForm extends React.Component {
 
@@ -36,9 +38,11 @@ export default class UserInputForm extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('sdkjhsdjkhsdjkhsdkj');
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
             this.setState({stepUserInput: [...nextProps.stepUserInput]});
         }
+        this.setState({ i: ieeeInterfaceTypesForProductTag('MSP100G')})
     };
 
     cancel = e => {
@@ -190,7 +194,7 @@ export default class UserInputForm extends React.Component {
             case "ieee_interface_type_for_product_tag":
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
-                                                              productTag='MSP1G'/>;
+                                                              productTag='MSP100G'/>;
             case "boolean":
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}
