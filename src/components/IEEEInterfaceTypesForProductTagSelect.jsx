@@ -2,8 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
+import {ieeeInterfaceTypesForProductTag} from "../api";
 
-export default class IEEEInterfaceTypesSelect extends React.PureComponent {
+export default class IEEEInterfaceTypesForProductTagSelect extends React.PureComponent {
+
+    constructor(props) {
+        super(props);
+        let interfaceTypes;
+        interfaceTypes = ieeeInterfaceTypesForProductTag('MSP1G');
+        this.setState({interfaceTypes});
+    }
+
+    // componentWillMount() {
+    //     let interfaceTypes;
+    //     interfaceTypes = ieeeInterfaceTypesForProductTag('MSP1G');
+    //     console.log(interfaceTypes)
+    //     this.setState({interfaceTypes});
+    // }
 
     render() {
         const {onChange, interfaceType, interfaceTypes, disabled} = this.props;
@@ -22,9 +37,10 @@ export default class IEEEInterfaceTypesSelect extends React.PureComponent {
 }
 
 
-IEEEInterfaceTypesSelect.propTypes = {
+IEEEInterfaceTypesForProductTagSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     interfaceTypes: PropTypes.array.isRequired,
     interfaceType: PropTypes.string,
+    productTag: PropTypes.string.isRequired,
     disabled: PropTypes.bool
 };

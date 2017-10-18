@@ -21,7 +21,7 @@ export default class Processes extends React.PureComponent {
             filteredProcesses: [],
             query: "",
             actions: {show: false, id: ""},
-            sorted: {name: "assignee", descending: true},
+            sorted: {name: "last_modified", descending: false},
             filterAttributesAssignee: [
                 {name: "CHANGES", selected: true, count: 0},
                 {name: "KLANT_SUPPORT", selected: true, count: 0},

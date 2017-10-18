@@ -11,7 +11,9 @@ import "highlight.js/styles/default.css";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
-import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
+import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
+import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
+
 import LocationCodeSelect from "./LocationCodeSelect";
 
 import "./UserInputForm.css";
@@ -182,9 +184,13 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-                return <IEEEInterfaceTypesSelectSelect onChange={this.changeSelectInput(name)}
-                                                       interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                       interfaceType={userInput.value}/>;
+                return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
+                                                 interfaceTypes={this.props.ieeeInterfaceTypes}
+                                                 interfaceType={userInput.value}/>;
+            case "ieee_interface_type_for_product_tag":
+                return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
+                                                              interfaceType={userInput.value}
+                                                              productTag='MSP1G'/>;
             case "boolean":
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}
