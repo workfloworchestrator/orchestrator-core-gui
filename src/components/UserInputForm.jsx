@@ -12,6 +12,7 @@ import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelectSelect from "./IEEEInterfaceTypesSelect";
+import LocationCodeSelect from "./LocationCodeSelect";
 
 import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
@@ -188,6 +189,10 @@ export default class UserInputForm extends React.Component {
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}
                                  info={I18n.t(`process.${userInput.name}`)}/>;
+            case "location_code":
+                return <LocationCodeSelect onChange={this.changeSelectInput(name)}
+                                           locationCodes={this.props.locationCodes}
+                                           locationCode={userInput.value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -221,6 +226,7 @@ UserInputForm.propTypes = {
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired,
+    locationCodes: PropTypes.array.isRequired,
     validSubmit: PropTypes.func.isRequired
 };
 

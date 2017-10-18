@@ -89,7 +89,7 @@ I18n.translations.en = {
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         crm_port_id: 'The CRM identifier for a port',
-        crm_port_id_info: 'Provide a valid CRM Port ID (Surfnet7)',
+        crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
         ims_id: "IMS identifier",
         ims_invalid_id: "Invalid / empty IMS port ID. The database data is corrupt / invalid",
         ims_id_info: "The IMS identifier stored in the IMS database",
@@ -103,6 +103,7 @@ I18n.translations.en = {
         service_id_info: "IMS service id",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
+        configuration_ready: 'Configuration ready',
         flash: {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
@@ -129,7 +130,6 @@ I18n.translations.en = {
         NOC: "NOC",
         KLANT_SUPPORT: "Klant Support",
         SYSTEM: "System",
-        label: "ASSIGNEE",
         all: "ALL",
         selected: "FILTERED",
         aborted: "Aborted",
