@@ -80,7 +80,9 @@ export function products() {
 
 export function ieeeInterfaceTypes() {
     //todo: make this dynamic so it work for other workflows ass well. Using product ID for MSP 100G
-    return fetchJson("ims/ieee_interface_types/MSP100G")
+    //return fetchJson("ims/ieee_interface_types/MSP100G")
+    return fetchJson("ims/ieee_interface_types")
+
 }
 
 export function locationCodes() {
