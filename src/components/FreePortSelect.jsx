@@ -18,15 +18,12 @@ export default class FreePortSelect extends React.PureComponent {
         console.log(`Fetching data for ${this.props.locationCode} and ${this.props.interfaceType}`);
         //fetch the data and use it when ready
         freePortsForLocationCodeAndInterfaceType(this.props.locationCode, this.props.interfaceType).then(result => {
-            console.log('HOER')
-            console.log(result)
             this.setState({ loading: false, freePorts: result})
         });
 
     };
 
     render() {
-        console.log(`render called with state ${this.state}`);
         const {loading, freePorts} = this.state;
 
         if (loading) {
