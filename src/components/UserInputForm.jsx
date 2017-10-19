@@ -14,12 +14,7 @@ import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import FreePortSelect from "./FreePortSelect";
-
-
-
-
 import LocationCodeSelect from "./LocationCodeSelect";
-
 import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
 
@@ -42,11 +37,9 @@ export default class UserInputForm extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('sdkjhsdjkhsdjkhsdkj');
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
             this.setState({stepUserInput: [...nextProps.stepUserInput]});
         }
-        this.setState({ i: ieeeInterfaceTypesForProductTag('MSP100G')})
     };
 
     cancel = e => {
