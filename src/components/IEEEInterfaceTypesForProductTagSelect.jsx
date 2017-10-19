@@ -16,29 +16,19 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
     }
 
     componentWillMount() {
-        console.log('Component will mount');
-        Promise.resolve(ieeeInterfaceTypesForProductTag('MSP100G')).then(function(result) {
-            const productInterfaceTypes = result;
-            console.log('Promise:')
-            console.log(productInterfaceTypes);
+        console.log("Fetching data for " + this.props.productTag);
+        //fetch the data and use it when ready
+        ieeeInterfaceTypesForProductTag(this.props.productTag).then(result => {
+            this.setState({ loading: false, interfaceTypes: result})
         });
-        this.setInterfaceType(['123','456'])
     };
-
-    setInterfaceType(productInterfaceTypes) {
-        this.setState({ interfaceTypes: productInterfaceTypes, loading: false})
-    }
-
-    stateIsReady() {
-        console.log('setState() ready')
-
-    }
 
     render() {
         console.log(`render called with state ${this.state}`);
         const {loading, interfaceTypes} = this.state;
 
         if (loading) {
+            console.log('Npt ready for render yet');
             return null; // render null when component is not ready yet
         }
 
