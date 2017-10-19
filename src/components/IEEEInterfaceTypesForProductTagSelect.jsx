@@ -5,31 +5,29 @@ import "react-select/dist/react-select.css";
 
 import {ieeeInterfaceTypesForProductTag} from "../api";
 
+
 export default class IEEEInterfaceTypesForProductTagSelect extends React.PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true
+        }
+    }
 
     componentWillMount() {
         console.log('Component will mount');
-        const p1 = Promise.resolve(ieeeInterfaceTypesForProductTag('MSP100G')).then(result => {
+        Promise.resolve(ieeeInterfaceTypesForProductTag('MSP100G')).then(function(result) {
             const productInterfaceTypes = result;
             console.log('Promise:')
             console.log(productInterfaceTypes);
-            return productInterfaceTypes
         });
-        console.log('P1')
-        console.log(p1.v)
-
-        //console.log(productInterfaceTypes);
-
-        this.setState({ interfaceTypes: p1}, function() {
-            this.stateIsReady();
-        });
-
-
-
-
-
+        this.setInterfaceType(['123','456'])
     };
+
+    setInterfaceType(productInterfaceTypes) {
+        this.setState({ interfaceTypes: productInterfaceTypes, loading: false})
+    }
 
     stateIsReady() {
         console.log('setState() ready')
@@ -38,12 +36,13 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
 
     render() {
         console.log(`render called with state ${this.state}`);
-        console.log(this.state)
-        console.log(this.props)
+        const {loading, interfaceTypes} = this.state;
 
+        if (loading) {
+            return null; // render null when component is not ready yet
+        }
 
         const {onChange, interfaceType, disabled} = this.props;
-        const interfaceTypes = this.state['interfaceTypes'];
         return (
             <Select className="select-interface-type"
                     onChange={onChange}
