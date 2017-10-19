@@ -13,7 +13,7 @@ export default function LocationCodeSelect({onChange, locationCode, locationCode
                 })}
                 value={locationCode}
                 searchable={true}
-                disabled={disabled || locationCodes.length === 1}/>
+                disabled={disabled || locationCodes.length === 0}/>
     );
 }
 

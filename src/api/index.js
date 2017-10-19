@@ -86,6 +86,11 @@ export function ieeeInterfaceTypesForProductTag(tag) {
     return fetchJson(`ims/ieee_interface_types/${tag}`)
 }
 
+export function freePortsForLocationCodeAndInterfaceType(locationCode, interfaceType) {
+    return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
+}
+
+
 export function locationCodes() {
     return fetchJson("crm/location_codes");
 }

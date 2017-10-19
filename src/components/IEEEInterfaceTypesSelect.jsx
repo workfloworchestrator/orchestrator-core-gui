@@ -17,7 +17,7 @@ export default class IEEEInterfaceTypesSelect extends React.PureComponent {
                     })}
                     value={interfaceType}
                     searchable={true}
-                    disabled={disabled || interfaceTypes.length === 1}/>
+                    disabled={disabled || interfaceTypes.length === 0}/>
         )
     }
 

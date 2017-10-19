@@ -13,7 +13,7 @@ export default function ProductSelect({onChange, product, products, disabled}) {
                 })}
                 value={product}
                 searchable={true}
-                disabled={disabled || products.length === 1}/>
+                disabled={disabled || products.length === 0}/>
     );
 }
 

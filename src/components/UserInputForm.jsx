@@ -13,6 +13,10 @@ import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
+import FreePortSelect from "./FreePortSelect";
+
+
+
 
 import LocationCodeSelect from "./LocationCodeSelect";
 
@@ -195,6 +199,11 @@ export default class UserInputForm extends React.Component {
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
                                                               productTag='MSP100G'/>;
+            case "free_ports_for_location_code_and_interface_type":
+                return <FreePortSelect onChange={this.changeSelectInput(name)}
+                                       freePort={userInput.value}
+                                       interfaceType='1000BASE-SX'
+                                       locationCode='UT001A'/>;
             case "boolean":
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}

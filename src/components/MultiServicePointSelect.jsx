@@ -23,7 +23,7 @@ export default class MultiServicePointSelect extends React.PureComponent {
                        })}
                        value={msp}
                        searchable={true}
-                       disabled={disabled || msps.length === 1}/>
+                       disabled={disabled || msps.length === 0}/>
 
     }
 }

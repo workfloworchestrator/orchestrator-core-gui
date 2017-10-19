@@ -13,7 +13,7 @@ export default function OrganisationSelect({onChange, organisation, organisation
                 })}
                 value={organisation}
                 searchable={true}
-                disabled={disabled || organisations.length === 1}/>
+                disabled={disabled || organisations.length === 0}/>
     );
 }
 

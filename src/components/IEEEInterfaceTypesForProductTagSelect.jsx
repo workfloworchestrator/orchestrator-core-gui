@@ -16,7 +16,7 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
     }
 
     componentWillMount() {
-        console.log("Fetching data for " + this.props.productTag);
+        console.log(`Fetching data for ${this.props.productTag}`);
         //fetch the data and use it when ready
         ieeeInterfaceTypesForProductTag(this.props.productTag).then(result => {
             this.setState({ loading: false, interfaceTypes: result})
@@ -28,7 +28,7 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
         const {loading, interfaceTypes} = this.state;
 
         if (loading) {
-            console.log('Npt ready for render yet');
+            console.log('Not ready for render yet');
             return null; // render null when component is not ready yet
         }
 
@@ -41,7 +41,7 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
                     })}
                     value={interfaceType}
                     searchable={true}
-                    disabled={disabled || interfaceTypes.length === 1}/>
+                    disabled={disabled || interfaceTypes.length === 0}/>
         )
     }
 
@@ -50,7 +50,6 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
 
 IEEEInterfaceTypesForProductTagSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
-    // interfaceTypes: PropTypes.array.isRequired,
     interfaceType: PropTypes.string,
     productTag: PropTypes.string.isRequired,
     disabled: PropTypes.bool
