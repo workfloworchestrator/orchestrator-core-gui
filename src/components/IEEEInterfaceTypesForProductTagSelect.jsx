@@ -11,27 +11,18 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            interfaceTypes: []
         }
     }
 
     componentWillMount() {
-        console.log(`Fetching data for ${this.props.productTag}`);
-        //fetch the data and use it when ready
-        ieeeInterfaceTypesForProductTag(this.props.productTag).then(result => {
-            this.setState({ loading: false, interfaceTypes: result})
-        });
+        ieeeInterfaceTypesForProductTag(this.props.productTag).then(result =>
+            this.setState({interfaceTypes: result})
+        );
     };
 
     render() {
-        console.log(`render called with state ${this.state}`);
-        const {loading, interfaceTypes} = this.state;
-
-        if (loading) {
-            console.log('Not ready for render yet');
-            return null; // render null when component is not ready yet
-        }
-
+        const {interfaceTypes} = this.state;
         const {onChange, interfaceType, disabled} = this.props;
         return (
             <Select className="select-interface-type"
@@ -46,7 +37,6 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
     }
 
 }
-
 
 IEEEInterfaceTypesForProductTagSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
