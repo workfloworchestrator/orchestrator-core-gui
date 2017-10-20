@@ -7,12 +7,23 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "../pages/NotFound";
 import Help from "../pages/Help";
 import Processes from "../pages/Processes";
+import Validations from "../pages/Validations";
 import NewProcess from "../pages/NewProcess";
 import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import {config, me, organisations, products, redirectToAuthorizationServer, reportError, subscriptions} from "../api";
+import {
+    config,
+    ieeeInterfaceTypes,
+    locationCodes,
+    me,
+    organisations,
+    products,
+    redirectToAuthorizationServer,
+    reportError,
+    subscriptions
+} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import ProcessDetail from "./ProcessDetail";
@@ -29,6 +40,8 @@ class App extends React.PureComponent {
             configuration: {},
             organisations: [],
             multiServicePoints: [],
+            ieeeInterfaceTypes: [],
+            locationCodes: [],
             products: [],
             error: false,
             errorDialogOpen: false,
@@ -97,13 +110,17 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions("MSP"), products()]).then(result => {
-                    const [currentUser, allOrganisations, multiServicePoints, allProducts] = result;
+                Promise.all([me(), organisations(), subscriptions("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
+                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
-                            loading: false, currentUser: currentUser,
-                            configuration: configuration, organisations: allOrganisations,
+                            loading: false,
+                            currentUser: currentUser,
+                            configuration: configuration,
+                            organisations: allOrganisations,
                             multiServicePoints: multiServicePoints,
+                            ieeeInterfaceTypes: allIeeeInterfaceTypes,
+                            locationCodes: allLocationCodes,
                             products: allProducts
                         });
                     } else {
@@ -120,7 +137,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, multiServicePoints, products} = this.state;
+        const {currentUser, configuration, organisations, multiServicePoints, products, ieeeInterfaceTypes, locationCodes} = this.state;
 
         return (
             <Router>
@@ -138,15 +155,30 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/processes"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Processes currentUser={currentUser} {...props}
+                                                                    products={products}
                                                                     organisations={organisations}/>}/>
+                        <ProtectedRoute path="/validations"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <Validations {...props}
+                                                                    products={products}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
-                                        render={props => <NewProcess currentUser={currentUser} products={products}
-                                                                     organisations={organisations} {...props}/>}/>
+                                        render={props => <NewProcess currentUser={currentUser}
+                                                                     products={products}
+                                                                     organisations={organisations}
+                                                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                                                     multiServicePoints={multiServicePoints}
+                                                                     locationCodes={locationCodes}
+                                                                     {...props}
+                                                                     />}/>
                         <Route path="/process/:id"
-                               render={props => <ProcessDetail currentUser={currentUser} organisations={organisations}
-                                                               configuration={configuration} products={products}
+                               render={props => <ProcessDetail currentUser={currentUser}
+                                                               organisations={organisations}
+                                                               configuration={configuration}
+                                                               products={products}
                                                                multiServicePoints={multiServicePoints}
+                                                               ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                                               locationCodes={locationCodes}
                                                                {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>

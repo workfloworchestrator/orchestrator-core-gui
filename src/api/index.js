@@ -78,20 +78,61 @@ export function products() {
     return fetchJson("products")
 }
 
+export function ieeeInterfaceTypes() {
+    return fetchJson("ims/ieee_interface_types")
+}
+
+export function ieeeInterfaceTypesForProductTag(tag) {
+    return fetchJson(`ims/ieee_interface_types/${tag}`)
+}
+
+export function freePortsForLocationCodeAndInterfaceType(locationCode, interfaceType) {
+    return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
+}
+
+
+export function locationCodes() {
+    return fetchJson("crm/location_codes");
+}
+
+export function initialWorkflowInput(workflowKey) {
+    return fetchJson(`workflows/${workflowKey}`)
+}
+
 export function processes() {
     return fetchJson("processes");
 }
 
-export function process(id) {
-    return fetchJson("processes/" + id);
+export function deleteProcess(processId) {
+    return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
+}
+
+export function abortProcess(processId) {
+    return fetchJson(`processes/${processId}/abort`, {method: "PUT"}, {}, true, false);
+}
+
+export function process(processId) {
+    return fetchJson("processes/" + processId);
 }
 
 export function startProcess(process) {
     return postPutJson("processes", process, "post");
 }
 
-export function resumeProcess(pid, userInput) {
-    return postPutJson(`processes/${pid}/resume`, {user_input: userInput}, "put", false);
+export function resumeProcess(processId, userInput) {
+    return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", false);
+}
+
+export function retryProcess(processId) {
+    return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
+}
+
+export function validations() {
+    return fetchJson("products/validations");
+}
+
+export function validation(productId) {
+    return validFetch(`products/${productId}/validate`);
 }
 
 export function reportError(error) {

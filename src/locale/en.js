@@ -23,18 +23,20 @@ I18n.translations.en = {
 
     navigation: {
         processes: "Processes",
-        help: "Help"
+        validations: "Validations"
     },
 
     processes: {
         changes: "Changes",
-        noc: "NOC",
+        system: "System",
+        noc: "NOC Engineers",
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
         new: "New Process",
         notFound: "No Workflow found",
         assignee: "Assignee",
         step: "Step",
+        status: "Status",
         customer: "Customer",
         product: "product",
         workflow_name: "Workflow",
@@ -44,9 +46,20 @@ I18n.translations.en = {
         none: "",
         submit: "Submit",
         cancel: "Cancel",
-        remove: "Delete",
-        deleteConfirmation: "Are you sure you want to delete {{name}}?",
-        no_found: "No processes"
+        delete: "Delete",
+        details: "Details",
+        user_input: "User input",
+        abort: "Abort",
+        retry: "Retry",
+        deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
+        abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
+        retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
+        no_found: "No processes",
+        flash: {
+            delete: "Process {{name}} is deleted",
+            abort: "Process {{name}} is aborted",
+            retry: "Process {{name}} has been retried"
+        }
     },
     process: {
         cancel: "Cancel",
@@ -57,6 +70,8 @@ I18n.translations.en = {
             user_input: "User input",
             process: "process"
         },
+        port: "Port",
+        port_info: "Select a port",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
@@ -66,18 +81,70 @@ I18n.translations.en = {
         destination: "Destination Multi-service port",
         destination_info: "The destination MSP",
         capacity: "Capacity",
-        capacity_info: "Integer marking the capacity of the lightpath",
+        capacity_info: "The capacity / speed of the lightpath in megabit per second",
         vlan: "VLAN",
-        vlan_info: "VLAN range",
+        vlan_info: "VLAN range - must be integer",
         emails: "Emails",
         emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
+        location_code: "Location code",
+        location_code_info: "Provide a valid location code",
+        crm_port_id: 'The CRM identifier for a port',
+        crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
         ims_id: "IMS identifier",
+        ims_invalid_id: "Invalid / empty IMS port ID. The database data is corrupt / invalid",
         ims_id_info: "The IMS identifier stored in the IMS database",
+        dienstafname: "Dienstafname",
+        dienstafname_info: "The dienstafname of the service - must be valid GUID like 76C5FB05-6D86-4BD2-A56C-124F7F33B1F9",
+        ieee_interface_type: "IEEE interface type",
+        ieee_interface_type_info: "The IEEE interface type",
+        ims_port_id: "IMS port id",
+        ims_port_id_info: "The IMS port id",
+        service_id: "IMS service id",
+        service_id_info: "IMS service id",
+        noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
+        configuration_ready: 'Configuration ready',
         flash: {
-            create: "Created process for {{name}}",
-            update: "Resumed process {{name}}"
+            create: "Created process for workflow {{name}}",
+            update: "Resumed process for workflow {{name}}"
         }
+    },
+    process_state: {
+        copy: "Copy to clipboard",
+        copied: "Copied",
+        raw: "Show raw JSON",
+        details: "Show details",
+        stateChanges: "Show state input",
+        wording: "Process {{product}} for {{customer}}",
+        summary: {
+            status: "Status",
+            assignee: "Assignee",
+            step: "Last step executed",
+            started: "Started",
+            last_modified: "Last updated"
+        }
+
+    },
+    validations: {
+        help: "Explain",
+        product: "Product",
+        description: "Description",
+        workflow: "Workflow",
+        resource_blocks: "Resource blocks",
+        resource_types: "Resource types"
+    },
+    filter: {
+        CHANGES: "Changes",
+        NOC: "NOC",
+        KLANT_SUPPORT: "Klant Support",
+        SYSTEM: "System",
+        all: "ALL",
+        selected: "FILTERED",
+        aborted: "Aborted",
+        completed: "Completed",
+        suspended: "Suspended",
+        running: "Running",
+        failed: "Failed"
     },
     clipboard: {
         copied: "Copied!",

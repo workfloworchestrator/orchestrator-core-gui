@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import I18n from "i18n-js";
 import "react-select/dist/react-select.css";
 
 export default class MultiServicePointSelect extends React.PureComponent {
@@ -8,7 +9,9 @@ export default class MultiServicePointSelect extends React.PureComponent {
     label = (msp, organisations) => {
         const organisation = organisations.find(org => org.uuid === msp.client_id);
         const organisationName = organisation ? organisation.name : "";
-        return `MSP ${msp.description} ${organisationName} (${msp.ims_port_id_value.trim()})`
+        const value = msp.ims_service_id || I18n.t("process.ims_invalid_id");
+        const description = msp.description || "<No description>";
+        return `MSP ${description.trim()} ${organisationName} (${value.trim()})`
     };
 
     render() {
@@ -16,11 +19,11 @@ export default class MultiServicePointSelect extends React.PureComponent {
         return <Select className="select-msp"
                        onChange={onChange}
                        options={msps.map(aMsp => {
-                           return {value: aMsp.ims_port_id_value, label: this.label(aMsp, organisations)};
+                           return {value: aMsp.ims_service_id, label: this.label(aMsp, organisations)};
                        })}
                        value={msp}
                        searchable={true}
-                       disabled={disabled || msps.length === 1}/>
+                       disabled={disabled || msps.length === 0}/>
 
     }
 }

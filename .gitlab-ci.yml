@@ -5,7 +5,7 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:$CI_BUILD_REF
+  CONTAINER_TEST_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:$CI_COMMIT_SHA
   CONTAINER_STAGING_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:staging
   CONTAINER_RELEASE_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:latest
 

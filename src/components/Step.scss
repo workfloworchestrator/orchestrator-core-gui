@@ -1,0 +1,31 @@
+@import "../stylesheets/vars.scss";
+
+
+//step statuses
+section.step {
+    border-radius: 5%;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+
+    &.failed {
+        background-color: $red;
+    }
+    &.pending {
+        background-color: $dark-grey;
+    }
+    &.success {
+        background-color: $dark-green;
+    }
+    &.suspend {
+        background-color: $gold;
+        color: $dark-grey;
+    }
+    &.abort {
+        background-color: $orange;
+        color: $dark-grey;
+    }
+}
+

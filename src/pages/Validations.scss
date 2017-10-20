@@ -1,0 +1,61 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+.mod-validations {
+    @include page;
+
+    .card {
+        @include card;
+        padding-bottom: 15px;
+    }
+
+    .explain {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        cursor: pointer;
+
+        i {
+            color: lighten($blue, 5);
+            font-size: 30px;
+            margin-right: 5px;
+
+        }
+
+        span {
+            color: $blue;
+            font-weight: bold;
+        }
+
+    }
+
+    section.validations {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px 20px 20px;
+        background-color: white;
+    }
+
+    section.validation {
+        section.header {
+            display: flex;
+            section.status {
+                text-align: center;
+                i {
+                    font-size: 26px;
+                    &.fa-check {
+                        color: $green;
+                    }
+                    &.fa-exclamation-triangle {
+                        color: $red;
+                    }
+                }
+            }
+            section.product-info {
+                flex-grow: 2;
+                margin-left: 45px;
+            }
+        }
+    }
+}
+

@@ -2,29 +2,38 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {processes} from "../api";
+import {abortProcess, deleteProcess, processes, retryProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./Processes.css";
-
+import FilterDropDown from "../components/FilterDropDown";
+import DropDownActions from "../components/DropDownActions";
+import {setFlash} from "../utils/Flash";
+import {renderDate, organisationNameByUuid, productNameById} from "../utils/Lookups";
 export default class Processes extends React.PureComponent {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            selected: -1,
             processes: [],
             filteredProcesses: [],
             query: "",
             actions: {show: false, id: ""},
-            sorted: {name: "assignee", descending: true},
-            filterAttributes: [
-                {name: "", selected: true, count: 0},
-                {name: "", selected: true, count: 0},
-                {name: "", selected: true, count: 0},
-                {name: "", selected: true, count: 0}
+            sorted: {name: "last_modified", descending: false},
+            filterAttributesAssignee: [
+                {name: "CHANGES", selected: true, count: 0},
+                {name: "KLANT_SUPPORT", selected: true, count: 0},
+                {name: "NOC", selected: true, count: 0},
+                {name: "SYSTEM", selected: true, count: 0}
+            ],
+            filterAttributesStatus: [
+                {name: "failed", selected: true, count: 0},
+                {name: "aborted", selected: true, count: 0},
+                {name: "completed", selected: true, count: 0},
+                {name: "running", selected: true, count: 0},
+                {name: "suspended", selected: true, count: 0}
             ],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
@@ -34,7 +43,29 @@ export default class Processes extends React.PureComponent {
     }
 
     componentDidMount = () => processes()
-        .then(results => this.setState({processes: results, filteredProcesses: results}));
+        .then(results => {
+            const {organisations, products} = this.props;
+            results.forEach(process => {
+                process.customer_name = organisationNameByUuid(process.customer, organisations);
+                process.product_name = productNameById(process.product, products);
+            });
+            const newFilterAttributesAssignee = [...this.state.filterAttributesAssignee];
+            newFilterAttributesAssignee.forEach(attr => attr.count = results
+                .filter(process => process.assignee === attr.name).length);
+
+            const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
+            newFilterAttributesStatus.forEach(attr => attr.count = results
+                .filter(process => process.status === attr.name).length);
+
+            const filteredProcesses = this.doSearchAndSortAndFilter("", results, this.state.sorted,
+                newFilterAttributesAssignee, newFilterAttributesStatus);
+
+            this.setState({
+                processes: results, filteredProcesses: filteredProcesses,
+                filterAttributesAssignee: newFilterAttributesAssignee.filter(attr => attr.count > 0),
+                filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
+            })
+        });
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
@@ -48,17 +79,33 @@ export default class Processes extends React.PureComponent {
         this.delayedSearch(query);
     };
 
-    delayedSearch = debounce(query => {
-        let processes = [...this.state.processes];
+    doSearchAndSortAndFilter = (query, processes, sorted, filterAttributesAssignee, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["assignee", "step", "customer", "product", "workflow_name"];
-            processes = processes.filter(process => searchable
-                .map(search => process[search].toLowerCase().indexOf(queryToLower))
-                .some(indexOf => indexOf > -1)
+            const searchable = ["assignee", "step", "customer_name", "product_name", "workflow_name"];
+            processes = processes.filter(process =>
+                searchable.map(search => process[search].toLowerCase().indexOf(queryToLower))
+                    .some(indexOf => indexOf > -1)
             );
+            processes.sort(this.sortBy(sorted.name));
         }
-        this.setState({query: query, filteredProcesses: processes});
+        processes = processes.filter(process =>
+            filterAttributesAssignee.filter(attr => attr.name === process.assignee)[0].selected);
+        processes = processes.filter(process =>
+            filterAttributesStatus.filter(attr => attr.name === process.status)[0].selected);
+        return sorted.descending ? processes : processes.reverse();
+    };
+
+    delayedSearch = debounce(query => {
+        const processes = [...this.state.processes];
+        const {filterAttributesAssignee} = this.state;
+        const {filterAttributesStatus} = this.state;
+
+
+        this.setState({
+            query: query,
+            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, this.state.sorted, filterAttributesAssignee, filterAttributesStatus)
+        });
     }, 250);
 
     toggleActions = (process, actions) => e => {
@@ -67,11 +114,110 @@ export default class Processes extends React.PureComponent {
         this.setState({actions: {show: newShow, id: process.id}});
     };
 
-    renderActions = (process, actions) => e => {
-        return null;
+    handleDeleteProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.deleteConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                deleteProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
+                })
+        );
     };
 
-    renderDate = epoch => new Date(epoch * 1000).toLocaleString();
+    handleAbortProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.abortConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                abortProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
+                })
+        );
+    };
+
+    handleRetryProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.retryConfirmation", {
+                name: process.product_name,
+                customer: process.customer_name
+            }), () =>
+                retryProcess(process.id).then(() => {
+                    this.componentDidMount();
+                    setFlash(I18n.t("processes.flash.retry", {name: process.product_name}));
+                })
+        );
+    };
+
+    confirmation = (question, action) => this.setState({
+        confirmationDialogOpen: true,
+        confirmationDialogQuestion: question,
+        confirmationDialogAction: () => {
+            this.cancelConfirmation();
+            action();
+        }
+    });
+
+
+    renderActions = (process, actions) => {
+        const actionId = process.id;
+        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
+            return null;
+        }
+        //TODO scope on the context of logged in-user
+        const details = {
+            icon: "fa fa-search-plus",
+            label: "details",
+            action: this.showProcess(process)
+        };
+        const userInput = {
+            icon: "fa fa-pencil-square-o",
+            label: "user_input",
+            action: this.showProcess(process)
+        };
+        const retry = {
+            icon: "fa fa-refresh",
+            label: "retry",
+            action: this.handleRetryProcess(process)
+        };
+        const _delete = {
+            icon: "fa fa-trash",
+            label: "delete",
+            action: this.handleDeleteProcess(process),
+            danger: true
+        };
+        const abort = {
+            icon: "fa fa-window-close",
+            label: "abort",
+            action: this.handleAbortProcess(process),
+            danger: true
+        };
+        let options = [];
+        const status = process.status;
+        switch (status) {
+            case "failed":
+                options = [details, retry, abort, _delete];
+                break;
+            case "aborted":
+                options = [details, _delete];
+                break;
+            case "running": //??
+                options = [details, abort, _delete];
+                break;
+            case "completed":
+                options = [details, _delete];
+                break;
+            case "suspended":
+                options = [userInput, abort, _delete];
+                break;
+            default : throw new Error(`Unknown process status: ${status}`)
+        }
+        return <DropDownActions options={options} i18nPrefix="processes"/>;
+    };
 
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";
@@ -92,6 +238,27 @@ export default class Processes extends React.PureComponent {
         });
     };
 
+    filter = item => {
+        const {processes, filterAttributesAssignee, filterAttributesStatus, sorted, query} = this.state;
+        const newFilterAttributesAssignee = [...filterAttributesAssignee];
+        newFilterAttributesAssignee.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
+        const newFilterAttributesStatus = [...filterAttributesStatus];
+        newFilterAttributesStatus.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
+        this.setState({
+            filteredProcesses: this.doSearchAndSortAndFilter(query, processes, sorted, newFilterAttributesAssignee, newFilterAttributesStatus),
+            filterAttributesAssignee: newFilterAttributesAssignee,
+            filterAttributesStatus: newFilterAttributesStatus
+        });
+    };
+
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
             return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
@@ -100,7 +267,7 @@ export default class Processes extends React.PureComponent {
     };
 
     renderProcessesTable(processes, actions, sorted) {
-        const columns = ["assignee", "step", "customer", "product", "workflow_name", "started", "last_modified", "actions"];
+        const columns = ["assignee", "step", "status", "customer", "product", "workflow_name", "started", "last_modified", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -108,6 +275,7 @@ export default class Processes extends React.PureComponent {
                 {this.sortColumnIcon(name, sorted)}
             </th>
         };
+
         if (processes.length !== 0) {
             return (
                 <table className="processes">
@@ -118,15 +286,17 @@ export default class Processes extends React.PureComponent {
                     {processes.map((process, index) =>
                         <tr key={`${process.id}_${index}`} onClick={this.showProcess(process)}>
                             <td data-label={I18n.t("processes.assignee")} className="assignee">{process.assignee}</td>
-                            <td data-label={I18n.t("processes.step")} className="status">{process.step}</td>
-                            <td data-label={I18n.t("processes.customer")} className="customer">{process.customer}</td>
-                            <td data-label={I18n.t("processes.product")} className="product">{process.product}</td>
+                            <td data-label={I18n.t("processes.step")} className="step">{process.step}</td>
+                            <td data-label={I18n.t("processes.status")} className="status">{process.status}</td>
+                            <td data-label={I18n.t("processes.customer")}
+                                className="customer">{process.customer_name}</td>
+                            <td data-label={I18n.t("processes.product")} className="product">{process.product_name}</td>
                             <td data-label={I18n.t("processes.workflow_name")}
                                 className="workflow_name">{process.workflow_name}</td>
                             <td data-label={I18n.t("processes.started")}
-                                className="started">{this.renderDate(process.started)}</td>
+                                className="started">{renderDate(process.started)}</td>
                             <td data-label={I18n.t("processes.last_modified")}
-                                className="product">{this.renderDate(process.last_modified)}</td>
+                                className="last_modified">{renderDate(process.last_modified)}</td>
                             <td data-label={I18n.t("processes.actions")} className="actions"
                                 onClick={this.toggleActions(process, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
@@ -145,8 +315,9 @@ export default class Processes extends React.PureComponent {
     render() {
         const {
             filteredProcesses, actions, query, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, sorted
+            confirmationDialogQuestion, sorted, filterAttributesAssignee, filterAttributesStatus
         } = this.state;
+        const {organisations} = this.props;
         return (
             <div className="mod-processes">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -155,6 +326,12 @@ export default class Processes extends React.PureComponent {
                                     question={confirmationDialogQuestion}/>
                 <div className="card">
                     <div className="options">
+                        <FilterDropDown items={filterAttributesAssignee}
+                                        filterBy={this.filter}
+                                        label={I18n.t("processes.assignee")}/>
+                        <FilterDropDown items={filterAttributesStatus}
+                                        filterBy={this.filter}
+                                        label={I18n.t("processes.status")}/>
                         <section className="search">
                             <input className="allowed"
                                    placeholder={I18n.t("processes.searchPlaceHolder")}
@@ -169,7 +346,7 @@ export default class Processes extends React.PureComponent {
                     </div>
                 </div>
                 <section className="processes">
-                    {this.renderProcessesTable(filteredProcesses, actions, sorted)}
+                    {this.renderProcessesTable(filteredProcesses, actions, sorted, organisations)}
                 </section>
             </div>
         );
@@ -179,6 +356,7 @@ export default class Processes extends React.PureComponent {
 Processes.propTypes = {
     history: PropTypes.object.isRequired,
     currentUser: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired
+    organisations: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired
 };
 

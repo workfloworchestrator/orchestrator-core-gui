@@ -1,0 +1,59 @@
+@import "../stylesheets/vars.scss";
+
+.validation-explain {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: white;
+    width: 385px;
+    z-index: 5;
+    height: 100%;
+    transition: left 325ms ease-in-out;
+
+    &.hide {
+        transition: left 250ms ease-in-out;
+        left: -390px;
+    }
+
+    .container {
+        overflow-y: scroll;
+        height: 99%;
+    }
+
+    p {
+        margin-top: 5px;
+    }
+
+    span {
+        &.emphasize {
+            font-style: italic;
+        }
+        &.strong {
+            font-weight: bold;
+        }
+    }
+
+    .title {
+        position: relative;
+        padding: 20px 10px;
+        background-color: $blue;
+        color: white;
+        font-weight: bold;
+        font-size: larger;
+
+        a.close {
+            position: absolute;
+            right: 0;
+            top: -4px;
+            font-size: 24px;
+            padding: 8px;
+        }
+    }
+
+    .explanation, .example, .details {
+        padding: 10px;
+    }
+
+}

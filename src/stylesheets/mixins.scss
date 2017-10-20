@@ -117,3 +117,25 @@
     }
 }
 
+@mixin copy-icon-pulse {
+    i.copied {
+        animation: pulse 1s;
+        animation-iteration-count: 1;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 white;
+        }
+        70% {
+            box-shadow: 0 0 10px 8px lighten($blue, 15%);
+        }
+        100% {
+            box-shadow: 0 0 0 0 white;
+        }
+    }
+}
+
+

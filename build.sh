@@ -1,5 +1,4 @@
 #!/bin/bash
-rm -Rf build/*
-rm -Rf target/*
+./clean.sh
 # yarn install && yarn lint && yarn test && yarn build
 yarn install && yarn build
