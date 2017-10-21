@@ -10,28 +10,21 @@ export default class FreePortSelect extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            freePorts: []
         }
     }
 
     componentWillMount() {
-        console.log(`Fetching data for ${this.props.locationCode} and ${this.props.interfaceType}`);
-        //fetch the data and use it when ready
-        freePortsForLocationCodeAndInterfaceType(this.props.locationCode, this.props.interfaceType).then(result => {
-            this.setState({ loading: false, freePorts: result})
-        });
+        freePortsForLocationCodeAndInterfaceType(this.props.locationCode, this.props.interfaceType).then(result =>
+            this.setState({freePorts: result})
+        );
 
     };
 
     render() {
-        const {loading, freePorts} = this.state;
-
-        if (loading) {
-            console.log('Not ready for render yet');
-            return null; // render null when component is not ready yet
-        }
-
+        const {freePorts} = this.state;
         const {onChange, freePort, disabled} = this.props;
+
         return (
             <Select className="select-free-port"
                     onChange={onChange}
