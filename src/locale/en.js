@@ -136,7 +136,7 @@ I18n.translations.en = {
         mapping: "Workflow mapping configuration ",
         no_mapping: "The '{{name}}' workflow has no 'workflow_subscription_mapping'. This is most likely a programming error.   ",
         product_block: "Product Block",
-        resource_type: "Resource Type",
+        resource_type: "Resource Types",
         resource_type_sub: "(Resource type ID vs Workflow ID)",
         errors: "Errors",
         error_name: "Resource block: <span>{{name}}</span>",
