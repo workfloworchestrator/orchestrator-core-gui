@@ -77,17 +77,22 @@ export default class ProductValidation extends React.PureComponent {
         )
     };
 
-    renderMapping = mapping => {
+    renderMapping = (mapping, workflowName) => {
         const productsBlocks = Object.keys(mapping);
+        const hasMapping = !isEmpty(productsBlocks);
         return <section className="product-mapping">
             <table>
                 <thead>
                 <tr>
-                    <th dangerouslySetInnerHTML={{__html: I18n.t("validations.mapping")}}
-                        colSpan="2" className="validations-mapping-title"></th>
+                    <th colSpan="2" className="validations-mapping-title">
+                        <i className="fa fa-cog"></i>{I18n.t("validations.mapping")}
+                    </th>
                 </tr>
                 </thead>
-                {productsBlocks.map(block => this.renderProductBlock(mapping, block))}
+                {hasMapping && productsBlocks.map(block => this.renderProductBlock(mapping, block))}
+                {!hasMapping && <tr>
+                    <td colSpan={2} className="no-mapping">{I18n.t("validations.no_mapping", {name: workflowName})}</td>
+                </tr>}
             </table>
 
         </section>;
@@ -132,7 +137,7 @@ export default class ProductValidation extends React.PureComponent {
                         <i className={`fa ${iconClassname}`}></i>
                     </section>
                     {this.renderProductInfo(validation)}
-                    {this.renderMapping(validation.mapping)}
+                    {this.renderMapping(validation.mapping, validation.product.workflow)}
                 </section>
                 {!isEmpty(validation.errors) && this.renderErrors(validation.errors, validation.product.name)}
             </section>);

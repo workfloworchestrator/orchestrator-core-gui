@@ -49,8 +49,8 @@ section.validation-container {
                     background-color: $lightest-grey;
                     padding: 4px 0;
                     &.validations-mapping-title {
-                        i.fa-arrow-right {
-                            margin: 0 15px;
+                        i.fa {
+                            margin-right: 15px;
                         }
                     }
                 }
@@ -75,6 +75,11 @@ section.validation-container {
                             margin: 4px 15px;
                             color: $medium-grey;
                         }
+                    }
+                    &.no-mapping {
+                        font-style: italic;
+                        color: $orange;
+                        padding: 20px 80px 0 0;
                     }
                 }
             }
