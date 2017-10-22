@@ -24,7 +24,12 @@ section.validation-container {
             }
         }
         section.product-info, section.product-mapping {
-            flex-grow: 2;
+            &.product-info {
+                width: 40%;
+            }
+            &.product-mapping {
+                width: 60%;
+            }
             table {
                 width: 100%;
                 font-size: 15px;
@@ -54,7 +59,8 @@ section.validation-container {
                         text-transform: uppercase;
                         font-weight: bold;
                         color: $medium-grey;
-                        padding: 2px 40px 2px 0;
+                        padding: 3px 0;
+                        width: 35%;
                     }
                     &.resource-type-sub {
                         color: $dark-grey;
