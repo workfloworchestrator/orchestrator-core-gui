@@ -140,8 +140,8 @@ I18n.translations.en = {
         resource_type_sub: "(Resource type ID vs Workflow ID)",
         errors: "Errors",
         error_name: "Resource block: <span>{{name}}</span>",
-        block_missing: "Resource block <span>{{name}}</span> not configured in the Product <span>{{product}}</span>",
-        resource_type_missing: "Resource type <span>{{name}}</span> not configured in the Resource Block <span>{{block}}</span>",
+        block_missing: "Resource block <span>{{name}}</span> is not configured in the Product <span>{{product}}</span>",
+        resource_type_missing: "Resource type <span>{{name}}</span> is not configured in the Resource Block <span>{{block}}</span>",
         hide_valids: "Hide valid product configurations",
         resource_blocks: "Resource blocks",
         resource_types: "Resource types"
