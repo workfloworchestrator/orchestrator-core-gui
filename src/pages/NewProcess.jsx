@@ -45,8 +45,7 @@ export default class NewProcess extends React.Component {
 
     changeProduct = option => {
         if (isEmpty(option) || isEmpty(option.value)) {
-            this.setState({stepUserInput: []});
-            this.setState({product: ""});
+            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: ""});
         } else {
             this.setState({product: option.value});
             Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
