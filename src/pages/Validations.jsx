@@ -5,6 +5,8 @@ import {validations} from "../api";
 
 import "./Validations.css";
 import ValidationsExplain from "../components/ValidationsExplain";
+import CheckBox from "../components/CheckBox";
+import ProductValidation from "../components/ProductValidation";
 
 export default class Validations extends React.PureComponent {
 
@@ -12,7 +14,8 @@ export default class Validations extends React.PureComponent {
         super(props);
         this.state = {
             validations: [],
-            showExplanation: false
+            showExplanation: false,
+            hideValid: false
         };
     }
 
@@ -20,48 +23,28 @@ export default class Validations extends React.PureComponent {
         validations().then(results => this.setState({validations: results}));
     }
 
-    renderValidation = (validation, index) => {
-        const iconClassname = validation.valid ? "fa-check" : "fa-exclamation-triangle";
-        return <section key={index} className="validation">
-            <section className="header">
-                <section className="status">
-                    <i className={`fa ${iconClassname}`}></i>
-                </section>
-                <section className="product-info">
-                    <table>
-                        <tr>
-                            <td>{I18n.t("validations.product")}</td>
-                            <td>{validation.product.name}</td>
-                        </tr>
-                        <tr>
-                            <td>{I18n.t("validations.description")}</td>
-                            <td>{validation.product.description}</td>
-                        </tr>
-                        <tr>
-                            <td>{I18n.t("validations.workflow")}</td>
-                            <td>{validation.product.workflow}</td>
-                        </tr>
-                    </table>
-                </section>
-            </section>
-        </section>
-
-    };
-
     render() {
-        const {validations, showExplanation} = this.state;
+        const {validations, showExplanation, hideValid} = this.state;
+        const validationsToShow = hideValid ? [...validations].filter(validation => !validation.valid) : validations;
         return (
             <div className="mod-validations">
-
                 <ValidationsExplain
                     close={() => this.setState({showExplanation: false})}
                     isVisible={showExplanation}/>
-                <section className="explain" onClick={() => this.setState({showExplanation: true})}>
-                    <i className="fa fa-question-circle"></i>
-                    <span>{I18n.t("validations.help")}</span>
+                <section className="header">
+                    <section className="explain" onClick={() => this.setState({showExplanation: true})}>
+                        <i className="fa fa-question-circle"></i>
+                        <span>{I18n.t("validations.help")}</span>
+                    </section>
+                    <section className="options">
+                        <CheckBox name="hideValid" value={hideValid}
+                                  info={I18n.t("validations.hide_valids")}
+                                  onChange={() => this.setState({hideValid: !hideValid})}/>
+                    </section>
                 </section>
                 <section className="validations">
-                    {validations.map(this.renderValidation)}
+                    {validationsToShow.map((validation, index) =>
+                        <ProductValidation validation={validation} key={index}/>)}
                 </section>
             </div>
         );

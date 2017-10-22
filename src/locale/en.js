@@ -103,7 +103,8 @@ I18n.translations.en = {
         service_id_info: "IMS service id",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
-        configuration_ready: 'Configuration ready',
+        configuration_ready: "Configuration ready",
+        product_validation: "Product / Workflow validation",
         flash: {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
@@ -128,8 +129,19 @@ I18n.translations.en = {
     validations: {
         help: "Explain",
         product: "Product",
+        name: "Name",
         description: "Description",
         workflow: "Workflow",
+        valid: "Valid",
+        mapping: "Mapping: product configuration <i class='fa fa-arrow-right'></i> workflow",
+        product_block: "Product Block",
+        resource_type: "Resource Type",
+        resource_type_sub: "(Resource type ID vs Workflow ID)",
+        errors: "Errors",
+        error_name: "Resource block: <span>{{name}}</span>",
+        block_missing: "Resource block <span>{{name}}</span> not configured in the Product <span>{{product}}</span>",
+        resource_type_missing: "Resource type <span>{{name}}</span> not configured in the Resource Block <span>{{block}}</span>",
+        hide_valids: "Hide valid product configurations",
         resource_blocks: "Resource blocks",
         resource_types: "Resource types"
     },

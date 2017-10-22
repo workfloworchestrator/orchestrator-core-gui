@@ -132,7 +132,7 @@ export function validations() {
 }
 
 export function validation(productId) {
-    return validFetch(`products/${productId}/validate`);
+    return fetchJson(`products/${productId}/validate`);
 }
 
 export function reportError(error) {

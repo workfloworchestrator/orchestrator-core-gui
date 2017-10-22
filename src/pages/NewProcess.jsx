@@ -2,13 +2,14 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import "./NewProcess.css";
-import {initialWorkflowInput, startProcess} from "../api";
+import {initialWorkflowInput, startProcess, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import "./ProcessDetail.css";
 import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
+import ProductValidation from "../components/ProductValidation";
 
 export default class NewProcess extends React.Component {
 
@@ -16,7 +17,8 @@ export default class NewProcess extends React.Component {
         super(props);
         this.state = {
             product: "",
-            stepUserInput: []
+            stepUserInput: [],
+            productValidation: {"valid": true, mapping: {}}
         };
     }
 
@@ -46,15 +48,16 @@ export default class NewProcess extends React.Component {
         if (isEmpty(option.value)) {
             this.setState({stepUserInput: []})
         } else {
-            initialWorkflowInput(option.workflow).then(userInput => {
-                const withoutProduct = userInput.filter(input => input.name !== "product")
-                this.setState({stepUserInput: withoutProduct})
+            Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
+                const [productValidation, userInput] = result;
+                const withoutProduct = userInput.filter(input => input.name !== "product");
+                this.setState({productValidation: productValidation, stepUserInput: withoutProduct});
             });
         }
     };
 
     render() {
-        const {product, stepUserInput} = this.state;
+        const {product, stepUserInput, productValidation} = this.state;
         const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
         return (
             <div className="mod-new-process">
@@ -70,15 +73,20 @@ export default class NewProcess extends React.Component {
                                                product={product}/>
                             </div>
                         </section>
+                        {!isEmpty(productValidation.mapping) &&
+                        <section>
+                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                            <ProductValidation validation={productValidation}/>
+                        </section>}
                         {!isEmpty(stepUserInput) &&
                         <UserInputForm stepUserInput={stepUserInput}
-                                     multiServicePoints={multiServicePoints}
-                                     history={history}
-                                     organisations={organisations}
-                                     products={products}
-                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
-                                     locationCodes={locationCodes}
-                                     validSubmit={this.validSubmit}/>}
+                                       multiServicePoints={multiServicePoints}
+                                       history={history}
+                                       organisations={organisations}
+                                       products={products}
+                                       ieeeInterfaceTypes={ieeeInterfaceTypes}
+                                       locationCodes={locationCodes}
+                                       validSubmit={this.validSubmit}/>}
                     </section>
                 </section>
             </div>

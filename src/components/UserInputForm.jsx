@@ -18,8 +18,6 @@ import LocationCodeSelect from "./LocationCodeSelect";
 import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
 
-import {ieeeInterfaceTypesForProductTag} from "../api";
-
 
 export default class UserInputForm extends React.Component {
 
