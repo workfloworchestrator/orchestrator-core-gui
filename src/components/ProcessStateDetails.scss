@@ -65,10 +65,10 @@ section.process-state-detail {
             td {
                 font-size: larger;
                 &.title {
+                    padding: 15px 40px 3px 15px;
                     text-transform: uppercase;
                     font-weight: bold;
                     color: #a6b6be;
-                    padding: 3px 40px 3px 15px;
                 }
             }
         }
