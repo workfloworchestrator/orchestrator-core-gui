@@ -44,10 +44,11 @@ export default class NewProcess extends React.Component {
     };
 
     changeProduct = option => {
-        this.setState({product: option.value});
-        if (isEmpty(option.value)) {
-            this.setState({stepUserInput: []})
+        if (isEmpty(option) || isEmpty(option.value)) {
+            this.setState({stepUserInput: []});
+            this.setState({product: ""});
         } else {
+            this.setState({product: option.value});
             Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
                 const [productValidation, userInput] = result;
                 const withoutProduct = userInput.filter(input => input.name !== "product");
