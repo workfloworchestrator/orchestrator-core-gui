@@ -48,27 +48,16 @@ export default class ProductValidation extends React.PureComponent {
         </td>
     </tr>;
 
-    renderProductBlock = (mapping, name) => {
-        const resourceTypes = mapping[name];
-        //resourceTypes is an array of Objects we want to flatten to one keys-values Object
-        const resourceTypesContainer = {};
-        resourceTypes.reduce((acc, rt) => {
-            Object.keys(rt).reduce((innerAcc, key) => {
-                innerAcc[key] = rt[key];
-                return innerAcc;
-            }, resourceTypesContainer);
-            return resourceTypesContainer;
-        }, resourceTypesContainer);
-
-        let resourceTypeKeys = Object.keys(resourceTypesContainer);
+    renderProductBlock = (name, resourceTypes, index) => {
+        const resourceTypeKeys = Object.keys(resourceTypes);
         return (
-            <tbody className="product-block" key={name}>
+            <tbody className="product-block" key={`${name}_${index}`}>
             <tr>
                 <td className="title">{I18n.t("validations.product_block")}</td>
                 <td className="product-block-name">{name}</td>
             </tr>
             {resourceTypeKeys.map((key, index) =>
-                this.renderResourceType(key, resourceTypesContainer[key], index))}
+                this.renderResourceType(key, resourceTypes[key], index))}
             {resourceTypeKeys.length === 1 && <tr>
                 <td className="resource-type-sub">{I18n.t("validations.resource_type_sub")}</td>
                 <td></td>
@@ -78,8 +67,14 @@ export default class ProductValidation extends React.PureComponent {
     };
 
     renderMapping = (mapping, workflowName) => {
+        //if the mapping for a Product Block contains one more entry then we duplicate the Product Block
         const productsBlocks = Object.keys(mapping);
         const hasMapping = !isEmpty(productsBlocks);
+        const mappings = productsBlocks.reduce((acc, key) => {
+            const resourceTypes = mapping[key];
+            resourceTypes.forEach(resourceType => acc.push({name: key, resourceTypes: resourceType}));
+            return acc;
+        }, []);
         return <section className="product-mapping">
             <table>
                 <thead>
@@ -89,10 +84,12 @@ export default class ProductValidation extends React.PureComponent {
                     </th>
                 </tr>
                 </thead>
-                {hasMapping && productsBlocks.map(block => this.renderProductBlock(mapping, block))}
-                {!hasMapping && <tbody><tr>
+                {hasMapping && mappings.map((block, index) => this.renderProductBlock(block.name, block.resourceTypes, index))}
+                {!hasMapping && <tbody>
+                <tr>
                     <td colSpan={2} className="no-mapping">{I18n.t("validations.no_mapping", {name: workflowName})}</td>
-                </tr></tbody>}
+                </tr>
+                </tbody>}
             </table>
 
         </section>;
