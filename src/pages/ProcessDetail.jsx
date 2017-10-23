@@ -9,7 +9,7 @@ import "./ProcessDetail.css";
 import "highlight.js/styles/default.css";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
-import {organisationNameByUuid, productNameById} from "../utils/Lookups";
+import {organisationNameByUuid, productNameById, productById} from "../utils/Lookups";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -61,7 +61,7 @@ export default class ProcessDetail extends React.PureComponent {
             }
             this.setState({
                 process: processInstance, loaded: true, stepUserInput: stepUserInput,
-                tabs: tabs, selectedTab: selectedTab
+                tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
             })
         });
     };
@@ -82,7 +82,9 @@ export default class ProcessDetail extends React.PureComponent {
 
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput) => {
         const {locationCodes, ieeeInterfaceTypes, products, organisations, multiServicePoints, history} = this.props;
-        const productName = products.find(prod => prod.identifier === process.product).name
+        const product = products.find(prod => prod.identifier === process.product);
+        const productName = product.name;
+
         if (selectedTab === "process") {
             return <section className="card">
                 <ProcessStateDetails process={process}/>
@@ -92,7 +94,7 @@ export default class ProcessDetail extends React.PureComponent {
                 <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
                 <UserInputForm locationCodes={locationCodes} ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
                              products={products} organisations={organisations} history={history}
-                             multiServicePoints={multiServicePoints} validSubmit={this.validSubmit}/>
+                             multiServicePoints={multiServicePoints} product={product} validSubmit={this.validSubmit}/>
             </section>;
         }
     };

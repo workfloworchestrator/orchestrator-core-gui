@@ -37,7 +37,7 @@ export default class NewProcess extends React.Component {
                 .then(() => {
                     this.props.history.push(`/processes`);
                     const {products} = this.props;
-                    const name = products.find(prod => prod.identifier === this.state.product).name;
+                    const name = products.find(prod => prod.identifier === this.state.product.value).name;
                     setFlash(I18n.t("process.flash.create", {name: name}));
                 });
         }

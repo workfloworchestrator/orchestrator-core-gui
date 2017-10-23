@@ -30,7 +30,8 @@ export default class UserInputForm extends React.Component {
             leavePage: true,
             errors: {},
             isNew: true,
-            stepUserInput: [...props.stepUserInput]
+            stepUserInput: [...props.stepUserInput],
+            product: {}
         };
     }
 
