@@ -16,7 +16,7 @@ export default class NewProcess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: "",
+            product: {},
             stepUserInput: [],
             productValidation: {"valid": true, mapping: {}}
         };
@@ -24,7 +24,7 @@ export default class NewProcess extends React.Component {
 
     validSubmit = stepUserInput => {
         if (!isEmpty(this.state.product)) {
-            const product = {name: "product", type: "product", value: this.state.product};
+            const product = {name: "product", type: "product", value: this.state.product.value, tag: this.state.product.tag};
             //create a copy to prevent re-rendering
             let processInput = [...stepUserInput];
             processInput.push(product);
@@ -45,9 +45,9 @@ export default class NewProcess extends React.Component {
 
     changeProduct = option => {
         if (isEmpty(option) || isEmpty(option.value)) {
-            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: ""});
+            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}});
         } else {
-            this.setState({product: option.value});
+            this.setState({product: option});
             Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
                 const [productValidation, userInput] = result;
                 const withoutProduct = userInput.filter(input => input.name !== "product");
@@ -86,6 +86,7 @@ export default class NewProcess extends React.Component {
                                        products={products}
                                        ieeeInterfaceTypes={ieeeInterfaceTypes}
                                        locationCodes={locationCodes}
+                                       product={product}
                                        validSubmit={this.validSubmit}/>}
                     </section>
                 </section>

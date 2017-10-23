@@ -190,7 +190,7 @@ export default class UserInputForm extends React.Component {
                 //Todo get selected product and use it's tag to populate InterfacesTypes
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
-                                                              productTag='MSP100G'/>;
+                                                              productTag={this.props.product.tag}/>;
             case "free_ports_for_location_code_and_interface_type":
                 //Todo get selected locationCode and interfaceType from previous steps and use it
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
@@ -239,6 +239,7 @@ UserInputForm.propTypes = {
     multiServicePoints: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
+    product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired
 };
 
