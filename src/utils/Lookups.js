@@ -10,6 +10,12 @@ export function productNameById(id, products) {
     return product ? product.name : id;
 }
 
+export function productById(id, products) {
+    const product = products.find(prod => prod.identifier === id);
+    return product;
+}
+
+
 export function renderDate(epoch) {
     return new Date(epoch * 1000).toLocaleString();
 }
