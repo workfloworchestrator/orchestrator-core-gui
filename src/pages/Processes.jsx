@@ -21,7 +21,7 @@ export default class Processes extends React.PureComponent {
             filteredProcesses: [],
             query: "",
             actions: {show: false, id: ""},
-            sorted: {name: "last_modified", descending: false},
+            sorted: {name: "last_modified", descending: true},
             filterAttributesAssignee: [
                 {name: "CHANGES", selected: true, count: 0},
                 {name: "KLANT_SUPPORT", selected: true, count: 0},
@@ -261,7 +261,7 @@ export default class Processes extends React.PureComponent {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
+            return <i className={sorted.descending ? "fa fa-sort-asc" : "fa fa-sort-desc"}></i>
         }
         return <i/>;
     };
