@@ -188,7 +188,6 @@ export default class UserInputForm extends React.Component {
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;
             case "ieee_interface_type_for_product_tag":
-                //Todo get selected product and use it's tag to populate InterfacesTypes
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
                                                               productTag={this.props.product.tag}/>;
@@ -196,8 +195,8 @@ export default class UserInputForm extends React.Component {
                 //Todo get selected locationCode and interfaceType from previous steps and use it
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}
-                                       interfaceType='1000BASE-SX'
-                                       locationCode='UT001A'/>;
+                                       interfaceType={this.props.currentState.ieee_interface_type}
+                                       locationCode={this.props.currentState.location_code}/>;
             case "boolean":
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}

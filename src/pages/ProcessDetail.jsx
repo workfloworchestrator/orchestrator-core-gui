@@ -92,9 +92,16 @@ export default class ProcessDetail extends React.PureComponent {
         } else {
             return <section className="card">
                 <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
-                <UserInputForm locationCodes={locationCodes} ieeeInterfaceTypes={ieeeInterfaceTypes} stepUserInput={stepUserInput}
-                             products={products} organisations={organisations} history={history}
-                             multiServicePoints={multiServicePoints} product={product} validSubmit={this.validSubmit}/>
+                <UserInputForm locationCodes={locationCodes}
+                               ieeeInterfaceTypes={ieeeInterfaceTypes}
+                               stepUserInput={stepUserInput}
+                               products={products}
+                               organisations={organisations}
+                               history={history}
+                               multiServicePoints={multiServicePoints}
+                               product={product}
+                               currentState={process.current_state}
+                               validSubmit={this.validSubmit}/>
             </section>;
         }
     };
