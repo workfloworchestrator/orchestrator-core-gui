@@ -10,6 +10,7 @@ import MultiServicePointSelect from "./MultiServicePointSelect";
 import "highlight.js/styles/default.css";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
+import BandwidthSelect from "./BandwidthSelect";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
@@ -116,7 +117,7 @@ export default class UserInputForm extends React.Component {
     doValidateUserInput = (userInput, value, errors) => {
         const type = userInput.type;
         const name = userInput.name;
-        if (type === "int" || type === "vlan" || type === "capacity") {
+        if (type === "int" || type === "vlan") {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
@@ -155,7 +156,6 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         switch (userInput.type) {
             case "string" :
-            case "capacity" :
             case "vlan" :
             case "guid":
             case "ims_free_port":
@@ -164,6 +164,8 @@ export default class UserInputForm extends React.Component {
             case "ims_id":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "bandwidth" :
+                return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
                                                 msps={this.props.multiServicePoints}
@@ -243,4 +245,3 @@ UserInputForm.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     validSubmit: PropTypes.func.isRequired
 };
-
