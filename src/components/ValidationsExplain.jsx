@@ -27,8 +27,8 @@ export default class ValidationsExplain extends React.PureComponent {
             in the workflow linked to the Product (e.g. the column value <span className="code">create_subscription_workflow_key</span>)
             must also be configured in <span>core-db</span>.</p>
 
-        <p>Each mismatch - being a completely missing Resource Block or missing individually Resource Types - are
-            reported and result in an invalid Product configuration.</p>
+        <p>Each mismatch - being a completely missing Resource Block or missing individual Resource Types - is
+            reported and results in an invalid Product configuration.</p>
     </section>;
 
     example = () => <section className="example">

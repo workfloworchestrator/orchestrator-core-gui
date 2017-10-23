@@ -65,10 +65,10 @@ section.process-state-detail {
             td {
                 font-size: larger;
                 &.title {
-                    padding: 15px 40px 3px 15px;
+                    padding: 3px 40px 3px 15px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    color: #a6b6be;
+                    color: $medium-grey;
                 }
             }
         }
@@ -77,6 +77,7 @@ section.process-state-detail {
     section.steps {
         display: flex;
         flex-direction: column;
+        margin-left: 25%;
 
         .details-container{
             display: flex;

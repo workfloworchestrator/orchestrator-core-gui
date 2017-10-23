@@ -90,9 +90,9 @@ export default class ProductValidation extends React.PureComponent {
                 </tr>
                 </thead>
                 {hasMapping && productsBlocks.map(block => this.renderProductBlock(mapping, block))}
-                {!hasMapping && <tr>
+                {!hasMapping && <tbody><tr>
                     <td colSpan={2} className="no-mapping">{I18n.t("validations.no_mapping", {name: workflowName})}</td>
-                </tr>}
+                </tr></tbody>}
             </table>
 
         </section>;
