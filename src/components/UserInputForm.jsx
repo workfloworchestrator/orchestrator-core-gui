@@ -192,7 +192,6 @@ export default class UserInputForm extends React.Component {
                                                               interfaceType={userInput.value}
                                                               productTag={this.props.product.tag}/>;
             case "free_ports_for_location_code_and_interface_type":
-                //Todo get selected locationCode and interfaceType from previous steps and use it
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}
                                        interfaceType={this.props.currentState.ieee_interface_type}
