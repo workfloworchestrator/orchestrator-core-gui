@@ -29,6 +29,7 @@ export default class Processes extends React.PureComponent {
                 {name: "SYSTEM", selected: true, count: 0}
             ],
             filterAttributesStatus: [
+                {name: "created", selected: true, count: 0},
                 {name: "failed", selected: true, count: 0},
                 {name: "aborted", selected: true, count: 0},
                 {name: "completed", selected: true, count: 0},
