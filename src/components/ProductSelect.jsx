@@ -25,6 +25,6 @@ export default function ProductSelect({onChange, product, products, disabled}) {
 ProductSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     products: PropTypes.array.isRequired,
-    product: PropTypes.object,
+    product: PropTypes.string,
     disabled: PropTypes.bool
 };
