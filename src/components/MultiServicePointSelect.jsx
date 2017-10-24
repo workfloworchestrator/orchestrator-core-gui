@@ -9,9 +9,9 @@ export default class MultiServicePointSelect extends React.PureComponent {
     label = (msp, organisations) => {
         const organisation = organisations.find(org => org.uuid === msp.client_id);
         const organisationName = organisation ? organisation.name : "";
-        const value = msp.ims_service_id || I18n.t("process.ims_invalid_id");
+        const value = msp.subscription_id;
         const description = msp.description || "<No description>";
-        return `MSP ${description.trim()} ${organisationName} (${value.trim()})`
+        return `MSP ${description.trim()} ${organisationName}`
     };
 
     render() {
@@ -19,7 +19,7 @@ export default class MultiServicePointSelect extends React.PureComponent {
         return <Select className="select-msp"
                        onChange={onChange}
                        options={msps.map(aMsp => {
-                           return {value: aMsp.ims_service_id, label: this.label(aMsp, organisations)};
+                           return {value: aMsp.subscription_id, label: this.label(aMsp, organisations)};
                        })}
                        value={msp}
                        searchable={true}
