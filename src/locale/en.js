@@ -23,7 +23,8 @@ I18n.translations.en = {
 
     navigation: {
         processes: "Processes",
-        validations: "Validations"
+        validations: "Validations",
+        subscriptions: "Subscriptions"
     },
 
     processes: {
@@ -33,7 +34,7 @@ I18n.translations.en = {
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
         new: "New Process",
-        notFound: "No Workflow found",
+        notFound: "No Process found (e.g. 404)",
         assignee: "Assignee",
         step: "Step",
         status: "Status",
@@ -157,6 +158,22 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed"
+    },
+    subscriptions: {
+        customer_name: "Customer",
+        description: "Description",
+        insync: "In sync",
+        product_name: "Product",
+        status: "Status",
+        start_date_epoch: "Start date",
+        end_date_epoch: "End date",
+        sub_name: "Name",
+        no_found: "No subscription",
+        searchPlaceHolder: "Search for subscriptions...",
+    },
+    subscription: {
+        notFound: "No Subscription found (e.g. 404)",
+        title: "Subscription"
     },
     clipboard: {
         copied: "Copied!",

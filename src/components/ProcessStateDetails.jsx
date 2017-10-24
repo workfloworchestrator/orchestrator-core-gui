@@ -8,7 +8,7 @@ import I18n from "i18n-js";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
-import {capitalize, renderDate} from "../utils/Lookups";
+import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 
 export default class ProcessStateDetails extends React.PureComponent {
@@ -78,7 +78,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         )
     };
 
-    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDate(value);
+    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
 
     stateDelta = (prev, curr) => {

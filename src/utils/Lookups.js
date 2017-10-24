@@ -15,9 +15,12 @@ export function productById(id, products) {
     return product;
 }
 
-
-export function renderDate(epoch) {
+export function renderDateTime(epoch) {
     return new Date(epoch * 1000).toLocaleString();
+}
+
+export function renderDate(s) {
+    return isEmpty(s) ? "" : new Date(s).toLocaleDateString();
 }
 
 export function capitalize(s) {

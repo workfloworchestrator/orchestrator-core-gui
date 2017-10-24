@@ -7,8 +7,11 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "../pages/NotFound";
 import Help from "../pages/Help";
 import Processes from "../pages/Processes";
+import Subscriptions from "../pages/Subscriptions";
 import Validations from "../pages/Validations";
 import NewProcess from "../pages/NewProcess";
+import ProcessDetail from "./ProcessDetail";
+import SubscriptionDetail from "./SubscriptionDetail";
 import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
 import Header from "../components/Header";
@@ -22,11 +25,10 @@ import {
     products,
     redirectToAuthorizationServer,
     reportError,
-    subscriptions
+    subscriptions_for_type
 } from "../api";
 import "../locale/en";
 import "../locale/nl";
-import ProcessDetail from "./ProcessDetail";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -110,7 +112,7 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
+                Promise.all([me(), organisations(), subscriptions_for_type("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
                     const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
@@ -160,7 +162,7 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/validations"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Validations {...props}
-                                                                    products={products}/>}/>
+                                                                      products={products}/>}/>
                         <ProtectedRoute path="/new-process"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <NewProcess currentUser={currentUser}
@@ -170,7 +172,7 @@ class App extends React.PureComponent {
                                                                      multiServicePoints={multiServicePoints}
                                                                      locationCodes={locationCodes}
                                                                      {...props}
-                                                                     />}/>
+                                        />}/>
                         <Route path="/process/:id"
                                render={props => <ProcessDetail currentUser={currentUser}
                                                                organisations={organisations}
@@ -180,6 +182,14 @@ class App extends React.PureComponent {
                                                                ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                locationCodes={locationCodes}
                                                                {...props}/>}/>
+                        <Route path="/subscriptions"
+                               render={props => <Subscriptions products={products}
+                                                               organisations={organisations}
+                                                               {...props}/>}/>
+                        <Route path="/subscription/:id"
+                               render={props => <SubscriptionDetail organisations={organisations}
+                                                                    products={products}
+                                                                    {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
                         <Route path="/not-allowed"

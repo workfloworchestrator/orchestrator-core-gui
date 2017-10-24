@@ -66,7 +66,15 @@ function postPutJson(path, body, method, result = true) {
 }
 
 //API
-export function subscriptions(type) {
+export function subscriptions() {
+    return fetchJson("subscriptions");
+}
+
+export function subscriptions_detail(subscription_id) {
+    return fetchJson(`subscriptions/${subscription_id}`);
+}
+
+export function subscriptions_for_type(type) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
