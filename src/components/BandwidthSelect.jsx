@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-export default class CapacitySelect extends React.PureComponent {
+export default class BandwidthSelect extends React.PureComponent {
 
     render() {
         const {onChange, value, disabled} = this.props;
@@ -26,7 +26,7 @@ export default class CapacitySelect extends React.PureComponent {
 }
 
 
-CapacitySelect.propTypes = {
+BandwidthSelect.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,

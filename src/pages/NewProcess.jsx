@@ -59,6 +59,7 @@ export default class NewProcess extends React.Component {
     render() {
         const {product, stepUserInput, productValidation} = this.state;
         const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
+        const showProductValidation = !isEmpty(productValidation.mapping) && !productValidation.valid;
         return (
             <div className="mod-new-process">
                 <section className="card">
@@ -70,10 +71,10 @@ export default class NewProcess extends React.Component {
                             <div className="validity-input-wrapper">
                                 <ProductSelect products={this.props.products}
                                                onChange={this.changeProduct}
-                                               product={product}/>
+                                               product={isEmpty(product) ? undefined : product.value}/>
                             </div>
                         </section>
-                        {!isEmpty(productValidation.mapping) &&
+                        {showProductValidation &&
                         <section>
                             <label htmlFor="none">{I18n.t("process.product_validation")}</label>
                             <ProductValidation validation={productValidation}/>

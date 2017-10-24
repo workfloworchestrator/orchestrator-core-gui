@@ -17,6 +17,7 @@ export default function ProductSelect({onChange, product, products, disabled}) {
                 })}
                 value={product}
                 searchable={true}
+                placeholder="Search and select a product..."
                 disabled={disabled || products.length === 0}/>
     );
 }

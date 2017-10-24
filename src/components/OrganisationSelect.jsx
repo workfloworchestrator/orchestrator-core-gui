@@ -13,6 +13,7 @@ export default function OrganisationSelect({onChange, organisation, organisation
                 })}
                 value={organisation}
                 searchable={true}
+                placeholder="Search and select a customer..."
                 disabled={disabled || organisations.length === 0}/>
     );
 }

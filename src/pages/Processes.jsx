@@ -88,13 +88,14 @@ export default class Processes extends React.PureComponent {
                 searchable.map(search => process[search].toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
-            processes.sort(this.sortBy(sorted.name));
+
         }
         processes = processes.filter(process =>
             filterAttributesAssignee.filter(attr => attr.name === process.assignee)[0].selected);
         processes = processes.filter(process =>
             filterAttributesStatus.filter(attr => attr.name === process.status)[0].selected);
-        return sorted.descending ? processes : processes.reverse();
+        processes.sort(this.sortBy(sorted.name));
+        return sorted.descending ? processes.reverse() : processes;
     };
 
     delayedSearch = debounce(query => {
@@ -231,10 +232,10 @@ export default class Processes extends React.PureComponent {
         const sorted = {...this.state.sorted};
         const filteredProcesses = [...this.state.filteredProcesses].sort(this.sortBy(name));
 
-        sorted.descending = sorted.name === name ? !sorted.descending : true;
+        sorted.descending = sorted.name === name ? !sorted.descending : false;
         sorted.name = name;
         this.setState({
-            filteredProcesses: sorted.descending ? filteredProcesses : filteredProcesses.reverse(),
+            filteredProcesses: sorted.descending ? filteredProcesses.reverse() : filteredProcesses,
             sorted: sorted
         });
     };
@@ -262,7 +263,7 @@ export default class Processes extends React.PureComponent {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-asc" : "fa fa-sort-desc"}></i>
+            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
         }
         return <i/>;
     };

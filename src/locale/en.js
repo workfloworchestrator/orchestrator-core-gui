@@ -103,6 +103,8 @@ I18n.translations.en = {
         ims_port_id_info: "The IMS port id",
         service_id: "IMS service id",
         service_id_info: "IMS service id",
+        bandwidth: "The bandwidth",
+        bandwidth_info: "Bandwidth in capacity per second",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         new_process: "New process",
         configuration_ready: "Configuration ready",
