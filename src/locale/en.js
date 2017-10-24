@@ -70,10 +70,8 @@ I18n.translations.en = {
             user_input: "User input",
             process: "process"
         },
-        bandwidth: "Bandwidth",
-        bandwidth_info: "Bandwidth as used in Jira",
-        port: "Port",
-        port_info: "Select a port",
+        port_id: "Port",
+        port_id_info: "Select a port",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
