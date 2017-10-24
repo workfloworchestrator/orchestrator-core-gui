@@ -59,7 +59,7 @@ export default class NewProcess extends React.Component {
     render() {
         const {product, stepUserInput, productValidation} = this.state;
         const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
-        const showProductValidation = !isEmpty(productValidation.mapping) && !productValidation.valid;
+        const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         return (
             <div className="mod-new-process">
                 <section className="card">

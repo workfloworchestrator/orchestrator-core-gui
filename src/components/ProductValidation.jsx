@@ -126,7 +126,8 @@ export default class ProductValidation extends React.PureComponent {
 
     render() {
         const {validation} = this.props;
-        const iconClassname = validation.valid ? "fa-check" : "fa-exclamation-triangle";
+        const iconClassname = (validation.valid && (isEmpty(validation.product) || !isEmpty(validation.mapping))) ?
+            "fa-check" : "fa-exclamation-triangle";
         return (
             <section className="validation-container">
                 <section className="validation">
