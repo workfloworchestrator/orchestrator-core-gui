@@ -10,7 +10,8 @@ import "./Processes.css";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-import {renderDate, organisationNameByUuid, productNameById} from "../utils/Lookups";
+import {organisationNameByUuid, productNameById, renderDateTime} from "../utils/Lookups";
+
 export default class Processes extends React.PureComponent {
 
     constructor(props) {
@@ -296,9 +297,9 @@ export default class Processes extends React.PureComponent {
                             <td data-label={I18n.t("processes.workflow_name")}
                                 className="workflow_name">{process.workflow_name}</td>
                             <td data-label={I18n.t("processes.started")}
-                                className="started">{renderDate(process.started)}</td>
+                                className="started">{renderDateTime(process.started)}</td>
                             <td data-label={I18n.t("processes.last_modified")}
-                                className="last_modified">{renderDate(process.last_modified)}</td>
+                                className="last_modified">{renderDateTime(process.last_modified)}</td>
                             <td data-label={I18n.t("processes.actions")} className="actions"
                                 onClick={this.toggleActions(process, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>

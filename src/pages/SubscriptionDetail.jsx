@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {subscriptions_detail} from "../api";
+import {subscriptions_detail, productById, imsService} from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
 import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
@@ -34,9 +34,12 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscription.product_name = productNameById(subscription.product_id, products);
             subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
             subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
-            this.setState({
-                subscription: subscription, loaded: true
-            })
+            this.setState({subscription: subscription, loaded: true});
+            const resourceTypes = subscription.instances.reduce((acc, instance) => acc.concat(instance.resource_types), []);
+            Promise.all([productById(subscription.product_id)]
+                .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)))).then(result => {
+                debugger;
+            });
         });
     };
 

@@ -86,6 +86,10 @@ export function products() {
     return fetchJson("products")
 }
 
+export function productById(productId) {
+    return fetchJson(`products/${productId}`)
+}
+
 export function ieeeInterfaceTypes() {
     return fetchJson("ims/ieee_interface_types")
 }
@@ -101,7 +105,7 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
 export function imsService(type, identifier) {
     switch (type) {
         case "ims_port_id":
-            return fetchJson(`/ims/service_by_ims_port/${identifier}`);
+            return fetchJson(`ims/service_by_ims_port/${identifier}`);
         case "ims_circuit_id":
             return fetchJson(`ims/service_by_ims_service_id/${identifier}`);
         default:
