@@ -108,6 +108,8 @@ export function imsService(type, identifier) {
             return fetchJson(`ims/service_by_ims_port/${identifier}`);
         case "ims_circuit_id":
             return fetchJson(`ims/service_by_ims_service_id/${identifier}`);
+        case "port_subscription_id":
+            return subscriptions_detail(identifier);
         default:
             return Promise.resolve({})
     }

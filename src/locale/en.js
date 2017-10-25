@@ -175,7 +175,28 @@ I18n.translations.en = {
     },
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
-        title: "Subscription"
+        subscription: "Subscription",
+        product_title: "Product",
+        ims_services: "IMS Services",
+        product: {
+            name: "Name",
+            description: "Description",
+            workflow: "Workflow-key",
+            created: "Created",
+            end_date: "End date",
+            product_type: "Product type",
+            status: "Status",
+            tag: "Tag"
+        },
+        ims_service: {
+            id: "IMS service ID ({{index}})",
+            customer: "Customer",
+            extra_info: "Extra info",
+            name: "Name",
+            product: "Product",
+            speed: "Speed",
+            status: "Status"
+        }
     },
     clipboard: {
         copied: "Copied!",
