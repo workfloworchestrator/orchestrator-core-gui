@@ -27,7 +27,7 @@ export default class NewProcess extends React.Component {
         if (preselectedProduct != null) {
             const product = products.find(x => x.identifier === preselectedProduct);
             if (product != null) {
-                this.changeProduct(Object.assign({}, {value: product.identifier}, product));
+                this.changeProduct({value: product.identifier, ...product});
             }
         }
     };
@@ -66,7 +66,7 @@ export default class NewProcess extends React.Component {
                     if (organisationInputIdx !== -1) {
                         const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
                         const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
-                        const organisationInput = Object.assign({}, stepUserInput[organisationInputIdx], {value: this.props.preselectedOrganisation});
+                        const organisationInput = {...stepUserInput[organisationInputIdx], value: this.props.preselectedOrganisation};
                         stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
                     }
                 }
