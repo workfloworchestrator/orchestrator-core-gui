@@ -22,6 +22,16 @@ export default class NewProcess extends React.Component {
         };
     }
 
+    componentDidMount = () => {
+        const {products, preselectedProduct} = this.props;
+        if (preselectedProduct != null) {
+            const product = products.find(x => x.identifier === preselectedProduct);
+            if (product != null) {
+                this.changeProduct(Object.assign({}, {value: product.identifier}, product));
+            }
+        }
+    };
+
     validSubmit = stepUserInput => {
         if (!isEmpty(this.state.product)) {
             const product = {name: "product", type: "product", value: this.state.product.value, tag: this.state.product.tag};
@@ -50,8 +60,17 @@ export default class NewProcess extends React.Component {
             this.setState({product: option});
             Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
                 const [productValidation, userInput] = result;
-                const withoutProduct = userInput.filter(input => input.name !== "product");
-                this.setState({productValidation: productValidation, stepUserInput: withoutProduct});
+                let stepUserInput = userInput.filter(input => input.name !== "product");
+                if (this.props.preselectedOrganisation != null) {
+                    const organisationInputIdx = stepUserInput.findIndex(x => x.name == "organisation");
+                    if (organisationInputIdx !== -1) {
+                        const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
+                        const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
+                        const organisationInput = Object.assign({}, stepUserInput[organisationInputIdx], {value: this.props.preselectedOrganisation});
+                        stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
+                    }
+                }
+                this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
             });
         }
     };
@@ -104,5 +123,6 @@ NewProcess.propTypes = {
     ieeeInterfaceTypes: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
+    preselectedProduct: PropTypes.string,
+    preselectedOrganisation: PropTypes.string,
 };
-
