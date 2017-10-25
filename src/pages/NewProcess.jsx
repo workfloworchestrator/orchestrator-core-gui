@@ -62,7 +62,7 @@ export default class NewProcess extends React.Component {
                 const [productValidation, userInput] = result;
                 let stepUserInput = userInput.filter(input => input.name !== "product");
                 if (this.props.preselectedOrganisation != null) {
-                    const organisationInputIdx = stepUserInput.findIndex(x => x.name == "organisation");
+                    const organisationInputIdx = stepUserInput.findIndex(x => x.name === "organisation");
                     if (organisationInputIdx !== -1) {
                         const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
                         const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
