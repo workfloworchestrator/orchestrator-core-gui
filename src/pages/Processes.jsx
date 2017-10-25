@@ -91,10 +91,14 @@ export default class Processes extends React.PureComponent {
             );
 
         }
-        processes = processes.filter(process =>
-            filterAttributesAssignee.filter(attr => attr.name === process.assignee)[0].selected);
-        processes = processes.filter(process =>
-            filterAttributesStatus.filter(attr => attr.name === process.status)[0].selected);
+        processes = processes.filter(process => {
+            const assigneeFilter = filterAttributesAssignee.find(attr => attr.name === process.assignee);
+            return assigneeFilter ? assigneeFilter.selected : true;
+        });
+        processes = processes.filter(process => {
+            const statusFilter = filterAttributesStatus.find(attr => attr.name === process.status);
+            return statusFilter ? statusFilter.selected : true;
+        });
         processes.sort(this.sortBy(sorted.name));
         return sorted.descending ? processes.reverse() : processes;
     };
