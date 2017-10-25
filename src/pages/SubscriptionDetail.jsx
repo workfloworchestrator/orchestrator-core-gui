@@ -17,6 +17,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscription: {},
             product: {},
             imsServices: [],
+            subscriptions: [],
             notFound: false,
             loaded: false
         };
@@ -31,27 +32,69 @@ export default class SubscriptionDetail extends React.PureComponent {
                     throw err;
                 }
             }).then(subscription => {
-            const {organisations, products} = this.props;
-
-            subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
-            subscription.product_name = productNameById(subscription.product_id, products);
-            subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
-            subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
+            this.enrichSubscription(subscription);
             this.setState({subscription: subscription, loaded: true});
             const resourceTypes = subscription.instances.reduce((acc, instance) => acc.concat(instance.resource_types), []);
             Promise.all([productById(subscription.product_id)]
                 .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)))).then(result => {
+                const relatedObjects = result.slice(1);
+                const subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
+                subscriptions.forEach(sub => this.enrichSubscription(sub));
+                const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
                 const flags = new Set();
-                const imsServices = result.slice(1).filter(resource => {
+                const imsServices = allImsServices.filter(resource => {
                     if (flags.has(resource.id)) {
                         return false;
                     }
                     flags.add(resource.id);
                     return true;
                 });
-                this.setState({product: result[0], imsServices: imsServices});
+                this.setState({product: result[0], imsServices: imsServices, subscriptions: subscriptions});
             });
         });
+    };
+
+    enrichSubscription = subscription  => {
+        const {organisations, products} = this.props;
+        subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
+        subscription.product_name = productNameById(subscription.product_id, products);
+        subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
+        subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
+    };
+
+    renderSubscriptions = (subscriptions, product) => {
+        if (isEmpty(subscriptions)) {
+            return null;
+        }
+        return <section className="details">
+            <h3>{I18n.t("subscription.subscriptions", {product: product})}</h3>
+            <div className="form-container-parent">
+                {subscriptions.map((subscription, index) => {
+                return <section key={index} className="form-container">
+                    <section>
+                        <label className="title">{I18n.t("subscriptions.customer_name")}</label>
+                        <input type="text" readOnly={true} value={subscription.customer_name}/>
+                        <label className="title">{I18n.t("subscriptions.description")}</label>
+                        <input type="text" readOnly={true} value={subscription.description}/>
+                        <label className="title">{I18n.t("subscriptions.product_name")}</label>
+                        <input type="text" readOnly={true} value={subscription.product_name}/>
+                        <label className="title">{I18n.t("subscriptions.sub_name")}</label>
+                        <input type="text" readOnly={true} value={subscription.sub_name}/>
+                    </section>
+                    <section>
+                        <label className="title">{I18n.t("subscriptions.status")}</label>
+                        <input type="text" readOnly={true} value={subscription.status}/>
+                        <label className="title">{I18n.t("subscriptions.start_date_epoch")}</label>
+                        <input type="text" readOnly={true} value={renderDate(subscription.start_date)}/>
+                        <label className="title">{I18n.t("subscriptions.end_date_epoch")}</label>
+                        <input type="text" readOnly={true} value={renderDate(subscription.end_date)}/>
+                        <CheckBox value={subscription.insync} readOnly={true}
+                                  name="isync" info={I18n.t("subscriptions.insync")}/>
+                    </section>
+                </section>
+                })}
+            </div>
+        </section>
     };
 
     renderServices = (imsServices, organisations) => {
@@ -154,7 +197,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     render() {
-        const {loaded, notFound, subscription, product, imsServices} = this.state;
+        const {loaded, notFound, subscription, product, imsServices, subscriptions} = this.state;
         const {organisations} = this.props;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
@@ -162,6 +205,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             <div className="mod-subscription-detail">
                 {renderContent && this.renderDetails(subscription)}
                 {renderContent && this.renderProduct(product)}
+                {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}
                 {renderContent && this.renderServices(imsServices, organisations)}
                 {renderNotFound && <section>{I18n.t("subscription.notFound")}</section>}
             </div>

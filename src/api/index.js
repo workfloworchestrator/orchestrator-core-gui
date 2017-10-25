@@ -103,16 +103,23 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
 }
 
 export function imsService(type, identifier) {
+    let promise;
     switch (type) {
         case "ims_port_id":
-            return fetchJson(`ims/service_by_ims_port/${identifier}`);
+            promise = fetchJson(`ims/service_by_ims_port/${identifier}`);
+            break;
         case "ims_circuit_id":
-            return fetchJson(`ims/service_by_ims_service_id/${identifier}`);
+            promise = fetchJson(`ims/service_by_ims_service_id/${identifier}`);
+            break;
         case "port_subscription_id":
-            return subscriptions_detail(identifier);
+            promise = subscriptions_detail(identifier);
+            break;
         default:
-            return Promise.resolve({})
+            promise = Promise.resolve({})
     }
+    return promise.then(json => {
+        return {type: type, json: json}
+    });
 }
 
 export function processIdFromSubscriptionId(subscriptionId) {

@@ -176,6 +176,7 @@ I18n.translations.en = {
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
+        subscriptions: "Subscriptions used in the product {{product}}",
         product_title: "Product",
         ims_services: "IMS Services",
         product: {
