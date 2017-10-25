@@ -7,6 +7,7 @@ import "./Validations.css";
 import ValidationsExplain from "../components/ValidationsExplain";
 import CheckBox from "../components/CheckBox";
 import ProductValidation from "../components/ProductValidation";
+import {isEmpty} from "../utils/Utils";
 
 export default class Validations extends React.PureComponent {
 
@@ -23,9 +24,13 @@ export default class Validations extends React.PureComponent {
         validations().then(results => this.setState({validations: results}));
     }
 
+    isValidValidation = validation =>
+        (validation.valid && (isEmpty(validation.product) || !isEmpty(validation.mapping)));
+
     render() {
         const {validations, showExplanation, hideValid} = this.state;
-        const validationsToShow = hideValid ? [...validations].filter(validation => !validation.valid) : validations;
+        const validationsToShow = hideValid ? [...validations]
+            .filter(validation => !this.isValidValidation(validation)) : validations;
         return (
             <div className="mod-validations">
                 <ValidationsExplain

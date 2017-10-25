@@ -8,14 +8,14 @@
 
     h3 {
         font-size: larger;
-        padding: 15px 0;
+        padding: 15px 0 0 15px;
         color: $darker-blue;
     }
 
     .form-container {
         display: flex;
         section {
-            padding:25px;
+            padding: 0 25px;
             width: 100%;
 
             label.title  {
