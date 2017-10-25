@@ -98,6 +98,24 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
 
+export function imsService(type, identifier) {
+    switch (type) {
+        case "ims_port_id":
+            return fetchJson(`/ims/service_by_ims_port/${identifier}`);
+        case "ims_circuit_id":
+            return fetchJson(`ims/service_by_ims_service_id/${identifier}`);
+        default:
+            return Promise.resolve({})
+    }
+}
+
+export function processIdFromSubscriptionId(subscriptionId) {
+    return fetchJson(`processes/process-subscription-by-subscription-id/${subscriptionId}`)
+}
+
+export function subscriptionIdFromProcessId(processId) {
+    return fetchJson(`processes/process-subscription-by-pid/${processId}`)
+}
 
 export function locationCodes() {
     return fetchJson("crm/location_codes");
