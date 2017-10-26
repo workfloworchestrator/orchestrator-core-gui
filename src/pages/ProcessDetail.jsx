@@ -65,9 +65,7 @@ export default class ProcessDetail extends React.PureComponent {
                 process: processInstance, loaded: true, stepUserInput: stepUserInput,
                 tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
             });
-            debugger;
             subscriptionIdFromProcessId(processInstance.id).then(subscriptionProcessLink => {
-                debugger;
                 this.setState({subscriptionProcessLink: subscriptionProcessLink});
             });
         });

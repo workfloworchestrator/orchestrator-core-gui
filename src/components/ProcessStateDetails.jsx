@@ -93,20 +93,13 @@ export default class ProcessStateDetails extends React.PureComponent {
         return newState;
     };
 
-    renderProcessSubscritionLink = subscriptionProcessLink => {
+    renderProcessSubscriptionLink = subscriptionProcessLink => {
         if (isEmpty(subscriptionProcessLink)) {
             return null;
         }
         return <section className="subscription-link">
-            <h3>{I18n.t("process.subscription_link")}</h3>
-            <div className="form-container-parent">
-                <section className="form-container">
-                    <section>
-                        <NavLink to={`/subscription/${subscriptionProcessLink.subscription_id}`} className="button green">
-                            <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt")}</NavLink>
-                    </section>
-                </section>
-            </div>
+            <NavLink to={`/subscription/${subscriptionProcessLink.subscription_id}`} className="button green">
+                <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt")}</NavLink>
         </section>
     };
 
@@ -125,7 +118,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                 json = step.form.reduce((acc, field) => {
                     acc[field.name] = "";
                     return acc;
-                },{});
+                }, {});
                 break;
             case "failed" :
                 json = step.state;
@@ -183,11 +176,11 @@ export default class ProcessStateDetails extends React.PureComponent {
     };
 
     render() {
-        const {process} = this.props;
-        const {raw, details, stateChanges, subscriptionProcessLink} = this.state;
+        const {process, subscriptionProcessLink} = this.props;
+        const {raw, details, stateChanges} = this.state;
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
-            {this.renderProcessSubscritionLink(subscriptionProcessLink)}
+            {this.renderProcessSubscriptionLink(subscriptionProcessLink)}
             {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
         </section>
     }

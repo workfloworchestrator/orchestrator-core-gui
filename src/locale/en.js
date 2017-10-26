@@ -114,7 +114,7 @@ I18n.translations.en = {
             update: "Resumed process for workflow {{name}}"
         },
         subscription_link: "Subscription",
-        subscription_link_text: "Show resulting subscription",
+        subscription_link_txt: "Show Subscription created by this Process",
     },
     process_state: {
         copy: "Copy to clipboard",
