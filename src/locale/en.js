@@ -186,6 +186,7 @@ I18n.translations.en = {
         process_link: "Process",
         process_link_text: "Show related process / workflow",
         ims_services: "IMS Services",
+        link_subscription: "Show Subscription",
         product: {
             name: "Name",
             description: "Description",

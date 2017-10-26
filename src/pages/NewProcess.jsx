@@ -32,7 +32,7 @@ export default class NewProcess extends React.Component {
         }
     };
 
-    validSubmit = stepUserInput => {
+    validSubmit = (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
             const product = {name: "product", type: "product", value: this.state.product.value, tag: this.state.product.tag};
             //create a copy to prevent re-rendering

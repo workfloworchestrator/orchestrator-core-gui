@@ -128,11 +128,18 @@ export default class ProcessStateDetails extends React.PureComponent {
                 break;
             default:
         }
+        if (isEmpty(json)) {
+            return null;
+        }
         const formattedJson = JSON.stringify(json, null, 4);
+        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user": "fa fa-cloud";
+        if (index === 0 || steps[index - 1]) {
+
+        }
         return (
             <section className="state-changes">
                 <section className="state-divider">
-                    <i className="fa fa-arrow-left"></i>
+                    <i className={iconName}></i>
                 </section>
                 <Highlight className="JSON">
                     {formattedJson}

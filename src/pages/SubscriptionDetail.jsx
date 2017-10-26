@@ -26,7 +26,12 @@ export default class SubscriptionDetail extends React.PureComponent {
     }
 
     componentWillMount = () => {
-        subscriptions_detail(this.props.match.params.id)
+        const subscriptionId = this.props.match.params.id;
+        this.refreshSubscription(subscriptionId);
+    };
+
+    refreshSubscription(subscriptionId) {
+        subscriptions_detail(subscriptionId)
             .catch(err => {
                 if (err.response && err.response.status === 404) {
                     this.setState({notFound: true, loaded: true});
@@ -52,10 +57,21 @@ export default class SubscriptionDetail extends React.PureComponent {
                     flags.add(resource.id);
                     return true;
                 });
-                this.setState({subscriptionProcessLink: result[0],product: result[1],
-                    imsServices: imsServices, subscriptions: subscriptions});
+                this.setState({
+                    subscriptionProcessLink: result[0], product: result[1],
+                    imsServices: imsServices, subscriptions: subscriptions
+                });
             });
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const id = this.props.match.params.id;
+        const nextId = nextProps.match.params.id;
+        if (id !== nextId) {
+            this.refreshSubscription(nextId);
+            window.scrollTo(0, 0);
+        }
     };
 
     subscriptionResourceTypes = subscription => subscription.instances.reduce((acc, instance) => acc.concat(instance.resource_types), []);
@@ -68,7 +84,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
     };
 
-    renderSubscriptionDetail = (subscription, index) =>
+    renderSubscriptionDetail = (subscription, index, showLink = true) =>
         <section key={index} className="form-container">
             <section>
                 <label className="title">{I18n.t("subscriptions.customer_name")}</label>
@@ -79,6 +95,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <input type="text" readOnly={true} value={subscription.product_name}/>
                 <label className="title">{I18n.t("subscriptions.sub_name")}</label>
                 <input type="text" readOnly={true} value={subscription.sub_name}/>
+                {showLink && <NavLink to={`/subscription/${subscription.subscription_id}`}
+                                      className="button green subscription-link">
+                    <i className="fa fa-link"></i> {I18n.t("subscription.link_subscription")}</NavLink>}
             </section>
             <section>
                 <label className="title">{I18n.t("subscriptions.status")}</label>
@@ -222,7 +241,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
             <div className="form-container-parent">
-                {this.renderSubscriptionDetail(subscription, 0)}
+                {this.renderSubscriptionDetail(subscription, 0, false)}
             </div>
         </section>
     };

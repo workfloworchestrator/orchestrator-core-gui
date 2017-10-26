@@ -19,6 +19,9 @@ section.step {
     &.success {
         background-color: $dark-green;
     }
+    &.complete {
+        background-color: $blue;
+    }
     &.suspend {
         background-color: $gold;
         color: $dark-grey;

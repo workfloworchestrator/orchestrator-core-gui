@@ -32,7 +32,8 @@ export default class UserInputForm extends React.Component {
             errors: {},
             isNew: true,
             stepUserInput: [...props.stepUserInput],
-            product: {}
+            product: {},
+            processing: false
         };
     }
 
@@ -49,8 +50,9 @@ export default class UserInputForm extends React.Component {
 
     submit = e => {
         stop(e);
-        const {stepUserInput} = this.state;
-        if (this.validateAllUserInput(stepUserInput)) {
+        const {stepUserInput, processing} = this.state;
+        if (this.validateAllUserInput(stepUserInput) && !processing) {
+            this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
         }
     };
@@ -63,7 +65,7 @@ export default class UserInputForm extends React.Component {
     };
 
     renderButtons = () => {
-        const invalid = this.isInvalid();
+        const invalid = this.isInvalid() || this.state.processing;
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}

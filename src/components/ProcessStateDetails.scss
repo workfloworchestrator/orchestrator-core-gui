@@ -40,6 +40,8 @@ section.process-state-detail {
         }
     }
     span.process-status {
+        background-color: $light-grey;
+
         &.failed {
             background-color: $failed;
         }
@@ -90,7 +92,7 @@ section.process-state-detail {
             min-width: 180px;
             text-align: center;
             .step-divider {
-                i.fa-arrow-down {
+                i.fa {
                     font-size: 30px;
                     margin: 10px 0;
                     color: $darker-blue;
@@ -102,7 +104,7 @@ section.process-state-detail {
             pre {
                 margin-bottom: 10px;
             }
-            i.fa-arrow-left {
+            i.fa {
                 font-size: 30px;
                 margin: 20px;
                 color: $darker-blue;
