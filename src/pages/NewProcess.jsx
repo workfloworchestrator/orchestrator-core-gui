@@ -88,7 +88,7 @@ export default class NewProcess extends React.Component {
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
                             <div className="validity-input-wrapper">
-                                <ProductSelect products={this.props.products}
+                                <ProductSelect products={this.props.products.filter(prod => prod.product_type !== "ssp")}
                                                onChange={this.changeProduct}
                                                product={isEmpty(product) ? undefined : product.value}/>
                             </div>

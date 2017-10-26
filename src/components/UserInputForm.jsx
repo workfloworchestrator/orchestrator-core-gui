@@ -179,6 +179,10 @@ export default class UserInputForm extends React.Component {
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
+            case "ssp_product" :
+                return <ProductSelect products={this.props.products.filter(prod => prod.product_type === "ssp")}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={userInput.value}/>;
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
@@ -188,6 +192,8 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
+            case "ieee_interface_type_ssp_1":
+            case "ieee_interface_type_ssp_2":            
                 return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;
@@ -205,6 +211,8 @@ export default class UserInputForm extends React.Component {
                                  onChange={this.changeBooleanInput(userInput.name)}
                                  info={I18n.t(`process.${userInput.name}`)}/>;
             case "location_code":
+            case "location_code_ssp_1":
+            case "location_code_ssp_2":
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
                                            locationCode={userInput.value}/>;
