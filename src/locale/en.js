@@ -179,6 +179,8 @@ I18n.translations.en = {
         subscriptions: "Subscriptions used in the product {{product}}",
         resource_types: "Subscription Resource Types",
         product_title: "Product",
+        process_link: "Process",
+        process_link_text: "Show related process / workflow",
         ims_services: "IMS Services",
         product: {
             name: "Name",

@@ -2,12 +2,13 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {imsService, productById, subscriptions_detail} from "../api";
+import {imsService, productById, subscriptions_detail, processIdFromSubscriptionId} from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
 import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {isEmpty} from "../utils/Utils";
+import {NavLink} from "react-router-dom";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -16,6 +17,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.state = {
             subscription: {instances: []},
             product: {},
+            subscriptionProcessLink:{},
             imsServices: [],
             subscriptions: [],
             notFound: false,
@@ -35,10 +37,9 @@ export default class SubscriptionDetail extends React.PureComponent {
             this.enrichSubscription(subscription);
             const resourceTypes = this.subscriptionResourceTypes(subscription);
             this.setState({subscription: subscription, loaded: true});
-
-            Promise.all([productById(subscription.product_id)]
+            Promise.all([processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
                 .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)))).then(result => {
-                const relatedObjects = result.slice(1);
+                const relatedObjects = result.slice(2);
                 const subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
                 subscriptions.forEach(sub => this.enrichSubscription(sub));
                 const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
@@ -51,7 +52,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     flags.add(resource.id);
                     return true;
                 });
-                this.setState({product: result[0], imsServices: imsServices, subscriptions: subscriptions});
+                this.setState({subscriptionProcessLink: result[0],product: result[1],
+                    imsServices: imsServices, subscriptions: subscriptions});
             });
         });
     };
@@ -139,13 +141,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderResourceType = resourceType => <div>
+    renderResourceType = (resourceType, index) => <div key={index}>
         <label className="title">{resourceType.resource_type}</label>
         <input type="text" readOnly={true} value={resourceType.value}/>
     </div>;
 
     renderSubscriptionResourceTypes = subscription => {
-        debugger;
         const resourceTypes = this.subscriptionResourceTypes(subscription);
         if (isEmpty(resourceTypes)) {
             return null;
@@ -200,6 +201,23 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
+    renderProcessLink = subscriptionProcessLink => {
+        if (isEmpty(subscriptionProcessLink)) {
+            return null;
+        }
+        return <section className="details">
+            <h3>{I18n.t("subscription.process_link")}</h3>
+            <div className="form-container-parent">
+                <section className="form-container">
+                    <section className="process-link">
+                        <NavLink to={`/process/${subscriptionProcessLink.pid}`} className="button green">
+                            <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text")}</NavLink>
+                    </section>
+                </section>
+            </div>
+        </section>
+    };
+
     renderDetails = subscription => {
         return <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
@@ -210,13 +228,14 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     render() {
-        const {loaded, notFound, subscription, product, imsServices, subscriptions} = this.state;
+        const {loaded, notFound, subscription, subscriptionProcessLink, product, imsServices, subscriptions} = this.state;
         const {organisations} = this.props;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
             <div className="mod-subscription-detail">
                 {renderContent && this.renderDetails(subscription)}
+                {renderContent && this.renderProcessLink(subscriptionProcessLink)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}
                 {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}

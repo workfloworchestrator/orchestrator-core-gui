@@ -123,11 +123,13 @@ export function imsService(type, identifier) {
 }
 
 export function processIdFromSubscriptionId(subscriptionId) {
-    return fetchJson(`processes/process-subscription-by-subscription-id/${subscriptionId}`)
+    return fetchJson(`processes/process-subscription-by-subscription-id/${subscriptionId}`, {}, {}, false, true)
+        .catch(err => Promise.resolve({}));
 }
 
 export function subscriptionIdFromProcessId(processId) {
-    return fetchJson(`processes/process-subscription-by-pid/${processId}`)
+    return fetchJson(`processes/process-subscription-by-pid/${processId}`, {}, {}, false, true)
+        .catch(err => Promise.resolve({}));
 }
 
 export function locationCodes() {
