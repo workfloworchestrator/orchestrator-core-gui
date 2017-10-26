@@ -9,7 +9,8 @@ import "./ProcessDetail.css";
 import "highlight.js/styles/default.css";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
-import {organisationNameByUuid, productNameById, productById} from "../utils/Lookups";
+import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
+import {subscriptionIdFromProcessId} from "../api/index";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -20,6 +21,7 @@ export default class ProcessDetail extends React.PureComponent {
             notFound: false,
             tabs: ["user_input", "process"],
             selectedTab: "process",
+            subscriptionProcessLink: {},
             loaded: false,
             stepUserInput: []
         };
@@ -62,7 +64,12 @@ export default class ProcessDetail extends React.PureComponent {
             this.setState({
                 process: processInstance, loaded: true, stepUserInput: stepUserInput,
                 tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
-            })
+            });
+            debugger;
+            subscriptionIdFromProcessId(processInstance.id).then(subscriptionProcessLink => {
+                debugger;
+                this.setState({subscriptionProcessLink: subscriptionProcessLink});
+            });
         });
     };
 
@@ -80,14 +87,14 @@ export default class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput) => {
+    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink) => {
         const {locationCodes, ieeeInterfaceTypes, products, organisations, multiServicePoints, history} = this.props;
         const product = products.find(prod => prod.identifier === process.product);
         const productName = product.name;
 
         if (selectedTab === "process") {
             return <section className="card">
-                <ProcessStateDetails process={process}/>
+                <ProcessStateDetails process={process} subscriptionProcessLink={subscriptionProcessLink}/>
             </section>;
         } else {
             return <section className="card">
@@ -114,7 +121,7 @@ export default class ProcessDetail extends React.PureComponent {
     ;
 
     render() {
-        const {loaded, notFound, process, tabs, stepUserInput, selectedTab} = this.state;
+        const {loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcessLink} = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
@@ -124,7 +131,7 @@ export default class ProcessDetail extends React.PureComponent {
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
-                {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput)}
+                {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink)}
                 {renderNotFound && <section>{I18n.t("process.notFound")}</section>}
             </div>
         );

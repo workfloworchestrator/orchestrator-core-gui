@@ -112,7 +112,9 @@ I18n.translations.en = {
         flash: {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
-        }
+        },
+        subscription_link: "Subscription",
+        subscription_link_text: "Show resulting subscription",
     },
     process_state: {
         copy: "Copy to clipboard",
