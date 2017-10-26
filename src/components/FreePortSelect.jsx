@@ -29,7 +29,7 @@ export default class FreePortSelect extends React.PureComponent {
             <Select className="select-free-port"
                     onChange={onChange}
                     options={freePorts.map(aFreePort => {
-                        return {value: aFreePort.id, label: aFreePort.port};
+                        return {value: aFreePort.id, label: `${aFreePort.node}_${aFreePort.port}`};
                     })}
                     value={freePort}
                     searchable={true}
