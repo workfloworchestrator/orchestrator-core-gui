@@ -2,7 +2,13 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {imsService, productById, subscriptions_detail, processIdFromSubscriptionId} from "../api";
+import {
+    imsService,
+    processIdFromSubscriptionId,
+    productById,
+    subscriptions_by_subscription_port_id,
+    subscriptions_detail
+} from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
 import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
@@ -17,7 +23,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.state = {
             subscription: {instances: []},
             product: {},
-            subscriptionProcessLink:{},
+            subscriptionProcessLink: {},
             imsServices: [],
             subscriptions: [],
             notFound: false,
@@ -42,10 +48,19 @@ export default class SubscriptionDetail extends React.PureComponent {
             this.enrichSubscription(subscription);
             const resourceTypes = this.subscriptionResourceTypes(subscription);
             this.setState({subscription: subscription, loaded: true});
-            Promise.all([processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
-                .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)))).then(result => {
+            const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
+                .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
+            if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id")) {
+                //add the subscription where this subscription is used as a MSP (or SSP)
+                promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
+            }
+            Promise.all(promises).then(result => {
                 const relatedObjects = result.slice(2);
-                const subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
+                let subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
+                const subscription_used = relatedObjects.find(obj => obj.type === "subscriptions");
+                if (subscription_used) {
+                    subscriptions = subscriptions.concat(subscription_used.json);
+                }
                 subscriptions.forEach(sub => this.enrichSubscription(sub));
                 const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
                 const flags = new Set();
@@ -116,8 +131,11 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (isEmpty(subscriptions)) {
             return null;
         }
+        const resourceTypes = this.subscriptionResourceTypes(this.state.subscription);
+        const title = resourceTypes.some(rt => rt.resource_type === "ims_circuit_id") ?
+            "subscription.subscriptions_ims_circuit_id" : "subscription.subscriptions";
         return <section className="details">
-            <h3>{I18n.t("subscription.subscriptions", {product: product})}</h3>
+            <h3>{I18n.t(title, {product: product})}</h3>
             <div className="form-container-parent">
                 {subscriptions.map((subscription, index) => this.renderSubscriptionDetail(subscription, index))}
             </div>

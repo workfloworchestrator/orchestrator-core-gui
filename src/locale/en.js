@@ -180,7 +180,8 @@ I18n.translations.en = {
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
-        subscriptions: "Subscriptions used in the product {{product}}",
+        subscriptions: "Subscriptions used in this subscription ({{product}})",
+        subscriptions_ims_circuit_id: "Subscriptions that use this subscription ({{product}})",
         resource_types: "Subscription Resource Types",
         product_title: "Product",
         process_link: "Process",

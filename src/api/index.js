@@ -74,8 +74,14 @@ export function subscriptions_detail(subscription_id) {
     return fetchJson(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptions_for_type(type) {
+export function subscriptions_by_product_type(type) {
     return fetchJson(`subscriptions/product_type/${type}`);
+}
+
+export function subscriptions_by_subscription_port_id(subscription_id) {
+    return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
+        return {type: "subscriptions", json: json}
+    });
 }
 
 export function organisations() {
