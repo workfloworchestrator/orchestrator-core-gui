@@ -11,6 +11,7 @@ import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {organisationNameByUuid, productNameById, renderDateTime} from "../utils/Lookups";
+import CheckBox from "../components/CheckBox";
 
 export default class Processes extends React.PureComponent {
 
@@ -40,11 +41,17 @@ export default class Processes extends React.PureComponent {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            refresh: true
         };
     }
 
-    componentDidMount = () => processes()
+    componentDidMount = () => {
+        this.refresh();
+        this.interval = setInterval(this.refresh, 3000);
+    };
+
+    refresh = () => processes()
         .then(results => {
             const {organisations, products} = this.props;
             results.forEach(process => {
@@ -68,6 +75,18 @@ export default class Processes extends React.PureComponent {
                 filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
             })
         });
+
+    componentWillUnmount = () => clearInterval(this.interval);
+
+    toggleRefresh = e => {
+        const refresh = e.target.checked;
+        this.setState({refresh : refresh});
+        if (refresh) {
+            this.interval = setInterval(this.refresh, 3000);
+        } else {
+            clearInterval(this.interval);
+        }
+    };
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
@@ -221,7 +240,8 @@ export default class Processes extends React.PureComponent {
             case "suspended":
                 options = [userInput, abort, _delete];
                 break;
-            default : throw new Error(`Unknown process status: ${status}`)
+            default :
+                throw new Error(`Unknown process status: ${status}`)
         }
         return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
@@ -322,7 +342,7 @@ export default class Processes extends React.PureComponent {
     render() {
         const {
             filteredProcesses, actions, query, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, sorted, filterAttributesAssignee, filterAttributesStatus
+            confirmationDialogQuestion, sorted, filterAttributesAssignee, filterAttributesStatus, refresh
         } = this.state;
         const {organisations} = this.props;
         return (
@@ -352,6 +372,10 @@ export default class Processes extends React.PureComponent {
                         </a>
                     </div>
                 </div>
+                <section className="refresh">
+                    <CheckBox name="refresh" info={I18n.t("processes.refresh")} value={refresh}
+                              onChange={this.toggleRefresh}/>
+                </section>
                 <section className="processes">
                     {this.renderProcessesTable(filteredProcesses, actions, sorted, organisations)}
                 </section>

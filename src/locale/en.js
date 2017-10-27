@@ -60,7 +60,8 @@ I18n.translations.en = {
             delete: "Process {{name}} is deleted",
             abort: "Process {{name}} is aborted",
             retry: "Process {{name}} has been retried"
-        }
+        },
+        refresh: "Refresh automatically every 3 seconds?"
     },
     process: {
         cancel: "Cancel",
