@@ -131,8 +131,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         if (isEmpty(json)) {
             return null;
         }
-        const formattedJson = JSON.stringify(json, null, 4);
-        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user": "fa fa-cloud";
+        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
         if (index === 0 || steps[index - 1]) {
 
         }
@@ -141,11 +140,21 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="state-divider">
                     <i className={iconName}></i>
                 </section>
-                <Highlight className="JSON">
-                    {formattedJson}
-                </Highlight>
+                <section className="state-delta">
+                    <table>
+                        <tbody>
+                        {Object.keys(json).map(key =>
+                            <tr>
+                                <td className="key">{key}</td>
+                                <td className="value">{json[key].toString()}</td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </section>
             </section>);
     };
+
 
     renderProcessOverview = (process, details, stateChanges) => {
         const last = i => i === process.steps.length - 1;
