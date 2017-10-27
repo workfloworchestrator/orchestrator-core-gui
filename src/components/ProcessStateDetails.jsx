@@ -85,7 +85,7 @@ export default class ProcessStateDetails extends React.PureComponent {
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1);
+        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || prev[key] !== curr[key]);
         const newState = newKeys.reduce((acc, key) => {
             acc[key] = curr[key];
             return acc;
