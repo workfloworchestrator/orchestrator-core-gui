@@ -158,6 +158,8 @@ export default class UserInputForm extends React.Component {
         switch (userInput.type) {
             case "string" :
             case "vlan" :
+            case "ssp_1_vlan" :
+            case "ssp_2_vlan" :
             case "guid":
             case "ims_free_port":
             case "port":
