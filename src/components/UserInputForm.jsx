@@ -52,7 +52,6 @@ export default class UserInputForm extends React.Component {
     submit = e => {
         stop(e);
         const {stepUserInput, processing} = this.state;
-        debugger;
         if (this.validateAllUserInput(stepUserInput) && !processing) {
             this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
@@ -112,6 +111,7 @@ export default class UserInputForm extends React.Component {
 
     changeNestedInput = name => newValue => {
         this.changeUserInput(name, newValue);
+        this.validateUserInput(name)({target: {value: newValue}});
     };
 
     changeArrayInput = name => arr => {
