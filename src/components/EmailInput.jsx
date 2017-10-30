@@ -86,7 +86,7 @@ export default class EmailInput extends React.PureComponent {
 
         return (
             <section className="email-input">
-                {!disabled && <div className="validity-input-wrapper">
+                {!disabled &&
                     <input placeholder={placeholder}
                            type="email"
                            onChange={this.onChange}
@@ -95,7 +95,7 @@ export default class EmailInput extends React.PureComponent {
                            value={email}
                            onKeyDown={this.onKeyDown}
                     />
-                </div>}
+                }
 
                 {multipleEmails && <section className="email_tags">
                     {emails.map(mail =>

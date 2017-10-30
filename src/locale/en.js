@@ -92,8 +92,8 @@ I18n.translations.en = {
         ssp_1_vlan_info: "VLAN range - must be integer",
         ssp_2_vlan: "SSP 2 VLAN",
         ssp_2_vlan_info: "VLAN range - must be integer",
-        emails: "Emails",
-        emails_info: "The email addresses to notify when the process is finished. You can add multiple addresses",
+        contact_persons: "Customer contact persons",
+        contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         location_code_ssp_1: "Location code SSP 1",        
@@ -224,6 +224,12 @@ I18n.translations.en = {
             speed: "Speed",
             status: "Status"
         }
+    },
+    contact_persons: {
+        email: "Email",
+        name: "Name",
+        tel: "Phone number",
+        invalid_email: "Invalid email"
     },
     clipboard: {
         copied: "Copied!",

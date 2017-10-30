@@ -5,6 +5,7 @@ import "highlight.js/styles/default.css";
 import PropTypes from "prop-types";
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
+import isEqual from "lodash/isEqual";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
@@ -85,7 +86,7 @@ export default class ProcessStateDetails extends React.PureComponent {
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || prev[key] !== curr[key]);
+        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.reduce((acc, key) => {
             acc[key] = curr[key];
             return acc;
@@ -101,6 +102,13 @@ export default class ProcessStateDetails extends React.PureComponent {
             <NavLink to={`/subscription/${subscriptionProcessLink.subscription_id}`} className="button green">
                 <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt")}</NavLink>
         </section>
+    };
+
+    displayStateValue = value => {
+        if (isEmpty(value)) {
+            return "";
+        }
+        return typeof value === "object" ? JSON.stringify(value) : value;
     };
 
     renderStateChanges = (steps, index) => {
@@ -146,7 +154,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                         {Object.keys(json).map(key =>
                             <tr>
                                 <td className="key">{key}</td>
-                                <td className="value">{json[key].toString()}</td>
+                                <td className="value">{this.displayStateValue(json[key])}</td>
                             </tr>
                         )}
                         </tbody>

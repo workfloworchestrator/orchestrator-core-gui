@@ -18,6 +18,7 @@ import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
 import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
+import ContactPersons from "./ContactPersons";
 
 
 export default class UserInputForm extends React.Component {
@@ -51,6 +52,7 @@ export default class UserInputForm extends React.Component {
     submit = e => {
         stop(e);
         const {stepUserInput, processing} = this.state;
+        debugger;
         if (this.validateAllUserInput(stepUserInput) && !processing) {
             this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
@@ -108,6 +110,10 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
+    changeNestedInput = name => newValue => {
+        this.changeUserInput(name, newValue);
+    };
+
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
@@ -144,9 +150,7 @@ export default class UserInputForm extends React.Component {
             <section key={name} className="form-divider">
                 {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
                 {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
-                <div className="validity-input-wrapper">
-                    {this.chooseInput(userInput)}
-                </div>
+                {this.chooseInput(userInput)}
                 {this.state.errors[name] &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
             </section>);
@@ -168,7 +172,8 @@ export default class UserInputForm extends React.Component {
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "bandwidth" :
-                return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
+                return <BandwidthSelect name={name} value={this.userInputValue(name)}
+                                        onChange={this.changeSelectInput(name)}/>;
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
                                                 msps={this.props.multiServicePoints}
@@ -185,6 +190,9 @@ export default class UserInputForm extends React.Component {
                 return <ProductSelect products={this.props.products.filter(prod => prod.product_type === "ssp")}
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
+            case "contact_persons" :
+                return <ContactPersons persons={isEmpty(userInput.value) ? [{email: "", name: "", tel: ""}] : userInput.value}
+                                       onChange={this.changeNestedInput(name)}/>;
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}

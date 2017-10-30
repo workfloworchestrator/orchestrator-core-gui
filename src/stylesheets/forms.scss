@@ -25,7 +25,7 @@ em {
   }
 }
 
-input[type=text], input[type=email], textarea {
+input[type=text], input[type=email],input[type=tel], textarea {
   display: block;
   width: 100%;
   border: 1px solid $lighter-grey;

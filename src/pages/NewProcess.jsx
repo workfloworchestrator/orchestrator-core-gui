@@ -34,7 +34,12 @@ export default class NewProcess extends React.Component {
 
     validSubmit = (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
-            const product = {name: "product", type: "product", value: this.state.product.value, tag: this.state.product.tag};
+            const product = {
+                name: "product",
+                type: "product",
+                value: this.state.product.value,
+                tag: this.state.product.tag
+            };
             //create a copy to prevent re-rendering
             let processInput = [...stepUserInput];
             processInput.push(product);
@@ -66,7 +71,10 @@ export default class NewProcess extends React.Component {
                     if (organisationInputIdx !== -1) {
                         const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
                         const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
-                        const organisationInput = {...stepUserInput[organisationInputIdx], value: this.props.preselectedOrganisation};
+                        const organisationInput = {
+                            ...stepUserInput[organisationInputIdx],
+                            value: this.props.preselectedOrganisation
+                        };
                         stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
                     }
                 }
@@ -87,11 +95,9 @@ export default class NewProcess extends React.Component {
                         <section className="form-divider">
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
-                            <div className="validity-input-wrapper">
-                                <ProductSelect products={this.props.products.filter(prod => prod.product_type !== "ssp")}
-                                               onChange={this.changeProduct}
-                                               product={isEmpty(product) ? undefined : product.value}/>
-                            </div>
+                            <ProductSelect products={this.props.products.filter(prod => prod.product_type !== "ssp")}
+                                           onChange={this.changeProduct}
+                                           product={isEmpty(product) ? undefined : product.value}/>
                         </section>
                         {showProductValidation &&
                         <section>
