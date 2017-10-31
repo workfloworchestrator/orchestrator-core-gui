@@ -108,7 +108,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? JSON.stringify(value) : value;
+        return typeof value === "object" ? JSON.stringify(value) : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
