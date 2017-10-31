@@ -122,7 +122,7 @@ I18n.translations.en = {
         nms_service_id_info: "The id of the ethernet service on the network",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         bandwidth: "Bandwidth",
-        bandwidth_info: "Bandwidth in capacity per second (JIRA enum)",
+        bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
         configuration_ready: "Configuration ready",
         product_validation: "Product / Workflow validation",

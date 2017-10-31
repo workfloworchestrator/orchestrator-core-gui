@@ -10,7 +10,6 @@ import MultiServicePointSelect from "./MultiServicePointSelect";
 import "highlight.js/styles/default.css";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
-import BandwidthSelect from "./BandwidthSelect";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
@@ -171,9 +170,9 @@ export default class UserInputForm extends React.Component {
             case "ims_id":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
-            case "bandwidth" :
-                return <BandwidthSelect name={name} value={this.userInputValue(name)}
-                                        onChange={this.changeSelectInput(name)}/>;
+            case "bandwidth":
+                return <input type="number" step="1" min="0" id={name} name={name} value={this.userInputValue(name)}
+                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
                                                 msps={this.props.multiServicePoints}
