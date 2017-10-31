@@ -216,6 +216,16 @@ export default class UserInputForm extends React.Component {
                                        freePort={userInput.value}
                                        interfaceType={this.props.currentState.ieee_interface_type}
                                        locationCode={this.props.currentState.location_code}/>;
+            case "free_ports_for_location_code_and_interface_type_ssp_1":
+                return <FreePortSelect onChange={this.changeSelectInput(name)}
+                                       freePort={userInput.value}
+                                       interfaceType={this.props.currentState.ieee_interface_type_ssp_1}
+                                       locationCode={this.props.currentState.location_code_ssp_1}/>;
+            case "free_ports_for_location_code_and_interface_type_ssp_2":
+                return <FreePortSelect onChange={this.changeSelectInput(name)}
+                                       freePort={userInput.value}
+                                       interfaceType={this.props.currentState.ieee_interface_type_ssp_2}
+                                       locationCode={this.props.currentState.location_code_ssp_2}/>;
             case "boolean":
                 return <CheckBox name={userInput.name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(userInput.name)}
