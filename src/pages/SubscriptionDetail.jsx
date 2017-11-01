@@ -70,14 +70,14 @@ export default class SubscriptionDetail extends React.PureComponent {
                         subscriptionProcessLink: result[0], product: result[1],
                         imsServices: imsServices, subscriptions: subscriptions
                     });
-                }).catch(err => {
-                    if (err.response && err.response.status === 404) {
-                        this.setState({notFound: true, loaded: true});
-                    } else {
-                        throw err;
-                    }
-                });
-            });
+                })
+            }).catch(err => {
+            if (err.response && err.response.status === 404) {
+                this.setState({notFound: true, loaded: true});
+            } else {
+                throw err;
+            }
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -277,7 +277,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 {renderContent && this.renderProduct(product)}
                 {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}
                 {renderContent && this.renderServices(imsServices, organisations)}
-                {renderNotFound && <section>{I18n.t("subscription.notFound")}</section>}
+                {renderNotFound &&
+                <section className="card not-found"><h1>{I18n.t("subscription.notFound")}</h1></section>}
             </div>
         );
     }

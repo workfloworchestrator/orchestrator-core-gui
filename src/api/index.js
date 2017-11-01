@@ -128,7 +128,7 @@ export function imsService(type, identifier) {
             promise = Promise.resolve({})
     }
     return promise
-    // IMS service is recorded in sbscription_instance_value but removed from IMS - prevent error
+    // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
         .then(json => {
             return {type: type, json: json}
         })
