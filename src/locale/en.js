@@ -214,8 +214,8 @@ I18n.translations.en = {
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
-        subscriptions: "Subscriptions used in this subscription ({{product}})",
-        subscriptions_ims_circuit_id: "Subscriptions that use this subscription ({{product}})",
+        child_subscriptions: "The following child subscriptions are used in this parent subscription - {{product}}",
+        parent_subscriptions: "The following parent subscriptions are using this child subscription - {{product}}",
         resource_types: "Subscription Resource Types",
         product_title: "Product",
         process_link: "Process",
@@ -240,7 +240,9 @@ I18n.translations.en = {
             product: "Product",
             speed: "Speed",
             status: "Status"
-        }
+        },
+        terminate: "Terminate Subscription",
+        terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
     },
     contact_persons: {
         email: "Email",

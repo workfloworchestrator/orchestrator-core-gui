@@ -7,14 +7,18 @@ import {
     processIdFromSubscriptionId,
     productById,
     subscriptions_by_subscription_port_id,
-    subscriptionsDetail
+    subscriptionsDetail,
+    terminateSubscription
 } from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
 import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
-import {isEmpty} from "../utils/Utils";
+import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
+import {isTerminatable, subscriptionResourceTypes} from "../validations/Subscriptions";
+import {setFlash} from "../utils/Flash";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -27,7 +31,12 @@ export default class SubscriptionDetail extends React.PureComponent {
             imsServices: [],
             subscriptions: [],
             notFound: false,
-            loaded: false
+            loaded: false,
+            isTerminatable: false,
+            confirmationDialogOpen: false,
+            confirmationDialogAction: () => this,
+            confirm: () => this,
+            confirmationDialogQuestion: "",
         };
     }
 
@@ -40,11 +49,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         subscriptionsDetail(subscriptionId)
             .then(subscription => {
                 this.enrichSubscription(subscription);
-                const resourceTypes = this.subscriptionResourceTypes(subscription);
+                const resourceTypes = subscriptionResourceTypes(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
                     .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
-                if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id")) {
+                if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id") &&
+                    !resourceTypes.some(rt => rt.resource_type === "nms_service_id")) {
                     //add the subscription where this subscription is used as a MSP (or SSP)
                     promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
                 }
@@ -68,7 +78,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     });
                     this.setState({
                         subscriptionProcessLink: result[0], product: result[1],
-                        imsServices: imsServices, subscriptions: subscriptions
+                        imsServices: imsServices, subscriptions: subscriptions,
+                        isTerminatable: isTerminatable(subscription, subscriptions)
                     });
                 })
             }).catch(err => {
@@ -89,8 +100,6 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
     };
 
-    subscriptionResourceTypes = subscription => subscription.instances.reduce((acc, instance) => acc.concat(instance.resource_types), []);
-
     enrichSubscription = subscription => {
         const {organisations, products} = this.props;
         subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
@@ -98,6 +107,32 @@ export default class SubscriptionDetail extends React.PureComponent {
         subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
         subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
     };
+
+    terminate = (subscription, isTerminatable) => e => {
+        stop(e);
+        if (isTerminatable) {
+            this.confirmation(I18n.t("subscription.terminateConfirmation", {
+                    name: subscription.product_name,
+                    customer: subscription.customer_name
+                }), () => alert("WIP......")
+                    // terminateSubscription(subscription.subscription_id).then(() => {
+                    //     this.props.history.push(`/processes`);
+                    //     setFlash(I18n.t("subscriptions.flash.delete", {name: subscription.product_name}));
+                    // })
+            );
+        }
+    };
+
+    cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
+
+    confirmation = (question, action) => this.setState({
+        confirmationDialogOpen: true,
+        confirmationDialogQuestion: question,
+        confirmationDialogAction: () => {
+            this.cancelConfirmation();
+            action();
+        }
+    });
 
     renderSubscriptionDetail = (subscription, index, showLink = true) =>
         <section key={index} className="form-container">
@@ -131,9 +166,9 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (isEmpty(subscriptions)) {
             return null;
         }
-        const resourceTypes = this.subscriptionResourceTypes(this.state.subscription);
-        const title = resourceTypes.some(rt => rt.resource_type === "ims_circuit_id") ?
-            "subscription.subscriptions_ims_circuit_id" : "subscription.subscriptions";
+        const resourceTypes = subscriptionResourceTypes(this.state.subscription);
+        const title = resourceTypes.some(rt => rt.resource_type === "nms_service_id") ?
+            "subscription.child_subscriptions" : "subscription.parent_subscriptions";
         return <section className="details">
             <h3>{I18n.t(title, {product: product})}</h3>
             <div className="form-container-parent">
@@ -184,7 +219,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     </div>;
 
     renderSubscriptionResourceTypes = subscription => {
-        const resourceTypes = this.subscriptionResourceTypes(subscription);
+        const resourceTypes = subscriptionResourceTypes(subscription);
         if (isEmpty(resourceTypes)) {
             return null;
         }
@@ -255,23 +290,38 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderDetails = subscription => {
-        return <section className="details">
-            <h3>{I18n.t("subscription.subscription")}</h3>
-            <div className="form-container-parent">
-                {this.renderSubscriptionDetail(subscription, 0, false)}
-            </div>
+    renderTerminateLink = (subscription, isTerminatable) =>
+        <section className="terminate-link">
+            <a href="/terminate" className={`button ${isTerminatable ? "green" : "grey disabled"}`}
+               onClick={this.terminate(subscription, isTerminatable)}>
+                <i className="fa fa-chain-broken"></i> {I18n.t("subscription.terminate")}</a>
         </section>
-    };
+
+    renderDetails = (subscription, isTerminatable) => <section className="details">
+        <h3>{I18n.t("subscription.subscription")}</h3>
+        <div className="form-container-parent">
+            {this.renderSubscriptionDetail(subscription, 0, false)}
+            {this.renderTerminateLink(subscription, isTerminatable)}
+        </div>
+    </section>;
 
     render() {
-        const {loaded, notFound, subscription, subscriptionProcessLink, product, imsServices, subscriptions} = this.state;
+        const {
+            loaded, notFound, subscription, subscriptionProcessLink, product, imsServices,
+            subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
+            confirmationDialogQuestion
+        } = this.state;
         const {organisations} = this.props;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
             <div className="mod-subscription-detail">
-                {renderContent && this.renderDetails(subscription)}
+                <ConfirmationDialog isOpen={confirmationDialogOpen}
+                                    cancel={this.cancelConfirmation}
+                                    confirm={confirmationDialogAction}
+                                    question={confirmationDialogQuestion}/>
+
+                {renderContent && this.renderDetails(subscription, isTerminatable)}
                 {renderContent && this.renderProcessLink(subscriptionProcessLink)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}

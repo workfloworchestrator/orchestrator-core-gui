@@ -169,6 +169,11 @@ export function deleteSubscription(subscriptionId) {
     return fetchJson(`subscriptions/${subscriptionId}`, {method: "DELETE"}, {}, true, false);
 }
 
+export function terminateSubscription(subscriptionId) {
+    return fetchJson(`subscriptions/terminate/${subscriptionId}`, {method: "PUT"}, {}, true, false);
+}
+
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }

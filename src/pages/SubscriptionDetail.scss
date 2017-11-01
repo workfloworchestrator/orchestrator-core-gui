@@ -17,11 +17,19 @@
         padding: 15px 0 0 15px;
         color: $darker-blue;
     }
-    .details {
+    section.terminate-link {
+        a {
+            margin-left: 25px;
+            i {
+                margin-right: 30px;
+            }
+        }
+    }
+    section.details {
         padding-bottom: 25px;
         border-bottom: 1px solid $light-blue;
     }
-    .form-container {
+    section.form-container {
         display: flex;
         &:first-child {
             margin-bottom: 20px;
