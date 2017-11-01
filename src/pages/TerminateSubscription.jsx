@@ -129,8 +129,8 @@ export default class TerminateSubscription extends React.Component {
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h3>{I18n.t("subscription.terminate")}</h3>
-                    {this.renderProduct(product)}
-                    {this.renderSubscriptionDetail(subscription)}
+                    {false && this.renderProduct(product)}
+                    {false && this.renderSubscriptionDetail(subscription)}
                     <section className="form-step">
                         <section className="form-divider">
                             {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
