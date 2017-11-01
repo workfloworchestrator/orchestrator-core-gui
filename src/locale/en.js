@@ -170,8 +170,16 @@ I18n.translations.en = {
         block_missing: "Resource block <span>{{name}}</span> is not configured in the Product <span>{{product}}</span>",
         resource_type_missing: "Resource type <span>{{name}}</span> is not configured in the Resource Block <span>{{block}}</span>",
         hide_valids: "Hide valid product configurations",
+        hide_valid_subscriptions_types: "Hide workflows with no invalid subscriptions",
         resource_blocks: "Resource blocks",
-        resource_types: "Resource types"
+        resource_types: "Resource types",
+        tabs: {
+            subscriptions: "Subscriptions",
+            workflows: "Workflows"
+        },
+        no_subscriptions: "No invalid subscriptions",
+        workflow_key: "Invalid subscriptions for workflow {{workflow}}"
+
     },
     filter: {
         CHANGES: "Changes",
@@ -195,7 +203,7 @@ I18n.translations.en = {
         start_date_epoch: "Start date",
         end_date_epoch: "End date",
         sub_name: "Name",
-        no_found: "No subscription",
+        no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
     },
     subscription: {

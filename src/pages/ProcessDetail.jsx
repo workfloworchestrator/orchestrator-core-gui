@@ -115,8 +115,7 @@ export default class ProcessDetail extends React.PureComponent {
         <span key={tab} className={tab === selectedTab ? "active" : ""}
               onClick={this.switchTab(tab)}>
             {I18n.t(`process.tabs.${tab}`)}
-        </span>
-    ;
+        </span>;
 
     render() {
         const {loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcessLink} = this.state;

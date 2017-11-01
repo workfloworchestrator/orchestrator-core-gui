@@ -142,6 +142,14 @@ export function locationCodes() {
     return fetchJson("crm/location_codes");
 }
 
+export function allWorkflows() {
+    return fetchJson("workflows")
+}
+
+export function invalidSubscriptions(workflowKey) {
+    return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`)
+}
+
 export function initialWorkflowInput(workflowKey) {
     return fetchJson(`workflows/${workflowKey}`)
 }
