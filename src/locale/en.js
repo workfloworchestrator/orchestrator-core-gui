@@ -34,7 +34,6 @@ I18n.translations.en = {
         customer_support: "Klant support",
         searchPlaceHolder: "Search for processes...",
         new: "New Process",
-        notFound: "No Process found (e.g. 404)",
         assignee: "Assignee",
         step: "Step",
         status: "Status",
@@ -66,6 +65,7 @@ I18n.translations.en = {
     process: {
         cancel: "Cancel",
         submit: "Submit",
+        notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {

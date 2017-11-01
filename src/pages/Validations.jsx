@@ -10,7 +10,7 @@ import ProductValidation from "../components/ProductValidation";
 import {isEmpty, stop} from "../utils/Utils";
 import SubscriptionValidation from "../components/SubscriptionValidation";
 
-export default class Validations extends React.PureComponent {
+export default class Validations extends React.Component {
 
     constructor(props) {
         super(props);
@@ -30,16 +30,22 @@ export default class Validations extends React.PureComponent {
             .then(res => {
                 this.setState({validations: res[0]});
                 const workflows = res[1];
-                Promise.all(workflows.map(workflow => invalidSubscriptions(workflow.key)))
-                    .then(results =>
-                        this.setState({
-                            invalidSubscriptions: results.map((res, index) => {
-                                return {name: workflows[index].name, subscriptions: res}
-                            })
-                        })
-                    )
+                this.mapWorkflowsToInvalidSubscriptions(workflows);
             });
     }
+
+    mapWorkflowsToInvalidSubscriptions(workflows) {
+        Promise.all(workflows.map(workflow => invalidSubscriptions(workflow.key)))
+            .then(results =>
+                this.setState({
+                    invalidSubscriptions: results.map((res, index) => {
+                        return {name: workflows[index].name, subscriptions: res}
+                    })
+                })
+            )
+    }
+
+    onSubscriptionsChange = () => allWorkflows().then(workflows => this.mapWorkflowsToInvalidSubscriptions(workflows));
 
     switchTab = tab => e => {
         stop(e);
@@ -66,6 +72,7 @@ export default class Validations extends React.PureComponent {
                                                 products={this.props.products}
                                                 subscriptions={ws.subscriptions}
                                                 workflow={ws.name}
+                                                onChange={this.onSubscriptionsChange}
                                                 key={ws.name}/>)}
             </section>
         </div>;
@@ -119,7 +126,8 @@ export default class Validations extends React.PureComponent {
             <div className="mod-validations">
                 <ValidationsExplain
                     close={() => this.setState({showExplanation: false})}
-                    isVisible={showExplanation}/>
+                    isVisible={showExplanation}
+                    isWorkFlows={selectedTab === "workflows"}/>
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>

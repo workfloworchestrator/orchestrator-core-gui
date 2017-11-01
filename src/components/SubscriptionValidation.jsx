@@ -10,17 +10,12 @@ import {setFlash} from "../utils/Flash";
 import {deleteSubscription} from "../api/index";
 import ConfirmationDialog from "./ConfirmationDialog";
 
-export default class SubscriptionValidation extends React.PureComponent {
+export default class SubscriptionValidation extends React.Component {
 
     constructor(props) {
         super(props);
         const {organisations, products, subscriptions} = this.props;
-        subscriptions.forEach(subscription => {
-            subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
-            subscription.product_name = productNameById(subscription.product_id, products);
-            subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
-            subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
-        });
+        this.enrichSubscriptions(subscriptions, organisations, products);
         this.state = {
             sorted: {name: "status", descending: false},
             subscriptions: subscriptions,
@@ -30,6 +25,25 @@ export default class SubscriptionValidation extends React.PureComponent {
             confirmationDialogQuestion: "",
         };
     }
+
+    enrichSubscriptions(subscriptions, organisations, products) {
+        subscriptions.forEach(subscription => {
+            subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
+            subscription.product_name = productNameById(subscription.product_id, products);
+            subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
+            subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {subscriptions} = nextProps;
+        if (subscriptions.length !== this.state.subscriptions.length) {
+            const {organisations, products} = this.props;
+            this.enrichSubscriptions(subscriptions, organisations, products);
+            this.setState({subscriptions: subscriptions});
+        }
+    };
+
 
     showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
 
@@ -79,7 +93,7 @@ export default class SubscriptionValidation extends React.PureComponent {
                 customer: subscription.customer_name
             }), () =>
                 deleteSubscription(subscription.subscription_id).then(() => {
-                    debugger;
+                    this.props.onChange();
                     setFlash(I18n.t("subscriptions.flash.delete", {name: subscription.product_name}));
                 })
         );
@@ -135,8 +149,10 @@ export default class SubscriptionValidation extends React.PureComponent {
     }
 
     render() {
-        const {subscriptions, sorted, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion} = this.state;
+        const {
+            subscriptions, sorted, confirmationDialogOpen, confirmationDialogAction,
+            confirmationDialogQuestion
+        } = this.state;
         const {workflow} = this.props;
         return (
             <section className="subscription-validation">
@@ -159,5 +175,6 @@ SubscriptionValidation.propTypes = {
     products: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
     workflow: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 

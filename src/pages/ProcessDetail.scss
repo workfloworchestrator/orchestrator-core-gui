@@ -9,6 +9,12 @@
         @include card;
         padding-bottom: 15px;
     }
+    section.not-found {
+        h1 {
+            font-size: 24px;
+            padding: 50px;
+        }
+    }
     section.tabs {
         display: flex;
         margin-top: 25px;

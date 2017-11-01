@@ -112,20 +112,23 @@ export function imsService(type, identifier) {
     let promise;
     switch (type) {
         case "ims_port_id":
-            promise = fetchJson(`ims/service_by_ims_port/${identifier}`);
+            promise = fetchJson(`ims/service_by_ims_port/${identifier}`, {}, {}, false, true);
             break;
         case "ims_circuit_id":
-            promise = fetchJson(`ims/service_by_ims_service_id/${identifier}`);
+            promise = fetchJson(`ims/service_by_ims_service_id/${identifier}`, {}, {}, false, true);
             break;
         case "port_subscription_id":
-            promise = subscriptions_detail(identifier);
+            promise = subscriptions_detail(identifier, {}, {}, false, true);
             break;
         default:
             promise = Promise.resolve({})
     }
-    return promise.then(json => {
-        return {type: type, json: json}
-    });
+    return promise
+    // IMS service is recorded in sbscription_instance_value but removed from IMS - prevent error
+        .then(json => {
+            return {type: type, json: json}
+        })
+        .catch(err => Promise.resolve({type: "absent", json: {}}));
 }
 
 export function processIdFromSubscriptionId(subscriptionId) {
@@ -171,7 +174,7 @@ export function abortProcess(processId) {
 }
 
 export function process(processId) {
-    return fetchJson("processes/" + processId);
+    return fetchJson("processes/" + processId, {}, {}, false, true);
 }
 
 export function startProcess(process) {

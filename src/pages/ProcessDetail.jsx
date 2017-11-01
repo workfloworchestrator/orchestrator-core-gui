@@ -29,45 +29,45 @@ export default class ProcessDetail extends React.PureComponent {
 
     componentWillMount = () => {
         process(this.props.match.params.id)
-            .catch(err => {
-                if (err.response && err.response.status === 404) {
-                    this.setState({notFound: true, loaded: true});
-                } else {
-                    throw err;
+            .then(processInstance => {
+                /**
+                 * This is the hook to enforce the correct membership for editing the user_input. For now we
+                 * don't enforce anything.
+                 * TODO
+                 */
+                const {configuration, currentUser, organisations, products} = this.props;
+
+                processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
+                processInstance.productName = productNameById(processInstance.product, products);
+
+                const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
+
+                let stepUserInput = [];
+                if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
+                    const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");
+                    stepUserInput = step && step.form;
                 }
-            }).then(processInstance => {
-            /**
-             * This is the hook to enforce the correct membership for editing the user_input. For now we
-             * don't enforce anything.
-             * TODO
-             */
-            const {configuration, currentUser, organisations, products} = this.props;
-
-            processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
-            processInstance.productName = productNameById(processInstance.product, products);
-
-            const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
-
-            let stepUserInput = [];
-            if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
-                const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");
-                stepUserInput = step && step.form;
+                const requiredTeamMembership = configuration[processInstance.assignee];
+                const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
+                const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
+                //Pre-fill the value of the user_input if the current_state already contains the value
+                const state = processInstance.current_state || {};
+                if (!isEmpty(state) && !isEmpty(stepUserInput)) {
+                    stepUserInput.forEach(userInput => userInput.value = state[userInput.name]);
+                }
+                this.setState({
+                    process: processInstance, loaded: true, stepUserInput: stepUserInput,
+                    tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
+                });
+                subscriptionIdFromProcessId(processInstance.id).then(subscriptionProcessLink => {
+                    this.setState({subscriptionProcessLink: subscriptionProcessLink});
+                });
+            }).catch(err => {
+            if (err.response && err.response.status === 404) {
+                this.setState({notFound: true, loaded: true});
+            } else {
+                throw err;
             }
-            const requiredTeamMembership = configuration[processInstance.assignee];
-            const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
-            const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
-            //Pre-fill the value of the user_input if the current_state already contains the value
-            const state = processInstance.current_state || {};
-            if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                stepUserInput.forEach(userInput => userInput.value = state[userInput.name]);
-            }
-            this.setState({
-                process: processInstance, loaded: true, stepUserInput: stepUserInput,
-                tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
-            });
-            subscriptionIdFromProcessId(processInstance.id).then(subscriptionProcessLink => {
-                this.setState({subscriptionProcessLink: subscriptionProcessLink});
-            });
         });
     };
 
@@ -129,7 +129,7 @@ export default class ProcessDetail extends React.PureComponent {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink)}
-                {renderNotFound && <section>{I18n.t("process.notFound")}</section>}
+                {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
             </div>
         );
     }
