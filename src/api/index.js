@@ -62,7 +62,7 @@ function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, res
 }
 
 function fetchJsonWithCustomErrorHandling(path) {
-    return validFetch(path, {}, {}, false, true).then(res => result ? res.json() : {});
+    return fetchJson(path, {}, {}, false, true);
 }
 
 function postPutJson(path, body, method, result = true) {
