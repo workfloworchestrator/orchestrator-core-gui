@@ -6,6 +6,9 @@ import {stop} from "../utils/Utils";
 import "./SubscriptionValidation.css";
 import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
+import {setFlash} from "../utils/Flash";
+import {deleteSubscription} from "../api/index";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 export default class SubscriptionValidation extends React.PureComponent {
 
@@ -20,7 +23,11 @@ export default class SubscriptionValidation extends React.PureComponent {
         });
         this.state = {
             sorted: {name: "status", descending: false},
-            subscriptions: subscriptions
+            subscriptions: subscriptions,
+            confirmationDialogOpen: false,
+            confirmationDialogAction: () => this,
+            confirm: () => this,
+            confirmationDialogQuestion: "",
         };
     }
 
@@ -34,15 +41,17 @@ export default class SubscriptionValidation extends React.PureComponent {
 
     sort = name => e => {
         stop(e);
-        const sorted = {...this.state.sorted};
-        const subscriptions = [...this.state.subscriptions].sort(this.sortBy(name));
+        if (name !== "noop") {
+            const sorted = {...this.state.sorted};
+            const subscriptions = [...this.state.subscriptions].sort(this.sortBy(name));
 
-        sorted.descending = sorted.name === name ? !sorted.descending : false;
-        sorted.name = name;
-        this.setState({
-            subscriptions: sorted.descending ? subscriptions.reverse() : subscriptions,
-            sorted: sorted
-        });
+            sorted.descending = sorted.name === name ? !sorted.descending : false;
+            sorted.name = name;
+            this.setState({
+                subscriptions: sorted.descending ? subscriptions.reverse() : subscriptions,
+                sorted: sorted
+            });
+        }
     };
 
     sortColumnIcon = (name, sorted) => {
@@ -52,13 +61,38 @@ export default class SubscriptionValidation extends React.PureComponent {
         return <i/>;
     };
 
+    cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
+
+    confirmation = (question, action) => this.setState({
+        confirmationDialogOpen: true,
+        confirmationDialogQuestion: question,
+        confirmationDialogAction: () => {
+            this.cancelConfirmation();
+            action();
+        }
+    });
+
+    handleDeleteSubscription = subscription => e => {
+        stop(e);
+        this.confirmation(I18n.t("subscriptions.deleteConfirmation", {
+                name: subscription.product_name,
+                customer: subscription.customer_name
+            }), () =>
+                deleteSubscription(subscription.subscription_id).then(() => {
+                    debugger;
+                    setFlash(I18n.t("subscriptions.flash.delete", {name: subscription.product_name}));
+                })
+        );
+    };
+
     renderSubscriptionsTable(subscriptions, sorted) {
-        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date_epoch", "end_date_epoch"];
+        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date_epoch",
+            "end_date_epoch", "noop"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
                 <span>{I18n.t(`subscriptions.${name}`)}</span>
-                {this.sortColumnIcon(name, sorted)}
+                {name !== "nope" && this.sortColumnIcon(name, sorted)}
             </th>
         };
 
@@ -87,6 +121,10 @@ export default class SubscriptionValidation extends React.PureComponent {
                                 className="start_date_epoch">{renderDate(subscription.start_date)}</td>
                             <td data-label={I18n.t("subscriptions.name")}
                                 className="end_date_epoch">{renderDate(subscription.end_date)}</td>
+                            <td data-label={I18n.t("subscriptions.nope")}
+                                className="actions"><span>
+                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
+                            </span></td>
                         </tr>
                     )}
                     </tbody>
@@ -97,10 +135,15 @@ export default class SubscriptionValidation extends React.PureComponent {
     }
 
     render() {
-        const {subscriptions, sorted} = this.state;
+        const {subscriptions, sorted, confirmationDialogOpen, confirmationDialogAction,
+            confirmationDialogQuestion} = this.state;
         const {workflow} = this.props;
         return (
             <section className="subscription-validation">
+                <ConfirmationDialog isOpen={confirmationDialogOpen}
+                                    cancel={this.cancelConfirmation}
+                                    confirm={confirmationDialogAction}
+                                    question={confirmationDialogQuestion}/>
                 <h3>{I18n.t("validations.workflow_key", {workflow: workflow})}</h3>
                 <section className="subscriptions">
                     {this.renderSubscriptionsTable(subscriptions, sorted)}

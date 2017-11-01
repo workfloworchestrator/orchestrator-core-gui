@@ -205,6 +205,11 @@ I18n.translations.en = {
         sub_name: "Name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
+        noop: "",
+        deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",
+        flash: {
+            delete: "Subscription {{name}} was deleted",
+        }
     },
     subscription: {
         notFound: "No Subscription found (e.g. 404)",

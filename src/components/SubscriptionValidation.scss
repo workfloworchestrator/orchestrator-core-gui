@@ -85,6 +85,13 @@ section.subscription-validation {
                     display: flex;
                     justify-content: center;
                 }
+                &.actions {
+                    i.fa-trash {
+                        color: $red;
+                        font-size: 22px;
+                        padding: 20px;
+                    }
+                }
             }
         }
 

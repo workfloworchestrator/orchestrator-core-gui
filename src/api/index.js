@@ -158,6 +158,10 @@ export function processes() {
     return fetchJson("processes");
 }
 
+export function deleteSubscription(subscriptionId) {
+    return fetchJson(`subscriptions/${subscriptionId}`, {method: "DELETE"}, {}, true, false);
+}
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }
