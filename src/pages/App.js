@@ -30,6 +30,7 @@ import {
 import "../locale/en";
 import "../locale/nl";
 import {getParameterByName} from "../utils/QueryParameters";
+import TerminateSubscription from "./TerminateSubscription";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -175,6 +176,14 @@ class App extends React.PureComponent {
                                                                      locationCodes={locationCodes}
                                                                      preselectedProduct={getParameterByName("product", props.location.search)}
                                                                      preselectedOrganisation={getParameterByName("organisation", props.location.search)}
+                                                                     {...props}
+                                        />}/>
+                        <ProtectedRoute path="/terminate-subscription"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <TerminateSubscription currentUser={currentUser}
+                                                                     products={products}
+                                                                     organisations={organisations}
+                                                                     subscriptionId={getParameterByName("subscription", props.location.search)}
                                                                      {...props}
                                         />}/>
                         <Route path="/process/:id"

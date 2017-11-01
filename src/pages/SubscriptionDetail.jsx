@@ -7,8 +7,7 @@ import {
     processIdFromSubscriptionId,
     productById,
     subscriptions_by_subscription_port_id,
-    subscriptionsDetail,
-    terminateSubscription
+    subscriptionsDetail
 } from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
@@ -17,7 +16,6 @@ import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 import {isTerminatable, subscriptionResourceTypes} from "../validations/Subscriptions";
-import {setFlash} from "../utils/Flash";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 export default class SubscriptionDetail extends React.PureComponent {
@@ -114,11 +112,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             this.confirmation(I18n.t("subscription.terminateConfirmation", {
                     name: subscription.product_name,
                     customer: subscription.customer_name
-                }), () => alert("WIP......")
-                    // terminateSubscription(subscription.subscription_id).then(() => {
-                    //     this.props.history.push(`/processes`);
-                    //     setFlash(I18n.t("subscriptions.flash.delete", {name: subscription.product_name}));
-                    // })
+                }),
+                () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`)
             );
         }
     };
