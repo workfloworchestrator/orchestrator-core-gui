@@ -7,7 +7,7 @@ import {
     processIdFromSubscriptionId,
     productById,
     subscriptions_by_subscription_port_id,
-    subscriptions_detail
+    subscriptionsDetail
 } from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
@@ -37,47 +37,47 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     refreshSubscription(subscriptionId) {
-        subscriptions_detail(subscriptionId)
-            .catch(err => {
-                if (err.response && err.response.status === 404) {
-                    this.setState({notFound: true, loaded: true});
-                } else {
-                    throw err;
+        subscriptionsDetail(subscriptionId)
+            .then(subscription => {
+                this.enrichSubscription(subscription);
+                const resourceTypes = this.subscriptionResourceTypes(subscription);
+                this.setState({subscription: subscription, loaded: true});
+                const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
+                    .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
+                if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id")) {
+                    //add the subscription where this subscription is used as a MSP (or SSP)
+                    promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
                 }
-            }).then(subscription => {
-            this.enrichSubscription(subscription);
-            const resourceTypes = this.subscriptionResourceTypes(subscription);
-            this.setState({subscription: subscription, loaded: true});
-            const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
-                .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
-            if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id")) {
-                //add the subscription where this subscription is used as a MSP (or SSP)
-                promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
-            }
-            Promise.all(promises).then(result => {
-                const relatedObjects = result.slice(2);
-                let subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
-                const subscription_used = relatedObjects.find(obj => obj.type === "subscriptions");
-                if (subscription_used) {
-                    subscriptions = subscriptions.concat(subscription_used.json);
-                }
-                subscriptions.forEach(sub => this.enrichSubscription(sub));
-                const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
-                const flags = new Set();
-                // There are service duplicates for port_id and circuit_id
-                const imsServices = allImsServices.filter(resource => {
-                    if (flags.has(resource.id)) {
-                        return false;
+                Promise.all(promises).then(result => {
+                    const relatedObjects = result.slice(2);
+                    let subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
+                    const subscription_used = relatedObjects.find(obj => obj.type === "subscriptions");
+                    if (subscription_used) {
+                        subscriptions = subscriptions.concat(subscription_used.json);
                     }
-                    flags.add(resource.id);
-                    return true;
-                });
-                this.setState({
-                    subscriptionProcessLink: result[0], product: result[1],
-                    imsServices: imsServices, subscriptions: subscriptions
+                    subscriptions.forEach(sub => this.enrichSubscription(sub));
+                    const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
+                    const flags = new Set();
+                    // There are service duplicates for port_id and circuit_id
+                    const imsServices = allImsServices.filter(resource => {
+                        if (flags.has(resource.id)) {
+                            return false;
+                        }
+                        flags.add(resource.id);
+                        return true;
+                    });
+                    this.setState({
+                        subscriptionProcessLink: result[0], product: result[1],
+                        imsServices: imsServices, subscriptions: subscriptions
+                    });
+                }).catch(err => {
+                    if (err.response && err.response.status === 404) {
+                        this.setState({notFound: true, loaded: true});
+                    } else {
+                        throw err;
+                    }
                 });
             });
-        });
     }
 
     componentWillReceiveProps(nextProps) {

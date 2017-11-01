@@ -61,6 +61,10 @@ function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, res
         .then(res => result ? res.json() : {});
 }
 
+function fetchJsonWithCustomErrorHandling(path) {
+    return validFetch(path, {}, {}, false, true).then(res => result ? res.json() : {});
+}
+
 function postPutJson(path, body, method, result = true) {
     return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, true, result);
 }
@@ -70,8 +74,8 @@ export function subscriptions() {
     return fetchJson("subscriptions");
 }
 
-export function subscriptions_detail(subscription_id) {
-    return fetchJson(`subscriptions/${subscription_id}`);
+export function subscriptionsDetail(subscription_id) {
+    return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
 export function subscriptions_by_product_type(type) {
@@ -112,13 +116,13 @@ export function imsService(type, identifier) {
     let promise;
     switch (type) {
         case "ims_port_id":
-            promise = fetchJson(`ims/service_by_ims_port/${identifier}`, {}, {}, false, true);
+            promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_port/${identifier}`);
             break;
         case "ims_circuit_id":
-            promise = fetchJson(`ims/service_by_ims_service_id/${identifier}`, {}, {}, false, true);
+            promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
         case "port_subscription_id":
-            promise = subscriptions_detail(identifier, {}, {}, false, true);
+            promise = subscriptionsDetail(identifier);
             break;
         default:
             promise = Promise.resolve({})
@@ -132,12 +136,12 @@ export function imsService(type, identifier) {
 }
 
 export function processIdFromSubscriptionId(subscriptionId) {
-    return fetchJson(`processes/process-subscription-by-subscription-id/${subscriptionId}`, {}, {}, false, true)
+    return fetchJsonWithCustomErrorHandling(`processes/process-subscription-by-subscription-id/${subscriptionId}`)
         .catch(err => Promise.resolve({}));
 }
 
 export function subscriptionIdFromProcessId(processId) {
-    return fetchJson(`processes/process-subscription-by-pid/${processId}`, {}, {}, false, true)
+    return fetchJsonWithCustomErrorHandling(`processes/process-subscription-by-pid/${processId}`)
         .catch(err => Promise.resolve({}));
 }
 
@@ -174,7 +178,7 @@ export function abortProcess(processId) {
 }
 
 export function process(processId) {
-    return fetchJson("processes/" + processId, {}, {}, false, true);
+    return fetchJsonWithCustomErrorHandling("processes/" + processId);
 }
 
 export function startProcess(process) {
