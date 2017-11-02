@@ -24,6 +24,10 @@
                 margin-right: 30px;
             }
         }
+        p.no-termination-reason {
+            color: $red;
+            margin: 15px 0 0 25px;
+        }
     }
     section.details {
         padding-bottom: 25px;

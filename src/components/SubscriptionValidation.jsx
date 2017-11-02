@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {stop} from "../utils/Utils";
 
 import "./SubscriptionValidation.css";
-import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
+import {enrichSubscription, organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {setFlash} from "../utils/Flash";
 import {deleteSubscription} from "../api/index";
@@ -15,7 +15,7 @@ export default class SubscriptionValidation extends React.Component {
     constructor(props) {
         super(props);
         const {organisations, products, subscriptions} = this.props;
-        this.enrichSubscriptions(subscriptions, organisations, products);
+        subscriptions.forEach(subscription => enrichSubscription(subscription, organisations, products));
         this.state = {
             sorted: {name: "status", descending: false},
             subscriptions: subscriptions,
@@ -39,7 +39,7 @@ export default class SubscriptionValidation extends React.Component {
         const {subscriptions} = nextProps;
         if (subscriptions.length !== this.state.subscriptions.length) {
             const {organisations, products} = this.props;
-            this.enrichSubscriptions(subscriptions, organisations, products);
+            subscriptions.forEach(subscription => enrichSubscription(subscription, organisations, products));
             this.setState({subscriptions: subscriptions});
         }
     };

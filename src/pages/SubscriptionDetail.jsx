@@ -11,11 +11,11 @@ import {
 } from "../api";
 import "./SubscriptionDetail.css";
 import "highlight.js/styles/default.css";
-import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
+import {enrichSubscription, organisationNameByUuid, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
-import {isTerminatable, subscriptionResourceTypes} from "../validations/Subscriptions";
+import {hasResourceType, isTerminatable, subscriptionResourceTypes} from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 export default class SubscriptionDetail extends React.PureComponent {
@@ -44,9 +44,10 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     refreshSubscription(subscriptionId) {
+        const {organisations, products} = this.props;
         subscriptionsDetail(subscriptionId)
             .then(subscription => {
-                this.enrichSubscription(subscription);
+                enrichSubscription(subscription, organisations, products);
                 const resourceTypes = subscriptionResourceTypes(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
@@ -63,7 +64,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     if (subscription_used) {
                         subscriptions = subscriptions.concat(subscription_used.json);
                     }
-                    subscriptions.forEach(sub => this.enrichSubscription(sub));
+                    subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
                     const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
                     const flags = new Set();
                     // There are service duplicates for port_id and circuit_id
@@ -96,14 +97,6 @@ export default class SubscriptionDetail extends React.PureComponent {
             this.refreshSubscription(nextId);
             window.scrollTo(0, 0);
         }
-    };
-
-    enrichSubscription = subscription => {
-        const {organisations, products} = this.props;
-        subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
-        subscription.product_name = productNameById(subscription.product_id, products);
-        subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
-        subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
     };
 
     terminate = (subscription, isTerminatable) => e => {
@@ -285,18 +278,27 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderTerminateLink = (subscription, isTerminatable) =>
-        <section className="terminate-link">
-            <a href="/terminate" className={`button ${isTerminatable ? "green" : "grey disabled"}`}
-               onClick={this.terminate(subscription, isTerminatable)}>
+    renderTerminateLink = (subscription, isTerminatable, subscriptions, product) => {
+        let reason = null;
+        if (!hasResourceType(subscription, "nms_service_id") && subscriptions.length > 0) {
+            reason = I18n.t("subscription.no_termination_parent_subscription");
+        }
+        if (!product.terminate_subscription_workflow_key) {
+            reason = I18n.t("subscription.no_termination_workflow");
+        }
+        return <section className="terminate-link">
+            <a href="/terminate" className={`button ${(isTerminatable && !reason) ? "green" : "grey disabled"}`}
+               onClick={this.terminate(subscription, isTerminatable && !reason)}>
                 <i className="fa fa-chain-broken"></i> {I18n.t("subscription.terminate")}</a>
+            {reason && <p className="no-termination-reason">{reason}</p>}
         </section>
+    };
 
-    renderDetails = (subscription, isTerminatable) => <section className="details">
+    renderDetails = (subscription, isTerminatable, subscriptions, product) => <section className="details">
         <h3>{I18n.t("subscription.subscription")}</h3>
         <div className="form-container-parent">
             {this.renderSubscriptionDetail(subscription, 0, false)}
-            {this.renderTerminateLink(subscription, isTerminatable)}
+            {this.renderTerminateLink(subscription, isTerminatable, subscriptions, product)}
         </div>
     </section>;
 
@@ -316,7 +318,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     confirm={confirmationDialogAction}
                                     question={confirmationDialogQuestion}/>
 
-                {renderContent && this.renderDetails(subscription, isTerminatable)}
+                {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product)}
                 {renderContent && this.renderProcessLink(subscriptionProcessLink)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}

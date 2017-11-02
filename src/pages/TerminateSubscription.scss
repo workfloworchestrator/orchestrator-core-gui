@@ -3,27 +3,53 @@
 @import "../stylesheets/forms.scss";
 
 .mod-terminate-subscription {
-  @include page;
+    @include page;
 
-  .card {
-    @include card;
-    padding-bottom: 15px;
-  }
-  section.form-step {
-    padding: 20px 0;
-    h3 {
-      font-size: larger;
-      margin-bottom: 15px;
-      color: $darker-blue;
+    .card {
+        @include card;
+        padding-bottom: 15px;
+        h1 {
+            font-size: 22px;
+            color: $darker-blue;
+            padding-top: 15px;
+        }
+        h3 {
+            font-size: larger;
+            color: $blue;
+            margin-top: 10px;
+        }
     }
+    section.form-step {
+        padding: 20px 0;
+        section.form-divider {
+            border-bottom: 1px solid $lightest-grey;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
 
-    section.form-divider {
-      border-bottom: 1px solid $lightest-grey;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
     }
+    section.form-container {
+        display: flex;
+        &:first-child {
+            margin-bottom: 20px;
+        }
+        &:not(:first-child) {
+            border-top: 1px solid $light-grey;
+            padding-top: 5px;
+        }
+        &:only-child {
+            margin-bottom: 0;
+        }
+        section {
+            padding: 0 25px;
+            width: 100%;
 
-  }
+            label.title {
+                margin: 15px 0 10px 0;
+            }
+        }
+
+    }
 
 }
 

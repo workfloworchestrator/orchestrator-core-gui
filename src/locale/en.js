@@ -243,6 +243,8 @@ I18n.translations.en = {
         },
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
+        no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions",
+        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key",
     },
     contact_persons: {
         email: "Email",
