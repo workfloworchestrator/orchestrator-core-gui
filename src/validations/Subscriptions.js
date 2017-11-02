@@ -18,3 +18,5 @@ export function isTerminatable(subscription, relatedSubscriptions) {
     return isEmpty(relatedSubscriptions);
 
 }
+
+export const validEmailRegExp = /^\S+@\S+$/;

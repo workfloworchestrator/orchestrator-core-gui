@@ -4,8 +4,7 @@ import I18n from "i18n-js";
 
 import {stop} from "../utils/Utils";
 import "./ContactPersons.css";
-
-const validEmailRegExp = /^\S+@\S+$/;
+import {validEmailRegExp} from "../validations/Subscriptions";
 
 export default class ContactPersons extends React.PureComponent {
 

@@ -55,7 +55,6 @@ export default class ProcessDetail extends React.PureComponent {
                 if (!isEmpty(state) && !isEmpty(stepUserInput)) {
                     stepUserInput.forEach(userInput => userInput.value = state[userInput.name]);
                 }
-                debugger;
                 this.setState({
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)

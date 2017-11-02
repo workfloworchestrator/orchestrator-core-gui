@@ -24,9 +24,9 @@ export default class NewProcess extends React.Component {
 
     componentDidMount = () => {
         const {products, preselectedProduct} = this.props;
-        if (preselectedProduct != null) {
+        if (preselectedProduct) {
             const product = products.find(x => x.identifier === preselectedProduct);
-            if (product != null) {
+            if (product) {
                 this.changeProduct({value: product.identifier, ...product});
             }
         }

@@ -33,8 +33,8 @@ input[type=text], input[type=email], input[type=tel], input[type=number], textar
   border-radius: $br;
   font-size: 14px;
   margin-top: 5px;
-  &[disabled] {
-    background-color: $light-grey;
+  &[disabled], &:read-only {
+    background-color: $lightest-grey;
   }
 }
 

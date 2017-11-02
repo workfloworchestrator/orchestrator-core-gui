@@ -11,6 +11,7 @@ import {terminateSubscription} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import "./TerminateSubscription.css";
 import {enrichSubscription} from "../utils/Lookups";
+import {validEmailRegExp} from "../validations/Subscriptions";
 
 export default class TerminateSubscription extends React.Component {
 
@@ -18,7 +19,7 @@ export default class TerminateSubscription extends React.Component {
         super(props);
         this.state = {
             product: {},
-            userInput: [{name: "contact_persons", value: [{email: "", name: "", tel: ""}]}],
+            contactPersons: [{email: "", name: "", tel: ""}],
             subscription: {},
             processing: false
         };
@@ -40,39 +41,31 @@ export default class TerminateSubscription extends React.Component {
     };
 
     renderButtons = () => {
-        const invalid = isEmpty(this.state.userInput) || this.state.processing;
+        const {processing, contactPersons} = this.state;
+        const invalid = processing || contactPersons.some(x => isEmpty(x.email) || !validEmailRegExp.test(x.email));
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
-                {I18n.t("process.cancel")}
+                {I18n.t("subscription.cancel")}
             </a>
             <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
-                {I18n.t("process.submit")}
+                {I18n.t("subscription.submit")}
             </a>
         </section>);
     };
 
 
     submit = () => {
-        const {product, subscription, userInput} = this.state;
-        const process = {
-            organisation: subscription.client_id,
-            subscription: subscription.subscription_id,
-            contact_persons: userInput.find(u => u.name === "contact_persons").value,
-            product: product.product_id
-        };
-        debugger;
-        terminateSubscription(process)
+        const {product, subscription, contactPersons} = this.state;
+        this.setState({processing: true});
+        terminateSubscription({subscription: subscription.subscription_id, contact_persons: contactPersons})
             .then(() => {
                 this.props.history.push(`/processes`);
                 setFlash(I18n.t("process.flash.create", {name: product.name}));
             });
     };
 
-
-    changeUserInput = name => value => {
-        const userInput = [...this.state.userInput];
-        userInput.find(input => input.name === name).value = value;
-        this.setState({user_input: userInput});
+    changeUserInput = value => {
+        this.setState({contactPersons: [...value]});
     };
 
 
@@ -121,23 +114,21 @@ export default class TerminateSubscription extends React.Component {
 
 
     render() {
-        const {product, subscription, userInput} = this.state;
-        const persons = userInput.find(u => u.name === "contact_persons").value;
+        //TODO use the form_input from workflow to render UserForm
+        const {product, subscription, contactPersons} = this.state;
         return (
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h1>{I18n.t("subscription.terminate")}</h1>
                     <section className="form-step">
-                        {this.renderProduct(product)}
                         {this.renderSubscriptionDetail(subscription)}
+                        {this.renderProduct(product)}
                     </section>
                     <section className="form-step">
                         <section className="form-divider">
                             {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
                             {<em>{I18n.t("process.contact_persons")}</em>}
-                            <ContactPersons
-                                persons={persons}
-                                onChange={this.changeUserInput("contact_persons")}/>
+                            <ContactPersons persons={contactPersons} onChange={this.changeUserInput}/>
                         </section>
                     </section>
                     {this.renderButtons()}
