@@ -90,9 +90,15 @@ export default class Processes extends React.PureComponent {
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
-    showProcess = process => () => this.props.history.push("/process/" + process.id);
+    showProcess = process => () => {
+        clearInterval(this.interval);
+        this.props.history.push("/process/" + process.id);
+    };
 
-    newProcess = () => this.props.history.push("/new-process");
+    newProcess = () => {
+        clearInterval(this.interval);
+        this.props.history.push("/new-process");
+    };
 
     search = e => {
         const query = e.target.value;
@@ -147,7 +153,7 @@ export default class Processes extends React.PureComponent {
                 customer: process.customer_name
             }), () =>
                 deleteProcess(process.id).then(() => {
-                    this.componentDidMount();
+                    this.refresh();
                     setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
                 })
         );
@@ -160,7 +166,7 @@ export default class Processes extends React.PureComponent {
                 customer: process.customer_name
             }), () =>
                 abortProcess(process.id).then(() => {
-                    this.componentDidMount();
+                    this.refresh();
                     setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
                 })
         );
@@ -173,7 +179,7 @@ export default class Processes extends React.PureComponent {
                 customer: process.customer_name
             }), () =>
                 retryProcess(process.id).then(() => {
-                    this.componentDidMount();
+                    this.refresh();
                     setFlash(I18n.t("processes.flash.retry", {name: process.product_name}));
                 })
         );
