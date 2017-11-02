@@ -232,7 +232,7 @@ export default class Processes extends React.PureComponent {
                 options = [details, _delete];
                 break;
             case "running": //??
-                options = [details, abort, _delete];
+                options = [];
                 break;
             case "completed":
                 options = [details, _delete];
