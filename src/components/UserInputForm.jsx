@@ -168,6 +168,7 @@ export default class UserInputForm extends React.Component {
             case "port":
             case "ims_port_id":
             case "ims_id":
+            case "subscription":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "bandwidth":
