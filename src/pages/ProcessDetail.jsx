@@ -96,7 +96,10 @@ export default class ProcessDetail extends React.PureComponent {
             </section>;
         } else {
             return <section className="card">
-                <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
+                <section className="header-info">
+                    <h3>{I18n.t("process.workflow", {name: process.workflow_name})}</h3>
+                    <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
+                </section>
                 <UserInputForm locationCodes={locationCodes}
                                ieeeInterfaceTypes={ieeeInterfaceTypes}
                                stepUserInput={stepUserInput}

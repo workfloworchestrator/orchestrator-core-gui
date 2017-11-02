@@ -57,7 +57,7 @@ export default class TerminateSubscription extends React.Component {
     submit = () => {
         const {product, subscription, contactPersons} = this.state;
         this.setState({processing: true});
-        terminateSubscription({subscription: subscription.subscription_id, contact_persons: contactPersons})
+        terminateSubscription({subscription_id: subscription.subscription_id, contact_persons: contactPersons})
             .then(() => {
                 this.props.history.push(`/processes`);
                 setFlash(I18n.t("process.flash.create", {name: product.name}));

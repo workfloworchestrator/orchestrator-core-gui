@@ -28,6 +28,11 @@ section.process-state-detail {
 
         ul {
             list-style: none;
+            h3 {
+                font-size: larger;
+                padding: 15px 0;
+                color: $darker-blue;
+            }
             li {
                 display: inline-block;
                 &.toggle-details, &.toggle-state-changes {

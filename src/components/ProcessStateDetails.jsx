@@ -61,7 +61,8 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <ul>
                     <li className="process-wording"><h3>{I18n.t("process_state.wording", {
                         product: process.productName,
-                        customer: process.customerName
+                        customer: process.customerName,
+                        workflow: process.workflow_name
                     })}</h3></li>
                 </ul>
                 <ul>

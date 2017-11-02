@@ -279,6 +279,9 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderTerminateLink = (subscription, isTerminatable, subscriptions, product) => {
+        if (isEmpty(product)) {
+            return null;
+        }
         let reason = null;
         if (!hasResourceType(subscription, "nms_service_id") && subscriptions.length > 0) {
             reason = I18n.t("subscription.no_termination_parent_subscription");
@@ -287,7 +290,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             reason = I18n.t("subscription.no_termination_workflow");
         }
         return <section className="terminate-link">
-            <a href="/terminate" className={`button ${(isTerminatable && !reason) ? "green" : "grey disabled"}`}
+            <a href="/terminate" className={`button ${(isTerminatable && !reason) ? "orange" : "grey disabled"}`}
                onClick={this.terminate(subscription, isTerminatable && !reason)}>
                 <i className="fa fa-chain-broken"></i> {I18n.t("subscription.terminate")}</a>
             {reason && <p className="no-termination-reason">{reason}</p>}

@@ -63,6 +63,7 @@ I18n.translations.en = {
         refresh: "Refresh automatically every 3 seconds?"
     },
     process: {
+        workflow: "Process instance of workflow {{name}}",
         cancel: "Cancel",
         submit: "Submit",
         notFound: "No Process found (e.g. 404)",
@@ -145,7 +146,7 @@ I18n.translations.en = {
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",
-        wording: "Process {{product}} for {{customer}}",
+        wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
         summary: {
             status: "Status",
             assignee: "Assignee",
