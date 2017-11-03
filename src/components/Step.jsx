@@ -1,6 +1,4 @@
 import React from "react";
-import "./ProcessStateDetails.css";
-import "highlight.js/styles/default.css";
 import PropTypes from "prop-types";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import "./Step.css";

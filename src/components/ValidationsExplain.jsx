@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./ValidationsExplain.css";
 import Highlight from "react-highlight";
+
+import "./ValidationsExplain.css";
 import "highlight.js/styles/default.css";
 
 export default class ValidationsExplain extends React.PureComponent {

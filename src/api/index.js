@@ -1,5 +1,6 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
+import {ims_circuit_id, ims_port_id, parent_subscriptions, port_subscription_id} from "../validations/Subscriptions";
 
 const apiPath = "/api/";
 
@@ -82,12 +83,6 @@ export function subscriptions_by_product_type(type) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptions_by_subscription_port_id(subscription_id) {
-    return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
-        return {type: "subscriptions", json: json}
-    });
-}
-
 export function organisations() {
     return fetchJson("crm/organisations");
 }
@@ -112,16 +107,22 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
 
+export function subscriptions_by_subscription_port_id(subscription_id) {
+    return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
+        return {type: parent_subscriptions, json: json}
+    });
+}
+
 export function imsService(type, identifier) {
     let promise;
     switch (type) {
-        case "ims_port_id":
+        case ims_port_id:
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_port/${identifier}`);
             break;
-        case "ims_circuit_id":
+        case ims_circuit_id:
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
-        case "port_subscription_id":
+        case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
         default:

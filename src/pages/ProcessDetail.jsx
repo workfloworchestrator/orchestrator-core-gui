@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import {process, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
-import "./ProcessDetail.css";
-import "highlight.js/styles/default.css";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
 import {subscriptionIdFromProcessId} from "../api/index";
+
+import "./ProcessDetail.css";
 
 export default class ProcessDetail extends React.PureComponent {
 

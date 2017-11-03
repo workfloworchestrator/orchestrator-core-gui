@@ -1,15 +1,14 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import "./NewProcess.css";
 import {initialWorkflowInput, startProcess, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
-import "./ProcessDetail.css";
-import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
 import ProductValidation from "../components/ProductValidation";
+
+import "./NewProcess.css";
 
 export default class NewProcess extends React.Component {
 

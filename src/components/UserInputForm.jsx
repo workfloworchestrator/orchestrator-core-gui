@@ -7,7 +7,6 @@ import ConfirmationDialog from "./ConfirmationDialog";
 import {isEmpty, stop} from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
 import MultiServicePointSelect from "./MultiServicePointSelect";
-import "highlight.js/styles/default.css";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
@@ -15,10 +14,11 @@ import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
-import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
 import ContactPersons from "./ContactPersons";
 
+import "./UserInputForm.css";
+import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 
 export default class UserInputForm extends React.Component {
 
@@ -168,10 +168,13 @@ export default class UserInputForm extends React.Component {
             case "port":
             case "ims_port_id":
             case "ims_id":
-            case "subscription_id":
-            case "subscription":
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "subscription_id":
+                return <ReadOnlySubscriptionView subscriptionId={userInput.value}
+                                                 products={this.props.products}
+                                                 organisations={this.props.organisations}
+                                                 className="indent"/>
             case "bandwidth":
                 return <input type="number" step="1" min="0" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
@@ -192,8 +195,9 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
             case "contact_persons" :
-                return <ContactPersons persons={isEmpty(userInput.value) ? [{email: "", name: "", tel: ""}] : userInput.value}
-                                       onChange={this.changeNestedInput(name)}/>;
+                return <ContactPersons
+                    persons={isEmpty(userInput.value) ? [{email: "", name: "", tel: ""}] : userInput.value}
+                    onChange={this.changeNestedInput(name)}/>;
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}
                                    onChangeEmails={this.changeArrayInput(name)}
@@ -204,7 +208,7 @@ export default class UserInputForm extends React.Component {
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
             case "ieee_interface_type_ssp_1":
-            case "ieee_interface_type_ssp_2":            
+            case "ieee_interface_type_ssp_2":
                 return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;

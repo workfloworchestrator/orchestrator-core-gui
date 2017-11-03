@@ -135,8 +135,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
-        subscription: "Subscription",
-        subscription_info: "The subscription ID that will be terminated",
+        subscription_id: "Subscription",
+        subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription created by this Process",
     },
@@ -247,9 +247,12 @@ I18n.translations.en = {
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
         no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions",
-        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key",
+        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key"
+    },
+    terminate_subscription: {
         cancel: "Cancel",
-        submit: "Terminate"
+        submit: "Terminate",
+        subscription_childs: "Child subscriptions - ports used in {{product}}"
     },
     contact_persons: {
         email: "Email",

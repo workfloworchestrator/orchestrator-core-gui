@@ -9,14 +9,23 @@ import {
     subscriptions_by_subscription_port_id,
     subscriptionsDetail
 } from "../api";
-import "./SubscriptionDetail.css";
-import "highlight.js/styles/default.css";
 import {enrichSubscription, organisationNameByUuid, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
-import {hasResourceType, isTerminatable, subscriptionResourceTypes} from "../validations/Subscriptions";
+import {
+    hasResourceType,
+    ims_circuit_id,
+    ims_port_id,
+    isTerminatable,
+    nms_service_id,
+    parent_subscriptions,
+    port_subscription_id,
+    subscriptionResourceTypes
+} from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
+
+import "./SubscriptionDetail.css";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -52,20 +61,20 @@ export default class SubscriptionDetail extends React.PureComponent {
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
                     .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
-                if (resourceTypes.some(rt => rt.resource_type === "ims_circuit_id") &&
-                    !resourceTypes.some(rt => rt.resource_type === "nms_service_id")) {
+                if (resourceTypes.some(rt => rt.resource_type === ims_circuit_id) &&
+                    !resourceTypes.some(rt => rt.resource_type === nms_service_id)) {
                     //add the subscription where this subscription is used as a MSP (or SSP)
                     promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
                 }
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(2);
-                    let subscriptions = relatedObjects.filter(obj => obj.type === "port_subscription_id").map(obj => obj.json);
-                    const subscription_used = relatedObjects.find(obj => obj.type === "subscriptions");
+                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id).map(obj => obj.json);
+                    const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
                     if (subscription_used) {
                         subscriptions = subscriptions.concat(subscription_used.json);
                     }
                     subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
-                    const allImsServices = relatedObjects.filter(obj => obj.type === "ims_circuit_id" || obj.type === "ims_port_id").map(obj => obj.json);
+                    const allImsServices = relatedObjects.filter(obj => obj.type === ims_circuit_id || obj.type === ims_port_id).map(obj => obj.json);
                     const flags = new Set();
                     // There are service duplicates for port_id and circuit_id
                     const imsServices = allImsServices.filter(resource => {
@@ -182,17 +191,17 @@ export default class SubscriptionDetail extends React.PureComponent {
                             <input type="text" readOnly={true}
                                    value={organisationNameByUuid(service.customer_id, organisations)}/>
                             <label className="title">{I18n.t("subscription.ims_service.extra_info")}</label>
-                            <input type="text" readOnly={true} value={service.extra_info}/>
+                            <input type="text" readOnly={true} value={service.extra_info || ""}/>
                             <label className="title">{I18n.t("subscription.ims_service.name")}</label>
-                            <input type="text" readOnly={true} value={service.name}/>
+                            <input type="text" readOnly={true} value={service.name || ""}/>
                         </section>
                         <section>
                             <label className="title">{I18n.t("subscription.ims_service.product")}</label>
                             <input type="text" readOnly={true} value={service.product}/>
                             <label className="title">{I18n.t("subscription.ims_service.speed")}</label>
-                            <input type="text" readOnly={true} value={service.speed}/>
+                            <input type="text" readOnly={true} value={service.speed || ""}/>
                             <label className="title">{I18n.t("subscription.ims_service.status")}</label>
-                            <input type="text" readOnly={true} value={service.status}/>
+                            <input type="text" readOnly={true} value={service.status || ""}/>
                         </section>
                     </section>
 
