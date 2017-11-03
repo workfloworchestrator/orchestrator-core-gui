@@ -18,6 +18,13 @@ export function productNameById(id, products) {
     return product ? product.name : id;
 }
 
+
+export function productTagById(id, products) {
+    const product = products.find(prod => prod.identifier === id);
+    return product ? product.tag : id;
+}
+
+
 export function productById(id, products) {
     const product = products.find(prod => prod.identifier === id);
     return product;

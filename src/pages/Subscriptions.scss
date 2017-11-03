@@ -6,10 +6,16 @@
 
     .card {
         @include card;
-        padding-bottom: 15px;
+        padding: 15px;
+    }
+    .options {
+        display: flex;
+        padding-top: 25px;
+        flex-direction: row;
+        align-items: center;
     }
     section.search {
-        padding-top: 25px;
+        padding: 0 15px 0 0;
         position: relative;
         flex-grow: 5;
 
@@ -28,8 +34,8 @@
         i.fa-search {
             color: lighten($blue, 5);
             position: absolute;
-            right: 14px;
-            top: 32px;
+            right: 24px;
+            top: 8px;
             font-size: 24px;
         }
     }

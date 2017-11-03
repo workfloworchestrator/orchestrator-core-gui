@@ -6,7 +6,8 @@ import {subscriptions} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 
 import "./Subscriptions.css";
-import {organisationNameByUuid, productNameById, renderDate} from "../utils/Lookups";
+import FilterDropDown from "../components/FilterDropDown";
+import {organisationNameByUuid, productNameById, productTagById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 
 export default class Subscriptions extends React.PureComponent {
@@ -21,7 +22,6 @@ export default class Subscriptions extends React.PureComponent {
             query: "",
             sorted: {name: "status", descending: false}
         };
-
     }
 
     componentDidMount = () => subscriptions()
@@ -30,18 +30,22 @@ export default class Subscriptions extends React.PureComponent {
             results.forEach(subscription => {
                 subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
                 subscription.product_name = productNameById(subscription.product_id, products);
+                subscription.product_tag = productTagById(subscription.product_id, products)
                 subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
                 subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
             });
             const newFilterAttributesProduct = [];
             this.props.products.forEach(product => {
-                // Todo: fill count
-                newFilterAttributesProduct.push({name: product.tag, selected: true, count:0});
+                newFilterAttributesProduct.push({
+                    name: product.tag,
+                    selected: true,
+                    count: results.filter(result => result.product_tag === product.tag).length
+                })
             });
 
             this.setState({
                 subscriptions: results, filteredSubscriptions: results,
-                filterAttributesProduct: newFilterAttributesProduct
+                filterAttributesProduct: newFilterAttributesProduct.filter(attr => attr.count > 0)
             })
         });
 
@@ -53,7 +57,7 @@ export default class Subscriptions extends React.PureComponent {
         this.delayedSearch(query);
     };
 
-    doSearchAndSortAndFilter = (query, subscriptions, sorted) => {
+    doSearchAndSortAndFilter = (query, subscriptions, sorted, filterAttributesProduct) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable = ["customer_name", "description", "product_name", "status", "sub_name"];
@@ -63,15 +67,21 @@ export default class Subscriptions extends React.PureComponent {
             );
 
         }
+        subscriptions = subscriptions.filter(subscription => {
+            const productFilter = filterAttributesProduct.find(attr => attr.name === subscription.product_tag);
+            return productFilter ? productFilter.selected : true;
+        });
         subscriptions.sort(this.sortBy(sorted.name));
         return sorted.descending ? subscriptions.reverse() : subscriptions;
     };
 
     delayedSearch = debounce(query => {
         const subscriptions = [...this.state.subscriptions];
+        const {filterAttributesProduct} = this.state;
+
         this.setState({
             query: query,
-            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, this.state.sorted)
+            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, this.state.sorted, filterAttributesProduct)
         });
     }, 250);
 
@@ -91,6 +101,20 @@ export default class Subscriptions extends React.PureComponent {
         this.setState({
             filteredSubscriptions: sorted.descending ? filteredSubscriptions.reverse() : filteredSubscriptions,
             sorted: sorted
+        });
+    };
+
+    filter = item => {
+        const {subscriptions, filterAttributesProduct, sorted, query} = this.state;
+        const newFilterAttributesProduct = [...filterAttributesProduct];
+        newFilterAttributesProduct.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
+        this.setState({
+            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, sorted, newFilterAttributesProduct),
+            filterAttributesProduct: newFilterAttributesProduct
         });
     };
 
@@ -146,19 +170,24 @@ export default class Subscriptions extends React.PureComponent {
     }
 
     render() {
-        const {filteredSubscriptions, query, sorted} = this.state;
+        const {filteredSubscriptions, filterAttributesProduct, query, sorted} = this.state;
         const {organisations} = this.props;
         return (
             <div className="mod-subscriptions">
                 <div className="card">
-                    <section className="search">
-                        <input className="allowed"
-                               placeholder={I18n.t("subscriptions.searchPlaceHolder")}
-                               type="text"
-                               onChange={this.search}
-                               value={query}/>
-                        <i className="fa fa-search"></i>
-                    </section>
+                    <div className="options">
+                        <FilterDropDown items={filterAttributesProduct}
+                                        filterBy={this.filter}
+                                        label={I18n.t("subscriptions.product")}/>
+                        <section className="search">
+                            <input className="allowed"
+                                   placeholder={I18n.t("subscriptions.searchPlaceHolder")}
+                                   type="text"
+                                   onChange={this.search}
+                                   value={query}/>
+                            <i className="fa fa-search"></i>
+                        </section>
+                    </div>
                 </div>
                 <section className="subscriptions">
                     {this.renderSubscriptionsTable(filteredSubscriptions, sorted, organisations)}

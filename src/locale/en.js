@@ -195,7 +195,16 @@ I18n.translations.en = {
         completed: "Completed",
         suspended: "Suspended",
         running: "Running",
-        failed: "Failed"
+        failed: "Failed",
+        LP: "LP",
+        MSP1G: "MSP1G",
+        MSP10G: "MSP10G",
+        MSP40G: "MSP40G",
+        MSP100G: "MSP100G",
+        PLP50M: "PLP50M",
+        RMSP1G: "RMSP1G",
+        SSP1G: "SSP1G",
+        SSP10G: "SSP10G",
     },
     subscriptions: {
         customer_name: "Customer",
@@ -210,6 +219,7 @@ I18n.translations.en = {
         searchPlaceHolder: "Search for subscriptions...",
         noop: "",
         deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",
+        product: "Product",
         flash: {
             delete: "Subscription {{name}} was deleted",
         }
