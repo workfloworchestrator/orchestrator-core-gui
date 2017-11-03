@@ -17,9 +17,11 @@ export default class Subscriptions extends React.PureComponent {
         this.state = {
             subscriptions: [],
             filteredSubscriptions: [],
+            filterAttributesProduct: [],
             query: "",
             sorted: {name: "status", descending: false}
         };
+
     }
 
     componentDidMount = () => subscriptions()
@@ -31,8 +33,15 @@ export default class Subscriptions extends React.PureComponent {
                 subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
                 subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
             });
+            const newFilterAttributesProduct = [];
+            this.props.products.forEach(product => {
+                // Todo: fill count
+                newFilterAttributesProduct.push({name: product.tag, selected: true, count:0});
+            });
+
             this.setState({
-                subscriptions: results, filteredSubscriptions: results
+                subscriptions: results, filteredSubscriptions: results,
+                filterAttributesProduct: newFilterAttributesProduct
             })
         });
 
