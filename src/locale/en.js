@@ -126,6 +126,7 @@ I18n.translations.en = {
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
         configuration_ready: "Configuration ready",
+        cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         ssp_product_1: "SSP 1",
         ssp_product_1_info: "The First SSP",
