@@ -109,7 +109,8 @@ export default class ProcessDetail extends React.PureComponent {
                                multiServicePoints={multiServicePoints}
                                product={product}
                                currentState={process.current_state}
-                               validSubmit={this.validSubmit}/>
+                               validSubmit={this.validSubmit}
+                               process={process} />
             </section>;
         }
     };

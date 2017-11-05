@@ -298,6 +298,11 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!product.terminate_subscription_workflow_key) {
             reason = I18n.t("subscription.no_termination_workflow");
         }
+        //All subscription statusses: ["initial", "provisioning", "active", "disabled", "terminated"]
+        const status = subscription.status;
+        if (status !== "provisioning" || status !== "active") {
+            reason = I18n.t("subscription.no_termination_invalid_status", {status: status});
+        }
         return <section className="terminate-link">
             <a href="/terminate" className={`button ${(isTerminatable && !reason) ? "orange" : "grey disabled"}`}
                onClick={this.terminate(subscription, isTerminatable && !reason)}>

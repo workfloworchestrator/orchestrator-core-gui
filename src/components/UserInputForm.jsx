@@ -142,21 +142,21 @@ export default class UserInputForm extends React.Component {
         this.setState({errors: errors});
     };
 
-    renderInput = userInput => {
+    renderInput = (userInput, process) => {
         const name = userInput.name;
-        const isBoolean = userInput.type === "boolean";
+        const isBoolean = userInput.type === "boolean" || userInput.type === "subscription_termination_confirmation";
         return (
             <section key={name} className="form-divider">
                 {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
                 {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
-                {this.chooseInput(userInput)}
+                {this.chooseInput(userInput, process)}
                 {this.state.errors[name] &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
             </section>);
 
     };
 
-    chooseInput = userInput => {
+    chooseInput = (userInput, process) => {
         const name = userInput.name;
         switch (userInput.type) {
             case "string" :
@@ -231,10 +231,21 @@ export default class UserInputForm extends React.Component {
                                        freePort={userInput.value}
                                        interfaceType={this.props.currentState.ieee_interface_type_ssp_2}
                                        locationCode={this.props.currentState.location_code_ssp_2}/>;
+            case "subscription_termination_confirmation":
+                return <div>
+                    <CheckBox name={name} value={userInput.value || false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={I18n.t(`process.${name}`)}/>
+                    <section className="form-divider"></section>
+                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
+                                              products={this.props.products}
+                                              organisations={this.props.organisations}
+                                              className="indent"/>
+                </div>
             case "boolean":
-                return <CheckBox name={userInput.name} value={userInput.value || false}
-                                 onChange={this.changeBooleanInput(userInput.name)}
-                                 info={I18n.t(`process.${userInput.name}`)}/>;
+                return <CheckBox name={name} value={userInput.value || false}
+                                 onChange={this.changeBooleanInput(name)}
+                                 info={I18n.t(`process.${name}`)}/>;
             case "location_code":
             case "location_code_ssp_1":
             case "location_code_ssp_2":
@@ -249,7 +260,9 @@ export default class UserInputForm extends React.Component {
     userInputToEmail = (input) => input ? input.split(",") : [];
 
     render() {
-        const {confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput, leavePage} = this.state;
+        const {confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput,
+            leavePage} = this.state;
+        const {process} = this.props;
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -258,7 +271,7 @@ export default class UserInputForm extends React.Component {
                                     leavePage={leavePage}/>
                 <section className="card">
                     <section className="form-step">
-                        {stepUserInput.map(input => this.renderInput(input))}
+                        {stepUserInput.map(input => this.renderInput(input, process))}
                     </section>
                     {this.renderButtons()}
                 </section>
@@ -276,5 +289,6 @@ UserInputForm.propTypes = {
     ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
-    validSubmit: PropTypes.func.isRequired
+    validSubmit: PropTypes.func.isRequired,
+    process: PropTypes.object,
 };

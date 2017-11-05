@@ -122,6 +122,8 @@ I18n.translations.en = {
         nms_service_id: "NMS service id",
         nms_service_id_info: "The id of the ethernet service on the network",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
+        noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the lichtpad and any child SSP's subscriptions",
+        noc_remove_lichtpad_confirmation_info: "Are the lichtpad of the subscription and any child SSP's subscriptions removed?",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
@@ -257,8 +259,9 @@ I18n.translations.en = {
         },
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions",
-        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key"
+        no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions.",
+        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
+        no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated."
     },
     terminate_subscription: {
         cancel: "Cancel",
