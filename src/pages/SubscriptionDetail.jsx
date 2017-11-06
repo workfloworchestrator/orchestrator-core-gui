@@ -300,7 +300,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
         //All subscription statusses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
-        if (status !== "provisioning" || status !== "active") {
+        if (status !== "provisioning" && status !== "active") {
             reason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
         return <section className="terminate-link">

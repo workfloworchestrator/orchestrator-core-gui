@@ -241,7 +241,7 @@ export default class UserInputForm extends React.Component {
                                               products={this.props.products}
                                               organisations={this.props.organisations}
                                               className="indent"/>
-                </div>
+                </div>;
             case "boolean":
                 return <CheckBox name={name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(name)}
