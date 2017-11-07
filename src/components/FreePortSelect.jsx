@@ -1,4 +1,5 @@
 import React from "react";
+import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
@@ -25,7 +26,7 @@ export default class FreePortSelect extends React.PureComponent {
 
     render() {
         const {freePorts, loading} = this.state;
-        const {onChange, freePort, disabled} = this.props;
+        const {onChange, freePort, disabled, locationCode, interfaceType} = this.props;
 
         const noFreePortsAvailable = !loading && freePorts.length === 0;
 
@@ -37,7 +38,10 @@ export default class FreePortSelect extends React.PureComponent {
                         value={freePort}
                         searchable={true}
                         disabled={disabled || freePorts.length === 0} />
-                {noFreePortsAvailable && <em className="warn">No free ports available</em>}
+                {noFreePortsAvailable &&
+                 <em className="warn">
+                     {I18n.t("FreePortSelect.noFreePortsAvailable", {interfaceType, location: locationCode})}
+                 </em>}
             </div>
         );
     }

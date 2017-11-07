@@ -307,7 +307,9 @@ I18n.translations.en = {
         stay: "Stay",
         leave: "Leave"
     },
-
+    FreePortSelect: {
+        "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}"
+    }
 };
 
 export default I18n.translations.en;
