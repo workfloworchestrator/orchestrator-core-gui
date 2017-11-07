@@ -10,12 +10,13 @@ function apiUrl(path) {
     return apiPath + path;
 }
 
-let pending = {};
+let started = 0;
+let ended = 0;
 
-function validateResponse(showErrorDialog, fetchId) {
+function validateResponse(showErrorDialog) {
     return res => {
-        delete pending[fetchId];
-        if (Object.keys(pending).length === 0) {
+        ++ended;
+        if (started === ended) {
             spinner.stop();
         }
         if (!res.ok) {
@@ -51,9 +52,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
         redirect: "manual",
     });
     spinner.start();
-
-    const fetchId = Math.random().toString();
-    pending[fetchId] = true;
+    ++started;
 
     const targetUrl = apiUrl(path);
     return fetch(targetUrl, fetchOptions)
@@ -61,7 +60,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
             spinner.stop();
             throw err;
         })
-        .then(validateResponse(showErrorDialog, fetchId));
+        .then(validateResponse(showErrorDialog));
 }
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
