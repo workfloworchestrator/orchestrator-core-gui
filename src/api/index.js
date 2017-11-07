@@ -10,10 +10,14 @@ function apiUrl(path) {
     return apiPath + path;
 }
 
-function validateResponse(showErrorDialog) {
-    return res => {
-        spinner.stop();
+let pending = {};
 
+function validateResponse(showErrorDialog, fetchId) {
+    return res => {
+        delete pending[fetchId];
+        if (Object.keys(pending).length === 0) {
+            spinner.stop();
+        }
         if (!res.ok) {
             if (res.type === "opaqueredirect") {
                 setTimeout(() => window.location.reload(true), 100);
@@ -48,13 +52,16 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
     });
     spinner.start();
 
+    const fetchId = Math.random().toString();
+    pending[fetchId] = true;
+
     const targetUrl = apiUrl(path);
     return fetch(targetUrl, fetchOptions)
         .catch(err => {
             spinner.stop();
             throw err;
         })
-        .then(validateResponse(showErrorDialog));
+        .then(validateResponse(showErrorDialog, fetchId));
 }
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
@@ -171,7 +178,7 @@ export function deleteSubscription(subscriptionId) {
 }
 
 export function terminateSubscription(process) {
-    return postPutJson("processes/terminate-subscription",process, "post");
+    return postPutJson("processes/terminate-subscription", process, "post");
 }
 
 
