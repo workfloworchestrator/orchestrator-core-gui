@@ -107,6 +107,10 @@ I18n.translations.en = {
         location_code_ssp_2_info: "Select a location code for the second SSP.",
         crm_port_id: 'The CRM identifier for a port',
         crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+        crm_port_id_ssp_1: 'The CRM identifier for SSP 1',
+        crm_port_id_ssp_1_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+        crm_port_id_ssp_2: 'The CRM identifier for SSP 2',
+        crm_port_id_ssp_2_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         dienstafname: "Dienstafname",
@@ -144,6 +148,10 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription created by this Process",
         device_port_name: "Device port name",
         device_port_name_info: "Port name to configure on the physical device",
+        device_port_name_ssp_1: "Device port name for SSP 1",
+        device_port_name_ssp_1_info: "Port name to configure on the physical device for SSP 1",
+        device_port_name_ssp_2: "Device port name for SSP 2",
+        device_port_name_ssp_2_info: "Port name to configure on the physical device for SSP 2"
     },
     process_state: {
         copy: "Copy to clipboard",
