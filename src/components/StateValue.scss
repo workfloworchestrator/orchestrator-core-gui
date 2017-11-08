@@ -1,0 +1,8 @@
+@import "../stylesheets/vars.scss";
+
+.state-value {
+    border: 1px solid $light-grey;
+    cursor: default;
+    padding: 5px;
+    width: 100%;
+}

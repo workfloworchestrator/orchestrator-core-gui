@@ -142,6 +142,8 @@ I18n.translations.en = {
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription created by this Process",
+        device_port_name: "Device port name",
+        device_port_name_info: "Port name to configure on the physical device",
     },
     process_state: {
         copy: "Copy to clipboard",

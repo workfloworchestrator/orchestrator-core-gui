@@ -16,6 +16,7 @@ import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
 import CheckBox from "./CheckBox";
 import ContactPersons from "./ContactPersons";
+import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
@@ -252,6 +253,8 @@ export default class UserInputForm extends React.Component {
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
                                            locationCode={userInput.value}/>;
+            case "label_with_state":
+                return <StateValue value={userInput.value} />
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
