@@ -152,8 +152,8 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="state-delta">
                     <table>
                         <tbody>
-                        {Object.keys(json).map(key =>
-                            <tr>
+                        {Object.keys(json).map((key,index) =>
+                            <tr key={key}>
                                 <td className="key">{key}</td>
                                 <td className="value">{this.displayStateValue(json[key])}</td>
                             </tr>

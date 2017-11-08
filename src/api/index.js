@@ -56,11 +56,13 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
 
     const targetUrl = apiUrl(path);
     return fetch(targetUrl, fetchOptions)
+        .then(validateResponse(showErrorDialog))
         .catch(err => {
+            started = ended = 0;
             spinner.stop();
             throw err;
         })
-        .then(validateResponse(showErrorDialog));
+
 }
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
