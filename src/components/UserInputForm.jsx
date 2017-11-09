@@ -34,7 +34,8 @@ export default class UserInputForm extends React.Component {
             isNew: true,
             stepUserInput: [...props.stepUserInput],
             product: {},
-            processing: false
+            processing: false,
+            interDependentState: {}
         };
     }
 
@@ -56,6 +57,12 @@ export default class UserInputForm extends React.Component {
             this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
         }
+    };
+
+    storeInterDependentState = (name, value) => {
+        const interDependentState = {...this.state.interDependentState};
+        interDependentState[name] = value;
+        this.setState({interDependentState: interDependentState});
     };
 
     validateAllUserInput = (stepUserInput) => {
@@ -186,6 +193,7 @@ export default class UserInputForm extends React.Component {
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
+                                           storeInterDependentState={this.storeInterDependentState}
                                            organisation={userInput.value}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
@@ -198,6 +206,7 @@ export default class UserInputForm extends React.Component {
             case "contact_persons" :
                 return <ContactPersons
                     persons={isEmpty(userInput.value) ? [{email: "", name: "", tel: ""}] : userInput.value}
+                    interDependentState={this.state.interDependentState}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(userInput.value)}

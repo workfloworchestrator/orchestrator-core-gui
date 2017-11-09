@@ -25,6 +25,16 @@ section.contact-persons {
                 }
             }
         }
+        div.contact-persons-name {
+            margin-top: 5px;
+            div.Select-control {
+                max-height: 30px;
+                div.Select-input {
+
+                    max-height: 30px;
+                }
+            }
+        }
     }
     div.add-person {
         display: flex;

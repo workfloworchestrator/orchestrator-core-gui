@@ -1,19 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-
-import {stop} from "../utils/Utils";
+import "react-select/dist/react-select.css";
+import Select from "react-select";
+import {isEmpty, stop} from "../utils/Utils";
 import "./ContactPersons.css";
 import {validEmailRegExp} from "../validations/Subscriptions";
+import {organisationContactsKey} from "./OrganisationSelect";
 
 export default class ContactPersons extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
         this.state = {
-            errors: {}
+            errors: {},
+            contactOptions: []
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.interDependentState) {
+            const contacts = nextProps.interDependentState[organisationContactsKey];
+            if (contacts) {
+                this.setState({contactOptions: contacts.map(contact => {
+                    return {value: contact.name, label: contact.name, contact: contact};
+                })});
+            }
+        }
+    };
+
 
     validateEmail = index => e => {
         const valid = validEmailRegExp.test(e.target.value);
@@ -25,6 +40,13 @@ export default class ContactPersons extends React.PureComponent {
     onChangeInternal = (name, index) => e => {
         const persons = [...this.props.persons];
         persons[index][name] = e.target.value;
+        this.props.onChange(persons);
+    };
+
+    onChangeOptionInternal = (name, index) => option => {
+        const persons = [...this.props.persons];
+        debugger;
+        persons[index][name] = option.value;
         this.props.onChange(persons);
     };
 
@@ -41,7 +63,29 @@ export default class ContactPersons extends React.PureComponent {
         this.props.onChange(persons);
     };
 
+    renderNameField = (person, index) => {
+        const {contactOptions} = this.state;
+        if (isEmpty(contactOptions)) {
+            return <input type="text"
+                          onChange={this.onChangeInternal("name", index)}
+                          value={person.name || ""}/>
+        }
+        return <Select.Creatable className="contact-persons-name"
+            onChange={this.onChangeOptionInternal("name", index)}
+            options={contactOptions}
+            value={person.name || ""}
+            searchable={true}
+            placeholder="Search and select a contact person..."
+            clearable={false}
+            multi={false}
+        />
+    };
+
     renderPerson = (person, index, errors) => <section className="person" key={index}>
+        <div className="wrapper">
+            {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
+            {this.renderNameField(person, index)}
+        </div>
         <div className="wrapper">
             {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
             <input type="email"
@@ -51,18 +95,10 @@ export default class ContactPersons extends React.PureComponent {
             {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
         </div>
         <div className="wrapper">
-            {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
-            <input type="text"
-                   onChange={this.onChangeInternal("name", index)}
-                   onBlur={this.propagateState}
-                   value={person.name || ""}/>
-        </div>
-        <div className="wrapper">
             {index === 0 && <label>{I18n.t("contact_persons.tel")}</label>}
             <div className="tel">
                 <input type="tel"
                        onChange={this.onChangeInternal("tel", index)}
-                       onBlur={this.propagateState}
                        value={person.tel || ""}/>
                 <i className={`fa fa-minus ${index === 0 ? "disabled" : "" }`} onClick={this.removePerson(index)}></i>
             </div>
@@ -84,7 +120,8 @@ export default class ContactPersons extends React.PureComponent {
 
 ContactPersons.propTypes = {
     persons: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    interDependentState: PropTypes.object.isRequired
 };
 
 

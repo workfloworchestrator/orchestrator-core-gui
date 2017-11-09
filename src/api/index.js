@@ -13,11 +13,13 @@ function apiUrl(path) {
 let started = 0;
 let ended = 0;
 
-function validateResponse(showErrorDialog) {
+function validateResponse(showErrorDialog, stopSpinner) {
     return res => {
-        ++ended;
-        if (started === ended) {
-            spinner.stop();
+        if (stopSpinner) {
+            ++ended;
+            if (started === ended) {
+                spinner.stop();
+            }
         }
         if (!res.ok) {
             if (res.type === "opaqueredirect") {
@@ -39,7 +41,7 @@ function validateResponse(showErrorDialog) {
     };
 }
 
-function validFetch(path, options, headers = {}, showErrorDialog = true) {
+function validFetch(path, options, headers = {}, showErrorDialog = true, showSpinner = true) {
     const access_token = localStorage.getItem('access_token');
     const contentHeaders = {
         "Accept": "application/json",
@@ -51,12 +53,14 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
         credentials: "same-origin",
         redirect: "manual",
     });
-    spinner.start();
-    ++started;
+    if (showSpinner) {
+        spinner.start();
+        ++started;
+    }
 
     const targetUrl = apiUrl(path);
     return fetch(targetUrl, fetchOptions)
-        .then(validateResponse(showErrorDialog))
+        .then(validateResponse(showErrorDialog, showSpinner))
         .catch(err => {
             started = ended = 0;
             spinner.stop();
@@ -65,8 +69,8 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
 
 }
 
-function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
-    return validFetch(path, options, headers, showErrorDialog)
+function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true, showSpinner = true) {
+    return validFetch(path, options, headers, showErrorDialog, showSpinner)
         .then(res => result ? res.json() : {});
 }
 
@@ -213,6 +217,10 @@ export function validations() {
 
 export function validation(productId) {
     return fetchJson(`products/${productId}/validate`);
+}
+
+export function contacts(organisationId) {
+    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true, false);
 }
 
 export function reportError(error) {
