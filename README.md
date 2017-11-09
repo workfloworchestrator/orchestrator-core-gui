@@ -30,4 +30,4 @@ yarn add package --dev
 ```
 
 ### Docker
-Deploys of GUI Workflows are in the form of a Docker image.
+Deploys of GUI Workflows are in the form of a Docker image with nginx.
