@@ -220,7 +220,8 @@ export function validation(productId) {
 }
 
 export function contacts(organisationId) {
-    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true, false);
+    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true, true)
+        .catch(err => Promise.resolve([]));
 }
 
 export function reportError(error) {

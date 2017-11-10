@@ -10,6 +10,9 @@ section.contact-persons {
         div.wrapper {
             margin-left: 25px;
             flex-grow: 2;
+            &.autocomplete-container {
+                position: relative;
+            }
             div.tel {
                 display: flex;
                 align-items: center;

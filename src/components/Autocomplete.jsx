@@ -1,15 +1,14 @@
 import React from "react";
-import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import ReactTooltip from "react-tooltip";
 import scrollIntoView from "scroll-into-view";
 
+import "./Autocomplete.css";
 import {isEmpty} from "../utils/Utils";
 
 export default class Autocomplete extends React.PureComponent {
 
     componentDidUpdate(prevProps) {
-        if (this.selectedRow && prevProps.selectedItem !== this.props.selectedItem) {
+        if (this.selectedRow && prevProps.selectedItem !== this.props.selectedItem && !isEmpty(this.props.suggestions)) {
             scrollIntoView(this.selectedRow);
         }
     }
@@ -21,45 +20,37 @@ export default class Autocomplete extends React.PureComponent {
         const first = name.substring(0, indexOf);
         const middle = name.substring(indexOf, indexOf + query.length);
         const last = name.substring(indexOf + query.length);
-        return  <span>{first}<span className="matched">{middle}</span>{last}</span>;
+        return <span>{first}<span className="matched">{middle}</span>{last}</span>;
     };
 
-    itemDescription = (item) => isEmpty(item.description) ? "" : item.description;
-
     render() {
-        const {suggestions, query, selectedItem, itemSelected} = this.props;
-        const showSuggestions = (suggestions && suggestions.length > 0);
+        const {suggestions, query, selectedItem, personIndex, itemSelected, className} = this.props;
+        if (isEmpty(suggestions)) {
+            return null;
+        }
         return (
-            <section className="autocomplete">
-                {showSuggestions && <table className="result">
-                    <thead>
-                    <tr>
-                        <th className="name">{I18n.t("teams_autocomplete.name")}</th>
-                        <th className="description">{I18n.t("teams.description")}</th>
-                        <th className="role"></th>
-                    </tr>
-                    </thead>
+            <section className={`autocomplete ${className || ""}`}>
+                <table className="result">
                     <tbody>
                     {suggestions
-                        .filter(item => item.name.toLowerCase().indexOf(query.toLowerCase()) > -1)
                         .map((item, index) => (
                                 <tr key={index}
-                                    className={selectedTeam === index ? "active" : ""}
-                                    onClick={() => itemSelected(item)}
+                                    className={selectedItem === index ? "active" : ""}
+                                    onClick={() => itemSelected(item, personIndex)}
                                     ref={ref => {
-                                        if (selectedTeam === index) {
+                                        if (selectedItem === index) {
                                             this.selectedRow = ref;
+                                        } else if (suggestions.length - 1 === index) {
+                                            this.lastRow = ref;
                                         }
                                     }}>
                                     <td>{this.itemName(item, query)}</td>
-                                    <td>{this.itemDescription(item, index)}</td>
-                                    <td className="role">{item.role ? <span>{item.role}</span> :
-                                        <span className="join">{I18n.t("teams.join")}</span>}</td>
+                                    <td>{item.email || ""}</td>
                                 </tr>
                             )
                         )}
                     </tbody>
-                </table>}
+                </table>
             </section>
         );
     }
@@ -69,8 +60,10 @@ export default class Autocomplete extends React.PureComponent {
 Autocomplete.propTypes = {
     suggestions: PropTypes.array.isRequired,
     query: PropTypes.string.isRequired,
-    selectedItem: PropTypes.number.isRequired,
-    itemSelected: PropTypes.func.isRequired
+    selectedItem: PropTypes.number,
+    personIndex: PropTypes.number.isRequired,
+    itemSelected: PropTypes.func.isRequired,
+    className: PropTypes.string,
 };
 
 

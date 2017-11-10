@@ -2,11 +2,12 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
-import {imsService, productById, subscriptionsDetail} from "../api/index";
+import {contacts, imsService, productById, subscriptionsDetail} from "../api/index";
 import {enrichSubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionResourceTypes} from "../validations/Subscriptions";
 
 import "./ReadOnlySubscriptionView.css";
+import {organisationContactsKey} from "./OrganisationSelect";
 
 export default class ReadOnlySubscriptionView extends React.PureComponent {
 
@@ -22,6 +23,10 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
     componentWillMount() {
         const {subscriptionId, organisations, products} = this.props;
         subscriptionsDetail(subscriptionId).then(subscription => {
+            if (this.props.storeInterDependentState) {
+                contacts(subscription.client_id).then(result =>
+                    this.props.storeInterDependentState(organisationContactsKey, result));
+            }
             enrichSubscription(subscription, organisations, products);
             this.setState({subscription: subscription});
             const resourceTypes = subscriptionResourceTypes(subscription);
@@ -109,5 +114,6 @@ ReadOnlySubscriptionView.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string.isRequired,
+    storeInterDependentState: PropTypes.func,
     className: PropTypes.string
 };

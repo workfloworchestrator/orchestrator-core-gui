@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import "react-select/dist/react-select.css";
-import Select from "react-select";
 import {isEmpty, stop} from "../utils/Utils";
-import "./ContactPersons.css";
 import {validEmailRegExp} from "../validations/Subscriptions";
-import {organisationContactsKey} from "./OrganisationSelect";
+import {organisationContactsKey, organisationNameKey} from "./OrganisationSelect";
+import Autocomplete from "./Autocomplete";
+import scrollIntoView from "scroll-into-view";
+
+import "react-select/dist/react-select.css";
+import "./ContactPersons.css";
 
 export default class ContactPersons extends React.PureComponent {
 
@@ -14,18 +16,15 @@ export default class ContactPersons extends React.PureComponent {
         super(props, context);
         this.state = {
             errors: {},
-            contactOptions: []
+            displayAutocomplete: {},
+            filteredSuggestions: [],
+            selectedItem: -1
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.interDependentState) {
-            const contacts = nextProps.interDependentState[organisationContactsKey];
-            if (contacts) {
-                this.setState({contactOptions: contacts.map(contact => {
-                    return {value: contact.name, label: contact.name, contact: contact};
-                })});
-            }
+        if (nextProps.interDependentState[organisationNameKey] !== this.props.interDependentState[organisationNameKey]) {
+            this.props.onChange([{email: "", name: "", phone: ""}]);
         }
     };
 
@@ -39,20 +38,30 @@ export default class ContactPersons extends React.PureComponent {
 
     onChangeInternal = (name, index) => e => {
         const persons = [...this.props.persons];
-        persons[index][name] = e.target.value;
+        const value = e.target.value;
+        persons[index][name] = value;
         this.props.onChange(persons);
-    };
 
-    onChangeOptionInternal = (name, index) => option => {
-        const persons = [...this.props.persons];
-        debugger;
-        persons[index][name] = option.value;
-        this.props.onChange(persons);
+        if (name !== "name") {
+            this.setState({displayAutocomplete: {}, selectedItem: -1});
+        } else {
+            const suggestions = this.props.interDependentState[organisationContactsKey] || [];
+            const filteredSuggestions = isEmpty(value) ? [] : suggestions
+                .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
+                .filter(item => !persons.some(person => person.email === item.email));
+            const newDisplayAutoCompleteState = {};
+            newDisplayAutoCompleteState[index] = !isEmpty(filteredSuggestions);
+            this.setState({
+                displayAutocomplete: newDisplayAutoCompleteState,
+                filteredSuggestions: filteredSuggestions,
+                selectedItem: -1
+            });
+        }
     };
 
     addPerson = () => {
         const persons = [...this.props.persons];
-        persons.push({email: "", name: "", tel: ""});
+        persons.push({email: "", name: "", phone: ""});
         this.props.onChange(persons);
     };
 
@@ -63,54 +72,92 @@ export default class ContactPersons extends React.PureComponent {
         this.props.onChange(persons);
     };
 
-    renderNameField = (person, index) => {
-        const {contactOptions} = this.state;
-        if (isEmpty(contactOptions)) {
-            return <input type="text"
-                          onChange={this.onChangeInternal("name", index)}
-                          value={person.name || ""}/>
-        }
-        return <Select.Creatable className="contact-persons-name"
-            onChange={this.onChangeOptionInternal("name", index)}
-            options={contactOptions}
-            value={person.name || ""}
-            searchable={true}
-            placeholder="Search and select a contact person..."
-            clearable={false}
-            multi={false}
-        />
+    itemSelected = (item, personIndex) => {
+        const persons = [...this.props.persons];
+        persons[personIndex].name = item.name || "";
+        persons[personIndex].email = item.email || "";
+        persons[personIndex].phone = item.phone || "";
+        this.props.onChange(persons);
+        this.setState({displayAutocomplete: {}, selectedItem: -1});
+        scrollIntoView(this);
     };
 
-    renderPerson = (person, index, errors) => <section className="person" key={index}>
-        <div className="wrapper">
-            {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
-            {this.renderNameField(person, index)}
-        </div>
-        <div className="wrapper">
-            {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
-            <input type="email"
-                   onChange={this.onChangeInternal("email", index)}
-                   onBlur={this.validateEmail(index)}
-                   value={person.email || ""}/>
-            {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
-        </div>
-        <div className="wrapper">
-            {index === 0 && <label>{I18n.t("contact_persons.tel")}</label>}
-            <div className="tel">
-                <input type="tel"
-                       onChange={this.onChangeInternal("tel", index)}
-                       value={person.tel || ""}/>
-                <i className={`fa fa-minus ${index === 0 ? "disabled" : "" }`} onClick={this.removePerson(index)}></i>
+    onAutocompleteKeyDown = personIndex => e => {
+        const {selectedItem, filteredSuggestions} = this.state;
+        if (isEmpty(filteredSuggestions)) {
+            return;
+        }
+        if (e.keyCode === 40 && selectedItem < (filteredSuggestions.length - 1)) {//keyDown
+            stop(e);
+            this.setState({selectedItem: (selectedItem + 1)});
+        }
+        if (e.keyCode === 38 && selectedItem >= 0) {//keyUp
+            stop(e);
+            this.setState({selectedItem: (selectedItem - 1)});
+        }
+        if (e.keyCode === 13) {//enter
+            if (selectedItem >= 0) {
+                stop(e);
+                this.setState({selectedItem: -1}, () => this.itemSelected(filteredSuggestions[selectedItem], personIndex));
+            }
+        }
+        if (e.keyCode === 27) {//escape
+            stop(e);
+            this.setState({selectedPerson: -1, displayAutocomplete: {}});
+        }
+
+    };
+
+    onBlurAutoComplete = e => {
+        stop(e);
+        setTimeout(() => this.setState({displayAutocomplete: {}}), 350);
+    };
+
+
+    renderPerson = (person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) =>
+        <section className="person" key={index}>
+            <div className="wrapper autocomplete-container" tabIndex="1"
+                 onBlur={this.onBlurAutoComplete}>
+                {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
+                <input type="text"
+                       onChange={this.onChangeInternal("name", index)}
+                       value={person.name || ""}
+                       onKeyDown={this.onAutocompleteKeyDown(index)}
+                />
+                {displayAutocomplete[index] && <Autocomplete query={person.name}
+                                                             className={index === 0 ? "" : "child"}
+                                                             itemSelected={this.itemSelected}
+                                                             selectedItem={selectedItem}
+                                                             suggestions={filteredSuggestions}
+                                                             personIndex={index}/>}
             </div>
-        </div>
-    </section>;
+            <div className="wrapper">
+                {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
+                <input type="email"
+                       onChange={this.onChangeInternal("email", index)}
+                       onBlur={this.validateEmail(index)}
+                       value={person.email || ""}/>
+                {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
+            </div>
+            <div className="wrapper">
+                {index === 0 && <label>{I18n.t("contact_persons.phone")}</label>}
+                <div className="tel">
+                    <input type="tel"
+                           onChange={this.onChangeInternal("phone", index)}
+                           value={person.phone || ""}/>
+                    <i className={`fa fa-minus ${index === 0 ? "disabled" : "" }`}
+                       onClick={this.removePerson(index)}></i>
+                </div>
+            </div>
+        </section>;
 
     render() {
         const {persons} = this.props;
-        const {errors} = this.state;
+        const {errors, displayAutocomplete, selectedItem, filteredSuggestions} = this.state;
         return (
             <section className="contact-persons">
-                {persons.map((person, index) => this.renderPerson(person, index, errors))}
+                {persons.map((person, index) =>
+                    this.renderPerson(person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem))}
                 <div className="add-person"><i className="fa fa-plus" onClick={this.addPerson}></i></div>
             </section>
         );

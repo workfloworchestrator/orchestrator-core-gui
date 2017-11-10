@@ -15,8 +15,9 @@ export default class TerminateSubscription extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactPersons: [{email: "", name: "", tel: ""}],
-            processing: false
+            contactPersons: [{email: "", name: "", phone: ""}],
+            processing: false,
+            interDependentState: {}
         };
     }
 
@@ -38,6 +39,11 @@ export default class TerminateSubscription extends React.Component {
         </section>);
     };
 
+    storeInterDependentState = (name, value) => {
+        const interDependentState = {...this.state.interDependentState};
+        interDependentState[name] = value;
+        this.setState({interDependentState: interDependentState});
+    };
 
     submit = () => {
         this.setState({processing: true});
@@ -64,13 +70,15 @@ export default class TerminateSubscription extends React.Component {
                     <h1>{I18n.t("subscription.terminate")}</h1>
                     <section className="form-step">
                         <ReadOnlySubscriptionView subscriptionId={subscriptionId}
-                                                  products={products} organisations={organisations}/>
+                                                  products={products} organisations={organisations}
+                                                  storeInterDependentState={this.storeInterDependentState}/>
                     </section>
                     <section className="form-step">
                         <section className="form-divider">
                             {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
                             {<em>{I18n.t("process.contact_persons")}</em>}
-                            <ContactPersons persons={contactPersons} onChange={this.changeUserInput}/>
+                            <ContactPersons persons={contactPersons} onChange={this.changeUserInput}
+                                            interDependentState={this.state.interDependentState}/>
                         </section>
                     </section>
                     {this.renderButtons()}

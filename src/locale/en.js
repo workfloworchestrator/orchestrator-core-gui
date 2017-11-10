@@ -281,7 +281,7 @@ I18n.translations.en = {
     contact_persons: {
         email: "Email",
         name: "Name",
-        tel: "Phone number",
+        phone: "Phone number",
         invalid_email: "Invalid email"
     },
     clipboard: {

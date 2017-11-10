@@ -205,7 +205,7 @@ export default class UserInputForm extends React.Component {
                                       product={userInput.value}/>;
             case "contact_persons" :
                 return <ContactPersons
-                    persons={isEmpty(userInput.value) ? [{email: "", name: "", tel: ""}] : userInput.value}
+                    persons={isEmpty(userInput.value) ? [{email: "", name: "", phone: ""}] : userInput.value}
                     interDependentState={this.state.interDependentState}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :

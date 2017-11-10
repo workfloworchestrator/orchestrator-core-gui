@@ -5,12 +5,14 @@ import {contacts} from "../api"
 import "react-select/dist/react-select.css";
 
 export const organisationContactsKey = "organisation-contacts";
+export const organisationNameKey = "organisation-name";
 
 export default function OrganisationSelect({onChange, storeInterDependentState, organisation, organisations, disabled}) {
 
     return (
         <Select onChange={option => {
                     onChange(option);
+                    storeInterDependentState(organisationNameKey, option ? option.value : "");
                     if (option && option.value) {
                         contacts(option.value).then(result => storeInterDependentState(organisationContactsKey, result))
                     }
