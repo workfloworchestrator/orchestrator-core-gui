@@ -28,6 +28,11 @@ export default class ContactPersons extends React.PureComponent {
         }
     };
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.persons.length + 1 === this.props.persons.length) {
+            this.lastPersonInput.focus();
+        }
+    }
 
     validateEmail = index => e => {
         const valid = validEmailRegExp.test(e.target.value);
@@ -79,7 +84,9 @@ export default class ContactPersons extends React.PureComponent {
         persons[personIndex].phone = item.phone || "";
         this.props.onChange(persons);
         this.setState({displayAutocomplete: {}, selectedItem: -1});
-        scrollIntoView(this);
+        if (this.personInput) {
+            setTimeout(scrollIntoView(this.personInput), 150);
+        }
     };
 
     onAutocompleteKeyDown = personIndex => e => {
@@ -98,7 +105,7 @@ export default class ContactPersons extends React.PureComponent {
         if (e.keyCode === 13) {//enter
             if (selectedItem >= 0) {
                 stop(e);
-                this.setState({selectedItem: -1}, () => this.itemSelected(filteredSuggestions[selectedItem], personIndex));
+                this.itemSelected(filteredSuggestions[selectedItem], personIndex);
             }
         }
         if (e.keyCode === 27) {//escape
@@ -114,22 +121,30 @@ export default class ContactPersons extends React.PureComponent {
     };
 
 
-    renderPerson = (person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) =>
-        <section className="person" key={index}>
+    renderPerson = (total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
+        const displayAutocompleteInstance = displayAutocomplete[index];
+        return <section className="person" key={index}>
             <div className="wrapper autocomplete-container" tabIndex="1"
                  onBlur={this.onBlurAutoComplete}>
                 {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
-                <input type="text"
+                <input ref={ref => {
+                    if (displayAutocompleteInstance) {
+                        this.personInput = ref;
+                    } else if (total - 1 === index) {
+                        this.lastPersonInput = ref;
+                    }}
+                }
+                       type="text"
                        onChange={this.onChangeInternal("name", index)}
                        value={person.name || ""}
                        onKeyDown={this.onAutocompleteKeyDown(index)}
                 />
-                {displayAutocomplete[index] && <Autocomplete query={person.name}
-                                                             className={index === 0 ? "" : "child"}
-                                                             itemSelected={this.itemSelected}
-                                                             selectedItem={selectedItem}
-                                                             suggestions={filteredSuggestions}
-                                                             personIndex={index}/>}
+                {displayAutocompleteInstance && <Autocomplete query={person.name}
+                                                              className={index === 0 ? "" : "child"}
+                                                              itemSelected={this.itemSelected}
+                                                              selectedItem={selectedItem}
+                                                              suggestions={filteredSuggestions}
+                                                              personIndex={index}/>}
             </div>
             <div className="wrapper">
                 {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
@@ -149,7 +164,8 @@ export default class ContactPersons extends React.PureComponent {
                        onClick={this.removePerson(index)}></i>
                 </div>
             </div>
-        </section>;
+        </section>
+    };
 
     render() {
         const {persons} = this.props;
@@ -157,7 +173,7 @@ export default class ContactPersons extends React.PureComponent {
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>
-                    this.renderPerson(person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem))}
+                    this.renderPerson(persons.length, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem))}
                 <div className="add-person"><i className="fa fa-plus" onClick={this.addPerson}></i></div>
             </section>
         );

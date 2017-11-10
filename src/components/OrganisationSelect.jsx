@@ -3,28 +3,43 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import {contacts} from "../api"
 import "react-select/dist/react-select.css";
+import {isEmpty} from "../utils/Utils";
 
 export const organisationContactsKey = "organisation-contacts";
 export const organisationNameKey = "organisation-name";
 
-export default function OrganisationSelect({onChange, storeInterDependentState, organisation, organisations, disabled}) {
+export default class OrganisationSelect extends React.PureComponent {
 
-    return (
-        <Select onChange={option => {
-                    onChange(option);
-                    storeInterDependentState(organisationNameKey, option ? option.value : "");
-                    if (option && option.value) {
-                        contacts(option.value).then(result => storeInterDependentState(organisationContactsKey, result))
-                    }
-                }}
-                options={organisations.map(org => {
-                    return {value: org.uuid, label: org.name};
-                })}
-                value={organisation}
-                searchable={true}
-                placeholder="Search and select a customer..."
-                disabled={disabled || organisations.length === 0}/>
-    );
+    componentDidMount() {
+        const {organisation, storeInterDependentState} = this.props;
+        this.fetchContacts(organisation, storeInterDependentState);
+    }
+
+    fetchContacts = (organisation, storeInterDependentState) => {
+        if (!isEmpty(organisation)) {
+            storeInterDependentState(organisationNameKey, organisation);
+            contacts(organisation).then(result => storeInterDependentState(organisationContactsKey, result))
+        }
+    };
+
+    render() {
+        const {onChange, storeInterDependentState, organisation, organisations, disabled} = this.props;
+        return (
+            <Select onChange={option => {
+                onChange(option);
+                if (option && option.value) {
+                    this.fetchContacts(option.value, storeInterDependentState);
+                }
+            }}
+                    options={organisations.map(org => {
+                        return {value: org.uuid, label: org.name};
+                    })}
+                    value={organisation}
+                    searchable={true}
+                    placeholder="Search and select a customer..."
+                    disabled={disabled || organisations.length === 0}/>
+        );
+    }
 }
 
 OrganisationSelect.propTypes = {
