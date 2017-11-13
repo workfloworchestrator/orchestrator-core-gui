@@ -138,6 +138,7 @@ export default class ContactPersons extends React.PureComponent {
                        onChange={this.onChangeInternal("name", index)}
                        value={person.name || ""}
                        onKeyDown={this.onAutocompleteKeyDown(index)}
+                       placeholder={I18n.t("contact_persons.namePlaceholder")}
                 />
                 {displayAutocompleteInstance && <Autocomplete query={person.name}
                                                               className={index === 0 ? "" : "child"}

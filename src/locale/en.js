@@ -282,7 +282,8 @@ I18n.translations.en = {
         email: "Email",
         name: "Name",
         phone: "Phone number",
-        invalid_email: "Invalid email"
+        invalid_email: "Invalid email",
+        namePlaceholder: "Search and add contact persons..."
     },
     clipboard: {
         copied: "Copied!",
