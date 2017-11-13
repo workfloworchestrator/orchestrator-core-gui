@@ -35,13 +35,13 @@ export default class ProcessDetail extends React.PureComponent {
                  * don't enforce anything.
                  * TODO
                  */
+
                 const {configuration, currentUser, organisations, products} = this.props;
 
                 processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
                 processInstance.productName = productNameById(processInstance.product, products);
 
                 const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
-
                 let stepUserInput = [];
                 if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
                     const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");

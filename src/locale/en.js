@@ -245,7 +245,9 @@ I18n.translations.en = {
         resource_types: "Subscription Resource Types",
         product_title: "Product",
         process_link: "Process",
+        notFoundRelatedObjects: "Subscription resource references NOT found / deleted",
         process_link_text: "Show related process / workflow",
+        no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
         product: {
@@ -270,6 +272,7 @@ I18n.translations.en = {
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
         no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions.",
+        no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems that are deleted.",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated."
     },

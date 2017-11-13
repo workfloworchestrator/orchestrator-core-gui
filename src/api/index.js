@@ -1,6 +1,9 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
-import {ims_circuit_id, ims_port_id, parent_subscriptions, port_subscription_id} from "../validations/Subscriptions";
+import {
+    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
+    port_subscription_id
+} from "../validations/Subscriptions";
 
 const apiPath = "/api/";
 
@@ -13,15 +16,16 @@ function apiUrl(path) {
 let started = 0;
 let ended = 0;
 
-function validateResponse(showErrorDialog, stopSpinner) {
+function validateResponse(showErrorDialog) {
     return res => {
-        if (stopSpinner) {
-            ++ended;
-            if (started === ended) {
-                spinner.stop();
-            }
+        ++ended;
+        if (started <= ended) {
+            spinner.stop();
         }
         if (!res.ok) {
+            started = ended = 0;
+            spinner.stop();
+
             if (res.type === "opaqueredirect") {
                 setTimeout(() => window.location.reload(true), 100);
                 return res;
@@ -41,7 +45,7 @@ function validateResponse(showErrorDialog, stopSpinner) {
     };
 }
 
-function validFetch(path, options, headers = {}, showErrorDialog = true, showSpinner = true) {
+function validFetch(path, options, headers = {}, showErrorDialog = true) {
     const access_token = localStorage.getItem('access_token');
     const contentHeaders = {
         "Accept": "application/json",
@@ -53,24 +57,15 @@ function validFetch(path, options, headers = {}, showErrorDialog = true, showSpi
         credentials: "same-origin",
         redirect: "manual",
     });
-    if (showSpinner) {
-        spinner.start();
-        ++started;
-    }
+    spinner.start();
+    ++started;
 
     const targetUrl = apiUrl(path);
-    return fetch(targetUrl, fetchOptions)
-        .then(validateResponse(showErrorDialog, showSpinner))
-        .catch(err => {
-            started = ended = 0;
-            spinner.stop();
-            throw err;
-        })
-
+    return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog))
 }
 
-function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true, showSpinner = true) {
-    return validFetch(path, options, headers, showErrorDialog, showSpinner)
+function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
+    return validFetch(path, options, headers, showErrorDialog)
         .then(res => result ? res.json() : {});
 }
 
@@ -141,11 +136,9 @@ export function imsService(type, identifier) {
             promise = Promise.resolve({})
     }
     return promise
-    // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
-        .then(json => {
-            return {type: type, json: json}
-        })
-        .catch(err => Promise.resolve({type: "absent", json: {}}));
+        // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
+        .then(json => ({type: type, json: json}))
+        .catch(err => Promise.resolve({type: absent, requestedType: type, identifier: identifier}));
 }
 
 export function processIdFromSubscriptionId(subscriptionId) {
@@ -220,7 +213,7 @@ export function validation(productId) {
 }
 
 export function contacts(organisationId) {
-    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true, true)
+    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true)
         .catch(err => Promise.resolve([]));
 }
 

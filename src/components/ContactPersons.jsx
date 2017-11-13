@@ -23,7 +23,9 @@ export default class ContactPersons extends React.PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.interDependentState[organisationNameKey] !== this.props.interDependentState[organisationNameKey]) {
+        const newOrg = nextProps.interDependentState[organisationNameKey];
+        const currentOrg = this.props.interDependentState[organisationNameKey];
+        if (!isEmpty(newOrg) && !(isEmpty(currentOrg)) && newOrg !== currentOrg) {
             this.props.onChange([{email: "", name: "", phone: ""}]);
         }
     };

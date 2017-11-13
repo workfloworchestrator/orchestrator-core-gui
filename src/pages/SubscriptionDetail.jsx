@@ -14,6 +14,7 @@ import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 import {
+    absent,
     hasResourceType,
     ims_circuit_id,
     ims_port_id,
@@ -44,6 +45,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
+            notFoundRelatedObjects: []
         };
     }
 
@@ -63,11 +65,12 @@ export default class SubscriptionDetail extends React.PureComponent {
                     .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
                 if (resourceTypes.some(rt => rt.resource_type === ims_circuit_id) &&
                     !resourceTypes.some(rt => rt.resource_type === nms_service_id)) {
-                    //add the subscription where this subscription is used as a MSP (or SSP)
+                    //add the parent subscriptions where this subscription is used as a MSP (or SSP)
                     promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
                 }
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(2);
+                    const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
                     let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id).map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
                     if (subscription_used) {
@@ -85,8 +88,11 @@ export default class SubscriptionDetail extends React.PureComponent {
                         return true;
                     });
                     this.setState({
-                        subscriptionProcessLink: result[0], product: result[1],
-                        imsServices: imsServices, subscriptions: subscriptions,
+                        subscriptionProcessLink: result[0],
+                        product: result[1],
+                        imsServices: imsServices,
+                        subscriptions: subscriptions,
+                        notFoundRelatedObjects: notFoundRelatedObjects,
                         isTerminatable: isTerminatable(subscription, subscriptions)
                     });
                 })
@@ -271,27 +277,31 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderProcessLink = subscriptionProcessLink => {
-        if (isEmpty(subscriptionProcessLink)) {
-            return null;
-        }
+        const displaySubscriptionProcessLink = !isEmpty(subscriptionProcessLink);
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
             <div className="form-container-parent">
                 <section className="form-container">
                     <section className="process-link">
+                        {displaySubscriptionProcessLink &&
                         <NavLink to={`/process/${subscriptionProcessLink.pid}`} className="button green">
-                            <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text")}</NavLink>
+                            <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text")}</NavLink>}
+                        {!displaySubscriptionProcessLink &&
+                        <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>}
                     </section>
                 </section>
             </div>
         </section>
     };
 
-    renderTerminateLink = (subscription, isTerminatable, subscriptions, product) => {
+    renderTerminateLink = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects) => {
         if (isEmpty(product)) {
             return null;
         }
         let reason = null;
+        if (!isEmpty(notFoundRelatedObjects)) {
+            reason = I18n.t("subscription.no_termination_deleted_related_objects");
+        }
         if (!hasResourceType(subscription, "nms_service_id") && subscriptions.length > 0) {
             reason = I18n.t("subscription.no_termination_parent_subscription");
         }
@@ -311,19 +321,38 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderDetails = (subscription, isTerminatable, subscriptions, product) => <section className="details">
-        <h3>{I18n.t("subscription.subscription")}</h3>
-        <div className="form-container-parent">
-            {this.renderSubscriptionDetail(subscription, 0, false)}
-            {this.renderTerminateLink(subscription, isTerminatable, subscriptions, product)}
-        </div>
-    </section>;
+
+    renderNotFoundRelatedObject = notFoundRelatedObjects => {
+        if (isEmpty(notFoundRelatedObjects)) {
+            return null;
+        }
+        return <section className="not-found-related-objects">
+            <h3>{I18n.t("subscription.notFoundRelatedObjects")}</h3>
+            <div className="form-container-parent">
+                <section className="form-container">
+                    {notFoundRelatedObjects.map((obj, index) => <section key={index}>
+                        <label className="title">{obj.requestedType}</label>
+                        <input type="text" readOnly={true} value={obj.identifier}/>
+                    </section>)}
+                </section>
+            </div>
+        </section>;
+    };
+
+    renderDetails = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects) =>
+        <section className="details">
+            <h3>{I18n.t("subscription.subscription")}</h3>
+            <div className="form-container-parent">
+                {this.renderSubscriptionDetail(subscription, 0, false)}
+                {this.renderTerminateLink(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects)}
+            </div>
+        </section>;
 
     render() {
         const {
             loaded, notFound, subscription, subscriptionProcessLink, product, imsServices,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion
+            confirmationDialogQuestion, notFoundRelatedObjects
         } = this.state;
         const {organisations} = this.props;
         const renderNotFound = loaded && notFound;
@@ -335,8 +364,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     confirm={confirmationDialogAction}
                                     question={confirmationDialogQuestion}/>
 
-                {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product)}
+                {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects)}
                 {renderContent && this.renderProcessLink(subscriptionProcessLink)}
+                {renderContent && this.renderNotFoundRelatedObject(notFoundRelatedObjects)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}
                 {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}

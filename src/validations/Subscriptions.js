@@ -26,3 +26,4 @@ export const ims_circuit_id = "ims_circuit_id";
 export const ims_port_id = "ims_port_id";
 export const nms_service_id = "nms_service_id";
 export const parent_subscriptions = "parent_subscriptions";
+export const absent = "absent";
