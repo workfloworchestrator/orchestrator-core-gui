@@ -218,6 +218,11 @@ I18n.translations.en = {
         RMSP1G: "RMSP1G",
         SSP1G: "SSP1G",
         SSP10G: "SSP10G",
+        initial: "Initial",
+        provisioning: "Provisioning",
+        active: "Active",
+        disabled: "Disabled",
+        terminated: "Terminated"
     },
     subscriptions: {
         customer_name: "Customer",

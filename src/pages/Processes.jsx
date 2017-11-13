@@ -114,7 +114,6 @@ export default class Processes extends React.PureComponent {
                 searchable.map(search => process[search].toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
-
         }
         processes = processes.filter(process => {
             const assigneeFilter = filterAttributesAssignee.find(attr => attr.name === process.assignee);

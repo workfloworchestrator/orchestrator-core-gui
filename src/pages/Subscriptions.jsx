@@ -19,6 +19,13 @@ export default class Subscriptions extends React.PureComponent {
             subscriptions: [],
             filteredSubscriptions: [],
             filterAttributesProduct: [],
+            filterAttributesStatus: [
+                {name: "initial", selected: true, count: 0},
+                {name: "provisioning", selected: true, count: 0},
+                {name: "active", selected: true, count: 0},
+                {name: "disabled", selected: true, count: 0},
+                {name: "terminated", selected: true, count: 0}
+            ],
             query: "",
             sorted: {name: "status", descending: false}
         };
@@ -42,10 +49,14 @@ export default class Subscriptions extends React.PureComponent {
                     count: results.filter(result => result.product_tag === product.tag).length
                 })
             });
+            const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
+            newFilterAttributesStatus.forEach(attr => attr.count = results
+                .filter(sub => sub.status === attr.name).length);
 
             this.setState({
                 subscriptions: results, filteredSubscriptions: results,
-                filterAttributesProduct: newFilterAttributesProduct.filter(attr => attr.count > 0)
+                filterAttributesProduct: newFilterAttributesProduct.filter(attr => attr.count > 0),
+                filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
             })
         });
 
@@ -57,7 +68,7 @@ export default class Subscriptions extends React.PureComponent {
         this.delayedSearch(query);
     };
 
-    doSearchAndSortAndFilter = (query, subscriptions, sorted, filterAttributesProduct) => {
+    doSearchAndSortAndFilter = (query, subscriptions, sorted, filterAttributesProduct, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable = ["customer_name", "description", "product_name", "status", "sub_name"];
@@ -71,17 +82,22 @@ export default class Subscriptions extends React.PureComponent {
             const productFilter = filterAttributesProduct.find(attr => attr.name === subscription.product_tag);
             return productFilter ? productFilter.selected : true;
         });
+        subscriptions = subscriptions.filter(subscription => {
+            const statusFilter = filterAttributesStatus.find(attr => attr.name === subscription.status);
+            return statusFilter ? statusFilter.selected : true;
+        });
+
         subscriptions.sort(this.sortBy(sorted.name));
         return sorted.descending ? subscriptions.reverse() : subscriptions;
     };
 
     delayedSearch = debounce(query => {
         const subscriptions = [...this.state.subscriptions];
-        const {filterAttributesProduct} = this.state;
+        const {filterAttributesProduct, filterAttributesStatus} = this.state;
 
         this.setState({
             query: query,
-            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, this.state.sorted, filterAttributesProduct)
+            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, this.state.sorted, filterAttributesProduct, filterAttributesStatus)
         });
     }, 250);
 
@@ -105,16 +121,23 @@ export default class Subscriptions extends React.PureComponent {
     };
 
     filter = item => {
-        const {subscriptions, filterAttributesProduct, sorted, query} = this.state;
+        const {subscriptions, filterAttributesProduct, filterAttributesStatus, sorted, query} = this.state;
         const newFilterAttributesProduct = [...filterAttributesProduct];
         newFilterAttributesProduct.forEach(attr => {
             if (attr.name === item.name) {
                 attr.selected = !attr.selected;
             }
         });
+        const newFilterAttributesStatus = [...filterAttributesStatus];
+        newFilterAttributesStatus.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
         this.setState({
-            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, sorted, newFilterAttributesProduct),
-            filterAttributesProduct: newFilterAttributesProduct
+            filteredSubscriptions: this.doSearchAndSortAndFilter(query, subscriptions, sorted, newFilterAttributesProduct, newFilterAttributesStatus),
+            filterAttributesProduct: newFilterAttributesProduct,
+            filterAttributesStatus: newFilterAttributesStatus
         });
     };
 
@@ -170,7 +193,7 @@ export default class Subscriptions extends React.PureComponent {
     }
 
     render() {
-        const {filteredSubscriptions, filterAttributesProduct, query, sorted} = this.state;
+        const {filteredSubscriptions, filterAttributesProduct, filterAttributesStatus, query, sorted} = this.state;
         const {organisations} = this.props;
         return (
             <div className="mod-subscriptions">
@@ -179,6 +202,9 @@ export default class Subscriptions extends React.PureComponent {
                         <FilterDropDown items={filterAttributesProduct}
                                         filterBy={this.filter}
                                         label={I18n.t("subscriptions.product")}/>
+                        <FilterDropDown items={filterAttributesStatus}
+                                        filterBy={this.filter}
+                                        label={I18n.t("subscriptions.status")}/>
                         <section className="search">
                             <input className="allowed"
                                    placeholder={I18n.t("subscriptions.searchPlaceHolder")}
