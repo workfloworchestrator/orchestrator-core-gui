@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Highlight from "react-highlight";
+import JSONPretty from 'react-json-pretty';
 
 import "./ValidationsExplain.css";
-import "highlight.js/styles/default.css";
 
 export default class ValidationsExplain extends React.PureComponent {
 
@@ -15,7 +14,8 @@ export default class ValidationsExplain extends React.PureComponent {
 
     explanation = () => <section className="explanation">
         <h3>Explanation</h3>
-        <p>The Product Configuration in <span>core-db</span> must match the corresponding workflow implementation for that Product.</p>
+        <p>The Product Configuration in <span>core-db</span> must match the corresponding workflow implementation for
+            that Product.</p>
         <p>Processes described / implemented in workflows that result in a subscription will populate
             the subscription instance values. These subscription instance values are linked to Resource types which
             are configured in the Resource Blocks of the Product.</p>
@@ -23,8 +23,10 @@ export default class ValidationsExplain extends React.PureComponent {
 
     explanationSubscriptions = () => <section className="explanation">
         <h3>Explanation</h3>
-        <p>Subscriptions have <span className="code">subscription_instances</span> and <span className="code">subscription_instance_values</span>.</p>
-        <p>Each subscription with the status <span className="code">active</span> must have the correct instances and instance_values according
+        <p>Subscriptions have <span className="code">subscription_instances</span> and <span className="code">subscription_instance_values</span>.
+        </p>
+        <p>Each subscription with the status <span className="code">active</span> must have the correct instances and
+            instance_values according
             to the product definition.</p>
     </section>;
 
@@ -42,27 +44,29 @@ export default class ValidationsExplain extends React.PureComponent {
     detailsSubscriptions = () => <section className="details">
         <h3>Details</h3>
         <p>The Subscription validation consist of each Subscription validated against the <span className="code">workflow_subscription_mapping </span>
-            of the Workflow linked to the product of the Subscription. Each invalid Subscription - due to lacking <span className="code">subscription_instance_values </span>
+            of the Workflow linked to the product of the Subscription. Each invalid Subscription - due to lacking <span
+                className="code">subscription_instance_values </span>
             - is listed per workflow.</p>
     </section>;
 
-    example = () => <section className="example">
-        <h3>Example</h3>
-        <p>A workflow with the following <span className="code">workflow_subscription_mapping</span>:</p>
-        <Highlight className="JSON">
-            {JSON.stringify([{
-                "Ethernet Circuit": [
-                    {"nms_service_id": "service_id", "servicespeed": "capacity"}
-                ]
-            }],null, 2)}
-        </Highlight>
-        <p>Will at a minimal need to populate the state variables <span>service_id</span> and <span>capacity </span>
-            during the execution of the various Process steps.</p>
-        <p>The corresponding Product configuration of this workflow must at a minimal
-            contain the Resource Block <span>Ethernet Circuit</span> with the Resource Types
-            <span> nms_service_id</span> and <span>servicespeed</span>
-        </p>
-    </section>;
+    example = () => {
+        const obj =  {
+            "Ethernet Circuit": [
+                {"nms_service_id": "service_id", "servicespeed": "capacity"}
+            ]
+        };
+        return <section className="example">
+            <h3>Example</h3>
+            <p>A workflow with the following <span className="code">workflow_subscription_mapping</span>:</p>
+            <JSONPretty id="json-pretty" json={obj}></JSONPretty>
+            <p>Will at a minimal need to populate the state variables <span>service_id</span> and <span>capacity </span>
+                during the execution of the various Process steps.</p>
+            <p>The corresponding Product configuration of this workflow must at a minimal
+                contain the Resource Block <span>Ethernet Circuit</span> with the Resource Types
+                <span> nms_service_id</span> and <span>servicespeed</span>
+            </p>
+        </section>
+    }
 
     render() {
         const {close, isVisible, isWorkFlows} = this.props;

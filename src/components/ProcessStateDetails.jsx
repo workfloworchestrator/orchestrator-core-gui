@@ -1,8 +1,6 @@
 import React from "react";
-import "./ProcessStateDetails.css";
-import Highlight from "react-highlight";
-import "highlight.js/styles/default.css";
 import PropTypes from "prop-types";
+import JSONPretty from 'react-json-pretty';
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
@@ -12,6 +10,8 @@ import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
+
+import "./ProcessStateDetails.css";
 
 export default class ProcessStateDetails extends React.PureComponent {
 
@@ -45,9 +45,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>
-                <Highlight className="JSON">
-                    {json}
-                </Highlight>
+                <JSONPretty id="json-pretty" json={process}></JSONPretty>
             </section>
         )
 
