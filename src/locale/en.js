@@ -128,6 +128,7 @@ I18n.translations.en = {
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the lichtpad and any child SSP's subscriptions",
         noc_remove_lichtpad_confirmation_info: "Are the lichtpad of the subscription and any child SSP's subscriptions removed?",
+        noc_remove_port_confirmation: "Are the port of the subscription removed from the live network?",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
