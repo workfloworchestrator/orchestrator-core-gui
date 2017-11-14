@@ -137,6 +137,8 @@ export default class UserInputForm extends React.Component {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
+        } else if (type === "uuid") {
+            errors[name] = !/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/.test(value)
         } else if (type === "emails") {
             errors[name] = isEmpty(value);
         } else if (type === "nms_service_id") {
@@ -180,6 +182,7 @@ export default class UserInputForm extends React.Component {
             case "ssp_1_vlan" :
             case "ssp_2_vlan" :
             case "guid":
+            case "uuid":
             case "ims_free_port":
             case "port":
             case "ims_port_id":
