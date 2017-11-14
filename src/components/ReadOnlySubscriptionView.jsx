@@ -42,12 +42,16 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
         })
     }
 
-    renderSubscriptionChilds = (circuits, product) =>
-        <section className="details">
+    renderSubscriptionChilds = (circuits, product) => {
+        if (isEmpty(circuits)) {
+            return null;
+        }
+        return <section className="details">
             <h3>{I18n.t("terminate_subscription.subscription_childs", {product: product.name})}</h3>
             {circuits.map((subscription, index) =>
                 this.renderSingleSubscription(subscription, index === circuits.length - 1 ? "child last" : "child not-last"))}
         </section>;
+    };
 
 
     renderSingleSubscription = (subscription, className = "") =>
