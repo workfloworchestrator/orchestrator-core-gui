@@ -27,7 +27,6 @@ export default class FreePortSelect extends React.PureComponent {
     render() {
         const {freePorts, loading} = this.state;
         const {onChange, freePort, disabled, locationCode, interfaceType} = this.props;
-
         const noFreePortsAvailable = !loading && freePorts.length === 0;
         const placeholder = loading ? I18n.t("FreePortSelect.freePortsLoading", {interfaceType, location: locationCode})
             : noFreePortsAvailable ? I18n.t("FreePortSelect.noFreePortsPlaceholder") :
@@ -55,7 +54,7 @@ export default class FreePortSelect extends React.PureComponent {
 
 FreePortSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
-    freePort: PropTypes.object,
+    freePort: PropTypes.number,
     locationCode: PropTypes.string.isRequired,
     interfaceType: PropTypes.string.isRequired,
     disabled: PropTypes.bool
