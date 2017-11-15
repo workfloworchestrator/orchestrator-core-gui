@@ -1,7 +1,12 @@
 @import "../stylesheets/vars.scss";
 
 .free-port-select {
-    .warn {
-        color: $orange;
+    em.msg {
+        display: block;
+        margin-top: 15px;
+        font-size: 15px;
+        &.warn {
+            color: $orange;
+        }
     }
 }

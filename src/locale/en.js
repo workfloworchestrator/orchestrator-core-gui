@@ -328,7 +328,10 @@ I18n.translations.en = {
         leave: "Leave"
     },
     FreePortSelect: {
-        "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}"
+        "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}",
+        "freePortsLoading": "Hang on tight, the query for free ports with interface type {{interfaceType}} available at location {{location}} takes time...",
+        "noFreePortsPlaceholder": "No free ports available",
+        "selectPort": "Select a port"
     }
 };
 
