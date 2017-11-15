@@ -25,7 +25,7 @@ import {
     products,
     redirectToAuthorizationServer,
     reportError,
-    subscriptions_by_product_type
+    subscriptions_by_tag
 } from "../api";
 import "../locale/en";
 import "../locale/nl";
@@ -114,7 +114,7 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions_by_product_type("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
+                Promise.all([me(), organisations(), subscriptions_by_tag("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
                     const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({

@@ -86,8 +86,8 @@ export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptions_by_product_type(type) {
-    return fetchJson(`subscriptions/product_type/${type}`);
+export function subscriptions_by_tag(tag) {
+    return fetchJson(`subscriptions/tag/${tag}`);
 }
 
 export function organisations() {
