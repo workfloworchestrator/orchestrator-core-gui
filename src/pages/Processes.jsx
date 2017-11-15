@@ -12,6 +12,7 @@ import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {organisationNameByUuid, productNameById, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
+import {actionOptions} from "../validations/Processes";
 
 export default class Processes extends React.PureComponent {
 
@@ -199,55 +200,8 @@ export default class Processes extends React.PureComponent {
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
-        //TODO scope on the context of logged in-user
-        const details = {
-            icon: "fa fa-search-plus",
-            label: "details",
-            action: this.showProcess(process)
-        };
-        const userInput = {
-            icon: "fa fa-pencil-square-o",
-            label: "user_input",
-            action: this.showProcess(process)
-        };
-        const retry = {
-            icon: "fa fa-refresh",
-            label: "retry",
-            action: this.handleRetryProcess(process)
-        };
-        const _delete = {
-            icon: "fa fa-trash",
-            label: "delete",
-            action: this.handleDeleteProcess(process),
-            danger: true
-        };
-        const abort = {
-            icon: "fa fa-window-close",
-            label: "abort",
-            action: this.handleAbortProcess(process),
-            danger: true
-        };
-        let options = [];
-        const status = process.status;
-        switch (status) {
-            case "failed":
-                options = [details, retry, abort, _delete];
-                break;
-            case "aborted":
-                options = [details, _delete];
-                break;
-            case "running": //??
-                options = [];
-                break;
-            case "completed":
-                options = [details, _delete];
-                break;
-            case "suspended":
-                options = [userInput, abort, _delete];
-                break;
-            default :
-                throw new Error(`Unknown process status: ${status}`)
-        }
+        const options = actionOptions(process, this.showProcess(process), this.handleRetryProcess(process),
+            this.handleDeleteProcess(process), this.handleAbortProcess(process));
         return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
 

@@ -40,6 +40,16 @@
             }
         }
     }
+    section.process-actions {
+        display: flex;
+        padding-top: 25px;
+        a {
+            margin-left: 40px;
+            &:first-child {
+                margin-left: auto;
+            }
+        }
+    }
     section.header-info {
         display: flex;
         h3 {

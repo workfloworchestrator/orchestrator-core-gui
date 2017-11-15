@@ -8,9 +8,11 @@ import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
-import {subscriptionIdFromProcessId} from "../api/index";
+import {abortProcess, deleteProcess, retryProcess, subscriptionIdFromProcessId} from "../api/index";
 
 import "./ProcessDetail.css";
+import ConfirmationDialog from "../components/ConfirmationDialog";
+import {actionOptions} from "../validations/Processes";
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -23,7 +25,11 @@ export default class ProcessDetail extends React.PureComponent {
             selectedTab: "process",
             subscriptionProcessLink: {},
             loaded: false,
-            stepUserInput: []
+            stepUserInput: [],
+            confirmationDialogOpen: false,
+            confirmationDialogAction: () => this,
+            confirm: () => this,
+            confirmationDialogQuestion: "",
         };
     }
 
@@ -71,6 +77,70 @@ export default class ProcessDetail extends React.PureComponent {
         });
     };
 
+    handleDeleteProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.deleteConfirmation", {
+                name: process.productName,
+                customer: process.customerName
+            }), () =>
+                deleteProcess(process.id).then(() => {
+                    this.props.history.push(`/processes`);
+                    setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
+                })
+        );
+    };
+
+    handleAbortProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.abortConfirmation", {
+                name: process.productName,
+                customer: process.customerName
+            }), () =>
+                abortProcess(process.id).then(() => {
+                    this.props.history.push(`/processes`);
+                    setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
+                })
+        );
+    };
+
+    handleRetryProcess = process => e => {
+        stop(e);
+        this.confirmation(I18n.t("processes.retryConfirmation", {
+                name: process.productName,
+                customer: process.customerName
+            }), () =>
+                retryProcess(process.id).then(() => {
+                    this.props.history.push(`/processes`);
+                    setFlash(I18n.t("processes.flash.retry", {name: process.product_name}));
+                })
+        );
+    };
+
+    cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
+
+    confirmation = (question, action) => this.setState({
+        confirmationDialogOpen: true,
+        confirmationDialogQuestion: question,
+        confirmationDialogAction: () => {
+            this.cancelConfirmation();
+            action();
+        }
+    });
+
+
+    renderActions = process => {
+        const options = actionOptions(process, () => false, this.handleRetryProcess(process),
+            this.handleDeleteProcess(process), this.handleAbortProcess(process))
+            .filter(option => option.label !== "user_input" && option.label !== "details");
+        return <section className="process-actions">
+            {options.map((option, index) => <a key={index} className={`button ${option.danger ? " red" : " blue"}`}
+                                               onClick={option.action}>
+                {I18n.t(`processes.${option.label}`)}
+            </a>)}
+        </section>
+    };
+
+
     validSubmit = stepUserInput => {
         const {process} = this.state;
         resumeProcess(process.id, stepUserInput)
@@ -92,6 +162,7 @@ export default class ProcessDetail extends React.PureComponent {
 
         if (selectedTab === "process") {
             return <section className="card">
+                {this.renderActions(process)}
                 <ProcessStateDetails process={process} subscriptionProcessLink={subscriptionProcessLink}/>
             </section>;
         } else {
@@ -110,7 +181,7 @@ export default class ProcessDetail extends React.PureComponent {
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}
-                               process={process} />
+                               process={process}/>
             </section>;
         }
     };
@@ -122,13 +193,20 @@ export default class ProcessDetail extends React.PureComponent {
         </span>;
 
     render() {
-        const {loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcessLink} = this.state;
+        const {
+            loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcessLink,
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
+        } = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         const renderStepForm = renderContent && !isEmpty(stepUserInput);
         return (
             <div className="mod-process-detail">
+                <ConfirmationDialog isOpen={confirmationDialogOpen}
+                                    cancel={this.cancelConfirmation}
+                                    confirm={confirmationDialogAction}
+                                    question={confirmationDialogQuestion}/>
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>

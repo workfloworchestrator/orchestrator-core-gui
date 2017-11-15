@@ -369,8 +369,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 {renderContent && this.renderNotFoundRelatedObject(notFoundRelatedObjects)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}
-                {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}
                 {renderContent && this.renderServices(imsServices, organisations)}
+                {renderContent && this.renderSubscriptions(subscriptions, subscription.product_name)}
                 {renderNotFound &&
                 <section className="card not-found"><h1>{I18n.t("subscription.notFound")}</h1></section>}
             </div>
