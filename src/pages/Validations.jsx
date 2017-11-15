@@ -52,8 +52,11 @@ export default class Validations extends React.Component {
         this.setState({selectedTab: tab});
     };
 
-    renderSubscriptionValidations = (invalidSubscriptions, hideValidSubscriptionTypes) =>
-        <div className="subscriptions">
+    renderSubscriptionValidations = (invalidSubscriptions, hideValidSubscriptionTypes) => {
+        const filteredSubscriptiops = invalidSubscriptions
+            .filter(workflowSubscriptions =>
+                !(isEmpty(workflowSubscriptions.subscriptions) && hideValidSubscriptionTypes));
+        return <div className="subscriptions">
             <section className="header">
                 {this.renderExplain()}
                 <section className="options">
@@ -63,10 +66,7 @@ export default class Validations extends React.Component {
                 </section>
             </section>
             <section className="validations">
-                {invalidSubscriptions
-                    .filter(workflowSubscriptions =>
-                        !(isEmpty(workflowSubscriptions.subscriptions) && hideValidSubscriptionTypes))
-                    .map(ws =>
+                {filteredSubscriptiops.map(ws =>
                         <SubscriptionValidation history={this.props.history}
                                                 organisations={this.props.organisations}
                                                 products={this.props.products}
@@ -74,8 +74,11 @@ export default class Validations extends React.Component {
                                                 workflow={ws.name}
                                                 onChange={this.onSubscriptionsChange}
                                                 key={ws.name}/>)}
+                {isEmpty(filteredSubscriptiops) &&
+                    <div><em>{I18n.t("validations.no_subscriptions")}</em></div>}
             </section>
         </div>;
+    };
 
     renderWorkflowValidations = (validations, hideValid, validationsToShow) =>
         <div className="workflows">
