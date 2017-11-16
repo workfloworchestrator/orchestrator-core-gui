@@ -225,7 +225,7 @@ export default class UserInputForm extends React.Component {
             case "ieee_interface_type_for_product_tag":
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
-                                                              productTag={this.props.product.tag}/>;
+                                                              productId={this.props.product.value}/>;
             case "free_ports_for_location_code_and_interface_type":
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}

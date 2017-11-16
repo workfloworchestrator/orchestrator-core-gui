@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {ieeeInterfaceTypesForProductTag} from "../api";
+import {ieeeInterfaceTypesForProductId} from "../api/index";
 
 
 export default class IEEEInterfaceTypesForProductTagSelect extends React.PureComponent {
@@ -15,11 +15,9 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
         }
     }
 
-    componentWillMount() {
-        ieeeInterfaceTypesForProductTag(this.props.productTag).then(result =>
-            this.setState({interfaceTypes: result})
-        );
-    };
+    componentWillMount = () => ieeeInterfaceTypesForProductId(this.props.productId).then(result =>
+        this.setState({interfaceTypes: result})
+    );
 
     render() {
         const {interfaceTypes} = this.state;
@@ -41,6 +39,6 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
 IEEEInterfaceTypesForProductTagSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     interfaceType: PropTypes.string,
-    productTag: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
     disabled: PropTypes.bool
 };
