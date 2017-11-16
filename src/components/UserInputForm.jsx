@@ -138,7 +138,7 @@ export default class UserInputForm extends React.Component {
         } else if (type === "emails") {
             errors[name] = isEmpty(value);
         } else if (type === "nms_service_id") {
-            errors[name] = !/^[0-9]{5}$/.test(value);
+            errors[name] = !/^[0-9]{4}$/.test(value);
         } else {
             errors[name] = isEmpty(value);
         }
