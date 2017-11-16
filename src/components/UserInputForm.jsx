@@ -137,6 +137,8 @@ export default class UserInputForm extends React.Component {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
         } else if (type === "emails") {
             errors[name] = isEmpty(value);
+        } else if (type === "nms_service_id") {
+            errors[name] = !/^[0-9]{5}$/.test(value);
         } else {
             errors[name] = isEmpty(value);
         }
@@ -168,6 +170,7 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         switch (userInput.type) {
             case "string" :
+            case "nms_service_id" :
             case "vlan" :
             case "ssp_1_vlan" :
             case "ssp_2_vlan" :
@@ -223,9 +226,10 @@ export default class UserInputForm extends React.Component {
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;
             case "ieee_interface_type_for_product_tag":
+                const productId = this.props.product.value || this.props.product.identifier;
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
-                                                              productId={this.props.product.value}/>;
+                                                              productId={productId}/>;
             case "free_ports_for_location_code_and_interface_type":
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}
