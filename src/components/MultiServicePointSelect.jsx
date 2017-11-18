@@ -9,7 +9,7 @@ export default class MultiServicePointSelect extends React.PureComponent {
         const organisation = organisations.find(org => org.uuid === msp.client_id);
         const organisationName = organisation ? organisation.name : "";
         const description = msp.description || "<No description>";
-        return `MSP ${description.trim()} ${organisationName}`
+        return `${description.trim()} ${organisationName}`
     };
 
     render() {
