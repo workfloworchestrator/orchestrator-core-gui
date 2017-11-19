@@ -31,7 +31,7 @@ export function productById(id, products) {
 }
 
 export function renderDateTime(epoch) {
-    return new Date(epoch * 1000).toLocaleString();
+    return new Date(epoch * 1000).toLocaleString("nl-NL") + " CET";
 }
 
 export function renderDate(s) {
