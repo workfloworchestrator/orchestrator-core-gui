@@ -1,19 +1,16 @@
 @import "../stylesheets/vars.scss";
 
-section.contact-persons {
+section.multiple-mps {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 
-    section.person {
+    section.msp {
         display: flex;
         div.wrapper {
             margin-left: 25px;
-            flex-grow: 2;
-            &.autocomplete-container {
-                position: relative;
-            }
-            div.tel {
+            width: 50%;
+            div.vlan {
                 display: flex;
                 align-items: center;
                 i.fa-minus {
@@ -29,7 +26,17 @@ section.contact-persons {
             }
         }
     }
-    div.add-person {
+    div.msp-select {
+        margin-top: 5px;
+        div.Select-control {
+            max-height: 30px;
+            div.Select-input {
+
+                max-height: 30px;
+            }
+        }
+    }
+    div.add-msp {
         display: flex;
         i.fa-plus {
             margin-left: auto;

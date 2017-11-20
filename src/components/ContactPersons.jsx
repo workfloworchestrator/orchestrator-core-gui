@@ -74,9 +74,11 @@ export default class ContactPersons extends React.PureComponent {
 
     removePerson = index => e => {
         stop(e);
-        const persons = [...this.props.persons];
-        persons.splice(index, 1);
-        this.props.onChange(persons);
+        if (index > 0) {
+            const persons = [...this.props.persons];
+            persons.splice(index, 1);
+            this.props.onChange(persons);
+        }
     };
 
     itemSelected = (item, personIndex) => {

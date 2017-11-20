@@ -1,5 +1,7 @@
 import {isEmpty} from "./Utils";
 
+const productLookup = (id, products) => products.find(prod => prod.identifier === id);
+
 export function organisationNameByUuid(uuid, organisations) {
     const organisation = organisations.find(org => org.uuid === uuid);
     return organisation ? organisation.name : uuid;
@@ -12,22 +14,20 @@ export function enrichSubscription(subscription, organisations, products) {
     subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
 }
 
-
 export function productNameById(id, products) {
-    const product = products.find(prod => prod.identifier === id);
+    const product = productLookup(id, products);
     return product ? product.name : id;
 }
 
 
 export function productTagById(id, products) {
-    const product = products.find(prod => prod.identifier === id);
+    const product = productLookup(id, products);
     return product ? product.tag : id;
 }
 
 
 export function productById(id, products) {
-    const product = products.find(prod => prod.identifier === id);
-    return product;
+    return productLookup(id, products);
 }
 
 export function renderDateTime(epoch) {
@@ -35,7 +35,7 @@ export function renderDateTime(epoch) {
 }
 
 export function renderDate(s) {
-    return isEmpty(s) ? "" : new Date(s).toLocaleDateString();
+    return isEmpty(s) ? "" : new Date(s).toLocaleDateString("nl-NL") + " CET";
 }
 
 export function capitalize(s) {

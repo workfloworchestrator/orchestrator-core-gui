@@ -20,6 +20,8 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
+import MultipleMSPs from "./MultipleMSPs";
+import {validEmailRegExp} from "../validations/Subscriptions";
 
 export default class UserInputForm extends React.Component {
 
@@ -139,7 +141,12 @@ export default class UserInputForm extends React.Component {
             errors[name] = isEmpty(value);
         } else if (type === "nms_service_id") {
             errors[name] = !/^[0-9]{4}$/.test(value);
-        } else {
+        } else if (type === "contact_persons") {
+            errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
+        } else if (type === "multi_msp") {
+            errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id))
+        }
+        else {
             errors[name] = isEmpty(value);
         }
     };
@@ -267,7 +274,15 @@ export default class UserInputForm extends React.Component {
                                            locationCodes={this.props.locationCodes}
                                            locationCode={userInput.value}/>;
             case "label_with_state":
-                return <StateValue value={userInput.value} />
+                return <StateValue value={userInput.value}/>;
+            case "multi_msp":
+                return <MultipleMSPs msps={isEmpty(userInput.value) ? [
+                    {subscription_id: null, vlan: ""},
+                    {subscription_id: null, vlan: ""}
+                ] : userInput.value}
+                                     availableMSPs={this.props.multiServicePoints}
+                                     organisations={this.props.organisations}
+                                     onChange={this.changeNestedInput(name)}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -276,8 +291,10 @@ export default class UserInputForm extends React.Component {
     userInputToEmail = (input) => input ? input.split(",") : [];
 
     render() {
-        const {confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput,
-            leavePage} = this.state;
+        const {
+            confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput,
+            leavePage
+        } = this.state;
         const {process} = this.props;
         return (
             <div className="mod-process-step">
