@@ -153,7 +153,7 @@ I18n.translations.en = {
         device_port_name_ssp_1_info: "Port name to configure on the physical device for SSP 1",
         device_port_name_ssp_2: "Device port name for SSP 2",
         device_port_name_ssp_2_info: "Port name to configure on the physical device for SSP 2",
-        multi_msp: "Mulit-Service Points",
+        multi_msp: "Multi-Service Points",
         multi_msp_info: "All off the MSP's that will be connected to each other in this E-LAN virtual private network - minimum is 2",
     },
     process_state: {
