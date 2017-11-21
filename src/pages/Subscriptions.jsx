@@ -49,11 +49,12 @@ export default class Subscriptions extends React.PureComponent {
                 subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
             });
             const newFilterAttributesProduct = [];
-            this.props.products.forEach(product => {
+            const uniqueTags =  [...new Set(products.map(p => p.tag))];
+            uniqueTags.forEach(tag => {
                 newFilterAttributesProduct.push({
-                    name: product.tag,
+                    name: tag,
                     selected: true,
-                    count: results.filter(result => result.product_tag === product.tag).length
+                    count: results.filter(result => result.product_tag === tag).length
                 })
             });
             const newFilterAttributesStatus = [...this.state.filterAttributesStatus];

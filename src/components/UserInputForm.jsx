@@ -177,7 +177,6 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         switch (userInput.type) {
             case "string" :
-            case "nms_service_id" :
             case "ssp_1_vlan" :
             case "ssp_2_vlan" :
             case "guid":
@@ -192,6 +191,7 @@ export default class UserInputForm extends React.Component {
                                                  products={this.props.products}
                                                  organisations={this.props.organisations}
                                                  className="indent"/>
+            case "nms_service_id" :
             case "bandwidth":
             case "vlan" :
                 return <input type="number" step="1" min="0" id={name} name={name} value={this.userInputValue(name)}
