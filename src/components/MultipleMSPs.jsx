@@ -37,7 +37,7 @@ export default class MultipleMSPs extends React.PureComponent {
     };
 
     validateVlan = index => e => {
-        const valid = !/^\+?(0|[1-9]\d*)$/.test(e.target.value);
+        const valid = /^\+?(0|[1-9]\d*)$/.test(e.target.value);
         const errors = {...this.state.errors};
         errors[index] = !valid;
         this.setState({errors: errors});
@@ -58,7 +58,7 @@ export default class MultipleMSPs extends React.PureComponent {
             <div className="wrapper">
                 {index === 0 && <label>{I18n.t("multi_msp.vlan")}</label>}
                 <div className="vlan">
-                    <input type="text"
+                    <input type="number" step="1" min="0"
                            onChange={this.onChangeInternal("vlan", index)}
                            onBlur={this.validateVlan(index)}
                            value={msp.vlan || ""}/>

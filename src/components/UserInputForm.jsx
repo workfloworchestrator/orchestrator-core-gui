@@ -144,7 +144,7 @@ export default class UserInputForm extends React.Component {
         } else if (type === "contact_persons") {
             errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
         } else if (type === "multi_msp") {
-            errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id))
+            errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
         }
         else {
             errors[name] = isEmpty(value);
@@ -178,7 +178,6 @@ export default class UserInputForm extends React.Component {
         switch (userInput.type) {
             case "string" :
             case "nms_service_id" :
-            case "vlan" :
             case "ssp_1_vlan" :
             case "ssp_2_vlan" :
             case "guid":
@@ -194,6 +193,7 @@ export default class UserInputForm extends React.Component {
                                                  organisations={this.props.organisations}
                                                  className="indent"/>
             case "bandwidth":
+            case "vlan" :
                 return <input type="number" step="1" min="0" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "msp" :
