@@ -27,6 +27,7 @@ import {
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.css";
+import {startModificationSubscription} from "../api/index";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -40,6 +41,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscriptions: [],
             notFound: false,
             loaded: false,
+            loadedIMSRelatedObjects: false,
             isTerminatable: false,
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
@@ -93,7 +95,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                         imsServices: imsServices,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
-                        isTerminatable: isTerminatable(subscription, subscriptions)
+                        isTerminatable: isTerminatable(subscription, subscriptions),
+                        loadedIMSRelatedObjects: true
                     });
                 })
             }).catch(err => {
@@ -121,8 +124,20 @@ export default class SubscriptionDetail extends React.PureComponent {
                     name: subscription.product_name,
                     customer: subscription.customer_name
                 }),
-                () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`)
-            );
+                () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`));
+        }
+    };
+
+    modify = (subscription, isModifiable) => e => {
+        stop(e);
+        if (isModifiable) {
+            this.confirmation(I18n.t("subscription.modifyConfirmation", {
+                    name: subscription.product_name,
+                    customer: subscription.customer_name
+                }),
+                () => startModificationSubscription(subscription.subscription_id).then(() =>{
+                    this.props.history.push("/processes")
+                }));
         }
     };
 
@@ -294,9 +309,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderTerminateLink = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects) => {
-        if (isEmpty(product)) {
-            return null;
+    renderTerminateLink = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects, loadedIMSRelatedObjects) => {
+        if (!loadedIMSRelatedObjects) {
+            return <section className="terminate-link-waiting">
+                <em>{I18n.t("subscription.fetchingImsData")}</em>
+                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+            </section>;
         }
         let reason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
@@ -308,7 +326,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!product.terminate_subscription_workflow_key) {
             reason = I18n.t("subscription.no_termination_workflow");
         }
-        //All subscription statusses: ["initial", "provisioning", "active", "disabled", "terminated"]
+        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         if (status !== "provisioning" && status !== "active") {
             reason = I18n.t("subscription.no_termination_invalid_status", {status: status});
@@ -321,6 +339,30 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
+    renderModifyLink = (subscription, product, notFoundRelatedObjects, loadedIMSRelatedObjects) => {
+        if (!loadedIMSRelatedObjects) {
+            return null;
+        }
+        let reason = null;
+        if (!isEmpty(notFoundRelatedObjects)) {
+            reason = I18n.t("subscription.no_modify_deleted_related_objects");
+        }
+        if (!product.modify_subscription_workflow_key) {
+            reason = I18n.t("subscription.no_modify_workflow");
+        }
+        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
+        const status = subscription.status;
+        if (status !== "active") {
+            reason = I18n.t("subscription.no_modify_invalid_status", {status: status});
+        }
+        const isModifiable = isEmpty(reason);
+        return <section className="modify-link">
+            <a href="/modify" className={`button ${isModifiable ? "blue" : "grey disabled"}`}
+               onClick={this.modify(subscription, isModifiable)}>
+                <i className="fa fa-pencil-square-o"></i> {I18n.t("subscription.modify")}</a>
+            {!isModifiable && <p className="no-modify-reason">{reason}</p>}
+        </section>
+    };
 
     renderNotFoundRelatedObject = notFoundRelatedObjects => {
         if (isEmpty(notFoundRelatedObjects)) {
@@ -339,12 +381,13 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>;
     };
 
-    renderDetails = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects) =>
+    renderDetails = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects, loadedIMSRelatedObjects) =>
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
             <div className="form-container-parent">
                 {this.renderSubscriptionDetail(subscription, 0, false)}
-                {this.renderTerminateLink(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects)}
+                {this.renderTerminateLink(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects, loadedIMSRelatedObjects)}
+                {this.renderModifyLink(subscription, product, notFoundRelatedObjects, loadedIMSRelatedObjects)}
             </div>
         </section>;
 
@@ -352,7 +395,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const {
             loaded, notFound, subscription, subscriptionProcessLink, product, imsServices,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects
         } = this.state;
         const {organisations} = this.props;
         const renderNotFound = loaded && notFound;
@@ -364,7 +407,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     confirm={confirmationDialogAction}
                                     question={confirmationDialogQuestion}/>
 
-                {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects)}
+                {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects, loadedIMSRelatedObjects)}
                 {renderContent && this.renderProcessLink(subscriptionProcessLink)}
                 {renderContent && this.renderNotFoundRelatedObject(notFoundRelatedObjects)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}

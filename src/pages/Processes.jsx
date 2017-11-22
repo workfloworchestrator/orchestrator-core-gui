@@ -270,7 +270,8 @@ export default class Processes extends React.PureComponent {
                     </thead>
                     <tbody>
                     {processes.map((process, index) =>
-                        <tr key={`${process.id}_${index}`} onClick={this.showProcess(process)}>
+                        <tr key={`${process.id}_${index}`} onClick={this.showProcess(process)}
+                            className={process.status}>
                             <td data-label={I18n.t("processes.assignee")} className="assignee">{process.assignee}</td>
                             <td data-label={I18n.t("processes.step")} className="step">{process.step}</td>
                             <td data-label={I18n.t("processes.status")} className="status">{process.status}</td>

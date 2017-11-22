@@ -85,7 +85,7 @@ export default class ProcessDetail extends React.PureComponent {
             }), () =>
                 deleteProcess(process.id).then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("processes.flash.delete", {name: process.product_name}));
+                    setFlash(I18n.t("processes.flash.delete", {name: process.productName}));
                 })
         );
     };
@@ -98,7 +98,7 @@ export default class ProcessDetail extends React.PureComponent {
             }), () =>
                 abortProcess(process.id).then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("processes.flash.abort", {name: process.product_name}));
+                    setFlash(I18n.t("processes.flash.abort", {name: process.productName}));
                 })
         );
     };
@@ -111,7 +111,7 @@ export default class ProcessDetail extends React.PureComponent {
             }), () =>
                 retryProcess(process.id).then(() => {
                     this.props.history.push(`/processes`);
-                    setFlash(I18n.t("processes.flash.retry", {name: process.product_name}));
+                    setFlash(I18n.t("processes.flash.retry", {name: process.productName}));
                 })
         );
     };

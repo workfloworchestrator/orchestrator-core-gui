@@ -225,6 +225,7 @@ I18n.translations.en = {
         ELAN: "E-LAN Light-paths",
         MSP: "MSP",
         SSP: "SSP",
+        LPNLNSI: "NSI Light-paths",
         initial: "Initial",
         provisioning: "Provisioning",
         active: "Active",
@@ -281,12 +282,18 @@ I18n.translations.en = {
             speed: "Speed",
             status: "Status"
         },
+        fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
         no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions.",
-        no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems that are deleted.",
+        no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems (e.g. IMS) that are deleted.",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
-        no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated."
+        no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
+        modify: "Modify Subscription",
+        modifyConfirmation: "Are you sure you want to modify {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
+        no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
+        no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
+        no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
     },
     terminate_subscription: {
         cancel: "Cancel",
