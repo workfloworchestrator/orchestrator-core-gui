@@ -133,6 +133,7 @@ I18n.translations.en = {
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
         configuration_ready: "Configuration ready",
+        nms_service_updated: "NMS Service has been updated",
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         ssp_product_1: "SSP 1",
