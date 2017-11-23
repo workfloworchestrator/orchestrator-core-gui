@@ -1,6 +1,6 @@
 import I18n from "i18n-js";
 import en from "../locale/en";
-import Adapter from "enzyme-adapter-react-15";
+import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme"
 
 const start = () => {
