@@ -127,7 +127,7 @@ export default class Product extends React.Component {
         const product = {...this.state.product};
         product.fixed_inputs.push({name: "", value: ""});
         this.setState({product: product});
-        setTimeout(()=> {
+        setTimeout(() => {
             if (this.lastFixedInputName) {
                 this.lastFixedInputName.focus();
             }
@@ -158,6 +158,13 @@ export default class Product extends React.Component {
         const product = {...this.state.product};
         product.fixed_inputs.splice(index, 1);
         this.setState({product: product});
+    };
+
+    workFlowKeys = (type, workflows) => {
+        const res = workflows
+            .filter(wf => wf.target === type)
+            .map(wf => wf.key);
+        return res;
     };
 
     renderFixedInputs = (product, readOnly) => {
@@ -230,7 +237,7 @@ export default class Product extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
-            leavePage, readOnly, productBlocks
+            leavePage, readOnly, productBlocks, workflows
         } = this.state;
         //TODO add workflows
         return (
@@ -251,6 +258,12 @@ export default class Product extends React.Component {
                     {formSelect("metadata.products.status", this.changeProperty("status"),
                         ["active", "phase out", "pre production", "end of life"], readOnly,
                         product.status || "active")}
+                    {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
+                        this.state.errors, this.changeProperty("crm_prod_id"), this.validateProperty("crm_prod_id"))}
+                    {formSelect("metadata.products.create_subscription_workflow_key",
+                        this.changeProperty("create_subscription_workflow_key"),
+                        this.workFlowKeys("CREATE", workflows), readOnly,
+                        product.create_subscription_workflow_key || undefined)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly)}
                     {formDate("metadata.products.create_date", () => false, true,

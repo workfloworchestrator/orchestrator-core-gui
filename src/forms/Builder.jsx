@@ -34,6 +34,22 @@ export function formSelect(i18nKey, onChange, values, readOnly, value) {
     )
 }
 
+export function formSelectPreDefined(i18nKey, onChange, options, readOnly, value) {
+    return (
+        <section className="form-divider">
+            <label>{I18n.t(i18nKey)}</label>
+            <em>{I18n.t(`${i18nKey}_info`)}</em>
+            <Select className="select-status"
+                    onChange={onChange}
+                    options={options}
+                    searchable={false}
+                    value={value}
+                    clearable={false}
+                    disabled={readOnly}/>
+        </section>
+    )
+}
+
 export function formDate(i18nKey, onChange, readOnly, value, isClearable = false) {
     return (
         <section className="form-divider">
