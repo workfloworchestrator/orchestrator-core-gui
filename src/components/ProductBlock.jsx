@@ -9,6 +9,7 @@ import {getParameterByName} from "../utils/QueryParameters";
 import "./ProductBlock.css";
 import {productBlock, resourceTypes, saveProductBlock} from "../api/index";
 import {setFlash} from "../utils/Flash";
+import Select from "react-select";
 
 export default class ProductBlock extends React.Component {
 
@@ -88,7 +89,7 @@ export default class ProductBlock extends React.Component {
 
     renderResourceType = (productBlock, resourceTypes, readOnly) => {
         const avaliableResourceTypes = resourceTypes
-            .filter(rt => !productBlock.resource_types.some(rt.resource_type_id === pbRt.resource_type_id));
+            .filter(rt => !productBlock.resource_types.some(pbRt => rt.resource_type_id === pbRt.resource_type_id));
         return <section className="form-divider">
             <label htmlFor="name">{I18n.t("metadata.productBlocks.resourceTypes")}</label>
             <em>{I18n.t("metadata.productBloks.resourceTypes_info")}</em>
