@@ -82,25 +82,55 @@ function postPutJson(path, body, method, result = true) {
 }
 
 //API metadata
+export function products() {
+    return fetchJson("products")
+}
+
+export function productById(productId) {
+    return fetchJson(`products/${productId}`)
+}
+
+export function saveProduct(product) {
+    //isEmpty(product_id) ? post ; put
+    return Promise.resolve("TODO");
+}
+
+export function deleteProduct(id) {
+    return Promise.resolve("TODO");
+}
+
 export function productBlocks() {
     return Promise.resolve(product_blocks_json);
 }
 
-export function productBlock(id) {
+export function productBlockById(id) {
     return Promise.resolve([...product_blocks_json].find(pb => pb.product_block_id === id));
 }
 
 export function saveProductBlock(productBlock) {
     //isEmpty(product_block_id) ? post ; put
-    return Promise.resolve("todo");
+    return Promise.resolve("TODO");
 }
 
 export function deleteProductBlock(id) {
-    return Promise.resolve("todo");
+    return Promise.resolve("TODO");
 }
 
 export function resourceTypes() {
     return Promise.resolve(resource_types_json);
+}
+
+export function resourceType(id) {
+    return Promise.resolve([...resource_types_json].find(rt => rt.resource_type_id === id));
+}
+
+export function saveResourceType(resourceType) {
+    //isEmpty(product_block_id) ? post ; put
+    return Promise.resolve("TODO");
+}
+
+export function deleteResourceType(id) {
+    return Promise.resolve("TODO");
 }
 
 //API
@@ -118,14 +148,6 @@ export function subscriptions_by_tag(tag) {
 
 export function organisations() {
     return fetchJson("crm/organisations");
-}
-
-export function products() {
-    return fetchJson("products")
-}
-
-export function productById(productId) {
-    return fetchJson(`products/${productId}`)
 }
 
 export function ieeeInterfaceTypes() {

@@ -5,6 +5,8 @@ import I18n from "i18n-js";
 import "./MetaData.css";
 import {stop} from "../utils/Utils";
 import ProductBlocks from "../components/ProductBlocks";
+import ResourceTypes from "../components/ResourceTypes";
+import Products from "../components/Products";
 
 export default class MetaData extends React.Component {
 
@@ -32,8 +34,17 @@ export default class MetaData extends React.Component {
             {I18n.t(`metadata.tabs.${tab}`)}
         </span>;
 
-    renderTabContent = (selectedTab, productBlocks) => {
-        return <ProductBlocks history={this.props.history}/>
+    renderTabContent = (selectedTab) => {
+        switch (selectedTab) {
+            case "products":
+                return <Products history={this.props.history}/>
+            case "product_blocks":
+                return <ProductBlocks history={this.props.history}/>
+            case "resource_types":
+                return <ResourceTypes history={this.props.history}/>
+            default:
+                throw new Error(`Unknown tab ${selectedTab}`)
+        }
     };
 
     render() {

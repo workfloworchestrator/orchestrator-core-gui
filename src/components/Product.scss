@@ -2,7 +2,7 @@
 @import "../stylesheets/buttons.scss";
 @import "../stylesheets/forms.scss";
 
-.mod-product-block {
+.mod-product {
 
     .card {
         @include card;
@@ -19,13 +19,34 @@
         }
     }
 
-    div.resource-type {
+    div.product-block, div.fixed-input {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+        div.wrapper {
+            flex-grow: 2;
+            &:first-child {
+                margin-right: 25px;
+            }
+        }
         i.fa-minus {
             color: $red;
             margin-left: 20px;
+            font-size: 32px;
+            cursor: pointer;
+            &.first {
+                padding-top: 22px;
+            }
+        }
+    }
+
+    div.add-fixed-input {
+        display: flex;
+        align-items: center;
+        i.fa-plus {
+            margin-left: auto;
+            padding: 10px 2px 0 0;
+            color: $green;
             font-size: 32px;
             cursor: pointer;
         }

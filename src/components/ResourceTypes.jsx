@@ -5,19 +5,18 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./ProductBlocks.css";
+import "./ResourceTypes.css";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-import {renderDate} from "../utils/Lookups";
-import {deleteProductBlock, productBlocks} from "../api/index";
+import {deleteResourceType, resourceTypes} from "../api/index";
 
-export default class ProductBlocks extends React.Component {
+export default class ResourceTypes extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            productBlocks: [],
-            filteredProductBlocks: [],
+            resourceTypes: [],
+            filteredResourceTypes: [],
             query: "",
             actions: {show: false, id: ""},
             sorted: {name: "name", descending: true},
@@ -30,17 +29,17 @@ export default class ProductBlocks extends React.Component {
     }
 
     componentDidMount() {
-        productBlocks().then(res => {
+        resourceTypes().then(res => {
             res.forEach(pb => pb.resource_types_string = (pb.resource_types || [])
                 .map(rt => rt.resource_type).join(", "));
-            this.setState({productBlocks: res, filteredProductBlocks: res})
+            this.setState({resourceTypes: res, filteredResourceTypes: res})
         });
     }
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
-    editProductBlock = (productBlock, readOnly = true, newProductBlock = false) => () => {
-        this.props.history.push(`/product-block/${newProductBlock ? 'new' : productBlock.product_block_id}?readOnly=${readOnly}`)
+    editResourceType = (resourceType, readOnly = true, newResourceType = false) => () => {
+        this.props.history.push(`/resource-type/${newResourceType ? 'new' : resourceType.resource_type_id}?readOnly=${readOnly}`)
     };
 
     search = e => {
@@ -49,44 +48,44 @@ export default class ProductBlocks extends React.Component {
         this.delayedSearch(query);
     };
 
-    doSearchAndSort = (query, productBlocks, sorted) => {
+    doSearchAndSort = (query, resourceTypes, sorted) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["name", "description", "tag", "status", "resource_types_string"];
-            productBlocks = productBlocks.filter(pb =>
+            const searchable = ["resource_type", "description"];
+            resourceTypes = resourceTypes.filter(pb =>
                 searchable
                     .filter(search => pb[search])
                     .map(search => pb[search].toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
         }
-        productBlocks.sort(this.sortBy(sorted.name));
-        return sorted.descending ? productBlocks.reverse() : productBlocks;
+        resourceTypes.sort(this.sortBy(sorted.name));
+        return sorted.descending ? resourceTypes.reverse() : resourceTypes;
     };
 
     delayedSearch = debounce(query => {
-        const productBlocks = [...this.state.productBlocks];
+        const resourceTypes = [...this.state.resourceTypes];
         this.setState({
             query: query,
-            filteredProductBlocks: this.doSearchAndSort(query, productBlocks, this.state.sorted)
+            filteredResourceTypes: this.doSearchAndSort(query, resourceTypes, this.state.sorted)
         });
     }, 250);
 
-    toggleActions = (productBlock, actions) => e => {
+    toggleActions = (resourceType, actions) => e => {
         stop(e);
-        const newShow = actions.id === productBlock.product_block_id ? !actions.show : true;
-        this.setState({actions: {show: newShow, id: productBlock.product_block_id}});
+        const newShow = actions.id === resourceType.resource_type_id ? !actions.show : true;
+        this.setState({actions: {show: newShow, id: resourceType.resource_type_id}});
     };
 
-    handleDeleteProductBlock = productBlock => e => {
+    handleDeleteResourceType = resourceType => e => {
         stop(e);
         this.confirmation(I18n.t("metadata.deleteConfirmation", {
-                type: "Product Block",
-                name: productBlock.name
+                type: "Resource Type",
+                name: resourceType.resource_type
             }), () =>
-                deleteProductBlock(productBlock.product_block_id).then(() => {
+                deleteResourceType(resourceType.resource_type_id).then(() => {
                     this.componentDidMount();
-                    setFlash(I18n.t("metadata.flash.delete", {name: productBlock.name, type: "Product Block"}));
+                    setFlash(I18n.t("metadata.flash.delete", {type: "Resource Type", name: resourceType.resource_type}));
                 })
         );
     };
@@ -101,29 +100,29 @@ export default class ProductBlocks extends React.Component {
     });
 
 
-    renderActions = (productBlock, actions) => {
-        const actionId = productBlock.product_block_id;
+    renderActions = (resourceType, actions) => {
+        const actionId = resourceType.resource_type_id;
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
         const view = {
             icon: "fa fa-search-plus",
             label: "view",
-            action: this.editProductBlock(productBlock, true, false)
+            action: this.editResourceType(resourceType, true, false)
         };
         const edit = {
             icon: "fa fa-pencil-square-o",
             label: "edit",
-            action: this.editProductBlock(productBlock, false, false)
+            action: this.editResourceType(resourceType, false, false)
         };
         const _delete = {
             icon: "fa fa-trash",
             label: "delete",
-            action: this.handleDeleteProductBlock(productBlock),
+            action: this.handleDeleteResourceType(resourceType),
             danger: true
         };
         const options = [view, edit, _delete];
-        return <DropDownActions options={options} i18nPrefix="metadata.productBlocks"/>;
+        return <DropDownActions options={options} i18nPrefix="metadata.resourceTypes"/>;
     };
 
     sortBy = name => (a, b) => {
@@ -135,20 +134,20 @@ export default class ProductBlocks extends React.Component {
     sort = name => e => {
         stop(e);
         const sorted = {...this.state.sorted};
-        const filteredProductBlocks = [...this.state.filteredProductBlocks].sort(this.sortBy(name));
+        const filteredResourceTypes = [...this.state.filteredResourceTypes].sort(this.sortBy(name));
 
         sorted.descending = sorted.name === name ? !sorted.descending : false;
         sorted.name = name;
         this.setState({
-            filteredProductBlocks: sorted.descending ? filteredProductBlocks.reverse() : filteredProductBlocks,
+            filteredResourceTypes: sorted.descending ? filteredResourceTypes.reverse() : filteredResourceTypes,
             sorted: sorted
         });
     };
 
     filter = item => {
-        const {filteredProductBlocks, sorted, query} = this.state;
+        const {filteredResourceTypes, sorted, query} = this.state;
         this.setState({
-            filteredProductBlocks: this.doSearchAndSort(query, filteredProductBlocks, sorted)
+            filteredResourceTypes: this.doSearchAndSort(query, filteredResourceTypes, sorted)
         });
     };
 
@@ -159,51 +158,37 @@ export default class ProductBlocks extends React.Component {
         return <i/>;
     };
 
-    renderProductBlocks(productBlocks, actions, sorted) {
-        const columns = ["name", "description", "status", "tag", "resource_types", "create_date", "actions"];
+    renderResourceTypes(resourceTypes, actions, sorted) {
+        const columns = ["resource_type", "description", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
-                <span>{I18n.t(`metadata.productBlocks.${name}`)}</span>
+                <span>{I18n.t(`metadata.resourceTypes.${name}`)}</span>
                 {this.sortColumnIcon(name, sorted)}
             </th>
         };
 
-        if (productBlocks.length !== 0) {
+        if (resourceTypes.length !== 0) {
             return (
-                <table className="product-blocks">
+                <table className="resource-types">
                     <thead>
                     <tr>{columns.map((column, index) => th(index))}</tr>
                     </thead>
                     <tbody>
-                    {productBlocks.map((productBlock, index) =>
-                        <tr key={`${productBlock.product_block_id}_${index}`}
-                            onClick={this.editProductBlock(productBlock, false, false)}
-                            className={productBlock.status}>
-                            <td data-label={I18n.t("metadata.productBlocks.name")} className="name">
-                                {productBlock.name}
+                    {resourceTypes.map((resourceType, index) =>
+                        <tr key={`${resourceType.resource_type_id}_${index}`}
+                            onClick={this.editResourceType(resourceType, false, false)}>
+                            <td data-label={I18n.t("metadata.resourceTypes.resource_type")} className="resource_type">
+                                {resourceType.resource_type}
                             </td>
-                            <td data-label={I18n.t("metadata.productBlocks.description")} className="description">
-                                {productBlock.description}
+                            <td data-label={I18n.t("metadata.resourceTypes.description")} className="description">
+                                {resourceType.description}
                             </td>
-                            <td data-label={I18n.t("metadata.productBlocks.status")} className="status">
-                                {productBlock.status}
-                            </td>
-                            <td data-label={I18n.t("metadata.productBlocks.tag")} className="tag">
-                                {productBlock.tag}
-                            </td>
-                            <td data-label={I18n.t("metadata.productBlocks.resource_types")} className="resource_types">
-                                {productBlock.resource_types.map(rt => rt.resource_type).join(", ")}
-                            </td>
-                            <td data-label={I18n.t("metadata.productBlocks.create_date")}
-                                className="started">
-                                {renderDate(productBlock.create_date)}
-                            </td>
-                            <td data-label={I18n.t("metadata.productBlocks.actions")} className="actions"
-                                onClick={this.toggleActions(productBlock, actions)}
+                            <td data-label={I18n.t("metadata.resourceTypes.actions")} className="actions"
+                                onClick={this.toggleActions(resourceType, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
                                 <i className="fa fa-ellipsis-h"></i>
-                                {this.renderActions(productBlock, actions)}
+                                {this.renderActions(resourceType, actions)}
                             </td>
                         </tr>
                     )}
@@ -216,11 +201,11 @@ export default class ProductBlocks extends React.Component {
 
     render() {
         const {
-            filteredProductBlocks, actions, query, confirmationDialogOpen, confirmationDialogAction,
+            filteredResourceTypes, actions, query, confirmationDialogOpen, confirmationDialogAction,
             confirmationDialogQuestion, sorted,
         } = this.state;
         return (
-            <div className="mod-product-blocks">
+            <div className="mod-resource-types">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={this.cancelConfirmation}
                                     confirm={confirmationDialogAction}
@@ -228,25 +213,25 @@ export default class ProductBlocks extends React.Component {
                 <div className="options">
                     <section className="search">
                         <input className="allowed"
-                               placeholder={I18n.t("metadata.productBlocks.searchPlaceHolder")}
+                               placeholder={I18n.t("metadata.resourceTypes.searchPlaceHolder")}
                                type="text"
                                onChange={this.search}
                                value={query}/>
                         <i className="fa fa-search"></i>
                     </section>
-                    <a className="new button green" onClick={this.editProductBlock({}, false, true)}>
-                        {I18n.t("metadata.productBlocks.new")}<i className="fa fa-plus"></i>
+                    <a className="new button green" onClick={this.editResourceType({}, false, true)}>
+                        {I18n.t("metadata.resourceTypes.new")}<i className="fa fa-plus"></i>
                     </a>
                 </div>
-                <section className="product-block">
-                    {this.renderProductBlocks(filteredProductBlocks, actions, sorted)}
+                <section className="resource-type">
+                    {this.renderResourceTypes(filteredResourceTypes, actions, sorted)}
                 </section>
             </div>
         );
     }
 }
 
-ProductBlocks.propTypes = {
+ResourceTypes.propTypes = {
     history: PropTypes.object.isRequired
 };
 

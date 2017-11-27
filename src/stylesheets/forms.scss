@@ -42,6 +42,10 @@ input[type=text], input[type=email], input[type=tel], input[type=number], textar
   min-width: 200px;
 }
 
+div.child-form {
+    margin-left: 25px;
+}
+
 div.checkbox {
   display: flex;
   align-items: center;

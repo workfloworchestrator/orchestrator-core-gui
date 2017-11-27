@@ -233,7 +233,7 @@ export default class UserInputForm extends React.Component {
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;
             case "ieee_interface_type_for_product_tag":
-                const productId = this.props.product.value || this.props.product.identifier;
+                const productId = this.props.product.value || this.props.product.product_id;
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={userInput.value}
                                                               productId={productId}/>;

@@ -2,7 +2,7 @@
 @import "../stylesheets/buttons.scss";
 @import "../stylesheets/forms.scss";
 
-.mod-product-block {
+.mod-resource-type {
 
     .card {
         @include card;
@@ -16,18 +16,6 @@
 
         em {
             margin-bottom: 10px;
-        }
-    }
-
-    div.resource-type {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        i.fa-minus {
-            color: $red;
-            margin-left: 20px;
-            font-size: 32px;
-            cursor: pointer;
         }
     }
 

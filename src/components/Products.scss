@@ -1,7 +1,7 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/media_queries.scss";
 
-.mod-product-blocks {
+.mod-products {
     .options {
         display: flex;
         padding: 25px 20px;
@@ -42,13 +42,13 @@
 
     }
 
-    section.product-block {
+    section.products {
         display: flex;
         padding: 0 20px 20px 20px;
         background-color: white;
     }
 
-    table.product-blocks {
+    table.products {
         width: 100%;
         word-break: break-all;
         td, th {
@@ -63,22 +63,25 @@
                 padding: 5px 5px 10px 5px
             }
             th.name {
-                width: 10%;
+                width: 15%;
             }
             th.description {
                 width: 25%;
             }
-            th.status {
-                width: 10%;
-            }
             th.tag {
-                width: 10%;
+                width: 8%;
             }
-            th.resource_types {
-                width: 25%;
+            th.product_type {
+                width: 8%;
+            }
+            th.status {
+                width: 8%;
+            }
+            th.crm_prod_id {
+                width: 24%;
             }
             th.create_date {
-                width: 15%;
+                width: 10%;
             }
             th.actions {
                 text-align: right;

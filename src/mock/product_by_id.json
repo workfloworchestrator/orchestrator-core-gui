@@ -6,6 +6,10 @@
   "end_date": "3000-01-01T00:00:00+00:00",
   "modify_subscription_workflow_key": "modify_elan",
   "name": "ELAN",
+  "fixed_inputs" : [
+    {"name": "test_name", "value": "test_value"},
+    {"name": "test_name", "value": "test_value"}
+  ],
   "product_blocks": [
     {
       "create_date": "2017-10-17",
