@@ -14,8 +14,8 @@ export function isTerminatable(subscription, relatedSubscriptions) {
     if (hasResourceType(subscription, "nms_service_id")) {
         return true;
     }
-    //Child subscriptions like 'MSP' / 'SSP' can only be terminated if not used in parent subscriptions
-    return isEmpty(relatedSubscriptions);
+    //Child subscriptions like 'MSP' / 'SSP' can only be terminated if not used in non-terminated parent subscriptions
+    return isEmpty(relatedSubscriptions) || relatedSubscriptions.every(sub => sub.status === "terminated");
 
 }
 

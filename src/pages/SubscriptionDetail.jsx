@@ -320,7 +320,8 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!isEmpty(notFoundRelatedObjects)) {
             reason = I18n.t("subscription.no_termination_deleted_related_objects");
         }
-        if (!hasResourceType(subscription, "nms_service_id") && subscriptions.length > 0) {
+        if (!hasResourceType(subscription, "nms_service_id") &&
+            (subscriptions.length > 0 && !subscriptions.every(sub => sub.status === "terminated"))) {
             reason = I18n.t("subscription.no_termination_parent_subscription");
         }
         if (!product.terminate_subscription_workflow_key) {
