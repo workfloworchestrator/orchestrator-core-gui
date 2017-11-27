@@ -8,6 +8,7 @@ import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
+import {lookupValueFromProcessState} from "../utils/ProcessState";
 import {abortProcess, deleteProcess, retryProcess, subscriptionIdFromProcessId} from "../api/index";
 
 import "./ProcessDetail.css";
@@ -59,7 +60,7 @@ export default class ProcessDetail extends React.PureComponent {
                 //Pre-fill the value of the user_input if the current_state already contains the value
                 const state = processInstance.current_state || {};
                 if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                    stepUserInput.forEach(userInput => userInput.value = state[userInput.name]);
+                    stepUserInput.forEach(userInput => userInput.value = lookupValueFromProcessState(userInput.name, state));
                 }
                 this.setState({
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
@@ -227,4 +228,3 @@ ProcessDetail.propTypes = {
     ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
 };
-
