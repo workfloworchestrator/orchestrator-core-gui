@@ -1,0 +1,27 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/buttons.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-product-block {
+
+    .card {
+        @include card;
+        padding: 20px 40px;
+    }
+
+    section.form-divider {
+        border-bottom: 1px solid $lightest-grey;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+
+        em {
+            margin-bottom: 10px;
+        }
+    }
+
+    .buttons {
+        margin-top: 35px;
+    }
+
+}
+

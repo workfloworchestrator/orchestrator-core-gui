@@ -1,0 +1,50 @@
+[
+  {
+    "description": "CRM port ID - 5 digit (Surfnet7)",
+    "resource_type": "crm_port_id",
+    "resource_type_id": "cc0736b6-02b9-4ea2-91d7-f05b96ffb737",
+    "unit": "int"
+  },
+  {
+    "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+    "resource_type": "ims_circuit_id",
+    "resource_type_id": "b8b11875-cdb3-4dc9-b6f9-9d8952004d2c",
+    "unit": "int"
+  },
+  {
+    "description": "This is the nms service_id",
+    "resource_type": "nms_service_id",
+    "resource_type_id": "54e8e41b-5154-4678-a586-de7bcb3c6988",
+    "unit": "int"
+  },
+  {
+    "description": "NSI isAlias STP",
+    "resource_type": "nsi_isalias",
+    "resource_type_id": "aa759ab4-63ef-4121-a18d-7f138fdab21e",
+    "unit": "stp"
+  },
+  {
+    "description": "Subscription id van opgeleverde Port",
+    "resource_type": "port_subscription_id",
+    "resource_type_id": "426328a2-0da4-4551-b810-c1f7ac34fa7a",
+    "unit": "varchar"
+  },
+  {
+    "description": "Policer speed in Mbps",
+    "resource_type": "servicespeed",
+    "resource_type_id": "51846643-dffe-4c50-bdd1-4779ec9d4497",
+    "unit": "int"
+  },
+  {
+    "description": "VLAN range op de bijbehorende port voor deze service",
+    "resource_type": "vlanrange",
+    "resource_type_id": "59087493-0f63-44f5-88c3-124c89426545",
+    "unit": "int"
+  },
+  {
+    "description": "VLAN range op de bijbehorende port voor deze service",
+    "resource_type": "vrrpprio",
+    "resource_type_id": "445b35c2-81aa-4455-99ab-8939dbe6a6fb",
+    "unit": "int"
+  }
+]

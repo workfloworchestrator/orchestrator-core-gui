@@ -24,7 +24,8 @@ I18n.translations.en = {
     navigation: {
         processes: "Processes",
         validations: "Validations",
-        subscriptions: "Subscriptions"
+        subscriptions: "Subscriptions",
+        metadata: "Metadata"
     },
 
     processes: {
@@ -312,7 +313,27 @@ I18n.translations.en = {
         copied: "Copied!",
         copy: "Copy to clipboard"
     },
-
+    metadata: {
+        tabs: {
+            products: "Products",
+            product_blocks: "Product Blocks",
+            resource_types: "Resource Types"
+        },
+        productBlocks: {
+            searchPlaceHolder: "Search for Product Blocks",
+            new: "New Product Block",
+            name: "Name",
+            description: "description",
+            status: "Status",
+            tag: "tag",
+            resource_types: "Resource Types",
+            create_date: "Created",
+            actions: "",
+            view: "View",
+            edit: "Edit",
+            delete: "Delete"
+        }
+    },
     error_dialog: {
         title: "Unexpected error",
         body: "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",

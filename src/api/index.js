@@ -5,6 +5,10 @@ import {
     port_subscription_id
 } from "../validations/Subscriptions";
 
+import product_blocks_json from "../mock/product_blocks.json";
+import resource_types_json from "../mock/resource_types.json";
+
+
 const apiPath = "/api/";
 
 let configuration = {};
@@ -75,6 +79,28 @@ function fetchJsonWithCustomErrorHandling(path) {
 
 function postPutJson(path, body, method, result = true) {
     return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, true, result);
+}
+
+//API metadata
+export function productBlocks() {
+    return Promise.resolve(product_blocks_json);
+}
+
+export function productBlock(id) {
+    return Promise.resolve([...product_blocks_json].find(pb => pb.product_block_id === id));
+}
+
+export function saveProductBlock(productBlock) {
+    //isEmpty(product_block_id) ? post ; put
+    return Promise.resolve("todo");
+}
+
+export function deleteProductBlock(id) {
+    return Promise.resolve("todo");
+}
+
+export function resourceTypes() {
+    return Promise.resolve(resource_types_json);
 }
 
 //API
@@ -182,7 +208,6 @@ export function terminateSubscription(process) {
 export function startModificationSubscription(subscriptionId) {
     return postPutJson("processes/modify-subscription", {subscription_id: subscriptionId}, "post");
 }
-
 
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);

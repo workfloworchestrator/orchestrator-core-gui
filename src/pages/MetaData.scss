@@ -1,0 +1,42 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+.mod-metadata {
+    @include page;
+
+    .card {
+        @include card;
+        padding-bottom: 15px;
+    }
+    section.tabs {
+        display: flex;
+        margin-top: 25px;
+        padding: 0;
+        span {
+            text-align: center;
+            cursor: pointer;
+            padding: 15px 75px;
+            background-color: $light-grey;
+            color: $dark-grey;
+            text-transform: uppercase;
+            border-right: 1px solid white;
+
+            &.active {
+                background-color: white;
+                color: $darker-blue;
+                border-top: 2px solid $blue;
+                border-right: none;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+    section.product-blocks {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+

@@ -31,6 +31,8 @@ import "../locale/en";
 import "../locale/nl";
 import {getParameterByName} from "../utils/QueryParameters";
 import TerminateSubscription from "./TerminateSubscription";
+import MetaData from "./MetaData";
+import ProductBlock from "../components/ProductBlock";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -203,6 +205,12 @@ class App extends React.PureComponent {
                                render={props => <SubscriptionDetail organisations={organisations}
                                                                     products={products}
                                                                     {...props}/>}/>
+                        <ProtectedRoute path="/metadata/:type"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <MetaData {...props} />}/>
+                        <ProtectedRoute path="/product-block/:id"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <ProductBlock {...props} />}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
                         <Route path="/not-allowed"
