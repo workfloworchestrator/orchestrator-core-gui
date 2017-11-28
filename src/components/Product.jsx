@@ -40,8 +40,6 @@ export default class Product extends React.Component {
         if (id !== "new") {
             const readOnly = getParameterByName("readOnly", window.location.search) === "true";
             productById(id).then(res => {
-                //TODO - temporary fix , remove
-                res.fixed_inputs = res.fixed_inputs = [];
                 this.setState({product: res, isNew: false, readOnly: readOnly})
             });
         }

@@ -154,7 +154,7 @@ export default class Products extends React.Component {
             danger: true
         };
         const options = [view, edit, _delete];
-        return <DropDownActions options={options} i18nPrefix="metadata.product"/>;
+        return <DropDownActions options={options} i18nPrefix="metadata.products"/>;
     };
 
     sortBy = name => (a, b) => {
