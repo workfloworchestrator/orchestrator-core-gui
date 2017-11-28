@@ -1,5 +1,4 @@
 import React from "react";
-import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
 import "./DatePickerCustom.css";
@@ -8,7 +7,7 @@ import "./DatePickerCustom.css";
 export default class DatePickerCustom extends React.PureComponent {
 
     render() {
-        const value = this.props.value || I18n.t("metadata.productBlocks.create_date");
+        const value = this.props.value || "-";
         const {onClick, clear, disabled} = this.props;
         return (
             <div className={disabled ? "date_picker_custom disabled" : "date_picker_custom"}>

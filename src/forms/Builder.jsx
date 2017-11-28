@@ -3,6 +3,8 @@ import I18n from "i18n-js";
 import Select from "react-select";
 import DatePickerCustom from "../components/DatePickerCustom";
 import DatePicker from "react-datepicker";
+import {isEmpty} from "../utils/Utils";
+import * as moment from "moment";
 
 
 export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBlur = () => true ) {
@@ -18,23 +20,8 @@ export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBl
         </section>    )
 }
 
-export function formSelect(i18nKey, onChange, values, readOnly, value) {
-    return (
-        <section className="form-divider">
-            <label>{I18n.t(i18nKey)}</label>
-            <em>{I18n.t(`${i18nKey}_info`)}</em>
-            <Select className="select-status"
-                    onChange={onChange}
-                    options={values.map(val => ({value: val, label: val}))}
-                    searchable={false}
-                    value={value}
-                    clearable={false}
-                    disabled={readOnly}/>
-        </section>
-    )
-}
-
-export function formSelectPreDefined(i18nKey, onChange, options, readOnly, value) {
+export function formSelect(i18nKey, onChange, values, readOnly, value, clearable = false) {
+    const options = isEmpty(values) ? [] : (values[0].label ? values : values.map(val => ({value: val, label: val})));
     return (
         <section className="form-divider">
             <label>{I18n.t(i18nKey)}</label>
@@ -44,21 +31,22 @@ export function formSelectPreDefined(i18nKey, onChange, options, readOnly, value
                     options={options}
                     searchable={false}
                     value={value}
-                    clearable={false}
+                    clearable={clearable}
                     disabled={readOnly}/>
         </section>
     )
 }
 
-export function formDate(i18nKey, onChange, readOnly, value, isClearable = false) {
+export function formDate(i18nKey, onChange, readOnly, value, openToDate = moment()) {
     return (
         <section className="form-divider">
             <label>{I18n.t(i18nKey)}</label>
             <em>{I18n.t(`${i18nKey}_info`)}</em>
             <DatePicker selected={value}
-                        isClearable={isClearable}
+                        isClearable={false}
                         onChange={onChange}
-                        customInput={<DatePickerCustom disabled={readOnly}/>}
+                        openToDate={openToDate}
+                        customInput={<DatePickerCustom disabled={readOnly} onClick={onChange} clear={onChange}/>}
                         disabled={readOnly}/>
         </section>
     )

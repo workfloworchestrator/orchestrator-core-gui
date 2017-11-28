@@ -105,7 +105,13 @@ export default class Product extends React.Component {
 
     changeProperty = name => e => {
         const {product} = this.state;
-        product[name] = e.target ? e.target.value : e.value;
+        let value;
+        if (isEmpty(e) || e._isAMomentObject) {
+            value = e;
+        } else {
+            value = e.target ? e.target.value : e.value;
+        }
+        product[name] = value;
         this.setState({product: product});
     };
 
@@ -160,12 +166,9 @@ export default class Product extends React.Component {
         this.setState({product: product});
     };
 
-    workFlowKeys = (type, workflows) => {
-        const res = workflows
+    workFlowKeys = (type, workflows) => workflows
             .filter(wf => wf.target === type)
-            .map(wf => wf.key);
-        return res;
-    };
+            .map(wf => ({label: wf.name, value: wf.key}));
 
     renderFixedInputs = (product, readOnly) => {
         const fixedInputs = product.fixed_inputs;
@@ -196,7 +199,8 @@ export default class Product extends React.Component {
                         </div>
                     )}
                     {!readOnly &&
-                    <div className="add-fixed-input"><i className="fa fa-plus" onClick={this.addFixedInput}></i></div>}
+                    <div className="add-fixed-input" onClick={this.addFixedInput}>
+                        <i className="fa fa-plus"></i></div>}
                 </div>
             </section>);
     };
@@ -263,13 +267,21 @@ export default class Product extends React.Component {
                     {formSelect("metadata.products.create_subscription_workflow_key",
                         this.changeProperty("create_subscription_workflow_key"),
                         this.workFlowKeys("CREATE", workflows), readOnly,
-                        product.create_subscription_workflow_key || undefined)}
+                        product.create_subscription_workflow_key || undefined, true)}
+                    {formSelect("metadata.products.modify_subscription_workflow_key",
+                        this.changeProperty("modify_subscription_workflow_key"),
+                        this.workFlowKeys("MODIFY", workflows), readOnly,
+                        product.modify_subscription_workflow_key || undefined, true)}
+                    {formSelect("metadata.products.terminate_subscription_workflow_key",
+                        this.changeProperty("terminate_subscription_workflow_key"),
+                        this.workFlowKeys("TERMINATE", workflows), readOnly,
+                        product.terminate_subscription_workflow_key || undefined, <true></true>)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly)}
                     {formDate("metadata.products.create_date", () => false, true,
                         product.create_date ? moment(product.create_date) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
-                        product.end_date ? moment(product.end_date) : moment().add(100, "years"))}
+                        product.end_date ? moment(product.end_date) : null, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}
                 </section>
             </div>

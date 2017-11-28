@@ -200,7 +200,7 @@ export default class Products extends React.Component {
             </th>
         };
         const tdValues = columns.slice(0, columns.indexOf("create_date"));
-        const td = (name, product) => <td data-label={I18n.t(`metadata.products.${name}`)} className={name}>
+        const td = (name, product) => <td key={name} data-label={I18n.t(`metadata.products.${name}`)} className={name}>
             {product[name]}
         </td>;
 

@@ -97,7 +97,13 @@ export default class ProductBlock extends React.Component {
 
     changeProperty = name => e => {
         const {productBlock} = this.state;
-        productBlock[name] = e.target ? e.target.value : e.value;
+        let value;
+        if (isEmpty(e) || e._isAMomentObject) {
+            value = e;
+        } else {
+            value = e.target ? e.target.value : e.value;
+        }
+        productBlock[name] = value;
         this.setState({productBlock: productBlock});
     };
 
@@ -152,6 +158,7 @@ export default class ProductBlock extends React.Component {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, productBlock,
             leavePage, readOnly, resourceTypes
         } = this.state;
+        const endDate = productBlock.end_date ? moment(productBlock.end_date) : null;
         return (
             <div className="mod-product-block">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -172,7 +179,7 @@ export default class ProductBlock extends React.Component {
                     {formDate("metadata.productBlocks.create_date", () => false, true,
                         productBlock.create_date ? moment(productBlock.create_date) : moment())}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly,
-                        productBlock.end_date ? moment(productBlock.end_date) : moment().add(100, "years"))}
+                        endDate, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}
                 </section>
             </div>
