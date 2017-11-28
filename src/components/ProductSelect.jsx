@@ -11,7 +11,7 @@ export default function ProductSelect({onChange, product, products, disabled}) {
                 options={products.map(aProduct => {
                     return {value: aProduct.product_id,
                         label: aProduct.name,
-                        workflow: aProduct.workflow,
+                        workflow: aProduct.create_subscription_workflow_key,
                         tag: aProduct.tag
                     };
                 })}
