@@ -243,7 +243,6 @@ export default class Product extends React.Component {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
             leavePage, readOnly, productBlocks, workflows
         } = this.state;
-        //TODO add workflows
         return (
             <div className="mod-product">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}

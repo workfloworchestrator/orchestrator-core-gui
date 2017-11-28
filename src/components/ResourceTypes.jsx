@@ -196,7 +196,7 @@ export default class ResourceTypes extends React.Component {
                 </table>
             );
         }
-        return <div><em>{I18n.t("metadata.no_found")}</em></div>;
+        return <div><em>{I18n.t("metadata.resourceTypes.no_found")}</em></div>;
     }
 
     render() {

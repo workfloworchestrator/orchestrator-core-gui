@@ -313,7 +313,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!loadedIMSRelatedObjects) {
             return <section className="terminate-link-waiting">
                 <em>{I18n.t("subscription.fetchingImsData")}</em>
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
             </section>;
         }
         let reason = null;

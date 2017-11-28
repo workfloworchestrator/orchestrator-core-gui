@@ -42,11 +42,11 @@ export default class Products extends React.Component {
                 count: res.filter(p => p.tag === tag).length
             }));
             const newFilterAttributesType = [];
-            const uniqueTypes = [...new Set(res.map(p => p.type))];
+            const uniqueTypes = [...new Set(res.map(p => p.product_type))];
             uniqueTypes.forEach(type => newFilterAttributesType.push({
                 name: type,
                 selected: true,
-                count: res.filter(p => p.tag === type).length
+                count: res.filter(p => p.product_type === type).length
             }));
             this.setState({
                 products: res, filteredProducts: res,
@@ -86,7 +86,7 @@ export default class Products extends React.Component {
         });
 
         products = products.filter(p => {
-            const filter = filterAttributesType.find(attr => attr.name === p.type);
+            const filter = filterAttributesType.find(attr => attr.name === p.product_type);
             return filter ? filter.selected : true;
         });
 
@@ -177,9 +177,23 @@ export default class Products extends React.Component {
     };
 
     filter = item => {
-        const {filteredProducts, sorted, query, filterAttributesTag, filterAttributesType} = this.state;
+        const {products, sorted, query, filterAttributesTag, filterAttributesType} = this.state;
+        const newFilterAttributesTag = [...filterAttributesTag];
+        newFilterAttributesTag.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
+        const newFilterAttributesType = [...filterAttributesType];
+        newFilterAttributesType.forEach(attr => {
+            if (attr.name === item.name) {
+                attr.selected = !attr.selected;
+            }
+        });
         this.setState({
-            filteredProducts: this.doSearchAndSort(query, filteredProducts, sorted, filterAttributesTag, filterAttributesType)
+            filterAttributesTag: newFilterAttributesTag,
+            filterAttributesType: newFilterAttributesType,
+            filteredProducts: this.doSearchAndSort(query, products, sorted, newFilterAttributesTag, newFilterAttributesType)
         });
     };
 
@@ -231,7 +245,7 @@ export default class Products extends React.Component {
                 </table>
             );
         }
-        return <div><em>{I18n.t("metadata.no_found")}</em></div>;
+        return <div><em>{I18n.t("metadata.products.no_found")}</em></div>;
     }
 
     render() {

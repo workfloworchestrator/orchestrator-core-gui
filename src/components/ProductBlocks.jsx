@@ -211,7 +211,7 @@ export default class ProductBlocks extends React.Component {
                 </table>
             );
         }
-        return <div><em>{I18n.t("metadata.no_found")}</em></div>;
+        return <div><em>{I18n.t("metadata.productBlocks.no_found")}</em></div>;
     }
 
     render() {

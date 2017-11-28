@@ -225,6 +225,7 @@ I18n.translations.en = {
         SSP10G: "SSP10G",
         LightPath: "Light-paths",
         ELAN: "E-LAN Light-paths",
+        Port: "Port",
         MSP: "MSP",
         SSP: "SSP",
         LPNLNSI: "NSI Light-paths",
@@ -363,7 +364,8 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             select_add_product_block: "Add a Product Block...",
-            select_no_more_product_blocks: "No more Product Blocks to add"
+            select_no_more_product_blocks: "No more Product Blocks to add",
+            no_found: "No Products"
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -389,7 +391,8 @@ I18n.translations.en = {
             resourceTypes: "Resource Types",
             resourceTypes_info: "The Resource Types of this Product Block. They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             select_add_resource_type: "Add a Resource Type...",
-            select_no_more_resource_types: "No more Resource Types to add"
+            select_no_more_resource_types: "No more Resource Types to add",
+            no_found: "No Product Blocks"
         },
         resourceTypes: {
             searchPlaceHolder: "Search for Resource Types",
@@ -402,7 +405,8 @@ I18n.translations.en = {
             back: "Back to Resource Types",
             view: "View",
             edit: "Edit",
-            delete: "Delete"
+            delete: "Delete",
+            no_found: "No Resource Types"
         }
 
     },
