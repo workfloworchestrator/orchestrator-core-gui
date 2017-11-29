@@ -354,7 +354,8 @@ I18n.translations.en = {
             product_blocks: "Product Blocks",
             product_blocks_info: "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             fixed_inputs: "Fixed Inputs",
-            fixed_inputs_info: "These name / value pairs are used in the workflows for this Product. Do not change this without syncing the code",
+            fixed_inputs_info: "These name / value pairs are used in the workflows for this Product" +
+            ". Do not change this without syncing the code",
             fixed_inputs_name: "Name",
             fixed_inputs_value: "Value",
             add_fixed_input: "Add Fixed Input",
