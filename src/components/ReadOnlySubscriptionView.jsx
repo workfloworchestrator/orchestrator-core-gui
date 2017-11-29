@@ -59,8 +59,8 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
             <section className="part">
                 <label className="title">{I18n.t("subscriptions.customer_name")}</label>
                 <input type="text" readOnly={true} value={subscription.customer_name}/>
-                <label className="title">{I18n.t("subscriptions.sub_name")}</label>
-                <input type="text" readOnly={true} value={subscription.sub_name}/>
+                <label className="title">{I18n.t("subscriptions.name")}</label>
+                <input type="text" readOnly={true} value={subscription.name}/>
             </section>
             <section className="part">
                 <label className="title">{I18n.t("subscriptions.status")}</label>

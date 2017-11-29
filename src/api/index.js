@@ -1,12 +1,12 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
-    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
+    absent,
+    ims_circuit_id,
+    ims_port_id,
+    parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
-
-import product_blocks_json from "../mock/product_blocks.json";
-import resource_types_json from "../mock/resource_types.json";
 
 
 const apiPath = "/api/";
@@ -91,46 +91,43 @@ export function productById(productId) {
 }
 
 export function saveProduct(product) {
-    //isEmpty(product_id) ? post ; put
-    return Promise.resolve("TODO");
+    return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", false)
 }
 
 export function deleteProduct(id) {
-    return Promise.resolve("TODO");
+    return fetchJson(`products/${id}`, {method: "DELETE"}, {}, false, false);
 }
 
 export function productBlocks() {
-    return Promise.resolve(product_blocks_json);
+    return fetchJson("product_blocks")
 }
 
 export function productBlockById(id) {
-    return Promise.resolve([...product_blocks_json].find(pb => pb.product_block_id === id));
+    return fetchJson(`product_blocks/${id}`)
 }
 
 export function saveProductBlock(productBlock) {
-    //isEmpty(product_block_id) ? post ; put
-    return Promise.resolve("TODO");
+    return postPutJson("product_blocks", productBlock, isEmpty(productBlock.product_block_id) ? "post" : "put", false)
 }
 
 export function deleteProductBlock(id) {
-    return Promise.resolve("TODO");
+    return fetchJson(`product_blocks/${id}`, {method: "DELETE"}, {}, false, false);
 }
 
 export function resourceTypes() {
-    return Promise.resolve(resource_types_json);
+    return fetchJson("resource_types")
 }
 
 export function resourceType(id) {
-    return Promise.resolve([...resource_types_json].find(rt => rt.resource_type_id === id));
+    return fetchJson(`resource_types/${id}`)
 }
 
 export function saveResourceType(resourceType) {
-    //isEmpty(product_block_id) ? post ; put
-    return Promise.resolve("TODO");
+    return postPutJson("resource_types", resourceType, isEmpty(resourceType.resource_type_id) ? "post" : "put", false)
 }
 
 export function deleteResourceType(id) {
-    return Promise.resolve("TODO");
+    return fetchJson(`resource_types/${id}`, {method: "DELETE"}, {}, false, false);
 }
 
 //API

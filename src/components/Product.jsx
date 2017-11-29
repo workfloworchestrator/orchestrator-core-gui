@@ -27,11 +27,13 @@ export default class Product extends React.Component {
             errors: {},
             isNew: true,
             readOnly: false,
-            product: {product_blocks: [], fixed_inputs: []},
+            product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port"},
             processing: false,
             productBlocks: [],
             products: [],
-            workflows: []
+            workflows: [],
+            optionalAttributes: ["crm_prod_id"],
+            duplicate_name: false
         };
     }
 
@@ -95,7 +97,9 @@ export default class Product extends React.Component {
         const value = e.target.value;
         const errors = {...this.state.errors};
         if (name === "name") {
-            errors[name] = this.state.products.some(p => p.name === value)
+            const duplicate = this.state.products.some(p => p.name === value);
+            errors[name] = duplicate;
+            this.setState({duplicate_name: duplicate});
         }
         errors[name] = isEmpty(value);
         this.setState({errors: errors});
@@ -239,7 +243,7 @@ export default class Product extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
-            leavePage, readOnly, productBlocks, workflows
+            leavePage, readOnly, productBlocks, workflows, duplicate_name
         } = this.state;
         return (
             <div className="mod-product">
@@ -249,7 +253,8 @@ export default class Product extends React.Component {
                                     leavePage={leavePage}/>
                 <section className="card">
                     {formInput("metadata.products.name", "name", product.name || "", readOnly,
-                        this.state.errors, this.changeProperty("name"), this.validateProperty("name"))}
+                        this.state.errors, this.changeProperty("name"), this.validateProperty("name"),
+                        duplicate_name ? I18n.t("metadata.products.duplicate_name") : null)}
                     {formInput("metadata.products.description", "description", product.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
                     {formInput("metadata.products.tag", "tag", product.tag || "", readOnly,
@@ -275,8 +280,8 @@ export default class Product extends React.Component {
                         product.terminate_subscription_workflow_key || undefined, <true></true>)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly)}
-                    {formDate("metadata.products.create_date", () => false, true,
-                        product.create_date ? moment(product.create_date) : moment())}
+                    {formDate("metadata.products.created_at", () => false, true,
+                        product.start_date ? moment(product.start_date) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
                         product.end_date ? moment(product.end_date) : null, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}

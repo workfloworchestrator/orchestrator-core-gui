@@ -83,9 +83,20 @@ export default class ResourceTypes extends React.Component {
                 type: "Resource Type",
                 name: resourceType.resource_type
             }), () =>
-                deleteResourceType(resourceType.resource_type_id).then(() => {
-                    this.componentDidMount();
-                    setFlash(I18n.t("metadata.flash.delete", {type: "Resource Type", name: resourceType.resource_type}));
+                deleteResourceType(resourceType.resource_type_id)
+                    .then(() => {
+                        this.componentDidMount();
+                        setFlash(I18n.t("metadata.flash.delete", {
+                            type: "Resource Type",
+                            name: resourceType.resource_type
+                        }));
+                    }).catch(err => {
+                    if (err.response && err.response.status === 400) {
+                        debugger;
+                        setFlash(err.response.json["error"], "error")
+                    } else {
+                        throw err;
+                    }
                 })
         );
     };

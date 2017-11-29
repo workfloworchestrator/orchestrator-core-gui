@@ -161,8 +161,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <input type="text" readOnly={true} value={subscription.description}/>
                 <label className="title">{I18n.t("subscriptions.product_name")}</label>
                 <input type="text" readOnly={true} value={subscription.product_name}/>
-                <label className="title">{I18n.t("subscriptions.sub_name")}</label>
-                <input type="text" readOnly={true} value={subscription.sub_name}/>
+                <label className="title">{I18n.t("subscriptions.name")}</label>
+                <input type="text" readOnly={true} value={subscription.name}/>
                 {showLink && <NavLink to={`/subscription/${subscription.subscription_id}`}
                                       className="button green subscription-link">
                     <i className="fa fa-link"></i> {I18n.t("subscription.link_subscription")}</NavLink>}
@@ -278,7 +278,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </section>
                     <section>
                         <label className="title">{I18n.t("subscription.product.created")}</label>
-                        <input type="text" readOnly={true} value={renderDate(product.create_date)}/>
+                        <input type="text" readOnly={true} value={renderDate(product.start_date)}/>
                         <label className="title">{I18n.t("subscription.product.end_date")}</label>
                         <input type="text" readOnly={true} value={renderDate(product.end_date)}/>
                         <label className="title">{I18n.t("subscription.product.status")}</label>

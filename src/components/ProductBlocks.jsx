@@ -160,7 +160,7 @@ export default class ProductBlocks extends React.Component {
     };
 
     renderProductBlocks(productBlocks, actions, sorted) {
-        const columns = ["name", "description", "status", "tag", "resource_types", "create_date", "actions"];
+        const columns = ["name", "description", "status", "tag", "resource_types", "start_date", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -195,9 +195,9 @@ export default class ProductBlocks extends React.Component {
                             <td data-label={I18n.t("metadata.productBlocks.resource_types")} className="resource_types">
                                 {productBlock.resource_types.map(rt => rt.resource_type).join(", ")}
                             </td>
-                            <td data-label={I18n.t("metadata.productBlocks.create_date")}
+                            <td data-label={I18n.t("metadata.productBlocks.start_date")}
                                 className="started">
-                                {renderDate(productBlock.create_date)}
+                                {renderDate(productBlock.start_date)}
                             </td>
                             <td data-label={I18n.t("metadata.productBlocks.actions")} className="actions"
                                 onClick={this.toggleActions(productBlock, actions)}

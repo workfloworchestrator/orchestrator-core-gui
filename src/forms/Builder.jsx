@@ -7,7 +7,7 @@ import {isEmpty} from "../utils/Utils";
 import * as moment from "moment";
 
 
-export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBlur = () => true ) {
+export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBlur = () => true, additionalError = null) {
     return (
         <section className="form-divider">
             <label htmlFor={name}>{I18n.t(i18nKey)}</label>
@@ -17,7 +17,10 @@ export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBl
                    disabled={readOnly}/>
             {errors[name] &&
             <em className="error">{I18n.t("process.format_error")}</em>}
-        </section>    )
+            {additionalError &&
+            <em className="error">{additionalError}</em>}
+        </section>
+    )
 }
 
 export function formSelect(i18nKey, onChange, values, readOnly, value, clearable = false) {

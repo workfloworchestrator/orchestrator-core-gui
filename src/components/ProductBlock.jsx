@@ -147,7 +147,7 @@ export default class ProductBlock extends React.Component {
                                           clearable={false}
                                           placeholder={availableResourceTypes.length > 0 ?
                                               I18n.t("metadata.productBlocks.select_add_resource_type") :
-                                              I18n.t("metadata.productBlocksw.select_no_more_resource_types")}
+                                              I18n.t("metadata.productBlocks.select_no_more_resource_types")}
                                           disabled={readOnly || availableResourceTypes.length === 0}/>}
                 </div>
             </section>);
@@ -176,8 +176,8 @@ export default class ProductBlock extends React.Component {
                         ["active", "phase out", "pre production", "end of life"], readOnly,
                         productBlock.status || "active")}
                     {this.renderResourceTypes(productBlock, resourceTypes, readOnly)}
-                    {formDate("metadata.productBlocks.create_date", () => false, true,
-                        productBlock.create_date ? moment(productBlock.create_date) : moment())}
+                    {formDate("metadata.productBlocks.start_date", () => false, true,
+                        productBlock.start_date ? moment(productBlock.start_date) : moment())}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly,
                         endDate, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}

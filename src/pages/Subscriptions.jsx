@@ -79,7 +79,7 @@ export default class Subscriptions extends React.PureComponent {
     doSearchAndSortAndFilter = (query, subscriptions, sorted, filterAttributesProduct, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["customer_name", "description", "product_name", "status", "sub_name"];
+            const searchable = ["customer_name", "description", "product_name", "status", "name"];
             subscriptions = subscriptions.filter(subscription =>
                 searchable.map(search => subscription[search].toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)

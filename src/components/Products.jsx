@@ -8,7 +8,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import "./Products.css";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-import {renderDate} from "../utils/Lookups";
+import {renderDateTime} from "../utils/Lookups";
 import {deleteProduct, products} from "../api/index";
 import FilterDropDown from "./FilterDropDown";
 
@@ -205,7 +205,7 @@ export default class Products extends React.Component {
     };
 
     renderProducts(products, actions, sorted) {
-        const columns = ["name", "description", "tag", "product_type", "status", "crm_prod_id", "create_date", "actions"];
+        const columns = ["name", "description", "tag", "product_type", "status", "crm_prod_id", "created_at", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -213,7 +213,7 @@ export default class Products extends React.Component {
                 {this.sortColumnIcon(name, sorted)}
             </th>
         };
-        const tdValues = columns.slice(0, columns.indexOf("create_date"));
+        const tdValues = columns.slice(0, columns.indexOf("created_at"));
         const td = (name, product) => <td key={name} data-label={I18n.t(`metadata.products.${name}`)} className={name}>
             {product[name]}
         </td>;
@@ -229,9 +229,9 @@ export default class Products extends React.Component {
                         <tr key={`${product.product_id}_${index}`}
                             onClick={this.editProduct(product, false, false)}>
                             {tdValues.map(tdValue => td(tdValue, product))}
-                            <td data-label={I18n.t("metadata.products.create_date")}
-                                className="started">
-                                {renderDate(product.create_date)}
+                            <td data-label={I18n.t("metadata.products.created_at")}
+                                className="created_at">
+                                {renderDateTime(product.created_at)}
                             </td>
                             <td data-label={I18n.t("metadata.products.actions")} className="actions"
                                 onClick={this.toggleActions(product, actions)}
