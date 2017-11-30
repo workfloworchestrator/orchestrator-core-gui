@@ -23,7 +23,7 @@ export default class ResourceType extends React.Component {
             cancelDialogAction: () => this.props.history.push("/metadata/resource_types"),
             leavePage: true,
             errors: {},
-            required: ["name", "description"],
+            required: ["resource_type", "description"],
             duplicateName: false,
             initial: true,
             isNew: true,
@@ -100,7 +100,7 @@ export default class ResourceType extends React.Component {
     validateProperty = name => e => {
         const value = e.target.value;
         const errors = {...this.state.errors};
-        if (name === "name") {
+        if (name === "resource_type") {
             const duplicate = this.state.resourceTypes.some(rt => rt.resource_type === value);
             errors[name] = duplicate;
             this.setState({duplicateName: duplicate});

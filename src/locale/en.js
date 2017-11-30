@@ -411,7 +411,7 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             no_found: "No Resource Types",
-            duplicate_name: "This name is already taken. Resource Types names need to be unique"
+            duplicate_name: "This type is already taken. Resource Types types need to be unique"
         }
 
     },
