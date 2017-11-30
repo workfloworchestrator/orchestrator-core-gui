@@ -277,13 +277,13 @@ export default class Product extends React.Component {
                     {formSelect("metadata.products.terminate_subscription_workflow_key",
                         this.changeProperty("terminate_subscription_workflow_key"),
                         this.workFlowKeys("TERMINATE", workflows), readOnly,
-                        product.terminate_subscription_workflow_key || undefined, <true></true>)}
+                        product.terminate_subscription_workflow_key || undefined, true)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly)}
                     {formDate("metadata.products.created_at", () => false, true,
-                        product.start_date ? moment(product.start_date) : moment())}
+                        product.start_date ? moment(product.start_date * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
-                        product.end_date ? moment(product.end_date) : null, moment().add(100, "years"))}
+                        product.end_date ? moment(product.end_date * 1000) : null, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}
                 </section>
             </div>

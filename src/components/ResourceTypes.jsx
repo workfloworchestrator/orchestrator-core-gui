@@ -92,8 +92,7 @@ export default class ResourceTypes extends React.Component {
                         }));
                     }).catch(err => {
                     if (err.response && err.response.status === 400) {
-                        debugger;
-                        setFlash(err.response.json["error"], "error")
+                        err.response.json().then(json => setFlash(json["error"], "error"));
                     } else {
                         throw err;
                     }

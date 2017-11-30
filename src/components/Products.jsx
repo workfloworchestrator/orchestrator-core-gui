@@ -114,10 +114,16 @@ export default class Products extends React.Component {
         this.confirmation(I18n.t("metadata.deleteConfirmation", {
                 type: "Product",
                 name: product.name
-            }), () =>
-                deleteProduct(product.product_id).then(() => {
+            }), () => deleteProduct(product.product_id)
+                .then(() => {
                     this.componentDidMount();
                     setFlash(I18n.t("metadata.flash.delete", {name: product.name, type: "Product"}));
+                }).catch(err => {
+                    if (err.response && err.response.status === 400) {
+                        err.response.json().then(json => setFlash(json["error"], "error"));
+                    } else {
+                        throw err;
+                    }
                 })
         );
     };

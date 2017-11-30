@@ -158,7 +158,7 @@ export default class ProductBlock extends React.Component {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, productBlock,
             leavePage, readOnly, resourceTypes
         } = this.state;
-        const endDate = productBlock.end_date ? moment(productBlock.end_date) : null;
+        const endDate = productBlock.end_date ? moment(productBlock.end_date * 1000) : null;
         return (
             <div className="mod-product-block">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -176,8 +176,8 @@ export default class ProductBlock extends React.Component {
                         ["active", "phase out", "pre production", "end of life"], readOnly,
                         productBlock.status || "active")}
                     {this.renderResourceTypes(productBlock, resourceTypes, readOnly)}
-                    {formDate("metadata.productBlocks.start_date", () => false, true,
-                        productBlock.start_date ? moment(productBlock.start_date) : moment())}
+                    {formDate("metadata.productBlocks.created_at", () => false, true,
+                        productBlock.created_at ? moment(productBlock.created_at * 1000) : moment())}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly,
                         endDate, moment().add(100, "years"))}
                     {this.renderButtons(readOnly)}

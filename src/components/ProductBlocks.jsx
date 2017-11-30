@@ -8,7 +8,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import "./ProductBlocks.css";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-import {renderDate} from "../utils/Lookups";
+import {renderDateTime} from "../utils/Lookups";
 import {deleteProductBlock, productBlocks} from "../api/index";
 
 export default class ProductBlocks extends React.Component {
@@ -83,10 +83,16 @@ export default class ProductBlocks extends React.Component {
         this.confirmation(I18n.t("metadata.deleteConfirmation", {
                 type: "Product Block",
                 name: productBlock.name
-            }), () =>
-                deleteProductBlock(productBlock.product_block_id).then(() => {
+            }), () => deleteProductBlock(productBlock.product_block_id)
+                .then(() => {
                     this.componentDidMount();
                     setFlash(I18n.t("metadata.flash.delete", {name: productBlock.name, type: "Product Block"}));
+                }).catch(err => {
+                    if (err.response && err.response.status === 400) {
+                        err.response.json().then(json => setFlash(json["error"], "error"));
+                    } else {
+                        throw err;
+                    }
                 })
         );
     };
@@ -160,7 +166,7 @@ export default class ProductBlocks extends React.Component {
     };
 
     renderProductBlocks(productBlocks, actions, sorted) {
-        const columns = ["name", "description", "status", "tag", "resource_types", "start_date", "actions"];
+        const columns = ["name", "description", "status", "tag", "resource_types", "created_at", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -195,9 +201,9 @@ export default class ProductBlocks extends React.Component {
                             <td data-label={I18n.t("metadata.productBlocks.resource_types")} className="resource_types">
                                 {productBlock.resource_types.map(rt => rt.resource_type).join(", ")}
                             </td>
-                            <td data-label={I18n.t("metadata.productBlocks.start_date")}
+                            <td data-label={I18n.t("metadata.productBlocks.created_at")}
                                 className="started">
-                                {renderDate(productBlock.start_date)}
+                                {renderDateTime(productBlock.created_at)}
                             </td>
                             <td data-label={I18n.t("metadata.productBlocks.actions")} className="actions"
                                 onClick={this.toggleActions(productBlock, actions)}
