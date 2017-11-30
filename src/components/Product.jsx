@@ -27,7 +27,7 @@ export default class Product extends React.Component {
             errors: {},
             isNew: true,
             readOnly: false,
-            product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port"},
+            product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port", tag: "LightPath"},
             processing: false,
             productBlocks: [],
             products: [],
@@ -257,8 +257,8 @@ export default class Product extends React.Component {
                         duplicate_name ? I18n.t("metadata.products.duplicate_name") : null)}
                     {formInput("metadata.products.description", "description", product.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
-                    {formInput("metadata.products.tag", "tag", product.tag || "", readOnly,
-                        this.state.errors, this.changeProperty("tag"), this.validateProperty("tag"))}
+                    {formSelect("metadata.products.tag", this.changeProperty("tag"),
+                        ["LightPath", "MSP", "LPNLNSI", "ELAN", "SSP"], readOnly, product.tag || "LightPath")}
                     {formSelect("metadata.products.product_type", this.changeProperty("product_type"),
                         ["Port", "LightPath", "ELAN"], readOnly, product.product_type || "Port")}
                     {formSelect("metadata.products.status", this.changeProperty("status"),
