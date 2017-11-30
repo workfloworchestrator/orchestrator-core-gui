@@ -359,6 +359,7 @@ I18n.translations.en = {
             fixed_inputs_name: "Name",
             fixed_inputs_value: "Value",
             add_fixed_input: "Add Fixed Input",
+            duplicate_fixed_input_name: "Duplicate Fixed Input names are not allowed",
             actions: "",
             back: "Back to Product Blocks",
             view: "View",
@@ -394,7 +395,8 @@ I18n.translations.en = {
             resourceTypes_info: "The Resource Types of this Product Block. They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             select_add_resource_type: "Add a Resource Type...",
             select_no_more_resource_types: "No more Resource Types to add",
-            no_found: "No Product Blocks"
+            no_found: "No Product Blocks",
+            duplicate_name: "This name is already taken. Product Block names need to be unique"
         },
         resourceTypes: {
             searchPlaceHolder: "Search for Resource Types",
@@ -408,7 +410,8 @@ I18n.translations.en = {
             view: "View",
             edit: "Edit",
             delete: "Delete",
-            no_found: "No Resource Types"
+            no_found: "No Resource Types",
+            duplicate_name: "This name is already taken. Resource Types names need to be unique"
         }
 
     },

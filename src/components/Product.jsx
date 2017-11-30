@@ -25,15 +25,18 @@ export default class Product extends React.Component {
             cancelDialogAction: () => this.props.history.push("/metadata/product_blocks"),
             leavePage: true,
             errors: {},
+            required: ["name", "description", "status", "product_type", "tag"],
             isNew: true,
+            initial: true,
             readOnly: false,
             product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port", tag: "LightPath"},
             processing: false,
             productBlocks: [],
             products: [],
             workflows: [],
+            duplicateFixedInputNames: {},
             optionalAttributes: ["crm_prod_id"],
-            duplicate_name: false
+            duplicateName: false
         };
     }
 
@@ -60,7 +63,7 @@ export default class Product extends React.Component {
     submit = e => {
         stop(e);
         const {product, processing} = this.state;
-        const invalid = this.isInvalid() || processing;
+        const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({processing: true});
             saveProduct(product).then(() => {
@@ -68,11 +71,12 @@ export default class Product extends React.Component {
                 setFlash(I18n.t(product.product_id ? "metadata.flash.updated" : "metadata.flash.created",
                     {type: "Product", name: product.name}));
             });
-
+        } else {
+            this.setState({initial: false});
         }
     };
 
-    renderButtons = (readOnly) => {
+    renderButtons = (readOnly, initial) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/products")}>
@@ -80,7 +84,7 @@ export default class Product extends React.Component {
                 </a>
             </section>);
         }
-        const invalid = this.isInvalid() || this.state.processing;
+        const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
@@ -91,7 +95,19 @@ export default class Product extends React.Component {
         </section>);
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
+    isInvalid = (markErrors = false) => {
+        const {errors, required, product, duplicateName, duplicateFixedInputNames} = this.state;
+        const hasErrors = Object.keys(errors).some(key => errors[key]);
+        const requiredInputMissing = required.some(attr => isEmpty(product[attr]));
+        const duplicatedFixedInput = Object.keys(duplicateFixedInputNames).some(key => duplicateFixedInputNames[key]);
+        if (markErrors) {
+            const missing = required.filter(attr => isEmpty(product[attr]));
+            const newErrors = {...errors};
+            missing.forEach(attr => newErrors[attr] = true);
+            this.setState({errors: newErrors});
+        }
+        return hasErrors || requiredInputMissing || duplicateName || duplicatedFixedInput;
+    };
 
     validateProperty = name => e => {
         const value = e.target.value;
@@ -99,7 +115,7 @@ export default class Product extends React.Component {
         if (name === "name") {
             const duplicate = this.state.products.some(p => p.name === value);
             errors[name] = duplicate;
-            this.setState({duplicate_name: duplicate});
+            this.setState({duplicateName: duplicate});
         }
         errors[name] = isEmpty(value);
         this.setState({errors: errors});
@@ -146,11 +162,13 @@ export default class Product extends React.Component {
         const product = {...this.state.product};
         const newName = e.target.value;
         const fixedInput = product.fixed_inputs[index];
-        const nameDuplicate = product.fixed_inputs.some(fi => fi.name === newName);
-        if (!nameDuplicate) {
-            fixedInput.name = newName;
-            this.setState({product: product});
-        }
+        fixedInput.name = newName;
+        this.setState({product: product}, () => {
+            const nameDuplicate = product.fixed_inputs.filter(fi => fi.name === newName).length > 1;
+            const newDuplicateFixedInputNames = {...this.state.duplicateFixedInputNames };
+            newDuplicateFixedInputNames[index] = nameDuplicate;
+            this.setState({duplicateFixedInputNames: newDuplicateFixedInputNames})
+        });
     };
 
     fixedInputValueChanged = (index) => e => {
@@ -172,7 +190,7 @@ export default class Product extends React.Component {
             .filter(wf => wf.target === type)
             .map(wf => ({label: wf.name, value: wf.key}));
 
-    renderFixedInputs = (product, readOnly) => {
+    renderFixedInputs = (product, readOnly, duplicateFixedInputNames) => {
         const fixedInputs = product.fixed_inputs;
         return (
             <section className="form-divider">
@@ -191,6 +209,7 @@ export default class Product extends React.Component {
                                        type="text"
                                        value={fv.name} onChange={this.fixedInputNameChanged(index)}
                                        disabled={readOnly}/>
+                                {duplicateFixedInputNames[index] && <em className="error">{I18n.t("metadata.products.duplicate_fixed_input_name")}</em>}
                             </div>
                             <div className="wrapper">
                                 {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
@@ -243,7 +262,7 @@ export default class Product extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
-            leavePage, readOnly, productBlocks, workflows, duplicate_name
+            leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames
         } = this.state;
         return (
             <div className="mod-product">
@@ -254,7 +273,7 @@ export default class Product extends React.Component {
                 <section className="card">
                     {formInput("metadata.products.name", "name", product.name || "", readOnly,
                         this.state.errors, this.changeProperty("name"), this.validateProperty("name"),
-                        duplicate_name ? I18n.t("metadata.products.duplicate_name") : null)}
+                        duplicateName ? I18n.t("metadata.products.duplicate_name") : null)}
                     {formInput("metadata.products.description", "description", product.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
                     {formSelect("metadata.products.tag", this.changeProperty("tag"),
@@ -265,7 +284,7 @@ export default class Product extends React.Component {
                         ["active", "phase out", "pre production", "end of life"], readOnly,
                         product.status || "active")}
                     {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
-                        this.state.errors, this.changeProperty("crm_prod_id"), this.validateProperty("crm_prod_id"))}
+                        this.state.errors, this.changeProperty("crm_prod_id"), () => false)}
                     {formSelect("metadata.products.create_subscription_workflow_key",
                         this.changeProperty("create_subscription_workflow_key"),
                         this.workFlowKeys("CREATE", workflows), readOnly,
@@ -279,12 +298,12 @@ export default class Product extends React.Component {
                         this.workFlowKeys("TERMINATE", workflows), readOnly,
                         product.terminate_subscription_workflow_key || undefined, true)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
-                    {this.renderFixedInputs(product, readOnly)}
+                    {this.renderFixedInputs(product, readOnly, duplicateFixedInputNames)}
                     {formDate("metadata.products.created_at", () => false, true,
                         product.start_date ? moment(product.start_date * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
                         product.end_date ? moment(product.end_date * 1000) : null, moment().add(100, "years"))}
-                    {this.renderButtons(readOnly)}
+                    {this.renderButtons(readOnly, initial)}
                 </section>
             </div>
         );

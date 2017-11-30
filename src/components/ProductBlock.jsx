@@ -25,9 +25,12 @@ export default class ProductBlock extends React.Component {
             cancelDialogAction: () => this.props.history.push("/metadata/product_blocks"),
             leavePage: true,
             errors: {},
+            required: ["name", "description"],
+            duplicateName: false,
+            initial: true,
             isNew: true,
             readOnly: false,
-            productBlock: {resource_types: []},
+            productBlock: {resource_types: [], status: "active"},
             processing: false,
             resourceTypes: [],
             productBlocks: []
@@ -52,7 +55,7 @@ export default class ProductBlock extends React.Component {
     submit = e => {
         stop(e);
         const {productBlock, processing} = this.state;
-        const invalid = this.isInvalid() || processing;
+        const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({processing: true});
             saveProductBlock(productBlock).then(() => {
@@ -60,11 +63,12 @@ export default class ProductBlock extends React.Component {
                 setFlash(I18n.t(productBlock.product_block_id ? "metadata.flash.updated" : "metadata.flash.created",
                     {type: "Product Block", name: productBlock.name}));
             });
-
+        } else {
+            this.setState({initial: false});
         }
     };
 
-    renderButtons = (readOnly) => {
+    renderButtons = (readOnly, initial) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/product_blocks")}>
@@ -72,7 +76,7 @@ export default class ProductBlock extends React.Component {
                 </a>
             </section>);
         }
-        const invalid = this.isInvalid() || this.state.processing;
+        const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
@@ -83,13 +87,27 @@ export default class ProductBlock extends React.Component {
         </section>);
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
+    isInvalid = (markErrors = false) => {
+        const {errors, required, productBlock, duplicateName} = this.state;
+        const hasErrors = Object.keys(errors).some(key => errors[key]);
+        const requiredInputMissing = required.some(attr => isEmpty(productBlock[attr]));
+        if (markErrors) {
+            const missing = required.filter(attr => isEmpty(productBlock[attr]));
+            const newErrors = {...errors};
+            missing.forEach(attr => newErrors[attr] = true);
+            this.setState({errors: newErrors});
+        }
+
+        return hasErrors || requiredInputMissing || duplicateName
+    };
 
     validateProperty = name => e => {
         const value = e.target.value;
         const errors = {...this.state.errors};
         if (name === "name") {
-            errors[name] = this.state.productBlocks.some(p => p.name === value)
+            const duplicate = this.state.productBlocks.some(p => p.name === value);
+            errors[name] = duplicate;
+            this.setState({duplicateName: duplicate});
         }
         errors[name] = isEmpty(value);
         this.setState({errors: errors});
@@ -156,7 +174,7 @@ export default class ProductBlock extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, productBlock,
-            leavePage, readOnly, resourceTypes
+            leavePage, readOnly, resourceTypes, duplicateName, initial
         } = this.state;
         const endDate = productBlock.end_date ? moment(productBlock.end_date * 1000) : null;
         return (
@@ -167,11 +185,12 @@ export default class ProductBlock extends React.Component {
                                     leavePage={leavePage}/>
                 <section className="card">
                     {formInput("metadata.productBlocks.name", "name", productBlock.name || "", readOnly,
-                        this.state.errors, this.changeProperty("name"), this.validateProperty("name"))}
+                        this.state.errors, this.changeProperty("name"), this.validateProperty("name"),
+                        duplicateName ? I18n.t("metadata.productBlocks.duplicate_name") : null)}
                     {formInput("metadata.productBlocks.description", "description", productBlock.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
                     {formInput("metadata.productBlocks.tag", "tag", productBlock.tag || "", readOnly,
-                        this.state.errors, this.changeProperty("tag"), this.validateProperty("tag"))}
+                        this.state.errors, this.changeProperty("tag"), () => true)}
                     {formSelect("metadata.productBlocks.status", this.changeProperty("status"),
                         ["active", "phase out", "pre production", "end of life"], readOnly,
                         productBlock.status || "active")}
@@ -180,7 +199,7 @@ export default class ProductBlock extends React.Component {
                         productBlock.created_at ? moment(productBlock.created_at * 1000) : moment())}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly,
                         endDate, moment().add(100, "years"))}
-                    {this.renderButtons(readOnly)}
+                    {this.renderButtons(readOnly, initial)}
                 </section>
             </div>
         );

@@ -24,9 +24,13 @@
         align-items: center;
         margin-bottom: 10px;
         div.wrapper {
+            position: relative;
             flex-grow: 2;
             &:first-child {
                 margin-right: 25px;
+            }
+            em {
+                position: absolute;
             }
         }
         i.fa-minus {

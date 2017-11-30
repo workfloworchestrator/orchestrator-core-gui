@@ -23,6 +23,9 @@ export default class ResourceType extends React.Component {
             cancelDialogAction: () => this.props.history.push("/metadata/resource_types"),
             leavePage: true,
             errors: {},
+            required: ["name", "description"],
+            duplicateName: false,
+            initial: true,
             isNew: true,
             readOnly: false,
             resourceType: {},
@@ -48,7 +51,7 @@ export default class ResourceType extends React.Component {
     submit = e => {
         stop(e);
         const {resourceType, processing} = this.state;
-        const invalid = this.isInvalid() || processing;
+        const invalid = this.isInvalid(true) || processing;
         if (!invalid) {
             this.setState({processing: true});
             saveResourceType(resourceType).then(() => {
@@ -57,10 +60,12 @@ export default class ResourceType extends React.Component {
                     {type: "Resource Type", name: resourceType.resource_type}));
             });
 
+        }else {
+            this.setState({initial: false});
         }
     };
 
-    renderButtons = (readOnly) => {
+    renderButtons = (readOnly, initial) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/resource_types")}>
@@ -68,7 +73,7 @@ export default class ResourceType extends React.Component {
                 </a>
             </section>);
         }
-        const invalid = this.isInvalid() || this.state.processing;
+        const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
@@ -79,13 +84,26 @@ export default class ResourceType extends React.Component {
         </section>);
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
+    isInvalid = (markErrors = false) => {
+        const {errors, required, resourceType, duplicateName} = this.state;
+        const hasErrors = Object.keys(errors).some(key => errors[key]);
+        const requiredInputMissing = required.some(attr => isEmpty(resourceType[attr]));
+        if (markErrors) {
+            const missing = required.filter(attr => isEmpty(resourceType[attr]));
+            const newErrors = {...errors};
+            missing.forEach(attr => newErrors[attr] = true);
+            this.setState({errors: newErrors});
+        }
+        return hasErrors || requiredInputMissing || duplicateName
+    };
 
     validateProperty = name => e => {
         const value = e.target.value;
         const errors = {...this.state.errors};
-        if (name === "resource_type") {
-            errors[name] = this.state.resourceTypes.some(rt => rt.resource_type === value)
+        if (name === "name") {
+            const duplicate = this.state.resourceTypes.some(rt => rt.resource_type === value);
+            errors[name] = duplicate;
+            this.setState({duplicateName: duplicate});
         }
         errors[name] = isEmpty(value);
         this.setState({errors: errors});
@@ -100,7 +118,7 @@ export default class ResourceType extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, resourceType,
-            leavePage, readOnly
+            leavePage, readOnly, duplicateName, initial
         } = this.state;
         return (
             <div className="mod-resource-type">
@@ -110,10 +128,11 @@ export default class ResourceType extends React.Component {
                                     leavePage={leavePage}/>
                 <section className="card">
                     {formInput("metadata.resourceTypes.resource_type", "resource_type", resourceType.resource_type || "",
-                        readOnly, this.state.errors, this.changeProperty("resource_type"), this.validateProperty("resource_type"))}
+                        readOnly, this.state.errors, this.changeProperty("resource_type"), this.validateProperty("resource_type"),
+                        duplicateName ? I18n.t("metadata.resourceTypes.duplicate_name") : null)}
                     {formInput("metadata.resourceTypes.description", "description", resourceType.description || "",
                         readOnly, this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
-                    {this.renderButtons(readOnly)}
+                    {this.renderButtons(readOnly, initial)}
                 </section>
             </div>
         );
