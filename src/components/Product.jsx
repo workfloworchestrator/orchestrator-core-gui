@@ -22,7 +22,7 @@ export default class Product extends React.Component {
         this.state = {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
-            cancelDialogAction: () => this.props.history.push("/metadata/product_blocks"),
+            cancelDialogAction: () => this.props.history.push("/metadata/products"),
             leavePage: true,
             errors: {},
             required: ["name", "description", "status", "product_type", "tag"],

@@ -192,20 +192,24 @@ export default class Products extends React.Component {
         });
     };
 
-    filter = item => {
+    filter = name => item => {
         const {products, sorted, query, filterAttributesTag, filterAttributesType} = this.state;
         const newFilterAttributesTag = [...filterAttributesTag];
-        newFilterAttributesTag.forEach(attr => {
-            if (attr.name === item.name) {
-                attr.selected = !attr.selected;
-            }
-        });
+        if (name === "tag") {
+            newFilterAttributesTag.forEach(attr => {
+                if (attr.name === item.name) {
+                    attr.selected = !attr.selected;
+                }
+            });
+        }
         const newFilterAttributesType = [...filterAttributesType];
-        newFilterAttributesType.forEach(attr => {
-            if (attr.name === item.name) {
-                attr.selected = !attr.selected;
-            }
-        });
+        if (name === "type") {
+            newFilterAttributesType.forEach(attr => {
+                if (attr.name === item.name) {
+                    attr.selected = !attr.selected;
+                }
+            });
+        }
         this.setState({
             filterAttributesTag: newFilterAttributesTag,
             filterAttributesType: newFilterAttributesType,
@@ -277,10 +281,10 @@ export default class Products extends React.Component {
                                     question={confirmationDialogQuestion}/>
                 <div className="options">
                     <FilterDropDown items={filterAttributesTag}
-                                    filterBy={this.filter}
+                                    filterBy={this.filter("tag")}
                                     label={I18n.t("metadata.products.tag")}/>
                     <FilterDropDown items={filterAttributesType}
-                                    filterBy={this.filter}
+                                    filterBy={this.filter("type")}
                                     label={I18n.t("metadata.products.product_type")}/>
                     <section className="search">
                         <input className="allowed"
