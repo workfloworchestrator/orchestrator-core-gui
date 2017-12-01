@@ -210,7 +210,7 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
             case "ssp_product" :
-                return <ProductSelect products={this.props.products.filter(prod => prod.tag.toLowerCase() === "ssp")}
+                return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
                                       onChange={this.changeSelectInput(name)}
                                       product={userInput.value}/>;
             case "contact_persons" :

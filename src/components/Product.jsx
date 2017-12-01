@@ -26,7 +26,6 @@ export default class Product extends React.Component {
             leavePage: true,
             errors: {},
             required: ["name", "description", "status", "product_type", "tag"],
-            isNew: true,
             initial: true,
             readOnly: false,
             product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port", tag: "LightPath"},
@@ -44,8 +43,13 @@ export default class Product extends React.Component {
         const id = this.props.match.params.id;
         if (id !== "new") {
             const readOnly = getParameterByName("readOnly", window.location.search) === "true";
-            productById(id).then(res => {
-                this.setState({product: res, isNew: false, readOnly: readOnly})
+            const clone = id === "clone";
+            productById(clone ? getParameterByName("productId", window.location.search) : id).then(res => {
+                if (clone) {
+                    delete res.name;
+                    delete res.product_id;
+                }
+                this.setState({product: res, readOnly: readOnly})
             });
         }
         Promise.all([productBlocks(), allWorkflows(), products()]).then(res => this.setState({

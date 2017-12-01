@@ -94,9 +94,11 @@ export default class NewProcess extends React.Component {
                         <section className="form-divider">
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
-                            <ProductSelect products={this.props.products.filter(prod => prod.tag.toLowerCase() !== "ssp")}
-                                           onChange={this.changeProduct}
-                                           product={isEmpty(product) ? undefined : product.value}/>
+                            <ProductSelect
+                                products={this.props.products.filter(prod => prod.tag !== "SSP" &&
+                                    !isEmpty(prod.create_subscription_workflow_key))}
+                                onChange={this.changeProduct}
+                                product={isEmpty(product) ? undefined : product.value}/>
                         </section>
                         {showProductValidation &&
                         <section>

@@ -352,6 +352,7 @@ I18n.translations.en = {
             end_date: "End Date",
             end_date_info: "The end date of this Product. This is currently not used",
             product_blocks: "Product Blocks",
+            product_blocks_string: "Product Blocks",
             product_blocks_info: "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             fixed_inputs: "Fixed Inputs",
             fixed_inputs_info: "These name / value pairs are used in the workflows for this Product" +
@@ -365,6 +366,7 @@ I18n.translations.en = {
             view: "View",
             edit: "Edit",
             delete: "Delete",
+            clone: "Clone",
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",

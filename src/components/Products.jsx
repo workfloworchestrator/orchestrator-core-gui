@@ -32,8 +32,11 @@ export default class Products extends React.Component {
         };
     }
 
+
     componentDidMount() {
         products().then(res => {
+            res.forEach(prod => prod.product_blocks_string = (prod.product_blocks || [])
+                .map(pb => pb.name).join(", "));
             const newFilterAttributesTag = [];
             const uniqueTags = [...new Set(res.map(p => p.tag))];
             uniqueTags.forEach(tag => newFilterAttributesTag.push({
@@ -58,8 +61,10 @@ export default class Products extends React.Component {
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
-    editProduct = (product, readOnly = true, newProduct = false) => () => {
-        this.props.history.push(`/product/${newProduct ? 'new' : product.product_id}?readOnly=${readOnly}`)
+    editProduct = (product, readOnly = true, newProduct = false, clone = false) => () => {
+        const productId = clone ? "clone" : (newProduct ? "new" : product.product_id);
+        const cloneId = clone ? `&productId=${product.product_id}` : "";
+        this.props.history.push(`/product/${productId}?readOnly=${readOnly}${cloneId}`)
     };
 
     search = e => {
@@ -71,7 +76,7 @@ export default class Products extends React.Component {
     doSearchAndSort = (query, products, sorted, filterAttributesTag, filterAttributesType) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["name", "description", "tag", "product_type", "status", "crm_prod_id,",
+            const searchable = ["name", "description", "tag", "product_type", "status", "crm_prod_id,", "product_blocks_string",
                 "create_subscription_workflow_key,", "modify_subscription_workflow_key,", "terminate_subscription_workflow_key"];
             products = products.filter(p =>
                 searchable
@@ -159,7 +164,12 @@ export default class Products extends React.Component {
             action: this.handleDeleteProduct(product),
             danger: true
         };
-        const options = [view, edit, _delete];
+        const clone = {
+            icon: "fa fa-clone",
+            label: "clone",
+            action: this.editProduct(product, false, true, true)
+        };
+        const options = [view, edit, _delete, clone];
         return <DropDownActions options={options} i18nPrefix="metadata.products"/>;
     };
 
@@ -211,7 +221,7 @@ export default class Products extends React.Component {
     };
 
     renderProducts(products, actions, sorted) {
-        const columns = ["name", "description", "tag", "product_type", "status", "crm_prod_id", "created_at", "actions"];
+        const columns = ["name", "description", "tag", "product_type", "status", "product_blocks_string", "created_at", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
