@@ -24,8 +24,7 @@ import {
     organisations,
     products,
     redirectToAuthorizationServer,
-    reportError,
-    subscriptions_by_tag
+    reportError
 } from "../api";
 import "../locale/en";
 import "../locale/nl";
@@ -47,7 +46,6 @@ class App extends React.PureComponent {
             currentUser: {},
             configuration: {},
             organisations: [],
-            multiServicePoints: [],
             ieeeInterfaceTypes: [],
             locationCodes: [],
             products: [],
@@ -118,15 +116,14 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), subscriptions_by_tag("MSP"), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
-                    const [currentUser, allOrganisations, multiServicePoints, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
+                Promise.all([me(), organisations(), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
+                    const [currentUser, allOrganisations, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
                             loading: false,
                             currentUser: currentUser,
                             configuration: configuration,
                             organisations: allOrganisations,
-                            multiServicePoints: multiServicePoints,
                             ieeeInterfaceTypes: allIeeeInterfaceTypes,
                             locationCodes: allLocationCodes,
                             products: allProducts
@@ -145,7 +142,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, multiServicePoints, products, ieeeInterfaceTypes, locationCodes} = this.state;
+        const {currentUser, configuration, organisations, products, ieeeInterfaceTypes, locationCodes} = this.state;
 
         return (
             <Router>
@@ -176,7 +173,6 @@ class App extends React.PureComponent {
                                                                      products={products}
                                                                      organisations={organisations}
                                                                      ieeeInterfaceTypes={ieeeInterfaceTypes}
-                                                                     multiServicePoints={multiServicePoints}
                                                                      locationCodes={locationCodes}
                                                                      preselectedProduct={getParameterByName("product", props.location.search)}
                                                                      preselectedOrganisation={getParameterByName("organisation", props.location.search)}
@@ -195,7 +191,6 @@ class App extends React.PureComponent {
                                                                organisations={organisations}
                                                                configuration={configuration}
                                                                products={products}
-                                                               multiServicePoints={multiServicePoints}
                                                                ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                locationCodes={locationCodes}
                                                                {...props}/>}/>
