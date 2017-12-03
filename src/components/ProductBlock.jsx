@@ -13,6 +13,7 @@ import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder"
+import {deleteProductBlock} from "../api";
 
 
 export default class ProductBlock extends React.Component {
@@ -23,6 +24,7 @@ export default class ProductBlock extends React.Component {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
             cancelDialogAction: () => this.props.history.push("/metadata/product_blocks"),
+            confirmationDialogQuestion: "",
             leavePage: true,
             errors: {},
             required: ["name", "description"],
@@ -49,7 +51,43 @@ export default class ProductBlock extends React.Component {
 
     cancel = e => {
         stop(e);
-        this.setState({confirmationDialogOpen: true});
+        this.setState({
+            confirmationDialogOpen: true, leavePage: true,
+            confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
+            cancelDialogAction: () => this.props.history.push("/metadata/product_blocks")
+        });
+    };
+
+    handleDeleteProductBlock = e => {
+        stop(e);
+        const {productBlock} = this.state;
+        const question = I18n.t("metadata.deleteConfirmation", {
+            type: "Product Block",
+            name: productBlock.name
+        });
+        const action = () => deleteProductBlock(productBlock.product_block_id)
+            .then(() => {
+                this.props.history.push("/metadata/product_blocks");
+                setFlash(I18n.t("metadata.flash.delete", {
+                    type: "Product Block",
+                    name: productBlock.name
+                }));
+            }).catch(err => {
+                if (err.response && err.response.status === 400) {
+                    this.setState({confirmationDialogOpen: false});
+                    err.response.json().then(json => setFlash(json["error"], "error"));
+                } else {
+                    throw err;
+                }
+            });
+        this.setState({
+            confirmationDialogOpen: true,
+            confirmationDialogQuestion: question,
+            leavePage: false,
+            confirmationDialogAction: action,
+            cancelDialogAction: () => this.setState({confirmationDialogOpen: false})
+        });
+
     };
 
     submit = e => {
@@ -68,7 +106,7 @@ export default class ProductBlock extends React.Component {
         }
     };
 
-    renderButtons = (readOnly, initial) => {
+    renderButtons = (readOnly, initial, productBlock) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/product_blocks")}>
@@ -84,6 +122,10 @@ export default class ProductBlock extends React.Component {
             <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("process.submit")}
             </a>
+            {productBlock.product_block_id && <a className="button red" onClick={this.handleDeleteProductBlock}>
+                {I18n.t("processes.delete")}
+            </a>}
+
         </section>);
     };
 
@@ -174,15 +216,17 @@ export default class ProductBlock extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, productBlock,
-            leavePage, readOnly, resourceTypes, duplicateName, initial
+            leavePage, readOnly, resourceTypes, duplicateName, initial, confirmationDialogQuestion
         } = this.state;
-        const endDate = productBlock.end_date ? moment(productBlock.end_date * 1000) : null;
+        const endDate = isEmpty(productBlock.end_date) ? null : productBlock.end_date._isAMomentObject ?
+             productBlock.end_date : moment(productBlock.end_date * 1000);
         return (
             <div className="mod-product-block">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={cancelDialogAction}
                                     confirm={confirmationDialogAction}
-                                    leavePage={leavePage}/>
+                                    leavePage={leavePage}
+                                    question={confirmationDialogQuestion}/>
                 <section className="card">
                     {formInput("metadata.productBlocks.name", "name", productBlock.name || "", readOnly,
                         this.state.errors, this.changeProperty("name"), this.validateProperty("name"),
@@ -199,7 +243,7 @@ export default class ProductBlock extends React.Component {
                         productBlock.created_at ? moment(productBlock.created_at * 1000) : moment())}
                     {formDate("metadata.productBlocks.end_date", this.changeProperty("end_date"), readOnly,
                         endDate, moment().add(100, "years"))}
-                    {this.renderButtons(readOnly, initial)}
+                    {this.renderButtons(readOnly, initial, productBlock)}
                 </section>
             </div>
         );

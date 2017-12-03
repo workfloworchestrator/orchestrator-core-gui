@@ -21,6 +21,10 @@
 
     .buttons {
         margin-top: 35px;
+        display: flex;
+        a.button.red {
+            margin-left: auto;
+        }
     }
 
 }

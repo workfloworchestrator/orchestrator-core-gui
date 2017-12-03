@@ -14,6 +14,7 @@ import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
 
 import "./Product.css";
+import {deleteProduct} from "../api";
 
 export default class Product extends React.Component {
 
@@ -23,6 +24,7 @@ export default class Product extends React.Component {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
             cancelDialogAction: () => this.props.history.push("/metadata/products"),
+            confirmationDialogQuestion: "",
             leavePage: true,
             errors: {},
             required: ["name", "description", "status", "product_type", "tag"],
@@ -61,7 +63,38 @@ export default class Product extends React.Component {
 
     cancel = e => {
         stop(e);
-        this.setState({confirmationDialogOpen: true});
+        this.setState({confirmationDialogOpen: true, leavePage: true,
+            confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
+            cancelDialogAction: () => this.props.history.push("/metadata/products")
+        });
+    };
+
+    handleDeleteProduct = e => {
+        stop(e);
+        const {product} = this.state;
+        const question = I18n.t("metadata.deleteConfirmation", {
+            type: "Product",
+            name: product.name
+        });
+        const action = () => deleteProduct(product.product_id)
+            .then(() => {
+                this.props.history.push("/metadata/products");
+                setFlash(I18n.t("metadata.flash.delete", {name: product.name, type: "Product"}));
+            }).catch(err => {
+                if (err.response && err.response.status === 400) {
+                    this.setState({confirmationDialogOpen: false});
+                    err.response.json().then(json => setFlash(json["error"], "error"));
+                } else {
+                    throw err;
+                }
+            });
+        this.setState({
+            confirmationDialogOpen: true,
+            confirmationDialogQuestion: question,
+            leavePage: false,
+            confirmationDialogAction: action,
+            cancelDialogAction: () => this.setState({confirmationDialogOpen: false})
+        });
     };
 
     submit = e => {
@@ -80,7 +113,7 @@ export default class Product extends React.Component {
         }
     };
 
-    renderButtons = (readOnly, initial) => {
+    renderButtons = (readOnly, initial, product) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/products")}>
@@ -89,14 +122,19 @@ export default class Product extends React.Component {
             </section>);
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
-        return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
-                {I18n.t("process.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
-                {I18n.t("process.submit")}
-            </a>
-        </section>);
+        return (
+            <section className="buttons">
+                <a className="button" onClick={this.cancel}>
+                    {I18n.t("process.cancel")}
+                </a>
+                <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+                    {I18n.t("process.submit")}
+                </a>
+                {product.product_id && <a className="button red" onClick={this.handleDeleteProduct}>
+                    {I18n.t("processes.delete")}
+                </a>}
+            </section>
+        );
     };
 
     isInvalid = (markErrors = false) => {
@@ -169,7 +207,7 @@ export default class Product extends React.Component {
         fixedInput.name = newName;
         this.setState({product: product}, () => {
             const nameDuplicate = product.fixed_inputs.filter(fi => fi.name === newName).length > 1;
-            const newDuplicateFixedInputNames = {...this.state.duplicateFixedInputNames };
+            const newDuplicateFixedInputNames = {...this.state.duplicateFixedInputNames};
             newDuplicateFixedInputNames[index] = nameDuplicate;
             this.setState({duplicateFixedInputNames: newDuplicateFixedInputNames})
         });
@@ -191,8 +229,8 @@ export default class Product extends React.Component {
     };
 
     workFlowKeys = (type, workflows) => workflows
-            .filter(wf => wf.target === type)
-            .map(wf => ({label: wf.name, value: wf.key}));
+        .filter(wf => wf.target === type)
+        .map(wf => ({label: wf.name, value: wf.key}));
 
     renderFixedInputs = (product, readOnly, duplicateFixedInputNames) => {
         const fixedInputs = product.fixed_inputs;
@@ -213,7 +251,8 @@ export default class Product extends React.Component {
                                        type="text"
                                        value={fv.name} onChange={this.fixedInputNameChanged(index)}
                                        disabled={readOnly}/>
-                                {duplicateFixedInputNames[index] && <em className="error">{I18n.t("metadata.products.duplicate_fixed_input_name")}</em>}
+                                {duplicateFixedInputNames[index] &&
+                                <em className="error">{I18n.t("metadata.products.duplicate_fixed_input_name")}</em>}
                             </div>
                             <div className="wrapper">
                                 {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
@@ -266,14 +305,16 @@ export default class Product extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
-            leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames
+            leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames,
+            confirmationDialogQuestion
         } = this.state;
         return (
             <div className="mod-product">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={cancelDialogAction}
                                     confirm={confirmationDialogAction}
-                                    leavePage={leavePage}/>
+                                    leavePage={leavePage}
+                                    question={confirmationDialogQuestion}/>
                 <section className="card">
                     {formInput("metadata.products.name", "name", product.name || "", readOnly,
                         this.state.errors, this.changeProperty("name"), this.validateProperty("name"),
@@ -307,7 +348,7 @@ export default class Product extends React.Component {
                         product.start_date ? moment(product.start_date * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
                         product.end_date ? moment(product.end_date * 1000) : null, moment().add(100, "years"))}
-                    {this.renderButtons(readOnly, initial)}
+                    {this.renderButtons(readOnly, initial, product)}
                 </section>
             </div>
         );

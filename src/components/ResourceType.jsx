@@ -11,6 +11,7 @@ import {resourceType, resourceTypes, saveResourceType} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import "react-datepicker/dist/react-datepicker.css";
 import {formInput} from "../forms/Builder";
+import {deleteResourceType} from "../api";
 
 
 export default class ResourceType extends React.Component {
@@ -21,6 +22,7 @@ export default class ResourceType extends React.Component {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
             cancelDialogAction: () => this.props.history.push("/metadata/resource_types"),
+            confirmationDialogQuestion: "",
             leavePage: true,
             errors: {},
             required: ["resource_type", "description"],
@@ -45,7 +47,43 @@ export default class ResourceType extends React.Component {
 
     cancel = e => {
         stop(e);
-        this.setState({confirmationDialogOpen: true});
+        this.setState({
+            confirmationDialogOpen: true, leavePage: true,
+            confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
+            cancelDialogAction: () => this.props.history.push("/metadata/resource_types")
+        });
+    };
+
+    handleDeleteResourceType = e => {
+        stop(e);
+        const {resourceType} = this.state;
+        const question = I18n.t("metadata.deleteConfirmation", {
+            type: "Resource Type",
+            name: resourceType.resource_type
+        });
+        const action = () => deleteResourceType(resourceType.resource_type_id)
+            .then(() => {
+                this.props.history.push("/metadata/resource_types");
+                setFlash(I18n.t("metadata.flash.delete", {
+                    type: "Resource Type",
+                    name: resourceType.resource_type
+                }));
+            }).catch(err => {
+                if (err.response && err.response.status === 400) {
+                    this.setState({confirmationDialogOpen: false});
+                    err.response.json().then(json => setFlash(json["error"], "error"));
+                } else {
+                    throw err;
+                }
+            });
+        this.setState({
+            confirmationDialogOpen: true,
+            confirmationDialogQuestion: question,
+            leavePage: false,
+            confirmationDialogAction: action,
+            cancelDialogAction: () => this.setState({confirmationDialogOpen: false})
+        });
+
     };
 
     submit = e => {
@@ -60,12 +98,12 @@ export default class ResourceType extends React.Component {
                     {type: "Resource Type", name: resourceType.resource_type}));
             });
 
-        }else {
+        } else {
             this.setState({initial: false});
         }
     };
 
-    renderButtons = (readOnly, initial) => {
+    renderButtons = (readOnly, initial, resourceType) => {
         if (readOnly) {
             return (<section className="buttons">
                 <a className="button" onClick={() => this.props.history.push("/metadata/resource_types")}>
@@ -81,6 +119,9 @@ export default class ResourceType extends React.Component {
             <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("process.submit")}
             </a>
+            {resourceType.resource_type_id && <a className="button red" onClick={this.handleDeleteResourceType}>
+                {I18n.t("processes.delete")}
+            </a>}
         </section>);
     };
 
@@ -118,21 +159,22 @@ export default class ResourceType extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, resourceType,
-            leavePage, readOnly, duplicateName, initial
+            leavePage, readOnly, duplicateName, initial, confirmationDialogQuestion
         } = this.state;
         return (
             <div className="mod-resource-type">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={cancelDialogAction}
                                     confirm={confirmationDialogAction}
-                                    leavePage={leavePage}/>
+                                    leavePage={leavePage}
+                                    question={confirmationDialogQuestion}/>
                 <section className="card">
                     {formInput("metadata.resourceTypes.resource_type", "resource_type", resourceType.resource_type || "",
                         readOnly, this.state.errors, this.changeProperty("resource_type"), this.validateProperty("resource_type"),
                         duplicateName ? I18n.t("metadata.resourceTypes.duplicate_name") : null)}
                     {formInput("metadata.resourceTypes.description", "description", resourceType.description || "",
                         readOnly, this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
-                    {this.renderButtons(readOnly, initial)}
+                    {this.renderButtons(readOnly, initial, resourceType)}
                 </section>
             </div>
         );
