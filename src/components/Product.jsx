@@ -308,6 +308,9 @@ export default class Product extends React.Component {
             leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames,
             confirmationDialogQuestion
         } = this.state;
+        const endDate = isEmpty(product.end_date) ? null : product.end_date._isAMomentObject ?
+            product.end_date : moment(product.end_date * 1000);
+
         return (
             <div className="mod-product">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -347,7 +350,7 @@ export default class Product extends React.Component {
                     {formDate("metadata.products.created_at", () => false, true,
                         product.start_date ? moment(product.start_date * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
-                        product.end_date ? moment(product.end_date * 1000) : null, moment().add(100, "years"))}
+                        endDate, moment().add(100, "years"))}
                     {this.renderButtons(readOnly, initial, product)}
                 </section>
             </div>
