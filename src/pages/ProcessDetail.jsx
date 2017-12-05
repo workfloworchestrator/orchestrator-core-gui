@@ -160,7 +160,7 @@ export default class ProcessDetail extends React.PureComponent {
 
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink, multiServicePoints) => {
         const {locationCodes, ieeeInterfaceTypes, products, organisations, history} = this.props;
-        const product = products.find(prod => prod.identifier === process.product);
+        const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
 
         if (selectedTab === "process") {

@@ -1,6 +1,6 @@
 import {isEmpty} from "./Utils";
 
-const productLookup = (id, products) => products.find(prod => prod.identifier === id);
+const productLookup = (id, products) => products.find(prod => prod.product_id === id);
 
 export function organisationNameByUuid(uuid, organisations) {
     const organisation = organisations.find(org => org.uuid === uuid);
