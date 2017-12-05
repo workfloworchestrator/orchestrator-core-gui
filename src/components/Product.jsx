@@ -50,6 +50,12 @@ export default class Product extends React.Component {
                 if (clone) {
                     delete res.name;
                     delete res.product_id;
+                    delete res.created_at;
+                    (res.fixed_inputs || []).forEach(fixedInput => {
+                        delete fixedInput.created_at;
+                        delete fixedInput.fixed_input_id;
+                        delete fixedInput.product_id;
+                    });
                 }
                 this.setState({product: res, readOnly: readOnly})
             });
