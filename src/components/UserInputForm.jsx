@@ -230,8 +230,6 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-            case "ieee_interface_type_ssp_1":
-            case "ieee_interface_type_ssp_2":
                 return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
                                                  interfaceType={userInput.value}/>;
@@ -245,16 +243,16 @@ export default class UserInputForm extends React.Component {
                                        freePort={userInput.value}
                                        interfaceType={this.props.currentState.ieee_interface_type}
                                        locationCode={this.props.currentState.location_code}/>;
-            case "free_ports_for_location_code_and_interface_type_ssp_1":
+            case "free_ports_for_location_code_and_interface_type_ssp_a":
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}
-                                       interfaceType={this.props.currentState.ieee_interface_type_ssp_1}
-                                       locationCode={this.props.currentState.location_code_ssp_1}/>;
-            case "free_ports_for_location_code_and_interface_type_ssp_2":
+                                       interfaceType={this.props.currentState.ssp_a.interface_type}
+                                       locationCode={this.props.currentState.ssp_a.location_code}/>;
+            case "free_ports_for_location_code_and_interface_type_ssp_b":
                 return <FreePortSelect onChange={this.changeSelectInput(name)}
                                        freePort={userInput.value}
-                                       interfaceType={this.props.currentState.ieee_interface_type_ssp_2}
-                                       locationCode={this.props.currentState.location_code_ssp_2}/>;
+                                       interfaceType={this.props.currentState.ssp_b.interface_type}
+                                       locationCode={this.props.currentState.ssp_b.location_code}/>;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={userInput.value || false}
