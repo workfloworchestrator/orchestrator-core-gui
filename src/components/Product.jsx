@@ -354,7 +354,7 @@ export default class Product extends React.Component {
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly, duplicateFixedInputNames)}
                     {formDate("metadata.products.created_at", () => false, true,
-                        product.start_date ? moment(product.start_date * 1000) : moment())}
+                        product.created_at ? moment(product.created_at * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,
                         endDate, moment().add(100, "years"))}
                     {this.renderButtons(readOnly, initial, product)}
