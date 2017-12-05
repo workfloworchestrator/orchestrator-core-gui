@@ -59,6 +59,9 @@
         background-color: $orange;
         color: white;
         border: none;
+        i {
+            color: white;
+        }
     }
     &.green {
         background-color: $green;

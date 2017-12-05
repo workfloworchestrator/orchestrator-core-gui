@@ -269,6 +269,10 @@ export function reportError(error) {
     return postPutJson("user/error", error, "post");
 }
 
+export function clearCache(name) {
+    return postPutJson("user/clearCache", {name: name}, "put", false);
+}
+
 export function ping() {
     return fetchJson("user/ping");
 }

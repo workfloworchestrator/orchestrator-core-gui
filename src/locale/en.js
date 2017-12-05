@@ -25,7 +25,8 @@ I18n.translations.en = {
         processes: "Processes",
         validations: "Validations",
         subscriptions: "Subscriptions",
-        metadata: "Metadata"
+        metadata: "Metadata",
+        cache: "Cache"
     },
 
     processes: {
@@ -416,6 +417,18 @@ I18n.translations.en = {
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
         }
 
+    },
+    cache: {
+        name: {
+            ims: "IMS locations",
+            crm: "CRM organisations, contacts and locations",
+            api: "Workflow endpoints (combined caches)",
+            all: "All caches"
+        },
+        remove: "Flush Cache",
+        remove_info: "Select a Cache to flush",
+        clear: "Flush",
+        flushed: "Cache was flushed."
     },
     error_dialog: {
         title: "Unexpected error",

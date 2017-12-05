@@ -34,6 +34,7 @@ import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
 import ResourceType from "../components/ResourceType";
 import Product from "../components/Product";
+import Cache from "./Cache";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -214,6 +215,9 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/resource-type/:id"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <ResourceType {...props} />}/>
+                        <ProtectedRoute path="/cache"
+                                        currentUser={currentUser}
+                                        render={props => <Cache {...props} />}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
                         <Route path="/not-allowed"
