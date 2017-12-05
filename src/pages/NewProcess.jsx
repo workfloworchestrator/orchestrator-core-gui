@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {initialWorkflowInput, startProcess, validation} from "../api";
+import {initialWorkflowInput, startProcess, subscriptions_by_tag, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
@@ -17,6 +17,7 @@ export default class NewProcess extends React.Component {
         this.state = {
             product: {},
             stepUserInput: [],
+            multiServicePoints: [],
             productValidation: {"valid": true, mapping: {}}
         };
     }
@@ -29,6 +30,7 @@ export default class NewProcess extends React.Component {
                 this.changeProduct({value: product.identifier, ...product});
             }
         }
+        subscriptions_by_tag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
     };
 
     validSubmit = (stepUserInput) => {
@@ -83,8 +85,8 @@ export default class NewProcess extends React.Component {
     };
 
     render() {
-        const {product, stepUserInput, productValidation} = this.state;
-        const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
+        const {product, stepUserInput, productValidation, multiServicePoints} = this.state;
+        const {organisations, products, ieeeInterfaceTypes, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         return (
             <div className="mod-new-process">
@@ -94,9 +96,11 @@ export default class NewProcess extends React.Component {
                         <section className="form-divider">
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
-                            <ProductSelect products={this.props.products.filter(prod => prod.tag.toLowerCase() !== "ssp")}
-                                           onChange={this.changeProduct}
-                                           product={isEmpty(product) ? undefined : product.value}/>
+                            <ProductSelect
+                                products={this.props.products.filter(prod => prod.tag !== "SSP" &&
+                                    !isEmpty(prod.create_subscription_workflow_key))}
+                                onChange={this.changeProduct}
+                                product={isEmpty(product) ? undefined : product.value}/>
                         </section>
                         {showProductValidation &&
                         <section>
@@ -126,7 +130,6 @@ NewProcess.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     ieeeInterfaceTypes: PropTypes.array.isRequired,
-    multiServicePoints: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,

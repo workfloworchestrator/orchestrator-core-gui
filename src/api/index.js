@@ -1,9 +1,13 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
-    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
+    absent,
+    ims_circuit_id,
+    ims_port_id,
+    parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
+
 
 const apiPath = "/api/";
 
@@ -77,6 +81,55 @@ function postPutJson(path, body, method, result = true) {
     return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, true, result);
 }
 
+//API metadata
+export function products() {
+    return fetchJson("products")
+}
+
+export function productById(productId) {
+    return fetchJson(`products/${productId}`)
+}
+
+export function saveProduct(product) {
+    return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", false)
+}
+
+export function deleteProduct(id) {
+    return fetchJson(`products/${id}`, {method: "DELETE"}, {}, false, false);
+}
+
+export function productBlocks() {
+    return fetchJson("product_blocks")
+}
+
+export function productBlockById(id) {
+    return fetchJson(`product_blocks/${id}`)
+}
+
+export function saveProductBlock(productBlock) {
+    return postPutJson("product_blocks", productBlock, isEmpty(productBlock.product_block_id) ? "post" : "put", false)
+}
+
+export function deleteProductBlock(id) {
+    return fetchJson(`product_blocks/${id}`, {method: "DELETE"}, {}, false, false);
+}
+
+export function resourceTypes() {
+    return fetchJson("resource_types")
+}
+
+export function resourceType(id) {
+    return fetchJson(`resource_types/${id}`)
+}
+
+export function saveResourceType(resourceType) {
+    return postPutJson("resource_types", resourceType, isEmpty(resourceType.resource_type_id) ? "post" : "put", false)
+}
+
+export function deleteResourceType(id) {
+    return fetchJson(`resource_types/${id}`, {method: "DELETE"}, {}, false, false);
+}
+
 //API
 export function subscriptions() {
     return fetchJson("subscriptions");
@@ -92,14 +145,6 @@ export function subscriptions_by_tag(tag) {
 
 export function organisations() {
     return fetchJson("crm/organisations");
-}
-
-export function products() {
-    return fetchJson("products")
-}
-
-export function productById(productId) {
-    return fetchJson(`products/${productId}`)
 }
 
 export function ieeeInterfaceTypes() {
@@ -183,7 +228,6 @@ export function startModificationSubscription(subscriptionId) {
     return postPutJson("processes/modify-subscription", {subscription_id: subscriptionId}, "post");
 }
 
-
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }
@@ -223,6 +267,10 @@ export function contacts(organisationId) {
 
 export function reportError(error) {
     return postPutJson("user/error", error, "post");
+}
+
+export function clearCache(name) {
+    return postPutJson("user/clearCache", {name: name}, "put", false);
 }
 
 export function ping() {

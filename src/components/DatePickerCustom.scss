@@ -1,0 +1,39 @@
+@import "../stylesheets/mixins.scss";
+
+div.date_picker_custom {
+
+    width: 180px;
+    display: flex;
+    border: 1px solid $lighter-grey;
+    border-radius: $br;
+    margin-top: 5px;
+    cursor: pointer;
+
+    &.disabled {
+        cursor: not-allowed;
+        a {
+            cursor: not-allowed;
+        }
+    }
+
+    a {
+        font-size: 14px;
+        padding: 7px;
+        color: inherit;
+        flex-grow: 5;
+        @include no-text-decoration;
+    }
+
+    span {
+        padding: 0 12px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        background-color: $light-grey;
+        font-size: larger;
+        &.clear {
+            border-right: 1px solid $lighter-grey;
+        }
+    }
+
+}

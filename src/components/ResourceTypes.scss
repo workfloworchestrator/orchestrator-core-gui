@@ -1,0 +1,142 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+.mod-resource-types {
+    .options {
+        display: flex;
+        padding: 25px 20px;
+        background-color: white;
+        flex-direction: row;
+        align-items: center;
+    }
+    section.search {
+        position: relative;
+        flex-grow: 5;
+
+        input {
+            padding: 12px;
+            margin-left: auto;
+            margin-top: 0;
+            border: 1px solid $lighter-grey;
+            border-bottom-left-radius: $br;
+            border-top-left-radius: $br;
+            font-size: 14px;
+            width: 100%;
+            height: 100%;
+        }
+
+        i.fa-search {
+            color: lighten($blue, 5);
+            position: absolute;
+            right: 14px;
+            top: 8px;
+            font-size: 24px;
+        }
+    }
+    a.button {
+        i.fa-plus {
+            font-size: inherit;
+            margin-left: 10px;
+            margin-top: 4px;
+        }
+
+    }
+
+    section.resource-type {
+        display: flex;
+        padding: 0 20px 20px 20px;
+        background-color: white;
+    }
+
+    table.resource-types {
+        width: 100%;
+        word-break: break-all;
+        td, th {
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid $light-grey;
+        }
+        thead {
+            th {
+                cursor: pointer;
+                padding: 5px 5px 10px 5px
+            }
+            th.resource_type {
+                width: 30%;
+            }
+            th.description {
+                width: 60%;
+            }
+            th.actions {
+                text-align: right;
+                width: 10%;
+            }
+            span {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: larger;
+                color: $medium-grey;
+                padding: 7px 2px 7px 0;
+            }
+            i.fa {
+                float: right;
+                margin-right: 15px;
+                color: $medium-grey;
+                font-size: 18px;
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: $hover;
+                    td.actions i.fa-ellipsis-h {
+                        color: $blue;
+                    }
+                }
+            }
+            td {
+                word-break: break-word;
+                word-wrap: break-word;
+                padding: 15px 5px;
+            }
+            td.actions {
+                cursor: pointer;
+                text-align: right;
+                font-size: 18px;
+                position: relative;
+
+            }
+        }
+
+        @include phone {
+            thead {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+                display: block;
+                border-bottom: 2px solid $lighter-grey;
+            }
+            td {
+                display: block;
+                text-align: right;
+                border-bottom: 1px dotted $light-blue;
+                padding: 8px 0;
+
+                &:before {
+                    content: attr(data-label);
+                    float: left;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: $medium-grey;
+                }
+            }
+
+        }
+
+    }
+}
+
