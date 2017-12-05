@@ -22,7 +22,7 @@ import {
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
-    subscriptionResourceTypes
+    subscriptionInstanceValues
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -61,12 +61,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         subscriptionsDetail(subscriptionId)
             .then(subscription => {
                 enrichSubscription(subscription, organisations, products);
-                const resourceTypes = subscriptionResourceTypes(subscription);
+                const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
-                    .concat(resourceTypes.map(rt => imsService(rt.resource_type, rt.value)));
-                if (resourceTypes.some(rt => rt.resource_type === ims_circuit_id) &&
-                    !resourceTypes.some(rt => rt.resource_type === nms_service_id)) {
+                    .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
+                if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
+                    !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
                     promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
                 }
@@ -184,8 +184,8 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (isEmpty(subscriptions)) {
             return null;
         }
-        const resourceTypes = subscriptionResourceTypes(this.state.subscription);
-        const title = resourceTypes.some(rt => rt.resource_type === "nms_service_id") ?
+        const sunscriptionInstanceValues = subscriptionInstanceValues(this.state.subscription);
+        const title = sunscriptionInstanceValues.some(val => val.resource_type.resource_type === nms_service_id) ?
             "subscription.child_subscriptions" : "subscription.parent_subscriptions";
         return <section className="details">
             <h3>{I18n.t(title, {product: product})}</h3>
@@ -231,26 +231,26 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderResourceType = (resourceType, index) => <div key={index}>
-        <label className="title">{resourceType.resource_type}</label>
-        <input type="text" readOnly={true} value={resourceType.value}/>
+    renderSubscriptionInstanceValue = (val, index) => <div key={index}>
+        <label className="title">{val.resource_type.resource_type}</label>
+        <input type="text" readOnly={true} value={val.value}/>
     </div>;
 
     renderSubscriptionResourceTypes = subscription => {
-        const resourceTypes = subscriptionResourceTypes(subscription);
-        if (isEmpty(resourceTypes)) {
+        const values = subscriptionInstanceValues(subscription);
+        if (isEmpty(values)) {
             return null;
         }
-        const nbrLeft = Math.ceil(resourceTypes.length / 2);
+        const nbrLeft = Math.ceil(values.length / 2);
         return <section className="details">
             <h3>{I18n.t("subscription.resource_types")}</h3>
             <div className="form-container-parent">
                 <section className="form-container">
                     <section>
-                        {resourceTypes.slice(0, nbrLeft).map(this.renderResourceType)}
+                        {values.slice(0, nbrLeft).map(this.renderSubscriptionInstanceValue)}
                     </section>
                     <section>
-                        {resourceTypes.slice(nbrLeft).map(this.renderResourceType)}
+                        {values.slice(nbrLeft).map(this.renderSubscriptionInstanceValue)}
                     </section>
                 </section>
             </div>
@@ -320,7 +320,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!isEmpty(notFoundRelatedObjects)) {
             reason = I18n.t("subscription.no_termination_deleted_related_objects");
         }
-        if (!hasResourceType(subscription, "nms_service_id") &&
+        if (!hasResourceType(subscription, nms_service_id) &&
             (subscriptions.length > 0 && !subscriptions.every(sub => sub.status === "terminated"))) {
             reason = I18n.t("subscription.no_termination_parent_subscription");
         }

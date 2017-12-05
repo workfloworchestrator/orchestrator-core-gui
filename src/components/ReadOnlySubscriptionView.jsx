@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
 import {contacts, imsService, productById, subscriptionsDetail} from "../api/index";
 import {enrichSubscription} from "../utils/Lookups";
-import {port_subscription_id, subscriptionResourceTypes} from "../validations/Subscriptions";
+import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
 import "./ReadOnlySubscriptionView.css";
 import {organisationContactsKey} from "./OrganisationSelect";
@@ -29,8 +29,8 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
             }
             enrichSubscription(subscription, organisations, products);
             this.setState({subscription: subscription});
-            const resourceTypes = subscriptionResourceTypes(subscription);
-            const portSubscriptionResourceTypes = resourceTypes.filter(rt => rt.resource_type === port_subscription_id);
+            const values = subscriptionInstanceValues(subscription);
+            const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
             const promises = [productById(subscription.product_id)]
                 .concat(portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value)));
 

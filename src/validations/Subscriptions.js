@@ -1,12 +1,12 @@
 import {isEmpty} from "../utils/Utils";
 
-export function subscriptionResourceTypes(subscription) {
-    return subscription.instances.reduce((acc, instance) => acc.concat(instance.resource_types), []);
+export function subscriptionInstanceValues(subscription) {
+    return subscription.instances.reduce((acc, instance) => acc.concat(instance.values), []);
 }
 
 export function hasResourceType(subscription, resourceType) {
-    const resourceTypes = subscriptionResourceTypes(subscription);
-    return resourceTypes.some(rt => rt.resource_type === resourceType);
+    const values = subscriptionInstanceValues(subscription);
+    return values.some(val => val.resource_type.resource_type === resourceType);
 }
 
 export function isTerminatable(subscription, relatedSubscriptions) {
