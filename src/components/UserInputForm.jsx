@@ -149,6 +149,8 @@ export default class UserInputForm extends React.Component {
             errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
         } else if (type === "accept") {
             errors[name] = !value;
+        } else if (type === "boolean") {
+            errors[name] = isEmpty(!!value);
         }
         else {
             errors[name] = isEmpty(value);
