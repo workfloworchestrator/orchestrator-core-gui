@@ -88,9 +88,9 @@ I18n.translations.en = {
         capacity: "Capacity",
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         source_vlan: "Source port VLAN",
-        source_vlan_info: "VLAN range - must be integer",
+        source_vlan_info: "VLAN range - must be integer [2-4095]",
         destination_vlan: "Destination port VLAN",
-        destination_vlan_info: "VLAN range - must be integer",
+        destination_vlan_info: "VLAN range - must be integer [2-4095]",
         contact_persons: "Customer contact persons",
         contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
         location_code: "Location code",
@@ -135,7 +135,7 @@ I18n.translations.en = {
             port_id: "Port SSP site A",
             port_id_info: "Select a port for SSP site A",
             vlan: "VLAN site A",
-            vlan_info: "VLAN range - must be integer",
+            vlan_info: "VLAN range - must be integer [2-4095]",
             location_code: "Location code site A",
             location_code_info: "Select a location code for site A.",
             crm_port_id: 'The CRM identifier for the SSP on site A',
@@ -151,7 +151,7 @@ I18n.translations.en = {
             port_id: "Port SSP site B",
             port_id_info: "Select a port for SSP site b",
             vlan: "VLAN site B",
-            vlan_info: "VLAN range - must be integer",
+            vlan_info: "VLAN range - must be integer [2-4095]",
             location_code: "Location code site B",
             location_code_info: "Select a location code for site B.",
             crm_port_id: 'The CRM identifier for the SSP on site B',
@@ -472,7 +472,7 @@ I18n.translations.en = {
     multi_msp: {
         msp: "Multi-Service Port",
         vlan: "Port Vlan",
-        invalid_vlan: "Invalid VLAN - must be integer"
+        invalid_vlan: "Invalid VLAN - must be integer [2-4095]"
     }
 };
 
