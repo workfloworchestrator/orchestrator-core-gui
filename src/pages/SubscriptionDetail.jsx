@@ -278,7 +278,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </section>
                     <section>
                         <label className="title">{I18n.t("subscription.product.created")}</label>
-                        <input type="text" readOnly={true} value={renderDate(product.start_date)}/>
+                        <input type="text" readOnly={true} value={renderDate(product.created_at)}/>
                         <label className="title">{I18n.t("subscription.product.end_date")}</label>
                         <input type="text" readOnly={true} value={renderDate(product.end_date)}/>
                         <label className="title">{I18n.t("subscription.product.status")}</label>
