@@ -136,7 +136,7 @@ export default class UserInputForm extends React.Component {
         if (type === "int") {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
         } else if (type === "vlan" || type === "ssp_1_vlan" || type === "ssp_2_vlan") {
-            errors[name] = !/^\d{4}$/.test(value) || value <= 1 || value >= 4096
+            errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
         } else if (type === "uuid") {
