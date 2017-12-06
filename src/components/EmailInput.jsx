@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "react-select/dist/react-select.css";
 
 import {isEmpty, stop} from "../utils/Utils";
+import {validEmailRegExp} from "../validations/Subscriptions";
 import "./EmailInput.css";
 
-const validEmailRegExp = /^\S+@\S+$/;
 
 export default class EmailInput extends React.PureComponent {
 
