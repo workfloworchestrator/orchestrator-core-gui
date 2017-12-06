@@ -23,6 +23,9 @@ import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleMSPs from "./MultipleMSPs";
 import {validEmailRegExp} from "../validations/Subscriptions";
 
+
+const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
+
 export default class UserInputForm extends React.Component {
 
     constructor(props) {
@@ -155,6 +158,8 @@ export default class UserInputForm extends React.Component {
             errors[name] = isEmpty(!!value);
         } else if (type === "crm_port_id") {
             errors[name] = !/^\d{5}$/.test(value)
+        } else if (type === "label") {
+            errors[name] = false;
         }
         else {
             errors[name] = isEmpty(value);
@@ -171,11 +176,11 @@ export default class UserInputForm extends React.Component {
 
     renderInput = (userInput, process) => {
         const name = userInput.name;
-        const isBoolean = userInput.type === "boolean" || userInput.type === "subscription_termination_confirmation";
+        const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         return (
-            <section key={name} className="form-divider">
-                {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
-                {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
+            <section key={name} className={`form-divider ${name}`}>
+                {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
+                {!ignoreLabel && <em>{I18n.t(`process.${name}_info`)}</em>}
                 {this.chooseInput(userInput, process)}
                 {this.state.errors[name] &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
@@ -285,7 +290,9 @@ export default class UserInputForm extends React.Component {
                                            locationCodes={this.props.locationCodes}
                                            locationCode={userInput.value}/>;
             case "label_with_state":
-                return <StateValue value={userInput.value}/>;
+                return <StateValue className={userInput.name} value={userInput.value}/>;
+            case "label":
+                return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`)}</p>;
             case "multi_msp":
                 return <MultipleMSPs msps={isEmpty(userInput.value) ? [
                     {subscription_id: null, vlan: ""},

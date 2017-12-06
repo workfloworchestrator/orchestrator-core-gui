@@ -20,6 +20,14 @@
             em {
                 margin-bottom: 10px;
             }
+            &.first_lightpath, &.second_lightpath {
+                text-transform: uppercase;
+                font-weight: bold;
+                color: $blue;
+            }
+            &.source_1, &.source_vlan_1, &.destination_1, &.destination_vlan_1, &.source_2, &.source_vlan_2, &.destination_2, &.destination_vlan_2 {
+                margin-left: 40px;
+            }
         }
 
     }
