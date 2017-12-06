@@ -147,6 +147,8 @@ export default class UserInputForm extends React.Component {
             errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
         } else if (type === "multi_msp") {
             errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
+        } else if (type === "accept") {
+            errors[name] = !value;
         }
         else {
             errors[name] = isEmpty(value);
@@ -264,6 +266,7 @@ export default class UserInputForm extends React.Component {
                                               organisations={this.props.organisations}
                                               className="indent"/>
                 </div>;
+            case "accept":
             case "boolean":
                 return <CheckBox name={name} value={userInput.value || false}
                                  onChange={this.changeBooleanInput(name)}
