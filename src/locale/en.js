@@ -108,6 +108,7 @@ I18n.translations.en = {
         nms_service_id: "NMS service id",
         nms_service_id_info: "The id of the ethernet service on the network (0000-9999)",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
+        noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath and any child SSP's subscriptions",
         noc_remove_lichtpad_confirmation_info: "Are the LightPath of the subscription and any child SSP's subscriptions removed?",
         noc_remove_port_confirmation: "Are the port of the subscription removed from the live network?",
