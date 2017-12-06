@@ -6,7 +6,7 @@ import "react-select/dist/react-select.css";
 export default class MultiServicePointSelect extends React.PureComponent {
 
     label = (msp, organisations) => {
-        const organisation = organisations.find(org => org.uuid === msp.client_id);
+        const organisation = organisations.find(org => org.uuid === msp.customer_id);
         const organisationName = organisation ? organisation.name : "";
         const description = msp.description || "<No description>";
         return `${description.trim()} ${organisationName}`

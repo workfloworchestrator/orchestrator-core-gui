@@ -24,7 +24,7 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
         const {subscriptionId, organisations, products} = this.props;
         subscriptionsDetail(subscriptionId).then(subscription => {
             if (this.props.storeInterDependentState) {
-                contacts(subscription.client_id).then(result =>
+                contacts(subscription.customer_id).then(result =>
                     this.props.storeInterDependentState(organisationContactsKey, result));
             }
             enrichSubscription(subscription, organisations, products);

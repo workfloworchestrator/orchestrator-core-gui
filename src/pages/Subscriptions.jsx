@@ -42,7 +42,7 @@ export default class Subscriptions extends React.PureComponent {
         .then(results => {
             const {organisations, products} = this.props;
             results.forEach(subscription => {
-                subscription.customer_name = organisationNameByUuid(subscription.client_id, organisations);
+                subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
                 subscription.product_name = productNameById(subscription.product_id, products);
                 subscription.product_tag = productTagById(subscription.product_id, products)
                 subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
