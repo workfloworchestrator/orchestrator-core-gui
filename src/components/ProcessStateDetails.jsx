@@ -117,6 +117,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         switch (status) {
             case "suspend" :
             case "abort" :
+            case "skipped" :
                 return null;
             case "pending" :
                 if (isEmpty(step.form)) {
@@ -139,9 +140,6 @@ export default class ProcessStateDetails extends React.PureComponent {
             return null;
         }
         const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
-        if (index === 0 || steps[index - 1]) {
-
-        }
         return (
             <section className="state-changes">
                 <section className="state-divider">
