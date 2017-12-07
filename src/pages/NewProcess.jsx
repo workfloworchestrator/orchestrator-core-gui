@@ -27,7 +27,11 @@ export default class NewProcess extends React.Component {
         if (preselectedProduct) {
             const product = products.find(x => x.product_id === preselectedProduct);
             if (product) {
-                this.changeProduct({value: product.product_id, ...product});
+                this.changeProduct({
+                    value: product.product_id,
+                    workflow: product.create_subscription_workflow_key,
+                    ...product
+                });
             }
         }
         subscriptions_by_tag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
