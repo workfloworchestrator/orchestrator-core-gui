@@ -25,9 +25,9 @@ export default class NewProcess extends React.Component {
     componentDidMount = () => {
         const {products, preselectedProduct} = this.props;
         if (preselectedProduct) {
-            const product = products.find(x => x.identifier === preselectedProduct);
+            const product = products.find(x => x.product_id === preselectedProduct);
             if (product) {
-                this.changeProduct({value: product.identifier, ...product});
+                this.changeProduct({value: product.product_id, ...product});
             }
         }
         subscriptions_by_tag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
