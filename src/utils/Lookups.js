@@ -31,11 +31,11 @@ export function productById(id, products) {
 }
 
 export function renderDateTime(epoch) {
-    return new Date(epoch * 1000).toLocaleString("nl-NL") + " CET";
+    return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleString("nl-NL") + " CET";
 }
 
-export function renderDate(s) {
-    return isEmpty(s) ? "" : new Date(s).toLocaleDateString("nl-NL") + " CET";
+export function renderDate(epoch) {
+    return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleDateString("nl-NL") + " CET";
 }
 
 export function capitalize(s) {

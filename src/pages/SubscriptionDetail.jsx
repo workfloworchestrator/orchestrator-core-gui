@@ -9,7 +9,7 @@ import {
     subscriptions_by_subscription_port_id,
     subscriptionsDetail
 } from "../api";
-import {enrichSubscription, organisationNameByUuid, renderDate} from "../utils/Lookups";
+import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
@@ -278,9 +278,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </section>
                     <section>
                         <label className="title">{I18n.t("subscription.product.created")}</label>
-                        <input type="text" readOnly={true} value={renderDate(product.created_at)}/>
+                        <input type="text" readOnly={true} value={renderDateTime(product.created_at)}/>
                         <label className="title">{I18n.t("subscription.product.end_date")}</label>
-                        <input type="text" readOnly={true} value={renderDate(product.end_date)}/>
+                        <input type="text" readOnly={true} value={renderDateTime(product.end_date)}/>
                         <label className="title">{I18n.t("subscription.product.status")}</label>
                         <input type="text" readOnly={true} value={product.status}/>
                         <label className="title">{I18n.t("subscription.product.tag")}</label>

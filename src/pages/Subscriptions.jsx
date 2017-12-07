@@ -45,8 +45,8 @@ export default class Subscriptions extends React.PureComponent {
                 subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
                 subscription.product_name = productNameById(subscription.product_id, products);
                 subscription.product_tag = productTagById(subscription.product_id, products)
-                subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : "";
-                subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : "";
+                // subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date * 1000).getTime() : "";
+                // subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date * 1000).getTime() : "";
             });
             const newFilterAttributesProduct = [];
             const uniqueTags =  [...new Set(products.map(p => p.tag))];
