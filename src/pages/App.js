@@ -127,7 +127,7 @@ class App extends React.PureComponent {
                             organisations: allOrganisations,
                             ieeeInterfaceTypes: allIeeeInterfaceTypes,
                             locationCodes: allLocationCodes,
-                            products: allProducts
+                            products: allProducts.sort((a,b) => a.name.localeCompare(b.name))
                         });
                     } else {
                         this.handleBackendDown();

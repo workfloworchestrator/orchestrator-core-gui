@@ -86,6 +86,18 @@ export function products() {
     return fetchJson("products")
 }
 
+export function productTags() {
+    return fetchJson("products/tags/all")
+}
+
+export function productTypes() {
+    return fetchJson("products/types/all")
+}
+
+export function productStatuses() {
+    return fetchJson("products/statuses/all")
+}
+
 export function productById(productId) {
     return fetchJson(`products/${productId}`)
 }

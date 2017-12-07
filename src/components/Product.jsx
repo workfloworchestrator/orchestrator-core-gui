@@ -14,7 +14,7 @@ import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
 
 import "./Product.css";
-import {deleteProduct} from "../api";
+import {deleteProduct, productStatuses, productTags, productTypes} from "../api";
 
 export default class Product extends React.Component {
 
@@ -35,6 +35,9 @@ export default class Product extends React.Component {
             productBlocks: [],
             products: [],
             workflows: [],
+            tags: [],
+            types: [],
+            statuses: [],
             duplicateFixedInputNames: {},
             optionalAttributes: ["crm_prod_id"],
             duplicateName: false
@@ -60,16 +63,21 @@ export default class Product extends React.Component {
                 this.setState({product: res, readOnly: readOnly})
             });
         }
-        Promise.all([productBlocks(), allWorkflows(), products()]).then(res => this.setState({
-            productBlocks: res[0],
-            workflows: res[1],
-            products: res[2]
-        }));
+        Promise.all([productBlocks(), allWorkflows(), products(), productTags(), productTypes(), productStatuses()])
+            .then(res => this.setState({
+                productBlocks: res[0],
+                workflows: res[1],
+                products: res[2],
+                tags: res[3],
+                types: res[4],
+                statuses: res[5]
+            }));
     }
 
     cancel = e => {
         stop(e);
-        this.setState({confirmationDialogOpen: true, leavePage: true,
+        this.setState({
+            confirmationDialogOpen: true, leavePage: true,
             confirmationDialogAction: () => this.setState({confirmationDialogOpen: false}),
             cancelDialogAction: () => this.props.history.push("/metadata/products")
         });
@@ -312,7 +320,7 @@ export default class Product extends React.Component {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
             leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames,
-            confirmationDialogQuestion
+            confirmationDialogQuestion, tags, types, statuses
         } = this.state;
         const endDate = isEmpty(product.end_date) ? null : product.end_date._isAMomentObject ?
             product.end_date : moment(product.end_date * 1000);
@@ -331,11 +339,11 @@ export default class Product extends React.Component {
                     {formInput("metadata.products.description", "description", product.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
                     {formSelect("metadata.products.tag", this.changeProperty("tag"),
-                        ["LightPath", "MSP", "LPNLNSI", "ELAN", "SSP"], readOnly, product.tag || "LightPath")}
+                        tags, readOnly, product.tag || "LightPath")}
                     {formSelect("metadata.products.product_type", this.changeProperty("product_type"),
-                        ["Port", "LightPath", "ELAN"], readOnly, product.product_type || "Port")}
+                        types, readOnly, product.product_type || "Port")}
                     {formSelect("metadata.products.status", this.changeProperty("status"),
-                        ["active", "phase out", "pre production", "end of life"], readOnly,
+                        statuses, readOnly,
                         product.status || "active")}
                     {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
                         this.state.errors, this.changeProperty("crm_prod_id"), () => false)}
