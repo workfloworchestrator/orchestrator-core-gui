@@ -151,7 +151,7 @@ export default class UserInputForm extends React.Component {
         } else if (type === "contact_persons") {
             errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
         } else if (type === "multi_msp") {
-            errors[name] = isEmpty(value) || value.some(msp =>  isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
+            errors[name] = isEmpty(value) || value.some(msp => isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
         } else if (type === "accept") {
             errors[name] = !value;
         } else if (type === "boolean") {
@@ -188,8 +188,18 @@ export default class UserInputForm extends React.Component {
 
     };
 
+    freePortSelect = (name, value, interfaceType, locationCode) => (
+        <FreePortSelect
+            onChange={this.changeSelectInput(name)}
+            freePort={value}
+            interfaceType={interfaceType}
+            locationCode={locationCode}/>
+    );
+
     chooseInput = (userInput, process) => {
         const name = userInput.name;
+        const value = userInput.value;
+        const currentState = this.props.currentState;
         switch (userInput.type) {
             case "string" :
             case "guid":
@@ -202,7 +212,7 @@ export default class UserInputForm extends React.Component {
                 return <input type="text" id={name} name={name} value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
-                return <ReadOnlySubscriptionView subscriptionId={userInput.value}
+                return <ReadOnlySubscriptionView subscriptionId={value}
                                                  products={this.props.products}
                                                  organisations={this.props.organisations}
                                                  className="indent"
@@ -212,65 +222,61 @@ export default class UserInputForm extends React.Component {
             case "vlan" :
             case "ssp_1_vlan":
             case "ssp_2_vlan":
-                return <input type="number" step="1" min="2" max="4095" id={name} name={name} value={this.userInputValue(name)}
+                return <input type="number" step="1" min="2" max="4095" id={name} name={name}
+                              value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "msp" :
-                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
+                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
                                                 organisations={this.props.organisations}/>;
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
                                            storeInterDependentState={this.storeInterDependentState}
-                                           organisation={userInput.value}/>;
+                                           organisation={value}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
-                                      product={userInput.value}/>;
+                                      product={value}/>;
             case "ssp_product" :
                 return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
                                       onChange={this.changeSelectInput(name)}
-                                      product={userInput.value}/>;
+                                      product={value}/>;
             case "contact_persons" :
                 return <ContactPersons
-                    persons={isEmpty(userInput.value) ? [{email: "", name: "", phone: ""}] : userInput.value}
+                    persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
                     interDependentState={this.state.interDependentState}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true} emailRequired={true}/>;
             case "email" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
                 return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
                                                  interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                 interfaceType={userInput.value}/>;
+                                                 interfaceType={value}/>;
             case "ieee_interface_type_for_product_tag":
                 const productId = this.props.product.value || this.props.product.product_id;
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
-                                                              interfaceType={userInput.value}
+                                                              interfaceType={value}
                                                               productId={productId}/>;
             case "free_ports_for_location_code_and_interface_type":
-                return <FreePortSelect onChange={this.changeSelectInput(name)}
-                                       freePort={userInput.value}
-                                       interfaceType={this.props.currentState.ieee_interface_type}
-                                       locationCode={this.props.currentState.location_code}/>;
+                return this.freePortSelect(name, value, currentState.ieee_interface_type, currentState.location_code);
+            case "free_ports_for_location_code_and_interface_type_1":
+                return this.freePortSelect(name, value, currentState.ieee_interface_type_1, currentState.location_code_1);
+            case "free_ports_for_location_code_and_interface_type_2":
+                return this.freePortSelect(name, value, currentState.ieee_interface_type_2, currentState.location_code_2);
             case "free_ports_for_location_code_and_interface_type_ssp_a":
-                return <FreePortSelect onChange={this.changeSelectInput(name)}
-                                       freePort={userInput.value}
-                                       interfaceType={this.props.currentState.ssp_a.interface_type}
-                                       locationCode={this.props.currentState.ssp_a.location_code}/>;
+                return this.freePortSelect(name, value, currentState.ssp_a.interface_type, currentState.ssp_a.location_code);
             case "free_ports_for_location_code_and_interface_type_ssp_b":
-                return <FreePortSelect onChange={this.changeSelectInput(name)}
-                                       freePort={userInput.value}
-                                       interfaceType={this.props.currentState.ssp_b.interface_type}
-                                       locationCode={this.props.currentState.ssp_b.location_code}/>;
+                return this.freePortSelect(name, value, currentState.ssp_b.interface_type, currentState.ssp_b.location_code);
             case "subscription_termination_confirmation":
                 return <div>
-                    <CheckBox name={name} value={userInput.value || false}
+                    <CheckBox name={name} value={value || false}
                               onChange={this.changeBooleanInput(name)}
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
@@ -281,7 +287,7 @@ export default class UserInputForm extends React.Component {
                 </div>;
             case "accept":
             case "boolean":
-                return <CheckBox name={name} value={userInput.value || false}
+                return <CheckBox name={name} value={value || false}
                                  onChange={this.changeBooleanInput(name)}
                                  info={I18n.t(`process.${name}`)}/>;
             case "location_code":
@@ -289,16 +295,16 @@ export default class UserInputForm extends React.Component {
             case "location_code_ssp_2":
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
-                                           locationCode={userInput.value}/>;
+                                           locationCode={value}/>;
             case "label_with_state":
-                return <StateValue className={userInput.name} value={userInput.value}/>;
+                return <StateValue className={userInput.name} value={value}/>;
             case "label":
                 return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`)}</p>;
             case "multi_msp":
-                return <MultipleMSPs msps={isEmpty(userInput.value) ? [
+                return <MultipleMSPs msps={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
-                ] : userInput.value}
+                ] : value}
                                      availableMSPs={this.props.multiServicePoints}
                                      organisations={this.props.organisations}
                                      onChange={this.changeNestedInput(name)}/>;

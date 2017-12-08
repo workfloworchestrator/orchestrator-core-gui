@@ -77,6 +77,8 @@ I18n.translations.en = {
         },
         port_id: "Port",
         port_id_info: "Select a port",
+        port_id_1: "Port",
+        port_id_1_info: "Select a port",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
