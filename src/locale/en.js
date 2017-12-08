@@ -168,6 +168,8 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription created by this Process",
         device_port_name: "Device port name",
         device_port_name_info: "Port name to configure on the physical device",
+        device_port_name_1: "Second device port name",
+        device_port_name_1_info: "Port name to configure on the physical device",
         multi_msp: "Multi-Service Points",
         multi_msp_info: "All off the MSP's that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         ssp_a: {
