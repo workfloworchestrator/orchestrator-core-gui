@@ -216,7 +216,7 @@ class App extends React.PureComponent {
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <ResourceType {...props} />}/>
                         <ProtectedRoute path="/cache"
-                                        currentUser={currentUser}
+                                        currentUser={currentUser} configuration={configuration}
                                         render={props => <Cache {...props} />}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>

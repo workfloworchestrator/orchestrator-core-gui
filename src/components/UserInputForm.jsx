@@ -205,7 +205,8 @@ export default class UserInputForm extends React.Component {
                 return <ReadOnlySubscriptionView subscriptionId={userInput.value}
                                                  products={this.props.products}
                                                  organisations={this.props.organisations}
-                                                 className="indent"/>;
+                                                 className="indent"
+                                                 storeInterDependentState={this.storeInterDependentState}/>;
             case "nms_service_id" :
             case "bandwidth":
             case "vlan" :
