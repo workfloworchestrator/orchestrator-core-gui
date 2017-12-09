@@ -52,7 +52,7 @@ export default class TerminateSubscription extends React.Component {
             contact_persons: this.state.contactPersons
         }).then(res => {
             this.props.history.push(`/processes`);
-            setFlash(I18n.t("process.flash.create", {name: res.pid}));
+            setFlash(I18n.t("process.flash.create", {name: this.props.subscriptionId}));
         });
     };
 

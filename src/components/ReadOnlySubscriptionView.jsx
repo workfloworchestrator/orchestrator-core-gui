@@ -77,6 +77,31 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
         </section>;
 
 
+    renderSubscriptionInstanceValue = (val, index) => <div key={index}>
+        <label className="title">{val.resource_type.resource_type}</label>
+        <input type="text" readOnly={true} value={val.value}/>
+    </div>;
+
+    renderSubscriptionResourceTypes = subscription => {
+        const values = subscriptionInstanceValues(subscription);
+        if (isEmpty(values)) {
+            return null;
+        }
+        const nbrLeft = Math.ceil(values.length / 2);
+        return <section className="details">
+            <h3>{I18n.t("subscription.resource_types")}</h3>
+            <em>{I18n.t("subscription.resource_types_info")}</em>
+            <div className="form-container">
+                <section className="part">
+                    {values.slice(0, nbrLeft).map(this.renderSubscriptionInstanceValue)}
+                </section>
+                <section className="part">
+                    {values.slice(nbrLeft).map(this.renderSubscriptionInstanceValue)}
+                </section>
+            </div>
+        </section>
+    };
+
     renderProduct = product => {
         if (isEmpty(product)) {
             return null;
@@ -109,6 +134,7 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
         return (
             <div className={`mod-read-only-subscription-view ${className}`}>
                 {this.renderSubscriptionDetail(subscription)}
+                {this.renderSubscriptionResourceTypes(subscription)}
                 {this.renderProduct(product)}
                 {this.renderSubscriptionChilds(childSubscriptions, product)}
             </div>

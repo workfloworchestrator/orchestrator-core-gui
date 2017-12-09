@@ -17,6 +17,9 @@
         padding: 15px 0 0 15px;
         color: $darker-blue;
     }
+    em {
+        margin-left: 15px;
+    }
     section.terminate-link, section.modify-link {
         &.modify-link {
             margin-top: 25px;

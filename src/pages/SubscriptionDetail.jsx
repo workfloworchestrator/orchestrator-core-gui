@@ -244,6 +244,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const nbrLeft = Math.ceil(values.length / 2);
         return <section className="details">
             <h3>{I18n.t("subscription.resource_types")}</h3>
+            <em>{I18n.t("subscription.resource_types_info")}</em>
             <div className="form-container-parent">
                 <section className="form-container">
                     <section>
