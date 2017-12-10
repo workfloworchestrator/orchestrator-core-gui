@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import "./Cache.css";
 import {stop} from "../utils/Utils";
-import {clearCache} from "../api";
+import {clearCache, ping} from "../api";
 import Select from "react-select";
 import {setFlash} from "../utils/Flash";
 
@@ -18,9 +18,11 @@ export default class Cache extends React.Component {
         };
     }
 
+    componentDidMount = () => ping();
+
     clearCache = e => {
         stop(e);
-        clearCache(this.state.cache).then(res => setFlash(I18n.t("cache.flushed")));
+        clearCache(this.state.cache).then(res => setFlash(I18n.t("cache.flushed", {name: I18n.t(`cache.name.${this.state.cache}`)})));
     };
 
     render() {

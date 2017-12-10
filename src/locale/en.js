@@ -476,7 +476,7 @@ I18n.translations.en = {
         remove: "Flush Cache",
         remove_info: "Select a Cache to flush",
         clear: "Flush",
-        flushed: "Cache was flushed."
+        flushed: "Cache {{name}} was flushed"
     },
     error_dialog: {
         title: "Unexpected error",
