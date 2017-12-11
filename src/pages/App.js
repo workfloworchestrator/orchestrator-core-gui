@@ -18,7 +18,6 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import {
     config,
-    ieeeInterfaceTypes,
     locationCodes,
     me,
     organisations,
@@ -47,7 +46,6 @@ class App extends React.PureComponent {
             currentUser: {},
             configuration: {},
             organisations: [],
-            ieeeInterfaceTypes: [],
             locationCodes: [],
             products: [],
             error: false,
@@ -117,15 +115,14 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), products(), ieeeInterfaceTypes(), locationCodes()]).then(result => {
-                    const [currentUser, allOrganisations, allProducts, allIeeeInterfaceTypes, allLocationCodes] = result;
+                Promise.all([me(), organisations(), products(), locationCodes()]).then(result => {
+                    const [currentUser, allOrganisations, allProducts, allLocationCodes] = result;
                     if (currentUser && currentUser.user_name) {
                         this.setState({
                             loading: false,
                             currentUser: currentUser,
                             configuration: configuration,
                             organisations: allOrganisations,
-                            ieeeInterfaceTypes: allIeeeInterfaceTypes,
                             locationCodes: allLocationCodes,
                             products: allProducts.sort((a,b) => a.name.localeCompare(b.name))
                         });
@@ -143,7 +140,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, products, ieeeInterfaceTypes, locationCodes} = this.state;
+        const {currentUser, configuration, organisations, products, locationCodes} = this.state;
 
         return (
             <Router>
@@ -173,7 +170,6 @@ class App extends React.PureComponent {
                                         render={props => <NewProcess currentUser={currentUser}
                                                                      products={products}
                                                                      organisations={organisations}
-                                                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                      locationCodes={locationCodes}
                                                                      preselectedProduct={getParameterByName("product", props.location.search)}
                                                                      preselectedOrganisation={getParameterByName("organisation", props.location.search)}
@@ -192,7 +188,6 @@ class App extends React.PureComponent {
                                                                organisations={organisations}
                                                                configuration={configuration}
                                                                products={products}
-                                                               ieeeInterfaceTypes={ieeeInterfaceTypes}
                                                                locationCodes={locationCodes}
                                                                {...props}/>}/>
                         <Route path="/subscriptions"

@@ -159,10 +159,6 @@ export function organisations() {
     return fetchJson("crm/organisations");
 }
 
-export function ieeeInterfaceTypes() {
-    return fetchJson("ims/ieee_interface_types")
-}
-
 export function ieeeInterfaceTypesForProductId(id) {
     return fetchJson(`products/ieee_interface_types/${id}`)
 }

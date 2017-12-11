@@ -131,6 +131,7 @@ I18n.translations.en = {
         ims_id_info: "The IMS identifier stored in the IMS database",
         dienstafname: "Dienstafname",
         dienstafname_info: "The dienstafname of the service - must be valid GUID like 76C5FB05-6D86-4BD2-A56C-124F7F33B1F9",
+        ieee_interface_type_select: "First select a product type...",
         ieee_interface_type: "IEEE interface type",
         ieee_interface_type_info: "Choose an IEEE interface type",
         ieee_interface_type_1: "First MSP IEEE interface type",

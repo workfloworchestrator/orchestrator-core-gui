@@ -159,7 +159,7 @@ export default class ProcessDetail extends React.PureComponent {
     };
 
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink, multiServicePoints) => {
-        const {locationCodes, ieeeInterfaceTypes, products, organisations, history} = this.props;
+        const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
 
@@ -175,7 +175,6 @@ export default class ProcessDetail extends React.PureComponent {
                     <h3>{I18n.t("process.userInput", {name: step.name, product: productName})}</h3>
                 </section>
                 <UserInputForm locationCodes={locationCodes}
-                               ieeeInterfaceTypes={ieeeInterfaceTypes}
                                stepUserInput={stepUserInput}
                                products={products}
                                organisations={organisations}
@@ -227,6 +226,5 @@ ProcessDetail.propTypes = {
     configuration: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired,
+    locationCodes: PropTypes.array.isRequired
 };

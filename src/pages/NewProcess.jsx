@@ -90,7 +90,7 @@ export default class NewProcess extends React.Component {
 
     render() {
         const {product, stepUserInput, productValidation, multiServicePoints} = this.state;
-        const {organisations, products, ieeeInterfaceTypes, locationCodes, history} = this.props;
+        const {organisations, products, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         return (
             <div className="mod-new-process">
@@ -117,7 +117,6 @@ export default class NewProcess extends React.Component {
                                        history={history}
                                        organisations={organisations}
                                        products={products}
-                                       ieeeInterfaceTypes={ieeeInterfaceTypes}
                                        locationCodes={locationCodes}
                                        product={product}
                                        validSubmit={this.validSubmit}/>}
@@ -133,7 +132,6 @@ NewProcess.propTypes = {
     currentUser: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,

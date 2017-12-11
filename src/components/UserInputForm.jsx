@@ -10,7 +10,6 @@ import MultiServicePointSelect from "./MultiServicePointSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
-import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
@@ -188,14 +187,6 @@ export default class UserInputForm extends React.Component {
 
     };
 
-    freePortSelect = (name, value, interfaceType, locationCode) => (
-        <FreePortSelect
-            onChange={this.changeSelectInput(name)}
-            freePort={value}
-            interfaceType={interfaceType}
-            locationCode={locationCode}/>
-    );
-
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
@@ -256,24 +247,25 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-                return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
-                                                 interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                 interfaceType={value}/>;
-            case "ieee_interface_type_for_product_tag":
-                const productId = this.props.product.value || this.props.product.product_id;
+                const stepUserInput = this.state.stepUserInput;
+                const productUserInput = stepUserInput.find(input => input.name === userInput.product_key);
+                const productId = productUserInput ? productUserInput.value : null;
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={value}
                                                               productId={productId}/>;
+            case "ieee_interface_type_for_product_tag":
+                const propsProductId = this.props.product.value || this.props.product.product_id;
+                return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
+                                                              interfaceType={value}
+                                                              productId={propsProductId}/>;
             case "free_ports_for_location_code_and_interface_type":
-                return this.freePortSelect(name, value, currentState.ieee_interface_type, currentState.location_code);
-            case "free_ports_for_location_code_and_interface_type_1":
-                return this.freePortSelect(name, value, currentState.ieee_interface_type_1, currentState.location_code_1);
-            case "free_ports_for_location_code_and_interface_type_2":
-                return this.freePortSelect(name, value, currentState.ieee_interface_type_2, currentState.location_code_2);
-            case "free_ports_for_location_code_and_interface_type_ssp_a":
-                return this.freePortSelect(name, value, currentState.ssp_a.interface_type, currentState.ssp_a.location_code);
-            case "free_ports_for_location_code_and_interface_type_ssp_b":
-                return this.freePortSelect(name, value, currentState.ssp_b.interface_type, currentState.ssp_b.location_code);
+                const interfaceType = currentState[userInput.interface_type_key];
+                const locationCode = currentState[userInput.location_code_key];
+                return <FreePortSelect
+                    onChange={this.changeSelectInput(name)}
+                    freePort={value}
+                    interfaceType={interfaceType}
+                    locationCode={locationCode}/>;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
@@ -344,7 +336,6 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
