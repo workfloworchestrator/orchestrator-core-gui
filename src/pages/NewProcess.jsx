@@ -64,9 +64,9 @@ export default class NewProcess extends React.Component {
     };
 
     changeProduct = option => {
-        if (isEmpty(option) || isEmpty(option.value)) {
-            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}});
-        } else {
+        this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}});
+        // looks strange, but if we don't time out for a while all the UserInput re-renderes based on the new product
+        setTimeout(() => {
             this.setState({product: option});
             Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
                 const [productValidation, userInput] = result;
@@ -85,7 +85,8 @@ export default class NewProcess extends React.Component {
                 }
                 this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
             });
-        }
+
+        }, 150);
     };
 
     render() {
