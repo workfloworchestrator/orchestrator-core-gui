@@ -21,6 +21,7 @@ import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleMSPs from "./MultipleMSPs";
 import {validEmailRegExp} from "../validations/Subscriptions";
+import {lookupValueFromProcessState} from "../utils/ProcessState";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -259,8 +260,8 @@ export default class UserInputForm extends React.Component {
                                                               interfaceType={value}
                                                               productId={propsProductId}/>;
             case "free_ports_for_location_code_and_interface_type":
-                const interfaceType = currentState[userInput.interface_type_key];
-                const locationCode = currentState[userInput.location_code_key];
+                const interfaceType = lookupValueFromProcessState(userInput.interface_type_key, currentState);
+                const locationCode = lookupValueFromProcessState(userInput.location_code_key, currentState);
                 return <FreePortSelect
                     onChange={this.changeSelectInput(name)}
                     freePort={value}
