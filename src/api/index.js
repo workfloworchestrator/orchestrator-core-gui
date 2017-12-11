@@ -216,6 +216,10 @@ export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`)
 }
 
+export function dienstafnameSubscriptionCrossCheck() {
+    return fetchJson("subscriptions/dienstafname-subscriptions")
+}
+
 export function initialWorkflowInput(workflowKey) {
     return fetchJson(`workflows/${workflowKey}`)
 }
