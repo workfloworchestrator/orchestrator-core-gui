@@ -91,12 +91,6 @@ export default class UserInputForm extends React.Component {
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
 
-    userInputValue = name => {
-        const userInput = this.state.stepUserInput;
-        return userInput.find(input => input.name === name).value || "";
-    };
-
-
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
         userInput.find(input => input.name === name).value = value;
@@ -138,7 +132,7 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         if (type === "int") {
             errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
-        } else if (type === "vlan" || type === "ssp_1_vlan" || type === "ssp_2_vlan") {
+        } else if (type === "vlan") {
             errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
         } else if (type === "guid") {
             errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
@@ -201,7 +195,7 @@ export default class UserInputForm extends React.Component {
             case "port":
             case "ims_port_id":
             case "ims_id":
-                return <input type="text" id={name} name={name} value={this.userInputValue(name)}
+                return <input type="text" id={name} name={name} value={value}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
@@ -212,8 +206,10 @@ export default class UserInputForm extends React.Component {
             case "nms_service_id" :
             case "bandwidth":
             case "vlan" :
-            case "ssp_1_vlan":
-            case "ssp_2_vlan":
+                const stepUserInput = this.state.stepUserInput;
+                const mspUserInput = stepUserInput.find(input => input.name === userInput.msp_key);
+                const subscriptionId = mspUserInput ? mspUserInput.value : null;
+                return <VirtualLAN key={name} vlan={value} onChange={this.changeStringInput(name)}>
                 return <input type="number" step="1" min="2" max="4095" id={name} name={name}
                               value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
