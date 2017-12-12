@@ -7,7 +7,7 @@ test("Lookup existing key in process state", () => {
 
 test("Lookup non-existing key in process state", () => {
     const value = lookupValueFromProcessState("key", {});
-    expect(value).toBe(undefined);
+    expect(value).toBe(null);
 });
 
 test("Lookup nested key in process state", () => {
