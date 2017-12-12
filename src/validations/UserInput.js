@@ -12,10 +12,12 @@ const inValidRange = range => {
 export function doValidateUserInput(userInput, value, errors) {
     const type = userInput.type;
     const name = userInput.name;
-    if (type === "vlan") {
+    if (type === "vlan_range") {
         const stripped = value.replace(/ /g, "");
         errors[name] = !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||
             stripped.split(",").some(inValidRange);
+    } else if (type === "vlan") {
+        errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
     } else if (type === "int") {
         errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
     } else if (type === "guid") {

@@ -181,10 +181,11 @@ export default class UserInputForm extends React.Component {
                                                  storeInterDependentState={this.storeInterDependentState}/>;
             case "nms_service_id" :
             case "bandwidth":
-                return <input type="number" step="1" min="2" max="4095" id={name} name={name}
-                              value={this.userInputValue(name)}
+                return <input type="number" id={name} name={name}
+                              value={value}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "vlan" :
+            case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
                 return <VirtualLAN name={name} vlan={value} onChange={this.changeStringInput(name)}
                                    onError={this.onError(name)} subscriptionIdMSP={subscriptionIdMSP}

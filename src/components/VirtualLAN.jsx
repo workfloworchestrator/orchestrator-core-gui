@@ -39,17 +39,20 @@ export default class VirtualLAN extends React.PureComponent {
             //semantically invalid so we don't validate against the already used ports
             return [];
         }
-        const stripped = value.replace(/ /g, "");
-        const ranges = stripped.split(",");
-        
-        return vlanRange.indexOf("7") > -1 ? [7, 9] : [];
+        const numbers = vlanRange.replace(/ /g, "").split(",").reduce((acc, val) => {
+            const boundaries = val.split("-");
+            const max = parseInt(boundaries[boundaries.length-1], 10);
+            const min = parseInt(boundaries[0], 10);
+            return acc.concat(Array.from(new Array(max - min + 1), (x,i) => min + i))
+        },[]);
+        return numbers.filter(num => usedVlans.some(used => used.length > 1 ? num >= used[0] && num <= used[1] : num === used[0]));
     };
 
     validateUsedVlans = e => {
         const {onBlur, name} = this.props;
         const {usedVlans} = this.state;
         const vlanRange = e.target.value;
-        const inUse = this.vlansInUse(name, vlanRange, usedVlans)
+        const inUse = this.vlansInUse(name, vlanRange, usedVlans);
         this.setState({vlansInUse: inUse});
         onBlur(e);
     };
@@ -59,7 +62,7 @@ export default class VirtualLAN extends React.PureComponent {
         const {onChange, vlan, subscriptionIdMSP} = this.props;
         return (
             <div>
-                <input type="text" value={vlan} placeholder={subscriptionIdMSP ? "Enter a valid VLAN range..." :
+                <input type="text" value={vlan || ""} placeholder={subscriptionIdMSP ? "Enter a valid VLAN range..." :
                     "First select a MSP..."} disabled={!subscriptionIdMSP}
                        onChange={onChange} onBlur={this.validateUsedVlans}/>
                 {}
