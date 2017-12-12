@@ -173,6 +173,8 @@ I18n.translations.en = {
         device_port_name_1_info: "Port name to configure on the physical device",
         multi_msp: "Multi-Service Points",
         multi_msp_info: "All off the MSP's that will be connected to each other in this E-LAN virtual private network - minimum is 2",
+        nsi_isalias: "NSI isAlias",
+        nsi_isalias_info: "",
         ssp_a: {
             port_id: "Port SSP site A",
             port_id_info: "Select a port for SSP site A",
