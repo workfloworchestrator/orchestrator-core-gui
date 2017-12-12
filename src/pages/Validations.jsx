@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {allWorkflows, invalidSubscriptions, validations} from "../api";
+import {allWorkflows, invalidSubscriptions, dienstafnameSubscriptionCrossCheck, validations} from "../api";
 
 import "./Validations.css";
 import ValidationsExplain from "../components/ValidationsExplain";
@@ -9,6 +9,8 @@ import CheckBox from "../components/CheckBox";
 import ProductValidation from "../components/ProductValidation";
 import {isEmpty, stop} from "../utils/Utils";
 import SubscriptionValidation from "../components/SubscriptionValidation";
+import DienstafnameValidation from "../components/DienstafnameValidation";
+
 
 export default class Validations extends React.Component {
 
@@ -17,20 +19,22 @@ export default class Validations extends React.Component {
         this.state = {
             validations: [],
             invalidSubscriptions: [],
+            dienstafnameSubscriptionMatches: [],
             showExplanation: false,
             hideValid: false,
             hideValidSubscriptionTypes: true,
-            tabs: ["workflows", "subscriptions"],
+            tabs: ["workflows", "subscriptions", "dienstafnames"],
             selectedTab: "workflows",
         };
     }
 
     componentDidMount() {
-        Promise.all([validations(), allWorkflows()])
+        Promise.all([validations(), allWorkflows(), dienstafnameSubscriptionCrossCheck()])
             .then(res => {
                 this.setState({validations: res[0]});
                 const workflows = res[1];
                 this.mapWorkflowsToInvalidSubscriptions(workflows);
+                this.setState({dienstafnameSubscriptionMatches: res[2]});
             });
     }
 
@@ -96,6 +100,19 @@ export default class Validations extends React.Component {
             </section>
         </div>;
 
+    renderDienstafnameValidations = (filteredDienstafnames) => {
+        return <div className="dienstafnames">
+            <section className="header">
+                {this.renderExplain()}
+            </section>
+            <section className="validations">
+                <DienstafnameValidation matches={filteredDienstafnames}/>
+                {isEmpty(filteredDienstafnames) &&
+                    <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>}
+            </section>
+        </div>
+    };
+
     renderExplain() {
         return <section className="explain" onClick={() => this.setState({showExplanation: true})}>
             <i className="fa fa-question-circle"></i>
@@ -112,16 +129,18 @@ export default class Validations extends React.Component {
             {I18n.t(`validations.tabs.${tab}`)}
         </span>;
 
-    renderTabContent = (validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow, invalidSubscriptions) => {
+    renderTabContent = (validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow, invalidSubscriptions, dienstafnameSubscriptionMatches) => {
         return selectedTab === "workflows" ?
             this.renderWorkflowValidations(validations, hideValid, validationsToShow) :
-            this.renderSubscriptionValidations(invalidSubscriptions, hideValidSubscriptionTypes);
+            selectedTab === "subscriptions" ?
+            this.renderSubscriptionValidations(invalidSubscriptions, hideValidSubscriptionTypes) :
+            this.renderDienstafnameValidations(dienstafnameSubscriptionMatches)
     };
 
     render() {
         const {
             validations, showExplanation, hideValid, tabs, selectedTab, invalidSubscriptions,
-            hideValidSubscriptionTypes
+            hideValidSubscriptionTypes, dienstafnameSubscriptionMatches
         } = this.state;
         const validationsToShow = hideValid ? [...validations]
             .filter(validation => !this.isValidValidation(validation)) : validations;
@@ -130,12 +149,13 @@ export default class Validations extends React.Component {
                 <ValidationsExplain
                     close={() => this.setState({showExplanation: false})}
                     isVisible={showExplanation}
-                    isWorkFlows={selectedTab === "workflows"}/>
+                    isWorkFlows={selectedTab === "workflows"}
+                    isSubscriptions={selectedTab === "subscriptions"}/>
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {this.renderTabContent(validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
-                    invalidSubscriptions)}
+                    invalidSubscriptions, dienstafnameSubscriptionMatches)}
             </div>
         );
     }

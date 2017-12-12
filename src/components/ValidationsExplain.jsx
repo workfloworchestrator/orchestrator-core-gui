@@ -30,6 +30,11 @@ export default class ValidationsExplain extends React.PureComponent {
             to the product definition.</p>
     </section>;
 
+    explanationDienstafnames = () => <section className="explanation">
+        <h3>Explanation</h3>
+        <p>Hier de uitleg over Dienstafnames</p>
+    </section>;
+
     details = () => <section className="details">
         <h3>Details</h3>
         <p>The validations consist of each Product validated against the <span className="code">workflow_subscription_mapping </span>
@@ -47,6 +52,11 @@ export default class ValidationsExplain extends React.PureComponent {
             of the Workflow linked to the product of the Subscription. Each invalid Subscription - due to lacking <span
                 className="code">subscription_instance_values </span>
             - is listed per workflow.</p>
+    </section>;
+
+    detailsDienstafnames = () => <section className="details">
+        <h3>Details</h3>
+        <p>Hier de verdere uitleg</p>
     </section>;
 
     example = () => {
@@ -69,9 +79,9 @@ export default class ValidationsExplain extends React.PureComponent {
     }
 
     render() {
-        const {close, isVisible, isWorkFlows} = this.props;
+        const {close, isVisible, isWorkFlows, isSubscriptions} = this.props;
         const className = isVisible ? "" : "hide";
-        const title = isWorkFlows ? "Product / Workflow Validations" : "Subscription Validations";
+        const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" : "Dienstafname / Subscription cross-check";
         return (
             <div className={`validation-explain ${className}`}
                  tabIndex="1" onBlur={close} ref={ref => this.main = ref}>
@@ -82,8 +92,8 @@ export default class ValidationsExplain extends React.PureComponent {
                             <i className="fa fa-remove"></i>
                         </a>
                     </section>
-                    {isWorkFlows ? this.explanation() : this.explanationSubscriptions()}
-                    {isWorkFlows ? this.details() : this.detailsSubscriptions()}
+                    {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() : this.explanationDienstafnames()}
+                    {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() : this.detailsDienstafnames()}
                     {isWorkFlows && this.example()}
                 </section>
             </div>
@@ -94,6 +104,7 @@ export default class ValidationsExplain extends React.PureComponent {
 ValidationsExplain.propTypes = {
     close: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
-    isWorkFlows: PropTypes.bool.isRequired
+    isWorkFlows: PropTypes.bool.isRequired,
+    isSubscriptions: PropTypes.bool.isRequired
 };
 

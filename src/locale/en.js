@@ -244,11 +244,14 @@ I18n.translations.en = {
         resource_types: "Resource types",
         tabs: {
             subscriptions: "Subscriptions",
-            workflows: "Workflows"
+            workflows: "Workflows",
+            dienstafnames: "Dienstafnames"
         },
         no_subscriptions: "No invalid subscriptions",
-        workflow_key: "Invalid subscriptions for workflow {{workflow}}"
-
+        workflow_key: "Invalid subscriptions for workflow {{workflow}}",
+        no_dienstafnames: "No mismatches in dienstafname vs. subscriptions tables",
+        dienstafname_matches: "Dienstafnames not present in Subscriptions table",
+        subscription_matches: "Subscriptions not present in Dienstafname table"
     },
     filter: {
         CHANGES: "Changes",
@@ -352,6 +355,10 @@ I18n.translations.en = {
         cancel: "Cancel",
         submit: "Terminate",
         subscription_childs: "Child subscriptions - ports used in {{product}}"
+    },
+    dienstafname: {
+        dienstafname: "Dienstafname",
+        subscription: "Subscription"
     },
     contact_persons: {
         email: "Email",
