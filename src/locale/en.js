@@ -90,27 +90,27 @@ I18n.translations.en = {
         source: "MSP left",
         source_info: "The left MSP in the lightpath",
         source_vlan: "Port VLAN left ",
-        source_vlan_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination: "MSP right",
         destination_info: "The right MSP in the lightpath",
         destination_vlan: "Port VLAN Right",
-        destination_vlan_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         source_1: "First Lightpath: MSP left",
         source_1_info: "The left MSP in the first lightpath",
         source_vlan_1: "First Lightpath: Port VLAN Left",
-        source_vlan_1_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_1_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination_1: "First Lightpath: MSP right",
         destination_1_info: "The right MSP in the first lightpath",
         destination_vlan_1: "First Lightpath: VLAN Port Right",
-        destination_vlan_1_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_1_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         source_2: "Second Lightpath: MSP left",
         source_2_info: "The left MSP in the second lightpath",
         source_vlan_2: "Second Lightpath: VLAN Port Left",
-        source_vlan_2_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_2_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination_2: "Second Lightpath: MSP right",
         destination_2_info: "The right MSP in the second lightpath",
         destination_vlan_2: "Second Lightpath: VLAN Port Right",
-        destination_vlan_2_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_2_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         capacity: "Capacity",
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         contact_persons: "Customer contact persons",
@@ -177,7 +177,7 @@ I18n.translations.en = {
             port_id: "Port SSP site A",
             port_id_info: "Select a port for SSP site A",
             vlan: "VLAN site A",
-            vlan_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+            vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
             location_code: "Location code site A",
             location_code_info: "Select a location code for site A.",
             crm_port_id: 'The CRM identifier for the SSP on site A',
@@ -193,7 +193,7 @@ I18n.translations.en = {
             port_id: "Port SSP site B",
             port_id_info: "Select a port for SSP site b",
             vlan: "VLAN site B",
-            vlan_info: "VLAN range - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'",
+            vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
             location_code: "Location code site B",
             location_code_info: "Select a location code for site B.",
             crm_port_id: 'The CRM identifier for the SSP on site B',
@@ -369,7 +369,8 @@ I18n.translations.en = {
     },
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
-        vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}"
+        vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
+        allPortsAvailable: "This MSP has no ports in use (yet)."
     },
     clipboard: {
         copied: "Copied!",
@@ -520,14 +521,14 @@ I18n.translations.en = {
     },
     FreePortSelect: {
         "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}",
-        "freePortsLoading": "Hang on tight, the query for free ports with interface type {{interfaceType}} available at location {{location}} takes time...",
+        "freePortsLoading": "Take a dump, the query for free ports with interface type {{interfaceType}} available at location {{location}} takes forever...",
         "noFreePortsPlaceholder": "No free ports available",
         "selectPort": "Select a port"
     },
     multi_msp: {
         msp: "Multi-Service Port",
         vlan: "Port Vlan",
-        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4095] VLAN integers, for example '2, 5-6, 1048-1052'"
+        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
     }
 };
 

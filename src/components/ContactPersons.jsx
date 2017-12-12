@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {isEmpty, stop} from "../utils/Utils";
 import {validEmailRegExp} from "../validations/Subscriptions";
-import {organisationContactsKey, organisationNameKey} from "./OrganisationSelect";
 import Autocomplete from "./Autocomplete";
 import scrollIntoView from "scroll-into-view";
 
 import "react-select/dist/react-select.css";
 import "./ContactPersons.css";
+import {contacts} from "../api";
 
 export default class ContactPersons extends React.PureComponent {
 
@@ -18,14 +18,23 @@ export default class ContactPersons extends React.PureComponent {
             errors: {},
             displayAutocomplete: {},
             filteredSuggestions: [],
-            selectedItem: -1
+            selectedItem: -1,
+            contactPersons: []
         };
     }
 
+    componentDidMount = (organisationId = this.props.organisationId) => {
+        if (organisationId) {
+            contacts(organisationId).then(result =>
+                this.setState({contactPersons: result})
+            );
+        }
+    };
+
     componentWillReceiveProps(nextProps) {
-        const newOrg = nextProps.interDependentState[organisationNameKey];
-        const currentOrg = this.props.interDependentState[organisationNameKey];
-        if (!isEmpty(newOrg) && !(isEmpty(currentOrg)) && newOrg !== currentOrg) {
+        if (nextProps.organisationId && nextProps.organisationId !== this.props.organisationId) {
+            this.componentDidMount(nextProps.organisationId);
+        } else if (isEmpty(nextProps.organisationId) && !isEmpty(this.props.organisationId)) {
             this.props.onChange([{email: "", name: "", phone: ""}]);
         }
     };
@@ -52,7 +61,7 @@ export default class ContactPersons extends React.PureComponent {
         if (name !== "name") {
             this.setState({displayAutocomplete: {}, selectedItem: -1});
         } else {
-            const suggestions = this.props.interDependentState[organisationContactsKey] || [];
+            const suggestions = this.state.contactPersons;
             const filteredSuggestions = isEmpty(value) ? [] : suggestions
                 .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
                 .filter(item => !persons.some(person => person.email === item.email));
@@ -189,7 +198,7 @@ export default class ContactPersons extends React.PureComponent {
 ContactPersons.propTypes = {
     persons: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    interDependentState: PropTypes.object.isRequired
+    organisationId: PropTypes.string
 };
 
 

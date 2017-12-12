@@ -64,29 +64,28 @@ export default class NewProcess extends React.Component {
     };
 
     changeProduct = option => {
-        this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}});
-        // looks strange, but if we don't time out for a while all the UserInput re-renderes based on the new product
-        setTimeout(() => {
+        this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
             this.setState({product: option});
-            Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
-                const [productValidation, userInput] = result;
-                let stepUserInput = userInput.filter(input => input.name !== "product");
-                if (this.props.preselectedOrganisation != null) {
-                    const organisationInputIdx = stepUserInput.findIndex(x => x.name === "organisation");
-                    if (organisationInputIdx !== -1) {
-                        const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
-                        const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
-                        const organisationInput = {
-                            ...stepUserInput[organisationInputIdx],
-                            value: this.props.preselectedOrganisation
-                        };
-                        stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
+            if (option) {
+                Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
+                    const [productValidation, userInput] = result;
+                    let stepUserInput = userInput.filter(input => input.name !== "product");
+                    if (this.props.preselectedOrganisation != null) {
+                        const organisationInputIdx = stepUserInput.findIndex(x => x.name === "organisation");
+                        if (organisationInputIdx !== -1) {
+                            const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
+                            const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
+                            const organisationInput = {
+                                ...stepUserInput[organisationInputIdx],
+                                value: this.props.preselectedOrganisation
+                            };
+                            stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
+                        }
                     }
-                }
-                this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
-            });
-
-        }, 150);
+                    this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
+                });
+            }
+        });
     };
 
     render() {

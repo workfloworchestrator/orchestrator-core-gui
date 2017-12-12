@@ -5,6 +5,8 @@ import {stop} from "../utils/Utils";
 
 import "./MultipleMSPs.css";
 import MultiServicePointSelect from "./MultiServicePointSelect";
+import VirtualLAN from "./VirtualLAN";
+import {doValidateUserInput} from "../validations/UserInput";
 
 export default class MultipleMSPs extends React.PureComponent {
 
@@ -36,10 +38,12 @@ export default class MultipleMSPs extends React.PureComponent {
         }
     };
 
+
     validateVlan = index => e => {
-        const valid = /^\+?(0|[1-9]\d*)$/.test(e.target.value);
+        const err = {};
+        doValidateUserInput({name: "n", type: "vlan_range"}, e.target.value, err);
         const errors = {...this.state.errors};
-        errors[index] = !valid;
+        errors[index] = err["n"];
         this.setState({errors: errors});
     };
 
@@ -47,6 +51,7 @@ export default class MultipleMSPs extends React.PureComponent {
     renderMSP = (msps, msp, index, errors, availableMSPs, organisations) => {
         const inSelect = availableMSPs.filter(aMsp => aMsp.subscription_id === msp.subscription_id ||
             !msps.some(x => x.subscription_id === aMsp.subscription_id));
+
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
                 {index === 0 && <label>{I18n.t("multi_msp.msp")}</label>}
@@ -58,10 +63,8 @@ export default class MultipleMSPs extends React.PureComponent {
             <div className="wrapper">
                 {index === 0 && <label>{I18n.t("multi_msp.vlan")}</label>}
                 <div className="vlan">
-                    <input type="number" step="1" min="0"
-                           onChange={this.onChangeInternal("vlan", index)}
-                           onBlur={this.validateVlan(index)}
-                           value={msp.vlan || ""}/>
+                    <VirtualLAN vlan={msp.vlan} onChange={this.onChangeInternal("vlan", index)}
+                                subscriptionIdMSP={msp.subscription_id} onBlur={this.validateVlan(index)}/>
                     <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                        onClick={this.removeMSP(index)}></i>
                 </div>

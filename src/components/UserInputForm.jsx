@@ -41,7 +41,6 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
-            interDependentState: {}
         };
     }
 
@@ -63,12 +62,6 @@ export default class UserInputForm extends React.Component {
             this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
         }
-    };
-
-    storeInterDependentState = (name, value) => {
-        const interDependentState = {...this.state.interDependentState};
-        interDependentState[name] = value;
-        this.setState({interDependentState: interDependentState});
     };
 
     validateAllUserInput = (stepUserInput) => {
@@ -177,19 +170,17 @@ export default class UserInputForm extends React.Component {
                 return <ReadOnlySubscriptionView subscriptionId={value}
                                                  products={this.props.products}
                                                  organisations={this.props.organisations}
-                                                 className="indent"
-                                                 storeInterDependentState={this.storeInterDependentState}/>;
+                                                 className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
                 return <input type="number" id={name} name={name}
-                              value={value}
+                              value={value || ""}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
-                return <VirtualLAN name={name} vlan={value} onChange={this.changeStringInput(name)}
-                                   onError={this.onError(name)} subscriptionIdMSP={subscriptionIdMSP}
-                                   onBlur={this.validateUserInput(name)}/>
+                return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
+                                   subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}/>
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
@@ -197,7 +188,6 @@ export default class UserInputForm extends React.Component {
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
-                                           storeInterDependentState={this.storeInterDependentState}
                                            organisation={value}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
@@ -208,9 +198,11 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
             case "contact_persons" :
+                const organisationId = lookupValueFromProcessState(userInput.organisation_key, currentState) ||
+                    this.findValueFromInputStep(userInput.organisation_key);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
-                    interDependentState={this.state.interDependentState}
+                    organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(value)}
@@ -255,8 +247,6 @@ export default class UserInputForm extends React.Component {
                                  onChange={this.changeBooleanInput(name)}
                                  info={I18n.t(`process.${name}`)}/>;
             case "location_code":
-            case "location_code_ssp_1":
-            case "location_code_ssp_2":
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
                                            locationCode={value}/>;
