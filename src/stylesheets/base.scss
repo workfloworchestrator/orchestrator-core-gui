@@ -41,7 +41,7 @@ a {
     box-sizing: border-box;
 }
 
-::-webkit-input-placeholder {
+::-webkit-input-placeholder, div.Select-placeholder {
     color: $blue;
 }
 

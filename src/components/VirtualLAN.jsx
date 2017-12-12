@@ -1,0 +1,82 @@
+import React from "react";
+import I18n from "i18n-js";
+import PropTypes from "prop-types";
+import {usedVlans} from "../api"
+import "react-select/dist/react-select.css";
+import {isEmpty} from "../utils/Utils";
+import {doValidateUserInput} from "../validations/UserInput";
+
+export default class VirtualLAN extends React.PureComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            usedVlans: [],
+            vlansInUse: []
+        }
+    }
+
+    componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
+        if (subscriptionIdMSP) {
+            usedVlans(subscriptionIdMSP).then(result =>
+                this.setState({usedVlans: result})
+            );
+        }
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.subscriptionIdMSP && nextProps.subscriptionIdMSP !== this.props.subscriptionIdMSP) {
+            this.componentDidMount(nextProps.subscriptionIdMSP);
+        } else if (isEmpty(nextProps.subscriptionIdMSP)) {
+            this.setState({usedVlans: []})
+        }
+    };
+
+    vlansInUse = (name, vlanRange, usedVlans) => {
+        const errors = {};
+        doValidateUserInput({name: name, type: "vlan"}, vlanRange, errors);
+        if (errors[name]) {
+            //semantically invalid so we don't validate against the already used ports
+            return [];
+        }
+        const stripped = value.replace(/ /g, "");
+        const ranges = stripped.split(",");
+        
+        return vlanRange.indexOf("7") > -1 ? [7, 9] : [];
+    };
+
+    validateUsedVlans = e => {
+        const {onBlur, name} = this.props;
+        const {usedVlans} = this.state;
+        const vlanRange = e.target.value;
+        const inUse = this.vlansInUse(name, vlanRange, usedVlans)
+        this.setState({vlansInUse: inUse});
+        onBlur(e);
+    };
+
+    render() {
+        const {usedVlans, vlansInUse} = this.state;
+        const {onChange, vlan, subscriptionIdMSP} = this.props;
+        return (
+            <div>
+                <input type="text" value={vlan} placeholder={subscriptionIdMSP ? "Enter a valid VLAN range..." :
+                    "First select a MSP..."} disabled={!subscriptionIdMSP}
+                       onChange={onChange} onBlur={this.validateUsedVlans}/>
+                {}
+                {!isEmpty(vlansInUse) &&
+                <em className="error">{I18n.t("vlan.vlansInUseError", {vlans: vlansInUse.join(", ")})}</em>}
+                {!isEmpty(usedVlans) && <em>{I18n.t("vlan.vlansInUse", {vlans: usedVlans.map(arr => arr.join("-")).join(", ")})}</em>}
+            </div>
+        )
+    }
+
+}
+
+VirtualLAN.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    vlan: PropTypes.string,
+    onError: PropTypes.func.isRequired,
+    subscriptionIdMSP: PropTypes.string
+};

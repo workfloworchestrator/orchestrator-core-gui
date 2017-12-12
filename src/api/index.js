@@ -167,6 +167,10 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
 
+export function usedVlans(subscriptionId) {
+    return fetchJson(`ims/vlans/${subscriptionId}`)
+}
+
 export function subscriptions_by_subscription_port_id(subscription_id) {
     return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
         return {type: parent_subscriptions, json: json}

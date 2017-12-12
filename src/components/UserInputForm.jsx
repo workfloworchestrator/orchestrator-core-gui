@@ -20,8 +20,9 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleMSPs from "./MultipleMSPs";
-import {validEmailRegExp} from "../validations/Subscriptions";
 import {lookupValueFromProcessState} from "../utils/ProcessState";
+import {doValidateUserInput} from "../validations/UserInput";
+import VirtualLAN from "./VirtualLAN";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -72,7 +73,7 @@ export default class UserInputForm extends React.Component {
 
     validateAllUserInput = (stepUserInput) => {
         const errors = {...this.state.errors};
-        stepUserInput.forEach(input => this.doValidateUserInput(input, input.value, errors));
+        stepUserInput.forEach(input => doValidateUserInput(input, input.value, errors));
         this.setState({errors: errors});
         return !Object.keys(errors).some(key => errors[key]);
     };
@@ -126,61 +127,36 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
-
-    doValidateUserInput = (userInput, value, errors) => {
-        const type = userInput.type;
-        const name = userInput.name;
-        if (type === "int") {
-            errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
-        } else if (type === "vlan") {
-            errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
-        } else if (type === "guid") {
-            errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
-        } else if (type === "uuid") {
-            errors[name] = !/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/.test(value)
-        } else if (type === "emails") {
-            errors[name] = isEmpty(value);
-        } else if (type === "nms_service_id") {
-            errors[name] = !/^[0-9]{4}$/.test(value);
-        } else if (type === "contact_persons") {
-            errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
-        } else if (type === "multi_msp") {
-            errors[name] = isEmpty(value) || value.some(msp => isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
-        } else if (type === "accept") {
-            errors[name] = !value;
-        } else if (type === "boolean") {
-            errors[name] = isEmpty(!!value);
-        } else if (type === "crm_port_id") {
-            errors[name] = !/^\d{5}$/.test(value)
-        } else if (type === "label") {
-            errors[name] = false;
-        }
-        else {
-            errors[name] = isEmpty(value);
-        }
-    };
-
     validateUserInput = name => e => {
         const value = e.target.value;
         const userInput = this.state.stepUserInput.find(input => input.name === name);
         const errors = {...this.state.errors};
-        this.doValidateUserInput(userInput, value, errors);
+        doValidateUserInput(userInput, value, errors);
         this.setState({errors: errors});
     };
+
+    onError = name => value => this.setState({errors: {...this.state.errors, name: value}});
 
     renderInput = (userInput, process) => {
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
+        const error = this.state.errors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
                 {!ignoreLabel && <em>{I18n.t(`process.${name}_info`)}</em>}
                 {this.chooseInput(userInput, process)}
-                {this.state.errors[name] &&
+                {error &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
             </section>);
 
     };
+
+    findValueFromInputStep = relatedKey => {
+        const stepUserInput = this.state.stepUserInput;
+        const relatedUserInput = stepUserInput.find(input => input.name === relatedKey);
+        return relatedUserInput ? relatedUserInput.value : null;
+    } ;
 
     chooseInput = (userInput, process) => {
         const name = userInput.name;
@@ -195,7 +171,7 @@ export default class UserInputForm extends React.Component {
             case "port":
             case "ims_port_id":
             case "ims_id":
-                return <input type="text" id={name} name={name} value={value}
+                return <input type="text" id={name} name={name} value={value || ""}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
@@ -205,14 +181,14 @@ export default class UserInputForm extends React.Component {
                                                  storeInterDependentState={this.storeInterDependentState}/>;
             case "nms_service_id" :
             case "bandwidth":
-            case "vlan" :
-                const stepUserInput = this.state.stepUserInput;
-                const mspUserInput = stepUserInput.find(input => input.name === userInput.msp_key);
-                const subscriptionId = mspUserInput ? mspUserInput.value : null;
-                return <VirtualLAN key={name} vlan={value} onChange={this.changeStringInput(name)}>
                 return <input type="number" step="1" min="2" max="4095" id={name} name={name}
                               value={this.userInputValue(name)}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "vlan" :
+                const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
+                return <VirtualLAN name={name} vlan={value} onChange={this.changeStringInput(name)}
+                                   onError={this.onError(name)} subscriptionIdMSP={subscriptionIdMSP}
+                                   onBlur={this.validateUserInput(name)}/>
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
@@ -244,9 +220,7 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-                const stepUserInput = this.state.stepUserInput;
-                const productUserInput = stepUserInput.find(input => input.name === userInput.product_key);
-                const productId = productUserInput ? productUserInput.value : null;
+                const productId = this.findValueFromInputStep(userInput.product_key);
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={value}
                                                               productId={productId}/>;
