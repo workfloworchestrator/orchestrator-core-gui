@@ -10,7 +10,9 @@ export default class DienstafnameValidation extends React.Component {
         super(props);
         const {matches} = this.props;
         this.state = {
+            // FIXME not used
             sorted: {name: "status", descending: false},
+            //FIXME why copy this from the props?
             dienstafnames: matches.dienstafnames_not_in_subscriptions,
             subscriptions: matches.subscriptions_not_in_dienstafnames,
         };
