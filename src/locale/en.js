@@ -282,6 +282,7 @@ I18n.translations.en = {
         MSP: "MSP",
         SSP: "SSP",
         LPNLNSI: "NSI Light-paths",
+        MSPNL: "MSP NL",
         RMSP: "Redundant MSP",
         initial: "Initial",
         provisioning: "Provisioning",
