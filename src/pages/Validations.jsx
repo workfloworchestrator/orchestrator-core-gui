@@ -40,12 +40,10 @@ export default class Validations extends React.Component {
 
     mapWorkflowsToInvalidSubscriptions(workflows) {
         Promise.all(workflows.map(workflow => invalidSubscriptions(workflow.key)))
-            .then(results =>
-                this.setState({
-                    invalidSubscriptions: results.map((res, index) => {
-                        return {name: workflows[index].name, subscriptions: res}
-                    })
-                })
+            .then(results => this.setState({
+                    invalidSubscriptions: results.map((res, index) =>
+                        ({name: workflows[index].name, subscriptions: res})
+                    )})
             )
     }
 
