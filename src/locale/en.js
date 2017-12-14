@@ -361,7 +361,12 @@ I18n.translations.en = {
     },
     dienstafname: {
         dienstafname: "Dienstafname",
-        subscription: "Subscription"
+        subscription: "Subscription",
+        statuscode: "Status",
+        dienstcode: "Dienst",
+        dienstname: "Dienst",
+        organisatiecode: "Code",
+        organisatienaam: "Organisation"
     },
     contact_persons: {
         email: "Email",

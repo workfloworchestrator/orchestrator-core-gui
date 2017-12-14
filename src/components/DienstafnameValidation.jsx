@@ -13,11 +13,12 @@ export default class DienstafnameValidation extends React.Component {
             //FIXME why copy this from the props?
             dienstafnames: matches.dienstafnames_not_in_subscriptions,
             subscriptions: matches.subscriptions_not_in_dienstafnames,
+            sorted: {name: "dienstafname", descending: true},
         };
     }
 
     renderDienstafnameTable(dienstafnames, sorted) {
-        const columns = ["dienstafname", "subscription"];
+        const columns = ["dienstafname", "subscription", "statuscode", "dienstcode", "organisatiecode", "organisatienaam"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name}>
@@ -33,13 +34,25 @@ export default class DienstafnameValidation extends React.Component {
                     </thead>
                     <tbody>
                     {dienstafnames.map((dienstafname, index) =>
-                        <tr key={`${dienstafname}_${index}`}>
+                        <tr key={`${dienstafname.dienstafname}_${index}`}>
                             <td data-label={I18n.t("dienstafname.dienstafname")}
                                 className="actions"
-                                ><span>{dienstafname[0]}</span></td>
+                                ><span>{dienstafname.dienst}</span></td>
                             <td data-label={I18n.t("dienstafname.subscription")}
                                 className="actions"
-                                ><span>{dienstafname[1]}</span></td>
+                                ><span>{dienstafname.subscription}</span></td>
+                            <td data-label={I18n.t("dienstafname.statuscode")}
+                                className="actions"
+                                ><span>{dienstafname.statuscode}</span></td>
+                            <td data-label={I18n.t("dienstafname.dienstcode")}
+                                className="actions"
+                                ><span>{dienstafname.dienstcode}</span></td>
+                            <td data-label={I18n.t("dienstafname.organisatiecode")}
+                                className="actions"
+                                ><span>{dienstafname.organisatiecode}</span></td>
+                            <td data-label={I18n.t("dienstafname.organisatienaam")}
+                                className="actions"
+                                ><span>{dienstafname.organisatienaam}</span></td>
                         </tr>
                     )}
                     </tbody>
