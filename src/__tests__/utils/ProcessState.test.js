@@ -11,6 +11,6 @@ test("Lookup non-existing key in process state", () => {
 });
 
 test("Lookup nested key in process state", () => {
-    const value = lookupValueFromProcessState("sub.key", {sub: {key: "value"}})
+    const value = lookupValueFromProcessState("sub.key", {sub: {key: "value"}});
     expect(value).toBe("value")
 });
