@@ -23,6 +23,7 @@ import MultipleMSPs from "./MultipleMSPs";
 import {lookupValueFromProcessState} from "../utils/ProcessState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
+import {randomCrmIdentifier} from "../locale/en";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -137,12 +138,19 @@ export default class UserInputForm extends React.Component {
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
-                {!ignoreLabel && <em>{I18n.t(`process.${name}_info`)}</em>}
+                {!ignoreLabel && this.renderInputInfoLabel(name)}
                 {this.chooseInput(userInput, process)}
                 {error &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
             </section>);
 
+    };
+
+    renderInputInfoLabel = name => {
+        if (name.indexOf("crm_port_id") > -1) {
+            return <em>{I18n.t(`process.${name}_info`, {example: randomCrmIdentifier()})}</em>;
+        }
+        return <em>{I18n.t(`process.${name}_info`)}</em>;
     };
 
     findValueFromInputStep = relatedKey => {

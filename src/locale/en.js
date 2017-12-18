@@ -5,6 +5,8 @@
 // Provide the values as: I18n.t("key", {name: "John Doe"})
 import I18n from "i18n-js";
 
+export const randomCrmIdentifier = () => Math.floor(Math.random() * 99999) + 1;
+
 I18n.translations.en = {
     code: "EN",
     name: "English",
@@ -121,7 +123,7 @@ I18n.translations.en = {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
             crm_port_id: 'The CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
             ieee_interface_type: "IEEE interface type",
             ieee_interface_type_info: "Choose an IEEE interface type",
         },
@@ -133,7 +135,7 @@ I18n.translations.en = {
             location_code: "First MSP location code",
             location_code_info: "Provide a valid location code",
             crm_port_id: 'First MSP the CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
             ieee_interface_type: "First MSP IEEE interface type",
             ieee_interface_type_info: "Choose an IEEE interface type",
             device_port_name: "Device port name",
@@ -148,7 +150,7 @@ I18n.translations.en = {
             location_code: "Second MSP location code",
             location_code_info: "Provide a valid location code",
             crm_port_id: 'Second MSP the CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
             ieee_interface_type: "Second MSP IEEE interface type",
             ieee_interface_type_info: "Choose an IEEE interface type",
             device_port_name: "Second device port name",
@@ -160,7 +162,7 @@ I18n.translations.en = {
             device_port_name_info: "Port name to configure on the physical device",
         },
         crm_port_id_2: 'Second MSP the CRM identifier for a port',
-        crm_port_id_2_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+        crm_port_id_2_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         dienstafname: "Dienstafname",
@@ -207,7 +209,7 @@ I18n.translations.en = {
             location_code: "Location code site A",
             location_code_info: "Select a location code for site A.",
             crm_port_id: 'The CRM identifier for the SSP on site A',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
             interface_type: "Interface type for SSP on site A",
             interface_type_info: "Choose an IEEE interface type",
             product: "SSP site A",
@@ -223,7 +225,7 @@ I18n.translations.en = {
             location_code: "Location code site B",
             location_code_info: "Select a location code for site B.",
             crm_port_id: 'The CRM identifier for the SSP on site B',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7)',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
             interface_type: "Interface type for SSP on site B",
             interface_type_info: "Choose an IEEE interface type",
             product: "SSP site B",
