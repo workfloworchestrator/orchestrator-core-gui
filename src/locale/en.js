@@ -279,7 +279,8 @@ I18n.translations.en = {
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
         no_dienstafnames: "No mismatches in dienstafname vs. subscriptions tables",
         dienstafname_matches: "Dienstafnames not present in Subscriptions table",
-        subscription_matches: "Subscriptions not present in Dienstafname table"
+        subscription_matches: "Subscriptions not present in Dienstafname table",
+        fetchingCRMData: "Loading CRM data. Hang on tight..."
     },
     filter: {
         CHANGES: "Changes",
@@ -386,11 +387,11 @@ I18n.translations.en = {
         subscription_childs: "Child subscriptions - ports used in {{product}}"
     },
     dienstafname: {
+        dienst: "Dienst",
         dienstafname: "Dienstafname",
         subscription: "Subscription",
         statuscode: "Status",
-        dienstcode: "Dienst",
-        dienstname: "Dienst",
+        dienstcode: "Dienstcode",
         organisatiecode: "Code",
         organisatienaam: "Organisation"
     },

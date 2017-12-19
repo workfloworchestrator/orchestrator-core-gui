@@ -2,57 +2,30 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-// import "./DienstafnameValidation.css";
+import "./DienstafnameValidation.css";
 
 export default class DienstafnameValidation extends React.Component {
 
-    constructor(props) {
-        super(props);
-        const {matches} = this.props;
-        this.state = {
-            //FIXME why copy this from the props?
-            dienstafnames: matches.dienstafnames_not_in_subscriptions,
-            subscriptions: matches.subscriptions_not_in_dienstafnames,
-            sorted: {name: "dienstafname", descending: true},
-        };
-    }
-
-    renderDienstafnameTable(dienstafnames, sorted) {
-        const columns = ["dienstafname", "subscription", "statuscode", "dienstcode", "organisatiecode", "organisatienaam"];
-        const th = index => {
-            const name = columns[index];
-            return <th key={index} className={name}>
-                <span>{I18n.t(`dienstafname.${name}`)}</span>
-            </th>
-        };
-
+    renderDienstafnameTable(dienstafnames) {
+        const columns = ["dienst", "dienstafname", "subscription", "statuscode", "dienstcode", "organisatiecode", "organisatienaam"];
+        const th = column =>
+            <th key={column} className={column}>
+                <span>{I18n.t(`dienstafname.${column}`)}</span>
+            </th>;
+        const td = (dienstafname, attr) =>
+            <td key={attr} data-label={I18n.t(`dienstafname.${attr}`)} className={attr}>
+                <span>{dienstafname[attr]}</span>
+            </td>;
         if (dienstafnames.length !== 0) {
             return (
-                <table className="subscriptions">
+                <table className="dienstafnames">
                     <thead>
-                    <tr>{columns.map((column, index) => th(index))}</tr>
+                    <tr>{columns.map(column => th(column))}</tr>
                     </thead>
                     <tbody>
                     {dienstafnames.map((dienstafname, index) =>
-                        <tr key={`${dienstafname.dienstafname}_${index}`}>
-                            <td data-label={I18n.t("dienstafname.dienstafname")}
-                                className="actions"
-                                ><span>{dienstafname.dienst}</span></td>
-                            <td data-label={I18n.t("dienstafname.subscription")}
-                                className="actions"
-                                ><span>{dienstafname.subscription}</span></td>
-                            <td data-label={I18n.t("dienstafname.statuscode")}
-                                className="actions"
-                                ><span>{dienstafname.statuscode}</span></td>
-                            <td data-label={I18n.t("dienstafname.dienstcode")}
-                                className="actions"
-                                ><span>{dienstafname.dienstcode}</span></td>
-                            <td data-label={I18n.t("dienstafname.organisatiecode")}
-                                className="actions"
-                                ><span>{dienstafname.organisatiecode}</span></td>
-                            <td data-label={I18n.t("dienstafname.organisatienaam")}
-                                className="actions"
-                                ><span>{dienstafname.organisatienaam}</span></td>
+                        <tr key={index}>
+                            {columns.map(column => td(dienstafname, column))}
                         </tr>
                     )}
                     </tbody>
@@ -61,28 +34,25 @@ export default class DienstafnameValidation extends React.Component {
         }
         return <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>;
     }
- 
-    renderSubscriptionTable(subscriptions, sorted) {
-        const columns = ["subscription",];
-        const th = index => {
-            const name = columns[index];
-            return <th key={index} className={name}>
-                <span>{I18n.t(`dienstafname.${name}`)}</span>
-            </th>
-        };
 
+    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription);
+
+    renderSubscriptionTable(subscriptions) {
         if (subscriptions.length !== 0) {
             return (
                 <table className="subscriptions">
                     <thead>
-                    <tr>{columns.map((column, index) => th(index))}</tr>
+                    <tr><th className="subscription">
+                        <span>{I18n.t("dienstafname.subscription")}</span>
+                    </th></tr>
                     </thead>
                     <tbody>
-                    {subscriptions.map((subscription, index) =>
-                        <tr key={`${subscription}_${index}`}>
+                    {subscriptions.map(subscription =>
+                        <tr key={subscription} onClick={this.showSubscription(subscription)}>
                             <td data-label={I18n.t("dienstafname.subscription")}
-                                className="actions"
-                                ><span>{subscription}</span></td>
+                                className="subscription">
+                                <span>{subscription}</span>
+                            </td>
                         </tr>
                     )}
                     </tbody>
@@ -94,18 +64,18 @@ export default class DienstafnameValidation extends React.Component {
  
 
     render() {
-        const {
-            dienstafnames, subscriptions, sorted
-        } = this.state;
+        const {matches} = this.props;
+        const dienstafnames = matches.dienstafnames_not_in_subscriptions;
+        const subscriptions = matches.subscriptions_not_in_dienstafnames;
         return (
-            <section>
-                <h3>{I18n.t("validations.dienstafname_matches")}</h3>
-                <section className="dienstafnames">
-                    {this.renderDienstafnameTable(dienstafnames, sorted)}
-                </section>
+            <section className="dienst-afname-validation">
                 <h3>{I18n.t("validations.subscription_matches")}</h3>
                 <section className="subscriptions">
-                    {this.renderSubscriptionTable(subscriptions, sorted)}
+                    {this.renderSubscriptionTable(subscriptions)}
+                </section>
+                <h3>{I18n.t("validations.dienstafname_matches")}</h3>
+                <section className="dienstafnames">
+                    {this.renderDienstafnameTable(dienstafnames)}
                 </section>
             </section>
         );
@@ -113,6 +83,7 @@ export default class DienstafnameValidation extends React.Component {
 }
 
 DienstafnameValidation.propTypes = {
+    history: PropTypes.object.isRequired,
     matches: PropTypes.object.isRequired,
 };
 

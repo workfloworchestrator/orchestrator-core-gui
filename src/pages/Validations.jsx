@@ -20,6 +20,7 @@ export default class Validations extends React.Component {
             validations: [],
             invalidSubscriptions: [],
             dienstafnameSubscriptionMatches: [],
+            loadedCRM: false,
             showExplanation: false,
             hideValid: false,
             hideValidSubscriptionTypes: true,
@@ -29,12 +30,14 @@ export default class Validations extends React.Component {
     }
 
     componentDidMount() {
-        Promise.all([validations(), allWorkflows(), dienstafnameSubscriptionCrossCheck()])
+        Promise.all([validations(), allWorkflows()])
             .then(res => {
                 this.setState({validations: res[0]});
                 const workflows = res[1];
                 this.mapWorkflowsToInvalidSubscriptions(workflows);
-                this.setState({dienstafnameSubscriptionMatches: res[2]});
+                dienstafnameSubscriptionCrossCheck().then(result =>
+                    this.setState({dienstafnameSubscriptionMatches: result, loadedCRM: true}));
+
             });
     }
 
@@ -98,16 +101,20 @@ export default class Validations extends React.Component {
             </section>
         </div>;
 
-    renderDienstafnameValidations = (filteredDienstafnames) => {
+    renderDienstafnameValidations = (filteredDienstafnames, loadedCRM) => {
         return <div className="dienstafnames">
             <section className="header">
                 {this.renderExplain()}
             </section>
-            <section className="validations">
-                <DienstafnameValidation matches={filteredDienstafnames}/>
+            {!loadedCRM && <section className="validations crm-waiting">
+                <em>{I18n.t("validations.fetchingCRMData")}</em>
+                <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+            </section>}
+            {loadedCRM && <section className="validations">
+                <DienstafnameValidation matches={filteredDienstafnames} history={this.props.history}/>
                 {isEmpty(filteredDienstafnames) &&
                     <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>}
-            </section>
+            </section>}
         </div>
     };
 
@@ -127,18 +134,19 @@ export default class Validations extends React.Component {
             {I18n.t(`validations.tabs.${tab}`)}
         </span>;
 
-    renderTabContent = (validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow, invalidSubscriptions, dienstafnameSubscriptionMatches) => {
+    renderTabContent = (validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
+                        invalidSubscriptions, dienstafnameSubscriptionMatches, loadedCRM) => {
         return selectedTab === "workflows" ?
             this.renderWorkflowValidations(validations, hideValid, validationsToShow) :
             selectedTab === "subscriptions" ?
             this.renderSubscriptionValidations(invalidSubscriptions, hideValidSubscriptionTypes) :
-            this.renderDienstafnameValidations(dienstafnameSubscriptionMatches)
+            this.renderDienstafnameValidations(dienstafnameSubscriptionMatches, loadedCRM)
     };
 
     render() {
         const {
             validations, showExplanation, hideValid, tabs, selectedTab, invalidSubscriptions,
-            hideValidSubscriptionTypes, dienstafnameSubscriptionMatches
+            hideValidSubscriptionTypes, dienstafnameSubscriptionMatches, loadedCRM
         } = this.state;
         const validationsToShow = hideValid ? [...validations]
             .filter(validation => !this.isValidValidation(validation)) : validations;
@@ -153,7 +161,7 @@ export default class Validations extends React.Component {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {this.renderTabContent(validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
-                    invalidSubscriptions, dienstafnameSubscriptionMatches)}
+                    invalidSubscriptions, dienstafnameSubscriptionMatches, loadedCRM)}
             </div>
         );
     }

@@ -32,7 +32,7 @@ export default class ValidationsExplain extends React.PureComponent {
 
     explanationDienstafnames = () => <section className="explanation">
         <h3>Explanation</h3>
-        <p>Hier de uitleg over Dienstafnames</p>
+        <p>Dienstafnames are registered in de CRM. Workflow processes resulting in new subscriptions store the Dienstafname reference in the subscription.</p>
     </section>;
 
     details = () => <section className="details">
@@ -56,7 +56,7 @@ export default class ValidationsExplain extends React.PureComponent {
 
     detailsDienstafnames = () => <section className="details">
         <h3>Details</h3>
-        <p>Hier de verdere uitleg</p>
+        <p>Every subscription in the workflows database should have a corresponding CRM dienstafname.</p>
     </section>;
 
     example = () => {
