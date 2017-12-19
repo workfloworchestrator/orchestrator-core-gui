@@ -37,7 +37,7 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
             options = [details, _delete];
             break;
         case "running": //??
-            options = [];
+            options = [abort, _delete];
             break;
         case "completed":
             options = [details, _delete];

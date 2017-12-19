@@ -232,6 +232,10 @@ export function processes() {
     return fetchJson("processes");
 }
 
+export function tasks() {
+    return fetchJson("tasks");
+}
+
 export function deleteSubscription(subscriptionId) {
     return fetchJson(`subscriptions/${subscriptionId}`, {method: "DELETE"}, {}, true, false);
 }
@@ -266,6 +270,30 @@ export function resumeProcess(processId, userInput) {
 
 export function retryProcess(processId) {
     return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
+}
+
+export function task(taskId) {
+    return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
+}
+
+export function startTask(task) {
+    return postPutJson("tasks", task, "post");
+}
+
+export function resumeTask(taskId, userInput) {
+    return postPutJson(`tasks/${taskId}/resume`, {user_input: userInput}, "put", false);
+}
+
+export function retryTask(taskId) {
+    return postPutJson(`tasks/${taskId}/resume`, {user_input: {}}, "put", false);
+}
+
+export function deleteTask(taskId) {
+    return fetchJson(`tasks/${taskId}`, {method: "DELETE"}, {}, true, false);
+}
+
+export function abortTask(taskId) {
+    return fetchJson(`tasks/${taskId}/abort`, {method: "PUT"}, {}, true, false);
 }
 
 export function validations() {

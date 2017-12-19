@@ -28,6 +28,7 @@ I18n.translations.en = {
         validations: "Validations",
         subscriptions: "Subscriptions",
         metadata: "Metadata",
+        tasks: "Tasks",
         cache: "Cache"
     },
 

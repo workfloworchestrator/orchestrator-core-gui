@@ -34,6 +34,7 @@ import ProductBlock from "../components/ProductBlock";
 import ResourceType from "../components/ResourceType";
 import Product from "../components/Product";
 import Cache from "./Cache";
+import Tasks from "./Tasks";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -213,6 +214,9 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/cache"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Cache {...props} />}/>
+                        <ProtectedRoute path="/tasks"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <Tasks currentUser={currentUser} {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
                         <Route path="/not-allowed"
