@@ -244,7 +244,7 @@ I18n.translations.en = {
         summary: {
             status: "Status",
             assignee: "Assignee",
-            step: "Last step executed",
+            step: "Current step",
             started: "Started",
             last_modified: "Last updated"
         }
