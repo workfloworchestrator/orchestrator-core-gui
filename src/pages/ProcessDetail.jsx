@@ -8,7 +8,7 @@ import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
-import {lookupValueFromProcessState} from "../utils/ProcessState";
+import {lookupValueFromNestedState} from "../utils/NestedState";
 import {abortProcess, deleteProcess, retryProcess, subscriptionIdFromProcessId} from "../api/index";
 
 import "./ProcessDetail.css";
@@ -61,7 +61,7 @@ export default class ProcessDetail extends React.PureComponent {
                 //Pre-fill the value of the user_input if the current_state already contains the value
                 const state = processInstance.current_state || {};
                 if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                    stepUserInput.forEach(userInput => userInput.value = lookupValueFromProcessState(userInput.name, state));
+                    stepUserInput.forEach(userInput => userInput.value = lookupValueFromNestedState(userInput.name, state));
                 }
                 this.setState({
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,

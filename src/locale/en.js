@@ -251,6 +251,22 @@ I18n.translations.en = {
         }
 
     },
+    task_state: {
+        copy: "Copy to clipboard",
+        copied: "Copied",
+        raw: "Show raw JSON",
+        details: "Show details",
+        stateChanges: "Show state input",
+        wording: "Task of workflow {{workflow}}",
+        summary: {
+            last_status: "Status",
+            created_by: "Created by",
+            last_step: "Current step",
+            started_at: "Started",
+            last_modified_at: "Last modified"
+        }
+
+    },
     validations: {
         help: "Explain",
         product: "Product",
@@ -514,6 +530,54 @@ I18n.translations.en = {
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
         }
 
+    },
+    tasks: {
+        searchPlaceHolder: "Search for tasks...",
+        new: "New Task",
+        last_step: "Current step",
+        last_status: "Status",
+        workflow : "Workflow",
+        started_at: "Started",
+        failed_reason: "Failed reason",
+        last_modified_at: "Last modified",
+        created_by: "Created by",
+        actions: "",
+        none: "",
+        submit: "Submit",
+        cancel: "Cancel",
+        delete: "Delete",
+        details: "Details",
+        user_input: "User input",
+        abort: "Abort",
+        retry: "Retry",
+        deleteConfirmation: "Are you sure you want to delete {{name}} task?",
+        abortConfirmation: "Are you sure you want to abort {{name}} task?",
+        retryConfirmation: "Are you sure you want to retry {{name}} task?",
+        no_found: "No tasks",
+        flash: {
+            delete: "Task {{name}} is deleted",
+            abort: "Task {{name}} is aborted",
+            retry: "Task {{name}} has been retried"
+        },
+        refresh: "Refresh automatically every 3 seconds?"
+    },
+    task: {
+        workflow: "Workflow",
+        workflow_info: "Select a task workflow to run",
+        cancel: "Cancel",
+        submit: "Submit",
+        notFound: "No Task found (e.g. 404)",
+        format_error: "Required input / invalid format",
+        userInput: "User input for step {{name}}",
+        tabs: {
+            user_input: "User input",
+            task: "Task"
+        },
+        new_task: "New task",
+        flash: {
+            create: "Created task for workflow {{name}}",
+            update: "Resumed task for workflow {{name}}"
+        },
     },
     cache: {
         name: {

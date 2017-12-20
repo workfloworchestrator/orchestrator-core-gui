@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {abortTask, deleteTask, tasks, retryTask} from "../api";
+import {abortTask, deleteTask, retryTask, tasks} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -10,7 +10,7 @@ import "./Tasks.css";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
-import { renderDateTime} from "../utils/Lookups";
+import {renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {actionOptions} from "../validations/Processes";
 
@@ -23,14 +23,8 @@ export default class Tasks extends React.PureComponent {
             tasks: [],
             filteredTasks: [],
             query: "",
-            actions: {show: false, id: ""},
+            actions: {show: false, tid: ""},
             sorted: {name: "last_modified", descending: true},
-            filterAttributesAssignee: [
-                {name: "CHANGES", selected: true, count: 0},
-                {name: "KLANT_SUPPORT", selected: true, count: 0},
-                {name: "NOC", selected: true, count: 0},
-                {name: "SYSTEM", selected: true, count: 0}
-            ],
             filterAttributesStatus: [
                 {name: "created", selected: true, count: 0},
                 {name: "failed", selected: true, count: 0},
@@ -56,7 +50,7 @@ export default class Tasks extends React.PureComponent {
         .then(results => {
             const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
             newFilterAttributesStatus.forEach(attr => attr.count = results
-                .filter(task => task.status === attr.name).length);
+                .filter(task => task.last_status === attr.name).length);
 
             const filteredTasks = this.doSearchAndSortAndFilter("", results, this.state.sorted, newFilterAttributesStatus);
 
@@ -70,7 +64,7 @@ export default class Tasks extends React.PureComponent {
 
     toggleRefresh = e => {
         const refresh = e.target.checked;
-        this.setState({refresh : refresh});
+        this.setState({refresh: refresh});
         if (refresh) {
             this.interval = setInterval(this.refresh, 3000);
         } else {
@@ -82,7 +76,7 @@ export default class Tasks extends React.PureComponent {
 
     showTask = task => () => {
         clearInterval(this.interval);
-        this.props.history.push("/task/" + task.id);
+        this.props.history.push("/task/" + task.tid);
     };
 
     newTask = () => {
@@ -99,14 +93,14 @@ export default class Tasks extends React.PureComponent {
     doSearchAndSortAndFilter = (query, tasks, sorted, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["step", "workflow_name"];
+            const searchable = ["created_by", "failed_reason", "last_status", "last_step", "workflow",];
             tasks = tasks.filter(task =>
-                searchable.map(search => task[search].toLowerCase().indexOf(queryToLower))
+                searchable.map(search => (task[search] || "").toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
         }
         tasks = tasks.filter(task => {
-            const statusFilter = filterAttributesStatus.find(attr => attr.name === task.status);
+            const statusFilter = filterAttributesStatus.find(attr => attr.name === task.last_status);
             return statusFilter ? statusFilter.selected : true;
         });
         tasks.sort(this.sortBy(sorted.name));
@@ -126,8 +120,8 @@ export default class Tasks extends React.PureComponent {
 
     toggleActions = (task, actions) => e => {
         stop(e);
-        const newShow = actions.id === task.id ? !actions.show : true;
-        this.setState({actions: {show: newShow, id: task.id}});
+        const newShow = actions.tid === task.tid ? !actions.show : true;
+        this.setState({actions: {show: newShow, tid: task.tid}});
     };
 
     handleDeleteTask = task => e => {
@@ -136,7 +130,7 @@ export default class Tasks extends React.PureComponent {
                 name: task.product_name,
                 customer: task.customer_name
             }), () =>
-                deleteTask(task.id).then(() => {
+                deleteTask(task.tid).then(() => {
                     this.refresh();
                     setFlash(I18n.t("tasks.flash.delete", {name: task.product_name}));
                 })
@@ -149,7 +143,7 @@ export default class Tasks extends React.PureComponent {
                 name: task.product_name,
                 customer: task.customer_name
             }), () =>
-                abortTask(task.id).then(() => {
+                abortTask(task.tid).then(() => {
                     this.refresh();
                     setFlash(I18n.t("tasks.flash.abort", {name: task.product_name}));
                 })
@@ -162,7 +156,7 @@ export default class Tasks extends React.PureComponent {
                 name: task.product_name,
                 customer: task.customer_name
             }), () =>
-                retryTask(task.id).then(() => {
+                retryTask(task.tid).then(() => {
                     this.refresh();
                     setFlash(I18n.t("tasks.flash.retry", {name: task.product_name}));
                 })
@@ -180,12 +174,12 @@ export default class Tasks extends React.PureComponent {
 
 
     renderActions = (task, actions) => {
-        const actionId = task.id;
-        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
+        const actionId = task.tid;
+        if (actions.tid !== actionId || (actions.tid === actionId && !actions.show)) {
             return null;
         }
         const options = actionOptions(task, this.showTask(task), this.handleRetryTask(task),
-            this.handleDeleteTask(task), this.handleAbortTask(task));
+            this.handleDeleteTask(task), this.handleAbortTask(task), "last_status");
         return <DropDownActions options={options} i18nPrefix="tasks"/>;
     };
 
@@ -230,7 +224,7 @@ export default class Tasks extends React.PureComponent {
     };
 
     renderTasksTable(tasks, actions, sorted) {
-        const columns = ["step", "status", "workflow_name", "started", "last_modified", "actions", "created_by"];
+        const columns = ["last_step", "last_status", "workflow", "started_at","failed_reason", "last_modified_at", "created_by","actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -247,20 +241,17 @@ export default class Tasks extends React.PureComponent {
                     </thead>
                     <tbody>
                     {tasks.map((task, index) =>
-                        <tr key={`${task.id}_${index}`} onClick={this.showTask(task)}
+                        <tr key={`${task.tid}_${index}`} onClick={this.showTask(task)}
                             className={task.status}>
-                            <td data-label={I18n.t("tasks.assignee")} className="assignee">{task.assignee}</td>
-                            <td data-label={I18n.t("tasks.step")} className="step">{task.step}</td>
-                            <td data-label={I18n.t("tasks.status")} className="status">{task.status}</td>
-                            <td data-label={I18n.t("tasks.customer")}
-                                className="customer">{task.customer_name}</td>
-                            <td data-label={I18n.t("tasks.product")} className="product">{task.product_name}</td>
-                            <td data-label={I18n.t("tasks.workflow_name")}
-                                className="workflow_name">{task.workflow_name}</td>
-                            <td data-label={I18n.t("tasks.started")}
-                                className="started">{renderDateTime(task.started)}</td>
-                            <td data-label={I18n.t("tasks.last_modified")}
-                                className="last_modified">{renderDateTime(task.last_modified)}</td>
+                            <td data-label={I18n.t("tasks.last_step")} className="last_step">{task.last_step}</td>
+                            <td data-label={I18n.t("tasks.last_status")} className="last_status">{task.last_status}</td>
+                            <td data-label={I18n.t("tasks.workflow")} className="workflow">{task.workflow}</td>
+                            <td data-label={I18n.t("tasks.started_at")}
+                                className="started_at">{renderDateTime(task.started_at)}</td>
+                            <td data-label={I18n.t("tasks.failed_reason")} className="failed_reason">{task.failed_reason}</td>
+                            <td data-label={I18n.t("tasks.last_modified_at")}
+                                className="last_modified_at">{renderDateTime(task.last_modified_at)}</td>
+                            <td data-label={I18n.t("tasks.created_by")} className="created_by">{task.created_by}</td>
                             <td data-label={I18n.t("tasks.actions")} className="actions"
                                 onClick={this.toggleActions(task, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
@@ -291,7 +282,7 @@ export default class Tasks extends React.PureComponent {
                     <div className="options">
                         <FilterDropDown items={filterAttributesStatus}
                                         filterBy={this.filter}
-                                        label={I18n.t("tasks.status")}/>
+                                        label={I18n.t("tasks.last_status")}/>
                         <section className="search">
                             <input className="allowed"
                                    placeholder={I18n.t("tasks.searchPlaceHolder")}

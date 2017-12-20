@@ -216,6 +216,10 @@ export function allWorkflows() {
     return fetchJson("workflows")
 }
 
+export function workflowsByTarget(target) {
+    return fetchJson(`workflows?target=${target}`)
+}
+
 export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`)
 }
@@ -230,10 +234,6 @@ export function initialWorkflowInput(workflowKey) {
 
 export function processes() {
     return fetchJson("processes");
-}
-
-export function tasks() {
-    return fetchJson("tasks");
 }
 
 export function deleteSubscription(subscriptionId) {
@@ -270,6 +270,10 @@ export function resumeProcess(processId, userInput) {
 
 export function retryProcess(processId) {
     return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
+}
+
+export function tasks() {
+    return fetchJson("tasks");
 }
 
 export function task(taskId) {

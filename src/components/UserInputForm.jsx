@@ -20,7 +20,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleMSPs from "./MultipleMSPs";
-import {lookupValueFromProcessState} from "../utils/ProcessState";
+import {lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
@@ -207,7 +207,7 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
             case "contact_persons" :
-                const organisationId = lookupValueFromProcessState(userInput.organisation_key, currentState) ||
+                const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     this.findValueFromInputStep(userInput.organisation_key);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
@@ -232,8 +232,8 @@ export default class UserInputForm extends React.Component {
                                                               interfaceType={value}
                                                               productId={propsProductId}/>;
             case "free_ports_for_location_code_and_interface_type":
-                const interfaceType = lookupValueFromProcessState(userInput.interface_type_key, currentState);
-                const locationCode = lookupValueFromProcessState(userInput.location_code_key, currentState);
+                const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
                 return <FreePortSelect
                     onChange={this.changeSelectInput(name)}
                     freePort={value}

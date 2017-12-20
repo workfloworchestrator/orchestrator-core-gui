@@ -16,15 +16,7 @@ import ServerError from "../pages/ServerError";
 import NotAllowed from "../pages/NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import {
-    config,
-    locationCodes,
-    me,
-    organisations,
-    products,
-    redirectToAuthorizationServer,
-    reportError
-} from "../api";
+import {config, locationCodes, me, organisations, products, redirectToAuthorizationServer, reportError} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import {getParameterByName} from "../utils/QueryParameters";
@@ -35,6 +27,8 @@ import ResourceType from "../components/ResourceType";
 import Product from "../components/Product";
 import Cache from "./Cache";
 import Tasks from "./Tasks";
+import NewTask from "./NewTask";
+import TaskDetail from "./TaskDetail";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -125,7 +119,7 @@ class App extends React.PureComponent {
                             configuration: configuration,
                             organisations: allOrganisations,
                             locationCodes: allLocationCodes,
-                            products: allProducts.sort((a,b) => a.name.localeCompare(b.name))
+                            products: allProducts.sort((a, b) => a.name.localeCompare(b.name))
                         });
                     } else {
                         this.handleBackendDown();
@@ -179,10 +173,10 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/terminate-subscription"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <TerminateSubscription currentUser={currentUser}
-                                                                     products={products}
-                                                                     organisations={organisations}
-                                                                     subscriptionId={getParameterByName("subscription", props.location.search)}
-                                                                     {...props}
+                                                                                products={products}
+                                                                                organisations={organisations}
+                                                                                subscriptionId={getParameterByName("subscription", props.location.search)}
+                                                                                {...props}
                                         />}/>
                         <Route path="/process/:id"
                                render={props => <ProcessDetail currentUser={currentUser}
@@ -217,6 +211,13 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/tasks"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Tasks currentUser={currentUser} {...props}/>}/>
+                        <ProtectedRoute path="/new-task"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <NewTask currentUser={currentUser} {...props}/>}/>
+                        <Route path="/task/:id"
+                               render={props => <TaskDetail currentUser={currentUser}
+                                                            configuration={configuration}
+                                                            {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
                         <Route path="/not-allowed"

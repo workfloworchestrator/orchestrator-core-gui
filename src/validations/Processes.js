@@ -1,4 +1,4 @@
-export function actionOptions(process, showAction, retryAction, deleteAction, abortAction ) {
+export function actionOptions(process, showAction, retryAction, deleteAction, abortAction, statusProperty = "status" ) {
     //TODO scope on the context of logged in-user
     const details = {
         icon: "fa fa-search-plus",
@@ -28,7 +28,7 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
         danger: true
     };
     let options = [];
-    const status = process.status;
+    const status = process[statusProperty];
     switch (status) {
         case "failed":
             options = [details, retry, abort, _delete];
@@ -46,7 +46,7 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
             options = [userInput, abort, _delete];
             break;
         default :
-            throw new Error(`Unknown process status: ${status}`)
+            throw new Error(`Unknown status: ${status}`)
     }
     return options;
 }
