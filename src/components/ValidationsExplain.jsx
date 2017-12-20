@@ -56,7 +56,10 @@ export default class ValidationsExplain extends React.PureComponent {
 
     detailsDienstafnames = () => <section className="details">
         <h3>Details</h3>
-        <p>Every subscription in the workflows database should have a corresponding CRM dienstafname.</p>
+        <p>Every subscription in the workflows database should have a corresponding CRM dienstafname. The column <span className="code">SUBSCRIPTION </span>
+            in the Dienstafnames table is the <span className="code">nw_subscription_uuid</span> in the CRM database. For most dienstafnames this is
+            <span className="code">null</span>.
+        </p>
     </section>;
 
     example = () => {
