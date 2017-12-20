@@ -89,22 +89,25 @@
                 cursor: pointer;
                 padding: 5px 5px 10px 5px
             }
-            th.created_by {
+            th.last_step {
+                width: 10%;
+            }
+            th.last_status {
+                width: 10%;
+            }
+            th.workflow {
                 width: 20%;
             }
-            th.step {
-                width: 10%;
-            }
-            th.status {
-                width: 10%;
-            }
-            th.workflow_name {
-                width: 25%;
-            }
-            th.started {
+            th.started_at {
                 width: 15%;
             }
-            th.last_modified {
+            th.failed_reason {
+                width: 10%;
+            }
+            th.last_modified_at {
+                width: 15%;
+            }
+            th.created_by {
                 width: 15%;
             }
             th.actions {
