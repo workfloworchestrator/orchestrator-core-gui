@@ -71,39 +71,30 @@ export default class TaskDetail extends React.PureComponent {
 
     handleDeleteTask = task => e => {
         stop(e);
-        this.confirmation(I18n.t("tasks.deleteConfirmation", {
-                name: task.productName,
-                customer: task.customerName
-            }), () =>
-                deleteTask(task.id).then(() => {
+        this.confirmation(I18n.t("tasks.deleteConfirmation", {name: task.workflow}), () =>
+                deleteTask(task.tid).then(() => {
                     this.props.history.push(`/tasks`);
-                    setFlash(I18n.t("tasks.flash.delete", {name: task.productName}));
+                    setFlash(I18n.t("tasks.flash.delete", {name: task.workflow}));
                 })
         );
     };
 
     handleAbortTask = task => e => {
         stop(e);
-        this.confirmation(I18n.t("tasks.abortConfirmation", {
-                name: task.productName,
-                customer: task.customerName
-            }), () =>
-                abortTask(task.id).then(() => {
+        this.confirmation(I18n.t("tasks.abortConfirmation", {name: task.workflow}), () =>
+                abortTask(task.tid).then(() => {
                     this.props.history.push(`/tasks`);
-                    setFlash(I18n.t("tasks.flash.abort", {name: task.productName}));
+                    setFlash(I18n.t("tasks.flash.abort", {name: task.workflow}));
                 })
         );
     };
 
     handleRetryTask = task => e => {
         stop(e);
-        this.confirmation(I18n.t("tasks.retryConfirmation", {
-                name: task.productName,
-                customer: task.customerName
-            }), () =>
-                retryTask(task.id).then(() => {
+        this.confirmation(I18n.t("tasks.retryConfirmation", {name: task.workflow}), () =>
+                retryTask(task.tid).then(() => {
                     this.props.history.push(`/tasks`);
-                    setFlash(I18n.t("tasks.flash.retry", {name: task.productName}));
+                    setFlash(I18n.t("tasks.flash.retry", {name: task.workflow}));
                 })
         );
     };
@@ -135,7 +126,7 @@ export default class TaskDetail extends React.PureComponent {
 
     validSubmit = stepUserInput => {
         const {task} = this.state;
-        resumeTask(task.id, stepUserInput)
+        resumeTask(task.tid, stepUserInput)
             .then(() => {
                 this.props.history.push(`/tasks`);
                 setFlash(I18n.t("task.flash.update", {name: task.workflow_name}));

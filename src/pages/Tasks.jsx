@@ -126,40 +126,33 @@ export default class Tasks extends React.PureComponent {
 
     handleDeleteTask = task => e => {
         stop(e);
-        this.confirmation(I18n.t("tasks.deleteConfirmation", {
-                name: task.product_name,
-                customer: task.customer_name
-            }), () =>
-                deleteTask(task.tid).then(() => {
-                    this.refresh();
-                    setFlash(I18n.t("tasks.flash.delete", {name: task.product_name}));
-                })
+        this.confirmation(I18n.t("tasks.deleteConfirmation", {name: task.workflow}), () =>
+            deleteTask(task.tid).then(() => {
+                this.refresh();
+                setFlash(I18n.t("tasks.flash.delete", {name: task.workflow}));
+            })
         );
     };
 
     handleAbortTask = task => e => {
         stop(e);
         this.confirmation(I18n.t("tasks.abortConfirmation", {
-                name: task.product_name,
-                customer: task.customer_name
+                name: task.workflow
             }), () =>
                 abortTask(task.tid).then(() => {
                     this.refresh();
-                    setFlash(I18n.t("tasks.flash.abort", {name: task.product_name}));
+                    setFlash(I18n.t("tasks.flash.abort", {name: task.workflow}));
                 })
         );
     };
 
     handleRetryTask = task => e => {
         stop(e);
-        this.confirmation(I18n.t("tasks.retryConfirmation", {
-                name: task.product_name,
-                customer: task.customer_name
-            }), () =>
-                retryTask(task.tid).then(() => {
-                    this.refresh();
-                    setFlash(I18n.t("tasks.flash.retry", {name: task.product_name}));
-                })
+        this.confirmation(I18n.t("tasks.retryConfirmation", {name: task.workflow}), () =>
+            retryTask(task.tid).then(() => {
+                this.refresh();
+                setFlash(I18n.t("tasks.flash.retry", {name: task.workflow}));
+            })
         );
     };
 
@@ -224,7 +217,7 @@ export default class Tasks extends React.PureComponent {
     };
 
     renderTasksTable(tasks, actions, sorted) {
-        const columns = ["last_step", "last_status", "workflow", "started_at","failed_reason", "last_modified_at", "created_by","actions"];
+        const columns = ["last_step", "last_status", "workflow", "started_at", "failed_reason", "last_modified_at", "created_by", "actions"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -248,7 +241,8 @@ export default class Tasks extends React.PureComponent {
                             <td data-label={I18n.t("tasks.workflow")} className="workflow">{task.workflow}</td>
                             <td data-label={I18n.t("tasks.started_at")}
                                 className="started_at">{renderDateTime(task.started_at)}</td>
-                            <td data-label={I18n.t("tasks.failed_reason")} className="failed_reason">{task.failed_reason}</td>
+                            <td data-label={I18n.t("tasks.failed_reason")}
+                                className="failed_reason">{task.failed_reason}</td>
                             <td data-label={I18n.t("tasks.last_modified_at")}
                                 className="last_modified_at">{renderDateTime(task.last_modified_at)}</td>
                             <td data-label={I18n.t("tasks.created_by")} className="created_by">{task.created_by}</td>
