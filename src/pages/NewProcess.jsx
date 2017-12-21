@@ -69,17 +69,18 @@ export default class NewProcess extends React.Component {
             if (option) {
                 Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
                     const [productValidation, userInput] = result;
-                    let stepUserInput = userInput.filter(input => input.name !== "product");
-                    if (this.props.preselectedOrganisation != null) {
-                        const organisationInputIdx = stepUserInput.findIndex(x => x.name === "organisation");
-                        if (organisationInputIdx !== -1) {
-                            const stepUserInputInit = stepUserInput.slice(0, organisationInputIdx);
-                            const stepUserInputTail = stepUserInput.slice(organisationInputIdx + 1);
-                            const organisationInput = {
-                                ...stepUserInput[organisationInputIdx],
-                                value: this.props.preselectedOrganisation
-                            };
-                            stepUserInput = stepUserInputInit.concat([organisationInput]).concat(stepUserInputTail);
+                    const stepUserInput = userInput.filter(input => input.name !== "product");
+                    const {preselectedOrganisation, preselectedDienstafname} = this.props;
+                    if (preselectedOrganisation) {
+                        const organisatieInput = stepUserInput.find(x => x.name === "organisation");
+                        if (organisatieInput) {
+                            organisatieInput.value = preselectedOrganisation
+                        }
+                    }
+                    if (preselectedDienstafname) {
+                        const dienstafnameInput =  stepUserInput.find(x => x.name === "dienstafname");
+                        if (dienstafnameInput) {
+                            dienstafnameInput.value = preselectedDienstafname;
                         }
                     }
                     this.setState({productValidation: productValidation, stepUserInput: stepUserInput});

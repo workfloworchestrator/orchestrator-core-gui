@@ -85,13 +85,13 @@ class App extends React.PureComponent {
         const hash = window.location.hash;
         const accessTokenMatch = hash.match(/access_token=(.*?)&/);
         if (accessTokenMatch) {
-            localStorage.setItem('access_token', accessTokenMatch[1]);
+            localStorage.setItem("access_token", accessTokenMatch[1]);
+            //TODO expiry date
             this.fetchUser();
         } else if (window.location.href.indexOf("error") > -1) {
             this.setState({loading: false});
         } else {
-            //TODO expiry date
-            const accessToken = localStorage.getItem('access_token');
+            const accessToken = localStorage.getItem("access_token");
             if (!accessToken) {
                 config().then(conf => {
                     if (conf.oauthEnabled) {
@@ -168,6 +168,7 @@ class App extends React.PureComponent {
                                                                      locationCodes={locationCodes}
                                                                      preselectedProduct={getParameterByName("product", props.location.search)}
                                                                      preselectedOrganisation={getParameterByName("organisation", props.location.search)}
+                                                                     preselectedDienstafname={getParameterByName("dienstafname", props.location.search)}
                                                                      {...props}
                                         />}/>
                         <ProtectedRoute path="/terminate-subscription"
