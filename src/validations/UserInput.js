@@ -38,6 +38,15 @@ export function doValidateUserInput(userInput, value, errors) {
         errors[name] = isEmpty(!!value);
     } else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
+    } else if (type === "stp") {
+        if (isEmpty(value)) {
+            errors[name] = true;
+        } else {
+            const ogf_network = /^urn:ogf:network:/;
+            const label = /\?vlan=\d+(?:-\d+)?$/;
+            const localpart = value.replace(ogf_network, '').replace(label);
+            errors[name] = !(ogf_network.test(value) && localpart.includes(":") && label.test(value));
+        }
     } else if (type === "label") {
         errors[name] = false;
     }
