@@ -21,7 +21,7 @@ export function doValidateUserInput(userInput, value, errors) {
     } else if (type === "int") {
         errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
     } else if (type === "guid") {
-        errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
+        errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
     } else if (type === "uuid") {
         errors[name] = !/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/.test(value)
     } else if (type === "emails") {

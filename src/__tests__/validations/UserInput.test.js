@@ -29,11 +29,21 @@ test("Validate out of range too high vlan range", () => {
     test_vlanrange("2, 43-4095");
 });
 
-function test_stp(value, expected=true) {
+const test_guid = (value, expected=true) => {
+    const errors = {};
+    doValidateUserInput({type: "guid", name: "t"}, value, errors);
+    expect(errors["t"]).toBe(expected)
+};
+
+test("Validate pseudo guid", () => {
+    test_guid("a7242eae-3813-e511-80d0-005056956c1a", false)
+});
+
+const test_stp = (value, expected=true) => {
     const errors = {};
     doValidateUserInput({type: "stp", name: "my_stp_input"}, value, errors);
     expect(errors["my_stp_input"]).toBe(expected);
-}
+};
 
 test("Validate empty STP", () => {
     test_stp(undefined, true);
