@@ -138,7 +138,7 @@ export default class TaskDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, task, step, stepUserInput, subscriptionTaskLink, multiServicePoints) => {
+    renderTabContent = (renderStepForm, selectedTab, task, step, stepUserInput) => {
         const {history} = this.props;
 
         if (selectedTab === "task") {
@@ -174,8 +174,8 @@ export default class TaskDetail extends React.PureComponent {
 
     render() {
         const {
-            loaded, notFound, task, tabs, stepUserInput, selectedTab, subscriptionTaskLink,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, multiServicePoints
+            loaded, notFound, task, tabs, stepUserInput, selectedTab,
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
         } = this.state;
         const step = task.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
@@ -190,8 +190,7 @@ export default class TaskDetail extends React.PureComponent {
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
-                {renderContent && this.renderTabContent(renderStepForm, selectedTab, task, step, stepUserInput,
-                    subscriptionTaskLink, multiServicePoints)}
+                {renderContent && this.renderTabContent(renderStepForm, selectedTab, task, step, stepUserInput)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("task.notFound")}</h1></section>}
             </div>
         );
