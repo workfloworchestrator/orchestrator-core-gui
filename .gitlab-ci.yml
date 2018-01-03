@@ -5,9 +5,9 @@ stages:
   - deploy
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:$CI_COMMIT_SHA
-  CONTAINER_STAGING_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:staging
-  CONTAINER_RELEASE_IMAGE: registry.staging.automation.surf.net/nwa/workflows-client:latest
+  CONTAINER_TEST_IMAGE: registry.automation.surf.net/nwa/workflows-client:$CI_COMMIT_SHA
+  CONTAINER_STAGING_IMAGE: registry.automation.surf.net/nwa/workflows-client:staging
+  CONTAINER_RELEASE_IMAGE: registry.automation.surf.net/nwa/workflows-client:latest
 
 build docker image:
   stage: build
@@ -54,14 +54,14 @@ deploy to staging:
   only:
     - staging@SURFnetNOC/workflows-client
 
-#deploy to prod:
-#  stage: deploy
-#  script:
-#    - ssh deploy@swarm-01-auto-prd.surf.net  "sudo docker service update --image $CONTAINER_RELEASE_IMAGE workflows-client"
-#  environment:
-#    name: prod
-#    url: https://workflows.automation.surf.net/
-#  tags:
-#    - shell-ext
-#  only:
-#    - master@SURFnetNOC/workflows
+deploy to prod:
+ stage: deploy
+ script:
+   - ssh deploy@swarm01.automation.surf.net  "sudo docker service update --image $CONTAINER_RELEASE_IMAGE prod_workflows-client"
+ environment:
+   name: prod
+   url: https://workflows.automation.surf.net/
+ tags:
+   - shell-ext
+ only:
+   - master@SURFnetNOC/workflows
