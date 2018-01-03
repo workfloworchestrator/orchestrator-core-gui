@@ -50,6 +50,11 @@ class App extends React.PureComponent {
             }
         };
         window.onerror = (msg, url, line, col, err) => {
+            if (err && err.response && err.response.status === 401) {
+                localStorage.removeItem("access_token");
+                this.componentDidMount();
+                return;
+            }
             this.setState({errorDialogOpen: true});
             const info = err || {};
             const response = info.response || {};
