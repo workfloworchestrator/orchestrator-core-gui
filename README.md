@@ -10,10 +10,22 @@ The client is a ReactJS user interface. This project was bootstrapped with [Crea
 
 The client is build with react and to get initially started:
 
+### Installing
+
+#### Mac
 ```
 brew install yarn
 yarn install
 ```
+
+#### Linux
+```
+npm install yarn -g
+npm install npm-run-all --save-dev -g
+./build.sh
+```
+
+### Running locally
 
 To run locally:
 
