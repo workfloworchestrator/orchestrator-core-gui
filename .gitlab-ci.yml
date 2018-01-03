@@ -64,4 +64,4 @@ deploy to prod:
  tags:
    - shell-ext
  only:
-   - master@SURFnetNOC/workflows
+   - master@SURFnetNOC/workflows-client
