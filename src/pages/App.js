@@ -86,7 +86,6 @@ class App extends React.PureComponent {
         const accessTokenMatch = hash.match(/access_token=(.*?)&/);
         if (accessTokenMatch) {
             localStorage.setItem("access_token", accessTokenMatch[1]);
-            //TODO expiry date
             this.fetchUser();
         } else if (window.location.href.indexOf("error") > -1) {
             this.setState({loading: false});
@@ -110,21 +109,30 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), products(), locationCodes()]).then(result => {
-                    const [currentUser, allOrganisations, allProducts, allLocationCodes] = result;
-                    if (currentUser && currentUser.user_name) {
-                        this.setState({
-                            loading: false,
-                            currentUser: currentUser,
-                            configuration: configuration,
-                            organisations: allOrganisations,
-                            locationCodes: allLocationCodes,
-                            products: allProducts.sort((a, b) => a.name.localeCompare(b.name))
-                        });
-                    } else {
-                        this.handleBackendDown();
-                    }
-                });
+                Promise.all([me(), organisations(), products(), locationCodes()])
+                    .then(result => {
+                        const [currentUser, allOrganisations, allProducts, allLocationCodes] = result;
+                        if (currentUser && currentUser.user_name) {
+                            this.setState({
+                                loading: false,
+                                currentUser: currentUser,
+                                configuration: configuration,
+                                organisations: allOrganisations,
+                                locationCodes: allLocationCodes,
+                                products: allProducts.sort((a, b) => a.name.localeCompare(b.name))
+                            });
+                        } else {
+                            this.handleBackendDown();
+                        }
+                    })
+                    .catch(err => {
+                        if (err.response && err.response.status === 401) {
+                            localStorage.removeItem("access_token");
+                            this.componentDidMount();
+                        } else {
+                            throw err;
+                        }
+                    });
             });
     }
 
