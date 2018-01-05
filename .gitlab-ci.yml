@@ -28,7 +28,7 @@ release image staging:
   tags:
     - docker-ct-builder-ext
   only:
-    - staging@SURFnetNOC/workflows-client
+    - staging@automation/workflows-client
 
 release image prod:
   stage: release
@@ -40,7 +40,7 @@ release image prod:
   tags:
     - docker-ct-builder-ext
   only:
-    - master@SURFnetNOC/workflows-client
+    - master@automation/workflows-client
 
 deploy to staging:
   stage: deploy
@@ -52,7 +52,7 @@ deploy to staging:
   tags:
     - shell-ext
   only:
-    - staging@SURFnetNOC/workflows-client
+    - staging@automation/workflows-client
 
 deploy to prod:
  stage: deploy
@@ -64,4 +64,4 @@ deploy to prod:
  tags:
    - shell-ext
  only:
-   - master@SURFnetNOC/workflows-client
+   - master@automation/workflows-client
