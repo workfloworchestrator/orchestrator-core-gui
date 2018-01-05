@@ -16,7 +16,7 @@ I18n.translations.en = {
     header: {
         title: "Workflows",
         links: {
-            help_html: "<a href=\"https://gitlab.surfnet.nl/SURFnetNOC/workflows/wikis/home\" target=\"_blank\">Help</a>",
+            help_html: "<a href=\"https://gitlab.surfnet.nl/automation/workflows/wikis/home\" target=\"_blank\">Help</a>",
             logout: "Logout",
             exit: "Exit"
         },
