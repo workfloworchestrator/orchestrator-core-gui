@@ -42,6 +42,7 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
+            randomCrm: randomCrmIdentifier()
         };
     }
 
@@ -148,7 +149,7 @@ export default class UserInputForm extends React.Component {
 
     renderInputInfoLabel = name => {
         if (name.indexOf("crm_port_id") > -1) {
-            return <em>{I18n.t(`process.${name}_info`, {example: randomCrmIdentifier()})}</em>;
+            return <em>{I18n.t(`process.${name}_info`, {example: this.state.randomCrm})}</em>;
         }
         return <em>{I18n.t(`process.${name}_info`)}</em>;
     };

@@ -5,7 +5,7 @@
 // Provide the values as: I18n.t("key", {name: "John Doe"})
 import I18n from "i18n-js";
 
-export const randomCrmIdentifier = () => Math.floor(Math.random() * 99999) + 1;
+export const randomCrmIdentifier = () => ("0000" + Math.floor(Math.random() * 99999) + 1).slice(-5);
 
 I18n.translations.en = {
     code: "EN",
@@ -167,7 +167,7 @@ I18n.translations.en = {
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         dienstafname: "Dienstafname",
-        dienstafname_info: "The dienstafname of the service - must be valid GUID like 76C5FB05-6D86-4BD2-A56C-124F7F33B1F9",
+        dienstafname_info: "The dienstafname of the service - must be valid GUID like 6769d05f-3b11-e511-80d0-005056956c1a",
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
