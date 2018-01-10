@@ -199,7 +199,8 @@ export default class UserInputForm extends React.Component {
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
-                                           organisation={value}/>;
+                                           organisation={value}
+                                           disabled={userInput.readonly}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
