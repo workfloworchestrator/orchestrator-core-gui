@@ -51,7 +51,7 @@ export default class NewTask extends React.Component {
 
     render() {
         const {workflows, workflow, stepUserInput} = this.state;
-        const {history} = this.props;
+        const {history, products} = this.props;
         return (
             <div className="mod-new-task">
                 <section className="card">
@@ -70,7 +70,7 @@ export default class NewTask extends React.Component {
                                        multiServicePoints={[]}
                                        history={history}
                                        organisations={[]}
-                                       products={[]}
+                                       products={products}
                                        locationCodes={[]}
                                        product={({})}
                                        validSubmit={this.validSubmit}/>}
@@ -83,5 +83,6 @@ export default class NewTask extends React.Component {
 
 NewTask.propTypes = {
     history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired
 };
