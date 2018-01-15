@@ -204,8 +204,6 @@ export default class UserInputForm extends React.Component {
                 return <input type="number" id={name} name={name}
                               value={value || ""}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
-            case "bandwidth" :
-                return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
