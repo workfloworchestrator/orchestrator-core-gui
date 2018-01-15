@@ -3,10 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import {
-    imsService,
-    processIdFromSubscriptionId,
-    productById,
-    subscriptions_by_subscription_port_id,
+    imsService, processSubscriptionsBySubscriptionId, productById, subscriptions_by_subscription_port_id,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -14,15 +11,8 @@ import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 import {
-    absent,
-    hasResourceType,
-    ims_circuit_id,
-    ims_port_id,
-    isTerminatable,
-    nms_service_id,
-    parent_subscriptions,
-    port_subscription_id,
-    subscriptionInstanceValues
+    absent, hasResourceType, ims_circuit_id, ims_port_id, isTerminatable, nms_service_id, parent_subscriptions,
+    port_subscription_id, subscriptionInstanceValues
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -36,7 +26,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.state = {
             subscription: {instances: []},
             product: {},
-            subscriptionProcessLink: {},
+            subscriptionProcesses: {},
             imsServices: [],
             subscriptions: [],
             notFound: false,
@@ -63,7 +53,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 enrichSubscription(subscription, organisations, products);
                 const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
-                const promises = [processIdFromSubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
+                const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
                     .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
@@ -90,7 +80,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         return true;
                     });
                     this.setState({
-                        subscriptionProcessLink: result[0],
+                        subscriptionProcesses: result[0],
                         product: result[1],
                         imsServices: imsServices,
                         subscriptions: subscriptions,
@@ -135,7 +125,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     name: subscription.product_name,
                     customer: subscription.customer_name
                 }),
-                () => startModificationSubscription(subscription.subscription_id).then(() =>{
+                () => startModificationSubscription(subscription.subscription_id).then(() => {
                     this.props.history.push("/processes")
                 }));
         }
@@ -292,19 +282,22 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderProcessLink = subscriptionProcessLink => {
-        const displaySubscriptionProcessLink = !isEmpty(subscriptionProcessLink);
+    renderProcessLink = subscriptionProcesses => {
+        const displaysubscriptionProcesses = !isEmpty(subscriptionProcesses);
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
             <div className="form-container-parent">
                 <section className="form-container">
+                    {displaysubscriptionProcesses &&
                     <section className="process-link">
-                        {displaySubscriptionProcessLink &&
-                        <NavLink to={`/process/${subscriptionProcessLink.pid}`} className="button green">
-                            <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text")}</NavLink>}
-                        {!displaySubscriptionProcessLink &&
-                        <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>}
-                    </section>
+                        {subscriptionProcesses.map((ps, index) =>
+                            <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
+                                <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
+                        )}
+                    </section>}
+                    {!displaysubscriptionProcesses && <section className="process-link">
+                        <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
+                    </section>}
                 </section>
             </div>
         </section>
@@ -395,7 +388,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     render() {
         const {
-            loaded, notFound, subscription, subscriptionProcessLink, product, imsServices,
+            loaded, notFound, subscription, subscriptionProcesses, product, imsServices,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
             confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects
         } = this.state;
@@ -410,7 +403,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     question={confirmationDialogQuestion}/>
 
                 {renderContent && this.renderDetails(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects, loadedIMSRelatedObjects)}
-                {renderContent && this.renderProcessLink(subscriptionProcessLink)}
+                {renderContent && this.renderProcessLink(subscriptionProcesses)}
                 {renderContent && this.renderNotFoundRelatedObject(notFoundRelatedObjects)}
                 {renderContent && this.renderSubscriptionResourceTypes(subscription)}
                 {renderContent && this.renderProduct(product)}

@@ -93,13 +93,16 @@ export default class ProcessStateDetails extends React.PureComponent {
         return newState;
     };
 
-    renderProcessSubscriptionLink = subscriptionProcessLink => {
-        if (isEmpty(subscriptionProcessLink)) {
+    renderProcessSubscriptionLink = subscriptionProcesses => {
+        if (isEmpty(subscriptionProcesses)) {
             return null;
         }
         return <section className="subscription-link">
-            <NavLink to={`/subscription/${subscriptionProcessLink.subscription_id}`} className="button green">
-                <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt")}</NavLink>
+            {subscriptionProcesses.map((ps, index) =>
+            <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
+                <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
+            </NavLink>
+            )}
         </section>
     };
 
@@ -197,11 +200,11 @@ export default class ProcessStateDetails extends React.PureComponent {
     };
 
     render() {
-        const {process, subscriptionProcessLink} = this.props;
+        const {process, subscriptionProcesses} = this.props;
         const {raw, details, stateChanges} = this.state;
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
-            {this.renderProcessSubscriptionLink(subscriptionProcessLink)}
+            {this.renderProcessSubscriptionLink(subscriptionProcesses)}
             {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
         </section>
     }
@@ -210,6 +213,6 @@ export default class ProcessStateDetails extends React.PureComponent {
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
-    subscriptionProcessLink: PropTypes.object.isRequired
+    subscriptionProcesses: PropTypes.object.isRequired
 };
 

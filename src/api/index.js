@@ -203,13 +203,13 @@ export function imsService(type, identifier) {
         .catch(err => Promise.resolve({type: absent, requestedType: type, identifier: identifier}));
 }
 
-export function processIdFromSubscriptionId(subscriptionId) {
-    return fetchJsonWithCustomErrorHandling(`processes/process-subscription-by-subscription-id/${subscriptionId}`)
+export function processSubscriptionsBySubscriptionId(subscriptionId) {
+    return fetchJsonWithCustomErrorHandling(`processes/process-subscriptions-by-subscription-id/${subscriptionId}`)
         .catch(err => Promise.resolve({}));
 }
 
-export function subscriptionIdFromProcessId(processId) {
-    return fetchJsonWithCustomErrorHandling(`processes/process-subscription-by-pid/${processId}`)
+export function processSubscriptionsByProcessId(processId) {
+    return fetchJsonWithCustomErrorHandling(`processes/process-subscriptions-by-pid/${processId}`)
         .catch(err => Promise.resolve({}));
 }
 

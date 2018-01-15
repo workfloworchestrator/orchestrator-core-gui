@@ -9,7 +9,7 @@ import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import {organisationNameByUuid, productById, productNameById} from "../utils/Lookups";
 import {lookupValueFromNestedState} from "../utils/NestedState";
-import {abortProcess, deleteProcess, retryProcess, subscriptionIdFromProcessId} from "../api/index";
+import {abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId} from "../api/index";
 
 import "./ProcessDetail.css";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -24,7 +24,7 @@ export default class ProcessDetail extends React.PureComponent {
             notFound: false,
             tabs: ["user_input", "process"],
             selectedTab: "process",
-            subscriptionProcessLink: {},
+            subscriptionProcesses: {},
             loaded: false,
             stepUserInput: [],
             multiServicePoints: [],
@@ -67,9 +67,9 @@ export default class ProcessDetail extends React.PureComponent {
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([subscriptionIdFromProcessId(processInstance.id), subscriptionsByTag("MSP")])
+                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTag("MSP")])
                 .then(res => {
-                    this.setState({subscriptionProcessLink: res[0], multiServicePoints: res[1]});
+                    this.setState({subscriptionProcesses: res[0], multiServicePoints: res[1]});
                 });
             }).catch(err => {
             if (err.response && err.response.status === 404) {
@@ -158,7 +158,7 @@ export default class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcessLink, multiServicePoints) => {
+    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, multiServicePoints) => {
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
@@ -166,7 +166,7 @@ export default class ProcessDetail extends React.PureComponent {
         if (selectedTab === "process") {
             return <section className="card">
                 {this.renderActions(process)}
-                <ProcessStateDetails process={process} subscriptionProcessLink={subscriptionProcessLink}/>
+                <ProcessStateDetails process={process} subscriptionProcesses={subscriptionProcesses}/>
             </section>;
         } else {
             return <section className="card">
@@ -196,7 +196,7 @@ export default class ProcessDetail extends React.PureComponent {
 
     render() {
         const {
-            loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcessLink,
+            loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses,
             confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, multiServicePoints
         } = this.state;
         const step = process.steps.find(step => step.status === "pending");
@@ -213,7 +213,7 @@ export default class ProcessDetail extends React.PureComponent {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput,
-                    subscriptionProcessLink, multiServicePoints)}
+                    subscriptionProcesses, multiServicePoints)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
             </div>
         );
