@@ -194,6 +194,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
+        subscription: "Subscription",
+        subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
