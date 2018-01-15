@@ -182,7 +182,6 @@ export default class UserInputForm extends React.Component {
         const currentState = this.props.currentState;
         switch (userInput.type) {
             case "string" :
-            case "vlan" :
             case "guid":
             case "uuid":
             case "crm_port_id":
@@ -201,9 +200,7 @@ export default class UserInputForm extends React.Component {
                                                  className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
-                return <input type="number" id={name} name={name}
-                              value={value || ""}
-                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+                return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
