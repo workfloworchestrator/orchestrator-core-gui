@@ -1,72 +1,56 @@
 import React from "react";
-import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import scrollIntoView from "scroll-into-view";
-import {isEmpty} from "../utils/Utils";
 
-import CheckBox from "./CheckBox";
 import "./Autocomplete.css";
+import {isEmpty} from "../utils/Utils";
 
 export default class Autocomplete extends React.PureComponent {
 
     componentDidUpdate(prevProps) {
-        if (this.selectedRow && prevProps.selected !== this.props.selectedRow) {
+        if (this.selectedRow && prevProps.selectedItem !== this.props.selectedItem && !isEmpty(this.props.suggestions)) {
             scrollIntoView(this.selectedRow);
         }
     }
 
-    item = (value, query) => {
-        if (isEmpty(value)) {
-            return <span></span>;
-        }
-        const nameToLower = value.toLowerCase();
+    itemName = (item, query) => {
+        const name = item.name;
+        const nameToLower = name.toLowerCase();
         const indexOf = nameToLower.indexOf(query.toLowerCase());
-        if (indexOf < 0) {
-            return <span>{value}</span>;
-        }
-        const first = value.substring(0, indexOf);
-        const middle = value.substring(indexOf, indexOf + query.length);
-        const last = value.substring(indexOf + query.length);
+        const first = name.substring(0, indexOf);
+        const middle = name.substring(indexOf, indexOf + query.length);
+        const last = name.substring(indexOf + query.length);
         return <span>{first}<span className="matched">{middle}</span>{last}</span>;
     };
 
     render() {
-        const {suggestions, query, selected, itemSelected} = this.props;
-        const showSuggestions = (suggestions && suggestions.length > 0);
+        const {suggestions, query, selectedItem, personIndex, itemSelected, className} = this.props;
+        if (isEmpty(suggestions)) {
+            return null;
+        }
         return (
-            <section className="metadata-autocomplete">
-                {!showSuggestions &&
-                <div className="no-results">{I18n.t("metadata_autocomplete.no_results")}</div>
-                }
-                {showSuggestions && <table className="result">
-                    <thead>
-                    <tr>
-                        <th className="name">{I18n.t("metadata_autocomplete.name")}</th>
-                        <th className="state">{I18n.t("metadata_autocomplete.state")}</th>
-                        <th className="entity_id">{I18n.t("metadata_autocomplete.entity_id")}</th>
-                    </tr>
-                    </thead>
+            <section className={`autocomplete ${className || ""}`}>
+                <table className="result">
                     <tbody>
                     {suggestions
                         .map((item, index) => (
                                 <tr key={index}
-                                    className={selected === index ? "active" : ""}
-                                    onClick={() => itemSelected(item)}
+                                    className={selectedItem === index ? "active" : ""}
+                                    onClick={() => itemSelected(item, personIndex)}
                                     ref={ref => {
-                                        if (selected === index) {
+                                        if (selectedItem === index) {
                                             this.selectedRow = ref;
+                                        } else if (suggestions.length - 1 === index) {
+                                            this.lastRow = ref;
                                         }
                                     }}>
-                                    <td>{this.item(item.data.metaDataFields["name:en"] || item.data.metaDataFields["name:nl"], query)}</td>
-                                    <td className="state">
-                                        <CheckBox name="state" value={item.data.state === "prodaccepted"} onChange={() => this} readOnly={true}/>
-                                    </td>
-                                    <td>{this.item(item.data.entityid, query)}</td>
+                                    <td>{this.itemName(item, query)}</td>
+                                    <td>{item.email || ""}</td>
                                 </tr>
                             )
                         )}
                     </tbody>
-                </table>}
+                </table>
             </section>
         );
     }
@@ -76,8 +60,10 @@ export default class Autocomplete extends React.PureComponent {
 Autocomplete.propTypes = {
     suggestions: PropTypes.array.isRequired,
     query: PropTypes.string.isRequired,
-    selected: PropTypes.number.isRequired,
-    itemSelected: PropTypes.func.isRequired
+    selectedItem: PropTypes.number,
+    personIndex: PropTypes.number.isRequired,
+    itemSelected: PropTypes.func.isRequired,
+    className: PropTypes.string,
 };
 
 

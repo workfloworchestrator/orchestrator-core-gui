@@ -1,0 +1,129 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+section.subscription-validation {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 2px 3px 3px 0 $light-grey;
+
+    h3 {
+        margin-left: 20px;
+        margin-bottom: 15px;
+        color: $blue;
+        font-size: 18px;
+    }
+
+    section.subscriptions {
+        display: flex;
+        padding: 0 20px 20px 20px;
+        background-color: white;
+    }
+
+    table.subscriptions {
+        width: 100%;
+        word-break: break-all;
+        td, th {
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid $light-grey;
+        }
+        thead {
+            th {
+                cursor: pointer;
+                padding: 5px 0 10px
+            }
+            th.customer_name {
+                width: 20%;
+            }
+            th.description {
+                width: 15%;
+            }
+            th.insync {
+                width: 10%;
+                text-align: center;
+            }
+            th.product_name {
+                width: 15%;
+            }
+            th.status {
+                width: 10%;
+            }
+            th.start_date_epoch {
+                width: 15%;
+            }
+            th.end_date_epoch {
+                width: 15%;
+            }
+            span {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: larger;
+                color: $medium-grey;
+                padding: 7px 2px 7px 0;
+            }
+            i.fa {
+                float: right;
+                margin-right: 15px;
+                color: $medium-grey;
+                font-size: 18px;
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+            td {
+                word-break: break-word;
+                word-wrap: break-word;
+                padding: 15px 0;
+                &.insync {
+                    display: flex;
+                    justify-content: center;
+                }
+                &.actions {
+                    i.fa-trash {
+                        color: $red;
+                        font-size: 22px;
+                        padding: 20px;
+                    }
+                }
+            }
+        }
+
+        @include phone {
+            thead {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+                display: block;
+                border-bottom: 2px solid $lighter-grey;
+            }
+            td {
+                display: block;
+                text-align: right;
+                border-bottom: 1px dotted $light-blue;
+                padding: 8px 0;
+
+                &:before {
+                    content: attr(data-label);
+                    float: left;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: $medium-grey;
+                }
+            }
+
+        }
+
+    }
+
+}
+
+

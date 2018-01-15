@@ -32,7 +32,8 @@ export default class Navigation extends React.PureComponent {
                     width: 2, // The line thickness
                     radius: 8, // The radius of the inner circle
                     color: "#4DB3CF", // #rgb or #rrggbb or array of colors
-                    top: "25%"
+                    top: "25%",
+                    position: "fixed"
                 }).spin(this.spinnerNode);
             }
         } else {
@@ -55,7 +56,11 @@ export default class Navigation extends React.PureComponent {
             <div className="navigation-container">
                 <div className="navigation">
                     {this.renderItem("/processes", "processes")}
+                    {this.renderItem("/subscriptions", "subscriptions")}
+                    {this.renderItem("/metadata/products", "metadata")}
                     {this.renderItem("/validations", "validations")}
+                    {this.renderItem("/tasks", "tasks")}
+                    {this.renderItem("/cache", "cache")}
                     {this.renderSpinner()}
                 </div>
             </div>

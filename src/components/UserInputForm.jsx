@@ -7,20 +7,27 @@ import ConfirmationDialog from "./ConfirmationDialog";
 import {isEmpty, stop} from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
 import MultiServicePointSelect from "./MultiServicePointSelect";
-import "highlight.js/styles/default.css";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import BandwidthSelect from "./BandwidthSelect";
 import EmailInput from "./EmailInput";
-import IEEEInterfaceTypesSelect from "./IEEEInterfaceTypesSelect";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
-import "./UserInputForm.css";
 import CheckBox from "./CheckBox";
+import ContactPersons from "./ContactPersons";
+import StateValue from "./StateValue";
 
-import {ieeeInterfaceTypesForProductTag} from "../api";
+import "./UserInputForm.css";
+import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
+import MultipleMSPs from "./MultipleMSPs";
+import {lookupValueFromNestedState} from "../utils/NestedState";
+import {doValidateUserInput} from "../validations/UserInput";
+import VirtualLAN from "./VirtualLAN";
+import {randomCrmIdentifier} from "../locale/en";
 
+
+const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
 
 export default class UserInputForm extends React.Component {
 
@@ -33,7 +40,9 @@ export default class UserInputForm extends React.Component {
             leavePage: true,
             errors: {},
             isNew: true,
-            stepUserInput: [...props.stepUserInput]
+            stepUserInput: [...props.stepUserInput],
+            product: {},
+            processing: false,
         };
     }
 
@@ -50,21 +59,22 @@ export default class UserInputForm extends React.Component {
 
     submit = e => {
         stop(e);
-        const {stepUserInput} = this.state;
-        if (this.validateAllUserInput(stepUserInput)) {
+        const {stepUserInput, processing} = this.state;
+        if (this.validateAllUserInput(stepUserInput) && !processing) {
+            this.setState({processing: true});
             this.props.validSubmit(stepUserInput);
         }
     };
 
     validateAllUserInput = (stepUserInput) => {
         const errors = {...this.state.errors};
-        stepUserInput.forEach(input => this.doValidateUserInput(input, input.value, errors));
+        stepUserInput.forEach(input => doValidateUserInput(input, input.value, errors));
         this.setState({errors: errors});
         return !Object.keys(errors).some(key => errors[key]);
     };
 
     renderButtons = () => {
-        const invalid = this.isInvalid();
+        const invalid = this.isInvalid() || this.state.processing;
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
@@ -76,12 +86,6 @@ export default class UserInputForm extends React.Component {
     };
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
-
-    userInputValue = name => {
-        const userInput = this.state.stepUserInput;
-        return userInput.find(input => input.name === name).value || "";
-    };
-
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -107,12 +111,16 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
+    changeNestedInput = name => newValue => {
+        this.changeUserInput(name, newValue);
+        this.validateUserInput(name)({target: {value: newValue}});
+    };
+
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
-
 
     doValidateUserInput = (userInput, value, errors) => {
         const type = userInput.type;
@@ -132,83 +140,156 @@ export default class UserInputForm extends React.Component {
         const value = e.target.value;
         const userInput = this.state.stepUserInput.find(input => input.name === name);
         const errors = {...this.state.errors};
-        this.doValidateUserInput(userInput, value, errors);
+        doValidateUserInput(userInput, value, errors);
         this.setState({errors: errors});
     };
 
-    renderInput = userInput => {
+    onError = name => value => this.setState({errors: {...this.state.errors, name: value}});
+
+    renderInput = (userInput, process) => {
         const name = userInput.name;
-        const isBoolean = userInput.type === "boolean";
+        const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
+        const error = this.state.errors[name];
         return (
-            <section key={name} className="form-divider">
-                {!isBoolean && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
-                {!isBoolean && <em>{I18n.t(`process.${name}_info`)}</em>}
-                <div className="validity-input-wrapper">
-                    {this.chooseInput(userInput)}
-                </div>
-                {this.state.errors[name] &&
+            <section key={name} className={`form-divider ${name}`}>
+                {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
+                {!ignoreLabel && this.renderInputInfoLabel(name)}
+                {this.chooseInput(userInput, process)}
+                {error &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
             </section>);
 
     };
 
-    chooseInput = userInput => {
+    renderInputInfoLabel = name => {
+        if (name.indexOf("crm_port_id") > -1) {
+            return <em>{I18n.t(`process.${name}_info`, {example: randomCrmIdentifier()})}</em>;
+        }
+        return <em>{I18n.t(`process.${name}_info`)}</em>;
+    };
+
+    findValueFromInputStep = relatedKey => {
+        const stepUserInput = this.state.stepUserInput;
+        const relatedUserInput = stepUserInput.find(input => input.name === relatedKey);
+        return relatedUserInput ? relatedUserInput.value : null;
+    } ;
+
+    chooseInput = (userInput, process) => {
         const name = userInput.name;
+        const value = userInput.value;
+        const currentState = this.props.currentState;
         switch (userInput.type) {
             case "string" :
             case "vlan" :
             case "guid":
+            case "uuid":
+            case "crm_port_id":
             case "ims_free_port":
             case "port":
             case "ims_port_id":
             case "ims_id":
-                return <input type="text" id={name} name={name} value={this.userInputValue(name)}
+            case "isalias":
+            case "stp":
+                return <input type="text" id={name} name={name} value={value || ""}
+                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "subscription_id":
+                return <ReadOnlySubscriptionView subscriptionId={value}
+                                                 products={this.props.products}
+                                                 organisations={this.props.organisations}
+                                                 className="indent"/>;
+            case "nms_service_id" :
+            case "bandwidth":
+                return <input type="number" id={name} name={name}
+                              value={value || ""}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "bandwidth" :
                 return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
+            case "vlan" :
+            case "vlan_range" :
+                const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
+                return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
+                                   subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}/>
             case "msp" :
-                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={userInput.value}
+                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
                                                 organisations={this.props.organisations}/>;
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
-                                           organisation={userInput.value}/>;
+                                           organisation={value}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
-                                      product={userInput.value}/>;
+                                      product={value}/>;
+            case "ssp_product" :
+                return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+            case "contact_persons" :
+                const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
+                    this.findValueFromInputStep(userInput.organisation_key);
+                return <ContactPersons
+                    persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
+                    organisationId={organisationId}
+                    onChange={this.changeNestedInput(name)}/>;
             case "emails" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true} emailRequired={true}/>;
             case "email" :
-                return <EmailInput emails={this.userInputToEmail(userInput.value)}
+                return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-                return <IEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
-                                                 interfaceTypes={this.props.ieeeInterfaceTypes}
-                                                 interfaceType={userInput.value}/>;
-            case "ieee_interface_type_for_product_tag":
-                //Todo get selected product and use it's tag to populate InterfacesTypes
+                const productId = this.findValueFromInputStep(userInput.product_key);
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
-                                                              interfaceType={userInput.value}
-                                                              productTag='MSP100G'/>;
+                                                              interfaceType={value}
+                                                              productId={productId}/>;
+            case "ieee_interface_type_for_product_tag":
+                const propsProductId = this.props.product.value || this.props.product.product_id;
+                return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
+                                                              interfaceType={value}
+                                                              productId={propsProductId}/>;
             case "free_ports_for_location_code_and_interface_type":
-                //Todo get selected locationCode and interfaceType from previous steps and use it
-                return <FreePortSelect onChange={this.changeSelectInput(name)}
-                                       freePort={userInput.value}
-                                       interfaceType='1000BASE-SX'
-                                       locationCode='UT001A'/>;
+                const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+                return <FreePortSelect
+                    onChange={this.changeSelectInput(name)}
+                    freePort={value}
+                    interfaceType={interfaceType}
+                    locationCode={locationCode}/>;
+            case "subscription_termination_confirmation":
+                return <div>
+                    <CheckBox name={name} value={value || false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={I18n.t(`process.${name}`)}/>
+                    <section className="form-divider"></section>
+                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
+                                              products={this.props.products}
+                                              organisations={this.props.organisations}
+                                              className="indent"/>
+                </div>;
+            case "accept":
             case "boolean":
-                return <CheckBox name={userInput.name} value={userInput.value || false}
-                                 onChange={this.changeBooleanInput(userInput.name)}
-                                 info={I18n.t(`process.${userInput.name}`)}/>;
+                return <CheckBox name={name} value={value || false}
+                                 onChange={this.changeBooleanInput(name)}
+                                 info={I18n.t(`process.${name}`)}/>;
             case "location_code":
                 return <LocationCodeSelect onChange={this.changeSelectInput(name)}
                                            locationCodes={this.props.locationCodes}
-                                           locationCode={userInput.value}/>;
+                                           locationCode={value}/>;
+            case "label_with_state":
+                return <StateValue className={userInput.name} value={value}/>;
+            case "label":
+                return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`)}</p>;
+            case "multi_msp":
+                return <MultipleMSPs msps={isEmpty(value) ? [
+                    {subscription_id: null, vlan: ""},
+                    {subscription_id: null, vlan: ""}
+                ] : value}
+                                     availableMSPs={this.props.multiServicePoints}
+                                     organisations={this.props.organisations}
+                                     onChange={this.changeNestedInput(name)}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -217,7 +298,11 @@ export default class UserInputForm extends React.Component {
     userInputToEmail = (input) => input ? input.split(",") : [];
 
     render() {
-        const {confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput, leavePage} = this.state;
+        const {
+            confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, stepUserInput,
+            leavePage
+        } = this.state;
+        const {process} = this.props;
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -226,7 +311,7 @@ export default class UserInputForm extends React.Component {
                                     leavePage={leavePage}/>
                 <section className="card">
                     <section className="form-step">
-                        {stepUserInput.map(input => this.renderInput(input))}
+                        {stepUserInput.map(input => this.renderInput(input, process))}
                     </section>
                     {this.renderButtons()}
                 </section>
@@ -241,7 +326,8 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     multiServicePoints: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
-    validSubmit: PropTypes.func.isRequired
+    product: PropTypes.object,
+    validSubmit: PropTypes.func.isRequired,
+    process: PropTypes.object,
 };

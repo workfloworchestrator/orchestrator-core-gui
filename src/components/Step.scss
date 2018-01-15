@@ -19,6 +19,12 @@ section.step {
     &.success {
         background-color: $dark-green;
     }
+    &.skipped {
+        background-color: $lighter-grey;
+    }
+    &.complete {
+        background-color: $blue;
+    }
     &.suspend {
         background-color: $gold;
         color: $dark-grey;

@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
+
 import "react-select/dist/react-select.css";
+import "./ProductSelect.css";
 
 export default function ProductSelect({onChange, product, products, disabled}) {
 
@@ -9,10 +11,15 @@ export default function ProductSelect({onChange, product, products, disabled}) {
         <Select className="select-product"
                 onChange={onChange}
                 options={products.map(aProduct => {
-                    return {value: aProduct.identifier, label: aProduct.name, workflow: aProduct.workflow};
+                    return {value: aProduct.product_id,
+                        label: aProduct.name,
+                        workflow: aProduct.create_subscription_workflow_key,
+                        tag: aProduct.tag
+                    };
                 })}
                 value={product}
                 searchable={true}
+                placeholder="Search and select a product..."
                 disabled={disabled || products.length === 0}/>
     );
 }

@@ -3,18 +3,19 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-export default function OrganisationSelect({onChange, organisation, organisations, disabled}) {
+export default class OrganisationSelect extends React.PureComponent {
 
-    return (
-        <Select className="select-organisation"
-                onChange={onChange}
-                options={organisations.map(org => {
-                    return {value: org.uuid, label: org.name};
-                })}
-                value={organisation}
-                searchable={true}
-                disabled={disabled || organisations.length === 0}/>
-    );
+    render() {
+        const {onChange, organisation, organisations, disabled} = this.props;
+        return (
+            <Select onChange={onChange}
+                    options={organisations.map(org => ({value: org.uuid, label: org.name}))}
+                    value={organisation}
+                    searchable={true}
+                    placeholder="Search and select a customer..."
+                    disabled={disabled || organisations.length === 0}/>
+        );
+    }
 }
 
 OrganisationSelect.propTypes = {

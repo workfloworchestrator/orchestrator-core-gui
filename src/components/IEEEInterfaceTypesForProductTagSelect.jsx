@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {ieeeInterfaceTypesForProductTag} from "../api";
+import {ieeeInterfaceTypesForProductId} from "../api/index";
+import {isEmpty} from "../utils/Utils";
 
 
 export default class IEEEInterfaceTypesForProductTagSelect extends React.PureComponent {
@@ -15,10 +16,20 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
         }
     }
 
-    componentWillMount() {
-        ieeeInterfaceTypesForProductTag(this.props.productTag).then(result =>
-            this.setState({interfaceTypes: result})
-        );
+    componentDidMount = (productId = this.props.productId) => {
+        if (productId) {
+            ieeeInterfaceTypesForProductId(productId).then(result =>
+                this.setState({interfaceTypes: result})
+            );
+        }
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.productId && nextProps.productId !== this.props.productId) {
+            this.componentDidMount(nextProps.productId);
+        } else if (isEmpty(nextProps.productId)) {
+            this.setState({interfaceTypes: []})
+        }
     };
 
     render() {
@@ -32,7 +43,9 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
                     })}
                     value={interfaceType}
                     searchable={true}
-                    disabled={disabled || interfaceTypes.length === 0}/>
+                    disabled={disabled || interfaceTypes.length === 0}
+                    placeholder={interfaceTypes.length > 0 ? "Select an IEEE interface type..." :
+                        "First select a product type..."}/>
         )
     }
 
@@ -41,6 +54,6 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
 IEEEInterfaceTypesForProductTagSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     interfaceType: PropTypes.string,
-    productTag: PropTypes.string.isRequired,
+    productId: PropTypes.string,
     disabled: PropTypes.bool
 };

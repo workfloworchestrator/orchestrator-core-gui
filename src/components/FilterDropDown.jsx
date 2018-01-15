@@ -38,14 +38,14 @@ export default class FilterDropDown extends React.PureComponent {
         const filtered = items.filter(item => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);
         const name = filtered.length === items.length ? I18n.t("filter.all", {count: count}) : I18n.t("filter.selected", {count: count});
-
+        const faIcon = dropDownActive ? "fa-caret-up" : "fa-caret-down";
         return (
-            <section className="filter-drop-down" tabIndex="1" onBlur={() => this.setState({dropDownActive: false})}>
+            <section className="filter-drop-down">
                 <div className="filtered" onClick={() => this.setState({dropDownActive: !dropDownActive})}>
                     <span className="filter-label">{label}</span>
                     <span className="filter-label-divider">:</span>
                     <span className="filter-name">{name}</span>
-                    <span><i className="fa fa-caret-down"/></span>
+                    <span><i className={`fa ${faIcon}`}/></span>
                 </div>
                 {dropDownActive && this.renderDropDown(items, filterBy)}
             </section>);

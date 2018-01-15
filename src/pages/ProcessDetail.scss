@@ -9,6 +9,12 @@
         @include card;
         padding-bottom: 15px;
     }
+    section.not-found {
+        h1 {
+            font-size: 24px;
+            padding: 50px;
+        }
+    }
     section.tabs {
         display: flex;
         margin-top: 25px;
@@ -34,10 +40,26 @@
             }
         }
     }
-    h3 {
-        font-size: larger;
-        padding: 15px 0;
-        color: $darker-blue;
+    section.process-actions {
+        display: flex;
+        padding-top: 25px;
+        a {
+            margin-left: 40px;
+            &:first-child {
+                margin-left: auto;
+            }
+        }
+    }
+    section.header-info {
+        display: flex;
+        h3 {
+            font-size: larger;
+            padding: 15px 0;
+            color: $darker-blue;
+            &:last-child {
+                margin-left: auto;
+            }
+        }
     }
 
     .actions {

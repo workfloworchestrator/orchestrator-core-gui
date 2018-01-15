@@ -7,14 +7,14 @@
     left: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background: white;
-    width: 385px;
+    width: 435px;
     z-index: 5;
     height: 100%;
     transition: left 325ms ease-in-out;
 
     &.hide {
         transition: left 250ms ease-in-out;
-        left: -390px;
+        left: -440px;
     }
 
     .container {
@@ -27,11 +27,9 @@
     }
 
     span {
-        &.emphasize {
-            font-style: italic;
-        }
-        &.strong {
-            font-weight: bold;
+        font-style: italic;
+        &.code {
+            font-family: Courier;
         }
     }
 

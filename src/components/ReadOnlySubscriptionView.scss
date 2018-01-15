@@ -1,0 +1,36 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-read-only-subscription-view {
+    &.indent {
+        padding-left: 20px;
+    }
+    h3 {
+        font-size: larger;
+        color: $blue;
+    }
+    div.form-container {
+        display: flex;
+        border-bottom: 3px solid $lightest-grey;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        &.child {
+            padding-left: 20px;
+            margin-bottom: 0;
+            &.last {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+        }
+        section.part {
+            padding-right: 50px;
+            width: 100%;
+
+            label.title {
+                margin: 15px 0 10px 0;
+            }
+        }
+    }
+}
+

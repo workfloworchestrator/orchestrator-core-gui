@@ -1,0 +1,126 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+section.validation-container {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 2px 3px 3px 0 $light-grey;
+
+    section.validation {
+        display: flex;
+        justify-content: space-between;
+        section.status {
+            text-align: center;
+            margin-right: 90px;
+            i {
+                font-size: 36px;
+                &.fa-check {
+                    color: $green;
+                }
+                &.fa-exclamation-triangle {
+                    color: $red;
+                }
+            }
+        }
+        section.product-info, section.product-mapping {
+            &.product-info {
+                width: 40%;
+                tbody {
+                    border-top: 1px solid $light-blue;
+                    tr:first-child {
+                        td.title {
+                            padding-top: 15px;
+                        }
+                    }
+                }
+            }
+            &.product-mapping {
+                width: 60%;
+            }
+            table {
+                width: 100%;
+                font-size: 15px;
+                tbody.product-block {
+                    border-top: 1px solid $light-blue;
+                    border-bottom: 1px solid $light-blue;
+                    tr:last-child {
+                        td {
+                            padding-bottom: 15px;
+                        }
+                    }
+                }
+                th {
+                    text-align: left;
+                    text-transform: uppercase;
+                    color: $blue;
+                    background-color: $lightest-grey;
+                    padding: 4px 0;
+                    &.validations-mapping-title {
+                        i.fa {
+                            margin-right: 15px;
+                        }
+                    }
+                }
+                td {
+                    &.title {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        color: $medium-grey;
+                        padding: 3px 0;
+                        width: 35%;
+                    }
+                    &.resource-type-sub {
+                        color: $dark-grey;
+                        font-style: italic;
+                    }
+                    &.product-block-name {
+                        font-weight: bold;
+                        padding-top: 15px;
+                    }
+                    &.resource-type {
+                        i.fa-arrow-right {
+                            margin: 4px 15px;
+                            color: $medium-grey;
+                        }
+                    }
+                    &.no-mapping {
+                        font-style: italic;
+                        color: $orange;
+                        padding: 20px 80px 0 0;
+                    }
+                }
+            }
+        }
+    }
+    section.product-errors {
+        margin: 10px 0 10px 124px;
+        table {
+            width: 100%;
+            font-size: 15px;
+            th {
+                text-align: left;
+                text-transform: uppercase;
+                color: $red;
+                background-color: $lightest-grey;
+                padding: 4px 0;
+            }
+            td {
+                &.name {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    color: $medium-grey;
+                    padding: 2px 40px 2px 0;
+                }
+                &.description {
+                    color: darken($orange, 25%)
+                }
+                span {
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}
+
+

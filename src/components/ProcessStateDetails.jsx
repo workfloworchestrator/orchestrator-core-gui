@@ -1,15 +1,17 @@
 import React from "react";
-import "./ProcessStateDetails.css";
-import Highlight from "react-highlight";
-import "highlight.js/styles/default.css";
 import PropTypes from "prop-types";
+import JSONPretty from 'react-json-pretty';
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
+import isEqual from "lodash/isEqual";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
-import {capitalize, renderDate} from "../utils/Lookups";
+import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
+import {NavLink} from "react-router-dom";
+
+import "./ProcessStateDetails.css";
 
 export default class ProcessStateDetails extends React.PureComponent {
 
@@ -43,9 +45,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>
-                <Highlight className="JSON">
-                    {json}
-                </Highlight>
+                <JSONPretty id="json-pretty" json={process}></JSONPretty>
             </section>
         )
 
@@ -59,7 +59,8 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <ul>
                     <li className="process-wording"><h3>{I18n.t("process_state.wording", {
                         product: process.productName,
-                        customer: process.customerName
+                        customer: process.customerName,
+                        workflow: process.workflow_name
                     })}</h3></li>
                 </ul>
                 <ul>
@@ -78,18 +79,35 @@ export default class ProcessStateDetails extends React.PureComponent {
         )
     };
 
-    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDate(value);
+    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
 
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
-        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1);
+        const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.reduce((acc, key) => {
             acc[key] = curr[key];
             return acc;
         }, {});
         return newState;
+    };
+
+    renderProcessSubscriptionLink = subscriptionProcessLink => {
+        if (isEmpty(subscriptionProcessLink)) {
+            return null;
+        }
+        return <section className="subscription-link">
+            <NavLink to={`/subscription/${subscriptionProcessLink.subscription_id}`} className="button green">
+                <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt")}</NavLink>
+        </section>
+    };
+
+    displayStateValue = value => {
+        if (isEmpty(value)) {
+            return "";
+        }
+        return typeof value === "object" ? JSON.stringify(value) : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
@@ -99,6 +117,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         switch (status) {
             case "suspend" :
             case "abort" :
+            case "skipped" :
                 return null;
             case "pending" :
                 if (isEmpty(step.form)) {
@@ -107,7 +126,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                 json = step.form.reduce((acc, field) => {
                     acc[field.name] = "";
                     return acc;
-                },{});
+                }, {});
                 break;
             case "failed" :
                 json = step.state;
@@ -117,17 +136,30 @@ export default class ProcessStateDetails extends React.PureComponent {
                 break;
             default:
         }
-        const formattedJson = JSON.stringify(json, null, 4);
+        if (isEmpty(json)) {
+            return null;
+        }
+        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
         return (
             <section className="state-changes">
                 <section className="state-divider">
-                    <i className="fa fa-arrow-left"></i>
+                    <i className={iconName}></i>
                 </section>
-                <Highlight className="JSON">
-                    {formattedJson}
-                </Highlight>
+                <section className="state-delta">
+                    <table>
+                        <tbody>
+                        {Object.keys(json).map((key,index) =>
+                            <tr key={key}>
+                                <td className="key">{key}</td>
+                                <td className="value">{this.displayStateValue(json[key])}</td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </section>
             </section>);
     };
+
 
     renderProcessOverview = (process, details, stateChanges) => {
         const last = i => i === process.steps.length - 1;
@@ -165,10 +197,11 @@ export default class ProcessStateDetails extends React.PureComponent {
     };
 
     render() {
-        const {process} = this.props;
+        const {process, subscriptionProcessLink} = this.props;
         const {raw, details, stateChanges} = this.state;
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
+            {this.renderProcessSubscriptionLink(subscriptionProcessLink)}
             {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
         </section>
     }
@@ -176,6 +209,7 @@ export default class ProcessStateDetails extends React.PureComponent {
 }
 
 ProcessStateDetails.propTypes = {
-    process: PropTypes.object.isRequired
+    process: PropTypes.object.isRequired,
+    subscriptionProcessLink: PropTypes.object.isRequired
 };
 

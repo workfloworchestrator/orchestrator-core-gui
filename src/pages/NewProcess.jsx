@@ -1,28 +1,50 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import "./NewProcess.css";
-import {initialWorkflowInput, startProcess} from "../api";
+import {initialWorkflowInput, startProcess, subscriptions_by_tag, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
-import "./ProcessDetail.css";
-import "highlight.js/styles/default.css";
 import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
+import ProductValidation from "../components/ProductValidation";
+
+import "./NewProcess.css";
 
 export default class NewProcess extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            product: "",
-            stepUserInput: []
+            product: {},
+            stepUserInput: [],
+            multiServicePoints: [],
+            productValidation: {"valid": true, mapping: {}}
         };
     }
 
-    validSubmit = stepUserInput => {
+    componentDidMount = () => {
+        const {products, preselectedProduct} = this.props;
+        if (preselectedProduct) {
+            const product = products.find(x => x.product_id === preselectedProduct);
+            if (product) {
+                this.changeProduct({
+                    value: product.product_id,
+                    workflow: product.create_subscription_workflow_key,
+                    ...product
+                });
+            }
+        }
+        subscriptions_by_tag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
+    };
+
+    validSubmit = (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
-            const product = {name: "product", type: "product", value: this.state.product};
+            const product = {
+                name: "product",
+                type: "product",
+                value: this.state.product.value,
+                tag: this.state.product.tag
+            };
             //create a copy to prevent re-rendering
             let processInput = [...stepUserInput];
             processInput.push(product);
@@ -35,27 +57,42 @@ export default class NewProcess extends React.Component {
                 .then(() => {
                     this.props.history.push(`/processes`);
                     const {products} = this.props;
-                    const name = products.find(prod => prod.identifier === this.state.product).name;
+                    const name = products.find(prod => prod.product_id === this.state.product.value).name;
                     setFlash(I18n.t("process.flash.create", {name: name}));
                 });
         }
     };
 
     changeProduct = option => {
-        this.setState({product: option.value});
-        if (isEmpty(option.value)) {
-            this.setState({stepUserInput: []})
-        } else {
-            initialWorkflowInput(option.workflow).then(userInput => {
-                const withoutProduct = userInput.filter(input => input.name !== "product")
-                this.setState({stepUserInput: withoutProduct})
-            });
-        }
+        this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
+            this.setState({product: option});
+            if (option) {
+                Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
+                    const [productValidation, userInput] = result;
+                    const stepUserInput = userInput.filter(input => input.name !== "product");
+                    const {preselectedOrganisation, preselectedDienstafname} = this.props;
+                    if (preselectedOrganisation) {
+                        const organisatieInput = stepUserInput.find(x => x.name === "organisation");
+                        if (organisatieInput) {
+                            organisatieInput.value = preselectedOrganisation
+                        }
+                    }
+                    if (preselectedDienstafname) {
+                        const dienstafnameInput =  stepUserInput.find(x => x.name === "dienstafname");
+                        if (dienstafnameInput) {
+                            dienstafnameInput.value = preselectedDienstafname;
+                        }
+                    }
+                    this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
+                });
+            }
+        });
     };
 
     render() {
-        const {product, stepUserInput} = this.state;
-        const {organisations, products, ieeeInterfaceTypes, multiServicePoints, locationCodes, history} = this.props;
+        const {product, stepUserInput, productValidation, multiServicePoints} = this.state;
+        const {organisations, products, locationCodes, history} = this.props;
+        const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         return (
             <div className="mod-new-process">
                 <section className="card">
@@ -64,21 +101,26 @@ export default class NewProcess extends React.Component {
                         <section className="form-divider">
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
-                            <div className="validity-input-wrapper">
-                                <ProductSelect products={this.props.products}
-                                               onChange={this.changeProduct}
-                                               product={product}/>
-                            </div>
+                            <ProductSelect
+                                products={this.props.products.filter(prod => prod.tag !== "SSP" &&
+                                    !isEmpty(prod.create_subscription_workflow_key))}
+                                onChange={this.changeProduct}
+                                product={isEmpty(product) ? undefined : product.value}/>
                         </section>
+                        {showProductValidation &&
+                        <section>
+                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                            <ProductValidation validation={productValidation}/>
+                        </section>}
                         {!isEmpty(stepUserInput) &&
                         <UserInputForm stepUserInput={stepUserInput}
-                                     multiServicePoints={multiServicePoints}
-                                     history={history}
-                                     organisations={organisations}
-                                     products={products}
-                                     ieeeInterfaceTypes={ieeeInterfaceTypes}
-                                     locationCodes={locationCodes}
-                                     validSubmit={this.validSubmit}/>}
+                                       multiServicePoints={multiServicePoints}
+                                       history={history}
+                                       organisations={organisations}
+                                       products={products}
+                                       locationCodes={locationCodes}
+                                       product={product}
+                                       validSubmit={this.validSubmit}/>}
                     </section>
                 </section>
             </div>
@@ -91,8 +133,7 @@ NewProcess.propTypes = {
     currentUser: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    ieeeInterfaceTypes: PropTypes.array.isRequired,
-    multiServicePoints: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
+    preselectedProduct: PropTypes.string,
+    preselectedOrganisation: PropTypes.string,
 };
-

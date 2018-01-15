@@ -8,54 +8,61 @@
         @include card;
         padding-bottom: 15px;
     }
+    section.tabs {
+        display: flex;
+        margin-top: 25px;
+        padding: 0;
+        span {
+            text-align: center;
+            cursor: pointer;
+            padding: 15px 75px;
+            background-color: $light-grey;
+            color: $dark-grey;
+            text-transform: uppercase;
+            border-right: 1px solid white;
 
-    .explain {
+            &.active {
+                background-color: white;
+                color: $darker-blue;
+                border-top: 2px solid $blue;
+                border-right: none;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+    .header {
         display: flex;
         align-items: center;
-        margin-right: 10px;
-        cursor: pointer;
+        margin: 20px 0 0 20px;
+        .explain {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 22px;
+            i {
+                color: lighten($blue, 5);
+                font-size: 30px;
+                margin-right: 15px;
+            }
 
-        i {
-            color: lighten($blue, 5);
-            font-size: 30px;
-            margin-right: 5px;
-
+            span {
+                color: $blue;
+                font-weight: bold;
+            }
         }
-
-        span {
-            color: $blue;
-            font-weight: bold;
+        .options {
+            margin-left: auto;
+            margin-right: 20px;
         }
-
     }
 
     section.validations {
         display: flex;
         flex-direction: column;
         padding: 0 20px 20px 20px;
-        background-color: white;
-    }
-
-    section.validation {
-        section.header {
-            display: flex;
-            section.status {
-                text-align: center;
-                i {
-                    font-size: 26px;
-                    &.fa-check {
-                        color: $green;
-                    }
-                    &.fa-exclamation-triangle {
-                        color: $red;
-                    }
-                }
-            }
-            section.product-info {
-                flex-grow: 2;
-                margin-left: 45px;
-            }
-        }
     }
 }
 

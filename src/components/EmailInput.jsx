@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "react-select/dist/react-select.css";
 
 import {isEmpty, stop} from "../utils/Utils";
+import {validEmailRegExp} from "../validations/Subscriptions";
 import "./EmailInput.css";
 
-const validEmailRegExp = /^\S+@\S+$/;
 
 export default class EmailInput extends React.PureComponent {
 
@@ -86,7 +86,7 @@ export default class EmailInput extends React.PureComponent {
 
         return (
             <section className="email-input">
-                {!disabled && <div className="validity-input-wrapper">
+                {!disabled &&
                     <input placeholder={placeholder}
                            type="email"
                            onChange={this.onChange}
@@ -95,7 +95,7 @@ export default class EmailInput extends React.PureComponent {
                            value={email}
                            onKeyDown={this.onKeyDown}
                     />
-                </div>}
+                }
 
                 {multipleEmails && <section className="email_tags">
                     {emails.map(mail =>

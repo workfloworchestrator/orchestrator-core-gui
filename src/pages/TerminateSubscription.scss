@@ -1,0 +1,21 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/buttons.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-terminate-subscription {
+    @include page;
+
+    .card {
+        @include card;
+        padding-bottom: 15px;
+        h1 {
+            font-size: 22px;
+            color: $darker-blue;
+            padding-top: 15px;
+        }
+    }
+    section.form-step {
+        padding: 20px 0;
+    }
+}
+

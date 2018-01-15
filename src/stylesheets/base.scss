@@ -10,11 +10,11 @@ body {
     background-color: $background;
 
     &:after {
-        content: "beta";
+        content: "RC-1";
         position: fixed;
         width: 100px;
         height: 30px;
-        background: $orange;
+        background: $blue;
         top: 10px;
         right: -28px;
         text-align: center;
@@ -41,7 +41,7 @@ a {
     box-sizing: border-box;
 }
 
-::-webkit-input-placeholder {
+::-webkit-input-placeholder, div.Select-placeholder {
     color: $blue;
 }
 

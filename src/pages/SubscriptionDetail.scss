@@ -1,0 +1,106 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/buttons.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-subscription-detail {
+    @include page;
+    @include card;
+    padding-bottom: 15px;
+    section.not-found {
+        h1 {
+            font-size: 24px;
+            padding: 50px;
+        }
+    }
+    h3 {
+        font-size: 22px;
+        padding: 15px 0 0 15px;
+        color: $darker-blue;
+    }
+    em {
+        margin-left: 15px;
+    }
+    section.terminate-link, section.modify-link {
+        &.modify-link {
+            margin-top: 25px;
+        }
+        a {
+            margin-left: 25px;
+            min-width: 320px;
+            i {
+                margin-right: 30px;
+                color: white;
+            }
+        }
+        p.no-termination-reason, p.no-modify-reason {
+            color: $orange;
+            margin: 15px 0 0 25px;
+        }
+    }
+    section.terminate-link-waiting {
+        margin-left: 25px;
+        display: flex;
+        align-items: center;
+        em {
+            font-size: 16px;
+        }
+        i.fa {
+            color: $orange;
+        }
+    }
+    section.details {
+        padding-bottom: 25px;
+        border-bottom: 5px solid $light-blue;
+    }
+    section.not-found-related-objects {
+        padding-bottom: 25px;
+        h3 {
+            color: $red;
+        }
+    }
+    section.form-container {
+        display: flex;
+        &:first-child {
+            margin-bottom: 20px;
+        }
+        &:not(:first-child) {
+            border-top: 1px solid $light-grey;
+            padding-top: 5px;
+        }
+        &:only-child {
+            margin-bottom: 0;
+        }
+        section {
+            padding: 0 25px;
+            width: 100%;
+
+            label.title  {
+                margin: 15px 0 10px 0;
+            }
+            .checkbox {
+                margin-top: 48px;
+            }
+            &.process-link {
+                a {
+                    margin-top: 15px;
+                }
+                i.fa {
+                    margin-right: 25px;
+                }
+                span.no_process_link {
+                    display: block;
+                    margin-top: 15px;
+                    color: $orange;
+                }
+            }
+            .subscription-link {
+                margin-top: 15px;
+                i.fa {
+                    margin-right: 25px;
+                }
+            }
+        }
+
+    }
+}
+
