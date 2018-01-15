@@ -231,6 +231,7 @@ class App extends React.PureComponent {
                         <Route path="/task/:id"
                                render={props => <TaskDetail currentUser={currentUser}
                                                             configuration={configuration}
+                                                            products={products}
                                                             {...props}/>}/>
                         <Route path="/help"
                                render={props => <Help currentUser={currentUser} {...props}/>}/>
