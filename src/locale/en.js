@@ -5,7 +5,7 @@
 // Provide the values as: I18n.t("key", {name: "John Doe"})
 import I18n from "i18n-js";
 
-export const randomCrmIdentifier = () => Math.floor(Math.random() * 99999) + 1;
+export const randomCrmIdentifier = () => ("0000" + Math.floor(Math.random() * 99999) + 1).slice(-5);
 
 I18n.translations.en = {
     code: "EN",
@@ -167,7 +167,7 @@ I18n.translations.en = {
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         dienstafname: "Dienstafname",
-        dienstafname_info: "The dienstafname of the service - must be valid GUID like 76C5FB05-6D86-4BD2-A56C-124F7F33B1F9",
+        dienstafname_info: "The dienstafname of the service - must be valid GUID like 6769d05f-3b11-e511-80d0-005056956c1a",
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
@@ -194,6 +194,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
+        subscription: "Subscription",
+        subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
@@ -234,6 +236,10 @@ I18n.translations.en = {
             device_port_name: "Device port name for SSP site B",
             device_port_name_info: "Port name to configure on the physical device",
         },
+        subscription_id1: "Subscription",
+        subscription_id1_info: "The first subscription to use",
+        subscription_id2: "Subscription",
+        subscription_id2_info: "The second subscription to use"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -536,7 +542,7 @@ I18n.translations.en = {
         new: "New Task",
         last_step: "Current step",
         last_status: "Status",
-        workflow : "Workflow",
+        workflow: "Workflow",
         started_at: "Started",
         failed_reason: "Failed reason",
         last_modified_at: "Last modified",
@@ -577,7 +583,11 @@ I18n.translations.en = {
         flash: {
             create: "Created task for workflow {{name}}",
             update: "Resumed task for workflow {{name}}"
-        },
+        }
+    },
+    subscription_select: {
+        placeholder: "Search and select a subscription",
+        select_product: "First select a Product",
     },
     cache: {
         name: {

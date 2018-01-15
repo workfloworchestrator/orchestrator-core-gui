@@ -25,6 +25,7 @@ import {lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
+import SubscriptionsSelect from "./SubscriptionsSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -43,6 +44,7 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
+            randomCrm: randomCrmIdentifier()
         };
     }
 
@@ -163,7 +165,7 @@ export default class UserInputForm extends React.Component {
 
     renderInputInfoLabel = name => {
         if (name.indexOf("crm_port_id") > -1) {
-            return <em>{I18n.t(`process.${name}_info`, {example: randomCrmIdentifier()})}</em>;
+            return <em>{I18n.t(`process.${name}_info`, {example: this.state.randomCrm})}</em>;
         }
         return <em>{I18n.t(`process.${name}_info`)}</em>;
     };
@@ -216,7 +218,8 @@ export default class UserInputForm extends React.Component {
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
-                                           organisation={value}/>;
+                                           organisation={value}
+                                           disabled={userInput.readonly}/>;
             case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
@@ -290,6 +293,11 @@ export default class UserInputForm extends React.Component {
                                      availableMSPs={this.props.multiServicePoints}
                                      organisations={this.props.organisations}
                                      onChange={this.changeNestedInput(name)}/>;
+            case "subscription":
+                const productIdForSubscription = this.findValueFromInputStep(userInput.product_key);
+                return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
+                                            productId={productIdForSubscription}
+                                            subscription={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

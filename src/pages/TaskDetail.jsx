@@ -139,7 +139,7 @@ export default class TaskDetail extends React.PureComponent {
     };
 
     renderTabContent = (renderStepForm, selectedTab, task, step, stepUserInput) => {
-        const {history} = this.props;
+        const {history, products} = this.props;
 
         if (selectedTab === "task") {
             return <section className="card">
@@ -154,7 +154,7 @@ export default class TaskDetail extends React.PureComponent {
                 </section>
                 <UserInputForm locationCodes={[]}
                                stepUserInput={stepUserInput}
-                               products={[]}
+                               products={products}
                                organisations={[]}
                                history={history}
                                multiServicePoints={[]}
@@ -201,4 +201,5 @@ TaskDetail.propTypes = {
     history: PropTypes.object.isRequired,
     currentUser: PropTypes.object.isRequired,
     configuration: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired
 };
