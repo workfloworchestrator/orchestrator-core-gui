@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {initialWorkflowInput, startProcess, subscriptions_by_tag, validation} from "../api";
+import {initialWorkflowInput, startProcess, subscriptionsByTag, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
@@ -34,7 +34,7 @@ export default class NewProcess extends React.Component {
                 });
             }
         }
-        subscriptions_by_tag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
+        subscriptionsByTag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
     };
 
     validSubmit = (stepUserInput) => {

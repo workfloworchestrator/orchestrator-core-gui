@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {process, resumeProcess, subscriptions_by_tag} from "../api";
+import {process, resumeProcess, subscriptionsByTag} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
@@ -67,7 +67,7 @@ export default class ProcessDetail extends React.PureComponent {
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([subscriptionIdFromProcessId(processInstance.id), subscriptions_by_tag("MSP")])
+                Promise.all([subscriptionIdFromProcessId(processInstance.id), subscriptionsByTag("MSP")])
                 .then(res => {
                     this.setState({subscriptionProcessLink: res[0], multiServicePoints: res[1]});
                 });

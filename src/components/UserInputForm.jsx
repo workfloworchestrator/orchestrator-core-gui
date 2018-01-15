@@ -24,6 +24,7 @@ import {lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
+import SubscriptionsSelect from "./SubscriptionsSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -274,6 +275,11 @@ export default class UserInputForm extends React.Component {
                                      availableMSPs={this.props.multiServicePoints}
                                      organisations={this.props.organisations}
                                      onChange={this.changeNestedInput(name)}/>;
+            case "subscription":
+                const productIdForSubscription = this.findValueFromInputStep(userInput.product_key);
+                return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
+                                            productId={productIdForSubscription}
+                                            subscription={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

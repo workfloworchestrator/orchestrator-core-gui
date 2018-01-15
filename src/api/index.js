@@ -151,9 +151,14 @@ export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptions_by_tag(tag) {
+export function subscriptionsByTag(tag) {
     return fetchJson(`subscriptions/tag/${tag}`);
 }
+
+export function subscriptionsByProductId(productId) {
+    return fetchJson(`subscriptions/product/${productId}`);
+}
+
 
 export function organisations() {
     return fetchJson("crm/organisations");

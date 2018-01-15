@@ -234,6 +234,10 @@ I18n.translations.en = {
             device_port_name: "Device port name for SSP site B",
             device_port_name_info: "Port name to configure on the physical device",
         },
+        subscription_id1: "Subscription",
+        subscription_id1_info: "The first subscription to use",
+        subscription_id2: "Subscription",
+        subscription_id2_info: "The second subscription to use"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -536,7 +540,7 @@ I18n.translations.en = {
         new: "New Task",
         last_step: "Current step",
         last_status: "Status",
-        workflow : "Workflow",
+        workflow: "Workflow",
         started_at: "Started",
         failed_reason: "Failed reason",
         last_modified_at: "Last modified",
@@ -577,7 +581,11 @@ I18n.translations.en = {
         flash: {
             create: "Created task for workflow {{name}}",
             update: "Resumed task for workflow {{name}}"
-        },
+        }
+    },
+    subscription_select: {
+        placeholder: "Search and select a subscription",
+        select_product: "First select a Product",
     },
     cache: {
         name: {
