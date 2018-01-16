@@ -80,27 +80,27 @@
             .checkbox {
                 margin-top: 48px;
             }
-            &.process-link {
-                a {
-                    margin-top: 15px;
-                }
-                i.fa {
-                    margin-right: 25px;
-                }
-                span.no_process_link {
-                    display: block;
-                    margin-top: 15px;
-                    color: $orange;
-                }
-            }
-            .subscription-link {
-                margin-top: 15px;
-                i.fa {
-                    margin-right: 25px;
-                }
-            }
         }
 
+    }
+    section.process-link {
+        a {
+            margin-top: 15px;
+        }
+        i.fa {
+            margin-right: 25px;
+        }
+        span.no_process_link {
+            display: block;
+            margin-top: 15px;
+            color: $orange;
+        }
+    }
+    .subscription-link {
+        margin-top: 15px;
+        i.fa {
+            margin-right: 25px;
+        }
     }
 }
 

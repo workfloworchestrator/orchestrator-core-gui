@@ -1,10 +1,7 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
-    absent,
-    ims_circuit_id,
-    ims_port_id,
-    parent_subscriptions,
+    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
 
@@ -198,7 +195,7 @@ export function imsService(type, identifier) {
             promise = Promise.resolve({})
     }
     return promise
-        // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
+    // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
         .then(json => ({type: type, json: json}))
         .catch(err => Promise.resolve({type: absent, requestedType: type, identifier: identifier}));
 }
@@ -342,11 +339,13 @@ export function config() {
 }
 
 export function redirectToAuthorizationServer() {
+    const re = /http[s]?:\/\/?[^/\s]+\/(.*)/;
+    const res = re.exec(window.location.href);
+    const state = res ? res[1] : "/";
     config().then(conf => {
         window.location.replace(
             `${conf.oauthAuthorizeUrl}?response_type=token&client_id=${conf.clientId}` +
-            `&scope=${conf.scope.join("+")}&redirect_uri=${conf.redirectUri}`);
-
+            `&scope=${conf.scope.join("+")}&redirect_uri=${conf.redirectUri}&state=${btoa("/" + state)}`);
     });
 
 }
