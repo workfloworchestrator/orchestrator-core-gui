@@ -35,23 +35,33 @@ export default class DienstafnameValidation extends React.Component {
         return <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>;
     }
 
-    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription);
+    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription[0]);
 
     renderSubscriptionTable(subscriptions) {
         if (subscriptions.length !== 0) {
             return (
                 <table className="subscriptions">
                     <thead>
-                    <tr><th className="subscription">
-                        <span>{I18n.t("dienstafname.subscription")}</span>
-                    </th></tr>
+                    <tr>
+                        <th className="subscription"><span>{I18n.t("dienstafname.subscription")}</span></th>
+                        <th className="subscription"><span>{I18n.t("dienstafname.description")}</span></th>
+                        <th className="subscription"><span>{I18n.t("dienstafname.statuscode")}</span></th>
+                    </tr>
                     </thead>
                     <tbody>
                     {subscriptions.map(subscription =>
                         <tr key={subscription} onClick={this.showSubscription(subscription)}>
                             <td data-label={I18n.t("dienstafname.subscription")}
                                 className="subscription">
-                                <span>{subscription}</span>
+                                <span>{subscription[0]}</span>
+                            </td>
+                            <td data-label={I18n.t("dienstafname.description")}
+                                className="subscription">
+                                <span>{subscription[1]}</span>
+                            </td>
+                            <td data-label={I18n.t("dienstafname.statuscode")}
+                                className="subscription">
+                                <span>{subscription[2]}</span>
                             </td>
                         </tr>
                     )}

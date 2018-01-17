@@ -416,7 +416,8 @@ I18n.translations.en = {
         statuscode: "Status",
         dienstcode: "Dienstcode",
         organisatiecode: "Code",
-        organisatienaam: "Organisation"
+        organisatienaam: "Organisation",
+        description: "Description"
     },
     contact_persons: {
         email: "Email",
