@@ -46,6 +46,7 @@ export default class DienstafnameValidation extends React.Component {
                         <th className="subscription"><span>{I18n.t("dienstafname.subscription")}</span></th>
                         <th className="subscription"><span>{I18n.t("dienstafname.description")}</span></th>
                         <th className="subscription"><span>{I18n.t("dienstafname.statuscode")}</span></th>
+                        <th className="subscription"><span>{I18n.t("metadata.products.name")}</span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,10 @@ export default class DienstafnameValidation extends React.Component {
                             <td data-label={I18n.t("dienstafname.statuscode")}
                                 className="subscription">
                                 <span>{subscription[2]}</span>
+                            </td>
+                            <td data-label={I18n.t("metadata.products.name")}
+                                className="subscription">
+                                <span>{subscription[3]}</span>
                             </td>
                         </tr>
                     )}
