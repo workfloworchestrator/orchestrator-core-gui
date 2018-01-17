@@ -1,7 +1,7 @@
 import {isEmpty} from "./Utils";
 
 export function lookupValueFromNestedState(key, state) {
-    if (isEmpty(state)) {
+    if (isEmpty(state) || isEmpty(key)) {
         //It is contract to return null as values from process state may not yet be initialized
         return null;
     }
