@@ -9,7 +9,6 @@ import OrganisationSelect from "./OrganisationSelect";
 import MultiServicePointSelect from "./MultiServicePointSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
-import BandwidthSelect from "./BandwidthSelect";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import FreePortSelect from "./FreePortSelect";
@@ -200,7 +199,9 @@ export default class UserInputForm extends React.Component {
                                                  className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
-                return <BandwidthSelect name={name} value={this.userInputValue(name)} onChange={this.changeSelectInput(name)} />;
+                return <input type="number" id={name} name={name}
+                              value={value || ""}
+                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
