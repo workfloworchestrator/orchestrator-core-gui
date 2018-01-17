@@ -26,7 +26,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.state = {
             subscription: {instances: []},
             product: {},
-            subscriptionProcesses: {},
+            subscriptionProcesses: [],
             imsServices: [],
             subscriptions: [],
             notFound: false,
@@ -286,20 +286,16 @@ export default class SubscriptionDetail extends React.PureComponent {
         const displaysubscriptionProcesses = !isEmpty(subscriptionProcesses);
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
-            <div className="form-container-parent">
-                <section className="form-container">
-                    {displaysubscriptionProcesses &&
+                    {subscriptionProcesses.map((ps, index) =>
                     <section className="process-link">
-                        {subscriptionProcesses.map((ps, index) =>
                             <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
                                 <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
-                        )}
-                    </section>}
+
+                    </section>
+                    )}
                     {!displaysubscriptionProcesses && <section className="process-link">
                         <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
                     </section>}
-                </section>
-            </div>
         </section>
     };
 

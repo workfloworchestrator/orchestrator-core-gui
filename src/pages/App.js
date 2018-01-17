@@ -45,6 +45,7 @@ class App extends React.PureComponent {
             products: [],
             error: false,
             errorDialogOpen: false,
+            redirectState: "/processes",
             errorDialogAction: () => {
                 this.setState({errorDialogOpen: false});
             }
@@ -91,6 +92,10 @@ class App extends React.PureComponent {
         const accessTokenMatch = hash.match(/access_token=(.*?)&/);
         if (accessTokenMatch) {
             localStorage.setItem("access_token", accessTokenMatch[1]);
+            const stateMatch = hash.match(/state=(.*?)&/);
+            if (stateMatch) {
+                this.setState({redirectState: atob(stateMatch[1])})
+            }
             this.fetchUser();
         } else if (window.location.href.indexOf("error") > -1) {
             this.setState({loading: false});
@@ -148,7 +153,7 @@ class App extends React.PureComponent {
             return null; // render null when app is not ready yet for static spinner
         }
 
-        const {currentUser, configuration, organisations, products, locationCodes} = this.state;
+        const {currentUser, configuration, organisations, products, locationCodes, redirectState} = this.state;
 
         return (
             <Router>
@@ -161,7 +166,7 @@ class App extends React.PureComponent {
                                      close={errorDialogAction}/>
                     </div>
                     <Switch>
-                        <Route exact path="/oauth2/callback" render={() => <Redirect to="/processes"/>}/>
+                        <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState}/>}/>
                         <Route exact path="/" render={() => <Redirect to="/processes"/>}/>
                         <ProtectedRoute path="/processes"
                                         currentUser={currentUser} configuration={configuration}
