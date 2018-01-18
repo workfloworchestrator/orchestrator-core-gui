@@ -73,7 +73,8 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
 
 
     renderSubscriptionInstanceValue = (val, index) => <div key={index}>
-        <label className="title">{val.resource_type.resource_type}</label>
+        <label
+            className="title">{val.resource_type.resource_type}{val.instance_label ? ` : ${val.instance_label}` : ""}</label>
         <input type="text" readOnly={true} value={val.value}/>
     </div>;
 

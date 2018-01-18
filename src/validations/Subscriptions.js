@@ -1,11 +1,8 @@
 import {isEmpty} from "../utils/Utils";
 
 export function subscriptionInstanceValues(subscription) {
-    return subscription.instances.reduce((acc, instance) => acc.concat(instance.values), []);
-}
-
-export function subscriptionInstanceValuesWithLabels(subscription) {
-    return subscription.instances.reduce((acc, instance) => acc.concat(instance.values.map((item, index) => Object.assign(item, {instance_label: instance.label}))), []);
+    return subscription.instances.reduce((acc, instance) =>
+        acc.concat(instance.values.map(item => ({...item, instance_label: instance.label}))), []);
 }
 
 export function hasResourceType(subscription, resourceType) {

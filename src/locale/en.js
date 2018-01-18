@@ -349,6 +349,8 @@ I18n.translations.en = {
         status: "Status",
         start_date: "Start date",
         end_date: "End date",
+        start_date_epoch: "Start date",
+        end_date_epoch: "End date",
         name: "Name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
