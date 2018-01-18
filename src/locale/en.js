@@ -188,6 +188,7 @@ I18n.translations.en = {
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         nms_service_updated: "NMS Service has been updated",
+        nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {

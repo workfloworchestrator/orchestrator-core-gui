@@ -173,6 +173,10 @@ export function usedVlans(subscriptionId) {
     return fetchJson(`ims/vlans/${subscriptionId}`)
 }
 
+export function usedVlansFiltered(subscriptionId, imsCircuitId) {
+    return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+}
+
 export function subscriptions_by_subscription_port_id(subscription_id) {
     return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
         return {type: parent_subscriptions, json: json}

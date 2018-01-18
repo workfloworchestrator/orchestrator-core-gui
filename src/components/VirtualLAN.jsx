@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {usedVlans} from "../api"
+import {usedVlans, usedVlansFiltered} from "../api"
 import "react-select/dist/react-select.css";
 import {isEmpty} from "../utils/Utils";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -18,9 +18,9 @@ export default class VirtualLAN extends React.PureComponent {
 
     componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
         if (subscriptionIdMSP) {
-            usedVlans(subscriptionIdMSP).then(result =>
-                this.setState({usedVlans: result})
-            );
+            const {imsCircuitId} = this.props;
+            const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
+            promise.then(result => this.setState({usedVlans: result}));
         }
     };
 
@@ -39,13 +39,18 @@ export default class VirtualLAN extends React.PureComponent {
             //semantically invalid so we don't validate against the already used ports
             return [];
         }
+        const numbers = this.getAllNumbersForVlanRange(vlanRange);
+        return numbers.filter(num => usedVlans.some(used => used.length > 1 ? num >= used[0] && num <= used[1] : num === used[0]));
+    };
+
+    getAllNumbersForVlanRange = vlanRange => {
         const numbers = vlanRange.replace(/ /g, "").split(",").reduce((acc, val) => {
             const boundaries = val.split("-");
-            const max = parseInt(boundaries[boundaries.length-1], 10);
+            const max = parseInt(boundaries[boundaries.length - 1], 10);
             const min = parseInt(boundaries[0], 10);
-            return acc.concat(Array.from(new Array(max - min + 1), (x,i) => min + i))
-        },[]);
-        return numbers.filter(num => usedVlans.some(used => used.length > 1 ? num >= used[0] && num <= used[1] : num === used[0]));
+            return acc.concat(Array.from(new Array(max - min + 1), (x, i) => min + i))
+        }, []);
+        return numbers;
     };
 
     validateUsedVlans = e => {
@@ -81,5 +86,6 @@ VirtualLAN.propTypes = {
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
     vlan: PropTypes.string,
-    subscriptionIdMSP: PropTypes.string
+    subscriptionIdMSP: PropTypes.string,
+    imsCircuitId: PropTypes.string
 };

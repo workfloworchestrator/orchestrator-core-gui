@@ -170,6 +170,9 @@ export default class UserInputForm extends React.Component {
     };
 
     findValueFromInputStep = relatedKey => {
+        if (isEmpty(relatedKey)) {
+            return null;
+        }
         const stepUserInput = this.state.stepUserInput;
         const relatedUserInput = stepUserInput.find(input => input.name === relatedKey);
         return relatedUserInput ? relatedUserInput.value : null;
@@ -205,8 +208,10 @@ export default class UserInputForm extends React.Component {
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
+                const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
-                                   subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}/>
+                                   subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
+                                   imsCircuitId={imsCircuitId}/>
             case "msp" :
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
@@ -219,7 +224,8 @@ export default class UserInputForm extends React.Component {
             case "product" :
                 return <ProductSelect products={this.props.products}
                                       onChange={this.changeSelectInput(name)}
-                                      product={value}/>;
+                                      product={value}
+                                      disabled={userInput.readonly}/>;
             case "ssp_product" :
                 return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
                                       onChange={this.changeSelectInput(name)}
