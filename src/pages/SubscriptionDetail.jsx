@@ -12,7 +12,7 @@ import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 import {
     absent, hasResourceType, ims_circuit_id, ims_port_id, isTerminatable, nms_service_id, parent_subscriptions,
-    port_subscription_id, subscriptionInstanceValues
+    port_subscription_id, subscriptionInstanceValues, subscriptionInstanceValuesWithLabels
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -222,12 +222,12 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderSubscriptionInstanceValue = (val, index) => <div key={index}>
-        <label className="title">{val.resource_type.resource_type}</label>
+        <label className="title">{val.resource_type.resource_type}{val.instance_label ? ' : ' + val.instance_label : ''}</label>
         <input type="text" readOnly={true} value={val.value}/>
     </div>;
 
     renderSubscriptionResourceTypes = subscription => {
-        const values = subscriptionInstanceValues(subscription);
+        const values = subscriptionInstanceValuesWithLabels(subscription);
         if (isEmpty(values)) {
             return null;
         }
