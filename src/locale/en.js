@@ -454,7 +454,7 @@ I18n.translations.en = {
             searchPlaceHolder: "Search for Products",
             new: "New Product",
             name: "Name",
-            name_info: "The name of this Product. Note that this name is used in the workflow code. Do not change this without syncing the code",
+            name_info: "The name of this Product.",
             description: "Description",
             description_info: "Free formatted description of this Product",
             tag: "Tag",
@@ -494,7 +494,7 @@ I18n.translations.en = {
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
-            duplicate_name: "This name is already taken. Product names need to be unique"
+            duplicate_name: "This name is already taken. Product names need to be unique."
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
