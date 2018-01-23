@@ -643,6 +643,9 @@ I18n.translations.en = {
         msp: "Multi-Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
+    },
+    bandwidth: {
+        invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
     }
 };
 

@@ -20,11 +20,12 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleMSPs from "./MultipleMSPs";
-import {lookupValueFromNestedState} from "../utils/NestedState";
+import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
+import BandwidthSelect from "./BandwidthSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -169,19 +170,11 @@ export default class UserInputForm extends React.Component {
         return <em>{I18n.t(`process.${name}_info`)}</em>;
     };
 
-    findValueFromInputStep = relatedKey => {
-        if (isEmpty(relatedKey)) {
-            return null;
-        }
-        const stepUserInput = this.state.stepUserInput;
-        const relatedUserInput = stepUserInput.find(input => input.name === relatedKey);
-        return relatedUserInput ? relatedUserInput.value : null;
-    } ;
-
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
         const currentState = this.props.currentState;
+        const stepUserInput = this.state.stepUserInput;
         switch (userInput.type) {
             case "string" :
             case "guid":
@@ -202,12 +195,12 @@ export default class UserInputForm extends React.Component {
                                                  className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
-                return <input type="number" id={name} name={name}
-                              value={value || ""}
-                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+                return <BandwidthSelect stepUserInput={stepUserInput} name={name} onBlur={this.validateUserInput(name)}
+                                        onChange={this.changeStringInput(name)} value={value || ""}
+                                        portsKey={userInput.ports_key}/>;
             case "vlan" :
             case "vlan_range" :
-                const subscriptionIdMSP = this.findValueFromInputStep(userInput.msp_key);
+                const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
                 const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
@@ -232,7 +225,7 @@ export default class UserInputForm extends React.Component {
                                       product={value}/>;
             case "contact_persons" :
                 const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
-                    this.findValueFromInputStep(userInput.organisation_key);
+                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
                     organisationId={organisationId}
@@ -246,7 +239,7 @@ export default class UserInputForm extends React.Component {
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
-                const productId = this.findValueFromInputStep(userInput.product_key);
+                const productId = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={value}
                                                               productId={productId}/>;
@@ -296,7 +289,7 @@ export default class UserInputForm extends React.Component {
                                      organisations={this.props.organisations}
                                      onChange={this.changeNestedInput(name)}/>;
             case "subscription":
-                const productIdForSubscription = this.findValueFromInputStep(userInput.product_key);
+                const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
                                             subscription={value}/>;
