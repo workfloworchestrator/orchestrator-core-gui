@@ -54,7 +54,7 @@ export default class BandwidthSelect extends React.PureComponent {
     componentWillReceiveProps(nextProps) {
         const next = this.portSpeedInputValues(nextProps).map(i => this.portSpeed(i, true));
         const {portIdentifiers} = this.state;
-        if (next.length === portIdentifiers.length && next.every((v, i) => v === portIdentifiers[i])) {
+        if (portIdentifiers.join() === next.join()) {
             //equality
             return;
         }

@@ -297,7 +297,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
                     {subscriptionProcesses.map((ps, index) =>
-                    <section className="process-link">
+                    <section key={index} className="process-link">
                             <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
                                 <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
 
