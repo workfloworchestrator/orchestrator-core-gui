@@ -20,6 +20,16 @@ test("Lookup non-existing nested key in process state", () => {
     expect(value).toBe(null)
 });
 
+test("Lookup nested key in flattened process state", () => {
+    const value = lookupValueFromNestedState("msp.location_code", {"msp.location_code":"value"});
+    expect(value).toBe(null)
+});
+
+test("Lookup nested key in non-flattened process state", () => {
+    const value = lookupValueFromNestedState("msp.location_code", {"msp":{location_code:"value"}});
+    expect(value).toBe(value)
+});
+
 test("Lookup existing name in user input", () => {
     const value = findValueFromInputStep("name", [{name: "name", value:"value"}]);
     expect(value).toBe("value")
@@ -39,3 +49,4 @@ test("Lookup non-existing nested name in user input", () => {
     const value = findValueFromInputStep("very.deep.nested.name", [{name: "nope", value:"value"}]);
     expect(value).toBe(null)
 });
+
