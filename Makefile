@@ -14,4 +14,3 @@ clean:
 	rm -rf target/*
 
 .PHONY: all clean run install
-
