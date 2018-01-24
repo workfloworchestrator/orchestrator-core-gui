@@ -4,7 +4,12 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 
 export default function LocationCodeSelect({onChange, locationCode, locationCodes, disabled}) {
-
+    function compareLocationCodeToUpperCase(lc) {
+	return lc.toUpperCase() === locationCode;
+    }
+    if (locationCodes.includes(locationCode) !== true) {
+	    locationCode = locationCodes.find(compareLocationCodeToUpperCase);
+    }
     return (
         <Select className="select-locationcode"
                 onChange={onChange}
