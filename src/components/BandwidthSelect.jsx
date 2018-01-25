@@ -30,8 +30,9 @@ export default class BandwidthSelect extends React.PureComponent {
     componentDidMount = (props = this.props) => {
         const inputs = this.portSpeedInputValues(props);
         if (inputs.length > 0) {
-            const promises = inputs.map(this.portSpeed).reduce((a, b) => a.concat(b), []);
-            Promise.all(promises)
+            const promises = inputs.map(i => this.portSpeed(i));
+            const flattened = promises.reduce((a, b) => a.concat(b), []);
+            Promise.all(flattened)
                 .then(results => {
                     const lowestPortSpeed = Math.min(...results);
                     const toHigh = this.toHighBandwidth(lowestPortSpeed, this.props.value);
