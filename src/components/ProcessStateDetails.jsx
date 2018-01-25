@@ -99,9 +99,11 @@ export default class ProcessStateDetails extends React.PureComponent {
         }
         return <section className="subscription-link">
             {subscriptionProcesses.map((ps, index) =>
-                <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
-                    <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
-                </NavLink>
+                <div>
+                    <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
+                        <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
+                    </NavLink>
+                </div>
             )}
         </section>
     };
