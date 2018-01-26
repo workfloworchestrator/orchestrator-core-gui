@@ -37,7 +37,7 @@ release image master:
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_MASTER_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_MASTER_IMAGE
   tags:
     - docker-ct-builder-ext
   only:
