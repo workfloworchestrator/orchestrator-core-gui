@@ -141,8 +141,10 @@ export default class ResourceType extends React.Component {
     validateProperty = name => e => {
         const value = e.target.value;
         const errors = {...this.state.errors};
+        const {resourceType} = this.state;
         if (name === "resource_type") {
-            const duplicate = this.state.resourceTypes.some(rt => rt.resource_type === value);
+            const nbr = this.state.resourceTypes.filter(p => p.resource_type === value).length;
+            const duplicate = resourceType.resource_type_id ? nbr === 2 : nbr === 1;
             errors[name] = duplicate;
             this.setState({duplicateName: duplicate});
         }

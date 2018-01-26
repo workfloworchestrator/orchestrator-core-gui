@@ -181,8 +181,8 @@ export default class Subscriptions extends React.PureComponent {
     };
 
     renderSubscriptionsTable(subscriptions, sorted) {
-        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date_epoch",
-            "end_date_epoch", "noop"];
+        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date",
+            "end_date", "noop"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>

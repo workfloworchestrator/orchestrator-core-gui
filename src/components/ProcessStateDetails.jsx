@@ -99,9 +99,11 @@ export default class ProcessStateDetails extends React.PureComponent {
         }
         return <section className="subscription-link">
             {subscriptionProcesses.map((ps, index) =>
-            <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
-                <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
-            </NavLink>
+                <div>
+                    <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
+                        <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
+                    </NavLink>
+                </div>
             )}
         </section>
     };
@@ -151,7 +153,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="state-delta">
                     <table>
                         <tbody>
-                        {Object.keys(json).map((key,index) =>
+                        {Object.keys(json).map((key, index) =>
                             <tr key={key}>
                                 <td className="key">{key}</td>
                                 <td className="value">{this.displayStateValue(json[key])}</td>

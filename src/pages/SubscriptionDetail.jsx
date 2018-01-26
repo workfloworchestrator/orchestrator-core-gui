@@ -3,7 +3,10 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import {
-    imsService, processSubscriptionsBySubscriptionId, productById, subscriptions_by_subscription_port_id,
+    imsService,
+    processSubscriptionsBySubscriptionId,
+    productById,
+    subscriptions_by_subscription_port_id,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -11,8 +14,15 @@ import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 import {
-    absent, hasResourceType, ims_circuit_id, ims_port_id, isTerminatable, nms_service_id, parent_subscriptions,
-    port_subscription_id, subscriptionInstanceValues
+    absent,
+    hasResourceType,
+    ims_circuit_id,
+    ims_port_id,
+    isTerminatable,
+    nms_service_id,
+    parent_subscriptions,
+    port_subscription_id,
+    subscriptionInstanceValues
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -222,7 +232,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderSubscriptionInstanceValue = (val, index) => <div key={index}>
-        <label className="title">{val.resource_type.resource_type}</label>
+        <label className="title">{val.resource_type.resource_type}{val.instance_label ? ` : ${val.instance_label}` : ""}</label>
         <input type="text" readOnly={true} value={val.value}/>
     </div>;
 
@@ -287,7 +297,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
                     {subscriptionProcesses.map((ps, index) =>
-                    <section className="process-link">
+                    <section key={index} className="process-link">
                             <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
                                 <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
 

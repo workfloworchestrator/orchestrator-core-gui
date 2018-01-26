@@ -168,8 +168,10 @@ export default class Product extends React.Component {
     validateProperty = name => e => {
         const value = e.target.value;
         const errors = {...this.state.errors};
+        const {product} = this.state;
         if (name === "name") {
-            const duplicate = this.state.products.some(p => p.name === value);
+            const nbr = this.state.products.filter(p => p.name === value).length;
+            const duplicate = product.product_id ? nbr === 2 : nbr === 1;
             errors[name] = duplicate;
             this.setState({duplicateName: duplicate});
         }

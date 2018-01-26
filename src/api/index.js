@@ -173,6 +173,10 @@ export function usedVlans(subscriptionId) {
     return fetchJson(`ims/vlans/${subscriptionId}`)
 }
 
+export function usedVlansFiltered(subscriptionId, imsCircuitId) {
+    return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+}
+
 export function subscriptions_by_subscription_port_id(subscription_id) {
     return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
         return {type: parent_subscriptions, json: json}
@@ -236,6 +240,14 @@ export function initialWorkflowInput(workflowKey) {
 
 export function processes() {
     return fetchJson("processes");
+}
+
+export function fetchPortSpeedByProduct(productId) {
+    return fetchJson(`fixed_inputs/port_speed_by_product_id/${productId}`);
+}
+
+export function fetchPortSpeedBySubscription(subscriptionId) {
+    return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
 }
 
 export function deleteSubscription(subscriptionId) {

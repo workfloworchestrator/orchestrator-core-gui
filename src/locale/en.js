@@ -188,6 +188,7 @@ I18n.translations.en = {
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         nms_service_updated: "NMS Service has been updated",
+        nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
@@ -346,6 +347,8 @@ I18n.translations.en = {
         insync: "In sync",
         product_name: "Product",
         status: "Status",
+        start_date: "Start date",
+        end_date: "End date",
         start_date_epoch: "Start date",
         end_date_epoch: "End date",
         name: "Name",
@@ -451,7 +454,7 @@ I18n.translations.en = {
             searchPlaceHolder: "Search for Products",
             new: "New Product",
             name: "Name",
-            name_info: "The name of this Product. Note that this name is used in the workflow code. Do not change this without syncing the code",
+            name_info: "The name of this Product.",
             description: "Description",
             description_info: "Free formatted description of this Product",
             tag: "Tag",
@@ -491,7 +494,7 @@ I18n.translations.en = {
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
-            duplicate_name: "This name is already taken. Product names need to be unique"
+            duplicate_name: "This name is already taken. Product names need to be unique."
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -640,6 +643,9 @@ I18n.translations.en = {
         msp: "Multi-Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
+    },
+    bandwidth: {
+        invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
     }
 };
 
