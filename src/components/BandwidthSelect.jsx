@@ -74,13 +74,13 @@ export default class BandwidthSelect extends React.PureComponent {
     toHighBandwidth = (lowestPortSpeed, value) => lowestPortSpeed && !isEmpty(value) && parseInt(value, 10) > parseInt(lowestPortSpeed, 10);
 
     render() {
-        const {name, value, onChange} = this.props;
+        const {name, value, onChange, disabled} = this.props;
         const {exceedsPortSpeed, lowestPortSpeed} = this.state;
         return (
             <div>
                 <input type="number" id={name} name={name}
                        value={value}
-                       onChange={onChange} onBlur={this.validateMaxBandwidth}/>
+                       onChange={onChange} onBlur={this.validateMaxBandwidth} disabled={disabled}/>
                 {exceedsPortSpeed && <em className="error">{I18n.t("bandwidth.invalid", {max: lowestPortSpeed})}</em>}
             </div>
         );
@@ -94,7 +94,8 @@ BandwidthSelect.propTypes = {
     value: PropTypes.string,
     portsKey: PropTypes.array,
     onChange: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired
+    onBlur: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
 };
 
 

@@ -14,7 +14,8 @@ export default function ProductSelect({onChange, product, products, disabled}) {
                     return {value: aProduct.product_id,
                         label: aProduct.name,
                         workflow: aProduct.create_subscription_workflow_key,
-                        tag: aProduct.tag
+                        tag: aProduct.tag,
+                        productId: aProduct.product_id
                     };
                 })}
                 value={product}

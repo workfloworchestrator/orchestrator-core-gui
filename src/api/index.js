@@ -234,8 +234,8 @@ export function dienstafnameSubscriptionCrossCheck() {
     return fetchJson("subscriptions/dienstafname-subscriptions")
 }
 
-export function initialWorkflowInput(workflowKey) {
-    return fetchJson(`workflows/${workflowKey}`)
+export function initialWorkflowInput(workflowKey, productId) {
+    return fetchJson(`workflows/${workflowKey}/${productId}`)
 }
 
 export function processes() {

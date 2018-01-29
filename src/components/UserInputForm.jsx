@@ -197,7 +197,7 @@ export default class UserInputForm extends React.Component {
             case "bandwidth":
                 return <BandwidthSelect stepUserInput={stepUserInput} name={name} onBlur={this.validateUserInput(name)}
                                         onChange={this.changeStringInput(name)} value={value || ""}
-                                        portsKey={userInput.ports_key}/>;
+                                        portsKey={userInput.ports_key} disabled={userInput.readonly}/>;
             case "vlan" :
             case "vlan_range" :
                 const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
