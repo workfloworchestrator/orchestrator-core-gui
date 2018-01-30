@@ -234,8 +234,8 @@ export function dienstafnameSubscriptionCrossCheck() {
     return fetchJson("subscriptions/dienstafname-subscriptions")
 }
 
-export function initialWorkflowInput(workflowKey) {
-    return fetchJson(`workflows/${workflowKey}`)
+export function initialWorkflowInput(workflowKey, productId) {
+    return productId ? fetchJson(`workflows/${workflowKey}/${productId}`) : fetchJson(`workflows/${workflowKey}`)
 }
 
 export function processes() {
@@ -248,6 +248,10 @@ export function fetchPortSpeedByProduct(productId) {
 
 export function fetchPortSpeedBySubscription(subscriptionId) {
     return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
+}
+
+export function fetchServiceSpeedByProduct(productId) {
+    return fetchJson(`fixed_inputs/service_speed_by_product_id/${productId}`);
 }
 
 export function deleteSubscription(subscriptionId) {

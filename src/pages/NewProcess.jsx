@@ -67,7 +67,7 @@ export default class NewProcess extends React.Component {
         this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
             this.setState({product: option});
             if (option) {
-                Promise.all([validation(option.value), initialWorkflowInput(option.workflow)]).then(result => {
+                Promise.all([validation(option.value), initialWorkflowInput(option.workflow, option.productId)]).then(result => {
                     const [productValidation, userInput] = result;
                     const stepUserInput = userInput.filter(input => input.name !== "product");
                     const {preselectedOrganisation, preselectedDienstafname} = this.props;

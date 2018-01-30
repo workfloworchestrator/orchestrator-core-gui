@@ -112,7 +112,7 @@ export default class Subscriptions extends React.PureComponent {
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
-        return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
+        return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toString().toLowerCase()) : aSafe - bSafe;
     };
 
     sort = name => e => {
