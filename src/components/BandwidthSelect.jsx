@@ -71,7 +71,9 @@ export default class BandwidthSelect extends React.PureComponent {
         this.props.onBlur(e);
     };
 
-    toHighBandwidth = (lowestPortSpeed, value) => !isEmpty(lowestPortSpeed) && !isEmpty(value) && parseInt(value, 10) > parseInt(lowestPortSpeed, 10);
+    toHighBandwidth = (lowestPortSpeed, value) => {
+        return !isEmpty(lowestPortSpeed) && !isEmpty(value) && parseInt(value, 10) > parseInt(lowestPortSpeed, 10);
+    };
 
     render() {
         const {name, value, onChange, disabled} = this.props;

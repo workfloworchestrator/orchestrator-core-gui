@@ -6,18 +6,18 @@ import "react-select/dist/react-select.css";
 import "./ProductSelect.css";
 
 export default function ProductSelect({onChange, product, products, disabled}) {
-
+    const options = products.map(aProduct => (
+        {value: aProduct.product_id,
+            label: aProduct.name,
+            workflow: aProduct.create_subscription_workflow_key,
+            tag: aProduct.tag,
+            productId: aProduct.product_id,
+            fixed_inputs: aProduct.fixed_inputs
+        }));
     return (
-        <Select className="select-product"
+        <Select className={`select-product ${options.length > 15 ? 'large' : ''}`}
                 onChange={onChange}
-                options={products.map(aProduct => {
-                    return {value: aProduct.product_id,
-                        label: aProduct.name,
-                        workflow: aProduct.create_subscription_workflow_key,
-                        tag: aProduct.tag,
-                        productId: aProduct.product_id
-                    };
-                })}
+                options={options}
                 value={product}
                 searchable={true}
                 placeholder="Search and select a product..."

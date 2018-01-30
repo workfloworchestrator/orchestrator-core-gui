@@ -173,7 +173,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const currentState = this.props.currentState;
+        const {currentState} = this.props;
         const stepUserInput = this.state.stepUserInput;
         switch (userInput.type) {
             case "string" :
@@ -206,6 +206,7 @@ export default class UserInputForm extends React.Component {
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
             case "msp" :
+
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={this.props.multiServicePoints}
                                                 organisations={this.props.organisations}/>;
@@ -220,7 +221,23 @@ export default class UserInputForm extends React.Component {
                                       product={value}
                                       disabled={userInput.readonly}/>;
             case "ssp_product" :
-                return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
+                const bandwidth = findValueFromInputStep("bandwidth", stepUserInput) ||
+                    lookupValueFromNestedState("bandwidth", currentState);
+                //Limit the products
+                const sspProducts = this.props.products.filter(prod => {
+                    if (prod.tag !== "SSP") {
+                        return false;
+                    }
+                    const fixedInputs = prod.fixed_inputs;
+                    if (fixedInputs) {
+                        const speed = fixedInputs.find(fi => fi.name === "port_speed");
+                        if (speed && speed.value < bandwidth) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+                return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
             case "contact_persons" :
