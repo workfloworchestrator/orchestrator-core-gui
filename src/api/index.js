@@ -250,6 +250,10 @@ export function fetchPortSpeedBySubscription(subscriptionId) {
     return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
 }
 
+export function fetchServiceSpeedByProduct(productId) {
+    return fetchJson(`fixed_inputs/service_speed_by_product_id/${productId}`);
+}
+
 export function deleteSubscription(subscriptionId) {
     return fetchJson(`subscriptions/${subscriptionId}`, {method: "DELETE"}, {}, true, false);
 }
