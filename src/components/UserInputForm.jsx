@@ -229,9 +229,9 @@ export default class UserInputForm extends React.Component {
                         return false;
                     }
                     const fixedInputs = prod.fixed_inputs;
-                    if (fixedInputs) {
+                    if (fixedInputs && !isEmpty(bandwidth)) {
                         const speed = fixedInputs.find(fi => fi.name === "port_speed");
-                        if (speed && speed.value < bandwidth) {
+                        if (speed && parseInt(speed.value, 10) < parseInt(bandwidth, 10)) {
                             return false;
                         }
                     }
