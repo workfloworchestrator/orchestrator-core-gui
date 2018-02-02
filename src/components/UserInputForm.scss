@@ -20,11 +20,14 @@
             em {
                 margin-bottom: 10px;
             }
-            &.first_lightpath, &.second_lightpath, &.first_msp, &.second_msp {
+            &.first_lightpath, &.second_lightpath, &.first_msp, &.second_msp,
+            &.lightpath_msp, &.lightpath_ssp, &.lightpath_msp_1, &.lightpath_ssp_1,
+            &.lightpath_msp_2, &.lightpath_ssp_2 {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: $blue;
             }
+            &.source, &.source_vlan, &.destination, &.destination_vlan,
             &.source_1, &.source_vlan_1, &.destination_1, &.destination_vlan_1, &.source_2, &.source_vlan_2,
             &.destination_2, &.destination_vlan_2, &.location_code_1, &.location_code_2, &.crm_port_id_1, &.crm_port_id_2,
             &.ieee_interface_type_1, &.ieee_interface_type_2,
