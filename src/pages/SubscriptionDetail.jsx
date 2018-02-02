@@ -231,16 +231,24 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderSubscriptionInstanceValue = (val, index) => <div key={index}>
-        <label className="title">{val.resource_type.resource_type}{val.instance_label ? ` : ${val.instance_label}` : ""}</label>
-        <input type="text" readOnly={true} value={val.value}/>
-    </div>;
+    renderSubscriptionInstanceValue = (val, index) => {
+        const title = val.resource_type.resource_type + (val.instance_label ? ` : ${val.instance_label}` : "");
+        return <div key={index}>
+            <label className="title">{title}</label>
+            <input type="text" readOnly={true} value={val.value}/>
+        </div>;
+    };
 
     renderSubscriptionResourceTypes = subscription => {
         const values = subscriptionInstanceValues(subscription);
         if (isEmpty(values)) {
             return null;
         }
+        values.sort((i1, i2) => {
+            const i1Safe = i1.instance_label || i1.resource_type.resource_type;
+            const i2Safe = i2.instance_label || i2.resource_type.resource_type;
+            return i1Safe.toString().toLowerCase().localeCompare(i2Safe.toString().toLowerCase());
+        });
         const nbrLeft = Math.ceil(values.length / 2);
         return <section className="details">
             <h3>{I18n.t("subscription.resource_types")}</h3>
@@ -296,16 +304,17 @@ export default class SubscriptionDetail extends React.PureComponent {
         const displaysubscriptionProcesses = !isEmpty(subscriptionProcesses);
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
-                    {subscriptionProcesses.map((ps, index) =>
-                    <section key={index} className="process-link">
-                            <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
-                                <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
+            {subscriptionProcesses.map((ps, index) =>
+                <section key={index} className="process-link">
+                    <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
+                        <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}
+                    </NavLink>
 
-                    </section>
-                    )}
-                    {!displaysubscriptionProcesses && <section className="process-link">
-                        <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
-                    </section>}
+                </section>
+            )}
+            {!displaysubscriptionProcesses && <section className="process-link">
+                <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
+            </section>}
         </section>
     };
 

@@ -9,9 +9,10 @@ const inValidRange = range => {
     return range < 2 || range > 4094;
 };
 
-export function doValidateUserInput(userInput, value, errors) {
+export function doValidateUserInput(userInput, val, errors) {
     const type = userInput.type;
     const name = userInput.name;
+    const value = val || "";
     if (type === "vlan_range") {
         const stripped = value.replace(/ /g, "");
         errors[name] = !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||

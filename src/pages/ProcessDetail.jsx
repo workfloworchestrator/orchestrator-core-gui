@@ -24,7 +24,7 @@ export default class ProcessDetail extends React.PureComponent {
             notFound: false,
             tabs: ["user_input", "process"],
             selectedTab: "process",
-            subscriptionProcesses: {},
+            subscriptionProcesses: [],
             loaded: false,
             stepUserInput: [],
             multiServicePoints: [],
@@ -162,7 +162,6 @@ export default class ProcessDetail extends React.PureComponent {
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
-
         if (selectedTab === "process") {
             return <section className="card">
                 {this.renderActions(process)}

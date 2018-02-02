@@ -26,6 +26,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
+import {filterProductsByTagAndBandwidth} from "../validations/Products";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -206,9 +207,14 @@ export default class UserInputForm extends React.Component {
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
             case "msp" :
-
+                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
+                    lookupValueFromNestedState("bandwidth", currentState);
+                const mspProductIds = filterProductsByTagAndBandwidth(this.props.products, "MSP", bandwidthMsp)
+                    .map(product => product.product_id);
+                const mspSubscriptions = this.props.multiServicePoints
+                    .filter(msp => mspProductIds.includes(msp.product_id));
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
-                                                msps={this.props.multiServicePoints}
+                                                msps={mspSubscriptions}
                                                 organisations={this.props.organisations}/>;
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
@@ -223,20 +229,7 @@ export default class UserInputForm extends React.Component {
             case "ssp_product" :
                 const bandwidth = findValueFromInputStep("bandwidth", stepUserInput) ||
                     lookupValueFromNestedState("bandwidth", currentState);
-                //Limit the products
-                const sspProducts = this.props.products.filter(prod => {
-                    if (prod.tag !== "SSP") {
-                        return false;
-                    }
-                    const fixedInputs = prod.fixed_inputs;
-                    if (fixedInputs && !isEmpty(bandwidth)) {
-                        const speed = fixedInputs.find(fi => fi.name === "port_speed");
-                        if (speed && parseInt(speed.value, 10) < parseInt(bandwidth, 10)) {
-                            return false;
-                        }
-                    }
-                    return true;
-                });
+                const sspProducts = filterProductsByTagAndBandwidth(this.props.products, "SSP", bandwidth)
                 return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;

@@ -9,8 +9,13 @@ const test_vlanrange = (value, expected=true) => {
 test("Validate VLAN range", () => {
     test_vlanrange("2, 43-4094", false);
 });
-test("Validate VLAN range", () => {
+
+test("Validate VLAN range strips", () => {
     test_vlanrange(" 2  , 3  ,  4,  6 - 1994 ", false);
+});
+
+test("Validate VLAN range with null", () => {
+    test_vlanrange(null);
 });
 
 test("Validate invalid format vlan range", () => {
