@@ -58,6 +58,11 @@ export default class Header extends React.PureComponent {
         return this.state.dropDownActive ? <UserProfile currentUser={currentUser}/> : null;
     }
 
+    static renderEnvironmentName(environment) {
+        if(environment==='production') return;
+        return <li className="environment">{environment}</li>;
+    }
+
     render() {
         const currentUser = this.props.currentUser;
         const environment = this.state.environment;
@@ -67,7 +72,7 @@ export default class Header extends React.PureComponent {
                     <Link to="/" className="logo"><img src={logo} alt=""/></Link>
                     <ul className="links">
                         <li className="title"><span>{I18n.t("header.title")}</span></li>
-                        <li>{environment}</li>
+                        {Header.renderEnvironmentName(environment)}
                         <li className="profile"
                             tabIndex="1" onBlur={() => this.setState({dropDownActive: false})}>
                             {this.renderProfileLink(currentUser)}
