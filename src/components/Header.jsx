@@ -15,6 +15,7 @@ export default class Header extends React.PureComponent {
         this.state = {
             dropDownActive: false
         };
+        console.log(process.env);
         // this.props = {
         //     environment: 'Local'
         // };
