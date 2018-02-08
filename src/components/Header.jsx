@@ -15,6 +15,9 @@ export default class Header extends React.PureComponent {
         this.state = {
             dropDownActive: false
         };
+        // this.props = {
+        //     environment: 'Local'
+        // };
     }
 
     stop = e => {
@@ -60,6 +63,7 @@ export default class Header extends React.PureComponent {
                     <Link to="/" className="logo"><img src={logo} alt=""/></Link>
                     <ul className="links">
                         <li className="title"><span>{I18n.t("header.title")}</span></li>
+                        <li>{process.env.NODE_ENV}</li>
                         <li className="profile"
                             tabIndex="1" onBlur={() => this.setState({dropDownActive: false})}>
                             {this.renderProfileLink(currentUser)}
