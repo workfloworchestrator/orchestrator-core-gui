@@ -61,7 +61,7 @@ release image prod:
 deploy to dev:
   stage: deploy
   script:
-    - ssh deploy@swarm01.dev.automation.surf.net  "sudo docker service update --image $CONTAINER_STAGING_IMAGE dev_workflows-client"
+    - ssh deploy@swarm01.dev.automation.surf.net  "sudo docker service update --image $CONTAINER_DEV_IMAGE dev_workflows-client"
   environment:
     name: staging
     url: https://workflows.dev.automation.surf.net/
