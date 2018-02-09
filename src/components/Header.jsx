@@ -16,7 +16,7 @@ export default class Header extends React.PureComponent {
         this.state = {
             dropDownActive: false,
             environment: hostname.indexOf("staging") > -1 ? "staging" :
-                hostname === "localhost" ? "development" : "production"
+                hostname === "localhost" ? "local" : hostname.indexOf("dev") > -1 ? "development" : "production"
         };
     }
 
