@@ -12,8 +12,14 @@ export default class Header extends React.PureComponent {
 
     constructor() {
         super();
+
+        let environment = 'production';
+        if (window.location.hostname.indexOf('staging')) environment = 'staging';
+        if (window.location.hostname === 'localhost') environment = 'development';
+
         this.state = {
-            dropDownActive: false
+            dropDownActive: false,
+            environment: environment
         };
     }
 
@@ -52,14 +58,21 @@ export default class Header extends React.PureComponent {
         return this.state.dropDownActive ? <UserProfile currentUser={currentUser}/> : null;
     }
 
+    static renderEnvironmentName(environment) {
+        if(environment==='production') return;
+        return <li className="environment">{environment}</li>;
+    }
+
     render() {
         const currentUser = this.props.currentUser;
+        const environment = this.state.environment;
         return (
             <div className="header-container">
                 <div className="header">
                     <Link to="/" className="logo"><img src={logo} alt=""/></Link>
                     <ul className="links">
                         <li className="title"><span>{I18n.t("header.title")}</span></li>
+                        {Header.renderEnvironmentName(environment)}
                         <li className="profile"
                             tabIndex="1" onBlur={() => this.setState({dropDownActive: false})}>
                             {this.renderProfileLink(currentUser)}
@@ -76,5 +89,5 @@ export default class Header extends React.PureComponent {
 }
 
 Header.propTypes = {
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object.isRequired,
 };

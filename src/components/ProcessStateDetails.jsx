@@ -99,8 +99,8 @@ export default class ProcessStateDetails extends React.PureComponent {
         }
         return <section className="subscription-link">
             {subscriptionProcesses.map((ps, index) =>
-                <div>
-                    <NavLink key={index} to={`/subscription/${ps.subscription_id}`} className="button green">
+                <div key={index}>
+                    <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
                         <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
                     </NavLink>
                 </div>
@@ -215,6 +215,6 @@ export default class ProcessStateDetails extends React.PureComponent {
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
-    subscriptionProcesses: PropTypes.object.isRequired
+    subscriptionProcesses: PropTypes.array.isRequired
 };
 

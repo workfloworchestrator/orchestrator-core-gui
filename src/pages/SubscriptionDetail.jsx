@@ -156,25 +156,25 @@ export default class SubscriptionDetail extends React.PureComponent {
         <section key={index} className="form-container">
             <section>
                 <label className="title">{I18n.t("subscriptions.customer_name")}</label>
-                <input type="text" readOnly={true} value={subscription.customer_name}/>
+                <input type="text" readOnly={true} value={subscription.customer_name || ""}/>
                 <label className="title">{I18n.t("subscriptions.description")}</label>
-                <input type="text" readOnly={true} value={subscription.description}/>
+                <input type="text" readOnly={true} value={subscription.description || ""}/>
                 <label className="title">{I18n.t("subscriptions.product_name")}</label>
-                <input type="text" readOnly={true} value={subscription.product_name}/>
+                <input type="text" readOnly={true} value={subscription.product_name || ""}/>
                 <label className="title">{I18n.t("subscriptions.name")}</label>
-                <input type="text" readOnly={true} value={subscription.name}/>
+                <input type="text" readOnly={true} value={subscription.name || ""}/>
                 {showLink && <NavLink to={`/subscription/${subscription.subscription_id}`}
                                       className="button green subscription-link">
                     <i className="fa fa-link"></i> {I18n.t("subscription.link_subscription")}</NavLink>}
             </section>
             <section>
                 <label className="title">{I18n.t("subscriptions.status")}</label>
-                <input type="text" readOnly={true} value={subscription.status}/>
+                <input type="text" readOnly={true} value={subscription.status || ""}/>
                 <label className="title">{I18n.t("subscriptions.start_date_epoch")}</label>
                 <input type="text" readOnly={true} value={renderDate(subscription.start_date)}/>
                 <label className="title">{I18n.t("subscriptions.end_date_epoch")}</label>
                 <input type="text" readOnly={true} value={renderDate(subscription.end_date)}/>
-                <CheckBox value={subscription.insync} readOnly={true}
+                <CheckBox value={subscription.insync || false} readOnly={true}
                           name="isync" info={I18n.t("subscriptions.insync")}/>
             </section>
         </section>
@@ -207,7 +207,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <section>
                             <label
                                 className="title">{I18n.t("subscription.ims_service.id", {index: (index + 1).toString()})}</label>
-                            <input type="text" readOnly={true} value={service.id}/>
+                            <input type="text" readOnly={true} value={service.id || ""}/>
                             <label className="title">{I18n.t("subscription.ims_service.customer")}</label>
                             <input type="text" readOnly={true}
                                    value={organisationNameByUuid(service.customer_id, organisations)}/>
@@ -218,7 +218,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         </section>
                         <section>
                             <label className="title">{I18n.t("subscription.ims_service.product")}</label>
-                            <input type="text" readOnly={true} value={service.product}/>
+                            <input type="text" readOnly={true} value={service.product || ""}/>
                             <label className="title">{I18n.t("subscription.ims_service.speed")}</label>
                             <input type="text" readOnly={true} value={service.speed || ""}/>
                             <label className="title">{I18n.t("subscription.ims_service.status")}</label>
@@ -231,16 +231,24 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderSubscriptionInstanceValue = (val, index) => <div key={index}>
-        <label className="title">{val.resource_type.resource_type}{val.instance_label ? ` : ${val.instance_label}` : ""}</label>
-        <input type="text" readOnly={true} value={val.value}/>
-    </div>;
+    renderSubscriptionInstanceValue = (val, index) => {
+        const title = val.resource_type.resource_type + (val.instance_label ? ` : ${val.instance_label}` : "");
+        return <div key={index}>
+            <label className="title">{title}</label>
+            <input type="text" readOnly={true} value={val.value}/>
+        </div>;
+    };
 
     renderSubscriptionResourceTypes = subscription => {
         const values = subscriptionInstanceValues(subscription);
         if (isEmpty(values)) {
             return null;
         }
+        values.sort((i1, i2) => {
+            const i1Safe = i1.instance_label || i1.resource_type.resource_type;
+            const i2Safe = i2.instance_label || i2.resource_type.resource_type;
+            return i1Safe.toString().toLowerCase().localeCompare(i2Safe.toString().toLowerCase());
+        });
         const nbrLeft = Math.ceil(values.length / 2);
         return <section className="details">
             <h3>{I18n.t("subscription.resource_types")}</h3>
@@ -269,13 +277,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <section className="form-container">
                     <section>
                         <label className="title">{I18n.t("subscription.product.name")}</label>
-                        <input type="text" readOnly={true} value={product.name}/>
+                        <input type="text" readOnly={true} value={product.name || ""}/>
                         <label className="title">{I18n.t("subscription.product.description")}</label>
-                        <input type="text" readOnly={true} value={product.description}/>
+                        <input type="text" readOnly={true} value={product.description || ""}/>
                         <label className="title">{I18n.t("subscription.product.workflow")}</label>
-                        <input type="text" readOnly={true} value={product.create_subscription_workflow_key}/>
+                        <input type="text" readOnly={true} value={product.create_subscription_workflow_key || ""}/>
                         <label className="title">{I18n.t("subscription.product.product_type")}</label>
-                        <input type="text" readOnly={true} value={product.product_type}/>
+                        <input type="text" readOnly={true} value={product.product_type || ""}/>
                     </section>
                     <section>
                         <label className="title">{I18n.t("subscription.product.created")}</label>
@@ -283,9 +291,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <label className="title">{I18n.t("subscription.product.end_date")}</label>
                         <input type="text" readOnly={true} value={renderDateTime(product.end_date)}/>
                         <label className="title">{I18n.t("subscription.product.status")}</label>
-                        <input type="text" readOnly={true} value={product.status}/>
+                        <input type="text" readOnly={true} value={product.status || ""}/>
                         <label className="title">{I18n.t("subscription.product.tag")}</label>
-                        <input type="text" readOnly={true} value={product.tag}/>
+                        <input type="text" readOnly={true} value={product.tag || ""}/>
                     </section>
                 </section>
             </div>
@@ -296,16 +304,17 @@ export default class SubscriptionDetail extends React.PureComponent {
         const displaysubscriptionProcesses = !isEmpty(subscriptionProcesses);
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
-                    {subscriptionProcesses.map((ps, index) =>
-                    <section key={index} className="process-link">
-                            <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
-                                <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}</NavLink>
+            {subscriptionProcesses.map((ps, index) =>
+                <section key={index} className="process-link">
+                    <NavLink key={index} to={`/process/${ps.pid}`} className="button green">
+                        <i className="fa fa-link"></i> {I18n.t("subscription.process_link_text", {target: ps.workflow_target})}
+                    </NavLink>
 
-                    </section>
-                    )}
-                    {!displaysubscriptionProcesses && <section className="process-link">
-                        <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
-                    </section>}
+                </section>
+            )}
+            {!displaysubscriptionProcesses && <section className="process-link">
+                <span className="no_process_link">{I18n.t("subscription.no_process_link_text")}</span>
+            </section>}
         </section>
     };
 

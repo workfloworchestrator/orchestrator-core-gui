@@ -26,6 +26,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
+import {filterProductsByTagAndBandwidth} from "../validations/Products";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -173,7 +174,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const currentState = this.props.currentState;
+        const {currentState} = this.props;
         const stepUserInput = this.state.stepUserInput;
         switch (userInput.type) {
             case "string" :
@@ -206,8 +207,14 @@ export default class UserInputForm extends React.Component {
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
             case "msp" :
+                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
+                    lookupValueFromNestedState("bandwidth", currentState);
+                const mspProductIds = filterProductsByTagAndBandwidth(this.props.products, "MSP", bandwidthMsp)
+                    .map(product => product.product_id);
+                const mspSubscriptions = this.props.multiServicePoints
+                    .filter(msp => mspProductIds.includes(msp.product_id));
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
-                                                msps={this.props.multiServicePoints}
+                                                msps={mspSubscriptions}
                                                 organisations={this.props.organisations}/>;
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
@@ -220,7 +227,10 @@ export default class UserInputForm extends React.Component {
                                       product={value}
                                       disabled={userInput.readonly}/>;
             case "ssp_product" :
-                return <ProductSelect products={this.props.products.filter(prod => prod.tag === "SSP")}
+                const bandwidth = findValueFromInputStep("bandwidth", stepUserInput) ||
+                    lookupValueFromNestedState("bandwidth", currentState);
+                const sspProducts = filterProductsByTagAndBandwidth(this.props.products, "SSP", bandwidth)
+                return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
             case "contact_persons" :
