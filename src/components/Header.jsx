@@ -12,14 +12,11 @@ export default class Header extends React.PureComponent {
 
     constructor() {
         super();
-
-        let environment = 'production';
-        if (window.location.hostname.indexOf('staging')) environment = 'staging';
-        if (window.location.hostname === 'localhost') environment = 'development';
-
+        const hostname = window.location.hostname;
         this.state = {
             dropDownActive: false,
-            environment: environment
+            environment: hostname.indexOf("staging") > -1 ? "staging" :
+                hostname === "localhost" ? "local" : hostname.indexOf("dev") > -1 ? "development" : "production"
         };
     }
 
@@ -58,21 +55,19 @@ export default class Header extends React.PureComponent {
         return this.state.dropDownActive ? <UserProfile currentUser={currentUser}/> : null;
     }
 
-    static renderEnvironmentName(environment) {
-        if(environment==='production') return;
-        return <li className="environment">{environment}</li>;
-    }
+    renderEnvironmentName = environment => environment === "production" ?
+        null : <li className="environment">{environment}</li>;
 
     render() {
-        const currentUser = this.props.currentUser;
-        const environment = this.state.environment;
+        const {currentUser} = this.props;
+        const {environment} = this.state;
         return (
             <div className="header-container">
                 <div className="header">
                     <Link to="/" className="logo"><img src={logo} alt=""/></Link>
                     <ul className="links">
-                        <li className="title"><span>{I18n.t("header.title")}</span></li>
-                        {Header.renderEnvironmentName(environment)}
+                        <li className={`title ${environment}`}><span>{I18n.t("header.title")}</span></li>
+                        {this.renderEnvironmentName(environment)}
                         <li className="profile"
                             tabIndex="1" onBlur={() => this.setState({dropDownActive: false})}>
                             {this.renderProfileLink(currentUser)}
