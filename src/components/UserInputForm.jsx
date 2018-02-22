@@ -41,6 +41,8 @@ export default class UserInputForm extends React.Component {
             cancelDialogAction: () => this.props.history.push("/processes"),
             leavePage: true,
             errors: {},
+            uniqueErrors: {},
+            uniqueSelectInputs: {},
             isNew: true,
             stepUserInput: [...props.stepUserInput],
             product: {},
@@ -88,7 +90,8 @@ export default class UserInputForm extends React.Component {
         </section>);
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]);
+    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]) ||
+                      Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -111,6 +114,29 @@ export default class UserInputForm extends React.Component {
     changeSelectInput = name => option => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
+        this.validateUserInput(name)({target: {value: value}});
+    };
+
+    enforceSelectInputUniqueness = (hash, name, value) => {
+        // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
+        const hashTable = {...this.state.uniqueSelectInputs};
+        const errors = {...this.state.uniqueErrors};
+        if(!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
+        const names = hashTable[hash]['names'];
+        const values = hashTable[hash]['values'];
+        if(!(value in values)) values[value] = 0;
+        values[value] += 1;
+        if(name in names) values[names[name]] -= 1;
+        names[name] = value;
+        Object.keys(names).forEach(name => {errors[name] = values[names[name]] > 1;});
+        this.setState({uniqueErrors: errors});
+        this.setState({uniqueSelectInputs: hashTable});
+    };
+
+    changeUniqueSelectInput = (name, hash) => option => {
+        const value = option ? option.value : null;
+        this.changeUserInput(name, value);
+        this.enforceSelectInputUniqueness(hash, name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
 
@@ -153,6 +179,7 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const error = this.state.errors[name];
+        const uniqueError = this.state.uniqueErrors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
@@ -160,8 +187,9 @@ export default class UserInputForm extends React.Component {
                 {this.chooseInput(userInput, process)}
                 {error &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
+                {uniqueError &&
+                <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>);
-
     };
 
     renderInputInfoLabel = name => {
@@ -261,8 +289,9 @@ export default class UserInputForm extends React.Component {
             case "free_ports_for_location_code_and_interface_type":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+                const uniqueIdentifier = interfaceType + locationCode;
                 return <FreePortSelect
-                    onChange={this.changeSelectInput(name)}
+                    onChange={this.changeUniqueSelectInput(name, uniqueIdentifier)}
                     freePort={value}
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
