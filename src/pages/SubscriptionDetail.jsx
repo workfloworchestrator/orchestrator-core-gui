@@ -341,6 +341,10 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (status !== "provisioning" && status !== "active") {
             reason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
+        const insync = subscription.insync
+        if (insync !== true) {
+            reason = I18n.t("subscription.not_in_sync");
+        }
         return <section className="terminate-link">
             <a href="/terminate" className={`button ${(isTerminatable && !reason) ? "orange" : "grey disabled"}`}
                onClick={this.terminate(subscription, isTerminatable && !reason)}>
@@ -364,6 +368,11 @@ export default class SubscriptionDetail extends React.PureComponent {
         const status = subscription.status;
         if (status !== "active") {
             reason = I18n.t("subscription.no_modify_invalid_status", {status: status});
+        }
+
+        const insync = subscription.insync
+        if (insync !== true) {
+            reason = I18n.t("subscription.not_in_sync");
         }
         const isModifiable = isEmpty(reason);
         return <section className="modify-link">
