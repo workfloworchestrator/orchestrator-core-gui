@@ -15,3 +15,12 @@ export function filterProductsByTagAndBandwidth(products, tag, bandwidth) {
         return true;
     });
 }
+
+export function filterProductsByTag(products, tags) {
+    return products.filter(prod =>{
+        if (tags.includes(prod.tag)) {
+            return true;
+        }
+        return false;
+    });
+}

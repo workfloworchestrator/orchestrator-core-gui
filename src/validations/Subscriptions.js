@@ -23,6 +23,10 @@ export function isTerminatable(subscription, relatedSubscriptions) {
 
 }
 
+export function isModifiable(subscription, relatedSubscriptions) {
+    return !isEmpty(relatedSubscriptions)
+}
+
 export const validEmailRegExp = /^\S+@\S+$/;
 
 export const port_subscription_id = "port_subscription_id";

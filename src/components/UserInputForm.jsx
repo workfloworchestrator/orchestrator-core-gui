@@ -26,7 +26,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import {filterProductsByTagAndBandwidth} from "../validations/Products";
+import {filterProductsByTagAndBandwidth, filterProductsByTag} from "../validations/Products";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -261,6 +261,20 @@ export default class UserInputForm extends React.Component {
                 return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
+            case "msp_product":
+                const tags = ["MSP", "RMSP"];
+                const mspProducts = filterProductsByTag(this.props.products, tags);
+                return <ProductSelect products={mspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
+            case "netherlight_msp_product":
+                const nlTags = ["MSPNL"];
+                const nlMspProducts = filterProductsByTag(this.props.products, nlTags);
+                return <ProductSelect products={nlMspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
             case "contact_persons" :
                 const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
@@ -306,6 +320,13 @@ export default class UserInputForm extends React.Component {
                                               organisations={this.props.organisations}
                                               className="indent"/>
                 </div>;
+            case "read_only_subscription":
+                return <div>
+                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
+                                              products={this.props.products}
+                                              organisations={this.props.organisations}
+                                              className="indent"/>
+                </div>;
             case "accept":
             case "boolean":
                 return <CheckBox name={name} value={value || false}
@@ -332,6 +353,8 @@ export default class UserInputForm extends React.Component {
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
                                             subscription={value}/>;
+
+
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

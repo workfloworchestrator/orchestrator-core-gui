@@ -19,6 +19,7 @@ import {
     ims_circuit_id,
     ims_port_id,
     isTerminatable,
+    isModifiable,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -43,6 +44,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             loaded: false,
             loadedIMSRelatedObjects: false,
             isTerminatable: false,
+            isModifiable: true,
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -96,6 +98,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         isTerminatable: isTerminatable(subscription, subscriptions),
+                        isModifiable: isModifiable(subscription, subscriptions),
                         loadedIMSRelatedObjects: true
                     });
                 })
@@ -374,6 +377,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (insync !== true) {
             reason = I18n.t("subscription.not_in_sync");
         }
+
         const isModifiable = isEmpty(reason);
         return <section className="modify-link">
             <a href="/modify" className={`button ${isModifiable ? "blue" : "grey disabled"}`}
