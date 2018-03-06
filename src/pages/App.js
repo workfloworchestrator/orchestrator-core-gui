@@ -122,7 +122,7 @@ class App extends React.PureComponent {
                 Promise.all([me(), organisations(), products(), locationCodes()])
                     .then(result => {
                         const [currentUser, allOrganisations, allProducts, allLocationCodes] = result;
-                        if (currentUser && currentUser.user_name) {
+                        if (currentUser && currentUser.sub) {
                             this.setState({
                                 loading: false,
                                 currentUser: currentUser,
