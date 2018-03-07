@@ -24,3 +24,6 @@ export function filterProductsByTag(products, tags) {
         return false;
     });
 }
+export const TARGET_CREATE = "CREATE";
+export const TARGET_MODIFY = "MODIFY";
+export const TARGET_TERMINATE = "TERMINATE";

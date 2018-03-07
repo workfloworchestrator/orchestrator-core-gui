@@ -262,8 +262,8 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId) {
-    return postPutJson("processes/modify-subscription", {subscription_id: subscriptionId}, "post");
+export function startModificationSubscription(subscriptionId, workflow) {
+    return postPutJson(`processes/modify-subscription/${workflow.name}`, {subscription_id: subscriptionId}, "post");
 }
 
 export function deleteProcess(processId) {

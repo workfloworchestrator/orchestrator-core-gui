@@ -9,6 +9,7 @@ import UserInputForm from "../components/UserInputForm";
 import ProductValidation from "../components/ProductValidation";
 
 import "./NewProcess.css";
+import {TARGET_CREATE} from "../validations/Products";
 
 export default class NewProcess extends React.Component {
 
@@ -29,7 +30,7 @@ export default class NewProcess extends React.Component {
             if (product) {
                 this.changeProduct({
                     value: product.product_id,
-                    workflow: product.create_subscription_workflow_key,
+                    workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
                     ...product
                 });
             }
@@ -103,7 +104,7 @@ export default class NewProcess extends React.Component {
                             <em>{I18n.t("process.product_info")}</em>
                             <ProductSelect
                                 products={this.props.products.filter(prod => prod.tag !== "SSP" &&
-                                    !isEmpty(prod.create_subscription_workflow_key))}
+                                    !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
                                 onChange={this.changeProduct}
                                 product={isEmpty(product) ? undefined : product.value}/>
                         </section>

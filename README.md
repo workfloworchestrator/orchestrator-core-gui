@@ -13,8 +13,22 @@ The client is build with react and to get initially started:
 ### Installing
 
 #### Mac
+
+Using Brew:
+
 ```
 brew install yarn
+```
+
+or using MacPorts:
+
+```
+sudo port install yarn npm5
+```
+
+and then:
+
+```
 yarn install
 ```
 
