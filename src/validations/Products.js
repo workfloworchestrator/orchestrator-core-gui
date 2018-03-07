@@ -15,3 +15,7 @@ export function filterProductsByTagAndBandwidth(products, tag, bandwidth) {
         return true;
     });
 }
+export const TARGET_CREATE = "CREATE";
+export const TARGET_MODIFY = "MODIFY";
+export const TARGET_TERMINATE = "TERMINATE";
+

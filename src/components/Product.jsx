@@ -15,6 +15,7 @@ import {formDate, formInput, formSelect} from "../forms/Builder";
 
 import "./Product.css";
 import {deleteProduct, productStatuses, productTags, productTypes} from "../api";
+import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
 export default class Product extends React.Component {
 
@@ -30,7 +31,10 @@ export default class Product extends React.Component {
             required: ["name", "description", "status", "product_type", "tag"],
             initial: true,
             readOnly: false,
-            product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port", tag: "LightPath"},
+            product: {
+                product_blocks: [], fixed_inputs: [], workflows: [],
+                status: "active", product_type: "Port", tag: "LightPath"
+            },
             processing: false,
             productBlocks: [],
             products: [],
@@ -179,6 +183,21 @@ export default class Product extends React.Component {
         this.setState({errors: errors});
     };
 
+    changeWorkflow = (target, multi = false) => option => {
+        const {product, workflows} = this.state;
+        const otherWorkflows = product.workflows.filter(wf => wf.target !== target);
+        if (isEmpty(option)) {
+            product.workflows = [...otherWorkflows];
+        } else if (multi) {
+            const names = option.map(opt => opt.value);
+            product.workflows = workflows.filter(wf => names.indexOf(wf.name) > -1).concat(otherWorkflows);
+        } else {
+            product.workflows = [workflows.find(wf => wf.name === option.value)].concat(otherWorkflows);
+        }
+        this.setState({product: product});
+    };
+
+
     changeProperty = name => e => {
         const {product} = this.state;
         let value;
@@ -246,7 +265,12 @@ export default class Product extends React.Component {
 
     workFlowKeys = (type, workflows) => workflows
         .filter(wf => wf.target === type)
-        .map(wf => ({label: wf.name, value: wf.key}));
+        .map(wf => ({label: wf.description, value: wf.name}));
+
+    workFlowByTarget = (product, target, multiValues = false) => {
+        const workflows = product.workflows.filter(wf => wf.target === target).map(wf => wf.name);
+        return multiValues ? workflows : isEmpty(workflows) ? undefined : workflows[0];
+    };
 
     renderFixedInputs = (product, readOnly, duplicateFixedInputNames) => {
         const fixedInputs = product.fixed_inputs;
@@ -326,7 +350,6 @@ export default class Product extends React.Component {
         } = this.state;
         const endDate = isEmpty(product.end_date) ? null : product.end_date._isAMomentObject ?
             product.end_date : moment(product.end_date * 1000);
-
         return (
             <div className="mod-product">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -350,17 +373,17 @@ export default class Product extends React.Component {
                     {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
                         this.state.errors, this.changeProperty("crm_prod_id"), () => false)}
                     {formSelect("metadata.products.create_subscription_workflow_key",
-                        this.changeProperty("create_subscription_workflow_key"),
-                        this.workFlowKeys("CREATE", workflows), readOnly,
-                        product.create_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_CREATE),
+                        this.workFlowKeys(TARGET_CREATE, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_CREATE), true)}
                     {formSelect("metadata.products.modify_subscription_workflow_key",
-                        this.changeProperty("modify_subscription_workflow_key"),
-                        this.workFlowKeys("MODIFY", workflows), readOnly,
-                        product.modify_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_MODIFY, true),
+                        this.workFlowKeys(TARGET_MODIFY, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_MODIFY, true), true, true)}
                     {formSelect("metadata.products.terminate_subscription_workflow_key",
-                        this.changeProperty("terminate_subscription_workflow_key"),
-                        this.workFlowKeys("TERMINATE", workflows), readOnly,
-                        product.terminate_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_TERMINATE),
+                        this.workFlowKeys(TARGET_TERMINATE, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_TERMINATE), true)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
                     {this.renderFixedInputs(product, readOnly, duplicateFixedInputNames)}
                     {formDate("metadata.products.created_at", () => false, true,

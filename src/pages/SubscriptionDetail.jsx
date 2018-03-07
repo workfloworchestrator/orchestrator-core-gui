@@ -28,6 +28,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.css";
 import {startModificationSubscription} from "../api/index";
+import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -128,14 +129,16 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
     };
 
-    modify = (subscription, isModifiable) => e => {
+    modify = (subscription, isModifiable, workflow) => e => {
         stop(e);
         if (isModifiable) {
+            const change = I18n.t(`subscription.modify_${workflow.name}`).toLowerCase();
             this.confirmation(I18n.t("subscription.modifyConfirmation", {
                     name: subscription.product_name,
-                    customer: subscription.customer_name
+                    customer: subscription.customer_name,
+                    change: change
                 }),
-                () => startModificationSubscription(subscription.subscription_id).then(() => {
+                () => startModificationSubscription(subscription.subscription_id, workflow).then(() => {
                     this.props.history.push("/processes")
                 }));
         }
@@ -266,6 +269,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
+    workflowByTarget = (product, target) => product.workflows.find(wf => wf.target === target);
 
     renderProduct = product => {
         if (isEmpty(product)) {
@@ -281,7 +285,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <label className="title">{I18n.t("subscription.product.description")}</label>
                         <input type="text" readOnly={true} value={product.description || ""}/>
                         <label className="title">{I18n.t("subscription.product.workflow")}</label>
-                        <input type="text" readOnly={true} value={product.create_subscription_workflow_key || ""}/>
+                        <input type="text" readOnly={true} value={this.workflowByTarget(product, TARGET_CREATE) || ""}/>
                         <label className="title">{I18n.t("subscription.product.product_type")}</label>
                         <input type="text" readOnly={true} value={product.product_type || ""}/>
                     </section>
@@ -333,7 +337,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             (subscriptions.length > 0 && !subscriptions.every(sub => sub.status === "terminated"))) {
             reason = I18n.t("subscription.no_termination_parent_subscription");
         }
-        if (!product.terminate_subscription_workflow_key) {
+        if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
             reason = I18n.t("subscription.no_termination_workflow");
         }
         //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
@@ -357,28 +361,33 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!loadedIMSRelatedObjects) {
             return null;
         }
+        const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
         let reason = null;
+        if (isEmpty(modifyWorkflows)) {
+            reason = I18n.t("subscription.no_modify_workflow");
+        }
         if (!isEmpty(notFoundRelatedObjects)) {
             reason = I18n.t("subscription.no_modify_deleted_related_objects");
-        }
-        if (!product.modify_subscription_workflow_key) {
-            reason = I18n.t("subscription.no_modify_workflow");
         }
         //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         if (status !== "active") {
             reason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
-
         const insync = subscription.insync
         if (insync !== true) {
             reason = I18n.t("subscription.not_in_sync");
         }
         const isModifiable = isEmpty(reason);
         return <section className="modify-link">
-            <a href="/modify" className={`button ${isModifiable ? "blue" : "grey disabled"}`}
-               onClick={this.modify(subscription, isModifiable)}>
-                <i className="fa fa-pencil-square-o"></i> {I18n.t("subscription.modify")}</a>
+            {
+                modifyWorkflows.map(wf =>
+                <a href="/modify" key={wf.name} className={`button ${isModifiable ? "blue" : "grey disabled"}`}
+                    onClick={this.modify(subscription, isModifiable, wf)}>
+                <i className="fa fa-pencil-square-o"></i> {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                )
+            }
+
             {!isModifiable && <p className="no-modify-reason">{reason}</p>}
         </section>
     };

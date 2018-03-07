@@ -39,7 +39,7 @@ export default class ValidationsExplain extends React.PureComponent {
         <h3>Details</h3>
         <p>The validations consist of each Product validated against the <span className="code">workflow_subscription_mapping </span>
             of the Workflow. All the Resource Blocks with their subsequent Resource Types configured to be present
-            in the workflow linked to the Product (e.g. the column value <span className="code">create_subscription_workflow_key</span>)
+            in the workflow linked to the Product (e.g. the workflow in the workflows table with target <span className="code">CREATE</span>)
             must also be configured in <span>core-db</span>.</p>
 
         <p>Each mismatch - being a completely missing Resource Block or missing individual Resource Types - is
