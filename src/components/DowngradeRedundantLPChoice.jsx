@@ -15,8 +15,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
         super(props);
         this.state = {
             subscription: {instances: []},
-            childSubscriptions: [],
-            primary: true
+            childSubscriptions: []
         };
     }
 
@@ -70,18 +69,27 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
         </section>;
     };
 
+    onChangeChoice = e => {
+        const checked = e.target.checked;
+        const isPrimary = e.target.name === "primary";
+        const result =  isPrimary ? (checked ? "Primary" : "Secondary") : (checked ? "Secondary" : "Primary");
+        this.props.onChange({target: {value: result}});
+    };
+
     renderChoice = () => {
-        const {primary} = this.state;
+        const {value} = this.props;
+        const primary = isEmpty(value) || value === "Primary";
         return <section className="choice">
             <h3>{I18n.t("downgrade_redundant_lp.choice")}</h3>
             <CheckBox name="primary" value={primary}
-                      onChange={e => this.setState({primary: e.target.checked})}
+                      onChange={this.onChangeChoice}
                       info={I18n.t("downgrade_redundant_lp.primary")}/>
             <CheckBox name="secondary" value={!primary}
-                      onChange={e => this.setState({primary: !e.target.checked})}
+                      onChange={this.onChangeChoice}
                       info={I18n.t("downgrade_redundant_lp.secondary")}/>
         </section>
     };
+
     render() {
         const {childSubscriptions, subscription} = this.state;
         return (
@@ -96,5 +104,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 DowngradeRedundantLPChoice.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    subscriptionId: PropTypes.string.isRequired
+    subscriptionId: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string
 };

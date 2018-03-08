@@ -301,11 +301,13 @@ export default class UserInputForm extends React.Component {
             case "downgrade_redundant_lp_choice":
                 return <DowngradeRedundantLPChoice products={this.props.products}
                                                    organisations={this.props.organisations}
-                                                   subscriptionId={process.current_state.subscription_id}/>
+                                                   onChange={this.changeStringInput(name)}
+                                                   subscriptionId={process.current_state.subscription_id}
+                                                   value={value}/>
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
-                              onChange={this.changeBooleanInput(name)}
+                              onChange={this.changeStringInput(name)}
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
