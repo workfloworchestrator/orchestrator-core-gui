@@ -178,6 +178,8 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+        new_product: "The new Product",
+        new_product_info: "Please select the product with the new speed",
         nms_service_id: "NMS service id",
         nms_service_id_info: "The id of the service on the network (0000-9999)",
         nms_service_id_1: "NMS service id of the first lightpath",

@@ -262,9 +262,16 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
             case "msp_product":
-                const tags = ["MSP", "RMSP"];
+                const tags = ["MSP"];
                 const mspProducts = filterProductsByTag(this.props.products, tags);
                 return <ProductSelect products={mspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
+            case "rmsp_product":
+                const rmsptags = ["RMSP"];
+                const rmspProducts = filterProductsByTag(this.props.products, rmsptags);
+                return <ProductSelect products={rmspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
 
