@@ -441,6 +441,7 @@ I18n.translations.en = {
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
+        modify_downgrade_redundant_lichtpad_to_unprotected_workflow: "Downgrade to Unprotected LP",
         modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",

@@ -32,6 +32,12 @@ and then:
 yarn install
 ```
 
+Note: when you use python3 as a default python on mac you will receive an error when yarn tries to install gyp: 
+stating that it needs python >2.5 < 3.0: you can then still install stuff by pointing yarn to the default python2.7 on 
+Mac OS: 
+
+```yarn install --python /usr/bin/python2.7```
+
 #### Linux
 ```
 npm install yarn -g

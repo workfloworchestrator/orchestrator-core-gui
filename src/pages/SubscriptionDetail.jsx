@@ -66,7 +66,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 enrichSubscription(subscription, organisations, products);
                 const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
-                const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id), productById(subscription.product_id)]
+                const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id),
+                    productById(subscription.product_id)]
                     .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
@@ -386,9 +387,9 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="modify-link">
             {
                 modifyWorkflows.map(wf =>
-                <a href="/modify" key={wf.name} className={`button ${isModifiable ? "blue" : "grey disabled"}`}
-                    onClick={this.modify(subscription, isModifiable, wf)}>
-                <i className="fa fa-pencil-square-o"></i> {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                    <a href="/modify" key={wf.name} className={`button ${isModifiable ? "blue" : "grey disabled"}`}
+                       onClick={this.modify(subscription, isModifiable, wf)}>
+                        <i className="fa fa-pencil-square-o"></i> {I18n.t(`subscription.modify_${wf.name}`)}</a>
                 )
             }
 
