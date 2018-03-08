@@ -279,7 +279,9 @@ I18n.translations.en = {
         subscription_id1: "Subscription",
         subscription_id1_info: "The first subscription to use",
         subscription_id2: "Subscription",
-        subscription_id2_info: "The second subscription to use"
+        subscription_id2_info: "The second subscription to use",
+        downgrade_redundant_lp_choice: "Redundant LP Subscription",
+        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -479,6 +481,12 @@ I18n.translations.en = {
     clipboard: {
         copied: "Copied!",
         copy: "Copy to clipboard"
+    },
+    downgrade_redundant_lp: {
+        choice: "Which one the LP should be removed from this redundant LP?",
+        subscription_childs: "The ports in this redundant LP",
+        primary: "Primary LP",
+        secondary: "Secondary LP"
     },
     metadata: {
         tabs: {

@@ -27,6 +27,7 @@ import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
 import {filterProductsByTagAndBandwidth} from "../validations/Products";
+import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -91,7 +92,7 @@ export default class UserInputForm extends React.Component {
     };
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]) ||
-                      Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
+        Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -121,14 +122,16 @@ export default class UserInputForm extends React.Component {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
         const hashTable = {...this.state.uniqueSelectInputs};
         const errors = {...this.state.uniqueErrors};
-        if(!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
+        if (!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
         const names = hashTable[hash]['names'];
         const values = hashTable[hash]['values'];
-        if(!(value in values)) values[value] = 0;
+        if (!(value in values)) values[value] = 0;
         values[value] += 1;
-        if(name in names) values[names[name]] -= 1;
+        if (name in names) values[names[name]] -= 1;
         names[name] = value;
-        Object.keys(names).forEach(name => {errors[name] = values[names[name]] > 1;});
+        Object.keys(names).forEach(name => {
+            errors[name] = values[names[name]] > 1;
+        });
         this.setState({uniqueErrors: errors});
         this.setState({uniqueSelectInputs: hashTable});
     };
@@ -295,6 +298,10 @@ export default class UserInputForm extends React.Component {
                     freePort={value}
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
+            case "downgrade_redundant_lp_choice":
+                return <DowngradeRedundantLPChoice products={this.props.products}
+                                                   organisations={this.props.organisations}
+                                                   subscriptionId={process.current_state.subscription_id}/>
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
