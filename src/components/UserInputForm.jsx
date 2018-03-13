@@ -28,6 +28,7 @@ import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
 import {filterProductsByTagAndBandwidth} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
+import TransitionProductSelect from "./TransitionProductSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
@@ -264,6 +265,15 @@ export default class UserInputForm extends React.Component {
                 return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
+            case "transition_product":
+                const transitionFromProduct = lookupValueFromNestedState(userInput.product_key, currentState) ||
+                    findValueFromInputStep(userInput.product_key, stepUserInput);
+                return <TransitionProductSelect
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}
+                                      transitionFromProduct={transitionFromProduct}
+                                      disabled={userInput.readonly}
+                                      transitionType={userInput.transition_type}/>;
             case "contact_persons" :
                 const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);

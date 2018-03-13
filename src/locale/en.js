@@ -281,7 +281,9 @@ I18n.translations.en = {
         subscription_id2: "Subscription",
         subscription_id2_info: "The second subscription to use",
         downgrade_redundant_lp_choice: "Redundant LP Subscription",
-        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated"
+        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+        transition_product_downgrade: "Choose Product",
+        transition_product_downgrade_info: "Choose the new Product for this subscription (scoped by the current product)"
     },
     process_state: {
         copy: "Copy to clipboard",
