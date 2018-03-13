@@ -27,7 +27,6 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
             const values = subscriptionInstanceValues(subscription);
             const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
             const promises = portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value));
-
             Promise.all(promises).then(results => {
                 const children = results.map(obj => obj.json);
                 children.forEach(sub => enrichSubscription(sub, organisations, products));

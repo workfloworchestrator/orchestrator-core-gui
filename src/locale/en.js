@@ -544,7 +544,7 @@ I18n.translations.en = {
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
-            duplicate_name: "This name is already taken. Product names need to be unique."
+            duplicate_name: "This name is already taken. Product names need to be unique.",
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -588,8 +588,8 @@ I18n.translations.en = {
             delete: "Delete",
             no_found: "No Resource Types",
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
-        }
-
+        },
+        results: "{{type}} found: {{count}}",
     },
     tasks: {
         searchPlaceHolder: "Search for tasks...",
