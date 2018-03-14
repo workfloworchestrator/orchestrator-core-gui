@@ -180,6 +180,8 @@ I18n.translations.en = {
         ims_port_id_info: "The IMS port id",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
+        new_interface_type: "The new interface type of the port",
+        new_interface_type_info: "Please select the new interface type of the port",
         nms_service_id: "NMS service id",
         nms_service_id_info: "The id of the service on the network (0000-9999)",
         nms_service_id_1: "NMS service id of the first lightpath",
@@ -416,6 +418,7 @@ I18n.translations.en = {
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        modify_modify_msp_speed: "Modify MSP speed",
         product: {
             name: "Name",
             description: "Description",
