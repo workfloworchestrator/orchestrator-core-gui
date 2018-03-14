@@ -279,6 +279,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (isEmpty(product)) {
             return null;
         }
+        const workflow = this.workflowByTarget(product, TARGET_CREATE);
         return <section className="details">
             <h3>{I18n.t("subscription.product_title")}</h3>
             <div className="form-container-parent">
@@ -289,7 +290,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <label className="title">{I18n.t("subscription.product.description")}</label>
                         <input type="text" readOnly={true} value={product.description || ""}/>
                         <label className="title">{I18n.t("subscription.product.workflow")}</label>
-                        <input type="text" readOnly={true} value={this.workflowByTarget(product, TARGET_CREATE) || ""}/>
+                        <input type="text" readOnly={true} value={workflow ? workflow.name : ""}/>
                         <label className="title">{I18n.t("subscription.product.product_type")}</label>
                         <input type="text" readOnly={true} value={product.product_type || ""}/>
                     </section>
