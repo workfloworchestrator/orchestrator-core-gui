@@ -283,7 +283,11 @@ I18n.translations.en = {
         subscription_id1: "Subscription",
         subscription_id1_info: "The first subscription to use",
         subscription_id2: "Subscription",
-        subscription_id2_info: "The second subscription to use"
+        subscription_id2_info: "The second subscription to use",
+        downgrade_redundant_lp_choice: "Redundant LP Subscription",
+        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+        transition_product_downgrade: "Choose Product",
+        transition_product_downgrade_info: "Choose the new Product for this subscription (scoped by the current product)"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -447,6 +451,7 @@ I18n.translations.en = {
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
         modify_downgrade_redundant_lichtpad_to_unprotected_workflow: "Downgrade to Unprotected LP",
+        modify_modify_elan: "Modify ELAN",
         modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
@@ -483,6 +488,12 @@ I18n.translations.en = {
     clipboard: {
         copied: "Copied!",
         copy: "Copy to clipboard"
+    },
+    downgrade_redundant_lp: {
+        choice: "Which one the LP should be removed from this redundant LP?",
+        subscription_childs: "The ports in this redundant LP",
+        primary: "Primary LP",
+        secondary: "Secondary LP"
     },
     metadata: {
         tabs: {
@@ -540,7 +551,7 @@ I18n.translations.en = {
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
-            duplicate_name: "This name is already taken. Product names need to be unique."
+            duplicate_name: "This name is already taken. Product names need to be unique.",
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -584,8 +595,8 @@ I18n.translations.en = {
             delete: "Delete",
             no_found: "No Resource Types",
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
-        }
-
+        },
+        results: "{{type}} found: {{count}}",
     },
     tasks: {
         searchPlaceHolder: "Search for tasks...",

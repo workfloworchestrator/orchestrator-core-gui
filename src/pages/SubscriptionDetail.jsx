@@ -378,7 +378,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (status !== "active") {
             reason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
-        const insync = subscription.insync
+        const insync = subscription.insync;
         if (insync !== true) {
             reason = I18n.t("subscription.not_in_sync");
         }

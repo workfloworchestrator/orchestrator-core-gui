@@ -261,6 +261,9 @@ export default class Products extends React.Component {
                             </td>
                         </tr>
                     )}
+                    <tr>
+                        <td className="metadata-results" colSpan={6}>{I18n.t("metadata.results", {type: "Products", count: products.length})}</td>
+                    </tr>
                     </tbody>
                 </table>
             );
