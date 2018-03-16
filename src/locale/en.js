@@ -193,6 +193,9 @@ I18n.translations.en = {
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath and any child SSP's subscriptions",
         noc_remove_lichtpad_confirmation_info: "Are the LightPath of the subscription and any child SSP's subscriptions removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
+        noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
+        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath and are SSP circuits disabled?",
+        noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
@@ -491,9 +494,20 @@ I18n.translations.en = {
     },
     downgrade_redundant_lp: {
         choice: "Which one the LP should be removed from this redundant LP?",
+        choosen: "The LP which should removed from this redundant LP",
         subscription_childs: "The ports in this redundant LP",
         primary: "Primary LP",
-        secondary: "Secondary LP"
+        secondary: "Secondary LP",
+        ims_circuit_id: "IMS Circuit ID",
+        ims_protection_circuit_id: "IMS Protection Circuit ID",
+        description: "Description",
+        connector_type: "Connector type",
+        customer_name: "Customer name",
+        location: "Location",
+        node: "Node",
+        patch_position: "Patch position",
+        msp: "MSP",
+        ssp: "SSP",
     },
     metadata: {
         tabs: {

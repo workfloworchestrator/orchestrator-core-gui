@@ -76,16 +76,18 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
     };
 
     renderChoice = () => {
-        const {value} = this.props;
+        const {value, readOnly} = this.props;
         const primary = isEmpty(value) || value === "Primary";
         return <section className="choice">
             <h3>{I18n.t("downgrade_redundant_lp.choice")}</h3>
             <CheckBox name="primary" value={primary}
                       onChange={this.onChangeChoice}
-                      info={I18n.t("downgrade_redundant_lp.primary")}/>
+                      info={I18n.t("downgrade_redundant_lp.primary")}
+                      readOnly={readOnly || false}/>
             <CheckBox name="secondary" value={!primary}
                       onChange={this.onChangeChoice}
-                      info={I18n.t("downgrade_redundant_lp.secondary")}/>
+                      info={I18n.t("downgrade_redundant_lp.secondary")}
+                      readOnly={readOnly || false}/>
         </section>
     };
 
@@ -105,5 +107,6 @@ DowngradeRedundantLPChoice.propTypes = {
     products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
+    readOnly: PropTypes.bool
 };

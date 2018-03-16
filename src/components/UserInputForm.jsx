@@ -26,12 +26,14 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import {filterProductsByTagAndBandwidth, filterProductsByTag} from "../validations/Products";
+import {filterProductsByTag, filterProductsByTagAndBandwidth} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
+import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 
 
-const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
+const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
+    "subscription_downgrade_confirmation", "label"];
 
 export default class UserInputForm extends React.Component {
 
@@ -102,6 +104,7 @@ export default class UserInputForm extends React.Component {
     };
 
     changeStringInput = name => e => {
+        debugger;
         const value = e.target.value;
         this.changeUserInput(name, value);
     };
@@ -290,11 +293,11 @@ export default class UserInputForm extends React.Component {
                 const transitionFromProduct = lookupValueFromNestedState(userInput.product_key, currentState) ||
                     findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <TransitionProductSelect
-                                      onChange={this.changeSelectInput(name)}
-                                      product={value}
-                                      transitionFromProduct={transitionFromProduct}
-                                      disabled={userInput.readonly}
-                                      transitionType={userInput.transition_type}/>;
+                    onChange={this.changeSelectInput(name)}
+                    product={value}
+                    transitionFromProduct={transitionFromProduct}
+                    disabled={userInput.readonly}
+                    transitionType={userInput.transition_type}/>;
             case "contact_persons" :
                 const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
@@ -334,11 +337,29 @@ export default class UserInputForm extends React.Component {
                                                    organisations={this.props.organisations}
                                                    onChange={this.changeStringInput(name)}
                                                    subscriptionId={process.current_state.subscription_id}
-                                                   value={value}/>
+                                                   value={value}
+                                                   readOnly={userInput.readonly}/>
+            case "downgrade_redundant_lp_confirmation":
+                const primary = lookupValueFromNestedState(userInput.primary, currentState);
+                const secondary = lookupValueFromNestedState(userInput.secondary, currentState);
+                const choice = lookupValueFromNestedState(userInput.choice, currentState);
+                return <div>
+                    <CheckBox name={name} value={value || false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={I18n.t(`process.noc_confirmation`)}/>
+                    <section className="form-divider"></section>
+                    <DowngradeRedundantLPConfirmation products={this.props.products}
+                                                      organisations={this.props.organisations}
+                                                      subscriptionId={process.current_state.subscription_id}
+                                                      className="indent"
+                                                      primary={primary}
+                                                      secondary={secondary}
+                                                      choice={choice}/>
+                </div>
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
-                              onChange={this.changeStringInput(name)}
+                              onChange={this.changeBooleanInput(name)}
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
