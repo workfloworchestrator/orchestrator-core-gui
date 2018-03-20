@@ -14,7 +14,7 @@ I18n.translations.en = {
     EntityId: "",
 
     header: {
-        title: "Workflows",
+        title: "Orchestrator",
         links: {
             help_html: "<a href=\"https://gitlab.surfnet.nl/automation/workflows/wikis/home\" target=\"_blank\">Help</a>",
             logout: "Logout",
