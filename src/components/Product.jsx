@@ -335,8 +335,8 @@ export default class Product extends React.Component {
                                           searchable={false}
                                           clearable={false}
                                           placeholder={availableFixedInputs.length > 0 ?
-                                              I18n.t("metadata.products.select_add_product_block") :
-                                              I18n.t("metadata.products.select_no_more_product_blocks")}
+                                              I18n.t("metadata.products.select_add_fixed_input") :
+                                              I18n.t("metadata.products.select_no_more_fixed_inputs")}
                                           disabled={readOnly || availableFixedInputs.length === 0}/>}
                 </div>
             </section>);

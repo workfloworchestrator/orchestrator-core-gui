@@ -103,7 +103,7 @@ export default class Validations extends React.Component {
                     <FixedInputProductValidation key={index} history={this.props.history}
                                                  validation={validation}/>)}
                 {isEmpty(fixedInputValidations) &&
-                <div><em>{I18n.t("validations.no_fixed_inputs")}</em></div>}
+                <div className={"no-errors"}><em>{I18n.t("validations.no_fixed_inputs")}</em></div>}
             </section>
         </div>;
 
