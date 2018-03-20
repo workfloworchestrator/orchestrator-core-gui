@@ -525,7 +525,8 @@ I18n.translations.en = {
         tabs: {
             products: "Products",
             product_blocks: "Product Blocks",
-            resource_types: "Resource Types"
+            resource_types: "Resource Types",
+            fixed_inputs: "Fixed Inputs"
         },
         deleteConfirmation: "Are you sure you want to delete {{type}} {{name}}?",
         flash: {
@@ -623,6 +624,14 @@ I18n.translations.en = {
             delete: "Delete",
             no_found: "No Resource Types",
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
+        },
+        fixedInputs: {
+            tags: "Fixed Inputs for Product tag: {{tag}}",
+            inputs: "Fixed Inputs and values",
+            name: "Name",
+            fixedInput: "Fixed Input name",
+            values: "Values",
+            required: "Required"
         },
         results: "{{type}} found: {{count}}",
     },
