@@ -347,14 +347,26 @@ I18n.translations.en = {
         tabs: {
             subscriptions: "Subscriptions",
             workflows: "Workflows",
-            dienstafnames: "Dienstafnames"
+            dienstafnames: "Dienstafnames",
+            fixedInputs: "Fixed Inputs"
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
+        no_fixed_inputs: "There are no products that are either missing required fixed inputs, have incorrect values or have unknown fixed inputs",
         no_dienstafnames: "No mismatches in dienstafname vs. subscriptions tables",
         dienstafname_matches: "Dienstafnames not present in Subscriptions table",
         subscription_matches: "Subscriptions not present in Dienstafname table",
-        fetchingCRMData: "Loading CRM data. Hang on tight..."
+        fetchingCRMData: "Loading CRM data. Hang on tight...",
+        fixedInput: {
+            title: "Invalid FixedInput settings for product {{name}}",
+            fixed_input_name: "Fixed Input name",
+            fixed_input_error: "Error",
+            error: {
+                required_not_present: "Required FixedInput, but not present",
+                invalid_value: "Invalid value for FixedInput: {{value}}",
+                missing_configuration: "FixedInput for product is not configured"
+            }
+        }
     },
     filter: {
         CHANGES: "Changes",
@@ -566,6 +578,8 @@ I18n.translations.en = {
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
             duplicate_name: "This name is already taken. Product names need to be unique.",
+            select_add_fixed_input: "Add a Fixed Input...",
+            select_no_more_fixed_inputs: "No more Fixed Inputs to add",
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",

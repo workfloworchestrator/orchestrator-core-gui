@@ -294,6 +294,10 @@ export function tasks() {
     return fetchJson("tasks");
 }
 
+export function fixedInputConfiguration() {
+    return fetchJson("fixed_inputs/configuration");
+}
+
 export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
 }
@@ -320,6 +324,10 @@ export function abortTask(taskId) {
 
 export function validations() {
     return fetchJson("products/validations");
+}
+
+export function fixedInputValidations() {
+    return fetchJson("fixed_inputs/validations");
 }
 
 export function validation(productId) {
