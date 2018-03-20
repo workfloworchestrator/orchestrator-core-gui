@@ -26,10 +26,14 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import {filterProductsByTagAndBandwidth} from "../validations/Products";
+import {filterProductsByTag, filterProductsByTagAndBandwidth} from "../validations/Products";
+import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
+import TransitionProductSelect from "./TransitionProductSelect";
+import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 
 
-const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation", "label"];
+const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
+    "subscription_downgrade_confirmation", "label"];
 
 export default class UserInputForm extends React.Component {
 
@@ -91,7 +95,7 @@ export default class UserInputForm extends React.Component {
     };
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]) ||
-                      Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
+        Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -100,6 +104,7 @@ export default class UserInputForm extends React.Component {
     };
 
     changeStringInput = name => e => {
+        debugger;
         const value = e.target.value;
         this.changeUserInput(name, value);
     };
@@ -121,14 +126,16 @@ export default class UserInputForm extends React.Component {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
         const hashTable = {...this.state.uniqueSelectInputs};
         const errors = {...this.state.uniqueErrors};
-        if(!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
+        if (!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
         const names = hashTable[hash]['names'];
         const values = hashTable[hash]['values'];
-        if(!(value in values)) values[value] = 0;
+        if (!(value in values)) values[value] = 0;
         values[value] += 1;
-        if(name in names) values[names[name]] -= 1;
+        if (name in names) values[names[name]] -= 1;
         names[name] = value;
-        Object.keys(names).forEach(name => {errors[name] = values[names[name]] > 1;});
+        Object.keys(names).forEach(name => {
+            errors[name] = values[names[name]] > 1;
+        });
         this.setState({uniqueErrors: errors});
         this.setState({uniqueSelectInputs: hashTable});
     };
@@ -261,6 +268,36 @@ export default class UserInputForm extends React.Component {
                 return <ProductSelect products={sspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
+            case "msp_product":
+                const tags = ["MSP"];
+                const mspProducts = filterProductsByTag(this.props.products, tags);
+                return <ProductSelect products={mspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
+            case "rmsp_product":
+                const rmsptags = ["RMSP"];
+                const rmspProducts = filterProductsByTag(this.props.products, rmsptags);
+                return <ProductSelect products={rmspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
+            case "netherlight_msp_product":
+                const nlTags = ["MSPNL"];
+                const nlMspProducts = filterProductsByTag(this.props.products, nlTags);
+                return <ProductSelect products={nlMspProducts}
+                                      onChange={this.changeSelectInput(name)}
+                                      product={value}/>;
+
+            case "transition_product":
+                const transitionFromProduct = lookupValueFromNestedState(userInput.product_key, currentState) ||
+                    findValueFromInputStep(userInput.product_key, stepUserInput);
+                return <TransitionProductSelect
+                    onChange={this.changeSelectInput(name)}
+                    product={value}
+                    transitionFromProduct={transitionFromProduct}
+                    disabled={userInput.readonly}
+                    transitionType={userInput.transition_type}/>;
             case "contact_persons" :
                 const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
@@ -295,12 +332,43 @@ export default class UserInputForm extends React.Component {
                     freePort={value}
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
+            case "downgrade_redundant_lp_choice":
+                return <DowngradeRedundantLPChoice products={this.props.products}
+                                                   organisations={this.props.organisations}
+                                                   onChange={this.changeStringInput(name)}
+                                                   subscriptionId={process.current_state.subscription_id}
+                                                   value={value}
+                                                   readOnly={userInput.readonly}/>
+            case "downgrade_redundant_lp_confirmation":
+                const primary = lookupValueFromNestedState(userInput.primary, currentState);
+                const secondary = lookupValueFromNestedState(userInput.secondary, currentState);
+                const choice = lookupValueFromNestedState(userInput.choice, currentState);
+                return <div>
+                    <CheckBox name={name} value={value || false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={I18n.t(`process.noc_confirmation`)}/>
+                    <section className="form-divider"></section>
+                    <DowngradeRedundantLPConfirmation products={this.props.products}
+                                                      organisations={this.props.organisations}
+                                                      subscriptionId={process.current_state.subscription_id}
+                                                      className="indent"
+                                                      primary={primary}
+                                                      secondary={secondary}
+                                                      choice={choice}/>
+                </div>
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
                               onChange={this.changeBooleanInput(name)}
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
+                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
+                                              products={this.props.products}
+                                              organisations={this.props.organisations}
+                                              className="indent"/>
+                </div>;
+            case "read_only_subscription":
+                return <div>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
                                               products={this.props.products}
                                               organisations={this.props.organisations}
@@ -332,6 +400,8 @@ export default class UserInputForm extends React.Component {
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
                                             subscription={value}/>;
+
+
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

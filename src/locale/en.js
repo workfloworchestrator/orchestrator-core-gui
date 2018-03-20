@@ -14,7 +14,7 @@ I18n.translations.en = {
     EntityId: "",
 
     header: {
-        title: "Workflows",
+        title: "Orchestrator",
         links: {
             help_html: "<a href=\"https://gitlab.surfnet.nl/automation/workflows/wikis/home\" target=\"_blank\">Help</a>",
             logout: "Logout",
@@ -178,6 +178,10 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+        new_product: "The new Product",
+        new_product_info: "Please select the product with the new speed",
+        new_interface_type: "The new interface type of the port",
+        new_interface_type_info: "Please select the new interface type of the port",
         nms_service_id: "NMS service id",
         nms_service_id_info: "The id of the service on the network (0000-9999)",
         nms_service_id_1: "NMS service id of the first lightpath",
@@ -189,6 +193,9 @@ I18n.translations.en = {
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath and any child SSP's subscriptions",
         noc_remove_lichtpad_confirmation_info: "Are the LightPath of the subscription and any child SSP's subscriptions removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
+        noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
+        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath and are SSP circuits disabled?",
+        noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         new_process: "New process",
@@ -279,7 +286,11 @@ I18n.translations.en = {
         subscription_id1: "Subscription",
         subscription_id1_info: "The first subscription to use",
         subscription_id2: "Subscription",
-        subscription_id2_info: "The second subscription to use"
+        subscription_id2_info: "The second subscription to use",
+        downgrade_redundant_lp_choice: "Redundant LP Subscription",
+        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+        transition_product_downgrade: "Choose Product",
+        transition_product_downgrade_info: "Choose the new Product for this subscription (scoped by the current product)"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -336,14 +347,26 @@ I18n.translations.en = {
         tabs: {
             subscriptions: "Subscriptions",
             workflows: "Workflows",
-            dienstafnames: "Dienstafnames"
+            dienstafnames: "Dienstafnames",
+            fixedInputs: "Fixed Inputs"
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
+        no_fixed_inputs: "There are no products that are either missing required fixed inputs, have incorrect values or have unknown fixed inputs",
         no_dienstafnames: "No mismatches in dienstafname vs. subscriptions tables",
         dienstafname_matches: "Dienstafnames not present in Subscriptions table",
         subscription_matches: "Subscriptions not present in Dienstafname table",
-        fetchingCRMData: "Loading CRM data. Hang on tight..."
+        fetchingCRMData: "Loading CRM data. Hang on tight...",
+        fixedInput: {
+            title: "Invalid FixedInput settings for product {{name}}",
+            fixed_input_name: "Fixed Input name",
+            fixed_input_error: "Error",
+            error: {
+                required_not_present: "Required FixedInput, but not present",
+                invalid_value: "Invalid value for FixedInput: {{value}}",
+                missing_configuration: "FixedInput for product is not configured"
+            }
+        }
     },
     filter: {
         CHANGES: "Changes",
@@ -414,6 +437,7 @@ I18n.translations.en = {
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        modify_modify_msp_speed: "Modify MSP speed",
         product: {
             name: "Name",
             description: "Description",
@@ -440,8 +464,10 @@ I18n.translations.en = {
         no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems (e.g. IMS) that are deleted.",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
-        modify: "Modify Subscription",
-        modifyConfirmation: "Are you sure you want to modify {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
+        modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
+        modify_downgrade_redundant_lichtpad_to_unprotected_workflow: "Downgrade to Unprotected LP",
+        modify_modify_elan: "Modify ELAN",
+        modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
         no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
@@ -478,11 +504,29 @@ I18n.translations.en = {
         copied: "Copied!",
         copy: "Copy to clipboard"
     },
+    downgrade_redundant_lp: {
+        choice: "Which one the LP should be removed from this redundant LP?",
+        choosen: "The LP which should removed from this redundant LP",
+        subscription_childs: "The ports in this redundant LP",
+        primary: "Primary LP",
+        secondary: "Secondary LP",
+        ims_circuit_id: "IMS Circuit ID",
+        ims_protection_circuit_id: "IMS Protection Circuit ID",
+        description: "Description",
+        connector_type: "Connector type",
+        customer_name: "Customer name",
+        location: "Location",
+        node: "Node",
+        patch_position: "Patch position",
+        msp: "MSP",
+        ssp: "SSP",
+    },
     metadata: {
         tabs: {
             products: "Products",
             product_blocks: "Product Blocks",
-            resource_types: "Resource Types"
+            resource_types: "Resource Types",
+            fixed_inputs: "Fixed Inputs"
         },
         deleteConfirmation: "Are you sure you want to delete {{type}} {{name}}?",
         flash: {
@@ -507,8 +551,8 @@ I18n.translations.en = {
             crm_prod_id_info: "The unique reference of this Product in the CRM",
             create_subscription_workflow_key: "Create Workflow",
             create_subscription_workflow_key_info: "The unique reference to the workflow responsible for the creation of a subscription based on this product",
-            modify_subscription_workflow_key: "Modify Workflow",
-            modify_subscription_workflow_key_info: "The unique reference to the workflow responsible for the modification of a subscription based on this product",
+            modify_subscription_workflow_key: "Modify Workflows",
+            modify_subscription_workflow_key_info: "The references to the workflows responsible for modifications of a subscription based on this product",
             terminate_subscription_workflow_key: "Terminate Workflow",
             terminate_subscription_workflow_key_info: "The unique reference to the workflow responsible for the termination of a subscription based on this product",
             created_at: "Create Date",
@@ -534,7 +578,9 @@ I18n.translations.en = {
             select_add_product_block: "Add a Product Block...",
             select_no_more_product_blocks: "No more Product Blocks to add",
             no_found: "No Products",
-            duplicate_name: "This name is already taken. Product names need to be unique."
+            duplicate_name: "This name is already taken. Product names need to be unique.",
+            select_add_fixed_input: "Add a Fixed Input...",
+            select_no_more_fixed_inputs: "No more Fixed Inputs to add",
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
@@ -578,8 +624,16 @@ I18n.translations.en = {
             delete: "Delete",
             no_found: "No Resource Types",
             duplicate_name: "This type is already taken. Resource Types types need to be unique"
-        }
-
+        },
+        fixedInputs: {
+            tags: "Fixed Inputs for Product tag: {{tag}}",
+            inputs: "Fixed Inputs and values",
+            name: "Name",
+            fixedInput: "Fixed Input name",
+            values: "Values",
+            required: "Required"
+        },
+        results: "{{type}} found: {{count}}",
     },
     tasks: {
         searchPlaceHolder: "Search for tasks...",

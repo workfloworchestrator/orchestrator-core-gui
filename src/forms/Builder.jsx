@@ -23,7 +23,7 @@ export function formInput(i18nKey, name, value, readOnly, errors, onChange, onBl
     )
 }
 
-export function formSelect(i18nKey, onChange, values, readOnly, value, clearable = false) {
+export function formSelect(i18nKey, onChange, values, readOnly, value, clearable = false, multiple = false) {
     const options = isEmpty(values) ? [] : (values[0].label ? values : values.map(val => ({value: val, label: val})));
     return (
         <section className="form-divider">
@@ -35,7 +35,8 @@ export function formSelect(i18nKey, onChange, values, readOnly, value, clearable
                     searchable={false}
                     value={value}
                     clearable={clearable}
-                    disabled={readOnly}/>
+                    disabled={readOnly}
+                    multi={multiple}/>
         </section>
     )
 }

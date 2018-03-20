@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {allWorkflows, invalidSubscriptions, dienstafnameSubscriptionCrossCheck, validations} from "../api";
+import {
+    allWorkflows,
+    dienstafnameSubscriptionCrossCheck,
+    fixedInputValidations,
+    invalidSubscriptions,
+    validations
+} from "../api";
 
 import "./Validations.css";
 import ValidationsExplain from "../components/ValidationsExplain";
@@ -10,6 +16,7 @@ import ProductValidation from "../components/ProductValidation";
 import {isEmpty, stop} from "../utils/Utils";
 import SubscriptionValidation from "../components/SubscriptionValidation";
 import DienstafnameValidation from "../components/DienstafnameValidation";
+import FixedInputProductValidation from "../components/FixedInputProductValidation";
 
 
 export default class Validations extends React.Component {
@@ -19,20 +26,21 @@ export default class Validations extends React.Component {
         this.state = {
             validations: [],
             invalidSubscriptions: [],
+            fixedInputs: [],
             dienstafnameSubscriptionMatches: [],
             loadedCRM: false,
             showExplanation: false,
             hideValid: false,
             hideValidSubscriptionTypes: true,
-            tabs: ["workflows", "subscriptions", "dienstafnames"],
+            tabs: ["workflows", "fixedInputs", "subscriptions", "dienstafnames"],
             selectedTab: "workflows",
         };
     }
 
     componentDidMount() {
-        Promise.all([validations(), allWorkflows()])
+        Promise.all([validations(), allWorkflows(), fixedInputValidations()])
             .then(res => {
-                this.setState({validations: res[0]});
+                this.setState({validations: res[0], fixedInputs: res[2]});
                 const workflows = res[1];
                 this.mapWorkflowsToInvalidSubscriptions(workflows);
                 dienstafnameSubscriptionCrossCheck().then(result =>
@@ -42,11 +50,12 @@ export default class Validations extends React.Component {
     }
 
     mapWorkflowsToInvalidSubscriptions(workflows) {
-        Promise.all(workflows.map(workflow => invalidSubscriptions(workflow.key)))
+        Promise.all(workflows.map(workflow => invalidSubscriptions(workflow.name)))
             .then(results => this.setState({
                     invalidSubscriptions: results.map((res, index) =>
                         ({name: workflows[index].name, subscriptions: res})
-                    )})
+                    )
+                })
             )
     }
 
@@ -72,18 +81,31 @@ export default class Validations extends React.Component {
             </section>
             <section className="validations">
                 {filteredSubscriptiops.map(ws =>
-                        <SubscriptionValidation history={this.props.history}
-                                                organisations={this.props.organisations}
-                                                products={this.props.products}
-                                                subscriptions={ws.subscriptions}
-                                                workflow={ws.name}
-                                                onChange={this.onSubscriptionsChange}
-                                                key={ws.name}/>)}
+                    <SubscriptionValidation history={this.props.history}
+                                            organisations={this.props.organisations}
+                                            products={this.props.products}
+                                            subscriptions={ws.subscriptions}
+                                            workflow={ws.name}
+                                            onChange={this.onSubscriptionsChange}
+                                            key={ws.name}/>)}
                 {isEmpty(filteredSubscriptiops) &&
-                    <div><em>{I18n.t("validations.no_subscriptions")}</em></div>}
+                <div><em>{I18n.t("validations.no_subscriptions")}</em></div>}
             </section>
         </div>;
     };
+
+    renderFixedInputValidations = (fixedInputValidations) => <div className="fixedInputs">
+            <section className="header">
+                {this.renderExplain()}
+            </section>
+            <section className="validations">
+                {fixedInputValidations.map((validation, index) =>
+                    <FixedInputProductValidation key={index} history={this.props.history}
+                                                 validation={validation}/>)}
+                {isEmpty(fixedInputValidations) &&
+                <div className={"no-errors"}><em>{I18n.t("validations.no_fixed_inputs")}</em></div>}
+            </section>
+        </div>;
 
     renderWorkflowValidations = (validations, hideValid, validationsToShow) =>
         <div className="workflows">
@@ -113,7 +135,7 @@ export default class Validations extends React.Component {
             {loadedCRM && <section className="validations">
                 <DienstafnameValidation matches={filteredDienstafnames} history={this.props.history}/>
                 {isEmpty(filteredDienstafnames) &&
-                    <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>}
+                <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>}
             </section>}
         </div>
     };
@@ -135,18 +157,20 @@ export default class Validations extends React.Component {
         </span>;
 
     renderTabContent = (validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
-                        invalidSubscriptions, dienstafnameSubscriptionMatches, loadedCRM) => {
+                        invalidSubscriptions, fixedInputs, dienstafnameSubscriptionMatches, loadedCRM) => {
         return selectedTab === "workflows" ?
             this.renderWorkflowValidations(validations, hideValid, validationsToShow) :
             selectedTab === "subscriptions" ?
-            this.renderSubscriptionValidations(invalidSubscriptions, hideValidSubscriptionTypes) :
-            this.renderDienstafnameValidations(dienstafnameSubscriptionMatches, loadedCRM)
+                this.renderSubscriptionValidations(invalidSubscriptions, hideValidSubscriptionTypes) :
+                selectedTab === "fixedInputs" ?
+                    this.renderFixedInputValidations(fixedInputs) :
+                    this.renderDienstafnameValidations(dienstafnameSubscriptionMatches, loadedCRM)
     };
 
     render() {
         const {
             validations, showExplanation, hideValid, tabs, selectedTab, invalidSubscriptions,
-            hideValidSubscriptionTypes, dienstafnameSubscriptionMatches, loadedCRM
+            hideValidSubscriptionTypes, dienstafnameSubscriptionMatches, loadedCRM, fixedInputs
         } = this.state;
         const validationsToShow = hideValid ? [...validations]
             .filter(validation => !this.isValidValidation(validation)) : validations;
@@ -156,12 +180,13 @@ export default class Validations extends React.Component {
                     close={() => this.setState({showExplanation: false})}
                     isVisible={showExplanation}
                     isWorkFlows={selectedTab === "workflows"}
+                    isFixedInputs={selectedTab === "fixedInputs"}
                     isSubscriptions={selectedTab === "subscriptions"}/>
                 <section className="tabs">
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {this.renderTabContent(validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
-                    invalidSubscriptions, dienstafnameSubscriptionMatches, loadedCRM)}
+                    invalidSubscriptions, fixedInputs, dienstafnameSubscriptionMatches, loadedCRM)}
             </div>
         );
     }

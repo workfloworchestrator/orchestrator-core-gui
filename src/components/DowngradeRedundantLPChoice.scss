@@ -1,0 +1,30 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/forms.scss";
+
+.mod-downgrade-redundant-lp {
+    h3 {
+        font-size: larger;
+        color: $blue;
+    }
+    div.form-container {
+        display: flex;
+        border-bottom: 3px solid $lightest-grey;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        section.part {
+            padding-right: 50px;
+            width: 100%;
+
+            label.title {
+                margin: 15px 0 10px 0;
+            }
+        }
+    }
+    p.child {
+        margin-top: 10px;
+        font-style: italic;
+        color: $blue;
+        text-transform: uppercase;
+    }
+}
+

@@ -4,12 +4,13 @@ import Select from "react-select";
 
 import "react-select/dist/react-select.css";
 import "./ProductSelect.css";
+import {TARGET_CREATE} from "../validations/Products";
 
 export default function ProductSelect({onChange, product, products, disabled}) {
     const options = products.map(aProduct => (
         {value: aProduct.product_id,
             label: aProduct.name,
-            workflow: aProduct.create_subscription_workflow_key,
+            workflow: aProduct.workflows.find(wf => wf.target === TARGET_CREATE),
             tag: aProduct.tag,
             productId: aProduct.product_id,
             fixed_inputs: aProduct.fixed_inputs

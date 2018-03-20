@@ -44,13 +44,13 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("terminate_subscription.subscription_childs", {product: product.name})}</h3>
             {circuits.map((subscription, index) =>
-                this.renderSingleSubscription(subscription, index === circuits.length - 1 ? "child last" : "child not-last"))}
+                this.renderSingleSubscription(subscription, index === circuits.length - 1 ? "child last" : "child not-last" ,index))}
         </section>;
     };
 
 
-    renderSingleSubscription = (subscription, className = "") =>
-        <div key={subscription.subscription_id} className={`form-container ${className}`}>
+    renderSingleSubscription = (subscription, className = "", index = 0) =>
+        <div key={`${subscription.subscription_id}_${index}`} className={`form-container ${className}`}>
             <section className="part">
                 <label className="title">{I18n.t("subscriptions.customer_name")}</label>
                 <input type="text" readOnly={true} value={subscription.customer_name}/>
@@ -116,8 +116,6 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
                     <input type="text" readOnly={true} value={product.product_type}/>
                     <label className="title">{I18n.t("subscription.product.tag")}</label>
                     <input type="text" readOnly={true} value={product.tag}/>
-                    <label className="title">{I18n.t("subscription.product.workflow")}</label>
-                    <input type="text" readOnly={true} value={product.terminate_subscription_workflow_key}/>
                 </section>
             </div>
         </section>

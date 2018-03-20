@@ -27,7 +27,7 @@ export default class Subscriptions extends React.PureComponent {
                 {name: "provisioning", selected: true, count: 0},
                 {name: "active", selected: true, count: 0},
                 {name: "disabled", selected: true, count: 0},
-                {name: "terminated", selected: true, count: 0}
+                {name: "terminated", selected: false, count: 0}
             ],
             query: "",
             sorted: {name: "status", descending: false},
@@ -45,8 +45,6 @@ export default class Subscriptions extends React.PureComponent {
                 subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
                 subscription.product_name = productNameById(subscription.product_id, products);
                 subscription.product_tag = productTagById(subscription.product_id, products)
-                // subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date * 1000).getTime() : "";
-                // subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date * 1000).getTime() : "";
             });
             const newFilterAttributesProduct = [];
             const uniqueTags =  [...new Set(products.map(p => p.tag))];
@@ -61,11 +59,14 @@ export default class Subscriptions extends React.PureComponent {
             newFilterAttributesStatus.forEach(attr => attr.count = results
                 .filter(sub => sub.status === attr.name).length);
 
+            const filterAttributesProduct = newFilterAttributesProduct.filter(attr => attr.count > 0);
+            const filterAttributesStatus = newFilterAttributesStatus.filter(attr => attr.count > 0);
             this.setState({
-                subscriptions: results, filteredSubscriptions: results,
-                filterAttributesProduct: newFilterAttributesProduct.filter(attr => attr.count > 0),
-                filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
-            })
+                subscriptions: results,
+                filteredSubscriptions: this.doSearchAndSortAndFilter("", results, this.state.sorted, filterAttributesProduct, filterAttributesStatus),
+                filterAttributesProduct: filterAttributesProduct,
+                filterAttributesStatus: filterAttributesStatus
+            });
         });
 
     showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);

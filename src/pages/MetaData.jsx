@@ -7,13 +7,14 @@ import {stop} from "../utils/Utils";
 import ProductBlocks from "../components/ProductBlocks";
 import ResourceTypes from "../components/ResourceTypes";
 import Products from "../components/Products";
+import FixedInputConfiguration from "../components/FixedInputConfiguration";
 
 export default class MetaData extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            tabs: ["products", "product_blocks", "resource_types"],
+            tabs: ["products", "product_blocks", "resource_types", "fixed_inputs"],
             selectedTab: "product_blocks"
         };
     }
@@ -42,6 +43,8 @@ export default class MetaData extends React.Component {
                 return <ProductBlocks history={this.props.history}/>
             case "resource_types":
                 return <ResourceTypes history={this.props.history}/>
+            case "fixed_inputs":
+                return <FixedInputConfiguration/>
             default:
                 throw new Error(`Unknown tab ${selectedTab}`)
         }

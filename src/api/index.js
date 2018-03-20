@@ -262,8 +262,8 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId) {
-    return postPutJson("processes/modify-subscription", {subscription_id: subscriptionId}, "post");
+export function startModificationSubscription(subscriptionId, workflow) {
+    return postPutJson(`processes/modify-subscription/${workflow.name}`, {subscription_id: subscriptionId}, "post");
 }
 
 export function deleteProcess(processId) {
@@ -294,6 +294,10 @@ export function tasks() {
     return fetchJson("tasks");
 }
 
+export function fixedInputConfiguration() {
+    return fetchJson("fixed_inputs/configuration");
+}
+
 export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
 }
@@ -322,8 +326,16 @@ export function validations() {
     return fetchJson("products/validations");
 }
 
+export function fixedInputValidations() {
+    return fetchJson("fixed_inputs/validations");
+}
+
 export function validation(productId) {
     return fetchJson(`products/${productId}/validate`);
+}
+
+export function transitions(productId, transitionType) {
+    return fetchJson(`products/transitions/${productId}/${transitionType}`);
 }
 
 export function contacts(organisationId) {
