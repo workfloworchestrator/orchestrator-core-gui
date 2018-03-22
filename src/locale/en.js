@@ -127,6 +127,14 @@ I18n.translations.en = {
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         contact_persons: "Customer contact persons",
         contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
+        service_port: {
+            location_code: "Location code",
+            location_code_info: "Provide a valid location code",
+            crm_port_id: 'The CRM identifier for a port',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            ieee_interface_type: "IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type",
+        },
         msp: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
@@ -136,6 +144,10 @@ I18n.translations.en = {
             ieee_interface_type_info: "Choose an IEEE interface type",
         },
         ims_info_msp: {
+            device_port_name: "Device port name",
+            device_port_name_info: "Port name to configure on the physical device",
+        },
+        ims_info: {
             device_port_name: "Device port name",
             device_port_name_info: "Port name to configure on the physical device",
         },

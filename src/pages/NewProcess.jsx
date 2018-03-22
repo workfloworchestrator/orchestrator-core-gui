@@ -103,8 +103,7 @@ export default class NewProcess extends React.Component {
                             <label htmlFor="product">{I18n.t("process.product")}</label>
                             <em>{I18n.t("process.product_info")}</em>
                             <ProductSelect
-                                products={this.props.products.filter(prod => prod.tag !== "SSP" &&
-                                    !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
+                                products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
                                 onChange={this.changeProduct}
                                 product={isEmpty(product) ? undefined : product.value}/>
                         </section>
