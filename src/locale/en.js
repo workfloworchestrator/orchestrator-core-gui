@@ -640,6 +640,7 @@ I18n.translations.en = {
         fixedInputs: {
             tags: "Fixed Inputs for Product tag: {{tag}}",
             inputs: "Fixed Inputs and values",
+            description: "Description",
             name: "Name",
             fixedInput: "Fixed Input name",
             values: "Values",
