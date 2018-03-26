@@ -6,7 +6,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 
 import {isEmpty, stop} from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
-import MultiServicePointSelect from "./MultiServicePointSelect";
+import MultiServicePointSelect from "./ServicePortSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
@@ -19,7 +19,7 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import MultipleMSPs from "./MultipleMSPs";
+import MultipleServicePoints from "./MultipleServicePoints";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -104,7 +104,6 @@ export default class UserInputForm extends React.Component {
     };
 
     changeStringInput = name => e => {
-        debugger;
         const value = e.target.value;
         this.changeUserInput(name, value);
     };
@@ -189,8 +188,8 @@ export default class UserInputForm extends React.Component {
         const uniqueError = this.state.uniqueErrors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
-                {!ignoreLabel && <label htmlFor="name">{I18n.t(`process.${name}`)}</label>}
-                {!ignoreLabel && this.renderInputInfoLabel(name)}
+                {!ignoreLabel && this.renderInputLabel(userInput)}
+                {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput, process)}
                 {error &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
@@ -199,11 +198,24 @@ export default class UserInputForm extends React.Component {
             </section>);
     };
 
-    renderInputInfoLabel = name => {
+    i18nContext = (i18nName, userInput) => {
+        if (userInput.i18n_state) {
+            debugger;
+        }
+        if (i18nName.endsWith("_info")) {
+            return <em>{I18n.t(i18nName, userInput.i18n_state)}</em>;
+        }
+        return <label htmlFor="name">{I18n.t(i18nName, userInput.i18n_state)}</label>;
+    };
+
+    renderInputLabel = userInput => this.i18nContext(`process.${userInput.name}`, userInput);
+
+    renderInputInfoLabel = userInput => {
+        const name = userInput.name;
         if (name.indexOf("crm_port_id") > -1) {
             return <em>{I18n.t(`process.${name}_info`, {example: this.state.randomCrm})}</em>;
         }
-        return <em>{I18n.t(`process.${name}_info`)}</em>;
+        return this.i18nContext(`process.${name}_info`, userInput);
     };
 
     chooseInput = (userInput, process) => {
@@ -211,6 +223,7 @@ export default class UserInputForm extends React.Component {
         const value = userInput.value;
         const {currentState} = this.props;
         const stepUserInput = this.state.stepUserInput;
+        let organisationId;
         switch (userInput.type) {
             case "string" :
             case "guid":
@@ -241,12 +254,12 @@ export default class UserInputForm extends React.Component {
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
-            case "msp" :
+            case "servicePort" :
                 const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
                     lookupValueFromNestedState("bandwidth", currentState);
                 const mspProductIds = filterProductsByTagAndBandwidth(this.props.products, "MSP", bandwidthMsp)
                     .map(product => product.product_id);
-                const mspSubscriptions = this.props.multiServicePoints
+                const mspSubscriptions = this.props.servicePorts
                     .filter(msp => mspProductIds.includes(msp.product_id));
                 return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
                                                 msps={mspSubscriptions}
@@ -299,7 +312,7 @@ export default class UserInputForm extends React.Component {
                     disabled={userInput.readonly}
                     transitionType={userInput.transition_type}/>;
             case "contact_persons" :
-                const organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
+                organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
@@ -386,15 +399,20 @@ export default class UserInputForm extends React.Component {
             case "label_with_state":
                 return <StateValue className={userInput.name} value={value}/>;
             case "label":
-                return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`)}</p>;
-            case "multi_msp":
-                return <MultipleMSPs msps={isEmpty(value) ? [
+                return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
+            case "service_ports":
+                organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
+                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                return <MultipleServicePoints servicePorts={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
                 ] : value}
-                                     availableMSPs={this.props.multiServicePoints}
-                                     organisations={this.props.organisations}
-                                     onChange={this.changeNestedInput(name)}/>;
+                                              availableServicePorts={this.props.servicePorts}
+                                              organisations={this.props.organisations}
+                                              onChange={this.changeNestedInput(name)}
+                                              organisationId={organisationId}
+                                              maximum={userInput.maximum}
+                />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
@@ -437,7 +455,7 @@ UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    multiServicePoints: PropTypes.array.isRequired,
+    servicePorts: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,

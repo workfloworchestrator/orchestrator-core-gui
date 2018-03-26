@@ -99,6 +99,8 @@ I18n.translations.en = {
         second_lightpath: "The second lightpath in this redundant LP",
         first_msp: "The first port in this redundant MSP",
         second_msp: "The second port in this redundant MSP",
+        first_service_port: "The first service port in this redundant {{product_tag}}",
+        second_service_port: "The second service port in this redundant {{product_tag}}",
         source: "MSP left",
         source_info: "The left MSP in the lightpath",
         source_vlan: "Port VLAN left ",
@@ -128,6 +130,14 @@ I18n.translations.en = {
         contact_persons: "Customer contact persons",
         contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
         service_port: {
+            location_code: "Location code",
+            location_code_info: "Provide a valid location code",
+            crm_port_id: 'The CRM identifier for a port',
+            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            ieee_interface_type: "IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type",
+        },
+        service_port_redundant: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
             crm_port_id: 'The CRM identifier for a port',
@@ -227,8 +237,10 @@ I18n.translations.en = {
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
-        multi_msp: "Multi-Service Points",
-        multi_msp_info: "All off the MSP's that will be connected to each other in this E-LAN virtual private network - minimum is 2",
+        service_ports: "Service Ports",
+        service_ports_info: "The two Service Ports that will be connected to each other in this LP",
+        elan_service_ports: "ELAN Service Ports",
+        elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         nsi_isalias: "NSI isAlias",
         nsi_isalias_info: "",
         ssp_a: {
@@ -746,8 +758,8 @@ I18n.translations.en = {
         "noFreePortsPlaceholder": "No free ports available",
         "selectPort": "Select a port"
     },
-    multi_msp: {
-        msp: "Multi-Service Port",
+    service_ports: {
+        servicePort: "Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
     },

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
-import "./MultipleMSPs.css";
-import MultiServicePointSelect from "./MultiServicePointSelect";
+import "./MultipleServicePoints.css";
+import MultiServicePointSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {doValidateUserInput} from "../validations/UserInput";
 
@@ -54,7 +54,7 @@ export default class MultipleMSPs extends React.PureComponent {
 
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
-                {index === 0 && <label>{I18n.t("multi_msp.msp")}</label>}
+                {index === 0 && <label>{I18n.t("multi_msp.servicePort")}</label>}
                 <MultiServicePointSelect key={index} onChange={this.onChangeInternal("subscription_id", index)}
                                          msp={msp.subscription_id}
                                          msps={inSelect}

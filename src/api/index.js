@@ -148,8 +148,8 @@ export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptionsByTag(tag) {
-    return fetchJson(`subscriptions/tag/${tag}`);
+export function subscriptionsByTags(tags) {
+    return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
 }
 
 export function subscriptionsByProductId(productId) {

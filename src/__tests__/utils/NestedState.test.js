@@ -21,12 +21,12 @@ test("Lookup non-existing nested key in process state", () => {
 });
 
 test("Lookup nested key in flattened process state", () => {
-    const value = lookupValueFromNestedState("msp.location_code", {"msp.location_code": "value"});
+    const value = lookupValueFromNestedState("servicePort.location_code", {"msp.location_code": "value"});
     expect(value).toBe(null)
 });
 
 test("Lookup nested key in non-flattened process state", () => {
-    const value = lookupValueFromNestedState("msp.location_code", {"msp": {location_code: "value"}});
+    const value = lookupValueFromNestedState("servicePort.location_code", {"servicePort": {location_code: "value"}});
     expect(value).toBe("value")
 });
 

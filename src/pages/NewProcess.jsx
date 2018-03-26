@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {initialWorkflowInput, startProcess, subscriptionsByTag, validation} from "../api";
+import {initialWorkflowInput, startProcess, subscriptionsByTags, validation} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
@@ -18,7 +18,7 @@ export default class NewProcess extends React.Component {
         this.state = {
             product: {},
             stepUserInput: [],
-            multiServicePoints: [],
+            servicePorts: [],
             productValidation: {"valid": true, mapping: {}}
         };
     }
@@ -35,7 +35,7 @@ export default class NewProcess extends React.Component {
                 });
             }
         }
-        subscriptionsByTag("MSP").then(multiServicePoints => this.setState({multiServicePoints: multiServicePoints}));
+        subscriptionsByTags(["MSP", "SSP"]).then(servicePorts => this.setState({servicePorts: servicePorts}));
     };
 
     validSubmit = (stepUserInput) => {
@@ -91,7 +91,7 @@ export default class NewProcess extends React.Component {
     };
 
     render() {
-        const {product, stepUserInput, productValidation, multiServicePoints} = this.state;
+        const {product, stepUserInput, productValidation, servicePorts} = this.state;
         const {organisations, products, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         return (
@@ -114,7 +114,7 @@ export default class NewProcess extends React.Component {
                         </section>}
                         {!isEmpty(stepUserInput) &&
                         <UserInputForm stepUserInput={stepUserInput}
-                                       multiServicePoints={multiServicePoints}
+                                       servicePorts={servicePorts}
                                        history={history}
                                        organisations={organisations}
                                        products={products}

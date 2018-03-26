@@ -31,9 +31,6 @@ export default class FilterDropDown extends React.PureComponent {
 
     render() {
         const {items, filterBy, label} = this.props;
-        if (items.length === 0) {
-            return null;
-        }
         const {dropDownActive} = this.state;
         const filtered = items.filter(item => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);

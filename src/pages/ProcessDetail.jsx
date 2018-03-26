@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {process, resumeProcess, subscriptionsByTag} from "../api";
+import {process, resumeProcess, subscriptionsByTags} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
@@ -27,7 +27,7 @@ export default class ProcessDetail extends React.PureComponent {
             subscriptionProcesses: [],
             loaded: false,
             stepUserInput: [],
-            multiServicePoints: [],
+            servicePorts: [],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -67,9 +67,9 @@ export default class ProcessDetail extends React.PureComponent {
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTag("MSP")])
+                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTags(["MSP", "SSP"])])
                 .then(res => {
-                    this.setState({subscriptionProcesses: res[0], multiServicePoints: res[1]});
+                    this.setState({subscriptionProcesses: res[0], servicePorts: res[1]});
                 });
             }).catch(err => {
             if (err.response && err.response.status === 404) {
@@ -158,7 +158,7 @@ export default class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, multiServicePoints) => {
+    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, servicePorts) => {
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
@@ -178,7 +178,7 @@ export default class ProcessDetail extends React.PureComponent {
                                products={products}
                                organisations={organisations}
                                history={history}
-                               multiServicePoints={multiServicePoints}
+                               servicePorts={servicePorts}
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}
@@ -196,7 +196,7 @@ export default class ProcessDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, multiServicePoints
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, servicePorts
         } = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
@@ -212,7 +212,7 @@ export default class ProcessDetail extends React.PureComponent {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput,
-                    subscriptionProcesses, multiServicePoints)}
+                    subscriptionProcesses, servicePorts)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
             </div>
         );
