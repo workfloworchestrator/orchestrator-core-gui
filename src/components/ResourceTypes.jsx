@@ -32,6 +32,7 @@ export default class ResourceTypes extends React.Component {
         resourceTypes().then(res => {
             res.forEach(pb => pb.resource_types_string = (pb.resource_types || [])
                 .map(rt => rt.resource_type).join(", "));
+            res = res.sort(this.sortBy(this.state.sorted.name));
             this.setState({resourceTypes: res, filteredResourceTypes: res})
         });
     }
