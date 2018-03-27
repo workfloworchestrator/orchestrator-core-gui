@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {isEmpty, stop} from "../utils/Utils";
+import {stop} from "../utils/Utils";
 
 import "./MultipleServicePoints.css";
 import ServicePortSelect from "./ServicePortSelect";
@@ -58,12 +58,10 @@ export default class MultipleServicePoints extends React.PureComponent {
     };
 
 
-    renderServicePort = (servicePorts, servicePort, index, errors, availableServicePorts, organisations, maximum, organisationId) => {
+    renderServicePort = (servicePorts, servicePort, index, errors, availableServicePorts, organisations, maximum) => {
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
-        if (!isEmpty(organisationId)) {
-           inSelect = inSelect.filter(port => port.tag === "MSP" ||  (port.tag ==="SSP" && port.customer_id === organisationId));
-        }
+        inSelect = inSelect.filter(port => port.tag === "MSP" ||  port.tag ==="SSP");
         if (maximum > 2) { //ELAN
             inSelect = inSelect.filter(port => port.tag === "MSP");
         }
@@ -91,11 +89,11 @@ export default class MultipleServicePoints extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, maximum, organisationId} = this.props;
+        const {availableServicePorts, servicePorts, organisations, maximum} = this.props;
         const {errors} = this.state;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
-                this.renderServicePort(servicePorts, servicePort, index, errors, availableServicePorts, organisations, maximum, organisationId))}
+                this.renderServicePort(servicePorts, servicePort, index, errors, availableServicePorts, organisations, maximum))}
             {maximum > 2 && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -106,6 +104,5 @@ MultipleServicePoints.propTypes = {
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
-    maximum: PropTypes.number.isRequired,
-    organisationId: PropTypes.string
+    maximum: PropTypes.number.isRequired
 };
