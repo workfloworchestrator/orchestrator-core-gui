@@ -39,7 +39,7 @@
             &.ssp_b\.product, &.ssp_b\.location_code, &.ssp_b\.interface_type, &.ssp_b\.crm_port_id,
             &.ssp_c\.product, &.ssp_c\.location_code, &.ssp_c\.interface_type, &.ssp_c\.crm_port_id,
             &.ssp_d\.product, &.ssp_d\.location_code, &.ssp_d\.interface_type, &.ssp_d\.crm_port_id,
-            &.downgrade_redundant_lp_choice {
+            &.downgrade_redundant_lp_choice, &.service_ports_primary, &.service_ports_secondary {
                 margin-left: 40px;
             }
         }
