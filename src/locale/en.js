@@ -467,7 +467,7 @@ I18n.translations.en = {
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
-        modify_modify_msp_speed: "Modify MSP speed",
+        modify_modify_service_port: "Modify Service Port",
         product: {
             name: "Name",
             description: "Description",
