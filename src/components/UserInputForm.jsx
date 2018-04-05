@@ -6,7 +6,6 @@ import ConfirmationDialog from "./ConfirmationDialog";
 
 import {isEmpty, stop} from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
-import MultiServicePointSelect from "./ServicePortSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
@@ -26,7 +25,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import {filterProductsByTag, filterProductsByTagAndBandwidth} from "../validations/Products";
+import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
@@ -251,16 +250,6 @@ export default class UserInputForm extends React.Component {
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
-            case "servicePort" :
-                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
-                    lookupValueFromNestedState("bandwidth", currentState);
-                const mspProductIds = filterProductsByTagAndBandwidth(this.props.products, "MSP", bandwidthMsp)
-                    .map(product => product.product_id);
-                const mspSubscriptions = this.props.servicePorts
-                    .filter(msp => mspProductIds.includes(msp.product_id));
-                return <MultiServicePointSelect key={name} onChange={this.changeSelectInput(name)} msp={value}
-                                                msps={mspSubscriptions}
-                                                organisations={this.props.organisations}/>;
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={this.props.organisations}
                                            onChange={this.changeSelectInput(name)}
@@ -271,13 +260,6 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={value}
                                       disabled={userInput.readonly}/>;
-            case "ssp_product" :
-                const bandwidth = findValueFromInputStep("bandwidth", stepUserInput) ||
-                    lookupValueFromNestedState("bandwidth", currentState);
-                const sspProducts = filterProductsByTagAndBandwidth(this.props.products, "SSP", bandwidth)
-                return <ProductSelect products={sspProducts}
-                                      onChange={this.changeSelectInput(name)}
-                                      product={value}/>;
             case "msp_product":
                 const tags = ["MSP"];
                 const mspProducts = filterProductsByTag(this.props.products, tags);
@@ -400,15 +382,23 @@ export default class UserInputForm extends React.Component {
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
+                    lookupValueFromNestedState("bandwidth", currentState);
+                const productIds = filterProductsByBandwidth(this.props.products, bandwidthMsp)
+                    .map(product => product.product_id);
+                const servicePorts= this.props.servicePorts
+                    .filter(sp => productIds.includes(sp.product_id));
+
                 return <MultipleServicePoints servicePorts={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
                 ] : value}
-                                              availableServicePorts={this.props.servicePorts}
+                                              availableServicePorts={servicePorts}
                                               organisations={this.props.organisations}
                                               onChange={this.changeNestedInput(name)}
                                               organisationId={organisationId}
                                               maximum={userInput.maximum}
+                                              disabled={userInput.readonly}
                 />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);

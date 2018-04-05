@@ -319,8 +319,10 @@ I18n.translations.en = {
         subscription_id2_info: "The second subscription to use",
         downgrade_redundant_lp_choice: "Redundant LP Subscription",
         downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
-        transition_product_downgrade: "Choose Product",
-        transition_product_downgrade_info: "Choose the new Product for this subscription (scoped by the current product)"
+        transition_product_downgrade: "Choose New Product",
+        transition_product_downgrade_info: "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
+        transition_product_upgrade: "Choose New Product",
+        transition_product_upgrade_info: "Choose the new Product for this subscription after the upgrade (scoped by the current product)"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -496,6 +498,7 @@ I18n.translations.en = {
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
         modify_downgrade_redundant_lichtpad_to_unprotected_workflow: "Downgrade to Unprotected LP",
+        modify_upgrade_lichtpad_to_redundant_workflow: "Upgrade to Redundant LP",
         modify_modify_elan: "Modify ELAN",
         modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
