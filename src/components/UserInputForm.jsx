@@ -199,9 +199,6 @@ export default class UserInputForm extends React.Component {
     };
 
     i18nContext = (i18nName, userInput) => {
-        if (userInput.i18n_state) {
-            debugger;
-        }
         if (i18nName.endsWith("_info")) {
             return <em>{I18n.t(i18nName, userInput.i18n_state)}</em>;
         }
