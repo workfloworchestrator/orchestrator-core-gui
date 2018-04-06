@@ -405,6 +405,9 @@ I18n.translations.en = {
         NOC: "NOC",
         KLANT_SUPPORT: "Klant Support",
         SYSTEM: "System",
+        MODIFY: "Modify",
+        TERMINATE: "Terminate",
+        CREATE: "Create",
         all: "ALL",
         selected: "FILTERED",
         aborted: "Aborted",
@@ -559,7 +562,8 @@ I18n.translations.en = {
             products: "Products",
             product_blocks: "Product Blocks",
             resource_types: "Resource Types",
-            fixed_inputs: "Fixed Inputs"
+            fixed_inputs: "Fixed Inputs",
+            workflows: "Workflows"
         },
         deleteConfirmation: "Are you sure you want to delete {{type}} {{name}}?",
         flash: {
@@ -666,6 +670,16 @@ I18n.translations.en = {
             fixedInput: "Fixed Input name",
             values: "Values",
             required: "Required"
+        },
+        workflows: {
+            name: "Unique key",
+            description: "Description",
+            target: "Target",
+            product_tags_string: "Product tags",
+            created_at: "Created",
+            tag: "Product tag",
+            searchPlaceHolder: "Search for workflows...",
+            no_found: "No workflows found"
         },
         results: "{{type}} found: {{count}}",
     },

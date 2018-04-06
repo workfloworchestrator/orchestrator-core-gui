@@ -26,8 +26,8 @@ export default class FixedInputConfiguration extends React.Component {
 
     render() {
         const {configuration} = this.state;
-        return Object.keys(configuration.by_tag).map(tag =>
-            <section className="fixed-input-configuration">
+        return Object.keys(configuration.by_tag).map((tag, index) =>
+            <section className="fixed-input-configuration" key={index}>
                 <h3 className="description">{I18n.t("metadata.fixedInputs.tags", {tag: tag})}</h3>
                 <table>
                     <thead>

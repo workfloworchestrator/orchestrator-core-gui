@@ -222,6 +222,10 @@ export function allWorkflows() {
     return fetchJson("workflows")
 }
 
+export function allWorkflowsWithProductTags() {
+    return fetchJson("workflows/with_product_tags")
+}
+
 export function workflowsByTarget(target) {
     return fetchJson(`workflows?target=${target}`)
 }

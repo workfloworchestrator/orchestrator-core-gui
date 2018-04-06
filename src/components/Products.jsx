@@ -302,7 +302,7 @@ export default class Products extends React.Component {
                         {I18n.t("metadata.products.new")}<i className="fa fa-plus"></i>
                     </a>
                 </div>
-                <section className="product">
+                <section className="products">
                     {this.renderProducts(filteredProducts, actions, sorted)}
                 </section>
             </div>
