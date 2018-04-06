@@ -770,7 +770,8 @@ I18n.translations.en = {
     service_ports: {
         servicePort: "Service Port",
         vlan: "Port Vlan",
-        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
+        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}"
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
