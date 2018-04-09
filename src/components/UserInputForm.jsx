@@ -287,7 +287,7 @@ export default class UserInputForm extends React.Component {
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
-                    transitionFromProduct={subscriptionId}
+                    subscriptionId={subscriptionId}
                     disabled={userInput.readonly}
                     transitionType={userInput.transition_type}/>;
             case "contact_persons" :
@@ -382,8 +382,9 @@ export default class UserInputForm extends React.Component {
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
-                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
-                    lookupValueFromNestedState("bandwidth", currentState);
+                const bandwidthKey = userInput.bandwidth_key || "bandwidth";
+                const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) ||
+                    lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(this.props.products, bandwidthMsp)
                     .map(product => product.product_id);
                 const servicePorts= this.props.servicePorts

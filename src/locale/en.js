@@ -222,6 +222,8 @@ I18n.translations.en = {
         noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
+        current_bandwidth: "Bandwidth",
+        current_bandwidth_info: "Current bandwidth in Mbit/s",
         new_process: "New process",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
