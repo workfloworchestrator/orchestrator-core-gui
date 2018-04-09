@@ -338,8 +338,8 @@ export function validation(productId) {
     return fetchJson(`products/${productId}/validate`);
 }
 
-export function transitions(productId, transitionType) {
-    return fetchJson(`products/transitions/${productId}/${transitionType}`);
+export function transitions(subscriptionId, transitionType) {
+    return fetchJson(`products/transitions/${subscriptionId}/${transitionType}`);
 }
 
 export function contacts(organisationId) {

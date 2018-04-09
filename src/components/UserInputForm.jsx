@@ -18,7 +18,7 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import MultipleServicePoints from "./MultipleServicePoints";
+import MultipleServicePorts from "./MultipleServicePorts";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -282,12 +282,12 @@ export default class UserInputForm extends React.Component {
                                       product={value}/>;
 
             case "transition_product":
-                const transitionFromProduct = lookupValueFromNestedState(userInput.product_key, currentState) ||
-                    findValueFromInputStep(userInput.product_key, stepUserInput);
+                const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
+                    findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
-                    transitionFromProduct={transitionFromProduct}
+                    transitionFromProduct={subscriptionId}
                     disabled={userInput.readonly}
                     transitionType={userInput.transition_type}/>;
             case "contact_persons" :
@@ -389,16 +389,16 @@ export default class UserInputForm extends React.Component {
                 const servicePorts= this.props.servicePorts
                     .filter(sp => productIds.includes(sp.product_id));
 
-                return <MultipleServicePoints servicePorts={isEmpty(value) ? [
+                return <MultipleServicePorts servicePorts={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
                 ] : value}
-                                              availableServicePorts={servicePorts}
-                                              organisations={this.props.organisations}
-                                              onChange={this.changeNestedInput(name)}
-                                              organisationId={organisationId}
-                                              maximum={userInput.maximum}
-                                              disabled={userInput.readonly}
+                                             availableServicePorts={servicePorts}
+                                             organisations={this.props.organisations}
+                                             onChange={this.changeNestedInput(name)}
+                                             organisationId={organisationId}
+                                             maximum={userInput.maximum}
+                                             disabled={userInput.readonly}
                 />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
