@@ -380,6 +380,7 @@ I18n.translations.en = {
     },
     subscriptions: {
         customer_name: "Customer",
+        subscription_id: "ID",
         description: "Description",
         insync: "In sync",
         product_name: "Product",
@@ -394,6 +395,7 @@ I18n.translations.en = {
         noop: "",
         deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",
         product: "Product",
+        product_tag: "Type",
         flash: {
             delete: "Subscription {{name}} was deleted",
         }

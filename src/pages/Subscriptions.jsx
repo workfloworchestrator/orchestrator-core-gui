@@ -13,6 +13,10 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import {deleteSubscription} from "../api/index";
 import {setFlash} from "../utils/Flash";
 
+const productServicePortTags = ["MSP", "MSPNL", "SSP", "RMSP"];
+const productLightPathTags = ["LightPath", "ELAN"];
+const collapsibleProductTags = productServicePortTags.concat(productLightPathTags);
+
 export default class Subscriptions extends React.PureComponent {
 
     constructor(props) {
@@ -34,20 +38,26 @@ export default class Subscriptions extends React.PureComponent {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            collapsedSubscriptions: [],
+            collapsibleSubscriptions: []
         };
     }
 
     componentDidMount = () => subscriptions()
         .then(results => {
             const {organisations, products} = this.props;
+            const collapsibleSubscriptions = [];
             results.forEach(subscription => {
                 subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
                 subscription.product_name = productNameById(subscription.product_id, products);
-                subscription.product_tag = productTagById(subscription.product_id, products)
+                subscription.product_tag = productTagById(subscription.product_id, products);
+                if (collapsibleProductTags.includes(subscription.product_tag)) {
+                    collapsibleSubscriptions.push(subscription.subscription_id);
+                }
             });
             const newFilterAttributesProduct = [];
-            const uniqueTags =  [...new Set(products.map(p => p.tag))];
+            const uniqueTags = [...new Set(products.map(p => p.tag))];
             uniqueTags.forEach(tag => {
                 newFilterAttributesProduct.push({
                     name: tag,
@@ -65,7 +75,8 @@ export default class Subscriptions extends React.PureComponent {
                 subscriptions: results,
                 filteredSubscriptions: this.doSearchAndSortAndFilter("", results, this.state.sorted, filterAttributesProduct, filterAttributesStatus),
                 filterAttributesProduct: filterAttributesProduct,
-                filterAttributesStatus: filterAttributesStatus
+                filterAttributesStatus: filterAttributesStatus,
+                collapsibleSubscriptions: collapsibleSubscriptions
             });
         });
 
@@ -168,6 +179,19 @@ export default class Subscriptions extends React.PureComponent {
         }
     });
 
+    handleCollapseSubscription = subscription => e => {
+        stop(e);
+        let collapsedSubscriptions = [...this.state.collapsedSubscriptions];
+        const id = subscription.subscription_id;
+        const indexOf = collapsedSubscriptions.indexOf(id);
+        if (indexOf > -1) {
+            collapsedSubscriptions.splice(indexOf, 1);
+        } else {
+            collapsedSubscriptions.push(id);
+        }
+        this.setState({collapsedSubscriptions: collapsedSubscriptions})
+    };
+
     handleDeleteSubscription = subscription => e => {
         stop(e);
         this.confirmation(I18n.t("subscriptions.deleteConfirmation", {
@@ -181,9 +205,9 @@ export default class Subscriptions extends React.PureComponent {
         );
     };
 
-    renderSubscriptionsTable(subscriptions, sorted) {
-        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date",
-            "end_date", "noop"];
+    renderSubscriptionsTable(filteredSubscriptions, sorted, collapsibleSubscriptions, collapsedSubscriptions) {
+        const columns = ["noop", "customer_name", "subscription_id", "description", "insync", "product_name", "status",
+            "product_tag", "start_date", "noop"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -192,36 +216,15 @@ export default class Subscriptions extends React.PureComponent {
             </th>
         };
 
-        if (subscriptions.length !== 0) {
+        if (filteredSubscriptions.length !== 0) {
             return (
                 <table className="subscriptions">
                     <thead>
                     <tr>{columns.map((column, index) => th(index))}</tr>
                     </thead>
                     <tbody>
-                    {subscriptions.map((subscription, index) =>
-                        <tr key={`${subscription.subscription_id}_${index}`}
-                            onClick={this.showSubscription(subscription)}>
-                            <td data-label={I18n.t("subscriptions.customer_name")}
-                                className="customer_name">{subscription.customer_name}</td>
-                            <td data-label={I18n.t("subscriptions.description")}
-                                className="description">{subscription.description}</td>
-                            <td data-label={I18n.t("subscriptions.insync")} className="insync">
-                                <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
-                            </td>
-                            <td data-label={I18n.t("subscriptions.product_name")}
-                                className="product_name">{subscription.product_name}</td>
-                            <td data-label={I18n.t("subscriptions.status")}
-                                className="status">{subscription.status}</td>
-                            <td data-label={I18n.t("subscriptions.start_date_epoch")}
-                                className="start_date_epoch">{renderDate(subscription.start_date)}</td>
-                            <td data-label={I18n.t("subscriptions.name")}
-                                className="end_date_epoch">{renderDate(subscription.end_date)}</td>
-                            <td data-label={I18n.t("subscriptions.nope")}
-                                className="actions"><span>
-                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
-                            </span></td>
-                        </tr>
+                    {filteredSubscriptions.map((subscription, index) =>
+                        this.renderSubscriptionRow(subscription, index, collapsibleSubscriptions, collapsedSubscriptions)
                     )}
                     </tbody>
                 </table>
@@ -230,12 +233,47 @@ export default class Subscriptions extends React.PureComponent {
         return <div><em>{I18n.t("subscriptions.no_found")}</em></div>;
     }
 
+    renderSubscriptionRow = (subscription, index, collapsibleSubscriptions, collapsedSubscriptions) => {
+        let subscriptionId = subscription.subscription_id;
+        const icon = collapsedSubscriptions.includes(subscriptionId) ? "minus" : "plus";
+        return (
+            <tr key={`${subscriptionId}_${index}`}
+                onClick={this.showSubscription(subscription)}>
+                <td data-label={I18n.t("subscriptions.noop")}
+                    className="expand"><span>
+                {collapsibleSubscriptions.includes(subscriptionId) &&
+                <i className={`fa fa-${icon}`} onClick={this.handleCollapseSubscription(subscription)}></i>}
+                            </span></td>
+                <td data-label={I18n.t("subscriptions.customer_name")}
+                    className="customer_name">{subscription.customer_name}</td>
+                <td data-label={I18n.t("subscriptions.subscription_id")}
+                    className="subscription_id">{subscriptionId.substring(0, 8)}</td>
+                <td data-label={I18n.t("subscriptions.description")}
+                    className="description">{subscription.description}</td>
+                <td data-label={I18n.t("subscriptions.insync")} className="insync">
+                    <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
+                </td>
+                <td data-label={I18n.t("subscriptions.product_name")}
+                    className="product_name">{subscription.product_name}</td>
+                <td data-label={I18n.t("subscriptions.status")}
+                    className="status">{subscription.status}</td>
+                <td data-label={I18n.t("subscriptions.product_tag")}
+                    className="tag">{subscription.product_tag}</td>
+                <td data-label={I18n.t("subscriptions.start_date_epoch")}
+                    className="start_date_epoch">{renderDate(subscription.start_date)}</td>
+                <td data-label={I18n.t("subscriptions.noop")}
+                    className="actions"><span>
+                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
+                            </span></td>
+        </tr>);
+    };
+
     render() {
         const {
             filteredSubscriptions, filterAttributesProduct, filterAttributesStatus, query, sorted,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, collapsibleSubscriptions,
+            collapsedSubscriptions
         } = this.state;
-        const {organisations} = this.props;
         return (
             <div className="mod-subscriptions">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -261,7 +299,8 @@ export default class Subscriptions extends React.PureComponent {
                     </div>
                 </div>
                 <section className="subscriptions">
-                    {this.renderSubscriptionsTable(filteredSubscriptions, sorted, organisations)}
+                    {this.renderSubscriptionsTable(filteredSubscriptions, sorted, collapsibleSubscriptions,
+                        collapsedSubscriptions)}
                 </section>
             </div>
         );
