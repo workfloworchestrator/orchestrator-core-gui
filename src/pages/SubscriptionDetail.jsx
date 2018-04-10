@@ -6,7 +6,7 @@ import {
     imsService,
     processSubscriptionsBySubscriptionId,
     productById,
-    subscriptions_by_subscription_port_id,
+    parentSubscriptions,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -72,7 +72,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
-                    promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
+                    promises.push(parentSubscriptions(subscription.subscription_id))
                 }
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(2);

@@ -27,6 +27,71 @@ export function isModifiable(subscription, relatedSubscriptions) {
     return !isEmpty(relatedSubscriptions)
 }
 
+const searchableSubscriptionsColumnsMapping = {
+    "customer": "customer_name",
+    "id": "subscription_id",
+    "description": "description",
+    "product": "product_name",
+    "status": "status",
+    "type": "product_tag"
+};
+
+export function searchConstruct(query) {
+    const queryToLower = query.toLowerCase();
+    let colonIndex = queryToLower.indexOf(":");
+    if (colonIndex > -1) {
+        const searchOptions = {};
+        const parts = query.split(/(:|'|"| )/)
+        let lastSearchItem = "";
+        let inSeparator = false;
+        let afterColon = false;
+        let inSearchTerm = false;
+        for (let i = 0; i < parts.length; i++) {
+            const part = parts[i];
+            if (part === "'" || part === '"') {
+                inSeparator = !inSeparator;
+                continue;
+            }
+            if (part === ":") {
+                afterColon = !afterColon;
+                continue;
+            }
+            if (part === " " && inSeparator) {
+                let key = searchableSubscriptionsColumnsMapping[lastSearchItem];
+                searchOptions[key] = searchOptions[key] + (part === " " ? part : part.trim().toLowerCase());
+            }
+            else if (part === " " && !inSeparator) {
+                let subParts = parts.slice(i);
+                const remainder = subParts.join("");
+                if (remainder.indexOf(":") < 0) {
+                    searchOptions["global_search"] = remainder.toLowerCase().trim();
+                    break;
+                }
+            } else if (parts.length === i) {
+                searchOptions["global_search"] = parts.toLowerCase().trim();
+            }
+            else if (customSearchableColumns.includes(part.trim()) && !inSeparator) {
+                lastSearchItem = part;
+                let key = searchableSubscriptionsColumnsMapping[part];
+                searchOptions[key] = "";
+                inSearchTerm = true;
+                //not really but we need to reset it
+                afterColon = false;
+            } else if (inSearchTerm && afterColon) {
+                let key = searchableSubscriptionsColumnsMapping[lastSearchItem];
+                searchOptions[key] = searchOptions[key] + (part === " " ? part : part.trim().toLowerCase());
+            }
+        }
+        Object.keys(searchOptions).forEach(key => {
+            searchOptions[key] = searchOptions[key].trim();
+            if (searchOptions[key] === "") {
+                delete searchOptions[key];
+            }
+        });
+        return searchOptions;
+    }
+}
+
 export const validEmailRegExp = /^\S+@\S+$/;
 
 export const port_subscription_id = "port_subscription_id";
@@ -34,4 +99,8 @@ export const ims_circuit_id = "ims_circuit_id";
 export const ims_port_id = "ims_port_id";
 export const nms_service_id = "nms_service_id";
 export const parent_subscriptions = "parent_subscriptions";
+export const child_subscriptions = "child_subscriptions";
 export const absent = "absent";
+
+export const customSearchableColumns = Object.keys(searchableSubscriptionsColumnsMapping);
+export const searchableColumns = Object.values(searchableSubscriptionsColumnsMapping);

@@ -398,7 +398,9 @@ I18n.translations.en = {
         product_tag: "Type",
         flash: {
             delete: "Subscription {{name}} was deleted",
-        }
+        },
+        fetchingRelatedSubscriptions: "Please wait until we have loaded related subscriptions",
+        noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to this subscription."
     },
     subscription: {
         notFound: "No Subscription found (e.g. 404)",

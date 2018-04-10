@@ -1,7 +1,7 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
-    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
+    absent, child_subscriptions, ims_circuit_id, ims_port_id, parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
 
@@ -177,9 +177,15 @@ export function usedVlansFiltered(subscriptionId, imsCircuitId) {
     return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
 }
 
-export function subscriptions_by_subscription_port_id(subscription_id) {
-    return fetchJson(`subscriptions/parent_subscriptions/${subscription_id}`).then(json => {
+export function parentSubscriptions(childSubscriptionId) {
+    return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`).then(json => {
         return {type: parent_subscriptions, json: json}
+    });
+}
+
+export function childSubscriptions(parentSubscriptionId) {
+    return fetchJson(`subscriptions/child_subscriptions/${parentSubscriptionId}`).then(json => {
+        return {type: child_subscriptions, json: json}
     });
 }
 

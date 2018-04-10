@@ -7,7 +7,7 @@ import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {doValidateUserInput} from "../validations/UserInput";
-import {subscriptions_by_subscription_port_id} from "../api";
+import {parentSubscriptions} from "../api";
 
 export default class MultipleServicePorts extends React.PureComponent {
 
@@ -28,7 +28,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
                 if (port.tag === "SSP") {
                     // The SSP may bot be used in other LP's
-                    subscriptions_by_subscription_port_id(value).then(res => {
+                    parentSubscriptions(value).then(res => {
                         const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
                         if (res.json.length > 0) {
                             usedSSPDescriptions[index] = res.json.map(parent => parent.description).join(", ");

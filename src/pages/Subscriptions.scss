@@ -53,11 +53,22 @@
     }
     tr {
       border-bottom: 1px solid $light-grey;
+      &.related-subscription {
+        background-color: $light-grey;
+        border-left: 5px solid $blue;
+      }
     }
     thead {
       th {
         cursor: pointer;
-        padding: 5px 0 10px
+        padding: 5px 0 10px;
+        i.fa {
+          float: right;
+          margin-right: 15px;
+          color: $medium-grey;
+          font-size: 18px;
+        }
+
       }
       th.customer_name {
         width: 14%;
@@ -66,7 +77,7 @@
         width: 8%;
       }
       th.description {
-        width: 14%;
+        width: 16%;
       }
       th.insync {
         width: 10%;
@@ -76,7 +87,7 @@
         width: 15%;
       }
       th.status {
-        width: 9%;
+        width: 7%;
       }
       th.tag {
         width: 10%;
@@ -105,7 +116,7 @@
       td {
         word-break: break-word;
         word-wrap: break-word;
-        padding: 5px 0;
+        padding: 3px 0;
         &.insync {
           display: flex;
           justify-content: center;
@@ -117,17 +128,25 @@
             padding: 0 20px;
           }
         }
-        i.fa-plus, i.fa-minus {
+        i.fa-plus-circle, i.fa-minus-circle {
           padding: 0 20px;
-          font-size: 22px;
+          font-size: 24px;
+          color: $blue;
         }
-        i.fa-plus {
-          color: $green;
-        }
-        i.fa-minus {
-          color: $red;
-        }
-
+      }
+    }
+    section.fetching-related-subscriptions {
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      em {
+        display: inline-block;
+        margin-left: 15px;
+        font-size: 12px;
+      }
+      i {
+        margin-left: 18px;
+        font-size: 16px;
       }
     }
 
