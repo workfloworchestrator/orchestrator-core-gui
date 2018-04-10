@@ -224,7 +224,7 @@ I18n.translations.en = {
         bandwidth_info: "Desired bandwidth in Mbit/s",
         current_bandwidth: "Bandwidth",
         current_bandwidth_info: "Current bandwidth in Mbit/s",
-        new_process: "New process",
+        new_process: "Create",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         nms_service_updated: "NMS Service has been updated",

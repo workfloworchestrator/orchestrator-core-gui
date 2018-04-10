@@ -152,6 +152,10 @@ export function subscriptionsByTags(tags) {
     return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
 }
 
+export function activeAndSyncedSubscriptions() {
+    return fetchJson("subscriptions?insync=True&status=active");
+}
+
 export function subscriptionsByProductId(productId) {
     return fetchJson(`subscriptions/product/${productId}`);
 }

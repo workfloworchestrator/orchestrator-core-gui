@@ -1,7 +1,13 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {initialWorkflowInput, startProcess, subscriptionsByTags, validation} from "../api";
+import {
+    activeAndSyncedSubscriptions,
+    initialWorkflowInput,
+    startProcess,
+    subscriptionsByTags,
+    validation
+} from "../api";
 import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
@@ -18,8 +24,8 @@ export default class NewProcess extends React.Component {
         this.state = {
             product: {},
             stepUserInput: [],
-            servicePorts: [],
-            productValidation: {"valid": true, mapping: {}}
+            productValidation: {"valid": true, mapping: {}},
+            subscriptions: []
         };
     }
 
@@ -35,7 +41,7 @@ export default class NewProcess extends React.Component {
                 });
             }
         }
-        subscriptionsByTags(["MSP", "SSP"]).then(servicePorts => this.setState({servicePorts: servicePorts}));
+        activeAndSyncedSubscriptions().then(subscriptions =>  this.setState({subscriptions : subscriptions}));
     };
 
     validSubmit = (stepUserInput) => {
@@ -90,42 +96,53 @@ export default class NewProcess extends React.Component {
         });
     };
 
+    renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
+                        organisations, products, locationCodes) {
+        return <section className="form-step">
+            <h3>{I18n.t("process.new_process")}</h3>
+            <section className="form-divider">
+                <label htmlFor="product">{I18n.t("process.product")}</label>
+                <em>{I18n.t("process.product_info")}</em>
+                <ProductSelect
+                    products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
+                    onChange={this.changeProduct}
+                    product={isEmpty(product) ? undefined : product.value}/>
+            </section>
+            {showProductValidation &&
+            <section>
+                <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                <ProductValidation validation={productValidation}/>
+            </section>}
+            {!isEmpty(stepUserInput) &&
+            <UserInputForm stepUserInput={stepUserInput}
+                           servicePorts={subscriptions.filter(sub => sub.tag === "MSP" || sub.tag === "SSP")}
+                           history={history}
+                           organisations={organisations}
+                           products={products}
+                           locationCodes={locationCodes}
+                           product={product}
+                           validSubmit={this.validSubmit}/>}
+        </section>;
+    }
+
     render() {
-        const {product, stepUserInput, productValidation, servicePorts} = this.state;
+        const {product, stepUserInput, productValidation, subscriptions} = this.state;
         const {organisations, products, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
+        const showModify = isEmpty(stepUserInput);
         return (
             <div className="mod-new-process">
                 <section className="card">
-                    <section className="form-step">
-                        <h3>{I18n.t("process.new_process")}</h3>
-                        <section className="form-divider">
-                            <label htmlFor="product">{I18n.t("process.product")}</label>
-                            <em>{I18n.t("process.product_info")}</em>
-                            <ProductSelect
-                                products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
-                                onChange={this.changeProduct}
-                                product={isEmpty(product) ? undefined : product.value}/>
-                        </section>
-                        {showProductValidation &&
-                        <section>
-                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                            <ProductValidation validation={productValidation}/>
-                        </section>}
-                        {!isEmpty(stepUserInput) &&
-                        <UserInputForm stepUserInput={stepUserInput}
-                                       servicePorts={servicePorts}
-                                       history={history}
-                                       organisations={organisations}
-                                       products={products}
-                                       locationCodes={locationCodes}
-                                       product={product}
-                                       validSubmit={this.validSubmit}/>}
-                    </section>
+                    {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
+                        subscriptions, history, organisations, products, locationCodes)}
+                        {/*{this.renderModifyProduct(subscriptions, products, locationCodes)}*/}
+                        {/*{this.renderTerminateProduct(product, showProductValidation, productValidation, stepUserInput,*/}
+                        {/*subscriptions, history, organisations, products, locationCodes)}*/}
                 </section>
             </div>
         );
     }
+
 }
 
 NewProcess.propTypes = {
@@ -136,4 +153,8 @@ NewProcess.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
+    preselectedDienstafname: PropTypes.string,
+    preselectedSubscription: PropTypes.string,
+    preselectedWorkflow: PropTypes.string,
+    preselectedWorkflowTarget: PropTypes.string,
 };
