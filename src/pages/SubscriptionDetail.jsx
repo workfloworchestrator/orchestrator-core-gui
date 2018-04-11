@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 
 import {
     imsService,
+    parentSubscriptions,
     processSubscriptionsBySubscriptionId,
     productById,
-    parentSubscriptions,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -19,7 +19,6 @@ import {
     ims_circuit_id,
     ims_port_id,
     isTerminatable,
-    isModifiable,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -100,7 +99,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         isTerminatable: isTerminatable(subscription, subscriptions),
-                        isModifiable: isModifiable(subscription, subscriptions),
+                        isModifiable: false,
                         loadedIMSRelatedObjects: true
                     });
                 })

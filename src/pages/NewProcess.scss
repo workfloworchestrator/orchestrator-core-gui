@@ -24,6 +24,12 @@
     }
 
   }
+  section.actions-buttons {
+    display: flex;
+    a.button {
+      margin-left: auto;
+    }
+  }
 
 }
 

@@ -224,7 +224,7 @@ I18n.translations.en = {
         bandwidth_info: "Desired bandwidth in Mbit/s",
         current_bandwidth: "Bandwidth",
         current_bandwidth_info: "Current bandwidth in Mbit/s",
-        new_process: "Create",
+        new_process: "Create new process / subscription",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         nms_service_updated: "NMS Service has been updated",
@@ -263,6 +263,12 @@ I18n.translations.en = {
         transition_product_upgrade_info: "Choose the new Product for this subscription after the upgrade (scoped by the current product)",
         transition_product_speed: "Choose New Product",
         transition_product_speed_info: "Choose a new product - scoped on the maximum capacity of the current ports - with a new speed.",
+        workflowsPlaceholder: "Search and select a workflow...",
+        workflowsEmptyPlaceholder: "First select a subscription...",
+        modify_subscription: "Modify existing subscription",
+        terminate_subscription: "Terminate existing subscription",
+        workflowSelect: "Modify workflow"
+
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -400,7 +406,9 @@ I18n.translations.en = {
             delete: "Subscription {{name}} was deleted",
         },
         fetchingRelatedSubscriptions: "Please wait until we have loaded related subscriptions",
-        noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to this subscription."
+        noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
+        relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
+        relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:"
     },
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
@@ -440,7 +448,7 @@ I18n.translations.en = {
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription: "This child subscription can not be terminated as it is used in parent subscriptions.",
+        no_termination_parent_subscription: "This Port subscription can not be terminated as it is used in other LP subscriptions.",
         no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems (e.g. IMS) that are deleted.",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
@@ -453,6 +461,9 @@ I18n.translations.en = {
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
         no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
+        selectSubscriptionPlaceholder: "Search and select a subscription...",
+        namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
+        start: "Start process"
     },
     terminate_subscription: {
         cancel: "Cancel",

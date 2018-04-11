@@ -1,5 +1,7 @@
 import {isEmpty} from "../utils/Utils";
 
+const lightPathProductTags = ["LightPath", "LPNLNSI", "ELAN"];
+
 export function subscriptionInstanceValues(subscription) {
     return subscription.instances.reduce((acc, instance) =>
         acc.concat(instance.values.map(item => ({...item, instance_label: instance.label}))), []);
@@ -10,21 +12,18 @@ export function hasResourceType(subscription, resourceType) {
     return values.some(val => val.resource_type.resource_type === resourceType);
 }
 
+export function isLightPathProduct(subscription) {
+    return lightPathProductTags.includes(subscription.tag);
+}
+
 export function isTerminatable(subscription, relatedSubscriptions) {
     //Parent subscriptions like 'Lichtpaden' can always be terminated
-    if (hasResourceType(subscription, "nms_service_id")) {
-        return true;
-    }
-    if (hasResourceType(subscription, "port_subscription_id")) {
+    if (lightPathProductTags.includes(subscription.tag)) {
         return true;
     }
     //Child subscriptions like 'MSP' / 'SSP' can only be terminated if not used in non-terminated parent subscriptions
     return isEmpty(relatedSubscriptions) || relatedSubscriptions.every(sub => sub.status === "terminated");
 
-}
-
-export function isModifiable(subscription, relatedSubscriptions) {
-    return !isEmpty(relatedSubscriptions)
 }
 
 const searchableSubscriptionsColumnsMapping = {
@@ -39,6 +38,7 @@ const searchableSubscriptionsColumnsMapping = {
 export function searchConstruct(query) {
     const queryToLower = query.toLowerCase();
     let colonIndex = queryToLower.indexOf(":");
+    //See the tests in src/__tests__/validations/Subscriptions.test.js for 'explanation'
     if (colonIndex > -1) {
         const searchOptions = {};
         const parts = query.split(/(:|'|"| )/)
@@ -58,7 +58,18 @@ export function searchConstruct(query) {
             }
             if (part === " " && inSeparator) {
                 let key = searchableSubscriptionsColumnsMapping[lastSearchItem];
-                searchOptions[key] = searchOptions[key] + (part === " " ? part : part.trim().toLowerCase());
+                const value = searchOptions[key];
+                if (Array.isArray(value)) {
+                    const lastValue = value[value.length - 1];
+                    if (isEmpty(lastValue) || inSeparator) {
+                        value[value.length - 1] = value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
+                    } else {
+                        value.push(part === " " ? part : part.trim().toLowerCase());
+                    }
+
+                } else {
+                    searchOptions[key] = value + (part === " " ? part : part.trim().toLowerCase());
+                }
             }
             else if (part === " " && !inSeparator) {
                 let subParts = parts.slice(i);
@@ -71,20 +82,45 @@ export function searchConstruct(query) {
                 searchOptions["global_search"] = parts.toLowerCase().trim();
             }
             else if (customSearchableColumns.includes(part.trim()) && !inSeparator) {
-                lastSearchItem = part;
                 let key = searchableSubscriptionsColumnsMapping[part];
-                searchOptions[key] = "";
+                if (lastSearchItem === part) {
+                    const previous = searchOptions[key];
+                    if (Array.isArray(previous)) {
+                        previous.push("");
+                    } else {
+                        searchOptions[key] = [previous, ""]
+                    }
+                } else {
+                    searchOptions[key] = "";
+                }
+                lastSearchItem = part;
                 inSearchTerm = true;
                 //not really but we need to reset it
                 afterColon = false;
             } else if (inSearchTerm && afterColon) {
                 let key = searchableSubscriptionsColumnsMapping[lastSearchItem];
-                searchOptions[key] = searchOptions[key] + (part === " " ? part : part.trim().toLowerCase());
+                const value = searchOptions[key];
+                if (Array.isArray(value)) {
+                    const lastValue = value[value.length - 1];
+                    if (isEmpty(lastValue) || inSeparator) {
+                        value[value.length - 1] = value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
+                    } else {
+                        value.push(part === " " ? part : part.trim().toLowerCase());
+                    }
+                } else {
+                    searchOptions[key] = value + (part === " " ? part : part.trim().toLowerCase());
+                }
+
             }
         }
         Object.keys(searchOptions).forEach(key => {
-            searchOptions[key] = searchOptions[key].trim();
-            if (searchOptions[key] === "") {
+            const value = searchOptions[key];
+            if (Array.isArray(value)) {
+                 searchOptions[key] = value.map(val => val.trim()).filter(val => !isEmpty(val));
+            } else {
+                searchOptions[key] = searchOptions[key].trim();
+            }
+            if (isEmpty(value)) {
                 delete searchOptions[key];
             }
         });

@@ -102,16 +102,17 @@ export default class Subscriptions extends React.PureComponent {
                 const searchOptions = searchConstruct(query);
                 Object.keys(searchOptions).forEach(key => {
                     subscriptions = subscriptions.filter(subscription => {
+                        const searchValue = searchOptions[key];
                         if (key === "global_search") {
                             const filteredColumns = searchableColumns.filter(col => !Object.keys(searchOptions).includes(col));
                             return filteredColumns
-                                .map(search => subscription[search].toLowerCase().indexOf(searchOptions[key]))
+                                .map(search => subscription[search].toLowerCase().indexOf(searchValue))
                                 .some(indexOf => indexOf > -1)
                         }
-                        if (subscription[key] === undefined) {
-                            debugger;
+                        if (Array.isArray(searchValue)) {
+                            return searchValue.every(val => subscription[key].toLowerCase().indexOf(val) > -1)
                         }
-                        return subscription[key].toLowerCase().indexOf(searchOptions[key]) > -1;
+                        return subscription[key].toLowerCase().indexOf(searchValue) > -1;
                     })
                 })
             } else {
@@ -273,6 +274,10 @@ export default class Subscriptions extends React.PureComponent {
         <em>{I18n.t("subscriptions.fetchingRelatedSubscriptions")}</em>
     </section>;
 
+    relatedSubscriptionMsg = subscription => ["LightPath", "LPNLNSI", "ELAN"].includes(subscription.tag) ?
+        I18n.t("subscriptions.relatedSubscriptionsLP", {description: subscription.description}) :
+    I18n.t("subscriptions.relatedSubscriptionsServicePort", {description: subscription.description});
+
     renderSubscriptionRow = (subscription, index, collapsibleSubscriptions, collapsedSubscriptions) => {
         const subscriptionId = subscription.subscription_id;
         const isCollapsible = collapsibleSubscriptions.includes(subscriptionId);
@@ -293,10 +298,17 @@ export default class Subscriptions extends React.PureComponent {
                 </td>
             </tr>}
             {hasNoRelatedSubscriptions &&
-            <tr>
+            <tr className="related-subscription">
                 <td></td>
                 <td colSpan="9">
-                    <em>{I18n.t("subscriptions.noRelatedSubscriptions")}</em>
+                    <em>{I18n.t("subscriptions.noRelatedSubscriptions", {description: subscription.description})}</em>
+                </td>
+            </tr>}
+            {renderRelatedSubscriptions &&
+            <tr className="related-subscription">
+                <td></td>
+                <td colSpan="9">
+                    <em>{this.relatedSubscriptionMsg(subscription)}</em>
                 </td>
             </tr>}
             {renderRelatedSubscriptions && relatedSubscriptions.map(sub =>

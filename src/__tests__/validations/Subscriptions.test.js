@@ -38,3 +38,13 @@ test("Very complex query", () => {
     testSearchConstructer("customer : 'Avans Hoge' product:'msp <=> msp' something more",
         {"customer_name": "avans hoge", "product_name":"msp <=> msp", "global_search": "something more"});
 });
+
+test("Multiple searches on the same keyword", () => {
+    testSearchConstructer("description:UU description:MSP",
+        {"description": ["uu", "msp"]})
+});
+
+test("Multiple searches on the same keyword with quotes", () => {
+    testSearchConstructer("description:uu description:msp description:'1 Gbit/s'",
+        {"description": ["uu", "msp", "1 gbit/s"]})
+});
