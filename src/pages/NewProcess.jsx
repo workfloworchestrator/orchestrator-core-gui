@@ -297,7 +297,7 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    renderTerminateProduct = (subscriptions, terminateSubscription, maybeTerminated) => {
+    renderTerminateProduct = (subscriptions, terminateSubscription, maybeTerminated, organisationName) => {
         const renderError = terminateSubscription && !maybeTerminated;
         return (
             <section className="form-step divider">
@@ -308,6 +308,7 @@ export default class NewProcess extends React.Component {
                         subscriptions={subscriptions}
                         subscription={terminateSubscription}
                         onChange={this.changeTerminatedSubscription}
+                        organisation={organisationName}
                     />
                     {renderError &&
                     <em className="error">{I18n.t("subscription.no_termination_parent_subscription")}</em>}
