@@ -20,6 +20,7 @@ import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePoints from "./MultipleServicePoints";
 import IPBlocks from "./IPBlocks";
+
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -283,12 +284,12 @@ export default class UserInputForm extends React.Component {
                                       product={value}/>;
 
             case "transition_product":
-                const transitionFromProduct = lookupValueFromNestedState(userInput.product_key, currentState) ||
-                    findValueFromInputStep(userInput.product_key, stepUserInput);
+                const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
+                    findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
-                    transitionFromProduct={transitionFromProduct}
+                    subscriptionId={subscriptionId}
                     disabled={userInput.readonly}
                     transitionType={userInput.transition_type}/>;
             case "contact_persons" :
@@ -383,23 +384,24 @@ export default class UserInputForm extends React.Component {
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
-                const bandwidthMsp = findValueFromInputStep("bandwidth", stepUserInput) ||
-                    lookupValueFromNestedState("bandwidth", currentState);
+                const bandwidthKey = userInput.bandwidth_key || "bandwidth";
+                const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) ||
+                    lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(this.props.products, bandwidthMsp)
                     .map(product => product.product_id);
                 const servicePorts= this.props.servicePorts
                     .filter(sp => productIds.includes(sp.product_id));
 
-                return <MultipleServicePoints servicePorts={isEmpty(value) ? [
+                return <MultipleServicePorts servicePorts={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
                 ] : value}
-                                              availableServicePorts={servicePorts}
-                                              organisations={this.props.organisations}
-                                              onChange={this.changeNestedInput(name)}
-                                              organisationId={organisationId}
-                                              maximum={userInput.maximum}
-                                              disabled={userInput.readonly}
+                                             availableServicePorts={servicePorts}
+                                             organisations={this.props.organisations}
+                                             onChange={this.changeNestedInput(name)}
+                                             organisationId={organisationId}
+                                             maximum={userInput.maximum}
+                                             disabled={userInput.readonly}
                 />;
 			case "ip_blocks":
 				return <IPBlocks ipBlocks={isEmpty(value) ? [{ipam_prefix_id: "", error_msg: "", display_value: ""}] : value} onChange={this.changeNestedInput(name)} />;

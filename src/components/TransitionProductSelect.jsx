@@ -13,8 +13,8 @@ export default class TransitionProductSelect extends React.PureComponent {
     }
 
     componentDidMount = () => {
-        const {transitionType, transitionFromProduct} = this.props;
-        transitions(transitionFromProduct, transitionType).then(result =>
+        const {subscriptionId, transitionType} = this.props;
+        transitions(subscriptionId, transitionType).then(result =>
             this.setState({transitionProducts: result})
         );
     };
@@ -36,7 +36,7 @@ export default class TransitionProductSelect extends React.PureComponent {
 
 TransitionProductSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
-    transitionFromProduct: PropTypes.string,
+    subscriptionId: PropTypes.string,
     product: PropTypes.string,
     transitionType: PropTypes.string,
     disabled: PropTypes.bool

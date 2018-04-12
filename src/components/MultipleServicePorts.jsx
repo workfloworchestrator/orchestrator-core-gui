@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
-import "./MultipleServicePoints.css";
+import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {doValidateUserInput} from "../validations/UserInput";
-import {subscriptions_by_subscription_port_id} from "../api";
+import {parentSubscriptions} from "../api";
 
-export default class MultipleServicePoints extends React.PureComponent {
+export default class MultipleServicePorts extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
@@ -28,7 +28,7 @@ export default class MultipleServicePoints extends React.PureComponent {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
                 if (port.tag === "SSP") {
                     // The SSP may bot be used in other LP's
-                    subscriptions_by_subscription_port_id(value).then(res => {
+                    parentSubscriptions(value).then(res => {
                         const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
                         if (res.json.length > 0) {
                             usedSSPDescriptions[index] = res.json.map(parent => parent.description).join(", ");
@@ -89,6 +89,7 @@ export default class MultipleServicePoints extends React.PureComponent {
         if (maximum > 2) { //ELAN
             inSelect = inSelect.filter(port => port.tag === "MSP");
         }
+        const showDelete = maximum > 2 && !disabled;
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}
@@ -106,7 +107,7 @@ export default class MultipleServicePoints extends React.PureComponent {
                     <VirtualLAN vlan={servicePort.vlan} onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={servicePort.subscription_id} onBlur={this.validateVlan(index)}
                                 disabled={disabled}/>
-                    {maximum > 2 && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
+                    {showDelete && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                        onClick={this.removeServicePort(index)}></i>}
                 </div>
                 {errors[index] && <em className="error">{I18n.t("service_ports.invalid_vlan")}</em>}
@@ -118,16 +119,17 @@ export default class MultipleServicePoints extends React.PureComponent {
     render() {
         const {availableServicePorts, servicePorts, organisations, maximum, disabled} = this.props;
         const {errors, usedSSPDescriptions} = this.state;
+        const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, errors, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions))}
-            {maximum > 2 && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
+            {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
 }
 
-MultipleServicePoints.propTypes = {
+MultipleServicePorts.propTypes = {
     onChange: PropTypes.func.isRequired,
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,

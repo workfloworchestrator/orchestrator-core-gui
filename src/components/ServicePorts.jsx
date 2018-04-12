@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
-import "./MultipleServicePoints.css";
+import "./MultipleServicePorts.css";
 import MultiServicePointSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {doValidateUserInput} from "../validations/UserInput";

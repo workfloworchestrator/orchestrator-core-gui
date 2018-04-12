@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 
 import {
     imsService,
+    parentSubscriptions,
     processSubscriptionsBySubscriptionId,
     productById,
-    subscriptions_by_subscription_port_id,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -19,7 +19,6 @@ import {
     ims_circuit_id,
     ims_port_id,
     isTerminatable,
-    isModifiable,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -72,7 +71,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
-                    promises.push(subscriptions_by_subscription_port_id(subscription.subscription_id))
+                    promises.push(parentSubscriptions(subscription.subscription_id))
                 }
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(2);
@@ -100,7 +99,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         isTerminatable: isTerminatable(subscription, subscriptions),
-                        isModifiable: isModifiable(subscription, subscriptions),
+                        isModifiable: false,
                         loadedIMSRelatedObjects: true
                     });
                 })

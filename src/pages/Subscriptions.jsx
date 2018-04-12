@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {subscriptions} from "../api";
+import {childSubscriptions, parentSubscriptions, subscriptions} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 
 import "./Subscriptions.css";
@@ -12,6 +12,12 @@ import CheckBox from "../components/CheckBox";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {deleteSubscription} from "../api/index";
 import {setFlash} from "../utils/Flash";
+import {searchableColumns, searchConstruct} from "../validations/Subscriptions";
+
+
+const productServicePortTags = ["MSP", "MSPNL", "SSP", "RMSP"];
+const productLightPathTags = ["LightPath", "ELAN"];
+const collapsibleProductTags = productServicePortTags.concat(productLightPathTags);
 
 export default class Subscriptions extends React.PureComponent {
 
@@ -34,20 +40,24 @@ export default class Subscriptions extends React.PureComponent {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            collapsedSubscriptions: [],
+            collapsibleSubscriptions: []
         };
     }
 
     componentDidMount = () => subscriptions()
         .then(results => {
             const {organisations, products} = this.props;
+            const collapsibleSubscriptions = [];
             results.forEach(subscription => {
-                subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
-                subscription.product_name = productNameById(subscription.product_id, products);
-                subscription.product_tag = productTagById(subscription.product_id, products)
+                this.enrichSubscription(subscription, organisations, products);
+                if (collapsibleProductTags.includes(subscription.product_tag)) {
+                    collapsibleSubscriptions.push(subscription.subscription_id);
+                }
             });
             const newFilterAttributesProduct = [];
-            const uniqueTags =  [...new Set(products.map(p => p.tag))];
+            const uniqueTags = [...new Set(products.map(p => p.tag))];
             uniqueTags.forEach(tag => {
                 newFilterAttributesProduct.push({
                     name: tag,
@@ -65,9 +75,16 @@ export default class Subscriptions extends React.PureComponent {
                 subscriptions: results,
                 filteredSubscriptions: this.doSearchAndSortAndFilter("", results, this.state.sorted, filterAttributesProduct, filterAttributesStatus),
                 filterAttributesProduct: filterAttributesProduct,
-                filterAttributesStatus: filterAttributesStatus
+                filterAttributesStatus: filterAttributesStatus,
+                collapsibleSubscriptions: collapsibleSubscriptions
             });
         });
+
+    enrichSubscription = (subscription, organisations, products) => {
+        subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
+        subscription.product_name = productNameById(subscription.product_id, products);
+        subscription.product_tag = productTagById(subscription.product_id, products);
+    };
 
     showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
 
@@ -80,12 +97,30 @@ export default class Subscriptions extends React.PureComponent {
     doSearchAndSortAndFilter = (query, subscriptions, sorted, filterAttributesProduct, filterAttributesStatus) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["customer_name", "description", "product_name", "status", "name"];
-            subscriptions = subscriptions.filter(subscription =>
-                searchable.map(search => subscription[search].toLowerCase().indexOf(queryToLower))
-                    .some(indexOf => indexOf > -1)
-            );
-
+            let colonIndex = queryToLower.indexOf(":");
+            if (colonIndex > -1) {
+                const searchOptions = searchConstruct(query);
+                Object.keys(searchOptions).forEach(key => {
+                    subscriptions = subscriptions.filter(subscription => {
+                        const searchValue = searchOptions[key];
+                        if (key === "global_search") {
+                            const filteredColumns = searchableColumns.filter(col => !Object.keys(searchOptions).includes(col));
+                            return filteredColumns
+                                .map(search => subscription[search].toLowerCase().indexOf(searchValue))
+                                .some(indexOf => indexOf > -1)
+                        }
+                        if (Array.isArray(searchValue)) {
+                            return searchValue.every(val => subscription[key].toLowerCase().indexOf(val) > -1)
+                        }
+                        return subscription[key].toLowerCase().indexOf(searchValue) > -1;
+                    })
+                })
+            } else {
+                subscriptions = subscriptions.filter(subscription =>
+                    searchableColumns.map(search => subscription[search].toLowerCase().indexOf(queryToLower))
+                        .some(indexOf => indexOf > -1)
+                );
+            }
         }
         subscriptions = subscriptions.filter(subscription => {
             const productFilter = filterAttributesProduct.find(attr => attr.name === subscription.product_tag);
@@ -168,6 +203,33 @@ export default class Subscriptions extends React.PureComponent {
         }
     });
 
+    handleCollapseSubscription = subscription => e => {
+        stop(e);
+        let collapsedSubscriptions = [...this.state.collapsedSubscriptions];
+        const id = subscription.subscription_id;
+        const indexOf = collapsedSubscriptions.indexOf(id);
+        if (indexOf > -1) {
+            collapsedSubscriptions.splice(indexOf, 1);
+        } else {
+            collapsedSubscriptions.push(id);
+            const isServicePort = productServicePortTags.includes(subscription.product_tag);
+            if ((isServicePort && subscription.parentSubscriptions === undefined) ||
+                (!isServicePort && subscription.childSubscriptions === undefined)) {
+                const promise = isServicePort ? parentSubscriptions : childSubscriptions;
+                promise(id).then(result => {
+                    const filteredSubscriptions = [...this.state.filteredSubscriptions];
+                    const subscriptionToBeEnriched = filteredSubscriptions.find(sub => sub.subscription_id === id);
+                    const attributeName = isServicePort ? "parentSubscriptions" : "childSubscriptions";
+                    const {organisations, products} = this.props;
+                    result.json.forEach(sub => this.enrichSubscription(sub, organisations, products));
+                    subscriptionToBeEnriched[attributeName] = result.json;
+                    this.setState({filteredSubscriptions: filteredSubscriptions});
+                });
+            }
+        }
+        this.setState({collapsedSubscriptions: collapsedSubscriptions});
+    };
+
     handleDeleteSubscription = subscription => e => {
         stop(e);
         this.confirmation(I18n.t("subscriptions.deleteConfirmation", {
@@ -181,9 +243,9 @@ export default class Subscriptions extends React.PureComponent {
         );
     };
 
-    renderSubscriptionsTable(subscriptions, sorted) {
-        const columns = ["customer_name", "description", "insync", "product_name", "status", "start_date",
-            "end_date", "noop"];
+    renderSubscriptionsTable(filteredSubscriptions, sorted, collapsibleSubscriptions, collapsedSubscriptions) {
+        const columns = ["noop", "customer_name", "subscription_id", "description", "insync", "product_name", "status",
+            "product_tag", "start_date", "noop"];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -192,50 +254,108 @@ export default class Subscriptions extends React.PureComponent {
             </th>
         };
 
-        if (subscriptions.length !== 0) {
+        if (filteredSubscriptions.length !== 0) {
             return (
                 <table className="subscriptions">
                     <thead>
                     <tr>{columns.map((column, index) => th(index))}</tr>
                     </thead>
-                    <tbody>
-                    {subscriptions.map((subscription, index) =>
-                        <tr key={`${subscription.subscription_id}_${index}`}
-                            onClick={this.showSubscription(subscription)}>
-                            <td data-label={I18n.t("subscriptions.customer_name")}
-                                className="customer_name">{subscription.customer_name}</td>
-                            <td data-label={I18n.t("subscriptions.description")}
-                                className="description">{subscription.description}</td>
-                            <td data-label={I18n.t("subscriptions.insync")} className="insync">
-                                <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
-                            </td>
-                            <td data-label={I18n.t("subscriptions.product_name")}
-                                className="product_name">{subscription.product_name}</td>
-                            <td data-label={I18n.t("subscriptions.status")}
-                                className="status">{subscription.status}</td>
-                            <td data-label={I18n.t("subscriptions.start_date_epoch")}
-                                className="start_date_epoch">{renderDate(subscription.start_date)}</td>
-                            <td data-label={I18n.t("subscriptions.name")}
-                                className="end_date_epoch">{renderDate(subscription.end_date)}</td>
-                            <td data-label={I18n.t("subscriptions.nope")}
-                                className="actions"><span>
-                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
-                            </span></td>
-                        </tr>
+                    {filteredSubscriptions.map((subscription, index) =>
+                        this.renderSubscriptionRow(subscription, index, collapsibleSubscriptions, collapsedSubscriptions)
                     )}
-                    </tbody>
                 </table>
             );
         }
         return <div><em>{I18n.t("subscriptions.no_found")}</em></div>;
     }
 
+    renderFetchingSpinner = () => <section className="fetching-related-subscriptions">
+        <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+        <em>{I18n.t("subscriptions.fetchingRelatedSubscriptions")}</em>
+    </section>;
+
+    relatedSubscriptionMsg = subscription => ["LightPath", "LPNLNSI", "ELAN"].includes(subscription.tag) ?
+        I18n.t("subscriptions.relatedSubscriptionsLP", {description: subscription.description}) :
+    I18n.t("subscriptions.relatedSubscriptionsServicePort", {description: subscription.description});
+
+    renderSubscriptionRow = (subscription, index, collapsibleSubscriptions, collapsedSubscriptions) => {
+        const subscriptionId = subscription.subscription_id;
+        const isCollapsible = collapsibleSubscriptions.includes(subscriptionId);
+        const isCollapsed = isCollapsible && collapsedSubscriptions.includes(subscriptionId);
+        const icon = isCollapsed ? "minus" : "plus";
+        const isServicePort = productServicePortTags.includes(subscription.product_tag);
+        const relatedSubscriptions = isServicePort ? subscription.parentSubscriptions : subscription.childSubscriptions;
+        const isLoading = isCollapsed && relatedSubscriptions === undefined;
+        const hasNoRelatedSubscriptions = isCollapsed && relatedSubscriptions && relatedSubscriptions.length === 0;
+        const renderRelatedSubscriptions = isCollapsed && relatedSubscriptions && relatedSubscriptions.length > 0;
+        return (
+            <tbody key={`${subscriptionId}_${index}`}>
+            {this.renderSingleSubscription(subscription, isCollapsible, icon)}
+            {isLoading &&
+            <tr>
+                <td colSpan="9">
+                    {this.renderFetchingSpinner()}
+                </td>
+            </tr>}
+            {hasNoRelatedSubscriptions &&
+            <tr className="related-subscription">
+                <td></td>
+                <td colSpan="9">
+                    <em>{I18n.t("subscriptions.noRelatedSubscriptions", {description: subscription.description})}</em>
+                </td>
+            </tr>}
+            {renderRelatedSubscriptions &&
+            <tr className="related-subscription">
+                <td></td>
+                <td colSpan="9">
+                    <em>{this.relatedSubscriptionMsg(subscription)}</em>
+                </td>
+            </tr>}
+            {renderRelatedSubscriptions && relatedSubscriptions.map(sub =>
+                this.renderSingleSubscription(sub, false, "nope", "related-subscription"))}
+            </tbody>);
+    };
+
+    renderSingleSubscription = (subscription, isCollapsible, icon, className = "") => {
+        const subscriptionId = subscription.subscription_id;
+        return (
+            <tr key={subscriptionId} className={className}
+                onClick={this.showSubscription(subscription)}>
+                <td data-label={I18n.t("subscriptions.noop")}
+                    className="expand"><span>
+                {isCollapsible &&
+                <i className={`fa fa-${icon}-circle`} onClick={this.handleCollapseSubscription(subscription)}></i>}
+                            </span></td>
+                <td data-label={I18n.t("subscriptions.customer_name")}
+                    className="customer_name">{subscription.customer_name}</td>
+                <td data-label={I18n.t("subscriptions.subscription_id")}
+                    className="subscription_id">{subscriptionId.substring(0, 8)}</td>
+                <td data-label={I18n.t("subscriptions.description")}
+                    className="description">{subscription.description}</td>
+                <td data-label={I18n.t("subscriptions.insync")} className="insync">
+                    <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
+                </td>
+                <td data-label={I18n.t("subscriptions.product_name")}
+                    className="product_name">{subscription.product_name}</td>
+                <td data-label={I18n.t("subscriptions.status")}
+                    className="status">{subscription.status}</td>
+                <td data-label={I18n.t("subscriptions.product_tag")}
+                    className="tag">{subscription.product_tag}</td>
+                <td data-label={I18n.t("subscriptions.start_date_epoch")}
+                    className="start_date_epoch">{renderDate(subscription.start_date)}</td>
+                <td data-label={I18n.t("subscriptions.noop")}
+                    className="actions"><span>
+                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
+                            </span></td>
+            </tr>)
+    };
+
     render() {
         const {
             filteredSubscriptions, filterAttributesProduct, filterAttributesStatus, query, sorted,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, collapsibleSubscriptions,
+            collapsedSubscriptions
         } = this.state;
-        const {organisations} = this.props;
         return (
             <div className="mod-subscriptions">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -261,7 +381,8 @@ export default class Subscriptions extends React.PureComponent {
                     </div>
                 </div>
                 <section className="subscriptions">
-                    {this.renderSubscriptionsTable(filteredSubscriptions, sorted, organisations)}
+                    {this.renderSubscriptionsTable(filteredSubscriptions, sorted, collapsibleSubscriptions,
+                        collapsedSubscriptions)}
                 </section>
             </div>
         );

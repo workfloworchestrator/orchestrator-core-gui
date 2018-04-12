@@ -1,18 +1,20 @@
 import React from "react";
+import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
 import "react-select/dist/react-select.css";
 
-export default function WorkflowSelect({onChange, workflows, workflow, disabled}) {
+export default function WorkflowSelect({onChange, workflows, workflow, disabled,
+                                           placeholder=I18n.t("process.workflowsPlaceholder")}) {
 
     return (
         <Select className="select-workflow"
                 onChange={onChange}
-                options={workflows.map(wf => ({label: wf.name, value: wf["key"]}))}
+                options={workflows.map(wf => ({label: wf.description, value: wf.name}))}
                 value={workflow}
                 searchable={true}
-                placeholder="Search and select a workflow..."
+                placeholder={placeholder}
                 disabled={disabled || workflows.length === 0}/>
     );
 }
