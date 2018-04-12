@@ -386,6 +386,8 @@ I18n.translations.en = {
     },
     subscriptions: {
         customer_name: "Customer",
+        customer_id: "Customer UUID",
+        id: "Subscription ID",
         subscription_id: "ID",
         description: "Description",
         insync: "In sync",
@@ -398,6 +400,8 @@ I18n.translations.en = {
         name: "Name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
+        fixedInputs: "Fixed Inputs",
+        productBlocks: "Product Blocks",
         noop: "",
         deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",
         product: "Product",
