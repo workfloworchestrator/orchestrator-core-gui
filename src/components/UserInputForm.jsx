@@ -18,6 +18,7 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
+import IPBlocks from "./IPBlocks";
 import MultipleServicePorts from "./MultipleServicePorts";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -387,6 +388,8 @@ export default class UserInputForm extends React.Component {
                                              disabled={userInput.readonly}
                                              isElan={userInput.elan}
                 />;
+			case "ip_blocks":
+				return <IPBlocks ipBlocks={isEmpty(value) ? [{ipam_prefix_id: "", error_msg: "", display_value: ""}] : value} onChange={this.changeNestedInput(name)} />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
