@@ -202,6 +202,7 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+		ip_blocks: "Please specify the prefixes you want allocated",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
         new_interface_type: "The new interface type of the port",
@@ -789,7 +790,10 @@ I18n.translations.en = {
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
-    }
+    },
+	ip_blocks: {
+		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
+	}
 };
 
 export default I18n.translations.en;

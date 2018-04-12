@@ -19,6 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePoints from "./MultipleServicePoints";
+import IPBlocks from "./IPBlocks";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -400,6 +401,8 @@ export default class UserInputForm extends React.Component {
                                               maximum={userInput.maximum}
                                               disabled={userInput.readonly}
                 />;
+			case "ip_blocks":
+				return <IPBlocks ipBlocks={isEmpty(value) ? [{ipam_prefix_id: "", error_msg: "", display_value: ""}] : value} onChange={this.changeNestedInput(name)} />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
