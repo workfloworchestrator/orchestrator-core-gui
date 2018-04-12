@@ -1,6 +1,7 @@
 import {isEmpty} from "../utils/Utils";
 import {validEmailRegExp} from "./Subscriptions";
 
+
 const inValidRange = range => {
     if (range.indexOf("-") > -1) {
         const ranges = range.split("-");
@@ -8,6 +9,8 @@ const inValidRange = range => {
     }
     return range < 2 || range > 4094;
 };
+
+
 
 export function doValidateUserInput(userInput, val, errors) {
     const type = userInput.type;
@@ -37,9 +40,11 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !value;
     } else if (type === "boolean") {
         errors[name] = isEmpty(!!value);
-    } else if (type === "crm_port_id") {
+	} else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
-    } else if (type === "stp") {
+    } else if (type === "ip_blocks") {
+		alert(value);
+	} else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;
         } else {

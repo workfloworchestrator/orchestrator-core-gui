@@ -37,6 +37,11 @@ export default class IPBlocks extends React.PureComponent {
 		this.props.onChange(ipBlocks);
 		
 	};
+	
+	validate = e => {
+		alert("vanuit IPB");
+		this.props.validateFunc(e);
+	}
 
     renderIPBlock = (index, ipBlock) => {
 		const {onChange} = this.props;
@@ -45,9 +50,9 @@ export default class IPBlocks extends React.PureComponent {
                 {index === 0 && <label>{I18n.t("ip_blocks.ip_block")}</label>}
                 <IPBlockInput 
 					ipBlock={ipBlock}
-					onChange={this.contentChanged}
 					clickRemove={this.clickRemove(index)}
-					index = {index}/>
+					validateFunc={this.validate}
+					index = {index} />
             </div>
 
         </section>)
@@ -64,6 +69,6 @@ export default class IPBlocks extends React.PureComponent {
 }
 
 IPBlocks.propTypes = {
-    onChange: PropTypes.func.isRequired,
-	ipBlocks: PropTypes.array.isRequired
+	ipBlocks: PropTypes.array.isRequired,
+	validateFunc: PropTypes.func.IsRequired
 };
