@@ -1,20 +1,20 @@
 @import "../stylesheets/vars.scss";
 
-section.multiple-mps {
+section.ip-blocks {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 
-    section.msp {
+    section.ip-block {
         display: flex;
-        div.wrapper {
+        div.ipp-select {
             margin-left: 25px;
             width: 50%;
-            div.vlan {
-                display: flex;
+		        display: flex;
                 align-items: center;
-                div.virtual-vlan {
+			    div.ip-block {
                     width: 100%;
+					
                 }
                 i.fa-minus {
                     padding-left: 5px;
@@ -24,12 +24,11 @@ section.multiple-mps {
                     &.disabled {
                         cursor: not-allowed;
                         color: $light-grey
-                    }
-                }
-            }
-        }
+                   }
+               }
+    	   }
     }
-    div.msp-select {
+    div.ipp-select {
         margin-top: 5px;
         div.Select-control {
             max-height: 30px;
@@ -39,7 +38,7 @@ section.multiple-mps {
             }
         }
     }
-    div.add-msp {
+    div.add-ip-block {
         display: flex;
         i.fa-plus {
             margin-left: auto;

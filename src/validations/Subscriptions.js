@@ -67,6 +67,18 @@ const searchableSubscriptionsColumnsMapping = {
     "type": "product_tag"
 };
 
+export function validateIPRange(value) {
+	var isValid = false;
+	if (value.indexOf(":")>0){
+		//assume IPv6 expression
+		isValid = validIPv6RangeRegExp.test(value.trim());
+	} else {
+		//IPv4
+		isValid = validIPv4RangeRegExp.test(value.trim());
+	}
+	return isValid;
+}	
+
 export function searchConstruct(query) {
     const queryToLower = query.toLowerCase();
     let colonIndex = queryToLower.indexOf(":");
