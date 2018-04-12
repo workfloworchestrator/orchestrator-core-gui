@@ -156,20 +156,6 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
-    doValidateUserInput = (userInput, value, errors) => {
-        const type = userInput.type;
-        const name = userInput.name;
-        if (type === "int" || type === "vlan") {
-            errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
-        } else if (type === "guid") {
-            errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
-        } else if (type === "emails") {
-            errors[name] = isEmpty(value);
-        } else {
-            errors[name] = isEmpty(value);
-        }
-    };
-
     validateUserInput = name => e => {
         const value = e.target.value;
         const userInput = this.state.stepUserInput.find(input => input.name === name);
@@ -177,8 +163,6 @@ export default class UserInputForm extends React.Component {
         doValidateUserInput(userInput, value, errors);
         this.setState({errors: errors});
     };
-
-    onError = name => value => this.setState({errors: {...this.state.errors, name: value}});
 
     renderInput = (userInput, process) => {
         const name = userInput.name;
@@ -300,7 +284,7 @@ export default class UserInputForm extends React.Component {
             case "emails" :
                 return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={true} emailRequired={true}/>;
+                                   placeholder={""} multipleEmails={true}/>;
             case "email" :
                 return <EmailInput emails={this.userInputToEmail(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
