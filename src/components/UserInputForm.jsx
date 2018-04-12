@@ -18,7 +18,7 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import MultipleServicePoints from "./MultipleServicePoints";
+import MultipleServicePorts from "./MultipleServicePorts";
 import IPBlocks from "./IPBlocks";
 
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
