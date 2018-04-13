@@ -67,16 +67,11 @@
     margin-top: 20px;
     margin-left: 30px;
     width: 75%;
-    word-break: break-all;
-    td, th {
-      text-align: left;
-      vertical-align: middle;
-    }
-    tr {
-      border-bottom: 1px solid $light-grey;
-    }
     tbody {
       tr {
+        border-bottom: 1px solid $light-grey;
+        border-left: 1px solid $blue;
+
         &:nth-child(even) {
           background: white;
         }
@@ -85,17 +80,23 @@
         }
       }
       td {
+        text-align: left;
+        vertical-align: middle;
         padding: 8px 15px;
-      }
-      td {
-        &:first-child, &:nth-child(2) {
+        &:first-child {
           width: 25%;
         }
-        &:last-child {
-          width: 75%;
+        &:nth-child(2) {
+          width: 30%;
           text-align: left;
           div.checkbox {
             margin: 0;
+          }
+        }
+        &:last-child {
+          width: 30%;
+          em.error {
+            font-size: 16px;
           }
         }
       }
