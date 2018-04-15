@@ -360,12 +360,16 @@ export default class SubscriptionDetail extends React.PureComponent {
                             {I18n.t("subscription.terminate")}
                         </a></td>}
                         {!displayTerminate && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        <td><em className="error">{reason}</em></td>
-                        <td>{!loadedIMSRelatedObjects && <section className="terminate-link-waiting">
+                        <td colSpan={loadedIMSRelatedObjects ? "2" : "1"}
+                            className={loadedIMSRelatedObjects ? "large" : ""}><em className="error">{reason}</em></td>
+                        {!loadedIMSRelatedObjects &&<td> <section className="terminate-link-waiting">
                             <em>{I18n.t("subscription.fetchingImsData")}</em>
                             <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                        </section>}
-                        </td>
+                        </section>
+                        </td>}
+                    </tr>
+                    <tr>
+                        <td colSpan={"3"}>TODO show modifications links</td>
                     </tr>
                     </tbody>
                 </table>
@@ -471,11 +475,20 @@ export default class SubscriptionDetail extends React.PureComponent {
             </div>
         </section>;
 
-    renderResourceTypeValue = (subscription, subscriptionInstanceValue) =>
-        subscriptionInstanceValue.resource_type.resource_type === "port_subscription_id" ?
-            <a target="_blank"
-               href={`/subscription/${subscription.subscription_id}`}>{subscriptionInstanceValue.value}</a> :
-            <span>{subscriptionInstanceValue.value}</span>
+    renderResourceTypeValue = (subscription, subscriptionInstanceValue) => {
+        const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === "port_subscription_id";
+        const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === "ims_circuit_id";
+        const icon = "plus";
+        return (
+            <div>
+                {isSubscriptionValue && <a target="_blank"
+                                           href={`/subscription/${subscription.subscription_id}`}>{subscriptionInstanceValue.value}</a>}
+                {!isSubscriptionValue && <span>{subscriptionInstanceValue.value}</span>}
+                {isExternalLinkValue && <i className={`fa fa-${icon}-circle`} onClick={e => stop(e)}></i>}
+            </div>
+        );
+    };
+
 
     renderDeletedIms = (notFoundRelatedObjects, subInstValue, loadedIMSRelatedObjects) => {
         const isDeleted = subInstValue.resource_type.resource_type === "ims_circuit_id" &&
@@ -494,19 +507,22 @@ export default class SubscriptionDetail extends React.PureComponent {
                     .map((instance, index) =>
                         <section className="product-block" key={index}>
                             <h2>{`${instance.product_block.tag} - ${instance.product_block.name}`}</h2>
-                            <table>
+                            <table className="multiple-tbody">
                                 <thead>
                                 </thead>
-                                <tbody>
                                 {instance.values
                                     .sort((a, b) => a.resource_type.resource_type.localeCompare(b.resource_type.resource_type))
                                     .map((value, i) =>
+                                        <tbody>
                                         <tr key={i}>
                                             <td>{value.resource_type.resource_type.toUpperCase()}</td>
-                                            <td>{this.renderResourceTypeValue(subscription, value)}</td>
+                                            <td>
+                                                {this.renderResourceTypeValue(subscription, value)}
+                                            </td>
                                             <td>{this.renderDeletedIms(notFoundRelatedObjects, value, loadedIMSRelatedObjects)}</td>
-                                        </tr>)}
-                                </tbody>
+                                        </tr>
+                                        </tbody>)}
+
                             </table>
                         </section>
                     )}
@@ -547,9 +563,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
                     {this.renderSubscriptions(subscriptions, subscription.description)}
-                    {this.renderServices(imsServices, organisations)}
                 </div>}
-                {renderNotFound &&<section className="card not-found"><h1>{I18n.t("subscription.notFound")}</h1></section>}
+                {renderNotFound &&
+                <section className="card not-found"><h1>{I18n.t("subscription.notFound")}</h1></section>}
             </div>
         );
     }

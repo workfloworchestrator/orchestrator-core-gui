@@ -66,7 +66,7 @@
   table {
     margin-top: 20px;
     margin-left: 30px;
-    width: 75%;
+    width: 85%;
     tbody {
       tr {
         border-bottom: 1px solid $light-grey;
@@ -83,6 +83,9 @@
         text-align: left;
         vertical-align: middle;
         padding: 8px 15px;
+        em.error {
+          font-size: 14px;
+        }
         &:first-child {
           width: 25%;
         }
@@ -95,13 +98,34 @@
         }
         &:last-child {
           width: 30%;
-          em.error {
-            font-size: 16px;
+        }
+        &.large {
+          width: 125%;
+        }
+        i.fa-plus-circle, i.fa-minus-circle {
+          cursor: pointer;
+          float: right;
+          font-size: 22px;
+          color: $blue;
+
+        }
+
+      }
+    }
+    &.multiple-tbody {
+      tbody {
+        &:nth-child(even) {
+          tr {
+            background: $table-odd-even;
+          }
+        }
+        &:nth-child(odd) {
+          tr {
+            background: white;
           }
         }
       }
     }
-
   }
 }
 
