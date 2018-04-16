@@ -554,16 +554,24 @@ export default class SubscriptionDetail extends React.PureComponent {
         );
     };
 
+    nullSafeComparision = (s1, s2) => {
+        const s1safe = s1 || "";
+        const s2safe = s2 || "";
+        return s1safe.localeCompare(s2safe);
+    };
+
     renderProductBlocks = (subscription, notFoundRelatedObjects, loadedIMSRelatedObjects, imsServices, collapsedObjects,
                            subscriptions) => {
         return <section className="details">
             <h3>{I18n.t("subscriptions.productBlocks")}</h3>
             <div className="form-container-parent">
                 {subscription.instances
-                    .sort((a, b) => a.product_block.tag.localeCompare(b.product_block.tag))
+                    .sort((a, b) => a.product_block.tag !== b.product_block.tag ? this.nullSafeComparision(a.product_block.tag, b.product_block.tag) :
+                        this.nullSafeComparision(a.label, a.label))
                     .map((instance, index) =>
                         <section className="product-block" key={index}>
                             <h2>{`${instance.product_block.tag} - ${instance.product_block.name}`}</h2>
+                            {instance.label && <p className="label">{`Label: ${instance.label}`}</p>}
                             <table className="detail-block multiple-tbody">
                                 <thead>
                                 </thead>
