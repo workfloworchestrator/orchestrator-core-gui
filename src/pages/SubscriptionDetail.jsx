@@ -467,9 +467,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <tbody>
                     {subscriptionProcesses.map((ps, index) =>
                         <tr key={index}>
-                            <td>{ps.workflow_target}</td>
+                            <td>{`${ps.workflow_target} - ${ps.process.workflow}`}</td>
                             <td><a target="_blank" href={`/process/${ps.pid}`}>{ps.pid}</a></td>
-
                         </tr>)}
                     {isEmpty(subscriptionProcesses) && <tr>
                         <td colSpan="3"><span
