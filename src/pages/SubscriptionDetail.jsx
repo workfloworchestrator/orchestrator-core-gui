@@ -521,10 +521,10 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedIMSRelatedObjects, notFoundRelatedObjects, index,
                              imsServices, collapsedObjects, subscriptions) => {
-        const isDeleted = subscriptionInstanceValue.resource_type.resource_type === "ims_circuit_id" &&
-            loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === "ims_circuit_id" && obj.identifier === subscriptionInstanceValue.value);
-        const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === "port_subscription_id";
-        const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === "ims_circuit_id";
+        const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
+            loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
+        const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === port_subscription_id;
+        const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id;
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
         const icon = isCollapsed ? "minus" : "plus";
         return (
