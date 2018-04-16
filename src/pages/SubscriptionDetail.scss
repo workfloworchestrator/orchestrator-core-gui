@@ -63,10 +63,23 @@
     }
   }
 
-  table {
+  table.detail-block {
     margin-top: 20px;
     margin-left: 30px;
-    width: 85%;
+    width: 90%;
+    &.related-subscription {
+      margin: 0;
+      width: 100%;
+    }
+    thead {
+      th {
+        padding: 5px 0 10px;
+        text-align: left;
+        &.insync {
+          width: 10%;
+        }
+      }
+    }
     tbody {
       tr {
         border-bottom: 1px solid $light-grey;
@@ -84,13 +97,18 @@
         vertical-align: middle;
         padding: 8px 15px;
         em.error {
+          margin-left: 0;
           font-size: 14px;
         }
+        div.resource-type {
+          display: flex;
+        }
+
         &:first-child {
-          width: 25%;
+          width: 10%;
         }
         &:nth-child(2) {
-          width: 30%;
+          width: 50%;
           text-align: left;
           div.checkbox {
             margin: 0;
@@ -99,12 +117,13 @@
         &:last-child {
           width: 30%;
         }
-        &.large {
-          width: 125%;
+        &.insync {
+          text-align: center;
         }
+
         i.fa-plus-circle, i.fa-minus-circle {
           cursor: pointer;
-          float: right;
+          margin-right: 15px;
           font-size: 22px;
           color: $blue;
 
@@ -124,8 +143,91 @@
             background: white;
           }
         }
+        tr.related-subscription {
+          border-bottom: none;
+          border-left: none;
+          td {
+            &.whitespace {
+              background-color: white;
+              border-left: none;
+            }
+            &.related-subscription-values {
+              background-color: $light-grey;
+              border-bottom: 1px solid $light-grey;
+              border-left: 5px solid $blue;
+              margin: 0;
+              padding: 0;
+            }
+          }
+        }
+
       }
     }
   }
+  table.subscriptions {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 90%;
+    word-break: break-all;
+    td, th {
+      text-align: left;
+    }
+    tr {
+      border-bottom: 1px solid $light-grey;
+      border-left: 1px solid $blue;
+      &:nth-child(even) {
+        background: white;
+      }
+      &:nth-child(odd) {
+        background: $table-odd-even;
+      }
+    }
+    th, td {
+      padding: 8px 15px;
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+    th.customer_name {
+      width: 20%;
+    }
+    th.subscription_id {
+      width: 8%;
+    }
+    th.description {
+      width: 20%;
+    }
+    th.insync {
+      width: 10%;
+      text-align: center;
+    }
+    th.product_name {
+      width: 15%;
+    }
+    th.status {
+      width: 8%;
+    }
+    th.tag {
+      width: 10%;
+    }
+    th.start_date_epoch {
+      width: 10%;
+    }
+    span {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: larger;
+      color: $medium-grey;
+      padding: 7px 2px 7px 0;
+    }
+    tbody {
+      td {
+        &.insync {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
 }
 

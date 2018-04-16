@@ -445,12 +445,15 @@ I18n.translations.en = {
         },
         ims_service: {
             id: "IMS service ID ({{index}})",
+            identifier: "IMS service ID",
             customer: "Customer",
             extra_info: "Extra info",
             name: "Name",
             product: "Product",
             speed: "Speed",
-            status: "Status"
+            status: "Status",
+            order_id: "Order ID",
+            aliases: "Aliases"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",

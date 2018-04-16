@@ -48,7 +48,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            notFoundRelatedObjects: []
+            notFoundRelatedObjects: [],
+            collapsedObjects: [],
         };
     }
 
@@ -157,119 +158,161 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
     });
 
-    renderSubscriptionDetail = (subscription, index) =>
-        <table key={index}>
+    renderSubscriptionDetail = (subscription, index, className = "") =>
+        <table className={`detail-block ${className}`} key={index}>
             <thead>
             </thead>
             <tbody>
             <tr>
                 <td>{I18n.t("subscriptions.id")}</td>
                 <td>{subscription.subscription_id}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.name")}</td>
                 <td>{subscription.name}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.description")}</td>
                 <td>{subscription.description}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.start_date_epoch")}</td>
                 <td>{renderDate(subscription.start_date)}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.end_date_epoch")}</td>
                 <td>{renderDate(subscription.end_date)}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.status")}</td>
                 <td>{subscription.status}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.insync")}</td>
                 <td><CheckBox value={subscription.insync || false} readOnly={true}
                               name="isync"/></td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.customer_name")}</td>
                 <td>{subscription.customer_name || ""}</td>
-                <td></td>
+
             </tr>
             <tr>
                 <td>{I18n.t("subscriptions.customer_id")}</td>
                 <td>{subscription.customer_id}</td>
-                <td></td>
+
             </tr>
             </tbody>
         </table>;
 
-
-    renderSubscriptions = (subscriptions, product) => {
+    renderSubscriptions = (subscriptions, subscription, organisations, products) => {
         if (isEmpty(subscriptions)) {
             return null;
         }
-        const values = subscriptionInstanceValues(this.state.subscription);
-        const title = values.some(val => val.resource_type.resource_type === nms_service_id) ?
-            "subscription.child_subscriptions" : "subscription.parent_subscriptions";
-        return <section className="details">
-            <h3>{I18n.t(title, {product: product})}</h3>
-            {subscriptions.map((subscription, index) =>
-                <div className="form-container-parent">{this.renderSubscriptionDetail(subscription, index)}</div>
-            )}
-        </section>
-    };
+        subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
 
-    renderServices = (imsServices, organisations) => {
-        if (isEmpty(imsServices)) {
+        const values = subscriptionInstanceValues(this.state.subscription);
+        const isLPSubscription = values.some(val => val.resource_type.resource_type === nms_service_id);
+        if (isLPSubscription) {
+            //child subscriptions are rendered in the product blocks
             return null;
         }
+        const columns = ["customer_name", "subscription_id", "description", "insync", "product_name", "status",
+            "product_tag", "start_date"];
+        const th = index => {
+            const name = columns[index];
+            return <th key={index} className={name}>
+                <span>{I18n.t(`subscriptions.${name}`)}</span>
+            </th>
+        };
         return <section className="details">
-            <h3>{I18n.t("subscription.ims_services")}</h3>
+            <h3>{I18n.t("subscription.parent_subscriptions", {product: subscription.description})}</h3>
             <div className="form-container-parent">
-                {imsServices.map((service, index) => {
-                    return <section key={index} className="form-container">
-                        <section>
-                            <label
-                                className="title">{I18n.t("subscription.ims_service.id", {index: (index + 1).toString()})}</label>
-                            <input type="text" readOnly={true} value={service.id || ""}/>
-                            <label className="title">{I18n.t("subscription.ims_service.customer")}</label>
-                            <input type="text" readOnly={true}
-                                   value={organisationNameByUuid(service.customer_id, organisations)}/>
-                            <label className="title">{I18n.t("subscription.ims_service.extra_info")}</label>
-                            <input type="text" readOnly={true} value={service.extra_info || ""}/>
-                            <label className="title">{I18n.t("subscription.ims_service.name")}</label>
-                            <input type="text" readOnly={true} value={service.name || ""}/>
-                        </section>
-                        <section>
-                            <label className="title">{I18n.t("subscription.ims_service.product")}</label>
-                            <input type="text" readOnly={true} value={service.product || ""}/>
-                            <label className="title">{I18n.t("subscription.ims_service.speed")}</label>
-                            <input type="text" readOnly={true} value={service.speed || ""}/>
-                            <label className="title">{I18n.t("subscription.ims_service.status")}</label>
-                            <input type="text" readOnly={true} value={service.status || ""}/>
-                        </section>
-                    </section>
-
-                })}
+                <table className="subscriptions">
+                    <thead>
+                    <tr>{columns.map((column, index) => th(index))}</tr>
+                    </thead>
+                    <tbody>
+                    {subscriptions.map((subscription, index) =>
+                        <tr key={index}>
+                            <td data-label={I18n.t("subscriptions.customer_name")}
+                                className="customer_name">{subscription.customer_name}</td>
+                            <td data-label={I18n.t("subscriptions.subscription_id")}
+                                className="subscription_id">
+                                <a target="_blank"
+                                   href={`/subscription/${subscription.subscription_id}`}>{subscription.subscription_id.substring(0, 8)}</a>
+                            </td>
+                            <td data-label={I18n.t("subscriptions.description")}
+                                className="description">{subscription.description}</td>
+                            <td data-label={I18n.t("subscriptions.insync")} className="insync">
+                                <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
+                            </td>
+                            <td data-label={I18n.t("subscriptions.product_name")}
+                                className="product_name">{subscription.product_name}</td>
+                            <td data-label={I18n.t("subscriptions.status")}
+                                className="status">{subscription.status}</td>
+                            <td data-label={I18n.t("subscriptions.product_tag")}
+                                className="tag">{subscription.tag}</td>
+                            <td data-label={I18n.t("subscriptions.start_date_epoch")}
+                                className="start_date_epoch">{renderDate(subscription.start_date)}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
             </div>
         </section>
     };
 
-    renderSubscriptionInstanceValue = (val, index) => {
-        const title = val.resource_type.resource_type + (val.instance_label ? ` : ${val.instance_label}` : "");
-        return <div key={index}>
-            <label className="title">{title}</label>
-            <input type="text" readOnly={true} value={val.value}/>
-        </div>;
-    };
+    renderImsServiceDetail = (service, index, className = "") =>
+        <table className={`detail-block ${className}`}>
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.identifier")}</td>
+                <td>{service.id}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.customer")}</td>
+                <td>{organisationNameByUuid(service.customer_id, this.props.organisations)}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.extra_info")}</td>
+                <td>{service.extra_info || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.name")}</td>
+                <td>{service.name || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.product")}</td>
+                <td>{service.product || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.speed")}</td>
+                <td>{service.speed || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.status")}</td>
+                <td>{service.status || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.order_id")}</td>
+                <td>{service.order_id || ""}</td>
+            </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.aliases")}</td>
+                <td>{(service.aliases || []).join(", ")}</td>
+            </tr>
+            </tbody>
+        </table>;
 
     renderProduct = product => {
         if (isEmpty(product)) {
@@ -278,44 +321,44 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("subscription.product_title")}</h3>
             <div className="form-container-parent">
-                <table>
+                <table className="detail-block">
                     <thead>
                     </thead>
                     <tbody>
                     <tr>
                         <td>{I18n.t("subscription.product.name")}</td>
                         <td><a target="_blank" href={`/product/${product.product_id}`}>{product.name || ""}</a></td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.description")}</td>
                         <td>{product.description}</td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.product_type")}</td>
                         <td>{product.product_type}</td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.tag")}</td>
                         <td>{product.tag || ""}</td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.status")}</td>
                         <td>{product.status || ""}</td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.created")}</td>
                         <td>{renderDateTime(product.created_at)}</td>
-                        <td></td>
+
                     </tr>
                     <tr>
                         <td>{I18n.t("subscription.product.end_date")}</td>
                         <td>{renderDateTime(product.end_date)}</td>
-                        <td></td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -327,50 +370,86 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
                      loadedIMSRelatedObjects) => {
-        let reason = null;
+        let noTerminateReason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
-            reason = I18n.t("subscription.no_termination_deleted_related_objects");
+            noTerminateReason = I18n.t("subscription.no_termination_deleted_related_objects");
         }
         if ((!hasResourceType(subscription, port_subscription_id) && !hasResourceType(subscription, nms_service_id)) &&
             (subscriptions.length > 0 && !subscriptions.every(sub => sub.status === "terminated"))) {
-            reason = I18n.t("subscription.no_termination_parent_subscription");
+            noTerminateReason = I18n.t("subscription.no_termination_parent_subscription");
         }
         if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
-            reason = I18n.t("subscription.no_termination_workflow");
+            noTerminateReason = I18n.t("subscription.no_termination_workflow");
         }
         //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         if (status !== "provisioning" && status !== "active") {
-            reason = I18n.t("subscription.no_termination_invalid_status", {status: status});
+            noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
         if (subscription.insync !== true) {
-            reason = I18n.t("subscription.not_in_sync");
+            noTerminateReason = I18n.t("subscription.not_in_sync");
         }
-        const displayTerminate = isTerminatable && !reason && loadedIMSRelatedObjects;
+        const displayTerminate = isTerminatable && !noTerminateReason && loadedIMSRelatedObjects;
+        const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
+
+        let noModifyReason = null;
+        if (isEmpty(modifyWorkflows)) {
+            noModifyReason = I18n.t("subscription.no_modify_workflow");
+        }
+        if (!isEmpty(notFoundRelatedObjects)) {
+            noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
+        }
+        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
+        if (status !== "active") {
+            noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
+        }
+        const insync = subscription.insync;
+        if (insync !== true) {
+            noModifyReason = I18n.t("subscription.not_in_sync");
+        }
+
+        const isModifiable = isEmpty(noModifyReason) && loadedIMSRelatedObjects;
+
         return <section className="details">
             <h3>{I18n.t("subscription.actions")}</h3>
             <div className="form-container-parent">
-                <table>
+                <table className="detail-block">
                     <thead>
                     </thead>
                     <tbody>
                     <tr>
                         {displayTerminate && <td><a href={I18n.t("subscription.terminate")}
-                                                    onClick={this.terminate(subscription, isTerminatable && !reason)}>
+                                                    onClick={this.terminate(subscription, isTerminatable && !noTerminateReason)}>
                             {I18n.t("subscription.terminate")}
                         </a></td>}
                         {!displayTerminate && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        <td colSpan={loadedIMSRelatedObjects ? "2" : "1"}
-                            className={loadedIMSRelatedObjects ? "large" : ""}><em className="error">{reason}</em></td>
-                        {!loadedIMSRelatedObjects &&<td> <section className="terminate-link-waiting">
-                            <em>{I18n.t("subscription.fetchingImsData")}</em>
-                            <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                        </section>
+                        {!displayTerminate && <td><em
+                            className="error">{noTerminateReason}</em></td>}
+                        {!loadedIMSRelatedObjects && <td>
+                            <section className="terminate-link-waiting">
+                                <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                            </section>
                         </td>}
                     </tr>
-                    <tr>
-                        <td colSpan={"3"}>TODO show modifications links</td>
-                    </tr>
+                    {modifyWorkflows.map((wf, index) =>
+                        <tr key={index}>
+                            {isModifiable && <td>
+                                <a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
+                                    {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                            </td>}
+                            {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
+                            {(!isEmpty(noModifyReason) && loadedIMSRelatedObjects) &&
+                            <td><em className="error">{noModifyReason}</em></td>}
+                            {!loadedIMSRelatedObjects && <td>
+                                <section className="terminate-link-waiting">
+                                    <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                    <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                </section>
+                            </td>}
+
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>
@@ -382,7 +461,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         return <section className="details">
             <h3>{I18n.t("subscription.process_link")}</h3>
             <div className="form-container-parent">
-                <table>
+                <table className="detail-block">
                     <thead>
                     </thead>
                     <tbody>
@@ -390,7 +469,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <tr key={index}>
                             <td>{ps.workflow_target}</td>
                             <td><a target="_blank" href={`/process/${ps.pid}`}>{ps.pid}</a></td>
-                            <td></td>
+
                         </tr>)}
                     {isEmpty(subscriptionProcesses) && <tr>
                         <td colSpan="3"><span
@@ -402,64 +481,11 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>;
     };
 
-    renderModifyLink = (subscription, product, notFoundRelatedObjects, loadedIMSRelatedObjects) => {
-        if (!loadedIMSRelatedObjects) {
-            return null;
-        }
-        const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
-        let reason = null;
-        if (isEmpty(modifyWorkflows)) {
-            reason = I18n.t("subscription.no_modify_workflow");
-        }
-        if (!isEmpty(notFoundRelatedObjects)) {
-            reason = I18n.t("subscription.no_modify_deleted_related_objects");
-        }
-        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        const status = subscription.status;
-        if (status !== "active") {
-            reason = I18n.t("subscription.no_modify_invalid_status", {status: status});
-        }
-        const insync = subscription.insync;
-        if (insync !== true) {
-            reason = I18n.t("subscription.not_in_sync");
-        }
-
-        const isModifiable = isEmpty(reason);
-        return <section className="modify-link">
-            {
-                modifyWorkflows.map(wf =>
-                    <a href="/modify" key={wf.name} className={`button ${isModifiable ? "blue" : "grey disabled"}`}
-                       onClick={this.modify(subscription, isModifiable, wf)}>
-                        <i className="fa fa-pencil-square-o"></i> {I18n.t(`subscription.modify_${wf.name}`)}</a>
-                )
-            }
-
-            {!isModifiable && <p className="no-modify-reason">{reason}</p>}
-        </section>
-    };
-
-    renderNotFoundRelatedObject = notFoundRelatedObjects => {
-        if (isEmpty(notFoundRelatedObjects)) {
-            return null;
-        }
-        return <section className="not-found-related-objects">
-            <h3>{I18n.t("subscription.notFoundRelatedObjects")}</h3>
-            <div className="form-container-parent">
-                <section className="form-container">
-                    {notFoundRelatedObjects.map((obj, index) => <section key={index}>
-                        <label className="title">{obj.requestedType}</label>
-                        <input type="text" readOnly={true} value={obj.identifier}/>
-                    </section>)}
-                </section>
-            </div>
-        </section>;
-    };
-
     renderFixedInputs = (product) =>
         <section className="details">
             <h3>{I18n.t("subscriptions.fixedInputs")}</h3>
             <div className="form-container-parent">
-                <table>
+                <table className="detail-block">
                     <thead>
                     </thead>
                     <tbody>
@@ -468,37 +494,68 @@ export default class SubscriptionDetail extends React.PureComponent {
                         .map((fi, index) => <tr key={index}>
                             <td>{fi.name}</td>
                             <td>{fi.value}</td>
-                            <td></td>
+
                         </tr>)}
                     </tbody>
                 </table>
             </div>
         </section>;
 
-    renderResourceTypeValue = (subscription, subscriptionInstanceValue) => {
+    handleCollapseSubscription = (relatedResourceTypeValue, collapsedObjects) => e => {
+        stop(e);
+        const indexOf = collapsedObjects.indexOf(relatedResourceTypeValue);
+        if (indexOf > -1) {
+            collapsedObjects.splice(indexOf, 1);
+        } else {
+            collapsedObjects.push(relatedResourceTypeValue);
+        }
+        this.setState({collapsedObjects: [...collapsedObjects]});
+    };
+
+    renderRelatedObject = (subscriptions, imsServices, identifier, isSubscriptionValue) => {
+        const target = isSubscriptionValue ? subscriptions.find(sub => sub.subscription_id === identifier) :
+            imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
+        const renderTarget = isSubscriptionValue ? this.renderSubscriptionDetail : this.renderImsServiceDetail;
+        return renderTarget(target, 0, "related-subscription");
+    };
+
+    renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedIMSRelatedObjects, notFoundRelatedObjects, index,
+                             imsServices, collapsedObjects, subscriptions) => {
+        const isDeleted = subscriptionInstanceValue.resource_type.resource_type === "ims_circuit_id" &&
+            loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === "ims_circuit_id" && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === "port_subscription_id";
         const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === "ims_circuit_id";
-        const icon = "plus";
+        let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
+        const icon = isCollapsed ? "minus" : "plus";
         return (
-            <div>
-                {isSubscriptionValue && <a target="_blank"
-                                           href={`/subscription/${subscription.subscription_id}`}>{subscriptionInstanceValue.value}</a>}
-                {!isSubscriptionValue && <span>{subscriptionInstanceValue.value}</span>}
-                {isExternalLinkValue && <i className={`fa fa-${icon}-circle`} onClick={e => stop(e)}></i>}
-            </div>
+            <tbody key={index}>
+            <tr>
+                <td>{subscriptionInstanceValue.resource_type.resource_type.toUpperCase()}</td>
+                <td colSpan={isDeleted ? "1" : "2"}>
+                    <div className="resource-type">
+                        {(isExternalLinkValue && !isDeleted) &&
+                        <i className={`fa fa-${icon}-circle`}
+                           onClick={this.handleCollapseSubscription(subscriptionInstanceValue.value, collapsedObjects)}></i>}
+                        {isSubscriptionValue && <a target="_blank"
+                                                   href={`/subscription/${subscriptionInstanceValue.value}`}>{subscriptionInstanceValue.value}</a>}
+                        {!isSubscriptionValue && <span>{subscriptionInstanceValue.value}</span>}
+                    </div>
+                </td>
+                {isDeleted && <td><em className="error">{"This circuit ID has been removed from IMS"}</em></td>}
+            </tr>
+            {(isExternalLinkValue && !isDeleted && isCollapsed) &&
+            <tr className="related-subscription">
+                <td className="whitespace"></td>
+                <td className="related-subscription-values"
+                    colSpan="2">{this.renderRelatedObject(subscriptions, imsServices, subscriptionInstanceValue.value, isSubscriptionValue)}</td>
+            </tr>}
+            </tbody>
+
         );
     };
 
-
-    renderDeletedIms = (notFoundRelatedObjects, subInstValue, loadedIMSRelatedObjects) => {
-        const isDeleted = subInstValue.resource_type.resource_type === "ims_circuit_id" &&
-            loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === "ims_circuit_id" && obj.identifier === subInstValue.value);
-        return isDeleted ? <em class="error">{"This circuit ID has been removed from IMS"}</em> : <span></span>;
-
-    };
-
-
-    renderProductBlocks = (subscription, notFoundRelatedObjects, loadedIMSRelatedObjects) => {
+    renderProductBlocks = (subscription, notFoundRelatedObjects, loadedIMSRelatedObjects, imsServices, collapsedObjects,
+                           subscriptions) => {
         return <section className="details">
             <h3>{I18n.t("subscriptions.productBlocks")}</h3>
             <div className="form-container-parent">
@@ -507,22 +564,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                     .map((instance, index) =>
                         <section className="product-block" key={index}>
                             <h2>{`${instance.product_block.tag} - ${instance.product_block.name}`}</h2>
-                            <table className="multiple-tbody">
+                            <table className="detail-block multiple-tbody">
                                 <thead>
                                 </thead>
                                 {instance.values
                                     .sort((a, b) => a.resource_type.resource_type.localeCompare(b.resource_type.resource_type))
-                                    .map((value, i) =>
-                                        <tbody>
-                                        <tr key={i}>
-                                            <td>{value.resource_type.resource_type.toUpperCase()}</td>
-                                            <td>
-                                                {this.renderResourceTypeValue(subscription, value)}
-                                            </td>
-                                            <td>{this.renderDeletedIms(notFoundRelatedObjects, value, loadedIMSRelatedObjects)}</td>
-                                        </tr>
-                                        </tbody>)}
-
+                                    .map((value, i) => this.renderResourceTypeRow(subscription, value, loadedIMSRelatedObjects, notFoundRelatedObjects, i,
+                                        imsServices, collapsedObjects, subscriptions))}
                             </table>
                         </section>
                     )}
@@ -534,7 +582,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
             <div className="form-container-parent">
-                {this.renderSubscriptionDetail(subscription, 0, false)}
+                {this.renderSubscriptionDetail(subscription, 0)}
             </div>
         </section>;
 
@@ -542,9 +590,10 @@ export default class SubscriptionDetail extends React.PureComponent {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects,
+            collapsedObjects
         } = this.state;
-        const {organisations} = this.props;
+        const {organisations, products} = this.props;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
@@ -557,12 +606,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                 {renderContent && <div>
                     {this.renderDetails(subscription)}
                     {this.renderFixedInputs(product)}
-                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedIMSRelatedObjects)}
+                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedIMSRelatedObjects,
+                        imsServices, collapsedObjects, subscriptions)}
                     {this.renderActions(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
                         loadedIMSRelatedObjects)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
-                    {this.renderSubscriptions(subscriptions, subscription.description)}
+                    {this.renderSubscriptions(subscriptions, subscription, organisations, products)}
                 </div>}
                 {renderNotFound &&
                 <section className="card not-found"><h1>{I18n.t("subscription.notFound")}</h1></section>}
