@@ -153,11 +153,6 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: newValue}});
     };
 
-	changeIPBlockInput = name => newValue => {
-		//this.changeUserInput(name, newValue);
-		this.validateUserInput(name, newValue);
-	};
-
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
@@ -396,7 +391,7 @@ export default class UserInputForm extends React.Component {
                 />;
 			case "ip_blocks":
 				return <IPBlocks ipBlocks={isEmpty(value) ? [{ipam_prefix_id: "", error_msg: "", display_value: ""}] : value} 
-					validateFunc={this.changeIPBlockInput(name)} 
+					onChange={this.changeNestedInput(name)} 
 					/> ;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);

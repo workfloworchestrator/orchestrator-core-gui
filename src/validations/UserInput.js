@@ -1,6 +1,6 @@
 import {isEmpty} from "../utils/Utils";
 import {validEmailRegExp} from "./Subscriptions";
-
+import {validateIPRange} from "./Subscriptions.js"
 
 const inValidRange = range => {
     if (range.indexOf("-") > -1) {
@@ -48,7 +48,7 @@ export function doValidateUserInput(userInput, val, errors) {
 	} else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
     } else if (type === "ip_blocks") {
-		alert(value);
+		errors[name] = isEmpty(value) || value.some(block => !validateIPRange(block.display_value));
 	} else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;
