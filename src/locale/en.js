@@ -453,7 +453,8 @@ I18n.translations.en = {
             speed: "Speed",
             status: "Status",
             order_id: "Order ID",
-            aliases: "Aliases"
+            aliases: "Aliases",
+            endpoints: "Endpoints"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
