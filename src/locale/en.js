@@ -262,6 +262,8 @@ I18n.translations.en = {
         transition_product_downgrade_info: "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
         transition_product_upgrade: "Choose New Product",
         transition_product_upgrade_info: "Choose the new Product for this subscription after the upgrade (scoped by the current product)",
+        transition_product: "Choose New Product for this Subscription",
+        transition_product_info: "Choose a new product - scoped on the maximum capacity of the LP's using this port - with a new speed.",
         transition_product_speed: "Choose New Product",
         transition_product_speed_info: "Choose a new product - scoped on the maximum capacity of the current ports - with a new speed.",
         workflowsPlaceholder: "Search and select a workflow...",
@@ -387,6 +389,8 @@ I18n.translations.en = {
     },
     subscriptions: {
         customer_name: "Customer",
+        customer_id: "Customer UUID",
+        id: "Subscription ID",
         subscription_id: "ID",
         description: "Description",
         insync: "In sync",
@@ -399,6 +403,8 @@ I18n.translations.en = {
         name: "Name",
         no_found: "No subscriptions",
         searchPlaceHolder: "Search for subscriptions...",
+        fixedInputs: "Fixed Inputs",
+        productBlocks: "Product Blocks",
         noop: "",
         deleteConfirmation: "Are you sure you want to delete {{name}} subscription for {{customer}}?",
         product: "Product",
@@ -414,18 +420,19 @@ I18n.translations.en = {
     subscription: {
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
-        child_subscriptions: "The following child subscriptions are used in this parent subscription - {{product}}",
-        parent_subscriptions: "The following parent subscriptions are using this child subscription - {{product}}",
+        child_subscriptions: "Port subscriptions in {{product}}",
+        parent_subscriptions: "LP subscriptions using {{product}}",
         resource_types: "Subscription Instance Values",
         resource_types_info: "The resource types of the associated product block(s) of this subscription",
         product_title: "Product",
-        process_link: "Process",
+        process_link: "Processes",
         notFoundRelatedObjects: "Subscription resource references NOT found / deleted",
         process_link_text: "Show related {{target}} process for this subscription",
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
-        modify_modify_service_port: "Modify Service Port",
+        modify_modify_ssp_speed: "Modify SSP Speed",
+        modify_modify_msp_speed: "Modify MSP Speed",
         modify_modify_lightpath_speed: "Modify Service Speed",
         product: {
             name: "Name",
@@ -439,12 +446,15 @@ I18n.translations.en = {
         },
         ims_service: {
             id: "IMS service ID ({{index}})",
+            identifier: "IMS service ID",
             customer: "Customer",
             extra_info: "Extra info",
             name: "Name",
             product: "Product",
             speed: "Speed",
-            status: "Status"
+            status: "Status",
+            order_id: "Order ID",
+            aliases: "Aliases"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
@@ -464,7 +474,8 @@ I18n.translations.en = {
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
-        start: "Start process"
+        start: "Start process",
+        actions: "Actions"
     },
     terminate_subscription: {
         cancel: "Cancel",
