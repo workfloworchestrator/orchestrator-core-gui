@@ -311,6 +311,11 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <td>{I18n.t("subscription.ims_service.aliases")}</td>
                 <td>{(service.aliases || []).join(", ")}</td>
             </tr>
+            <tr>
+                <td>{I18n.t("subscription.ims_service.endpoints")}</td>
+                <td>{(service.endpoints || []).map(endpoint => `ID: ${endpoint.id} - ${(endpoint.vlanranges || [])
+                    .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ")}`).join(", ")}</td>
+            </tr>
             </tbody>
         </table>;
 
