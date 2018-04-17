@@ -81,7 +81,7 @@ export default class ValidationsExplain extends React.PureComponent {
     example = () => {
         const obj =  {
             "Virtual Circuit": [
-                {"nms_service_id": "service_id", "servicespeed": "capacity"}
+                {"nms_service_id": "service_id", "service_speed": "capacity"}
             ]
         };
         return <section className="example">
@@ -92,7 +92,7 @@ export default class ValidationsExplain extends React.PureComponent {
                 during the execution of the various Process steps.</p>
             <p>The corresponding Product configuration of this workflow must at a minimal
                 contain the Resource Block <span>Virtual Circuit</span> with the Resource Types
-                <span> nms_service_id</span> and <span>servicespeed</span>
+                <span> nms_service_id</span> and <span>service_speed</span>
             </p>
         </section>
     }
