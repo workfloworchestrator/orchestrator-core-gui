@@ -86,6 +86,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         const bandwidthErrors = {...this.state.bandwidthErrors};
         // debugger;
         // bandwidthErrors[index] = err["n"];
+        // debugger;
         this.setState({bandwidthErrors: bandwidthErrors});
     };
 
@@ -99,7 +100,8 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
         const showDelete = maximum > 2 && !disabled;
         const vlanPlaceholder = servicePort.tag === "SSP" ? I18n.t("vlan.ssp") :
-            (servicePort.subscription_id ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
+            (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
+                (isElan ? I18n.t("vlan.placeholder_no_msp") : I18n.t("vlan.placeholder_no_service_port")));
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}

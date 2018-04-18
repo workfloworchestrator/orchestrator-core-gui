@@ -174,11 +174,11 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
 }
 
 export function usedVlans(subscriptionId) {
-    return fetchJson(`ims/vlans/${subscriptionId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`)
 }
 
 export function usedVlansFiltered(subscriptionId, imsCircuitId) {
-    return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
 }
 
 export function portByImsPortId(portId) {

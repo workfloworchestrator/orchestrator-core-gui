@@ -29,7 +29,8 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
-        cache: "Cache"
+        cache: "Cache",
+        new_process: "New Process +"
     },
 
     processes: {
@@ -514,9 +515,11 @@ I18n.translations.en = {
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
+        missingInIms: "This service port has been deleted from IMS",
         allPortsAvailable: "This MSP has no ports in use (yet).",
         placeholder: "Enter a valid VLAN range..." ,
-        placeholder_no_msp: "First select a Service Port...",
+        placeholder_no_service_port: "First select a Service Port...",
+        placeholder_no_msp: "First select a MSP...",
         ssp: "A SSP has a default VLAN"
     },
     clipboard: {
@@ -770,8 +773,8 @@ I18n.translations.en = {
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",
         bandwidth: "Bandwidth",
-        bandwidth_placeholder: "Define the bandwidth of this MSP",
-        bandwidth_no_msp_placeholder: "First select a MSP",
+        bandwidth_placeholder: "Enter the bandwidth of this MSP...",
+        bandwidth_no_msp_placeholder: "First select a MSP...",
         invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
     },
     bandwidth: {

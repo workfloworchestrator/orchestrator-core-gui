@@ -43,7 +43,7 @@ export default class NewProcess extends React.Component {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-
+            started: false
         };
     }
 
@@ -131,7 +131,7 @@ export default class NewProcess extends React.Component {
                                 dienstafnameInput.value = preselectedDienstafname;
                             }
                         }
-                        this.setState({productValidation: productValidation, stepUserInput: stepUserInput});
+                        this.setState({productValidation: productValidation, stepUserInput: stepUserInput, started: true});
                     });
                 }
             });
@@ -192,14 +192,14 @@ export default class NewProcess extends React.Component {
     };
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
-                        organisations, products, locationCodes) {
+                        organisations, products, locationCodes, started) {
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
                 <label htmlFor="product">{I18n.t("process.product")}</label>
                 <ProductSelect
                     products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
-                    onChange={this.changeProduct}
+                    onChange={this.changeProduct} disabled={started}
                     product={isEmpty(product) ? undefined : product.value}/>
             </section>
             {showProductValidation &&
@@ -322,7 +322,7 @@ export default class NewProcess extends React.Component {
         const {
             product, stepUserInput, productValidation, subscriptions, modifySubscription, modifyWorkflow,
             terminateSubscription, maybeTerminated, notModifiableMessage, modifyWorkflows, organisationName,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, started
         } = this.state;
         const {organisations, products, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
@@ -336,7 +336,7 @@ export default class NewProcess extends React.Component {
 
                 <section className="card">
                     {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
-                        subscriptions, history, organisations, products, locationCodes)}
+                        subscriptions, history, organisations, products, locationCodes, started)}
                     {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName)}
                     {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, maybeTerminated, organisationName)}
                 </section>
