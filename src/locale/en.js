@@ -465,7 +465,7 @@ I18n.translations.en = {
             location: "Location",
             node: "Node",
             patchposition: "Patch position",
-            port: "Vlan ports",
+            port: "Port",
             status: "Status"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
