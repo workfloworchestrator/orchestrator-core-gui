@@ -64,13 +64,14 @@ export default class VirtualLAN extends React.PureComponent {
 
     render() {
         const {usedVlans, vlansInUse} = this.state;
-        const {onChange, vlan, subscriptionIdMSP, disabled} = this.props;
+        const {onChange, vlan, subscriptionIdMSP, disabled, placeholder} = this.props;
         const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans);
         const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled;
+        const derivedPlaceholder = placeholder || (subscriptionIdMSP ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
         return (
             <div className="virtual-vlan">
-                <input type="text" value={vlan || ""} placeholder={subscriptionIdMSP ? "Enter a valid VLAN range..." :
-                    "First select a MSP..."} disabled={!subscriptionIdMSP || disabled}
+                <input type="text" value={vlan || ""} placeholder={derivedPlaceholder}
+                       disabled={!subscriptionIdMSP || disabled}
                        onChange={onChange} onBlur={this.validateUsedVlans}/>
                 {!isEmpty(vlansInUse) &&
                 <em className="error">{I18n.t("vlan.vlansInUseError", {vlans: vlansInUse.join(", ")})}</em>}
@@ -88,5 +89,6 @@ VirtualLAN.propTypes = {
     vlan: PropTypes.string,
     subscriptionIdMSP: PropTypes.string,
     imsCircuitId: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    placeholder:  PropTypes.string
 };
