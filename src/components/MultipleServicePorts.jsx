@@ -7,7 +7,7 @@ import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {doValidateUserInput} from "../validations/UserInput";
-import {parentSubscriptions} from "../api";
+import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
 
 export default class MultipleServicePorts extends React.PureComponent {
 
@@ -82,12 +82,15 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     validateMaxBandwidth = index => e => {
-        // const err = {};
-        const bandwidthErrors = {...this.state.bandwidthErrors};
-        // debugger;
-        // bandwidthErrors[index] = err["n"];
-        // debugger;
-        this.setState({bandwidthErrors: bandwidthErrors});
+        const bandwidth = e.target.value;
+        if (bandwidth) {
+            const servicePort = this.props.servicePorts[index];
+            fetchPortSpeedBySubscription(servicePort.subscription_id).then(res => {
+                const bandwidthErrors = {...this.state.bandwidthErrors};
+                bandwidthErrors[index] = parseInt(bandwidth, 10) > parseInt(res, 10);
+                this.setState({bandwidthErrors: bandwidthErrors});
+            });
+        }
     };
 
     renderServicePort = (servicePorts, servicePort, index, vlanErrors, availableServicePorts, organisations, maximum,
@@ -116,10 +119,11 @@ export default class MultipleServicePorts extends React.PureComponent {
             <div className="wrapper">
                 {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
                 <div className="vlan">
-                    <VirtualLAN vlan={servicePort.tag === "SSP" ? "0" : servicePort.vlan} onChange={this.onChangeInternal("vlan", index)}
+                    <VirtualLAN vlan={servicePort.tag === "SSP" ? "0" : servicePort.vlan}
+                                onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={servicePort.subscription_id} onBlur={this.validateVlan(index)}
                                 disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
-                    placeholder={vlanPlaceholder}/>
+                                placeholder={vlanPlaceholder}/>
                     {(!isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}
                 </div>
@@ -132,7 +136,8 @@ export default class MultipleServicePorts extends React.PureComponent {
                            value={servicePort.bandwidth || ""}
                            placeholder={servicePort.subscription_id ? I18n.t("service_ports.bandwidth_placeholder") :
                                I18n.t("service_ports.bandwidth_no_msp_placeholder")}
-                           onChange={this.onChangeInternal("bandwidth")} onBlur={this.validateMaxBandwidth}
+                           onChange={this.onChangeInternal("bandwidth", index)}
+                           onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
                     {(isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                                   onClick={this.removeServicePort(index)}></i>}

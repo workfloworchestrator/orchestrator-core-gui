@@ -183,13 +183,7 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => {
-        if (option && option.value) {
-            this.setState({product: option});
-        } else {
-            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}});
-        }
-    };
+    changeProduct = option => this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: option});
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, started) {
@@ -199,7 +193,7 @@ export default class NewProcess extends React.Component {
                 <label htmlFor="product">{I18n.t("process.product")}</label>
                 <ProductSelect
                     products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
-                    onChange={this.changeProduct} disabled={started}
+                    onChange={this.changeProduct}
                     product={isEmpty(product) ? undefined : product.value}/>
             </section>
             {showProductValidation &&

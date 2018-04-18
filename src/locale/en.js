@@ -242,6 +242,8 @@ I18n.translations.en = {
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
+        multi_msp: "MSP's",
+        multi_msp_info: "The two MSP's that will be connected to each other in this LP",
         service_ports: "Service Ports",
         service_ports_info: "The two Service Ports that will be connected to each other in this LP",
         service_ports_primary: "Service Ports",
