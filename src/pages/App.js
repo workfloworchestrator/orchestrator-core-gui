@@ -51,7 +51,7 @@ class App extends React.PureComponent {
             }
         };
         window.onerror = (msg, url, line, col, err) => {
-            if (err && err.response && err.response.status === 401) {
+            if (err && err.response && (err.response.status === 401 || err.response.status === 403)) {
                 localStorage.removeItem("access_token");
                 this.componentDidMount();
                 return;
