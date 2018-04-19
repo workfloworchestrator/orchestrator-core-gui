@@ -119,10 +119,10 @@ class App extends React.PureComponent {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
-                Promise.all([me(), organisations(), products(), locationCodes()])
-                    .then(result => {
-                        const [currentUser, allOrganisations, allProducts, allLocationCodes] = result;
-                        if (currentUser && currentUser.user_name) {
+                me().then(currentUser => {
+                    if (currentUser && currentUser.user_name) {
+                        Promise.all([organisations(), products(), locationCodes()]).then(result => {
+                            const [allOrganisations, allProducts, allLocationCodes] = result;
                             this.setState({
                                 loading: false,
                                 currentUser: currentUser,
@@ -131,12 +131,12 @@ class App extends React.PureComponent {
                                 locationCodes: allLocationCodes,
                                 products: allProducts.sort((a, b) => a.name.localeCompare(b.name))
                             });
-                        } else {
-                            this.handleBackendDown();
-                        }
-                    })
-                    .catch(err => {
-                        if (err.response && err.response.status === 401) {
+                        })
+                    } else {
+                        this.handleBackendDown();
+                    }
+                }).catch(err => {
+                        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
                             localStorage.removeItem("access_token");
                             this.componentDidMount();
                         } else {
