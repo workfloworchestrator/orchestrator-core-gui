@@ -32,7 +32,12 @@ export function doValidateUserInput(userInput, val, errors) {
     } else if (type === "contact_persons") {
         errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
     } else if (type === "multi_msp" || type === "service_ports") {
-        errors[name] = isEmpty(value) || value.some(sp => isEmpty(sp.subscription_id) || isEmpty(sp.vlan))
+        errors[name] = isEmpty(value)
+        //FIX ME
+        //     || value.some(sp => {
+        //     if (sp.tag)
+        //     return isEmpty(sp.subscription_id) || (sp.tag === "MSP" && isEmpty(sp.vlan))
+        // })
     } else if (type === "accept") {
         errors[name] = !value;
     } else if (type === "boolean") {
