@@ -1,21 +1,15 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/media_queries.scss";
 
-.mod-subscriptions {
-  @include page;
-
-  .card {
-    @include card;
-    padding: 15px;
-  }
+.mod-workflows {
   .options {
     display: flex;
-    padding-top: 25px;
+    padding: 25px 20px;
+    background-color: white;
     flex-direction: row;
     align-items: center;
   }
   section.search {
-    padding: 0 15px 0 0;
     position: relative;
     flex-grow: 5;
 
@@ -34,18 +28,18 @@
     i.fa-search {
       color: lighten($blue, 5);
       position: absolute;
-      right: 24px;
+      right: 14px;
       top: 8px;
       font-size: 24px;
     }
   }
-  section.subscriptions {
+  section.workflows {
     display: flex;
     padding: 0 20px 20px 20px;
     background-color: white;
   }
 
-  table.subscriptions {
+  table.workflows {
     width: 100%;
     word-break: break-all;
     td, th {
@@ -53,50 +47,29 @@
     }
     tr {
       border-bottom: 1px solid $light-grey;
-      &.related-subscription {
+      &.invalid {
         background-color: $light-grey;
-        border-left: 5px solid $blue;
       }
     }
     thead {
       th {
         cursor: pointer;
-        padding: 5px 0 10px;
-        i.fa {
-          float: right;
-          margin-right: 15px;
-          color: $medium-grey;
-          font-size: 18px;
-        }
-
+        padding: 5px 5px 10px 5px
       }
-      th.customer_name {
-        width: 14%;
-      }
-      th.subscription_id {
-        width: 8%;
+      th.name {
+        width: 25%;
       }
       th.description {
-        width: 16%;
+        width: 25%;
       }
-      th.insync {
-        width: 10%;
-        text-align: center;
+      th.target {
+        width: 12%;
       }
-      th.product_name {
-        width: 15%;
+      th.product_tags_string {
+        width: 24%;
       }
-      th.status {
-        width: 7%;
-      }
-      th.tag {
-        width: 10%;
-      }
-      th.start_date_epoch {
-        width: 10%;
-      }
-      th.end_date_epoch {
-        width: 10%;
+      th.created_at {
+        width: 12%;
       }
       span {
         text-transform: uppercase;
@@ -105,48 +78,24 @@
         color: $medium-grey;
         padding: 7px 2px 7px 0;
       }
+      i.fa {
+        float: right;
+        margin-right: 15px;
+        color: $medium-grey;
+        font-size: 18px;
+      }
     }
     tbody {
-      tr {
-        cursor: pointer;
-        &:hover {
-          background-color: $hover;
-        }
-      }
       td {
         word-break: break-word;
         word-wrap: break-word;
-        padding: 3px 0;
-        &.insync {
-          display: flex;
-          justify-content: center;
+        padding: 15px 5px;
+        &.metadata-results {
+          font-style: italic;
+          color: $darker-blue;
+          font-size: larger;
+          cursor: default;
         }
-        &.actions {
-          i.fa-trash {
-            color: $red;
-            font-size: 22px;
-            padding: 0 20px;
-          }
-        }
-        i.fa-plus-circle, i.fa-minus-circle {
-          padding: 0 20px;
-          font-size: 24px;
-          color: $blue;
-        }
-      }
-    }
-    section.fetching-related-subscriptions {
-      display: flex;
-      align-items: center;
-      padding: 5px 0;
-      em {
-        display: inline-block;
-        margin-left: 15px;
-        font-size: 12px;
-      }
-      i {
-        margin-left: 18px;
-        font-size: 16px;
       }
     }
 

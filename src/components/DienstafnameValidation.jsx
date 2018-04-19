@@ -35,8 +35,6 @@ export default class DienstafnameValidation extends React.Component {
         return <div><em>{I18n.t("validations.no_dienstafnames")}</em></div>;
     }
 
-    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription[0]);
-
     renderSubscriptionTable(subscriptions) {
         if (subscriptions.length !== 0) {
             return (
@@ -51,10 +49,10 @@ export default class DienstafnameValidation extends React.Component {
                     </thead>
                     <tbody>
                     {subscriptions.map(subscription =>
-                        <tr key={subscription} onClick={this.showSubscription(subscription)}>
+                        <tr key={subscription}>
                             <td data-label={I18n.t("dienstafname.subscription")}
                                 className="subscription">
-                                <span>{subscription[0]}</span>
+                                <a href={`subscription/${subscription[0]}`} target="_blank">{subscription[0]}</a>
                             </td>
                             <td data-label={I18n.t("dienstafname.description")}
                                 className="subscription">

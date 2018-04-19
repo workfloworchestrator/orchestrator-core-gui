@@ -1,7 +1,7 @@
 import spinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
-    absent, ims_circuit_id, ims_port_id, parent_subscriptions,
+    absent, child_subscriptions, ims_circuit_id, ims_port_id, parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
 
@@ -148,8 +148,12 @@ export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptionsByTag(tag) {
-    return fetchJson(`subscriptions/tag/${tag}`);
+export function subscriptionsByTags(tags) {
+    return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
+}
+
+export function activeAndSyncedSubscriptions() {
+    return fetchJson("subscriptions?insync=True&status=active");
 }
 
 export function subscriptionsByProductId(productId) {
@@ -170,16 +174,30 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
 }
 
 export function usedVlans(subscriptionId) {
-    return fetchJson(`ims/vlans/${subscriptionId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`)
 }
 
 export function usedVlansFiltered(subscriptionId, imsCircuitId) {
-    return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
 }
 
-export function subscriptions_by_subscription_port_id(subscription_id) {
-    return fetchJson(`subscriptions/port_subscriptions/${subscription_id}`).then(json => {
+export function portByImsPortId(portId) {
+    return fetchJson(`ims/port_by_ims_port/${portId}`)
+}
+
+export function portByImsServiceId(serviceId) {
+    return fetchJson(`ims/port_by_ims_service/${serviceId}`)
+}
+
+export function parentSubscriptions(childSubscriptionId) {
+    return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`).then(json => {
         return {type: parent_subscriptions, json: json}
+    });
+}
+
+export function childSubscriptions(parentSubscriptionId) {
+    return fetchJson(`subscriptions/child_subscriptions/${parentSubscriptionId}`).then(json => {
+        return {type: child_subscriptions, json: json}
     });
 }
 
@@ -222,6 +240,10 @@ export function allWorkflows() {
     return fetchJson("workflows")
 }
 
+export function allWorkflowsWithProductTags() {
+    return fetchJson("workflows/with_product_tags")
+}
+
 export function workflowsByTarget(target) {
     return fetchJson(`workflows?target=${target}`)
 }
@@ -262,8 +284,12 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId) {
-    return postPutJson("processes/modify-subscription", {subscription_id: subscriptionId}, "post");
+export function startModificationSubscription(subscriptionId, workflow, dienstafname=null) {
+    const body = {subscription_id: subscriptionId};
+    if (!isEmpty(dienstafname)) {
+        body.dienstafname = dienstafname;
+    }
+    return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
 }
 
 export function deleteProcess(processId) {
@@ -294,6 +320,10 @@ export function tasks() {
     return fetchJson("tasks");
 }
 
+export function fixedInputConfiguration() {
+    return fetchJson("fixed_inputs/configuration");
+}
+
 export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
 }
@@ -322,8 +352,16 @@ export function validations() {
     return fetchJson("products/validations");
 }
 
+export function fixedInputValidations() {
+    return fetchJson("fixed_inputs/validations");
+}
+
 export function validation(productId) {
     return fetchJson(`products/${productId}/validate`);
+}
+
+export function transitions(subscriptionId, transitionType) {
+    return fetchJson(`products/transitions/${subscriptionId}/${transitionType}`);
 }
 
 export function contacts(organisationId) {

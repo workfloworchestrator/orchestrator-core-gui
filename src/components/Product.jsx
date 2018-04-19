@@ -14,7 +14,10 @@ import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
 
 import "./Product.css";
-import {deleteProduct, productStatuses, productTags, productTypes} from "../api";
+import {deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes} from "../api";
+import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
+
+const TAG_LIGHTPATH = "LightPath";
 
 export default class Product extends React.Component {
 
@@ -30,7 +33,10 @@ export default class Product extends React.Component {
             required: ["name", "description", "status", "product_type", "tag"],
             initial: true,
             readOnly: false,
-            product: {product_blocks: [], fixed_inputs: [], status: "active", product_type: "Port", tag: "LightPath"},
+            product: {
+                product_blocks: [], fixed_inputs: [], workflows: [],
+                status: "active", product_type: "Port", tag: "LightPath"
+            },
             processing: false,
             productBlocks: [],
             products: [],
@@ -38,41 +44,68 @@ export default class Product extends React.Component {
             tags: [],
             types: [],
             statuses: [],
-            duplicateFixedInputNames: {},
             optionalAttributes: ["crm_prod_id"],
-            duplicateName: false
+            duplicateName: false,
+            allowedFixedInputs: [],
+            fixedInputConf: {"by_tag": {}, "fixed_inputs": {}}
         };
     }
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        if (id !== "new") {
+        const isExistingProduct = id !== "new";
+        if (isExistingProduct) {
             const readOnly = getParameterByName("readOnly", window.location.search) === "true";
             const clone = id === "clone";
-            productById(clone ? getParameterByName("productId", window.location.search) : id).then(res => {
+            productById(clone ? getParameterByName("productId", window.location.search) : id).then(product => {
                 if (clone) {
-                    delete res.name;
-                    delete res.product_id;
-                    delete res.created_at;
-                    (res.fixed_inputs || []).forEach(fixedInput => {
+                    delete product.name;
+                    delete product.product_id;
+                    delete product.created_at;
+                    (product.fixed_inputs || []).forEach(fixedInput => {
                         delete fixedInput.created_at;
                         delete fixedInput.fixed_input_id;
                         delete fixedInput.product_id;
                     });
                 }
-                this.setState({product: res, readOnly: readOnly})
+                this.setState({product: product, readOnly: readOnly});
+                this.fetchAllConstants(product.tag);
             });
+        } else {
+            this.fetchAllConstants(TAG_LIGHTPATH);
         }
-        Promise.all([productBlocks(), allWorkflows(), products(), productTags(), productTypes(), productStatuses()])
-            .then(res => this.setState({
-                productBlocks: res[0],
-                workflows: res[1],
-                products: res[2],
-                tags: res[3],
-                types: res[4],
-                statuses: res[5]
-            }));
+
     }
+
+    fetchAllConstants = productTag =>
+        Promise.all([productBlocks(), allWorkflows(), products(), productTags(), productTypes(), productStatuses(), fixedInputConfiguration()])
+            .then(res => this.setState({
+                    productBlocks: res[0],
+                    workflows: res[1],
+                    products: res[2],
+                    tags: res[3],
+                    types: res[4],
+                    statuses: res[5],
+                    fixedInputConf: res[6],
+                    allowedFixedInputs: this.determineAllowedFixedInputs(productTag, res[6])
+                })
+            );
+
+    determineAllowedFixedInputs = (productTag, fixedInputConf) => {
+        const ourTag = Object.keys(fixedInputConf.by_tag).find(tag => tag === productTag);
+        if (isEmpty(ourTag)) {
+            return this.state.allowedFixedInputs
+        }
+        const inputs = fixedInputConf.by_tag[ourTag].map(fi => {
+            const name = Object.keys(fi)[0];
+            const required = fi[name];
+            const cfi = fixedInputConf.fixed_inputs.find(f => f.name === name);
+            cfi.required = required;
+            return cfi;
+        });
+        return inputs;
+
+    };
 
     cancel = e => {
         stop(e);
@@ -152,17 +185,16 @@ export default class Product extends React.Component {
     };
 
     isInvalid = (markErrors = false) => {
-        const {errors, required, product, duplicateName, duplicateFixedInputNames} = this.state;
+        const {errors, required, product, duplicateName} = this.state;
         const hasErrors = Object.keys(errors).some(key => errors[key]);
         const requiredInputMissing = required.some(attr => isEmpty(product[attr]));
-        const duplicatedFixedInput = Object.keys(duplicateFixedInputNames).some(key => duplicateFixedInputNames[key]);
         if (markErrors) {
             const missing = required.filter(attr => isEmpty(product[attr]));
             const newErrors = {...errors};
             missing.forEach(attr => newErrors[attr] = true);
             this.setState({errors: newErrors});
         }
-        return hasErrors || requiredInputMissing || duplicateName || duplicatedFixedInput;
+        return hasErrors || requiredInputMissing || duplicateName;
     };
 
     validateProperty = name => e => {
@@ -179,8 +211,23 @@ export default class Product extends React.Component {
         this.setState({errors: errors});
     };
 
+    changeWorkflow = (target, multi = false) => option => {
+        const {product, workflows} = this.state;
+        const otherWorkflows = product.workflows.filter(wf => wf.target !== target);
+        if (isEmpty(option)) {
+            product.workflows = [...otherWorkflows];
+        } else if (multi) {
+            const names = option.map(opt => opt.value);
+            product.workflows = workflows.filter(wf => names.indexOf(wf.name) > -1).concat(otherWorkflows);
+        } else {
+            product.workflows = [workflows.find(wf => wf.name === option.value)].concat(otherWorkflows);
+        }
+        this.setState({product: product});
+    };
+
+
     changeProperty = name => e => {
-        const {product} = this.state;
+        const {product, fixedInputConf} = this.state;
         let value;
         if (isEmpty(e) || e._isAMomentObject) {
             value = e;
@@ -189,6 +236,9 @@ export default class Product extends React.Component {
         }
         product[name] = value;
         this.setState({product: product});
+        if (name === "tag") {
+            this.determineAllowedFixedInputs(value, fixedInputConf)
+        }
     };
 
     addProductBlock = option => {
@@ -205,33 +255,16 @@ export default class Product extends React.Component {
         this.setState({productBlock: product});
     };
 
-    addFixedInput = () => {
+    addFixedInput = allowedFixedInputs => option => {
         const product = {...this.state.product};
-        product.fixed_inputs.push({name: "", value: ""});
+        const fi = allowedFixedInputs.find(fi => fi.name === option.value);
+        product.fixed_inputs.push({name: fi.name, value: fi.values[0]});
         this.setState({product: product});
-        setTimeout(() => {
-            if (this.lastFixedInputName) {
-                this.lastFixedInputName.focus();
-            }
-        }, 250);
     };
 
-    fixedInputNameChanged = (index) => e => {
+    fixedInputValueChanged = (index) => option => {
         const product = {...this.state.product};
-        const newName = e.target.value;
-        const fixedInput = product.fixed_inputs[index];
-        fixedInput.name = newName;
-        this.setState({product: product}, () => {
-            const nameDuplicate = product.fixed_inputs.filter(fi => fi.name === newName).length > 1;
-            const newDuplicateFixedInputNames = {...this.state.duplicateFixedInputNames};
-            newDuplicateFixedInputNames[index] = nameDuplicate;
-            this.setState({duplicateFixedInputNames: newDuplicateFixedInputNames})
-        });
-    };
-
-    fixedInputValueChanged = (index) => e => {
-        const product = {...this.state.product};
-        const newValue = e.target.value;
+        const newValue = option.value;
         const fixedInput = product.fixed_inputs[index];
         fixedInput.value = newValue;
         this.setState({product: product});
@@ -246,41 +279,65 @@ export default class Product extends React.Component {
 
     workFlowKeys = (type, workflows) => workflows
         .filter(wf => wf.target === type)
-        .map(wf => ({label: wf.name, value: wf.key}));
+        .map(wf => ({label: wf.description, value: wf.name}));
 
-    renderFixedInputs = (product, readOnly, duplicateFixedInputNames) => {
+    workFlowByTarget = (product, target, multiValues = false) => {
+        const workflows = product.workflows.filter(wf => wf.target === target).map(wf => wf.name);
+        return multiValues ? workflows : isEmpty(workflows) ? undefined : workflows[0];
+    };
+
+    renderSingleFixedInput = (fixedInput, index, allowedFixedInputs, readOnly) => {
+        const fixedInputConf = allowedFixedInputs.find(fi => fi.name === fixedInput.name);
+        const values = fixedInputConf ? fixedInputConf.values : [];
+        const required = fixedInputConf ? fixedInputConf.required : true;
+        return (
+            <div key={index} className="fixed-input">
+                <div className="wrapper">
+                    {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_name")}</label>}
+                    <input type="text"
+                           value={fixedInput.name}
+                           disabled={true}/>
+                </div>
+                <div className="wrapper">
+                    {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
+                    <Select className="select-fixed-input-value"
+                            onChange={this.fixedInputValueChanged(index)}
+                            options={values.map(val => ({value: val, label: val}))}
+                            searchable={false}
+                            value={fixedInput.value}
+                            clearable={false}
+                            disabled={readOnly}/>
+                </div>
+                {!required && <i className="fa fa-minus first" onClick={this.removeFixedInput(index)}></i>}
+            </div>
+
+        );
+    };
+
+    renderFixedInputs = (product, readOnly) => {
         const fixedInputs = product.fixed_inputs;
+        const {allowedFixedInputs} = this.state;
+        const availableFixedInputs = allowedFixedInputs
+            .filter(afi => !fixedInputs.some(fi => afi.name === fi.name));
         return (
             <section className="form-divider">
                 <label>{I18n.t("metadata.products.fixed_inputs")}</label>
                 <em>{I18n.t("metadata.products.fixed_inputs_info")}</em>
                 <div className="child-form">
-                    {fixedInputs.map((fv, index) =>
-                        <div key={index} className="fixed-input">
-                            <div className="wrapper">
-                                {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_name")}</label>}
-                                <input ref={ref => {
-                                    if (index === fixedInputs.length - 1) {
-                                        this.lastFixedInputName = ref;
-                                    }
-                                }}
-                                       type="text"
-                                       value={fv.name} onChange={this.fixedInputNameChanged(index)}
-                                       disabled={readOnly}/>
-                                {duplicateFixedInputNames[index] &&
-                                <em className="error">{I18n.t("metadata.products.duplicate_fixed_input_name")}</em>}
-                            </div>
-                            <div className="wrapper">
-                                {index === 0 && <label>{I18n.t("metadata.products.fixed_inputs_value")}</label>}
-                                <input type="text" value={fv.value} onChange={this.fixedInputValueChanged(index)}
-                                       disabled={readOnly}/>
-                            </div>
-                            <i className="fa fa-minus first" onClick={this.removeFixedInput(index)}></i>
-                        </div>
-                    )}
-                    {!readOnly &&
-                    <div className="add-fixed-input" onClick={this.addFixedInput}>
-                        <i className="fa fa-plus"></i></div>}
+                    {fixedInputs.map((fv, index) => this.renderSingleFixedInput(fv, index, allowedFixedInputs, readOnly))}
+
+                    {!readOnly && <Select className="select-fixed-input"
+                                          onChange={this.addFixedInput(allowedFixedInputs)}
+                                          options={availableFixedInputs.map(fi => ({
+                                              value: fi.name,
+                                              label: fi.name
+                                          }))}
+                                          searchable={false}
+                                          clearable={false}
+                                          placeholder={availableFixedInputs.length > 0 ?
+                                              I18n.t("metadata.products.select_add_fixed_input") :
+                                              I18n.t("metadata.products.select_no_more_fixed_inputs")}
+                                          disabled={readOnly || availableFixedInputs.length === 0}/>}
                 </div>
             </section>);
     };
@@ -321,12 +378,11 @@ export default class Product extends React.Component {
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
-            leavePage, readOnly, productBlocks, workflows, duplicateName, initial, duplicateFixedInputNames,
+            leavePage, readOnly, productBlocks, workflows, duplicateName, initial,
             confirmationDialogQuestion, tags, types, statuses
         } = this.state;
         const endDate = isEmpty(product.end_date) ? null : product.end_date._isAMomentObject ?
             product.end_date : moment(product.end_date * 1000);
-
         return (
             <div className="mod-product">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -341,7 +397,7 @@ export default class Product extends React.Component {
                     {formInput("metadata.products.description", "description", product.description || "", readOnly,
                         this.state.errors, this.changeProperty("description"), this.validateProperty("description"))}
                     {formSelect("metadata.products.tag", this.changeProperty("tag"),
-                        tags, readOnly, product.tag || "LightPath")}
+                        tags, readOnly, product.tag || TAG_LIGHTPATH)}
                     {formSelect("metadata.products.product_type", this.changeProperty("product_type"),
                         types, readOnly, product.product_type || "Port")}
                     {formSelect("metadata.products.status", this.changeProperty("status"),
@@ -350,19 +406,19 @@ export default class Product extends React.Component {
                     {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
                         this.state.errors, this.changeProperty("crm_prod_id"), () => false)}
                     {formSelect("metadata.products.create_subscription_workflow_key",
-                        this.changeProperty("create_subscription_workflow_key"),
-                        this.workFlowKeys("CREATE", workflows), readOnly,
-                        product.create_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_CREATE),
+                        this.workFlowKeys(TARGET_CREATE, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_CREATE), true)}
                     {formSelect("metadata.products.modify_subscription_workflow_key",
-                        this.changeProperty("modify_subscription_workflow_key"),
-                        this.workFlowKeys("MODIFY", workflows), readOnly,
-                        product.modify_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_MODIFY, true),
+                        this.workFlowKeys(TARGET_MODIFY, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_MODIFY, true), true, true)}
                     {formSelect("metadata.products.terminate_subscription_workflow_key",
-                        this.changeProperty("terminate_subscription_workflow_key"),
-                        this.workFlowKeys("TERMINATE", workflows), readOnly,
-                        product.terminate_subscription_workflow_key || undefined, true)}
+                        this.changeWorkflow(TARGET_TERMINATE),
+                        this.workFlowKeys(TARGET_TERMINATE, workflows), readOnly,
+                        this.workFlowByTarget(product, TARGET_TERMINATE), true)}
                     {this.renderProductBlocks(product, productBlocks, readOnly)}
-                    {this.renderFixedInputs(product, readOnly, duplicateFixedInputNames)}
+                    {this.renderFixedInputs(product, readOnly)}
                     {formDate("metadata.products.created_at", () => false, true,
                         product.created_at ? moment(product.created_at * 1000) : moment())}
                     {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly,

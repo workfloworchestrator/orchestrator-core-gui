@@ -51,6 +51,7 @@ export default class Products extends React.Component {
                 selected: true,
                 count: res.filter(p => p.product_type === type).length
             }));
+            res = res.sort(this.sortBy(this.state.sorted.name));
             this.setState({
                 products: res, filteredProducts: res,
                 filterAttributesTag: newFilterAttributesTag.filter(attr => attr.count > 0),
@@ -261,6 +262,9 @@ export default class Products extends React.Component {
                             </td>
                         </tr>
                     )}
+                    <tr>
+                        <td className="metadata-results" colSpan={6}>{I18n.t("metadata.results", {type: "Products", count: products.length})}</td>
+                    </tr>
                     </tbody>
                 </table>
             );
@@ -298,7 +302,7 @@ export default class Products extends React.Component {
                         {I18n.t("metadata.products.new")}<i className="fa fa-plus"></i>
                     </a>
                 </div>
-                <section className="product">
+                <section className="products">
                     {this.renderProducts(filteredProducts, actions, sorted)}
                 </section>
             </div>

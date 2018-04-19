@@ -12,7 +12,8 @@ export default class VirtualLAN extends React.PureComponent {
         super(props);
         this.state = {
             usedVlans: [],
-            vlansInUse: []
+            vlansInUse: [],
+            missingInIms: false
         }
     }
 
@@ -20,7 +21,9 @@ export default class VirtualLAN extends React.PureComponent {
         if (subscriptionIdMSP) {
             const {imsCircuitId} = this.props;
             const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
-            promise.then(result => this.setState({usedVlans: result}));
+            promise
+                .then(result => this.setState({usedVlans: result, missingInIms: false}))
+                .catch(err => this.setState({missingInIms: true}));
         }
     };
 
@@ -63,18 +66,20 @@ export default class VirtualLAN extends React.PureComponent {
     };
 
     render() {
-        const {usedVlans, vlansInUse} = this.state;
-        const {onChange, vlan, subscriptionIdMSP} = this.props;
-        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans);
+        const {usedVlans, vlansInUse, missingInIms} = this.state;
+        const {onChange, vlan, subscriptionIdMSP, disabled, placeholder} = this.props;
+        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms;
+        const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled && !missingInIms;
+        const derivedPlaceholder = placeholder || (subscriptionIdMSP ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
         return (
             <div className="virtual-vlan">
-                <input type="text" value={vlan || ""} placeholder={subscriptionIdMSP ? "Enter a valid VLAN range..." :
-                    "First select a MSP..."} disabled={!subscriptionIdMSP}
+                <input type="text" value={vlan || ""} placeholder={derivedPlaceholder}
+                       disabled={!subscriptionIdMSP || disabled}
                        onChange={onChange} onBlur={this.validateUsedVlans}/>
-                {}
                 {!isEmpty(vlansInUse) &&
                 <em className="error">{I18n.t("vlan.vlansInUseError", {vlans: vlansInUse.join(", ")})}</em>}
-                {!isEmpty(usedVlans) && <em>{I18n.t("vlan.vlansInUse", {vlans: usedVlans.map(arr => arr.join("-")).join(", ")})}</em>}
+                {missingInIms &&  <em className="error">{I18n.t("vlan.missingInIms", {vlans: vlansInUse.join(", ")})}</em>}
+                {showWhichPortsAreInUse && <em>{I18n.t("vlan.vlansInUse", {vlans: usedVlans.map(arr => arr.join("-")).join(", ")})}</em>}
                 {showAllPortsAvailable && <em>{I18n.t("vlan.allPortsAvailable")}</em>}
             </div>
         )
@@ -87,5 +92,7 @@ VirtualLAN.propTypes = {
     onBlur: PropTypes.func.isRequired,
     vlan: PropTypes.string,
     subscriptionIdMSP: PropTypes.string,
-    imsCircuitId: PropTypes.string
+    imsCircuitId: PropTypes.string,
+    disabled: PropTypes.bool,
+    placeholder:  PropTypes.string
 };

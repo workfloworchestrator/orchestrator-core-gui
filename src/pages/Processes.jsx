@@ -67,7 +67,7 @@ export default class Processes extends React.PureComponent {
             newFilterAttributesStatus.forEach(attr => attr.count = results
                 .filter(process => process.status === attr.name).length);
 
-            const filteredProcesses = this.doSearchAndSortAndFilter("", results, this.state.sorted,
+            const filteredProcesses = this.doSearchAndSortAndFilter(this.state.query, results, this.state.sorted,
                 newFilterAttributesAssignee, newFilterAttributesStatus);
 
             this.setState({

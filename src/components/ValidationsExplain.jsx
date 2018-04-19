@@ -35,11 +35,17 @@ export default class ValidationsExplain extends React.PureComponent {
         <p>Dienstafnames are registered in de CRM. Workflow processes resulting in new subscriptions store the Dienstafname reference in the subscription.</p>
     </section>;
 
+    explanationFixedInputs = () => <section className="explanation">
+        <h3>Explanation</h3>
+        <p><span className="code">FixedInputs</span> are fixed product characteristics and the allowed
+            <span className="code">FixedInputs</span> and the subsequent values are configured in the code.</p>
+    </section>;
+
     details = () => <section className="details">
         <h3>Details</h3>
         <p>The validations consist of each Product validated against the <span className="code">workflow_subscription_mapping </span>
             of the Workflow. All the Resource Blocks with their subsequent Resource Types configured to be present
-            in the workflow linked to the Product (e.g. the column value <span className="code">create_subscription_workflow_key</span>)
+            in the workflow linked to the Product (e.g. the workflow in the workflows table with target <span className="code">CREATE</span>)
             must also be configured in <span>core-db</span>.</p>
 
         <p>Each mismatch - being a completely missing Resource Block or missing individual Resource Types - is
@@ -62,10 +68,20 @@ export default class ValidationsExplain extends React.PureComponent {
         </p>
     </section>;
 
+    detailsFixedInputs = () => <section className="details">
+        <h3>Details</h3>
+        <p>In the <span className="code">workflows/server/config/fixed_inputs.py</span> all of the allowed <span className="code">FixedInputs</span> are
+            described together with the allowed values per <span className="code">Product</span> by <span className="code">tag</span>.
+        </p>
+        <p>All <span className="code">Products</span> that either miss required <span className="code">FixedInputs </span>or has <span className="code">FixedInputs </span>
+            with invalid values or has <span className="code">FixedInputs </span> that are not known / allowed are listed.
+        </p>
+    </section>;
+
     example = () => {
         const obj =  {
-            "Ethernet Circuit": [
-                {"nms_service_id": "service_id", "servicespeed": "capacity"}
+            "Virtual Circuit": [
+                {"nms_service_id": "service_id", "service_speed": "capacity"}
             ]
         };
         return <section className="example">
@@ -75,16 +91,16 @@ export default class ValidationsExplain extends React.PureComponent {
             <p>Will at a minimal need to populate the state variables <span>service_id</span> and <span>capacity </span>
                 during the execution of the various Process steps.</p>
             <p>The corresponding Product configuration of this workflow must at a minimal
-                contain the Resource Block <span>Ethernet Circuit</span> with the Resource Types
-                <span> nms_service_id</span> and <span>servicespeed</span>
+                contain the Resource Block <span>Virtual Circuit</span> with the Resource Types
+                <span> nms_service_id</span> and <span>service_speed</span>
             </p>
         </section>
     }
 
     render() {
-        const {close, isVisible, isWorkFlows, isSubscriptions} = this.props;
+        const {close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs} = this.props;
         const className = isVisible ? "" : "hide";
-        const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" : "Dienstafname / Subscription cross-check";
+        const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" : isFixedInputs ? "Products / FixedInputs" : "Dienstafname / Subscription cross-check";
         return (
             <div className={`validation-explain ${className}`}
                  tabIndex="1" onBlur={close} ref={ref => this.main = ref}>
@@ -95,8 +111,8 @@ export default class ValidationsExplain extends React.PureComponent {
                             <i className="fa fa-remove"></i>
                         </a>
                     </section>
-                    {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() : this.explanationDienstafnames()}
-                    {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() : this.detailsDienstafnames()}
+                    {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() : isFixedInputs ? this.explanationFixedInputs() : this.explanationDienstafnames()}
+                    {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() : isFixedInputs ? this.detailsFixedInputs() : this.detailsDienstafnames()}
                     {isWorkFlows && this.example()}
                 </section>
             </div>
@@ -108,6 +124,7 @@ ValidationsExplain.propTypes = {
     close: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
     isWorkFlows: PropTypes.bool.isRequired,
-    isSubscriptions: PropTypes.bool.isRequired
+    isSubscriptions: PropTypes.bool.isRequired,
+    isFixedInputs: PropTypes.bool.isRequired
 };
 

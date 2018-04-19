@@ -35,8 +35,6 @@ export default class SubscriptionValidation extends React.Component {
         }
     };
 
-    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
-
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
@@ -108,12 +106,13 @@ export default class SubscriptionValidation extends React.Component {
                     </thead>
                     <tbody>
                     {subscriptions.map((subscription, index) =>
-                        <tr key={`${subscription.subscription_id}_${index}`}
-                            onClick={this.showSubscription(subscription)}>
+                        <tr key={`${subscription.subscription_id}_${index}`}>
                             <td data-label={I18n.t("subscriptions.customer_name")}
                                 className="customer_name">{subscription.customer_name}</td>
                             <td data-label={I18n.t("subscriptions.description")}
-                                className="description">{subscription.description}</td>
+                                className="description">
+                            <a href={`subscription/${subscription.subscription_id}`} target="_blank">{subscription.description}</a>
+                            </td>
                             <td data-label={I18n.t("subscriptions.insync")} className="insync">
                                 <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
                             </td>
