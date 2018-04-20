@@ -80,8 +80,8 @@ export default class ValidationsExplain extends React.PureComponent {
 
     example = () => {
         const obj =  {
-            "Ethernet Circuit": [
-                {"nms_service_id": "service_id", "servicespeed": "capacity"}
+            "Virtual Circuit": [
+                {"nms_service_id": "service_id", "service_speed": "capacity"}
             ]
         };
         return <section className="example">
@@ -91,8 +91,8 @@ export default class ValidationsExplain extends React.PureComponent {
             <p>Will at a minimal need to populate the state variables <span>service_id</span> and <span>capacity </span>
                 during the execution of the various Process steps.</p>
             <p>The corresponding Product configuration of this workflow must at a minimal
-                contain the Resource Block <span>Ethernet Circuit</span> with the Resource Types
-                <span> nms_service_id</span> and <span>servicespeed</span>
+                contain the Resource Block <span>Virtual Circuit</span> with the Resource Types
+                <span> nms_service_id</span> and <span>service_speed</span>
             </p>
         </section>
     }

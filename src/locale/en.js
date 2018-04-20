@@ -29,7 +29,8 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
-        cache: "Cache"
+        cache: "Cache",
+        new_process: "New Process +"
     },
 
     processes: {
@@ -241,6 +242,8 @@ I18n.translations.en = {
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
+        multi_msp: "MSP's",
+        multi_msp_info: "The two MSP's that will be connected to each other in this LP",
         service_ports: "Service Ports",
         service_ports_info: "The two Service Ports that will be connected to each other in this LP",
         service_ports_primary: "Service Ports",
@@ -453,7 +456,20 @@ I18n.translations.en = {
             speed: "Speed",
             status: "Status",
             order_id: "Order ID",
-            aliases: "Aliases"
+            aliases: "Aliases",
+            endpoints: "Endpoints"
+        },
+        ims_port: {
+            connector_type: "Connector type",
+            fiber_type: "Fiber type",
+            id: "IMS Port ID {{id}}",
+            iface_type: "Interface type",
+            line_name: "Line name",
+            location: "Location",
+            node: "Node",
+            patchposition: "Patch position",
+            port: "Port",
+            status: "Status"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
@@ -501,7 +517,12 @@ I18n.translations.en = {
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
-        allPortsAvailable: "This MSP has no ports in use (yet)."
+        missingInIms: "This service port has been deleted from IMS",
+        allPortsAvailable: "This MSP has no ports in use (yet).",
+        placeholder: "Enter a valid VLAN range..." ,
+        placeholder_no_service_port: "First select a Service Port...",
+        placeholder_no_msp: "First select a MSP...",
+        ssp: "A SSP has a default VLAN"
     },
     clipboard: {
         copied: "Copied!",
@@ -752,7 +773,11 @@ I18n.translations.en = {
         servicePort: "Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
-        used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}"
+        used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",
+        bandwidth: "Bandwidth",
+        bandwidth_placeholder: "Enter the bandwidth of this MSP...",
+        bandwidth_no_msp_placeholder: "First select a MSP...",
+        invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"

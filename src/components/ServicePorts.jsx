@@ -54,21 +54,21 @@ export default class MultipleMSPs extends React.PureComponent {
 
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
-                {index === 0 && <label>{I18n.t("multi_msp.servicePort")}</label>}
+                {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}
                 <MultiServicePointSelect key={index} onChange={this.onChangeInternal("subscription_id", index)}
                                          msp={msp.subscription_id}
                                          msps={inSelect}
                                          organisations={organisations}/>
             </div>
             <div className="wrapper">
-                {index === 0 && <label>{I18n.t("multi_msp.vlan")}</label>}
+                {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
                 <div className="vlan">
                     <VirtualLAN vlan={msp.vlan} onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={msp.subscription_id} onBlur={this.validateVlan(index)}/>
                     <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                        onClick={this.removeMSP(index)}></i>
                 </div>
-                {errors[index] && <em className="error">{I18n.t("multi_msp.invalid_vlan")}</em>}
+                {errors[index] && <em className="error">{I18n.t("service_ports.invalid_vlan")}</em>}
             </div>
 
         </section>)

@@ -62,7 +62,9 @@
       color: $red;
     }
   }
-
+  table {
+     table-layout: fixed;
+  }
   table.detail-block {
     margin-top: 20px;
     margin-left: 30px;
@@ -227,6 +229,11 @@
         }
       }
     }
+  }
+  p.label {
+    color: $blue;
+    margin-left: 25px;
+    padding-top: 5px;
   }
 
 }

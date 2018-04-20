@@ -201,7 +201,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState} = this.props;
+        const {currentState, products, organisations, servicePorts} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -219,8 +219,8 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
-                                                 products={this.props.products}
-                                                 organisations={this.props.organisations}
+                                                 products={products}
+                                                 organisations={organisations}
                                                  className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
@@ -235,32 +235,32 @@ export default class UserInputForm extends React.Component {
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId}/>
             case "organisation" :
-                return <OrganisationSelect key={name} organisations={this.props.organisations}
+                return <OrganisationSelect key={name} organisations={organisations}
                                            onChange={this.changeSelectInput(name)}
                                            organisation={value}
                                            disabled={userInput.readonly}/>;
             case "product" :
-                return <ProductSelect products={this.props.products}
+                return <ProductSelect products={products}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}
                                       disabled={userInput.readonly}/>;
             case "msp_product":
                 const tags = ["MSP"];
-                const mspProducts = filterProductsByTag(this.props.products, tags);
+                const mspProducts = filterProductsByTag(products, tags);
                 return <ProductSelect products={mspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
 
             case "rmsp_product":
                 const rmsptags = ["RMSP"];
-                const rmspProducts = filterProductsByTag(this.props.products, rmsptags);
+                const rmspProducts = filterProductsByTag(products, rmsptags);
                 return <ProductSelect products={rmspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
 
             case "netherlight_msp_product":
                 const nlTags = ["MSPNL"];
-                const nlMspProducts = filterProductsByTag(this.props.products, nlTags);
+                const nlMspProducts = filterProductsByTag(products, nlTags);
                 return <ProductSelect products={nlMspProducts}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}/>;
@@ -309,8 +309,8 @@ export default class UserInputForm extends React.Component {
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
             case "downgrade_redundant_lp_choice":
-                return <DowngradeRedundantLPChoice products={this.props.products}
-                                                   organisations={this.props.organisations}
+                return <DowngradeRedundantLPChoice products={products}
+                                                   organisations={organisations}
                                                    onChange={this.changeStringInput(name)}
                                                    subscriptionId={process.current_state.subscription_id}
                                                    value={value}
@@ -324,8 +324,8 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeBooleanInput(name)}
                               info={I18n.t(`process.noc_confirmation`)}/>
                     <section className="form-divider"></section>
-                    <DowngradeRedundantLPConfirmation products={this.props.products}
-                                                      organisations={this.props.organisations}
+                    <DowngradeRedundantLPConfirmation products={products}
+                                                      organisations={organisations}
                                                       subscriptionId={process.current_state.subscription_id}
                                                       className="indent"
                                                       primary={primary}
@@ -339,15 +339,15 @@ export default class UserInputForm extends React.Component {
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
-                                              products={this.props.products}
-                                              organisations={this.props.organisations}
+                                              products={products}
+                                              organisations={organisations}
                                               className="indent"/>
                 </div>;
             case "read_only_subscription":
                 return <div>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
-                                              products={this.props.products}
-                                              organisations={this.props.organisations}
+                                              products={products}
+                                              organisations={organisations}
                                               className="indent"/>
                 </div>;
             case "accept":
@@ -369,21 +369,22 @@ export default class UserInputForm extends React.Component {
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
                 const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) ||
                     lookupValueFromNestedState(bandwidthKey, currentState);
-                const productIds = filterProductsByBandwidth(this.props.products, bandwidthMsp)
+                const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
-                const servicePorts= this.props.servicePorts
-                    .filter(sp => productIds.includes(sp.product_id));
-
+                const availableServicePorts = productIds.length === products.length ? servicePorts :
+                    servicePorts
+                        .filter(sp => productIds.includes(sp.product_id));
                 return <MultipleServicePorts servicePorts={isEmpty(value) ? [
                     {subscription_id: null, vlan: ""},
                     {subscription_id: null, vlan: ""}
                 ] : value}
-                                             availableServicePorts={servicePorts}
-                                             organisations={this.props.organisations}
+                                             availableServicePorts={availableServicePorts}
+                                             organisations={organisations}
                                              onChange={this.changeNestedInput(name)}
                                              organisationId={organisationId}
                                              maximum={userInput.maximum}
                                              disabled={userInput.readonly}
+                                             isElan={userInput.elan}
                 />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
