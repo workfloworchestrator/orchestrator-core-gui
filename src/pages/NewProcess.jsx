@@ -21,6 +21,7 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import {isLightPathProduct, isTerminatable} from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
+import {subscriptionInsyncStatus} from "../api";
 
 
 export default class NewProcess extends React.Component {
@@ -213,11 +214,20 @@ export default class NewProcess extends React.Component {
         </section>;
     }
 
-    maybeModifiedMessage = option => {
+    maybeModifiedMessage = (option, relations) => {
         const {subscriptions} = this.state;
         if (option && option.value) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            if (!subscription.insync) {
+            if (!subscription.insync || !relations.insync) {
+                if (relations.hasOwnProperty('subscriptions') && relations.subscriptions.length !== 0) {
+                    // Todo: change i18n prefix also?
+                    let message =  "There is a related workflow entity out of sync: "
+                    for (let r in relations.subscriptions) {
+                        message = message.concat(relations.subscriptions[r].description);
+                    }
+                    console.log(message);
+                    return I18n.t("subscription.not_in_sync") + message;
+                }
                 return I18n.t("subscription.not_in_sync");
             }
             if (subscription.status !== "active") {
@@ -229,12 +239,19 @@ export default class NewProcess extends React.Component {
 
     changeModifySubscription = option => {
         const {subscriptions} = this.state;
+        const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
         const {products} = this.props;
-        const workflows = (option && option.value) ? products.find(prod => prod.product_id === subscriptions.find(sub => sub.subscription_id === option.value).product_id)
+        const workflows = (option && option.value) ? products.find(prod => prod.product_id === subscription.product_id)
             .workflows.filter(wf => wf.target === TARGET_MODIFY) : [];
+
+        subscriptionInsyncStatus(subscription.subscription_id).then(result => {
+                this.setState({notModifiableMessage: this.maybeModifiedMessage(option, result)});
+            }
+        );
+
         this.setState({
             modifySubscription: option ? option.value : undefined,
-            notModifiableMessage: this.maybeModifiedMessage(option),
+            notModifiableMessage: this.maybeModifiedMessage(option, false),
             modifyWorkflows: workflows,
             modifyWorkflow: workflows.length === 1 ? workflows[0].name : this.state.modifyWorkflow
         });

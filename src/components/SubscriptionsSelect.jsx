@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {subscriptionInsyncStatus, subscriptionsByProductId} from "../api";
+import {subscriptionsByProductId} from "../api";
 import {isEmpty} from "../utils/Utils";
 
 export default class SubscriptionsSelect extends React.PureComponent {
@@ -13,7 +13,6 @@ export default class SubscriptionsSelect extends React.PureComponent {
         super(props);
         this.state = {
             subscriptions: [],
-            subscriptionRelationsInsyncStatus: {}
         }
     }
 
@@ -34,20 +33,6 @@ export default class SubscriptionsSelect extends React.PureComponent {
             this.setState({subscriptions: []})
         }
     };
-
-    onInternalChange() {
-        // subscriptionInsyncStatus(value).then(res => {
-        //     const subscriptionRelationsInsyncStatus = {...this.state.subscriptionRelationsInsyncStatus};
-        //     debugger;
-        //     // if (res.json.length > 0) {
-        //     //     usedSSPDescriptions[index] = res.json.map(parent => parent.description).join(", ");
-        //     // } else {
-        //     //     this.clearErrors(index);
-        //     // }
-        //     // this.setState({subscriptionRelationsInsyncStatus: subscriptionRelationsInsyncStatus});
-        // });
-    };
-
 
     render() {
         const {subscriptions} = this.state;
