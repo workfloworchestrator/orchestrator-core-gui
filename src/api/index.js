@@ -152,6 +152,11 @@ export function subscriptionsByTags(tags) {
     return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
 }
 
+export function subscriptionInsyncStatus(subscription_id) {
+    return fetchJson(`insync_info_subscription_relations/${subscription_id}`)
+}
+
+// Todo: check maybe we can combine this with the function above
 export function activeAndSyncedSubscriptions() {
     return fetchJson("subscriptions?insync=True&status=active");
 }
@@ -174,11 +179,19 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
 }
 
 export function usedVlans(subscriptionId) {
-    return fetchJson(`ims/vlans/${subscriptionId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`)
 }
 
 export function usedVlansFiltered(subscriptionId, imsCircuitId) {
-    return fetchJson(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}/${imsCircuitId}`)
+}
+
+export function portByImsPortId(portId) {
+    return fetchJson(`ims/port_by_ims_port/${portId}`)
+}
+
+export function portByImsServiceId(serviceId) {
+    return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
 
 export function parentSubscriptions(childSubscriptionId) {

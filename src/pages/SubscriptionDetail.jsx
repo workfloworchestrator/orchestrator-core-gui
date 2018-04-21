@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import {
     imsService,
     parentSubscriptions,
+    portByImsPortId,
+    portByImsServiceId,
     processSubscriptionsBySubscriptionId,
     productById,
     subscriptionsDetail
@@ -38,6 +40,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             product: {fixed_inputs: [], workflows: []},
             subscriptionProcesses: [],
             imsServices: [],
+            imsEndpoints: [],
             subscriptions: [],
             notFound: false,
             loaded: false,
@@ -83,15 +86,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     }
                     subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
                     const allImsServices = relatedObjects.filter(obj => obj.type === ims_circuit_id || obj.type === ims_port_id).map(obj => obj.json);
-                    const flags = new Set();
                     // There are service duplicates for port_id and circuit_id
-                    const imsServices = allImsServices.filter(resource => {
-                        if (flags.has(resource.id)) {
-                            return false;
-                        }
-                        flags.add(resource.id);
-                        return true;
-                    });
+                    const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
@@ -102,6 +98,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                         isModifiable: false,
                         loadedIMSRelatedObjects: true
                     });
+                    const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
+                        .map(endpoint => endpoint.type === "service" ? portByImsServiceId(endpoint.id) : portByImsPortId(endpoint.id)))
+                        .reduce((a, b) => a.concat(b), []);
+                    Promise.all(uniquePortPromises).then(result => this.setState({imsEndpoints: result}));
                 })
             }).catch(err => {
             if (err.response && err.response.status === 404) {
@@ -270,7 +270,25 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderImsServiceDetail = (service, index, className = "") =>
+    renderImsPortDetail = (port, index) =>
+        <tr>
+            <td>{I18n.t("subscription.ims_port.id", {id: port.id})}</td>
+            <td>
+                <table className="detail-block related-subscription" index={index}>
+                    <thead>
+                    </thead>
+                    <tbody>
+                    {["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
+                        .map(attr => <tr>
+                            <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
+                            <td>{port[attr]}</td>
+                        </tr>)}
+                    </tbody>
+                </table>
+            </td>
+        </tr>;
+
+    renderImsServiceDetail = (service, index, imsEndpoints, className = "") =>
         <table className={`detail-block ${className}`}>
             <thead>
             </thead>
@@ -316,6 +334,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <td>{(service.endpoints || []).map(endpoint => `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${(endpoint.vlanranges || [])
                     .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ")}`).join(", ")}</td>
             </tr>
+            {imsEndpoints.map((port, index) => this.renderImsPortDetail(port, index))}
             </tbody>
         </table>;
 
@@ -516,15 +535,15 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.setState({collapsedObjects: [...collapsedObjects]});
     };
 
-    renderRelatedObject = (subscriptions, imsServices, identifier, isSubscriptionValue) => {
+    renderRelatedObject = (subscriptions, imsServices, identifier, isSubscriptionValue, imsEndpoints) => {
         const target = isSubscriptionValue ? subscriptions.find(sub => sub.subscription_id === identifier) :
             imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
-        const renderTarget = isSubscriptionValue ? this.renderSubscriptionDetail : this.renderImsServiceDetail;
-        return renderTarget(target, 0, "related-subscription");
+        return isSubscriptionValue ? this.renderSubscriptionDetail(target, 0, "related-subscription") :
+            this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
     };
 
     renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedIMSRelatedObjects, notFoundRelatedObjects, index,
-                             imsServices, collapsedObjects, subscriptions) => {
+                             imsServices, collapsedObjects, subscriptions, imsEndpoints) => {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
             loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === port_subscription_id;
@@ -551,7 +570,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             <tr className="related-subscription">
                 <td className="whitespace"></td>
                 <td className="related-subscription-values"
-                    colSpan="2">{this.renderRelatedObject(subscriptions, imsServices, subscriptionInstanceValue.value, isSubscriptionValue)}</td>
+                    colSpan="2">{this.renderRelatedObject(subscriptions, imsServices, subscriptionInstanceValue.value, isSubscriptionValue, imsEndpoints)}</td>
             </tr>}
             </tbody>
 
@@ -565,7 +584,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderProductBlocks = (subscription, notFoundRelatedObjects, loadedIMSRelatedObjects, imsServices, collapsedObjects,
-                           subscriptions) => {
+                           subscriptions, imsEndpoints) => {
         return <section className="details">
             <h3>{I18n.t("subscriptions.productBlocks")}</h3>
             <div className="form-container-parent">
@@ -582,7 +601,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                 {instance.values
                                     .sort((a, b) => a.resource_type.resource_type.localeCompare(b.resource_type.resource_type))
                                     .map((value, i) => this.renderResourceTypeRow(subscription, value, loadedIMSRelatedObjects, notFoundRelatedObjects, i,
-                                        imsServices, collapsedObjects, subscriptions))}
+                                        imsServices, collapsedObjects, subscriptions, imsEndpoints))}
                             </table>
                         </section>
                     )}
@@ -600,7 +619,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     render() {
         const {
-            loaded, notFound, subscription, subscriptionProcesses, product, imsServices,
+            loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
             confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects,
             collapsedObjects
@@ -619,7 +638,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {this.renderDetails(subscription)}
                     {this.renderFixedInputs(product)}
                     {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedIMSRelatedObjects,
-                        imsServices, collapsedObjects, subscriptions)}
+                        imsServices, collapsedObjects, subscriptions, imsEndpoints)}
                     {this.renderActions(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
                         loadedIMSRelatedObjects)}
                     {this.renderProduct(product)}
