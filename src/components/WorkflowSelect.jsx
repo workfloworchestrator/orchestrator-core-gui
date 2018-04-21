@@ -7,8 +7,8 @@ import "react-select/dist/react-select.css";
 
 export default class WorkflowSelect extends React.PureComponent {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         this.state = {
             placeholder: I18n.t("process.workflowsPlaceholder")
         }

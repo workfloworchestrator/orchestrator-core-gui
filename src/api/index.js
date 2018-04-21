@@ -152,6 +152,11 @@ export function subscriptionsByTags(tags) {
     return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
 }
 
+export function subscriptionInsyncStatus(subscription_id) {
+    return fetchJson(`insync_info_subscription_relations/${subscription_id}`)
+}
+
+// Todo: check maybe we can combine this with the function above
 export function activeAndSyncedSubscriptions() {
     return fetchJson("subscriptions?insync=True&status=active");
 }

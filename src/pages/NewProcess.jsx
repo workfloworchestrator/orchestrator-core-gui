@@ -107,7 +107,6 @@ export default class NewProcess extends React.Component {
         }
     });
 
-
     startNewProcess = e => {
         stop(e);
         const {product} = this.state;
