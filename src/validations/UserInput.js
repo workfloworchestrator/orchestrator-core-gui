@@ -31,7 +31,7 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !/^[0-9]{4}$/.test(value);
     } else if (type === "contact_persons") {
         errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
-    } else if (type === "multi_msp" || type === "service_ports") {
+    } else if (type === "service_ports") {
         errors[name] = isEmpty(value)
         //FIX ME
         //     || value.some(sp => {
