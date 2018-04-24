@@ -37,8 +37,8 @@ export default class NewProcess extends React.Component {
             modifySubscription: undefined,
             modifyWorkflow: undefined,
             terminateSubscription: undefined,
-            maybeTerminated: false,
             notModifiableMessage: undefined,
+            notTerminatableMessage: undefined,
             organisationName: undefined,
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
@@ -220,12 +220,10 @@ export default class NewProcess extends React.Component {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
             if (!subscription.insync || !relations.insync) {
                 if (relations.hasOwnProperty('subscriptions') && relations.subscriptions.length !== 0) {
-                    // Todo: change i18n prefix also?
-                    let message =  "There is a related workflow entity out of sync: "
-                    for (let r in relations.subscriptions) {
-                        message = message.concat(relations.subscriptions[r].description);
-                    }
-                    console.log(message);
+                    let message =  "There is a one or more related workflow entity out of sync: ";
+                    relations.subscriptions.forEach((relation, index, array) => {
+                        message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                    });
                     return I18n.t("subscription.not_in_sync") + message;
                 }
                 return I18n.t("subscription.not_in_sync");
@@ -261,20 +259,50 @@ export default class NewProcess extends React.Component {
         this.setState({modifyWorkflow: option ? option.value : undefined});
     };
 
-    changeTerminatedSubscription = option => {
+    maybeTerminatedMessage = (option, relations) => {
         const {subscriptions} = this.state;
         if (option && option.value) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            if (!isLightPathProduct(subscription)) {
-                parentSubscriptions(option.value).then(res => {
-                    const maybeTerminated = isTerminatable(subscription, res.json);
-                    this.setState({maybeTerminated: maybeTerminated});
-                });
-            } else {
-                this.setState({maybeTerminated: true});
+
+            if (!subscription.insync || !relations.insync) {
+                if (relations.hasOwnProperty('subscriptions') && relations.subscriptions.length !== 0) {
+                    let message =  "There is a one or more related workflow entity out of sync: ";
+                    relations.subscriptions.forEach((relation, index, array) => {
+                        message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                    });
+                    return I18n.t("subscription.not_in_sync") + message;
+                }
+                return I18n.t("subscription.not_in_sync");
+            }
+            if (subscription.status !== "active") {
+                return I18n.t("subscription.no_terminate_invalid_status", {status: subscription.status});
             }
         }
-        this.setState({terminateSubscription: option ? option.value : undefined});
+        return null;
+    };
+
+    changeTerminateSubscription = option => {
+        const {subscriptions} = this.state;
+        const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
+
+        if (!isLightPathProduct(subscription)) {
+            parentSubscriptions(option.value).then(res => {
+                if (!isTerminatable(subscription, res.json)) {
+                    this.setState({notTerminatableMessage: I18n.t("subscription.no_termination_parent_subscription")});
+                }
+            });
+        }
+
+        subscriptionInsyncStatus(subscription.subscription_id).then(result => {
+            if(!result.insync) {
+                this.setState({notTerminatableMessage: this.maybeTerminatedMessage(option, result)});
+            }
+        });
+
+        this.setState({
+            terminateSubscription: option ? option.value : undefined,
+            notTerminatableMessage: this.maybeTerminatedMessage(option, false),
+        });
     };
 
     renderModifyProduct = (subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName) => {
@@ -307,8 +335,7 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    renderTerminateProduct = (subscriptions, terminateSubscription, maybeTerminated, organisationName) => {
-        const renderError = terminateSubscription && !maybeTerminated;
+    renderTerminateProduct = (subscriptions, terminateSubscription, notTerminatableMessage, organisationName) => {
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.terminate_subscription")}</h3>
@@ -317,13 +344,12 @@ export default class NewProcess extends React.Component {
                     <SubscriptionSearchSelect
                         subscriptions={subscriptions.filter(sub => sub.status !== "terminated")}
                         subscription={terminateSubscription}
-                        onChange={this.changeTerminatedSubscription}
+                        onChange={this.changeTerminateSubscription}
                         organisation={organisationName}
                     />
-                    {renderError &&
-                    <em className="error">{I18n.t("subscription.no_termination_parent_subscription")}</em>}
+                    {notTerminatableMessage && <em className="error">{notTerminatableMessage}</em>}
                 </section>
-                {this.renderActions(this.startTerminateProcess, isEmpty(terminateSubscription) || !maybeTerminated)}
+                {this.renderActions(this.startTerminateProcess, isEmpty(terminateSubscription) || !isEmpty(notTerminatableMessage))}
             </section>
         );
     };
@@ -331,8 +357,8 @@ export default class NewProcess extends React.Component {
     render() {
         const {
             product, stepUserInput, productValidation, subscriptions, modifySubscription, modifyWorkflow,
-            terminateSubscription, maybeTerminated, notModifiableMessage, modifyWorkflows, organisationName,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, started
+            terminateSubscription, notModifiableMessage, notTerminatableMessage, modifyWorkflows,
+            organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, started
         } = this.state;
         const {organisations, products, locationCodes, history} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
@@ -348,7 +374,7 @@ export default class NewProcess extends React.Component {
                     {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
                         subscriptions, history, organisations, products, locationCodes, started)}
                     {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName)}
-                    {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, maybeTerminated, organisationName)}
+                    {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, notTerminatableMessage, organisationName)}
                 </section>
             </div>
         );
