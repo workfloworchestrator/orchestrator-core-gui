@@ -7,22 +7,14 @@ import "react-select/dist/react-select.css";
 
 export default class WorkflowSelect extends React.PureComponent {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            placeholder: I18n.t("process.workflowsPlaceholder")
-        }
-    }
-
     render() {
         const {onChange, workflows, workflow, disabled} = this.props;
-        const {placeholder} = this.state;
         return <Select className="select-workflow"
                        onChange={onChange}
                        options={workflows.map(wf => ({label: wf.description, value: wf.name}))}
                        value={workflow}
                        searchable={true}
-                       placeholder={placeholder}
+                       placeholder={I18n.t("process.workflowsPlaceholder")}
                        disabled={disabled || workflows.length === 0}/>
 
     }

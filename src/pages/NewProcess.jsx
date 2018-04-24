@@ -3,9 +3,9 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {
     initialWorkflowInput,
-    parentSubscriptions,
     startModificationSubscription,
     startProcess,
+    subscriptionInsyncStatus,
     subscriptions,
     validation
 } from "../api";
@@ -18,10 +18,8 @@ import "./NewProcess.css";
 import {TARGET_CREATE, TARGET_MODIFY} from "../validations/Products";
 import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";
-import {isLightPathProduct, isTerminatable} from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
-import {subscriptionInsyncStatus} from "../api";
 
 
 export default class NewProcess extends React.Component {
@@ -131,7 +129,11 @@ export default class NewProcess extends React.Component {
                                 dienstafnameInput.value = preselectedDienstafname;
                             }
                         }
-                        this.setState({productValidation: productValidation, stepUserInput: stepUserInput, started: true});
+                        this.setState({
+                            productValidation: productValidation,
+                            stepUserInput: stepUserInput,
+                            started: true
+                        });
                     });
                 }
             });
@@ -183,7 +185,11 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: option});
+    changeProduct = option => this.setState({
+        stepUserInput: [],
+        productValidation: {"valid": true, mapping: {}},
+        product: option
+    });
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, started) {
@@ -234,23 +240,23 @@ export default class NewProcess extends React.Component {
             }
             return I18n.t("subscription.relations_not_in_sync") + message;
         }
-        else {
-            return null;
-        }
+        return null;
     };
 
     changeModifySubscription = option => {
-        const {subscriptions} = this.state;
-        const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-        const {products} = this.props;
-        const workflows = (option && option.value) ? products.find(prod => prod.product_id === subscription.product_id)
-            .workflows.filter(wf => wf.target === TARGET_MODIFY) : [];
-
-        subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                this.setState({notModifiableMessage: this.maybeModifiedMessage(subscription, relation_info)});
-            }
-        );
-
+        const subscriptionSelected = option && option.value;
+        let workflows;
+        if (subscriptionSelected) {
+            const subscription = this.state.subscriptions.find(sub => sub.subscription_id === option.value);
+            subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
+                    this.setState({notModifiableMessage: this.maybeModifiedMessage(subscription, relation_info)});
+                }
+            );
+            workflows = this.props.products.find(prod => prod.product_id === subscription.product_id)
+                .workflows.filter(wf => wf.target === TARGET_MODIFY);
+        } else {
+            workflows = []
+        }
         this.setState({
             modifySubscription: option ? option.value : undefined,
             notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
@@ -289,9 +295,7 @@ export default class NewProcess extends React.Component {
             }
             return I18n.t("subscription.relations_not_in_sync") + message;
         }
-        else {
-            return null;
-        }
+        return null;
     };
 
     changeTerminateSubscription = option => {
