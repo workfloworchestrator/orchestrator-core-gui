@@ -153,7 +153,7 @@ export function subscriptionsByTags(tags) {
 }
 
 export function subscriptionInsyncStatus(subscription_id) {
-    return fetchJson(`subscriptions/insync_info_subscription_relations/${subscription_id}`)
+    return fetchJson(`subscriptions/insync_status_relations/${subscription_id}`)
 }
 
 // Todo: check maybe we can combine this with the function above

@@ -420,6 +420,7 @@ I18n.translations.en = {
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:"
     },
     subscription: {
+        acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
         child_subscriptions: "Port subscriptions in {{product}}",
@@ -486,8 +487,10 @@ I18n.translations.en = {
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
         no_terminate_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active subscriptions can be terminated.",
-        no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
+        relations_not_in_sync: "This subscription can not be modified because some related subscriptions are not insync.",
+        locked_child_subscriptions: "Locked child subscriptions:",
+        locked_parent_subscriptions: "Locked parent subscriptions:",
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",

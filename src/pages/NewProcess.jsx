@@ -214,25 +214,29 @@ export default class NewProcess extends React.Component {
         </section>;
     }
 
-    maybeModifiedMessage = (option, relations) => {
-        const {subscriptions} = this.state;
-        if (option && option.value) {
-            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            if (!subscription.insync || !relations.insync) {
-                if (relations.hasOwnProperty('subscriptions') && relations.subscriptions.length !== 0) {
-                    let message =  "There is a one or more related workflow entity out of sync: ";
-                    relations.subscriptions.forEach((relation, index, array) => {
-                        message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                    });
-                    return I18n.t("subscription.not_in_sync") + message;
-                }
-                return I18n.t("subscription.not_in_sync");
-            }
-            if (subscription.status !== "active") {
-                return I18n.t("subscription.no_modify_invalid_status", {status: subscription.status});
-            }
+    maybeModifiedMessage = (subscription, relation_info) => {
+        let message = "";
+        if (!subscription.insync) {
+            return I18n.t("subscription.not_in_sync");
         }
-        return null;
+        else if (!relation_info.insync) {
+            if (!isEmpty(relation_info.locked_childs)) {
+                message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
+                relation_info.locked_childs.forEach((relation, index, array) => {
+                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                });
+            }
+            if (!isEmpty(relation_info.locked_parents)) {
+                message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
+                relation_info.locked_parents.forEach((relation, index, array) => {
+                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                });
+            }
+            return I18n.t("subscription.relations_not_in_sync") + message;
+        }
+        else {
+            return null;
+        }
     };
 
     changeModifySubscription = option => {
@@ -242,14 +246,14 @@ export default class NewProcess extends React.Component {
         const workflows = (option && option.value) ? products.find(prod => prod.product_id === subscription.product_id)
             .workflows.filter(wf => wf.target === TARGET_MODIFY) : [];
 
-        subscriptionInsyncStatus(subscription.subscription_id).then(result => {
-                this.setState({notModifiableMessage: this.maybeModifiedMessage(option, result)});
+        subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
+                this.setState({notModifiableMessage: this.maybeModifiedMessage(subscription, relation_info)});
             }
         );
 
         this.setState({
             modifySubscription: option ? option.value : undefined,
-            notModifiableMessage: this.maybeModifiedMessage(option, false),
+            notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
             modifyWorkflows: workflows,
             modifyWorkflow: workflows.length === 1 ? workflows[0].name : this.state.modifyWorkflow
         });
