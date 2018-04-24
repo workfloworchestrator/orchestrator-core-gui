@@ -5,20 +5,20 @@ import Select from "react-select";
 
 import "react-select/dist/react-select.css";
 
-export default function WorkflowSelect({onChange, workflows, workflow, disabled,
-                                           placeholder=I18n.t("process.workflowsPlaceholder")}) {
+export default class WorkflowSelect extends React.PureComponent {
 
-    return (
-        <Select className="select-workflow"
-                onChange={onChange}
-                options={workflows.map(wf => ({label: wf.description, value: wf.name}))}
-                value={workflow}
-                searchable={true}
-                placeholder={placeholder}
-                disabled={disabled || workflows.length === 0}/>
-    );
+    render() {
+        const {onChange, workflows, workflow, disabled} = this.props;
+        return <Select className="select-workflow"
+                       onChange={onChange}
+                       options={workflows.map(wf => ({label: wf.description, value: wf.name}))}
+                       value={workflow}
+                       searchable={true}
+                       placeholder={I18n.t("process.workflowsPlaceholder")}
+                       disabled={disabled || workflows.length === 0}/>
+
+    }
 }
-
 WorkflowSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     workflows: PropTypes.array.isRequired,

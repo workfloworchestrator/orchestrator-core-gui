@@ -12,7 +12,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            subscriptions: []
+            subscriptions: [],
         }
     }
 
