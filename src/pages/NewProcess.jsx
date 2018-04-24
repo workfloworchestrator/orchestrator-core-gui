@@ -263,49 +263,49 @@ export default class NewProcess extends React.Component {
         this.setState({modifyWorkflow: option ? option.value : undefined});
     };
 
-    maybeTerminatedMessage = (option, relations) => {
-        const {subscriptions} = this.state;
-        if (option && option.value) {
-            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-
-            if (!subscription.insync || !relations.insync) {
-                if (relations.hasOwnProperty('subscriptions') && relations.subscriptions.length !== 0) {
-                    let message =  "There is a one or more related workflow entity out of sync: ";
-                    relations.subscriptions.forEach((relation, index, array) => {
-                        message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                    });
-                    return I18n.t("subscription.not_in_sync") + message;
-                }
-                return I18n.t("subscription.not_in_sync");
-            }
-            if (subscription.status !== "active") {
-                return I18n.t("subscription.no_terminate_invalid_status", {status: subscription.status});
-            }
+    maybeTerminatedMessage = (subscription, relation_info) => {
+        let message = "";
+        if (!subscription.insync) {
+            return I18n.t("subscription.not_in_sync");
         }
-        return null;
+        else if (!relation_info.insync) {
+            if (!isEmpty(relation_info.unterminated_parents)) {
+                message = message + " " + I18n.t("subscription.no_termination_parent_subscription") + " ";
+                relation_info.unterminated_parents.forEach((relation, index, array) => {
+                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                });
+            }
+            if (!isEmpty(relation_info.locked_childs)) {
+                message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
+                relation_info.locked_childs.forEach((relation, index, array) => {
+                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                });
+            }
+            if (!isEmpty(relation_info.locked_parents)) {
+                message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
+                relation_info.locked_parents.forEach((relation, index, array) => {
+                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+                });
+            }
+            return I18n.t("subscription.relations_not_in_sync") + message;
+        }
+        else {
+            return null;
+        }
     };
 
     changeTerminateSubscription = option => {
         const {subscriptions} = this.state;
         const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
 
-        if (!isLightPathProduct(subscription)) {
-            parentSubscriptions(option.value).then(res => {
-                if (!isTerminatable(subscription, res.json)) {
-                    this.setState({notTerminatableMessage: I18n.t("subscription.no_termination_parent_subscription")});
-                }
-            });
-        }
-
-        subscriptionInsyncStatus(subscription.subscription_id).then(result => {
-            if(!result.insync) {
-                this.setState({notTerminatableMessage: this.maybeTerminatedMessage(option, result)});
+        subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
+                this.setState({notTerminatableMessage: this.maybeTerminatedMessage(subscription, relation_info)});
             }
-        });
+        );
 
         this.setState({
             terminateSubscription: option ? option.value : undefined,
-            notTerminatableMessage: this.maybeTerminatedMessage(option, false),
+            notTerminatableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
         });
     };
 
