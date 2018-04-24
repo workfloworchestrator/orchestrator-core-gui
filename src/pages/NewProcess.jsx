@@ -245,9 +245,11 @@ export default class NewProcess extends React.Component {
 
     changeModifySubscription = option => {
         const subscriptionSelected = option && option.value;
+        const {subscriptions} = this.state;
+
         let workflows;
         if (subscriptionSelected) {
-            const subscription = this.state.subscriptions.find(sub => sub.subscription_id === option.value);
+            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
             subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
                     this.setState({notModifiableMessage: this.maybeModifiedMessage(subscription, relation_info)});
                 }
@@ -299,14 +301,16 @@ export default class NewProcess extends React.Component {
     };
 
     changeTerminateSubscription = option => {
+        const subscriptionSelected = option && option.value;
+
         const {subscriptions} = this.state;
-        const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-
-        subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                this.setState({notTerminatableMessage: this.maybeTerminatedMessage(subscription, relation_info)});
-            }
-        );
-
+        if (subscriptionSelected) {
+            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
+            subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
+                    this.setState({notTerminatableMessage: this.maybeTerminatedMessage(subscription, relation_info)});
+                }
+            );
+        }
         this.setState({
             terminateSubscription: option ? option.value : undefined,
             notTerminatableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
