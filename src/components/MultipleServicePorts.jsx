@@ -78,7 +78,14 @@ export default class MultipleServicePorts extends React.PureComponent {
         doValidateUserInput({name: "n", type: "vlan_range"}, e.target.value, err);
         const vlanErrors = {...this.state.vlanErrors};
         vlanErrors[index] = err["n"];
-        this.setState({vlanErrors: vlanErrors});
+        this.setState({vlanErrors: vlanErrors}, this.bubbleUpErrorState);
+    };
+
+    bubbleUpErrorState = () => {
+      const {vlanErrors, bandwidthErrors, usedSSPDescriptions} = this.state;
+      const inValid = Object.values(vlanErrors).some(val => val) || Object.values(bandwidthErrors).some(val => val) ||
+      Object.values(usedSSPDescriptions).some(val => val) ;
+      this.props.reportError(inValid);
     };
 
     validateMaxBandwidth = index => e => {
@@ -87,8 +94,9 @@ export default class MultipleServicePorts extends React.PureComponent {
             const servicePort = this.props.servicePorts[index];
             fetchPortSpeedBySubscription(servicePort.subscription_id).then(res => {
                 const bandwidthErrors = {...this.state.bandwidthErrors};
-                bandwidthErrors[index] = parseInt(bandwidth, 10) > parseInt(res, 10);
-                this.setState({bandwidthErrors: bandwidthErrors});
+                const isTooLarge = parseInt(bandwidth, 10) > parseInt(res, 10);
+                bandwidthErrors[index] = isTooLarge;
+                this.setState({bandwidthErrors: bandwidthErrors}, this.bubbleUpErrorState);
             });
         }
     };
@@ -169,5 +177,6 @@ MultipleServicePorts.propTypes = {
     organisations: PropTypes.array.isRequired,
     maximum: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
-    isElan: PropTypes.bool
+    isElan: PropTypes.bool,
+    reportError: PropTypes.func.isRequired
 };

@@ -74,7 +74,13 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    validateAllUserInput = (stepUserInput) => {
+    reportError = name => isError => {
+        const errors = {...this.state.errors};
+        errors[name] = isError;
+        this.setState({errors: errors});
+    };
+
+    validateAllUserInput = stepUserInput => {
         const errors = {...this.state.errors};
         stepUserInput.forEach(input => doValidateUserInput(input, input.value, errors));
         this.setState({errors: errors});
@@ -94,7 +100,7 @@ export default class UserInputForm extends React.Component {
     };
 
     isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]) ||
-        Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
+        Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key]);
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -110,8 +116,7 @@ export default class UserInputForm extends React.Component {
     changeBooleanInput = name => e => {
         const value = e.target.checked;
         this.changeUserInput(name, value);
-        const {stepUserInput} = this.state;
-        this.validateAllUserInput(stepUserInput);
+        this.validateUserInput(name)({target: {value: value}})
     };
 
     changeSelectInput = name => option => {
@@ -122,20 +127,24 @@ export default class UserInputForm extends React.Component {
 
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
-        const hashTable = {...this.state.uniqueSelectInputs};
+        const uniqueSelectInputs = {...this.state.uniqueSelectInputs};
         const errors = {...this.state.uniqueErrors};
-        if (!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
-        const names = hashTable[hash]['names'];
-        const values = hashTable[hash]['values'];
-        if (!(value in values)) values[value] = 0;
+        if (isEmpty(uniqueSelectInputs[hash])) {
+            uniqueSelectInputs[hash] = {"names": {}, "values": {}};
+        }
+        const names = uniqueSelectInputs[hash]["names"];
+        const values = uniqueSelectInputs[hash]["values"];
+        if (!values[value]) {
+            values[value] = 0;
+        }
         values[value] += 1;
-        if (name in names) values[names[name]] -= 1;
+        if (names[name]){
+          values[names[name]] -= 1;
+        }
         names[name] = value;
-        Object.keys(names).forEach(name => {
-            errors[name] = values[names[name]] > 1;
-        });
+        Object.keys(names).forEach(name =>  errors[name] = values[names[name]] > 1);
         this.setState({uniqueErrors: errors});
-        this.setState({uniqueSelectInputs: hashTable});
+        this.setState({uniqueSelectInputs: uniqueSelectInputs});
     };
 
     changeUniqueSelectInput = (name, hash) => option => {
@@ -302,9 +311,8 @@ export default class UserInputForm extends React.Component {
             case "free_ports_for_location_code_and_interface_type":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
-                const uniqueIdentifier = interfaceType + locationCode;
                 return <FreePortSelect
-                    onChange={this.changeUniqueSelectInput(name, uniqueIdentifier)}
+                    onChange={this.changeUniqueSelectInput(name, `${interfaceType}_${locationCode}`)}
                     freePort={value}
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
@@ -385,6 +393,7 @@ export default class UserInputForm extends React.Component {
                                              maximum={userInput.maximum}
                                              disabled={userInput.readonly}
                                              isElan={userInput.elan}
+                                             reportError={this.reportError("service_ports")}
                 />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
