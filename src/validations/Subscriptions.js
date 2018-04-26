@@ -1,30 +1,9 @@
 import {isEmpty} from "../utils/Utils";
 import I18n from "i18n-js";
 
-const lightPathProductTags = ["LightPath", "LPNLNSI", "ELAN"];
-
 export function subscriptionInstanceValues(subscription) {
     return subscription.instances.reduce((acc, instance) =>
         acc.concat(instance.values.map(item => ({...item, instance_label: instance.label}))), []);
-}
-
-export function hasResourceType(subscription, resourceType) {
-    const values = subscriptionInstanceValues(subscription);
-    return values.some(val => val.resource_type.resource_type === resourceType);
-}
-
-export function isLightPathProduct(subscription) {
-    return lightPathProductTags.includes(subscription.tag);
-}
-
-export function isTerminatable(subscription, relatedSubscriptions) {
-    //Parent subscriptions like 'Lichtpaden' can always be terminated
-    if (lightPathProductTags.includes(subscription.tag)) {
-        return true;
-    }
-    //Child subscriptions like 'MSP' / 'SSP' can only be terminated if not used in non-terminated parent subscriptions
-    return isEmpty(relatedSubscriptions) || relatedSubscriptions.every(sub => sub.status === "terminated");
-
 }
 
 export function maybeModifiedMessage(subscription, relation_info) {
@@ -94,7 +73,7 @@ export function searchConstruct(query) {
     //See the tests in src/__tests__/validations/Subscriptions.test.js for 'explanation'
     if (colonIndex > -1) {
         const searchOptions = {};
-        const parts = query.split(/(:|'|"| )/)
+        const parts = query.split(/(:|'|"| )/);
         let lastSearchItem = "";
         let inSeparator = false;
         let afterColon = false;

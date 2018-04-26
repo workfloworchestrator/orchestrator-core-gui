@@ -18,7 +18,8 @@ import {
     absent,
     ims_circuit_id,
     ims_port_id,
-    isTerminatable, maybeModifiedMessage, maybeTerminatedMessage,
+    maybeModifiedMessage,
+    maybeTerminatedMessage,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -45,8 +46,6 @@ export default class SubscriptionDetail extends React.PureComponent {
             loaded: false,
             loadedAllRelatedObjects: false,
             enrichedRelatedSubscriptions: {},
-            isTerminatable: false,
-            isModifiable: true,
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -95,8 +94,6 @@ export default class SubscriptionDetail extends React.PureComponent {
                         imsServices: imsServices,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
-                        isTerminatable: isTerminatable(subscription, subscriptions),
-                        isModifiable: false,
                         loadedAllRelatedObjects: true
                     });
 
@@ -394,7 +391,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     workflowByTarget = (product, target) => product.workflows.find(wf => wf.target === target);
 
-    renderActions = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
+    renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
         let noTerminateReason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
@@ -409,9 +406,11 @@ export default class SubscriptionDetail extends React.PureComponent {
             noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
         // Check if related subscriptions and main subscription are insync
-        noTerminateReason = maybeTerminatedMessage(subscription, enrichedRelatedSubscriptions);
+        if (isEmpty(noTerminateReason)) {
+            noTerminateReason = maybeTerminatedMessage(subscription, enrichedRelatedSubscriptions);
+        }
 
-        const displayTerminate = isTerminatable && !noTerminateReason && loadedAllRelatedObjects;
+        const isTerminatable = isEmpty(noTerminateReason) && loadedAllRelatedObjects;
 
         const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
 
@@ -427,7 +426,9 @@ export default class SubscriptionDetail extends React.PureComponent {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
         // Check if related subscriptions and main subscription are insync
-        noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
+        if (isEmpty(noModifyReason)) {
+            noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
+        }
 
         const isModifiable = isEmpty(noModifyReason) && loadedAllRelatedObjects;
 
@@ -439,12 +440,12 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </thead>
                     <tbody>
                     <tr>
-                        {displayTerminate && <td><a href={I18n.t("subscription.terminate")}
+                        {isTerminatable && <td><a href={I18n.t("subscription.terminate")}
                                                     onClick={this.terminate(subscription, isTerminatable && !noTerminateReason)}>
                             {I18n.t("subscription.terminate")}
                         </a></td>}
-                        {!displayTerminate && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        {!displayTerminate && <td><em
+                        {!isTerminatable && <td><span>{I18n.t("subscription.terminate")}</span></td>}
+                        {!isTerminatable && <td><em
                             className="error">{noTerminateReason}</em></td>}
                         {!loadedAllRelatedObjects && <td>
                             <section className="terminate-link-waiting">
@@ -617,7 +618,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
-            subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
+            subscriptions, confirmationDialogOpen, confirmationDialogAction,
             confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects, enrichedRelatedSubscriptions,
             collapsedObjects
         } = this.state;
@@ -636,7 +637,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {this.renderFixedInputs(product)}
                     {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
-                    {this.renderActions(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
+                    {this.renderActions(subscription, subscriptions, product, notFoundRelatedObjects,
                         loadedAllRelatedObjects, enrichedRelatedSubscriptions)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
