@@ -12,14 +12,7 @@ export default class ServicePortSelect extends React.PureComponent {
         return `${description.trim()} ${organisationName}`
     };
 
-    is_selectable = (servicePort) => {
-        if (servicePort.tag === "SSP") {
-            // Service port with TAG SSP can always be used
-            return true;
-        }
-        // Other service ports need to be insync before you can select them
-        return servicePort.insync;
-    };
+    is_selectable = (servicePort) => servicePort.tag === "SSP" ? true : servicePort.insync;
 
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
@@ -31,12 +24,11 @@ export default class ServicePortSelect extends React.PureComponent {
                                tag: aServicePort.tag,
                                disabled: !this.is_selectable(aServicePort),
                            }))
-                           .sort((x,y)=> x.label.localeCompare(y.label))
+                           .sort((x, y) => x.label.localeCompare(y.label))
                        }
                        value={servicePort}
                        searchable={true}
                        disabled={disabled || servicePorts.length === 0}/>
-
     }
 }
 
