@@ -393,6 +393,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
+        const status = subscription.status;
         let noTerminateReason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
             noTerminateReason = I18n.t("subscription.no_termination_deleted_related_objects");
@@ -401,7 +402,6 @@ export default class SubscriptionDetail extends React.PureComponent {
             noTerminateReason = I18n.t("subscription.no_termination_workflow");
         }
         //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        const status = subscription.status;
         if (status !== "provisioning" && status !== "active") {
             noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
