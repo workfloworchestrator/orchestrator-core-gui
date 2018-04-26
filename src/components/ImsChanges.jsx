@@ -73,7 +73,7 @@ export default class ImsChanges extends React.PureComponent {
                     {["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
                         .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
-                            <td>{port[attr]}</td>
+                            <td>{port[attr] || ""}</td>
                         </tr>)}
                     </tbody>
                 </table>
