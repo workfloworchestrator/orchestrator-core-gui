@@ -279,7 +279,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </thead>
                     <tbody>
                     {["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
-                        .map(attr => <tr>
+                        .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
                             <td>{port[attr]}</td>
                         </tr>)}

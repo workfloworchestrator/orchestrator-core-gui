@@ -228,6 +228,10 @@ I18n.translations.en = {
         new_process: "Create new process / subscription",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
+        network_changes_ready: "IMS changes ready",
+        network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in IMS",
+        ims_changes: "Updated in IMS",
+        ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
         nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
         cleanup_ready: "Cleanup ready",
@@ -783,6 +787,11 @@ I18n.translations.en = {
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
+    },
+    ims_changes:{
+        circuit_changed: "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
+        old_endpoint: "The old endpoint",
+        new_endpoint: "The new endpoint"
     }
 };
 
