@@ -15,6 +15,13 @@
     &.new_endpoint {
       color: $dark-green;
     }
+    thead {
+      th {
+        text-align: left;
+        padding: 8px 15px;
+        font-size: larger;
+      }
+    },
     tbody {
       tr {
         border-bottom: 1px solid $light-grey;

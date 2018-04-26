@@ -7,14 +7,18 @@ import "./ImsChanges.css";
 
 export default class ImsChanges extends React.PureComponent {
 
-    renderImsServiceDetail = (service, index, imsEndpoints, className) =>
+    renderVlanRange = vlanRanges => {
+        return (vlanRanges || []).map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ");
+    };
+
+    renderImsServiceDetail = (service, index, imsEndpoints, vlanRanges, className) =>
         <table className={`ims-circuit ${className}`}>
             <thead>
-            <th>
-                <td className="header" colSpan="2">
-                    {I18n.t(`ims_changes.${className}`)}
-                </td>
-            </th>
+            <tr>
+                <th className="header" colSpan="2">
+                    {I18n.t(`ims_changes.${className}`) + " - " + this.renderVlanRange(vlanRanges)}
+                </th>
+            </tr>
             </thead>
             <tbody>
             <tr>
@@ -55,15 +59,16 @@ export default class ImsChanges extends React.PureComponent {
             </tr>
             <tr>
                 <td>{I18n.t("subscription.ims_service.endpoints")}</td>
-                <td>{(service.endpoints || []).map(endpoint => `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${(endpoint.vlanranges || [])
-                    .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ")}`).join(", ")}</td>
+                <td>{(service.endpoints || []).map(endpoint =>
+                    `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${this.renderVlanRange(endpoint.vlanranges)}`)
+                    .join(", ")}</td>
             </tr>
             {imsEndpoints.map((port, index) => this.renderImsPortDetail(port, index))}
             </tbody>
         </table>;
 
     renderImsPortDetail = (port, index) =>
-        <tr>
+        <tr key={index}>
             <td>{I18n.t("subscription.ims_port.id", {id: port.id})}</td>
             <td>
                 <table className="ims-port" index={index}>
@@ -89,9 +94,9 @@ export default class ImsChanges extends React.PureComponent {
                         id: change.ims_circuit_id,
                         description: change.description
                     })}</h3>
-                    {change.endpoints.map((endpoint, index) => <section>
-                        {this.renderImsServiceDetail(endpoint.old_ims_service, index, [endpoint.old_ims_port], "old_endpoint")}
-                        {this.renderImsServiceDetail(endpoint.new_ims_service, index, [endpoint.new_ims_port], "new_endpoint")}
+                    {change.endpoints.map((endpoint, index) => <section key={index}>
+                        {this.renderImsServiceDetail(endpoint.old_ims_service, index, [endpoint.old_ims_port], endpoint.vlanranges, "old_endpoint")}
+                        {this.renderImsServiceDetail(endpoint.new_ims_service, index, [endpoint.new_ims_port], endpoint.vlanranges, "new_endpoint")}
                     </section>)}
                 </section>
             )}
