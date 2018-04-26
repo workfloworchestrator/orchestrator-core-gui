@@ -44,7 +44,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscriptions: [],
             notFound: false,
             loaded: false,
-            loadedIMSRelatedObjects: false,
+            loadedAllRelatedObjects: false,
             isTerminatable: false,
             isModifiable: true,
             confirmationDialogOpen: false,
@@ -96,7 +96,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         isTerminatable: isTerminatable(subscription, subscriptions),
                         isModifiable: false,
-                        loadedIMSRelatedObjects: true
+                        loadedAllRelatedObjects: true
                     });
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
                         .map(endpoint => endpoint.type === "service" ? portByImsServiceId(endpoint.id) : portByImsPortId(endpoint.id)))
@@ -621,7 +621,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
             subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects,
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects,
             collapsedObjects
         } = this.state;
         const {organisations, products} = this.props;
@@ -637,10 +637,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                 {renderContent && <div>
                     {this.renderDetails(subscription)}
                     {this.renderFixedInputs(product)}
-                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedIMSRelatedObjects,
+                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
                     {this.renderActions(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
-                        loadedIMSRelatedObjects)}
+                        loadedAllRelatedObjects)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
                     {this.renderSubscriptions(subscriptions, subscription, organisations, products)}

@@ -20,6 +20,7 @@ import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
+import {maybeModifiedMessage, maybeTerminatedMessage} from "../validations/Subscriptions";
 
 
 export default class NewProcess extends React.Component {
@@ -220,29 +221,6 @@ export default class NewProcess extends React.Component {
         </section>;
     }
 
-    maybeModifiedMessage = (subscription, relation_info) => {
-        let message = "";
-        if (!subscription.insync) {
-            return I18n.t("subscription.not_in_sync");
-        }
-        else if (!relation_info.insync) {
-            if (!isEmpty(relation_info.locked_childs)) {
-                message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
-                relation_info.locked_childs.forEach((relation, index, array) => {
-                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                });
-            }
-            if (!isEmpty(relation_info.locked_parents)) {
-                message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
-                relation_info.locked_parents.forEach((relation, index, array) => {
-                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                });
-            }
-            return I18n.t("subscription.relations_not_in_sync") + message;
-        }
-        return null;
-    };
-
     changeModifySubscription = option => {
         const subscriptionSelected = option && option.value;
         const {subscriptions} = this.state;
@@ -251,7 +229,7 @@ export default class NewProcess extends React.Component {
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
             subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                    this.setState({notModifiableMessage: this.maybeModifiedMessage(subscription, relation_info)});
+                    this.setState({notModifiableMessage: maybeModifiedMessage(subscription, relation_info)});
                 }
             );
             workflows = this.props.products.find(prod => prod.product_id === subscription.product_id)
@@ -271,35 +249,6 @@ export default class NewProcess extends React.Component {
         this.setState({modifyWorkflow: option ? option.value : undefined});
     };
 
-    maybeTerminatedMessage = (subscription, relation_info) => {
-        let message = "";
-        if (!subscription.insync) {
-            return I18n.t("subscription.not_in_sync");
-        }
-        else if (!relation_info.insync) {
-            if (!isEmpty(relation_info.unterminated_parents)) {
-                message = message + " " + I18n.t("subscription.no_termination_parent_subscription") + " ";
-                relation_info.unterminated_parents.forEach((relation, index, array) => {
-                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                });
-            }
-            if (!isEmpty(relation_info.locked_childs)) {
-                message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
-                relation_info.locked_childs.forEach((relation, index, array) => {
-                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                });
-            }
-            if (!isEmpty(relation_info.locked_parents)) {
-                message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
-                relation_info.locked_parents.forEach((relation, index, array) => {
-                    message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-                });
-            }
-            return I18n.t("subscription.relations_not_in_sync") + message;
-        }
-        return null;
-    };
-
     changeTerminateSubscription = option => {
         const subscriptionSelected = option && option.value;
 
@@ -307,7 +256,7 @@ export default class NewProcess extends React.Component {
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
             subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                    this.setState({notTerminatableMessage: this.maybeTerminatedMessage(subscription, relation_info)});
+                    this.setState({notTerminatableMessage: maybeTerminatedMessage(subscription, relation_info)});
                 }
             );
         }
