@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 
 import "./MetaData.css";
-import {stop} from "../utils/Utils";
 import ProductBlocks from "../components/ProductBlocks";
 import ResourceTypes from "../components/ResourceTypes";
 import Products from "../components/Products";
 import FixedInputConfiguration from "../components/FixedInputConfiguration";
+import WorkFlows from "../components/WorkFlows";
 
 export default class MetaData extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            tabs: ["products", "product_blocks", "resource_types", "fixed_inputs"],
-            selectedTab: "product_blocks"
+            tabs: ["products", "product_blocks", "resource_types", "fixed_inputs", "workflows"],
+            selectedTab: "products"
         };
     }
 
@@ -24,9 +24,9 @@ export default class MetaData extends React.Component {
         this.setState({selectedTab: type});
     }
 
-    switchTab = tab => e => {
-        stop(e);
+    switchTab = tab => () => {
         this.setState({selectedTab: tab});
+        this.props.history.push(`/metadata/${tab}`);
     };
 
     renderTab = (tab, selectedTab) =>
@@ -44,7 +44,9 @@ export default class MetaData extends React.Component {
             case "resource_types":
                 return <ResourceTypes history={this.props.history}/>
             case "fixed_inputs":
-                return <FixedInputConfiguration/>
+                return <FixedInputConfiguration/>;
+            case "workflows":
+                return <WorkFlows/>;
             default:
                 throw new Error(`Unknown tab ${selectedTab}`)
         }

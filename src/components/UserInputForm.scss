@@ -20,26 +20,15 @@
             em {
                 margin-bottom: 10px;
             }
-            &.first_lightpath, &.second_lightpath, &.first_msp, &.second_msp,
-            &.lightpath_msp, &.lightpath_ssp, &.lightpath_msp_1, &.lightpath_ssp_1,
-            &.lightpath_msp_2, &.lightpath_ssp_2 {
+            &.first_lightpath, &.second_lightpath {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: $blue;
             }
-            &.source, &.source_vlan, &.destination, &.destination_vlan,
-            &.source_1, &.source_vlan_1, &.destination_1, &.destination_vlan_1, &.source_2, &.source_vlan_2,
-            &.destination_2, &.destination_vlan_2, &.location_code_1, &.location_code_2, &.crm_port_id_1, &.crm_port_id_2,
-            &.ieee_interface_type_1, &.ieee_interface_type_2,
-            &.ssp_a\.product, &.ssp_a\.location_code, &.ssp_a\.interface_type, &.ssp_a\.crm_port_id,
-            &.ssp_b\.product, &.ssp_b\.location_code, &.ssp_b\.interface_type, &.ssp_b\.crm_port_id,
-            &.ssp_c\.product, &.ssp_c\.location_code, &.ssp_c\.interface_type, &.ssp_c\.crm_port_id,
-            &.ssp_d\.product, &.ssp_d\.location_code, &.ssp_d\.interface_type, &.ssp_d\.crm_port_id,
-            &.downgrade_redundant_lp_choice {
+            &.downgrade_redundant_lp_choice, &.service_ports_primary, &.service_ports_secondary {
                 margin-left: 40px;
             }
         }
-
     }
 
     .actions {

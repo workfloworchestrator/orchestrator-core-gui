@@ -19,7 +19,7 @@ export default class BandwidthSelect extends React.PureComponent {
     portSpeed = (userInput, valueOnly = false) => {
         if (userInput.type === "ssp_product") {
             return valueOnly ? userInput.value : [fetchPortSpeedByProduct(userInput.value)];
-        } else if (userInput.type === "multi_msp") {
+        } else if (userInput.type === "service_ports") {
             return userInput.value
                 .filter(m => !isEmpty(m.subscription_id))
                 .map(m => valueOnly ? m.subscription_id : fetchPortSpeedBySubscription(m.subscription_id))

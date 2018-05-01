@@ -31,8 +31,13 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !/^[0-9]{4}$/.test(value);
     } else if (type === "contact_persons") {
         errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
-    } else if (type === "multi_msp") {
-        errors[name] = isEmpty(value) || value.some(msp => isEmpty(msp.subscription_id) || isEmpty(msp.vlan))
+    } else if (type === "service_ports") {
+        errors[name] = isEmpty(value)
+        //FIX ME
+        //     || value.some(sp => {
+        //     if (sp.tag)
+        //     return isEmpty(sp.subscription_id) || (sp.tag === "MSP" && isEmpty(sp.vlan))
+        // })
     } else if (type === "accept") {
         errors[name] = !value;
     } else if (type === "boolean") {

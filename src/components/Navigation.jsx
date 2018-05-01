@@ -41,9 +41,9 @@ export default class Navigation extends React.PureComponent {
         }
     }
 
-    renderItem(href, value) {
+    renderItem(href, value, className = "") {
         return (
-            <NavLink activeClassName="active" to={href}>{I18n.t("navigation." + value)}</NavLink>
+            <NavLink className={className} activeClassName="active" to={href}>{I18n.t("navigation." + value)}</NavLink>
         );
     }
 
@@ -61,6 +61,7 @@ export default class Navigation extends React.PureComponent {
                     {this.renderItem("/validations", "validations")}
                     {this.renderItem("/tasks", "tasks")}
                     {this.renderItem("/cache", "cache")}
+                    {this.renderItem("/new-process", "new_process", "new_process")}
                     {this.renderSpinner()}
                 </div>
             </div>
