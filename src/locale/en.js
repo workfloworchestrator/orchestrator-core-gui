@@ -442,6 +442,7 @@ I18n.translations.en = {
         modify_modify_lightpath_speed: "Modify Service Speed",
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
+        modify_modify_ip_range_workflow: "Modify IP range",
         product: {
             name: "Name",
             description: "Description",
@@ -794,9 +795,8 @@ I18n.translations.en = {
     },
 	ip_blocks: {
 		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
-	}
     },
-    ims_changes:{
+    ims_changes: {
         circuit_changed: "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
         old_endpoint: "The old endpoint",
         new_endpoint: "The new endpoint"
