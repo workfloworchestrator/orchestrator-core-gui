@@ -389,9 +389,11 @@ export default class UserInputForm extends React.Component {
                                              isElan={userInput.elan}
                 />;
 			case "ip_blocks":
-				return <IPBlocks ipBlocks={isEmpty(value) ? [{ipam_prefix_id: "", error_msg: "", display_value: ""}] : value} 
-					onChange={this.changeNestedInput(name)} 
-					/> ;
+			    const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
+			    const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
+			    return <IPBlocks ipBlocks={ipBlocks}
+					onChange={this.changeNestedInput(name)}
+                /> ;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
