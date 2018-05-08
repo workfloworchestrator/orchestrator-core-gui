@@ -8,7 +8,7 @@ import {
     portByImsPortId,
     portByImsServiceId,
     processSubscriptionsBySubscriptionId,
-    productById,
+    productById, subscriptionInsyncStatus,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -16,10 +16,10 @@ import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {
     absent,
-    hasResourceType,
     ims_circuit_id,
     ims_port_id,
-    isTerminatable,
+    maybeModifiedMessage,
+    maybeTerminatedMessage,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -44,9 +44,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscriptions: [],
             notFound: false,
             loaded: false,
-            loadedIMSRelatedObjects: false,
-            isTerminatable: false,
-            isModifiable: true,
+            loadedAllRelatedObjects: false,
+            enrichedRelatedSubscriptions: {},
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -69,15 +68,15 @@ export default class SubscriptionDetail extends React.PureComponent {
                 const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id),
-                    productById(subscription.product_id)]
+                    productById(subscription.product_id), subscriptionInsyncStatus(subscription.subscription_id)]
                     .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
-                    promises.push(parentSubscriptions(subscription.subscription_id))
+                    promises.push(parentSubscriptions(subscription.subscription_id));
                 }
                 Promise.all(promises).then(result => {
-                    const relatedObjects = result.slice(2);
+                    const relatedObjects = result.slice(3);
                     const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
                     let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id).map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
@@ -91,13 +90,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
+                        enrichedRelatedSubscriptions: result[2],
                         imsServices: imsServices,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
-                        isTerminatable: isTerminatable(subscription, subscriptions),
-                        isModifiable: false,
-                        loadedIMSRelatedObjects: true
+                        loadedAllRelatedObjects: true
                     });
+
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
                         .map(endpoint => endpoint.type === "service" ? portByImsServiceId(endpoint.id) : portByImsPortId(endpoint.id)))
                         .reduce((a, b) => a.concat(b), []);
@@ -279,7 +278,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </thead>
                     <tbody>
                     {["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
-                        .map(attr => <tr>
+                        .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
                             <td>{port[attr]}</td>
                         </tr>)}
@@ -392,28 +391,27 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     workflowByTarget = (product, target) => product.workflows.find(wf => wf.target === target);
 
-    renderActions = (subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
-                     loadedIMSRelatedObjects) => {
+    renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
+                     loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
+        const status = subscription.status;
         let noTerminateReason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
             noTerminateReason = I18n.t("subscription.no_termination_deleted_related_objects");
-        }
-        if ((!hasResourceType(subscription, port_subscription_id) && !hasResourceType(subscription, nms_service_id)) &&
-            (subscriptions.length > 0 && !subscriptions.every(sub => sub.status === "terminated"))) {
-            noTerminateReason = I18n.t("subscription.no_termination_parent_subscription");
         }
         if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
             noTerminateReason = I18n.t("subscription.no_termination_workflow");
         }
         //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        const status = subscription.status;
         if (status !== "provisioning" && status !== "active") {
             noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
-        if (subscription.insync !== true) {
-            noTerminateReason = I18n.t("subscription.not_in_sync");
+        // Check if related subscriptions and main subscription are insync
+        if (isEmpty(noTerminateReason)) {
+            noTerminateReason = maybeTerminatedMessage(subscription, enrichedRelatedSubscriptions);
         }
-        const displayTerminate = isTerminatable && !noTerminateReason && loadedIMSRelatedObjects;
+
+        const isTerminatable = isEmpty(noTerminateReason) && loadedAllRelatedObjects;
+
         const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
 
         let noModifyReason = null;
@@ -427,12 +425,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (status !== "active") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
-        const insync = subscription.insync;
-        if (insync !== true) {
-            noModifyReason = I18n.t("subscription.not_in_sync");
+        // Check if related subscriptions and main subscription are insync
+        if (isEmpty(noModifyReason)) {
+            noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
         }
 
-        const isModifiable = isEmpty(noModifyReason) && loadedIMSRelatedObjects;
+        const isModifiable = isEmpty(noModifyReason) && loadedAllRelatedObjects;
 
         return <section className="details">
             <h3>{I18n.t("subscription.actions")}</h3>
@@ -442,14 +440,14 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </thead>
                     <tbody>
                     <tr>
-                        {displayTerminate && <td><a href={I18n.t("subscription.terminate")}
+                        {isTerminatable && <td><a href={I18n.t("subscription.terminate")}
                                                     onClick={this.terminate(subscription, isTerminatable && !noTerminateReason)}>
                             {I18n.t("subscription.terminate")}
                         </a></td>}
-                        {!displayTerminate && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        {!displayTerminate && <td><em
+                        {!isTerminatable && <td><span>{I18n.t("subscription.terminate")}</span></td>}
+                        {!isTerminatable && <td><em
                             className="error">{noTerminateReason}</em></td>}
-                        {!loadedIMSRelatedObjects && <td>
+                        {!loadedAllRelatedObjects && <td>
                             <section className="terminate-link-waiting">
                                 <em>{I18n.t("subscription.fetchingImsData")}</em>
                                 <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
@@ -463,9 +461,9 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     {I18n.t(`subscription.modify_${wf.name}`)}</a>
                             </td>}
                             {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
-                            {(!isEmpty(noModifyReason) && loadedIMSRelatedObjects) &&
+                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects) &&
                             <td><em className="error">{noModifyReason}</em></td>}
-                            {!loadedIMSRelatedObjects && <td>
+                            {!loadedAllRelatedObjects && <td>
                                 <section className="terminate-link-waiting">
                                     <em>{I18n.t("subscription.fetchingImsData")}</em>
                                     <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
@@ -542,10 +540,10 @@ export default class SubscriptionDetail extends React.PureComponent {
             this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
     };
 
-    renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedIMSRelatedObjects, notFoundRelatedObjects, index,
+    renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedAllRelatedObjects, notFoundRelatedObjects, index,
                              imsServices, collapsedObjects, subscriptions, imsEndpoints) => {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
-            loadedIMSRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
+            loadedAllRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === port_subscription_id;
         const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id;
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
@@ -583,7 +581,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         return s1safe.localeCompare(s2safe);
     };
 
-    renderProductBlocks = (subscription, notFoundRelatedObjects, loadedIMSRelatedObjects, imsServices, collapsedObjects,
+    renderProductBlocks = (subscription, notFoundRelatedObjects, loadedAllRelatedObjects, imsServices, collapsedObjects,
                            subscriptions, imsEndpoints) => {
         return <section className="details">
             <h3>{I18n.t("subscriptions.productBlocks")}</h3>
@@ -600,7 +598,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                 </thead>
                                 {instance.values
                                     .sort((a, b) => a.resource_type.resource_type.localeCompare(b.resource_type.resource_type))
-                                    .map((value, i) => this.renderResourceTypeRow(subscription, value, loadedIMSRelatedObjects, notFoundRelatedObjects, i,
+                                    .map((value, i) => this.renderResourceTypeRow(subscription, value, loadedAllRelatedObjects, notFoundRelatedObjects, i,
                                         imsServices, collapsedObjects, subscriptions, imsEndpoints))}
                             </table>
                         </section>
@@ -620,8 +618,8 @@ export default class SubscriptionDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
-            subscriptions, isTerminatable, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects, loadedIMSRelatedObjects,
+            subscriptions, confirmationDialogOpen, confirmationDialogAction,
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects, enrichedRelatedSubscriptions,
             collapsedObjects
         } = this.state;
         const {organisations, products} = this.props;
@@ -637,10 +635,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                 {renderContent && <div>
                     {this.renderDetails(subscription)}
                     {this.renderFixedInputs(product)}
-                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedIMSRelatedObjects,
+                    {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
-                    {this.renderActions(subscription, isTerminatable, subscriptions, product, notFoundRelatedObjects,
-                        loadedIMSRelatedObjects)}
+                    {this.renderActions(subscription, subscriptions, product, notFoundRelatedObjects,
+                        loadedAllRelatedObjects, enrichedRelatedSubscriptions)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
                     {this.renderSubscriptions(subscriptions, subscription, organisations, products)}

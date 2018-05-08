@@ -12,6 +12,8 @@ export default class ServicePortSelect extends React.PureComponent {
         return `${description.trim()} ${organisationName}`
     };
 
+    is_selectable = (servicePort) => servicePort.tag === "SSP" ? true : servicePort.insync;
+
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
         return <Select onChange={onChange}
@@ -19,13 +21,14 @@ export default class ServicePortSelect extends React.PureComponent {
                            .map(aServicePort => ({
                                value: aServicePort.subscription_id,
                                label: this.label(aServicePort, organisations),
-                               tag: aServicePort.tag }))
-                           .sort((x,y)=> x.label.localeCompare(y.label))
+                               tag: aServicePort.tag,
+                               disabled: !this.is_selectable(aServicePort),
+                           }))
+                           .sort((x, y) => x.label.localeCompare(y.label))
                        }
                        value={servicePort}
                        searchable={true}
                        disabled={disabled || servicePorts.length === 0}/>
-
     }
 }
 

@@ -1,29 +1,61 @@
 import {isEmpty} from "../utils/Utils";
-
-const lightPathProductTags = ["LightPath", "LPNLNSI", "ELAN"];
+import I18n from "i18n-js";
 
 export function subscriptionInstanceValues(subscription) {
     return subscription.instances.reduce((acc, instance) =>
         acc.concat(instance.values.map(item => ({...item, instance_label: instance.label}))), []);
 }
 
-export function hasResourceType(subscription, resourceType) {
-    const values = subscriptionInstanceValues(subscription);
-    return values.some(val => val.resource_type.resource_type === resourceType);
-}
-
-export function isLightPathProduct(subscription) {
-    return lightPathProductTags.includes(subscription.tag);
-}
-
-export function isTerminatable(subscription, relatedSubscriptions) {
-    //Parent subscriptions like 'Lichtpaden' can always be terminated
-    if (lightPathProductTags.includes(subscription.tag)) {
-        return true;
+export function maybeModifiedMessage(subscription, relation_info) {
+    let message = "";
+    if (!subscription.insync) {
+        return I18n.t("subscription.not_in_sync");
     }
-    //Child subscriptions like 'MSP' / 'SSP' can only be terminated if not used in non-terminated parent subscriptions
-    return isEmpty(relatedSubscriptions) || relatedSubscriptions.every(sub => sub.status === "terminated");
+    else if (!relation_info.insync) {
+        if (!isEmpty(relation_info.locked_childs)) {
+            message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
+            relation_info.locked_childs.forEach((relation, index, array) => {
+                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+            });
+        }
+        if (!isEmpty(relation_info.locked_parents)) {
+            message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
+            relation_info.locked_parents.forEach((relation, index, array) => {
+                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+            });
+        }
+        return I18n.t("subscription.relations_not_in_sync") + message;
+    }
+    return null;
+}
 
+export function maybeTerminatedMessage(subscription, relation_info) {
+    let message = "";
+    if (!subscription.insync) {
+        return I18n.t("subscription.not_in_sync");
+    }
+    else if (!relation_info.insync) {
+        if (!isEmpty(relation_info.unterminated_parents)) {
+            message = message + " " + I18n.t("subscription.no_termination_parent_subscription") + " ";
+            relation_info.unterminated_parents.forEach((relation, index, array) => {
+                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+            });
+        }
+        if (!isEmpty(relation_info.locked_childs)) {
+            message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
+            relation_info.locked_childs.forEach((relation, index, array) => {
+                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+            });
+        }
+        if (!isEmpty(relation_info.locked_parents)) {
+            message = message + " " + I18n.t("subscription.locked_parent_subscriptions") + " ";
+            relation_info.locked_parents.forEach((relation, index, array) => {
+                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+            });
+        }
+        return I18n.t("subscription.relations_not_in_sync") + message;
+    }
+    return null;
 }
 
 const searchableSubscriptionsColumnsMapping = {
@@ -41,7 +73,7 @@ export function searchConstruct(query) {
     //See the tests in src/__tests__/validations/Subscriptions.test.js for 'explanation'
     if (colonIndex > -1) {
         const searchOptions = {};
-        const parts = query.split(/(:|'|"| )/)
+        const parts = query.split(/(:|'|"| )/);
         let lastSearchItem = "";
         let inSeparator = false;
         let afterColon = false;

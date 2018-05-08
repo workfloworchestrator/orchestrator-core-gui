@@ -1,0 +1,55 @@
+@import "../stylesheets/vars.scss";
+
+.mod-ims-changes {
+  padding-bottom: 25px;
+  h3 {
+    color: $blue;
+  }
+  table.ims-circuit {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 90%;
+    &.old_endpoint {
+      color: $red;
+    }
+    &.new_endpoint {
+      color: $dark-green;
+    }
+    thead {
+      th {
+        text-align: left;
+        padding: 8px 15px;
+        font-size: larger;
+      }
+    },
+    tbody {
+      tr {
+        border-bottom: 1px solid $light-grey;
+        border-left: 1px solid $blue;
+
+        &:nth-child(even) {
+          background: white;
+        }
+        &:nth-child(odd) {
+          background: $table-odd-even;
+        }
+      }
+      td {
+        text-align: left;
+        vertical-align: middle;
+        padding: 8px 15px;
+        &:first-child {
+          width: 10%;
+        }
+        &:nth-child(2) {
+          width: 50%;
+          text-align: left;
+          div.checkbox {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+

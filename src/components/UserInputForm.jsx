@@ -29,6 +29,7 @@ import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Pro
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
+import ImsChanges from "./ImsChanges";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -400,7 +401,8 @@ export default class UserInputForm extends React.Component {
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
                                             subscription={value}/>;
-
+            case "ims_changes":
+                return <ImsChanges changes={value} organisations={organisations}/>;
 
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
