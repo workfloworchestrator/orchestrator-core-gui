@@ -91,7 +91,6 @@ class App extends React.PureComponent {
         const hash = window.location.hash;
         const accessTokenMatch = hash.match(/access_token=(.*?)&/);
         if (accessTokenMatch) {
-            debugger;
             localStorage.setItem("access_token", accessTokenMatch[1]);
             const stateMatch = hash.match(/state=(.*?)&/);
             if (stateMatch) {
