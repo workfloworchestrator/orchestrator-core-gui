@@ -29,8 +29,7 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
-        cache: "Cache",
-        new_process: "New Process +"
+        cache: "Cache"
     },
 
     processes: {
@@ -229,10 +228,6 @@ I18n.translations.en = {
         new_process: "Create new process / subscription",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
-        network_changes_ready: "IMS changes ready",
-        network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in IMS",
-        ims_changes: "Updated in IMS",
-        ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
         nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
         cleanup_ready: "Cleanup ready",
@@ -423,7 +418,6 @@ I18n.translations.en = {
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:"
     },
     subscription: {
-        acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
         notFound: "No Subscription found (e.g. 404)",
         subscription: "Subscription",
         child_subscriptions: "Port subscriptions in {{product}}",
@@ -440,9 +434,6 @@ I18n.translations.en = {
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
         modify_modify_lightpath_speed: "Modify Service Speed",
-        modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
-        modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
-        modify_modify_ip_range_workflow: "Modify IP range",
         product: {
             name: "Name",
             description: "Description",
@@ -463,25 +454,12 @@ I18n.translations.en = {
             speed: "Speed",
             status: "Status",
             order_id: "Order ID",
-            aliases: "Aliases",
-            endpoints: "Endpoints"
-        },
-        ims_port: {
-            connector_type: "Connector type",
-            fiber_type: "Fiber type",
-            id: "IMS Port ID {{id}}",
-            iface_type: "Interface type",
-            line_name: "Line name",
-            location: "Location",
-            node: "Node",
-            patchposition: "Patch position",
-            port: "Port",
-            status: "Status"
+            aliases: "Aliases"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription: "This Port subscription can not be terminated as it is used in other LP subscriptions:",
+        no_termination_parent_subscription: "This Port subscription can not be terminated as it is used in other LP subscriptions.",
         no_termination_deleted_related_objects: "This subscription can not be terminated because it contains references to other systems (e.g. IMS) that are deleted.",
         no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
         no_termination_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active and provisioning subscriptions can be terminated.",
@@ -493,11 +471,7 @@ I18n.translations.en = {
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
         no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
-        no_terminate_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active subscriptions can be terminated.",
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
-        relations_not_in_sync: "This subscription can not be modified because some related subscriptions are not insync.",
-        locked_child_subscriptions: "Locked child subscriptions:",
-        locked_parent_subscriptions: "Locked parent subscriptions:",
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
@@ -528,12 +502,7 @@ I18n.translations.en = {
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
-        missingInIms: "This service port has been deleted from IMS",
-        allPortsAvailable: "This MSP has no ports in use (yet).",
-        placeholder: "Enter a valid VLAN range..." ,
-        placeholder_no_service_port: "First select a Service Port...",
-        placeholder_no_msp: "First select a MSP...",
-        ssp: "A SSP has a default VLAN"
+        allPortsAvailable: "This MSP has no ports in use (yet)."
     },
     clipboard: {
         copied: "Copied!",
@@ -784,22 +753,13 @@ I18n.translations.en = {
         servicePort: "Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
-        used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",
-        bandwidth: "Bandwidth",
-        bandwidth_placeholder: "Enter the bandwidth of this MSP...",
-        bandwidth_no_msp_placeholder: "First select a MSP...",
-        invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
+        used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}"
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
     },
 	ip_blocks: {
 		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
-    },
-    ims_changes: {
-        circuit_changed: "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
-        old_endpoint: "The old endpoint",
-        new_endpoint: "The new endpoint"
     }
 };
 

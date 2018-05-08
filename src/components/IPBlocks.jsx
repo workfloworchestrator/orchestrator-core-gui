@@ -27,7 +27,7 @@ export default class IPBlocks extends React.PureComponent {
 	addIPBlock = () => {
 		const ipBlocks = [...this.props.ipBlocks];
 		ipBlocks.push({ipam_prefix_id:"", error_msg:"", display_value:""});
-		this.props.onChange(ipBlocks)
+		this.props.onChange(ipBlocks);
 	};
 
 	contentChanged = () => {
@@ -59,7 +59,7 @@ export default class IPBlocks extends React.PureComponent {
 
     render() {
 		const ipBlocks = [...this.props.ipBlocks];
-		return (<section className="ip-blocks">
+        return (<section className="ip-blocks">
             {ipBlocks.map((ipBlock, index) =>
                 this.renderIPBlock(index, ipBlock))}
             <div className="add-ip-block"><i className="fa fa-plus" onClick={this.addIPBlock}></i></div>
