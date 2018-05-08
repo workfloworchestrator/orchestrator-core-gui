@@ -6,7 +6,6 @@ import {stop} from "../utils/Utils";
 import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
-import {doValidateUserInput} from "../validations/UserInput";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
 
 export default class MultipleServicePorts extends React.PureComponent {
@@ -14,7 +13,6 @@ export default class MultipleServicePorts extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            vlanErrors: {},
             bandwidthErrors: {},
             usedSSPDescriptions: {}
         };
@@ -28,7 +26,7 @@ export default class MultipleServicePorts extends React.PureComponent {
             if (e !== null) {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
                 if (port.tag === "SSP") {
-                    // The SSP may bot be used in other LP's
+                    // The SSP may not be used in other LP's
                     parentSubscriptions(value).then(res => {
                         const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
                         if (res.json.length > 0) {
@@ -54,7 +52,7 @@ export default class MultipleServicePorts extends React.PureComponent {
 
     clearErrors = index => {
         const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
-        usedSSPDescriptions[index] = null;
+        usedSSPDescriptions[index] = false;
         this.setState({usedSSPDescriptions: usedSSPDescriptions});
     };
 
@@ -73,19 +71,12 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
-    validateVlan = index => e => {
-        const err = {};
-        doValidateUserInput({name: "n", type: "vlan_range"}, e.target.value, err);
-        const vlanErrors = {...this.state.vlanErrors};
-        vlanErrors[index] = err["n"];
-        this.setState({vlanErrors: vlanErrors}, this.bubbleUpErrorState);
-    };
+    reportVlanError = isError => this.props.reportError(isError);
 
     bubbleUpErrorState = () => {
-      const {vlanErrors, bandwidthErrors, usedSSPDescriptions} = this.state;
-      const inValid = Object.values(vlanErrors).some(val => val) || Object.values(bandwidthErrors).some(val => val) ||
-      Object.values(usedSSPDescriptions).some(val => val) ;
-      this.props.reportError(inValid);
+        const {bandwidthErrors, usedSSPDescriptions} = this.state;
+        const inValid = Object.values(bandwidthErrors).concat(Object.values(usedSSPDescriptions)).some(val => val);
+        this.props.reportError(inValid);
     };
 
     validateMaxBandwidth = index => e => {
@@ -94,14 +85,13 @@ export default class MultipleServicePorts extends React.PureComponent {
             const servicePort = this.props.servicePorts[index];
             fetchPortSpeedBySubscription(servicePort.subscription_id).then(res => {
                 const bandwidthErrors = {...this.state.bandwidthErrors};
-                const isTooLarge = parseInt(bandwidth, 10) > parseInt(res, 10);
-                bandwidthErrors[index] = isTooLarge;
+                bandwidthErrors[index] = parseInt(bandwidth, 10) > parseInt(res, 10);
                 this.setState({bandwidthErrors: bandwidthErrors}, this.bubbleUpErrorState);
             });
         }
     };
 
-    renderServicePort = (servicePorts, servicePort, index, vlanErrors, availableServicePorts, organisations, maximum,
+    renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
                          disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
@@ -129,13 +119,13 @@ export default class MultipleServicePorts extends React.PureComponent {
                 <div className="vlan">
                     <VirtualLAN vlan={servicePort.tag === "SSP" ? "0" : servicePort.vlan}
                                 onChange={this.onChangeInternal("vlan", index)}
-                                subscriptionIdMSP={servicePort.subscription_id} onBlur={this.validateVlan(index)}
+                                subscriptionIdMSP={servicePort.subscription_id}
                                 disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
-                                placeholder={vlanPlaceholder}/>
+                                placeholder={vlanPlaceholder}
+                                reportError={this.reportVlanError}/>
                     {(!isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}
                 </div>
-                {vlanErrors[index] && <em className="error">{I18n.t("service_ports.invalid_vlan")}</em>}
             </div>
             {isElan && <div className="wrapper">
                 {index === 0 && <label>{I18n.t("service_ports.bandwidth")}</label>}
@@ -159,11 +149,11 @@ export default class MultipleServicePorts extends React.PureComponent {
 
     render() {
         const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
-        const {vlanErrors, bandwidthErrors, usedSSPDescriptions} = this.state;
+        const {bandwidthErrors, usedSSPDescriptions} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
-                this.renderServicePort(servicePorts, servicePort, index, vlanErrors, availableServicePorts, organisations,
+                this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)

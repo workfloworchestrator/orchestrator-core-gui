@@ -75,6 +75,7 @@ I18n.translations.en = {
         notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         uniquenessViolation: "Value selected more than once",
+        customError: "Invalid ",
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {
             user_input: "User input",
