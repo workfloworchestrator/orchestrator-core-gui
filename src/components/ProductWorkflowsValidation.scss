@@ -1,0 +1,107 @@
+@import "../stylesheets/mixins.scss";
+@import "../stylesheets/media_queries.scss";
+
+section.products-workflows-validation {
+  background-color: white;
+  padding: 15px 0 0 0;
+  margin-top: 20px;
+  box-shadow: 2px 3px 3px 0 $light-grey;
+
+  h3 {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    color: $blue;
+    font-size: 18px;
+  }
+
+    table {
+      margin-bottom: 35px;
+        width: 100%;
+        word-break: break-all;
+        td, th {
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid $light-grey;
+        }
+        thead {
+            th {
+                padding: 5px 5px 10px 5px
+            }
+            span {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: larger;
+                color: $medium-grey;
+                padding: 7px 2px 7px 0;
+            }
+        }
+        tbody {
+            td {
+                word-break: break-word;
+                word-wrap: break-word;
+                padding: 15px 5px;
+            }
+        }
+
+    }
+
+    table.products {
+        thead {
+            th.name {
+                width: 20%;
+            }
+            th.description {
+                width: 30%;
+            }
+            th.tag {
+                width: 10%;
+            }
+            th.product_type {
+                width: 10%;
+            }
+            th.status {
+                width: 10%;
+            }
+            th.workflows_string {
+                width: 20%;
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+        }
+
+    }
+    table.workflows {
+        thead {
+            th.name {
+                width: 25%;
+            }
+            th.description {
+                width: 25%;
+            }
+            th.target {
+                width: 25%;
+            }
+            th.product_tags_string {
+                width: 25%;
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+        }
+
+    }
+}
+
+

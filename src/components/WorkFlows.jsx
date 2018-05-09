@@ -206,6 +206,9 @@ export default class WorkFlows extends React.Component {
                         <i className="fa fa-search"></i>
                     </section>
                 </div>
+                <section className="explanation">
+                    <p>{I18n.t("metadata.workflows.explanation")}</p>
+                </section>
                 <section className="workflows">
                     {this.renderWorkflows(filteredWorkflows, actions, sorted)}
                 </section>
