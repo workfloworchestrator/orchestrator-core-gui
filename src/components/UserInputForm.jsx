@@ -18,8 +18,8 @@ import StateValue from "./StateValue";
 
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import IPBlocks from "./IPBlocks";
 import MultipleServicePorts from "./MultipleServicePorts";
+import IPBlocks from "./IPBlocks"
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -30,6 +30,7 @@ import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Pro
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
+import ImsChanges from "./ImsChanges";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -202,7 +203,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState} = this.props;
+        const {currentState, products, organisations, servicePorts} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -220,8 +221,8 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
-                                                 products={this.props.products}
-                                                 organisations={this.props.organisations}
+                                                 products={products}
+                                                 organisations={organisations}
                                                  className="indent"/>;
             case "nms_service_id" :
             case "bandwidth":
@@ -385,18 +386,21 @@ export default class UserInputForm extends React.Component {
                                              organisationId={organisationId}
                                              maximum={userInput.maximum}
                                              disabled={userInput.readonly}
+                                             isElan={userInput.elan}
                 />;
-			case "ip_blocks":
-			    const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
-			    const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
-			    return <IPBlocks ipBlocks={ipBlocks}
-					onChange={this.changeNestedInput(name)}
-                /> ;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
-                                            subscription={value}/>;
+                                subscription={value}/>;
+
+            case "ip_blocks":
+               const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
+               const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
+               return <IPBlocks ipBlocks={ipBlocks}
+                           onChange={this.changeNestedInput(name)}
+                        /> ;
+
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 
