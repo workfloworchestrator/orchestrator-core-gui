@@ -75,6 +75,7 @@ I18n.translations.en = {
         notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         uniquenessViolation: "Value selected more than once",
+        customError: "Invalid ",
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {
             user_input: "User input",
@@ -439,6 +440,8 @@ I18n.translations.en = {
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
         modify_modify_lightpath_speed: "Modify Service Speed",
+        modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
+        modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
         product: {
             name: "Name",
             description: "Description",
