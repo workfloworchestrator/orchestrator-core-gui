@@ -13,7 +13,8 @@ export default class VirtualLAN extends React.PureComponent {
         this.state = {
             usedVlans: [],
             vlansInUse: [],
-            missingInIms: false
+            missingInIms: false,
+            invalidFormat: false
         }
     }
 
@@ -23,7 +24,7 @@ export default class VirtualLAN extends React.PureComponent {
             const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
             promise
                 .then(result => this.setState({usedVlans: result, missingInIms: false}))
-                .catch(err => this.setState({missingInIms: true}));
+                .catch(() => this.setState({missingInIms: true}));
         }
     };
 
@@ -47,26 +48,32 @@ export default class VirtualLAN extends React.PureComponent {
     };
 
     getAllNumbersForVlanRange = vlanRange => {
-        const numbers = vlanRange.replace(/ /g, "").split(",").reduce((acc, val) => {
+        return vlanRange.replace(/ /g, "").split(",").reduce((acc, val) => {
             const boundaries = val.split("-");
             const max = parseInt(boundaries[boundaries.length - 1], 10);
             const min = parseInt(boundaries[0], 10);
             return acc.concat(Array.from(new Array(max - min + 1), (x, i) => min + i))
         }, []);
-        return numbers;
     };
 
     validateUsedVlans = e => {
         const {onBlur} = this.props;
         const {usedVlans} = this.state;
+
+        const err = {};
         const vlanRange = e.target.value;
+        doValidateUserInput({name: "n", type: "vlan_range"}, vlanRange, err);
         const inUse = this.vlansInUse(vlanRange, usedVlans);
-        this.setState({vlansInUse: inUse});
-        onBlur(e);
+
+        this.setState({vlansInUse: inUse, invalidFormat: err["n"]});
+        this.props.reportError(!isEmpty(inUse) || err["n"]);
+        if (onBlur) {
+            onBlur(e);
+        }
     };
 
     render() {
-        const {usedVlans, vlansInUse, missingInIms} = this.state;
+        const {usedVlans, vlansInUse, missingInIms, invalidFormat} = this.state;
         const {onChange, vlan, subscriptionIdMSP, disabled, placeholder} = this.props;
         const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms;
         const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled && !missingInIms;
@@ -78,9 +85,12 @@ export default class VirtualLAN extends React.PureComponent {
                        onChange={onChange} onBlur={this.validateUsedVlans}/>
                 {!isEmpty(vlansInUse) &&
                 <em className="error">{I18n.t("vlan.vlansInUseError", {vlans: vlansInUse.join(", ")})}</em>}
-                {missingInIms &&  <em className="error">{I18n.t("vlan.missingInIms", {vlans: vlansInUse.join(", ")})}</em>}
-                {showWhichPortsAreInUse && <em>{I18n.t("vlan.vlansInUse", {vlans: usedVlans.map(arr => arr.join("-")).join(", ")})}</em>}
+                {missingInIms &&
+                <em className="error">{I18n.t("vlan.missingInIms", {vlans: vlansInUse.join(", ")})}</em>}
+                {showWhichPortsAreInUse &&
+                <em>{I18n.t("vlan.vlansInUse", {vlans: usedVlans.map(arr => arr.join("-")).join(", ")})}</em>}
                 {showAllPortsAvailable && <em>{I18n.t("vlan.allPortsAvailable")}</em>}
+                {invalidFormat && <em className="error">{I18n.t("service_ports.invalid_vlan")}</em>}
             </div>
         )
     }
@@ -89,10 +99,11 @@ export default class VirtualLAN extends React.PureComponent {
 
 VirtualLAN.propTypes = {
     onChange: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
+    reportError: PropTypes.func.isRequired,
     vlan: PropTypes.string,
     subscriptionIdMSP: PropTypes.string,
     imsCircuitId: PropTypes.string,
     disabled: PropTypes.bool,
-    placeholder:  PropTypes.string
+    placeholder: PropTypes.string
 };

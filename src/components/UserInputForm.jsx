@@ -36,6 +36,7 @@ import ImsChanges from "./ImsChanges";
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
     "subscription_downgrade_confirmation", "label"];
 
+
 export default class UserInputForm extends React.Component {
 
     constructor(props) {
@@ -46,6 +47,7 @@ export default class UserInputForm extends React.Component {
             cancelDialogAction: () => this.props.history.push("/processes"),
             leavePage: true,
             errors: {},
+            customErrors: {},
             uniqueErrors: {},
             uniqueSelectInputs: {},
             isNew: true,
@@ -76,7 +78,13 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    validateAllUserInput = (stepUserInput) => {
+    reportCustomError = name => isError => {
+        const customErrors = {...this.state.customErrors};
+        customErrors[name] = isError;
+        this.setState({customErrors: customErrors});
+    };
+
+    validateAllUserInput = stepUserInput => {
         const errors = {...this.state.errors};
         stepUserInput.forEach(input => doValidateUserInput(input, input.value, errors));
         this.setState({errors: errors});
@@ -95,8 +103,10 @@ export default class UserInputForm extends React.Component {
         </section>);
     };
 
-    isInvalid = () => Object.keys(this.state.errors).some(key => this.state.errors[key]) ||
-        Object.keys(this.state.uniqueErrors).some(key => this.state.uniqueErrors[key])
+    isInvalid = () => Object.values(this.state.errors)
+        .concat(Object.values(this.state.uniqueErrors))
+        .concat(Object.values(this.state.customErrors))
+        .some(val => val);
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -112,8 +122,7 @@ export default class UserInputForm extends React.Component {
     changeBooleanInput = name => e => {
         const value = e.target.checked;
         this.changeUserInput(name, value);
-        const {stepUserInput} = this.state;
-        this.validateAllUserInput(stepUserInput);
+        this.validateUserInput(name)({target: {value: value}})
     };
 
     changeSelectInput = name => option => {
@@ -124,20 +133,23 @@ export default class UserInputForm extends React.Component {
 
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
-        const hashTable = {...this.state.uniqueSelectInputs};
-        const errors = {...this.state.uniqueErrors};
-        if (!(hash in hashTable)) hashTable[hash] = {'names': {}, 'values': {}};
-        const names = hashTable[hash]['names'];
-        const values = hashTable[hash]['values'];
-        if (!(value in values)) values[value] = 0;
+        const uniqueSelectInputs = {...this.state.uniqueSelectInputs};
+        const uniqueErrors = {...this.state.uniqueErrors};
+        if (isEmpty(uniqueSelectInputs[hash])) {
+            uniqueSelectInputs[hash] = {"names": {}, "values": {}};
+        }
+        const names = uniqueSelectInputs[hash]["names"];
+        const values = uniqueSelectInputs[hash]["values"];
+        if (!values[value]) {
+            values[value] = 0;
+        }
         values[value] += 1;
-        if (name in names) values[names[name]] -= 1;
+        if (names[name]) {
+            values[names[name]] -= 1;
+        }
         names[name] = value;
-        Object.keys(names).forEach(name => {
-            errors[name] = values[names[name]] > 1;
-        });
-        this.setState({uniqueErrors: errors});
-        this.setState({uniqueSelectInputs: hashTable});
+        Object.keys(names).forEach(name => uniqueErrors[name] = values[names[name]] > 1);
+        this.setState({uniqueErrors: uniqueErrors, uniqueSelectInputs: uniqueSelectInputs});
     };
 
     changeUniqueSelectInput = (name, hash) => option => {
@@ -170,13 +182,14 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const error = this.state.errors[name];
+        const customError = this.state.customErrors[name];
         const uniqueError = this.state.uniqueErrors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput, process)}
-                {error &&
+                {(error || customError) &&
                 <em className="error">{I18n.t("process.format_error")}</em>}
                 {uniqueError &&
                 <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
@@ -235,7 +248,7 @@ export default class UserInputForm extends React.Component {
                 const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
-                                   imsCircuitId={imsCircuitId}/>
+                                   imsCircuitId={imsCircuitId} reportError={this.reportCustomError(userInput.type)}/>
             case "organisation" :
                 return <OrganisationSelect key={name} organisations={organisations}
                                            onChange={this.changeSelectInput(name)}
@@ -304,9 +317,8 @@ export default class UserInputForm extends React.Component {
             case "free_ports_for_location_code_and_interface_type":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
-                const uniqueIdentifier = interfaceType + locationCode;
                 return <FreePortSelect
-                    onChange={this.changeUniqueSelectInput(name, uniqueIdentifier)}
+                    onChange={this.changeUniqueSelectInput(name, `${interfaceType}_${locationCode}`)}
                     freePort={value}
                     interfaceType={interfaceType}
                     locationCode={locationCode}/>;
@@ -376,10 +388,11 @@ export default class UserInputForm extends React.Component {
                 const availableServicePorts = productIds.length === products.length ? servicePorts :
                     servicePorts
                         .filter(sp => productIds.includes(sp.product_id));
-                return <MultipleServicePorts servicePorts={isEmpty(value) ? [
-                    {subscription_id: null, vlan: ""},
-                    {subscription_id: null, vlan: ""}
-                ] : value}
+                const ports = isEmpty(value) ? [{subscription_id: null, vlan: ""}, {
+                    subscription_id: null,
+                    vlan: ""
+                }] : value;
+                return <MultipleServicePorts servicePorts={ports}
                                              availableServicePorts={availableServicePorts}
                                              organisations={organisations}
                                              onChange={this.changeNestedInput(name)}
@@ -387,6 +400,7 @@ export default class UserInputForm extends React.Component {
                                              maximum={userInput.maximum}
                                              disabled={userInput.readonly}
                                              isElan={userInput.elan}
+                                             reportError={this.reportCustomError(userInput.type)}
                 />;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);

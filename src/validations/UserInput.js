@@ -2,6 +2,13 @@ import {isEmpty} from "../utils/Utils";
 import {validEmailRegExp} from "./Subscriptions";
 import {validateIPRange} from "./Subscriptions.js"
 
+const inValidVlan = vlan => {
+    const value = vlan || "";
+    const stripped = value.replace(/ /g, "");
+    return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||
+            stripped.split(",").some(inValidRange);
+};
+
 const inValidRange = range => {
     if (range.indexOf("-") > -1) {
         const ranges = range.split("-");
@@ -10,16 +17,19 @@ const inValidRange = range => {
     return range < 2 || range > 4094;
 };
 
-
+const inValidServicePort = (sp, isElan) => {
+    if (isEmpty(sp) || isEmpty(sp.tag)) {
+        return true;
+    }
+    return isElan ? (inValidVlan(sp.vlan) || isEmpty(sp.bandwidth)) : inValidVlan(sp.vlan);
+};
 
 export function doValidateUserInput(userInput, val, errors) {
     const type = userInput.type;
     const name = userInput.name;
     const value = val || "";
     if (type === "vlan_range") {
-        const stripped = value.replace(/ /g, "");
-        errors[name] = !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||
-            stripped.split(",").some(inValidRange);
+        errors[name] = inValidVlan(value);
     } else if (type === "vlan") {
         errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
     } else if (type === "int") {
@@ -35,12 +45,7 @@ export function doValidateUserInput(userInput, val, errors) {
     } else if (type === "contact_persons") {
         errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
     } else if (type === "service_ports") {
-        errors[name] = isEmpty(value)
-        //FIX ME
-        //     || value.some(sp => {
-        //     if (sp.tag)
-        //     return isEmpty(sp.subscription_id) || (sp.tag === "MSP" && isEmpty(sp.vlan))
-        // })
+        errors[name] = isEmpty(value) || (Array.isArray(value) && value.some(sp => inValidServicePort(sp, userInput.elan)));
     } else if (type === "accept") {
         errors[name] = !value;
     } else if (type === "boolean") {
