@@ -7,6 +7,7 @@ import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
+import {Link} from "react-router-dom";
 
 export default class MultipleServicePorts extends React.PureComponent {
 
@@ -156,6 +157,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
+            {<a href="/new-process/" target="_blank">Create a new SSP</a>}
         </section>)
     }
 }
