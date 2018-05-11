@@ -7,6 +7,7 @@ import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
+import SSPProducts from "./SSPProducts";
 
 export default class MultipleServicePorts extends React.PureComponent {
 
@@ -15,7 +16,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         this.state = {
             bandwidthErrors: {},
             usedSSPDescriptions: {},
-            newSSPDialoOpen: false
+            sspProductLinksVisible: false
         };
     }
 
@@ -92,12 +93,12 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
-    openNewSSPDialog = () => {
-        this.setState({newSSPDialoOpen: true});
+    showSSPProductLinks = () => {
+        this.setState({sspProductLinksVisible: true});
     };
 
-    renderSSPDialog = () => {
-        return 'Dialog mand'
+    hideSSPProductLinks = () => {
+        this.setState({sspProductLinksVisible: false});
     };
 
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
@@ -157,15 +158,16 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
-        const {bandwidthErrors, usedSSPDescriptions, newSSPDialoOpen} = this.state;
+        const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan, products} = this.props;
+        const {bandwidthErrors, usedSSPDescriptions, sspProductLinksVisible} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
-            {!newSSPDialoOpen && <i className="fa fa-user-plus" onClick={this.openNewSSPDialog}>Create a new SSP</i>}
+            {!sspProductLinksVisible && <i className="fa fa-angle-double-right" onClick={this.showSSPProductLinks}>Create a new SSP</i>}
+            {sspProductLinksVisible && <i className="fa fa-angle-double-down" onClick={this.hideSSPProductLinks}>Create a new SSP</i> && <SSPProducts products={products}/>}
         </section>)
     }
 }
@@ -175,6 +177,7 @@ MultipleServicePorts.propTypes = {
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired,
     maximum: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,

@@ -394,6 +394,7 @@ export default class UserInputForm extends React.Component {
                 return <MultipleServicePorts servicePorts={ports}
                                              availableServicePorts={availableServicePorts}
                                              organisations={organisations}
+                                             products={products}
                                              onChange={this.changeNestedInput(name)}
                                              organisationId={organisationId}
                                              maximum={userInput.maximum}
