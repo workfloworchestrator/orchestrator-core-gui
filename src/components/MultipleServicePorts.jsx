@@ -7,7 +7,6 @@ import "./MultipleServicePorts.css";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
-import {Link} from "react-router-dom";
 
 export default class MultipleServicePorts extends React.PureComponent {
 
@@ -15,7 +14,8 @@ export default class MultipleServicePorts extends React.PureComponent {
         super(props, context);
         this.state = {
             bandwidthErrors: {},
-            usedSSPDescriptions: {}
+            usedSSPDescriptions: {},
+            newSSPDialoOpen: false
         };
     }
 
@@ -92,6 +92,14 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
+    openNewSSPDialog = () => {
+        this.setState({newSSPDialoOpen: true});
+    };
+
+    renderSSPDialog = () => {
+        return 'Dialog mand'
+    };
+
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
                          disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
@@ -150,14 +158,14 @@ export default class MultipleServicePorts extends React.PureComponent {
 
     render() {
         const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
-        const {bandwidthErrors, usedSSPDescriptions} = this.state;
+        const {bandwidthErrors, usedSSPDescriptions, newSSPDialoOpen} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
-            {<a href="/new-process/" target="_blank">Create a new SSP</a>}
+            {!newSSPDialoOpen && <i className="fa fa-user-plus" onClick={this.openNewSSPDialog}>Create a new SSP</i>}
         </section>)
     }
 }
