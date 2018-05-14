@@ -25,6 +25,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
+import SSPProductSelect from "./SSPProductSelect";
 import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
@@ -129,6 +130,15 @@ export default class UserInputForm extends React.Component {
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
+
+    changeSSPProductSelectInput = name => option => {
+        const value = option ? option.value : null;
+        this.changeUserInput(name, value);
+    };
+
+    openNewTab = () => () => {
+        window.open("https://www.google.com");
+    }
 
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
@@ -394,14 +404,21 @@ export default class UserInputForm extends React.Component {
                 return <MultipleServicePorts servicePorts={ports}
                                              availableServicePorts={availableServicePorts}
                                              organisations={organisations}
-                                             products={products}
                                              onChange={this.changeNestedInput(name)}
                                              organisationId={organisationId}
                                              maximum={userInput.maximum}
                                              disabled={userInput.readonly}
                                              isElan={userInput.elan}
-                                             reportError={this.reportCustomError(userInput.type)}
-                />;
+                                             reportError={this.reportCustomError(userInput.type)}/>;
+            case "new_ssp_workflow":
+                const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
+                const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
+                    lookupValueFromNestedState(bandwidthKey, currentState);
+                const ssp_products = filterProductsByBandwidth(products, bandwithSSP).filter((product) => product.tag === 'SSP');
+                return <SSPProductSelect products={ssp_products}
+                                         onChange={this.changeSSPProductSelectInput(name)}
+                                         product={value}
+                                         disabled={userInput.readonly}/>;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
