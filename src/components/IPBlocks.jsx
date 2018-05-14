@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
 
-import {stop} from "../utils/Utils";
-
 import "./IPBlocks.css";
 import IPBlockInput from "./IPBlockInput";
 

@@ -5,7 +5,6 @@ import "react-select/dist/react-select.css";
 import "./IPBlocks.css";
 
 
-
 export default class IPBlockInput extends React.PureComponent {
 
 
