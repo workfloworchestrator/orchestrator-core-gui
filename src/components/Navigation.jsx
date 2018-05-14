@@ -58,7 +58,7 @@ export default class Navigation extends React.PureComponent {
                     {this.renderItem("/processes", "processes")}
                     {this.renderItem("/subscriptions", "subscriptions")}
                     {this.renderItem("/metadata/products", "metadata")}
-                    {this.renderItem("/validations", "validations")}
+                    {this.renderItem("/validations/workflows", "validations")}
                     {this.renderItem("/tasks", "tasks")}
                     {this.renderItem("/cache", "cache")}
                     {this.renderItem("/new-process", "new_process", "new_process")}

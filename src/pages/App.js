@@ -173,7 +173,7 @@ class App extends React.PureComponent {
                                         render={props => <Processes currentUser={currentUser} {...props}
                                                                     products={products}
                                                                     organisations={organisations}/>}/>
-                        <ProtectedRoute path="/validations"
+                        <ProtectedRoute path="/validations/:type"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Validations {...props}
                                                                       products={products}
