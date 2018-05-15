@@ -131,15 +131,6 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
-    changeSSPProductSelectInput = name => option => {
-        const value = option ? option.value : null;
-        this.changeUserInput(name, value);
-    };
-
-    openNewTab = () => () => {
-        window.open("https://www.google.com");
-    }
-
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
         const uniqueSelectInputs = {...this.state.uniqueSelectInputs};
@@ -416,7 +407,7 @@ export default class UserInputForm extends React.Component {
                     lookupValueFromNestedState(bandwidthKey, currentState);
                 const ssp_products = filterProductsByBandwidth(products, bandwithSSP).filter((product) => product.tag === 'SSP');
                 return <SSPProductSelect products={ssp_products}
-                                         onChange={this.changeSSPProductSelectInput(name)}
+                                         onChange={this.changeSelectInput(name)}
                                          product={value}
                                          disabled={userInput.readonly}/>;
             case "subscription":
