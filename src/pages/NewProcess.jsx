@@ -193,7 +193,7 @@ export default class NewProcess extends React.Component {
     });
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
-                        organisations, products, locationCodes, started) {
+                        organisations, products, locationCodes, preselectedProduct) {
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
@@ -201,7 +201,9 @@ export default class NewProcess extends React.Component {
                 <ProductSelect
                     products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
                     onChange={this.changeProduct}
-                    product={isEmpty(product) ? undefined : product.value}/>
+                    product={isEmpty(product) ? undefined : product.value}
+                    disabled={!isEmpty(preselectedProduct)}
+                />
             </section>
             {showProductValidation &&
             <section>
@@ -319,9 +321,9 @@ export default class NewProcess extends React.Component {
         const {
             product, stepUserInput, productValidation, subscriptions, modifySubscription, modifyWorkflow,
             terminateSubscription, notModifiableMessage, notTerminatableMessage, modifyWorkflows,
-            organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, started
+            organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
         } = this.state;
-        const {organisations, products, locationCodes, history} = this.props;
+        const {organisations, products, locationCodes, history, preselectedProduct} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         const showModify = isEmpty(stepUserInput);
         return (
@@ -333,7 +335,7 @@ export default class NewProcess extends React.Component {
 
                 <section className="card">
                     {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
-                        subscriptions, history, organisations, products, locationCodes, started)}
+                        subscriptions, history, organisations, products, locationCodes, preselectedProduct)}
                     {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName)}
                     {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, notTerminatableMessage, organisationName)}
                 </section>
