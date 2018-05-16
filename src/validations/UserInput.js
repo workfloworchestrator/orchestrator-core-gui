@@ -18,7 +18,10 @@ const inValidRange = range => {
 };
 
 const inValidServicePort = (sp, isElan) => {
-    if (isEmpty(sp) || isEmpty(sp.tag)) {
+    if (sp.tag === "SSP" && isEmpty(sp.vlan)){
+        return false;
+    }
+    if (isEmpty(sp) || isEmpty(sp.tag) ) {
         return true;
     }
     return isElan ? (inValidVlan(sp.vlan) || isEmpty(sp.bandwidth)) : inValidVlan(sp.vlan);
