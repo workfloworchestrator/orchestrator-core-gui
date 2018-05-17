@@ -194,7 +194,7 @@ export default class NewProcess extends React.Component {
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, started) {
-        servicePorts = subscriptions.filter(
+        let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
             ).filter(sub => sub.tag === "MSP" || sub.tag === "SSP");
         return <section className="form-step divider">
