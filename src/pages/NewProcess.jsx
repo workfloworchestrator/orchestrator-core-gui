@@ -66,9 +66,6 @@ export default class NewProcess extends React.Component {
                 organisationName = org ? org.name : organisationName;
                 subscriptions = subscriptions.filter(sub => sub.customer_id === preselectedOrganisation);
             }
-            subscriptions = subscriptions.filter(
-                sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            );
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
         });
     };
@@ -197,6 +194,9 @@ export default class NewProcess extends React.Component {
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, started) {
+        servicePorts = subscriptions.filter(
+                sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
+            ).filter(sub => sub.tag === "MSP" || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
@@ -214,7 +214,7 @@ export default class NewProcess extends React.Component {
             {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
             {!isEmpty(stepUserInput) &&
             <UserInputForm stepUserInput={stepUserInput}
-                           servicePorts={subscriptions.filter(sub => sub.tag === "MSP" || sub.tag === "SSP")}
+                           servicePorts={servicePorts}
                            history={history}
                            organisations={organisations}
                            products={products}
