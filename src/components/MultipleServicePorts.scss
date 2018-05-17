@@ -36,15 +36,21 @@ section.multiple-mps {
             div.Select-input {
                 max-height: 30px;
             }
-            div.refresh-service-ports {
-                font-size: 22px;
-                cursor: pointer;
-            }
         }
     }
     div.add-msp {
         display: flex;
         i.fa-plus {
+            margin-left: auto;
+            padding: 10px 2px 0 0;
+            color: $green;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+    div.refresh-service-ports {
+        display: flex;
+        i.fa-refresh {
             margin-left: auto;
             padding: 10px 2px 0 0;
             color: $green;
