@@ -64,13 +64,13 @@ export default class NewProcess extends React.Component {
             if (preselectedOrganisation) {
                 const org = organisations.find(org => org.uuid === preselectedOrganisation);
                 organisationName = org ? org.name : organisationName;
-                subscriptions = subscriptions.filter(sub => sub.customer_id === preselectedOrganisation);
             }
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
         });
     };
 
     refreshSubscriptions = () => {
+        // todo: check for clashes clashes with Thijs's code.
         subscriptions().then(subscriptions => {
             this.setState({subscriptions: subscriptions});
         });
