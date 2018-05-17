@@ -66,6 +66,9 @@ export default class NewProcess extends React.Component {
                 organisationName = org ? org.name : organisationName;
                 subscriptions = subscriptions.filter(sub => sub.customer_id === preselectedOrganisation);
             }
+            subscriptions = subscriptions.filter(
+                sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
+            );
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
         });
     };
