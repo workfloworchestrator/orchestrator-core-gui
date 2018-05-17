@@ -70,6 +70,13 @@ export default class NewProcess extends React.Component {
         });
     };
 
+    refreshSubscriptions = () => {
+        subscriptions().then(subscriptions => {
+            this.setState({subscriptions: subscriptions});
+        });
+    };
+
+
     validSubmit = (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
             const product = {
@@ -223,6 +230,7 @@ export default class NewProcess extends React.Component {
                            locationCodes={locationCodes}
                            product={product}
                            validSubmit={this.validSubmit}/>}
+            {<div className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.refreshSubscriptions}></i></div>}
         </section>;
     }
 

@@ -91,11 +91,6 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
-    refreshServicePorts = () => {
-        console.log("Here we are");
-    }
-
-
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
                          disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
@@ -156,14 +151,11 @@ export default class MultipleServicePorts extends React.PureComponent {
         const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
         const {bandwidthErrors, usedSSPDescriptions} = this.state;
         const showAdd = maximum > 2 && !disabled;
-        const showRefresh = true;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
                     maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
-            {showRefresh && <div className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.refreshServicePorts}></i></div>}
-
         </section>)
     }
 }

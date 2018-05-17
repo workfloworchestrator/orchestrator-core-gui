@@ -31,6 +31,7 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
+import {subscriptions} from "../api";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -54,7 +55,7 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
-            randomCrm: randomCrmIdentifier()
+            randomCrm: randomCrmIdentifier(),
         };
     }
 
@@ -217,6 +218,7 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const value = userInput.value;
         const {currentState, products, organisations, servicePorts} = this.props;
+        const {showServicePortRefresh} = this.state;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -392,15 +394,17 @@ export default class UserInputForm extends React.Component {
                     subscription_id: null,
                     vlan: ""
                 }] : value;
-                return <MultipleServicePorts servicePorts={ports}
-                                             availableServicePorts={availableServicePorts}
-                                             organisations={organisations}
-                                             onChange={this.changeNestedInput(name)}
-                                             organisationId={organisationId}
-                                             maximum={userInput.maximum}
-                                             disabled={userInput.readonly}
-                                             isElan={userInput.elan}
-                                             reportError={this.reportCustomError(userInput.type)}/>;
+                return <div>
+                    <MultipleServicePorts servicePorts={ports}
+                                         availableServicePorts={availableServicePorts}
+                                         organisations={organisations}
+                                         onChange={this.changeNestedInput(name)}
+                                         organisationId={organisationId}
+                                         maximum={userInput.maximum}
+                                         disabled={userInput.readonly}
+                                         isElan={userInput.elan}
+                                         reportError={this.reportCustomError(userInput.type)}/>
+                    </div>;
             case "new_ssp_workflow":
                 const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
                 const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
