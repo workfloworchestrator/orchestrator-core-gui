@@ -52,10 +52,11 @@ export default class NewProcess extends React.Component {
         if (preselectedProduct) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedProduct.toLowerCase());
             if (product) {
+                this.setState({product:product});
                 this.changeProduct({
                     value: product.product_id,
                     workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
-                    ...product
+                    productId: product.product_id,
                 });
             }
         }
@@ -121,6 +122,8 @@ export default class NewProcess extends React.Component {
                 if (product) {
                     Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
                         const [productValidation, userInput] = result;
+
+
                         const stepUserInput = userInput.filter(input => input.name !== "product");
                         const {preselectedOrganisation, preselectedDienstafname} = this.props;
                         if (preselectedOrganisation) {
@@ -191,11 +194,13 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => this.setState({
-        stepUserInput: [],
-        productValidation: {"valid": true, mapping: {}},
-        product: option
-    });
+    changeProduct = option => {
+        this.setState({
+            stepUserInput: [],
+            productValidation: {"valid": true, mapping: {}},
+            product: option
+        });
+    };
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, preselectedProduct) {
@@ -215,6 +220,7 @@ export default class NewProcess extends React.Component {
             </section>
             {showProductValidation &&
             <section>
+                <p>ZO DAN</p>
                 <label htmlFor="none">{I18n.t("process.product_validation")}</label>
                 <ProductValidation validation={productValidation}/>
             </section>}
