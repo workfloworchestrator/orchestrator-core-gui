@@ -395,6 +395,7 @@ export default class UserInputForm extends React.Component {
                     vlan: ""
                 }] : value;
                 return <div>
+                    {!userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
@@ -461,5 +462,6 @@ UserInputForm.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
+    refreshSubscriptions: PropTypes.func,
     process: PropTypes.object,
 };
