@@ -31,7 +31,6 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
-import {subscriptions} from "../api";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -218,7 +217,6 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const value = userInput.value;
         const {currentState, products, organisations, servicePorts} = this.props;
-        const {showServicePortRefresh} = this.state;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -395,7 +393,7 @@ export default class UserInputForm extends React.Component {
                     vlan: ""
                 }] : value;
                 return <div>
-                    {!userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
