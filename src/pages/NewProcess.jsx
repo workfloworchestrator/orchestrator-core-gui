@@ -194,13 +194,12 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => {
-        this.setState({
-            stepUserInput: [],
-            productValidation: {"valid": true, mapping: {}},
-            product: option
-        });
-    };
+    changeProduct = option => this.setState({
+        stepUserInput: [],
+        productValidation: {"valid": true, mapping: {}},
+        product: option
+    });
+
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, preselectedProduct) {
