@@ -19,14 +19,19 @@ export default class VirtualLAN extends React.PureComponent {
     }
 
     componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
-        if (subscriptionIdMSP) {
-            const {imsCircuitId} = this.props;
-            const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
-            promise
-                .then(result => this.setState({usedVlans: result, missingInIms: false}))
-                .catch(() => this.setState({missingInIms: true}));
+        if (this.props.servicePort.tag === "SSP") {
+            this.setState({missingInIms: false});
+        } else {
+            if (subscriptionIdMSP) {
+                const {imsCircuitId} = this.props;
+                const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
+                promise
+                    .then(result => this.setState({usedVlans: result, missingInIms: false}))
+                    .catch(() => this.setState({missingInIms: true}));
+            }
         }
-    };
+        ;
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.subscriptionIdMSP && nextProps.subscriptionIdMSP !== this.props.subscriptionIdMSP) {
