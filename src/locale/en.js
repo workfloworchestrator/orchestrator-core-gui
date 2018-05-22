@@ -206,6 +206,8 @@ I18n.translations.en = {
         ims_port_id_info: "The IMS port id",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
+        new_ssp_workflow: "Create a new SSP",
+        new_ssp_workflow_info: "Start a new SSP create workflow in a new tab. If you don't need a new SSP you can safely skip this step.",
         new_interface_type: "The new interface type of the port",
         new_interface_type_info: "Please select the new interface type of the port",
         nms_service_id: "NMS service id",

@@ -54,6 +54,8 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = isEmpty(!!value);
     } else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
+    } else if (type === "new_ssp_workflow") {
+        errors[name] = false;
     } else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;

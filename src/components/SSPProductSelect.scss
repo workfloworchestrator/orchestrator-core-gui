@@ -1,0 +1,16 @@
+section.ssp-product-select {
+  display: flex;
+  div.wrapper-left {
+    display: flex;
+    width: 53%;
+    div.Select.select-ssp-product {
+      width: 100%;
+    }
+  }
+  div.wrapper-right {
+    display: flex;
+    a.button {
+      height: 36px;
+    }
+  }
+}
