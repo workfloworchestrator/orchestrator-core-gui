@@ -123,6 +123,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                                 subscriptionIdMSP={servicePort.subscription_id}
                                 disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
                                 placeholder={vlanPlaceholder}
+                                servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
                     {(!isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}

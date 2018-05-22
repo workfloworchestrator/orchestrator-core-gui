@@ -19,7 +19,7 @@ export default class VirtualLAN extends React.PureComponent {
     }
 
     componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
-        if (this.props.servicePort.tag === "SSP") {
+        if (this.props.servicePortTag === "SSP") {
             this.setState({missingInIms: false});
         } else {
             if (subscriptionIdMSP) {
@@ -110,5 +110,6 @@ VirtualLAN.propTypes = {
     subscriptionIdMSP: PropTypes.string,
     imsCircuitId: PropTypes.string,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    servicePortTag:PropTypes.string
 };
