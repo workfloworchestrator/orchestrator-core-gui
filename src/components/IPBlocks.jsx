@@ -41,8 +41,7 @@ export default class IPBlocks extends React.PureComponent {
 	};
 
     renderIPBlock = (index, ipBlock) => {
-		const {onChange} = this.props;
-        return (<section className="ip-block" key={index}>
+    	return (<section className="ip-block" key={index}>
             <div className="wrapper ipp-select" >
                 {index === 0 && <label>{I18n.t("ip_blocks.ip_block")}</label>}
                 <IPBlockInput 
