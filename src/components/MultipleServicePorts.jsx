@@ -14,7 +14,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         super(props, context);
         this.state = {
             bandwidthErrors: {},
-            usedSSPDescriptions: {}
+            usedSSPDescriptions: {},
         };
     }
 

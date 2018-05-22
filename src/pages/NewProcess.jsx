@@ -52,10 +52,11 @@ export default class NewProcess extends React.Component {
         if (preselectedProduct) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedProduct.toLowerCase());
             if (product) {
+                this.setState({product:product});
                 this.changeProduct({
                     value: product.product_id,
                     workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
-                    ...product
+                    productId: product.product_id,
                 });
             }
         }
@@ -64,9 +65,14 @@ export default class NewProcess extends React.Component {
             if (preselectedOrganisation) {
                 const org = organisations.find(org => org.uuid === preselectedOrganisation);
                 organisationName = org ? org.name : organisationName;
-                subscriptions = subscriptions.filter(sub => sub.customer_id === preselectedOrganisation);
             }
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
+        });
+    };
+
+    refreshSubscriptions = () => {
+        subscriptions().then(subscriptions => {
+            this.setState({subscriptions: subscriptions});
         });
     };
 
@@ -116,6 +122,8 @@ export default class NewProcess extends React.Component {
                 if (product) {
                     Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
                         const [productValidation, userInput] = result;
+
+
                         const stepUserInput = userInput.filter(input => input.name !== "product");
                         const {preselectedOrganisation, preselectedDienstafname} = this.props;
                         if (preselectedOrganisation) {
@@ -192,8 +200,12 @@ export default class NewProcess extends React.Component {
         product: option
     });
 
+
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
-                        organisations, products, locationCodes, started) {
+                        organisations, products, locationCodes, preselectedProduct) {
+        let servicePorts = subscriptions.filter(
+                sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
+            ).filter(sub => sub.tag === "MSP" || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
@@ -201,23 +213,28 @@ export default class NewProcess extends React.Component {
                 <ProductSelect
                     products={this.props.products.filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))}
                     onChange={this.changeProduct}
-                    product={isEmpty(product) ? undefined : product.value}/>
+                    product={isEmpty(product) ? undefined : product.value}
+                    disabled={!isEmpty(preselectedProduct)}
+                />
             </section>
             {showProductValidation &&
             <section>
+                <p>ZO DAN</p>
                 <label htmlFor="none">{I18n.t("process.product_validation")}</label>
                 <ProductValidation validation={productValidation}/>
             </section>}
             {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
             {!isEmpty(stepUserInput) &&
             <UserInputForm stepUserInput={stepUserInput}
-                           servicePorts={subscriptions.filter(sub => sub.tag === "MSP" || sub.tag === "SSP")}
+                           servicePorts={servicePorts}
                            history={history}
                            organisations={organisations}
                            products={products}
                            locationCodes={locationCodes}
                            product={product}
-                           validSubmit={this.validSubmit}/>}
+                           validSubmit={this.validSubmit}
+                           refreshSubscriptions={this.refreshSubscriptions}
+            />}
         </section>;
     }
 
@@ -319,9 +336,9 @@ export default class NewProcess extends React.Component {
         const {
             product, stepUserInput, productValidation, subscriptions, modifySubscription, modifyWorkflow,
             terminateSubscription, notModifiableMessage, notTerminatableMessage, modifyWorkflows,
-            organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, started
+            organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
         } = this.state;
-        const {organisations, products, locationCodes, history} = this.props;
+        const {organisations, products, locationCodes, history, preselectedProduct} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         const showModify = isEmpty(stepUserInput);
         return (
@@ -333,7 +350,7 @@ export default class NewProcess extends React.Component {
 
                 <section className="card">
                     {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
-                        subscriptions, history, organisations, products, locationCodes, started)}
+                        subscriptions, history, organisations, products, locationCodes, preselectedProduct)}
                     {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName)}
                     {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, notTerminatableMessage, organisationName)}
                 </section>

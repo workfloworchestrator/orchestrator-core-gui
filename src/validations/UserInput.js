@@ -53,8 +53,10 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !value;
     } else if (type === "boolean") {
         errors[name] = isEmpty(!!value);
-	} else if (type === "crm_port_id") {
+    } else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
+    } else if (type === "new_ssp_workflow") {
+        errors[name] = false;
     } else if (type === "ip_blocks") {
 		errors[name] = isEmpty(value) || value.some(block => !validateIPRange(block.display_value));
 	} else if (type === "stp") {

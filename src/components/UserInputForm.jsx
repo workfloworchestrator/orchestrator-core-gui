@@ -26,6 +26,7 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
+import SSPProductSelect from "./SSPProductSelect";
 import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
@@ -54,7 +55,7 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
-            randomCrm: randomCrmIdentifier()
+            randomCrm: randomCrmIdentifier(),
         };
     }
 
@@ -392,16 +393,27 @@ export default class UserInputForm extends React.Component {
                     subscription_id: null,
                     vlan: ""
                 }] : value;
-                return <MultipleServicePorts servicePorts={ports}
-                                             availableServicePorts={availableServicePorts}
-                                             organisations={organisations}
-                                             onChange={this.changeNestedInput(name)}
-                                             organisationId={organisationId}
-                                             maximum={userInput.maximum}
-                                             disabled={userInput.readonly}
-                                             isElan={userInput.elan}
-                                             reportError={this.reportCustomError(userInput.type)}
-                />;
+                return <div>
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    <MultipleServicePorts servicePorts={ports}
+                                         availableServicePorts={availableServicePorts}
+                                         organisations={organisations}
+                                         onChange={this.changeNestedInput(name)}
+                                         organisationId={organisationId}
+                                         maximum={userInput.maximum}
+                                         disabled={userInput.readonly}
+                                         isElan={userInput.elan}
+                                         reportError={this.reportCustomError(userInput.type)}/>
+                    </div>;
+            case "new_ssp_workflow":
+                const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
+                const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
+                    lookupValueFromNestedState(bandwidthKey, currentState);
+                const ssp_products = filterProductsByBandwidth(products, bandwithSSP).filter((product) => product.tag === 'SSP');
+                return <SSPProductSelect products={ssp_products}
+                                         onChange={this.changeSelectInput(name)}
+                                         product={value}
+                                         disabled={userInput.readonly}/>;
             case "subscription":
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
@@ -457,5 +469,6 @@ UserInputForm.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
+    refreshSubscriptions: PropTypes.func,
     process: PropTypes.object,
 };
