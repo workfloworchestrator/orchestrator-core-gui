@@ -245,6 +245,10 @@ export function allWorkflows() {
     return fetchJson("workflows")
 }
 
+export function allWorkflowCodeImplementations() {
+    return fetchJson("workflows/coded_workflows")
+}
+
 export function allWorkflowsWithProductTags() {
     return fetchJson("workflows/with_product_tags")
 }

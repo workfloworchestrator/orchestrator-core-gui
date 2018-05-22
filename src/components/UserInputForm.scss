@@ -30,6 +30,15 @@
             }
         }
     }
+    section.refresh-service-ports {
+        i.fa-refresh {
+            margin-left: auto;
+            margin-top: 0px;
+            color: $blue;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
 
     .actions {
         display: flex;

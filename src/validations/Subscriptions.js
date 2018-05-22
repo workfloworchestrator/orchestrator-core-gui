@@ -35,12 +35,6 @@ export function maybeTerminatedMessage(subscription, relation_info) {
         return I18n.t("subscription.not_in_sync");
     }
     else if (!relation_info.insync) {
-        if (!isEmpty(relation_info.unterminated_parents)) {
-            message = message + " " + I18n.t("subscription.no_termination_parent_subscription") + " ";
-            relation_info.unterminated_parents.forEach((relation, index, array) => {
-                message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
-            });
-        }
         if (!isEmpty(relation_info.locked_childs)) {
             message = message + " " + I18n.t("subscription.locked_child_subscriptions") + " ";
             relation_info.locked_childs.forEach((relation, index, array) => {
@@ -54,6 +48,13 @@ export function maybeTerminatedMessage(subscription, relation_info) {
             });
         }
         return I18n.t("subscription.relations_not_in_sync") + message;
+    }
+    else if (!isEmpty(relation_info.unterminated_parents)) {
+        message = message + " " + I18n.t("subscription.no_termination_parent_subscription") + " ";
+        relation_info.unterminated_parents.forEach((relation, index, array) => {
+            message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
+        });
+        return message;
     }
     return null;
 }

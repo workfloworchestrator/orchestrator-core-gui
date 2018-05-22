@@ -17,7 +17,10 @@ const inValidRange = range => {
 };
 
 const inValidServicePort = (sp, isElan) => {
-    if (isEmpty(sp) || isEmpty(sp.tag)) {
+    if (sp.tag === "SSP" && isEmpty(sp.vlan)){
+        return false;
+    }
+    if (isEmpty(sp) || isEmpty(sp.tag) ) {
         return true;
     }
     return isElan ? (inValidVlan(sp.vlan) || isEmpty(sp.bandwidth)) : inValidVlan(sp.vlan);
@@ -51,6 +54,8 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = isEmpty(!!value);
     } else if (type === "crm_port_id") {
         errors[name] = !/^\d{5}$/.test(value)
+    } else if (type === "new_ssp_workflow") {
+        errors[name] = false;
     } else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;

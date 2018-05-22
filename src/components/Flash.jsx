@@ -1,6 +1,6 @@
 import React from "react";
 
-import {emitter, getFlash, clearFlash} from "../utils/Flash";
+import {clearFlash, emitter, getFlash} from "../utils/Flash";
 import {isEmpty} from "../utils/Utils";
 import "./Flash.css";
 

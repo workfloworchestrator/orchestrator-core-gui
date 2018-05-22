@@ -41,6 +41,13 @@ export default class ValidationsExplain extends React.PureComponent {
             <span className="code">FixedInputs</span> and the subsequent values are configured in the code.</p>
     </section>;
 
+    explainProductWorkflows = () => <section className="explanation">
+        <h3>Explanation</h3>
+        <p><span className="code">Workflows</span> are stored in the database to register the many-to-many relations with <span className="code"> Products </span>
+        , but are coded in the Python code. Discrepancies can occur between the database and the code implementation.
+        </p>
+    </section>;
+
     details = () => <section className="details">
         <h3>Details</h3>
         <p>The validations consist of each Product validated against the <span className="code">workflow_subscription_mapping </span>
@@ -68,7 +75,20 @@ export default class ValidationsExplain extends React.PureComponent {
         </p>
     </section>;
 
-    detailsFixedInputs = () => <section className="details">
+    detailsProductWorkflows = () => <section className="details">
+        <h3>Details</h3>
+            <p>All the <span className="code">Workflow</span> - <span className="code">Product</span> relations are verified to ensure:</p>
+            <ul>
+                <li>Every product has one and not more then one <span className="code">CREATE</span> workflow.</li>
+                <li>Every product has at least one <span className="code">MODIFY</span> workflow.</li>
+                <li>Every product has at least one <span className="code">TERMINATE</span> workflow.</li>
+                <li>Every workflow that is not a Task has a relation with at least one Product.</li>
+                <li>Every workflow in the codebase has a corresponding - based on the name of the workflow - database entry.</li>
+                <li>Every workflow in the database has a corresponding - based on the name of the workflow - code implementation.</li>
+            </ul>
+    </section>;
+
+            detailsFixedInputs = () => <section className="details">
         <h3>Details</h3>
         <p>In the <span className="code">workflows/server/config/fixed_inputs.py</span> all of the allowed <span className="code">FixedInputs</span> are
             described together with the allowed values per <span className="code">Product</span> by <span className="code">tag</span>.
@@ -98,9 +118,10 @@ export default class ValidationsExplain extends React.PureComponent {
     }
 
     render() {
-        const {close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs} = this.props;
+        const {close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs, isProductWorkflows} = this.props;
         const className = isVisible ? "" : "hide";
-        const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" : isFixedInputs ? "Products / FixedInputs" : "Dienstafname / Subscription cross-check";
+        const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" :
+            isFixedInputs ? "Products / FixedInputs" : isProductWorkflows ? "Products / Workflows" : "Dienstafname / Subscription cross-check";
         return (
             <div className={`validation-explain ${className}`}
                  tabIndex="1" onBlur={close} ref={ref => this.main = ref}>
@@ -111,8 +132,10 @@ export default class ValidationsExplain extends React.PureComponent {
                             <i className="fa fa-remove"></i>
                         </a>
                     </section>
-                    {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() : isFixedInputs ? this.explanationFixedInputs() : this.explanationDienstafnames()}
-                    {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() : isFixedInputs ? this.detailsFixedInputs() : this.detailsDienstafnames()}
+                    {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() :
+                        isFixedInputs ? this.explanationFixedInputs() : isProductWorkflows ? this.explainProductWorkflows() : this.explanationDienstafnames()}
+                    {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() :
+                        isFixedInputs ? this.detailsFixedInputs() : isProductWorkflows ? this.detailsProductWorkflows() :this.detailsDienstafnames()}
                     {isWorkFlows && this.example()}
                 </section>
             </div>
@@ -125,6 +148,7 @@ ValidationsExplain.propTypes = {
     isVisible: PropTypes.bool.isRequired,
     isWorkFlows: PropTypes.bool.isRequired,
     isSubscriptions: PropTypes.bool.isRequired,
-    isFixedInputs: PropTypes.bool.isRequired
+    isFixedInputs: PropTypes.bool.isRequired,
+    isProductWorkflows: PropTypes.bool.isRequired
 };
 

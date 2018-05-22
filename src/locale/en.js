@@ -206,6 +206,8 @@ I18n.translations.en = {
         ims_port_id_info: "The IMS port id",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
+        new_ssp_workflow: "Create a new SSP",
+        new_ssp_workflow_info: "Start a new SSP create workflow in a new tab. If you don't need a new SSP you can safely skip this step.",
         new_interface_type: "The new interface type of the port",
         new_interface_type_info: "Please select the new interface type of the port",
         nms_service_id: "NMS service id",
@@ -334,7 +336,8 @@ I18n.translations.en = {
             subscriptions: "Subscriptions",
             workflows: "Workflows",
             dienstafnames: "Dienstafnames",
-            fixedInputs: "Fixed Inputs"
+            fixedInputs: "Fixed Inputs",
+            productWorkflows: "Product ⟺ Workflows"
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
@@ -352,6 +355,19 @@ I18n.translations.en = {
                 invalid_value: "Invalid value for FixedInput: {{value}}",
                 missing_configuration: "FixedInput for product is not configured"
             }
+        },
+        productWorkflows: {
+            title: "Validation of the Products ⟺ Workflows configuration in the code / database.",
+            productsWithoutWorkflow: "The following products do NOT have a {{target}} workflow.",
+            productsWithWorkflow: "All products have a {{target}} workflow.",
+            workflowsWithoutProducts: "The following process workflows have no Product relations. They can never create processes.",
+            workflowsWithProducts: "All process workflows have at least one Product relation",
+            productsWithMultipleWorkflow: "The following products have more then one {{target}} workflow. This is an error.",
+            productsWithoutMultipleWorkflow: "There are no products with more then one {{target}} workflow.",
+            workflowsWithoutImplementations: "The following workflows in the database have no corresponding code implementation. This is an error",
+            workflowsWithImplementations: "All workflows in the database have a code implementation",
+            workflowsWithoutRecords: "The following workflows in the code have no corresponding database record. This is an error",
+            workflowsWithRecords: "All implementations of workflows in the code have a corresponding database record",
         }
     },
     filter: {
@@ -596,6 +612,7 @@ I18n.translations.en = {
             end_date_info: "The end date of this Product. This is currently not used",
             product_blocks: "Product Blocks",
             product_blocks_string: "Product Blocks",
+            workflows_string: "Workflows",
             product_blocks_info: "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             fixed_inputs: "Fixed Inputs",
             fixed_inputs_info: "These name / value pairs are used in the workflows for this Product" +
@@ -671,13 +688,15 @@ I18n.translations.en = {
         },
         workflows: {
             name: "Unique key",
+            implementation: "Method name",
             description: "Description",
             target: "Target",
             product_tags_string: "Product tags",
             created_at: "Created",
             tag: "Product tag",
             searchPlaceHolder: "Search for workflows...",
-            no_found: "No workflows found"
+            no_found: "No workflows found",
+            explanation: "Workflows that are not the type SYSTEM - e.g. are not Tasks - and do not have a relation with any Product can never be run. These workflows are colored grey and should be subject for investigation."
         },
         results: "{{type}} found: {{count}}",
     },
