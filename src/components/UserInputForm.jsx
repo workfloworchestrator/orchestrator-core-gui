@@ -387,8 +387,7 @@ export default class UserInputForm extends React.Component {
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
                 const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts
-                        .filter(sp => productIds.includes(sp.product_id));
+                    servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? [{subscription_id: null, vlan: ""}, {
                     subscription_id: null,
                     vlan: ""

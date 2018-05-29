@@ -19,14 +19,19 @@ export default class VirtualLAN extends React.PureComponent {
     }
 
     componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
-        if (subscriptionIdMSP) {
-            const {imsCircuitId} = this.props;
-            const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
-            promise
-                .then(result => this.setState({usedVlans: result, missingInIms: false}))
-                .catch(() => this.setState({missingInIms: true}));
+        if (this.props.servicePortTag === "SSP") {
+            this.setState({missingInIms: false, usedVlans:[], });
+        } else {
+            if (subscriptionIdMSP) {
+                const {imsCircuitId} = this.props;
+                const promise = imsCircuitId ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId) : usedVlans(subscriptionIdMSP);
+                promise
+                    .then(result => this.setState({usedVlans: result, missingInIms: false}))
+                    .catch(() => this.setState({missingInIms: true}));
+            }
         }
-    };
+        ;
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.subscriptionIdMSP && nextProps.subscriptionIdMSP !== this.props.subscriptionIdMSP) {
@@ -74,8 +79,8 @@ export default class VirtualLAN extends React.PureComponent {
 
     render() {
         const {usedVlans, vlansInUse, missingInIms, invalidFormat} = this.state;
-        const {onChange, vlan, subscriptionIdMSP, disabled, placeholder} = this.props;
-        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms;
+        const {onChange, vlan, subscriptionIdMSP, disabled, placeholder, servicePortTag} = this.props;
+        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms && !servicePortTag==="SSP"
         const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled && !missingInIms;
         const derivedPlaceholder = placeholder || (subscriptionIdMSP ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
         return (
@@ -105,5 +110,6 @@ VirtualLAN.propTypes = {
     subscriptionIdMSP: PropTypes.string,
     imsCircuitId: PropTypes.string,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    servicePortTag:PropTypes.string
 };
