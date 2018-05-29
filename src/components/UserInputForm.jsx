@@ -19,6 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
+import IPBlocks from "./IPBlocks"
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -386,8 +387,7 @@ export default class UserInputForm extends React.Component {
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
                 const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts
-                        .filter(sp => productIds.includes(sp.product_id));
+                    servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? [{subscription_id: null, vlan: ""}, {
                     subscription_id: null,
                     vlan: ""
@@ -417,7 +417,15 @@ export default class UserInputForm extends React.Component {
                 const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
-                                            subscription={value}/>;
+                                subscription={value}/>;
+
+            case "ip_blocks":
+               const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
+               const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
+               return <IPBlocks ipBlocks={ipBlocks}
+                           onChange={this.changeNestedInput(name)}
+                        /> ;
+
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 

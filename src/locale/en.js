@@ -75,7 +75,6 @@ I18n.translations.en = {
         notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         uniquenessViolation: "Value selected more than once",
-        customError: "Invalid ",
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {
             user_input: "User input",
@@ -204,6 +203,7 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
+        ip_blocks: "Please specify the prefixes you want allocated",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
         new_ssp_workflow: "Create a new SSP",
@@ -385,6 +385,7 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -458,6 +459,7 @@ I18n.translations.en = {
         modify_modify_lightpath_speed: "Modify Service Speed",
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
+        modify_modify_ip_range_workflow: "Modify IP Space",
         product: {
             name: "Name",
             description: "Description",
@@ -815,7 +817,11 @@ I18n.translations.en = {
         circuit_changed: "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
         old_endpoint: "The old endpoint",
         new_endpoint: "The new endpoint"
+    },
+    ip_blocks: {
+		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
     }
+
 };
 
 export default I18n.translations.en;

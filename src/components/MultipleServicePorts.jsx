@@ -93,6 +93,7 @@ export default class MultipleServicePorts extends React.PureComponent {
 
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
                          disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
+        // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
         inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "SSP");
@@ -122,6 +123,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                                 subscriptionIdMSP={servicePort.subscription_id}
                                 disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
                                 placeholder={vlanPlaceholder}
+                                servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
                     {(!isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}

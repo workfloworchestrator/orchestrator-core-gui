@@ -9,7 +9,7 @@ export default class ServicePortSelect extends React.PureComponent {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
-        return `${description.trim()} ${organisationName}`
+        return `${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
     };
 
     is_selectable = (servicePort) => servicePort.tag === "SSP" ? true : servicePort.insync;
