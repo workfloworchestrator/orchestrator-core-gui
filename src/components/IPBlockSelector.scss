@@ -1,0 +1,53 @@
+@import "../stylesheets/vars.scss";
+
+
+section.ipblock-selector {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    section.ip-block {
+        display: flex;
+        div.ipp-select {
+            margin-left: 25px;
+            width: 50%;
+		        display: flex;
+                align-items: center;
+			    div.ip-block {
+                    width: 100%;
+					
+                }
+                i.fa-minus {
+                    padding-left: 5px;
+                    color: $red;
+                    font-size: 30px;
+                    cursor: pointer;
+                    &.disabled {
+                        cursor: not-allowed;
+                        color: $light-grey
+                   }
+               }
+    	   }
+    }
+    div.ipp-select {
+        margin-top: 5px;
+        div.Select-control {
+            max-height: 30px;
+            div.Select-input {
+
+                max-height: 30px;
+            }
+        }
+    }
+    div.add-ip-block {
+        display: flex;
+        i.fa-plus {
+            margin-left: auto;
+            padding: 10px 2px 0 0;
+            color: $green;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+
+}

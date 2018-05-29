@@ -4,6 +4,7 @@ import I18n from "i18n-js";
 
 import "./IPBlocks.css";
 import IPBlockInput from "./IPBlockInput";
+import IPBlockSelector from "./IPBlockSelector";
 
 export default class IPBlocks extends React.PureComponent {
 
@@ -11,6 +12,7 @@ export default class IPBlocks extends React.PureComponent {
         super(props, context);
         this.state = {
             errors: {},
+			showSelector: false
         };
     };
 
@@ -23,6 +25,7 @@ export default class IPBlocks extends React.PureComponent {
     };
 
 	addIPBlock = () => {
+		this.setState({"showSelector": !this.state.showSelector});
 		const ipBlocks = [...this.props.ipBlocks];
 		ipBlocks.push({ipam_prefix_id:"", error_msg:"", display_value:""});
 		this.props.onChange(ipBlocks);
@@ -49,6 +52,10 @@ export default class IPBlocks extends React.PureComponent {
 					clickRemove={this.clickRemove(index)}
 					validateFunc={this.validateInternal("display_value", index)}
 					index = {index} />
+				<IPBlockSelector
+					ipBlock={ipBlock}
+					visible={this.state.showSelector}
+					/>
             </div>
 
         </section>)
