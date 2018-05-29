@@ -385,6 +385,7 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -458,7 +459,7 @@ I18n.translations.en = {
         modify_modify_lightpath_speed: "Modify Service Speed",
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
-        modify_modify_ip_range_workflow: "Modify IP range",
+        modify_modify_ip_range_workflow: "Modify IP Space",
         product: {
             name: "Name",
             description: "Description",
