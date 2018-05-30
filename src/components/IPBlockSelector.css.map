@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,wBAAyB;EACrB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,SAAS,EAAE,IAAI",
+"sources": ["IPBlockSelector.scss"],
+"names": [],
+"file": "IPBlockSelector.css"
+}
