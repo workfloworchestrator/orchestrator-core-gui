@@ -76,7 +76,6 @@ class App extends React.PureComponent {
 
     handleBackendDown = (err) => {
         const location = window.location;
-        console.error(err);
         const alreadyRetried = location.href.indexOf("guid") > -1;
         if (alreadyRetried) {
             window.location.href = `${location.protocol}//${location.hostname}${location.port ? ":" + location.port : ""}/error`;
@@ -120,7 +119,7 @@ class App extends React.PureComponent {
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
                 me().then(currentUser => {
-                    if (currentUser && currentUser.sub) {
+                    if (currentUser && (currentUser.sub || currentUser.user_name)) {
                         Promise.all([organisations(), products(), locationCodes()]).then(result => {
                             const [allOrganisations, allProducts, allLocationCodes] = result;
                             this.setState({
