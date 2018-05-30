@@ -32,7 +32,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                         if (res.json.length > 0) {
                             usedSSPDescriptions[index] = res.json.map(parent => parent.description).join(", ");
                         } else {
-                            this.clearErrors(index);
+                            usedSSPDescriptions[index] = false;
                         }
                         this.setState({usedSSPDescriptions: usedSSPDescriptions});
                     });
