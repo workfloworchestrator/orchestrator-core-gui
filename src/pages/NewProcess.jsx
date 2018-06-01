@@ -291,7 +291,7 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
-                        subscriptions={subscriptions}
+                        subscriptions={subscriptions.filter(sub => sub.status === "active" && sub.insync)}
                         subscription={modifySubscription}
                         onChange={this.changeModifySubscription}
                         organisation={organisationName}
