@@ -73,5 +73,5 @@ export default class IPBlocks extends React.PureComponent {
 
 IPBlocks.propTypes = {
 	ipBlocks: PropTypes.array.isRequired,
-	onChange: PropTypes.func.IsRequired
+	onChange: PropTypes.func.isRequired
 };
