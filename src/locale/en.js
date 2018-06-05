@@ -385,6 +385,7 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -458,7 +459,7 @@ I18n.translations.en = {
         modify_modify_lightpath_speed: "Modify Service Speed",
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
-        modify_modify_ip_range_workflow: "Modify IP range",
+        modify_modify_ip_range_workflow: "Modify IP Space",
         product: {
             name: "Name",
             description: "Description",
@@ -544,7 +545,7 @@ I18n.translations.en = {
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
-        missingInIms: "This service port has been deleted from IMS",
+        missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
         allPortsAvailable: "This MSP has no ports in use (yet).",
         placeholder: "Enter a valid VLAN range..." ,
         placeholder_no_service_port: "First select a Service Port...",

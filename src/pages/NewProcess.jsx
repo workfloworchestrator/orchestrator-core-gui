@@ -205,7 +205,7 @@ export default class NewProcess extends React.Component {
                         organisations, products, locationCodes, preselectedProduct) {
         let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            ).filter(sub => sub.tag === "MSP" || sub.tag === "SSP");
+            ).filter(sub => (sub.tag === "MSP" && sub.insync) || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
@@ -291,7 +291,7 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
-                        subscriptions={subscriptions}
+                        subscriptions={subscriptions.filter(sub => sub.status === "active" && sub.insync)}
                         subscription={modifySubscription}
                         onChange={this.changeModifySubscription}
                         organisation={organisationName}
