@@ -26,11 +26,12 @@ export default class MultipleServicePorts extends React.PureComponent {
             if (e !== null) {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
                 if (port.tag === "SSP") {
-                    // The SSP may not be used in other LP's
+                    // The SSP may not be used in other LP's (except when they are terminated)
                     parentSubscriptions(value).then(res => {
                         const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
-                        if (res.json.length > 0) {
-                            usedSSPDescriptions[index] = res.json.map(parent => parent.description).join(", ");
+                        let filteredParents = res.json.filter(parent => parent.status !== "terminated");
+                        if (filteredParents.length > 0) {
+                            usedSSPDescriptions[index] = filteredParents.map(parent => parent.description).join(", ");
                         } else {
                             usedSSPDescriptions[index] = false;
                         }
