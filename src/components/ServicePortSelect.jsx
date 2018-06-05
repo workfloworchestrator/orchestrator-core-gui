@@ -12,7 +12,6 @@ export default class ServicePortSelect extends React.PureComponent {
         return `${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
     };
 
-    is_selectable = (servicePort) => servicePort.tag === "SSP" ? true : servicePort.insync;
 
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
@@ -22,7 +21,6 @@ export default class ServicePortSelect extends React.PureComponent {
                                value: aServicePort.subscription_id,
                                label: this.label(aServicePort, organisations),
                                tag: aServicePort.tag,
-                               disabled: !this.is_selectable(aServicePort),
                            }))
                            .sort((x, y) => x.label.localeCompare(y.label))
                        }
