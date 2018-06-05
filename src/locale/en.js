@@ -545,7 +545,7 @@ I18n.translations.en = {
     vlan: {
         vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
-        missingInIms: "This service port can not be found in IMS. It maybe deleted or in an initial state.",
+        missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
         allPortsAvailable: "This MSP has no ports in use (yet).",
         placeholder: "Enter a valid VLAN range..." ,
         placeholder_no_service_port: "First select a Service Port...",
