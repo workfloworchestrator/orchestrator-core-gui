@@ -301,6 +301,11 @@ export function startModificationSubscription(subscriptionId, workflow, dienstaf
     return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
 }
 
+//IPAM IPAS IP blocks
+export function ip_blocks(){
+    return fetchJson("ipam/ip_blocks");
+}
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }
