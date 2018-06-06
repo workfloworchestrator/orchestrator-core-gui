@@ -57,6 +57,10 @@
         background-color: $light-grey;
         border-left: 5px solid $blue;
       }
+      &.related-subscription-warning {
+        background-color: $light-orange;
+        border-left: 5px solid $blue;
+      }
     }
     thead {
       th {
