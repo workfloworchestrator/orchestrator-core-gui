@@ -305,10 +305,10 @@ export default class Subscriptions extends React.PureComponent {
                 </td>
             </tr>}
             {renderRelatedSubscriptions &&
-            <tr className="related-subscription">
+            <tr className={subscription.status !== "terminated" ? "related-subscription" : "related-subscription-warning"}>
                 <td></td>
                 <td colSpan="9">
-                    <em>{this.relatedSubscriptionMsg(subscription)}</em>
+                    <em>{subscription.status !== "terminated" ? this.relatedSubscriptionMsg(subscription) : I18n.t("subscriptions.terminatedWarning")}</em>
                 </td>
             </tr>}
             {renderRelatedSubscriptions && relatedSubscriptions.map(sub =>
