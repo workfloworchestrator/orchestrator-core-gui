@@ -269,6 +269,20 @@ export default class Subscriptions extends React.PureComponent {
         return <div><em>{I18n.t("subscriptions.no_found")}</em></div>;
     }
 
+    filterRelatedSubscriptions = subscriptions => {
+        // Apply the same filter to child and parent subscriptions
+        const filterAttributesStatus = this.state.filterAttributesStatus;
+
+        if (isEmpty(subscriptions)) {
+            return subscriptions;
+        }
+
+        return subscriptions.filter(subscription => {
+            const statusFilter = filterAttributesStatus.find(attr => attr.name === subscription.status);
+            return statusFilter ? statusFilter.selected : true;
+        });
+    };
+
     renderFetchingSpinner = () => <section className="fetching-related-subscriptions">
         <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
         <em>{I18n.t("subscriptions.fetchingRelatedSubscriptions")}</em>
@@ -284,7 +298,7 @@ export default class Subscriptions extends React.PureComponent {
         const isCollapsed = isCollapsible && collapsedSubscriptions.includes(subscriptionId);
         const icon = isCollapsed ? "minus" : "plus";
         const isServicePort = productServicePortTags.includes(subscription.product_tag);
-        const relatedSubscriptions = isServicePort ? subscription.parentSubscriptions : subscription.childSubscriptions;
+        const relatedSubscriptions = isServicePort ? this.filterRelatedSubscriptions(subscription.parentSubscriptions) : this.filterRelatedSubscriptions(subscription.childSubscriptions);
         const isLoading = isCollapsed && relatedSubscriptions === undefined;
         const hasNoRelatedSubscriptions = isCollapsed && relatedSubscriptions && relatedSubscriptions.length === 0;
         const renderRelatedSubscriptions = isCollapsed && relatedSubscriptions && relatedSubscriptions.length > 0;
@@ -318,6 +332,7 @@ export default class Subscriptions extends React.PureComponent {
 
     renderSingleSubscription = (subscription, isCollapsible, icon, className = "") => {
         const subscriptionId = subscription.subscription_id;
+
         return (
             <tr key={subscriptionId} className={className}
                 onClick={this.showSubscription(subscription)}>
