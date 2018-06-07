@@ -419,7 +419,7 @@ export default class UserInputForm extends React.Component {
                                             productId={productIdForSubscription}
                                 subscription={value}/>;
 
-            case "ip_blocks":
+            case "ip_prefix":
                const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
                const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
                return <IPBlocks ipBlocks={ipBlocks}
