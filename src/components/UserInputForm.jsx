@@ -405,6 +405,7 @@ export default class UserInputForm extends React.Component {
                                          organisations={organisations}
                                          onChange={this.changeNestedInput(name)}
                                          organisationId={organisationId}
+                                         minimum={userInput.minimum}
                                          maximum={userInput.maximum}
                                          disabled={userInput.readonly}
                                          isElan={userInput.elan}

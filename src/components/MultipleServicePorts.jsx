@@ -65,11 +65,9 @@ export default class MultipleServicePorts extends React.PureComponent {
 
     removeServicePort = index => e => {
         stop(e);
-        if (index > 1) {
-            const servicePorts = [...this.props.servicePorts];
-            servicePorts.splice(index, 1);
-            this.props.onChange(servicePorts);
-        }
+        const servicePorts = [...this.props.servicePorts];
+        servicePorts.splice(index, 1);
+        this.props.onChange(servicePorts);
     };
 
     reportVlanError = isError => this.props.reportError(isError);
@@ -92,7 +90,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
-    renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
+    renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, minimum, maximum,
                          disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
         // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
@@ -126,7 +124,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                                 placeholder={vlanPlaceholder}
                                 servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
-                    {(!isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
+                    {(!isElan && showDelete) && <i className={`fa fa-minus ${index < minimum ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}
                 </div>
             </div>
@@ -140,7 +138,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                            onChange={this.onChangeInternal("bandwidth", index)}
                            onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
-                    {(isElan && showDelete) && <i className={`fa fa-minus ${index < 2 ? "disabled" : "" }`}
+                    {(isElan && showDelete) && <i className={`fa fa-minus ${index < minimum ? "disabled" : "" }`}
                                                   onClick={this.removeServicePort(index)}></i>}
                 </div>
                 {bandwidthErrors[index] &&
@@ -151,13 +149,13 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
+        const {availableServicePorts, servicePorts, organisations, minimum, maximum, disabled, isElan} = this.props;
         const {bandwidthErrors, usedSSPDescriptions} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
-                    maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
+                    minimum, maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -168,8 +166,13 @@ MultipleServicePorts.propTypes = {
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
+    minimum: PropTypes.number,
     maximum: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
     reportError: PropTypes.func.isRequired
 };
+
+MultipleServicePorts.defaultProps = {
+    minimum: 2,
+}
