@@ -214,6 +214,15 @@ export default class UserInputForm extends React.Component {
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
+    initialPorts = minimum => {
+        const empty_port = {subscription_id: null, vlan: ""};
+        if (minimum === 1) {
+            return [empty_port];
+        } else {
+            return [empty_port, empty_port];
+        }
+    };
+
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
@@ -387,11 +396,8 @@ export default class UserInputForm extends React.Component {
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
                 const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts.filter(sp => productIds.includes(sp.product_id));
-                const ports = isEmpty(value) ? [{subscription_id: null, vlan: ""}, {
-                    subscription_id: null,
-                    vlan: ""
-                }] : value;
+                     servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
