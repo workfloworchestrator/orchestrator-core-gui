@@ -420,9 +420,9 @@ export default class UserInputForm extends React.Component {
                                 subscription={value}/>;
 
             case "ip_prefix":
-               const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
-               const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
-               return <IPBlocks ipBlocks={ipBlocks}
+               const procIpBlock = isEmpty(process) ? [{"prefix":""}] : process.current_state.ip_block;
+               const ipBlock = isEmpty(value) ? procIpBlock : value ;
+               return <IPBlocks ipBlock={ipBlock}
                            onChange={this.changeNestedInput(name)}
                         /> ;
 

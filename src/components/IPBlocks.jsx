@@ -16,62 +16,21 @@ export default class IPBlocks extends React.PureComponent {
         };
     };
 
-    validateInternal = (name, index) => e => {
-		let value;
-		const ipBlocks = [...this.props.ipBlocks];
-	 	value = e.target ? e.target.value : null;
-		ipBlocks[index] = {ipam_prefix_id: "", error_msg: "", display_value: value};
-		this.props.onChange(ipBlocks);
-    };
-
-	addIPBlock = () => {
-		this.setState({"showSelector": !this.state.showSelector});
-		const ipBlocks = [...this.props.ipBlocks];
-		ipBlocks.push({ipam_prefix_id:"", error_msg:"", display_value:""});
-		this.props.onChange(ipBlocks);
-	};
-
-	contentChanged = () => {
-		alert("constantChanged");
-	};
-
-	clickRemove = index => e => {
-		//stop(e);
-		const ipBlocks = [...this.props.ipBlocks];
-		ipBlocks.splice(index,1);
-		this.props.onChange(ipBlocks);
-		
-	};
-
-    renderIPBlock = (index, ipBlock) => {
-    	return (<section className="ip-block" key={index}>
+    render() {
+		const ipBlock = [...this.props.ipBlock];
+        return (<section className="ip-blocks">
             <div className="wrapper ipp-select" >
-                {index === 0 && <label>{I18n.t("ip_blocks.ip_block")}</label>}
-                <IPBlockInput 
-					ipBlock={ipBlock}
-					clickRemove={this.clickRemove(index)}
-					validateFunc={this.validateInternal("display_value", index)}
-					index = {index} />
-				<IPBlockSelector
+				<span>Selected prefix: {this.state.ipBlock && <span>{this.state.ipBlock.prefix}</span>}</span>
+			<IPBlockSelector
 					ipBlock={ipBlock}
 					visible={this.state.showSelector}
 					/>
-            </div>
-
-        </section>)
-    };
-
-    render() {
-		const ipBlocks = [...this.props.ipBlocks];
-        return (<section className="ip-blocks">
-            {ipBlocks.map((ipBlock, index) =>
-                this.renderIPBlock(index, ipBlock))}
-            <div className="add-ip-block"><i className="fa fa-plus" onClick={this.addIPBlock}></i></div>
-        </section>)
+			</div>
+		</section>)
     }
 }
 
 IPBlocks.propTypes = {
-	ipBlocks: PropTypes.array.isRequired,
+	ipBlock: PropTypes.object.isRequired,
 	onChange: PropTypes.func.isRequired
 };

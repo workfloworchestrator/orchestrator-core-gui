@@ -1,8 +1,102 @@
 @import "../stylesheets/vars.scss";
+@import "../stylesheets/mixins.scss";
 
-
+.ipspace_popup {
+    width: 100%;
+    background-color: black;
+}
 section.ipblock-selector {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 100%;
+    height: 80;
+
+
+    table.ip-blocks {
+        word-break: break-all;
+        overflow-y: none;
+        width: 100%;
+        td, th {
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid $light-grey;
+        }
+        thead {
+            display: block;
+        },
+        tbody {
+            display: block;
+            height: 380px;
+            overflow-y: auto;
+        },
+        thead {
+            width: 100%;
+            tr {
+                width: 100%;
+            }
+            th {
+                cursor: pointer;
+                padding: 5px 5px 10px 5px
+            }
+            th.id {
+                width: 50px;
+            }
+            th.prefix {
+                width: 100px;
+            }
+            th.description {
+                width: 300px;
+            }
+            th.state {
+                width: 100px;
+            }
+            th.version {
+                width: 100px;
+            }
+
+        }
+
+        tbody {
+            tr {
+                cursor: pointer;
+                width: 100%;
+                &:hover {
+                    background-color: $hover;
+                    td.actions i.fa-ellipsis-h {
+                        color: $blue;
+                    }
+                }
+            }
+            td {
+                word-break: break-word;
+                word-wrap: break-word;
+                padding: 15px 5px;
+            }
+            td.id {
+                width: 50px;
+            }
+            td.prefix {
+                width: 150px;
+            }
+            td.description {
+                width: 300px;
+            }
+            td.state {
+                width: 100px;
+            }
+            td.version {
+                width: 100px;
+            }
+            td.actions {
+                cursor: pointer;
+                text-align: right;
+                font-size: 18px;
+                position: relative;
+
+            }
+        }
     }
+}
+
