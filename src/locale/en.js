@@ -32,7 +32,9 @@ I18n.translations.en = {
         cache: "Cache",
         new_process: "New Process +"
     },
-
+    prefixes: {
+            select: "select"
+    },
     processes: {
         changes: "Changes",
         system: "System",
@@ -587,6 +589,13 @@ I18n.translations.en = {
             updated: "{{type}} {{name}} successfully updated",
             created: "{{type}} {{name}} successfully created.",
             delete: "{{type}} {{name}} successfully deleted."
+        },
+        ipBlocks: {
+            id: "id",
+            prefix: "prefix",
+            description: "description",
+            state: "state",
+            version: "version"
         },
         products: {
             searchPlaceHolder: "Search for Products",
