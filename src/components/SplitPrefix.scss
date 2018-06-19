@@ -1,0 +1,13 @@
+@import "../stylesheets/vars.scss";
+@import "../stylesheets/mixins.scss";
+
+
+section.split-prefix {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 80;
+
+}
+

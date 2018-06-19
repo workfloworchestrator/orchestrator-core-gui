@@ -306,6 +306,10 @@ export function ip_blocks(){
     return fetchJson("ipam/ip_blocks");
 }
 
+export function subnets(subnet, netmask, prefixlen){
+    return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
+}
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }

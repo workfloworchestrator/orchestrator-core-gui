@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import {ip_blocks, subscriptions} from "../api";
 
 import "react-select/dist/react-select.css";
-import "./IPBlockSelector.css";
+import "./IPPrefix.css";
 import I18n from "i18n-js";
 import {renderDateTime} from "../utils/Lookups";
 import {stop} from "../utils/Utils";
@@ -13,7 +13,7 @@ import {actionOptions} from "../validations/Prefixes";
 import DropDownActions from "../components/DropDownActions";
 
 
-export default class IPBlockSelector extends React.PureComponent {
+export default class IPPrefix extends React.PureComponent {
 
 
     constructor(props, context) {
@@ -30,7 +30,8 @@ export default class IPBlockSelector extends React.PureComponent {
             },
             sorted: {
                 name: "index",
-                descending: true}
+                descending: true},
+            selected_prefix_id: null
 		};
     }
 
@@ -114,22 +115,22 @@ export default class IPBlockSelector extends React.PureComponent {
         return sorted.descending ? filteredIpBlocks.reverse() : filteredIpBlocks;
     }
 
-    selectPrefix = (prefix, close) => () => {
-        this.state.ipBlock = prefix;
-        close();
+    selectPrefix = (prefix) => () => {
+        this.setState({selected_prefix_id: prefix['id'], isValid: true });
+        this.props.onChange(prefix);
 
     }
 
-    renderActions = (prefix, actions, close) => {
+    renderActions = (prefix, actions) => {
         const actionId = prefix.id;
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
-        const options = actionOptions(prefix, this.selectPrefix(prefix, close));
+        const options = actionOptions(prefix, this.selectPrefix(prefix));
         return <DropDownActions options={options} i18nPrefix="prefixes"/>;
     };
 
-    renderContent(ipBlocks, loading, close) {
+    renderContent(ipBlocks, loading) {
         const columns = ["id", "prefix", "description", "state", "version"];
         const {actions, sorted} = this.state;
         const {version, state} = {...this.state.filter};
@@ -173,7 +174,7 @@ export default class IPBlockSelector extends React.PureComponent {
                                 onClick={this.toggleActions(ipBlock, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
                                     {(ipBlock.state === 3) && <i className="fa fa-ellipsis-h"></i>}
-                                {this.renderActions(ipBlock, actions, close)}
+                                {this.renderActions(ipBlock, actions)}
                                 </td>
                     </tr>
                 )}
@@ -187,19 +188,15 @@ export default class IPBlockSelector extends React.PureComponent {
 
     render() {
         const {ipBlock, ipBlocks, visible} = this.props;
-        const {loading} = this.state;
+        const {loading, selected_prefix_id} = this.state;
         let filteredIpBlocks = this.filterAndSortBlocks();
-        return <section className="ipblock-selector"><div className="selected_value">{ipBlock['prefix']}
-                    </div> <PopUp modal position="top left"
-                                  name="ipBlock_id" className="ipspace_popup" trigger={this.renderButton}>
-            {close => (this.renderContent(filteredIpBlocks, loading, close))}</PopUp></section> ;
+        return <section className="ipblock-selector"><div className="selected_value">{selected_prefix_id}
+                    </div>{this.renderContent(filteredIpBlocks, loading)}</section> ;
     }
 
 }
 
-IPBlockSelector.propTypes = {
+IPPrefix.propTypes = {
     ipBlock: PropTypes.object,
-    iBlocks: PropTypes.array,
-	index: PropTypes.number,
-    visible: PropTypes.bool
+    onChange: PropTypes.func.isRequired
 };
