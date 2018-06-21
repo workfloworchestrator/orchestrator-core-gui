@@ -32,6 +32,7 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
+import NodeSelect from "./NodeSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -425,11 +426,18 @@ export default class UserInputForm extends React.Component {
                const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
                return <IPBlocks ipBlocks={ipBlocks}
                            onChange={this.changeNestedInput(name)}
-                        /> ;
+                        />;
 
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 
+            case "nodes_for_location_code_and_status":
+                const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
+                const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+                return <NodeSelect onChange={this.changeUniqueSelectInput(name, `${locationCodeNode}_${status}`)}
+                                   status={status}
+                                   locationCode={locationCodeNode}
+                                   node={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

@@ -277,8 +277,9 @@ I18n.translations.en = {
         workflowsEmptyPlaceholder: "First select a subscription...",
         modify_subscription: "Modify existing subscription",
         terminate_subscription: "Terminate existing subscription",
-        workflowSelect: "Modify workflow"
-
+        workflowSelect: "Modify workflow",
+        location_code: "Location code",
+        location_code_info: "Provide a valid location code"
     },
     process_state: {
         copy: "Copy to clipboard",
