@@ -33,6 +33,7 @@ import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
 import NodeSelect from "./NodeSelect";
+import NodePortSelect from "./NodePortSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -218,7 +219,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts} = this.props;
+        const {currentState, products, organisations, servicePorts, subscriptions} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -438,6 +439,9 @@ export default class UserInputForm extends React.Component {
                                    status={status}
                                    locationCode={locationCodeNode}
                                    node={value}/>;
+            case "corelink":
+                return <NodePortSelect onChange={this.changeUniqueSelectInput(name)}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -474,6 +478,7 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,

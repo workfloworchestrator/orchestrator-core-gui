@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {process, resumeProcess, subscriptionsByTags} from "../api";
+import {process, resumeProcess, subscriptions, subscriptionsByTags} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
@@ -26,6 +26,7 @@ export default class ProcessDetail extends React.PureComponent {
             selectedTab: "process",
             subscriptionProcesses: [],
             loaded: false,
+            subscriptions: [],
             stepUserInput: [],
             servicePorts: [],
             confirmationDialogOpen: false,
@@ -77,6 +78,9 @@ export default class ProcessDetail extends React.PureComponent {
             } else {
                 throw err;
             }
+        });
+        subscriptions().then(subscriptions => {
+            this.setState({subscriptions: subscriptions});
         });
     };
 
@@ -159,6 +163,7 @@ export default class ProcessDetail extends React.PureComponent {
     };
 
     renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, servicePorts) => {
+        const {subscriptions} = this.state;
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
@@ -178,6 +183,7 @@ export default class ProcessDetail extends React.PureComponent {
                                products={products}
                                organisations={organisations}
                                history={history}
+                               subscriptions={subscriptions}
                                servicePorts={servicePorts}
                                product={product}
                                currentState={process.current_state}
