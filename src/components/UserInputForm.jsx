@@ -32,7 +32,9 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
-
+import DatePickerCustom from "./DatePickerCustom";
+import DatePicker from "react-datepicker";
+import * as moment from "moment";
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
     "subscription_downgrade_confirmation", "label"];
@@ -131,6 +133,17 @@ export default class UserInputForm extends React.Component {
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
+
+
+    changeDateInput = name => dd => {
+        const value = moment(dd).format("YYYY-MM-DD");
+        this.changeUserInput(name, value);
+    }
+
+    clearDateInput = (name, target) => trigger => {
+        this.changeUserInput(name, target);
+    }
+
 
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
@@ -376,6 +389,9 @@ export default class UserInputForm extends React.Component {
                 </div>;
             case "accept":
             case "boolean":
+		if (isEmpty(value)) {
+		   this.changeUserInput(name, false);
+		}
                 return <CheckBox name={name} value={value || false}
                                  onChange={this.changeBooleanInput(name)}
                                  info={I18n.t(`process.${name}`)}/>;
@@ -421,7 +437,7 @@ export default class UserInputForm extends React.Component {
                                          product={value}
                                          disabled={userInput.readonly}/>;
             case "subscription":
-                const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
+                const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
                                             productId={productIdForSubscription}
                                 subscription={value}/>;
@@ -435,6 +451,14 @@ export default class UserInputForm extends React.Component {
 
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
+	    case "delivery_date":
+		const targetDate = moment().add(14, 'days');
+		return <DatePicker
+			dateFormat="YYYY-MM-DD"
+			selected={moment(value)}
+			onChange={this.changeDateInput(name)}
+                        customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
+			openToDate={targetDate} />;
 
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);

@@ -281,8 +281,14 @@ I18n.translations.en = {
         workflowsEmptyPlaceholder: "First select a subscription...",
         modify_subscription: "Modify existing subscription",
         terminate_subscription: "Terminate existing subscription",
-        workflowSelect: "Modify workflow"
-
+        workflowSelect: "Modify workflow",
+        internetpinnen: "Internetpinnen",
+        asn: "Autonomous System Number",
+        multicast: "Multicast",
+        customer_ip_prefix_subscription: "Subscription to a an IP prefix",
+        customer_ip_prefix_subscription_info: "Specify the IP Address space of the customer with an IP prefix subscription.",
+        delivery_date: "Delivery Date",
+        delivery_date_info: "When should the internet service be online?"
     },
     process_state: {
         copy: "Copy to clipboard",
