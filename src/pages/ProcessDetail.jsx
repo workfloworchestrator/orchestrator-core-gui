@@ -143,10 +143,22 @@ export default class ProcessDetail extends React.PureComponent {
         </section>
     };
 
+    addMissingDefaults = inputs => {
+        let list = [];
+        for (let input of inputs) {
+            if(input.type === 'boolean' && input.value === undefined) {
+                input.value = false;
+            }
+            list.push(input)
+        }
+        return list;
+    };
 
     validSubmit = stepUserInput => {
+        console.log(stepUserInput);
+
         const {process} = this.state;
-        resumeProcess(process.id, stepUserInput)
+        resumeProcess(process.id, this.addMissingDefaults(stepUserInput))
             .then(() => {
                 this.props.history.push(`/processes`);
                 setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
