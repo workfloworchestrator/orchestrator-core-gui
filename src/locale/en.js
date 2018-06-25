@@ -471,6 +471,8 @@ I18n.translations.en = {
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
         modify_modify_ip_range_workflow: "Modify IP Space",
+        modify_modify_ssp_replace: "Replace SSP with another SSP",
+        modify_modify_msp_replace: "Replace MSP with another MSP",
         product: {
             name: "Name",
             description: "Description",
