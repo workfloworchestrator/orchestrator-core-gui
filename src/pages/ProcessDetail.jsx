@@ -155,8 +155,6 @@ export default class ProcessDetail extends React.PureComponent {
     };
 
     validSubmit = stepUserInput => {
-        console.log(stepUserInput);
-
         const {process} = this.state;
         resumeProcess(process.id, this.addMissingDefaults(stepUserInput))
             .then(() => {
