@@ -134,7 +134,6 @@ export default class ProcessDetail extends React.PureComponent {
         }
     });
 
-
     renderActions = process => {
         const options = actionOptions(process, () => false, this.handleRetryProcess(process),
             this.handleDeleteProcess(process), this.handleAbortProcess(process))
@@ -146,7 +145,6 @@ export default class ProcessDetail extends React.PureComponent {
             </a>)}
         </section>
     };
-
 
     validSubmit = stepUserInput => {
         const {process} = this.state;
