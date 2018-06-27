@@ -452,7 +452,7 @@ export default class UserInputForm extends React.Component {
 
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
-	    case "delivery_date":
+	    case "date_picker":
 		const targetDate = moment().add(14, 'days');
 		return <DatePicker
 			dateFormat="YYYY-MM-DD"
