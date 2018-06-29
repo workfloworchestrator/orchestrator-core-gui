@@ -281,7 +281,9 @@ I18n.translations.en = {
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
-        ims_node_id_info: "Choose a node that has state PLANNED in IMS"
+        ims_node_id_info: "Choose a node that has state PLANNED in IMS",
+        node_ready_for_production: "Is the node ready for production?",
+        node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -388,7 +390,7 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
-        NODE: "Node",
+        node: "Node",
         IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
