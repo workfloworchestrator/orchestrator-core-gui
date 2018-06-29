@@ -279,7 +279,9 @@ I18n.translations.en = {
         terminate_subscription: "Terminate existing subscription",
         workflowSelect: "Modify workflow",
         location_code: "Location code",
-        location_code_info: "Provide a valid location code"
+        location_code_info: "Provide a valid location code",
+        ims_node_id: "Choose a node from IMS",
+        ims_node_id_info: "Choose a node that has state PLANNED in IMS"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -386,7 +388,8 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
-	IPAS: "IPAS",
+        NODE: "Node",
+        IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -822,6 +825,10 @@ I18n.translations.en = {
     },
     ip_blocks: {
 		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
+    },
+    NodeSelect: {
+        selectNode: "Select a node",
+        nodesLoading: "Loading nodes, please wait..."
     }
 
 };
