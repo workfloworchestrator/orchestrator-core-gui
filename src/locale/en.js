@@ -228,6 +228,8 @@ I18n.translations.en = {
         bandwidth_info: "Desired bandwidth in Mbit/s",
         current_bandwidth: "Bandwidth",
         current_bandwidth_info: "Current bandwidth in Mbit/s",
+        new_bandwidth: "New bandwidth",
+        new_bandwidth_info: "New bandwidth in Mbit/s",
         new_process: "Create new process / subscription",
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
@@ -461,6 +463,7 @@ I18n.translations.en = {
         modify_modify_msp_redundancy_upgrade: "Upgrade a MSP to a RMSP",
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
         modify_modify_ip_range_workflow: "Modify IP Space",
+        modify_modify_lightpath_msp_only_speed: "Modify Service Speed",
         modify_modify_ssp_replace: "Replace SSP with another SSP",
         modify_modify_msp_replace: "Replace MSP with another MSP",
         product: {
