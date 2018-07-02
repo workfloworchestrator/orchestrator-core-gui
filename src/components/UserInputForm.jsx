@@ -440,8 +440,9 @@ export default class UserInputForm extends React.Component {
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
-                return <NodePortSelect onChange={this.changeUniqueSelectInput(name)}
-                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}/>;
+                return <NodePortSelect onChange={this.changeUniqueSelectInput(name, name)}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'node')}
+                                       port={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

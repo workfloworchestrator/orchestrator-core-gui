@@ -32,7 +32,7 @@ export default class NodeSelect extends React.PureComponent {
 
         return (
             <div className="node-select">
-                <Select className="slect-node"
+                <Select className="select-node"
                         onChange={onChange}
                         options={nodes.map(x => { return {value: x.id, label: x.name}; })}
                         value={node}
