@@ -808,11 +808,11 @@ I18n.translations.en = {
         stay: "Stay",
         leave: "Leave"
     },
-    FreePortSelect: {
-        "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}",
-        "freePortsLoading": "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
-        "noFreePortsPlaceholder": "No free ports available",
-        "selectPort": "Select a port"
+    free_port_select: {
+        "no_free_ports_available": "No free ports with interface type {{interfaceType}} available at location {{location}}",
+        "free_ports_loading": "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
+        "no_free_ports_placeholder": "No free ports available",
+        "select_port": "Select a port"
     },
     service_ports: {
         servicePort: "Service Port",
@@ -835,11 +835,16 @@ I18n.translations.en = {
     ip_blocks: {
 		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
     },
-    NodeSelect: {
-        selectNode: "Select a node",
-        nodesLoading: "Loading nodes, please wait..."
+    node_select: {
+        select_node: "Select a node",
+        nodes_loading: "Loading nodes, please wait...",
+        no_nodes_placeholder: "No nodes available",
+        no_nodes_message: "No nodes available with status {{status}} on location: {{location}}"
+    },
+    node_port: {
+        select_node_first: "First select a node",
+        select_port: "Select a port"
     }
-
 };
 
 export default I18n.translations.en;
