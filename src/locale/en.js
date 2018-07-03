@@ -283,7 +283,9 @@ I18n.translations.en = {
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED in IMS",
         node_ready_for_production: "Is the node ready for production?",
-        node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)"
+        node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
+        confirm_core_link: "Is the node's corelink configured ok?",
+        confirm_core_link_info: "Confirm that the corelink is configured ok"
     },
     process_state: {
         copy: "Copy to clipboard",
