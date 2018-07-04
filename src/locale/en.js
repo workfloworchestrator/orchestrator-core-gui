@@ -287,7 +287,11 @@ I18n.translations.en = {
         node_ready_for_production: "Is the node ready for production?",
         node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
         confirm_core_link: "Is the node's corelink configured ok?",
-        confirm_core_link_info: "Confirm that the corelink is configured ok"
+        confirm_core_link_info: "Confirm that the corelink is configured ok",
+        node_port_1: "First node and port",
+        node_port_1_info: "Choose a node and port that you want to use to create the first corelink",
+        node_port_2: "Second node and port",
+        node_port_2_info: "Choose a node and port that you want to use to create the second corelink"
     },
     process_state: {
         copy: "Copy to clipboard",
