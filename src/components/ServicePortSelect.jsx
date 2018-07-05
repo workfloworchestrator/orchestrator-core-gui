@@ -12,7 +12,6 @@ export default class ServicePortSelect extends React.PureComponent {
         return `${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
     };
 
-
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
         return <Select onChange={onChange}

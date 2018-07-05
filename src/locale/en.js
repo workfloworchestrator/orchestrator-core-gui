@@ -279,8 +279,19 @@ I18n.translations.en = {
         workflowsEmptyPlaceholder: "First select a subscription...",
         modify_subscription: "Modify existing subscription",
         terminate_subscription: "Terminate existing subscription",
-        workflowSelect: "Modify workflow"
-
+        workflowSelect: "Modify workflow",
+        location_code: "Location code",
+        location_code_info: "Provide a valid location code",
+        ims_node_id: "Choose a node from IMS",
+        ims_node_id_info: "Choose a node that has state PLANNED in IMS",
+        node_ready_for_production: "Is the node ready for production?",
+        node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
+        confirm_core_link: "Is the node's corelink configured ok?",
+        confirm_core_link_info: "Confirm that the corelink is configured ok",
+        node_port_1: "First node and port",
+        node_port_1_info: "Choose a node and port that you want to use to create the first corelink",
+        node_port_2: "Second node and port",
+        node_port_2_info: "Choose a node and port that you want to use to create the second corelink"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -387,7 +398,8 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
-	IPAS: "IPAS",
+        node: "Node",
+        IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -800,11 +812,11 @@ I18n.translations.en = {
         stay: "Stay",
         leave: "Leave"
     },
-    FreePortSelect: {
-        "noFreePortsAvailable": "No free ports with interface type {{interfaceType}} available at location {{location}}",
-        "freePortsLoading": "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
-        "noFreePortsPlaceholder": "No free ports available",
-        "selectPort": "Select a port"
+    free_port_select: {
+        "no_free_ports_available": "No free ports with interface type {{interfaceType}} available at location {{location}}",
+        "free_ports_loading": "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
+        "no_free_ports_placeholder": "No free ports available",
+        "select_port": "Select a port"
     },
     service_ports: {
         servicePort: "Service Port",
@@ -826,8 +838,17 @@ I18n.translations.en = {
     },
     ip_blocks: {
 		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
+    },
+    node_select: {
+        select_node: "Select a node",
+        nodes_loading: "Loading nodes, please wait...",
+        no_nodes_placeholder: "No nodes available",
+        no_nodes_message: "No nodes available with status {{status}} on location: {{location}}"
+    },
+    node_port: {
+        select_node_first: "First select a node",
+        select_port: "Select a port"
     }
-
 };
 
 export default I18n.translations.en;
