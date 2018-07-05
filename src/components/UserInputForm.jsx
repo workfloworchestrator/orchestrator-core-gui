@@ -32,6 +32,8 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
+import NodeSelect from "./NodeSelect";
+import NodePortSelect from "./NodePortSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -217,7 +219,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts} = this.props;
+        const {currentState, products, organisations, servicePorts, subscriptions} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -402,6 +404,7 @@ export default class UserInputForm extends React.Component {
                                          maximum={userInput.maximum}
                                          disabled={userInput.readonly}
                                          isElan={userInput.elan}
+                                         mspOnly={userInput.mspOnly}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
             case "new_ssp_workflow":
@@ -424,11 +427,22 @@ export default class UserInputForm extends React.Component {
                const ipBlock = isEmpty(value) ? procIpBlock : value ;
                return <IPBlocks ipBlock={ipBlock}
                            onChange={this.changeNestedInput(name)}
-                        /> ;
+                        />;
 
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 
+            case "nodes_for_location_code_and_status":
+                const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
+                const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+                return <NodeSelect onChange={this.changeUniqueSelectInput(name, `${locationCodeNode}_${status}`)}
+                                   status={status}
+                                   locationCode={locationCodeNode}
+                                   node={value}/>;
+            case "corelink":
+                return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'node')}
+                                       port={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -465,6 +479,7 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,

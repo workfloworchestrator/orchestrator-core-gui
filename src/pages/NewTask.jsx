@@ -70,6 +70,7 @@ export default class NewTask extends React.Component {
                                        servicePorts={[]}
                                        history={history}
                                        organisations={[]}
+                                       subscriptions={[]}
                                        products={products}
                                        locationCodes={[]}
                                        product={({})}

@@ -178,6 +178,14 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
 
+export function portsForNodeSubscriptionId(nodeId) {
+    return fetchJson(`ims/ports_by_node_subscription_id/${nodeId}`)
+}
+
+export function nodesForLocationCodeAndStatus(locationCode, status) {
+    return fetchJson(`ims/nodes/${locationCode}/${status}`)
+}
+
 export function usedVlans(subscriptionId) {
     return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`)
 }
