@@ -395,6 +395,7 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IP: "IP",
 	IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
