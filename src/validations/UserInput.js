@@ -68,7 +68,7 @@ export function doValidateUserInput(userInput, val, errors) {
             const localpart = value.replace(ogf_network, '').replace(label);
             errors[name] = !(ogf_network.test(value) && localpart.includes(":") && label.test(value));
         }
-    } else if (type === "label") {
+    } else if (type === "label" || type === "ims_changes" ) {
         errors[name] = false;
     }
     else {

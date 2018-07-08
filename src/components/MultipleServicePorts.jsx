@@ -93,12 +93,12 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, maximum,
-                         disabled, usedSSPDescriptions, bandwidthErrors, isElan) => {
+                         disabled, usedSSPDescriptions, bandwidthErrors, isElan, mspOnly) => {
         // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
         inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "SSP");
-        if (maximum > 2) { //ELAN
+        if (maximum > 2 || mspOnly) { // >2 == ELAN
             inSelect = inSelect.filter(port => port.tag === "MSP");
         }
         const showDelete = maximum > 2 && !disabled;
@@ -151,13 +151,13 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan} = this.props;
+        const {availableServicePorts, servicePorts, organisations, maximum, disabled, isElan, mspOnly} = this.props;
         const {bandwidthErrors, usedSSPDescriptions} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
-                    maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan))}
+                    maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan, mspOnly))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -171,5 +171,6 @@ MultipleServicePorts.propTypes = {
     maximum: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
+    mspOnly: PropTypes.bool,
     reportError: PropTypes.func.isRequired
 };
