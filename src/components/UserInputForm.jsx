@@ -433,7 +433,7 @@ export default class UserInputForm extends React.Component {
                const parts = ip_prefix['prefix'].split("/");
                const subnet = parts[0];
                const netmask = parts[1];
-               const prefixlen = parseInt(netmask) + 1;
+               const prefixlen = parseInt(netmask);
                return <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={prefixlen}
                            onChange={this.changeNestedInput(name)}
                         /> ;
