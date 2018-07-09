@@ -90,14 +90,17 @@ export default class MultipleServicePorts extends React.PureComponent {
         }
     };
 
-    renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, minimum, maximum,
-                         disabled, usedSSPDescriptions, bandwidthErrors, isElan, mspOnly) => {
+    renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, organisationId, minimum, maximum,
+                         disabled, usedSSPDescriptions, bandwidthErrors, isElan, organisationPortsOnly, mspOnly) => {
         // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
         inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "SSP");
         if (maximum > 2 || mspOnly) { // >2 == ELAN
             inSelect = inSelect.filter(port => port.tag === "MSP");
+        }
+        if (organisationPortsOnly) {
+            inSelect = inSelect.filter(port => port.customer_id === organisationId);
         }
         const showDelete = maximum > 2 && !disabled;
         const vlanPlaceholder = servicePort.tag === "SSP" ? I18n.t("vlan.ssp") :
@@ -149,13 +152,13 @@ export default class MultipleServicePorts extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, minimum, maximum, disabled, isElan, mspOnly} = this.props;
+        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, mspOnly} = this.props;
         const {bandwidthErrors, usedSSPDescriptions} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
-                this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations,
-                    minimum, maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan, mspOnly))}
+                this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations, organisationId,
+                    minimum, maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan, organisationPortsOnly, mspOnly))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -166,10 +169,12 @@ MultipleServicePorts.propTypes = {
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
+    organisationId: PropTypes.string,
     minimum: PropTypes.number,
     maximum: PropTypes.number.isRequired,
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
+    organisationPortsOnly: PropTypes.bool,
     mspOnly: PropTypes.bool,
     reportError: PropTypes.func.isRequired
 };

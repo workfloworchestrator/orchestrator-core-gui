@@ -425,6 +425,7 @@ export default class UserInputForm extends React.Component {
                                          maximum={userInput.maximum}
                                          disabled={userInput.readonly}
                                          isElan={userInput.elan}
+					 organisationPortsOnly={userInput.organisationPortsOnly}
                                          mspOnly={userInput.mspOnly}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
