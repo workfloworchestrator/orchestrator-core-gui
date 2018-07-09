@@ -35,6 +35,9 @@ import ImsChanges from "./ImsChanges";
 import DatePickerCustom from "./DatePickerCustom";
 import DatePicker from "react-datepicker";
 import * as moment from "moment";
+import NodeSelect from "./NodeSelect";
+import NodePortSelect from "./NodePortSelect";
+
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
     "subscription_downgrade_confirmation", "label"];
@@ -239,7 +242,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts} = this.props;
+        const {currentState, products, organisations, servicePorts, subscriptions} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -389,9 +392,6 @@ export default class UserInputForm extends React.Component {
                 </div>;
             case "accept":
             case "boolean":
-		if (isEmpty(value)) {
-		   this.changeUserInput(name, false);
-		}
                 return <CheckBox name={name} value={value || false}
                                  onChange={this.changeBooleanInput(name)}
                                  info={I18n.t(`process.${name}`)}/>;
@@ -449,7 +449,7 @@ export default class UserInputForm extends React.Component {
                const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
                return <IPBlocks ipBlocks={ipBlocks}
                            onChange={this.changeNestedInput(name)}
-                        /> ;
+                        />;
 
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
@@ -462,6 +462,17 @@ export default class UserInputForm extends React.Component {
                         customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
 			openToDate={targetDate} />;
 
+            case "nodes_for_location_code_and_status":
+                const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
+                const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+                return <NodeSelect onChange={this.changeUniqueSelectInput(name, `${locationCodeNode}_${status}`)}
+                                   status={status}
+                                   locationCode={locationCodeNode}
+                                   node={value}/>;
+            case "corelink":
+                return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'node')}
+                                       port={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
@@ -498,6 +509,7 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
+    subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,

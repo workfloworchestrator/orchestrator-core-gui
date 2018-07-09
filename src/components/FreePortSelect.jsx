@@ -28,9 +28,9 @@ export default class FreePortSelect extends React.PureComponent {
         const {freePorts, loading} = this.state;
         const {onChange, freePort, disabled, locationCode, interfaceType} = this.props;
         const noFreePortsAvailable = !loading && freePorts.length === 0;
-        const placeholder = loading ? I18n.t("FreePortSelect.freePortsLoading", {interfaceType, location: locationCode})
-            : noFreePortsAvailable ? I18n.t("FreePortSelect.noFreePortsPlaceholder") :
-                I18n.t("FreePortSelect.selectPort");
+        const placeholder = loading ? I18n.t("free_port_select.free_ports_loading", {interfaceType, location: locationCode})
+            : noFreePortsAvailable ? I18n.t("free_port_select.no_free_ports_placeholder") :
+                I18n.t("free_port_select.select_port");
 
         return (
             <div className="free-port-select">
@@ -43,7 +43,7 @@ export default class FreePortSelect extends React.PureComponent {
                         placeholder={placeholder}/>
                 {noFreePortsAvailable &&
                  <em className="msg warn">
-                     {I18n.t("FreePortSelect.noFreePortsAvailable", {interfaceType, location: locationCode})}
+                     {I18n.t("free_port_select.no_free_ports_available", {interfaceType, location: locationCode})}
                  </em>}
             </div>
         );
