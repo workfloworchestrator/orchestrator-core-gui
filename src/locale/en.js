@@ -290,7 +290,7 @@ I18n.translations.en = {
         customer_ip_prefix_subscription: "Subscription to a an IP prefix",
         customer_ip_prefix_subscription_info: "Specify the IP Address space of the customer with an IP prefix subscription.",
         delivery_date: "Delivery Date",
-        delivery_date_info: "When should the internet service be online?"
+        delivery_date_info: "When should the internet service be online?",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
