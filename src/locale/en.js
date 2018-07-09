@@ -237,6 +237,8 @@ I18n.translations.en = {
         configuration_ready_info: "All of the work entailed is successfully configured",
         network_changes_ready: "NMS changes ready",
         network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS",
+        ipam_description: "Description",
+        ipam_description_info: "Description field from IPAM",
         ims_changes: "Updated in IMS",
         ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
@@ -247,6 +249,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
+        split_prefix: "Split IP Prefix",
+        split_prefix_info: "Select the subnet from all subnets of the given prefix length",
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",

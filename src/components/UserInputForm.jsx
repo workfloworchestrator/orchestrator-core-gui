@@ -19,7 +19,8 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
-import IPBlocks from "./IPBlocks"
+import IPPrefix from "./IPPrefix";
+import SplitPrefix from "./SplitPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -423,12 +424,24 @@ export default class UserInputForm extends React.Component {
                                 subscription={value}/>;
 
             case "ip_prefix":
-               const procIpBlock = isEmpty(process) ? [{"prefix":""}] : process.current_state.ip_block;
-               const ipBlock = isEmpty(value) ? procIpBlock : value ;
-               return <IPBlocks ipBlock={ipBlock}
+               const procIpBlock = isEmpty(process.current_state.ip_blocks) ?
+                   [{"prefix":""}] : process.current_state.ip_block;
+               const ipBlock = isEmpty(value) ? procIpBlock : value;
+               return <IPPrefix ipBlock={ipBlock}
+                           onChange={this.changeNestedInput(name)}
+                        /> ;
+            case "split_prefix":
+               const ip_prefix = isEmpty(process.current_state.ip_prefix) ?
+                   [{"prefix":""}] : process.current_state.ip_prefix;
+               const parts = ip_prefix['prefix'].split("/");
+               const subnet = parts[0];
+               const netmask = parts[1];
+               const prefixlen = parseInt(netmask);
+               return <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={prefixlen}
                            onChange={this.changeNestedInput(name)}
                         />;
 
+                        /> ;
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 

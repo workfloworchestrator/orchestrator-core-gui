@@ -57,8 +57,8 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !/^\d{5}$/.test(value)
     } else if (type === "new_ssp_workflow") {
         errors[name] = false;
-    } else if (type === "ip_blocks") {
-		errors[name] = isEmpty(value) || value.some(block => !validateIPRange(block.display_value));
+    } else if (type === "ip_prefix") {
+		errors[name] = isEmpty(value);
 	} else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;
@@ -68,7 +68,7 @@ export function doValidateUserInput(userInput, val, errors) {
             const localpart = value.replace(ogf_network, '').replace(label);
             errors[name] = !(ogf_network.test(value) && localpart.includes(":") && label.test(value));
         }
-    } else if (type === "label") {
+    } else if (type === "label" || type === "ims_changes" ) {
         errors[name] = false;
     }
     else {

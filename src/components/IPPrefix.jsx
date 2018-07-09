@@ -2,10 +2,10 @@ import React from "react";
 import PopUp from "reactjs-popup";
 import PropTypes from "prop-types";
 
-import {ip_blocks, subscriptions} from "../api";
+import {ip_blocks, prefix_filters, subscriptions} from "../api";
 
 import "react-select/dist/react-select.css";
-import "./IPBlockSelector.css";
+import "./IPPrefix.css";
 import I18n from "i18n-js";
 import {renderDateTime} from "../utils/Lookups";
 import {stop} from "../utils/Utils";
@@ -13,7 +13,7 @@ import {actionOptions} from "../validations/Prefixes";
 import DropDownActions from "../components/DropDownActions";
 
 
-export default class IPBlockSelector extends React.PureComponent {
+export default class IPPrefix extends React.PureComponent {
 
 
     constructor(props, context) {
@@ -24,20 +24,27 @@ export default class IPBlockSelector extends React.PureComponent {
             ipBlocks: [],
             filteredIpBlocks: [],
             loading:true,
+            filter_prefixes: [],
             filter: {
                 version: 4,
-                state: [1,2,3]
+                state: [1,2,3],
+                prefix: {id: 0, prefix: "all", version: 0},
             },
             sorted: {
                 name: "index",
-                descending: true}
+                descending: true},
+            selected_prefix_id: null
 		};
     }
 
     componentDidMount(){
+        prefix_filters().then(result=> {
+            this.setState({filter_prefixes: result, filteredIpBlocks: this.filterAndSortBlocks()})
+        });
         ip_blocks().then(result =>{
             this.setState({ipBlocks:result, loading: false});
         });
+
     }
 
     sort = name => e => {
@@ -104,34 +111,36 @@ export default class IPBlockSelector extends React.PureComponent {
         const {filter, sorted, ipBlocks} = this.state;
         let filteredIpBlocks = ipBlocks;
         Object.keys(filter).map((key,index) => {
-            if (key=='state'){
-                filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]))
+            if (key=='state') {
+                //filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]))
+            } else if (key=='prefix' && !(filter['prefix']['id']==0)){
+                filteredIpBlocks = filteredIpBlocks.filter(i => i['parent']==filter['prefix']['id'])
             } else {
-                filteredIpBlocks = filteredIpBlocks.filter(i => i[key] == filter[key])
+                //filteredIpBlocks = filteredIpBlocks.filter(i => i[key] == filter[key])
             }
         });
         filteredIpBlocks.sort(this.sortBy(sorted.name));
         return sorted.descending ? filteredIpBlocks.reverse() : filteredIpBlocks;
     }
 
-    selectPrefix = (prefix, close) => () => {
-        this.state.ipBlock = prefix;
-        close();
+    selectPrefix = (prefix) => () => {
+        this.setState({selected_prefix_id: prefix['id'], isValid: true });
+        this.props.onChange(prefix);
 
     }
 
-    renderActions = (prefix, actions, close) => {
+    renderActions = (prefix, actions) => {
         const actionId = prefix.id;
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
-        const options = actionOptions(prefix, this.selectPrefix(prefix, close));
+        const options = actionOptions(prefix, this.selectPrefix(prefix));
         return <DropDownActions options={options} i18nPrefix="prefixes"/>;
     };
 
-    renderContent(ipBlocks, loading, close) {
+    renderContent(ipBlocks, loading) {
         const columns = ["id", "prefix", "description", "state", "version"];
-        const {actions, sorted} = this.state;
+        const {actions, sorted, filter_prefixes} = this.state;
         const {version, state} = {...this.state.filter};
         const th = index => {
             const name = columns[index];
@@ -155,6 +164,11 @@ export default class IPBlockSelector extends React.PureComponent {
                     <span><input type="radio" name="version" onClick={this.filterVersion}
                                  value="6" checked={version===6}></input> 6 </span>
                 </div>
+                <div><span>Root filter</span>
+                    <span>
+                        <select options={filter_prefixes.map(fp => ({value: fp['id'], label: fp['prefix']}))} />
+                    </span>
+                </div>
             <table className="ip-blocks">
                 <thead>
                 <tr>{columns.map((column, index) => th(index))}
@@ -173,7 +187,7 @@ export default class IPBlockSelector extends React.PureComponent {
                                 onClick={this.toggleActions(ipBlock, actions)}
                                 tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
                                     {(ipBlock.state === 3) && <i className="fa fa-ellipsis-h"></i>}
-                                {this.renderActions(ipBlock, actions, close)}
+                                {this.renderActions(ipBlock, actions)}
                                 </td>
                     </tr>
                 )}
@@ -187,19 +201,16 @@ export default class IPBlockSelector extends React.PureComponent {
 
     render() {
         const {ipBlock, ipBlocks, visible} = this.props;
-        const {loading} = this.state;
+        const {loading, selected_prefix_id} = this.state;
         let filteredIpBlocks = this.filterAndSortBlocks();
-        return <section className="ipblock-selector"><div className="selected_value">{ipBlock['prefix']}
-                    </div> <PopUp modal position="top left"
-                                  name="ipBlock_id" className="ipspace_popup" trigger={this.renderButton}>
-            {close => (this.renderContent(filteredIpBlocks, loading, close))}</PopUp></section> ;
+        return <section className="ipblock-selector"><div className="selected_value">{selected_prefix_id}
+                    </div>{this.renderContent(filteredIpBlocks, loading)}</section> ;
     }
 
 }
 
-IPBlockSelector.propTypes = {
+IPPrefix.propTypes = {
     ipBlock: PropTypes.object,
-    iBlocks: PropTypes.array,
-	index: PropTypes.number,
-    visible: PropTypes.bool
+    onChange: PropTypes.func.isRequired,
+    filterPrefixes: PropTypes.array.isRequired
 };
