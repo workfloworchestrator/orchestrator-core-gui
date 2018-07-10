@@ -289,8 +289,6 @@ I18n.translations.en = {
         multicast: "Multicast",
         customer_ip_prefix_subscription: "Subscription to a an IP prefix",
         customer_ip_prefix_subscription_info: "Specify the IP Address space of the customer with an IP prefix subscription.",
-        delivery_date: "Delivery Date",
-        delivery_date_info: "When should the internet service be online?",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
@@ -860,6 +858,14 @@ I18n.translations.en = {
     node_port: {
         select_node_first: "First select a node",
         select_port: "Select a port"
+    },
+    ipam: {
+      prefix: "IP Prefix",
+      afi: "IP Family",
+      state: "State",
+      ipaddress: "IP Address",
+      fqdn: "FQDN",
+      assigned_address_id: "Assigned IP Address ID"
     }
 };
 
