@@ -310,8 +310,8 @@ export function startModificationSubscription(subscriptionId, workflow, dienstaf
 }
 
 //IPAM IP Prefixes
-export function ip_blocks(){
-    return fetchJson("ipam/ip_blocks");
+export function ip_blocks(parentPrefix){
+    return fetchJson("ipam/ip_blocks/" + parentPrefix);
 }
 
 //IPAM the user-defined filters as configured in the database for the IP PREFIX product

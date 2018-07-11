@@ -1,18 +1,11 @@
 import React from "react";
-import PopUp from "reactjs-popup";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import {subnets, subscriptions} from "../api";
+import {subnets} from "../api";
 
 import "react-select/dist/react-select.css";
 import "./SplitPrefix.css";
-import I18n from "i18n-js";
-import {renderDateTime} from "../utils/Lookups";
-import {stop} from "../utils/Utils";
-import {actionOptions} from "../validations/Prefixes";
-import DropDownActions from "../components/DropDownActions";
-import ServicePortSelect from "./ServicePortSelect";
 
 
 export default class SplitPrefix extends React.PureComponent {

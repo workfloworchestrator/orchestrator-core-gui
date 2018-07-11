@@ -1,13 +1,12 @@
 import React from "react";
-import PopUp from "reactjs-popup";
+import Select from "react-select";
 import PropTypes from "prop-types";
 
-import {ip_blocks, prefix_filters, subscriptions} from "../api";
+import {ip_blocks, prefix_filters} from "../api";
 
 import "react-select/dist/react-select.css";
 import "./IPPrefix.css";
 import I18n from "i18n-js";
-import {renderDateTime} from "../utils/Lookups";
 import {stop} from "../utils/Utils";
 import {actionOptions} from "../validations/Prefixes";
 import DropDownActions from "../components/DropDownActions";
@@ -28,20 +27,22 @@ export default class IPPrefix extends React.PureComponent {
             filter: {
                 version: 4,
                 state: [1,2,3],
-                prefix: {id: 0, prefix: "all", version: 0},
+                prefix: {'id': 0}
             },
             sorted: {
                 name: "index",
-                descending: true},
+                descending: false},
             selected_prefix_id: null
 		};
     }
 
     componentDidMount(){
         prefix_filters().then(result=> {
-            this.setState({filter_prefixes: result, filteredIpBlocks: this.filterAndSortBlocks()})
+            let {filter} = this.state;
+            filter['prefix'] = result[0];
+            this.setState({filter_prefixes: result, filter: filter, filteredIpBlocks: this.filterAndSortBlocks()})
         });
-        ip_blocks().then(result =>{
+        ip_blocks(1).then(result =>{
             this.setState({ipBlocks:result, loading: false});
         });
 
@@ -65,7 +66,8 @@ export default class IPPrefix extends React.PureComponent {
         const aSafe = aSafe === 0 ? aSafe : a[name] || "";
         const bSafe = bSafe === 0 ? bSafe : b[name] || "";
         try {
-            return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
+            return typeof aSafe === "string" && typeof bSafe === "string"
+                ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
         } catch(e){
             console.log(e);
         }
@@ -107,16 +109,27 @@ export default class IPPrefix extends React.PureComponent {
 
     };
 
+    filterParentPrefix = e => {
+        const parentPrefix = parseInt(e.value);
+        let {filter, filter_prefixes} = this.state;
+        let the_prefix = {};
+        filter_prefixes.forEach(prefix => the_prefix = prefix['id']==parentPrefix ? prefix : the_prefix);
+        filter['prefix'] = the_prefix;
+        ip_blocks(parentPrefix).then(result =>{
+            this.setState({ipBlocks:result, filteredIpBlocks: this.filterAndSortBlocks(), loading: false, filter: filter});
+        });
+    }
+
     filterAndSortBlocks() {
         const {filter, sorted, ipBlocks} = this.state;
         let filteredIpBlocks = ipBlocks;
         Object.keys(filter).map((key,index) => {
             if (key=='state') {
-                //filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]))
-            } else if (key=='prefix' && !(filter['prefix']['id']==0)){
-                filteredIpBlocks = filteredIpBlocks.filter(i => i['parent']==filter['prefix']['id'])
-            } else {
-                //filteredIpBlocks = filteredIpBlocks.filter(i => i[key] == filter[key])
+                filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]))
+            } else if (key==='prefix' && !(filter['prefix']['id']===0)) {
+                filteredIpBlocks = filteredIpBlocks.filter(i => i['parent'] == filter['prefix']['id'])
+            } else if (key !== 'prefix') {
+                filteredIpBlocks = filteredIpBlocks.filter(i => i[key] == filter[key])
             }
         });
         filteredIpBlocks.sort(this.sortBy(sorted.name));
@@ -139,9 +152,11 @@ export default class IPPrefix extends React.PureComponent {
     };
 
     renderContent(ipBlocks, loading) {
-        const columns = ["id", "prefix", "description", "state", "version"];
+        const columns = ["id"
+            , "prefix", "description", "state", "version"];
         const {actions, sorted, filter_prefixes} = this.state;
-        const {version, state} = {...this.state.filter};
+        const {version, state, prefix} = {...this.state.filter};
+        let parentPrefix = prefix['id'];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -151,22 +166,24 @@ export default class IPPrefix extends React.PureComponent {
         return (
             <div>
                 <div><span>State:</span>
-                    <span><input type="checkbox" name="state" onClick={this.filterState}
+                    <span><input type="checkbox" name="state" onChange={this.filterState}
                                  value="1" checked={state.includes(1)}></input> 1 (Permanent toegewezen) </span>
-                    <span><input type="checkbox" name="state" onClick={this.filterState}
+                    <span><input type="checkbox" name="state" onChange={this.filterState}
                                  value="2" checked={state.includes(2)}></input> 2 (Gereserveerd) </span>
-                    <span><input type="checkbox" name="state" onClick={this.filterState}
+                    <span><input type="checkbox" name="state" onChange={this.filterState}
                                  value="3" checked={state.includes(3)}></input> 3 (Vrij) </span>
                 </div>
                 <div><span>IP Version:</span>
-                    <span><input type="radio" name="version" onClick={this.filterVersion}
+                    <span><input type="radio" name="version" onChange={this.filterVersion}
                                  value="4" checked={version===4}></input> 4 </span>
-                    <span><input type="radio" name="version" onClick={this.filterVersion}
+                    <span><input type="radio" name="version" onChange={this.filterVersion}
                                  value="6" checked={version===6}></input> 6 </span>
                 </div>
                 <div><span>Root filter</span>
                     <span>
-                        <select options={filter_prefixes.map(fp => ({value: fp['id'], label: fp['prefix']}))} />
+                        <Select
+                            options={filter_prefixes.map(fp => ({value: fp['id'], label: fp['prefix']}))}
+                            onChange={this.filterParentPrefix} value={parentPrefix} />
                     </span>
                 </div>
             <table className="ip-blocks">
@@ -177,7 +194,7 @@ export default class IPPrefix extends React.PureComponent {
                 {ipBlocks.length > 0 &&
                 <tbody>
                 {ipBlocks.map((ipBlock, index) =>
-                    <tr key="${ipBlock['id']}_${index}">
+                    <tr key={`${ipBlock['id']}_${index}`}>
                         {columns.map(column =>
                             <td data-label={column} className={column}>
                                 {ipBlock[column]}
@@ -211,6 +228,5 @@ export default class IPPrefix extends React.PureComponent {
 
 IPPrefix.propTypes = {
     ipBlock: PropTypes.object,
-    onChange: PropTypes.func.isRequired,
-    filterPrefixes: PropTypes.array.isRequired
+    onChange: PropTypes.func.isRequired
 };
