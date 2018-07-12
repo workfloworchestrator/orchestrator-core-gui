@@ -16,12 +16,22 @@ section.ipblock-selector {
     table.ip-blocks {
         word-break: break-all;
         overflow-y: none;
-        width: 100%;
         td, th {
             text-align: left;
         }
         tr {
             border-bottom: 1px solid $light-grey;
+        }
+        tr.prefixrow_1 {
+            cursor: default;
+            background-color: rgba(100,0,0,0.25)
+        }
+        tr.prefixrow_3 {
+            cursor: pointer;
+            background-color: rgba(0,100,0,0.25)
+        }
+        tr.prefixrow_selected {
+            background-color: rgba(0,0,100,0.25)
         }
         thead {
             display: block;
@@ -32,10 +42,6 @@ section.ipblock-selector {
             overflow-y: auto;
         }
         thead {
-            width: 100%;
-            tr {
-                width: 100%;
-            }
             th {
                 cursor: pointer;
                 padding: 5px 5px 10px 5px
@@ -59,9 +65,8 @@ section.ipblock-selector {
         }
 
         tbody {
-            tr {
-                cursor: pointer;
-                width: 100%;
+            tr {width: 700px;}
+            tr.prefixrow_3 {
                 &:hover {
                     background-color: $hover;
                     td.actions i.fa-ellipsis-h {

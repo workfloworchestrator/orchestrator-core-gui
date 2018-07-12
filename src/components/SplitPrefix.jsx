@@ -53,7 +53,7 @@ export default class SplitPrefix extends React.PureComponent {
         const {subnet, netmask, prefixlen} = this.props;
         const {desired_prefixlen, selected_subnet} = this.state;
         const prefixlengths = [...Array(32-prefixlen+1).keys()].map(x => prefixlen + x );
-        return <section>{subnet} {netmask} {prefixlen}
+        return <section><h3>Selected prefix: {subnet} {netmask}</h3>
             <div>Desired netmask of the new subnet:</div>
             <Select onChange={this.changePrefixLength}
                 options={prefixlengths.map(pl => ({value: pl, label: pl}))}

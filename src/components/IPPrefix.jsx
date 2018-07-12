@@ -25,7 +25,6 @@ export default class IPPrefix extends React.PureComponent {
             loading:true,
             filter_prefixes: [],
             filter: {
-                version: 4,
                 state: [1,2,3],
                 prefix: {'id': 0}
             },
@@ -73,21 +72,12 @@ export default class IPPrefix extends React.PureComponent {
         }
     };
 
-    renderButton(){
-        return <button>Select IP Block</button>;
-    };
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
             return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
         }
         return <i/>;
-    };
-
-    toggleActions = (process, actions) => e => {
-        stop(e);
-        const newShow = actions.id === process.id ? !actions.show : true;
-        this.setState({actions: {show: newShow, id: process.id}});
     };
 
     filterState = e => {
@@ -101,13 +91,6 @@ export default class IPPrefix extends React.PureComponent {
         this.setState({filter: filter, filteredIpBlocks:this.filterAndSortBlocks()});
 
     }
-    filterVersion = e => {
-        const version = parseInt(e.target.value);
-        let {filter} = this.state;
-        filter['version'] = version;
-        this.setState({filter: filter, filteredIpBlocks:this.filterAndSortBlocks()});
-
-    };
 
     filterParentPrefix = e => {
         const parentPrefix = parseInt(e.value);
@@ -137,25 +120,18 @@ export default class IPPrefix extends React.PureComponent {
     }
 
     selectPrefix = (prefix) => () => {
-        this.setState({selected_prefix_id: prefix['id'], isValid: true });
+
+
+        this.setState({selected_prefix_id: prefix['id'], selected_prefix: prefix['prefix'], isValid: true });
         this.props.onChange(prefix);
 
     }
 
-    renderActions = (prefix, actions) => {
-        const actionId = prefix.id;
-        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
-            return null;
-        }
-        const options = actionOptions(prefix, this.selectPrefix(prefix));
-        return <DropDownActions options={options} i18nPrefix="prefixes"/>;
-    };
-
     renderContent(ipBlocks, loading) {
         const columns = ["id"
             , "prefix", "description", "state", "version"];
-        const {actions, sorted, filter_prefixes} = this.state;
-        const {version, state, prefix} = {...this.state.filter};
+        const {actions, sorted, filter_prefixes, selected_prefix_id, selected_prefix} = this.state;
+        const {state, prefix} = {...this.state.filter};
         let parentPrefix = prefix['id'];
         const th = index => {
             const name = columns[index];
@@ -165,6 +141,7 @@ export default class IPPrefix extends React.PureComponent {
         };
         return (
             <div>
+                <div><h3>Selected prefix: {selected_prefix}</h3></div>
                 <div><span>State:</span>
                     <span><input type="checkbox" name="state" onChange={this.filterState}
                                  value="1" checked={state.includes(1)}></input> 1 (Permanent toegewezen) </span>
@@ -172,12 +149,6 @@ export default class IPPrefix extends React.PureComponent {
                                  value="2" checked={state.includes(2)}></input> 2 (Gereserveerd) </span>
                     <span><input type="checkbox" name="state" onChange={this.filterState}
                                  value="3" checked={state.includes(3)}></input> 3 (Vrij) </span>
-                </div>
-                <div><span>IP Version:</span>
-                    <span><input type="radio" name="version" onChange={this.filterVersion}
-                                 value="4" checked={version===4}></input> 4 </span>
-                    <span><input type="radio" name="version" onChange={this.filterVersion}
-                                 value="6" checked={version===6}></input> 6 </span>
                 </div>
                 <div><span>Root filter</span>
                     <span>
@@ -189,24 +160,24 @@ export default class IPPrefix extends React.PureComponent {
             <table className="ip-blocks">
                 <thead>
                 <tr>{columns.map((column, index) => th(index))}
-                <th className="actions"></th></tr>
+                </tr>
                 </thead>
                 {ipBlocks.length > 0 &&
                 <tbody>
                 {ipBlocks.map((ipBlock, index) =>
-                    <tr key={`${ipBlock['id']}_${index}`}>
+                {let prefixrow_classname_ext = ipBlock['id']==selected_prefix_id ?
+                                "selected" : ipBlock['state'] ;
+                return (
+                    <tr key={`${ipBlock['id']}_${index}`} onClick={this.selectPrefix(ipBlock)}
+                            className={"prefixrow_" + prefixrow_classname_ext} >
                         {columns.map(column =>
                             <td data-label={column} className={column}>
                                 {ipBlock[column]}
                             </td>
                         )}
-                        <td data-label={I18n.t("processes.actions")} className="actions"
-                                onClick={this.toggleActions(ipBlock, actions)}
-                                tabIndex="1" onBlur={() => this.setState({actions: {show: false, id: ""}})}>
-                                    {(ipBlock.state === 3) && <i className="fa fa-ellipsis-h"></i>}
-                                {this.renderActions(ipBlock, actions)}
-                                </td>
+
                     </tr>
+                    )}
                 )}
                 </tbody>
                 }
