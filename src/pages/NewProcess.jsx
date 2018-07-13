@@ -220,7 +220,6 @@ export default class NewProcess extends React.Component {
             </section>
             {showProductValidation &&
             <section>
-                <p>ZO DAN</p>
                 <label htmlFor="none">{I18n.t("process.product_validation")}</label>
                 <ProductValidation validation={productValidation}/>
             </section>}
@@ -231,6 +230,7 @@ export default class NewProcess extends React.Component {
                            history={history}
                            organisations={organisations}
                            products={products}
+                           subscriptions={subscriptions}
                            locationCodes={locationCodes}
                            product={product}
                            validSubmit={this.validSubmit}
