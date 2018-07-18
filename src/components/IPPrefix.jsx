@@ -31,7 +31,9 @@ export default class IPPrefix extends React.PureComponent {
             sorted: {
                 name: "index",
                 descending: false},
-            selected_prefix_id: null
+            selected_prefix_id: null,
+            selected_prefix: "0/0",
+            ipam_prefix: ""
 		};
     }
 
@@ -121,18 +123,27 @@ export default class IPPrefix extends React.PureComponent {
 
     selectPrefix = (prefix) => () => {
 
+        this.setState({selected_prefix_id: prefix['id'], selected_prefix: prefix['prefix'] });
 
-        this.setState({selected_prefix_id: prefix['id'], selected_prefix: prefix['prefix'], isValid: true });
+
+    }
+
+    selectIpam = prefix => {
+        this.setState({ipam_prefix: prefix, isValid: true});
         this.props.onChange(prefix);
-
     }
 
     renderContent(ipBlocks, loading) {
         const columns = ["id"
             , "prefix", "description", "state_repr"];
+
+        const {onChange} = this.props;
         const {actions, sorted, filter_prefixes, selected_prefix_id, selected_prefix} = this.state;
         const {state, prefix} = {...this.state.filter};
         let parentPrefix = prefix['id'];
+        const parts = selected_prefix.split("/");
+        const subnet = parts[0];
+        const netmask = parts[1];
         const th = index => {
             const name = columns[index];
             return <th key={index} className={name} onClick={this.sort(name)}>
@@ -183,7 +194,11 @@ export default class IPPrefix extends React.PureComponent {
                 }
 
             </table>
-                
+                {selected_prefix_id &&
+
+                <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={parseInt(netmask)}
+                            onChange={this.selectIpam} />
+                }
             </div>);
     }
 	

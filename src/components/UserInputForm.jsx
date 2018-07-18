@@ -430,16 +430,6 @@ export default class UserInputForm extends React.Component {
                return <IPPrefix ipBlock={ipBlock}
                            onChange={this.changeNestedInput(name)}
                         /> ;
-            case "split_prefix":
-               const ip_prefix = isEmpty(process.current_state.ip_prefix) ?
-                   [{"prefix":""}] : process.current_state.ip_prefix;
-               const parts = ip_prefix['prefix'].split("/");
-               const subnet = parts[0];
-               const netmask = parts[1];
-               const prefixlen = parseInt(netmask);
-               return <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={prefixlen}
-                           onChange={this.changeNestedInput(name)}
-                        />;
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 
