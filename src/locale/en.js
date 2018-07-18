@@ -225,7 +225,7 @@ I18n.translations.en = {
         noc_remove_lichtpad_confirmation_info: "Are the LightPath of the subscription and any child SSP's subscriptions removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
         noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
-        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath and are SSP circuits disabled?",
+        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
