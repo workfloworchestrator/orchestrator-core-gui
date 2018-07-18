@@ -1,6 +1,5 @@
 import {isEmpty} from "../utils/Utils";
 import {validEmailRegExp} from "./Subscriptions";
-import {validateIPRange} from "./Subscriptions.js"
 
 const inValidVlan = vlan => {
     const value = vlan || "";
