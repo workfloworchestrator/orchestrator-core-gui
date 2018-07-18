@@ -10,7 +10,7 @@ import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 import {actionOptions} from "../validations/Prefixes";
 import DropDownActions from "../components/DropDownActions";
-
+import SplitPrefix from "./SplitPrefix"
 
 export default class IPPrefix extends React.PureComponent {
 
@@ -129,7 +129,7 @@ export default class IPPrefix extends React.PureComponent {
 
     renderContent(ipBlocks, loading) {
         const columns = ["id"
-            , "prefix", "description", "state", "version"];
+            , "prefix", "description", "state_repr"];
         const {actions, sorted, filter_prefixes, selected_prefix_id, selected_prefix} = this.state;
         const {state, prefix} = {...this.state.filter};
         let parentPrefix = prefix['id'];
@@ -183,6 +183,7 @@ export default class IPPrefix extends React.PureComponent {
                 }
 
             </table>
+                
             </div>);
     }
 	

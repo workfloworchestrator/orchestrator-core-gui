@@ -617,6 +617,7 @@ I18n.translations.en = {
             prefix: "prefix",
             description: "description",
             state: "state",
+            state_repr: "status",
             version: "version"
         },
         products: {
