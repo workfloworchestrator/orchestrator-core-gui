@@ -62,11 +62,11 @@ export default class IPPrefix extends React.PureComponent {
         if (name==='prefix'){
             name = 'index';
         }
-        const aSafe = aSafe === 0 ? aSafe : a[name] || "";
-        const bSafe = bSafe === 0 ? bSafe : b[name] || "";
+        const aVal = a[name];
+        const bVal = b[name];
         try {
-            return typeof aSafe === "string" && typeof bSafe === "string"
-                ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
+            return typeof aVal === "string" && typeof bVal === "string"
+                ? aVal.toLowerCase().localeCompare(bVal.toLowerCase()) : aVal - bVal;
         } catch(e){
             console.log(e);
         }
@@ -107,13 +107,14 @@ export default class IPPrefix extends React.PureComponent {
         const {filter, sorted, ipBlocks} = this.state;
         let filteredIpBlocks = ipBlocks;
         Object.keys(filter).map((key,index) => {
-            if (key=='state') {
+            if (key==='state') {
                 filteredIpBlocks = filteredIpBlocks.filter(i => filter[key].includes(i[key]))
             } else if (key==='prefix' && !(filter['prefix']['id']===0)) {
                 filteredIpBlocks = filteredIpBlocks.filter(i => i['parent'] === filter['prefix']['id'])
             } else if (key !== 'prefix') {
                 filteredIpBlocks = filteredIpBlocks.filter(i => i[key] === filter[key])
             }
+            return key;
         });
         filteredIpBlocks.sort(this.sortBy(sorted.name));
         return sorted.descending ? filteredIpBlocks.reverse() : filteredIpBlocks;
@@ -132,8 +133,7 @@ export default class IPPrefix extends React.PureComponent {
     }
 
     renderContent(ipBlocks, loading) {
-        const columns = ["id"
-            , "prefix", "description", "state_repr"];
+        const columns = ["id", "prefix", "description", "state_repr"];
 
         const {sorted, filter_prefixes, selected_prefix_id, selected_prefix} = this.state;
         const {state, prefix} = {...this.state.filter};

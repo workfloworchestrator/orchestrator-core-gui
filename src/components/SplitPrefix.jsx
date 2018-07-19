@@ -27,7 +27,7 @@ export default class SplitPrefix extends React.PureComponent {
         const {subnet, netmask, prefixlen} = {...this.props};
         subnets(subnet, netmask, prefixlen).then(result =>{
             this.setState({subnets:result['subnets'],
-                desired_prefixlen: parseInt(netmask),
+                desired_prefixlen: parseInt(netmask, 10),
                 selected_subnet: subnet + "/" + netmask,
                 loading: false});
         });
