@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAIA,oBAAqB;EACjB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,EAAE",
-"sources": ["SplitPrefix.scss"],
-"names": [],
-"file": "SplitPrefix.css"
-}
