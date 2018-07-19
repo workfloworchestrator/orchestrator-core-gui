@@ -32,7 +32,9 @@ I18n.translations.en = {
         cache: "Cache",
         new_process: "New Process +"
     },
-
+    prefixes: {
+            select: "select"
+    },
     processes: {
         changes: "Changes",
         system: "System",
@@ -203,7 +205,8 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
-        ip_blocks: "Please specify the prefixes you want allocated",
+        ip_prefix: "Select a free subnet",
+        ip_prefix_info: "In the next step you can allocate any prefix under the subnet you select here",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
         new_ssp_workflow: "Create a new SSP",
@@ -235,6 +238,8 @@ I18n.translations.en = {
         configuration_ready_info: "All of the work entailed is successfully configured",
         network_changes_ready: "NMS changes ready",
         network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS",
+        ipam_description: "Description",
+        ipam_description_info: "Description field from IPAM",
         ims_changes: "Updated in IMS",
         ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
@@ -245,6 +250,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
+        split_prefix: "Split IP Prefix",
+        split_prefix_info: "Select the subnet from all subnets of the given prefix length",
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
@@ -604,6 +611,14 @@ I18n.translations.en = {
             updated: "{{type}} {{name}} successfully updated",
             created: "{{type}} {{name}} successfully created.",
             delete: "{{type}} {{name}} successfully deleted."
+        },
+        ipBlocks: {
+            id: "id",
+            prefix: "prefix",
+            description: "description",
+            state: "state",
+            state_repr: "status",
+            version: "version"
         },
         products: {
             searchPlaceHolder: "Search for Products",

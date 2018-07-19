@@ -309,6 +309,21 @@ export function startModificationSubscription(subscriptionId, workflow, dienstaf
     return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
 }
 
+//IPAM IP Prefixes
+export function ip_blocks(parentPrefix){
+    return fetchJson("ipam/ip_blocks/" + parentPrefix);
+}
+
+//IPAM the user-defined filters as configured in the database for the IP PREFIX product
+export function prefix_filters(){
+    return fetchJson("ipam/prefix_filters")
+}
+
+
+export function subnets(subnet, netmask, prefixlen){
+    return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
+}
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }
