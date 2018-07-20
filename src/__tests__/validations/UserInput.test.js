@@ -82,19 +82,3 @@ const test_ip_block = (testPattern, expected=true) => {
 	doValidateUserInput({type: "ip_blocks", name: "my_ipblock_input"}, value, errors);
 	expect(errors["my_ipblock_input"]).toBe(expected);
 }
-
-test("Correct IPv4 Range", () => {
-	test_ip_block("217.139.203.176/28", false);
-});
-
-test("Incorrect IPv4 Range", () => {
-	test_ip_block("0/fout", true);
-});
-
-test("Correct IPv6 Range", () => {
-	test_ip_block("fe80:0000:0000:0000:0204:61ff:fe9d:f156", false);
-});
-
-test("Incorrect IPv6 Range", () => {
-	test_ip_block("fout:kapot/slecht", true);
-})

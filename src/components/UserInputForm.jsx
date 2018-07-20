@@ -19,7 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
-import IPBlocks from "./IPBlocks"
+import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -443,13 +443,13 @@ export default class UserInputForm extends React.Component {
                                             productId={productIdForSubscription}
                                 subscription={value}/>;
 
-            case "ip_blocks":
-               const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
-               const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
-               return <IPBlocks ipBlocks={ipBlocks}
+            case "ip_prefix":
+               const procIpBlock = isEmpty(process.current_state.ip_blocks) ?
+                   {"prefix":""} : process.current_state.ip_block;
+               const ipBlock = isEmpty(value) ? procIpBlock : value;
+               return <IPPrefix ipBlock={ipBlock}
                            onChange={this.changeNestedInput(name)}
-                        />;
-
+                        /> ;
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
 	    case "date_picker":

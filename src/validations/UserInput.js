@@ -1,6 +1,5 @@
 import {isEmpty} from "../utils/Utils";
 import {validEmailRegExp} from "./Subscriptions";
-import {validateIPRange} from "./Subscriptions.js"
 
 const inValidVlan = vlan => {
     const value = vlan || "";
@@ -57,8 +56,8 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !/^\d{5}$/.test(value)
     } else if (type === "new_ssp_workflow") {
         errors[name] = false;
-    } else if (type === "ip_blocks") {
-		errors[name] = isEmpty(value) || value.some(block => !validateIPRange(block.display_value));
+    } else if (type === "ip_prefix") {
+		errors[name] = isEmpty(value);
 	} else if (type === "stp") {
         if (isEmpty(value)) {
             errors[name] = true;
