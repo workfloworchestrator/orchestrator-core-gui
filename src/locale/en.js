@@ -493,6 +493,7 @@ I18n.translations.en = {
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
         modify_modify_ip_range_workflow: "Modify IP Space",
         modify_modify_lightpath_msp_only_speed: "Modify Service Speed",
+        modify_modify_netherlight_isalias: "Modify Netherlight isAlias",
         modify_modify_ssp_replace: "Replace SSP with another SSP",
         modify_modify_msp_replace: "Replace MSP with another MSP",
         product: {
