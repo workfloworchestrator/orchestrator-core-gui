@@ -266,6 +266,10 @@ I18n.translations.en = {
         service_ports_secondary_info: "The two Service Ports of the secondary LP in this redundant LP",
         elan_service_ports: "ELAN Service Ports",
         elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
+        ip_bgp_service_ports: "IP Service Ports",
+        ip_bgp_service_ports_info: "The Service Port(s) used at customer side for IP service using BGP",
+        ip_static_service_port: "IP Service Port",
+        ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
         nsi_isalias: "NSI isAlias",
         nsi_isalias_info: "",
         subscription_id1: "Subscription",
@@ -287,6 +291,11 @@ I18n.translations.en = {
         modify_subscription: "Modify existing subscription",
         terminate_subscription: "Terminate existing subscription",
         workflowSelect: "Modify workflow",
+        internetpinnen: "Internetpinnen",
+        asn: "Autonomous System Number",
+        multicast: "Multicast",
+        customer_ip_prefix_subscription: "Subscription to a an IP prefix",
+        customer_ip_prefix_subscription_info: "Specify the IP Address space of the customer with an IP prefix subscription.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
@@ -405,8 +414,9 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IP: "IP",
+	IPAS: "IPAS",
         node: "Node",
-        IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -863,6 +873,14 @@ I18n.translations.en = {
     node_port: {
         select_node_first: "First select a node",
         select_port: "Select a port"
+    },
+    ipam: {
+      prefix: "IP Prefix",
+      afi: "IP Family",
+      state: "State",
+      ipaddress: "IP Address",
+      fqdn: "FQDN",
+      assigned_address_id: "Assigned IP Address ID"
     }
 };
 

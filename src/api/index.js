@@ -226,6 +226,10 @@ export function imsService(type, identifier) {
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
+        case "ptp_ipv4_ipam_id":
+        case "ptp_ipv6_ipam_id":
+            promise = fetchJsonWithCustomErrorHandling(`product_blocks/prefix_by_id/${identifier}`);
+	          break;
         default:
             promise = Promise.resolve({})
     }
