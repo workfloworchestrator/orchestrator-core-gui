@@ -101,7 +101,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                     });
 
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
-                        .map(endpoint => endpoint.type === "service" ? portByImsServiceId(endpoint.id) : portByImsPortId(endpoint.id)))
+                        .map(endpoint => {
+                          if (endpoint.type === "service") {
+                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                          } else {
+                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                          }
+                        }))
                         .reduce((a, b) => a.concat(b), []);
                     Promise.all(uniquePortPromises).then(result => this.setState({imsEndpoints: result}));
                 })
@@ -336,8 +342,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <td>{(service.endpoints || []).map(endpoint => `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${(endpoint.vlanranges || [])
                     .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ")}`).join(", ")}</td>
             </tr>
-            {imsEndpoints.map((port, index) => this.renderImsPortDetail(port, index))}
             </tbody>
+            {imsEndpoints
+              .filter(port => service.endpoints.map(endpoint => endpoint.id).includes(port.serviceId))
+              .map((port, index) => this.renderImsPortDetail(port, index))}
         </table>;
 
     renderIpamPrefix = (prefix, index, className = "") => {
