@@ -322,11 +322,11 @@ export default class UserInputForm extends React.Component {
                     organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :
-                return <EmailInput emails={this.userInputToEmail(value)}
+                return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true}/>;
             case "email" :
-                return <EmailInput emails={this.userInputToEmail(value)}
+                return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
@@ -437,12 +437,13 @@ export default class UserInputForm extends React.Component {
                                          onChange={this.changeSelectInput(name)}
                                          product={value}
                                          disabled={userInput.readonly}/>;
-            case "subscription":
+            case "subscriptions":
                 const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
-                return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
+                return <SubscriptionsSelect onChange={this.changeArrayInput(name)}
                                             productId={productIdForSubscription}
-                                subscription={value}/>;
-
+                                            selectedSubscriptions={this.commaSeperatedArray(value)}
+                                            minimum={userInput.minimum}
+                                            maximum={userInput.maximum}/>;
             case "ip_prefix":
                const procIpBlock = isEmpty(process.current_state.ip_blocks) ?
                    {"prefix":""} : process.current_state.ip_block;
@@ -477,7 +478,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    userInputToEmail = (input) => input ? input.split(",") : [];
+    commaSeperatedArray = (input) => input ? input.split(",") : [];
 
     render() {
         const {
