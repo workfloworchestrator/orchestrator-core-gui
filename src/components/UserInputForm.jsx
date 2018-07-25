@@ -371,6 +371,17 @@ export default class UserInputForm extends React.Component {
                                                       secondary={secondary}
                                                       choice={choice}/>
                 </div>
+            case "noc_modification_confirmation":
+                const {human_service_speed, new_human_service_speed, nms_service_id} = process.current_state;
+                const infoLabel = I18n.t(`process.noc_modification_confirmation_prefix`)  + nms_service_id +
+        I18n.t(`process.noc_modification_confirmation_infix1`) +
+                        human_service_speed + I18n.t(`process.noc_modification_confirmation_infix2`)
+                    + new_human_service_speed;
+                return <div>
+                    <CheckBox name={name} value={value||false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={infoLabel}/>
+                </div>;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
