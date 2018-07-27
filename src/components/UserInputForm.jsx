@@ -437,11 +437,12 @@ export default class UserInputForm extends React.Component {
                                          onChange={this.changeSelectInput(name)}
                                          product={value}
                                          disabled={userInput.readonly}/>;
+            case "subscription":
             case "subscriptions":
                 const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeArrayInput(name)}
                                             productId={productIdForSubscription}
-                                            selectedSubscriptions={this.commaSeperatedArray(value)}
+                                            subscriptions={this.commaSeperatedArray(value)}
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
             case "ip_prefix":
