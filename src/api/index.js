@@ -223,11 +223,13 @@ export function imsService(type, identifier) {
         case ims_circuit_id:
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
+        case "ip_prefix_subscription_id":
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
         case "ptp_ipv4_ipam_id":
         case "ptp_ipv6_ipam_id":
+        case "ipam_prefix_id":
             promise = fetchJsonWithCustomErrorHandling(`product_blocks/prefix_by_id/${identifier}`);
 	          break;
         default:

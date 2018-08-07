@@ -62,8 +62,8 @@ export default class SubscriptionsSelect extends React.PureComponent {
         if (subscriptions.length > nboxes) {
           subscriptions.splice(index, 1);
           this.props.onChange(subscriptions);
-      }
-      this.setState({numberOfBoxes: nboxes});
+        }
+        this.setState({numberOfBoxes: nboxes});
     };
 
     render() {
