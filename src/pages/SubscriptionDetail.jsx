@@ -356,6 +356,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                   <thead>
                   </thead>
                   <tbody>
+                    <tr>
+                        <td>{I18n.t("ipam.description")}</td>
+                        <td>{prefix.description}</td>
+                    </tr>
                      <tr>
                         <td>{I18n.t("ipam.prefix")}</td>
                         <td>{prefix.prefix}</td>
@@ -363,6 +367,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <tr>
                       <td>{I18n.t("ipam.afi")}</td>
                       <td>{prefix.afi}</td>
+                    </tr>
+                    <tr>
+                      <td>{I18n.t("ipam.asn")}</td>
+                      <td>{prefix.asn}</td>
                     </tr>
                     {prefix.assigned_addresses.map((address, idx) =>
                       [

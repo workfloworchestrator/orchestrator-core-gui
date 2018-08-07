@@ -881,8 +881,10 @@ I18n.translations.en = {
         select_port: "Select a port"
     },
     ipam: {
+      description: "Description",
       prefix: "IP Prefix",
       afi: "IP Family",
+      asn: "Autonomous System Number",
       state: "State",
       ipaddress: "IP Address",
       fqdn: "FQDN",
