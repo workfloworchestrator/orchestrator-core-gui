@@ -299,7 +299,7 @@ I18n.translations.en = {
         internetpinnen: "Internetpinnen",
         asn: "Autonomous System Number",
         multicast: "Multicast",
-        ip_prefix_subscriptions: "Subscription to an IP prefix",
+        ip_prefix_subscriptions: "IP prefix subscriptions",
         ip_prefix_subscriptions_info: "Specify one or more IP prefix subscriptions reserved for this customer.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
