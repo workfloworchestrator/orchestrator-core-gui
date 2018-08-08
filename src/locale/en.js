@@ -299,8 +299,8 @@ I18n.translations.en = {
         internetpinnen: "Internetpinnen",
         asn: "Autonomous System Number",
         multicast: "Multicast",
-        customer_ip_prefix_subscription: "Subscription to a an IP prefix",
-        customer_ip_prefix_subscription_info: "Specify the IP Address space of the customer with an IP prefix subscription.",
+        ip_prefix_subscriptions: "IP prefix subscriptions",
+        ip_prefix_subscriptions_info: "Specify one or more IP prefix subscriptions reserved for this customer.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
@@ -881,8 +881,10 @@ I18n.translations.en = {
         select_port: "Select a port"
     },
     ipam: {
+      description: "Description",
       prefix: "IP Prefix",
       afi: "IP Family",
+      asn: "Autonomous System Number",
       state: "State",
       ipaddress: "IP Address",
       fqdn: "FQDN",
