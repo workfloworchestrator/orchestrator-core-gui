@@ -58,6 +58,7 @@ export default class NewProcess extends React.Component {
                     value: product.product_id,
                     workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
                     productId: product.product_id,
+                    tag: product.tag
                 });
             }
         }
@@ -194,13 +195,14 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => this.setState({
-        stepUserInput: [],
-        productValidation: {"valid": true, mapping: {}},
-        product: option,
-        showInitialMsps: true
-    });
-
+    changeProduct = option => {
+        this.setState({
+            stepUserInput: [],
+            productValidation: {"valid": true, mapping: {}},
+            product: option,
+            showInitialMsps: option.tag === "IP",
+        });
+    };
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, preselectedProduct) {
