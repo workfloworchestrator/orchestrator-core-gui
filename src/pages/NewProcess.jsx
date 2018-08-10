@@ -43,7 +43,8 @@ export default class NewProcess extends React.Component {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            started: false
+            started: false,
+            showInitialMsps: false
         };
     }
 
@@ -123,7 +124,6 @@ export default class NewProcess extends React.Component {
                     Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
                         const [productValidation, userInput] = result;
 
-
                         const stepUserInput = userInput.filter(input => input.name !== "product");
                         const {preselectedOrganisation, preselectedDienstafname} = this.props;
                         if (preselectedOrganisation) {
@@ -197,16 +197,18 @@ export default class NewProcess extends React.Component {
     changeProduct = option => this.setState({
         stepUserInput: [],
         productValidation: {"valid": true, mapping: {}},
-        product: option
+        product: option,
+        showInitialMsps: true
     });
 
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, preselectedProduct) {
+
+        let showInitialMsps = this.state.showInitialMsps;
         let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            ).filter(sub => (sub.tag === "MSP" && sub.insync) || sub.tag === "SSP").filter(
-                sub => !(sub.is_ssp_and_has_parent));
+            ).filter(sub => (sub.tag === "MSP" && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
