@@ -230,7 +230,7 @@ export function imsService(type, identifier) {
         case "ptp_ipv4_ipam_id":
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
-            promise = fetchJsonWithCustomErrorHandling(`product_blocks/prefix_by_id/${identifier}`);
+            promise = fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${identifier}`);
 	          break;
         default:
             promise = Promise.resolve({})
