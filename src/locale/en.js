@@ -234,7 +234,7 @@ I18n.translations.en = {
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         network_changes_ready: "NMS changes ready",
-        network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS",
+        network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS. If IMS needs updating this will happen after this step",
         ims_changes: "Updated in IMS",
         ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
