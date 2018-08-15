@@ -19,7 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
-import IPBlocks from "./IPBlocks"
+import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
 import VirtualLAN from "./VirtualLAN";
@@ -32,6 +32,9 @@ import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
 import ImsChanges from "./ImsChanges";
+import DatePickerCustom from "./DatePickerCustom";
+import DatePicker from "react-datepicker";
+import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
 
@@ -134,6 +137,17 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({target: {value: value}});
     };
 
+
+    changeDateInput = name => dd => {
+        const value = moment(dd).format("YYYY-MM-DD");
+        this.changeUserInput(name, value);
+    }
+
+    clearDateInput = (name, target) => trigger => {
+        this.changeUserInput(name, target);
+    }
+
+
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
         const uniqueSelectInputs = {...this.state.uniqueSelectInputs};
@@ -214,6 +228,14 @@ export default class UserInputForm extends React.Component {
             return <em>{I18n.t(`process.${name}_info`, {example: this.state.randomCrm})}</em>;
         }
         return this.i18nContext(`process.${name}_info`, userInput);
+    };
+
+    initialPorts = minimum => {
+        if (minimum === 1) {
+            return [{subscription_id: null, vlan: ""}];
+        } else {
+            return [{subscription_id: null, vlan: ""}, {subscription_id: null, vlan: ""}];
+        }
     };
 
     chooseInput = (userInput, process) => {
@@ -300,11 +322,11 @@ export default class UserInputForm extends React.Component {
                     organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
             case "emails" :
-                return <EmailInput emails={this.userInputToEmail(value)}
+                return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true}/>;
             case "email" :
-                return <EmailInput emails={this.userInputToEmail(value)}
+                return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
@@ -349,6 +371,17 @@ export default class UserInputForm extends React.Component {
                                                       secondary={secondary}
                                                       choice={choice}/>
                 </div>
+            case "noc_modification_confirmation":
+                const {human_service_speed, new_human_service_speed, nms_service_id} = process.current_state;
+                const infoLabel = I18n.t(`process.noc_modification_confirmation_prefix`)  + nms_service_id +
+        I18n.t(`process.noc_modification_confirmation_infix1`) +
+                        human_service_speed + I18n.t(`process.noc_modification_confirmation_infix2`)
+                    + new_human_service_speed;
+                return <div>
+                    <CheckBox name={name} value={value||false}
+                              onChange={this.changeBooleanInput(name)}
+                              info={infoLabel}/>
+                </div>;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
@@ -389,11 +422,8 @@ export default class UserInputForm extends React.Component {
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
                 const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts.filter(sp => productIds.includes(sp.product_id));
-                const ports = isEmpty(value) ? [{subscription_id: null, vlan: ""}, {
-                    subscription_id: null,
-                    vlan: ""
-                }] : value;
+                     servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
@@ -401,9 +431,11 @@ export default class UserInputForm extends React.Component {
                                          organisations={organisations}
                                          onChange={this.changeNestedInput(name)}
                                          organisationId={organisationId}
+                                         minimum={userInput.minimum}
                                          maximum={userInput.maximum}
                                          disabled={userInput.readonly}
                                          isElan={userInput.elan}
+					                               organisationPortsOnly={userInput.organisationPortsOnly}
                                          mspOnly={userInput.mspOnly}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
@@ -417,20 +449,30 @@ export default class UserInputForm extends React.Component {
                                          product={value}
                                          disabled={userInput.readonly}/>;
             case "subscription":
-                const productIdForSubscription = findValueFromInputStep(userInput.product_key, stepUserInput);
-                return <SubscriptionsSelect onChange={this.changeSelectInput(name)}
+            case "subscriptions":
+                const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
+                return <SubscriptionsSelect onChange={this.changeArrayInput(name)}
                                             productId={productIdForSubscription}
-                                subscription={value}/>;
-
-            case "ip_blocks":
-               const procIpBlocks = isEmpty(process) ? [{"display_value":""}] : process.current_state.ip_blocks;
-               const ipBlocks = isEmpty(value) ? procIpBlocks : value ;
-               return <IPBlocks ipBlocks={ipBlocks}
+                                            subscriptions={this.commaSeperatedArray(value)}
+                                            minimum={userInput.minimum}
+                                            maximum={userInput.maximum}/>;
+            case "ip_prefix":
+               const procIpBlock = isEmpty(process.current_state.ip_blocks) ?
+                   {"prefix":""} : process.current_state.ip_block;
+               const ipBlock = isEmpty(value) ? procIpBlock : value;
+               return <IPPrefix ipBlock={ipBlock}
                            onChange={this.changeNestedInput(name)}
-                        />;
-
+                        /> ;
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
+	    case "date_picker":
+		const targetDate = moment().add(14, 'days');
+		return <DatePicker
+			dateFormat="YYYY-MM-DD"
+			selected={moment(value)}
+			onChange={this.changeDateInput(name)}
+                        customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
+			openToDate={targetDate} />;
 
             case "nodes_for_location_code_and_status":
                 const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
@@ -448,7 +490,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    userInputToEmail = (input) => input ? input.split(",") : [];
+    commaSeperatedArray = (input) => input ? input.split(",") : [];
 
     render() {
         const {

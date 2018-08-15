@@ -1,0 +1,46 @@
+@import "../stylesheets/vars.scss";
+
+section.multiple-subscriptions {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    section.subscription-select {
+        width: 100%;
+        div.wrapper {
+            display: flex;
+            margin-left: 25px;
+
+            div.select-box {
+                width: 98%;
+                margin-top: 5px;
+                div.Select-control {
+                    max-height: 30px;
+                    div.Select-input {
+                        max-height: 30px;
+                    }
+                }
+            }
+            i.fa-minus {
+                padding-left: 5px;
+                color: $red;
+                font-size: 30px;
+                cursor: pointer;
+                &.disabled {
+                    cursor: not-allowed;
+                    color: $light-grey
+                }
+            }
+        }
+        div.add-subscription {
+            display: flex;
+            i.fa-plus {
+                margin-left: auto;
+                padding: 10px 2px 0 0;
+                color: $green;
+                font-size: 30px;
+                cursor: pointer;
+            }
+        }
+    }
+}

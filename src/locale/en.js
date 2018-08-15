@@ -32,7 +32,9 @@ I18n.translations.en = {
         cache: "Cache",
         new_process: "New Process +"
     },
-
+    prefixes: {
+            select: "select"
+    },
     processes: {
         changes: "Changes",
         system: "System",
@@ -203,7 +205,8 @@ I18n.translations.en = {
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
-        ip_blocks: "Please specify the prefixes you want allocated",
+        ip_prefix: "Select a free subnet",
+        ip_prefix_info: "In the next step you can allocate any prefix under the subnet you select here",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
         new_ssp_workflow: "Create a new SSP",
@@ -218,11 +221,16 @@ I18n.translations.en = {
         nms_service_id_2_info: "The id of the service on the network (0000-9999)",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
-        noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath and any child SSP's subscriptions",
-        noc_remove_lichtpad_confirmation_info: "Are the LightPath of the subscription and any child SSP's subscriptions removed?",
+        noc_modification_confirmation: "NOC confirms modification of service",
+        noc_modification_confirmation_info: "Confirm that the modifications are implemented in the network as specified.",
+        noc_modification_confirmation_prefix: "Confirm modification of service with NMS service id ",
+        noc_modification_confirmation_infix1: " from ",
+        noc_modification_confirmation_infix2: " to ",
+        noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath.",
+        noc_remove_lichtpad_confirmation_info: "Is the LightPath of the subscription removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
         noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
-        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath and are SSP circuits disabled?",
+        noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
         bandwidth_info: "Desired bandwidth in Mbit/s",
@@ -235,6 +243,8 @@ I18n.translations.en = {
         configuration_ready_info: "All of the work entailed is successfully configured",
         network_changes_ready: "NMS changes ready",
         network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS. If IMS needs updating this will happen after this step",
+        ipam_description: "Description",
+        ipam_description_info: "Description field from IPAM",
         ims_changes: "Updated in IMS",
         ims_changes_info: "The following changes to LP circuits has been made in the IMS database",
         nms_service_updated: "NMS Service has been updated",
@@ -245,6 +255,8 @@ I18n.translations.en = {
             create: "Created process for workflow {{name}}",
             update: "Resumed process for workflow {{name}}"
         },
+        split_prefix: "Split IP Prefix",
+        split_prefix_info: "Select the subnet from all subnets of the given prefix length",
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
@@ -259,6 +271,10 @@ I18n.translations.en = {
         service_ports_secondary_info: "The two Service Ports of the secondary LP in this redundant LP",
         elan_service_ports: "ELAN Service Ports",
         elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
+        ip_bgp_service_ports: "IP Service Ports",
+        ip_bgp_service_ports_info: "The Service Port(s) used at customer side for IP service using BGP",
+        ip_static_service_port: "IP Service Port",
+        ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
         nsi_isalias: "NSI isAlias",
         nsi_isalias_info: "",
         subscription_id1: "Subscription",
@@ -280,6 +296,11 @@ I18n.translations.en = {
         modify_subscription: "Modify existing subscription",
         terminate_subscription: "Terminate existing subscription",
         workflowSelect: "Modify workflow",
+        internetpinnen: "Internetpinnen",
+        asn: "Autonomous System Number",
+        multicast: "Multicast",
+        ip_prefix_subscriptions: "IP prefix subscriptions",
+        ip_prefix_subscriptions_info: "Specify one or more IP prefix subscriptions reserved for this customer.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
@@ -398,8 +419,9 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+	IP: "IP",
+	IPAS: "IPAS",
         node: "Node",
-        IPAS: "IPAS",
         LP: "LP",
         MSP1G: "MSP1G",
         MSP10G: "MSP10G",
@@ -476,6 +498,7 @@ I18n.translations.en = {
         modify_modify_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
         modify_modify_ip_range_workflow: "Modify IP Space",
         modify_modify_lightpath_msp_only_speed: "Modify Service Speed",
+        modify_modify_netherlight_isalias: "Modify Netherlight isAlias",
         modify_modify_ssp_replace: "Replace SSP with another SSP",
         modify_modify_msp_replace: "Replace MSP with another MSP",
         product: {
@@ -604,6 +627,14 @@ I18n.translations.en = {
             updated: "{{type}} {{name}} successfully updated",
             created: "{{type}} {{name}} successfully created.",
             delete: "{{type}} {{name}} successfully deleted."
+        },
+        ipBlocks: {
+            id: "id",
+            prefix: "prefix",
+            description: "description",
+            state: "state",
+            state_repr: "status",
+            version: "version"
         },
         products: {
             searchPlaceHolder: "Search for Products",
@@ -848,6 +879,16 @@ I18n.translations.en = {
     node_port: {
         select_node_first: "First select a node",
         select_port: "Select a port"
+    },
+    ipam: {
+      description: "Description",
+      prefix: "IP Prefix",
+      afi: "IP Family",
+      asn: "Autonomous System Number",
+      state: "State",
+      ipaddress: "IP Address",
+      fqdn: "FQDN",
+      assigned_address_id: "Assigned IP Address ID"
     }
 };
 

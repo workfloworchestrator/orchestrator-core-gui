@@ -223,9 +223,15 @@ export function imsService(type, identifier) {
         case ims_circuit_id:
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
+        case "ip_prefix_subscription_id":
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
+        case "ptp_ipv4_ipam_id":
+        case "ptp_ipv6_ipam_id":
+        case "ipam_prefix_id":
+            promise = fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${identifier}`);
+	          break;
         default:
             promise = Promise.resolve({})
     }
@@ -307,6 +313,21 @@ export function startModificationSubscription(subscriptionId, workflow, dienstaf
         body.dienstafname = dienstafname;
     }
     return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
+}
+
+//IPAM IP Prefixes
+export function ip_blocks(parentPrefix){
+    return fetchJson("ipam/ip_blocks/" + parentPrefix);
+}
+
+//IPAM the user-defined filters as configured in the database for the IP PREFIX product
+export function prefix_filters(){
+    return fetchJson("ipam/prefix_filters")
+}
+
+
+export function subnets(subnet, netmask, prefixlen){
+    return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
 export function deleteProcess(processId) {

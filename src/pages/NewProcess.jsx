@@ -43,7 +43,8 @@ export default class NewProcess extends React.Component {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            started: false
+            started: false,
+            showInitialMsps: false
         };
     }
 
@@ -57,6 +58,7 @@ export default class NewProcess extends React.Component {
                     value: product.product_id,
                     workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
                     productId: product.product_id,
+                    tag: product.tag
                 });
             }
         }
@@ -122,7 +124,6 @@ export default class NewProcess extends React.Component {
                 if (product) {
                     Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
                         const [productValidation, userInput] = result;
-
 
                         const stepUserInput = userInput.filter(input => input.name !== "product");
                         const {preselectedOrganisation, preselectedDienstafname} = this.props;
@@ -194,19 +195,22 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => this.setState({
-        stepUserInput: [],
-        productValidation: {"valid": true, mapping: {}},
-        product: option
-    });
-
+    changeProduct = option => {
+        this.setState({
+            stepUserInput: [],
+            productValidation: {"valid": true, mapping: {}},
+            product: option,
+            showInitialMsps: option.tag === "IP",
+        });
+    };
 
     renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
                         organisations, products, locationCodes, preselectedProduct) {
+
+        let showInitialMsps = this.state.showInitialMsps;
         let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            ).filter(sub => (sub.tag === "MSP" && sub.insync) || sub.tag === "SSP").filter(
-                sub => !(sub.is_ssp_and_has_parent));
+            ).filter(sub => (sub.tag === "MSP" && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">

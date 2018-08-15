@@ -41,6 +41,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             subscriptionProcesses: [],
             imsServices: [],
             imsEndpoints: [],
+            ipamPrefixes: [],
             subscriptions: [],
             notFound: false,
             loaded: false,
@@ -78,7 +79,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(3);
                     const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
-                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id).map(obj => obj.json);
+                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id || obj.type === "ip_prefix_subscription_id").map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
                     if (subscription_used) {
                         subscriptions = subscriptions.concat(subscription_used.json);
@@ -87,18 +88,26 @@ export default class SubscriptionDetail extends React.PureComponent {
                     const allImsServices = relatedObjects.filter(obj => obj.type === ims_circuit_id || obj.type === ims_port_id).map(obj => obj.json);
                     // There are service duplicates for port_id and circuit_id
                     const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
+                    const ipamPrefixes = relatedObjects.filter(obj => obj.type === "ptp_ipv4_ipam_id" || obj.type === "ptp_ipv6_ipam_id" || obj.type === "ipam_prefix_id").map(obj => obj.json)
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
                         enrichedRelatedSubscriptions: result[2],
                         imsServices: imsServices,
+                        ipamPrefixes: ipamPrefixes,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         loadedAllRelatedObjects: true
                     });
 
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
-                        .map(endpoint => endpoint.type === "service" ? portByImsServiceId(endpoint.id) : portByImsPortId(endpoint.id)))
+                        .map(endpoint => {
+                          if (endpoint.type === "service") {
+                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                          } else {
+                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                          }
+                        }))
                         .reduce((a, b) => a.concat(b), []);
                     Promise.all(uniquePortPromises).then(result => this.setState({imsEndpoints: result}));
                 })
@@ -333,9 +342,59 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <td>{(service.endpoints || []).map(endpoint => `ID: ${endpoint.id}${endpoint.vlanranges ? " - " : ""}${(endpoint.vlanranges || [])
                     .map(vlan => `VLAN: ${vlan.start} - ${vlan.end}`).join(", ")}`).join(", ")}</td>
             </tr>
-            {imsEndpoints.map((port, index) => this.renderImsPortDetail(port, index))}
             </tbody>
+            {imsEndpoints
+              .filter(port => service.endpoints.map(endpoint => endpoint.id).includes(port.serviceId))
+              .map((port, index) => this.renderImsPortDetail(port, index))}
         </table>;
+
+    renderIpamPrefix = (prefix, index, className = "") => {
+      if (isEmpty(prefix)) {
+        return null;
+      }
+      return <table className={`detail-block ${className}`}>
+                  <thead>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td>{I18n.t("ipam.description")}</td>
+                        <td>{prefix.description}</td>
+                    </tr>
+                     <tr>
+                        <td>{I18n.t("ipam.prefix")}</td>
+                        <td>{prefix.prefix}</td>
+                    </tr>
+                    <tr>
+                      <td>{I18n.t("ipam.afi")}</td>
+                      <td>{prefix.afi}</td>
+                    </tr>
+                    <tr>
+                      <td>{I18n.t("ipam.asn")}</td>
+                      <td>{prefix.asn}</td>
+                    </tr>
+                    {prefix.assigned_addresses.map((address, idx) =>
+                      [
+                        <tr>
+                          <td>{I18n.t("ipam.assigned_address_id")}</td>
+                          <td>{address.id}</td>
+                        </tr>,
+                        <tr>
+                          <td>{I18n.t("ipam.state")}</td>
+                          <td>{address.state__label}</td>
+                        </tr>,
+                        <tr>
+                          <td>{I18n.t("ipam.ipaddress")}</td>
+                          <td>{address.address}</td>
+                        </tr>,
+                        <tr>
+                          <td>{I18n.t("ipam.fqdn")}</td>
+                        <td>{address.fqdn}</td>
+                        </tr>
+                     ]
+                     )}
+      </tbody>
+      </table>
+    };
 
     renderProduct = product => {
         if (isEmpty(product)) {
@@ -533,19 +592,33 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.setState({collapsedObjects: [...collapsedObjects]});
     };
 
-    renderRelatedObject = (subscriptions, imsServices, identifier, isSubscriptionValue, imsEndpoints) => {
-        const target = isSubscriptionValue ? subscriptions.find(sub => sub.subscription_id === identifier) :
-            imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
-        return isSubscriptionValue ? this.renderSubscriptionDetail(target, 0, "related-subscription") :
-            this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
+    renderRelatedObject = (subscriptions, imsServices, type, identifier, isSubscriptionValue, imsEndpoints) => {
+        var target;
+        switch (type) {
+          case ims_circuit_id:
+            target = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
+            return this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
+          case port_subscription_id:
+          case "ip_prefix_subscription_id":
+            target = subscriptions.find(sub => sub.subscription_id === identifier);
+            return this.renderSubscriptionDetail(target, 0, "related-subscription");
+          case "ipam_prefix_id":
+          case "ptp_ipv4_ipam_id":
+          case "ptp_ipv6_ipam_id":
+            target = this.state.ipamPrefixes.find(prefix => prefix.id === parseInt(identifier, 10));
+            return this.renderIpamPrefix(target, 0, "related-subscription");
+          default:
+            return null;
+        }
     };
 
     renderResourceTypeRow = (subscription, subscriptionInstanceValue, loadedAllRelatedObjects, notFoundRelatedObjects, index,
                              imsServices, collapsedObjects, subscriptions, imsEndpoints) => {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
             loadedAllRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
-        const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type === port_subscription_id;
-        const isExternalLinkValue = isSubscriptionValue || subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id;
+        const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type.endsWith("subscription_id");
+        const externalLinks = [ims_circuit_id, "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id"]
+        const isExternalLinkValue = isSubscriptionValue || externalLinks.includes(subscriptionInstanceValue.resource_type.resource_type);
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
         const icon = isCollapsed ? "minus" : "plus";
         return (
@@ -568,7 +641,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             <tr className="related-subscription">
                 <td className="whitespace"></td>
                 <td className="related-subscription-values"
-                    colSpan="2">{this.renderRelatedObject(subscriptions, imsServices, subscriptionInstanceValue.value, isSubscriptionValue, imsEndpoints)}</td>
+                    colSpan="2">{this.renderRelatedObject(subscriptions, imsServices, subscriptionInstanceValue.resource_type.resource_type, subscriptionInstanceValue.value, isSubscriptionValue, imsEndpoints)}</td>
             </tr>}
             </tbody>
 
@@ -655,4 +728,3 @@ SubscriptionDetail.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired
 };
-
