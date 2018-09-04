@@ -9,7 +9,8 @@ export default class ServicePortSelect extends React.PureComponent {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
-        return `${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
+        const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
+        return `${crm_port_id} - ${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
     };
 
     render() {
