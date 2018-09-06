@@ -255,7 +255,7 @@ export default class UserInputForm extends React.Component {
             case "ims_id":
             case "isalias":
             case "stp":
-                return <input type="text" id={name} name={name} value={value || ""}
+                return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
@@ -483,7 +483,7 @@ export default class UserInputForm extends React.Component {
                                    node={value}/>;
             case "corelink":
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
-                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'node')}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);

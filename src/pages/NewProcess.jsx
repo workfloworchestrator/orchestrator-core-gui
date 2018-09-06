@@ -130,13 +130,15 @@ export default class NewProcess extends React.Component {
                         if (preselectedOrganisation) {
                             const organisatieInput = stepUserInput.find(x => x.name === "organisation");
                             if (organisatieInput) {
-                                organisatieInput.value = preselectedOrganisation
+                                organisatieInput.value = preselectedOrganisation;
+                                organisatieInput.readonly = true;
                             }
                         }
                         if (preselectedDienstafname) {
                             const dienstafnameInput = stepUserInput.find(x => x.name === "dienstafname");
                             if (dienstafnameInput) {
                                 dienstafnameInput.value = preselectedDienstafname;
+                                dienstafnameInput.readonly = true;
                             }
                         }
                         this.setState({
