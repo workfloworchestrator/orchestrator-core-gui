@@ -12,7 +12,7 @@ import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
-
+import CheckBox from "../components/CheckBox";
 import "./Product.css";
 import {deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes} from "../api";
 import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
@@ -44,7 +44,6 @@ export default class Product extends React.Component {
             tags: [],
             types: [],
             statuses: [],
-            optionalAttributes: ["crm_prod_id"],
             duplicateName: false,
             allowedFixedInputs: [],
             fixedInputConf: {"by_tag": {}, "fixed_inputs": {}}
@@ -375,6 +374,24 @@ export default class Product extends React.Component {
             </section>);
     };
 
+    renderHasDienstAfname = (has_dienstafname_value, readOnly) => {
+       return (
+           <div>
+           <label htmlFor="name">{I18n.t("metadata.products.has_dienstafname")}</label>
+               <em>{I18n.t("metadata.products.has_dienstafname_info")}</em>
+               <CheckBox value={has_dienstafname_value || false} name="has_dienstafname" readOnly={readOnly} onChange={this.changeHasDienstafname}/>
+           </div>
+       )
+    };
+
+    changeHasDienstafname = e => {
+        const {product} = this.state;
+        const value = e.target.checked;
+        product.has_dienstafname = value
+        this.setState({product: product});
+    };
+
+
     render() {
         const {
             confirmationDialogOpen, confirmationDialogAction, cancelDialogAction, product,
@@ -403,8 +420,7 @@ export default class Product extends React.Component {
                     {formSelect("metadata.products.status", this.changeProperty("status"),
                         statuses, readOnly,
                         product.status || "active")}
-                    {formInput("metadata.products.crm_prod_id", "crm_prod_id", product.crm_prod_id || "", readOnly,
-                        this.state.errors, this.changeProperty("crm_prod_id"), () => false)}
+                    {this.renderHasDienstAfname(product.has_dienstafname, false)}
                     {formSelect("metadata.products.create_subscription_workflow_key",
                         this.changeWorkflow(TARGET_CREATE),
                         this.workFlowKeys(TARGET_CREATE, workflows), readOnly,
