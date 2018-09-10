@@ -312,7 +312,9 @@ I18n.translations.en = {
         node_port_1: "First node and port",
         node_port_1_info: "Choose a node and port that you want to use to create the first corelink",
         node_port_2: "Second node and port",
-        node_port_2_info: "Choose a node and port that you want to use to create the second corelink"
+        node_port_2_info: "Choose a node and port that you want to use to create the second corelink",
+	plan_dont_allocate: "Set state to planned",
+	plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet"
     },
     process_state: {
         copy: "Copy to clipboard",
