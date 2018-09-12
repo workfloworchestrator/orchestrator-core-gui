@@ -309,6 +309,8 @@ I18n.translations.en = {
         node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
         confirm_core_link: "Is the node's corelink configured ok?",
         confirm_core_link_info: "Confirm that the corelink is configured ok",
+        plan_dont_allocate: "Set state to planned",
+        plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
         ims_port_id1: "First node and port",
         ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
         ims_port_id2: "Second node and port",
