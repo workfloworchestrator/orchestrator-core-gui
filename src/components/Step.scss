@@ -13,6 +13,9 @@ section.step {
     &.failed {
         background-color: $red;
     }
+    &.waiting {
+        background-color: $orange;
+    }
     &.pending {
         background-color: $dark-grey;
     }

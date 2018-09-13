@@ -120,11 +120,11 @@ export default class ProcessStateDetails extends React.PureComponent {
         const status = step.status;
         let json = {};
         switch (status) {
-            case "suspend" :
-            case "abort" :
-            case "skipped" :
+            case "suspend":
+            case "abort":
+            case "skipped":
                 return null;
-            case "pending" :
+            case "pending":
                 if (isEmpty(step.form)) {
                     return null;
                 }
@@ -133,7 +133,10 @@ export default class ProcessStateDetails extends React.PureComponent {
                     return acc;
                 }, {});
                 break;
-            case "failed" :
+            case "failed":
+                json = step.state;
+                break;
+            case "waiting":
                 json = step.state;
                 break;
             case "success":

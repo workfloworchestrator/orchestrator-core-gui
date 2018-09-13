@@ -33,6 +33,9 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
         case "failed":
             options = [details, retry, abort, _delete];
             break;
+        case "waiting":
+            options = [details, retry, abort, _delete];
+            break;
         case "aborted":
             options = [details, _delete];
             break;
