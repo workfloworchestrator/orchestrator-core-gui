@@ -61,8 +61,8 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
-        };
-    }
+        }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
@@ -141,11 +141,11 @@ export default class UserInputForm extends React.Component {
     changeDateInput = name => dd => {
         const value = moment(dd).format("YYYY-MM-DD");
         this.changeUserInput(name, value);
-    }
+    };
 
     clearDateInput = (name, target) => trigger => {
         this.changeUserInput(name, target);
-    }
+    };
 
 
     enforceSelectInputUniqueness = (hash, name, value) => {
