@@ -29,11 +29,24 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
+        prefixes: "IP Prefixes",
         cache: "Cache",
         new_process: "New Process +"
     },
     prefixes: {
-            select: "select"
+        customer: "Customer",
+        subscription_id: "Sub ID",
+        description: "Description",
+        family: "Family",
+        prefix: "Prefix",
+        status: "Status",
+        start_date: "Start Date",
+        select: "select",
+        filters : {
+            family: "IP Family",
+            root_prefix: "Root Prefix",
+            status: "Status",
+        }
     },
     processes: {
         changes: "Changes",
@@ -447,7 +460,12 @@ I18n.translations.en = {
         provisioning: "Provisioning",
         active: "Active",
         disabled: "Disabled",
-        terminated: "Terminated"
+        terminated: "Terminated",
+        Allocated: "Allocated",
+        Planned: "Planned",
+        Available: "Available",
+        IPv4: "IPv4",
+        IPv6: "IPv6"
     },
     subscriptions: {
         customer_name: "Customer",
