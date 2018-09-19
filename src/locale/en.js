@@ -618,6 +618,7 @@ I18n.translations.en = {
         patch_position: "Patch position",
         msp: "MSP",
         ssp: "SSP",
+        redundant_lightpath: "redundant lichtpad"
     },
     metadata: {
         tabs: {

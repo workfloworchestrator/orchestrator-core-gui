@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
 import {imsService, subscriptionsDetail} from "../api/index";
-import {enrichSubscription} from "../utils/Lookups";
+import {enrichSubscription, enrichPortSubscription, enrichPrimarySubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
 import "./DowngradeRedundantLPChoice.css";
@@ -13,27 +13,45 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 
     constructor(props) {
         super(props);
+        this.primaryTable = React.createRef();
+        this.secondaryTable = React.createRef();
         this.state = {
             subscription: {instances: []},
-            childSubscriptions: []
-        };
-    }
+            childSubscriptions: [],
+            spPL: "",
+            spPR: "",
+            spSL: "",
+            spSR: ""
+        }
+    };
 
     componentWillMount() {
         const {subscriptionId, organisations, products} = this.props;
         subscriptionsDetail(subscriptionId).then(subscription => {
-            enrichSubscription(subscription, organisations, products);
+            enrichPrimarySubscription(subscription, organisations, products);
             this.setState({subscription: subscription});
             const values = subscriptionInstanceValues(subscription);
             const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
             const promises = portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value));
+            const portPromises = [];
             Promise.all(promises).then(results => {
                 const children = results.map(obj => obj.json);
                 children.forEach(sub => enrichSubscription(sub, organisations, products));
+                //children.forEach(sub => enrichPortSubscription(subscription, sub));
+                children.forEach(sub => portPromises.push(enrichPortSubscription(subscription, sub)));
+                Promise.all(portPromises).then(results => {
+                    this.setState({
+                        spPL: results.find(r => r.label === 'Primary-left'),
+                        spPR: results.find(r => r.label === 'Primary-right'),
+                        spSL: results.find(r => r.label === 'Secondary-left'),
+                        spSR: results.find(r => r.label === 'Secondary-right')
+                    });
+                });
                 this.setState({childSubscriptions: children});
             });
-        })
+        });
     }
+
 
     renderChild = (subscription, children, label) => {
         const instance = subscription.instances.find(instance => instance.label.toLowerCase() === label);
@@ -48,29 +66,111 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 
     };
 
-    renderSubscriptionChilds = (subscription, children) => {
+    renderServicePort = (title, servicePort) => {
+
+        return <table>
+                <thead>
+                    <tr>
+                        <td colSpan="2">{title}
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                {servicePort && this.renderValue("klant", servicePort.customer_name)}
+                {servicePort && this.renderValue("CRM port ID", servicePort.crm_port_id)}
+                {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name)}
+                {servicePort && this.renderValue("IMS node", servicePort.ims_node)}
+                {servicePort && this.renderValue("IMS port", servicePort.ims_port)}
+                {servicePort && this.renderValue("interface type", servicePort.ims_iface_type)}
+                {servicePort && this.renderValue("patch position", servicePort.ims_patch_position)}
+                {servicePort && this.renderValue("port subscription", this.renderSubscriptionLink(servicePort.subscription_id))}
+                </tbody>
+        </table>
+
+    };
+
+
+    renderValue = (name, value, colspan) => {
+        return <tr>
+            <td class="label">{name}</td>
+            <td colspan="{colspan}" class="value">{value}</td>
+        </tr>
+    };
+
+    renderSubscriptionLink = (subscription_id) => {
+        return <a href='/subscription/{subscription_id}' target="_blank">{subscription_id}</a>;
+    };
+
+    renderSubscription = (subscription, children) => {
         if (isEmpty(children)) {
             return null;
         }
+        const {spPL, spPR, spSL, spSR} = this.state;
         return <section className="lightpaths">
             <div key={subscription.subscription_id} className={`form-container`}>
-                <section className="part">
-                    <h3>{I18n.t("downgrade_redundant_lp.primary")}</h3>
-                    {this.renderChild(subscription, children, "primary-left")}
-                    {this.renderChild(subscription, children, "primary-right")}
-                </section>
-                <section className="part">
-                    <h3>{I18n.t("downgrade_redundant_lp.secondary")}</h3>
-                    {this.renderChild(subscription, children, "secondary-left")}
-                    {this.renderChild(subscription, children, "secondary-right")}
-                </section>
+                <div style={{flexDirection: "column"}}>
+                    <div className={"rlp_container"}>
+                <table class="rlp_heading">
+                    <tr>
+                        <th colspan="4"><h3>{I18n.t("downgrade_redundant_lp.redundant_lightpath")}</h3></th>
+                    </tr>
+                    {this.renderValue('klant',subscription.customer_name, 4)}
+                    {this.renderValue('protection','redundant', 4)}
+                    {this.renderValue('speed',subscription.service_speed, 4)}
+                    {this.renderValue('nms_service_id',
+                        subscription.nms_service_id_p + " en " + subscription.nms_service_id_s, 4)}
+                    {this.renderValue('subscription', this.renderSubscriptionLink(subscription.subscription_id), 4)}
+                    <tr>
+                        <td className="vspacer" colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table ref={this.primaryTable}>
+                                <tr>
+                                     <td><h3>Primary LP</h3></td>
+                                    <td>{subscription.nms_service_id_p}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        {this.renderServicePort("A1", spPL)}
+                                        {this.renderServicePort("B1", spPR)}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="spacer"></td>
+                        <td colspan="2">
+                            <table ref={this.secondaryTable}>
+                                <tr>
+                                    <td><h3>Secondary LP</h3></td>
+                                    <td>{subscription.nms_service_id_s}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="2">
+                                        {this.renderServicePort("A2", spSL)}
+                                        {this.renderServicePort("B2", spSR)}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                    </div>
+                </div>
             </div>
-        </section>;
+        </section>
     };
 
     onChangeChoice = e => {
         const checked = e.target.checked;
         const isPrimary = e.target.name === "primary";
+        if (isPrimary){
+            this.primaryTable.current.className = "highlight";
+            this.secondaryTable.current.className = "";
+        } else {
+            this.secondaryTable.current.className = "highlight";
+            this.primaryTable.current.className = "";
+        }
         const result =  isPrimary ? (checked ? "Primary" : "Secondary") : (checked ? "Secondary" : "Primary");
         this.props.onChange({target: {value: result}});
     };
@@ -95,7 +195,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
         const {childSubscriptions, subscription} = this.state;
         return (
             <div className="mod-downgrade-redundant-lp">
-                {this.renderSubscriptionChilds(subscription, childSubscriptions)}
+                {this.renderSubscription(subscription, childSubscriptions)}
                 {this.renderChoice()}
             </div>
         );
