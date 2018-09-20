@@ -13,15 +13,14 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.primaryTable = React.createRef();
-        this.secondaryTable = React.createRef();
         this.state = {
             subscription: {instances: []},
             childSubscriptions: [],
             spPL: "",
             spPR: "",
             spSL: "",
-            spSR: ""
+            spSR: "",
+            primarySelected: false
         }
     };
 
@@ -33,12 +32,10 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
             const values = subscriptionInstanceValues(subscription);
             const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
             const promises = portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value));
-            const portPromises = [];
             Promise.all(promises).then(results => {
                 const children = results.map(obj => obj.json);
                 children.forEach(sub => enrichSubscription(sub, organisations, products));
-                //children.forEach(sub => enrichPortSubscription(subscription, sub));
-                children.forEach(sub => portPromises.push(enrichPortSubscription(subscription, sub)));
+                const portPromises = children.map(sub => enrichPortSubscription(subscription, sub));
                 Promise.all(portPromises).then(results => {
                     this.setState({
                         spPL: results.find(r => r.label === 'Primary-left'),
@@ -105,7 +102,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
         if (isEmpty(children)) {
             return null;
         }
-        const {spPL, spPR, spSL, spSR} = this.state;
+        const {spPL, spPR, spSL, spSR, primarySelected} = this.state;
         return <section className="lightpaths">
             <div key={subscription.subscription_id} className={`form-container`}>
                 <div style={{flexDirection: "column"}}>
@@ -125,7 +122,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <table ref={this.primaryTable}>
+                            <table className={primarySelected === true && "highlight"}>
                                 <tr>
                                      <td><h3>Primary LP</h3></td>
                                     <td>{subscription.nms_service_id_p}</td>
@@ -140,7 +137,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                         </td>
                         <td class="spacer"></td>
                         <td colspan="2">
-                            <table ref={this.secondaryTable}>
+                            <table className={primarySelected === false && "highlight"}>
                                 <tr>
                                     <td><h3>Secondary LP</h3></td>
                                     <td>{subscription.nms_service_id_s}</td>
@@ -164,13 +161,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
     onChangeChoice = e => {
         const checked = e.target.checked;
         const isPrimary = e.target.name === "primary";
-        if (isPrimary){
-            this.primaryTable.current.className = "highlight";
-            this.secondaryTable.current.className = "";
-        } else {
-            this.secondaryTable.current.className = "highlight";
-            this.primaryTable.current.className = "";
-        }
+        this.setState({primarySelected: isPrimary});
         const result =  isPrimary ? (checked ? "Primary" : "Secondary") : (checked ? "Secondary" : "Primary");
         this.props.onChange({target: {value: result}});
     };
