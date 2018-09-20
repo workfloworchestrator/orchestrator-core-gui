@@ -65,23 +65,20 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 
     renderServicePort = (title, servicePort) => {
 
-        return <table>
-                <thead>
-                    <tr>
+        return    <tbody>
+                    <tr className="label">
                         <td colSpan="2">{title}
                         </td>
                     </tr>
-                </thead>
-                <tbody>{servicePort && this.renderValue("klant", servicePort.customer_name)}
-                {servicePort && this.renderValue("CRM port ID", servicePort.crm_port_id)}
-                {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name)}
-                {servicePort && this.renderValue("IMS node", servicePort.ims_node)}
-                {servicePort && this.renderValue("IMS port", servicePort.ims_port)}
-                {servicePort && this.renderValue("interface type", servicePort.ims_iface_type)}
-                {servicePort && this.renderValue("patch position", servicePort.ims_patch_position)}
-                {servicePort && this.renderValue("port subscription", this.renderSubscriptionLink(servicePort.subscription_id))}
-                </tbody>
-        </table>
+                {servicePort && this.renderValue("klant", servicePort.customer_name, 1)}
+                {servicePort && this.renderValue("CRM port ID", servicePort.crm_port_id, 1)}
+                {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name, 1)}
+                {servicePort && this.renderValue("IMS node", servicePort.ims_node, 1)}
+                {servicePort && this.renderValue("IMS port", servicePort.ims_port, 1)}
+                {servicePort && this.renderValue("interface type", servicePort.ims_iface_type, 1)}
+                {servicePort && this.renderValue("patch position", servicePort.ims_patch_position, 1)}
+                {servicePort && this.renderValue("port subscription", this.renderSubscriptionLink(servicePort.subscription_id), 1)}
+        </tbody>
 
     };
 
@@ -106,7 +103,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
             <div key={subscription.subscription_id} className={`form-container`}>
                 <div style={{flexDirection: "column"}}>
                     <div className={"rlp_container"}>
-                <table class="rlp_heading">
+                <table className="rlp_heading">
                     <thead>
                     <tr>
                         <th colSpan="5"><h3>{I18n.t("downgrade_redundant_lp.redundant_lightpath")}</h3></th>
@@ -123,41 +120,29 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                         <td className="vspacer" colSpan="5"></td>
                     </tr>
                     <tr>
-                        <td colSpan="2">
-                            <table className={(primarySelected === true) ? "highlight" : ""}>
+                        <td colSpan="2" className="border-off">
+                            <table className={primarySelected ? "highlight-on" : "highlight-off"}>
                                 <thead>
                                 <tr>
                                      <td><h3>Primary LP</h3></td>
                                     <td>{subscription.nms_service_id_p}</td>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td colSpan="2">
-                                        {this.renderServicePort("A1", spPL)}
-                                        {this.renderServicePort("B1", spPR)}
-                                    </td>
-                                </tr>
-                                </tbody>
+                                {this.renderServicePort("A1", spPL)}
+                                {this.renderServicePort("B1", spPR)}
                             </table>
                         </td>
                         <td className="spacer"></td>
                         <td colSpan="2">
-                            <table className={(primarySelected === false) ? "highlight" : ""}>
+                            <table className={primarySelected ? "highlight-off" : "highlight-on"}>
                                 <thead>
                                 <tr>
                                     <td><h3>Secondary LP</h3></td>
                                     <td>{subscription.nms_service_id_s}</td>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td colSpan="2">
-                                        {this.renderServicePort("A2", spSL)}
-                                        {this.renderServicePort("B2", spSR)}
-                                    </td>
-                                </tr>
-                                </tbody>
+                                {this.renderServicePort("A2", spSL)}
+                                {this.renderServicePort("B2", spSR)}
                             </table>
                         </td>
                     </tr>
