@@ -72,8 +72,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                         </td>
                     </tr>
                 </thead>
-                <tbody>
-                {servicePort && this.renderValue("klant", servicePort.customer_name)}
+                <tbody>{servicePort && this.renderValue("klant", servicePort.customer_name)}
                 {servicePort && this.renderValue("CRM port ID", servicePort.crm_port_id)}
                 {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name)}
                 {servicePort && this.renderValue("IMS node", servicePort.ims_node)}
@@ -89,8 +88,8 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
 
     renderValue = (name, value, colspan) => {
         return <tr>
-            <td class="label">{name}</td>
-            <td colspan="{colspan}" class="value">{value}</td>
+            <td className="label">{name}</td>
+            <td colSpan={colspan} className="value">{value}</td>
         </tr>
     };
 
@@ -108,9 +107,12 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                 <div style={{flexDirection: "column"}}>
                     <div className={"rlp_container"}>
                 <table class="rlp_heading">
+                    <thead>
                     <tr>
-                        <th colspan="4"><h3>{I18n.t("downgrade_redundant_lp.redundant_lightpath")}</h3></th>
+                        <th colSpan="5"><h3>{I18n.t("downgrade_redundant_lp.redundant_lightpath")}</h3></th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {this.renderValue('klant',subscription.customer_name, 4)}
                     {this.renderValue('protection','redundant', 4)}
                     {this.renderValue('speed',subscription.service_speed, 4)}
@@ -118,39 +120,48 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                         subscription.nms_service_id_p + " en " + subscription.nms_service_id_s, 4)}
                     {this.renderValue('subscription', this.renderSubscriptionLink(subscription.subscription_id), 4)}
                     <tr>
-                        <td className="vspacer" colspan="5"></td>
+                        <td className="vspacer" colSpan="5"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <table className={primarySelected === true && "highlight"}>
+                        <td colSpan="2">
+                            <table className={(primarySelected === true) ? "highlight" : ""}>
+                                <thead>
                                 <tr>
                                      <td><h3>Primary LP</h3></td>
                                     <td>{subscription.nms_service_id_p}</td>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 <tr>
-                                    <td colspan="2">
+                                    <td colSpan="2">
                                         {this.renderServicePort("A1", spPL)}
                                         {this.renderServicePort("B1", spPR)}
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </td>
-                        <td class="spacer"></td>
-                        <td colspan="2">
-                            <table className={primarySelected === false && "highlight"}>
+                        <td className="spacer"></td>
+                        <td colSpan="2">
+                            <table className={(primarySelected === false) ? "highlight" : ""}>
+                                <thead>
                                 <tr>
                                     <td><h3>Secondary LP</h3></td>
                                     <td>{subscription.nms_service_id_s}</td>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 <tr>
                                     <td colSpan="2">
                                         {this.renderServicePort("A2", spSL)}
                                         {this.renderServicePort("B2", spSR)}
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </td>
                     </tr>
+                    </tbody>
                 </table>
                     </div>
                 </div>
