@@ -20,7 +20,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
             spPR: "",
             spSL: "",
             spSR: "",
-            primarySelected: false
+            primarySelected: true
         }
     };
 
