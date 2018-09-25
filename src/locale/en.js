@@ -221,6 +221,15 @@ I18n.translations.en = {
         nms_service_id_2_info: "The id of the service on the network (0000-9999)",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
+        noc_subtask_confirmation: "Are all subtasks executed correctly?",
+        noc_subtask_confirmation_info: "Please check the requirements below:",
+        noc_subtask_confirmation_checks: {
+            check_service_built: "The new service has been built on the network",
+            check_iface_no_errors: "The interface does not give any errors",
+            check_cfm_up: "The CFM is up",
+            check_ims_defined: "The new path for service has been put in IMS",
+            check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
+        },
         noc_modification_confirmation: "NOC confirms modification of service",
         noc_modification_confirmation_info: "Confirm that the modifications are implemented in the network as specified.",
         noc_modification_confirmation_prefix: "Confirm modification of service with NMS service id ",
