@@ -32,11 +32,9 @@ export function enrichPortSubscription(parentSubscription, subscription){
     subscription.label = parentSubscription.instances.find(
         i => i.product_block.name === 'Service Attach Point' && i.values.find(
             rt => rt.resource_type.resource_type === 'port_subscription_id').value === subscription.subscription_id).label;
-
-    //const si = parentSubscription.instances.find(i => i.label === label);
-    //const sub_id = si.values.find(rt => rt.resource_type.resource_type === 'port_subscription_id').value;
-        //const result = childSubscriptions.find(cs => cs.subscription_id === sub_id);
-    // voor elk van de endpoints, haal daar de
+    subscription.vlan = parentSubscription.instances.find(
+        i => i.label === subscription.label ).values.find(
+            v => v.resource_type.resource_type === 'vlanrange').value;
     const vc_label_part = subscription.label.split("-")[0];
     const prim_sec_part = (subscription.label.split("-")[1] === 'left') ? 0 : 1;
     const si = parentSubscription.instances.find(i => i.label === vc_label_part);
