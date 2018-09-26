@@ -221,6 +221,15 @@ I18n.translations.en = {
         nms_service_id_2_info: "The id of the service on the network (0000-9999)",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
+        noc_subtask_confirmation: "Are all subtasks executed correctly?",
+        noc_subtask_confirmation_info: "Please check the requirements below:",
+        noc_subtask_confirmation_checks: {
+            check_service_built: "The new service has been built on the network",
+            check_iface_no_errors: "The interface does not give any errors",
+            check_cfm_up: "The CFM is up",
+            check_ims_defined: "The new path for service has been put in IMS",
+            check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
+        },
         noc_modification_confirmation: "NOC confirms modification of service",
         noc_modification_confirmation_info: "Confirm that the modifications are implemented in the network as specified.",
         noc_modification_confirmation_prefix: "Confirm modification of service with NMS service id ",
@@ -307,8 +316,10 @@ I18n.translations.en = {
         ims_node_id_info: "Choose a node that has state PLANNED in IMS",
         node_ready_for_production: "Is the node ready for production?",
         node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
-        confirm_core_link: "Is the node's corelink configured ok?",
-        confirm_core_link_info: "Confirm that the corelink is configured ok",
+        confirm_corelink: "Is the node's corelink configured ok?",
+        confirm_corelink_info: "Confirm that the corelink is configured ok",
+        plan_dont_allocate: "Set state to planned",
+        plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
         ims_port_id1: "First node and port",
         ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
         ims_port_id2: "Second node and port",
@@ -616,6 +627,7 @@ I18n.translations.en = {
         patch_position: "Patch position",
         msp: "MSP",
         ssp: "SSP",
+        redundant_lightpath: "redundant lichtpad"
     },
     metadata: {
         tabs: {

@@ -2,10 +2,11 @@
 
 //process statuses
 $failed: $red;
-$aborted: $orange;
-$completed: $gold;
+$waiting: $orange;
+$aborted: $darkest-blue;
+$completed: $blue;
 $running: $dark-green;
-$suspended: $darker-blue;
+$suspended: $gold;
 
 section.process-state-detail {
     padding: 15px 0 10px 0;
@@ -49,6 +50,9 @@ section.process-state-detail {
 
         &.failed {
             background-color: $failed;
+        }
+        &.waiting {
+            background-color: $waiting;
         }
         &.aborted {
             background-color: $aborted;

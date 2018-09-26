@@ -19,6 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
+import NOCConfirm from "./NOCConfirm";
 import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -61,8 +62,8 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
-        };
-    }
+        }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
@@ -141,11 +142,11 @@ export default class UserInputForm extends React.Component {
     changeDateInput = name => dd => {
         const value = moment(dd).format("YYYY-MM-DD");
         this.changeUserInput(name, value);
-    }
+    };
 
     clearDateInput = (name, target) => trigger => {
         this.changeUserInput(name, target);
-    }
+    };
 
 
     enforceSelectInputUniqueness = (hash, name, value) => {
@@ -382,6 +383,17 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeBooleanInput(name)}
                               info={infoLabel}/>
                 </div>;
+            case "noc_subtask_confirmation":
+                const {is_redundant} = process.current_state;
+                let circuits = [];
+                if (is_redundant){
+                    const {ims_circuit_name_1, ims_circuit_name_2} = process.current_state;
+                    circuits = [ims_circuit_name_1, ims_circuit_name_2];
+                } else  {
+                    circuits = [process.current_state.ims_circuit_name];
+                };
+                return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
+                                    circuits={circuits} />;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}

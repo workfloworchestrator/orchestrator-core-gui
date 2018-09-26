@@ -8,10 +8,13 @@ section.step {
     text-align: center;
     display: flex;
     flex-direction: column;
-    padding: 12px 0;
+    padding: 12px;
 
     &.failed {
         background-color: $red;
+    }
+    &.waiting {
+        background-color: $orange;
     }
     &.pending {
         background-color: $dark-grey;
@@ -30,8 +33,6 @@ section.step {
         color: $dark-grey;
     }
     &.abort {
-        background-color: $orange;
-        color: $dark-grey;
+        background-color: $darkest-blue;
     }
 }
-
