@@ -15,8 +15,6 @@ export default class NOCConfirm extends React.PureComponent {
             cfm_up: false,
             ims_primary: false,
             ims_secondary: false
-
-
         };
     }
 
