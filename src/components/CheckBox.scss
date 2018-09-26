@@ -1,6 +1,6 @@
 @import "../stylesheets/vars.scss";
 
-div.checkbox {
+div.checkbox, div.level_2 {
 
   input[type="checkbox"] {
     display: none;
@@ -54,4 +54,11 @@ div.checkbox {
       background-color: $medium-grey;
     }
   }
+
+}
+
+div.level_2 {
+  padding-left: 50px;
+
+  label {}
 }
