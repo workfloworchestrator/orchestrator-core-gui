@@ -37,7 +37,7 @@ I18n.translations.en = {
         customer: "Customer",
         subscription_id: "Sub ID",
         description: "Description",
-        family: "Family",
+        family: "Fam",
         prefix: "Prefix",
         status: "Status",
         start_date: "Start Date",
@@ -46,7 +46,8 @@ I18n.translations.en = {
             family: "IP Family",
             root_prefix: "Root Prefix",
             status: "Status",
-        }
+        },
+        searchPlaceHolder: "Search for IP prefixes"
     },
     processes: {
         changes: "Changes",

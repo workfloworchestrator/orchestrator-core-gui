@@ -3,6 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import "./Prefixes.css";
+import {ip_blocks, prefix_filters, prefix_by_id, subscriptionsByProductType} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate} from "../utils/Lookups";
 
@@ -33,15 +34,61 @@ export default class Prefixes extends React.PureComponent {
         {name: "IPv4", selected: true, count: 0},
         {name: "IPv6", selected: true, count: 0}
       ],
+      root_prefixes: [],
     }
   }
 
-  showParentSubscriptions(prefix) {
-    return
+  componentDidMount(){
+      prefix_filters().then(result => {
+          const filter = result.map(p => ({name: p.prefix, selected: true, count: 0}));
+          this.setState({root_prefixes: result, filterAttributesRootPrefix: filter});
+      });
+      subscriptionsByProductType("IP_PREFIX")
+      .then(subscriptions =>
+        subscriptions.map(sub => this.enrichSubscription(sub)))
+      .then(enrichedSubscriptions =>
+        Promise.all(enrichedSubscriptions).then(result => {
+                this.setState({prefixes: result});
+            }
+        )
+     )
   }
 
-  filter(item) {
-    const newFilterAttributesFamily = [...this.state.filterAttributesFamily];
+  enrichSubscription = sub => {
+     const ipam_prefix_id = sub.instances
+        .map(instance =>
+            instance.values.filter(v => v.resource_type.resource_type === "ipam_prefix_id")
+            .map(v => v.value)[0])[0];
+     const ipam_prefix = prefix_by_id(ipam_prefix_id);
+     return ipam_prefix.then(prefix => {
+        return {
+                customer_name: organisationNameByUuid(sub.customer_id),
+                subscription_id: sub.subscription_id,
+                start_date: sub.start_date,
+                description: sub.description,
+                prefix: prefix.prefix,
+                family: prefix.afi,
+                status: prefix.status}
+     })
+     .catch(error => {
+         return {
+             customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
+             subscription_id: sub.subscription_id,
+             start_date: sub.start_date,
+             description: sub.description,
+             prefix: "N/A",
+             family: "N/A",
+             status: "N/A",
+         }
+     })
+  }
+
+  showParentSubscriptions(prefix) {
+    return null;
+  }
+
+  filter = item => {
+    const newFilterAttributesFamily = this.state.filterAttributesFamily;
     newFilterAttributesFamily.forEach(attr => {
         if (attr.name === item.name) {
             attr.selected = !attr.selected;
@@ -68,8 +115,7 @@ export default class Prefixes extends React.PureComponent {
   }
 
   sort = name => e => {
-
-
+    return null;
   }
 
   search = e => {
@@ -100,28 +146,33 @@ export default class Prefixes extends React.PureComponent {
               {this.sortColumnIcon(name, this.state.sorted)}
           </th>
       };
+      const query = this.state.query;
 
-    return <div className="mod-prefixes">
+    return (
+        <div className="mod-prefixes">
             <div className="card">
-            <div className="options">
-                <FilterDropDown items={this.state.filterAttributesFamily}
-                                filterBy={this.filter}
-                                label={I18n.t("prefixes.filters.family")}/>
-                <FilterDropDown items={this.state.filterAttributesRootPrefix}
-                                filterBy={this.filter}
-                                label={I18n.t("prefixes.filters.root_prefix")}/>
-                <FilterDropDown items={this.state.filterAttributesStatus}
-                                filterBy={this.filter}
-                                label={I18n.t("prefixes.filters.status")}/>
+                <div className="options">
+                    <FilterDropDown items={this.state.filterAttributesFamily}
+                                    filterBy={this.filter}
+                                    label={I18n.t("prefixes.filters.family")}/>
+                    <FilterDropDown items={this.state.filterAttributesRootPrefix}
+                                    filterBy={this.filter}
+                                    label={I18n.t("prefixes.filters.root_prefix")}
+                                    noTrans={true}/>
+                    <FilterDropDown items={this.state.filterAttributesStatus}
+                                    filterBy={this.filter}
+                                    label={I18n.t("prefixes.filters.status")}/>
+
+                    <section className="search">
+                    <input className="allowed"
+                           placeholder={I18n.t("prefixes.searchPlaceHolder")}
+                           type="text"
+                           onChange={this.search}
+                           value={query}/>
+                    <i className="fa fa-search"></i>
+                    </section>
+                </div>
             </div>
-            <section className="search">
-                <input className="allowed"
-                       placeholder={I18n.t("prefixes.searchPlaceHolder")}
-                       type="text"
-                       onChange={this.search}
-                       value={query}/>
-                <i className="fa fa-search"></i>
-            </section>
             <section className="prefixes">
             <table className="prefixes">
                 <thead>
@@ -151,10 +202,12 @@ export default class Prefixes extends React.PureComponent {
                 </tbody>
               </table>
            </section>
-           </div>;
-  }
+          </div>
+        );
+    }
 }
 
 Prefixes.propTypes = {
     history: PropTypes.object.isRequired,
-};
+    organisations: PropTypes.array.isRequired
+}

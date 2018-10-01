@@ -152,6 +152,10 @@ export function subscriptionsByTags(tags) {
     return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
 }
 
+export function subscriptionsByProductType(type) {
+    return fetchJson(`subscriptions/product_type/${type}`);
+}
+
 export function subscriptionInsyncStatus(subscription_id) {
     return fetchJson(`subscriptions/insync_status_relations/${subscription_id}`)
 }
@@ -325,6 +329,9 @@ export function prefix_filters(){
     return fetchJson("ipam/prefix_filters")
 }
 
+export function prefix_by_id(prefixId) {
+    return fetchJson(`ipam/prefix_by_id/${prefixId}`);
+}
 
 export function subnets(subnet, netmask, prefixlen){
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
