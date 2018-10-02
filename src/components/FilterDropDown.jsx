@@ -13,8 +13,8 @@ export default class FilterDropDown extends React.PureComponent {
         this.state = {dropDownActive: false};
     }
 
-    renderDropDownItem = (item, filterBy, noTrans) => {
-        const name = noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
+    renderDropDownItem = (item, filterBy) => {
+        const name = this.props.noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
         return (
             <li key={item.name} onClick={() => filterBy(item)}>
                 <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)}/>
@@ -30,7 +30,7 @@ export default class FilterDropDown extends React.PureComponent {
 
 
     render() {
-        const {items, filterBy, label, noTrans} = this.props;
+        const {items, filterBy, label} = this.props;
         const {dropDownActive} = this.state;
         const filtered = items.filter(item => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);
@@ -44,7 +44,7 @@ export default class FilterDropDown extends React.PureComponent {
                     <span className="filter-name">{name}</span>
                     <span><i className={`fa ${faIcon}`}/></span>
                 </div>
-                {dropDownActive && this.renderDropDown(items, filterBy, noTrans)}
+                {dropDownActive && this.renderDropDown(items, filterBy)}
             </section>);
     }
 
@@ -53,5 +53,6 @@ export default class FilterDropDown extends React.PureComponent {
 FilterDropDown.propTypes = {
     items: PropTypes.array.isRequired,
     filterBy: PropTypes.func.isRequired,
+    label: PropTypes.string,
     noTrans: PropTypes.bool
 };

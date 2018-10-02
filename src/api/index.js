@@ -330,7 +330,8 @@ export function prefix_filters(){
 }
 
 export function prefix_by_id(prefixId) {
-    return fetchJson(`ipam/prefix_by_id/${prefixId}`);
+    return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`)
+           .catch(err => Promise.resolve({afi: 4, prefix: "", state: 0}));
 }
 
 export function subnets(subnet, netmask, prefixlen){

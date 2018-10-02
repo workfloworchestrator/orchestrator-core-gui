@@ -62,24 +62,13 @@ export default class Prefixes extends React.PureComponent {
      const ipam_prefix = prefix_by_id(ipam_prefix_id);
      return ipam_prefix.then(prefix => {
         return {
-                customer_name: organisationNameByUuid(sub.customer_id),
+                customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
                 subscription_id: sub.subscription_id,
                 start_date: sub.start_date,
                 description: sub.description,
                 prefix: prefix.prefix,
                 family: prefix.afi,
-                status: prefix.status}
-     })
-     .catch(error => {
-         return {
-             customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
-             subscription_id: sub.subscription_id,
-             start_date: sub.start_date,
-             description: sub.description,
-             prefix: "N/A",
-             family: "N/A",
-             status: "N/A",
-         }
+                status: prefix.state}
      })
   }
 
