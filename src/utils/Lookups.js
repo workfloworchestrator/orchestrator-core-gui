@@ -88,3 +88,10 @@ export function capitalize(s) {
     return isEmpty(s) ? "" : s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+// prefix states as returned by IPAM. Free and Failed are fake states for the frontend
+//                          0       1            2          3          4           5          6
+export const ipamStates = [ "Free", "Allocated", "Expired", "Planned", "Reserved", "Suspend", "Failed"]
+
+// AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
+//                             0      1      2      3      4       5      6
+export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"]

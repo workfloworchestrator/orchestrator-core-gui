@@ -3,9 +3,9 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import "./Prefixes.css";
-import {ip_blocks, prefix_filters, prefix_by_id, subscriptionsByProductType} from "../api";
+import {ip_blocks, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
-import {organisationNameByUuid, renderDate} from "../utils/Lookups";
+import {organisationNameByUuid, renderDate, enrichIPPrefixSubscription, ipamStates, familyFullName} from "../utils/Lookups";
 
 export default class Prefixes extends React.PureComponent {
 
@@ -26,8 +26,9 @@ export default class Prefixes extends React.PureComponent {
       sorted: {name: "start_date", descending: true},
       filterAttributesStatus: [
         {name: "Allocated", selected: true, count: 0},
+        {name: "Free", selected: true, count: 0},
         {name: "Planned", selected: true, count: 0},
-        {name: "Available", selected: true, count: 0}
+        {name: "Failed", selected: true, count: 0}
       ],
       filterAttributesRootPrefix: [],
       filterAttributesFamily: [
@@ -45,7 +46,7 @@ export default class Prefixes extends React.PureComponent {
       });
       subscriptionsByProductType("IP_PREFIX")
       .then(subscriptions =>
-        subscriptions.map(sub => this.enrichSubscription(sub)))
+        subscriptions.map(sub => this.enrichIPPrefixSubscription(sub)))
       .then(enrichedSubscriptions =>
         Promise.all(enrichedSubscriptions).then(result => {
                 this.setState({prefixes: result});
@@ -54,22 +55,31 @@ export default class Prefixes extends React.PureComponent {
      )
   }
 
-  enrichSubscription = sub => {
+
+  enrichIPPrefixSubscription(sub) {
      const ipam_prefix_id = sub.instances
         .map(instance =>
             instance.values.filter(v => v.resource_type.resource_type === "ipam_prefix_id")
             .map(v => v.value)[0])[0];
-     const ipam_prefix = prefix_by_id(ipam_prefix_id);
-     return ipam_prefix.then(prefix => {
-        return {
+     return prefixById(ipam_prefix_id)
+        .then(prefix => ({
                 customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
                 subscription_id: sub.subscription_id,
                 start_date: sub.start_date,
                 description: sub.description,
                 prefix: prefix.prefix,
                 family: prefix.afi,
-                status: prefix.state}
-     })
+                state: prefix.state})
+        )
+        .catch(error => ({
+             customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
+             subscription_id: sub.subscription_id,
+             start_date: sub.start_date,
+             description: sub.description,
+             state: -1,
+             family: 0,
+             prefix: error.message
+        }));
   }
 
   showParentSubscriptions(prefix) {
@@ -128,6 +138,7 @@ export default class Prefixes extends React.PureComponent {
 
   render() {
       const columns = ["customer", "subscription_id", "description", "family", "prefix", "status", "start_date"];
+      ;
       const th = index => {
           const name = columns[index];
           return <th key={index} className={name} onClick={this.sort(name)}>
@@ -174,17 +185,27 @@ export default class Prefixes extends React.PureComponent {
                     <td data-label={I18n.t("prefixes.customer")}
                       className="customer">{prefix.customer_name}</td>
                     <td data-label={I18n.t("prefixes.subscription_id")}
-                      className="subscription">{prefix.subscription_id}</td>
+                      className="subscription">{prefix.subscription_id.substring(0,8)}</td>
                     <td data-label={I18n.t("prefixes.description")}
                       className="description">{prefix.description}</td>
+                  {prefix.prefix ? ([
                     <td data-label={I18n.t("prefixes.family")}
-                      className="family">{prefix.family === "4" ? "IPv4" : "IPv6"}</td>
+                      className="family">{familyFullName[prefix.family]}</td>,
                     <td data-label={I18n.t("prefixes.ip_prefix")}
-                      className="prefix">{prefix.prefix}</td>
+                      className="prefix">{prefix.prefix}</td>,
                     <td data-label={I18n.t("prefixes.status")}
-                      className="status">{prefix.status}</td>
-                    <td data-label={I18n.t("prefixes.start_date")}
-                      className="start_date">{prefix.start_date}</td>
+                      className="status">{ipamStates[prefix.state]}</td>]
+                  ) : ([
+                    <td data-label={I18n.t("prefixes.family")}
+                      className="family">-</td>,
+                    <td data-label={I18n.t("prefixes.ip_prefix")}
+                      className="prefix">{prefix.error}</td>,
+                    <td data-label={I18n.t("prefixes.status")}
+                      className="status">0</td>])
+                  }
+                  <td data-label={I18n.t("prefixes.start_date")}
+                    className="start_date">{renderDate(prefix.start_date)}</td>
+
                   </tr>
                   )
                 }
