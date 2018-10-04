@@ -36,9 +36,9 @@ export default class Prefixes extends React.PureComponent {
       prefix_filters()
       .then(result => {
           const prefixFilters = result.map(p => ({name: p.prefix, selected: true, count: 0}));
-          const newFilterAttributes = {...this.state.filterAttributes};
-          newFilterAttributes.rootPrefix = prefixFilters;
-          this.setState({rootPrefixes: result, filterAttributes: newFilterAttributes});
+          const currentFilterAttributes = this.state.filterAttributes;
+          const modifiedAttributes = {rootPrefix: prefixFilters}
+          this.setState({rootPrefixes: result, filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}});
           this.getFreePrefixes(result);
       });
       subscriptionsByProductType("IP_PREFIX")
@@ -55,22 +55,28 @@ export default class Prefixes extends React.PureComponent {
             .map(v => v.value)[0])[0];
      return prefixById(ipam_prefix_id)
         .then(prefix => ({
+                id: prefix.id,
                 customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
                 subscription_id: sub.subscription_id,
                 start_date: sub.start_date,
                 description: sub.description,
                 prefix: prefix.prefix,
+                prefixlen: parseInt(prefix.prefix.split("/")[1], 10),
+                parent: prefix.parent__label.split(": ")[1],
                 family: prefix.afi,
                 state: prefix.state})
         )
         .catch(error => ({
+             id: 9999,
              customer_name: organisationNameByUuid(sub.customer_id, this.props.organisations),
              subscription_id: sub.subscription_id,
              start_date: sub.start_date,
              description: sub.description,
              state: ipamStates.indexOf("Failed"),
+             parent: "",
              family: 0,
-             prefix: error.message
+             prefix: error.message,
+             prefixlen: 0
         }))
         .then(result => {
             this.setState({prefixes: this.state.prefixes.concat(result)});
@@ -82,13 +88,16 @@ export default class Prefixes extends React.PureComponent {
         roots.map(p => {
             freeSubnets(p.prefix)
                 .then(result => {
-                  const free = result.map(r => ({
+                  const free = result.map((r, idx) => ({
+                      id: 9999 - idx,
                       customer_name: "N/A",
                       subscription_id: "N/A",
                       start_date: Date.now(),
-                      description: `Vrij subnet binnen ${p.prefix}`,
+                      description: "Vrije ruimte - gegenereerd",
                       family: p.version,
                       prefix: r,
+                      prefixlen: parseInt(r.split("/")[1], 10),
+                      parent: p.prefix,
                       state: ipamStates.indexOf("Free")
                   }));
                   this.setState({prefixes: this.state.prefixes.concat(free)});
@@ -107,6 +116,7 @@ export default class Prefixes extends React.PureComponent {
         if (attr.name === item.name) {
             attr.selected = !attr.selected;
         }
+        return attr;
     });
     this.setState({
         filterAttributes: {...currentFilterAttributes, ...modifiedAttributes},
@@ -114,19 +124,26 @@ export default class Prefixes extends React.PureComponent {
     );
   }
 
-  sortBy = (name, descending) => (a, b) => {
-      var aSafe, bSafe;
-      if (descending) {
-          // swap a and b for descending order
-          aSafe = b[name] || "";
-          bSafe = a[name] || "";
-      } else {
-          aSafe = a[name] || "";
-          bSafe = b[name] || "";
-      }
+  filter = unfiltered => {
+      return unfiltered.filter(prefix => {
+       const statusFilter = this.state.filterAttributes.status.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
+       const rootPrefixFilter = this.state.filterAttributes.rootPrefix.find(attr => attr.name === prefix.parent);
+       const familyFilter = this.state.filterAttributes.family.find(attr => attr.name === familyFullName[prefix.family]);
+
+       return (statusFilter ? statusFilter.selected : true)
+        && (rootPrefixFilter ? rootPrefixFilter.selected : true)
+        && (familyFilter ? familyFilter.selected : true);
+    });
+  }
+
+  sortBy = name => (a, b) => {
+      const aSafe = a[name] || "";
+      const bSafe = b[name] || "";
       if (name === "prefix") {
         return ipAddressToNumber(aSafe.split("/")[0]) - ipAddressToNumber(bSafe.split("/")[0]);
-      } else {
+    } else if (name == "status") {
+        return ipamStates[parseInt(aSafe,10)].localeCompare(ipamStates[parseInt(bSafe,10)]);
+    } else {
 
         return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toString().toLowerCase()) : aSafe - bSafe;
       }
@@ -142,7 +159,11 @@ export default class Prefixes extends React.PureComponent {
 
   sort = unsorted => {
       const {name, descending} = this.state.sortOrder;
-      return unsorted.sort(this.sortBy(name, descending));
+      const sorted = unsorted.sort(this.sortBy(name));
+      if (descending) {
+          sorted.reverse();
+      }
+      return sorted;
   };
 
   search = e => {
@@ -152,7 +173,23 @@ export default class Prefixes extends React.PureComponent {
   }
 
   delayedSearch = debounce(query => {
-    return query;
+    const {prefixes} = this.state;
+    const queryToLower = query.toLowerCase();
+    const runQuery = new Promise(
+        function(resolve, reject) {
+         const results = prefixes.filter(prefix => {
+                    return (prefix.prefix.toLowerCase().includes(queryToLower)
+                    || prefix.customer_name.toLowerCase().includes(queryToLower)
+                    || prefix.description.toLowerCase().includes(queryToLower)
+                    || ipamStates[prefix.state].toLowerCase().includes(queryToLower)
+                    || queryToLower === familyFullName[prefix.family].toLowerCase()
+                    || renderDate(prefix.start_date).includes(query))
+                });
+         resolve(results);
+    });
+    runQuery.then(results => {
+        this.setState({searchResults: results});
+    });
   }, 250);
 
   sortColumnIcon = (name, sorted) => {
@@ -163,7 +200,7 @@ export default class Prefixes extends React.PureComponent {
   }
 
   render() {
-    const columns = ["customer", "subscription_id", "description", "family", "prefix", "status", "start_date"];
+    const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "status", "start_date"];
     const th = index => {
       const name = columns[index];
       return (
@@ -173,8 +210,9 @@ export default class Prefixes extends React.PureComponent {
         </th>
       )
     };
-    const {prefixes, query, filterAttributes} = this.state;
-    const sortedPrefixes = this.sort(prefixes);
+    const {prefixes, query, searchResults, filterAttributes} = this.state;
+    const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
+    const sortedPrefixes = this.sort(filteredPrefixes);
 
     return (
         <div className="mod-prefixes">
@@ -219,15 +257,23 @@ export default class Prefixes extends React.PureComponent {
                   {prefix.prefix ? ([
                     <td data-label={I18n.t("prefixes.family")}
                       className="family">{familyFullName[prefix.family]}</td>,
-                    <td data-label={I18n.t("prefixes.ip_prefix")}
+                    <td data-label={I18n.t("prefixes.prefixlen")}
+                        className="prefixlen">/{prefix.prefixlen}</td>,
+                    <td data-label={I18n.t("prefixes.prefix")}
                       className="prefix">{prefix.prefix}</td>,
+                    <td data-label={I18n.t("prefixes.parent")}
+                        className="parent">{prefix.parent}</td>,
                     <td data-label={I18n.t("prefixes.status")}
                       className="status">{ipamStates[prefix.state]}</td>]
                   ) : ([
                     <td data-label={I18n.t("prefixes.family")}
                       className="family">-</td>,
-                    <td data-label={I18n.t("prefixes.ip_prefix")}
+                    <td data-label={I18n.t("prefixes.prefixlen")}
+                        className="prefixlen">0</td>,
+                    <td data-label={I18n.t("prefixes.prefix")}
                       className="prefix">{prefix.error}</td>,
+                      <td data-label={I18n.t("prefixes.parent")}
+                          className="parent">-</td>,
                     <td data-label={I18n.t("prefixes.status")}
                       className="status">0</td>])
                   }

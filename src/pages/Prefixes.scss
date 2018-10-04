@@ -101,7 +101,7 @@
         width: 15%;
       }
       th.subscription_id {
-        width: 8%;
+        width: 5%;
       }
       th.description {
         width: 20%;
@@ -109,7 +109,13 @@
       th.family {
         width: 5%;
       }
+      th.prefixlen {
+        width: 5%;
+      }
       th.prefix {
+        width: 15%;
+      }
+      th.parent {
         width: 15%;
       }
       th.status {
