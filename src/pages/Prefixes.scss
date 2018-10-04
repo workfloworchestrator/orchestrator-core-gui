@@ -78,11 +78,18 @@
     }
     tr {
       border-bottom: 1px solid $light-grey;
-      &.suspended {
+
+      &.Planned {
         background-color: $light-gold;
       }
-      &.running {
+      &.Free {
         background-color: $light-green;
+      }
+      &.Allocated {
+        background-color: $gold;
+      }
+      &.Failed {
+        background-color: $red;
       }
     }
     thead {

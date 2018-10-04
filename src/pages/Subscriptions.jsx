@@ -409,4 +409,3 @@ Subscriptions.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired
 };
-

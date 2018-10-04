@@ -333,6 +333,10 @@ export function prefixById(prefixId) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
 
+export function freeSubnets(supernet) {
+    return fetchJson(`ipam/free_subnets/${supernet}`);
+}
+
 export function subnets(subnet, netmask, prefixlen){
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }

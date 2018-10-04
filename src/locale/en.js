@@ -462,9 +462,10 @@ I18n.translations.en = {
         active: "Active",
         disabled: "Disabled",
         terminated: "Terminated",
+        Free: "Free",
         Allocated: "Allocated",
         Planned: "Planned",
-        Available: "Available",
+        Failed: "Failed",
         IPv4: "IPv4",
         IPv6: "IPv6"
     },
