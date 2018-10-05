@@ -612,8 +612,8 @@ I18n.translations.en = {
         copy: "Copy to clipboard"
     },
     downgrade_redundant_lp: {
-        choice: "Which one the LP should be removed from this redundant LP?",
-        choosen: "The LP which should removed from this redundant LP",
+        choice: "Which lightpath should be removed from this redundant LP?",
+        choosen: "The lightpath that should be removed from this redundant LP",
         subscription_childs: "The ports in this redundant LP",
         primary: "Primary LP",
         secondary: "Secondary LP",
