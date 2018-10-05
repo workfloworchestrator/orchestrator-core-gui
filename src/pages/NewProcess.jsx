@@ -163,7 +163,7 @@ export default class NewProcess extends React.Component {
     startModifyProcess = e => {
         stop(e);
         const {modifySubscription, modifyWorkflow} = this.state;
-        const {preselectedDienstafname} = this.props;
+        const {preselectedDienstafname, preselectedProduct} = this.props;
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         this.confirmation(I18n.t("subscription.modifyConfirmation", {
@@ -171,7 +171,7 @@ export default class NewProcess extends React.Component {
                 customer: subscription.customer_name,
                 change: change
             }),
-            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedDienstafname).then(() => {
+            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedDienstafname, preselectedProduct).then(() => {
                 this.props.history.push("/processes")
             }));
     };

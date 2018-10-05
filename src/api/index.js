@@ -307,10 +307,13 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId, workflow, dienstafname=null) {
+export function startModificationSubscription(subscriptionId, workflow, dienstafname=null, product=null) {
     const body = {subscription_id: subscriptionId};
     if (!isEmpty(dienstafname)) {
         body.dienstafname = dienstafname;
+    }
+    if (!isEmpty(product)) {
+        body.product = product;
     }
     return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
 }
