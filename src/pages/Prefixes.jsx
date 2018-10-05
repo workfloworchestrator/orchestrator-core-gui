@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {isEmpty, stop} from "../utils/Utils";
+import {isEmpty, stop, isValidUUIDv4} from "../utils/Utils";
 
 import "./Prefixes.css";
 import {freeSubnets, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
@@ -46,6 +46,15 @@ export default class Prefixes extends React.PureComponent {
         subscriptions
         .filter(s => s.status === "active")
         .map(sub => this.enrichIPPrefixSubscription(sub)));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+      if (this.state.prefixes !== prevState.prefixes) {
+          this.count();
+      }
+      if (this.state.filterAttributes !== prevState.filterAttributes) {
+          this.count();
+      }
   }
 
   enrichIPPrefixSubscription(sub) {
@@ -105,9 +114,21 @@ export default class Prefixes extends React.PureComponent {
             )
   }
 
-  showParentSubscriptions(prefix) {
-    return null;
-  }
+
+  count = debounce(() => {
+      const {prefixes, filterAttributes} = this.state;
+      const {state, rootPrefix, family} = filterAttributes;
+      const stateCount = state.map(attr => (
+          {...attr, count: prefixes.filter(p => ipamStates[p.state] === attr.name).length})
+      );
+      const rootPrefixCount = rootPrefix.map(attr => (
+          {...attr, count: prefixes.filter(p => p.parent === attr.name).length})
+      );
+      const familyCount = family.map(attr => (
+          {...attr, count: prefixes.filter(p => familyFullName[p.family] === attr.name).length})
+      );
+      this.setState({filterAttributes: {state: stateCount, rootPrefix: rootPrefixCount, family: familyCount}})
+  }, 250)
 
   setFilter = filterName => item => {
     const currentFilterAttributes = this.state.filterAttributes;
@@ -199,6 +220,12 @@ export default class Prefixes extends React.PureComponent {
      return <i/>;
   }
 
+  showSubscription = subscription_id => () => {
+      if (isValidUUIDv4(subscription_id)) {
+          this.props.history.push("/subscription/" + subscription_id);
+      }
+  }
+
   render() {
     const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "state", "start_date"];
     const th = index => {
@@ -246,7 +273,7 @@ export default class Prefixes extends React.PureComponent {
                 </thead>
                 <tbody>
                 {sortedPrefixes.map((prefix, index) =>
-                  <tr key={`${prefix.id}_${index}`} onClick={this.showParentSubscriptions(prefix)}
+                  <tr key={`${prefix.id}_${index}`} onClick={this.showSubscription(prefix.subscription_id)}
                     className={ipamStates[prefix.state]}>
                     <td data-label={I18n.t("prefixes.customer")}
                       className="customer">{prefix.customer_name}</td>
