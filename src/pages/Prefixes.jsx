@@ -146,10 +146,11 @@ export default class Prefixes extends React.PureComponent {
   }
 
   filter = unfiltered => {
+      const {state, rootPrefix, family} = this.state.filterAttributes;
       return unfiltered.filter(prefix => {
-       const stateFilter = this.state.filterAttributes.state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
-       const rootPrefixFilter = this.state.filterAttributes.rootPrefix.find(attr => attr.name === prefix.parent);
-       const familyFilter = this.state.filterAttributes.family.find(attr => attr.name === familyFullName[prefix.family]);
+       const stateFilter = state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
+       const rootPrefixFilter = rootPrefix.find(attr => attr.name === prefix.parent);
+       const familyFilter = family.find(attr => attr.name === familyFullName[prefix.family]);
 
        return (stateFilter ? stateFilter.selected : true)
         && (rootPrefixFilter ? rootPrefixFilter.selected : true)
@@ -165,7 +166,6 @@ export default class Prefixes extends React.PureComponent {
     } else if (name === "state") {
         return ipamStates[parseInt(aSafe,10)].localeCompare(ipamStates[parseInt(bSafe,10)]);
     } else {
-
         return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toString().toLowerCase()) : aSafe - bSafe;
       }
     };
