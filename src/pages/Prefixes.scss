@@ -86,10 +86,10 @@
         background-color: $light-green;
       }
       &.Allocated {
-        background-color: $gold;
+        background-color: $light-blue;
       }
       &.Failed {
-        background-color: $red;
+        background-color: $light-red;
       }
     }
     thead {
