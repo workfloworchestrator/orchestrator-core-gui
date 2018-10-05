@@ -281,32 +281,18 @@ export default class Prefixes extends React.PureComponent {
                       className="subscription">{prefix.subscription_id.substring(0,8)}</td>
                     <td data-label={I18n.t("prefixes.description")}
                       className="description">{prefix.description}</td>
-                  {prefix.prefix ? ([
                     <td data-label={I18n.t("prefixes.family")}
-                      className="family">{familyFullName[prefix.family]}</td>,
+                      className="family">{familyFullName[prefix.family]}</td>
                     <td data-label={I18n.t("prefixes.prefixlen")}
-                        className="prefixlen">/{prefix.prefixlen}</td>,
+                        className="prefixlen">/{prefix.prefixlen}</td>
                     <td data-label={I18n.t("prefixes.prefix")}
-                      className="prefix">{prefix.prefix}</td>,
+                      className="prefix">{prefix.prefix}</td>
                     <td data-label={I18n.t("prefixes.parent")}
-                        className="parent">{prefix.parent}</td>,
+                        className="parent">{prefix.parent}</td>
                     <td data-label={I18n.t("prefixes.state")}
-                      className="state">{ipamStates[prefix.state]}</td>]
-                  ) : ([
-                    <td data-label={I18n.t("prefixes.family")}
-                      className="family">-</td>,
-                    <td data-label={I18n.t("prefixes.prefixlen")}
-                        className="prefixlen">0</td>,
-                    <td data-label={I18n.t("prefixes.prefix")}
-                      className="prefix">{prefix.error}</td>,
-                      <td data-label={I18n.t("prefixes.parent")}
-                          className="parent">-</td>,
-                    <td data-label={I18n.t("prefixes.state")}
-                      className="state">0</td>])
-                  }
-                  <td data-label={I18n.t("prefixes.start_date")}
-                    className="start_date">{renderDate(prefix.start_date)}</td>
-
+                      className="state">{ipamStates[prefix.state]}</td>
+                    <td data-label={I18n.t("prefixes.start_date")}
+                      className="start_date">{renderDate(prefix.start_date)}</td>
                   </tr>
                   )
                 }
