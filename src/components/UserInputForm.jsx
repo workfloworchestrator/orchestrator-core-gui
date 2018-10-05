@@ -309,12 +309,17 @@ export default class UserInputForm extends React.Component {
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
+                const newProductId = lookupValueFromNestedState(userInput.product_id_key, currentState) ||
+                    lookupValueFromNestedState("product", currentState);
+
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
                     subscriptionId={subscriptionId}
                     disabled={userInput.readonly}
-                    transitionType={userInput.transition_type}/>;
+                    transitionType={userInput.transition_type}
+                    newProductId={newProductId}
+                />;
             case "contact_persons" :
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
