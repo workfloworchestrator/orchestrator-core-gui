@@ -14,7 +14,7 @@ export default class FilterDropDown extends React.PureComponent {
     }
 
     renderDropDownItem = (item, filterBy) => {
-        const name = I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
+        const name = this.props.noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
         return (
             <li key={item.name} onClick={() => filterBy(item)}>
                 <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)}/>
@@ -52,5 +52,7 @@ export default class FilterDropDown extends React.PureComponent {
 
 FilterDropDown.propTypes = {
     items: PropTypes.array.isRequired,
-    filterBy: PropTypes.func.isRequired
+    filterBy: PropTypes.func.isRequired,
+    label: PropTypes.string,
+    noTrans: PropTypes.bool
 };
