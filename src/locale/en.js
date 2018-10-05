@@ -41,13 +41,13 @@ I18n.translations.en = {
         prefixlen: "len",
         prefix: "Prefix",
         parent: "Parent",
-        status: "Status",
+        state: "State",
         start_date: "Start Date",
         select: "select",
         filters : {
             family: "IP Family",
             root_prefix: "Root Prefix",
-            status: "Status",
+            state: "State",
         },
         searchPlaceHolder: "Search for IP prefixes"
     },

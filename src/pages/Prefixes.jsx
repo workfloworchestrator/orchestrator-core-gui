@@ -5,9 +5,9 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 
 import "./Prefixes.css";
-import {freeSubnets, ip_blocks, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
+import {freeSubnets, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
-import {organisationNameByUuid, renderDate, enrichIPPrefixSubscription, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
+import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
 
 export default class Prefixes extends React.PureComponent {
 
@@ -20,7 +20,7 @@ export default class Prefixes extends React.PureComponent {
       searchResults: [],
       sortOrder: {name: "prefix", descending: false},
       filterAttributes: {
-        status: ipamStates.filter(s => s).map(state =>
+        state: ipamStates.filter(s => s).map(state =>
           ({name: state, selected: true, count: 0})),
         rootPrefix: [],
         family: [
@@ -85,14 +85,14 @@ export default class Prefixes extends React.PureComponent {
   }
 
   getFreePrefixes = roots => {
-        roots.map(p => {
+        return roots.map(p =>
             freeSubnets(p.prefix)
                 .then(result => {
                   const free = result.map((r, idx) => ({
                       id: 9999 - idx,
                       customer_name: "N/A",
                       subscription_id: "N/A",
-                      start_date: Date.now(),
+                      start_date: Math.floor(Date.now() / 1000),
                       description: "Vrije ruimte - gegenereerd",
                       family: p.version,
                       prefix: r,
@@ -102,7 +102,7 @@ export default class Prefixes extends React.PureComponent {
                   }));
                   this.setState({prefixes: this.state.prefixes.concat(free)});
                 })
-        })
+            )
   }
 
   showParentSubscriptions(prefix) {
@@ -126,22 +126,22 @@ export default class Prefixes extends React.PureComponent {
 
   filter = unfiltered => {
       return unfiltered.filter(prefix => {
-       const statusFilter = this.state.filterAttributes.status.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
+       const stateFilter = this.state.filterAttributes.state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
        const rootPrefixFilter = this.state.filterAttributes.rootPrefix.find(attr => attr.name === prefix.parent);
        const familyFilter = this.state.filterAttributes.family.find(attr => attr.name === familyFullName[prefix.family]);
 
-       return (statusFilter ? statusFilter.selected : true)
+       return (stateFilter ? stateFilter.selected : true)
         && (rootPrefixFilter ? rootPrefixFilter.selected : true)
         && (familyFilter ? familyFilter.selected : true);
     });
   }
 
   sortBy = name => (a, b) => {
-      const aSafe = a[name] || "";
-      const bSafe = b[name] || "";
+      const aSafe = a[name] === undefined ? "" : a[name];
+      const bSafe = b[name] === undefined ? "" : b[name];
       if (name === "prefix") {
         return ipAddressToNumber(aSafe.split("/")[0]) - ipAddressToNumber(bSafe.split("/")[0]);
-    } else if (name == "status") {
+    } else if (name === "state") {
         return ipamStates[parseInt(aSafe,10)].localeCompare(ipamStates[parseInt(bSafe,10)]);
     } else {
 
@@ -200,7 +200,7 @@ export default class Prefixes extends React.PureComponent {
   }
 
   render() {
-    const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "status", "start_date"];
+    const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "state", "start_date"];
     const th = index => {
       const name = columns[index];
       return (
@@ -225,9 +225,9 @@ export default class Prefixes extends React.PureComponent {
                                     filterBy={this.setFilter("rootPrefix")}
                                     label={I18n.t("prefixes.filters.root_prefix")}
                                     noTrans={true}/>
-                    <FilterDropDown items={filterAttributes.status}
-                                    filterBy={this.setFilter("status")}
-                                    label={I18n.t("prefixes.filters.status")}/>
+                    <FilterDropDown items={filterAttributes.state}
+                                    filterBy={this.setFilter("state")}
+                                    label={I18n.t("prefixes.filters.state")}/>
 
                     <section className="search">
                     <input className="allowed"
@@ -263,8 +263,8 @@ export default class Prefixes extends React.PureComponent {
                       className="prefix">{prefix.prefix}</td>,
                     <td data-label={I18n.t("prefixes.parent")}
                         className="parent">{prefix.parent}</td>,
-                    <td data-label={I18n.t("prefixes.status")}
-                      className="status">{ipamStates[prefix.state]}</td>]
+                    <td data-label={I18n.t("prefixes.state")}
+                      className="state">{ipamStates[prefix.state]}</td>]
                   ) : ([
                     <td data-label={I18n.t("prefixes.family")}
                       className="family">-</td>,
@@ -274,8 +274,8 @@ export default class Prefixes extends React.PureComponent {
                       className="prefix">{prefix.error}</td>,
                       <td data-label={I18n.t("prefixes.parent")}
                           className="parent">-</td>,
-                    <td data-label={I18n.t("prefixes.status")}
-                      className="status">0</td>])
+                    <td data-label={I18n.t("prefixes.state")}
+                      className="state">0</td>])
                   }
                   <td data-label={I18n.t("prefixes.start_date")}
                     className="start_date">{renderDate(prefix.start_date)}</td>

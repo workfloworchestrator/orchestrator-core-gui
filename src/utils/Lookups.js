@@ -101,7 +101,10 @@ export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"
 export function ipAddressToNumber(ipAddress) {
       const octets = ipAddress.split(".");
       if (octets.length === 4) {
-          return (parseInt(octets[0], 10) * 16777216) + (parseInt(octets[1], 10) * 65536) + (parseInt(octets[2], 10) * 256) + parseInt(octets[3], 10);
+          return (parseInt(octets[0], 10) * 16777216)
+            + (parseInt(octets[1], 10) * 65536)
+            + (parseInt(octets[2], 10) * 256)
+            + parseInt(octets[3], 10);
       } else {
           const hextets = ipAddress.split(":");
           var power;
