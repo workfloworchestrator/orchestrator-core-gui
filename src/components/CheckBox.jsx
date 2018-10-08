@@ -34,7 +34,8 @@ CheckBox.propTypes = {
     readOnly: PropTypes.bool,
     info: PropTypes.string,
     className: PropTypes.string,
-    autofocus: PropTypes.bool
+    autofocus: PropTypes.bool,
+    level: PropTypes.string,
 };
 
 

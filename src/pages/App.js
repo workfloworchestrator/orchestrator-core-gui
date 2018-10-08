@@ -29,6 +29,7 @@ import Cache from "./Cache";
 import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import TaskDetail from "./TaskDetail";
+import Prefixes from "../pages/Prefixes";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -229,6 +230,11 @@ class App extends React.PureComponent {
                         <ProtectedRoute path="/tasks"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Tasks currentUser={currentUser} {...props}/>}/>
+                        <ProtectedRoute path="/prefixes"
+                                        currentUser={currentUser} configuration={configuration}
+                                        render={props => <Prefixes currentuser={currentUser}
+                                                                   organisations={organisations}
+                                                                   {...props} />}/>
                         <ProtectedRoute path="/new-task"
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <NewTask currentUser={currentUser}

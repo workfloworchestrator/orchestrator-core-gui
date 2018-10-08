@@ -29,11 +29,27 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
+        prefixes: "IP Prefixes",
         cache: "Cache",
         new_process: "New Process +"
     },
     prefixes: {
-            select: "select"
+        customer: "Customer",
+        subscription_id: "Sub ID",
+        description: "Description",
+        family: "Fam",
+        prefixlen: "len",
+        prefix: "Prefix",
+        parent: "Parent",
+        state: "State",
+        start_date: "Start Date",
+        select: "select",
+        filters : {
+            family: "IP Family",
+            root_prefix: "Root Prefix",
+            state: "State",
+        },
+        searchPlaceHolder: "Search for IP prefixes"
     },
     processes: {
         changes: "Changes",
@@ -221,6 +237,15 @@ I18n.translations.en = {
         nms_service_id_2_info: "The id of the service on the network (0000-9999)",
         noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
         noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
+        noc_subtask_confirmation: "Are all subtasks executed correctly?",
+        noc_subtask_confirmation_info: "Please check the requirements below:",
+        noc_subtask_confirmation_checks: {
+            check_service_built: "The new service has been built on the network",
+            check_iface_no_errors: "The interface does not give any errors",
+            check_cfm_up: "The CFM is up",
+            check_ims_defined: "The new path for service has been put in IMS",
+            check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
+        },
         noc_modification_confirmation: "NOC confirms modification of service",
         noc_modification_confirmation_info: "Confirm that the modifications are implemented in the network as specified.",
         noc_modification_confirmation_prefix: "Confirm modification of service with NMS service id ",
@@ -447,7 +472,13 @@ I18n.translations.en = {
         provisioning: "Provisioning",
         active: "Active",
         disabled: "Disabled",
-        terminated: "Terminated"
+        terminated: "Terminated",
+        Free: "Free",
+        Allocated: "Allocated",
+        Planned: "Planned",
+        Failed: "Failed",
+        IPv4: "IPv4",
+        IPv6: "IPv6"
     },
     subscriptions: {
         customer_name: "Customer",
@@ -603,8 +634,8 @@ I18n.translations.en = {
         copy: "Copy to clipboard"
     },
     downgrade_redundant_lp: {
-        choice: "Which one the LP should be removed from this redundant LP?",
-        choosen: "The LP which should removed from this redundant LP",
+        choice: "Which lightpath should be removed from this redundant LP?",
+        choosen: "The lightpath that should be removed from this redundant LP",
         subscription_childs: "The ports in this redundant LP",
         primary: "Primary LP",
         secondary: "Secondary LP",

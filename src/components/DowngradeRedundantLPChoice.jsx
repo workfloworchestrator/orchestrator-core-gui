@@ -75,6 +75,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
                 {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name, 1)}
                 {servicePort && this.renderValue("IMS node", servicePort.ims_node, 1)}
                 {servicePort && this.renderValue("IMS port", servicePort.ims_port, 1)}
+                {servicePort && this.renderValue("VLAN ID", servicePort.vlan, 1)}
                 {servicePort && this.renderValue("interface type", servicePort.ims_iface_type, 1)}
                 {servicePort && this.renderValue("patch position", servicePort.ims_patch_position, 1)}
                 {servicePort && this.renderValue("port subscription", this.renderSubscriptionLink(servicePort.subscription_id), 1)}
@@ -91,7 +92,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
     };
 
     renderSubscriptionLink = (subscription_id) => {
-        return <a href='/subscription/{subscription_id}' target="_blank">{subscription_id}</a>;
+        return <a href={"/subscription/" + subscription_id} target="_blank">{subscription_id}</a>;
     };
 
     renderSubscription = (subscription, children) => {
