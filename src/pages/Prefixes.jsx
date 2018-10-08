@@ -30,7 +30,7 @@ export default class Prefixes extends React.PureComponent {
      },
       rootPrefixes: [],
      }
-  }
+  };
 
   componentDidMount(){
       prefix_filters()
@@ -46,7 +46,7 @@ export default class Prefixes extends React.PureComponent {
         subscriptions
         .filter(s => s.status === "active")
         .map(sub => this.enrichIPPrefixSubscription(sub)));
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
       if (this.state.prefixes !== prevState.prefixes) {
@@ -55,7 +55,7 @@ export default class Prefixes extends React.PureComponent {
       if (this.state.filterAttributes !== prevState.filterAttributes) {
           this.count();
       }
-  }
+  };
 
   enrichIPPrefixSubscription(sub) {
      const ipam_prefix_id = sub.instances
@@ -91,7 +91,7 @@ export default class Prefixes extends React.PureComponent {
             this.setState({prefixes: this.state.prefixes.concat(result)});
         });
 
-  }
+  };
 
   getFreePrefixes = roots => {
         return roots.map(p =>
@@ -112,7 +112,7 @@ export default class Prefixes extends React.PureComponent {
                   this.setState({prefixes: this.state.prefixes.concat(free)});
                 })
             )
-  }
+  };
 
 
   count = debounce(() => {
@@ -128,7 +128,7 @@ export default class Prefixes extends React.PureComponent {
           {...attr, count: prefixes.filter(p => familyFullName[p.family] === attr.name).length})
       );
       this.setState({filterAttributes: {state: stateCount, rootPrefix: rootPrefixCount, family: familyCount}})
-  }, 250)
+  }, 250);
 
   setFilter = filterName => item => {
     const currentFilterAttributes = this.state.filterAttributes;
@@ -143,7 +143,7 @@ export default class Prefixes extends React.PureComponent {
         filterAttributes: {...currentFilterAttributes, ...modifiedAttributes},
         }
     );
-  }
+  };
 
   singleSelectFilter = filterName => (e, item) => {
       stop(e);
@@ -160,7 +160,7 @@ export default class Prefixes extends React.PureComponent {
       this.setState({
           filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}
       })
-  }
+  };
 
   selectAll = filterName => e => {
       stop(e);
@@ -175,7 +175,7 @@ export default class Prefixes extends React.PureComponent {
       this.setState({
           filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}
       })
-  }
+  };
 
   filter = unfiltered => {
       const {state, rootPrefix, family} = this.state.filterAttributes;
@@ -188,7 +188,7 @@ export default class Prefixes extends React.PureComponent {
         && (rootPrefixFilter ? rootPrefixFilter.selected : true)
         && (familyFilter ? familyFilter.selected : true);
     });
-  }
+  };
 
   sortBy = name => (a, b) => {
       const aSafe = a[name] === undefined ? "" : a[name];
@@ -208,7 +208,7 @@ export default class Prefixes extends React.PureComponent {
       sortOrder.descending = sortOrder.name === name ? !sortOrder.descending : false;
       sortOrder.name = name;
       this.setState({sortOrder: sortOrder});
-  }
+  };
 
   sort = unsorted => {
       const {name, descending} = this.state.sortOrder;
@@ -223,7 +223,7 @@ export default class Prefixes extends React.PureComponent {
     const query = e.target.value;
     this.setState({query: query});
     this.delayedSearch(query);
-  }
+  };
 
   delayedSearch = debounce(query => {
     const {prefixes} = this.state;
@@ -250,13 +250,13 @@ export default class Prefixes extends React.PureComponent {
          return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"}></i>
      }
      return <i/>;
-  }
+  };
 
   showSubscription = subscription_id => () => {
       if (isValidUUIDv4(subscription_id)) {
           this.props.history.push("/subscription/" + subscription_id);
       }
-  }
+  };
 
   render() {
     const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "state", "start_date"];
@@ -339,10 +339,10 @@ export default class Prefixes extends React.PureComponent {
            </section>
           </div>
         );
-    }
-}
+    };
+};
 
 Prefixes.propTypes = {
     history: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired
-}
+};
