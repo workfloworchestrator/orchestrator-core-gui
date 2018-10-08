@@ -19,6 +19,7 @@ import StateValue from "./StateValue";
 import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
+import NOCConfirm from "./NOCConfirm";
 import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -308,12 +309,17 @@ export default class UserInputForm extends React.Component {
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
+                const newProductId = lookupValueFromNestedState(userInput.product_id_key, currentState) ||
+                    lookupValueFromNestedState("product", currentState);
+
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
                     subscriptionId={subscriptionId}
                     disabled={userInput.readonly}
-                    transitionType={userInput.transition_type}/>;
+                    transitionType={userInput.transition_type}
+                    newProductId={newProductId}
+                />;
             case "contact_persons" :
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
@@ -382,6 +388,17 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeBooleanInput(name)}
                               info={infoLabel}/>
                 </div>;
+            case "noc_subtask_confirmation":
+                const {is_redundant} = process.current_state;
+                let circuits = [];
+                if (is_redundant){
+                    const {ims_circuit_name_1, ims_circuit_name_2} = process.current_state;
+                    circuits = [ims_circuit_name_1, ims_circuit_name_2];
+                } else  {
+                    circuits = [process.current_state.ims_circuit_name];
+                };
+                return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
+                                    circuits={circuits} />;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
@@ -485,9 +502,7 @@ export default class UserInputForm extends React.Component {
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
-
-
-             default:
+            default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
     };

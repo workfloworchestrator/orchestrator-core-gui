@@ -13,7 +13,6 @@ import {
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
-import LightPathVisualizer from "../components/LightPathVisualizer";
 import {isEmpty, stop} from "../utils/Utils";
 import {
     absent,
@@ -166,21 +165,6 @@ export default class SubscriptionDetail extends React.PureComponent {
             action();
         }
     });
-
-    renderLightPathVisualizer = (subscription, subscriptions) =>
-        <section className="details">
-            <h3>{I18n.t("subscriptions.lightPathVisualizer")}</h3>
-            <div className="form-container-parent">
-                <table className="detail-block">
-                    <thead>
-                    </thead>
-                    <tbody>
-                    <td><LightPathVisualizer name="lightpath" subscription={subscription}
-                        subscriptions={subscriptions}/></td>
-                    </tbody>
-                </table>
-            </div>
-        </section>;
 
     renderSubscriptionDetail = (subscription, index, className = "") =>
         <table className={`detail-block ${className}`} key={index}>
@@ -723,7 +707,6 @@ export default class SubscriptionDetail extends React.PureComponent {
 
                 {renderContent && <div>
                     {this.renderDetails(subscription)}
-                    {this.renderLightPathVisualizer(subscription, subscriptions)}
                     {this.renderFixedInputs(product)}
                     {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
