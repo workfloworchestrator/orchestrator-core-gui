@@ -98,7 +98,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         //inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "SSP");
         // TC above check already implemented in new-process.jsx
         if (maximum > 2 || mspOnly) { // >2 == ELAN
-            inSelect = inSelect.filter(port => port.tag === "MSP");
+            inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "MSPNL");
         }
         if (organisationPortsOnly) {
             inSelect = inSelect.filter(port => port.customer_id === organisationId);
