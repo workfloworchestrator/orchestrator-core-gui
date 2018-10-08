@@ -32,6 +32,10 @@ section.filter-drop-down {
 
     i {
       color: $blue;
+      &.fa-undo {
+          padding-right: 8px;
+      }
+
     }
   }
 
@@ -55,9 +59,19 @@ section.filter-drop-down {
 
       label {
           margin-left: auto;
+          padding-right: 8px;
           cursor: pointer;
+
       }
 
+      i {
+        &.fa-filter {
+          color: $blue;
+          &:hover {
+              color: $darkest-blue;
+          }
+        }
+      }
     }
   }
 }
