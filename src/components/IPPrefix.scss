@@ -6,102 +6,84 @@
     background-color: black;
 }
 section.ipblock-selector {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     width: 100%;
-    height: 80;
-
-
     table.ip-blocks {
         word-break: break-all;
-        overflow-y: none;
+        width: 70%;
         td, th {
             text-align: left;
         }
         tr {
             border-bottom: 1px solid $light-grey;
         }
-        tr.prefixrow_1 {
+        tr.Allocated {
             cursor: default;
-            background-color: rgba(100,0,0,0.25)
+            background-color: $light-blue;
+            &:hover {
+                background-color: darken($light-blue, 10%);
+            }
         }
-        tr.prefixrow_3 {
-            cursor: pointer;
-            background-color: rgba(0,100,0,0.25)
+        tr.Planned {
+            cursor: default;
+            background-color: $light-gold;
         }
-        tr.prefixrow_selected {
-            background-color: rgba(0,0,100,0.25)
+        tr.Free {
+            cursor: default;
+            background-color: $light-green;
+            &:hover {
+                background-color: darken($light-green, 10%);
+            }
+        }
+        tr.selected {
+            background-color: $dark-grey;
+            color: white;
+            &:hover {
+                background-color: black;
+            }
         }
         thead {
             display: block;
-        }
-        tbody {
-            display: block;
-            height: 380px;
-            overflow-y: auto;
-        }
-        thead {
             th {
                 cursor: pointer;
                 padding: 5px 5px 10px 5px
             }
             th.id {
-                width: 50px;
+                min-width: 8em;
             }
             th.prefix {
-                width: 100px;
+                min-width: 15em;
             }
             th.description {
-                width: 300px;
+                min-width: 30em;
             }
             th.state {
-                width: 100px;
+                min-width: 25em;
             }
-            th.version {
-                width: 100px;
-            }
-
         }
 
         tbody {
-            tr {width: 700px;}
-            tr.prefixrow_3 {
-                &:hover {
-                    background-color: $hover;
-                    td.actions i.fa-ellipsis-h {
-                        color: $blue;
-                    }
-                }
-            }
+            min-width: 1800px;
+            height: 240px;
+            display: block;
+            overflow: auto;
             td {
                 word-break: break-word;
                 word-wrap: break-word;
                 padding: 15px 5px;
             }
             td.id {
-                width: 50px;
+                min-width: 8em;
             }
             td.prefix {
-                width: 150px;
+                min-width: 15em;
             }
             td.description {
-                width: 300px;
+                min-width: 30em;
             }
             td.state {
-                width: 100px;
+                min-width: 25em;
             }
-            td.version {
-                width: 100px;
-            }
-            td.actions {
-                cursor: pointer;
-                text-align: right;
-                font-size: 18px;
-                position: relative;
 
-            }
         }
     }
 }
-
