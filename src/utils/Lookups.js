@@ -86,3 +86,34 @@ export function capitalize(s) {
     return isEmpty(s) ? "" : s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+// prefix states are returned as int by IPAM. At each index of the array below the state label is returned.
+// The unused states are set to null
+// Free and Failed are fake states for frontend use only
+// 0 Free 1 Allocated  2 (Expired) 3 Planned 4 (Reserved) 5 (Suspend)  6 Failed
+export const ipamStates = [ "Free", "Allocated", null, "Planned", null, null, "Failed"];
+
+// AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
+//                             0      1      2      3      4       5      6
+export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"];
+
+export function ipAddressToNumber(ipAddress) {
+      const octets = ipAddress.split(".");
+      if (octets.length === 4) {
+          return (parseInt(octets[0], 10) * 16777216)
+            + (parseInt(octets[1], 10) * 65536)
+            + (parseInt(octets[2], 10) * 256)
+            + parseInt(octets[3], 10);
+      } else {
+          const hextets = ipAddress.split(":");
+          var power;
+          var result = 0;
+          for (power = 128 - 16; hextets.length > 0; power = power - 16) {
+              var hextet = parseInt(hextets[0], 16);
+              if (!isNaN(hextet)) {
+                  result += hextet * 2**power;
+              }
+              hextets.shift();
+          }
+          return result;
+      }
+}

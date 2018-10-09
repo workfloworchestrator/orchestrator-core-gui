@@ -163,7 +163,7 @@ export default class NewProcess extends React.Component {
     startModifyProcess = e => {
         stop(e);
         const {modifySubscription, modifyWorkflow} = this.state;
-        const {preselectedDienstafname} = this.props;
+        const {preselectedDienstafname, preselectedProduct} = this.props;
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         this.confirmation(I18n.t("subscription.modifyConfirmation", {
@@ -171,7 +171,7 @@ export default class NewProcess extends React.Component {
                 customer: subscription.customer_name,
                 change: change
             }),
-            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedDienstafname).then(() => {
+            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedDienstafname, preselectedProduct).then(() => {
                 this.props.history.push("/processes")
             }));
     };
@@ -212,7 +212,7 @@ export default class NewProcess extends React.Component {
         let showInitialMsps = this.state.showInitialMsps;
         let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            ).filter(sub => (sub.tag === "MSP" && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
+            ).filter(sub => ((sub.tag === "MSP" || sub.tag === "MSPNL") && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
