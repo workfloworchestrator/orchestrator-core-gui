@@ -143,14 +143,17 @@
         cursor: pointer;
         &:hover {
           background-color: $hover;
-          &.suspended {
+          &.Planned {
             background-color: darken($light-gold, 10%);
           }
-          &.running {
+          &.Free {
             background-color: darken($light-green, 10%);
           }
-          td.actions i.fa-ellipsis-h {
-            color: $blue;
+          &.Allocated {
+            background-color: darken($light-blue, 10%);
+          }
+          &.Failed {
+            background-color: darken($light-red, 10%);
           }
         }
       }
