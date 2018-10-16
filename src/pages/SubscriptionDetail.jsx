@@ -283,7 +283,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderEndpointDetail = (endpoint, index) =>
         <tr>
-            <td>{endpoint.endpointType != "internet" ?
+            <td>{endpoint.endpointType !== "internet" ?
                 I18n.t("subscription.ims_port.id", {id: endpoint.id})
                 : I18n.t("subscription.ims_service.id", {index: endpoint.id})}</td>
             <td>
@@ -291,7 +291,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <thead>
                     </thead>
                     <tbody>
-                    {endpoint.endpointType != "internet" ?
+                    {endpoint.endpointType !== "internet" ?
                         ["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
                         .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
