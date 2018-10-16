@@ -141,6 +141,10 @@ export function deleteResourceType(id) {
 
 //API
 export function subscriptions() {
+    return fetchJson("subscriptions/with_computed");
+}
+
+export function subscriptions_no_compute() {
     return fetchJson("subscriptions");
 }
 
