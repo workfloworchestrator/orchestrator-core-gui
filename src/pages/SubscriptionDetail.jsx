@@ -9,6 +9,7 @@ import {
     portByImsServiceId,
     processSubscriptionsBySubscriptionId,
     productById, subscriptionInsyncStatus,
+    serviceByImsServiceId,
     subscriptionsDetail
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
@@ -103,9 +104,11 @@ export default class SubscriptionDetail extends React.PureComponent {
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
                         .map(endpoint => {
                           if (endpoint.type === "service") {
-                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
+                          } else if (endpoint.type === "port"){
+                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
                           } else {
-                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id}));
+                            return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
                           }
                         }))
                         .reduce((a, b) => a.concat(b), []);
@@ -278,19 +281,27 @@ export default class SubscriptionDetail extends React.PureComponent {
         </section>
     };
 
-    renderImsPortDetail = (port, index) =>
+    renderEndpointDetail = (endpoint, index) =>
         <tr>
-            <td>{I18n.t("subscription.ims_port.id", {id: port.id})}</td>
+            <td>{endpoint.endpointType != "internet" ?
+                I18n.t("subscription.ims_port.id", {id: endpoint.id})
+                : I18n.t("subscription.ims_service.id", {index: endpoint.id})}</td>
             <td>
                 <table className="detail-block related-subscription" index={index}>
                     <thead>
                     </thead>
                     <tbody>
-                    {["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
+                    {endpoint.endpointType != "internet" ?
+                        ["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
                         .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
-                            <td>{port[attr]}</td>
-                        </tr>)}
+                            <td>{endpoint[attr]}</td>
+                        </tr>)
+                        : ["name", "product", "speed", "status"]
+                            .map(attr => <tr key={attr}>
+                                <td>{I18n.t(`subscription.ims_service.${attr}`)}</td>
+                                <td>{endpoint[attr]}</td>
+                            </tr>)}
                     </tbody>
                 </table>
             </td>
@@ -344,8 +355,9 @@ export default class SubscriptionDetail extends React.PureComponent {
             </tr>
             </tbody>
             {imsEndpoints
-              .filter(port => service.endpoints.map(endpoint => endpoint.id).includes(port.serviceId))
-              .map((port, index) => this.renderImsPortDetail(port, index))}
+              .filter(port => service.endpoints
+                  .map(endpoint => endpoint.id).includes(port.serviceId))
+              .map((port, index) => this.renderEndpointDetail(port, index))}
         </table>;
 
     renderIpamPrefix = (prefix, index, className = "") => {

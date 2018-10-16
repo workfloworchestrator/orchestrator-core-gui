@@ -206,6 +206,10 @@ export function portByImsServiceId(serviceId) {
     return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
 
+export function serviceByImsServiceId(serviceId) {
+    return fetchJson(`ims/service_by_ims_service_id/${serviceId}`);
+}
+
 export function parentSubscriptions(childSubscriptionId) {
     return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`).then(json => {
         return {type: parent_subscriptions, json: json}
