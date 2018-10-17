@@ -144,6 +144,11 @@ export function subscriptions() {
     return fetchJson("subscriptions");
 }
 
+// Comma seperated list of stuff to exclude
+export function subsciptionsExclude(exclude) {
+    return fetchJson(`subscriptions?exclude=${exclude}`);
+}
+
 export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
