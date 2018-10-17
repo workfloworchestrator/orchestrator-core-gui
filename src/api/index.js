@@ -141,11 +141,12 @@ export function deleteResourceType(id) {
 
 //API
 export function subscriptions() {
-    return fetchJson("subscriptions/with_computed");
+    return fetchJson("subscriptions");
 }
 
-export function subscriptions_no_compute() {
-    return fetchJson("subscriptions");
+// Comma seperated list of stuff to exclude
+export function subsciptionsExclude(exclude) {
+    return fetchJson(`subscriptions?exclude=${exclude}`);
 }
 
 export function subscriptionsDetail(subscription_id) {
