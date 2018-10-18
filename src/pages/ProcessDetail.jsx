@@ -68,7 +68,7 @@ export default class ProcessDetail extends React.PureComponent {
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTags(["MSP", "SSP"])])
+                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTags(["MSP", "SSP", "MSPNL"])])
                 .then(res => {
                     this.setState({subscriptionProcesses: res[0], servicePorts: res[1]});
                 });
