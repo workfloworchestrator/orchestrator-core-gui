@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {childSubscriptions, parentSubscriptions, subscriptions} from "../api";
+import {childSubscriptions, parentSubscriptions, subsciptionsExclude} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 
 import "./Subscriptions.css";
@@ -46,7 +46,7 @@ export default class Subscriptions extends React.PureComponent {
         };
     }
 
-    componentDidMount = () => subscriptions()
+    componentDidMount = () => subsciptionsExclude("tag,name,is_ssp_and_has_parent,crm_port_id")
         .then(results => {
             const {organisations, products} = this.props;
             const collapsibleSubscriptions = [];

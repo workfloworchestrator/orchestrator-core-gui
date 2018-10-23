@@ -28,7 +28,7 @@ export default class Tasks extends React.PureComponent {
             filterAttributesStatus: [
                 {name: "created", selected: true, count: 0},
                 {name: "failed", selected: true, count: 0},
-                {name: "aborted", selected: true, count: 0},
+                {name: "aborted", selected: false, count: 0},
                 {name: "completed", selected: false, count: 0},
                 {name: "running", selected: true, count: 0},
                 {name: "suspended", selected: true, count: 0}

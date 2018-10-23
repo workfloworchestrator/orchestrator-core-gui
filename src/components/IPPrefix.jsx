@@ -8,6 +8,7 @@ import "react-select/dist/react-select.css";
 import "./IPPrefix.css";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
+import {ipamStates} from "../utils/Lookups";
 import SplitPrefix from "./SplitPrefix"
 
 export default class IPPrefix extends React.PureComponent {
@@ -23,7 +24,11 @@ export default class IPPrefix extends React.PureComponent {
             loading:true,
             filter_prefixes: [],
             filter: {
-                state: [1,2,3],
+                state: [
+                    ipamStates.indexOf("Free"),
+                    ipamStates.indexOf("Allocated"),
+                    ipamStates.indexOf("Planned")
+                ],
                 prefix: {'id': 0}
             },
             sorted: {
@@ -152,11 +157,11 @@ export default class IPPrefix extends React.PureComponent {
                 <div><h3>Selected prefix: {selected_prefix}</h3></div>
                 <div><span>State:</span>
                     <span><input type="checkbox" name="state" onChange={this.filterState}
-                                 value="1" checked={state.includes(1)}></input> 1 (Permanent toegewezen) </span>
+                                 value={ipamStates.indexOf("Allocated")} checked={state.includes(ipamStates.indexOf("Allocated"))}></input>Permanent toegewezen</span>
                     <span><input type="checkbox" name="state" onChange={this.filterState}
-                                 value="2" checked={state.includes(2)}></input> 2 (Gereserveerd) </span>
+                                 value={ipamStates.indexOf("Planned")} checked={state.includes(ipamStates.indexOf("Planned"))}></input>Gereserveerd</span>
                     <span><input type="checkbox" name="state" onChange={this.filterState}
-                                 value="3" checked={state.includes(3)}></input> 3 (Vrij) </span>
+                                 value={ipamStates.indexOf("Free")} checked={state.includes(ipamStates.indexOf("Free"))}></input>Vrij</span>
                 </div>
                 <div><span>Root filter</span>
                     <span>
@@ -165,40 +170,36 @@ export default class IPPrefix extends React.PureComponent {
                             onChange={this.filterParentPrefix} value={parentPrefix} />
                     </span>
                 </div>
-            <table className="ip-blocks">
-                <thead>
-                <tr>{columns.map((column, index) => th(index))}
-                </tr>
-                </thead>
-                {ipBlocks.length > 0 &&
-                <tbody>
-                {ipBlocks.map((ipBlock, index) =>
-                {let prefixrow_classname_ext = ipBlock['id']===selected_prefix_id ?
-                                "selected" : ipBlock['state'] ;
-                return (
-                    <tr key={`${ipBlock['id']}_${index}`} onClick={this.selectPrefix(ipBlock)}
-                            className={"prefixrow_" + prefixrow_classname_ext} >
-                        {columns.map(column =>
-                            <td data-label={column} className={column}>
-                                {ipBlock[column]}
-                            </td>
-                        )}
-
+                <table className="ip-blocks">
+                    <thead>
+                    <tr>{columns.map((column, index) => th(index))}
                     </tr>
+                    </thead>
+                    {ipBlocks.length > 0 &&
+                    <tbody>
+                    {ipBlocks.map((ipBlock, index) => {
+                    let selected = (ipBlock['id'] === selected_prefix_id);
+                    return (
+                        <tr key={`${ipBlock['id']}_${index}`} onClick={this.selectPrefix(ipBlock)}
+                                className={ipamStates[ipBlock['state']] + (selected ? " selected": "")}>
+                            {columns.map((column, tdIndex) =>
+                                <td key={`${ipBlock['id']}_${index}_${tdIndex}`} data-label={column} className={column}>
+                                    {ipBlock[column]}
+                                </td>
+                            )}
+                        </tr>
+                        )}
                     )}
-                )}
-                </tbody>
-                }
-
-            </table>
+                    </tbody>
+                    }
+                </table>
                 {selected_prefix_id &&
-
                 <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={parseInt(netmask, 10)}
                             onChange={this.selectIpam} />
                 }
             </div>);
     }
-	
+
 
     render() {
         const {loading, selected_prefix_id} = this.state;

@@ -14,7 +14,17 @@ export default class FilterDropDown extends React.PureComponent {
     }
 
     renderDropDownItem = (item, filterBy) => {
-        const name = this.props.noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
+        const {noTrans, singleSelectFilter} = this.props;
+        const name = noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
+        if (singleSelectFilter) {
+            return (
+                <li key={item.name} onClick={() => filterBy(item)}>
+                    <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)}/>
+                    <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
+                    <i className="fa fa-filter" onClick={e => singleSelectFilter(e, item)}></i>
+                </li>
+            );
+        }
         return (
             <li key={item.name} onClick={() => filterBy(item)}>
                 <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)}/>
@@ -30,7 +40,7 @@ export default class FilterDropDown extends React.PureComponent {
 
 
     render() {
-        const {items, filterBy, label} = this.props;
+        const {items, filterBy, label, selectAll} = this.props;
         const {dropDownActive} = this.state;
         const filtered = items.filter(item => item.selected);
         const count = filtered.reduce((acc, item) => item.count, 0);
@@ -42,7 +52,7 @@ export default class FilterDropDown extends React.PureComponent {
                     <span className="filter-label">{label}</span>
                     <span className="filter-label-divider">:</span>
                     <span className="filter-name">{name}</span>
-                    <span><i className={`fa ${faIcon}`}/></span>
+                    <span>{filtered.length !== items.length && selectAll && <i class="fa fa-undo" onClick={selectAll}></i>}<i className={`fa ${faIcon}`}/></span>
                 </div>
                 {dropDownActive && this.renderDropDown(items, filterBy)}
             </section>);
@@ -53,6 +63,8 @@ export default class FilterDropDown extends React.PureComponent {
 FilterDropDown.propTypes = {
     items: PropTypes.array.isRequired,
     filterBy: PropTypes.func.isRequired,
+    singleSelectFilter: PropTypes.func,
+    selectAll: PropTypes.func,
     label: PropTypes.string,
     noTrans: PropTypes.bool
 };

@@ -145,6 +145,38 @@ export default class Prefixes extends React.PureComponent {
     );
   };
 
+  singleSelectFilter = filterName => (e, item) => {
+      stop(e);
+      const currentFilterAttributes = this.state.filterAttributes;
+      var modifiedAttributes = {};
+      modifiedAttributes[filterName] = currentFilterAttributes[filterName].map(attr => {
+          if (attr.name !== item.name && attr.selected) {
+              attr.selected = false;
+          } else if (attr.name === item.name && !attr.selected) {
+              attr.selected = true;
+          }
+          return attr;
+      })
+      this.setState({
+          filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}
+      })
+  };
+
+  selectAll = filterName => e => {
+      stop(e);
+      const currentFilterAttributes = this.state.filterAttributes;
+      var modifiedAttributes = {};
+      modifiedAttributes[filterName] = currentFilterAttributes[filterName].map(attr => {
+          if (!attr.selected) {
+              attr.selected = true;
+          }
+          return attr;
+      })
+      this.setState({
+          filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}
+      })
+  };
+
   filter = unfiltered => {
       const {state, rootPrefix, family} = this.state.filterAttributes;
       return unfiltered.filter(prefix => {
@@ -247,13 +279,19 @@ export default class Prefixes extends React.PureComponent {
                 <div className="options">
                     <FilterDropDown items={filterAttributes.family}
                                     filterBy={this.setFilter("family")}
+                                    singleSelectFilter={this.singleSelectFilter("family")}
+                                    selectAll={this.selectAll("family")}
                                     label={I18n.t("prefixes.filters.family")}/>
                     <FilterDropDown items={filterAttributes.rootPrefix}
                                     filterBy={this.setFilter("rootPrefix")}
+                                    singleSelectFilter={this.singleSelectFilter("rootPrefix")}
+                                    selectAll={this.selectAll("rootPrefix")}
                                     label={I18n.t("prefixes.filters.root_prefix")}
                                     noTrans={true}/>
                     <FilterDropDown items={filterAttributes.state}
                                     filterBy={this.setFilter("state")}
+                                    singleSelectFilter={this.singleSelectFilter("state")}
+                                    selectAll={this.selectAll("state")}
                                     label={I18n.t("prefixes.filters.state")}/>
 
                     <section className="search">
@@ -301,8 +339,8 @@ export default class Prefixes extends React.PureComponent {
            </section>
           </div>
         );
-    }
-}
+    };
+};
 
 Prefixes.propTypes = {
     history: PropTypes.object.isRequired,
