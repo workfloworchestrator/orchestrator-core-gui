@@ -586,6 +586,7 @@ I18n.translations.en = {
         modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
+        no_modify_invalid_status_for_node: "This subscription can not be modified because of the status: {{status}}. Only Node subscriptions with the status 'active' or 'provisioning' can be modified.",
         no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
         no_terminate_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active subscriptions can be terminated.",
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
