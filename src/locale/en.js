@@ -910,7 +910,7 @@ I18n.translations.en = {
         select_node: "Select a node",
         nodes_loading: "Loading nodes, please wait...",
         no_nodes_placeholder: "No nodes available",
-        no_nodes_message: "No nodes available with status {{status}} on location: {{location}}"
+        no_nodes_message: "No nodes available with status PLANNED or READY FOR SERVICE on location: {{location}}"
     },
     node_port: {
         select_node_first: "First select a node",
