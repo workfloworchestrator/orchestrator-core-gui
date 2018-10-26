@@ -464,6 +464,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
+        // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         let noTerminateReason = null;
         if (!isEmpty(notFoundRelatedObjects)) {
@@ -472,7 +473,6 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
             noTerminateReason = I18n.t("subscription.no_termination_workflow");
         }
-        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         if (status !== "provisioning" && status !== "active") {
             noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
         }
@@ -492,10 +492,15 @@ export default class SubscriptionDetail extends React.PureComponent {
         if (!isEmpty(notFoundRelatedObjects)) {
             noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
         }
-        //All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        if (status !== "active") {
+
+        // Ensure only subscription with correct status can be modified: except for new Nodes with status "provisioning"
+        if(subscription.tag === "Node" && status !== "active" && status !== "provisioning") {
+            noModifyReason = I18n.t("subscription.no_modify_invalid_status_for_node", {status: status});
+        }
+        else if (product.product_type !== "Node" && status !== "active") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
+
         // Check if related subscriptions and main subscription are insync
         if (isEmpty(noModifyReason)) {
             noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);

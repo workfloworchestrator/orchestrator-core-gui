@@ -191,8 +191,8 @@ export function portsForNodeSubscriptionId(nodeId) {
     return fetchJson(`ims/ports_by_node_subscription_id/${nodeId}`)
 }
 
-export function nodesForLocationCodeAndStatus(locationCode, status) {
-    return fetchJson(`ims/nodes/${locationCode}/${status}`)
+export function nodesForLocationCode(locationCode) {
+    return fetchJson(`ims/nodes/${locationCode}`)
 }
 
 export function usedVlans(subscriptionId) {
