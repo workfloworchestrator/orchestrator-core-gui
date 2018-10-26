@@ -23,7 +23,7 @@ export default class NodeSelect extends React.PureComponent {
 
     render() {
         const {nodes, loading} = this.state;
-        const {onChange, node, locationCode, status, disabled} = this.props;
+        const {onChange, node, locationCode, disabled} = this.props;
 
         const noNodesAvailable = !loading && nodes.length === 0;
         const placeholder = loading ? I18n.t("node_select.nodes_loading")
@@ -41,7 +41,7 @@ export default class NodeSelect extends React.PureComponent {
                         placeholder={placeholder}/>
                 {noNodesAvailable &&
                 <em className="msg warn">
-                    {I18n.t("node_select.no_nodes_message", {status, location: locationCode})}
+                            {I18n.t("node_select.no_nodes_message", {location: locationCode})}
                 </em>}
             </div>
         )
