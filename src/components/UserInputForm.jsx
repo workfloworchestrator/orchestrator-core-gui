@@ -20,6 +20,7 @@ import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
 import NOCConfirm from "./NOCConfirm";
+import NOCNetworkConfirm from "./NOCNetworkConfirm";
 import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -396,6 +397,8 @@ export default class UserInputForm extends React.Component {
                 };
                 return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
                                     circuits={circuits} />;
+            case "noc_network_confirmation":
+                return <NOCNetworkConfirm onChange={this.changeNestedInput(name)} />;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
