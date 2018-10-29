@@ -329,9 +329,7 @@ I18n.translations.en = {
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
-        ims_node_id_info: "Choose a node that has state PLANNED in IMS",
-        node_ready_for_production: "Is the node ready for production?",
-        node_ready_for_production_info: "Confirm that the node will be permananet reachable (out-of-band)",
+        ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "Is the node's corelink configured ok?",
         confirm_corelink_info: "Confirm that the corelink is configured ok",
         plan_dont_allocate: "Set state to planned",
@@ -586,6 +584,7 @@ I18n.translations.en = {
         modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only active subscriptions can be modified.",
+        no_modify_invalid_status_for_node: "This subscription can not be modified because of the status: {{status}}. Only Node subscriptions with the status 'active' or 'provisioning' can be modified.",
         no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
         no_terminate_invalid_status: "This subscription can not be terminated because of the status: {{status}}. Only active subscriptions can be terminated.",
         not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
@@ -911,7 +910,7 @@ I18n.translations.en = {
         select_node: "Select a node",
         nodes_loading: "Loading nodes, please wait...",
         no_nodes_placeholder: "No nodes available",
-        no_nodes_message: "No nodes available with status {{status}} on location: {{location}}"
+        no_nodes_message: "No nodes available with status PLANNED or READY FOR SERVICE on location: {{location}}"
     },
     node_port: {
         select_node_first: "First select a node",
