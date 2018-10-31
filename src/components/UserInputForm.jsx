@@ -310,13 +310,15 @@ export default class UserInputForm extends React.Component {
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
-
+                const newProductId = lookupValueFromNestedState("product", currentState) ||
+-                   lookupValueFromNestedState("product", currentState);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
                     subscriptionId={subscriptionId}
                     disabled={userInput.readonly}
                     transitionType={userInput.transition_type}
+                    newProductId={newProductId}
                 />;
             case "contact_persons" :
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
@@ -398,7 +400,10 @@ export default class UserInputForm extends React.Component {
                 return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
                                     circuits={circuits} />;
             case "noc_network_confirmation":
-                return <NOCNetworkConfirm onChange={this.changeNestedInput(name)} />;
+                const {jira_ticket_uri} = process.current_state;
+
+                return <NOCNetworkConfirm onChange={this.changeNestedInput(name)}
+                    jira_ticket_uri={jira_ticket_uri} />;
             case "subscription_termination_confirmation":
                 return <div>
                     <CheckBox name={name} value={value || false}
