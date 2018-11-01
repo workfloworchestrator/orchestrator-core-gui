@@ -292,13 +292,15 @@ export default class NewProcess extends React.Component {
 
     renderModifyProduct = (subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName) => {
         const noModifyWorkflows = (modifySubscription && modifyWorkflows.length === 0) ? I18n.t("subscription.no_modify_workflow") : null;
+        console.log(subscriptions);
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.modify_subscription")}</h3>
                 <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
+                    {/*Only allow modify on active subscription except for nodes that can be modified from state provisioning*/}
                     <SubscriptionSearchSelect
-                        subscriptions={subscriptions.filter(sub => sub.status === "active" && sub.insync)}
+                        subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node"))}
                         subscription={modifySubscription}
                         onChange={this.changeModifySubscription}
                         organisation={organisationName}

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
-import {nodesForLocationCodeAndStatus} from "../api";
+import {nodesForLocationCode} from "../api";
 import I18n from "i18n-js";
 
 export default class NodeSelect extends React.PureComponent {
@@ -16,14 +16,14 @@ export default class NodeSelect extends React.PureComponent {
     }
 
     componentWillMount() {
-        nodesForLocationCodeAndStatus(this.props.locationCode, this.props.status).then(result =>
+        nodesForLocationCode(this.props.locationCode).then(result =>
             this.setState({nodes: result, loading: false})
         );
     };
 
     render() {
         const {nodes, loading} = this.state;
-        const {onChange, node, locationCode, status, disabled} = this.props;
+        const {onChange, node, locationCode, disabled} = this.props;
 
         const noNodesAvailable = !loading && nodes.length === 0;
         const placeholder = loading ? I18n.t("node_select.nodes_loading")
@@ -41,7 +41,7 @@ export default class NodeSelect extends React.PureComponent {
                         placeholder={placeholder}/>
                 {noNodesAvailable &&
                 <em className="msg warn">
-                    {I18n.t("node_select.no_nodes_message", {status, location: locationCode})}
+                            {I18n.t("node_select.no_nodes_message", {location: locationCode})}
                 </em>}
             </div>
         )
@@ -52,6 +52,5 @@ NodeSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     node: PropTypes.number,
     locationCode: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
     disabled: PropTypes.bool
 };
