@@ -1,4 +1,4 @@
-import {replaceQueryParameter, getParameterByName} from "../../utils/QueryParameters";
+import {replaceQueryParameter, getParameterByName, getQueryParameters} from "../../utils/QueryParameters";
 
 test("Replace query parameters", () => {
     const replaced = replaceQueryParameter("?test=bogus", "test", "value");
@@ -22,3 +22,9 @@ test("Parameter by name", () => {
 test("Parameter by name not exists", () => {
     expect("value", getParameterByName("", undefined))
 });
+
+test("Return query parameters as objects", () => {
+    const params = getQueryParameters("?vis=zeebaars&huisdier=hond&huisdier=kat");
+    expect("zeebaars", params.vis);
+    expect(2, params.huisdier.length);
+})

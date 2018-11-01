@@ -8,6 +8,9 @@ import "./Prefixes.css";
 import {freeSubnets, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
+import ProductsContainer from "../containers/ProductsContainer";
+import {Subscribe} from 'unstated';
+
 
 export default class Prefixes extends React.PureComponent {
 
@@ -252,11 +255,17 @@ export default class Prefixes extends React.PureComponent {
      return <i/>;
   };
 
-  showSubscription = subscription_id => () => {
+  subscriptionLink = (product, selection)  => () => {
+      const {subscription_id, prefix, prefixlen} = selection;
+      const product_id = product.product_id;
       if (isValidUUIDv4(subscription_id)) {
-          this.props.history.push("/subscription/" + subscription_id);
+	      this.props.history.push("/subscription/" + subscription_id);
+      
+      } else if (subscription_id === "N/A") {
+	      let network = prefix.split("/")[0];
+	      this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}`)
       }
-  };
+  }
 
   render() {
     const columns = ["customer", "subscription_id", "description", "family", "prefixlen", "prefix", "parent", "state", "start_date"];
@@ -274,70 +283,74 @@ export default class Prefixes extends React.PureComponent {
     const sortedPrefixes = this.sort(filteredPrefixes);
 
     return (
-        <div className="mod-prefixes">
-            <div className="card">
-                <div className="options">
-                    <FilterDropDown items={filterAttributes.family}
-                                    filterBy={this.setFilter("family")}
-                                    singleSelectFilter={this.singleSelectFilter("family")}
-                                    selectAll={this.selectAll("family")}
-                                    label={I18n.t("prefixes.filters.family")}/>
-                    <FilterDropDown items={filterAttributes.rootPrefix}
-                                    filterBy={this.setFilter("rootPrefix")}
-                                    singleSelectFilter={this.singleSelectFilter("rootPrefix")}
-                                    selectAll={this.selectAll("rootPrefix")}
-                                    label={I18n.t("prefixes.filters.root_prefix")}
-                                    noTrans={true}/>
-                    <FilterDropDown items={filterAttributes.state}
-                                    filterBy={this.setFilter("state")}
-                                    singleSelectFilter={this.singleSelectFilter("state")}
-                                    selectAll={this.selectAll("state")}
-                                    label={I18n.t("prefixes.filters.state")}/>
+	<Subscribe to={[ProductsContainer]}>
+	    {products => (
+		<div className="mod-prefixes">
+		    <div className="card">
+			<div className="options">
+			    <FilterDropDown items={filterAttributes.family}
+					    filterBy={this.setFilter("family")}
+					    singleSelectFilter={this.singleSelectFilter("family")}
+					    selectAll={this.selectAll("family")}
+					    label={I18n.t("prefixes.filters.family")}/>
+			    <FilterDropDown items={filterAttributes.rootPrefix}
+					    filterBy={this.setFilter("rootPrefix")}
+					    singleSelectFilter={this.singleSelectFilter("rootPrefix")}
+					    selectAll={this.selectAll("rootPrefix")}
+					    label={I18n.t("prefixes.filters.root_prefix")}
+					    noTrans={true}/>
+			    <FilterDropDown items={filterAttributes.state}
+					    filterBy={this.setFilter("state")}
+					    singleSelectFilter={this.singleSelectFilter("state")}
+					    selectAll={this.selectAll("state")}
+					    label={I18n.t("prefixes.filters.state")}/>
 
-                    <section className="search">
-                    <input className="allowed"
-                           placeholder={I18n.t("prefixes.searchPlaceHolder")}
-                           type="text"
-                           onChange={this.search}
-                           value={query}/>
-                    <i className="fa fa-search"></i>
-                    </section>
-                </div>
-            </div>
-            <section className="prefixes">
-            <table className="prefixes">
-                <thead>
-                    <tr>{columns.map((column, index) => th(index))}</tr>
-                </thead>
-                <tbody>
-                {sortedPrefixes.map((prefix, index) =>
-                  <tr key={`${prefix.id}_${index}`} onClick={this.showSubscription(prefix.subscription_id)}
-                    className={ipamStates[prefix.state]}>
-                    <td data-label={I18n.t("prefixes.customer")}
-                      className="customer">{prefix.customer_name}</td>
-                    <td data-label={I18n.t("prefixes.subscription_id")}
-                      className="subscription">{prefix.subscription_id.substring(0,8)}</td>
-                    <td data-label={I18n.t("prefixes.description")}
-                      className="description">{prefix.description}</td>
-                    <td data-label={I18n.t("prefixes.family")}
-                      className="family">{familyFullName[prefix.family]}</td>
-                    <td data-label={I18n.t("prefixes.prefixlen")}
-                        className="prefixlen">/{prefix.prefixlen}</td>
-                    <td data-label={I18n.t("prefixes.prefix")}
-                      className="prefix">{prefix.prefix}</td>
-                    <td data-label={I18n.t("prefixes.parent")}
-                        className="parent">{prefix.parent}</td>
-                    <td data-label={I18n.t("prefixes.state")}
-                      className="state">{ipamStates[prefix.state]}</td>
-                    <td data-label={I18n.t("prefixes.start_date")}
-                      className="start_date">{renderDate(prefix.start_date)}</td>
-                  </tr>
-                  )
-                }
-                </tbody>
-              </table>
-           </section>
-          </div>
+			    <section className="search">
+			    <input className="allowed"
+				   placeholder={I18n.t("prefixes.searchPlaceHolder")}
+				   type="text"
+				   onChange={this.search}
+				   value={query}/>
+			    <i className="fa fa-search"></i>
+			    </section>
+			</div>
+		    </div>
+		    <section className="prefixes">
+		    <table className="prefixes">
+			<thead>
+			    <tr>{columns.map((column, index) => th(index))}</tr>
+			</thead>
+			<tbody>
+			{sortedPrefixes.map((prefix, index) =>
+			  <tr key={`${prefix.id}_${index}`} onClick={this.subscriptionLink(products.byName("IP_PREFIX"), prefix)}
+			    className={ipamStates[prefix.state]}>
+			    <td data-label={I18n.t("prefixes.customer")}
+			      className="customer">{prefix.customer_name}</td>
+			    <td data-label={I18n.t("prefixes.subscription_id")}
+			      className="subscription">{prefix.subscription_id.substring(0,8)}</td>
+			    <td data-label={I18n.t("prefixes.description")}
+			      className="description">{prefix.description}</td>
+			    <td data-label={I18n.t("prefixes.family")}
+			      className="family">{familyFullName[prefix.family]}</td>
+			    <td data-label={I18n.t("prefixes.prefixlen")}
+				className="prefixlen">/{prefix.prefixlen}</td>
+			    <td data-label={I18n.t("prefixes.prefix")}
+			      className="prefix">{prefix.prefix}</td>
+			    <td data-label={I18n.t("prefixes.parent")}
+				className="parent">{prefix.parent}</td>
+			    <td data-label={I18n.t("prefixes.state")}
+			      className="state">{ipamStates[prefix.state]}</td>
+			    <td data-label={I18n.t("prefixes.start_date")}
+			      className="start_date">{renderDate(prefix.start_date)}</td>
+			  </tr>
+			  )
+			}
+			</tbody>
+		      </table>
+		   </section>
+		</div>)
+		}
+	</Subscribe>
         );
     };
 };
