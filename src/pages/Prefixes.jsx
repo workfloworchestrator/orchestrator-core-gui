@@ -8,8 +8,6 @@ import "./Prefixes.css";
 import {freeSubnets, prefix_filters, prefixById, subscriptionsByProductType} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
-import ProductsContainer from "../containers/ProductsContainer";
-import {Subscribe} from 'unstated';
 
 
 export default class Prefixes extends React.PureComponent {
@@ -30,13 +28,16 @@ export default class Prefixes extends React.PureComponent {
           {name: "IPv4", selected: true, count: 0},
           {name: "IPv6", selected: true, count: 0}
         ]
-     },
+      },
       rootPrefixes: [],
-     }
+      ipPrefixProductId: props.products.filter(p => p.name === "IP_PREFIX").map(p => p.product_id).pop(),
+      availablePrefixId: 10000
+    }
   };
 
   componentDidMount(){
-      prefix_filters()
+    this.setState({})
+    prefix_filters()
       .then(result => {
           const prefixFilters = result.map(p => ({name: p.prefix, selected: true, count: 0}));
           const currentFilterAttributes = this.state.filterAttributes;
@@ -44,7 +45,7 @@ export default class Prefixes extends React.PureComponent {
           this.setState({rootPrefixes: result, filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}});
           this.getFreePrefixes(result);
       });
-      subscriptionsByProductType("IP_PREFIX")
+    subscriptionsByProductType("IP_PREFIX")
       .then(subscriptions =>
         subscriptions
         .filter(s => s.status === "active")
@@ -100,8 +101,9 @@ export default class Prefixes extends React.PureComponent {
         return roots.map(p =>
             freeSubnets(p.prefix)
                 .then(result => {
+                  const {availablePrefixId} = this.state;
                   const free = result.map((r, idx) => ({
-                      id: 9999 - idx,
+                      id: availablePrefixId + idx,
                       customer_name: "N/A",
                       subscription_id: "N/A",
                       start_date: Math.floor(Date.now() / 1000),
@@ -112,7 +114,10 @@ export default class Prefixes extends React.PureComponent {
                       parent: p.prefix,
                       state: ipamStates.indexOf("Free")
                   }));
-                  this.setState({prefixes: this.state.prefixes.concat(free)});
+                  this.setState(prevState => ({
+                      prefixes: prevState.prefixes.concat(free),
+                      availablePrefixId: prevState.availablePrefixId + free.length
+                  }));
                 })
             )
   };
@@ -255,15 +260,17 @@ export default class Prefixes extends React.PureComponent {
      return <i/>;
   };
 
-  subscriptionLink = (product, selection)  => () => {
+  
+
+  subscriptionLink = (selection)  => () => {
       const {subscription_id, prefix, prefixlen} = selection;
-      const product_id = product.product_id;
+      const product_id = this.state.ipPrefixProductId;
       if (isValidUUIDv4(subscription_id)) {
-	      this.props.history.push("/subscription/" + subscription_id);
-      
+         this.props.history.push("/subscription/" + subscription_id);
+
       } else if (subscription_id === "N/A") {
-	      let network = prefix.split("/")[0];
-	      this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}`)
+        let network = prefix.split("/")[0];
+        this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}`)
       }
   }
 
@@ -282,80 +289,75 @@ export default class Prefixes extends React.PureComponent {
     const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
     const sortedPrefixes = this.sort(filteredPrefixes);
 
-    return (
-	<Subscribe to={[ProductsContainer]}>
-	    {products => (
-		<div className="mod-prefixes">
-		    <div className="card">
-			<div className="options">
-			    <FilterDropDown items={filterAttributes.family}
-					    filterBy={this.setFilter("family")}
-					    singleSelectFilter={this.singleSelectFilter("family")}
-					    selectAll={this.selectAll("family")}
-					    label={I18n.t("prefixes.filters.family")}/>
-			    <FilterDropDown items={filterAttributes.rootPrefix}
-					    filterBy={this.setFilter("rootPrefix")}
-					    singleSelectFilter={this.singleSelectFilter("rootPrefix")}
-					    selectAll={this.selectAll("rootPrefix")}
-					    label={I18n.t("prefixes.filters.root_prefix")}
-					    noTrans={true}/>
-			    <FilterDropDown items={filterAttributes.state}
-					    filterBy={this.setFilter("state")}
-					    singleSelectFilter={this.singleSelectFilter("state")}
-					    selectAll={this.selectAll("state")}
-					    label={I18n.t("prefixes.filters.state")}/>
+    return <div className="mod-prefixes">
+      <div className="card">
+    <div className="options">
+        <FilterDropDown items={filterAttributes.family}
+            filterBy={this.setFilter("family")}
+            singleSelectFilter={this.singleSelectFilter("family")}
+            selectAll={this.selectAll("family")}
+            label={I18n.t("prefixes.filters.family")}/>
+        <FilterDropDown items={filterAttributes.rootPrefix}
+            filterBy={this.setFilter("rootPrefix")}
+            singleSelectFilter={this.singleSelectFilter("rootPrefix")}
+            selectAll={this.selectAll("rootPrefix")}
+            label={I18n.t("prefixes.filters.root_prefix")}
+            noTrans={true}/>
+        <FilterDropDown items={filterAttributes.state}
+            filterBy={this.setFilter("state")}
+            singleSelectFilter={this.singleSelectFilter("state")}
+            selectAll={this.selectAll("state")}
+            label={I18n.t("prefixes.filters.state")}/>
 
-			    <section className="search">
-			    <input className="allowed"
-				   placeholder={I18n.t("prefixes.searchPlaceHolder")}
-				   type="text"
-				   onChange={this.search}
-				   value={query}/>
-			    <i className="fa fa-search"></i>
-			    </section>
-			</div>
-		    </div>
-		    <section className="prefixes">
-		    <table className="prefixes">
-			<thead>
-			    <tr>{columns.map((column, index) => th(index))}</tr>
-			</thead>
-			<tbody>
-			{sortedPrefixes.map((prefix, index) =>
-			  <tr key={`${prefix.id}_${index}`} onClick={this.subscriptionLink(products.byName("IP_PREFIX"), prefix)}
-			    className={ipamStates[prefix.state]}>
-			    <td data-label={I18n.t("prefixes.customer")}
-			      className="customer">{prefix.customer_name}</td>
-			    <td data-label={I18n.t("prefixes.subscription_id")}
-			      className="subscription">{prefix.subscription_id.substring(0,8)}</td>
-			    <td data-label={I18n.t("prefixes.description")}
-			      className="description">{prefix.description}</td>
-			    <td data-label={I18n.t("prefixes.family")}
-			      className="family">{familyFullName[prefix.family]}</td>
-			    <td data-label={I18n.t("prefixes.prefixlen")}
-				className="prefixlen">/{prefix.prefixlen}</td>
-			    <td data-label={I18n.t("prefixes.prefix")}
-			      className="prefix">{prefix.prefix}</td>
-			    <td data-label={I18n.t("prefixes.parent")}
-				className="parent">{prefix.parent}</td>
-			    <td data-label={I18n.t("prefixes.state")}
-			      className="state">{ipamStates[prefix.state]}</td>
-			    <td data-label={I18n.t("prefixes.start_date")}
-			      className="start_date">{renderDate(prefix.start_date)}</td>
-			  </tr>
-			  )
-			}
-			</tbody>
-		      </table>
-		   </section>
-		</div>)
-		}
-	</Subscribe>
-        );
+        <section className="search">
+        <input className="allowed"
+         placeholder={I18n.t("prefixes.searchPlaceHolder")}
+         type="text"
+         onChange={this.search}
+         value={query}/>
+        <i className="fa fa-search"></i>
+        </section>
+    </div>
+      </div>
+      <section className="prefixes">
+      <table className="prefixes">
+    <thead>
+        <tr>{columns.map((column, index) => th(index))}</tr>
+    </thead>
+    <tbody>
+    {sortedPrefixes.map(prefix =>
+      <tr key={prefix.id} onClick={this.subscriptionLink(prefix)}
+        className={ipamStates[prefix.state]}>
+        <td data-label={I18n.t("prefixes.customer")}
+          className="customer">{prefix.customer_name}</td>
+        <td data-label={I18n.t("prefixes.subscription_id")}
+          className="subscription">{prefix.subscription_id.substring(0,8)}</td>
+        <td data-label={I18n.t("prefixes.description")}
+          className="description">{prefix.description}</td>
+        <td data-label={I18n.t("prefixes.family")}
+          className="family">{familyFullName[prefix.family]}</td>
+        <td data-label={I18n.t("prefixes.prefixlen")}
+      className="prefixlen">/{prefix.prefixlen}</td>
+        <td data-label={I18n.t("prefixes.prefix")}
+          className="prefix">{prefix.prefix}</td>
+        <td data-label={I18n.t("prefixes.parent")}
+      className="parent">{prefix.parent}</td>
+        <td data-label={I18n.t("prefixes.state")}
+          className="state">{ipamStates[prefix.state]}</td>
+        <td data-label={I18n.t("prefixes.start_date")}
+          className="start_date">{renderDate(prefix.start_date)}</td>
+      </tr>
+      )
+    }
+    </tbody>
+        </table>
+     </section>
+  </div>
     };
 };
 
 Prefixes.propTypes = {
     history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired
+    organisations: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired
 };

@@ -8,9 +8,7 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-scripts": "1.0.17",
-    "reactjs-popup": "^1.1.1",
-    "unstated": "^2.1.1",
-    "unstated-debug": "^0.3.2"
+    "reactjs-popup": "^1.1.1"
   },
   "devDependencies": {
     "enzyme": "^3.2.0",

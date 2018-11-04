@@ -40,20 +40,19 @@ export default class IPPrefix extends React.PureComponent {
     }
 
     componentDidMount(){
-	const {preselectedPrefix} =  this.props;
-	if (preselectedPrefix) {
-		this.setState({loading: false});
-	} else {
-		prefix_filters().then(result=> {
-		    let {filter} = this.state;
-		    filter['prefix'] = result[0];
-		    this.setState({filter_prefixes: result, filter: filter})
-		});
-		ip_blocks(1).then(result =>{
-		    this.setState({ipBlocks:result, loading: false});
-		});
-	}
-
+        const {preselectedPrefix} =  this.props;
+        if (preselectedPrefix) {
+            this.setState({loading: false});
+        } else {
+            prefix_filters().then(result=> {
+                let {filter} = this.state;
+                filter['prefix'] = result[0];
+                this.setState({filter_prefixes: result, filter: filter})
+            });
+            ip_blocks(1).then(result =>{
+                this.setState({ipBlocks:result, loading: false});
+            });
+        }
     }
 
     sort = name => e => {
@@ -130,10 +129,7 @@ export default class IPPrefix extends React.PureComponent {
     }
 
     selectPrefix = (prefix) => () => {
-
         this.setState({selected_prefix_id: prefix['id'], selected_prefix: prefix['prefix'] });
-
-
     }
 
     selectIpam = prefix => {
@@ -204,31 +200,30 @@ export default class IPPrefix extends React.PureComponent {
 
 
     renderContentWithPreselectedPrefix = (preselectedPrefix) => {
-	    const [subnet, netmask] = preselectedPrefix.split("/");
-	    return (
-		 <section className="ipblock-selector">
-		 <div>
-			 <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={parseInt(netmask, 10)}
-				 onChange={this.selectIpam} />
-	    	 </div>
-	 </section>
-	    )
-
+        const [subnet, netmask] = preselectedPrefix.split("/");
+        return (
+            <section className="ipblock-selector">
+                <div>
+                    <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={parseInt(netmask, 10)}
+                        onChange={this.selectIpam} />
+                </div>
+            </section>
+        )
     }
-
 
     render() {
-	const {preselectedPrefix} = this.props;
-	if (preselectedPrefix) {
-		return this.renderContentWithPreselectedPrefix(preselectedPrefix);
-	} else {
-		const {loading, selected_prefix_id} = this.state;
-		let filteredIpBlocks = this.filterAndSortBlocks();
-		return <section className="ipblock-selector"><div className="selected_value">{selected_prefix_id}
-			    </div>{this.renderContent(filteredIpBlocks, loading)}</section> ;
-	}
+       const {preselectedPrefix} = this.props;
+       if (preselectedPrefix) {
+           return this.renderContentWithPreselectedPrefix(preselectedPrefix);
+       } else {
+           const {loading, selected_prefix_id} = this.state;
+           let filteredIpBlocks = this.filterAndSortBlocks();
+           return <section className="ipblock-selector">
+               <div className="selected_value">{selected_prefix_id}</div>
+               {this.renderContent(filteredIpBlocks, loading)}
+           </section> ;
+       }
     }
-
 }
 
 IPPrefix.propTypes = {

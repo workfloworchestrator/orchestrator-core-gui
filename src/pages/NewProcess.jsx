@@ -21,8 +21,6 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
 import {maybeModifiedMessage, maybeTerminatedMessage} from "../validations/Subscriptions";
-import ProductsContainer from "../containers/ProductsContainer";
-import {Subscribe} from "unstated";
 import {getQueryParameters} from "../utils/QueryParameters";
 
 
@@ -352,11 +350,10 @@ export default class NewProcess extends React.Component {
             terminateSubscription, notModifiableMessage, notTerminatableMessage, modifyWorkflows,
             organisationName, confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
         } = this.state;
-        const {organisations, locationCodes, history, preselectedProduct} = this.props;
+        const {organisations, locationCodes, history, preselectedProduct, products} = this.props;
         const showProductValidation = (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         const showModify = isEmpty(stepUserInput);
         return (
-	    <Subscribe to={[ProductsContainer]}>{products => (
             <div className="mod-new-process">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={this.cancelConfirmation}
@@ -365,13 +362,11 @@ export default class NewProcess extends React.Component {
 
                 <section className="card">
                     {this.renderCreateProduct(product, showProductValidation, productValidation, stepUserInput,
-                        subscriptions, history, organisations, products.all(), locationCodes, preselectedProduct)}
-                    {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products.all(), notModifiableMessage, modifyWorkflows, organisationName)}
+                        subscriptions, history, organisations, products, locationCodes, preselectedProduct)}
+                    {showModify && this.renderModifyProduct(subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName)}
                     {showModify && this.renderTerminateProduct(subscriptions, terminateSubscription, notTerminatableMessage, organisationName)}
                 </section>
             </div>
-	   )}
-   	</Subscribe>
         );
     }
 }
@@ -381,6 +376,7 @@ NewProcess.propTypes = {
     currentUser: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired,
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
     preselectedDienstafname: PropTypes.string
