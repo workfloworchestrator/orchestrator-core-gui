@@ -479,7 +479,7 @@ export default class UserInputForm extends React.Component {
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
 	    case "ip_prefix":
-		const preselectedPrefix = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+		const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
 
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
                            onChange={this.changeNestedInput(name)}

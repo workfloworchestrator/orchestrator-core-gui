@@ -71,6 +71,6 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = false;
     }
     else {
-        errors[name] = isEmpty(value);
+        errors[name] = userInput.required === false ? false : isEmpty(value);
     }
 }
