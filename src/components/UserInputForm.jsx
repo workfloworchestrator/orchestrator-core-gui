@@ -29,6 +29,7 @@ import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
 import SSPProductSelect from "./SSPProductSelect";
+import GenericSelect from "./GenericSelect";
 import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
@@ -380,7 +381,7 @@ export default class UserInputForm extends React.Component {
             case "noc_modification_confirmation":
                 const {human_service_speed, new_human_service_speed, nms_service_id} = process.current_state;
                 const infoLabel = I18n.t(`process.noc_modification_confirmation_prefix`)  + nms_service_id +
-        I18n.t(`process.noc_modification_confirmation_infix1`) +
+                        I18n.t(`process.noc_modification_confirmation_infix1`) +
                         human_service_speed + I18n.t(`process.noc_modification_confirmation_infix2`)
                     + new_human_service_speed;
                 return <div>
@@ -457,7 +458,7 @@ export default class UserInputForm extends React.Component {
                                          maximum={userInput.maximum}
                                          disabled={userInput.readonly}
                                          isElan={userInput.elan}
-					                               organisationPortsOnly={userInput.organisationPortsOnly}
+                                         organisationPortsOnly={userInput.organisationPortsOnly}
                                          mspOnly={userInput.mspOnly}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
@@ -478,22 +479,21 @@ export default class UserInputForm extends React.Component {
                                             subscriptions={this.commaSeperatedArray(value)}
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
-	    case "ip_prefix":
-		const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-
+            case "ip_prefix":
+                const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
                            onChange={this.changeNestedInput(name)}
                         /> ;
             case "ims_changes":
                 return <ImsChanges changes={value} organisations={organisations}/>;
-	    case "date_picker":
-		const targetDate = moment().add(14, 'days');
-		return <DatePicker
-			dateFormat="YYYY-MM-DD"
-			selected={moment(value)}
-			onChange={this.changeDateInput(name)}
+            case "date_picker":
+                const targetDate = moment().add(14, 'days');
+                return <DatePicker
+                        dateFormat="YYYY-MM-DD"
+                        selected={moment(value)}
+                        onChange={this.changeDateInput(name)}
                         customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
-			openToDate={targetDate} />;
+                        openToDate={targetDate} />;
 
             case "nodes_for_location_code_and_status":
                 const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
@@ -506,6 +506,8 @@ export default class UserInputForm extends React.Component {
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
+            case "generic_select":
+                return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

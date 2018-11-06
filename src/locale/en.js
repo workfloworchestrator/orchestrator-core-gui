@@ -294,6 +294,8 @@ I18n.translations.en = {
         subscription_id_info: "The subscription that will be terminated",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
+        surfcert_filter: "SURFcert filter",
+        surfcert_filter_info: "Type of SURFcert filter",
         service_ports: "Service Ports",
         service_ports_info: "The A and B side",
         service_ports_primary: "Service Ports",
