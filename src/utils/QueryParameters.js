@@ -45,9 +45,22 @@ export function replaceQueryParameter(windowLocationSearch, name, value) {
 }
 
 export function getParameterByName(name, windowLocationSearch) {
-    
+
     const replacedName = name.replace(/[[]/, "[").replace(/[\]]/, "\\]");
     const regex = new RegExp("[\\?&]" + replacedName + "=([^&#]*)"),
         results = regex.exec(windowLocationSearch);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+export function getQueryParameters(windowLocationSearch) {
+    const params = QueryParameter.searchToHash(windowLocationSearch);
+    var squashed = {};
+    for (const [key, val] of Object.entries(params)) {
+        if (val.length === 1) {
+            squashed[key] = val.pop();
+        } else {
+            squashed[key] = val;
+        }
+    };
+    return squashed;
 }

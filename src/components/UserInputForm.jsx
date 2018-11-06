@@ -243,7 +243,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts, subscriptions} = this.props;
+        const {currentState, products, organisations, servicePorts, subscriptions, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -478,11 +478,10 @@ export default class UserInputForm extends React.Component {
                                             subscriptions={this.commaSeperatedArray(value)}
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
-            case "ip_prefix":
-               const procIpBlock = isEmpty(process.current_state.ip_blocks) ?
-                   {"prefix":""} : process.current_state.ip_block;
-               const ipBlock = isEmpty(value) ? procIpBlock : value;
-               return <IPPrefix ipBlock={ipBlock}
+	    case "ip_prefix":
+		const preselectedPrefix = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+
+                return <IPPrefix preselectedPrefix={preselectedPrefix}
                            onChange={this.changeNestedInput(name)}
                         /> ;
             case "ims_changes":
@@ -549,4 +548,5 @@ UserInputForm.propTypes = {
     validSubmit: PropTypes.func.isRequired,
     refreshSubscriptions: PropTypes.func,
     process: PropTypes.object,
+    preselectedInput: PropTypes.object
 };

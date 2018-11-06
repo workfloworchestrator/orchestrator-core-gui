@@ -52,7 +52,7 @@ export default class FilterDropDown extends React.PureComponent {
                     <span className="filter-label">{label}</span>
                     <span className="filter-label-divider">:</span>
                     <span className="filter-name">{name}</span>
-                    <span>{filtered.length !== items.length && selectAll && <i class="fa fa-undo" onClick={selectAll}></i>}<i className={`fa ${faIcon}`}/></span>
+                    <span>{filtered.length !== items.length && selectAll && <i className="fa fa-undo" onClick={selectAll}></i>}<i className={`fa ${faIcon}`}/></span>
                 </div>
                 {dropDownActive && this.renderDropDown(items, filterBy)}
             </section>);
