@@ -88,6 +88,8 @@ I18n.translations.en = {
     },
     process: {
         workflow: "Process instance of workflow {{name}}",
+        corelink_interface_type: "Corelink interface type",
+        corelink_interface_type_info: "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
         cancel: "Cancel",
         submit: "Submit",
         notFound: "No Process found (e.g. 404)",

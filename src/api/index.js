@@ -183,6 +183,10 @@ export function ieeeInterfaceTypesForProductId(id) {
     return fetchJson(`products/ieee_interface_types/${id}`)
 }
 
+export function corelinkIEEEInterfaceTypes() {
+    return fetchJson("products/corelink_ieee_interface_types")
+}
+
 export function freePortsForLocationCodeAndInterfaceType(locationCode, interfaceType) {
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
