@@ -4,7 +4,7 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "./NodePortSelect.css";
 
-import {portsForNodeSubscriptionId} from "../api";
+import {interfacesForNodeSubscriptionId} from "../api";
 import I18n from "i18n-js";
 
 
@@ -30,7 +30,7 @@ export default class NodePortSelect extends React.PureComponent {
             value = e ? e.value : null;
             if (e !== null) {
                 this.setState({node: value, loading: true, ports: []})
-                portsForNodeSubscriptionId(value).then(result =>
+                interfacesForNodeSubscriptionId(value).then(result =>
                     this.setState({ports: result, loading: false})
                 );
             } else {
