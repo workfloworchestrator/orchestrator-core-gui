@@ -40,6 +40,8 @@ import DatePicker from "react-datepicker";
 import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
+import BfdSettings from "./BfdSettings";
+import NumericInput from "react-numeric-input";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -248,7 +250,7 @@ export default class UserInputForm extends React.Component {
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
-            case "string" :
+            case "string":
             case "guid":
             case "uuid":
             case "crm_port_id":
@@ -258,6 +260,7 @@ export default class UserInputForm extends React.Component {
             case "ims_id":
             case "isalias":
             case "stp":
+	    case "bgp_hash":
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
@@ -508,6 +511,8 @@ export default class UserInputForm extends React.Component {
                                        port={value}/>;
             case "generic_select":
                 return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>
+	    case "bfd":
+			return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
