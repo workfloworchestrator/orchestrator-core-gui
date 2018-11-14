@@ -39,9 +39,9 @@ export default class BfdSettings extends React.PureComponent {
 				/>
 				{value.enabled &&
 					<React.Fragment>
-						<label>Minimum Interval</label>
+						<label>BFD Minimum Interval</label>
 						<NumericInput min={1} max={255000} value={value.minimum_interval} onChange={this.changeMinimumInterval} readOnly={readOnly}/>
-						<label>Multiplier</label>
+						<label>BFD Multiplier</label>
 						<NumericInput min={1} max={255} value={value.multiplier} onChange={this.changeMultiplier} readOnly={readOnly}/>
 					</React.Fragment>
 				}

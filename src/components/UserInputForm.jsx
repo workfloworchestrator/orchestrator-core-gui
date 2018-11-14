@@ -512,7 +512,7 @@ export default class UserInputForm extends React.Component {
             case "generic_select":
                 return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>
 	    case "bfd":
-			return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>
+			return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
