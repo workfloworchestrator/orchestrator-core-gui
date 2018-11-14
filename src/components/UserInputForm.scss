@@ -20,7 +20,7 @@
             em {
                 margin-bottom: 10px;
             }
-            &.first_lightpath, &.second_lightpath {
+            &.first_lightpath, &.second_lightpath, &.sap1_label, &.sap2_label, &.sap3_label, &.sap4_label, &.sap5_label, &.sap6_label {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: $blue;
