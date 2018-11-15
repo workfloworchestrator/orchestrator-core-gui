@@ -4,7 +4,7 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "./NodePortSelect.css";
 
-import {interfacesForNodeSubscriptionId} from "../api";
+import {freeCorelinkPortsForNodeIdAndInterfaceType} from "../api";
 import I18n from "i18n-js";
 
 
@@ -30,7 +30,7 @@ export default class NodePortSelect extends React.PureComponent {
             value = e ? e.value : null;
             if (e !== null) {
                 this.setState({node: value, loading: true, ports: []})
-                interfacesForNodeSubscriptionId(value).then(result =>
+                freeCorelinkPortsForNodeIdAndInterfaceType(value, "1000BASE-LX").then(result =>
                     this.setState({ports: result, loading: false})
                 );
             } else {
