@@ -346,10 +346,10 @@ I18n.translations.en = {
         confirm_corelink_info: "Confirm that the corelink is configured ok",
         plan_dont_allocate: "Set state to planned",
         plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
-        ims_port_id1: "First node and port",
-        ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
-        ims_port_id2: "Second node and port",
-        ims_port_id2_info: "Choose a node and port that you want to use to create the second corelink"
+        ims_port_id_1: "First node and port",
+        ims_port_id_1_info: "Choose a node and port that you want to use to create the first corelink",
+        ims_port_id_2: "Second node and port",
+        ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink"
     },
     process_state: {
         copy: "Copy to clipboard",
