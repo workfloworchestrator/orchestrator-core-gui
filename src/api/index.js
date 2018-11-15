@@ -191,8 +191,8 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode, interface
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }
 
-export function interfacesForNodeSubscriptionId(nodeId) {
-    return fetchJson(`ims/interfaces_by_node_subscription_id/${nodeId}`)
+export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId, interfaceType) {
+    return fetchJson(`ims/free_corelink_ports/${nodeId}/${interfaceType}`)
 }
 
 export function nodesForLocationCode(locationCode) {

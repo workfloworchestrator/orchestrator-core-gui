@@ -511,7 +511,9 @@ export default class UserInputForm extends React.Component {
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
+                const corelinkInterfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
+                                       interfaceType={corelinkInterfaceType}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
             case "generic_select":

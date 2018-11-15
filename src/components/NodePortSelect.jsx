@@ -4,7 +4,7 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "./NodePortSelect.css";
 
-import {interfacesForNodeSubscriptionId} from "../api";
+import {freeCorelinkPortsForNodeIdAndInterfaceType} from "../api";
 import I18n from "i18n-js";
 
 
@@ -25,12 +25,13 @@ export default class NodePortSelect extends React.PureComponent {
     };
 
     onChangeInternal = (name) => e => {
+        const {interfaceType} = this.props;
         let value;
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
                 this.setState({node: value, loading: true, ports: []})
-                interfacesForNodeSubscriptionId(value).then(result =>
+                freeCorelinkPortsForNodeIdAndInterfaceType(value, interfaceType).then(result =>
                     this.setState({ports: result, loading: false})
                 );
             } else {
@@ -55,16 +56,16 @@ export default class NodePortSelect extends React.PureComponent {
                 <div className="node-select">
                     <label>Node</label>
                     <Select onChange={this.onChangeInternal("subscription_id")}
-                       options={nodes
-                           .map(aNode => ({
-                               value: aNode.subscription_id,
-                               label: this.nodeLabel(aNode),
-                               tag: aNode.tag,
-                           }))
-                           .sort((x, y) => x.label.localeCompare(y.label))
-                       }
-                       value={node}
-                       searchable={true}
+                            options={nodes
+                                .map(aNode => ({
+                                    value: aNode.subscription_id,
+                                    label: this.nodeLabel(aNode),
+                                    tag: aNode.tag,
+                                }))
+                                .sort((x, y) => x.label.localeCompare(y.label))
+                            }
+                            value={node}
+                            searchable={true}
                             disabled={disabled || nodes.length === 0}/>
                 </div>
                 <div className="port-select">
@@ -90,7 +91,8 @@ export default class NodePortSelect extends React.PureComponent {
 NodePortSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     nodes: PropTypes.array.isRequired,
+    interfaceType: PropTypes.string.isRequired,
     nodePort: PropTypes.string,
     disabled: PropTypes.bool,
-    port: PropTypes.string
+    port: PropTypes.number,
 };
