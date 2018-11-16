@@ -346,13 +346,8 @@ I18n.translations.en = {
         ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
         ims_port_id2: "Second node and port",
         ims_port_id2_info: "Choose a node and port that you want to use to create the second corelink",
-        sap1_label: "Service Attach Point settings for first selected port",
-        sap2_label: "Service Attach Point settings for second selected port",
-        sap3_label: "Service Attach Point settings for third selected port",
-        sap4_label: "Service Attach Point settings for fourth selected port",
-        sap5_label: "Service Attach Point settings for fifth selected port",
-        sap6_label: "Service Attach Point settings for sixth selected port",
         sap1: {
+            label: "Service Attach Point settings for first selected port",
             service_port: "First selected Port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -360,6 +355,7 @@ I18n.translations.en = {
             customer_ipv6_mtu: "Customer MTU for IPv6 traffic",
         },
         sap2: {
+            label: "Service Attach Point settings for second selected port",
             service_port: "Second selected port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -367,6 +363,7 @@ I18n.translations.en = {
             customer_ipv6_mtu: "Customer MTU for IPv6 traffic",
         },
         sap3: {
+            label: "Service Attach Point settings for third selected port",
             service_port: "Third selected Port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -374,6 +371,7 @@ I18n.translations.en = {
             customer_ipv6_mtu: "Customer MTU for IPv6 traffic",
         },
         sap4: {
+            label: "Service Attach Point settings for fourth selected port",
             service_port: "Fourth selected Port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -381,6 +379,7 @@ I18n.translations.en = {
             customer_ipv6_mtu: "Customer MTU for IPv6 traffic",
         },
         sap5: {
+            label: "Service Attach Point settings for fifth selected port",
             service_port: "Fifth selected Port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -388,6 +387,7 @@ I18n.translations.en = {
             customer_ipv6_mtu: "Customer MTU for IPv6 traffic",
         },
         sap6: {
+            label: "Service Attach Point settings for sixth selected port",
             service_port: "Sixth selected Port",
             bgp_import_policy: "BGP Import Policy",
             bgp_export_policy: "BGP Export Policy",
@@ -960,7 +960,7 @@ I18n.translations.en = {
         new_endpoint: "The new endpoint"
     },
     ip_blocks: {
-		ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
+    ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
     },
     node_select: {
         select_node: "Select a node",
