@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {isEmpty} from "../utils/Utils";
 import {corelinkIEEEInterfaceTypes} from "../api";
-
 
 export default class CorelinkIEEEInterfaceTypesSelect extends React.PureComponent {
 
