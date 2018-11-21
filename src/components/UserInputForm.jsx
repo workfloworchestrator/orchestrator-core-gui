@@ -16,7 +16,6 @@ import CheckBox from "./CheckBox";
 import ContactPersons from "./ContactPersons";
 import StateValue from "./StateValue";
 
-import "./UserInputForm.css";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
 import NOCConfirm from "./NOCConfirm";
@@ -40,6 +39,9 @@ import DatePicker from "react-datepicker";
 import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
+import CorelinkIEEEInterfaceTypesSelect from "./CorelinkIEEEInterfaceTypesSelect";
+
+import "./UserInputForm.css";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -258,6 +260,7 @@ export default class UserInputForm extends React.Component {
             case "ims_id":
             case "isalias":
             case "stp":
+            case "isis_metric":
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
@@ -346,6 +349,11 @@ export default class UserInputForm extends React.Component {
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={value}
                                                               productId={propsProductId}/>;
+            case "corelink_ieee_interface_type":
+                return <CorelinkIEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
+                                                         interfaceType={value}
+                                                         productId={productId}/>;
+
             case "free_ports_for_location_code_and_interface_type":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
@@ -503,7 +511,9 @@ export default class UserInputForm extends React.Component {
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
+                const corelinkInterfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
+                                       interfaceType={corelinkInterfaceType}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
             case "generic_select":
