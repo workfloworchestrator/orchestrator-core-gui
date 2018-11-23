@@ -22,7 +22,7 @@ export default class BfdSettings extends React.PureComponent {
     changeEnabled = e => {
         const {name, value, onChange} = this.props;
         const isEnabled = e.target.checked;
-        const newValue = {...value, enabled: isEnabled};
+        const newValue = isEnabled ? {multiplier: 3, minimum_interval: 900, enabled: true} : {enabled: false};
         onChange(name, newValue);
 
     }
@@ -34,14 +34,14 @@ export default class BfdSettings extends React.PureComponent {
                <section key={name} className={`form-divider ${name}`}>
                 <CheckBox name={name} value={value.enabled || false}
                     onChange={this.changeEnabled}
-                    info={"Enable BFD"}
+                    info={I18n.t("bfd_settings.enable")}
                     disabled={readOnly}
                 />
                 {value.enabled &&
                     <React.Fragment>
-                        <label>BFD Minimum Interval</label>
+                        <label>{I18n.t("bfd_settings.minimum_interval")}</label>
                         <NumericInput min={1} max={255000} value={value.minimum_interval} onChange={this.changeMinimumInterval} readOnly={readOnly}/>
-                        <label>BFD Multiplier</label>
+                        <label>{I18n.t("bfd_settings.multiplier")}</label>
                         <NumericInput min={1} max={255} value={value.multiplier} onChange={this.changeMultiplier} readOnly={readOnly}/>
                     </React.Fragment>
                 }
