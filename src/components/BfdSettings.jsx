@@ -20,7 +20,7 @@ export default class BfdSettings extends React.PureComponent {
     }
 
     changeEnabled = e => {
-        const {name, value, onChange} = this.props;
+        const {name, onChange} = this.props;
         const isEnabled = e.target.checked;
         const newValue = isEnabled ? {multiplier: 3, minimum_interval: 900, enabled: true} : {enabled: false};
         onChange(name, newValue);
@@ -28,7 +28,7 @@ export default class BfdSettings extends React.PureComponent {
     }
 
     render() {
-        const {name, value, onChange, readOnly} =  this.props;
+        const {name, value, readOnly} =  this.props;
         return (
             <div>
                <section key={name} className={`form-divider ${name}`}>
