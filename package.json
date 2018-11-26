@@ -5,8 +5,9 @@
   "dependencies": {
     "create-react-app": "^1.4.3",
     "global": "^4.3.2",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0",
+    "moment": "^2.22.2",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-scripts": "1.0.17",
     "reactjs-popup": "^1.1.1"
   },
@@ -25,7 +26,7 @@
     "package": "^1.0.1",
     "prop-types": "^15.6.0",
     "react-copy-to-clipboard": "^5.0.0",
-    "react-datepicker": "^0.61.0",
+    "react-datepicker": "1.8.0",
     "react-json-pretty": "^1.7.4",
     "react-modal": "^3.1.4",
     "react-pretty-json": "^2.0.2",

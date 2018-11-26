@@ -234,6 +234,7 @@ class App extends React.PureComponent {
                                         currentUser={currentUser} configuration={configuration}
                                         render={props => <Prefixes currentuser={currentUser}
                                                                    organisations={organisations}
+								   products={products}
                                                                    {...props} />}/>
                         <ProtectedRoute path="/new-task"
                                         currentUser={currentUser} configuration={configuration}

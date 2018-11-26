@@ -384,25 +384,25 @@ export default class SubscriptionDetail extends React.PureComponent {
                       <td>{I18n.t("ipam.asn")}</td>
                       <td>{prefix.asn}</td>
                     </tr>
-                    {prefix.assigned_addresses.map((address, idx) =>
-                      [
+                    {prefix.assigned_addresses && prefix.assigned_addresses.map((address, idx) =>
+		      <React.Fragment>
                         <tr>
                           <td>{I18n.t("ipam.assigned_address_id")}</td>
                           <td>{address.id}</td>
-                        </tr>,
+                        </tr>
                         <tr>
                           <td>{I18n.t("ipam.state")}</td>
                           <td>{address.state__label}</td>
-                        </tr>,
+                        </tr>
                         <tr>
                           <td>{I18n.t("ipam.ipaddress")}</td>
                           <td>{address.address}</td>
-                        </tr>,
+                        </tr>
                         <tr>
                           <td>{I18n.t("ipam.fqdn")}</td>
                         <td>{address.fqdn}</td>
                         </tr>
-                     ]
+		     </React.Fragment>
                      )}
       </tbody>
       </table>
