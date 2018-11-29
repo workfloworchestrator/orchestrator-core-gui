@@ -295,7 +295,6 @@ export default class NewProcess extends React.Component {
 
     renderModifyProduct = (subscriptions, modifySubscription, modifyWorkflow, products, notModifiableMessage, modifyWorkflows, organisationName) => {
         const noModifyWorkflows = (modifySubscription && modifyWorkflows.length === 0) ? I18n.t("subscription.no_modify_workflow") : null;
-        console.log(subscriptions);
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.modify_subscription")}</h3>

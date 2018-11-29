@@ -88,6 +88,8 @@ I18n.translations.en = {
     },
     process: {
         workflow: "Process instance of workflow {{name}}",
+        corelink_interface_type: "Corelink interface type",
+        corelink_interface_type_info: "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
         cancel: "Cancel",
         submit: "Submit",
         notFound: "No Process found (e.g. 404)",
@@ -223,6 +225,8 @@ I18n.translations.en = {
         ims_port_id_info: "The IMS port id",
         ip_prefix: "Select a free subnet",
         ip_prefix_info: "In the next step you can allocate any prefix under the subnet you select here",
+        isis_metric: "IS-IS metric",
+        isis_metric_info: "Enter the desired IS-IS metric for this corelink",
         new_product: "The new Product",
         new_product_info: "Please select the product with the new speed",
         new_ssp_workflow: "Create a new SSP",
