@@ -345,7 +345,9 @@ I18n.translations.en = {
         ims_port_id1: "First node and port",
         ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
         ims_port_id2: "Second node and port",
-        ims_port_id2_info: "Choose a node and port that you want to use to create the second corelink"
+        ims_port_id2_info: "Choose a node and port that you want to use to create the second corelink",
+        port_mode: "Port Mode",
+        port_mode_info: "The port mode as sent to IMS and NSO"
     },
     process_state: {
         copy: "Copy to clipboard",
