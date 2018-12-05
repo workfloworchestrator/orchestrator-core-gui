@@ -26,4 +26,3 @@ yarn-error.log*
 
 .idea/
 delme-validations.json
-package-lock.json
