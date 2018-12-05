@@ -10,7 +10,6 @@ import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
 import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
-import FreePortSelect from "./FreePortSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
 import CheckBox from "./CheckBox";
 import ContactPersons from "./ContactPersons";
@@ -362,15 +361,6 @@ export default class UserInputForm extends React.Component {
                                           locationCode={locCode}
                                           interfaceType={intType}
                 />;
-
-            case "free_ports_for_location_code_and_interface_type":
-                const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
-                const locationCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
-                return <FreePortSelect
-                    onChange={this.changeUniqueSelectInput(name, `${interfaceType}_${locationCode}`)}
-                    freePort={value}
-                    interfaceType={interfaceType}
-                    locationCode={locationCode}/>;
             case "downgrade_redundant_lp_choice":
                 return <DowngradeRedundantLPChoice products={products}
                                                    organisations={organisations}
