@@ -187,6 +187,14 @@ export function corelinkIEEEInterfaceTypes() {
     return fetchJson("products/corelink_ieee_interface_types")
 }
 
+export function getNodeByLocationAndStatus(locationCode, status) {
+    return fetchJson(`ims/nodes/${locationCode}/${status}`)
+}
+
+export function getFreePortsByNodeIdAndInterfaceType(nodeId, interfaceType, status, mode) {
+    return fetchJson(`ims/free_ports/${nodeId}/${interfaceType}/${status}/${mode}`)
+}
+
 export function freePortsForLocationCodeAndInterfaceType(locationCode, interfaceType) {
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`)
 }

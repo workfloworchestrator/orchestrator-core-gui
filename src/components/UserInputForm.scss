@@ -20,7 +20,7 @@
             em {
                 margin-bottom: 10px;
             }
-            &.first_lightpath, &.second_lightpath {
+            &.first_lightpath, &.second_lightpath, p.label {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: $blue;
