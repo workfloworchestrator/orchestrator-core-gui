@@ -40,8 +40,9 @@ import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
 import CorelinkIEEEInterfaceTypesSelect from "./CorelinkIEEEInterfaceTypesSelect";
-
 import "./UserInputForm.css";
+import BfdSettings from "./BfdSettings";
+import NumericInput from "react-numeric-input";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -152,6 +153,9 @@ export default class UserInputForm extends React.Component {
         this.changeUserInput(name, target);
     };
 
+    changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
+        this.changeUserInput(name, valueAsNumber);
+    };
 
     enforceSelectInputUniqueness = (hash, name, value) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
@@ -250,7 +254,7 @@ export default class UserInputForm extends React.Component {
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
-            case "string" :
+            case "string":
             case "guid":
             case "uuid":
             case "crm_port_id":
@@ -442,7 +446,7 @@ export default class UserInputForm extends React.Component {
             case "label_with_state":
                 return <StateValue className={userInput.name} value={value}/>;
             case "label":
-                return <p className={userInput.name}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
+                return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
@@ -501,7 +505,6 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeDateInput(name)}
                         customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
                         openToDate={targetDate} />;
-
             case "nodes_for_location_code_and_status":
                 const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
                 const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
@@ -516,7 +519,18 @@ export default class UserInputForm extends React.Component {
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
                                        port={value}/>;
             case "generic_select":
-                return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>
+                return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>;
+        case "bfd":
+                return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
+        case "numeric":
+                return <NumericInput onChange={this.changeNumericInput(name)}
+                                     min={userInput.minimum || Number.MIN_SAFE_INTEGER}
+                                     max={userInput.maximum || Number.MAX_SAFE_INTEGER}
+                                     step={userInput.step || 1}
+                                     precision={userInput.precision || 0}
+                                     value={value}
+                                     strict={true}
+                                     readOnly={userInput.readonly || false}/>
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
