@@ -15,6 +15,7 @@ import LocationCodeSelect from "./LocationCodeSelect";
 import CheckBox from "./CheckBox";
 import ContactPersons from "./ContactPersons";
 import StateValue from "./StateValue";
+import NodeIdPortSelect from "./NodeIdPortSelect"
 
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
@@ -353,6 +354,14 @@ export default class UserInputForm extends React.Component {
                 return <CorelinkIEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
                                                          interfaceType={value}
                                                          productId={productId}/>;
+            case "node_id_port_select":
+                const intType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const locCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
+
+                return <NodeIdPortSelect  onChange={this.changeSelectInput(name)}
+                                          locationCode={locCode}
+                                          interfaceType={intType}
+                />;
 
             case "free_ports_for_location_code_and_interface_type":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
@@ -368,7 +377,7 @@ export default class UserInputForm extends React.Component {
                                                    onChange={this.changeStringInput(name)}
                                                    subscriptionId={process.current_state.subscription_id}
                                                    value={value}
-                                                   readOnly={userInput.readonly}/>
+                                                   readOnly={userInput.readonly}/>;
             case "downgrade_redundant_lp_confirmation":
                 const primary = lookupValueFromNestedState(userInput.primary, currentState);
                 const secondary = lookupValueFromNestedState(userInput.secondary, currentState);
