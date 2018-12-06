@@ -96,6 +96,11 @@ export const ipamStates = [ "Free", "Allocated", null, "Planned", null, null, "F
 //                             0      1      2      3      4       5      6
 export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"];
 
+// States as defined in IMS
+//                        0   1     2      3     4     5      6
+export const imsStates = ["", "PL", "RFS", "IS", "MI", "OOS", "RFC"];
+
+
 export function ipAddressToNumber(ipAddress) {
       const octets = ipAddress.split(".");
       if (octets.length === 4) {
