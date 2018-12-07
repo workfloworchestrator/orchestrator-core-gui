@@ -31,7 +31,7 @@ export default class NodePortSelect extends React.PureComponent {
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
-                this.setState({node: value, loading: true, ports: []})
+                this.setState({node: value, loading: true, ports: []});
                 freeCorelinkPortsForNodeIdAndInterfaceType(value, interfaceType).then(result =>
                     this.setState({ports: result, loading: false})
                 );
@@ -75,7 +75,7 @@ export default class NodePortSelect extends React.PureComponent {
                             options={ports
                                 .map(aPort => ({
                                     value: aPort.id,
-                                    label: `${aPort.port} [${imsStates[aPort.status]}]`,
+                                    label: `${aPort.port} (${imsStates[aPort.status]})`,
                                 }))
                                 .sort((x, y) => x.label.localeCompare(y.label))
                             }
