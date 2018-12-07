@@ -10,7 +10,7 @@ import {
     processSubscriptionsBySubscriptionId,
     productById, subscriptionInsyncStatus,
     serviceByImsServiceId,
-    subscriptionsDetail
+    subscriptionsDetail, internalPortByImsPortId
 } from "../api";
 import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
@@ -86,9 +86,12 @@ export default class SubscriptionDetail extends React.PureComponent {
                         subscriptions = subscriptions.concat(subscription_used.json);
                     }
                     subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
-                    const allImsServices = relatedObjects.filter(obj => obj.type === ims_circuit_id || obj.type === ims_port_id).map(obj => obj.json);
+
+                    const allImsServices = relatedObjects.filter(obj => obj.type === ims_circuit_id || obj.type === "ims_corelink_trunk_id" || obj.type === ims_port_id).map(obj => obj.json);
+
                     // There are service duplicates for port_id and circuit_id
                     const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
+
                     const ipamPrefixes = relatedObjects.filter(obj => obj.type === "ptp_ipv4_ipam_id" || obj.type === "ptp_ipv6_ipam_id" || obj.type === "ipam_prefix_id").map(obj => obj.json)
                     this.setState({
                         subscriptionProcesses: result[0],
@@ -107,6 +110,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                             return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
                           } else if (endpoint.type === "port"){
                             return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
+                          } else if (endpoint.type === "internal_port"){
+                              return internalPortByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
                           } else {
                             return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
                           }
@@ -612,6 +617,8 @@ export default class SubscriptionDetail extends React.PureComponent {
     renderRelatedObject = (subscriptions, imsServices, type, identifier, isSubscriptionValue, imsEndpoints) => {
         var target;
         switch (type) {
+            case "ims_corelink_trunk_id":
+                return <div>Todo: implement fetch</div>
           case ims_circuit_id:
             target = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
             return this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
@@ -634,7 +641,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
             loadedAllRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type.endsWith("subscription_id");
-        const externalLinks = [ims_circuit_id, "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id"]
+        const externalLinks = [ims_circuit_id, "ims_corelink_trunk_id", "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id"]
         const isExternalLinkValue = isSubscriptionValue || externalLinks.includes(subscriptionInstanceValue.resource_type.resource_type);
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
         const icon = isCollapsed ? "minus" : "plus";
