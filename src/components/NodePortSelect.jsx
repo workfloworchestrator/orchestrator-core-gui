@@ -6,6 +6,7 @@ import "./NodePortSelect.css";
 
 import {freeCorelinkPortsForNodeIdAndInterfaceType} from "../api";
 import I18n from "i18n-js";
+import {imsStates} from "../utils/Lookups.js";
 
 
 export default class NodePortSelect extends React.PureComponent {
@@ -21,7 +22,7 @@ export default class NodePortSelect extends React.PureComponent {
 
     nodeLabel = (node) => {
         const description = node.description || "<No description>";
-        return `${node.subscription_id.substring(0,8)} ${description.trim()}`
+        return `${node.subscription_id.substring(0,8)} ${description.trim()}`;
     };
 
     onChangeInternal = (name) => e => {
@@ -30,7 +31,7 @@ export default class NodePortSelect extends React.PureComponent {
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
-                this.setState({node: value, loading: true, ports: []})
+                this.setState({node: value, loading: true, ports: []});
                 freeCorelinkPortsForNodeIdAndInterfaceType(value, interfaceType).then(result =>
                     this.setState({ports: result, loading: false})
                 );
@@ -74,7 +75,7 @@ export default class NodePortSelect extends React.PureComponent {
                             options={ports
                                 .map(aPort => ({
                                     value: aPort.id,
-                                    label: aPort.port,
+                                    label: `${aPort.port} (${imsStates[aPort.status]})`,
                                 }))
                                 .sort((x, y) => x.label.localeCompare(y.label))
                             }

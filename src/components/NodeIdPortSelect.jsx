@@ -6,6 +6,7 @@ import "./NodePortSelect.css";
 
 import {getNodeByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType} from "../api";
 import I18n from "i18n-js";
+import {imsStates} from "../utils/Lookups.js";
 
 
 export default class NodeIdPortSelect extends React.PureComponent {
@@ -93,7 +94,7 @@ export default class NodeIdPortSelect extends React.PureComponent {
                             options={ports
                                 .map(aPort => ({
                                     value: aPort.id,
-                                    label: aPort.port,
+                                    label: `${aPort.port} (${imsStates[aPort.status]})`,
                                 }))
                                 .sort((x, y) => x.label.localeCompare(y.label))
                             }
