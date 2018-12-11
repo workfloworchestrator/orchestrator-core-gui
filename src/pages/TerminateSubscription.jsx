@@ -3,13 +3,12 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty, stop} from "../utils/Utils";
 import ContactPersons from "../components/ContactPersons";
-import {terminateSubscription} from "../api/index";
+import {terminateSubscription, subscriptionsDetail} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import {validEmailRegExp} from "../validations/Subscriptions";
 import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
 
 import "./TerminateSubscription.css";
-import {subscriptionsDetail} from "../api";
 
 export default class TerminateSubscription extends React.Component {
 
@@ -33,7 +32,8 @@ export default class TerminateSubscription extends React.Component {
 
     renderButtons = () => {
         const {processing, contactPersons} = this.state;
-        const invalid = processing || contactPersons.some(x => isEmpty(x.email) || !validEmailRegExp.test(x.email));
+        //const invalid = processing || contactPersons.some(x => isEmpty(x.email) || !validEmailRegExp.test(x.email));
+        const invalid = false;
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
                 {I18n.t("terminate_subscription.cancel")}
@@ -63,6 +63,11 @@ export default class TerminateSubscription extends React.Component {
         //TODO use the form_input from workflow to render UserForm
         const {contactPersons, organisationId} = this.state;
         const {subscriptionId, products, organisations} = this.props;
+
+
+        const productTag = subscriptionsDetail(subscriptionId).then( subscription => {
+            return subscription.product.tag;
+        });
         return (
             <div className="mod-terminate-subscription">
                 <section className="card">
@@ -71,6 +76,7 @@ export default class TerminateSubscription extends React.Component {
                         <ReadOnlySubscriptionView subscriptionId={subscriptionId}
                                                   products={products} organisations={organisations}/>
                     </section>
+                    {productTag === 'IP_PREFIX' &&
                     <section className="form-step">
                         <section className="form-divider">
                             {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
@@ -79,6 +85,7 @@ export default class TerminateSubscription extends React.Component {
                                             organisationId={organisationId}/>
                         </section>
                     </section>
+                    }
                     {this.renderButtons()}
                 </section>
             </div>
