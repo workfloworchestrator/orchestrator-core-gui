@@ -1,11 +1,9 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {isEmpty, stop} from "../utils/Utils";
 import ContactPersons from "../components/ContactPersons";
 import {terminateSubscription, subscriptionsDetail} from "../api/index";
 import {setFlash} from "../utils/Flash";
-import {validEmailRegExp} from "../validations/Subscriptions";
 import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
 
 import "./TerminateSubscription.css";
@@ -31,8 +29,6 @@ export default class TerminateSubscription extends React.Component {
     };
 
     renderButtons = () => {
-        const {processing, contactPersons} = this.state;
-        //const invalid = processing || contactPersons.some(x => isEmpty(x.email) || !validEmailRegExp.test(x.email));
         const invalid = false;
         return (<section className="buttons">
             <a className="button" onClick={this.cancel}>
