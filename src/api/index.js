@@ -357,6 +357,10 @@ export function prefix_filters(){
     return fetchJson("ipam/prefix_filters")
 }
 
+export function prefixSubscriptionsByRootPrefix(parentId) {
+    return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
+}
+
 export function prefixById(prefixId) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
