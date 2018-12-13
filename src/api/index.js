@@ -219,6 +219,10 @@ export function portByImsPortId(portId) {
     return fetchJson(`ims/port_by_ims_port/${portId}`)
 }
 
+export function internalPortByImsPortId(portId) {
+    return fetchJson(`ims/internal_port_by_ims_port/${portId}`)
+}
+
 export function portByImsServiceId(serviceId) {
     return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
