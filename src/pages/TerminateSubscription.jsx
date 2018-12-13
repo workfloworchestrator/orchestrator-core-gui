@@ -16,12 +16,20 @@ export default class TerminateSubscription extends React.Component {
         this.state = {
             contactPersons: [{email: "", name: "", phone: ""}],
             processing: false,
-            organisationId: null
+            organisationId: null,
+            productTag: null
         };
     }
 
-    componentDidMount = () => subscriptionsDetail(this.props.subscriptionId)
-        .then(sub => this.setState({organisationId: sub.customer_id}));
+    componentDidMount = () => {
+        subscriptionsDetail(this.props.subscriptionId)
+            .then(sub => this.setState({
+                organisationId: sub.customer_id,
+                productTag: sub.product.tag
+            }));
+    }
+
+
 
 
     cancel = e => {
@@ -58,13 +66,10 @@ export default class TerminateSubscription extends React.Component {
 
     render() {
         //TODO use the form_input from workflow to render UserForm
-        const {contactPersons, organisationId} = this.state;
+        const {contactPersons, organisationId, productTag} = this.state;
         const {subscriptionId, products, organisations} = this.props;
 
 
-        const productTag = subscriptionsDetail(subscriptionId).then( subscription => {
-            return subscription.product.tag;
-        });
         return (
             <div className="mod-terminate-subscription">
                 <section className="card">
@@ -73,7 +78,7 @@ export default class TerminateSubscription extends React.Component {
                         <ReadOnlySubscriptionView subscriptionId={subscriptionId}
                                                   products={products} organisations={organisations}/>
                     </section>
-                    {productTag === 'IP_PREFIX' &&
+                    {productTag !== 'IP_PREFIX' &&
                     <section className="form-step">
                         <section className="form-divider">
                             {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
