@@ -84,6 +84,13 @@ export default class Tasks extends React.PureComponent {
         this.props.history.push("/new-task");
     };
 
+    runAllTasks = () => {
+        this.confirmation(I18n.t("tasks.runallConfirmation"), () =>
+
+            {alert("Hoi hoi");}
+
+        }
+
     search = e => {
         const query = e.target.value;
         this.setState({query: query});
@@ -291,6 +298,9 @@ export default class Tasks extends React.PureComponent {
                     </div>
                 </div>
                 <section className="refresh">
+                    <a className="new button blue" onClick={this.runAllTasks}>
+                            {I18n.t("tasks.runall")}
+                        </a>
                     <CheckBox name="refresh" info={I18n.t("tasks.refresh")} value={refresh}
                               onChange={this.toggleRefresh}/>
                 </section>
