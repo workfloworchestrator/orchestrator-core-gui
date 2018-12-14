@@ -661,7 +661,7 @@ I18n.translations.en = {
         noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -749,7 +749,9 @@ I18n.translations.en = {
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
-        actions: "Actions"
+        actions: "Actions",
+        node_terminate_warning: "Node terminate warning",
+        node_terminate_warning_info: "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
     },
     terminate_subscription: {
         cancel: "Cancel",
