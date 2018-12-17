@@ -401,6 +401,10 @@ export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
 }
 
+export function resumeAll() {
+    return fetchJsonWithCustomErrorHandling("tasks/resumeall")
+}
+
 export function startTask(task) {
     return postPutJson("tasks", task, "post");
 }

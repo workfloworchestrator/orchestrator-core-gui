@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {abortTask, deleteTask, retryTask, tasks} from "../api";
+import {abortTask, deleteTask, retryTask, tasks, resumeAll} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -85,11 +85,11 @@ export default class Tasks extends React.PureComponent {
     };
 
     runAllTasks = () => {
-        this.confirmation(I18n.t("tasks.runallConfirmation"), () =>
-
-            {alert("Hoi hoi");}
-
-        }
+        this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
+            resumeAll().then( result =>
+            {})
+        })
+    }
 
     search = e => {
         const query = e.target.value;
