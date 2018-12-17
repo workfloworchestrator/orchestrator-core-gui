@@ -219,6 +219,10 @@ export function portByImsPortId(portId) {
     return fetchJson(`ims/port_by_ims_port/${portId}`)
 }
 
+export function internalPortByImsPortId(portId) {
+    return fetchJson(`ims/internal_port_by_ims_port/${portId}`)
+}
+
 export function portByImsServiceId(serviceId) {
     return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
@@ -351,6 +355,10 @@ export function ip_blocks(parentPrefix){
 //IPAM the user-defined filters as configured in the database for the IP PREFIX product
 export function prefix_filters(){
     return fetchJson("ipam/prefix_filters")
+}
+
+export function prefixSubscriptionsByRootPrefix(parentId) {
+    return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
 }
 
 export function prefixById(prefixId) {
