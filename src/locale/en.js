@@ -748,7 +748,8 @@ I18n.translations.en = {
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
-        actions: "Actions"
+        actions: "Actions",
+        modify_modify_ip_prefix: "Modify IP Prefix"
     },
     terminate_subscription: {
         cancel: "Cancel",
