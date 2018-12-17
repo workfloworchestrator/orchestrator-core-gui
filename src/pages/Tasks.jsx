@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import {abortTask, deleteTask, retryTask, tasks} from "../api";
+import {abortTask, deleteTask, retryTask, tasks, resumeAll} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
@@ -83,6 +83,13 @@ export default class Tasks extends React.PureComponent {
         clearInterval(this.interval);
         this.props.history.push("/new-task");
     };
+
+    runAllTasks = () => {
+        this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
+            resumeAll().then( result =>
+            {})
+        })
+    }
 
     search = e => {
         const query = e.target.value;
@@ -291,6 +298,9 @@ export default class Tasks extends React.PureComponent {
                     </div>
                 </div>
                 <section className="refresh">
+                    <a className="new button blue" onClick={this.runAllTasks}>
+                            {I18n.t("tasks.runall")}
+                        </a>
                     <CheckBox name="refresh" info={I18n.t("tasks.refresh")} value={refresh}
                               onChange={this.toggleRefresh}/>
                 </section>

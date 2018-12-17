@@ -67,7 +67,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
     return validFetch(path, options, headers, showErrorDialog)
-        .then(res => result ? res.json() : {});
+        .then(res => result ? res.json() : {})
 }
 
 function fetchJsonWithCustomErrorHandling(path) {
@@ -407,6 +407,10 @@ export function fixedInputConfiguration() {
 
 export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
+}
+
+export function resumeAll() {
+    return fetchJsonWithCustomErrorHandling("tasks/resumeall")
 }
 
 export function startTask(task) {
