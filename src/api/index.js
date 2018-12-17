@@ -67,7 +67,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
     return validFetch(path, options, headers, showErrorDialog)
-        .then(res => result ? res.json() : {});
+        .then(res => result ? res.json() : {})
 }
 
 function fetchJsonWithCustomErrorHandling(path) {
