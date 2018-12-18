@@ -4,35 +4,44 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 import "./NodePortSelect.css";
 
-import {freeCorelinkPortsForNodeIdAndInterfaceType} from "../api";
+import {getNodeByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType} from "../api";
 import I18n from "i18n-js";
 import {imsStates} from "../utils/Lookups.js";
 
 
-export default class NodePortSelect extends React.PureComponent {
+export default class NodeIdPortSelect extends React.PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
+            nodes: [],
             ports: [],
             loading: true,
             node: undefined
-        }
+        };
+        this.getNodesOnLocation(props.locationCode);
     }
 
     nodeLabel = (node) => {
-        const description = node.description || "<No description>";
-        return `${node.subscription_id.substring(0,8)} ${description.trim()}`;
+        const description = node.name || "<No description>";
+        return `${description.trim()}`
     };
 
-    onChangeInternal = (name) => e => {
+    getNodesOnLocation = (location) => {
+      getNodeByLocationAndStatus(location, "IS").then(result =>
+        this.setState({nodes: result, loading: false})
+      );
+    };
+
+
+    onChangeNodes = (name) => e => {
         const {interfaceType} = this.props;
         let value;
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
-                this.setState({node: value, loading: true, ports: []});
-                freeCorelinkPortsForNodeIdAndInterfaceType(value, interfaceType).then(result =>
+                this.setState({node: value, loading: true, ports: []})
+                getFreePortsByNodeIdAndInterfaceType(value, interfaceType, 'free', 'patched').then(result =>
                     this.setState({ports: result, loading: false})
                 );
             } else {
@@ -44,24 +53,34 @@ export default class NodePortSelect extends React.PureComponent {
 
     };
 
+
+    onChangePort = e => {
+        let value;
+        value = e ? e.value : null;
+        this.props.onChange(e);
+        this.setState({port: value})
+    };
+
+
     clearErrors = () => {
         this.setState({node: undefined, ports: []});
     };
 
     render() {
-        const {node, ports} = this.state;
-        const {onChange, port, nodes, disabled} = this.props;
-        const portPlaceholder = node ? I18n.t("node_port.select_port") : I18n.t("node_port.select_node_first");
+        const {port, ports, nodes, node} = this.state;
+        const {locationCode, disabled} = this.props;
+        const portPlaceholder = locationCode ? I18n.t("node_port.select_port") : I18n.t("node_port.select_node_first");
+
         return (
             <section className="node-port">
                 <div className="node-select">
                     <label>Node</label>
-                    <Select onChange={this.onChangeInternal("subscription_id")}
+                    <Select onChange={this.onChangeNodes("subscription_id")}
                             options={nodes
                                 .map(aNode => ({
-                                    value: aNode.subscription_id,
+                                    value: aNode.id,
                                     label: this.nodeLabel(aNode),
-                                    tag: aNode.tag,
+                                    tag: aNode.status,
                                 }))
                                 .sort((x, y) => x.label.localeCompare(y.label))
                             }
@@ -71,7 +90,7 @@ export default class NodePortSelect extends React.PureComponent {
                 </div>
                 <div className="port-select">
                     <label>Port</label>
-                    <Select onChange={onChange}
+                    <Select onChange={this.onChangePort}
                             options={ports
                                 .map(aPort => ({
                                     value: aPort.id,
@@ -89,11 +108,9 @@ export default class NodePortSelect extends React.PureComponent {
     }
 }
 
-NodePortSelect.propTypes = {
+NodeIdPortSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
-    nodes: PropTypes.array.isRequired,
     interfaceType: PropTypes.string.isRequired,
-    nodePort: PropTypes.string,
+    locationCode: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    port: PropTypes.number,
 };
