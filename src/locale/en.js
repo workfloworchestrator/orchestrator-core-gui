@@ -750,6 +750,7 @@ I18n.translations.en = {
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
         actions: "Actions",
+        modify_modify_ip_prefix: "Modify IP Prefix",
         node_terminate_warning: "Node terminate warning",
         node_terminate_warning_info: "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
     },
@@ -966,13 +967,15 @@ I18n.translations.en = {
         deleteConfirmation: "Are you sure you want to delete {{name}} task?",
         abortConfirmation: "Are you sure you want to abort {{name}} task?",
         retryConfirmation: "Are you sure you want to retry {{name}} task?",
+        runallConfirmation: "Are you sure you want to rerun all failed tasks?",
         no_found: "No tasks",
         flash: {
             delete: "Task {{name}} is deleted",
             abort: "Task {{name}} is aborted",
             retry: "Task {{name}} has been retried"
         },
-        refresh: "Refresh automatically every 3 seconds?"
+        refresh: "Refresh automatically every 3 seconds?",
+        runall: "Rerun all"
     },
     task: {
         workflow: "Workflow",
