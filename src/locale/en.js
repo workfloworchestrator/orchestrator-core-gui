@@ -343,7 +343,7 @@ I18n.translations.en = {
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "Is the node's corelink configured ok?",
-        confirm_corelink_info: "Confirm that the corelink is configured ok",
+        confirm_corelink_info: "Please confirm that the, \"MANUAL\", administration of the physical layers in IMS is done.",
         plan_dont_allocate: "Set state to planned",
         plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
         ims_port_id1: "First node and port",
