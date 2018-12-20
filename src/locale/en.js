@@ -343,7 +343,7 @@ I18n.translations.en = {
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "Is the node's corelink configured ok?",
-        confirm_corelink_info: "Confirm that the corelink is configured ok",
+        confirm_corelink_info: "Please confirm that the, \"MANUAL\", administration of the physical layers in IMS is done.",
         plan_dont_allocate: "Set state to planned",
         plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
         ims_port_id1: "First node and port",
@@ -661,7 +661,7 @@ I18n.translations.en = {
         noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -750,7 +750,9 @@ I18n.translations.en = {
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
         actions: "Actions",
-        modify_modify_ip_prefix: "Modify IP Prefix"
+        modify_modify_ip_prefix: "Modify IP Prefix",
+        node_terminate_warning: "Node terminate warning",
+        node_terminate_warning_info: "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
     },
     terminate_subscription: {
         cancel: "Cancel",
