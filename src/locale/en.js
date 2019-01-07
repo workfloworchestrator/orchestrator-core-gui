@@ -492,6 +492,10 @@ I18n.translations.en = {
         },
         bgp_ip_internetpinnen_prefix_subscriptions: "Internetpinnen prefixes",
         bgp_ip_internetpinnen_prefix_subscriptions_info: "IP Prefix(es) reserved for internetpinnen.",
+        old_isis_metric: "Current",
+        old_isis_metric_info: "Current value for the ISIS metric of this Corelink subscription",
+        new_isis_metric: "Desired",
+        new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -678,6 +682,7 @@ I18n.translations.en = {
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
         modify_modify_lightpath_speed: "Modify Service Speed",
