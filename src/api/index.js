@@ -67,7 +67,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
 
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
     return validFetch(path, options, headers, showErrorDialog)
-        .then(res => result ? res.json() : {});
+        .then(res => result ? res.json() : {})
 }
 
 function fetchJsonWithCustomErrorHandling(path) {
@@ -219,6 +219,10 @@ export function portByImsPortId(portId) {
     return fetchJson(`ims/port_by_ims_port/${portId}`)
 }
 
+export function internalPortByImsPortId(portId) {
+    return fetchJson(`ims/internal_port_by_ims_port/${portId}`)
+}
+
 export function portByImsServiceId(serviceId) {
     return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
@@ -353,6 +357,10 @@ export function prefix_filters(){
     return fetchJson("ipam/prefix_filters")
 }
 
+export function prefixSubscriptionsByRootPrefix(parentId) {
+    return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
+}
+
 export function prefixById(prefixId) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
@@ -399,6 +407,10 @@ export function fixedInputConfiguration() {
 
 export function task(taskId) {
     return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
+}
+
+export function resumeAll() {
+    return fetchJsonWithCustomErrorHandling("tasks/resumeall")
 }
 
 export function startTask(task) {
