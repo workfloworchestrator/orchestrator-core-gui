@@ -1,6 +1,7 @@
 ---
 stages:
   - build
+  - scan
   - release
   - deploy
 
@@ -19,6 +20,71 @@ build docker image:
     - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-ct-builder-ext
+
+scan docker images:
+  stage: scan
+  dependencies:
+    - build docker image
+  image:
+    name: anchore/anchore-engine:latest
+    entrypoint: [""]
+  services:
+    - name: anchore/engine-db-preload:latest
+      alias: anchore-db
+
+  variables:
+    GIT_STRATEGY: none
+    ANCHORE_FAIL_ON_POLICY: "false"
+    ANCHORE_TIMEOUT: 500
+
+  script:
+    - |
+      curl -o /tmp/anchore_ci_tools.py https://raw.githubusercontent.com/anchore/ci-tools/v0.3.0/scripts/anchore_ci_tools.py
+      chmod +x /tmp/anchore_ci_tools.py
+      ln -s /tmp/anchore_ci_tools.py /usr/local/bin/anchore_ci_tools
+    - anchore_ci_tools --setup
+    - anchore-cli registry add registry.automatuion.surf.net foo  bar --skip-validate
+    - anchore_ci_tools --analyze --report --image "$CONTAINER_TEST_IMAGE" --timeout "$ANCHORE_TIMEOUT"
+    - |
+      if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ]; then
+        anchore-cli evaluate check "$CONTAINER_TEST_IMAGE"
+      else
+        set +o pipefail
+        anchore-cli evaluate check "$CONTAINER_TEST_IMAGE" | tee /dev/null
+      fi
+
+  artifacts:
+    name: ${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}
+    paths:
+      - anchore-reports/*
+  tags:
+    - docker-ct-builder-ext
+  only:
+    - dev@automation/workflows-client
+    - master@automation/workflows-client
+    - tags
+
+anchore_reports:
+  stage: release
+  image: alpine:latest
+  dependencies:
+    - scan docker images
+
+  variables:
+    GIT_STRATEGY: none
+
+  script:
+    - apk add jq
+    - |
+        echo "Parsing anchore reports."
+        printf "\n%s\n" "The following vulnerabilites were found on ${CONTAINER_TEST_IMAGE}:"
+        jq '[.vulnerabilities | group_by(.package) | .[] | {package: .[0].package, vuln: [.[].vuln], severity: [.[].severity]}]' anchore-reports/image-vuln-report.json || true
+  tags:
+    - docker-ct-builder-ext
+  only:
+    - dev@automation/workflows-client
+    - master@automation/workflows-client
+    - tags
 
 release image dev:
   stage: release
