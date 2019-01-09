@@ -680,6 +680,7 @@ I18n.translations.en = {
         notFoundRelatedObjects: "Subscription resource references NOT found / deleted",
         process_link_text: "Show related {{target}} process for this subscription",
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
+        not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
