@@ -24,6 +24,10 @@ export function maybeModifiedMessage(subscription, relation_info) {
                 message = message + relation.description + ((index !== array.length - 1) ? ", " : ".");
             });
         }
+
+        if (relation_info.node) {
+            return null;
+        }
         return I18n.t("subscription.relations_not_in_sync") + message;
     }
     return null;

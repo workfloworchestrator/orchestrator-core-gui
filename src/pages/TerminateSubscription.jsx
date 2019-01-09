@@ -27,10 +27,7 @@ export default class TerminateSubscription extends React.Component {
                 organisationId: sub.customer_id,
                 productTag: sub.product.tag
             }));
-    }
-
-
-
+    };
 
     cancel = e => {
         stop(e);
@@ -74,19 +71,44 @@ export default class TerminateSubscription extends React.Component {
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h1>{I18n.t("subscription.terminate")}</h1>
+                    {productTag === "Node" &&
+                    <section className="message-container">
+                        <section className="message">
+                            <section className="status-icon">
+                                <i className="fa fa-exclamation-triangle" />
+                            </section>
+                            <section className="status-info">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>{I18n.t("subscription.node_terminate_warning")}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{I18n.t("subscription.node_terminate_warning_info")}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </section>
+                    </section>
+                    }
+
                     <section className="form-step">
                         <ReadOnlySubscriptionView subscriptionId={subscriptionId}
                                                   products={products} organisations={organisations}/>
                     </section>
-                    {productTag !== 'IP_PREFIX' &&
-                    <section className="form-step">
-                        <section className="form-divider">
-                            {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
-                            {<em>{I18n.t("process.contact_persons")}</em>}
-                            <ContactPersons persons={contactPersons} onChange={this.changeUserInput}
-                                            organisationId={organisationId}/>
+
+                    {productTag !== 'IP_PREFIX' && productTag !== 'Node' && productTag !== 'Corelink' &&
+                        <section className="form-step">
+                            <section className="form-divider">
+                                {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
+                                {<em>{I18n.t("process.contact_persons")}</em>}
+                                <ContactPersons persons={contactPersons} onChange={this.changeUserInput}
+                                                organisationId={organisationId}/>
+                            </section>
                         </section>
-                    </section>
                     }
                     {this.renderButtons()}
                 </section>

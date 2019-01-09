@@ -342,14 +342,14 @@ I18n.translations.en = {
         location_code_info: "Provide a valid location code",
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
-        confirm_corelink: "Is the node's corelink configured ok?",
-        confirm_corelink_info: "Confirm that the corelink is configured ok",
+        confirm_corelink: "Physical link registered OK?",
+        confirm_corelink_info: "To ensure correct impact analyse a node needs an ODU4 on most locations. Please confirm that the, \"MANUAL\", administration of the physical layers in IMS is registered ok.",
         plan_dont_allocate: "Set state to planned",
         plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
-        ims_port_id1: "First node and port",
-        ims_port_id1_info: "Choose a node and port that you want to use to create the first corelink",
-        ims_port_id2: "Second node and port",
-        ims_port_id2_info: "Choose a node and port that you want to use to create the second corelink",
+        ims_port_id_1: "First node and port",
+        ims_port_id_1_info: "Choose a node and port that you want to use to create the first corelink",
+        ims_port_id_2: "Second node and port",
+        ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
         port_mode_info: "The port mode as sent to IMS and NSO",
         sap1: {
@@ -492,6 +492,10 @@ I18n.translations.en = {
         },
         bgp_ip_internetpinnen_prefix_subscriptions: "Internetpinnen prefixes",
         bgp_ip_internetpinnen_prefix_subscriptions_info: "IP Prefix(es) reserved for internetpinnen.",
+        old_isis_metric: "Current",
+        old_isis_metric_info: "Current value for the ISIS metric of this Corelink subscription",
+        new_isis_metric: "Desired",
+        new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -661,7 +665,7 @@ I18n.translations.en = {
         noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -676,8 +680,10 @@ I18n.translations.en = {
         notFoundRelatedObjects: "Subscription resource references NOT found / deleted",
         process_link_text: "Show related {{target}} process for this subscription",
         no_process_link_text: "This subscription has NOT been created by a workflow or the Process has been deleted.",
+        not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
         modify_modify_lightpath_speed: "Modify Service Speed",
@@ -750,7 +756,9 @@ I18n.translations.en = {
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
         actions: "Actions",
-        modify_modify_ip_prefix: "Modify IP Prefix"
+        modify_modify_ip_prefix: "Modify IP Prefix",
+        node_terminate_warning: "Node terminate warning",
+        node_terminate_warning_info: "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
     },
     terminate_subscription: {
         cancel: "Cancel",
