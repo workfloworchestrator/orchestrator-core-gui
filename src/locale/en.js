@@ -87,6 +87,7 @@ I18n.translations.en = {
         refresh: "Refresh automatically every 3 seconds?"
     },
     process: {
+        asn_info: "Asn of the customer",
         workflow: "Process instance of workflow {{name}}",
         corelink_interface_type: "Corelink interface type",
         corelink_interface_type_info: "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
@@ -108,6 +109,8 @@ I18n.translations.en = {
         port_id_2_info: "Select a port",
         port_id_redundant: "Redundant port",
         port_id_redundant_info: "Select a port",
+        internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
+        internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
@@ -597,6 +600,7 @@ I18n.translations.en = {
         CREATE: "Create",
         all: "ALL",
         selected: "FILTERED",
+        created: "Created",
         aborted: "Aborted",
         completed: "Completed",
         suspended: "Suspended",
