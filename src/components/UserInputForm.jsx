@@ -450,14 +450,20 @@ export default class UserInputForm extends React.Component {
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                const servicePortDomain = "SURFNET8"
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
                 const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) ||
                     lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
-                const availableServicePorts = productIds.length === products.length ? servicePorts :
-                     servicePorts.filter(sp => productIds.includes(sp.product_id));
+                // const availableServicePorts = productIds.length === products.length ? servicePorts :
+                //      servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const availableServicePorts = servicePorts;
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
+
+                // const servicePortDomain = userInput.domain;
+
+
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
@@ -471,6 +477,7 @@ export default class UserInputForm extends React.Component {
                                          isElan={userInput.elan}
                                          organisationPortsOnly={userInput.organisationPortsOnly}
                                          mspOnly={userInput.mspOnly}
+                                         domain={servicePortDomain}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
             case "new_ssp_workflow":
