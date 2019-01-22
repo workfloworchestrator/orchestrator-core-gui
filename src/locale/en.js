@@ -687,7 +687,7 @@ I18n.translations.en = {
         not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
-	modify_modify_add_link: "Add a link to a Corelink",
+	modify_modify_corelink_add_link: "Add a link to an existing Corelink",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
