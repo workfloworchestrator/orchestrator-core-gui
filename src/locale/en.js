@@ -638,7 +638,8 @@ I18n.translations.en = {
         Planned: "Planned",
         Failed: "Failed",
         IPv4: "IPv4",
-        IPv6: "IPv6"
+        IPv6: "IPv6",
+        SP: "SN8 Service Port"
     },
     subscriptions: {
         customer_name: "Customer",

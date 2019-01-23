@@ -235,6 +235,7 @@ export default class NewProcess extends React.Component {
             {!isEmpty(stepUserInput) &&
             <UserInputForm stepUserInput={stepUserInput}
                            servicePorts={servicePorts}
+                           servicePortsSN8={servicePorts}
                            history={history}
                            organisations={organisations}
                            products={products}

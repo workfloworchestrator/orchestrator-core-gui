@@ -250,7 +250,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts, subscriptions, preselectedInput} = this.props;
+        const {currentState, products, organisations, servicePorts, servicePortsSN8, subscriptions, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -461,9 +461,6 @@ export default class UserInputForm extends React.Component {
                 const availableServicePorts = servicePorts;
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
 
-                // const servicePortDomain = userInput.domain;
-
-
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
@@ -477,9 +474,36 @@ export default class UserInputForm extends React.Component {
                                          isElan={userInput.elan}
                                          organisationPortsOnly={userInput.organisationPortsOnly}
                                          mspOnly={userInput.mspOnly}
-                                         domain={servicePortDomain}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
+            case "sn8_service_ports":
+                organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
+                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                const bandwidthKeySN8 = userInput.bandwidth_key || "bandwidth";
+                const bandwidthMspSN8 = findValueFromInputStep(bandwidthKey, stepUserInput) ||
+                    lookupValueFromNestedState(bandwidthKeySN8, currentState);
+                const productIdsSN8 = filterProductsByBandwidth(products, bandwidthMspSN8)
+                    .map(product => product.product_id);
+                // const availableServicePorts = productIds.length === products.length ? servicePorts :
+                //      servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const availableServicePortsSN8 = servicePorts;
+                const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
+
+                return <div>
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    <MultipleServicePorts servicePorts={portsSN8}
+                                          availableServicePorts={availableServicePortsSN8}
+                                          organisations={organisations}
+                                          onChange={this.changeNestedInput(name)}
+                                          organisationId={organisationId}
+                                          minimum={userInput.minimum}
+                                          maximum={userInput.maximum}
+                                          disabled={userInput.readonly}
+                                          isElan={userInput.elan}
+                                          organisationPortsOnly={userInput.organisationPortsOnly}
+                                          mspOnly={userInput.mspOnly}
+                                          reportError={this.reportCustomError(userInput.type)}/>
+                </div>;
             case "new_ssp_workflow":
                 const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
                 const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
@@ -574,6 +598,7 @@ UserInputForm.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
+    servicePortsSN8: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,

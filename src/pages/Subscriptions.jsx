@@ -46,7 +46,7 @@ export default class Subscriptions extends React.PureComponent {
         };
     }
 
-    componentDidMount = () => subsciptionsExclude("tag,name,is_ssp_and_has_parent,crm_port_id")
+    componentDidMount = () => subsciptionsExclude("tag,name,is_ssp_and_has_parent,crm_port_id,port_mode")
         .then(results => {
             const {organisations, products} = this.props;
             const collapsibleSubscriptions = [];

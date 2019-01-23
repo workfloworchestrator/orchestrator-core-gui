@@ -68,9 +68,13 @@ export default class ProcessDetail extends React.PureComponent {
                     process: processInstance, loaded: true, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([processSubscriptionsByProcessId(processInstance.id), subscriptionsByTags(["MSP", "SSP", "MSPNL"])])
+                Promise.all([
+                    processSubscriptionsByProcessId(processInstance.id),
+                    subscriptionsByTags(["MSP", "SSP", "MSPNL"]),
+                    subscriptionsByTags(["SP"])
+                ])
                 .then(res => {
-                    this.setState({subscriptionProcesses: res[0], servicePorts: res[1]});
+                    this.setState({subscriptionProcesses: res[0], servicePorts: res[1], servicePortsSN8: res[2]});
                 });
             }).catch(err => {
             if (err.response && err.response.status === 404) {
@@ -194,6 +198,7 @@ export default class ProcessDetail extends React.PureComponent {
                                history={history}
                                subscriptions={subscriptions}
                                servicePorts={servicePorts}
+                               servicePortsSN8={servicePorts}
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}
