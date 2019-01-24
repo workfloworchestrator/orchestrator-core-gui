@@ -15,6 +15,7 @@ export default class ServicePortSelectSN8 extends React.PureComponent {
 
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
+        console.log(servicePorts)
         return <Select onChange={onChange}
                        options={servicePorts
                            .map(aServicePort => ({

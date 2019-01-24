@@ -43,6 +43,7 @@ import CorelinkIEEEInterfaceTypesSelect from "./CorelinkIEEEInterfaceTypesSelect
 import "./UserInputForm.css";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
+import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -488,21 +489,20 @@ export default class UserInputForm extends React.Component {
                 //      servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const availableServicePortsSN8 = servicePortsSN8;
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
-
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
-                    <MultipleServicePorts servicePorts={portsSN8}
-                                          availableServicePorts={availableServicePortsSN8}
-                                          organisations={organisations}
-                                          onChange={this.changeNestedInput(name)}
-                                          organisationId={organisationId}
-                                          minimum={userInput.minimum}
-                                          maximum={userInput.maximum}
-                                          disabled={userInput.readonly}
-                                          isElan={userInput.elan}
-                                          organisationPortsOnly={userInput.organisationPortsOnly}
-                                          mspOnly={userInput.mspOnly}
-                                          reportError={this.reportCustomError(userInput.type)}/>
+                    <MultipleServicePortsSN8 servicePorts={portsSN8}
+                                             availableServicePorts={availableServicePortsSN8}
+                                             organisations={organisations}
+                                             onChange={this.changeNestedInput(name)}
+                                             organisationId={organisationId}
+                                             minimum={userInput.minimum}
+                                             maximum={userInput.maximum}
+                                             disabled={userInput.readonly}
+                                             isElan={userInput.elan}
+                                             organisationPortsOnly={userInput.organisationPortsOnly}
+                                             mspOnly={userInput.mspOnly}
+                                             reportError={this.reportCustomError(userInput.type)}/>
                 </div>;
             case "new_ssp_workflow":
                 const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";

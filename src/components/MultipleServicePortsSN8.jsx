@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
-import "./SN8MultipleServicePorts.css";
+import "./MultipleServicePortsSN8.css";
 import ServicePortSelectSN8 from "./ServicePortSelectSN8";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
@@ -97,12 +97,13 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
         // PB let op er is ook een filter die een andere lijst van servicePorts ophaalt in procesdetail.jsx
         // TC above check already implemented in new-process.jsx
-        if (maximum > 2 || mspOnly) { // >2 == ELAN
+
+/*        if (maximum > 2 || mspOnly) { // >2 == ELAN
             inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "MSPNL");
         }
         if (organisationPortsOnly) {
             inSelect = inSelect.filter(port => port.customer_id === organisationId);
-        }
+        }*/
         const showDelete = maximum > 2 && !disabled;
         const vlanPlaceholder = servicePort.tag === "SSP" ? I18n.t("vlan.ssp") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
@@ -110,7 +111,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}
-                <ServicePortSelect key={index} onChange={this.onChangeInternal("subscription_id", index)}
+                <ServicePortSelectSN8 key={index} onChange={this.onChangeInternal("subscription_id", index)}
                                    servicePort={servicePort.subscription_id}
                                    servicePorts={inSelect}
                                    organisations={organisations}
