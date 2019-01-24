@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-export default class SN8ServicePortSelect extends React.PureComponent {
+export default class ServicePortSelectSN8 extends React.PureComponent {
 
     label = (servicePort, organisations) => {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
@@ -30,7 +30,7 @@ export default class SN8ServicePortSelect extends React.PureComponent {
     }
 }
 
-SN8ServicePortSelect.propTypes = {
+ServicePortSelectSN8.propTypes = {
     onChange: PropTypes.func.isRequired,
     servicePorts: PropTypes.array.isRequired,
     servicePort: PropTypes.string,

@@ -476,7 +476,7 @@ export default class UserInputForm extends React.Component {
                                          mspOnly={userInput.mspOnly}
                                          reportError={this.reportCustomError(userInput.type)}/>
                     </div>;
-            case "sn8_service_ports":
+            case "service_ports_sn8":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKeySN8 = userInput.bandwidth_key || "bandwidth";
@@ -486,7 +486,7 @@ export default class UserInputForm extends React.Component {
                     .map(product => product.product_id);
                 // const availableServicePorts = productIds.length === products.length ? servicePorts :
                 //      servicePorts.filter(sp => productIds.includes(sp.product_id));
-                const availableServicePortsSN8 = servicePorts;
+                const availableServicePortsSN8 = servicePortsSN8;
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
 
                 return <div>

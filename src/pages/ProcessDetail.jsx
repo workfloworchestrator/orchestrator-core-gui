@@ -29,6 +29,7 @@ export default class ProcessDetail extends React.PureComponent {
             subscriptions: [],
             stepUserInput: [],
             servicePorts: [],
+            servicePortsSN8: [],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -83,6 +84,7 @@ export default class ProcessDetail extends React.PureComponent {
                 throw err;
             }
         });
+        // Todo: remove this one OR add it to the promise.all() ??
         subscriptions().then(subscriptions => {
             this.setState({subscriptions: subscriptions});
         });
@@ -175,7 +177,7 @@ export default class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, servicePorts) => {
+    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, servicePorts, servicePortsSN8) => {
         const {subscriptions} = this.state;
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
@@ -198,7 +200,7 @@ export default class ProcessDetail extends React.PureComponent {
                                history={history}
                                subscriptions={subscriptions}
                                servicePorts={servicePorts}
-                               servicePortsSN8={servicePorts}
+                               servicePortsSN8={servicePortsSN8}
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}
@@ -216,7 +218,7 @@ export default class ProcessDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, servicePorts
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, servicePorts, servicePortsSN8
         } = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
@@ -232,7 +234,7 @@ export default class ProcessDetail extends React.PureComponent {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput,
-                    subscriptionProcesses, servicePorts)}
+                    subscriptionProcesses, servicePorts, servicePortsSN8)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
             </div>
         );

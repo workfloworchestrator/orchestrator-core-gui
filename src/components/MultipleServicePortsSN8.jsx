@@ -4,11 +4,11 @@ import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
 import "./SN8MultipleServicePorts.css";
-import SN8ServicePortSelect from "./SN8ServicePortSelect";
+import ServicePortSelectSN8 from "./ServicePortSelectSN8";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";
 
-export default class SN8MultipleServicePorts extends React.PureComponent {
+export default class MultipleServicePortsSN8 extends React.PureComponent {
 
     constructor(props, context) {
         super(props, context);
@@ -165,7 +165,7 @@ export default class SN8MultipleServicePorts extends React.PureComponent {
     }
 }
 
-SN8MultipleServicePorts.propTypes = {
+MultipleServicePortsSN8.propTypes = {
     onChange: PropTypes.func.isRequired,
     availableServicePorts: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
@@ -180,6 +180,6 @@ SN8MultipleServicePorts.propTypes = {
     reportError: PropTypes.func.isRequired
 };
 
-SN8MultipleServicePorts.defaultProps = {
+MultipleServicePortsSN8.defaultProps = {
     minimum: 2,
 }
