@@ -14,7 +14,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         super(props, context);
         this.state = {
             bandwidthErrors: {},
-            usedSSPDescriptions: {},
+            usedUntaggedServicePorts: {},
         };
     }
 
@@ -25,22 +25,29 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
             value = e ? e.value : null;
             if (e !== null) {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
-                if (port.tag === "SSP") {
-                    // The SSP may not be used in other LP's (except when they are terminated)
+                if (port.port_mode === "untagged") {
+                    // The untagged Sp may not be used in other LP's (except when they are terminated)
+                    // TODO: check if this is needed and ensure it works with SN8 SP's
+                    console.log("Warning: not all business logic is implemented/clear for untagged SP's: " +
+                        "As there a no workflows yet that create an SP parent; the call to /api/subscriptions/parent_subscriptions " +
+                        "could yield unuseable results")
                     parentSubscriptions(value).then(res => {
-                        const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
+                        const usedUntaggedServicePorts = {...this.state.usedUntaggedServicePorts};
                         let filteredParents = res.json.filter(parent => parent.status !== "terminated");
                         if (filteredParents.length > 0) {
-                            usedSSPDescriptions[index] = filteredParents.map(parent => parent.description).join(", ");
+                            usedUntaggedServicePorts[index] = filteredParents.map(parent => parent.description).join(", ");
                         } else {
-                            usedSSPDescriptions[index] = false;
+                            usedUntaggedServicePorts[index] = false;
                         }
-                        this.setState({usedSSPDescriptions: usedSSPDescriptions});
+                        this.setState({usedUntaggedServicePorts: usedUntaggedServicePorts});
                     });
+
                 } else {
+                    // TODO: check if this is needed and ensure it works with SN8 SP's
+                    console.log("Warning: not all business logic is implemented/clear for untagged SP's: investigate clearErrors()...");
                     this.clearErrors(index);
                 }
-                servicePorts[index].tag = port.tag;
+                servicePorts[index].port_mode = port.port_mode;
             } else {
                 this.clearErrors(index);
             }
@@ -52,13 +59,14 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     clearErrors = index => {
-        const usedSSPDescriptions = {...this.state.usedSSPDescriptions};
-        usedSSPDescriptions[index] = false;
-        this.setState({usedSSPDescriptions: usedSSPDescriptions});
+        const usedUntaggedServicePorts = {...this.state.usedUntaggedServicePorts};
+        usedUntaggedServicePorts[index] = false;
+        this.setState({usedUntaggedServicePorts: usedUntaggedServicePorts});
     };
 
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
+        //todo: we might need to add tag and port_mode
         servicePorts.push({subscription_id: null, vlan: ""});
         this.props.onChange(servicePorts);
     };
@@ -73,8 +81,8 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     reportVlanError = isError => this.props.reportError(isError);
 
     bubbleUpErrorState = () => {
-        const {bandwidthErrors, usedSSPDescriptions} = this.state;
-        const inValid = Object.values(bandwidthErrors).concat(Object.values(usedSSPDescriptions)).some(val => val);
+        const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
+        const inValid = Object.values(bandwidthErrors).concat(Object.values(usedUntaggedServicePorts)).some(val => val);
         this.props.reportError(inValid);
     };
 
@@ -91,41 +99,51 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, organisationId, minimum, maximum,
-                         disabled, usedSSPDescriptions, bandwidthErrors, isElan, organisationPortsOnly, mspOnly) => {
+                         disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode) => {
         // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
         // PB let op er is ook een filter die een andere lijst van servicePorts ophaalt in procesdetail.jsx
         // TC above check already implemented in new-process.jsx
 
-/*        if (maximum > 2 || mspOnly) { // >2 == ELAN
-            inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "MSPNL");
+        // Port mode filter
+        if (isElan || visiblePortMode === "untagged") {
+            inSelect = inSelect.filter(port => port.port_mode === "untagged");
         }
+        else if (visiblePortMode === "tagged") {
+            inSelect = inSelect.filter(port => port.port_mode === "tagged");
+        }
+        else if (visiblePortMode === "link_member") {
+            inSelect = inSelect.filter(port => port.port_mode === "link_member");
+        }
+
+        // Customer filter toggle
         if (organisationPortsOnly) {
             inSelect = inSelect.filter(port => port.customer_id === organisationId);
-        }*/
+        }
         const showDelete = maximum > 2 && !disabled;
-        const vlanPlaceholder = servicePort.tag === "SSP" ? I18n.t("vlan.ssp") :
+        const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
                 (isElan ? I18n.t("vlan.placeholder_no_msp") : I18n.t("vlan.placeholder_no_service_port")));
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}
                 <ServicePortSelectSN8 key={index} onChange={this.onChangeInternal("subscription_id", index)}
-                                   servicePort={servicePort.subscription_id}
-                                   servicePorts={inSelect}
-                                   organisations={organisations}
-                                   disabled={disabled}/>
-                {usedSSPDescriptions[index] &&
-                <em className="error">{I18n.t("service_ports.used_ssp", {descriptions: usedSSPDescriptions[index]})}</em>}
+                                      servicePort={servicePort.subscription_id}
+                                      servicePorts={inSelect}
+                                      organisations={organisations}
+                                      disabled={disabled}
+                                      visiblePortMode={visiblePortMode}/>
+                {usedUntaggedServicePorts[index] &&
+                <em className="error">{I18n.t("service_ports.used_ssp", {descriptions: usedUntaggedServicePorts[index]})}</em>}
             </div>
             <div className="wrapper">
                 {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
                 <div className="vlan">
-                    <VirtualLAN vlan={servicePort.tag === "SSP" ? "0" : servicePort.vlan}
+                    <VirtualLAN vlan={servicePort.port_mode === "untagged" ? "0" : servicePort.vlan}
                                 onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={servicePort.subscription_id}
-                                disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
+                                disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id}
                                 placeholder={vlanPlaceholder}
                                 servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
@@ -154,13 +172,13 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, mspOnly} = this.props;
-        const {bandwidthErrors, usedSSPDescriptions} = this.state;
+        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, mspOnly, visiblePortMode} = this.props;
+        const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="multiple-mps">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations, organisationId,
-                    minimum, maximum, disabled, usedSSPDescriptions, bandwidthErrors, isElan, organisationPortsOnly, mspOnly))}
+                    minimum, maximum, disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode))}
             {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -177,10 +195,11 @@ MultipleServicePortsSN8.propTypes = {
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
     organisationPortsOnly: PropTypes.bool,
-    mspOnly: PropTypes.bool,
-    reportError: PropTypes.func.isRequired
+    reportError: PropTypes.func.isRequired,
+    visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
 };
 
 MultipleServicePortsSN8.defaultProps = {
     minimum: 2,
-}
+    visiblePortMode: "all",
+};

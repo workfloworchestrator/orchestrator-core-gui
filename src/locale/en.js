@@ -796,7 +796,8 @@ I18n.translations.en = {
         placeholder: "Enter a valid VLAN range..." ,
         placeholder_no_service_port: "First select a Service Port...",
         placeholder_no_msp: "First select a MSP...",
-        ssp: "A SSP has a default VLAN"
+        ssp: "A SSP has a default VLAN",
+        untagged: "An UNTAGGED SN8 Serviceport has a default VLAN"
     },
     clipboard: {
         copied: "Copied!",

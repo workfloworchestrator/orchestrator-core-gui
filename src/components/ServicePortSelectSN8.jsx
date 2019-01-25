@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
+import {isEmpty} from "../utils/Utils";
 
 export default class ServicePortSelectSN8 extends React.PureComponent {
 
@@ -9,13 +10,12 @@ export default class ServicePortSelectSN8 extends React.PureComponent {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
-        const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
-        return `${crm_port_id} - ${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
+        const portMode = isEmpty(servicePort.port_mode) ? "<No port_mode>" : servicePort.port_mode.toUpperCase();
+        return `${servicePort.subscription_id.substring(0,8)} ${portMode} ${description.trim()} ${organisationName}`
     };
 
     render() {
         const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
-        console.log(servicePorts)
         return <Select onChange={onChange}
                        options={servicePorts
                            .map(aServicePort => ({
@@ -36,8 +36,6 @@ ServicePortSelectSN8.propTypes = {
     servicePorts: PropTypes.array.isRequired,
     servicePort: PropTypes.string,
     organisations: PropTypes.array.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
 };
-
-// Ideas:
-//- add mode: "tagged", "untagged", "link_member"
