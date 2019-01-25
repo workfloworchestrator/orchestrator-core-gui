@@ -1067,6 +1067,7 @@ I18n.translations.en = {
         bandwidth: "Bandwidth",
         bandwidth_placeholder: "Enter the bandwidth of this MSP...",
         bandwidth_no_msp_placeholder: "First select a MSP...",
+        bandwidth_no_service_port_placeholder: "First select a Tagged Service Port",
         invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
     },
     bandwidth: {

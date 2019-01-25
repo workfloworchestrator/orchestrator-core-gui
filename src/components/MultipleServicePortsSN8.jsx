@@ -124,7 +124,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         const showDelete = maximum > 2 && !disabled;
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
-                (isElan ? I18n.t("vlan.placeholder_no_service-port") : I18n.t("vlan.placeholder_no_service_port")));
+                (isElan ? I18n.t("vlan.placeholder_no_service_port") : I18n.t("vlan.placeholder_no_service_port")));
         return (<section className="service-port" key={index}>
             <div className="wrapper service-port-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}
@@ -157,7 +157,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     <input type="number" name={`bandwidth_${index}`}
                            value={servicePort.bandwidth || ""}
                            placeholder={servicePort.subscription_id ? I18n.t("service_ports.bandwidth_placeholder") :
-                               I18n.t("service_ports.bandwidth_no_service-port_placeholder")}
+                               I18n.t("service_ports.bandwidth_no_service_port_placeholder")}
                            onChange={this.onChangeInternal("bandwidth", index)}
                            onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
