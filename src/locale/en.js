@@ -1058,6 +1058,7 @@ I18n.translations.en = {
     },
     service_ports: {
         servicePort: "Service Port",
+        servicePortSN8:"SURFnet8 Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",

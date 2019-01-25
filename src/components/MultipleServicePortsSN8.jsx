@@ -110,7 +110,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                 (isElan ? I18n.t("vlan.placeholder_no_msp") : I18n.t("vlan.placeholder_no_service_port")));
         return (<section className="msp" key={index}>
             <div className="wrapper msp-select">
-                {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}
+                {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}
                 <ServicePortSelectSN8 key={index} onChange={this.onChangeInternal("subscription_id", index)}
                                    servicePort={servicePort.subscription_id}
                                    servicePorts={inSelect}
