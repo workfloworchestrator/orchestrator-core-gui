@@ -1,11 +1,11 @@
 @import "../stylesheets/vars.scss";
 
-section.multiple-mps {
+section.service-port-container{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 
-    section.msp {
+    section.service-port {
         display: flex;
         div.wrapper {
             margin-left: 25px;
@@ -29,7 +29,7 @@ section.multiple-mps {
             }
         }
     }
-    div.msp-select {
+    div.service-port-select {
         margin-top: 5px;
         div.Select-control {
             max-height: 30px;
@@ -38,7 +38,7 @@ section.multiple-mps {
             }
         }
     }
-    div.add-msp {
+    div.add-service-port {
         display: flex;
         i.fa-plus {
             margin-left: auto;

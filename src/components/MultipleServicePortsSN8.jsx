@@ -124,9 +124,9 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         const showDelete = maximum > 2 && !disabled;
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
-                (isElan ? I18n.t("vlan.placeholder_no_msp") : I18n.t("vlan.placeholder_no_service_port")));
-        return (<section className="msp" key={index}>
-            <div className="wrapper msp-select">
+                (isElan ? I18n.t("vlan.placeholder_no_service-port") : I18n.t("vlan.placeholder_no_service_port")));
+        return (<section className="service-port" key={index}>
+            <div className="wrapper service-port-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}
                 <ServicePortSelectSN8 key={index} onChange={this.onChangeInternal("subscription_id", index)}
                                       servicePort={servicePort.subscription_id}
@@ -157,7 +157,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     <input type="number" name={`bandwidth_${index}`}
                            value={servicePort.bandwidth || ""}
                            placeholder={servicePort.subscription_id ? I18n.t("service_ports.bandwidth_placeholder") :
-                               I18n.t("service_ports.bandwidth_no_msp_placeholder")}
+                               I18n.t("service_ports.bandwidth_no_service-port_placeholder")}
                            onChange={this.onChangeInternal("bandwidth", index)}
                            onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
@@ -172,14 +172,14 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, mspOnly, visiblePortMode} = this.props;
+        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, visiblePortMode} = this.props;
         const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
         const showAdd = maximum > 2 && !disabled;
-        return (<section className="multiple-mps">
+        return (<section className="service-port-container">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations, organisationId,
                     minimum, maximum, disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode))}
-            {showAdd && <div className="add-msp"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
+            {showAdd && <div className="add-service-port"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
 }
