@@ -320,7 +320,7 @@ export default class UserInputForm extends React.Component {
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
                 const newProductId = lookupValueFromNestedState("product", currentState) ||
--                   lookupValueFromNestedState("product", currentState);
+                    lookupValueFromNestedState("product", currentState);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
@@ -547,13 +547,20 @@ export default class UserInputForm extends React.Component {
                 const corelinkInterfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                                        interfaceType={corelinkInterfaceType}
-                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node')}
+                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated')}
                                        port={value}/>;
+            case "corelink_add_link":
+                const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const nodeSubscriptionId = lookupValueFromNestedState(userInput.node_key, currentState);
+                return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
+                       interfaceType={interfaceType}
+                       nodes={subscriptions.filter((subscription) => subscription.subscription_id === nodeSubscriptionId)}
+                       port={value}/>;
             case "generic_select":
                 return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>;
-        case "bfd":
+            case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
-        case "numeric":
+            case "numeric":
                 return <NumericInput onChange={this.changeNumericInput(name)}
                                      min={userInput.minimum || Number.MIN_SAFE_INTEGER}
                                      max={userInput.maximum || Number.MAX_SAFE_INTEGER}
