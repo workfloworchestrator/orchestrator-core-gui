@@ -113,6 +113,9 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         else if (visiblePortMode === "tagged") {
             inSelect = inSelect.filter(port => port.port_mode === "tagged");
         }
+        else if (visiblePortMode === "normal") {
+            inSelect = inSelect.filter(port => port.port_mode === "tagged" || port.port_mode === "untagged");
+        }
         else if (visiblePortMode === "link_member") {
             inSelect = inSelect.filter(port => port.port_mode === "link_member");
         }
