@@ -451,17 +451,14 @@ export default class UserInputForm extends React.Component {
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
-                const servicePortDomain = "SURFNET8"
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
                 const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) ||
                     lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
-                // const availableServicePorts = productIds.length === products.length ? servicePorts :
-                //      servicePorts.filter(sp => productIds.includes(sp.product_id));
-                const availableServicePorts = servicePorts;
+                const availableServicePorts = productIds.length === products.length ? servicePorts :
+                    servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
-
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
                     <MultipleServicePorts servicePorts={ports}
@@ -481,13 +478,12 @@ export default class UserInputForm extends React.Component {
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKeySN8 = userInput.bandwidth_key || "bandwidth";
-                const bandwidthMspSN8 = findValueFromInputStep(bandwidthKey, stepUserInput) ||
+                const bandwidthServicePortSN8 = findValueFromInputStep(bandwidthKeySN8, stepUserInput) ||
                     lookupValueFromNestedState(bandwidthKeySN8, currentState);
-                const productIdsSN8 = filterProductsByBandwidth(products, bandwidthMspSN8)
+                const productIdsSN8 = filterProductsByBandwidth(products, bandwidthServicePortSN8)
                     .map(product => product.product_id);
-                // const availableServicePorts = productIds.length === products.length ? servicePorts :
-                //      servicePorts.filter(sp => productIds.includes(sp.product_id));
-                const availableServicePortsSN8 = servicePortsSN8;
+                const availableServicePortsSN8 = productIdsSN8.length === products.length ? servicePortsSN8 :
+                     servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product_id));
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
@@ -568,7 +564,7 @@ export default class UserInputForm extends React.Component {
                                      precision={userInput.precision || 0}
                                      value={value}
                                      strict={true}
-                                     readOnly={userInput.readonly || false}/>
+                                     readOnly={userInput.readonly || false}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
