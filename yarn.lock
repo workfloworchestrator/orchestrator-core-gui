@@ -7251,10 +7251,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
-moment@^2.22.2:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
-  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -9207,7 +9207,7 @@ react-app-polyfill@^0.2.0:
     raf "3.4.0"
     whatwg-fetch "3.0.0"
 
-react-copy-to-clipboard@^5.0.0:
+react-copy-to-clipboard@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.1.tgz#8eae107bb400be73132ed3b6a7b4fb156090208e"
   integrity sha512-ELKq31/E3zjFs5rDWNCfFL4NvNFQvGRoJdAKReD/rUPA+xxiLPQmZBZBvy2vgH7V0GE9isIQpT9WXbwIVErYdA==
@@ -9278,12 +9278,12 @@ react-input-autosize@^2.0.1:
     create-react-class "^15.5.2"
     prop-types "^15.5.8"
 
-react-json-pretty@^1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/react-json-pretty/-/react-json-pretty-1.7.4.tgz#6daa917da9400feff111bc01749e4793feca1869"
-  integrity sha1-baqRfalAD+/xEbwBdJ5Hk/7KGGk=
+react-json-pretty@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-json-pretty/-/react-json-pretty-2.0.0.tgz#703bdf7c680afefe3796f4ec00f6424c7865d985"
+  integrity sha512-AaOGcuoU/pBNKtAc33GgtEX7a0vepAfsw/hxhlwJl4qKf3EaHvFgBKblrkiBBIaO/XIS/8/sSwN4tShXvSTmUA==
   dependencies:
-    create-react-class "^15.5.2"
+    prop-types "^15.6.2"
 
 react-modal@^3.1.4:
   version "3.1.4"
