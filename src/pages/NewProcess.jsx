@@ -215,6 +215,9 @@ export default class NewProcess extends React.Component {
         let servicePorts = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
             ).filter(sub => ((sub.tag === "MSP" || sub.tag === "MSPNL") && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
+        let servicePortsSN8 = subscriptions.filter(
+            sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
+        ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));
         return <section className="form-step divider">
             <h3>{I18n.t("process.new_process")}</h3>
             <section className="form-divider">
@@ -235,6 +238,7 @@ export default class NewProcess extends React.Component {
             {!isEmpty(stepUserInput) &&
             <UserInputForm stepUserInput={stepUserInput}
                            servicePorts={servicePorts}
+                           servicePortsSN8={servicePortsSN8}
                            history={history}
                            organisations={organisations}
                            products={products}
