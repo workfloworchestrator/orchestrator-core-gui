@@ -16,6 +16,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
     "events": "^3.0.0",
+    "http-proxy-middleware": "^0.19.1",
     "i18n-js": "^3.2.1",
     "jsondiffpatch": "^0.2.4",
     "lodash.clonedeep": "^4.5.0",
