@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
+// import "react-select/dist/react-select.css";
 import {isEmpty} from "../utils/Utils";
 
 export default function LocationCodeSelect({onChange, locationCode, locationCodes, disabled}) {

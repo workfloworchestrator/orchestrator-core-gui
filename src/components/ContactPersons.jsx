@@ -6,7 +6,6 @@ import {validEmailRegExp} from "../validations/Subscriptions";
 import Autocomplete from "./Autocomplete";
 import scrollIntoView from "scroll-into-view";
 
-import "react-select/dist/react-select.css";
 import "./ContactPersons.scss";
 import {contacts} from "../api";
 
