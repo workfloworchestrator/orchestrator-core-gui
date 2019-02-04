@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import JSONPretty from 'react-json-pretty';
 
-import "./ValidationsExplain.css";
+import "./ValidationsExplain.scss";
 
 export default class ValidationsExplain extends React.PureComponent {
 

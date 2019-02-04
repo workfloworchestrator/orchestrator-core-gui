@@ -28,7 +28,7 @@ import {
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./SubscriptionDetail.css";
+import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
 import {TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 

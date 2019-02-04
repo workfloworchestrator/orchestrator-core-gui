@@ -6,7 +6,7 @@ import {imsService, subscriptionsDetail} from "../api/index";
 import {enrichSubscription, enrichPortSubscription, enrichPrimarySubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
-import "./DowngradeRedundantLPChoice.css";
+import "./DowngradeRedundantLPChoice.scss";
 import CheckBox from "./CheckBox";
 
 export default class DowngradeRedundantLPChoice extends React.PureComponent {

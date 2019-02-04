@@ -11,7 +11,7 @@ import {organisationNameByUuid, productById, productNameById} from "../utils/Loo
 import {lookupValueFromNestedState} from "../utils/NestedState";
 import {abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId} from "../api/index";
 
-import "./ProcessDetail.css";
+import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 

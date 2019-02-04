@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./Products.css";
+import "./Products.scss";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {renderDateTime} from "../utils/Lookups";

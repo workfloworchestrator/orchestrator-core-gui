@@ -7,7 +7,7 @@ import {terminateSubscription, subscriptionsDetail} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
 
-import "./TerminateSubscription.css";
+import "./TerminateSubscription.scss";
 
 export default class TerminateSubscription extends React.Component {
 

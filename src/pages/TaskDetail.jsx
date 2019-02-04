@@ -10,7 +10,7 @@ import TaskStateDetails from "../components/TaskStateDetails";
 import {lookupValueFromNestedState} from "../utils/NestedState";
 import {abortTask, deleteTask, retryTask} from "../api/index";
 
-import "./TaskDetail.css";
+import "./TaskDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {unmountComponentAtNode} from "react-dom";
 import {Link} from "react-router-dom";
 import logo from "../images/network-automation.png";
-import "./Header.css";
+import "./Header.scss";
 import UserProfile from "./UserProfile";
 import {stop} from "../utils/Utils";
 

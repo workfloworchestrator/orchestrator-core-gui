@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {subscriptionsDetail} from "../api/index";
 import {enrichSubscription} from "../utils/Lookups";
 
-import "./DowngradeRedundantLPConfirmation.css";
+import "./DowngradeRedundantLPConfirmation.scss";
 import CheckBox from "./CheckBox";
 
 export default class DowngradeRedundantLPConfirmation extends React.PureComponent {

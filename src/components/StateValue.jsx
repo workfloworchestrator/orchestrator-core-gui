@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./StateValue.css";
+import "./StateValue.scss";
 
 export default function StateValue({value = "—", className}) {
     return <p className={`state-value ${className}`}>{value}</p>;

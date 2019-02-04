@@ -11,7 +11,7 @@ import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 
-import "./ProcessStateDetails.css";
+import "./ProcessStateDetails.scss";
 
 export default class ProcessStateDetails extends React.PureComponent {
 

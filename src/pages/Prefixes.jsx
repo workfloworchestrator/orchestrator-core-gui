@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import {isEmpty, stop, isValidUUIDv4} from "../utils/Utils";
 
-import "./Prefixes.css";
+import "./Prefixes.scss";
 import {freeSubnets, prefix_filters, prefixSubscriptionsByRootPrefix} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";

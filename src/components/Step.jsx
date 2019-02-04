@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {capitalize, renderDateTime} from "../utils/Lookups";
-import "./Step.css";
+import "./Step.scss";
 
 export default class Step extends React.PureComponent {
 

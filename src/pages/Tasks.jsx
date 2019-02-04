@@ -6,7 +6,7 @@ import {abortTask, deleteTask, retryTask, tasks, resumeAll} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./Tasks.css";
+import "./Tasks.scss";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";

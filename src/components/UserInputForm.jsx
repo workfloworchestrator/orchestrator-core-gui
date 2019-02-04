@@ -40,7 +40,7 @@ import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
 import CorelinkIEEEInterfaceTypesSelect from "./CorelinkIEEEInterfaceTypesSelect";
-import "./UserInputForm.css";
+import "./UserInputForm.scss";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";

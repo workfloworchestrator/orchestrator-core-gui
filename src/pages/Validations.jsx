@@ -12,7 +12,7 @@ import {
     validations
 } from "../api";
 
-import "./Validations.css";
+import "./Validations.scss";
 import ValidationsExplain from "../components/ValidationsExplain";
 import CheckBox from "../components/CheckBox";
 import ProductValidation from "../components/ProductValidation";

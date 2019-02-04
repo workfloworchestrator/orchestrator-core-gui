@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {stop} from "../utils/Utils";
 
-import "./SubscriptionValidation.css";
+import "./SubscriptionValidation.scss";
 import {enrichSubscription, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {setFlash} from "../utils/Flash";

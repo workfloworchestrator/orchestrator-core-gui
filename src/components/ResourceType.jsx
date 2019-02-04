@@ -6,7 +6,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 
 import {isEmpty, stop} from "../utils/Utils";
 import {getParameterByName} from "../utils/QueryParameters";
-import "./ResourceType.css";
+import "./ResourceType.scss";
 import {resourceType, resourceTypes, saveResourceType} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import "react-datepicker/dist/react-datepicker.css";

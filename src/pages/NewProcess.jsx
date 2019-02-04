@@ -14,7 +14,7 @@ import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
 import ProductValidation from "../components/ProductValidation";
-import "./NewProcess.css";
+import "./NewProcess.scss";
 import {TARGET_CREATE, TARGET_MODIFY} from "../validations/Products";
 import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";

@@ -10,7 +10,7 @@ import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 
-import "./TaskStateDetails.css";
+import "./TaskStateDetails.scss";
 
 export default class TaskStateDetails extends React.PureComponent {
 

@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
 import CheckBox from "../components/CheckBox";
-import "./Product.css";
+import "./Product.scss";
 import {deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes} from "../api";
 import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 

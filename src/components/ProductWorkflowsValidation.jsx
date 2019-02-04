@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import "./ProductWorkflowsValidation.css";
+import "./ProductWorkflowsValidation.scss";
 import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 import {isEmpty} from "../utils/Utils";
 

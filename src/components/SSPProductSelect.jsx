@@ -7,7 +7,7 @@ import {isEmpty, stop} from "../utils/Utils";
 
 
 import "react-select/dist/react-select.css";
-import "./SSPProductSelect.css";
+import "./SSPProductSelect.scss";
 
 export default class SSPProductSelect extends React.Component {
 

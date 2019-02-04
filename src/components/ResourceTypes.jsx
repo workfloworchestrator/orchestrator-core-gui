@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./ResourceTypes.css";
+import "./ResourceTypes.scss";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {deleteResourceType, resourceTypes} from "../api/index";

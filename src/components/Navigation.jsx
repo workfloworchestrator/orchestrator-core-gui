@@ -7,7 +7,7 @@ import spinner from "../lib/Spin";
 
 import {NavLink} from "react-router-dom";
 
-import "./Navigation.css";
+import "./Navigation.scss";
 
 export default class Navigation extends React.PureComponent {
 

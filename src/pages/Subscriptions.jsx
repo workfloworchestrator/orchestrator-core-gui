@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {childSubscriptions, parentSubscriptions, subsciptionsExclude} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 
-import "./Subscriptions.css";
+import "./Subscriptions.scss";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, productNameById, productTagById, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";

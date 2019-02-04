@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
-import "./DatePickerCustom.css";
+import "./DatePickerCustom.scss";
 
 
 export default class DatePickerCustom extends React.PureComponent {

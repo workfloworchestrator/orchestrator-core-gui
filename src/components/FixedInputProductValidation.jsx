@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import "./FixedInputProductValidation.css";
+import "./FixedInputProductValidation.scss";
 
 export default class FixedInputProductValidation extends React.Component {
 

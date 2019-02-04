@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import CheckBox from "./CheckBox";
-import "./CheckBox.css";
+import "./CheckBox.scss";
 
 
 export default class NOCConfirm extends React.PureComponent {

@@ -6,7 +6,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 
 import {isEmpty, stop} from "../utils/Utils";
 import {getParameterByName} from "../utils/QueryParameters";
-import "./ProductBlock.css";
+import "./ProductBlock.scss";
 import {productBlockById, productBlocks, resourceTypes, saveProductBlock} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import Select from "react-select";
