@@ -34,9 +34,11 @@
     "react-select": "^1.0.0-rc.10",
     "react-tooltip": "^3.3.0",
     "scroll-into-view": "^1.9.1",
+    "source-map-explorer": "^1.6.0",
     "spin.js": "^2.3.2"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
