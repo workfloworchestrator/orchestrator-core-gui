@@ -72,7 +72,14 @@ yarn start
 
 Browse to the [application homepage](http://localhost:3000/).
 
-To add new dependencies:
+#### Running against dev backend
+
+Copy `.env.local.example` to `.env.local`
+
+This overrides the `BACKEND_URL` variable. You should make local changes to `.env.local`
+
+
+### Add new dependencies
 
 ```
 yarn add package --dev
