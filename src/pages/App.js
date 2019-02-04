@@ -150,7 +150,7 @@ class App extends React.PureComponent {
         const {loading, errorDialogAction, errorDialogOpen} = this.state;
 
         if (loading) {
-            return null; // render null when app is not ready yet for static spinner
+            return null; // render null when app is not ready yet for static mySpinner
         }
 
         const {currentUser, configuration, organisations, products, locationCodes, redirectState} = this.state;

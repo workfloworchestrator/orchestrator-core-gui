@@ -1,4 +1,4 @@
-import spinner from "../lib/Spin";
+import mySpinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
     absent, child_subscriptions, ims_circuit_id, ims_port_id, parent_subscriptions,
@@ -21,11 +21,11 @@ function validateResponse(showErrorDialog) {
     return res => {
         ++ended;
         if (started <= ended) {
-            spinner.stop();
+            mySpinner.stop();
         }
         if (!res.ok) {
             started = ended = 0;
-            spinner.stop();
+            mySpinner.stop();
 
             if (res.type === "opaqueredirect") {
                 setTimeout(() => window.location.reload(true), 100);
@@ -58,7 +58,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
         credentials: "same-origin",
         redirect: "manual",
     });
-    spinner.start();
+    mySpinner.start();
     ++started;
 
     const targetUrl = apiUrl(path);
