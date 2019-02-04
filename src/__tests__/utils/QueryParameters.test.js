@@ -16,15 +16,15 @@ test("Replace query parameters", () => {
 });
 
 test("Parameter by name", () => {
-   expect("value", getParameterByName("name", "?name=value"))
+   expect(getParameterByName("name", "?name=value")).toBe("value")
 });
 
 test("Parameter by name not exists", () => {
-    expect("value", getParameterByName("", undefined))
+    expect(getParameterByName("", undefined)).toBe("")
 });
 
 test("Return query parameters as objects", () => {
     const params = getQueryParameters("?vis=zeebaars&huisdier=hond&huisdier=kat");
-    expect("zeebaars", params.vis);
-    expect(2, params.huisdier.length);
+    expect(params.vis).toBe("zeebaars");
+    expect(params.huisdier.length).toBe(2);
 })
