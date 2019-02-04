@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import Spinner from "spin.js";
+import { Spinner}  from "spin.js";
 import spinner from "../lib/Spin";
 
 import {NavLink} from "react-router-dom";
