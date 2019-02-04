@@ -27,4 +27,4 @@ yarn-error.log*
 .idea/
 delme-validations.json
 .node-version
-yarn.lock
+package-lock.json
