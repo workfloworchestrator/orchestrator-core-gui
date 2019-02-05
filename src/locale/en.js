@@ -638,7 +638,8 @@ I18n.translations.en = {
         Planned: "Planned",
         Failed: "Failed",
         IPv4: "IPv4",
-        IPv6: "IPv6"
+        IPv6: "IPv6",
+        SP: "SN8 Service Port"
     },
     subscriptions: {
         customer_name: "Customer",
@@ -795,7 +796,8 @@ I18n.translations.en = {
         placeholder: "Enter a valid VLAN range..." ,
         placeholder_no_service_port: "First select a Service Port...",
         placeholder_no_msp: "First select a MSP...",
-        ssp: "A SSP has a default VLAN"
+        ssp: "A SSP has a default VLAN",
+        untagged: "An UNTAGGED SN8 Serviceport has a default VLAN"
     },
     clipboard: {
         copied: "Copied!",
@@ -1058,12 +1060,14 @@ I18n.translations.en = {
     },
     service_ports: {
         servicePort: "Service Port",
+        servicePortSN8:"SURFnet8 Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",
         bandwidth: "Bandwidth",
         bandwidth_placeholder: "Enter the bandwidth of this MSP...",
         bandwidth_no_msp_placeholder: "First select a MSP...",
+        bandwidth_no_service_port_placeholder: "First select a Tagged Service Port",
         invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
     },
     bandwidth: {
