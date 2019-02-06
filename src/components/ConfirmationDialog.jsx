@@ -15,7 +15,9 @@ export default function ConfirmationDialog({isOpen = false, cancel, confirm, que
             contentLabel={I18n.t("confirmation_dialog.title")}
             className="confirmation-dialog-content"
             overlayClassName="confirmation-dialog-overlay"
-            closeTimeoutMS={250}>
+            closeTimeoutMS={250}
+            appElement={document.getElementById('app')}
+        >
             <section className="dialog-header">
                 {I18n.t("confirmation_dialog.title")}
             </section>

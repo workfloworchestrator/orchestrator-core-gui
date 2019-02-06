@@ -106,22 +106,22 @@ export default class ResourceType extends React.Component {
     renderButtons = (readOnly, initial, resourceType) => {
         if (readOnly) {
             return (<section className="buttons">
-                <a className="button" onClick={() => this.props.history.push("/metadata/resource_types")}>
+                <button className="button" onClick={() => this.props.history.push("/metadata/resource_types")}>
                     {I18n.t("metadata.resourceTypes.back")}
-                </a>
+                </button>
             </section>);
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
+            <button className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+            </button>
+            <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("process.submit")}
-            </a>
-            {resourceType.resource_type_id && <a className="button red" onClick={this.handleDeleteResourceType}>
+            </button>
+            {resourceType.resource_type_id && <button className="button red" onClick={this.handleDeleteResourceType}>
                 {I18n.t("processes.delete")}
-            </a>}
+            </button>}
         </section>);
     };
 

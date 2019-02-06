@@ -13,7 +13,9 @@ export default function ErrorDialog({isOpen = false, close}) {
             contentLabel={I18n.t("error_dialog.title")}
             className="confirmation-dialog-content"
             overlayClassName="confirmation-dialog-overlay"
-            closeTimeoutMS={250}>
+            closeTimeoutMS={250}
+            appElement={document.getElementById('app')}
+        >
             <section className="dialog-header error">
                 {I18n.t("error_dialog.title")}
             </section>

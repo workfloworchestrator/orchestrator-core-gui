@@ -107,12 +107,12 @@ export default class UserInputForm extends React.Component {
     renderButtons = () => {
         const invalid = this.isInvalid() || this.state.processing;
         return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
+            <button className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+            </button>
+            <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("process.submit")}
-            </a>
+            </button>
         </section>);
     };
 
