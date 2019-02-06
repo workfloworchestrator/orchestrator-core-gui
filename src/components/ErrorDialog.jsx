@@ -23,10 +23,10 @@ export default function ErrorDialog({isOpen = false, close}) {
                 <h2>{I18n.t("error_dialog.body")}</h2>
             </section>
             <section className="dialog-buttons">
-                <a className="button blue error" onClick={e => {
+                <button className="button blue error" onClick={e => {
                     stop(e);
                     close(e);
-                }}>{I18n.t("error_dialog.ok")}</a>
+                }}>{I18n.t("error_dialog.ok")}</button>
             </section>
         </Modal>
     );

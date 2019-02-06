@@ -298,9 +298,9 @@ export default class Products extends React.Component {
                                value={query}/>
                         <i className="fa fa-search"></i>
                     </section>
-                    <a className="new button green" onClick={this.editProduct({}, false, true)}>
+                    <button className="new button green" onClick={this.editProduct({}, false, true)}>
                         {I18n.t("metadata.products.new")}<i className="fa fa-plus"></i>
-                    </a>
+                    </button>
                 </div>
                 <section className="products">
                     {this.renderProducts(filteredProducts, actions, sorted)}

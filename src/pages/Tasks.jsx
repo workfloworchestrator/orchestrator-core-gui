@@ -292,15 +292,15 @@ export default class Tasks extends React.PureComponent {
                                    value={query}/>
                             <i className="fa fa-search"></i>
                         </section>
-                        <a className="new button green" onClick={this.newTask}>
+                        <button className="new button green" onClick={this.newTask}>
                             {I18n.t("tasks.new")}<i className="fa fa-plus"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <section className="refresh">
-                    <a className="new button blue" onClick={this.runAllTasks}>
+                    <button className="new button blue" onClick={this.runAllTasks}>
                             {I18n.t("tasks.runall")}
-                        </a>
+                        </button>
                     <CheckBox name="refresh" info={I18n.t("tasks.refresh")} value={refresh}
                               onChange={this.toggleRefresh}/>
                 </section>

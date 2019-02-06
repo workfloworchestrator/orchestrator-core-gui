@@ -230,9 +230,9 @@ export default class ResourceTypes extends React.Component {
                                value={query}/>
                         <i className="fa fa-search"></i>
                     </section>
-                    <a className="new button green" onClick={this.editResourceType({}, false, true)}>
+                    <button className="new button green" onClick={this.editResourceType({}, false, true)}>
                         {I18n.t("metadata.resourceTypes.new")}<i className="fa fa-plus"></i>
-                    </a>
+                    </button>
                 </div>
                 <section className="resource-type">
                     {this.renderResourceTypes(filteredResourceTypes, actions, sorted)}

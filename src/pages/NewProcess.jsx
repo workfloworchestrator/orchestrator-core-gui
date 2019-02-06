@@ -51,7 +51,7 @@ export default class NewProcess extends React.Component {
 
     componentDidMount = () => {
         const {products, organisations, location} = this.props;
-	let preselectedInput = getQueryParameters(location.search);
+        let preselectedInput = getQueryParameters(location.search);
         if (preselectedInput.product) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedInput.product.toLowerCase());
             if (product) {
@@ -192,9 +192,9 @@ export default class NewProcess extends React.Component {
     renderActions = (start, disabled) => {
         return (
             <section className="actions-buttons">
-                <a tabIndex={0} className={`button ${disabled ? "grey disabled" : "blue"}`} onClick={start}>
+                <button tabIndex={0} className={`button ${disabled ? "grey disabled" : "blue"}`} onClick={start}>
                     {I18n.t("subscription.start")}
-                </a>
+                </button>
             </section>
         );
     };
