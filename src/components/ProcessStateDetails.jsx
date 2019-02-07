@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import JSONPretty from 'react-json-pretty';
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
@@ -12,6 +11,7 @@ import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
+import HighlightCode from "./HighlightCode";
 
 export default class ProcessStateDetails extends React.PureComponent {
 
@@ -45,7 +45,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>
-                <JSONPretty id="json-pretty" json={process}></JSONPretty>
+                <HighlightCode data={JSON.stringify(process, null, 2)} />
             </section>
         )
 
@@ -112,7 +112,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? JSON.stringify(value) : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 1)}/> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {

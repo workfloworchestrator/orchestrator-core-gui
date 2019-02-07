@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import JSONPretty from 'react-json-pretty';
+import HighlightCode from "./HighlightCode";
 
 import "./ValidationsExplain.scss";
 
@@ -107,7 +107,7 @@ export default class ValidationsExplain extends React.PureComponent {
         return <section className="example">
             <h3>Example</h3>
             <p>A workflow with the following <span className="code">workflow_subscription_mapping</span>:</p>
-            <JSONPretty id="json-pretty" json={obj}></JSONPretty>
+            <HighlightCode data={JSON.stringify(obj, null, 2)} />
             <p>Will at a minimal need to populate the state variables <span>service_id</span> and <span>capacity </span>
                 during the execution of the various Process steps.</p>
             <p>The corresponding Product configuration of this workflow must at a minimal
