@@ -40,6 +40,10 @@
       @include no-text-decoration;
     }
 
+    button:focus {
+      outline: none;
+    }
+
     a.logo {
       position: absolute;
       top: 12px;
