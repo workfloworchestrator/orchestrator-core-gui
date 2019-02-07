@@ -133,6 +133,9 @@ section.process-state-detail {
                         &.value {
                             padding-left: 40px;
                         }
+                        pre {
+                            margin-left: -10px;
+                        }
                     }
                 }
             }

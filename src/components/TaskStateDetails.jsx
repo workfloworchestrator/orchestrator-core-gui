@@ -94,7 +94,7 @@ export default class TaskStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? JSON.stringify(value) : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 1)}/> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
