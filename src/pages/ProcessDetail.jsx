@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {process, resumeProcess, subscriptions, subscriptionsByTags} from "../api";
+import {process, resumeProcess, subscriptionsWithDetails, subscriptionsByTags} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
@@ -85,7 +85,7 @@ export default class ProcessDetail extends React.PureComponent {
             }
         });
         // Todo: remove this one OR add it to the promise.all() ??
-        subscriptions().then(subscriptions => {
+        subscriptionsWithDetails().then(subscriptions => {
             this.setState({subscriptions: subscriptions});
         });
     };
