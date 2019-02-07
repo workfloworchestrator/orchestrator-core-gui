@@ -23,7 +23,8 @@ Here’s a short summary of what’s new in this release:
 
 ## Client
 
-The client is a ReactJS user interface. This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+The client is a ReactJS user interface. This project was bootstrapped with 
+[Create React App](https://github.com/facebookincubator/create-react-app).
 
 The client is build with react and to get initially started:
 
@@ -82,7 +83,7 @@ This overrides the `BACKEND_URL` variable. You should make local changes to `.en
 ### Add new dependencies
 
 ```
-yarn add package --dev
+yarn add 'package-name'
 ```
 
 ### Docker
