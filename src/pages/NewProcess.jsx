@@ -6,7 +6,7 @@ import {
     startModificationSubscription,
     startProcess,
     subscriptionInsyncStatus,
-    subscriptions,
+    subscriptionsWithDetails,
     validation
 } from "../api";
 import {isEmpty, stop} from "../utils/Utils";
@@ -64,7 +64,7 @@ export default class NewProcess extends React.Component {
                 });
             }
         }
-        subscriptions().then(subscriptions => {
+        subscriptionsWithDetails().then(subscriptions => {
             let organisationName = null;
             if (preselectedInput.organisation) {
                 const org = organisations.find(org => org.uuid === preselectedInput.organisation);
@@ -75,7 +75,7 @@ export default class NewProcess extends React.Component {
     };
 
     refreshSubscriptions = () => {
-        subscriptions().then(subscriptions => {
+        subscriptionsWithDetails().then(subscriptions => {
             this.setState({subscriptions: subscriptions});
         });
     };

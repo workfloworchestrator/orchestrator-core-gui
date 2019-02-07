@@ -141,12 +141,12 @@ export function deleteResourceType(id) {
 
 //API
 export function subscriptions() {
-    return fetchJson("subscriptions");
+    return fetchJson('v2/subscriptions');
 }
 
-// Comma seperated list of stuff to exclude
-export function subsciptionsExclude(exclude) {
-    return fetchJson(`subscriptions?exclude=${exclude}`);
+// Subscriptions including dynamic properties (SLOW)
+export function subscriptionsWithDetails() {
+    return fetchJson("subscriptions/with_details");
 }
 
 export function subscriptionsDetail(subscription_id) {
@@ -163,11 +163,6 @@ export function subscriptionsByProductType(type) {
 
 export function subscriptionInsyncStatus(subscription_id) {
     return fetchJson(`subscriptions/insync_status_relations/${subscription_id}`)
-}
-
-// Todo: check maybe we can combine this with the function above
-export function activeAndSyncedSubscriptions() {
-    return fetchJson("subscriptions?insync=True&status=active");
 }
 
 export function subscriptionsByProductId(productId) {
