@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import logo from "../images/network-automation.png";
 import "./Header.scss";
 import UserProfile from "./UserProfile";
-import {stop} from "../utils/Utils";
 
 export default class Header extends React.PureComponent {
 
@@ -20,30 +19,28 @@ export default class Header extends React.PureComponent {
         };
     }
 
-    stop = e => {
-        stop(e);
+    logout = () => {
         const node = document.getElementById("app");
         unmountComponentAtNode(node);
         localStorage.clear();
         window.location.href = "/";
     };
 
-    handleToggle = e => {
-        stop(e);
+    handleToggle = () => {
         this.setState({dropDownActive: !this.state.dropDownActive});
     };
 
     renderExitLogout = () =>
-        <li className="border-left"><a onClick={this.stop}>{I18n.t("header.links.logout")}</a>
+        <li className="border-left"><button onClick={this.logout}>{I18n.t("header.links.logout")}</button>
         </li>;
 
     renderProfileLink(currentUser) {
         return (
-            <a className="welcome-link" onClick={this.handleToggle}>
+            <button onClick={this.handleToggle}>
                 <i className="fa fa-user-circle-o"></i>
                 {currentUser.display_name}
                 {this.renderDropDownIndicator()}
-            </a>
+            </button>
         );
     }
 

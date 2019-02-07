@@ -32,9 +32,9 @@ export default class Flash extends React.PureComponent {
             <div className={`flash ${className} ${flash.type}`}>
                 <div className="message-container">
                     <p>{flash.message}</p>
-                    <a className="close" onClick={clearFlash}>
+                    <button className="close" onClick={clearFlash}>
                         <i className="fa fa-remove"></i>
-                    </a>
+                    </button>
                 </div>
             </div>
         );

@@ -18,6 +18,13 @@ section.process-state-detail {
         color: $blue;
         display: inline-block;
         margin-bottom: 10px;
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: larger;
+        }
     }
 
     @include copy-icon-pulse;

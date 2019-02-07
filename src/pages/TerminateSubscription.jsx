@@ -37,12 +37,12 @@ export default class TerminateSubscription extends React.Component {
     renderButtons = () => {
         const invalid = false;
         return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
+            <button className="button" onClick={this.cancel}>
                 {I18n.t("terminate_subscription.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+            </button>
+            <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("terminate_subscription.submit")}
-            </a>
+            </button>
         </section>);
     };
 
