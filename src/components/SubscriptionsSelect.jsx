@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {subscriptionsByProductId, subscriptions} from "../api";
+import {subscriptionsByProductId, subscriptionsWithDetails} from "../api";
 import {isEmpty} from "../utils/Utils";
 import "./SubscriptionsSelect.css";
 
@@ -27,7 +27,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
                 this.setState({availableSubscriptions: result, loading: false})
             );
         } else {
-          subscriptions().then(result =>
+          subscriptionsWithDetails().then(result =>
             this.setState({availableSubscriptions: result, loading: false}))
         }
 
