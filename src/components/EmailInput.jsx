@@ -4,7 +4,7 @@ import "react-select/dist/react-select.css";
 
 import {isEmpty, stop} from "../utils/Utils";
 import {validEmailRegExp} from "../validations/Subscriptions";
-import "./EmailInput.css";
+import "./EmailInput.scss";
 
 
 export default class EmailInput extends React.PureComponent {

@@ -6,7 +6,7 @@ import {abortProcess, deleteProcess, processes, retryProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./Processes.css";
+import "./Processes.scss";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
@@ -327,9 +327,9 @@ export default class Processes extends React.PureComponent {
                                    value={query}/>
                             <i className="fa fa-search"></i>
                         </section>
-                        <a className="new button green" onClick={this.newProcess}>
-                            {I18n.t("processes.new")}<i className="fa fa-plus"></i>
-                        </a>
+                        <button className="new button green" onClick={this.newProcess}>
+                            {I18n.t("processes.new")} <i className="fa fa-plus"></i>
+                        </button>
                     </div>
                 </div>
                 <section className="refresh">

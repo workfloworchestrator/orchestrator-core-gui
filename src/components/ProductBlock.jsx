@@ -6,7 +6,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 
 import {isEmpty, stop} from "../utils/Utils";
 import {getParameterByName} from "../utils/QueryParameters";
-import "./ProductBlock.css";
+import "./ProductBlock.scss";
 import {productBlockById, productBlocks, resourceTypes, saveProductBlock} from "../api/index";
 import {setFlash} from "../utils/Flash";
 import Select from "react-select";
@@ -109,22 +109,22 @@ export default class ProductBlock extends React.Component {
     renderButtons = (readOnly, initial, productBlock) => {
         if (readOnly) {
             return (<section className="buttons">
-                <a className="button" onClick={() => this.props.history.push("/metadata/product_blocks")}>
+                <button className="button" onClick={() => this.props.history.push("/metadata/product_blocks")}>
                     {I18n.t("metadata.productBlocks.back")}
-                </a>
+                </button>
             </section>);
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (<section className="buttons">
-            <a className="button" onClick={this.cancel}>
+            <button className="button" onClick={this.cancel}>
                 {I18n.t("process.cancel")}
-            </a>
-            <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+            </button>
+            <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                 {I18n.t("process.submit")}
-            </a>
-            {productBlock.product_block_id && <a className="button red" onClick={this.handleDeleteProductBlock}>
+            </button>
+            {productBlock.product_block_id && <button className="button red" onClick={this.handleDeleteProductBlock}>
                 {I18n.t("processes.delete")}
-            </a>}
+            </button>}
 
         </section>);
     };

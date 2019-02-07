@@ -6,7 +6,7 @@ import {imsService, productById, subscriptionsDetail} from "../api/index";
 import {enrichSubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
-import "./ReadOnlySubscriptionView.css";
+import "./ReadOnlySubscriptionView.scss";
 
 export default class ReadOnlySubscriptionView extends React.PureComponent {
 

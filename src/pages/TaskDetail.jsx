@@ -10,7 +10,7 @@ import TaskStateDetails from "../components/TaskStateDetails";
 import {lookupValueFromNestedState} from "../utils/NestedState";
 import {abortTask, deleteTask, retryTask} from "../api/index";
 
-import "./TaskDetail.css";
+import "./TaskDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 
@@ -116,10 +116,10 @@ export default class TaskDetail extends React.PureComponent {
             this.handleDeleteTask(task), this.handleAbortTask(task), "last_status")
             .filter(option => option.label !== "user_input" && option.label !== "details");
         return <section className="task-actions">
-            {options.map((option, index) => <a key={index} className={`button ${option.danger ? " red" : " blue"}`}
+            {options.map((option, index) => <button key={index} className={`button ${option.danger ? " red" : " blue"}`}
                                                onClick={option.action}>
                 {I18n.t(`tasks.${option.label}`)}
-            </a>)}
+            </button>)}
         </section>
     };
 

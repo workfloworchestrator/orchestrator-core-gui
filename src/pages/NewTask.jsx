@@ -6,7 +6,7 @@ import {isEmpty} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 
-import "./NewTask.css";
+import "./NewTask.scss";
 import WorkflowSelect from "../components/WorkflowSelect";
 
 export default class NewTask extends React.Component {

@@ -14,7 +14,7 @@ import {setFlash} from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
 import ProductValidation from "../components/ProductValidation";
-import "./NewProcess.css";
+import "./NewProcess.scss";
 import {TARGET_CREATE, TARGET_MODIFY} from "../validations/Products";
 import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";
@@ -51,7 +51,7 @@ export default class NewProcess extends React.Component {
 
     componentDidMount = () => {
         const {products, organisations, location} = this.props;
-	let preselectedInput = getQueryParameters(location.search);
+        let preselectedInput = getQueryParameters(location.search);
         if (preselectedInput.product) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedInput.product.toLowerCase());
             if (product) {
@@ -116,8 +116,7 @@ export default class NewProcess extends React.Component {
         }
     });
 
-    startNewProcess = e => {
-        stop(e);
+    startNewProcess = () => {
         const {product} = this.state;
         if (!isEmpty(product)) {
             this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
@@ -192,14 +191,15 @@ export default class NewProcess extends React.Component {
     renderActions = (start, disabled) => {
         return (
             <section className="actions-buttons">
-                <a tabIndex={0} className={`button ${disabled ? "grey disabled" : "blue"}`} onClick={start}>
+                <button tabIndex={0} className={`button ${disabled ? "grey disabled" : "blue"}`} onClick={start}>
                     {I18n.t("subscription.start")}
-                </a>
+                </button>
             </section>
         );
     };
 
     changeProduct = option => {
+        console.log(option)
         this.setState({
             stepUserInput: [],
             productValidation: {"valid": true, mapping: {}},
@@ -304,7 +304,6 @@ export default class NewProcess extends React.Component {
                 <h3>{I18n.t("process.modify_subscription")}</h3>
 		<section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
-                    {/*Only allow modify on active subscription except for nodes that can be modified from state provisioning*/}
                     <SubscriptionSearchSelect
                         subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node"))}
                         subscription={modifySubscription}

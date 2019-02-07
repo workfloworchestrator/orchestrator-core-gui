@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./Products.css";
+import "./Products.scss";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {renderDateTime} from "../utils/Lookups";
@@ -298,9 +298,9 @@ export default class Products extends React.Component {
                                value={query}/>
                         <i className="fa fa-search"></i>
                     </section>
-                    <a className="new button green" onClick={this.editProduct({}, false, true)}>
-                        {I18n.t("metadata.products.new")}<i className="fa fa-plus"></i>
-                    </a>
+                    <button className="new button green" onClick={this.editProduct({}, false, true)}>
+                        {I18n.t("metadata.products.new")} <i className="fa fa-plus"></i>
+                    </button>
                 </div>
                 <section className="products">
                     {this.renderProducts(filteredProducts, actions, sorted)}

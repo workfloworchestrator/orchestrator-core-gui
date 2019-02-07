@@ -6,7 +6,7 @@ import {abortTask, deleteTask, retryTask, tasks, resumeAll} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./Tasks.css";
+import "./Tasks.scss";
 import FilterDropDown from "../components/FilterDropDown";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
@@ -292,15 +292,15 @@ export default class Tasks extends React.PureComponent {
                                    value={query}/>
                             <i className="fa fa-search"></i>
                         </section>
-                        <a className="new button green" onClick={this.newTask}>
-                            {I18n.t("tasks.new")}<i className="fa fa-plus"></i>
-                        </a>
+                        <button className="new button green" onClick={this.newTask}>
+                            {I18n.t("tasks.new")} <i className="fa fa-plus"></i>
+                        </button>
                     </div>
                 </div>
                 <section className="refresh">
-                    <a className="new button blue" onClick={this.runAllTasks}>
-                            {I18n.t("tasks.runall")}
-                        </a>
+                    <button className="button blue" onClick={this.runAllTasks}>
+                        {I18n.t("tasks.runall")}<i className="fa fa-refresh"></i>
+                        </button>
                     <CheckBox name="refresh" info={I18n.t("tasks.refresh")} value={refresh}
                               onChange={this.toggleRefresh}/>
                 </section>

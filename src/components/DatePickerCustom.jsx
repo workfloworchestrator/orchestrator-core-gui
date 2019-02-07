@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
-import "./DatePickerCustom.css";
+import "./DatePickerCustom.scss";
 
 
 export default class DatePickerCustom extends React.PureComponent {
@@ -11,9 +11,9 @@ export default class DatePickerCustom extends React.PureComponent {
         const {onClick, clear, disabled} = this.props;
         return (
             <div className={disabled ? "date_picker_custom disabled" : "date_picker_custom"}>
-                <a onClick={onClick}>
+                <button onClick={onClick}>
                     {value}
-                </a>
+                </button>
                 {(!isEmpty(this.props.value) && !disabled) && <span className="clear" onClick={clear}>
                     <i className="fa fa-remove"></i></span>}
                 <span onClick={this.props.onClick}><i className="fa fa-calendar"></i></span>

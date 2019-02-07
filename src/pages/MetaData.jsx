@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
 
-import "./MetaData.css";
+import "./MetaData.scss";
 import ProductBlocks from "../components/ProductBlocks";
 import ResourceTypes from "../components/ResourceTypes";
 import Products from "../components/Products";

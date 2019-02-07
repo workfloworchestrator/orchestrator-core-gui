@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {organisationNameByUuid} from "../utils/Lookups";
 import I18n from "i18n-js";
 
-import "./ImsChanges.css";
+import "./ImsChanges.scss";
 
 export default class ImsChanges extends React.PureComponent {
 

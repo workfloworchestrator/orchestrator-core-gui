@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import ErrorDialog from "../components/ErrorDialog";
 import Flash from "../components/Flash";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -150,7 +150,7 @@ class App extends React.PureComponent {
         const {loading, errorDialogAction, errorDialogOpen} = this.state;
 
         if (loading) {
-            return null; // render null when app is not ready yet for static spinner
+            return null; // render null when app is not ready yet for static mySpinner
         }
 
         const {currentUser, configuration, organisations, products, locationCodes, redirectState} = this.state;

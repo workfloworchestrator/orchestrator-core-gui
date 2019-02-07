@@ -11,7 +11,7 @@ import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
 
-import "./ProcessStateDetails.css";
+import "./ProcessStateDetails.scss";
 
 export default class ProcessStateDetails extends React.PureComponent {
 
@@ -39,9 +39,9 @@ export default class ProcessStateDetails extends React.PureComponent {
             <section>
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
                         <span className="copy-to-clipboard-container">
-                            <a data-for="copy-to-clipboard" data-tip>
+                            <button data-for="copy-to-clipboard" data-tip>
                                 <i className={`fa fa-clone ${copiedToClipBoardClassName}`}></i>
-                            </a>
+                            </button>
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>

@@ -1,4 +1,4 @@
-import spinner from "../lib/Spin";
+import mySpinner from "../lib/Spin";
 import {isEmpty} from "../utils/Utils";
 import {
     absent, child_subscriptions, ims_circuit_id, ims_port_id, parent_subscriptions,
@@ -21,11 +21,11 @@ function validateResponse(showErrorDialog) {
     return res => {
         ++ended;
         if (started <= ended) {
-            spinner.stop();
+            mySpinner.stop();
         }
         if (!res.ok) {
             started = ended = 0;
-            spinner.stop();
+            mySpinner.stop();
 
             if (res.type === "opaqueredirect") {
                 setTimeout(() => window.location.reload(true), 100);
@@ -58,7 +58,7 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
         credentials: "same-origin",
         redirect: "manual",
     });
-    spinner.start();
+    mySpinner.start();
     ++started;
 
     const targetUrl = apiUrl(path);
@@ -74,8 +74,8 @@ function fetchJsonWithCustomErrorHandling(path) {
     return fetchJson(path, {}, {}, false, true);
 }
 
-function postPutJson(path, body, method, result = true) {
-    return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, true, result);
+function postPutJson(path, body, method, showErrorDialog = true, result = true) {
+    return fetchJson(path, {method: method, body: JSON.stringify(body)}, {}, showErrorDialog, result);
 }
 
 //API metadata
@@ -100,7 +100,7 @@ export function productById(productId) {
 }
 
 export function saveProduct(product) {
-    return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", false)
+    return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", true, false)
 }
 
 export function deleteProduct(id) {
@@ -116,7 +116,7 @@ export function productBlockById(id) {
 }
 
 export function saveProductBlock(productBlock) {
-    return postPutJson("product_blocks", productBlock, isEmpty(productBlock.product_block_id) ? "post" : "put", false)
+    return postPutJson("product_blocks", productBlock, isEmpty(productBlock.product_block_id) ? "post" : "put", true, false)
 }
 
 export function deleteProductBlock(id) {
@@ -132,7 +132,7 @@ export function resourceType(id) {
 }
 
 export function saveResourceType(resourceType) {
-    return postPutJson("resource_types", resourceType, isEmpty(resourceType.resource_type_id) ? "post" : "put", false)
+    return postPutJson("resource_types", resourceType, isEmpty(resourceType.resource_type_id) ? "post" : "put", true, false)
 }
 
 export function deleteResourceType(id) {
@@ -385,11 +385,11 @@ export function startProcess(process) {
 }
 
 export function resumeProcess(processId, userInput) {
-    return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", false);
+    return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", true, false);
 }
 
 export function retryProcess(processId) {
-    return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", false);
+    return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", true, false);
 }
 
 export function tasks() {
@@ -413,11 +413,11 @@ export function startTask(task) {
 }
 
 export function resumeTask(taskId, userInput) {
-    return postPutJson(`tasks/${taskId}/resume`, {user_input: userInput}, "put", false);
+    return postPutJson(`tasks/${taskId}/resume`, {user_input: userInput}, "put", true, false);
 }
 
 export function retryTask(taskId) {
-    return postPutJson(`tasks/${taskId}/resume`, {user_input: {}}, "put", false);
+    return postPutJson(`tasks/${taskId}/resume`, {user_input: {}}, "put", true, false);
 }
 
 export function deleteTask(taskId) {
@@ -450,11 +450,11 @@ export function contacts(organisationId) {
 }
 
 export function reportError(error) {
-    return postPutJson("user/error", error, "post");
+    return postPutJson("user/error", error, "post", false);
 }
 
 export function clearCache(name) {
-    return postPutJson("user/clearCache", {name: name}, "put", false);
+    return postPutJson("user/clearCache", {name: name}, "put", true, false);
 }
 
 export function ping() {

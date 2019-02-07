@@ -11,7 +11,7 @@ import {organisationNameByUuid, productById, productNameById} from "../utils/Loo
 import {lookupValueFromNestedState} from "../utils/NestedState";
 import {abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId} from "../api/index";
 
-import "./ProcessDetail.css";
+import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 
@@ -145,10 +145,10 @@ export default class ProcessDetail extends React.PureComponent {
             this.handleDeleteProcess(process), this.handleAbortProcess(process))
             .filter(option => option.label !== "user_input" && option.label !== "details");
         return <section className="process-actions">
-            {options.map((option, index) => <a key={index} className={`button ${option.danger ? " red" : " blue"}`}
+            {options.map((option, index) => <button key={index} className={`button ${option.danger ? " red" : " blue"}`}
                                                onClick={option.action}>
                 {I18n.t(`processes.${option.label}`)}
-            </a>)}
+            </button>)}
         </section>
     };
 

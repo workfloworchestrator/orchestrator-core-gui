@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 import "react-select/dist/react-select.css";
-import "./ProductSelect.css";
+import "./ProductSelect.scss";
 import {TARGET_CREATE} from "../validations/Products";
 
 export default function ProductSelect({onChange, product, products, disabled}) {

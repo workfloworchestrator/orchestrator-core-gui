@@ -3,16 +3,15 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import {isEmpty, stop} from "../utils/Utils";
+import {isEmpty} from "../utils/Utils";
 
 
 import "react-select/dist/react-select.css";
-import "./SSPProductSelect.css";
+import "./SSPProductSelect.scss";
 
 export default class SSPProductSelect extends React.Component {
 
-    openNewTab = product_id => e => {
-        stop(e);
+    openNewTab = product_id => {
         window.open(`/new-process?product=${product_id}`);
     };
 
@@ -36,9 +35,9 @@ export default class SSPProductSelect extends React.Component {
                         disabled={disabled || products.length === 0}/>
                 </div>
                 <div className="wrapper-right ssp-select-button">
-                    <a className={`button ${isEmpty(product) ? "grey disabled" : "green"}`} onClick={this.openNewTab(product)}>
+                    <button className={`button ${isEmpty(product) ? "grey disabled" : "green"}`} onClick={() => this.openNewTab(product)}>
                     {I18n.t("subscription.start")}
-                </a>
+                </button>
                 </div>
             </section>
         );
