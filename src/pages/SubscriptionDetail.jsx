@@ -28,7 +28,7 @@ import {
 } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./SubscriptionDetail.css";
+import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
 import {TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
@@ -262,7 +262,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                 className="customer_name">{subscription.customer_name}</td>
                             <td data-label={I18n.t("subscriptions.subscription_id")}
                                 className="subscription_id">
-                                <a target="_blank"
+                                <a target="_blank" rel="noopener noreferrer"
                                    href={`/subscription/${subscription.subscription_id}`}>{subscription.subscription_id.substring(0, 8)}</a>
                             </td>
                             <td data-label={I18n.t("subscriptions.description")}
@@ -426,7 +426,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <tbody>
                     <tr>
                         <td>{I18n.t("subscription.product.name")}</td>
-                        <td><a target="_blank" href={`/product/${product.product_id}`}>{product.name || ""}</a></td>
+                        <td><a target="_blank" rel="noopener noreferrer"
+                               href={`/product/${product.product_id}`}>{product.name || ""}</a></td>
 
                     </tr>
                     <tr>
@@ -571,7 +572,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {subscriptionProcesses.map((ps, index) =>
                         <tr key={index}>
                             <td>{`${ps.workflow_target} - ${ps.process.workflow}`}</td>
-                            <td><a target="_blank" href={`/process/${ps.pid}`}>{ps.pid}</a></td>
+                            <td><a target="_blank" rel="noopener noreferrer"
+                                   href={`/process/${ps.pid}`}>{ps.pid}</a></td>
                         </tr>)}
                     {isEmpty(subscriptionProcesses) && <tr>
                         <td colSpan="3"><span
@@ -654,7 +656,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         {(isExternalLinkValue && !isDeleted) &&
                         <i className={`fa fa-${icon}-circle`}
                            onClick={this.handleCollapseSubscription(subscriptionInstanceValue.value, collapsedObjects)}></i>}
-                        {isSubscriptionValue && <a target="_blank"
+                        {isSubscriptionValue && <a target="_blank" rel="noopener noreferrer"
                                                    href={`/subscription/${subscriptionInstanceValue.value}`}>{subscriptionInstanceValue.value}</a>}
                         {!isSubscriptionValue && <span>{subscriptionInstanceValue.value}</span>}
                     </div>

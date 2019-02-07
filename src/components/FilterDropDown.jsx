@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import CheckBox from "./CheckBox";
 
-import "./FilterDropDown.css";
+import "./FilterDropDown.scss";
 
 export default class FilterDropDown extends React.PureComponent {
 

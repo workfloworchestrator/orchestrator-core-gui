@@ -1,9 +1,9 @@
-const spinner = {
+const mySpinner = {
     onStart: null,
     onStop: null,
 
-    start: () => spinner.onStart && spinner.onStart(),
-    stop: () => spinner.onStop && spinner.onStop()
+    start: () => mySpinner.onStart && mySpinner.onStart(),
+    stop: () => mySpinner.onStop && mySpinner.onStop()
 };
 
-export default spinner;
+export default mySpinner;

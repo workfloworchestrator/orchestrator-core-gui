@@ -10,7 +10,7 @@ import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 
-import "./TaskStateDetails.css";
+import "./TaskStateDetails.scss";
 
 export default class TaskStateDetails extends React.PureComponent {
 
@@ -38,9 +38,9 @@ export default class TaskStateDetails extends React.PureComponent {
             <section>
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
                         <span className="copy-to-clipboard-container">
-                            <a data-for="copy-to-clipboard" data-tip>
+                            <button data-for="copy-to-clipboard" data-tip>
                                 <i className={`fa fa-clone ${copiedToClipBoardClassName}`}></i>
-                            </a>
+                            </button>
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>

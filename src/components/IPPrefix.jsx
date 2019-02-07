@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import {ip_blocks, prefix_filters} from "../api";
 
 import "react-select/dist/react-select.css";
-import "./IPPrefix.css";
+import "./IPPrefix.scss";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 import {ipamStates} from "../utils/Lookups";

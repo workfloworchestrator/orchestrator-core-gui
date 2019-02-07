@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
 import {formDate, formInput, formSelect} from "../forms/Builder";
 import CheckBox from "../components/CheckBox";
-import "./Product.css";
+import "./Product.scss";
 import {deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes} from "../api";
 import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
@@ -162,23 +162,23 @@ export default class Product extends React.Component {
     renderButtons = (readOnly, initial, product) => {
         if (readOnly) {
             return (<section className="buttons">
-                <a className="button" onClick={() => this.props.history.push("/metadata/products")}>
+                <button className="button" onClick={() => this.props.history.push("/metadata/products")}>
                     {I18n.t("metadata.products.back")}
-                </a>
+                </button>
             </section>);
         }
         const invalid = !initial && (this.isInvalid() || this.state.processing);
         return (
             <section className="buttons">
-                <a className="button" onClick={this.cancel}>
+                <button className="button" onClick={this.cancel}>
                     {I18n.t("process.cancel")}
-                </a>
-                <a tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+                </button>
+                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
                     {I18n.t("process.submit")}
-                </a>
-                {product.product_id && <a className="button red" onClick={this.handleDeleteProduct}>
+                </button>
+                {product.product_id && <button className="button red" onClick={this.handleDeleteProduct}>
                     {I18n.t("processes.delete")}
-                </a>}
+                </button>}
             </section>
         );
     };

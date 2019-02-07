@@ -4,9 +4,27 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 This project contains the workflow GUI SURFnet Network Automation. 
 
+It's based on create-react-app 2.3:
+
+Here’s a short summary of what’s new in this release:
+
+🎉 More styling options: you can use Sass and CSS Modules out of the box.
+🐠 We updated to Babel 7, including support for the React fragment syntax and many bugfixes.
+📦 We updated to webpack 4, which automatically splits JS bundles more intelligently.
+🃏 We updated to Jest 23, which includes an interactive mode for reviewing snapshots.
+💄 We added PostCSS so you can use new CSS features in old browsers.
+💎 You can use Apollo, Relay Modern, MDX, and other third-party Babel Macros transforms.
+🌠 You can now import an SVG as a React component, and use it in JSX.
+🐈 You can try the experimental Yarn Plug’n’Play mode that removes node_modules.
+🕸 You can now plug your own proxy implementation in development to match your backend API.
+🚀 You can now use packages written for latest Node versions without breaking the build.
+✂️ You can now optionally get a smaller CSS bundle if you only plan to target modern browsers.
+👷‍♀️ Service workers are now opt-in and are built using Google’s Workbox.
+
 ## Client
 
-The client is a ReactJS user interface. This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+The client is a ReactJS user interface. This project was bootstrapped with 
+[Create React App](https://github.com/facebookincubator/create-react-app).
 
 The client is build with react and to get initially started:
 
@@ -55,10 +73,17 @@ yarn start
 
 Browse to the [application homepage](http://localhost:3000/).
 
-To add new dependencies:
+#### Running against dev backend
+
+Copy `.env.local.example` to `.env.local`
+
+This overrides the `BACKEND_URL` variable. You should make local changes to `.env.local`
+
+
+### Add new dependencies
 
 ```
-yarn add package --dev
+yarn add 'package-name'
 ```
 
 ### Docker

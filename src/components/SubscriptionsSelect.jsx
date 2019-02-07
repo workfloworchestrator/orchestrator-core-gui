@@ -6,7 +6,7 @@ import "react-select/dist/react-select.css";
 
 import {subscriptionsByProductId, subscriptionsWithDetails} from "../api";
 import {isEmpty} from "../utils/Utils";
-import "./SubscriptionsSelect.css";
+import "./SubscriptionsSelect.scss";
 
 export default class SubscriptionsSelect extends React.PureComponent {
 

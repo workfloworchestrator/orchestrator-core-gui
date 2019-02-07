@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import CheckBox from "./CheckBox";
-import "./CheckBox.css";
+import "./CheckBox.scss";
 
 
 export default class NOCNetworkConfirm extends React.PureComponent {
@@ -36,7 +36,7 @@ export default class NOCNetworkConfirm extends React.PureComponent {
         return (
             <section className="NOCConfirm">
                 <label>{I18n.t(`process.noc_upgrade_redundant_confirmation_intro`)}</label>
-                <a href={jira_ticket_uri} target="_blank">{jira_ticket_uri}</a>
+                <a href={jira_ticket_uri} target="_blank" rel="noopener noreferrer">{jira_ticket_uri}</a>
                 <label>{I18n.t(`process.noc_upgrade_redundant_confirmation_steps_intro`)}</label><br/>
                 <CheckBox name="LR2_built" onChange={this.onChangeInternal} value={LR2_built} info={LR2_built_info} />
                 <CheckBox name="LPE_renamed" onChange={this.onChangeInternal} value={LPE_renamed} info={LPE_renamed_info} />

@@ -5,7 +5,7 @@ import Select from "react-select";
 import {subnets} from "../api";
 
 import "react-select/dist/react-select.css";
-import "./SplitPrefix.css";
+import "./SplitPrefix.scss";
 
 
 export default class SplitPrefix extends React.PureComponent {

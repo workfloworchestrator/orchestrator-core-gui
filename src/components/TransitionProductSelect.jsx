@@ -25,14 +25,12 @@ export default class TransitionProductSelect extends React.PureComponent {
                     transitions(subscriptionId, transitionType).then(result =>
                         this.setState({transitionProducts: result})
                     );
-                }
-
-                else {
+                } else {
                     productById(newProductId).then(prod => {
                             transitions(subscriptionId, transitionType).then(result => {
                                     result.map((res) => {
                                             if (prod.product_id === res.product_id) {
-                                                this.setState({transitionProducts:[prod]});
+                                                this.setState({transitionProducts: [prod]});
                                             }
                                             return {};
                                         }

@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop} from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
-import "./ResourceTypes.css";
+import "./ResourceTypes.scss";
 import DropDownActions from "../components/DropDownActions";
 import {setFlash} from "../utils/Flash";
 import {deleteResourceType, resourceTypes} from "../api/index";
@@ -230,9 +230,9 @@ export default class ResourceTypes extends React.Component {
                                value={query}/>
                         <i className="fa fa-search"></i>
                     </section>
-                    <a className="new button green" onClick={this.editResourceType({}, false, true)}>
-                        {I18n.t("metadata.resourceTypes.new")}<i className="fa fa-plus"></i>
-                    </a>
+                    <button className="new button green" onClick={this.editResourceType({}, false, true)}>
+                        {I18n.t("metadata.resourceTypes.new")} <i className="fa fa-plus"></i>
+                    </button>
                 </div>
                 <section className="resource-type">
                     {this.renderResourceTypes(filteredResourceTypes, actions, sorted)}

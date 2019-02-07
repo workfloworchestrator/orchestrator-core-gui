@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import JSONPretty from 'react-json-pretty';
 
-import "./ValidationsExplain.css";
+import "./ValidationsExplain.scss";
 
 export default class ValidationsExplain extends React.PureComponent {
 
@@ -128,9 +128,9 @@ export default class ValidationsExplain extends React.PureComponent {
                 <section className="container">
                     <section className="title">
                         <p>{title}</p>
-                        <a className="close" onClick={close}>
+                        <button className="close" onClick={close}>
                             <i className="fa fa-remove"></i>
-                        </a>
+                        </button>
                     </section>
                     {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() :
                         isFixedInputs ? this.explanationFixedInputs() : isProductWorkflows ? this.explainProductWorkflows() : this.explanationDienstafnames()}

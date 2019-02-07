@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {stop} from "../utils/Utils";
 
-import "./MultipleServicePortsSN8.css";
+import "./MultipleServicePortsSN8.scss";
 import ServicePortSelectSN8 from "./ServicePortSelectSN8";
 import VirtualLAN from "./VirtualLAN";
 import {fetchPortSpeedBySubscription, parentSubscriptions} from "../api";

@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import "./DienstafnameValidation.css";
+import "./DienstafnameValidation.scss";
 
 export default class DienstafnameValidation extends React.Component {
 
@@ -52,7 +52,8 @@ export default class DienstafnameValidation extends React.Component {
                         <tr key={subscription}>
                             <td data-label={I18n.t("dienstafname.subscription")}
                                 className="subscription">
-                                <a href={`/subscription/${subscription[0]}`} target="_blank">{subscription[0]}</a>
+                                <a href={`/subscription/${subscription[0]}`}
+                                   target="_blank" rel="noopener noreferrer">{subscription[0]}</a>
                             </td>
                             <td data-label={I18n.t("dienstafname.description")}
                                 className="subscription">

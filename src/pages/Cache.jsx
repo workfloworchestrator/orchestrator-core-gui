@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import "./Cache.css";
+import "./Cache.scss";
 import {stop} from "../utils/Utils";
 import {clearCache, ping} from "../api";
 import Select from "react-select";
@@ -42,9 +42,9 @@ export default class Cache extends React.Component {
                                     value={cache}
                                     clearable={false}
                                     disabled={false}/>
-                            <a className="new button orange" onClick={this.clearCache}>
+                            <button className="new button orange" onClick={this.clearCache}>
                                 {I18n.t("cache.clear")}<i className="fa fa-eraser"></i>
-                            </a>
+                            </button>
                             </section>
                         </section>
                     </section>

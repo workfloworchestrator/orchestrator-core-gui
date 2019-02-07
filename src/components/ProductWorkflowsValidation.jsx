@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import "./ProductWorkflowsValidation.css";
+import "./ProductWorkflowsValidation.scss";
 import {TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 import {isEmpty} from "../utils/Utils";
 
@@ -96,7 +96,8 @@ export default class ProductWorkflowsValidation extends React.Component {
                     <tbody>
                     {products.map((product, index) =>
                         <tr key={index}>
-                            <td><a target="_blank" href={`/product/${product.product_id}`}>{product.name}</a></td>
+                            <td><a target="_blank" rel="noopener noreferrer"
+                                   href={`/product/${product.product_id}`}>{product.name}</a></td>
                             <td>{product.description}</td>
                             <td>{product.tag}</td>
                             <td>{product.product_type}</td>

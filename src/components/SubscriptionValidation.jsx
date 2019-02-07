@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {stop} from "../utils/Utils";
 
-import "./SubscriptionValidation.css";
+import "./SubscriptionValidation.scss";
 import {enrichSubscription, renderDate} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {setFlash} from "../utils/Flash";
@@ -111,7 +111,8 @@ export default class SubscriptionValidation extends React.Component {
                                 className="customer_name">{subscription.customer_name}</td>
                             <td data-label={I18n.t("subscriptions.description")}
                                 className="description">
-                            <a href={`subscription/${subscription.subscription_id}`} target="_blank">{subscription.description}</a>
+                            <a href={`subscription/${subscription.subscription_id}`} 
+                               target="_blank" rel="noopener noreferrer">{subscription.description}</a>
                             </td>
                             <td data-label={I18n.t("subscriptions.insync")} className="insync">
                                 <CheckBox value={subscription.insync} name="insync" readOnly={true}/>
