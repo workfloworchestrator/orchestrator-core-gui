@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import JSONPretty from 'react-json-pretty';
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
@@ -9,6 +8,7 @@ import CheckBox from "./CheckBox";
 import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
+import HighlightCode from "./HighlightCode";
 
 import "./TaskStateDetails.scss";
 
@@ -44,7 +44,7 @@ export default class TaskStateDetails extends React.PureComponent {
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>
-                <JSONPretty id="json-pretty" json={task}></JSONPretty>
+                <HighlightCode data={JSON.stringify(task, null, 2)} />
             </section>
         )
 

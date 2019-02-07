@@ -5,6 +5,7 @@
   "dependencies": {
     "create-react-app": "^1.4.3",
     "global": "^4.3.2",
+    "highlight.js": "^9.14.2",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.0",
@@ -27,7 +28,6 @@
     "prop-types": "^15.6.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-datepicker": "1.8.0",
-    "react-json-pretty": "^2.0.0",
     "react-modal": "^3.8.1",
     "react-numeric-input": "^2.2.3",
     "react-pretty-json": "^2.0.2",
