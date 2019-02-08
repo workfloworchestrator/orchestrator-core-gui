@@ -129,9 +129,12 @@ section.process-state-detail {
                             font-weight: bold;
                             color: $medium-grey;
                             padding: 5px;
+                            width: 125px;
                         }
                         &.value {
-                            padding-left: 40px;
+                            width: 800px;
+                            min-width: 500px;
+                            padding-left: 20px;
                         }
                         pre {
                             margin-left: -10px;
