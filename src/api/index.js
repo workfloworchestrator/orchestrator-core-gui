@@ -219,7 +219,6 @@ export function internalPortByImsPortId(portId) {
 }
 
 export function portByImsServiceId(serviceId) {
-    console.log(`Calling: ims/port_by_ims_service/${serviceId}`);
     return fetchJson(`ims/port_by_ims_service/${serviceId}`)
 }
 
