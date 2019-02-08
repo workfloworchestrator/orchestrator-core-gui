@@ -125,9 +125,12 @@ section.task-state-detail {
                             font-weight: bold;
                             color: $medium-grey;
                             padding: 5px;
+                            width: 125px;
                         }
                         &.value {
-                            padding-left: 40px;
+                            width: 800px;
+                            min-width: 550px;
+                            padding-left: 20px;
                         }
                         pre {
                             margin-left: -10px;
@@ -143,7 +146,6 @@ section.task-state-detail {
                     margin-right: 30px;
                 }
             }
-
         }
     }
     section.subscription-link {
