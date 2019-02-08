@@ -106,15 +106,30 @@ export default class SubscriptionDetail extends React.PureComponent {
 
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
                         .map(endpoint => {
-                          if (endpoint.type === "service") {
-                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else if (endpoint.type === "port"){
-                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else if (endpoint.type === "internal_port"){
-                              return internalPortByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else {
-                            return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          }
+                            if (endpoint.type === "service") {
+                                return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            }
+                            else if (endpoint.type === "port") {
+                                return portByImsPortId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            }
+                            else if (endpoint.type === "internal_port") {
+                                return internalPortByImsPortId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            }
+                            else {
+                                return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            }
                         }))
                         .reduce((a, b) => a.concat(b), []);
                     Promise.all(uniquePortPromises).then(result => this.setState({imsEndpoints: result}));
