@@ -105,16 +105,38 @@ export default class SubscriptionDetail extends React.PureComponent {
                     });
 
                     const uniquePortPromises = imsServices.map(resource => (resource.endpoints || [])
-                        .map(endpoint => {
-                          if (endpoint.type === "service") {
-                            return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else if (endpoint.type === "port"){
-                            return portByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else if (endpoint.type === "internal_port"){
-                              return internalPortByImsPortId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          } else {
-                            return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {serviceId: endpoint.id, endpointType: endpoint.type}));
-                          }
+                        .map(async endpoint => {
+                            if (endpoint.type === "service") {
+                                // Fix for https://app.asana.com/0/483691603643478/819968465785951/f
+                                // Todo: handle this in redux or refactor? -> seems like a noop to wait for an result
+                                const service = await serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: "trunk"
+                                }));
+                                if (service.speed === "TG") {
+                                    return service
+                                }
+                                return portByImsServiceId(endpoint.id).then(result => Object.assign(result, {
+                                        serviceId: endpoint.id,
+                                        endpointType: endpoint.type
+                                    }));
+                           } else if (endpoint.type === "port") {
+                                return portByImsPortId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            } else if (endpoint.type === "internal_port") {
+                                return internalPortByImsPortId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            } else {
+                                // Todo: Refactor this stuff, couldn't reach this else during my tests...
+                                return serviceByImsServiceId(endpoint.id).then(result => Object.assign(result, {
+                                    serviceId: endpoint.id,
+                                    endpointType: endpoint.type
+                                }));
+                            }
                         }))
                         .reduce((a, b) => a.concat(b), []);
                     Promise.all(uniquePortPromises).then(result => this.setState({imsEndpoints: result}));
@@ -223,7 +245,6 @@ export default class SubscriptionDetail extends React.PureComponent {
             <tr>
                 <td>{I18n.t("subscriptions.customer_id")}</td>
                 <td>{subscription.customer_id}</td>
-
             </tr>
             </tbody>
         </table>;
@@ -288,7 +309,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderEndpointDetail = (endpoint, index) =>
         <tr>
-            <td>{endpoint.endpointType !== "internet" ?
+            <td>{endpoint.endpointType !== "internet" && endpoint.endpointType !== "trunk" ?
                 I18n.t("subscription.ims_port.id", {id: endpoint.id})
                 : I18n.t("subscription.ims_service.id", {index: endpoint.id})}</td>
             <td>
@@ -296,7 +317,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <thead>
                     </thead>
                     <tbody>
-                    {endpoint.endpointType !== "internet" ?
+                    {endpoint.endpointType !== "internet" && endpoint.endpointType !== "trunk" ?
                         ["connector_type", "fiber_type", "iface_type", "line_name", "location", "node", "patchposition", "port", "status"]
                         .map(attr => <tr key={attr}>
                             <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
