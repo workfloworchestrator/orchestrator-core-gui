@@ -155,6 +155,12 @@ I18n.translations.en = {
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         contact_persons: "Customer contact persons",
         contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
+        customer_ipv4_mtu: "IPv4 MTU",
+        customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic",
+        customer_ipv6_mtu: "IPv6 MTU",
+        customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic",
+        vlan_range: "VLAN Range",
+        vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
         service_port: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
@@ -703,7 +709,7 @@ I18n.translations.en = {
         modify_modify_msp_replace: "Replace MSP with another MSP",
         modify_modify_node_to_in_service: "Set a planned node in service",
         modify_modify_sn8_service_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
-        modify_modify_sn8_static_ip_resources: "Modify SAP resource settings",
+        modify_modify_sn8_static_ip_resources: "Modify SAP resource settings (IPV4/6 MTU & VLANRANGE if applicable)",
         product: {
             name: "Name",
             description: "Description",
