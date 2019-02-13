@@ -703,6 +703,7 @@ I18n.translations.en = {
         modify_modify_msp_replace: "Replace MSP with another MSP",
         modify_modify_node_to_in_service: "Set a planned node in service",
         modify_modify_sn8_service_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
+        modify_modify_sn8_static_ip_resources: "Modify SAP resource settings",
         product: {
             name: "Name",
             description: "Description",
