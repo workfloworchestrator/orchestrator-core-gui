@@ -99,7 +99,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     renderServicePort = (servicePorts, servicePort, index, availableServicePorts, organisations, organisationId, minimum, maximum,
-                         disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode) => {
+                         disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode, disabledPorts) => {
         // TC the statement below filters the selected-value of itself and of it's sibling components
         let inSelect = availableServicePorts.filter(port => port.subscription_id === servicePort.subscription_id ||
             !servicePorts.some(x => x.subscription_id === port.subscription_id));
@@ -128,6 +128,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
                 (isElan ? I18n.t("vlan.placeholder_no_service_port") : I18n.t("vlan.placeholder_no_service_port")));
+        debugger;
         return (<section className="service-port" key={index}>
             <div className="wrapper service-port-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}
@@ -135,7 +136,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                                       servicePort={servicePort.subscription_id}
                                       servicePorts={inSelect}
                                       organisations={organisations}
-                                      disabled={disabled}
+                                      disabled={disabled || disabledPorts}
                                       visiblePortMode={visiblePortMode}/>
                 {usedUntaggedServicePorts[index] &&
                 <em className="error">{I18n.t("service_ports.used_ssp", {descriptions: usedUntaggedServicePorts[index]})}</em>}
@@ -175,13 +176,13 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     };
 
     render() {
-        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, visiblePortMode} = this.props;
+        const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, visiblePortMode, disabledPorts} = this.props;
         const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
         const showAdd = maximum > 2 && !disabled;
         return (<section className="service-port-container">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations, organisationId,
-                    minimum, maximum, disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode))}
+                    minimum, maximum, disabled, usedUntaggedServicePorts, bandwidthErrors, isElan, organisationPortsOnly, visiblePortMode, disabledPorts))}
             {showAdd && <div className="add-service-port"><i className="fa fa-plus" onClick={this.addServicePort}></i></div>}
         </section>)
     }
@@ -200,9 +201,11 @@ MultipleServicePortsSN8.propTypes = {
     organisationPortsOnly: PropTypes.bool,
     reportError: PropTypes.func.isRequired,
     visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
+    disabledPorts: PropTypes.bool,
 };
 
 MultipleServicePortsSN8.defaultProps = {
     minimum: 2,
     visiblePortMode: "all",
+    disabledPorts: false
 };
