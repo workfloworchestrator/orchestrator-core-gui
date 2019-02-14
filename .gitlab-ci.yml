@@ -129,8 +129,8 @@ deploy to dev:
   script:
     - ssh deploy@swarm01.dev.automation.surf.net  "sudo docker service update --image $CONTAINER_DEV_IMAGE dev_workflows-client"
   environment:
-    name: dev
-    url: https://workflows.dev.automation.surf.net/
+    name: development
+    url: https://orchestrator.dev.automation.surf.net/
   tags:
     - shell-ext
   only:
@@ -142,7 +142,7 @@ deploy to staging:
     - ssh deploy@swarm01.staging.automation.surf.net  "sudo docker service update --image $CONTAINER_MASTER_IMAGE staging_workflows-client"
   environment:
     name: staging
-    url: https://workflows.staging.automation.surf.net/
+    url: https://orchestrator.staging.automation.surf.net/
   tags:
     - shell-ext
   only:
@@ -153,8 +153,8 @@ deploy to prod:
  script:
    - ssh deploy@swarm01.automation.surf.net  "sudo docker service update --image $CONTAINER_RELEASE_IMAGE prod_workflows-client"
  environment:
-   name: prod
-   url: https://workflows.automation.surf.net/
+   name: production
+   url: https://orchestrator.automation.surf.net/
  tags:
    - shell-ext
  only:
