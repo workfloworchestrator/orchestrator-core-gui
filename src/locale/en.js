@@ -639,7 +639,8 @@ I18n.translations.en = {
         Failed: "Failed",
         IPv4: "IPv4",
         IPv6: "IPv6",
-        SP: "SN8 Service Port"
+        SP: "SN8 Service Port",
+        SPNL: "N8 Service Port"
     },
     subscriptions: {
         customer_name: "Customer",
@@ -688,7 +689,8 @@ I18n.translations.en = {
         not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
-	modify_modify_corelink_add_link: "Add a link to an existing Corelink",
+	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
+        modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
