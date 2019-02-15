@@ -128,7 +128,6 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
                 (isElan ? I18n.t("vlan.placeholder_no_service_port") : I18n.t("vlan.placeholder_no_service_port")));
-        debugger;
         return (<section className="service-port" key={index}>
             <div className="wrapper service-port-select">
                 {index === 0 && <label>{I18n.t("service_ports.servicePortSN8")}</label>}

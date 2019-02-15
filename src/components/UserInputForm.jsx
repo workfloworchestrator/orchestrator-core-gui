@@ -487,7 +487,6 @@ export default class UserInputForm extends React.Component {
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
-                    debugger;
                     <MultipleServicePortsSN8 servicePorts={portsSN8}
                                              availableServicePorts={availableServicePortsSN8}
                                              organisations={organisations}
