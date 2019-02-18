@@ -311,7 +311,7 @@ I18n.translations.en = {
         surfcert_filter: "SURFcert filter",
         surfcert_filter_info: "Type of SURFcert filter",
         service_ports: "Service Ports",
-        service_ports_info: "The A and B side",
+        service_ports_info: "Choose Service Ports",
         service_ports_primary: "Service Ports",
         service_ports_primary_info: "The A1 and B1 side",
         service_ports_secondary: "Service Ports",
