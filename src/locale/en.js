@@ -267,6 +267,8 @@ I18n.translations.en = {
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath.",
         noc_remove_lichtpad_confirmation_info: "Is the LightPath of the subscription removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
+	noc_remove_static_ip_confirmation: "Confirm removal",
+	noc_remove_static_ip_confirmation_info: "Is this Static IP service removed from the network?",
         noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
         noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
