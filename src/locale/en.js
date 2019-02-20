@@ -273,7 +273,8 @@ I18n.translations.en = {
         noc_remove_lichtpad_confirmation: "Confirmation of the successful removal of the LightPath.",
         noc_remove_lichtpad_confirmation_info: "Is the LightPath of the subscription removed?",
         noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
-        noc_remove_static_ip_confirmation: "Service has been removed from the network",
+        noc_remove_static_ip_confirmation: "Confirm removal",
+        noc_remove_static_ip_confirmation_info: "Is this Static IP service removed from the network?",
         noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
         noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
@@ -646,7 +647,8 @@ I18n.translations.en = {
         Failed: "Failed",
         IPv4: "IPv4",
         IPv6: "IPv6",
-        SP: "SN8 Service Port"
+        SP: "SN8 Service Port",
+        SPNL: "N8 Service Port"
     },
     subscriptions: {
         customer_name: "Customer",
@@ -695,7 +697,8 @@ I18n.translations.en = {
         not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
-	modify_modify_corelink_add_link: "Add a link to an existing Corelink",
+	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
+        modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
         modify_modify_msp_speed: "Modify MSP Speed",
