@@ -498,6 +498,7 @@ export default class UserInputForm extends React.Component {
                                              isElan={userInput.elan}
                                              organisationPortsOnly={userInput.organisationPortsOnly}
                                              visiblePortMode={userInput.visiblePortMode}
+                                             disabledPorts={userInput.disabledPorts}
                                              reportError={this.reportCustomError(userInput.type)}/>
                 </div>;
             case "new_ssp_workflow":
