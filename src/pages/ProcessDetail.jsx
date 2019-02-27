@@ -143,7 +143,7 @@ export default class ProcessDetail extends React.PureComponent {
     renderActions = process => {
         const options = actionOptions(process, () => false, this.handleRetryProcess(process),
             this.handleDeleteProcess(process), this.handleAbortProcess(process))
-            .filter(option => option.label !== "user_input" && option.label !== "details");
+            .filter(option => option.label !== "user_input" && option.label !== "details" && option.label !== "delete");
         return <section className="process-actions">
             {options.map((option, index) => <button key={index} className={`button ${option.danger ? " red" : " blue"}`}
                                                onClick={option.action}>

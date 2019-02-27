@@ -359,9 +359,7 @@ export default class Subscriptions extends React.PureComponent {
                 <td data-label={I18n.t("subscriptions.start_date_epoch")}
                     className="start_date_epoch">{renderDate(subscription.start_date)}</td>
                 <td data-label={I18n.t("subscriptions.noop")}
-                    className="actions"><span>
-                                <i className="fa fa-trash" onClick={this.handleDeleteSubscription(subscription)}></i>
-                            </span></td>
+                    className="actions"></td>
             </tr>)
     };
 

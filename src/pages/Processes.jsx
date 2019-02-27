@@ -200,8 +200,10 @@ export default class Processes extends React.PureComponent {
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
-        const options = actionOptions(process, this.showProcess(process), this.handleRetryProcess(process),
+        let options = actionOptions(process, this.showProcess(process), this.handleRetryProcess(process),
             this.handleDeleteProcess(process), this.handleAbortProcess(process));
+        // hotfix to remove delete button
+        options = options.filter(option => option.label !== 'delete');
         return <DropDownActions options={options} i18nPrefix="processes"/>;
     };
 
