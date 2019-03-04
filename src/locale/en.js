@@ -720,6 +720,7 @@ I18n.translations.en = {
         modify_modify_sn8_static_ip_resources: "Modify SAP resource settings (IPV4/6 MTU & VLANRANGE if applicable)",
         modify_modify_sn8_bgp_ip_resources: "Modify SAP resource settings (BGP settings, IPV4/6 MTU & VLANRANGE if applicable)",
         modify_sn8_modify_bgp_ip_add_ports: "Add port(s) to SN8 BGP IP",
+        modify_sn8_modify_bgp_ip_remove_ports: "Remove port(s) from SN8 BGP IP",
         product: {
             name: "Name",
             description: "Description",
