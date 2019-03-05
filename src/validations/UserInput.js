@@ -34,6 +34,8 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = inValidVlan(value);
     } else if (type === "vlan") {
         errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
+    } else if (type === "mtu") {
+        errors[name] = !/^\d{4}$/.test(value) || value < 1500 || value > 9000
     } else if (type === "int") {
         errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
     } else if (type === "guid") {
