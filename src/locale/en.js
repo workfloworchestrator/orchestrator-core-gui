@@ -700,6 +700,8 @@ I18n.translations.en = {
         not_a_node: "The subscription is not a node.",
         ims_services: "IMS Services",
         link_subscription: "Show Subscription",
+        modify_migrate_sn7_bgp_ip_ipss_to_sn8: "Migrate to SN8",
+        modify_migrate_sn7_static_ip_ipss_to_sn8: "Migrate to SN8",
 	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
         modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
