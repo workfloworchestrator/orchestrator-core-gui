@@ -12,7 +12,7 @@ import {
     serviceByImsServiceId,
     subscriptionsDetail, internalPortByImsPortId
 } from "../api";
-import {enrichSubscription, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
+import {enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {isEmpty, stop} from "../utils/Utils";
 import {
@@ -410,7 +410,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                       <td>{I18n.t("ipam.asn")}</td>
                       <td>{prefix.asn}</td>
                     </tr>
-                    {prefix.assigned_addresses && prefix.assigned_addresses.map((address, idx) =>
+                    {prefix.addresses && prefix.addresses.map((address, idx) =>
 		      <React.Fragment>
                         <tr>
                           <td>{I18n.t("ipam.assigned_address_id")}</td>
@@ -418,7 +418,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         </tr>
                         <tr>
                           <td>{I18n.t("ipam.state")}</td>
-                          <td>{address.state__label}</td>
+                          <td>{ipamStates[address.state]}</td>
                         </tr>
                         <tr>
                           <td>{I18n.t("ipam.ipaddress")}</td>
