@@ -1,7 +1,7 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/media_queries.scss";
 
-.subscriptions-page {
+.mod-subscriptions {
   @include page;
 
   .card {

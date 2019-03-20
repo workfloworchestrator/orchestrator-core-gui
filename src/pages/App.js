@@ -7,7 +7,8 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "../pages/NotFound";
 import Help from "../pages/Help";
 import Processes from "../pages/Processes";
-import Subscriptions from "../pages/Subscriptions";
+import OldSubscriptions from "./OldSubscriptions";
+import Subscriptions from "./Subscriptions";
 import Validations from "../pages/Validations";
 import NewProcess from "../pages/NewProcess";
 import ProcessDetail from "./ProcessDetail";
@@ -205,9 +206,11 @@ class App extends React.PureComponent {
                                                                locationCodes={locationCodes}
                                                                {...props}/>}/>
                         <Route path="/subscriptions"
-                               render={props => <Subscriptions products={products}
-                                                               organisations={organisations}
-                                                               {...props}/>}/>
+                               render={props => <Subscriptions {...props}/>}/>
+                        <Route path="/old-subscriptions"
+                               render={props => <OldSubscriptions products={products}
+                                                                  organisations={organisations}
+                                                                  {...props}/>}/>
                         <Route path="/subscription/:id"
                                render={props => <SubscriptionDetail organisations={organisations}
                                                                     products={products}
