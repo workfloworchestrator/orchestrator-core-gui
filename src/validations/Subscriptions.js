@@ -76,7 +76,7 @@ const searchableSubscriptionsColumnsMapping = {
 export function searchConstruct(query) {
     const queryToLower = query.toLowerCase();
     let colonIndex = queryToLower.indexOf(":");
-    //See the tests in src/__tests__/validations/Subscriptions.test.js for 'explanation'
+    //See the tests in src/__tests__/validations/OldSubscriptions.test.js for 'explanation'
     if (colonIndex > -1) {
         const searchOptions = {};
         const parts = query.split(/(:|'|"| )/);

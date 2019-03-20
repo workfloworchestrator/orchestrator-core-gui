@@ -144,7 +144,7 @@ export function subscriptions() {
     return fetchJson('v2/subscriptions');
 }
 
-// Subscriptions including dynamic properties (SLOW)
+// OldSubscriptions including dynamic properties (SLOW)
 export function subscriptionsWithDetails() {
     return fetchJson("subscriptions/with_details");
 }
