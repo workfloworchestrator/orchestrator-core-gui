@@ -1,12 +1,13 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {subscriptions} from "../api";
-import {isEmpty} from "../utils/Utils";
-
 import "./Subscriptions.scss";
-import FilterDropDown from "../components/FilterDropDown";
-import ConfirmationDialog from "../components/ConfirmationDialog";
+
+import ReactTable from "react-table";
+import "react-table/react-table.css"
+import {renderDate} from "../utils/Lookups";
+import {requestSubscriptionData} from "../utils/SubscriptionData";
+
 
 export default class Subscriptions extends React.PureComponent {
 
@@ -15,66 +16,78 @@ export default class Subscriptions extends React.PureComponent {
 
         this.state = {
             subscriptions: [],
-            filterAttributesProduct: [],
-            filterAttributesStatus: [
-                {name: "initial", selected: true, count: 0},
-                {name: "provisioning", selected: true, count: 0},
-                {name: "migrating", selected: true, count: 0},
-                {name: "active", selected: true, count: 0},
-                {name: "disabled", selected: true, count: 0},
-                {name: "terminated", selected: false, count: 0}
-            ],
-            searchPhrase: "",
-            sorted: {name: "start_date", descending: true},
+            loading: true,
+            pages: 0,
         };
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    componentDidMount = () => subscriptions()
-        .then(results => {
-           // const newFilterAttributesProduct = [];
-           // this.setState({
-           //      subscriptions: results,
-           //      filteredSubscriptions: this.doSearchAndSortAndFilter("", results, this.state.sorted, filterAttributesProduct, filterAttributesStatus),
-           //      filterAttributesProduct: filterAttributesProduct,
-           //      filterAttributesStatus: filterAttributesStatus,
-           //      collapsibleSubscriptions: collapsibleSubscriptions
-           //  });
+    fetchData(state, instance) {
+        // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
+        // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
+        this.setState({ loading: true });
+        // Request the data however you want.  Here, we'll use our mocked service we created earlier
+        requestSubscriptionData(
+            state.pageSize,
+            state.page,
+            state.sorted,
+            state.filtered
+        ).then(res => {
+            // Now just get the rows of data to your React Table (and update anything else like total pages or loading)
+            this.setState({
+                subscriptions: res.rows,
+                pages: res.pages.length/state.pageSize,
+                loading: false
+            });
         });
-
-    filter = item => {
-        console.log("filter() called")
-    };
-
-
+    }
 
     showSubscriptionDetail = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
 
     render() {
-        const {
-            filteredSubscriptions, filterAttributesProduct, filterAttributesStatus, searchPhrase, sorted,
-        } = this.state;
+        const {loading, pages, subscriptions} = this.state;
+
         return (
             <div className="subscriptions-page">
-               <div className="card">
-                    <div className="options">
-                        <FilterDropDown items={filterAttributesProduct}
-                                        filterBy={this.filter}
-                                        label={I18n.t("subscriptions.product")}/>
-                        <FilterDropDown items={filterAttributesStatus}
-                                        filterBy={this.filter}
-                                        label={I18n.t("subscriptions.status")}/>
-                        <section className="search">
-                            <input className="allowed"
-                                   placeholder={I18n.t("subscriptions.searchPlaceHolder")}
-                                   type="text"
-                                   value={searchPhrase}/>
-                            <i className="fa fa-search"></i>
-                        </section>
+                <div className="subscriptions-header">
+                </div>
+                <div className="subscriptions-container">
+                    <ReactTable
+                        columns={[
+                            {
+                                Header: "Id",
+                                id: "subscription_id",
+                                accessor: d => d.subscription_id.slice(0,8)
+                            },
+                            {
+                                Header: "Description",
+                                accessor: "description"
+                            },
+                            {
+                                Header: "In Sync",
+                                accessor: "insync"
+                            },
+                            {
+                                Header: "Start Date",
+                                id: "start_date",
+                                accessor: d => renderDate(d.start_date)
+                            }
+                        ]}
+                        manual // Forces table not to paginate or sort automatically, so we can handle it server-side
+                        data={subscriptions}
+                        pages={pages} // Display the total number of pages
+                        loading={loading} // Display the loading overlay when we need it
+                        onFetchData={this.fetchData} // Request new data when things change
+                        filterable
+                        defaultSorted={[{
+                            id   : 'start_date',
+                            desc : true,
+                        }]}
+                        defaultPageSize={20}
+                        className="-striped -highlight"
+                    />
                     </div>
                 </div>
-                <section className="subscriptions-container">
-                </section>
-            </div>
         );
     }
 }

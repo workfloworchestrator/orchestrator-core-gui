@@ -140,7 +140,11 @@ export function deleteResourceType(id) {
 }
 
 //API
-export function subscriptions() {
+export function subscriptions(range="0,10") {
+    return fetchJson(`v2/subscriptions?range=${range}`);
+}
+
+export function paginated_subscriptions() {
     return fetchJson('v2/subscriptions');
 }
 
