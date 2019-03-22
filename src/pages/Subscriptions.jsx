@@ -7,6 +7,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css"
 import {renderDate} from "../utils/Lookups";
 import {requestSubscriptionData} from "../utils/SubscriptionData";
+import {stop} from "../utils/Utils";
 
 
 export default class Subscriptions extends React.PureComponent {
@@ -42,7 +43,10 @@ export default class Subscriptions extends React.PureComponent {
         });
     }
 
-    showSubscriptionDetail = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
+    showSubscriptionDetail = subscription_id => e => {
+        stop(e);
+        this.props.history.push("/subscription/" + subscription_id);
+    };
 
     render() {
         const {loading, pages, subscriptions} = this.state;
@@ -57,7 +61,9 @@ export default class Subscriptions extends React.PureComponent {
                             {
                                 Header: "Id",
                                 id: "subscription_id",
-                                accessor: d => d.subscription_id.slice(0,8)
+                                accessor: d => <a href={`/subscription/${d.subscription_id}`} onClick={this.showSubscriptionDetail(d.subscription_id)}>
+                                    {d.subscription_id.slice(0,8)}
+                                </a>
                             },
                             {
                                 Header: "Description",
@@ -65,7 +71,12 @@ export default class Subscriptions extends React.PureComponent {
                             },
                             {
                                 Header: "In Sync",
-                                accessor: "insync"
+                                id: "insync",
+                                accessor: d => d.insync ? "yes" : "no"
+                            },
+                            {
+                                Header: "Status",
+                                accessor: "status"
                             },
                             {
                                 Header: "Start Date",
@@ -79,6 +90,7 @@ export default class Subscriptions extends React.PureComponent {
                         loading={loading} // Display the loading overlay when we need it
                         onFetchData={this.fetchData} // Request new data when things change
                         filterable
+                        resizable={false} // Causes bugs when enabled with subscription columnn
                         defaultSorted={[{
                             id   : 'start_date',
                             desc : true,
@@ -94,4 +106,5 @@ export default class Subscriptions extends React.PureComponent {
 
 Subscriptions.propTypes = {
     history: PropTypes.object.isRequired,
+    organisations: PropTypes.array.isRequired,
 };
