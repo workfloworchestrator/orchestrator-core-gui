@@ -63,7 +63,9 @@ export default class Subscriptions extends React.PureComponent {
                                 id: "subscription_id",
                                 accessor: d => <a href={`/subscription/${d.subscription_id}`} onClick={this.showSubscriptionDetail(d.subscription_id)}>
                                     {d.subscription_id.slice(0,8)}
-                                </a>
+                                </a>,
+                                width: 100
+
                             },
                             {
                                 Header: "Description",
@@ -72,7 +74,8 @@ export default class Subscriptions extends React.PureComponent {
                             {
                                 Header: "In Sync",
                                 id: "insync",
-                                accessor: d => d.insync ? "yes" : "no"
+                                accessor: d => d.insync ? "yes" : "no",
+                                width: 80
                             },
                             {
                                 Header: "Status",
