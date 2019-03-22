@@ -36,7 +36,7 @@ export default class Subscriptions extends React.PureComponent {
             // Now just get the rows of data to your React Table (and update anything else like total pages or loading)
             this.setState({
                 subscriptions: res.rows,
-                pages: res.pages.length/state.pageSize,
+                pages: res.pages,
                 loading: false
             });
         });
