@@ -8,6 +8,7 @@ import "react-table/react-table.css"
 import {renderDate} from "../utils/Lookups";
 import {requestSubscriptionData} from "../utils/SubscriptionData";
 import {stop} from "../utils/Utils";
+import MessageBox from "../components/MessageBox";
 
 
 export default class Subscriptions extends React.PureComponent {
@@ -48,14 +49,23 @@ export default class Subscriptions extends React.PureComponent {
         this.props.history.push("/subscription/" + subscription_id);
     };
 
+    navigateToOldSubscriptions = () => {
+        this.props.history.push("/old-subscriptions/");
+    };
+
+
     render() {
         const {loading, pages, subscriptions} = this.state;
 
         return (
             <div className="subscriptions-page">
-                <div className="subscriptions-header">
-                </div>
+                <MessageBox messageHeader="Subscriptions"
+                            messageText="Experimental new subscriptions page. Tip: search for status 'a' for active subs."
+                            handleClick={this.navigateToOldSubscriptions}
+                            linkName="use old page"
+                />
                 <div className="subscriptions-container">
+
                     <ReactTable
                         columns={[
                             {
@@ -65,12 +75,16 @@ export default class Subscriptions extends React.PureComponent {
                                     {d.subscription_id.slice(0,8)}
                                 </a>,
                                 width: 100
-
                             },
                             {
                                 Header: "Product",
                                 accessor: "product.name",
                                 width: 200
+                            },
+                            {
+                                Header: "Tag",
+                                accessor: "product.tag",
+                                width: 175
                             },
                             {
                                 Header: "Description",
@@ -96,12 +110,12 @@ export default class Subscriptions extends React.PureComponent {
                         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
                         data={subscriptions}
                         pages={pages} // Display the total number of pages
-                        loading={loading} // Display the loading overlay when we need it
+                        loading={false} // We use the spinner of the core app itself.
                         onFetchData={this.fetchData} // Request new data when things change
                         filterable
-                        resizable={false} // Causes bugs when enabled with subscription columnn
+                        resizable={false} // Causes bugs when enabled with description columnn
                         defaultSorted={[{
-                            id   : 'start_date',
+                            id   : "start_date",
                             desc : true,
                         }]}
                         defaultPageSize={25}
