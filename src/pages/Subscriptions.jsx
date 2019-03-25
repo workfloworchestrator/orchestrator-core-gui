@@ -68,8 +68,14 @@ export default class Subscriptions extends React.PureComponent {
 
                             },
                             {
+                                Header: "Product",
+                                accessor: "product.name",
+                                width: 200
+                            },
+                            {
                                 Header: "Description",
-                                accessor: "description"
+                                accessor: "description",
+                                width: 425
                             },
                             {
                                 Header: "In Sync",
@@ -98,8 +104,10 @@ export default class Subscriptions extends React.PureComponent {
                             id   : 'start_date',
                             desc : true,
                         }]}
-                        defaultPageSize={20}
+                        defaultPageSize={25}
                         className="-striped -highlight"
+                        showPaginationTop
+                        showPaginationBottom
                     />
                     </div>
                 </div>
