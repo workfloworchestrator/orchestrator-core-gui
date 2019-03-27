@@ -60,7 +60,7 @@ export default class Subscriptions extends React.PureComponent {
         return (
             <div className="subscriptions-page">
                 <MessageBox messageHeader="Subscriptions"
-                            messageText="Experimental new subscriptions page. Tip: search for status 'a' for active subs."
+                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
                             handleClick={this.navigateToOldSubscriptions}
                             linkName="use old page"
                 />
@@ -104,6 +104,7 @@ export default class Subscriptions extends React.PureComponent {
                             {
                                 Header: "Start Date",
                                 id: "start_date",
+                                filterable: false,
                                 accessor: d => renderDate(d.start_date)
                             }
                         ]}

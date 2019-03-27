@@ -6,9 +6,12 @@ export const requestSubscriptionData = (pageSize, page, sorted, filtered) => {
     console.log(sorted);
     // Todo: log filter and sort OBJECTS also
 
+    const filter_parameters = filtered.map(item => {return `${item.id},${item.value}`}).join(",")
+    const sort_parameters = sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`}).join(",")
+
     const paginate_query = `${page*(pageSize-1)},${pageSize-1+(page*(pageSize-1))}`;
-    const sort_query = sorted.length > 0 ? `${sorted[0].id},${sorted[0].desc ? "desc" : "asc"}` : "";
-    const filter_query = filtered.length > 0 ? `${filtered[0].id},${filtered[0].value}` : "";
+    const sort_query = sorted.length > 0 ? sort_parameters : "";
+    const filter_query = filtered.length > 0 ?  filter_parameters: "";
 
     return paginatedSubscriptions(paginate_query, sort_query, filter_query).then(results => {
 
