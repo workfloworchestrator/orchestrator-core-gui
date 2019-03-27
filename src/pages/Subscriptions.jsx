@@ -1,5 +1,4 @@
 import React from "react";
-import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import "./Subscriptions.scss";
 
@@ -55,7 +54,7 @@ export default class Subscriptions extends React.PureComponent {
 
 
     render() {
-        const {loading, pages, subscriptions} = this.state;
+        const {pages, subscriptions} = this.state;
 
         return (
             <div className="subscriptions-page">
