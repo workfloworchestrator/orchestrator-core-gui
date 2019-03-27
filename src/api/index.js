@@ -141,10 +141,18 @@ export function deleteResourceType(id) {
 
 //API
 export function subscriptions() {
+    return fetchJson(`v2/subscriptions`);
+}
+
+export function paginatedSubscriptions(range="0,10", sort=["start_date", "desc"], filter) {
+    return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
+}
+
+export function paginated_subscriptions() {
     return fetchJson('v2/subscriptions');
 }
 
-// Subscriptions including dynamic properties (SLOW)
+// OldSubscriptions including dynamic properties (SLOW)
 export function subscriptionsWithDetails() {
     return fetchJson("subscriptions/with_details");
 }
