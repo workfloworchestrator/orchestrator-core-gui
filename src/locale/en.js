@@ -507,6 +507,8 @@ I18n.translations.en = {
             ip_prefix_subscriptions: "IP Prefix subscriptions",
             ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
         },
+        selected_sap: "Select a Service Attach Point",
+        selected_sap_info: "Choose the SAP you want to migrate",
         bgp_ip_internetpinnen_prefix_subscriptions: "Internetpinnen prefixes",
         bgp_ip_internetpinnen_prefix_subscriptions_info: "IP Prefix(es) reserved for internetpinnen.",
         old_isis_metric: "Current",

@@ -177,7 +177,6 @@ export function subscriptionsByProductId(productId) {
     return fetchJson(`subscriptions/product/${productId}`);
 }
 
-
 export function organisations() {
     return fetchJson("crm/organisations");
 }

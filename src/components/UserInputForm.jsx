@@ -555,7 +555,10 @@ export default class UserInputForm extends React.Component {
                        nodes={subscriptions.filter((subscription) => subscription.subscription_id === nodeSubscriptionId)}
                        port={value}/>;
             case "generic_select":
-                return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>;
+                return <GenericSelect onChange={this.changeSelectInput(name)}
+                                      choices={userInput.choices}
+                                      selected={value}
+                                      disabled={userInput.readonly}/>;
             case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             case "numeric":
