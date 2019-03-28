@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {subscriptionsByProductId, subscriptionsWithDetails} from "../api";
 import {isEmpty} from "../utils/Utils";
-import "./SubscriptionsSelect.scss";
+import "./SubscriptionProductTagSelect.scss";
+import {subscriptionsByTags} from "../api";
 
-export default class SubscriptionsSelect extends React.PureComponent {
+export default class SubscriptionProductTagSelect extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -25,11 +25,14 @@ export default class SubscriptionsSelect extends React.PureComponent {
     };
 
     render() {
-        const {subscriptions, loading} = this.state;
+        const {loading} = this.state;
         const {productId, disabled, tags, statusList, subscription} = this.props;
-        const placeholder = productId ? I18n.t("subscription_product_tag_select.placeholder") : I18n.t("subscription_product_tag_select.placeholder_selected_product");
+        const placeholder = productId ?
+            I18n.t("subscription_product_tag_select.placeholder") :
+            I18n.t("subscription_product_tag_select.placeholder_selected_product");
 
         // Todo; filter subscriptions based on product and status select
+        let subscriptions = this.state.subscriptions;
 
         return (
             <section className="subscription-select">
@@ -42,17 +45,13 @@ export default class SubscriptionsSelect extends React.PureComponent {
                               x.subscription_id === subscription || !subscriptions.includes(x.subscription_id))
                             )
                             .map(x => ({value: x.subscription_id, label: x.description}))}
+                          isLoading={loading}
                           value={subscription}
                           searchable={true}
-                          disabled={disabled || availableSubscriptions.length === 0}
+                          disabled={disabled || subscriptions.length === 0}
                           placeholder={placeholder}/>
                   </div>
-
-                          {(maximum > minimum) && <i className={`fa fa-minus ${index < minimum  ? "disabled" : "" }`}
-                                                  onClick={this.removeSubscription.bind(this, index)}></i>}
-               </div>
               )}
-
             </section>
           )
   };
