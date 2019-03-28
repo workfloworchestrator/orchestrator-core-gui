@@ -702,6 +702,8 @@ I18n.translations.en = {
         link_subscription: "Show Subscription",
         modify_migrate_sn7_bgp_ip_ipss_to_sn8: "Migrate to SN8",
         modify_migrate_sn7_static_ip_ipss_to_sn8: "Migrate to SN8",
+        modify_migrate_sn7_static_ip_sap_to_sn8: "Migrate static SAP to SN8",
+        modify_migrate_sn7_bgp_ip_sap_to_sn8: "Migrate one SAP to SN8",
 	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
         modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
