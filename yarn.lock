@@ -11214,6 +11214,13 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
+react-table@^6.9.2:
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.9.2.tgz#6a59adfeb8d5deced288241ed1c7847035b5ec5f"
+  integrity sha512-sTbNHU8Um0xRtmCd1js873HXnXaMWeBwZoiljuj0l1d44eaqjKyYPK/3HCBbJg1yeE2O5pQJ3Km0tlm9niNL9w==
+  dependencies:
+    classnames "^2.2.5"
+
 react-test-renderer@^16.0.0-0:
   version "16.8.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.0.tgz#a7a635ac0622e79f349e4f42663a7f313d648518"

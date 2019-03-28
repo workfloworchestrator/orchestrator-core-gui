@@ -1,0 +1,35 @@
+@import "../stylesheets/vars.scss";
+
+section.message-box {
+  margin-top: -20px;
+
+  section.message-body {
+
+    margin-top: -10px;
+    margin-bottom: -5px;
+
+    .message-button {
+      margin-left: 12px;
+      color: $medium-grey;
+      background-color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid $blue;
+      border-radius: 3px;
+      font-family: "Roboto", Sans-serif;
+      font-size: 0.8em;
+    }
+    .message-button:hover, .message-button:visited {
+      text-decoration: none;
+      border: 1px solid $lighter-grey;
+      color: $blue;
+    }
+    .message-button:focus {
+      outline: none;
+    }
+
+
+  }
+
+}
+
