@@ -524,12 +524,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         if(subscription.tag === "Node" && status !== "active" && status !== "provisioning") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status_for_node", {status: status});
         }
-        else if (product.product_type !== "Node" && status !== "active") {
+        else if (product.product_type !== "Node" && status !== "active" && status !== "migrating") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
 
         // Check if related subscriptions and main subscription are insync
-        if (isEmpty(noModifyReason)) {
+        if (status !== "migrating" && isEmpty(noModifyReason)) {
             noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
         }
 
