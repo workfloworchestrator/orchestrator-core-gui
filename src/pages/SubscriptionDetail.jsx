@@ -491,6 +491,8 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
+        const canAlwaysBeModified = ["migrate_sn7_static_ip_sap_to_sn8", "_migrate_sn7_bgp_ip_sap_to_sn8"];
+
         // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         let noTerminateReason = null;
@@ -524,7 +526,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         if(subscription.tag === "Node" && status !== "active" && status !== "provisioning") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status_for_node", {status: status});
         }
-        else if (product.product_type !== "Node" && status !== "active" && status !== "migrating") {
+        else if (product.product_type !== "Node" && status !== "active") {
             noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
         }
 
@@ -559,12 +561,12 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </tr>
                     {modifyWorkflows.map((wf, index) =>
                         <tr key={index}>
-                            {isModifiable && <td>
+                            {(isModifiable || canAlwaysBeModified.includes(wf.name)) && <td>
                                 <a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
                                     {I18n.t(`subscription.modify_${wf.name}`)}</a>
                             </td>}
                             {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
-                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects) &&
+                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects && !canAlwaysBeModified.includes(wf.name)) &&
                             <td><em className="error">{noModifyReason}</em></td>}
                             {!loadedAllRelatedObjects && <td>
                                 <section className="terminate-link-waiting">
