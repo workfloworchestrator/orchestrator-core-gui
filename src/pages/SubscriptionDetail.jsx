@@ -491,7 +491,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
-        const canAlwaysBeModified = ["migrate_sn7_static_ip_sap_to_sn8", "_migrate_sn7_bgp_ip_sap_to_sn8"];
+        const canAlwaysBeModified = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
 
         // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
@@ -561,11 +561,18 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </tr>
                     {modifyWorkflows.map((wf, index) =>
                         <tr key={index}>
-                            {(isModifiable || canAlwaysBeModified.includes(wf.name)) && <td>
-                                <a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
-                                    {I18n.t(`subscription.modify_${wf.name}`)}</a>
-                            </td>}
-                            {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
+                            {(canAlwaysBeModified.includes(wf.name) && subscription.status === "migrating") &&
+                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
+                                    {I18n.t(`subscription.modify_${wf.name}`)} {subscription.status}</a>
+                                </td>
+                            }
+                            {(isModifiable && subscription.status === "active" && !canAlwaysBeModified.includes(wf.name)) &&
+                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
+                                {I18n.t(`subscription.modify_${wf.name}`)} {subscription.status}</a></td>
+                            }
+                            {(!isModifiable || canAlwaysBeModified.includes(wf.name)) &&
+                                <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>
+                            }
                             {(!isEmpty(noModifyReason) && loadedAllRelatedObjects && !canAlwaysBeModified.includes(wf.name)) &&
                             <td><em className="error">{noModifyReason}</em></td>}
                             {!loadedAllRelatedObjects && <td>
