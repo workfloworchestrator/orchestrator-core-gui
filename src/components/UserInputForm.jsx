@@ -44,6 +44,7 @@ import "./UserInputForm.scss";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
+import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -143,7 +144,6 @@ export default class UserInputForm extends React.Component {
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
-
 
     changeDateInput = name => dd => {
         const value = moment(dd).format("YYYY-MM-DD");
@@ -269,6 +269,10 @@ export default class UserInputForm extends React.Component {
             case "mtu":
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "jira_ticket":
+                // Todo implement a cool way yo do the regex
+                return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
+                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
                                                  products={products}
@@ -320,8 +324,7 @@ export default class UserInputForm extends React.Component {
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
-                const newProductId = lookupValueFromNestedState("product", currentState) ||
-                    lookupValueFromNestedState("product", currentState);
+                const newProductId = lookupValueFromNestedState("product", currentState);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
@@ -519,6 +522,16 @@ export default class UserInputForm extends React.Component {
                                             subscriptions={this.commaSeperatedArray(value)}
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
+            case "subscription_product_tag":
+                return <SubscriptionProductTagSelect onChange={this.changeSelectInput(name)}
+                                            // productId={productIdForSubscription}
+                                            tags={userInput.tags}
+                                            productId={lookupValueFromNestedState(userInput.product_key, currentState)}
+                                            subscription={value}
+                                            />;
+
+
+
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}

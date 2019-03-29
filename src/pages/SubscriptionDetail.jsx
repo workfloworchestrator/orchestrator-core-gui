@@ -562,13 +562,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {modifyWorkflows.map((wf, index) =>
                         <tr key={index}>
                             {(canAlwaysBeModified.includes(wf.name) && subscription.status === "migrating") &&
-                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
-                                    {I18n.t(`subscription.modify_${wf.name}`)} {subscription.status}</a>
+                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, true, wf)}>
+                                    {I18n.t(`subscription.modify_${wf.name}`)}</a>
                                 </td>
                             }
                             {(isModifiable && subscription.status === "active" && !canAlwaysBeModified.includes(wf.name)) &&
                                 <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
-                                {I18n.t(`subscription.modify_${wf.name}`)} {subscription.status}</a></td>
+                                {I18n.t(`subscription.modify_${wf.name}`)}</a></td>
                             }
                             {(!isModifiable || canAlwaysBeModified.includes(wf.name)) &&
                                 <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>

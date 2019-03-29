@@ -33,12 +33,12 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
 
         // Todo; filter subscriptions based on product and status select
         let subscriptions = this.state.subscriptions;
-
         return (
             <section className="subscription-select">
-                  <div className="select-box" key={index}>
-                  <Select onChange={this.onChangeInternal(index)}
-                          key={index}
+                <span>Warning not all filters are implemented yet!</span>
+                  <div className="select-box">
+                      {this.props.productId}
+                  <Select onChange={this.props.onChange}
                           options={
                             subscriptions
                             .filter(x => (
@@ -51,7 +51,6 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
                           disabled={disabled || subscriptions.length === 0}
                           placeholder={placeholder}/>
                   </div>
-              )}
             </section>
           )
   };
