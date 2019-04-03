@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import ReactTable from "react-table";
 import "react-table/react-table.css"
@@ -10,7 +11,14 @@ import MessageBox from "../components/MessageBox";
 
 import "./Subscriptions.scss";
 
-export default class Subscriptions extends React.PureComponent {
+const urlPropsQueryConfig = {
+    page: { type: UrlQueryParamTypes.number },
+    sorted: { type: UrlQueryParamTypes.array },
+    filtered: { type: UrlQueryParamTypes.array },
+};
+
+
+class Subscriptions extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -22,6 +30,22 @@ export default class Subscriptions extends React.PureComponent {
         };
         this.fetchData = this.fetchData.bind(this);
     }
+
+    static propTypes = {
+        // URL props are automatically decoded and passed in based on the config
+        page: PropTypes.number,
+        filtered: PropTypes.array,
+        sorted: PropTypes.array,
+
+        // change handlers are automatically generated when given a config.
+        // By default they update that single query parameter and maintain existing
+        // values in the other parameters.
+        onChangePage: PropTypes.func,
+        onChangeFiltered: PropTypes.func,
+        onChangeSorted: PropTypes.func,
+    };
+
+
 
     fetchData(state, instance) {
         // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
@@ -55,23 +79,27 @@ export default class Subscriptions extends React.PureComponent {
 
     render() {
         const {pages, subscriptions} = this.state;
+        const {page, onChangePage, filtered, onChangeFiltered, sorted, onChangeSorted} = this.props;
 
         return (
             <div className="subscriptions-page">
-                <MessageBox messageHeader="Subscriptions"
-                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
-                            handleClick={this.navigateToOldSubscriptions}
-                            linkName="use old page"
-                />
+
                 <div className="subscriptions-container">
+                    <div>
+                        page: {this.props.page}<br/>
+                        filtered: {this.props.filtered}<br/>
+                        sorted: {this.props.sorted}<br/>
+
+                    </div>
                     <ReactTable
                         columns={[
                             {
                                 Header: "Id",
                                 id: "subscription_id",
-                                accessor: d => <a href={`/subscription/${d.subscription_id}`} onClick={this.showSubscriptionDetail(d.subscription_id)}>
-                                    {d.subscription_id.slice(0,8)}
-                                </a>,
+                                accessor: d => <a href={`/subscription/${d.subscription_id}`}
+                                                  onClick={this.showSubscriptionDetail(d.subscription_id)}>
+                                                {d.subscription_id.slice(0,8)}
+                                               </a>,
                                 width: 100
                             },
                             {
@@ -121,8 +149,23 @@ export default class Subscriptions extends React.PureComponent {
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
+                        // Call back heaven:
+                        onSortedChange={sorted => {
+                            onChangeSorted(sorted)
+                            onChangePage(0)
+                        }}
+                        onPageChange={page => onChangePage(page)}
+                        // onResizedChange={resized => this.setState({ resized })}
+                        onFilteredChange={filtered => onChangeFiltered(filtered)}
+
+
                     />
                     </div>
+                <MessageBox messageHeader="Info"
+                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
+                            handleClick={this.navigateToOldSubscriptions}
+                            linkName="use old page"
+                />
                 </div>
         );
     }
@@ -132,3 +175,5 @@ Subscriptions.propTypes = {
     history: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
 };
+
+export default addUrlProps({ urlPropsQueryConfig })(Subscriptions)

@@ -31,6 +31,7 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import TaskDetail from "./TaskDetail";
 import Prefixes from "../pages/Prefixes";
+import { RouterToUrlQuery } from 'react-url-query';
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -158,6 +159,7 @@ class App extends React.PureComponent {
 
         return (
             <Router>
+                <RouterToUrlQuery>
                 <div>
                     <div>
                         <Flash/>
@@ -258,6 +260,7 @@ class App extends React.PureComponent {
                         <Route component={NotFound}/>
                     </Switch>
                 </div>
+                </RouterToUrlQuery>
             </Router>
 
         );
