@@ -270,7 +270,7 @@ export default class UserInputForm extends React.Component {
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "jira_ticket":
-                return <input type="text" id={name} name={name} value={value || userInput.jira_ticket_suffix}
+                return <input type="text" id={name} name={name} value={value || `${userInput.jira_ticket_suffix}-`}
                               readOnly={userInput.readonly} onChange={this.changeStringInput(name)}
                               onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
@@ -278,24 +278,24 @@ export default class UserInputForm extends React.Component {
                                                  products={products}
                                                  organisations={organisations}
                                                  className="indent"/>;
-            case "nms_service_id" :
+            case "nms_service_id":
             case "bandwidth":
                 return <BandwidthSelect stepUserInput={stepUserInput} name={name} onBlur={this.validateUserInput(name)}
                                         onChange={this.changeStringInput(name)} value={value || ""}
                                         portsKey={userInput.ports_key} disabled={userInput.readonly}/>;
-            case "vlan" :
-            case "vlan_range" :
+            case "vlan":
+            case "vlan_range":
                 const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
                 const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId} reportError={this.reportCustomError(userInput.type)}/>
-            case "organisation" :
+            case "organisation":
                 return <OrganisationSelect key={name} organisations={organisations}
                                            onChange={this.changeSelectInput(name)}
                                            organisation={value}
                                            disabled={userInput.readonly}/>;
-            case "product" :
+            case "product":
                 return <ProductSelect products={products}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}
@@ -333,18 +333,18 @@ export default class UserInputForm extends React.Component {
                     transitionType={userInput.transition_type}
                     newProductId={newProductId}
                 />;
-            case "contact_persons" :
+            case "contact_persons":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
                     organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
-            case "emails" :
+            case "emails":
                 return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true}/>;
-            case "email" :
+            case "email":
                 return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
@@ -464,7 +464,11 @@ export default class UserInputForm extends React.Component {
                     servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
-                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
+                        <section className="refresh-service-ports">
+                            <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
+                        </section>
+                    }
                     <MultipleServicePorts servicePorts={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
@@ -490,7 +494,11 @@ export default class UserInputForm extends React.Component {
                      servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product_id));
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
-                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
+                        <section className="refresh-service-ports">
+                            <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
+                        </section>
+                    }
                     <MultipleServicePortsSN8 servicePorts={portsSN8}
                                              availableServicePorts={availableServicePortsSN8}
                                              organisations={organisations}
@@ -524,14 +532,10 @@ export default class UserInputForm extends React.Component {
                                             maximum={userInput.maximum}/>;
             case "subscription_product_tag":
                 return <SubscriptionProductTagSelect onChange={this.changeSelectInput(name)}
-                                            // productId={productIdForSubscription}
                                             tags={userInput.tags}
                                             productId={lookupValueFromNestedState(userInput.product_key, currentState)}
                                             subscription={value}
                                             />;
-
-
-
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}

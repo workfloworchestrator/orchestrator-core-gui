@@ -1041,8 +1041,8 @@ I18n.translations.en = {
         select_product: "First select a Product",
     },
     subscription_product_tag_select: {
-        placeholder: "Select a subscription"
-
+        placeholder_selected_product: "Select a subscription for the selected product",
+        placeholder: "Select a subscription for this product tag"
     },
     cache: {
         name: {

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Subscriptions.scss";
 
 import ReactTable from "react-table";
 import "react-table/react-table.css"
@@ -9,6 +8,7 @@ import {requestSubscriptionData} from "../utils/SubscriptionData";
 import {stop} from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
 
+import "./Subscriptions.scss";
 
 export default class Subscriptions extends React.PureComponent {
 
@@ -58,16 +58,12 @@ export default class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page">
-
-
-
                 <MessageBox messageHeader="Subscriptions"
                             messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
                             handleClick={this.navigateToOldSubscriptions}
                             linkName="use old page"
                 />
                 <div className="subscriptions-container">
-
                     <ReactTable
                         columns={[
                             {
@@ -118,8 +114,8 @@ export default class Subscriptions extends React.PureComponent {
                         filterable
                         resizable={false} // Causes bugs when enabled with description columnn
                         defaultSorted={[{
-                            id   : "start_date",
-                            desc : true,
+                            id: "start_date",
+                            desc: true,
                         }]}
                         defaultPageSize={25}
                         className="-striped -highlight"
