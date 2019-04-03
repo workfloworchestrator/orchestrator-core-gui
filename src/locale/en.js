@@ -1040,6 +1040,10 @@ I18n.translations.en = {
         placeholder: "Search and select a subscription",
         select_product: "First select a Product",
     },
+    subscription_product_tag_select: {
+        placeholder: "Select a subscription"
+
+    },
     cache: {
         name: {
             ims: "IMS locations",
@@ -1057,7 +1061,6 @@ I18n.translations.en = {
         body: "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",
         ok: "Close"
     },
-
     not_found: {
         title: "404",
         description_html: "The requested page could not be found"

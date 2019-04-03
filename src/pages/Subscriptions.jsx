@@ -58,6 +58,9 @@ export default class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page">
+
+
+
                 <MessageBox messageHeader="Subscriptions"
                             messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
                             handleClick={this.navigateToOldSubscriptions}

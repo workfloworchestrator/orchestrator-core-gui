@@ -270,9 +270,9 @@ export default class UserInputForm extends React.Component {
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
             case "jira_ticket":
-                // Todo implement a cool way yo do the regex
-                return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
-                              onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+                return <input type="text" id={name} name={name} value={value || userInput.jira_ticket_suffix}
+                              readOnly={userInput.readonly} onChange={this.changeStringInput(name)}
+                              onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
                                                  products={products}
