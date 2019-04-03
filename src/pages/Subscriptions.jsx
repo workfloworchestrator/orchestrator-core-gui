@@ -151,12 +151,12 @@ class Subscriptions extends React.PureComponent {
                         showPaginationBottom
                         // Call back heaven:
                         onSortedChange={sorted => {
-                            onChangeSorted(sorted)
+                            onChangeSorted(sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`}));
                             onChangePage(0)
                         }}
                         onPageChange={page => onChangePage(page)}
                         // onResizedChange={resized => this.setState({ resized })}
-                        onFilteredChange={filtered => onChangeFiltered(filtered)}
+                        onFilteredChange={filtered => onChangeFiltered(filtered.map(item => {return `${item.id},${item.value}`}))}
 
 
                     />
