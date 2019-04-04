@@ -2,8 +2,8 @@ import {paginatedSubscriptions} from "../api";
 
 export const requestSubscriptionData = (pageSize, page, sorted, filtered) => {
     console.log(`Requesting data -> Page: ${page}, pageSize: ${pageSize}`);
-    console.log(filtered);
-    console.log(sorted);
+    // console.log(filtered);
+    // console.log(sorted);
     // Todo: log filter and sort OBJECTS also
 
     const filter_parameters = filtered.map(item => {return `${item.id},${item.value}`}).join(",")
@@ -17,7 +17,7 @@ export const requestSubscriptionData = (pageSize, page, sorted, filtered) => {
 
         const res = {
             rows: results,
-            pages: 20 // todo: get it from header
+            pages: 99 // todo: get it from header
         };
         return res
     });
