@@ -508,7 +508,9 @@ I18n.translations.en = {
         old_isis_metric: "Current",
         old_isis_metric_info: "Current value for the ISIS metric of this Corelink subscription",
         new_isis_metric: "Desired",
-        new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription"
+        new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription",
+        ipv4_prefixlen: "IPv4 Prefix length",
+        ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
     },
     process_state: {
         copy: "Copy to clipboard",
