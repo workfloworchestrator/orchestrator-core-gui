@@ -510,7 +510,7 @@ I18n.translations.en = {
         new_isis_metric: "Desired",
         new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription",
         service_speed: "Bandbreedte",
-        service_speed_info: "Bandbreedtte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten"
+        service_speed_info: "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten"
     },
     process_state: {
         copy: "Copy to clipboard",
