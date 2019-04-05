@@ -24,19 +24,17 @@ class Subscriptions extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.handleKeyDown = this.handleKeyDown.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
             subscriptions: [],
             loading: true,
             pages: 99,
-            // Buggy with start_date !!!
             sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
             filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : []
         };
-        this.fetchData = this.fetchData.bind(this);
     };
 
-    fetchData(state, instance) {
+    fetchData = (state, instance) => {
         this.setState({ loading: true });
         requestSubscriptionData(
             state.pageSize,
@@ -56,7 +54,7 @@ class Subscriptions extends React.PureComponent {
         // console.log(newSorted)
         this.setState({
             sorted: newSorted
-        })
+        });
         const newSort = newSorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`})
         this.props.onChangeSorted(newSort)
     };
@@ -64,14 +62,14 @@ class Subscriptions extends React.PureComponent {
     updateFiltered = (newFiltered) => {
         this.setState({
             filtered: newFiltered
-        })
+        });
         const newFilter = newFiltered.map(item => {return `${item.id},${item.value}`})
         this.props.onChangeFiltered(newFilter)
     };
 
 
     handleKeyDown(e) {
-        if (e.keyCode === 38 & this.props.page !== 0) {
+        if (e.keyCode === 38 && this.props.page && this.props.page !== 0) {
             this.props.onChangePage(this.props.page-1)
         } else if (e.keyCode === 40) {
             this.props.onChangePage(this.props.page+1)
@@ -93,13 +91,13 @@ class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-
+                <div class="divider"></div>
                 <div className="subscriptions-container">
-                    <div>
-                        page: {this.props.page}<br/>
-                        filtered: {this.props.filtered}<br/>
-                        sorted: {this.state.sorted ? this.state.sorted.join(",") : ""}<br/>
-                    </div>
+                    {/*<div>*/}
+                        {/*page: {this.props.page}<br/>*/}
+                        {/*filtered: {this.props.filtered}<br/>*/}
+                        {/*sorted: {this.state.sorted ? this.state.sorted.join(",") : ""}<br/>*/}
+                    {/*</div>*/}
                     <ReactTable
                         columns={[
                             {

@@ -5,10 +5,11 @@
   @include  page;
   @include card;
 
-  margin-top: -5px;
+  .divider {
+    height: 5px;
+  }
 
   .subscriptions-container {
-    margin-top: 5px;
     background-color: white;
   }
 

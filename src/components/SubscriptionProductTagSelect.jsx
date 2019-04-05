@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import {isEmpty} from "../utils/Utils";
 import "./SubscriptionProductTagSelect.scss";
 import {subscriptionsByTags} from "../api";
 
@@ -30,7 +29,7 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
 
     render() {
         const {loading} = this.state;
-        const {productId, disabled, tags, statusList, subscription} = this.props;
+        const {productId, disabled, subscription} = this.props;
         const placeholder = productId ?
             I18n.t("subscription_product_tag_select.placeholder_selected_product") :
             I18n.t("subscription_product_tag_select.placeholder");
