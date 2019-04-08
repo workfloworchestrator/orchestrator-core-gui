@@ -331,8 +331,12 @@ I18n.translations.en = {
         subscription_id1_info: "The first subscription to use",
         subscription_id2: "Subscription",
         subscription_id2_info: "The second subscription to use",
+        new_subscription_id: "Subscription ID of the new subscription",
+        new_subscription_id_info: "Enter the subscription ID of the SN8 (active or provisioning) subscription as a destination for the migration",
         downgrade_redundant_lp_choice: "Redundant LP Subscription",
         downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+        ticket_id: "Jira ticket ID",
+        ticket_id_info: "The JIRA ticket ID that will be used/mentioned in the confirmation mail",
         transition_product_downgrade: "Choose New Product",
         transition_product_downgrade_info: "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
         transition_product_upgrade: "Choose New Product",
@@ -503,6 +507,8 @@ I18n.translations.en = {
             ip_prefix_subscriptions: "IP Prefix subscriptions",
             ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
         },
+        selected_sap: "Select a Service Attach Point",
+        selected_sap_info: "Choose the SAP you want to migrate",
         bgp_ip_internetpinnen_prefix_subscriptions: "Internetpinnen prefixes",
         bgp_ip_internetpinnen_prefix_subscriptions_info: "IP Prefix(es) reserved for internetpinnen.",
         old_isis_metric: "Current",
@@ -706,6 +712,8 @@ I18n.translations.en = {
         link_subscription: "Show Subscription",
         modify_migrate_sn7_bgp_ip_ipss_to_sn8: "Migrate to SN8",
         modify_migrate_sn7_static_ip_ipss_to_sn8: "Migrate to SN8",
+        modify_migrate_sn7_static_ip_sap_to_sn8: "Migrate static SAP to SN8",
+        modify_migrate_sn7_bgp_ip_sap_to_sn8: "Migrate one SAP to SN8",
 	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
         modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
@@ -1036,6 +1044,10 @@ I18n.translations.en = {
         placeholder: "Search and select a subscription",
         select_product: "First select a Product",
     },
+    subscription_product_tag_select: {
+        placeholder_selected_product: "Select a subscription for the selected product",
+        placeholder: "Select a subscription for this product tag"
+    },
     cache: {
         name: {
             ims: "IMS locations",
@@ -1053,7 +1065,6 @@ I18n.translations.en = {
         body: "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",
         ok: "Close"
     },
-
     not_found: {
         title: "404",
         description_html: "The requested page could not be found"

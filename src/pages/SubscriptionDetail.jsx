@@ -491,6 +491,8 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
                      loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
+        const modifyWorkflowsThatCanAlwaysRun = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
+
         // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
         const status = subscription.status;
         let noTerminateReason = null;
@@ -529,7 +531,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
 
         // Check if related subscriptions and main subscription are insync
-        if (isEmpty(noModifyReason)) {
+        if (status !== "migrating" && isEmpty(noModifyReason)) {
             noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
         }
 
@@ -559,12 +561,19 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </tr>
                     {modifyWorkflows.map((wf, index) =>
                         <tr key={index}>
-                            {isModifiable && <td>
-                                <a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
+                            {(modifyWorkflowsThatCanAlwaysRun.includes(wf.name) && subscription.status === "migrating") &&
+                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, true, wf)}>
                                     {I18n.t(`subscription.modify_${wf.name}`)}</a>
-                            </td>}
-                            {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
-                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects) &&
+                                </td>
+                            }
+                            {(isModifiable && subscription.status === "active" && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
+                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
+                                {I18n.t(`subscription.modify_${wf.name}`)}</a></td>
+                            }
+                            {(!isModifiable || modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
+                                <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>
+                            }
+                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
                             <td><em className="error">{noModifyReason}</em></td>}
                             {!loadedAllRelatedObjects && <td>
                                 <section className="terminate-link-waiting">
