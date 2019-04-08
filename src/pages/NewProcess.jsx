@@ -253,7 +253,7 @@ export default class NewProcess extends React.Component {
     }
 
     changeModifySubscription = products => option => {
-        const canAlwaysBeModified = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
+        const modifyWorkflowsThatCanAlwaysRun = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
         const subscriptionSelected = option && option.value;
         const {subscriptions} = this.state;
 
@@ -261,14 +261,14 @@ export default class NewProcess extends React.Component {
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
             if (subscription.status === "migrating") {
-                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && canAlwaysBeModified.includes(wf.name));
+                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && modifyWorkflowsThatCanAlwaysRun.includes(wf.name));
             }
             else {
                 this.setState({notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations")})
                 subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
                     this.setState({notModifiableMessage: maybeModifiedMessage(subscription, relation_info)});
                 });
-                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && !canAlwaysBeModified.includes(wf.name));
+                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name));
             }
 
         } else {
