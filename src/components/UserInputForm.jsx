@@ -535,7 +535,7 @@ export default class UserInputForm extends React.Component {
                                             tags={userInput.tags}
                                             productId={lookupValueFromNestedState(userInput.product_key, currentState)}
                                             subscription={value}
-                                            />;
+                                            excludedSubscriptionIds={userInput.excluded_subscriptions}/>;
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
