@@ -23,6 +23,10 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
             if (this.props.productId) {
                 subscriptions = subscriptions.filter(item => item.product_id === this.props.productId)
             }
+            if (this.props.excludedSubscriptionIds.length > 0) {
+                //todo:
+                subscriptions = subscriptions.filter(item => item.product_id === this.props.productId)
+            }
             this.setState({subscriptions: subscriptions, loading: false})
         });
     };
@@ -64,5 +68,6 @@ SubscriptionProductTagSelect.propTypes = {
 };
 
 SubscriptionProductTagSelect.defaultProps = {
-    statusList: ["provisioning", "active"]
+    statusList: ["provisioning", "active"],
+    excludedSubscriptionIds: []
 };
