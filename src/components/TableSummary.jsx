@@ -19,7 +19,6 @@ export default class TableSummary extends React.PureComponent {
             </tr>
         );
 
-
         return (
             <section className="table-summary">
                 <table>

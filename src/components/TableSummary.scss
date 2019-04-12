@@ -8,11 +8,11 @@ section.table-summary {
     }
 
     .label {
+        font-weight: bold;
         background-color: $light-blue;
+        border-right: solid 1px $blue;
     }
-    //div.wrapper {
-    //    display: flex;
-    //    margin-left: 25px;
-    //
-    //}
+    .value {
+      background-color: $lightest-grey;
+    }
 }
