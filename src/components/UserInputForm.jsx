@@ -45,6 +45,7 @@ import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
+import TableSummary from "./TableSummary";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -590,6 +591,9 @@ export default class UserInputForm extends React.Component {
                                      value={value}
                                      strict={true}
                                      readOnly={userInput.readonly || false}/>;
+            case "table_summary":
+            case "migration_summary":
+                return <TableSummary data={userInput.data}/>
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

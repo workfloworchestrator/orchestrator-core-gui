@@ -3,9 +3,16 @@
 section.table-summary {
     width: 100%;
 
-    div.wrapper {
-        display: flex;
-        margin-left: 25px;
-
+    td {
+        padding: 10px;
     }
+
+    .label {
+        background-color: $light-blue;
+    }
+    //div.wrapper {
+    //    display: flex;
+    //    margin-left: 25px;
+    //
+    //}
 }
