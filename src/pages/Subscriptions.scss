@@ -2,14 +2,16 @@
 @import "../stylesheets/media_queries.scss";
 
 .subscriptions-page {
-  @include page;
+  @include  page;
+  @include card;
 
-  .subscriptions-header {
+  .divider {
+    height: 5px;
   }
+
   .subscriptions-container {
-    margin-top: 15px;
+    background-color: white;
   }
-
 
 }
 

@@ -1,47 +1,80 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Subscriptions.scss";
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import ReactTable from "react-table";
-import "react-table/react-table.css"
 import {renderDate} from "../utils/Lookups";
 import {requestSubscriptionData} from "../utils/SubscriptionData";
 import {stop} from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
 
+import "./Subscriptions.scss";
+import "./TableStyle.scss";
 
-export default class Subscriptions extends React.PureComponent {
+
+const urlPropsQueryConfig = {
+    page: { type: UrlQueryParamTypes.number },
+    pageSize: { type: UrlQueryParamTypes.number },
+    sorted: { type: UrlQueryParamTypes.array },
+    filtered: { type: UrlQueryParamTypes.array },
+};
+
+
+class Subscriptions extends React.PureComponent {
 
     constructor(props) {
         super(props);
-
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
             subscriptions: [],
             loading: true,
-            pages: 0,
+            pages: 99,
+            sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
+            filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : []
         };
-        this.fetchData = this.fetchData.bind(this);
-    }
+    };
 
-    fetchData(state, instance) {
-        // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
-        // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
+    fetchData = (state, instance) => {
         this.setState({ loading: true });
-        // Request the data however you want.  Here, we'll use our mocked service we created earlier
         requestSubscriptionData(
             state.pageSize,
             state.page,
             state.sorted,
             state.filtered
         ).then(res => {
-            // Now just get the rows of data to your React Table (and update anything else like total pages or loading)
             this.setState({
                 subscriptions: res.rows,
                 pages: res.pages,
                 loading: false
             });
         });
-    }
+    };
+
+    updateSorted = (newSorted) => {
+        // console.log(newSorted)
+        this.setState({
+            sorted: newSorted
+        });
+        const newSort = newSorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`})
+        this.props.onChangeSorted(newSort)
+    };
+
+    updateFiltered = (newFiltered) => {
+        this.setState({
+            filtered: newFiltered
+        });
+        const newFilter = newFiltered.map(item => {return `${item.id},${item.value}`})
+        this.props.onChangeFiltered(newFilter)
+    };
+
+
+    handleKeyDown(e) {
+        if (e.keyCode === 38 && this.props.page && this.props.page !== 0) {
+            this.props.onChangePage(this.props.page-1)
+        } else if (e.keyCode === 40) {
+            this.props.onChangePage(this.props.page+1)
+        }
+    };
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
@@ -52,27 +85,28 @@ export default class Subscriptions extends React.PureComponent {
         this.props.history.push("/old-subscriptions/");
     };
 
-
     render() {
-        const {pages, subscriptions} = this.state;
+        const {pages, subscriptions, sorted, filtered} = this.state;
+        const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
-            <div className="subscriptions-page">
-                <MessageBox messageHeader="Subscriptions"
-                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and hold shift to sort on multiple columns."
-                            handleClick={this.navigateToOldSubscriptions}
-                            linkName="use old page"
-                />
+            <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
+                <div class="divider"></div>
                 <div className="subscriptions-container">
-
+                    {/*<div>*/}
+                        {/*page: {this.props.page}<br/>*/}
+                        {/*filtered: {this.props.filtered}<br/>*/}
+                        {/*sorted: {this.state.sorted ? this.state.sorted.join(",") : ""}<br/>*/}
+                    {/*</div>*/}
                     <ReactTable
                         columns={[
                             {
                                 Header: "Id",
                                 id: "subscription_id",
-                                accessor: d => <a href={`/subscription/${d.subscription_id}`} onClick={this.showSubscriptionDetail(d.subscription_id)}>
-                                    {d.subscription_id.slice(0,8)}
-                                </a>,
+                                accessor: d => <a href={`/subscription/${d.subscription_id}`}
+                                                  onClick={this.showSubscriptionDetail(d.subscription_id)}>
+                                                {d.subscription_id.slice(0,8)}
+                                               </a>,
                                 width: 100
                             },
                             {
@@ -114,16 +148,33 @@ export default class Subscriptions extends React.PureComponent {
                         onFetchData={this.fetchData} // Request new data when things change
                         filterable
                         resizable={false} // Causes bugs when enabled with description columnn
-                        defaultSorted={[{
-                            id   : "start_date",
-                            desc : true,
-                        }]}
                         defaultPageSize={25}
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
+
+                        // Controlled props
+                        page={page}
+                        pageSize={pageSize}
+                        sorted={sorted}
+                        filtered={filtered}
+
+                        // Call back heaven:
+                        onPageChange={page => onChangePage(page)}
+                        onPageSizeChange={(pageSize, pageIndex) => {
+                            onChangePageSize(pageSize);
+                            onChangePage(pageIndex);
+                        }}
+                        onSortedChange={this.updateSorted}
+                        onFilteredChange={this.updateFiltered}
                     />
                     </div>
+                <MessageBox messageHeader="Info"
+                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
+                            hold shift to sort on multiple columns. When an input has focus you can use UP/DOWN arrow to paginate "
+                            handleClick={this.navigateToOldSubscriptions}
+                            linkName="use old page"
+                />
                 </div>
         );
     }
@@ -132,4 +183,18 @@ export default class Subscriptions extends React.PureComponent {
 Subscriptions.propTypes = {
     history: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
+
+    // Mapped to URL query parameters
+    page: PropTypes.number,
+    filtered: PropTypes.array,
+    sorted: PropTypes.array,
+    pageSize: PropTypes.number,
+
+    // Functions to change URL query paramaters
+    onChangePage: PropTypes.func,
+    onChangeFiltered: PropTypes.func,
+    onChangeSorted: PropTypes.func,
+    onChangePageSize: PropTypes.func,
 };
+
+export default addUrlProps({ urlPropsQueryConfig })(Subscriptions)

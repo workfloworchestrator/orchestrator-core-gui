@@ -253,24 +253,29 @@ export default class NewProcess extends React.Component {
     }
 
     changeModifySubscription = products => option => {
+        const modifyWorkflowsThatCanAlwaysRun = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
         const subscriptionSelected = option && option.value;
         const {subscriptions} = this.state;
 
         let workflows;
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
+            if (subscription.status === "migrating") {
+                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && modifyWorkflowsThatCanAlwaysRun.includes(wf.name));
+            }
+            else {
+                this.setState({notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations")})
+                subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
                     this.setState({notModifiableMessage: maybeModifiedMessage(subscription, relation_info)});
-                }
-            );
-            workflows = products.find(prod => prod.product_id === subscription.product_id)
-                .workflows.filter(wf => wf.target === TARGET_MODIFY);
+                });
+                workflows = products.find(prod => prod.product_id === subscription.product_id).workflows.filter(wf => wf.target === TARGET_MODIFY && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name));
+            }
+
         } else {
             workflows = []
         }
         this.setState({
             modifySubscription: option ? option.value : undefined,
-            notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
             modifyWorkflows: workflows,
             modifyWorkflow: workflows.length === 1 ? workflows[0].name : this.state.modifyWorkflow
         });
@@ -302,10 +307,10 @@ export default class NewProcess extends React.Component {
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.modify_subscription")}</h3>
-		<section className="form-divider">
+                <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
-                        subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node"))}
+                        subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node") || sub.status === "migrating")}
                         subscription={modifySubscription}
                         onChange={this.changeModifySubscription(products)}
                         organisation={organisationName}

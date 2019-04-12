@@ -71,8 +71,9 @@ export function doValidateUserInput(userInput, val, errors) {
         }
     } else if (type === "label" || type === "ims_changes" ) {
         errors[name] = false;
-    }
-    else {
+    } else if (type === "jira_ticket") {
+        errors[name] = !/^[A-Z]{4}-[0-9]{4,10}$/i.test(value)
+    } else {
         errors[name] = userInput.required === false ? false : isEmpty(value);
     }
 }
