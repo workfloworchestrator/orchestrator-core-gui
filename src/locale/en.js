@@ -523,8 +523,8 @@ I18n.translations.en = {
         confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
-        sap_migration_summary: "Summary of migration changes",
-        sap_migration_summary_info: "Please check the summary for any inconsistencies"
+        sap_migration_summary: "Summary of old SAP",
+        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed"
     },
     process_state: {
         copy: "Copy to clipboard",
