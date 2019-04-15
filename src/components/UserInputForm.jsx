@@ -580,7 +580,7 @@ export default class UserInputForm extends React.Component {
             case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             case "numeric":
-                if (userInput.state_key_for_maximum !== ''){
+                if (userInput.state_key_for_maximum !== '') {
                     userInput.maximum = lookupValueFromNestedState(userInput.state_key_for_maximum, currentState);
                 }
                 return <NumericInput onChange={this.changeNumericInput(name)}
@@ -593,7 +593,7 @@ export default class UserInputForm extends React.Component {
                                      readOnly={userInput.readonly || false}/>;
             case "table_summary":
             case "migration_summary":
-                return <TableSummary data={userInput.data}/>
+                return <TableSummary data={userInput.data}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
