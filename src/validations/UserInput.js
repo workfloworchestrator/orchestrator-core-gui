@@ -69,7 +69,7 @@ export function doValidateUserInput(userInput, val, errors) {
             const localpart = value.replace(ogf_network, '').replace(label);
             errors[name] = !(ogf_network.test(value) && localpart.includes(":") && label.test(value));
         }
-    } else if (type === "label" || type === "ims_changes" ) {
+    } else if (type === "label" || type === "ims_changes" || type === "table_summary" || type === "migration_summary" ) {
         errors[name] = false;
     } else if (type === "jira_ticket") {
         errors[name] = !/^[A-Z]{4}-[0-9]{4,10}$/i.test(value)
