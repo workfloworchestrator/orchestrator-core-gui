@@ -9,7 +9,17 @@ import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSe
 import "../pages/App.scss"
 import "./storybook.scss"
 import GenericSelect from "../components/GenericSelect";
+import TableSummary from "../components/TableSummary";
 // import UserInputWrapper from "./UserInputWrapper";
+
+const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
+const tabbleSummaryData = [
+    {label: 'Label 1', value: 'Short value'},
+    {label: "Label numero dos", value: "A slightly longer value"},
+    ];
+
+
+
 
 storiesOf('Welcome', module).add('to Storybook', () =>
     <div>
@@ -20,7 +30,6 @@ storiesOf('Welcome', module).add('to Storybook', () =>
             the client normally uses, as detailed in the README.md.</p>
     </div>
 )
-
 
 storiesOf('SubscriptionProductTagSelect', module)
     .add('Only tags', () =>
@@ -50,7 +59,18 @@ storiesOf('GenericSelect', module)
             debugger;
             this.selected=e.value;
             e;
-        }} choices={['SAP 1', 'SAP 2', 'SAP 3']}/>);
+        }} choices={genericSelectChoices}/>);
+
+
+storiesOf('TableSummary', module)
+    .add('Default', () =>
+        <TableSummary onChange={(e) => {
+            action('clicked');
+            debugger;
+            this.selected=e.value;
+            e;
+        }} data={tabbleSummaryData}/>);
+
 
 // storiesOf('Wrapper', module)
 //     .add('Blaat', () =>
