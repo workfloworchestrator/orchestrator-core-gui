@@ -8,7 +8,7 @@ import "./Prefixes.scss";
 import {freeSubnets, prefix_filters, prefixSubscriptionsByRootPrefix} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
-
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class Prefixes extends React.PureComponent {
 
@@ -324,6 +324,7 @@ export default class Prefixes extends React.PureComponent {
     </tbody>
         </table>
      </section>
+     <ScrollUpButton />
   </div>
     };
 };

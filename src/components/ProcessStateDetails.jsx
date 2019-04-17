@@ -9,6 +9,7 @@ import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
