@@ -363,6 +363,8 @@ I18n.translations.en = {
         confirm_corelink_info: "Please design the physical layer of the Corelink in IMS. When you are done, please submit the form.",
         confirm_corelink_working: "Is the Corelink working?",
         confirm_corelink_working_info: "Please confirm that the corelink is working correctly",
+        corelink_service_speed: "Please choose the corelink speed",
+        corelink_service_speed_info: "This will restrict the interface choices to the correct values",
         plan_dont_allocate: "Set state to planned",
         plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
         ims_port_id_1: "First node and port",
