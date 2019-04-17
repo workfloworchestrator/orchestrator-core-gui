@@ -91,6 +91,9 @@
       &.Failed {
         background-color: $light-red;
       }
+      &.Subnet {
+        background-color: $light-grey;
+      }
     }
     thead {
       th {

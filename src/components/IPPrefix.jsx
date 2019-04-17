@@ -26,7 +26,8 @@ export default class IPPrefix extends React.PureComponent {
                 state: [
                     ipamStates.indexOf("Free"),
                     ipamStates.indexOf("Allocated"),
-                    ipamStates.indexOf("Planned")
+                    ipamStates.indexOf("Planned"),
+                    ipamStates.indexOf("Subnet")
                 ],
                 prefix: {'id': 0}
             },

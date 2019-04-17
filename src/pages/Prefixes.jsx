@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import {isEmpty, stop, isValidUUIDv4} from "../utils/Utils";
 
 import "./Prefixes.scss";
-import {freeSubnets, prefix_filters, prefixSubscriptionsByRootPrefix} from "../api";
+import {freeSubnets, prefix_filters, prefixSubscriptions} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
 
@@ -35,16 +35,27 @@ export default class Prefixes extends React.PureComponent {
   };
 
   componentDidMount(){
-    this.setState({})
-    prefix_filters()
+      this.setState({});
+      const {organisations} = this.props;
+      prefixSubscriptions().then(
+          result => {
+              this.setState({prefixes: result.map(prefix => {
+                  const {customer_id, start_date, subscription_id} = prefix;
+                  const organisation = customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
+                  const subscription = subscription_id === undefined ? "Missing": subscription_id;
+                  return {...prefix, customer: organisation, start_date_as_str: renderDate(start_date), subscription_id: subscription};
+              })})
+          });
+      prefix_filters()
       .then(result => {
           const prefixFilters = result.map((p, idx) => ({name: p.prefix, selected: (idx === 0), count: 0}));
           const currentFilterAttributes = this.state.filterAttributes;
-          const modifiedAttributes = {rootPrefix: prefixFilters}
+          const modifiedAttributes = {rootPrefix: prefixFilters};
           this.setState({rootPrefixes: result, filterAttributes: {...currentFilterAttributes, ...modifiedAttributes}});
           this.getFreePrefixes(result);
-          this.getPrefixSubscriptions(result);
+
       });
+
    };
 
   componentDidUpdate(prevProps, prevState) {
@@ -53,21 +64,22 @@ export default class Prefixes extends React.PureComponent {
       }
   };
 
-   getPrefixSubscriptions = roots => {
-      const {organisations} = this.props;
-      return roots.map(p =>
-          prefixSubscriptionsByRootPrefix(p.id)
-          .then(result => result.map(prefix => {
-              const {customer_id, start_date, subscription_id} = prefix;
-              const organisation = customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
-              const subscription = subscription_id === undefined ? "Missing": subscription_id;
-              return {...prefix, customer: organisation, start_date_as_str: renderDate(start_date), subscription_id: subscription};
-          }))
-            .then(result => {
-                this.setState(prevState => ({prefixes: prevState.prefixes.concat(result)}))
-            })
-      )
-  };
+   getPrefixSubscriptions = () => {
+       const {organisations} = this.props;
+       const promise = prefixSubscriptions();
+       promise.then(result =>
+       {
+           this.setState({prefixes: result})
+       });
+   }
+      //result.map(prefix => {
+       // const {customer_id, start_date, subscription_id} = prefix;
+       // const organisation = customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
+        //const subscription = subscription_id === undefined ? "Missing": subscription_id;
+        //return {...prefix, customer: organisation, start_date_as_str: renderDate(start_date), subscription_id: subscription} };
+   //}
+
+
 
   getFreePrefixes = roots => {
         const now = Math.floor(Date.now() / 1000);
