@@ -75,7 +75,7 @@ export default class NodePortSelect extends React.PureComponent {
                             options={ports
                                 .map(aPort => ({
                                     value: aPort.id,
-                                    label: `${aPort.port} (${imsStates[aPort.status]})`,
+                                    label: `${aPort.port} (${imsStates[aPort.status]}) (${aPort.iface_type})`,
                                 }))
                                 .sort((x, y) => x.label.localeCompare(y.label))
                             }
