@@ -560,9 +560,9 @@ export default class UserInputForm extends React.Component {
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
-                const corelinkInterfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
-                                       interfaceType={corelinkInterfaceType}
+                                       interfaceType={corelinkInterfaceSpeed}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated')}
                                        port={value}/>;
             case "corelink_add_link":
