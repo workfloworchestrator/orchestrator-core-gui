@@ -94,11 +94,6 @@ class Subscriptions extends React.PureComponent {
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
                 <div class="divider"></div>
                 <div className="subscriptions-container">
-                    {/*<div>*/}
-                        {/*page: {this.props.page}<br/>*/}
-                        {/*filtered: {this.props.filtered}<br/>*/}
-                        {/*sorted: {this.state.sorted ? this.state.sorted.join(",") : ""}<br/>*/}
-                    {/*</div>*/}
                     <ReactTable
                         columns={[
                             {

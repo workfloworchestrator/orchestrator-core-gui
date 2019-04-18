@@ -15,11 +15,30 @@ import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
 
-const urlPropsQueryConfig = {
-    collapsed: { type: UrlQueryParamTypes.array },
-};
+
+/**
+ * Map from url query params to props. The values in `url` will still be encoded
+ * as strings since we did not pass a `urlPropsQueryConfig` to addUrlProps.
+ */
+function mapUrlToProps(url, props) {
+    return {
+        collapsed: url.collapsed ? decode(UrlQueryParamTypes.string, url.collapsed).split(",").map(item => parseInt(item)) : [],
+        scrollToLastExecuted: decode(UrlQueryParamTypes.boolean, url.scrollToLastExecuted),
+    };
+}
+
+/**
+ * Manually specify how to deal with changes to URL query param props.
+ * We do this since we are not using a urlPropsQueryConfig and have specific contents in the array.
+ */
+function mapUrlChangeHandlersToProps(props) {
+    return {
+        onChangeCollapsed: (value) => replaceInUrlQuery('collapsed', encode(UrlQueryParamTypes.number, value)),
+        onChangeScrollToLastExecuted: (value) => replaceInUrlQuery('scrollToLastExecuted', encode(UrlQueryParamTypes.boolean, value)),
+    }
+}
 
 
 class ProcessDetail extends React.PureComponent {
@@ -136,6 +155,25 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
+    handleCollapse = step => {
+        let {collapsed} = this.props;
+        if (collapsed.includes(step)) {
+            this.props.onChangeCollapsed(collapsed.filter(item => item !== step))
+        }
+        else {
+            collapsed.push(step);
+            this.props.onChangeCollapsed(collapsed)
+        }
+    };
+
+    handleCollapseAll = () => {
+        this.props.onChangeCollapsed(this.state.process.steps.map((i,index) => index));
+    };
+
+    handleExpandAll = () => {
+        this.props.onChangeCollapsed([]);
+    };
+
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
     confirmation = (question, action) => this.setState({
@@ -156,6 +194,8 @@ class ProcessDetail extends React.PureComponent {
                                                onClick={option.action}>
                 {I18n.t(`processes.${option.label}`)}
             </button>)}
+            <button className="button" onClick={this.handleCollapseAll}>Collapse</button>
+            <button className="button" onClick={this.handleExpandAll}>Expand</button>
         </section>
     };
 
@@ -192,7 +232,13 @@ class ProcessDetail extends React.PureComponent {
         if (selectedTab === "process") {
             return <section className="card">
                 {this.renderActions(process)}
-                <ProcessStateDetails process={process} subscriptionProcesses={subscriptionProcesses} collapsed={this.props.collapsed}/>
+                <ProcessStateDetails
+                    process={process}
+                    subscriptionProcesses={subscriptionProcesses}
+                    collapsed={this.props.collapsed}
+                    onChangeCollapsed={this.handleCollapse}
+                    scrollToLastExecuted={this.props.scrollToLastExecuted}
+                />
             </section>;
         } else {
             return <section className="card">
@@ -257,8 +303,16 @@ ProcessDetail.propTypes = {
     products: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
 
-    onChangeCollapsed: PropTypes.func,  // when provided you can toggle collapse state of steps
-    collapsed: PropTypes.array
+    // URL query controlled
+    scrollToLastExecuted: PropTypes.bool,
+    onChangeScrollToLastExecuted: PropTypes.func,
+    collapsed: PropTypes.array,
+    onChangeCollapsed: PropTypes.func,
 };
 
-export default addUrlProps({urlPropsQueryConfig})(ProcessDetail)
+ProcessDetail.defaultProps = {
+    collapsed: [],
+    scrollToLastExecuted: false,
+};
+
+export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(ProcessDetail)

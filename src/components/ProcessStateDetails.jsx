@@ -149,46 +149,36 @@ class ProcessStateDetails extends React.PureComponent {
             return null;
         }
         const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
+        const stepIsCollapsed = this.props.collapsed.includes(index);
+
         return (
             <section className="state-changes">
                 <section className="state-divider">
                     <i className={iconName}></i>
                 </section>
-                {!this.props.collapsed.includes(index) &&
-                    <section className="state-delta" onClick={() => this.toggleStep(index)}>
-                        <table>
-                            <tbody>
-                            {Object.keys(json).map((key, index) =>
-                                <tr key={key}>
-                                    <td className="key">{key}</td>
-                                    <td className="value">{this.displayStateValue(json[key])}</td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </table>
-                    </section>
-                }
-                {this.props.collapsed.includes(index) &&
-                <section className="state-delta-collapsed">
-                </section>
-                }
 
+                <section className={ stepIsCollapsed ? "state-delta-collapsed" : "state-delta"} onClick={() => this.toggleStep(index)}>
+                    <table>
+                        <tbody>
+                        {Object.keys(json).map((key, index) =>
+                            <tr key={key}>
+                                <td className="key">{key}</td>
+                                <td className="value">{this.displayStateValue(json[key])}</td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </section>
 
             </section>);
     };
 
     toggleStep = (step) => {
-        let {collapsed} = this.state;
-        console.log(`Toggling step: ${step}`)
-        if (collapsed.includes(step)) {
-            collapsed = []
+        if (this.props.onChangeCollapsed) {
+            // console.log(`Calling provided prop function with step: ${step}`)
+            this.props.onChangeCollapsed(step);
         }
-        else {
-            collapsed.push(step);
-            console.log(collapsed);
-        }
-        this.setState({collapsed: collapsed})
-    }
+    };
 
 
     renderProcessOverview = (process, details, stateChanges) => {
@@ -229,6 +219,7 @@ class ProcessStateDetails extends React.PureComponent {
     render() {
         const {process, subscriptionProcesses} = this.props;
         const {raw, details, stateChanges} = this.state;
+        console.log(this.props.collapsed)
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
             {this.renderProcessSubscriptionLink(subscriptionProcesses)}
@@ -241,6 +232,9 @@ class ProcessStateDetails extends React.PureComponent {
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
     subscriptionProcesses: PropTypes.array.isRequired,
+    collapsed: PropTypes.array,
+    onChangeCollapsed: PropTypes.func,  // when provided it will toggle the collapse functionality
+    scrollToLastExecuted: PropTypes.bool.isRequired,
 };
 
 ProcessStateDetails.defaultProps = {
