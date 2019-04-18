@@ -227,8 +227,6 @@ I18n.translations.en = {
         crm_port_id_2_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
-        dienstafname: "Dienstafname",
-        dienstafname_info: "The dienstafname of the service - must be valid GUID like 6769d05f-3b11-e511-80d0-005056956c1a",
         ieee_interface_type_select: "First select a product type...",
         ims_port_id: "IMS port id",
         ims_port_id_info: "The IMS port id",
@@ -579,16 +577,12 @@ I18n.translations.en = {
         tabs: {
             subscriptions: "Subscriptions",
             workflows: "Workflows",
-            dienstafnames: "Dienstafnames",
             fixedInputs: "Fixed Inputs",
             productWorkflows: "Product ⟺ Workflows"
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
         no_fixed_inputs: "There are no products that are either missing required fixed inputs, have incorrect values or have unknown fixed inputs",
-        no_dienstafnames: "No mismatches in dienstafname vs. subscriptions tables",
-        dienstafname_matches: "Dienstafnames not present in Subscriptions table",
-        subscription_matches: "Subscriptions not present in Dienstafname table",
         fetchingCRMData: "Loading CRM data. Hang on tight...",
         fixedInput: {
             title: "Invalid FixedInput settings for product {{name}}",
@@ -807,16 +801,6 @@ I18n.translations.en = {
         submit: "Terminate",
         subscription_childs: "Child subscriptions - ports used in {{product}}"
     },
-    dienstafname: {
-        dienst: "Dienst",
-        dienstafname: "Dienstafname",
-        subscription: "Subscription",
-        statuscode: "Status",
-        dienstcode: "Dienstcode",
-        organisatiecode: "Code",
-        organisatienaam: "Organisation",
-        description: "Description"
-    },
     contact_persons: {
         email: "Email",
         name: "Name",
@@ -892,8 +876,6 @@ I18n.translations.en = {
             product_type_info: "The Type of this Product",
             status: "Status",
             status_info: "The status of this Product. This is currently not used",
-            has_dienstafname: "Has dienstafname",
-            has_dienstafname_info: "When this boolean is set the product must have a dienstafname in the CRM",
             create_subscription_workflow_key: "Create Workflow",
             create_subscription_workflow_key_info: "The unique reference to the workflow responsible for the creation of a subscription based on this product",
             modify_subscription_workflow_key: "Modify Workflows",

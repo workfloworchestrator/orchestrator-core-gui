@@ -77,7 +77,7 @@ export default class Products extends React.Component {
     doSearchAndSort = (query, products, sorted, filterAttributesTag, filterAttributesType) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["name", "description", "tag", "product_type", "status", "has_dienstafname,", "product_blocks_string",
+            const searchable = ["name", "description", "tag", "product_type", "status", "product_blocks_string",
                 "create_subscription_workflow_key,", "modify_subscription_workflow_key,", "terminate_subscription_workflow_key"];
             products = products.filter(p =>
                 searchable
