@@ -219,7 +219,6 @@ class ProcessStateDetails extends React.PureComponent {
     render() {
         const {process, subscriptionProcesses} = this.props;
         const {raw, details, stateChanges} = this.state;
-        console.log(this.props.collapsed)
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
             {this.renderProcessSubscriptionLink(subscriptionProcesses)}
