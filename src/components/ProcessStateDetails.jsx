@@ -20,6 +20,7 @@ export default class ProcessStateDetails extends React.PureComponent {
         super(props);
         this.state = {
             raw: false,
+            collapsed: [],
             details: true,
             stateChanges: true,
             copiedToClipboard: false
@@ -154,20 +155,32 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="state-divider">
                     <i className={iconName}></i>
                 </section>
-                <section className="state-delta">
-                    <table>
-                        <tbody>
-                        {Object.keys(json).map((key, index) =>
-                            <tr key={key}>
-                                <td className="key">{key}</td>
-                                <td className="value">{this.displayStateValue(json[key])}</td>
-                            </tr>
-                        )}
-                        </tbody>
-                    </table>
+                {!this.state.collapsed.includes(index) &&
+                    <section className="state-delta" onClick={this.collapseStep}>
+                        <table>
+                            <tbody>
+                            {Object.keys(json).map((key, index) =>
+                                <tr key={key}>
+                                    <td className="key">{key}</td>
+                                    <td className="value">{this.displayStateValue(json[key])}</td>
+                                </tr>
+                            )}
+                            </tbody>
+                        </table>
+                    </section>
+                }
+                {this.state.collapsed.includes(index) &&
+                <section className="state-delta-collapsed">
                 </section>
+                }
+
+
             </section>);
     };
+
+    collapseStep = (step) => {
+        console.log("Step clicked " + step)
+    }
 
 
     renderProcessOverview = (process, details, stateChanges) => {
@@ -219,6 +232,11 @@ export default class ProcessStateDetails extends React.PureComponent {
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
+    collapsed: PropTypes.array,
     subscriptionProcesses: PropTypes.array.isRequired
 };
+
+ProcessStateDetails.defaultPropTypes = {
+    collapsed: []
+}
 

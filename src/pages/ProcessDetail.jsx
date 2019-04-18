@@ -14,7 +14,8 @@ import {abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcess
 import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
-import ScrollUpButton from "react-scroll-up-button"; //Add this line Here
+import ScrollUpButton from "react-scroll-up-button";
+
 
 export default class ProcessDetail extends React.PureComponent {
 
@@ -22,7 +23,6 @@ export default class ProcessDetail extends React.PureComponent {
         super(props);
         this.state = {
             process: {steps: []},
-            collapsed: [],
             notFound: false,
             tabs: ["user_input", "process"],
             selectedTab: "process",

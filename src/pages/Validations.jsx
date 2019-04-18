@@ -21,6 +21,7 @@ import SubscriptionValidation from "../components/SubscriptionValidation";
 import DienstafnameValidation from "../components/DienstafnameValidation";
 import FixedInputProductValidation from "../components/FixedInputProductValidation";
 import ProductWorkflowsValidation from "../components/ProductWorkflowsValidation";
+import ScrollUpButton from "react-scroll-up-button";
 
 
 export default class Validations extends React.Component {
@@ -224,6 +225,7 @@ export default class Validations extends React.Component {
                 {this.renderTabContent(validations, hideValid, hideValidSubscriptionTypes, selectedTab, validationsToShow,
                     invalidSubscriptions, fixedInputs, dienstafnameSubscriptionMatches, loadedCRM, products, workflowCodeImplementations,
                     workflows)}
+                <ScrollUpButton />
             </div>
         );
     }
