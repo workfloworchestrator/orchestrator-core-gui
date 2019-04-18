@@ -15,9 +15,14 @@ import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+
+const urlPropsQueryConfig = {
+    collapsed: { type: UrlQueryParamTypes.array },
+};
 
 
-export default class ProcessDetail extends React.PureComponent {
+class ProcessDetail extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -187,7 +192,7 @@ export default class ProcessDetail extends React.PureComponent {
         if (selectedTab === "process") {
             return <section className="card">
                 {this.renderActions(process)}
-                <ProcessStateDetails process={process} subscriptionProcesses={subscriptionProcesses}/>
+                <ProcessStateDetails process={process} subscriptionProcesses={subscriptionProcesses} collapsed={this.props.collapsed}/>
             </section>;
         } else {
             return <section className="card">
@@ -250,5 +255,10 @@ ProcessDetail.propTypes = {
     configuration: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired
+    locationCodes: PropTypes.array.isRequired,
+
+    onChangeCollapsed: PropTypes.func,  // when provided you can toggle collapse state of steps
+    collapsed: PropTypes.array
 };
+
+export default addUrlProps({urlPropsQueryConfig})(ProcessDetail)

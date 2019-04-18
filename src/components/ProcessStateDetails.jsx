@@ -9,18 +9,17 @@ import Step from "./Step";
 import {capitalize, renderDateTime} from "../utils/Lookups";
 import {isEmpty} from "../utils/Utils";
 import {NavLink} from "react-router-dom";
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
 
-export default class ProcessStateDetails extends React.PureComponent {
+
+class ProcessStateDetails extends React.PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
             raw: false,
-            collapsed: [],
             details: true,
             stateChanges: true,
             copiedToClipboard: false
@@ -155,8 +154,8 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="state-divider">
                     <i className={iconName}></i>
                 </section>
-                {!this.state.collapsed.includes(index) &&
-                    <section className="state-delta" onClick={this.collapseStep}>
+                {!this.props.collapsed.includes(index) &&
+                    <section className="state-delta" onClick={() => this.toggleStep(index)}>
                         <table>
                             <tbody>
                             {Object.keys(json).map((key, index) =>
@@ -169,7 +168,7 @@ export default class ProcessStateDetails extends React.PureComponent {
                         </table>
                     </section>
                 }
-                {this.state.collapsed.includes(index) &&
+                {this.props.collapsed.includes(index) &&
                 <section className="state-delta-collapsed">
                 </section>
                 }
@@ -178,8 +177,17 @@ export default class ProcessStateDetails extends React.PureComponent {
             </section>);
     };
 
-    collapseStep = (step) => {
-        console.log("Step clicked " + step)
+    toggleStep = (step) => {
+        let {collapsed} = this.state;
+        console.log(`Toggling step: ${step}`)
+        if (collapsed.includes(step)) {
+            collapsed = []
+        }
+        else {
+            collapsed.push(step);
+            console.log(collapsed);
+        }
+        this.setState({collapsed: collapsed})
     }
 
 
@@ -232,11 +240,11 @@ export default class ProcessStateDetails extends React.PureComponent {
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
-    collapsed: PropTypes.array,
-    subscriptionProcesses: PropTypes.array.isRequired
+    subscriptionProcesses: PropTypes.array.isRequired,
 };
 
-ProcessStateDetails.defaultPropTypes = {
+ProcessStateDetails.defaultProps = {
     collapsed: []
-}
+};
 
+export default ProcessStateDetails
