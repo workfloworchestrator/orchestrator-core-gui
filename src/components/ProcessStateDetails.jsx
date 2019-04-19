@@ -200,7 +200,7 @@ class ProcessStateDetails extends React.PureComponent {
                 <section className="steps">
                     {process.steps.map((step, index) => {
                         return (
-                            <div key={index} className="details-container">
+                            <div key={index} id={`step-index-${index}`} className="details-container">
                                 <div className="step-container">
                                     <Step step={step}/>
                                     {!last(index) && <section className="step-divider">
@@ -233,7 +233,6 @@ ProcessStateDetails.propTypes = {
     subscriptionProcesses: PropTypes.array.isRequired,
     collapsed: PropTypes.array,
     onChangeCollapsed: PropTypes.func,  // when provided it will toggle the collapse functionality
-    scrollToLastExecuted: PropTypes.bool.isRequired,
 };
 
 ProcessStateDetails.defaultProps = {

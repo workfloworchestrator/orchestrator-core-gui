@@ -25,18 +25,18 @@ import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } fr
 function mapUrlToProps(url, props) {
     return {
         collapsed: url.collapsed ? decode(UrlQueryParamTypes.string, url.collapsed).split(",").map(item => parseInt(item)) : [],
-        scrollToLastExecuted: decode(UrlQueryParamTypes.boolean, url.scrollToLastExecuted),
+        scrollToStep: decode(UrlQueryParamTypes.number, url.scrollToStep),
     };
 }
 
 /**
  * Manually specify how to deal with changes to URL query param props.
- * We do this since we are not using a urlPropsQueryConfig and have specific contents in the array.
+ * We do this since we are not using a urlPropsQueryConfig and have specific contents in the `collapsed` array.
  */
 function mapUrlChangeHandlersToProps(props) {
     return {
         onChangeCollapsed: (value) => replaceInUrlQuery('collapsed', encode(UrlQueryParamTypes.number, value)),
-        onChangeScrollToLastExecuted: (value) => replaceInUrlQuery('scrollToLastExecuted', encode(UrlQueryParamTypes.boolean, value)),
+        onChangeScrollToStep: (value) => replaceInUrlQuery('scrollToStep', encode(UrlQueryParamTypes.number, value)),
     }
 }
 
@@ -63,7 +63,7 @@ class ProcessDetail extends React.PureComponent {
         };
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         process(this.props.match.params.id)
             .then(processInstance => {
                 /**
@@ -174,6 +174,11 @@ class ProcessDetail extends React.PureComponent {
         this.props.onChangeCollapsed([]);
     };
 
+    handleScrollTo = (step) => {
+        document.getElementById(`step-index-${step}`).scrollIntoView();
+        this.props.onChangeScrollToStep(step)
+    };
+
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
     confirmation = (question, action) => this.setState({
@@ -189,6 +194,9 @@ class ProcessDetail extends React.PureComponent {
         const options = actionOptions(process, () => false, this.handleRetryProcess(process),
             this.handleDeleteProcess(process), this.handleAbortProcess(process))
             .filter(option => option.label !== "user_input" && option.label !== "details" && option.label !== "delete");
+
+        const lastStepIndex = process.steps.findIndex(item => item.name === process.step)
+
         return <section className="process-actions">
             {options.map((option, index) => <button key={index} className={`button ${option.danger ? " red" : " blue"}`}
                                                onClick={option.action}>
@@ -196,6 +204,7 @@ class ProcessDetail extends React.PureComponent {
             </button>)}
             <button className="button" onClick={this.handleCollapseAll}>Collapse</button>
             <button className="button" onClick={this.handleExpandAll}>Expand</button>
+            <button className="button" onClick={() => this.handleScrollTo(lastStepIndex)}>Scroll to Last</button>
         </section>
     };
 
@@ -237,7 +246,7 @@ class ProcessDetail extends React.PureComponent {
                     subscriptionProcesses={subscriptionProcesses}
                     collapsed={this.props.collapsed}
                     onChangeCollapsed={this.handleCollapse}
-                    scrollToLastExecuted={this.props.scrollToLastExecuted}
+                    scrollToStep={this.props.scrollToStep}
                 />
             </section>;
         } else {
@@ -304,15 +313,15 @@ ProcessDetail.propTypes = {
     locationCodes: PropTypes.array.isRequired,
 
     // URL query controlled
-    scrollToLastExecuted: PropTypes.bool,
-    onChangeScrollToLastExecuted: PropTypes.func,
+    scrollToStep: PropTypes.number,
+    onChangeScrollToStep: PropTypes.func,
     collapsed: PropTypes.array,
     onChangeCollapsed: PropTypes.func,
 };
 
 ProcessDetail.defaultProps = {
     collapsed: [],
-    scrollToLastExecuted: false,
+    scrollToStep: 0,
 };
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(ProcessDetail)
