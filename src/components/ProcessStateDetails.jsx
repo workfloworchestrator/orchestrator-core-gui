@@ -82,7 +82,6 @@ class ProcessStateDetails extends React.PureComponent {
 
     renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
-
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
@@ -179,7 +178,6 @@ class ProcessStateDetails extends React.PureComponent {
             this.props.onChangeCollapsed(step);
         }
     };
-
 
     renderProcessOverview = (process, details, stateChanges) => {
         const last = i => i === process.steps.length - 1;
