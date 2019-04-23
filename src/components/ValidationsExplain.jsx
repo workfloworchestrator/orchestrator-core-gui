@@ -30,11 +30,6 @@ export default class ValidationsExplain extends React.PureComponent {
             to the product definition.</p>
     </section>;
 
-    explanationDienstafnames = () => <section className="explanation">
-        <h3>Explanation</h3>
-        <p>Dienstafnames are registered in de CRM. Workflow processes resulting in new subscriptions store the Dienstafname reference in the subscription.</p>
-    </section>;
-
     explanationFixedInputs = () => <section className="explanation">
         <h3>Explanation</h3>
         <p><span className="code">FixedInputs</span> are fixed product characteristics and the allowed
@@ -65,14 +60,6 @@ export default class ValidationsExplain extends React.PureComponent {
             of the Workflow linked to the product of the Subscription. Each invalid Subscription - due to lacking <span
                 className="code">subscription_instance_values </span>
             - is listed per workflow.</p>
-    </section>;
-
-    detailsDienstafnames = () => <section className="details">
-        <h3>Details</h3>
-        <p>Every subscription in the workflows database should have a corresponding CRM dienstafname. The column <span className="code">SUBSCRIPTION </span>
-            in the Dienstafnames table is the <span className="code">nw_subscription_uuid</span> in the CRM database. For most dienstafnames this is
-            <span className="code">null</span>.
-        </p>
     </section>;
 
     detailsProductWorkflows = () => <section className="details">
@@ -118,10 +105,10 @@ export default class ValidationsExplain extends React.PureComponent {
     }
 
     render() {
-        const {close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs, isProductWorkflows} = this.props;
+        const {close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs} = this.props;
         const className = isVisible ? "" : "hide";
         const title = isWorkFlows ? "Product / Workflow Validations" : isSubscriptions ? "Subscription Validations" :
-            isFixedInputs ? "Products / FixedInputs" : isProductWorkflows ? "Products / Workflows" : "Dienstafname / Subscription cross-check";
+            isFixedInputs ? "Products / FixedInputs" : "Products / Workflows";
         return (
             <div className={`validation-explain ${className}`}
                  tabIndex="1" onBlur={close} ref={ref => this.main = ref}>
@@ -133,9 +120,9 @@ export default class ValidationsExplain extends React.PureComponent {
                         </button>
                     </section>
                     {isWorkFlows ? this.explanation() : isSubscriptions ? this.explanationSubscriptions() :
-                        isFixedInputs ? this.explanationFixedInputs() : isProductWorkflows ? this.explainProductWorkflows() : this.explanationDienstafnames()}
+                        isFixedInputs ? this.explanationFixedInputs() : this.explainProductWorkflows()}
                     {isWorkFlows ? this.details() : isSubscriptions ? this.detailsSubscriptions() :
-                        isFixedInputs ? this.detailsFixedInputs() : isProductWorkflows ? this.detailsProductWorkflows() :this.detailsDienstafnames()}
+                        isFixedInputs ? this.detailsFixedInputs() : this.detailsProductWorkflows()}
                     {isWorkFlows && this.example()}
                 </section>
             </div>
@@ -149,6 +136,5 @@ ValidationsExplain.propTypes = {
     isWorkFlows: PropTypes.bool.isRequired,
     isSubscriptions: PropTypes.bool.isRequired,
     isFixedInputs: PropTypes.bool.isRequired,
-    isProductWorkflows: PropTypes.bool.isRequired
 };
 

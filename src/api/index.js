@@ -306,10 +306,6 @@ export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`)
 }
 
-export function dienstafnameSubscriptionCrossCheck() {
-    return fetchJson("subscriptions/dienstafname-subscriptions")
-}
-
 export function initialWorkflowInput(workflowKey, productId) {
     return productId ? fetchJson(`workflows/${workflowKey}/${productId}`) : fetchJson(`workflows/${workflowKey}`)
 }
@@ -338,11 +334,8 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId, workflow, dienstafname=null, product=null) {
+export function startModificationSubscription(subscriptionId, workflow, product=null) {
     const body = {subscription_id: subscriptionId};
-    if (!isEmpty(dienstafname)) {
-        body.dienstafname = dienstafname;
-    }
     if (!isEmpty(product)) {
         body.product = product;
     }

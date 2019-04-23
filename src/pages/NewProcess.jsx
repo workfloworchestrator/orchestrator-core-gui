@@ -126,19 +126,12 @@ export default class NewProcess extends React.Component {
                         const [productValidation, userInput] = result;
 
                         const stepUserInput = userInput.filter(input => input.name !== "product");
-                        const {preselectedOrganisation, preselectedDienstafname} = this.props;
+                        const {preselectedOrganisation} = this.props;
                         if (preselectedOrganisation) {
                             const organisatieInput = stepUserInput.find(x => x.name === "organisation");
                             if (organisatieInput) {
                                 organisatieInput.value = preselectedOrganisation;
                                 organisatieInput.readonly = true;
-                            }
-                        }
-                        if (preselectedDienstafname) {
-                            const dienstafnameInput = stepUserInput.find(x => x.name === "dienstafname");
-                            if (dienstafnameInput) {
-                                dienstafnameInput.value = preselectedDienstafname;
-                                dienstafnameInput.readonly = true;
                             }
                         }
                         this.setState({
@@ -164,7 +157,7 @@ export default class NewProcess extends React.Component {
         stop(e);
         const {modifySubscription, modifyWorkflow} = this.state;
         const {location} = this.props;
-	const preselectedInput = getQueryParameters(location.search);
+        const preselectedInput = getQueryParameters(location.search);
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         this.confirmation(I18n.t("subscription.modifyConfirmation", {
@@ -172,7 +165,7 @@ export default class NewProcess extends React.Component {
                 customer: subscription.customer_name,
                 change: change
             }),
-            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedInput.dienstafname, preselectedInput.product).then(() => {
+            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedInput.product).then(() => {
                 this.props.history.push("/processes")
             }));
     };
