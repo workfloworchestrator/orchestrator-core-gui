@@ -566,7 +566,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     {I18n.t(`subscription.modify_${wf.name}`)}</a>
                                 </td>
                             }
-                            {(isModifiable && subscription.status === "active" && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
+                            {(isModifiable && (subscription.status === "active" || subscription.status === "provisioning") && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
                                 <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
                                 {I18n.t(`subscription.modify_${wf.name}`)}</a></td>
                             }

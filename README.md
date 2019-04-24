@@ -92,5 +92,5 @@ Deploys of GUI Workflows are in the form of a Docker image with nginx.
 ### CRM calling url
 
 ```
-new-process?product=58695551-e386-437a-a999-41c1296f84b8&organisation=ad93daef-0911-e511-80d0-005056956c1a&dienstafname=744fe180-b2aa-e811-810c-0050569555d1
+new-process?product=58695551-e386-437a-a999-41c1296f84b8&organisation=ad93daef-0911-e511-80d0-005056956c1a
 ```

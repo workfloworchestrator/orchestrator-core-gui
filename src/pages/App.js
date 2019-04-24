@@ -194,7 +194,6 @@ class App extends React.PureComponent {
                                                                      locationCodes={locationCodes}
                                                                      preselectedProduct={getParameterByName("product", props.location.search)}
                                                                      preselectedOrganisation={getParameterByName("organisation", props.location.search)}
-                                                                     preselectedDienstafname={getParameterByName("dienstafname", props.location.search)}
                                                                      {...props}
                                         />}/>
                         <ProtectedRoute path="/terminate-subscription"
