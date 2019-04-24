@@ -139,6 +139,12 @@ class Subscriptions extends React.PureComponent {
                                 id: "start_date",
                                 filterable: false,
                                 accessor: d => renderDate(d.start_date)
+                            },
+                            {
+                                Header: "End Date",
+                                id: "end_date",
+                                filterable: false,
+                                accessor: d => renderDate(d.end_date)
                             }
                         ]}
                         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
