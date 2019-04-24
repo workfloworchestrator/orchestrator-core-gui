@@ -133,11 +133,13 @@ class Subscriptions extends React.PureComponent {
                             {
                                 Header: "Start Date",
                                 id: "start_date",
+                                filterable: false,
                                 accessor: d => renderDate(d.start_date)
                             },
                             {
                                 Header: "End Date",
                                 id: "end_date",
+                                filterable: false,
                                 accessor: d => renderDate(d.end_date)
                             }
                         ]}
