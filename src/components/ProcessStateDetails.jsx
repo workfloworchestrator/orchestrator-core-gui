@@ -156,7 +156,7 @@ class ProcessStateDetails extends React.PureComponent {
                     <i className={iconName}></i>
                 </section>
 
-                <section className={ stepIsCollapsed ? "state-delta-collapsed" : "state-delta"}>
+                <section className={ stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
                     <table>
                         <tbody>
                         {Object.keys(json).map((key, index) =>

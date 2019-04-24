@@ -143,34 +143,15 @@ section.process-state-detail {
                         }
                     }
                 }
+                &.collapsed {
+                    height: 110px;
+                    overflow: scroll;
+                    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+                }
+
             }
 
-            section.state-delta-collapsed {
-                @include card;
-                background-color: $lightest-grey;
-                margin-bottom: 25px;
-                table {
-                    td {
-                        &.key {
-                            text-transform: uppercase;
-                            font-weight: bold;
-                            color: $medium-grey;
-                            padding: 5px;
-                            width: 125px;
-                        }
-                        &.value {
-                            width: 800px;
-                            min-width: 550px;
-                            padding-left: 20px;
-                        }
-                        pre {
-                            margin-left: -10px;
-                        }
-                    }
-                }
-                height: 110px;
-                overflow: scroll;
-            }
+
 
 
 
