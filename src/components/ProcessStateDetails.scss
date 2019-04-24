@@ -102,6 +102,7 @@ section.process-state-detail {
         }
 
         .step-container {
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             width: 180px;
@@ -120,7 +121,6 @@ section.process-state-detail {
 
             section.state-delta {
                 @include card;
-                cursor: pointer;
                 box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
                 background-color: $lightest-grey;
                 margin-bottom: 25px;
@@ -147,7 +147,6 @@ section.process-state-detail {
 
             section.state-delta-collapsed {
                 @include card;
-                cursor: pointer;
                 background-color: $lightest-grey;
                 margin-bottom: 25px;
                 table {

@@ -7,12 +7,16 @@ section.table-summary {
         padding: 10px;
     }
 
+    td:not(:first-child):not(:last-child) {
+        border-right: solid 2px $light-grey;
+    }
+
     .label {
         font-weight: bold;
         background-color: $light-blue;
-        border-right: solid 1px $blue;
+        border-right: solid 2px $blue;
     }
     .value {
-      background-color: $lightest-grey;
+        background-color: $lightest-grey;
     }
 }

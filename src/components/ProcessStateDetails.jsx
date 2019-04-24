@@ -156,7 +156,7 @@ class ProcessStateDetails extends React.PureComponent {
                     <i className={iconName}></i>
                 </section>
 
-                <section className={ stepIsCollapsed ? "state-delta-collapsed" : "state-delta"} onClick={() => this.toggleStep(index)}>
+                <section className={ stepIsCollapsed ? "state-delta-collapsed" : "state-delta"}>
                     <table>
                         <tbody>
                         {Object.keys(json).map((key, index) =>
@@ -199,7 +199,7 @@ class ProcessStateDetails extends React.PureComponent {
                     {process.steps.map((step, index) => {
                         return (
                             <div key={index} id={`step-index-${index}`} className="details-container">
-                                <div className="step-container">
+                                <div className="step-container" onClick={() => this.toggleStep(index)}>
                                     <Step step={step}/>
                                     {!last(index) && <section className="step-divider">
                                         <i className="fa fa-arrow-down"></i>

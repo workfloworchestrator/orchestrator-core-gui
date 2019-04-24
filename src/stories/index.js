@@ -13,15 +13,26 @@ import TableSummary from "../components/TableSummary";
 // import UserInputWrapper from "./UserInputWrapper";
 
 const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
-const tabbleSummaryData = [
-    {label: 'Label 1', value: 'Short value'},
-    {label: "Label numero dos", value: "A slightly longer value"},
-    {label: "Label 3", value: "Lorem ipsum dosem solem"},
-    {label: "Label 4", value: "Brand, Alfa, Hertog Jan"},
-    {label: "Label 5", value: "3"},
-    {label: "Label 6", value: "Some examples"},
-    ];
+const tableSummaryDataDefinition = [
+    {labels: ["Label1", "Label 2", "Label 3"]},
+    {columns: [["value1", "value2", "value3 with slightly longer text"]]}];
 
+const tableSummaryDataWithHeaders = [
+    {headers: ["Old Values", "New Values"]},
+    {columns: [
+        ["value1", "value2", "value3"],
+        ["new value1", "new value2", "new value3"]]
+    }
+];
+
+const tableSummaryDataDefinitionWithHeaders = [
+    {labels: ["Label1", "Label 2", "Label 3"]},
+    {headers: ["Old Values", "New Values"]},
+    {columns: [
+        ["value1", "value2", "value3"],
+        ["new value1", "new value2", "new value3"]]
+    }
+];
 
 storiesOf('Welcome', module).add('to Storybook', () =>
     <div>
@@ -65,10 +76,24 @@ storiesOf('GenericSelect', module)
 
 
 storiesOf('TableSummary', module)
-    .add('Default', () =>
+    .add('Definition', () =>
         <TableSummary onChange={(e) => {
             action('clicked');
             debugger;
             this.selected=e.value;
             e;
-        }} data={tabbleSummaryData}/>);
+        }} data={tableSummaryDataDefinition}/>)
+    .add('Summary with headers', () =>
+        <TableSummary onChange={(e) => {
+            action('clicked');
+            debugger;
+            this.selected=e.value;
+            e;
+        }} data={tableSummaryDataWithHeaders}/>)
+    .add('Summary with definition and headers', () =>
+        <TableSummary onChange={(e) => {
+            action('clicked');
+            debugger;
+            this.selected=e.value;
+            e;
+        }} data={tableSummaryDataDefinitionWithHeaders}/>);
