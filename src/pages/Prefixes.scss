@@ -84,15 +84,17 @@
       }
       &.Free {
         background-color: $light-green;
+        cursor: pointer;
       }
       &.Allocated {
-        background-color: $light-blue;
+        background-color: $light-green;
       }
       &.Failed {
-        background-color: $light-red;
+        background-color: $light-blue;
       }
       &.Subnet {
         background-color: $light-grey;
+        cursor: default;
       }
     }
     thead {

@@ -65,7 +65,7 @@ export default class Prefixes extends React.PureComponent {
   };
 
    getPrefixSubscriptions = () => {
-       const {organisations} = this.props;
+       // const {organisations} = this.props;
        const promise = prefixSubscriptions();
        promise.then(result =>
        {
