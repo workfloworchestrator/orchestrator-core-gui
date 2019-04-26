@@ -69,10 +69,11 @@ class Subscriptions extends React.PureComponent {
 
 
     handleKeyDown(e) {
-        if (e.keyCode === 38 && this.props.page && this.props.page !== 0) {
-            this.props.onChangePage(this.props.page-1)
+        const page = this.props.page ? this.props.page : 0;
+        if (e.keyCode === 38 && page > 0) {
+            this.props.onChangePage(page-1)
         } else if (e.keyCode === 40) {
-            this.props.onChangePage(this.props.page+1)
+            this.props.onChangePage(page+1)
         }
     };
 
@@ -93,11 +94,6 @@ class Subscriptions extends React.PureComponent {
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
                 <div class="divider"></div>
                 <div className="subscriptions-container">
-                    {/*<div>*/}
-                        {/*page: {this.props.page}<br/>*/}
-                        {/*filtered: {this.props.filtered}<br/>*/}
-                        {/*sorted: {this.state.sorted ? this.state.sorted.join(",") : ""}<br/>*/}
-                    {/*</div>*/}
                     <ReactTable
                         columns={[
                             {
@@ -137,11 +133,13 @@ class Subscriptions extends React.PureComponent {
                             {
                                 Header: "Start Date",
                                 id: "start_date",
+                                filterable: false,
                                 accessor: d => renderDate(d.start_date)
                             },
                             {
                                 Header: "End Date",
                                 id: "end_date",
+                                filterable: false,
                                 accessor: d => renderDate(d.end_date)
                             }
                         ]}

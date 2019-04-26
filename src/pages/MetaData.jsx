@@ -8,6 +8,8 @@ import ResourceTypes from "../components/ResourceTypes";
 import Products from "../components/Products";
 import FixedInputConfiguration from "../components/FixedInputConfiguration";
 import WorkFlows from "../components/WorkFlows";
+import ScrollUpButton from "react-scroll-up-button";
+
 
 export default class MetaData extends React.Component {
 
@@ -60,6 +62,7 @@ export default class MetaData extends React.Component {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {this.renderTabContent(selectedTab)}
+                <ScrollUpButton />
             </div>
         );
     }

@@ -13,6 +13,7 @@ import {setFlash} from "../utils/Flash";
 import {organisationNameByUuid, productNameById, renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {actionOptions} from "../validations/Processes";
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class Processes extends React.PureComponent {
 
@@ -341,6 +342,7 @@ export default class Processes extends React.PureComponent {
                 <section className="processes">
                     {this.renderProcessesTable(filteredProcesses, actions, sorted, organisations)}
                 </section>
+                <ScrollUpButton />
             </div>
         );
     }

@@ -13,7 +13,8 @@ import {NavLink} from "react-router-dom";
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
 
-export default class ProcessStateDetails extends React.PureComponent {
+
+class ProcessStateDetails extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -81,7 +82,6 @@ export default class ProcessStateDetails extends React.PureComponent {
 
     renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
-
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
@@ -148,12 +148,15 @@ export default class ProcessStateDetails extends React.PureComponent {
             return null;
         }
         const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
+        const stepIsCollapsed = this.props.collapsed.includes(index);
+
         return (
             <section className="state-changes">
                 <section className="state-divider">
                     <i className={iconName}></i>
                 </section>
-                <section className="state-delta">
+
+                <section className={ stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
                     <table>
                         <tbody>
                         {Object.keys(json).map((key, index) =>
@@ -165,9 +168,16 @@ export default class ProcessStateDetails extends React.PureComponent {
                         </tbody>
                     </table>
                 </section>
+
             </section>);
     };
 
+    toggleStep = (step) => {
+        if (this.props.onChangeCollapsed) {
+            // console.log(`Calling provided prop function with step: ${step}`)
+            this.props.onChangeCollapsed(step);
+        }
+    };
 
     renderProcessOverview = (process, details, stateChanges) => {
         const last = i => i === process.steps.length - 1;
@@ -188,8 +198,8 @@ export default class ProcessStateDetails extends React.PureComponent {
                 <section className="steps">
                     {process.steps.map((step, index) => {
                         return (
-                            <div key={index} className="details-container">
-                                <div className="step-container">
+                            <div key={index} id={`step-index-${index}`} className="details-container">
+                                <div className="step-container" onClick={() => this.toggleStep(index)}>
                                     <Step step={step}/>
                                     {!last(index) && <section className="step-divider">
                                         <i className="fa fa-arrow-down"></i>
@@ -218,6 +228,13 @@ export default class ProcessStateDetails extends React.PureComponent {
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
-    subscriptionProcesses: PropTypes.array.isRequired
+    subscriptionProcesses: PropTypes.array.isRequired,
+    collapsed: PropTypes.array,
+    onChangeCollapsed: PropTypes.func,  // when provided it will toggle the collapse functionality
 };
 
+ProcessStateDetails.defaultProps = {
+    collapsed: []
+};
+
+export default ProcessStateDetails

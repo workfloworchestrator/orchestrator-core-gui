@@ -520,7 +520,13 @@ I18n.translations.en = {
         ipv4_prefixlen: "IPv4 Prefix length",
         ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
         service_speed: "Bandbreedte",
-        service_speed_info: "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten"
+        service_speed_info: "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten",
+        confirm_migrate_sap: "Confirm the migration of the SAP",
+        confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
+        confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
+        confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
+        sap_migration_summary: "Summary of SAP migration changes",
+        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed"
     },
     process_state: {
         copy: "Copy to clipboard",

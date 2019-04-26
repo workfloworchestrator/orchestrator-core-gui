@@ -45,6 +45,7 @@ import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
+import TableSummary from "./TableSummary";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -535,7 +536,7 @@ export default class UserInputForm extends React.Component {
                                             tags={userInput.tags}
                                             productId={lookupValueFromNestedState(userInput.product_key, currentState)}
                                             subscription={value}
-                                            />;
+                                            excludedSubscriptionIds={userInput.excluded_subscriptions}/>;
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
@@ -579,7 +580,7 @@ export default class UserInputForm extends React.Component {
             case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             case "numeric":
-                if (userInput.state_key_for_maximum !== ''){
+                if (userInput.state_key_for_maximum !== '') {
                     userInput.maximum = lookupValueFromNestedState(userInput.state_key_for_maximum, currentState);
                 }
                 return <NumericInput onChange={this.changeNumericInput(name)}
@@ -590,6 +591,9 @@ export default class UserInputForm extends React.Component {
                                      value={value}
                                      strict={true}
                                      readOnly={userInput.readonly || false}/>;
+            case "table_summary":
+            case "migration_summary":
+                return <TableSummary data={userInput.data}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

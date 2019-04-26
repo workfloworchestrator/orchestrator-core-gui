@@ -13,6 +13,8 @@ import {setFlash} from "../utils/Flash";
 import {renderDateTime} from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import {actionOptions} from "../validations/Processes";
+import ScrollUpButton from "react-scroll-up-button";
+
 
 export default class Tasks extends React.PureComponent {
 
@@ -307,6 +309,7 @@ export default class Tasks extends React.PureComponent {
                 <section className="tasks">
                     {this.renderTasksTable(filteredTasks, actions, sorted)}
                 </section>
+                <ScrollUpButton />
             </div>
         );
     }

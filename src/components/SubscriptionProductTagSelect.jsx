@@ -21,7 +21,10 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
         subscriptionsByTags(this.props.tags).then(result => {
             let subscriptions = result.filter(item => this.props.statusList.includes(item.status));
             if (this.props.productId) {
-                subscriptions = subscriptions.filter(item => item.product_id === this.props.productId)
+                subscriptions = subscriptions.filter(item => item.product_id === this.props.productId);
+            }
+            if (this.props.excludedSubscriptionIds.length > 0) {
+                subscriptions = subscriptions.filter(item => !this.props.excludedSubscriptionIds.includes(item.subscription_id));
             }
             this.setState({subscriptions: subscriptions, loading: false})
         });
@@ -52,7 +55,7 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
                   </div>
             </section>
           )
-  };
+    };
 }
 
 SubscriptionProductTagSelect.propTypes = {
@@ -60,9 +63,11 @@ SubscriptionProductTagSelect.propTypes = {
     productId: PropTypes.string, // leave empty if you want all subscriptions of given tag
     disabled: PropTypes.bool,
     tags: PropTypes.array.isRequired,
-    statusList: PropTypes.array
+    statusList: PropTypes.array,
+    excludedSubscriptionIds: PropTypes.array
 };
 
 SubscriptionProductTagSelect.defaultProps = {
-    statusList: ["provisioning", "active"]
+    statusList: ["provisioning", "active"],
+    excludedSubscriptionIds: []
 };
