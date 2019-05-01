@@ -371,6 +371,8 @@ I18n.translations.en = {
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
         port_mode_info: "The port mode as sent to IMS and NSO",
+        old_subscription_label: "Old Subscription",
+        old_subscription_label_info: "The old subscription in this workflow",
         sap1: {
             label: "Service Attach Point settings for first selected port",
             service_port: "First selected Port",
