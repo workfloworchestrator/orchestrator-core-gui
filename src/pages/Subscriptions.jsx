@@ -92,7 +92,7 @@ class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div class="divider"></div>
+                <div className="divider"></div>
                 <div className="subscriptions-container">
                     <ReactTable
                         columns={[

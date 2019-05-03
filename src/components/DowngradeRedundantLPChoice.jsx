@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
-import {imsService, subscriptionsDetail} from "../api/index";
+import {getResourceTypeInfo, subscriptionsDetail} from "../api/index";
 import {enrichSubscription, enrichPortSubscription, enrichPrimarySubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
@@ -31,7 +31,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent {
             this.setState({subscription: subscription});
             const values = subscriptionInstanceValues(subscription);
             const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
-            const promises = portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value));
+            const promises = portSubscriptionResourceTypes.map(rt => getResourceTypeInfo(port_subscription_id, rt.value));
             Promise.all(promises).then(results => {
                 const children = results.map(obj => obj.json);
                 children.forEach(sub => enrichSubscription(sub, organisations, products));
