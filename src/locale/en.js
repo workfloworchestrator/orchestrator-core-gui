@@ -526,7 +526,9 @@ I18n.translations.en = {
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
         sap_migration_summary: "Summary of SAP migration changes",
-        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed"
+        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed",
+        sap_summary_sn7: "Summary of available SN7 SAP's",
+        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details"
     },
     process_state: {
         copy: "Copy to clipboard",
