@@ -60,8 +60,6 @@ scan docker images:
   tags:
     - docker-ct-builder-ext
   only:
-    - dev@automation/workflows-client
-    - master@automation/workflows-client
     - tags
 
 anchore_reports:
@@ -82,8 +80,6 @@ anchore_reports:
   tags:
     - docker-ct-builder-ext
   only:
-    - dev@automation/workflows-client
-    - master@automation/workflows-client
     - tags
 
 release image dev:
