@@ -26,10 +26,10 @@ scan docker images:
   dependencies:
     - build docker image
   image:
-    name: anchore/anchore-engine:latest
+    name: anchore/anchore-engine:v0.3.0
     entrypoint: [""]
   services:
-    - name: anchore/engine-db-preload:latest
+    - name: anchore/engine-db-preload:v0.3.0
       alias: anchore-db
 
   variables:
