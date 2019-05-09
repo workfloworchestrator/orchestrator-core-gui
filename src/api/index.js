@@ -245,7 +245,7 @@ export function childSubscriptions(parentSubscriptionId) {
     });
 }
 
-export function imsService(type, identifier) {
+export function getResourceTypeInfo(type, identifier) {
     let promise;
     switch (type) {
         case ims_port_id:
@@ -255,6 +255,7 @@ export function imsService(type, identifier) {
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
         case "ip_prefix_subscription_id":
+        case "internetpinnen_prefix_subscription_id":
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
@@ -262,7 +263,13 @@ export function imsService(type, identifier) {
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
             promise = fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${identifier}`);
-	          break;
+            break;
+        case "node_ipv4_ipam_id":
+        case "node_ipv6_ipam_id":
+        case "corelink_ipv4_ipam_id":
+        case "corelink_ipv6_ipam_id":
+            promise = fetchJsonWithCustomErrorHandling(`ipam/address_by_id/${identifier}`);
+            break;
         default:
             promise = Promise.resolve({})
     }

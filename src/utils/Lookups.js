@@ -1,6 +1,6 @@
 import {isEmpty} from "./Utils";
 import {ims_circuit_id} from "../validations/Subscriptions";
-import {imsService, portByImsServiceId} from "../api";
+import {getResourceTypeInfo, portByImsServiceId} from "../api";
 const productLookup = (id, products) => products.find(prod => prod.product_id === id);
 
 export function organisationNameByUuid(uuid, organisations) {
@@ -39,7 +39,7 @@ export function enrichPortSubscription(parentSubscription, subscription){
     const prim_sec_part = (subscription.label.split("-")[1] === 'left') ? 0 : 1;
     const si = parentSubscription.instances.find(i => i.label === vc_label_part);
     const imsCircuitId = si.values.find(v => v.resource_type.resource_type === 'ims_circuit_id').value;
-    const imsServicePromise = imsService(ims_circuit_id,imsCircuitId );
+    const imsServicePromise = getResourceTypeInfo(ims_circuit_id,imsCircuitId );
     return new Promise((resolve, reject) => {
         imsServicePromise.then(result => {
             portByImsServiceId(result.json.endpoints[prim_sec_part].id).then(

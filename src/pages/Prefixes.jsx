@@ -8,7 +8,7 @@ import "./Prefixes.scss";
 import {freeSubnets, prefix_filters, prefixSubscriptionsByRootPrefix} from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import {organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, familyFullName} from "../utils/Lookups";
-
+import ScrollUpButton from "react-scroll-up-button";
 
 export default class Prefixes extends React.PureComponent {
 
@@ -309,7 +309,7 @@ export default class Prefixes extends React.PureComponent {
         <td data-label={I18n.t("prefixes.family")}
           className="family">{familyFullName[prefix.family]}</td>
         <td data-label={I18n.t("prefixes.prefixlen")}
-      className="prefixlen">/{prefix.prefixlen}</td>
+          className="prefixlen">/{prefix.prefixlen}</td>
         <td data-label={I18n.t("prefixes.prefix")}
           className="prefix">{prefix.prefix}</td>
         <td data-label={I18n.t("prefixes.parent")}
@@ -324,6 +324,7 @@ export default class Prefixes extends React.PureComponent {
     </tbody>
         </table>
      </section>
+     <ScrollUpButton />
   </div>
     };
 };

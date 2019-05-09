@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import {
-    imsService,
+    getResourceTypeInfo,
     parentSubscriptions,
     portByImsPortId,
     portByImsServiceId,
@@ -71,7 +71,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id),
                     productById(subscription.product_id), subscriptionInsyncStatus(subscription.subscription_id)]
-                    .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
+                    .concat(values.map(val => getResourceTypeInfo(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
@@ -80,7 +80,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(3);
                     const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
-                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id || obj.type === "ip_prefix_subscription_id").map(obj => obj.json);
+                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id || obj.type === "ip_prefix_subscription_id" || obj.type === "internetpinnen_prefix_subscription_id").map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
                     if (subscription_used) {
                         subscriptions = subscriptions.concat(subscription_used.json);
@@ -93,12 +93,16 @@ export default class SubscriptionDetail extends React.PureComponent {
                     const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
 
                     const ipamPrefixes = relatedObjects.filter(obj => obj.type === "ptp_ipv4_ipam_id" || obj.type === "ptp_ipv6_ipam_id" || obj.type === "ipam_prefix_id").map(obj => obj.json)
+
+                    const ipamAddresses = relatedObjects.filter(obj => obj.type === "node_ipv4_ipam_id" || obj.type === "node_ipv6_ipam_id").map(obj => obj.json)
+
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
                         enrichedRelatedSubscriptions: result[2],
                         imsServices: imsServices,
                         ipamPrefixes: ipamPrefixes,
+                        ipamAddresses: ipamAddresses,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         loadedAllRelatedObjects: true
@@ -386,6 +390,34 @@ export default class SubscriptionDetail extends React.PureComponent {
               .map((port, index) => this.renderEndpointDetail(port, index))}
         </table>;
 
+    renderIpamAddress = (address, index, className = "") => {
+      if (isEmpty(address)) {
+        return null;
+      }
+      return <table className={`detail-block ${className}`}>
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{I18n.t("ipam.assigned_address_id")}</td>
+                  <td>{address.id}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.state")}</td>
+                  <td>{ipamStates[address.state]}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.ipaddress")}</td>
+                  <td>{address.address}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.fqdn")}</td>
+                  <td>{address.fqdn}</td>
+                </tr>
+              </tbody>
+            </table>
+    };
+
     renderIpamPrefix = (prefix, index, className = "") => {
       if (isEmpty(prefix)) {
         return null;
@@ -426,7 +458,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         </tr>
                         <tr>
                           <td>{I18n.t("ipam.fqdn")}</td>
-                        <td>{address.fqdn}</td>
+                          <td>{address.fqdn}</td>
                         </tr>
 		     </React.Fragment>
                      )}
@@ -566,7 +598,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     {I18n.t(`subscription.modify_${wf.name}`)}</a>
                                 </td>
                             }
-                            {(isModifiable && subscription.status === "active" && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
+                            {(isModifiable && (subscription.status === "active" || subscription.status === "provisioning") && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
                                 <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
                                 {I18n.t(`subscription.modify_${wf.name}`)}</a></td>
                             }
@@ -656,6 +688,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             return this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
           case port_subscription_id:
           case "ip_prefix_subscription_id":
+          case "internetpinnen_prefix_subscription_id":
             target = subscriptions.find(sub => sub.subscription_id === identifier);
             return this.renderSubscriptionDetail(target, 0, "related-subscription");
           case "ipam_prefix_id":
@@ -663,6 +696,12 @@ export default class SubscriptionDetail extends React.PureComponent {
           case "ptp_ipv6_ipam_id":
             target = this.state.ipamPrefixes.find(prefix => prefix.id === parseInt(identifier, 10));
             return this.renderIpamPrefix(target, 0, "related-subscription");
+          case "node_ipv4_ipam_id":
+          case "node_ipv6_ipam_id":
+          case "corelink_ipv4_ipam_id":
+          case "corelink_ipv6_ipam_id":
+            target = this.state.ipamAddresses.find(address => address.id === parseInt(identifier, 10));
+            return this.renderIpamAddress(target, 0, "related-subscription");
           default:
             return null;
         }
@@ -673,7 +712,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
             loadedAllRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type.endsWith("subscription_id");
-        const externalLinks = [ims_circuit_id, "ims_corelink_trunk_id", "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id"]
+        const externalLinks = [ims_circuit_id, "ims_corelink_trunk_id", "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id", "node_ipv4_ipam_id", "node_ipv6_ipam_id", "corelink_ipv4_ipam_id", "corelink_ipv6_ipam_id"]
         const isExternalLinkValue = isSubscriptionValue || externalLinks.includes(subscriptionInstanceValue.resource_type.resource_type);
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
         const icon = isCollapsed ? "minus" : "plus";

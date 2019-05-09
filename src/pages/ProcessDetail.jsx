@@ -14,8 +14,34 @@ import {abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcess
 import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {actionOptions} from "../validations/Processes";
+import ScrollUpButton from "react-scroll-up-button";
+import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
 
-export default class ProcessDetail extends React.PureComponent {
+
+/**
+ * Map from url query params to props. The values in `url` will still be encoded
+ * as strings since we did not pass a `urlPropsQueryConfig` to addUrlProps.
+ */
+function mapUrlToProps(url, props) {
+    return {
+        collapsed: url.collapsed ? decode(UrlQueryParamTypes.string, url.collapsed).split(",").map(item => parseInt(item)) : [],
+        scrollToStep: decode(UrlQueryParamTypes.number, url.scrollToStep),
+    };
+}
+
+/**
+ * Manually specify how to deal with changes to URL query param props.
+ * We do this since we are not using a urlPropsQueryConfig and have specific contents in the `collapsed` array.
+ */
+function mapUrlChangeHandlersToProps(props) {
+    return {
+        onChangeCollapsed: (value) => replaceInUrlQuery('collapsed', encode(UrlQueryParamTypes.number, value)),
+        onChangeScrollToStep: (value) => replaceInUrlQuery('scrollToStep', encode(UrlQueryParamTypes.number, value)),
+    }
+}
+
+
+class ProcessDetail extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -37,7 +63,7 @@ export default class ProcessDetail extends React.PureComponent {
         };
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         process(this.props.match.params.id)
             .then(processInstance => {
                 /**
@@ -129,6 +155,30 @@ export default class ProcessDetail extends React.PureComponent {
         );
     };
 
+    handleCollapse = step => {
+        let {collapsed} = this.props;
+        if (collapsed.includes(step)) {
+            this.props.onChangeCollapsed(collapsed.filter(item => item !== step))
+        }
+        else {
+            collapsed.push(step);
+            this.props.onChangeCollapsed(collapsed)
+        }
+    };
+
+    handleCollapseAll = () => {
+        this.props.onChangeCollapsed(this.state.process.steps.map((i,index) => index));
+    };
+
+    handleExpandAll = () => {
+        this.props.onChangeCollapsed([]);
+    };
+
+    handleScrollTo = (step) => {
+        document.getElementById(`step-index-${step}`).scrollIntoView();
+        this.props.onChangeScrollToStep(step)
+    };
+
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
 
     confirmation = (question, action) => this.setState({
@@ -144,11 +194,17 @@ export default class ProcessDetail extends React.PureComponent {
         const options = actionOptions(process, () => false, this.handleRetryProcess(process),
             this.handleDeleteProcess(process), this.handleAbortProcess(process))
             .filter(option => option.label !== "user_input" && option.label !== "details" && option.label !== "delete");
+
+        const lastStepIndex = process.steps.findIndex(item => item.name === process.step)
+
         return <section className="process-actions">
             {options.map((option, index) => <button key={index} className={`button ${option.danger ? " red" : " blue"}`}
                                                onClick={option.action}>
                 {I18n.t(`processes.${option.label}`)}
             </button>)}
+            <button className="button" onClick={this.handleCollapseAll}>Collapse</button>
+            <button className="button" onClick={this.handleExpandAll}>Expand</button>
+            <button className="button" onClick={() => this.handleScrollTo(lastStepIndex)}>Scroll to Last</button>
         </section>
     };
 
@@ -185,7 +241,13 @@ export default class ProcessDetail extends React.PureComponent {
         if (selectedTab === "process") {
             return <section className="card">
                 {this.renderActions(process)}
-                <ProcessStateDetails process={process} subscriptionProcesses={subscriptionProcesses}/>
+                <ProcessStateDetails
+                    process={process}
+                    subscriptionProcesses={subscriptionProcesses}
+                    collapsed={this.props.collapsed}
+                    onChangeCollapsed={this.handleCollapse}
+                    scrollToStep={this.props.scrollToStep}
+                />
             </section>;
         } else {
             return <section className="card">
@@ -236,6 +298,7 @@ export default class ProcessDetail extends React.PureComponent {
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput,
                     subscriptionProcesses, servicePorts, servicePortsSN8)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
+                <ScrollUpButton />
             </div>
         );
     }
@@ -247,5 +310,18 @@ ProcessDetail.propTypes = {
     configuration: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired
+    locationCodes: PropTypes.array.isRequired,
+
+    // URL query controlled
+    scrollToStep: PropTypes.number,
+    onChangeScrollToStep: PropTypes.func,
+    collapsed: PropTypes.array,
+    onChangeCollapsed: PropTypes.func,
 };
+
+ProcessDetail.defaultProps = {
+    collapsed: [],
+    scrollToStep: 0,
+};
+
+export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(ProcessDetail)

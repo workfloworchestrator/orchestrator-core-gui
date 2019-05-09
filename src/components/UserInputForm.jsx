@@ -27,7 +27,6 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import SSPProductSelect from "./SSPProductSelect";
 import GenericSelect from "./GenericSelect";
 import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
@@ -45,6 +44,7 @@ import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
+import TableSummary from "./TableSummary";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -513,15 +513,6 @@ export default class UserInputForm extends React.Component {
                                              disabledPorts={userInput.disabledPorts}
                                              reportError={this.reportCustomError(userInput.type)}/>
                 </div>;
-            case "new_ssp_workflow":
-                const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
-                const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
-                    lookupValueFromNestedState(bandwidthKey, currentState);
-                const ssp_products = filterProductsByBandwidth(products, bandwithSSP).filter((product) => product.tag === 'SSP');
-                return <SSPProductSelect products={ssp_products}
-                                         onChange={this.changeSelectInput(name)}
-                                         product={value}
-                                         disabled={userInput.readonly}/>;
             case "subscription":
             case "subscriptions":
                 const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
@@ -535,7 +526,7 @@ export default class UserInputForm extends React.Component {
                                             tags={userInput.tags}
                                             productId={lookupValueFromNestedState(userInput.product_key, currentState)}
                                             subscription={value}
-                                            />;
+                                            excludedSubscriptionIds={userInput.excluded_subscriptions}/>;
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
@@ -579,7 +570,7 @@ export default class UserInputForm extends React.Component {
             case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             case "numeric":
-                if (userInput.state_key_for_maximum !== ''){
+                if (userInput.state_key_for_maximum !== '') {
                     userInput.maximum = lookupValueFromNestedState(userInput.state_key_for_maximum, currentState);
                 }
                 return <NumericInput onChange={this.changeNumericInput(name)}
@@ -590,6 +581,9 @@ export default class UserInputForm extends React.Component {
                                      value={value}
                                      strict={true}
                                      readOnly={userInput.readonly || false}/>;
+            case "table_summary":
+            case "migration_summary":
+                return <TableSummary data={userInput.data}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
