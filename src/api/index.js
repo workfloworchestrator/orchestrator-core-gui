@@ -144,7 +144,7 @@ export function subscriptions() {
     return fetchJson(`v2/subscriptions`);
 }
 
-export function paginatedSubscriptions(range="0,10", sort=["start_date", "desc"], filter) {
+export function paginatedSubscriptions(range="0,24", sort=["start_date", "desc"], filter) {
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
@@ -161,22 +161,21 @@ export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptionsByTags(tags) {
-    return fetchJson(`subscriptions/tag/${encodeURIComponent(tags.join(","))}`);
+export function subscriptionsByTags(tagList) {
+    return fetchJson(`subscriptions/tag/${encodeURIComponent(tagList.join(","))}`);
 }
 
 export function subscriptionsByProductType(type) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptionInsyncStatus(subscription_id) {
-    return fetchJson(`subscriptions/insync_status_relations/${subscription_id}`)
+export function subscriptionWorkflows(subscription_id) {
+    return fetchJson(`v2/subscriptions/workflows/${subscription_id}`)
 }
 
 export function subscriptionsByProductId(productId) {
     return fetchJson(`subscriptions/product/${productId}`);
 }
-
 
 export function organisations() {
     return fetchJson("crm/organisations");
@@ -246,7 +245,7 @@ export function childSubscriptions(parentSubscriptionId) {
     });
 }
 
-export function imsService(type, identifier) {
+export function getResourceTypeInfo(type, identifier) {
     let promise;
     switch (type) {
         case ims_port_id:
@@ -256,6 +255,7 @@ export function imsService(type, identifier) {
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
         case "ip_prefix_subscription_id":
+        case "internetpinnen_prefix_subscription_id":
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
@@ -263,7 +263,13 @@ export function imsService(type, identifier) {
         case "ptp_ipv6_ipam_id":
         case "ipam_prefix_id":
             promise = fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${identifier}`);
-	          break;
+            break;
+        case "node_ipv4_ipam_id":
+        case "node_ipv6_ipam_id":
+        case "corelink_ipv4_ipam_id":
+        case "corelink_ipv6_ipam_id":
+            promise = fetchJsonWithCustomErrorHandling(`ipam/address_by_id/${identifier}`);
+            break;
         default:
             promise = Promise.resolve({})
     }
@@ -307,10 +313,6 @@ export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`)
 }
 
-export function dienstafnameSubscriptionCrossCheck() {
-    return fetchJson("subscriptions/dienstafname-subscriptions")
-}
-
 export function initialWorkflowInput(workflowKey, productId) {
     return productId ? fetchJson(`workflows/${workflowKey}/${productId}`) : fetchJson(`workflows/${workflowKey}`)
 }
@@ -339,15 +341,12 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId, workflow, dienstafname=null, product=null) {
+export function startModificationSubscription(subscriptionId, workflow_name, product=null) {
     const body = {subscription_id: subscriptionId};
-    if (!isEmpty(dienstafname)) {
-        body.dienstafname = dienstafname;
-    }
     if (!isEmpty(product)) {
         body.product = product;
     }
-    return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
+    return postPutJson(`processes/modify-subscription/${workflow_name}`, body, "post");
 }
 
 //IPAM IP Prefixes

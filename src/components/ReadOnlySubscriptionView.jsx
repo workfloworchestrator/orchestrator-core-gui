@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import {isEmpty} from "../utils/Utils";
-import {imsService, productById, subscriptionsDetail} from "../api/index";
+import {getResourceTypeInfo, productById, subscriptionsDetail} from "../api/index";
 import {enrichSubscription} from "../utils/Lookups";
 import {port_subscription_id, subscriptionInstanceValues} from "../validations/Subscriptions";
 
@@ -27,7 +27,7 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
             const values = subscriptionInstanceValues(subscription);
             const portSubscriptionResourceTypes = values.filter(val => val.resource_type.resource_type === port_subscription_id);
             const promises = [productById(subscription.product_id)]
-                .concat(portSubscriptionResourceTypes.map(rt => imsService(port_subscription_id, rt.value)));
+                .concat(portSubscriptionResourceTypes.map(rt => getResourceTypeInfo(port_subscription_id, rt.value)));
 
             Promise.all(promises).then(results => {
                 const children = results.slice(1).map(obj => obj.json);

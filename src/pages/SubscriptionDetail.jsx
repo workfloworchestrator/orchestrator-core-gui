@@ -3,12 +3,12 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import {
-    imsService,
+    getResourceTypeInfo,
     parentSubscriptions,
     portByImsPortId,
     portByImsServiceId,
     processSubscriptionsBySubscriptionId,
-    productById, subscriptionInsyncStatus,
+    productById, subscriptionWorkflows,
     serviceByImsServiceId,
     subscriptionsDetail, internalPortByImsPortId
 } from "../api";
@@ -19,8 +19,6 @@ import {
     absent,
     ims_circuit_id,
     ims_port_id,
-    maybeModifiedMessage,
-    maybeTerminatedMessage,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -30,7 +28,6 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
-import {TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -47,13 +44,13 @@ export default class SubscriptionDetail extends React.PureComponent {
             notFound: false,
             loaded: false,
             loadedAllRelatedObjects: false,
-            enrichedRelatedSubscriptions: {},
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
             notFoundRelatedObjects: [],
             collapsedObjects: [],
+            workflows: {terminate: [], modify:[]},
         };
     }
 
@@ -70,8 +67,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id),
-                    productById(subscription.product_id), subscriptionInsyncStatus(subscription.subscription_id)]
-                    .concat(values.map(val => imsService(val.resource_type.resource_type, val.value)));
+                    productById(subscription.product_id), subscriptionWorkflows(subscription.subscription_id)]
+                    .concat(values.map(val => getResourceTypeInfo(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
                     //add the parent subscriptions where this subscription is used as a MSP (or SSP)
@@ -80,7 +77,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 Promise.all(promises).then(result => {
                     const relatedObjects = result.slice(3);
                     const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
-                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id || obj.type === "ip_prefix_subscription_id").map(obj => obj.json);
+                    let subscriptions = relatedObjects.filter(obj => obj.type === port_subscription_id || obj.type === "ip_prefix_subscription_id" || obj.type === "internetpinnen_prefix_subscription_id").map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
                     if (subscription_used) {
                         subscriptions = subscriptions.concat(subscription_used.json);
@@ -93,12 +90,16 @@ export default class SubscriptionDetail extends React.PureComponent {
                     const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
 
                     const ipamPrefixes = relatedObjects.filter(obj => obj.type === "ptp_ipv4_ipam_id" || obj.type === "ptp_ipv6_ipam_id" || obj.type === "ipam_prefix_id").map(obj => obj.json)
+
+                    const ipamAddresses = relatedObjects.filter(obj => obj.type === "node_ipv4_ipam_id" || obj.type === "node_ipv6_ipam_id").map(obj => obj.json)
+
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
-                        enrichedRelatedSubscriptions: result[2],
+                        workflows: result[2],
                         imsServices: imsServices,
                         ipamPrefixes: ipamPrefixes,
+                        ipamAddresses: ipamAddresses,
                         subscriptions: subscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         loadedAllRelatedObjects: true
@@ -159,30 +160,26 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
     };
 
-    terminate = (subscription, isTerminatable) => e => {
+    terminate = (subscription) => e => {
         stop(e);
-        if (isTerminatable) {
-            this.confirmation(I18n.t("subscription.terminateConfirmation", {
-                    name: subscription.product_name,
-                    customer: subscription.customer_name
-                }),
-                () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`));
-        }
+        this.confirmation(I18n.t("subscription.terminateConfirmation", {
+                name: subscription.product_name,
+                customer: subscription.customer_name
+            }),
+            () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`));
     };
 
-    modify = (subscription, isModifiable, workflow) => e => {
+    modify = (subscription, workflow_name) => e => {
         stop(e);
-        if (isModifiable) {
-            const change = I18n.t(`subscription.modify_${workflow.name}`).toLowerCase();
-            this.confirmation(I18n.t("subscription.modifyConfirmation", {
-                    name: subscription.product_name,
-                    customer: subscription.customer_name,
-                    change: change
-                }),
-                () => startModificationSubscription(subscription.subscription_id, workflow).then(() => {
-                    this.props.history.push("/processes")
-                }));
-        }
+        const change = I18n.t(`subscription.modify_${workflow_name}`).toLowerCase();
+        this.confirmation(I18n.t("subscription.modifyConfirmation", {
+                name: subscription.product_name,
+                customer: subscription.customer_name,
+                change: change
+            }),
+            () => startModificationSubscription(subscription.subscription_id, workflow_name).then(() => {
+                this.props.history.push("/processes")
+            }));
     };
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
@@ -386,6 +383,34 @@ export default class SubscriptionDetail extends React.PureComponent {
               .map((port, index) => this.renderEndpointDetail(port, index))}
         </table>;
 
+    renderIpamAddress = (address, index, className = "") => {
+      if (isEmpty(address)) {
+        return null;
+      }
+      return <table className={`detail-block ${className}`}>
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{I18n.t("ipam.assigned_address_id")}</td>
+                  <td>{address.id}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.state")}</td>
+                  <td>{ipamStates[address.state]}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.ipaddress")}</td>
+                  <td>{address.address}</td>
+                </tr>
+                <tr>
+                  <td>{I18n.t("ipam.fqdn")}</td>
+                  <td>{address.fqdn}</td>
+                </tr>
+              </tbody>
+            </table>
+    };
+
     renderIpamPrefix = (prefix, index, className = "") => {
       if (isEmpty(prefix)) {
         return null;
@@ -426,7 +451,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         </tr>
                         <tr>
                           <td>{I18n.t("ipam.fqdn")}</td>
-                        <td>{address.fqdn}</td>
+                          <td>{address.fqdn}</td>
                         </tr>
 		     </React.Fragment>
                      )}
@@ -489,51 +514,12 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     workflowByTarget = (product, target) => product.workflows.find(wf => wf.target === target);
 
-    renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
-                     loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
-        // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        const status = subscription.status;
-        let noTerminateReason = null;
+    renderActions = (subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows) => {
         if (!isEmpty(notFoundRelatedObjects)) {
-            noTerminateReason = I18n.t("subscription.no_termination_deleted_related_objects");
+            const noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
+            workflows.terminate.map(wf => wf.reason = noModifyReason);
+            workflows.modify.map(wf => wf.reason = noModifyReason);
         }
-        if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
-            noTerminateReason = I18n.t("subscription.no_termination_workflow");
-        }
-        if (status !== "provisioning" && status !== "active") {
-            noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
-        }
-        // Check if related subscriptions and main subscription are insync
-        if (isEmpty(noTerminateReason)) {
-            noTerminateReason = maybeTerminatedMessage(subscription, enrichedRelatedSubscriptions);
-        }
-
-        const isTerminatable = isEmpty(noTerminateReason) && loadedAllRelatedObjects;
-
-        const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
-
-        let noModifyReason = null;
-        if (isEmpty(modifyWorkflows)) {
-            noModifyReason = I18n.t("subscription.no_modify_workflow");
-        }
-        if (!isEmpty(notFoundRelatedObjects)) {
-            noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
-        }
-
-        // Ensure only subscription with correct status can be modified: except for new Nodes with status "provisioning"
-        if(subscription.tag === "Node" && status !== "active" && status !== "provisioning") {
-            noModifyReason = I18n.t("subscription.no_modify_invalid_status_for_node", {status: status});
-        }
-        else if (product.product_type !== "Node" && status !== "active") {
-            noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
-        }
-
-        // Check if related subscriptions and main subscription are insync
-        if (isEmpty(noModifyReason)) {
-            noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
-        }
-
-        const isModifiable = isEmpty(noModifyReason) && loadedAllRelatedObjects;
 
         return <section className="details">
             <h3>{I18n.t("subscription.actions")}</h3>
@@ -542,39 +528,49 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <thead>
                     </thead>
                     <tbody>
-                    <tr>
-                        {isTerminatable && <td><a href={I18n.t("subscription.terminate")}
-                                                    onClick={this.terminate(subscription, isTerminatable && !noTerminateReason)}>
-                            {I18n.t("subscription.terminate")}
-                        </a></td>}
-                        {!isTerminatable && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        {!isTerminatable && <td><em
-                            className="error">{noTerminateReason}</em></td>}
-                        {!loadedAllRelatedObjects && <td>
-                            <section className="terminate-link-waiting">
-                                <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                            </section>
-                        </td>}
-                    </tr>
-                    {modifyWorkflows.map((wf, index) =>
-                        <tr key={index}>
-                            {isModifiable && <td>
-                                <a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
-                                    {I18n.t(`subscription.modify_${wf.name}`)}</a>
-                            </td>}
-                            {!isModifiable && <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>}
-                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects) &&
-                            <td><em className="error">{noModifyReason}</em></td>}
-                            {!loadedAllRelatedObjects && <td>
-                                <section className="terminate-link-waiting">
-                                    <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                    <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                                </section>
-                            </td>}
-
-                        </tr>
-                    )}
+                        {workflows.terminate.map((wf, index) =>
+                            <tr key={index}>
+                                <td>
+                                    {(!wf.reason) &&
+                                    <a href="/modify" key={wf.name} onClick={this.terminate(subscription)}>
+                                        {I18n.t(`subscription.terminate`)}</a>
+                                    }
+                                    {(wf.reason) && <span>{I18n.t(`subscription.terminate`)}</span>}
+                                </td>
+                                <td>
+                                    {(wf.reason) && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                </td>
+                                {!loadedAllRelatedObjects && 
+                                    <td><section className="terminate-link-waiting">
+                                        <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                        <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                    </section></td>
+                                }
+                            </tr>
+                        )}
+                        {(isEmpty(workflows.terminate)) && <tr><td><em className="error">{I18n.t("subscription.no_termination_workflow")}</em></td></tr>}
+                        {workflows.modify.map((wf, index) =>
+                            <tr key={index}>
+                                <td>
+                                    {(!wf.reason) &&
+                                    <a href="/modify" key={wf.name} onClick={this.modify(subscription, wf.name)}>
+                                        {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                                    }
+                                    {(wf.reason) && <span>{I18n.t(`subscription.modify_${wf.name}`)}</span>}
+                                </td>
+                                <td>
+                                    {(wf.reason) && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                </td>
+                                
+                                {!loadedAllRelatedObjects && 
+                                    <td><section className="terminate-link-waiting">
+                                        <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                        <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                    </section></td>
+                                }
+                            </tr>
+                        )}
+                        {(isEmpty(workflows.modify)) && <tr><td><em className="error">{I18n.t("subscription.no_modify_workflow")}</em></td></tr>}
                     </tbody>
                 </table>
             </div>
@@ -647,6 +643,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             return this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
           case port_subscription_id:
           case "ip_prefix_subscription_id":
+          case "internetpinnen_prefix_subscription_id":
             target = subscriptions.find(sub => sub.subscription_id === identifier);
             return this.renderSubscriptionDetail(target, 0, "related-subscription");
           case "ipam_prefix_id":
@@ -654,6 +651,12 @@ export default class SubscriptionDetail extends React.PureComponent {
           case "ptp_ipv6_ipam_id":
             target = this.state.ipamPrefixes.find(prefix => prefix.id === parseInt(identifier, 10));
             return this.renderIpamPrefix(target, 0, "related-subscription");
+          case "node_ipv4_ipam_id":
+          case "node_ipv6_ipam_id":
+          case "corelink_ipv4_ipam_id":
+          case "corelink_ipv6_ipam_id":
+            target = this.state.ipamAddresses.find(address => address.id === parseInt(identifier, 10));
+            return this.renderIpamAddress(target, 0, "related-subscription");
           default:
             return null;
         }
@@ -664,7 +667,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const isDeleted = subscriptionInstanceValue.resource_type.resource_type === ims_circuit_id &&
             loadedAllRelatedObjects && notFoundRelatedObjects.some(obj => obj.requestedType === ims_circuit_id && obj.identifier === subscriptionInstanceValue.value);
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type.endsWith("subscription_id");
-        const externalLinks = [ims_circuit_id, "ims_corelink_trunk_id", "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id"]
+        const externalLinks = [ims_circuit_id, "ims_corelink_trunk_id", "ptp_ipv4_ipam_id", "ptp_ipv6_ipam_id", "ipam_prefix_id", "node_ipv4_ipam_id", "node_ipv6_ipam_id", "corelink_ipv4_ipam_id", "corelink_ipv6_ipam_id"]
         const isExternalLinkValue = isSubscriptionValue || externalLinks.includes(subscriptionInstanceValue.resource_type.resource_type);
         let isCollapsed = collapsedObjects.includes(subscriptionInstanceValue.value);
         const icon = isCollapsed ? "minus" : "plus";
@@ -739,8 +742,8 @@ export default class SubscriptionDetail extends React.PureComponent {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
             subscriptions, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects, enrichedRelatedSubscriptions,
-            collapsedObjects
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects,
+            collapsedObjects, workflows
         } = this.state;
         const {organisations, products} = this.props;
         const renderNotFound = loaded && notFound;
@@ -757,8 +760,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {this.renderFixedInputs(product)}
                     {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
-                    {this.renderActions(subscription, subscriptions, product, notFoundRelatedObjects,
-                        loadedAllRelatedObjects, enrichedRelatedSubscriptions)}
+                    {this.renderActions(subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
                     {this.renderSubscriptions(subscriptions, subscription, organisations, products)}

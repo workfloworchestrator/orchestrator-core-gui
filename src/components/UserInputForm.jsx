@@ -27,7 +27,6 @@ import VirtualLAN from "./VirtualLAN";
 import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
-import SSPProductSelect from "./SSPProductSelect";
 import GenericSelect from "./GenericSelect";
 import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
@@ -44,6 +43,8 @@ import "./UserInputForm.scss";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
+import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
+import TableSummary from "./TableSummary";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -143,7 +144,6 @@ export default class UserInputForm extends React.Component {
         this.changeUserInput(name, value);
         this.validateUserInput(name)({target: {value: value}});
     };
-
 
     changeDateInput = name => dd => {
         const value = moment(dd).format("YYYY-MM-DD");
@@ -269,29 +269,33 @@ export default class UserInputForm extends React.Component {
             case "mtu":
                 return <input type="text" id={name} name={name} value={value || ""} readOnly={userInput.readonly}
                               onChange={this.changeStringInput(name)} onBlur={this.validateUserInput(name)}/>;
+            case "jira_ticket":
+                return <input type="text" id={name} name={name} value={value || `${userInput.jira_ticket_suffix}-`}
+                              readOnly={userInput.readonly} onChange={this.changeStringInput(name)}
+                              onBlur={this.validateUserInput(name)}/>;
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value}
                                                  products={products}
                                                  organisations={organisations}
                                                  className="indent"/>;
-            case "nms_service_id" :
+            case "nms_service_id":
             case "bandwidth":
                 return <BandwidthSelect stepUserInput={stepUserInput} name={name} onBlur={this.validateUserInput(name)}
                                         onChange={this.changeStringInput(name)} value={value || ""}
                                         portsKey={userInput.ports_key} disabled={userInput.readonly}/>;
-            case "vlan" :
-            case "vlan_range" :
+            case "vlan":
+            case "vlan_range":
                 const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
                 const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
                 return <VirtualLAN vlan={value} onChange={this.changeStringInput(name)}
                                    subscriptionIdMSP={subscriptionIdMSP} onBlur={this.validateUserInput(name)}
                                    imsCircuitId={imsCircuitId} reportError={this.reportCustomError(userInput.type)}/>
-            case "organisation" :
+            case "organisation":
                 return <OrganisationSelect key={name} organisations={organisations}
                                            onChange={this.changeSelectInput(name)}
                                            organisation={value}
                                            disabled={userInput.readonly}/>;
-            case "product" :
+            case "product":
                 return <ProductSelect products={products}
                                       onChange={this.changeSelectInput(name)}
                                       product={value}
@@ -320,8 +324,7 @@ export default class UserInputForm extends React.Component {
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
-                const newProductId = lookupValueFromNestedState("product", currentState) ||
-                    lookupValueFromNestedState("product", currentState);
+                const newProductId = lookupValueFromNestedState("product", currentState);
                 return <TransitionProductSelect
                     onChange={this.changeSelectInput(name)}
                     product={value}
@@ -330,18 +333,18 @@ export default class UserInputForm extends React.Component {
                     transitionType={userInput.transition_type}
                     newProductId={newProductId}
                 />;
-            case "contact_persons" :
+            case "contact_persons":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return <ContactPersons
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
                     organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
-            case "emails" :
+            case "emails":
                 return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={true}/>;
-            case "email" :
+            case "email":
                 return <EmailInput emails={this.commaSeperatedArray(value)}
                                    onChangeEmails={this.changeArrayInput(name)}
                                    placeholder={""} multipleEmails={false}/>;
@@ -461,7 +464,11 @@ export default class UserInputForm extends React.Component {
                     servicePorts.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
-                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
+                        <section className="refresh-service-ports">
+                            <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
+                        </section>
+                    }
                     <MultipleServicePorts servicePorts={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
@@ -487,7 +494,11 @@ export default class UserInputForm extends React.Component {
                      servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product_id));
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
-                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && <section className="refresh-service-ports"><i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i></section>}
+                    {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
+                        <section className="refresh-service-ports">
+                            <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
+                        </section>
+                    }
                     <MultipleServicePortsSN8 servicePorts={portsSN8}
                                              availableServicePorts={availableServicePortsSN8}
                                              organisations={organisations}
@@ -502,15 +513,6 @@ export default class UserInputForm extends React.Component {
                                              disabledPorts={userInput.disabledPorts}
                                              reportError={this.reportCustomError(userInput.type)}/>
                 </div>;
-            case "new_ssp_workflow":
-                const bandwithKeySSP = userInput.bandwidth_key || "bandwidth";
-                const bandwithSSP = findValueFromInputStep(bandwithKeySSP, stepUserInput) ||
-                    lookupValueFromNestedState(bandwidthKey, currentState);
-                const ssp_products = filterProductsByBandwidth(products, bandwithSSP).filter((product) => product.tag === 'SSP');
-                return <SSPProductSelect products={ssp_products}
-                                         onChange={this.changeSelectInput(name)}
-                                         product={value}
-                                         disabled={userInput.readonly}/>;
             case "subscription":
             case "subscriptions":
                 const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
@@ -519,6 +521,12 @@ export default class UserInputForm extends React.Component {
                                             subscriptions={this.commaSeperatedArray(value)}
                                             minimum={userInput.minimum}
                                             maximum={userInput.maximum}/>;
+            case "subscription_product_tag":
+                return <SubscriptionProductTagSelect onChange={this.changeSelectInput(name)}
+                                            tags={userInput.tags}
+                                            productId={lookupValueFromNestedState(userInput.product_key, currentState)}
+                                            subscription={value}
+                                            excludedSubscriptionIds={userInput.excluded_subscriptions}/>;
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return <IPPrefix preselectedPrefix={preselectedPrefix}
@@ -542,9 +550,9 @@ export default class UserInputForm extends React.Component {
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
-                const corelinkInterfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
-                                       interfaceType={corelinkInterfaceType}
+                                       interfaceType={corelinkInterfaceSpeed}
                                        nodes={subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated')}
                                        port={value}/>;
             case "corelink_add_link":
@@ -555,10 +563,16 @@ export default class UserInputForm extends React.Component {
                        nodes={subscriptions.filter((subscription) => subscription.subscription_id === nodeSubscriptionId)}
                        port={value}/>;
             case "generic_select":
-                return <GenericSelect onChange={this.changeSelectInput(name)} choices={userInput.choices} selected={value} disabled={userInput.readonly}/>;
+                return <GenericSelect onChange={this.changeSelectInput(name)}
+                                      choices={userInput.choices}
+                                      selected={value}
+                                      disabled={userInput.readonly}/>;
             case "bfd":
                 return <BfdSettings name={name} value={value} onChange={this.changeUserInput} readOnly={userInput.readonly}/>;
             case "numeric":
+                if (userInput.state_key_for_maximum !== '') {
+                    userInput.maximum = lookupValueFromNestedState(userInput.state_key_for_maximum, currentState);
+                }
                 return <NumericInput onChange={this.changeNumericInput(name)}
                                      min={userInput.minimum || Number.MIN_SAFE_INTEGER}
                                      max={userInput.maximum || Number.MAX_SAFE_INTEGER}
@@ -567,6 +581,9 @@ export default class UserInputForm extends React.Component {
                                      value={value}
                                      strict={true}
                                      readOnly={userInput.readonly || false}/>;
+            case "table_summary":
+            case "migration_summary":
+                return <TableSummary data={userInput.data}/>;
             default:
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }

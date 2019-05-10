@@ -5,7 +5,7 @@ import {
     initialWorkflowInput,
     startModificationSubscription,
     startProcess,
-    subscriptionInsyncStatus,
+    subscriptionWorkflows,
     subscriptionsWithDetails,
     validation
 } from "../api";
@@ -15,12 +15,11 @@ import ProductSelect from "../components/ProductSelect";
 import UserInputForm from "../components/UserInputForm";
 import ProductValidation from "../components/ProductValidation";
 import "./NewProcess.scss";
-import {TARGET_CREATE, TARGET_MODIFY} from "../validations/Products";
+import {TARGET_CREATE} from "../validations/Products";
 import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
-import {maybeModifiedMessage, maybeTerminatedMessage} from "../validations/Subscriptions";
 import {getQueryParameters} from "../utils/QueryParameters";
 
 
@@ -126,19 +125,12 @@ export default class NewProcess extends React.Component {
                         const [productValidation, userInput] = result;
 
                         const stepUserInput = userInput.filter(input => input.name !== "product");
-                        const {preselectedOrganisation, preselectedDienstafname} = this.props;
+                        const {preselectedOrganisation} = this.props;
                         if (preselectedOrganisation) {
                             const organisatieInput = stepUserInput.find(x => x.name === "organisation");
                             if (organisatieInput) {
                                 organisatieInput.value = preselectedOrganisation;
                                 organisatieInput.readonly = true;
-                            }
-                        }
-                        if (preselectedDienstafname) {
-                            const dienstafnameInput = stepUserInput.find(x => x.name === "dienstafname");
-                            if (dienstafnameInput) {
-                                dienstafnameInput.value = preselectedDienstafname;
-                                dienstafnameInput.readonly = true;
                             }
                         }
                         this.setState({
@@ -164,7 +156,7 @@ export default class NewProcess extends React.Component {
         stop(e);
         const {modifySubscription, modifyWorkflow} = this.state;
         const {location} = this.props;
-	const preselectedInput = getQueryParameters(location.search);
+        const preselectedInput = getQueryParameters(location.search);
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         this.confirmation(I18n.t("subscription.modifyConfirmation", {
@@ -172,7 +164,7 @@ export default class NewProcess extends React.Component {
                 customer: subscription.customer_name,
                 change: change
             }),
-            () => startModificationSubscription(modifySubscription, {name: modifyWorkflow}, preselectedInput.dienstafname, preselectedInput.product).then(() => {
+            () => startModificationSubscription(modifySubscription, modifyWorkflow, preselectedInput.product).then(() => {
                 this.props.history.push("/processes")
             }));
     };
@@ -247,7 +239,7 @@ export default class NewProcess extends React.Component {
                            product={product}
                            validSubmit={this.validSubmit(products)}
                            refreshSubscriptions={this.refreshSubscriptions}
-			   preselectedInput={getQueryParameters(this.props.location.search)}
+                           preselectedInput={getQueryParameters(this.props.location.search)}
             />}
         </section>;
     }
@@ -256,28 +248,26 @@ export default class NewProcess extends React.Component {
         const subscriptionSelected = option && option.value;
         const {subscriptions} = this.state;
 
-        let workflows;
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                    this.setState({notModifiableMessage: maybeModifiedMessage(subscription, relation_info)});
-                }
-            );
-            workflows = products.find(prod => prod.product_id === subscription.product_id)
-                .workflows.filter(wf => wf.target === TARGET_MODIFY);
-        } else {
-            workflows = []
+
+            subscriptionWorkflows(subscription.subscription_id).then(workflows => {
+                this.setState({
+                    notModifiableMessage: I18n.t(workflows.reason, workflows),
+                    modifyWorkflows: workflows.modify.filter(wf => !wf.reason),
+                });
+            });
         }
+
         this.setState({
             modifySubscription: option ? option.value : undefined,
-            notModifiableMessage: I18n.t("subscription.acquiring_insync_info_about_relations"),
-            modifyWorkflows: workflows,
-            modifyWorkflow: workflows.length === 1 ? workflows[0].name : this.state.modifyWorkflow
         });
     };
 
     changeModifyWorkflow = option => {
-        this.setState({modifyWorkflow: option ? option.value : undefined});
+        this.setState({
+            modifyWorkflow: option ? option.value : undefined,
+        });
     };
 
     changeTerminateSubscription = option => {
@@ -286,10 +276,14 @@ export default class NewProcess extends React.Component {
         const {subscriptions} = this.state;
         if (subscriptionSelected) {
             const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
-            subscriptionInsyncStatus(subscription.subscription_id).then(relation_info => {
-                    this.setState({notTerminatableMessage: maybeTerminatedMessage(subscription, relation_info)});
-                }
-            );
+            subscriptionWorkflows(subscription.subscription_id).then(workflows => {
+                let workflow = workflows.terminate[0]
+
+                this.setState({
+                    notTerminatableMessage: I18n.t(workflow.reason, workflow)
+                });
+            });
+
         }
         this.setState({
             terminateSubscription: option ? option.value : undefined,
@@ -302,10 +296,10 @@ export default class NewProcess extends React.Component {
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.modify_subscription")}</h3>
-		<section className="form-divider">
+                <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
-                        subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node"))}
+                        subscriptions={subscriptions.filter(sub => (sub.status === "active" && sub.insync) || (sub.status === "provisioning" && sub.insync && sub.tag === "Node") || sub.status === "migrating")}
                         subscription={modifySubscription}
                         onChange={this.changeModifySubscription(products)}
                         organisation={organisationName}
