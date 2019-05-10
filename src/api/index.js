@@ -379,6 +379,10 @@ export function subnets(subnet, netmask, prefixlen){
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
+export function free_subnets(subnet, netmask, prefixlen){
+    return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen  );
+}
+
 export function deleteProcess(processId) {
     return fetchJson(`processes/${processId}`, {method: "DELETE"}, {}, true, false);
 }

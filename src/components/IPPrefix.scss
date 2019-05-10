@@ -34,8 +34,8 @@ section.ipblock-selector {
                 background-color: darken($light-green, 10%);
             }
         }
-        &.Subnet {
-            background-color: $light-grey;
+        tr.Subnet {
+            background-color: darken($light-blue, 30%);
             cursor: default;
         }
         tr.selected {

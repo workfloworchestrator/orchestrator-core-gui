@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import {subnets} from "../api";
+import {free_subnets} from "../api";
 
 import "react-select/dist/react-select.css";
 import "./SplitPrefix.scss";
@@ -23,8 +23,9 @@ export default class SplitPrefix extends React.PureComponent {
 
     componentDidMount(){
         const {subnet, netmask, prefixlen} = {...this.props};
-        subnets(subnet, netmask, prefixlen).then(result =>{
-            this.setState({subnets:result['subnets'],
+        free_subnets(subnet, prefixlen, prefixlen).then(result =>{
+            let subnets = result.filter(x => parseInt(x.split("/")[1],10)===prefixlen);
+            this.setState({subnets:subnets,
                 desired_prefixlen: parseInt(netmask, 10),
                 selected_subnet: subnet + "/" + netmask,
                 loading: false});
@@ -36,8 +37,9 @@ export default class SplitPrefix extends React.PureComponent {
         const {subnet, netmask} = {...this.props};
         const prefixlen = e ? e.value : null;
         if (prefixlen){
-            subnets(subnet, netmask, prefixlen).then(result => {
-                this.setState({subnets: result['subnets'], desired_prefixlen: prefixlen, loading: false, isValid: false});
+            free_subnets(subnet, netmask, prefixlen).then(result => {
+                let subnets = result.filter(x => parseInt(x.split("/")[1],10)===prefixlen);
+                this.setState({subnets: subnets, desired_prefixlen: prefixlen, loading: false, isValid: false});
             })
         }
     }
