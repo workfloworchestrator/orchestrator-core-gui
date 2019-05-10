@@ -169,8 +169,8 @@ export function subscriptionsByProductType(type) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptionInsyncStatus(subscription_id) {
-    return fetchJson(`subscriptions/insync_status_relations/${subscription_id}`)
+export function subscriptionWorkflows(subscription_id) {
+    return fetchJson(`v2/subscriptions/workflows/${subscription_id}`)
 }
 
 export function subscriptionsByProductId(productId) {
@@ -341,12 +341,12 @@ export function terminateSubscription(process) {
     return postPutJson("processes/terminate-subscription", process, "post");
 }
 
-export function startModificationSubscription(subscriptionId, workflow, product=null) {
+export function startModificationSubscription(subscriptionId, workflow_name, product=null) {
     const body = {subscription_id: subscriptionId};
     if (!isEmpty(product)) {
         body.product = product;
     }
-    return postPutJson(`processes/modify-subscription/${workflow.name}`, body, "post");
+    return postPutJson(`processes/modify-subscription/${workflow_name}`, body, "post");
 }
 
 //IPAM IP Prefixes
