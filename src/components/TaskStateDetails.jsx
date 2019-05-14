@@ -44,7 +44,7 @@ export default class TaskStateDetails extends React.PureComponent {
                             <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
                         </span>
                 </CopyToClipboard>
-                <HighlightCode data={JSON.stringify(task, null, 2)} />
+                <HighlightCode data={JSON.stringify(task, null, 4)} />
             </section>
         )
 
@@ -94,7 +94,7 @@ export default class TaskStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 1)}/> : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)}/> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {

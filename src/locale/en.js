@@ -369,6 +369,8 @@ I18n.translations.en = {
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
         port_mode_info: "The port mode as sent to IMS and NSO",
+        old_subscription_label: "Old Subscription",
+        old_subscription_label_info: "The old subscription in this workflow",
         sap1: {
             label: "Service Attach Point settings for first selected port",
             service_port: "First selected Port",
@@ -524,7 +526,9 @@ I18n.translations.en = {
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
         sap_migration_summary: "Summary of SAP migration changes",
-        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed"
+        sap_migration_summary_info: "Please check the summary for any inconsistencies in the port that will be removed",
+        sap_summary_sn7: "Summary of available SN7 SAP's",
+        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details"
     },
     process_state: {
         copy: "Copy to clipboard",

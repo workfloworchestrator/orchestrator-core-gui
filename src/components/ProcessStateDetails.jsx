@@ -87,6 +87,11 @@ class ProcessStateDetails extends React.PureComponent {
         const currKeys = Object.keys(curr);
         const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.reduce((acc, key) => {
+            // if (curr[key] === Object(curr[key]) && prev[key]) {
+            //     acc[key] = this.stateDelta(prev[key], curr[key]);
+            // } else {
+            //     acc[key] = curr[key];
+            // }
             acc[key] = curr[key];
             return acc;
         }, {});
@@ -112,7 +117,7 @@ class ProcessStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 1)}/> : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)}/> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
