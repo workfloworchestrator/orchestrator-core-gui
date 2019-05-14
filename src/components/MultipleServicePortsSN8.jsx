@@ -135,7 +135,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                                       servicePort={servicePort.subscription_id}
                                       servicePorts={inSelect}
                                       organisations={organisations}
-                                      disabled={disabled || !servicePort.modifiable || disabledPorts}
+                                      disabled={disabled || (servicePort.modifiable === false) || disabledPorts}
                                       visiblePortMode={visiblePortMode}/>
                 {usedUntaggedServicePorts[index] &&
                 <em className="error">{I18n.t("service_ports.used_ssp", {descriptions: usedUntaggedServicePorts[index]})}</em>}
@@ -146,7 +146,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     <VirtualLAN vlan={servicePort.port_mode === "untagged" ? "0" : servicePort.vlan}
                                 onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={servicePort.subscription_id}
-                                disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id || !servicePort.modifiable}
+                                disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id || (servicePort.modifiable === false)}
                                 placeholder={vlanPlaceholder}
                                 servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
