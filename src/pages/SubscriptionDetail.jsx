@@ -8,7 +8,7 @@ import {
     portByImsPortId,
     portByImsServiceId,
     processSubscriptionsBySubscriptionId,
-    productById, subscriptionInsyncStatus,
+    productById, subscriptionWorkflows,
     serviceByImsServiceId,
     subscriptionsDetail, internalPortByImsPortId
 } from "../api";
@@ -19,8 +19,6 @@ import {
     absent,
     ims_circuit_id,
     ims_port_id,
-    maybeModifiedMessage,
-    maybeTerminatedMessage,
     nms_service_id,
     parent_subscriptions,
     port_subscription_id,
@@ -30,7 +28,6 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
-import {TARGET_MODIFY, TARGET_TERMINATE} from "../validations/Products";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -47,13 +44,13 @@ export default class SubscriptionDetail extends React.PureComponent {
             notFound: false,
             loaded: false,
             loadedAllRelatedObjects: false,
-            enrichedRelatedSubscriptions: {},
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
             notFoundRelatedObjects: [],
             collapsedObjects: [],
+            workflows: {terminate: [], modify:[]},
         };
     }
 
@@ -70,7 +67,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 const values = subscriptionInstanceValues(subscription);
                 this.setState({subscription: subscription, loaded: true});
                 const promises = [processSubscriptionsBySubscriptionId(subscription.subscription_id),
-                    productById(subscription.product_id), subscriptionInsyncStatus(subscription.subscription_id)]
+                    productById(subscription.product_id), subscriptionWorkflows(subscription.subscription_id)]
                     .concat(values.map(val => getResourceTypeInfo(val.resource_type.resource_type, val.value)));
                 if (values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
                     !values.some(val => val.resource_type.resource_type === nms_service_id)) {
@@ -99,7 +96,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     this.setState({
                         subscriptionProcesses: result[0],
                         product: result[1],
-                        enrichedRelatedSubscriptions: result[2],
+                        workflows: result[2],
                         imsServices: imsServices,
                         ipamPrefixes: ipamPrefixes,
                         ipamAddresses: ipamAddresses,
@@ -163,30 +160,26 @@ export default class SubscriptionDetail extends React.PureComponent {
         }
     };
 
-    terminate = (subscription, isTerminatable) => e => {
+    terminate = (subscription) => e => {
         stop(e);
-        if (isTerminatable) {
-            this.confirmation(I18n.t("subscription.terminateConfirmation", {
-                    name: subscription.product_name,
-                    customer: subscription.customer_name
-                }),
-                () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`));
-        }
+        this.confirmation(I18n.t("subscription.terminateConfirmation", {
+                name: subscription.product_name,
+                customer: subscription.customer_name
+            }),
+            () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`));
     };
 
-    modify = (subscription, isModifiable, workflow) => e => {
+    modify = (subscription, workflow_name) => e => {
         stop(e);
-        if (isModifiable) {
-            const change = I18n.t(`subscription.modify_${workflow.name}`).toLowerCase();
-            this.confirmation(I18n.t("subscription.modifyConfirmation", {
-                    name: subscription.product_name,
-                    customer: subscription.customer_name,
-                    change: change
-                }),
-                () => startModificationSubscription(subscription.subscription_id, workflow).then(() => {
-                    this.props.history.push("/processes")
-                }));
-        }
+        const change = I18n.t(`subscription.modify_${workflow_name}`).toLowerCase();
+        this.confirmation(I18n.t("subscription.modifyConfirmation", {
+                name: subscription.product_name,
+                customer: subscription.customer_name,
+                change: change
+            }),
+            () => startModificationSubscription(subscription.subscription_id, workflow_name).then(() => {
+                this.props.history.push("/processes")
+            }));
     };
 
     cancelConfirmation = () => this.setState({confirmationDialogOpen: false});
@@ -521,53 +514,12 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     workflowByTarget = (product, target) => product.workflows.find(wf => wf.target === target);
 
-    renderActions = (subscription, subscriptions, product, notFoundRelatedObjects,
-                     loadedAllRelatedObjects, enrichedRelatedSubscriptions) => {
-        const modifyWorkflowsThatCanAlwaysRun = ["migrate_sn7_static_ip_sap_to_sn8", "migrate_sn7_bgp_ip_sap_to_sn8"];
-
-        // All subscription statuses: ["initial", "provisioning", "active", "disabled", "terminated"]
-        const status = subscription.status;
-        let noTerminateReason = null;
+    renderActions = (subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows) => {
         if (!isEmpty(notFoundRelatedObjects)) {
-            noTerminateReason = I18n.t("subscription.no_termination_deleted_related_objects");
+            const noModifyReason = "subscription.no_modify_deleted_related_objects";
+            workflows.terminate.map(wf => wf.reason = noModifyReason);
+            workflows.modify.map(wf => wf.reason = noModifyReason);
         }
-        if (!this.workflowByTarget(product, TARGET_TERMINATE)) {
-            noTerminateReason = I18n.t("subscription.no_termination_workflow");
-        }
-        if (status !== "provisioning" && status !== "active") {
-            noTerminateReason = I18n.t("subscription.no_termination_invalid_status", {status: status});
-        }
-        // Check if related subscriptions and main subscription are insync
-        if (isEmpty(noTerminateReason)) {
-            noTerminateReason = maybeTerminatedMessage(subscription, enrichedRelatedSubscriptions);
-        }
-
-        const isTerminatable = isEmpty(noTerminateReason) && loadedAllRelatedObjects;
-
-        const modifyWorkflows = product.workflows.filter(wf => wf.target === TARGET_MODIFY);
-
-        let noModifyReason = null;
-        if (isEmpty(modifyWorkflows)) {
-            noModifyReason = I18n.t("subscription.no_modify_workflow");
-        }
-        if (!isEmpty(notFoundRelatedObjects)) {
-            noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
-        }
-
-        // Ensure only subscription with correct status can be modified: except for new Nodes with status "provisioning"
-        if(subscription.tag === "Node" && status !== "active" && status !== "provisioning") {
-            noModifyReason = I18n.t("subscription.no_modify_invalid_status_for_node", {status: status});
-        }
-        else if (product.product_type !== "Node" && status !== "active") {
-            noModifyReason = I18n.t("subscription.no_modify_invalid_status", {status: status});
-        }
-
-        // Check if related subscriptions and main subscription are insync
-        if (status !== "migrating" && isEmpty(noModifyReason)) {
-            noModifyReason = maybeModifiedMessage(subscription, enrichedRelatedSubscriptions);
-        }
-
-        const isModifiable = isEmpty(noModifyReason) && loadedAllRelatedObjects;
 
         return <section className="details">
             <h3>{I18n.t("subscription.actions")}</h3>
@@ -576,46 +528,49 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <thead>
                     </thead>
                     <tbody>
-                    <tr>
-                        {isTerminatable && <td><a href={I18n.t("subscription.terminate")}
-                                                    onClick={this.terminate(subscription, isTerminatable && !noTerminateReason)}>
-                            {I18n.t("subscription.terminate")}
-                        </a></td>}
-                        {!isTerminatable && <td><span>{I18n.t("subscription.terminate")}</span></td>}
-                        {!isTerminatable && <td><em
-                            className="error">{noTerminateReason}</em></td>}
-                        {!loadedAllRelatedObjects && <td>
-                            <section className="terminate-link-waiting">
-                                <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                            </section>
-                        </td>}
-                    </tr>
-                    {modifyWorkflows.map((wf, index) =>
-                        <tr key={index}>
-                            {(modifyWorkflowsThatCanAlwaysRun.includes(wf.name) && subscription.status === "migrating") &&
-                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, true, wf)}>
-                                    {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                        {workflows.terminate.map((wf, index) =>
+                            <tr key={index}>
+                                <td>
+                                    {(!wf.reason) &&
+                                    <a href="/modify" key={wf.name} onClick={this.terminate(subscription)}>
+                                        {I18n.t(`subscription.terminate`)}</a>
+                                    }
+                                    {(wf.reason) && <span>{I18n.t(`subscription.terminate`)}</span>}
                                 </td>
-                            }
-                            {(isModifiable && (subscription.status === "active" || subscription.status === "provisioning") && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
-                                <td><a href="/modify" key={wf.name} onClick={this.modify(subscription, isModifiable, wf)}>
-                                {I18n.t(`subscription.modify_${wf.name}`)}</a></td>
-                            }
-                            {(!isModifiable || modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
-                                <td><span>{I18n.t(`subscription.modify_${wf.name}`)}</span></td>
-                            }
-                            {(!isEmpty(noModifyReason) && loadedAllRelatedObjects && !modifyWorkflowsThatCanAlwaysRun.includes(wf.name)) &&
-                            <td><em className="error">{noModifyReason}</em></td>}
-                            {!loadedAllRelatedObjects && <td>
-                                <section className="terminate-link-waiting">
-                                    <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                    <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                                </section>
-                            </td>}
-
-                        </tr>
-                    )}
+                                <td>
+                                    {(wf.reason) && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                </td>
+                                {!loadedAllRelatedObjects && 
+                                    <td><section className="terminate-link-waiting">
+                                        <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                        <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                    </section></td>
+                                }
+                            </tr>
+                        )}
+                        {(isEmpty(workflows.terminate)) && <tr><td><em className="error">{I18n.t("subscription.no_termination_workflow")}</em></td></tr>}
+                        {workflows.modify.map((wf, index) =>
+                            <tr key={index}>
+                                <td>
+                                    {(!wf.reason) &&
+                                    <a href="/modify" key={wf.name} onClick={this.modify(subscription, wf.name)}>
+                                        {I18n.t(`subscription.modify_${wf.name}`)}</a>
+                                    }
+                                    {(wf.reason) && <span>{I18n.t(`subscription.modify_${wf.name}`)}</span>}
+                                </td>
+                                <td>
+                                    {(wf.reason) && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                </td>
+                                
+                                {!loadedAllRelatedObjects && 
+                                    <td><section className="terminate-link-waiting">
+                                        <em>{I18n.t("subscription.fetchingImsData")}</em>
+                                        <i className="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                                    </section></td>
+                                }
+                            </tr>
+                        )}
+                        {(isEmpty(workflows.modify)) && <tr><td><em className="error">{I18n.t("subscription.no_modify_workflow")}</em></td></tr>}
                     </tbody>
                 </table>
             </div>
@@ -787,8 +742,8 @@ export default class SubscriptionDetail extends React.PureComponent {
         const {
             loaded, notFound, subscription, subscriptionProcesses, product, imsServices, imsEndpoints,
             subscriptions, confirmationDialogOpen, confirmationDialogAction,
-            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects, enrichedRelatedSubscriptions,
-            collapsedObjects
+            confirmationDialogQuestion, notFoundRelatedObjects, loadedAllRelatedObjects,
+            collapsedObjects, workflows
         } = this.state;
         const {organisations, products} = this.props;
         const renderNotFound = loaded && notFound;
@@ -805,8 +760,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     {this.renderFixedInputs(product)}
                     {this.renderProductBlocks(subscription, notFoundRelatedObjects, loadedAllRelatedObjects,
                         imsServices, collapsedObjects, subscriptions, imsEndpoints)}
-                    {this.renderActions(subscription, subscriptions, product, notFoundRelatedObjects,
-                        loadedAllRelatedObjects, enrichedRelatedSubscriptions)}
+                    {this.renderActions(subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows)}
                     {this.renderProduct(product)}
                     {this.renderProcesses(subscriptionProcesses)}
                     {this.renderSubscriptions(subscriptions, subscription, organisations, products)}
