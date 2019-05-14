@@ -516,7 +516,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     renderActions = (subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows) => {
         if (!isEmpty(notFoundRelatedObjects)) {
-            const noModifyReason = I18n.t("subscription.no_modify_deleted_related_objects");
+            const noModifyReason = "subscription.no_modify_deleted_related_objects";
             workflows.terminate.map(wf => wf.reason = noModifyReason);
             workflows.modify.map(wf => wf.reason = noModifyReason);
         }
