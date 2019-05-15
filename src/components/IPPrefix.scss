@@ -17,7 +17,7 @@ section.ipblock-selector {
             border-bottom: 1px solid $light-grey;
         }
         tr.Allocated {
-            cursor: default;
+            cursor: pointer;
             background-color: $light-blue;
             &:hover {
                 background-color: darken($light-blue, 10%);
@@ -28,11 +28,15 @@ section.ipblock-selector {
             background-color: $light-gold;
         }
         tr.Free {
-            cursor: default;
+            cursor: pointer;
             background-color: $light-green;
             &:hover {
                 background-color: darken($light-green, 10%);
             }
+        }
+        tr.Subnet {
+            background-color: darken($light-blue, 30%);
+            cursor: default;
         }
         tr.selected {
             background-color: $dark-grey;
