@@ -64,23 +64,7 @@ export default class Prefixes extends React.PureComponent {
       }
   };
 
-   getPrefixSubscriptions = () => {
-       // const {organisations} = this.props;
-       const promise = prefixSubscriptions();
-       promise.then(result =>
-       {
-           this.setState({prefixes: result})
-       });
-   }
-      //result.map(prefix => {
-       // const {customer_id, start_date, subscription_id} = prefix;
-       // const organisation = customer_id === undefined ? "Unknown" : organisationNameByUuid(customer_id, organisations);
-        //const subscription = subscription_id === undefined ? "Missing": subscription_id;
-        //return {...prefix, customer: organisation, start_date_as_str: renderDate(start_date), subscription_id: subscription} };
-   //}
-
-
-
+  
   getFreePrefixes = roots => {
         const now = Math.floor(Date.now() / 1000);
         const nowString = renderDate(now);
