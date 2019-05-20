@@ -21,6 +21,7 @@ export default class IPPrefix extends React.PureComponent {
             isValid: true,
             ipBlocks: [],
             loading: true,
+            filteredIpBlocks: [],
             filter_prefixes: [],
             filter: {
                 state: [
@@ -49,7 +50,7 @@ export default class IPPrefix extends React.PureComponent {
             prefix_filters().then(result=> {
                 let {filter} = this.state;
                 filter['prefix'] = result[0];
-                this.setState({filter_prefixes: result, filter: filter})
+                this.setState({filter_prefixes: result, filter: filter, filteredIpBlocks: this.filterAndSortBlocks()})
             });
             ip_blocks(1).then(result =>{
                 this.setState({ipBlocks:result, loading: false});
@@ -64,7 +65,8 @@ export default class IPPrefix extends React.PureComponent {
         sorted.descending = sorted.name === name ? !sorted.descending : false;
         sorted.name = name;
         this.setState({
-            sorted: sorted
+            sorted: sorted,
+            filteredIpBlocks: this.filterAndSortBlocks()
         });
     };
 
@@ -98,8 +100,7 @@ export default class IPPrefix extends React.PureComponent {
         } else {
             filter['state'] = filter['state'].filter(e => e !== state_filter);
         }
-        this.setState({filter: filter});
-
+        this.setState({filter: filter, filteredIpBlocks: this.filterAndSortBlocks()});
     }
 
     filterParentPrefix = e => {
@@ -109,7 +110,7 @@ export default class IPPrefix extends React.PureComponent {
         filter_prefixes.forEach(prefix => the_prefix = prefix['id'] === parentPrefix ? prefix : the_prefix);
         filter['prefix'] = the_prefix;
         ip_blocks(parentPrefix).then(result => {
-            this.setState({ipBlocks:result, loading: false, filter: filter});
+            this.setState({ipBlocks:result, filteredIpBlocks: this.filterAndSortBlocks(), loading: false, filter: filter});
         });
     }
 
