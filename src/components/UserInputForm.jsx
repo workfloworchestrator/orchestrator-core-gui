@@ -45,6 +45,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
+import {subscriptionsByTags, subscriptionsWithDetails} from "../api";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -69,8 +70,44 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
+            subscriptionsLoaded: false,
+            servicePortsLoadedSN7: false,
+            servicePortsLoadedSN8: false,
+            subscriptions: [],
+            servicePortsSN7: [],
+            servicePortsSN8: [],
         }
     };
+
+    loadSubscriptions = () => {
+        subscriptionsWithDetails().then(subscriptions => {
+            this.setState({subscriptionsLoaded: true, subscriptions: subscriptions});
+        });
+    };
+
+    loadServicePortsSN7 = () => {
+        subscriptionsByTags(["MSP", "SSP", "MSPNL"]).then(result => {
+            this.setState({servicePortsSN7: result, servicePortsLoadedSN7: true});
+        })
+    };
+
+    loadServicePortsSN8 = () => {
+        subscriptionsByTags(["SP"]).then(result => {
+            this.setState({servicePortsSN8: result, servicePortsLoadedSN8: true});
+        })
+    };
+
+    componentDidMount = () => {
+        if (this.props.preloadSubscriptions) {
+            this.loadSubscriptions()
+        }
+        if (this.props.preloadServicePortsSN7) {
+            this.loadServicePortsSN7()
+        }
+        if (this.props.preloadServicePortsSN8) {
+            this.loadServicePortsSN8()
+        }
+    }
 
     componentWillReceiveProps(nextProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
@@ -251,7 +288,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts, servicePortsSN8, subscriptions, preselectedInput} = this.props;
+        const {currentState, products, organisations, servicePortsSN7, servicePortsSN8, subscriptions, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
         let organisationId;
         switch (userInput.type) {
@@ -460,8 +497,8 @@ export default class UserInputForm extends React.Component {
                     lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
-                const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const availableServicePorts = productIds.length === products.length ? servicePortsSN7 :
+                    servicePortsSN7.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
@@ -469,7 +506,7 @@ export default class UserInputForm extends React.Component {
                             <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
                         </section>
                     }
-                    <MultipleServicePorts servicePorts={ports}
+                    <MultipleServicePorts servicePortsSN7={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
                                          onChange={this.changeNestedInput(name)}
@@ -499,7 +536,7 @@ export default class UserInputForm extends React.Component {
                             <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
                         </section>
                     }
-                    <MultipleServicePortsSN8 servicePorts={portsSN8}
+                    <MultipleServicePortsSN8 servicePortsSN7={portsSN8}
                                              availableServicePorts={availableServicePortsSN8}
                                              organisations={organisations}
                                              onChange={this.changeNestedInput(name)}
@@ -619,13 +656,28 @@ UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    servicePorts: PropTypes.array.isRequired,
-    servicePortsSN8: PropTypes.array.isRequired,
-    subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
     refreshSubscriptions: PropTypes.func,
     process: PropTypes.object,
-    preselectedInput: PropTypes.object
+    preselectedInput: PropTypes.object,
+
+    preloadSubscriptions: PropTypes.bool,
+    preloadServicePortsSN7: PropTypes.bool,
+    preloadServicePortsSN8: PropTypes.bool,
+    subscriptions: PropTypes.array,
+    servicePortsSN7: PropTypes.array,
+    servicePortsSN8: PropTypes.array,
+
 };
+
+UserInputForm.defaultProps = {
+    preloadSubscriptions: false,
+    preloadServicePortsSN7: false,
+    preloadServicePortsSN8: false,
+    subscriptions: [],
+    servicePortsSN7: [],
+    servicePortsSN8: [],
+};
+

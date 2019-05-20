@@ -2,7 +2,7 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
-import {process, resumeProcess, subscriptionsWithDetails, subscriptionsByTags} from "../api";
+import {process, resumeProcess} from "../api";
 import {isEmpty, stop} from "../utils/Utils";
 import {setFlash} from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
@@ -92,16 +92,19 @@ class ProcessDetail extends React.PureComponent {
                     stepUserInput.forEach(userInput => userInput.value = lookupValueFromNestedState(userInput.name, state));
                 }
                 this.setState({
-                    process: processInstance, loaded: true, stepUserInput: stepUserInput,
+                    process: processInstance, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
                 Promise.all([
                     processSubscriptionsByProcessId(processInstance.id),
-                    subscriptionsByTags(["MSP", "SSP", "MSPNL"]),
-                    subscriptionsByTags(["SP"])
+                    // subscriptionsByTags(["MSP", "SSP", "MSPNL"]),
+                    // subscriptionsByTags(["SP"])
                 ])
                 .then(res => {
-                    this.setState({subscriptionProcesses: res[0], servicePorts: res[1], servicePortsSN8: res[2]});
+                    this.setState({subscriptionProcesses: res[0],
+                        loaded: true
+                        // servicePorts: res[1], servicePortsSN8: res[2]
+                    });
                 });
             }).catch(err => {
             if (err.response && err.response.status === 404) {
@@ -109,10 +112,6 @@ class ProcessDetail extends React.PureComponent {
             } else {
                 throw err;
             }
-        });
-        // Todo: remove this one OR add it to the promise.all() ??
-        subscriptionsWithDetails().then(subscriptions => {
-            this.setState({subscriptions: subscriptions});
         });
     };
 
@@ -260,9 +259,9 @@ class ProcessDetail extends React.PureComponent {
                                products={products}
                                organisations={organisations}
                                history={history}
-                               subscriptions={subscriptions}
-                               servicePorts={servicePorts}
-                               servicePortsSN8={servicePortsSN8}
+                               // subscriptions={subscriptions}
+                               // servicePorts={servicePorts}
+                               // servicePortsSN8={servicePortsSN8}
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}
