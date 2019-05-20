@@ -363,6 +363,10 @@ export function prefixSubscriptionsByRootPrefix(parentId) {
     return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
 }
 
+export function prefixSubscriptions(){
+    return fetchJson(`ipam/prefix_subscriptions/`);
+}
+
 export function prefixById(prefixId) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
@@ -373,6 +377,10 @@ export function freeSubnets(supernet) {
 
 export function subnets(subnet, netmask, prefixlen){
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
+}
+
+export function free_subnets(subnet, netmask, prefixlen){
+    return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen  );
 }
 
 export function deleteProcess(processId) {

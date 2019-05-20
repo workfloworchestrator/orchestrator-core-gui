@@ -29,3 +29,4 @@ delme-validations.json
 .node-version
 package-lock.json
 .vscode
+.env

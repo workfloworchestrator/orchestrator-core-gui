@@ -124,7 +124,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         if (organisationPortsOnly) {
             inSelect = inSelect.filter(port => port.customer_id === organisationId);
         }
-        const showDelete = maximum > 2 && !disabled;
+        const showDelete = maximum > 2 && !servicePort.nonremovable && !disabled;
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
                 (isElan ? I18n.t("vlan.placeholder_no_service_port") : I18n.t("vlan.placeholder_no_service_port")));
@@ -135,7 +135,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                                       servicePort={servicePort.subscription_id}
                                       servicePorts={inSelect}
                                       organisations={organisations}
-                                      disabled={disabled || disabledPorts}
+                                      disabled={disabled || (servicePort.modifiable === false) || disabledPorts}
                                       visiblePortMode={visiblePortMode}/>
                 {usedUntaggedServicePorts[index] &&
                 <em className="error">{I18n.t("service_ports.used_ssp", {descriptions: usedUntaggedServicePorts[index]})}</em>}
@@ -146,7 +146,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     <VirtualLAN vlan={servicePort.port_mode === "untagged" ? "0" : servicePort.vlan}
                                 onChange={this.onChangeInternal("vlan", index)}
                                 subscriptionIdMSP={servicePort.subscription_id}
-                                disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id}
+                                disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id || (servicePort.modifiable === false)}
                                 placeholder={vlanPlaceholder}
                                 servicePortTag={servicePort.tag}
                                 reportError={this.reportVlanError}/>
@@ -164,7 +164,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                            onChange={this.onChangeInternal("bandwidth", index)}
                            onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
-                    {(isElan && showDelete) && <i className={`fa fa-minus ${index < minimum ? "disabled" : "" }`}
+                    {(isElan && showDelete) && <i className={`fa fa-minus ${(index < minimum || !servicePort.nonremovable) ? "disabled" : "" }`}
                                                   onClick={this.removeServicePort(index)}></i>}
                 </div>
                 {bandwidthErrors[index] &&
@@ -177,7 +177,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     render() {
         const {availableServicePorts, servicePorts, organisations, organisationId, minimum, maximum, disabled, isElan, organisationPortsOnly, visiblePortMode, disabledPorts} = this.props;
         const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
-        const showAdd = maximum > 2 && !disabled;
+        const showAdd = maximum > 2 && servicePorts.length < maximum && !disabled;
         return (<section className="service-port-container">
             {servicePorts.map((servicePort, index) =>
                 this.renderServicePort(servicePorts, servicePort, index, availableServicePorts, organisations, organisationId,
