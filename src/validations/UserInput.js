@@ -20,7 +20,7 @@ const inValidServicePort = (sp, isElan) => {
     if (sp.tag === "SSP" && (isEmpty(sp.vlan) || sp.vlan === "0")){
         return false;
     }
-    if (isEmpty(sp) || isEmpty(sp.tag) ) {
+    if (isEmpty(sp)) {
         return true;
     }
     return isElan ? (inValidVlan(sp.vlan) || isEmpty(sp.bandwidth)) : inValidVlan(sp.vlan);
@@ -48,7 +48,7 @@ export function doValidateUserInput(userInput, val, errors) {
         errors[name] = !/^[0-9]{4}$/.test(value);
     } else if (type === "contact_persons") {
         errors[name] = isEmpty(value) || value.some(p => !validEmailRegExp.test(p.email))
-    } else if (type === "service_ports") {
+    } else if (type === "service_ports" || type === "service_ports_sn8") {
         errors[name] = isEmpty(value) || (Array.isArray(value) && value.some(sp => inValidServicePort(sp, userInput.elan)));
     } else if (type === "accept") {
         errors[name] = !value;
