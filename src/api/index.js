@@ -157,6 +157,11 @@ export function subscriptionsWithDetails() {
     return fetchJson("subscriptions/with_details");
 }
 
+// New call : just plain subs with enriched product.tag
+export function subscriptionsWithTags() {
+    return fetchJson("subscriptions/all_with_tags");
+}
+
 export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }

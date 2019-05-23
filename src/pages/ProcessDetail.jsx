@@ -54,7 +54,7 @@ class ProcessDetail extends React.PureComponent {
             loaded: false,
             subscriptions: [],
             stepUserInput: [],
-            servicePorts: [],
+            servicePortsSN7: [],
             servicePortsSN8: [],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
@@ -103,7 +103,7 @@ class ProcessDetail extends React.PureComponent {
                 .then(res => {
                     this.setState({subscriptionProcesses: res[0],
                         loaded: true
-                        // servicePorts: res[1], servicePortsSN8: res[2]
+                        // servicePortsSN7: res[1], servicePortsSN8: res[2]
                     });
                 });
             }).catch(err => {
@@ -232,8 +232,7 @@ class ProcessDetail extends React.PureComponent {
         this.setState({selectedTab: tab});
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses, servicePorts, servicePortsSN8) => {
-        const {subscriptions} = this.state;
+    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses) => {
         const {locationCodes, products, organisations, history} = this.props;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
@@ -259,8 +258,13 @@ class ProcessDetail extends React.PureComponent {
                                products={products}
                                organisations={organisations}
                                history={history}
+
+                               // Todo: determine if we are going to preload here? We know which input types are requested...
+                               preloadSubscriptions={true}
+                               preloadServicePortsSN7={true}
+                               preloadServicePortsSN8={true}
                                // subscriptions={subscriptions}
-                               // servicePorts={servicePorts}
+                               // servicePortsSN7={servicePortsSN7}
                                // servicePortsSN8={servicePortsSN8}
                                product={product}
                                currentState={process.current_state}
@@ -279,7 +283,7 @@ class ProcessDetail extends React.PureComponent {
     render() {
         const {
             loaded, notFound, process, tabs, stepUserInput, selectedTab, subscriptionProcesses,
-            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion, servicePorts, servicePortsSN8
+            confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion
         } = this.state;
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
@@ -295,7 +299,7 @@ class ProcessDetail extends React.PureComponent {
                     {tabs.map(tab => this.renderTab(tab, selectedTab))}
                 </section>
                 {renderContent && this.renderTabContent(renderStepForm, selectedTab, process, step, stepUserInput,
-                    subscriptionProcesses, servicePorts, servicePortsSN8)}
+                    subscriptionProcesses)}
                 {renderNotFound && <section className="not-found card"><h1>{I18n.t("process.notFound")}</h1></section>}
                 <ScrollUpButton />
             </div>

@@ -45,7 +45,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import {subscriptionsByTags, subscriptionsWithDetails} from "../api";
+import {subscriptionsByTags, subscriptionsWithTags} from "../api";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -80,7 +80,7 @@ export default class UserInputForm extends React.Component {
     };
 
     loadSubscriptions = () => {
-        subscriptionsWithDetails().then(subscriptions => {
+        subscriptionsWithTags().then(subscriptions => {
             this.setState({subscriptionsLoaded: true, subscriptions: subscriptions});
         });
     };
@@ -99,12 +99,15 @@ export default class UserInputForm extends React.Component {
 
     componentDidMount = () => {
         if (this.props.preloadSubscriptions) {
+            console.log("UserInputForm: Preloading subscriptions")
             this.loadSubscriptions()
         }
         if (this.props.preloadServicePortsSN7) {
+            console.log("UserInputForm: Preloading SN7 ServicePorts")
             this.loadServicePortsSN7()
         }
         if (this.props.preloadServicePortsSN8) {
+            console.log("UserInputForm: Preloading SN8 ServicePorts")
             this.loadServicePortsSN8()
         }
     }
@@ -506,7 +509,7 @@ export default class UserInputForm extends React.Component {
                             <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
                         </section>
                     }
-                    <MultipleServicePorts servicePortsSN7={ports}
+                    <MultipleServicePorts servicePorts={ports}
                                          availableServicePorts={availableServicePorts}
                                          organisations={organisations}
                                          onChange={this.changeNestedInput(name)}
@@ -536,7 +539,7 @@ export default class UserInputForm extends React.Component {
                             <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions}></i>
                         </section>
                     }
-                    <MultipleServicePortsSN8 servicePortsSN7={portsSN8}
+                    <MultipleServicePortsSN8 servicePorts={portsSN8}
                                              availableServicePorts={availableServicePortsSN8}
                                              organisations={organisations}
                                              onChange={this.changeNestedInput(name)}
