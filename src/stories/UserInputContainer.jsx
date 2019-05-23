@@ -117,8 +117,7 @@ export default class UserInputContainer extends React.Component {
         return subscription;
     };
 
-    renderCreateProduct(product, showProductValidation, productValidation, stepUserInput, subscriptions, history,
-                        organisations, products, locationCodes, preselectedProduct) {
+    renderCreateProduct(product, stepUserInput, subscriptions, organisations, products, locationCodes, preselectedProduct) {
 
         // Todo: delegate complete servicePort stuff to UserInput (e.g. determine when a service_port input is used -> and fetch data)
         /*        let showInitialMsps = this.state.showInitialMsps;
