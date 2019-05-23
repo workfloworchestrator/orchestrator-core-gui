@@ -642,6 +642,11 @@ export default class UserInputForm extends React.Component {
             leavePage
         } = this.state;
         const {process} = this.props;
+
+
+        debugger;
+
+
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -658,6 +663,7 @@ export default class UserInputForm extends React.Component {
         );
     }
 }
+
 
 UserInputForm.propTypes = {
     history: PropTypes.object.isRequired,
