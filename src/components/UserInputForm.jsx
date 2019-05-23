@@ -71,11 +71,11 @@ export default class UserInputForm extends React.Component {
             processing: false,
             randomCrm: randomCrmIdentifier(),
             subscriptionsLoaded: false,
-            servicePortsLoadedSN7: false,
-            servicePortsLoadedSN8: false,
+            servicePortsLoadedSN7: !!this.props.servicePortsSN7,
+            servicePortsLoadedSN8: !!this.props.servicePortsSN8,
             subscriptions: [],
-            servicePortsSN7: [],
-            servicePortsSN8: [],
+            servicePortsSN7: this.props.servicePortsSN7 ? this.props.servicePortsSN7 : [],
+            servicePortsSN8: this.props.servicePortsSN8 ? this.props.servicePortsSN8 : [],
         }
     };
 
@@ -291,8 +291,11 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePortsSN7, servicePortsSN8, subscriptions, preselectedInput} = this.props;
+        const {currentState, products, organisations, subscriptions, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
+
+        const {servicePortsSN7, servicePortsSN8} = this.state;
+
         let organisationId;
         switch (userInput.type) {
             case "string":
@@ -493,6 +496,7 @@ export default class UserInputForm extends React.Component {
             case "label":
                 return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
             case "service_ports":
+                console.log(servicePortsSN7);
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
@@ -503,6 +507,7 @@ export default class UserInputForm extends React.Component {
                 const availableServicePorts = productIds.length === products.length ? servicePortsSN7 :
                     servicePortsSN7.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
+                debugger;
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
                         <section className="refresh-service-ports">
