@@ -253,7 +253,7 @@ export default class NewProcess extends React.Component {
 
             subscriptionWorkflows(subscription.subscription_id).then(workflows => {
                 this.setState({
-                    notModifiableMessage: I18n.t(workflows.reason, workflows),
+                    notModifiableMessage: workflows.reason ? I18n.t(workflows.reason, workflows): "",
                     modifyWorkflows: workflows.modify.filter(wf => !wf.reason),
                 });
             });
