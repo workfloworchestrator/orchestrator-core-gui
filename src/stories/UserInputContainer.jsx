@@ -167,7 +167,7 @@ export default class UserInputContainer extends React.Component {
         return subscription;
     };
 
-    renderCreateProduct(product, stepUserInput, subscriptions, organisations, products, locationCodes, preselectedProduct) {
+    renderForm(product, stepUserInput, subscriptions, organisations, products, locationCodes, preselectedProduct, formName) {
 
         // Todo: delegate complete servicePort stuff to UserInput (e.g. determine when a service_port input is used -> and fetch data)
         /*        let showInitialMsps = this.state.showInitialMsps;
@@ -178,8 +178,7 @@ export default class UserInputContainer extends React.Component {
                     sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
                 ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
         return <section className="form-step divider">
-            <h3>{I18n.t("process.new_process")}</h3>
-            {!isEmpty(stepUserInput) &&
+            <h1>{formName}</h1>
             <UserInputForm
                 locationCodes={locationCodes}
                 stepUserInput={stepUserInput}
@@ -198,17 +197,17 @@ export default class UserInputContainer extends React.Component {
                 validSubmit={this.validSubmit(products)}
                 // refreshSubscriptions={this.refreshSubscriptions}
                 // preselectedInput={getQueryParameters(this.props.location.search)}
-            />}
+            />
         </section>;
     }
 
     render() {
-        const {product, stepUserInput, subscriptions} = this.state;
-        const {organisations, locationCodes, preselectedProduct, products} = this.props;
+        const {product, subscriptions} = this.state;
+        const {organisations, stepUserInput, locationCodes, preselectedProduct, products, formName} = this.props;
         return (
             <div className="mod-new-process">
                 <section className="card">
-                    {this.renderCreateProduct(product, stepUserInput, subscriptions, organisations, products, locationCodes, preselectedProduct)}
+                    {this.renderForm(product, stepUserInput, subscriptions, organisations, products, locationCodes, preselectedProduct, formName)}
                 </section>
             </div>
         );
@@ -222,6 +221,7 @@ UserInputContainer.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     stepUserInput: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
+    formName: PropTypes.string.isRequired,
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
     preselectedDienstafname: PropTypes.string,
