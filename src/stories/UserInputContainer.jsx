@@ -26,7 +26,57 @@ export default class UserInputContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: {},
+            started: true,
+            product: {
+                "value": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                "label": "MSP 1G",
+                "workflow": {
+                    "created_at": 1531342996,
+                    "description": "MSP Request",
+                    "name": "msp_request",
+                    "target": "CREATE",
+                    "workflow_id": "5d76a621-6ad6-41f6-b18c-f74a80ab868b"
+                },
+                "tag": "MSP",
+                "productId": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                "fixed_inputs": [{
+                    "created_at": 1531342997,
+                    "fixed_input_id": "e5ceb7f4-2429-4f3e-b021-5151008d0f6f",
+                    "name": "port_speed",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "1000"
+                }, {
+                    "created_at": 1531342997,
+                    "fixed_input_id": "700b6510-1915-491f-8619-8dfa332ccca5",
+                    "name": "protection_type",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "Unprotected"
+                }, {
+                    "created_at": 1531342997,
+                    "fixed_input_id": "e7de8efa-88ce-4cae-b76b-96603e926bec",
+                    "name": "domain",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "SURFNET7"
+                }, {
+                    "created_at": 1531342997,
+                    "fixed_input_id": "a1833621-beb3-408a-a456-8d8578792bc4",
+                    "name": "tagged",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "single"
+                }, {
+                    "created_at": 1531342997,
+                    "fixed_input_id": "49fa1095-382b-40e2-ab4c-ecec3e834e43",
+                    "name": "redundant",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "False"
+                }, {
+                    "created_at": 1531342997,
+                    "fixed_input_id": "9037fc5c-ae20-40b7-a0d1-02c381eb1f8b",
+                    "name": "aggregate",
+                    "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+                    "value": "False"
+                }]
+            },
             productValidation: {"valid": true, mapping: {}},
             subscriptions: [],
             organisationName: undefined,
@@ -39,10 +89,10 @@ export default class UserInputContainer extends React.Component {
 
         subscriptionsWithTags().then(subscriptions => {
             let organisationName = null;
-            if (preselectedInput.organisation) {
-                const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-                organisationName = org ? org.name : organisationName;
-            }
+            // if (preselectedInput.organisation) {
+            //     const org = organisations.find(org => org.uuid === preselectedInput.organisation);
+            //     organisationName = org ? org.name : organisationName;
+            // }
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
         })
         // subscriptionsWithDetails().then(subscriptions => {
@@ -80,34 +130,34 @@ export default class UserInputContainer extends React.Component {
         }
     };
 
-    startNewProcess = () => {
-        const {product} = this.state;
-        if (!isEmpty(product)) {
-            this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
-                this.setState({product: product});
-                if (product) {
-                    Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
-                        const [productValidation, userInput] = result;
-
-                        const stepUserInput = userInput.filter(input => input.name !== "product");
-                        const {preselectedOrganisation} = this.props;
-                        if (preselectedOrganisation) {
-                            const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-                            if (organisatieInput) {
-                                organisatieInput.value = preselectedOrganisation;
-                                organisatieInput.readonly = true;
-                            }
-                        }
-                        this.setState({
-                            productValidation: productValidation,
-                            stepUserInput: stepUserInput,
-                            started: true
-                        });
-                    });
-                }
-            });
-        }
-    };
+    // startNewProcess = () => {
+    //     const {product} = this.state;
+    //     if (!isEmpty(product)) {
+    //         this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
+    //             this.setState({product: product});
+    //             if (product) {
+    //                 Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
+    //                     const [productValidation, userInput] = result;
+    //
+    //                     const stepUserInput = userInput.filter(input => input.name !== "product");
+    //                     const {preselectedOrganisation} = this.props;
+    //                     if (preselectedOrganisation) {
+    //                         const organisatieInput = stepUserInput.find(x => x.name === "organisation");
+    //                         if (organisatieInput) {
+    //                             organisatieInput.value = preselectedOrganisation;
+    //                             organisatieInput.readonly = true;
+    //                         }
+    //                     }
+    //                     this.setState({
+    //                         productValidation: productValidation,
+    //                         stepUserInput: stepUserInput,
+    //                         started: true
+    //                     });
+    //                 });
+    //             }
+    //         });
+    //     }
+    // };
 
     addContextToSubscription = subscriptionId => {
         const {subscriptions} = this.state;

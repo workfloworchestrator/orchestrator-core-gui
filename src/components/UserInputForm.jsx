@@ -507,7 +507,6 @@ export default class UserInputForm extends React.Component {
                 const availableServicePorts = productIds.length === products.length ? servicePortsSN7 :
                     servicePortsSN7.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
-                debugger;
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
                         <section className="refresh-service-ports">
