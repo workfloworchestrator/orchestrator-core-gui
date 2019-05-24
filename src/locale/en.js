@@ -666,6 +666,7 @@ I18n.translations.en = {
         Allocated: "Allocated",
         Planned: "Planned",
         Failed: "Failed",
+        Subnet: "Subnet",
         IPv4: "IPv4",
         IPv6: "IPv6",
         SP: "SN8 Service Port",
