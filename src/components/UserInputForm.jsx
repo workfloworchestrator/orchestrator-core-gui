@@ -73,7 +73,7 @@ export default class UserInputForm extends React.Component {
             subscriptionsLoaded: false,
             servicePortsLoadedSN7: !!this.props.servicePortsSN7,
             servicePortsLoadedSN8: !!this.props.servicePortsSN8,
-            subscriptions: [],
+            subscriptions: !!this.props.subscriptions,
             servicePortsSN7: this.props.servicePortsSN7 ? this.props.servicePortsSN7 : [],
             servicePortsSN8: this.props.servicePortsSN8 ? this.props.servicePortsSN8 : [],
         }
@@ -291,10 +291,10 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, subscriptions, preselectedInput} = this.props;
+        const {currentState, products, organisations, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
 
-        const {servicePortsSN7, servicePortsSN8} = this.state;
+        const {servicePortsSN7, servicePortsSN8, subscriptions} = this.state;
 
         let organisationId;
         switch (userInput.type) {
@@ -595,9 +595,10 @@ export default class UserInputForm extends React.Component {
                                    node={value}/>;
             case "corelink":
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const nodeSubscriptions = subscriptions.length ? subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated') : []
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                                        interfaceType={corelinkInterfaceSpeed}
-                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated')}
+                                       nodes={nodeSubscriptions}
                                        port={value}/>;
             case "corelink_add_link":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
@@ -641,10 +642,6 @@ export default class UserInputForm extends React.Component {
             leavePage
         } = this.state;
         const {process} = this.props;
-
-
-        debugger;
-
 
         return (
             <div className="mod-process-step">
