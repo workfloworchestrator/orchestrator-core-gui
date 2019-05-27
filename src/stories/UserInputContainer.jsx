@@ -89,10 +89,10 @@ export default class UserInputContainer extends React.Component {
 
         subscriptionsWithTags().then(subscriptions => {
             let organisationName = null;
-            // if (preselectedInput.organisation) {
-            //     const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-            //     organisationName = org ? org.name : organisationName;
-            // }
+            if (preselectedInput.organisation) {
+                const org = organisations.find(org => org.uuid === preselectedInput.organisation);
+                organisationName = org ? org.name : organisationName;
+            }
             this.setState({subscriptions: subscriptions, organisationName: organisationName});
         })
         // subscriptionsWithDetails().then(subscriptions => {
