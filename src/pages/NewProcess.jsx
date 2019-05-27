@@ -217,7 +217,7 @@ export default class NewProcess extends React.Component {
                         organisations, products, locationCodes, preselectedProduct) {
 
         // Todo: delegate complete servicePort stuff to UserInput (e.g. determine when a service_port input is used -> and fetch data)
-/*        let showInitialMsps = this.state.showInitialMsps;
+        /* let showInitialMsps = this.state.showInitialMsps;
         let servicePortsSN7 = subscriptions.filter(
                 sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
             ).filter(sub => ((sub.tag === "MSP" || sub.tag === "MSPNL") && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
@@ -249,7 +249,7 @@ export default class NewProcess extends React.Component {
                 organisations={organisations}
                 history={history}
 
-                // Using subscriptions with enriched .tag info
+                // Using already loaded subscriptions with enriched .tag info
                 subscriptions={subscriptions}
                 // Preloading servicePorts here
                 // Todo: disable preload en deal with service ports in UserInputForm itself? Now the call is done after start of process: seems fast enough for now
