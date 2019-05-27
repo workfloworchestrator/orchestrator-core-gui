@@ -406,11 +406,16 @@ export function startProcess(process) {
 }
 
 export function resumeProcess(processId, userInput) {
-    return postPutJson(`processes/${processId}/resume`, {user_input: userInput}, "put", true, false);
+    userInput = userInput.reduce((acc, input) => {
+        acc[input.name] = input.value;
+        return acc;
+    }, {});
+
+    return postPutJson(`processes/${processId}/resume`, userInput, "put", true, false);
 }
 
 export function retryProcess(processId) {
-    return postPutJson(`processes/${processId}/resume`, {user_input: {}}, "put", true, false);
+    return postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
 }
 
 export function tasks() {
@@ -434,11 +439,16 @@ export function startTask(task) {
 }
 
 export function resumeTask(taskId, userInput) {
-    return postPutJson(`tasks/${taskId}/resume`, {user_input: userInput}, "put", true, false);
+    userInput = userInput.reduce((acc, input) => {
+        acc[input.name] = input.value;
+        return acc;
+    }, {});
+
+    return postPutJson(`tasks/${taskId}/resume`, userInput, "put", true, false);
 }
 
 export function retryTask(taskId) {
-    return postPutJson(`tasks/${taskId}/resume`, {user_input: {}}, "put", true, false);
+    return postPutJson(`tasks/${taskId}/resume`, {}, "put", true, false);
 }
 
 export function deleteTask(taskId) {
