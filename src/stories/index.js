@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import {storiesOf} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
+import {linkTo} from '@storybook/addon-links';
 
-import { Button, Welcome } from '@storybook/react/demo';
+import {Button, Welcome} from '@storybook/react/demo';
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss"
 import "./storybook.scss"
@@ -22,26 +22,40 @@ const tableSummaryDataDefinition = [
 
 const tableSummaryDataWithHeaders = [
     {headers: ["Old Values", "New Values"]},
-    {columns: [
-        ["value1", "value2", "value3"],
-        ["new value1", "new value2", "new value3"]]
+    {
+        columns: [
+            ["value1", "value2", "value3"],
+            ["new value1", "new value2", "new value3"]]
     }
 ];
 
 const tableSummaryDataDefinitionWithHeaders = [
     {labels: ["Label1", "Label 2", "Label 3"]},
     {headers: ["Old Values", "New Values"]},
-    {columns: [
-        ["value1", "value2", "value3"],
-        ["new value1", "new value2", "new value3"]]
+    {
+        columns: [
+            ["value1", "value2", "value3"],
+            ["new value1", "new value2", "new value3"]]
     }
 ];
 
-const corelinkInputSteps = [{"interface_type_key":"corelink_service_speed","name":"ims_port_id_1","type":"corelink"},{"interface_type_key":"corelink_service_speed","name":"ims_port_id_2","type":"corelink"}]
+const corelinkInputSteps = [{
+    "interface_type_key": "corelink_service_speed",
+    "name": "ims_port_id_1",
+    "type": "corelink"
+}, {"interface_type_key": "corelink_service_speed", "name": "ims_port_id_2", "type": "corelink"}]
 
-const sn8PortSelectInputSteps = [{"name":"organisation","type":"organisation"},{"name":"contact_persons","organisation_key":"organisation","type":"contact_persons"},{"name":"bandwidth","ports_key":["service_ports"],"readonly":false,"type":"bandwidth","value":null},{"maximum":6,"minimum":1,"name":"bgp_ip_service_ports","organisationPortsOnly":false,"organisation_key":"organisation","type":"service_ports_sn8","visiblePortMode":"normal"}];
+const sn8PortSelectInputSteps = [
+    {"name": "organisation", "type": "organisation"},
+    {"name": "contact_persons", "organisation_key": "organisation", "type": "contact_persons"},
+    {"name": "bandwidth", "ports_key": ["service_ports"], "readonly": false, "type": "bandwidth", "value": null},
+    {"maximum": 6, "minimum": 1, "name": "bgp_ip_service_ports", "organisationPortsOnly": false, "organisation_key": "organisation", "type": "service_ports_sn8", "visiblePortMode": "normal"}];
 
-
+const sn7PortSelectInputSteps = [
+    {"name": "organisation", "type": "organisation"},
+    {"name": "contact_persons", "organisation_key": "organisation", "type": "contact_persons"},
+    {"name": "bandwidth", "ports_key": ["service_ports"], "readonly": false, "type": "bandwidth", "value": null},
+    {"maximum": 6, "minimum": 1, "name": "bgp_ip_service_ports", "organisationPortsOnly": false, "organisation_key": "organisation", "type": "service_ports", "mspOnly": false}];
 
 
 storiesOf('Welcome', module).add('to Storybook', () =>
@@ -49,7 +63,8 @@ storiesOf('Welcome', module).add('to Storybook', () =>
         <h1>Workflows client storybook</h1>
         <p>Welcome to the root of the storybook. We will demonstrate some of the components here.
             The storybook will try to use the data from dev soon.</p>
-        <p><b>But for now it uses mocks that will needs some dynamic stuff (ORGANISATIONS, PRODUCTS etc), to get it working with dev's data </b></p>
+        <p><b>But for now it uses mocks that will needs some dynamic stuff (ORGANISATIONS, PRODUCTS etc), to get it
+            working with dev's data </b></p>
     </div>
 );
 
@@ -80,7 +95,7 @@ storiesOf('GenericSelect', module)
         <GenericSelect onChange={(e) => {
             action('clicked');
             debugger;
-            this.selected=e.value;
+            this.selected = e.value;
             e;
         }} choices={genericSelectChoices}/>);
 
@@ -90,21 +105,21 @@ storiesOf('TableSummary', module)
         <TableSummary onChange={(e) => {
             action('clicked');
             debugger;
-            this.selected=e.value;
+            this.selected = e.value;
             e;
         }} data={tableSummaryDataDefinition}/>)
     .add('Summary with headers', () =>
         <TableSummary onChange={(e) => {
             action('clicked');
             debugger;
-            this.selected=e.value;
+            this.selected = e.value;
             e;
         }} data={tableSummaryDataWithHeaders}/>)
     .add('Summary with definition and headers', () =>
         <TableSummary onChange={(e) => {
             action('clicked');
             debugger;
-            this.selected=e.value;
+            this.selected = e.value;
             e;
         }} data={tableSummaryDataDefinitionWithHeaders}/>);
 
@@ -118,6 +133,17 @@ storiesOf('UserInputForm', module)
             stepUserInput={corelinkInputSteps}
             products={PRODUCTS}
             formName="Corelink form">
+        </UserInputContainer>
+    )
+    .add('SN7 Portselect', () =>
+        <UserInputContainer
+            history=""
+            currentUser=""
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            stepUserInput={sn7PortSelectInputSteps}
+            products={PRODUCTS}
+            formName="SN7 portselect form">
         </UserInputContainer>
     )
     .add('SN8 Portselect', () =>

@@ -6,6 +6,7 @@ import {
 } from "../validations/Subscriptions";
 
 
+// const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
 let configuration = {};

@@ -95,25 +95,17 @@ class ProcessDetail extends React.PureComponent {
                     process: processInstance, stepUserInput: stepUserInput,
                     tabs: tabs, selectedTab: selectedTab, product: productById(processInstance.product, products)
                 });
-                Promise.all([
-                    processSubscriptionsByProcessId(processInstance.id),
-                    // subscriptionsByTags(["MSP", "SSP", "MSPNL"]),
-                    // subscriptionsByTags(["SP"])
-                ])
-                .then(res => {
-                    this.setState({subscriptionProcesses: res[0],
-                        loaded: true
-                        // servicePortsSN7: res[1], servicePortsSN8: res[2]
-                    });
+                processSubscriptionsByProcessId(processInstance.id).then(res => {
+                    this.setState({subscriptionProcesses: res, loaded: true});
+                }).catch(err => {
+                    if (err.response && err.response.status === 404) {
+                        this.setState({notFound: true, loaded: true});
+                    } else {
+                        throw err;
+                    }
                 });
-            }).catch(err => {
-            if (err.response && err.response.status === 404) {
-                this.setState({notFound: true, loaded: true});
-            } else {
-                throw err;
-            }
-        });
-    };
+            });
+    }
 
     handleDeleteProcess = process => e => {
         stop(e);
@@ -263,9 +255,6 @@ class ProcessDetail extends React.PureComponent {
                                preloadSubscriptions={true}
                                preloadServicePortsSN7={true}
                                preloadServicePortsSN8={true}
-                               // subscriptions={subscriptions}
-                               // servicePortsSN7={servicePortsSN7}
-                               // servicePortsSN8={servicePortsSN8}
                                product={product}
                                currentState={process.current_state}
                                validSubmit={this.validSubmit}

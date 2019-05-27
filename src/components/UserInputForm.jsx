@@ -92,7 +92,7 @@ export default class UserInputForm extends React.Component {
     };
 
     loadServicePortsSN8 = () => {
-        subscriptionsByTags(["SP"]).then(result => {
+        subscriptionsByTags(["SP", "SPNL"]).then(result => {
             this.setState({servicePortsSN8: result, servicePortsLoadedSN8: true});
         })
     };
