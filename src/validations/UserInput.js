@@ -3,7 +3,8 @@ import {validEmailRegExp} from "./Subscriptions";
 
 const inValidVlan = vlan => {
     const value = vlan || "";
-    const stripped = value.replace(/ /g, "");
+
+    const stripped = value.toString().replace(/ /g, "");
     return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||
             stripped.split(",").some(inValidRange);
 };
