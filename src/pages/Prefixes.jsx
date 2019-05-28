@@ -253,7 +253,7 @@ export default class Prefixes extends React.PureComponent {
 
       } else if (subscription_id === "N/A") {
         let network = prefix.split("/")[0];
-        this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}`)
+        this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`)
       }
   }
 
