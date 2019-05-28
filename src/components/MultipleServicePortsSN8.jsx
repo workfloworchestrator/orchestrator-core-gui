@@ -78,8 +78,6 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
 
     bubbleUpErrorState = () => {
         const {bandwidthErrors, usedUntaggedServicePorts} = this.state;
-        console.log(bandwidthErrors);
-        console.log(usedUntaggedServicePorts);
         const inValid = Object.values(bandwidthErrors).concat(Object.values(usedUntaggedServicePorts)).some(val => val);
         this.props.reportError(inValid);
     };
