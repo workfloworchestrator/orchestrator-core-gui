@@ -26,11 +26,6 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
             if (e !== null) {
                 const port = this.props.availableServicePorts.find(x => x.subscription_id === value);
                 if (port.port_mode === "untagged") {
-                    // The untagged Sp may not be used in other LP's (except when they are terminated)
-                    // TODO: check if this is needed and ensure it works with SN8 SP's
-                    console.log("Warning: not all business logic is implemented/clear for untagged SP's: " +
-                        "As there a no workflows yet that create an SP parent; the call to /api/subscriptions/parent_subscriptions " +
-                        "could yield unuseable results")
                     parentSubscriptions(value).then(res => {
                         const usedUntaggedServicePorts = {...this.state.usedUntaggedServicePorts};
                         let filteredParents = res.json.filter(parent => parent.status !== "terminated");
@@ -40,6 +35,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                             usedUntaggedServicePorts[index] = false;
                         }
                         this.setState({usedUntaggedServicePorts: usedUntaggedServicePorts});
+
                     });
 
                 } else {
@@ -107,10 +103,10 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         // TC above check already implemented in new-process.jsx
 
         // Port mode filter
-        if (isElan || visiblePortMode === "untagged") {
+        if (visiblePortMode === "untagged") {
             inSelect = inSelect.filter(port => port.port_mode === "untagged");
         }
-        else if (visiblePortMode === "tagged") {
+        else if (isElan || visiblePortMode === "tagged") {
             inSelect = inSelect.filter(port => port.port_mode === "tagged");
         }
         else if (visiblePortMode === "normal") {
@@ -148,7 +144,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                                 subscriptionIdMSP={servicePort.subscription_id}
                                 disabled={disabled || servicePort.port_mode === "untagged" || !servicePort.subscription_id || (servicePort.modifiable === false)}
                                 placeholder={vlanPlaceholder}
-                                servicePortTag={servicePort.tag}
+                                servicePortTag={servicePort.port_mode}
                                 reportError={this.reportVlanError}/>
                     {(!isElan && showDelete) && <i className={`fa fa-minus ${index < minimum ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}

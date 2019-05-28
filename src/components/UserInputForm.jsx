@@ -496,7 +496,6 @@ export default class UserInputForm extends React.Component {
             case "label":
                 return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
             case "service_ports":
-                console.log(servicePortsSN7);
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
@@ -536,7 +535,7 @@ export default class UserInputForm extends React.Component {
                     .map(product => product.product_id);
                 const availableServicePortsSN8 = productIdsSN8.length === products.length ? servicePortsSN8 :
                      servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product_id));
-                const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
+                const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
                         <section className="refresh-service-ports">
