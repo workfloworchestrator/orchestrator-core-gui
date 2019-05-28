@@ -45,6 +45,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
+import {subscriptionsByTags, subscriptionsWithTags} from "../api";
 
 
 const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
@@ -69,8 +70,47 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
+            subscriptionsLoaded: false,
+            servicePortsLoadedSN7: !!this.props.servicePortsSN7,
+            servicePortsLoadedSN8: !!this.props.servicePortsSN8,
+            subscriptions: !!this.props.subscriptions,
+            servicePortsSN7: this.props.servicePortsSN7 ? this.props.servicePortsSN7 : [],
+            servicePortsSN8: this.props.servicePortsSN8 ? this.props.servicePortsSN8 : [],
         }
     };
+
+    loadSubscriptions = () => {
+        subscriptionsWithTags().then(subscriptions => {
+            this.setState({subscriptionsLoaded: true, subscriptions: subscriptions});
+        });
+    };
+
+    loadServicePortsSN7 = () => {
+        subscriptionsByTags(["MSP", "SSP", "MSPNL"]).then(result => {
+            this.setState({servicePortsSN7: result, servicePortsLoadedSN7: true});
+        })
+    };
+
+    loadServicePortsSN8 = () => {
+        subscriptionsByTags(["SP", "SPNL"]).then(result => {
+            this.setState({servicePortsSN8: result, servicePortsLoadedSN8: true});
+        })
+    };
+
+    componentDidMount = () => {
+        if (this.props.preloadSubscriptions) {
+            console.log("UserInputForm: Preloading subscriptions")
+            this.loadSubscriptions()
+        }
+        if (this.props.preloadServicePortsSN7) {
+            console.log("UserInputForm: Preloading SN7 ServicePorts")
+            this.loadServicePortsSN7()
+        }
+        if (this.props.preloadServicePortsSN8) {
+            console.log("UserInputForm: Preloading SN8 ServicePorts")
+            this.loadServicePortsSN8()
+        }
+    }
 
     componentWillReceiveProps(nextProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
@@ -251,8 +291,11 @@ export default class UserInputForm extends React.Component {
     chooseInput = (userInput, process) => {
         const name = userInput.name;
         const value = userInput.value;
-        const {currentState, products, organisations, servicePorts, servicePortsSN8, subscriptions, preselectedInput} = this.props;
+        const {currentState, products, organisations, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
+
+        const {servicePortsSN7, servicePortsSN8, subscriptions} = this.state;
+
         let organisationId;
         switch (userInput.type) {
             case "string":
@@ -453,6 +496,7 @@ export default class UserInputForm extends React.Component {
             case "label":
                 return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
             case "service_ports":
+                console.log(servicePortsSN7);
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
@@ -460,8 +504,8 @@ export default class UserInputForm extends React.Component {
                     lookupValueFromNestedState(bandwidthKey, currentState);
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp)
                     .map(product => product.product_id);
-                const availableServicePorts = productIds.length === products.length ? servicePorts :
-                    servicePorts.filter(sp => productIds.includes(sp.product_id));
+                const availableServicePorts = productIds.length === products.length ? servicePortsSN7 :
+                    servicePortsSN7.filter(sp => productIds.includes(sp.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value
                 return <div>
                     {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly &&
@@ -551,9 +595,10 @@ export default class UserInputForm extends React.Component {
                                    node={value}/>;
             case "corelink":
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
+                const nodeSubscriptions = subscriptions.length ? subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated') : []
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                                        interfaceType={corelinkInterfaceSpeed}
-                                       nodes={subscriptions.filter((subscription) => subscription.tag === 'Node' && subscription.status !== 'terminated')}
+                                       nodes={nodeSubscriptions}
                                        port={value}/>;
             case "corelink_add_link":
                 const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
@@ -597,6 +642,7 @@ export default class UserInputForm extends React.Component {
             leavePage
         } = this.state;
         const {process} = this.props;
+
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
@@ -614,18 +660,34 @@ export default class UserInputForm extends React.Component {
     }
 }
 
+
 UserInputForm.propTypes = {
     history: PropTypes.object.isRequired,
     stepUserInput: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
-    servicePorts: PropTypes.array.isRequired,
-    servicePortsSN8: PropTypes.array.isRequired,
-    subscriptions: PropTypes.array.isRequired,
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
     refreshSubscriptions: PropTypes.func,
     process: PropTypes.object,
-    preselectedInput: PropTypes.object
+    preselectedInput: PropTypes.object,
+
+    preloadSubscriptions: PropTypes.bool,
+    preloadServicePortsSN7: PropTypes.bool,
+    preloadServicePortsSN8: PropTypes.bool,
+    subscriptions: PropTypes.array,
+    servicePortsSN7: PropTypes.array,
+    servicePortsSN8: PropTypes.array,
+
 };
+
+UserInputForm.defaultProps = {
+    preloadSubscriptions: false,
+    preloadServicePortsSN7: false,
+    preloadServicePortsSN8: false,
+    subscriptions: [],
+    servicePortsSN7: [],
+    servicePortsSN8: [],
+};
+

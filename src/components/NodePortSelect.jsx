@@ -51,6 +51,7 @@ export default class NodePortSelect extends React.PureComponent {
     render() {
         const {node, ports} = this.state;
         const {onChange, port, nodes, disabled} = this.props;
+        console.log(nodes);
         const portPlaceholder = node ? I18n.t("node_port.select_port") : I18n.t("node_port.select_node_first");
         return (
             <section className="node-port">

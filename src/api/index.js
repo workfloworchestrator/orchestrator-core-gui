@@ -6,6 +6,7 @@ import {
 } from "../validations/Subscriptions";
 
 
+// const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
 let configuration = {};
@@ -155,6 +156,11 @@ export function paginated_subscriptions() {
 // OldSubscriptions including dynamic properties (SLOW)
 export function subscriptionsWithDetails() {
     return fetchJson("subscriptions/with_details");
+}
+
+// New call : just plain subs with enriched product.tag
+export function subscriptionsWithTags() {
+    return fetchJson("v2/all-subscriptions-with-tags");
 }
 
 export function subscriptionsDetail(subscription_id) {
