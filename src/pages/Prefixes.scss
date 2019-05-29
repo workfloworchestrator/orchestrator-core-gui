@@ -77,26 +77,37 @@
       vertical-align: middle;
     }
     tr {
-      border-bottom: 1px solid $light-grey;
-
-      &.Planned {
-        background-color: $light-gold;
-      }
-      &.Free {
-        background-color: $light-green;
-        cursor: pointer;
-      }
-      &.Allocated {
-        background-color: $light-green;
-      }
-      &.Failed {
-        background-color: $light-blue;
-      }
-      &.Subnet {
-        background-color: $light-grey;
-        cursor: default;
-      }
-    }
+            border-bottom: 1px solid $light-grey;
+        }
+        tr.Allocated {
+            cursor: pointer;
+            background-color: $light-blue;
+            &:hover {
+                background-color: darken($light-blue, 10%);
+            }
+        }
+        tr.Planned {
+            cursor: default;
+            background-color: $light-gold;
+        }
+        tr.Free {
+            cursor: pointer;
+            background-color: $light-green;
+            &:hover {
+                background-color: darken($light-green, 10%);
+            }
+        }
+        tr.Subnet {
+            background-color: darken($light-blue, 30%);
+            cursor: default;
+        }
+        tr.selected {
+            background-color: $dark-grey;
+            color: white;
+            &:hover {
+                background-color: black;
+            }
+        }
     thead {
       th {
         cursor: pointer;
