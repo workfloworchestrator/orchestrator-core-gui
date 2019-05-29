@@ -29,10 +29,31 @@ class Subscriptions extends React.PureComponent {
             subscriptions: [],
             loading: true,
             pages: 99,
-            sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
-            filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : []
+            sorted: [],
+            filtered: [],
+            initialFiltered: undefined
         };
     };
+
+    componentDidMount() {
+        if (this.props.sorted) {
+            console.log("Resort needed")
+        }
+        if (this.props.filtered) {
+            console.log("Re Filter needed")
+            const newState= {
+                filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [],
+                sorted: [],
+                //page: this.props.page ? 0,
+                page: 0,
+                pageSize: 25
+            }
+            this.fetchData(newState)
+            // debugger;
+            this.setState({initialFiltered: newState.filtered})
+        }
+
+    }
 
     fetchData = (state, instance) => {
         this.setState({ loading: true });
@@ -50,24 +71,6 @@ class Subscriptions extends React.PureComponent {
         });
     };
 
-    updateSorted = (newSorted) => {
-        // console.log(newSorted)
-        this.setState({
-            sorted: newSorted
-        });
-        const newSort = newSorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`})
-        this.props.onChangeSorted(newSort)
-    };
-
-    updateFiltered = (newFiltered) => {
-        this.setState({
-            filtered: newFiltered
-        });
-        const newFilter = newFiltered.map(item => {return `${item.id},${item.value}`})
-        this.props.onChangeFiltered(newFilter)
-    };
-
-
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
         if (e.keyCode === 38 && page > 0) {
@@ -79,6 +82,10 @@ class Subscriptions extends React.PureComponent {
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
+        const sortUrlParameters = this.state.sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`});
+        this.props.onChangeSorted(sortUrlParameters);
+        const filterUrlParameters = this.state.filtered.map(item => {return `${item.id},${item.value}`});
+        this.props.onChangeFiltered(filterUrlParameters);
         this.props.history.push("/subscription/" + subscription_id);
     };
 
@@ -87,7 +94,7 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, subscriptions, sorted, filtered} = this.state;
+        const {pages, subscriptions, sorted, filtered, initialFiltered} = this.state;
         const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
@@ -154,12 +161,11 @@ class Subscriptions extends React.PureComponent {
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
+                        filtered={initialFiltered}
 
                         // Controlled props
                         page={page}
                         pageSize={pageSize}
-                        sorted={sorted}
-                        filtered={filtered}
 
                         // Call back heaven:
                         onPageChange={page => onChangePage(page)}
@@ -167,8 +173,8 @@ class Subscriptions extends React.PureComponent {
                             onChangePageSize(pageSize);
                             onChangePage(pageIndex);
                         }}
-                        onSortedChange={this.updateSorted}
-                        onFilteredChange={this.updateFiltered}
+                        onSortedChange={sorted => this.setState({ sorted })}
+                        onFilteredChange={filtered => this.setState({ filtered: filtered, initialFiltered: undefined })}
                     />
                     </div>
                 <MessageBox messageHeader="Info"
