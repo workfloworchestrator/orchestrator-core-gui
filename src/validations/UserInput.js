@@ -3,7 +3,8 @@ import {validEmailRegExp} from "./Subscriptions";
 
 const inValidVlan = vlan => {
     const value = vlan || "";
-    const stripped = value.replace(/ /g, "");
+
+    const stripped = value.toString().replace(/ /g, "");
     return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) ||
             stripped.split(",").some(inValidRange);
 };
@@ -17,7 +18,7 @@ const inValidRange = range => {
 };
 
 const inValidServicePort = (sp, isElan) => {
-    if (sp.tag === "SSP" && (isEmpty(sp.vlan) || sp.vlan === "0")){
+    if ((sp.tag === "SSP" || sp.port_mode === "untagged") && (isEmpty(sp.vlan) || sp.vlan === "0")){
         return false;
     }
     if (isEmpty(sp)) {

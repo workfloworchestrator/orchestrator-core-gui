@@ -19,7 +19,7 @@ export default class VirtualLAN extends React.PureComponent {
     }
 
     componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
-        if (this.props.servicePortTag === "SSP") {
+        if (this.props.servicePortTag === "SSP" || this.props.servicePortTag === "untagged") {
             this.setState({missingInIms: false, usedVlans:[], });
         } else {
             if (subscriptionIdMSP) {
@@ -80,7 +80,7 @@ export default class VirtualLAN extends React.PureComponent {
     render() {
         const {usedVlans, vlansInUse, missingInIms, invalidFormat} = this.state;
         const {onChange, vlan, subscriptionIdMSP, disabled, placeholder, servicePortTag} = this.props;
-        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms && !servicePortTag==="SSP"
+        const showAllPortsAvailable = subscriptionIdMSP && isEmpty(usedVlans) && !missingInIms && (!servicePortTag === "SSP" || !servicePortTag === "untagged")
         const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled && !missingInIms;
         const derivedPlaceholder = placeholder || (subscriptionIdMSP ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
         return (
