@@ -25,7 +25,7 @@ export default class Prefixes extends React.PureComponent {
       sortOrder: {name: "prefix", descending: false},
       filterAttributes: {
         state: ipamStates.filter(s => s).map(state =>
-          ({name: state, selected: (state === "Allocated"), count: 0})),
+          ({name: state, selected: (state === "Allocated" || state === "Subnet"), count: 0})),
         rootPrefix: [],
       },
       rootPrefixes: [],
