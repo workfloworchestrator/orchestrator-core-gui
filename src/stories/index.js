@@ -13,6 +13,7 @@ import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
 import UserInputForm from "../components/UserInputForm";
 import {LOCATION_CODES, ORGANISATIONS, PRODUCTS} from "./data";
+import LocationCodeSelect from "../components/LocationCodeSelect";
 // import UserInputWrapper from "./UserInputWrapper";
 
 
@@ -110,10 +111,18 @@ storiesOf('GenericSelect', module)
     .add('Default', () =>
         <GenericSelect onChange={(e) => {
             action('clicked');
-            debugger;
             this.selected = e.value;
             e;
         }} choices={genericSelectChoices}/>);
+
+storiesOf('LocationCodeSelect', module)
+    .add('Default', () =>
+        <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={(e) => {
+            action('clicked');
+            this.selected = e.value;
+            e;
+        }}/>
+    )
 
 
 storiesOf('TableSummary', module)
