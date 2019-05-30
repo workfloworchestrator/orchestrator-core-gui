@@ -31,28 +31,19 @@ class Subscriptions extends React.PureComponent {
             pages: 99,
             sorted: [],
             filtered: [],
-            initialFiltered: undefined
+            initialFiltered: undefined,
+            initialSorted: [{id:"start_date", desc:true}],
         };
     };
 
     componentDidMount() {
-        if (this.props.sorted) {
-            console.log("Resort needed")
+        if (this.props.sorted || this.props.filtered) {
+            console.log("Re-fetch needed: to load values from URL")
+            this.setState({
+                initialSorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
+                initialFiltered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : undefined,
+            })
         }
-        if (this.props.filtered) {
-            console.log("Re Filter needed")
-            const newState= {
-                filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [],
-                sorted: [],
-                //page: this.props.page ? 0,
-                page: 0,
-                pageSize: 25
-            }
-            this.fetchData(newState)
-            // debugger;
-            this.setState({initialFiltered: newState.filtered})
-        }
-
     }
 
     fetchData = (state, instance) => {
@@ -94,7 +85,7 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, subscriptions, sorted, filtered, initialFiltered} = this.state;
+        const {pages, subscriptions, initialFiltered, initialSorted} = this.state;
         const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
@@ -162,6 +153,7 @@ class Subscriptions extends React.PureComponent {
                         showPaginationTop
                         showPaginationBottom
                         filtered={initialFiltered}
+                        sorted={initialSorted}
 
                         // Controlled props
                         page={page}
@@ -173,7 +165,7 @@ class Subscriptions extends React.PureComponent {
                             onChangePageSize(pageSize);
                             onChangePage(pageIndex);
                         }}
-                        onSortedChange={sorted => this.setState({ sorted })}
+                        onSortedChange={sorted => this.setState({ sorted: sorted, initialSorted: undefined })}
                         onFilteredChange={filtered => this.setState({ filtered: filtered, initialFiltered: undefined })}
                     />
                     </div>
