@@ -29,18 +29,16 @@ class Subscriptions extends React.PureComponent {
             subscriptions: [],
             loading: true,
             pages: 99,
-            sorted: [],
+            sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
             filtered: [],
             initialFiltered: undefined,
-            initialSorted: [{id:"start_date", desc:true}],
         };
     };
 
     componentDidMount() {
-        if (this.props.sorted || this.props.filtered) {
+        if (this.props.filtered) {
             console.log("Re-fetch needed: to load values from URL")
             this.setState({
-                initialSorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
                 initialFiltered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : undefined,
             })
         }
@@ -62,6 +60,17 @@ class Subscriptions extends React.PureComponent {
         });
     };
 
+    updateSorted = (newSorted) => {
+        // console.log(newSorted)
+        this.setState({
+            sorted: newSorted
+        });
+        const newSort = newSorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`})
+        this.props.onChangeSorted(newSort)
+    };
+
+
+
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
         if (e.keyCode === 38 && page > 0) {
@@ -73,8 +82,6 @@ class Subscriptions extends React.PureComponent {
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
-        const sortUrlParameters = this.state.sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`});
-        this.props.onChangeSorted(sortUrlParameters);
         const filterUrlParameters = this.state.filtered.map(item => {return `${item.id},${item.value}`});
         this.props.onChangeFiltered(filterUrlParameters);
         this.props.history.push("/subscription/" + subscription_id);
@@ -85,7 +92,7 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, subscriptions, initialFiltered, initialSorted} = this.state;
+        const {pages, sorted, subscriptions, initialFiltered} = this.state;
         const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
@@ -152,10 +159,10 @@ class Subscriptions extends React.PureComponent {
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
-                        filtered={initialFiltered}
-                        sorted={initialSorted}
+                        filtered={initialFiltered} // Will be undefined when no filter was propvided in URL
 
                         // Controlled props
+                        sorted={sorted}
                         page={page}
                         pageSize={pageSize}
 
@@ -165,7 +172,7 @@ class Subscriptions extends React.PureComponent {
                             onChangePageSize(pageSize);
                             onChangePage(pageIndex);
                         }}
-                        onSortedChange={sorted => this.setState({ sorted: sorted, initialSorted: undefined })}
+                        onSortedChange={this.updateSorted}
                         onFilteredChange={filtered => this.setState({ filtered: filtered, initialFiltered: undefined })}
                     />
                     </div>
