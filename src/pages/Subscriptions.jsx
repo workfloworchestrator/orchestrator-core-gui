@@ -35,7 +35,7 @@ class Subscriptions extends React.PureComponent {
         };
     };
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.filtered) {
             console.log("Re-fetch needed: to load values from URL")
             this.setState({
@@ -70,6 +70,13 @@ class Subscriptions extends React.PureComponent {
     };
 
 
+    updateFiltered = (newFiltered) => {
+        this.setState({initialFiltered: undefined});
+
+        this.setState({
+            filtered: newFiltered
+        });
+    };
 
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
@@ -82,7 +89,9 @@ class Subscriptions extends React.PureComponent {
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
-        const filterUrlParameters = this.state.filtered.map(item => {return `${item.id},${item.value}`});
+        const filterUrlParameters = this.state.initialFiltered ? this.state.initialFiltered.map(item => {return `${item.id},${item.value}`}) : this.state.filtered.map(item => {return `${item.id},${item.value}`});
+        const sortedUrlParameters = this.state.sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`});
+        this.props.onChangeSorted(sortedUrlParameters);
         this.props.onChangeFiltered(filterUrlParameters);
         this.props.history.push("/subscription/" + subscription_id);
     };
@@ -159,7 +168,7 @@ class Subscriptions extends React.PureComponent {
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
-                        filtered={initialFiltered} // Will be undefined when no filter was propvided in URL
+                        filtered={initialFiltered} // Will be undefined when no filter was provided in URL
 
                         // Controlled props
                         sorted={sorted}
@@ -173,7 +182,8 @@ class Subscriptions extends React.PureComponent {
                             onChangePage(pageIndex);
                         }}
                         onSortedChange={this.updateSorted}
-                        onFilteredChange={filtered => this.setState({ filtered: filtered, initialFiltered: undefined })}
+                        // onFilteredChange={debounce(onColumnFilterChange, 1000)}
+                        onFilteredChange={this.updateFiltered}
                     />
                     </div>
                 <MessageBox messageHeader="Info"
