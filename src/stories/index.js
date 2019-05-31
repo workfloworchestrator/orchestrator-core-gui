@@ -17,6 +17,9 @@ import LocationCodeSelect from "../components/LocationCodeSelect";
 // import UserInputWrapper from "./UserInputWrapper";
 
 
+// start json server with
+// json-server --watch src/stories/mocked_data/db.json --port 8080 --routes src/stories/mocked_data/routes.json
+
 const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
 const tableSummaryDataDefinition = [
     {labels: ["Label1", "Label 2", "Label 3"]},
@@ -84,7 +87,6 @@ storiesOf('Welcome', module).add('to Storybook', () =>
             working with dev's data </b></p>
     </div>
 );
-
 
 storiesOf('SubscriptionProductTagSelect', module)
     .add('Only tags', () =>

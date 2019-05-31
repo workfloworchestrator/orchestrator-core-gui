@@ -28,6 +28,7 @@
     "events": "^3.0.0",
     "http-proxy-middleware": "^0.19.1",
     "i18n-js": "^3.2.1",
+    "json-server": "^0.15.0",
     "jsondiffpatch": "^0.3.11",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",

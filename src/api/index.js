@@ -7,7 +7,8 @@ import {
 
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
-const apiPath = "/api/";
+// const apiPath = "/api/";
+const apiPath = "ihttp://localhost:8080/api/";
 
 let configuration = {};
 
