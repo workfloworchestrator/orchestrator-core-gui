@@ -61,7 +61,6 @@ class Subscriptions extends React.PureComponent {
     };
 
     updateSorted = (newSorted) => {
-        // console.log(newSorted)
         this.setState({
             sorted: newSorted
         });
@@ -71,9 +70,8 @@ class Subscriptions extends React.PureComponent {
 
 
     updateFiltered = (newFiltered) => {
-        this.setState({initialFiltered: undefined});
-
         this.setState({
+            initialFiltered: undefined, // reset any initialFilter stuff to unbind the filtered state from URL
             filtered: newFiltered
         });
     };
@@ -106,7 +104,7 @@ class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div className="divider"></div>
+                <div className="divider"/>
                 <div className="subscriptions-container">
                     <ReactTable
                         columns={[
