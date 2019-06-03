@@ -20,6 +20,7 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
 import {getQueryParameters} from "../utils/QueryParameters";
+import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
 
 export default class UserInputContainer extends React.Component {
 
@@ -196,6 +197,7 @@ export default class UserInputContainer extends React.Component {
 
                 product={product}
                 validSubmit={this.validSubmit(products)}
+                currentState={this.props.currentState}
                 // refreshSubscriptions={this.refreshSubscriptions}
                 // preselectedInput={getQueryParameters(this.props.location.search)}
             />
@@ -226,4 +228,9 @@ UserInputContainer.propTypes = {
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
     preselectedDienstafname: PropTypes.string,
+    currentState: PropTypes.array,
+};
+
+UserInputContainer.defaultProps = {
+    currentState: [],
 };

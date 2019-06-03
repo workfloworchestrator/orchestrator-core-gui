@@ -12,13 +12,18 @@ import GenericSelect from "../components/GenericSelect";
 import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
 import UserInputForm from "../components/UserInputForm";
-import {LOCATION_CODES, ORGANISATIONS, PRODUCTS} from "./data";
+import {
+    allSubscriptionsWithTags, contactPersons,
+    LOCATION_CODES,
+    ORGANISATIONS,
+    PRODUCTS,
+    subscriptions_by_tag_msp,
+    subscriptionsWithTagSp
+} from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
-// import UserInputWrapper from "./UserInputWrapper";
 
+import fetchMock from 'fetch-mock';
 
-// start json server with
-// json-server --watch src/stories/mocked_data/db.json --port 8080 --routes src/stories/mocked_data/routes.json
 
 const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
 const tableSummaryDataDefinition = [
@@ -51,11 +56,10 @@ const contactPersonSteps = [
 ];
 
 
-const corelinkInputSteps = [{
-    "interface_type_key": "corelink_service_speed",
-    "name": "ims_port_id_1",
-    "type": "corelink"
-}, {"interface_type_key": "corelink_service_speed", "name": "ims_port_id_2", "type": "corelink"}];
+const corelinkInputSteps = [
+    {"interface_type_key": "corelink_service_speed", "name": "ims_port_id_1", "type": "corelink", "location_code_key": "location_code"},
+    {"interface_type_key": "corelink_service_speed", "name": "ims_port_id_2", "type": "corelink", "location_code_key": "location_code"}
+    ];
 
 const sn8PortSelectInputStepsAllOrganisations = [
     {"name": "organisation", "type": "organisation"},
@@ -88,129 +92,107 @@ storiesOf('Welcome', module).add('to Storybook', () =>
     </div>
 );
 
-storiesOf('SubscriptionProductTagSelect', module)
-    .add('Only tags', () =>
+storiesOf("SubscriptionProductTagSelect", module)
+    .add("Only tags", () =>
         <SubscriptionProductTagSelect onChange={(e) => {
-            action('clicked');
+            action("clicked");
             debugger;
             e;
-        }} tags={['SP', 'MSP']}/>)
+        }} tags={["SP", "MSP"]}/>)
     .add("Filtered on Product", () =>
         <SubscriptionProductTagSelect
-            onChange={action('clicked')}
-            tags={['IPS']}
-            productId='077e6583-a1f8-42bd-87b0-60f7051c8d42'/>)
+            onChange={action("clicked")}
+            tags={["IPS"]}
+            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"/>)
     .add("Filtered on Product with excluded subs", () =>
         <SubscriptionProductTagSelect
-            onChange={action('clicked')}
-            tags={['IPS']}
-            productId='077e6583-a1f8-42bd-87b0-60f7051c8d42'
-            excludedSubscriptionIds={['08ac5baa-4053-4d01-98e0-505e957d73c7']}
+            onChange={action("clicked")}
+            tags={["IPS"]}
+            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"
+            excludedSubscriptionIds={["08ac5baa-4053-4d01-98e0-505e957d73c7"]}
         />);
 
 
-storiesOf('GenericSelect', module)
-    .add('Default', () =>
+storiesOf("GenericSelect", module)
+    .add("Default", () =>
         <GenericSelect onChange={(e) => {
-            action('clicked');
+            action("clicked");
             this.selected = e.value;
             e;
         }} choices={genericSelectChoices}/>);
 
-storiesOf('LocationCodeSelect', module)
-    .add('Default', () =>
+storiesOf("LocationCodeSelect", module)
+    .add("Default", () =>
         <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={(e) => {
-            action('clicked');
+            action("clicked");
             this.selected = e.value;
             e;
         }}/>
     )
 
 
-storiesOf('TableSummary', module)
-    .add('Definition', () =>
+storiesOf("TableSummary", module)
+    .add("Definition", () =>
         <TableSummary onChange={(e) => {
-            action('clicked');
+            action("clicked");
             this.selected = e.value;
             e;
         }} data={tableSummaryDataDefinition}/>)
-    .add('Summary with headers', () =>
+    .add("Summary with headers", () =>
         <TableSummary onChange={(e) => {
-            action('clicked');
+            action("clicked");
             this.selected = e.value;
             e;
         }} data={tableSummaryDataWithHeaders}/>)
-    .add('Summary with definition and headers', () =>
+    .add("Summary with definition and headers", () =>
         <TableSummary onChange={(e) => {
-            action('clicked');
+            action("clicked");
             this.selected = e.value;
             e;
         }} data={tableSummaryDataDefinitionWithHeaders}/>);
 
-storiesOf('UserInputForm', module)
-    .add('Contactpersons', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={contactPersonSteps}
-            products={PRODUCTS}
-            formName="Organisation and contacts">
-        </UserInputContainer>
+storiesOf("UserInputForm", module)
+    .add("Contactpersons", () => {
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', allSubscriptionsWithTags);
+        fetchMock.get('glob:*/api/crm/contacts/*', contactPersons);
+        return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps}
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+        }
     )
-    .add('Corelink', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={corelinkInputSteps}
-            products={PRODUCTS}
-            formName="Corelink form">
-        </UserInputContainer>
-    )
-    .add('SN7 Portselect all organisations', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={sn7PortSelectInputStepsAllOrganisations}
-            products={PRODUCTS}
-            formName="SN7 portselect form, showing all ports">
-        </UserInputContainer>
-    )
-    .add('SN7 Portselect selected organisation', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={sn7PortSelectInputStepsSelectedOrganisation}
-            products={PRODUCTS}
-            formName="SN7 portselect, showing only ports for selected organisation">
-        </UserInputContainer>
-    )
-    .add('SN8 Portselect all organisations', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={sn8PortSelectInputStepsAllOrganisations}
-            products={PRODUCTS}
-            formName="SN8 portselect form, showing all ports">
-        </UserInputContainer>
-    )
-    .add('SN8 Portselect selected organisation', () =>
-        <UserInputContainer
-            history=""
-            currentUser=""
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
-            products={PRODUCTS}
-            formName="SN8 portselect, showing only ports for selected organisation">
-        </UserInputContainer>
-    )
+    .add("Corelink", () => {
+        // const currentState = {"asn":1,"corelink_service_speed":"100000","description":"Corelink for SURFnetnetwerk","dns_zone":"dev.vtb","infra_vrf":1,"ipv4_prefix":"10.1.16.0/20","ipv6_prefix":"fd00:0:101::/48","isis_metric":"20","nso_service_id":"42344f8f-d2b5-4628-ab45-740f27239a0e","organisation":"c9b5e717-0b11-e511-80d0-005056956c1a","organisation_abbrev":"SURFnetnetwerk","organisation_name":"SURFnet netwerk","process_id":"db04bfc7-0d89-4677-95d3-69b0e0c2bee9","product":"f5f5c099-506b-4be1-a476-65891b49919d","reporter":"SYSTEM","subscription_id":"344d007d-c1a4-48d5-b7b8-79eaff39246c","workflow_target":"CREATE"}
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', allSubscriptionsWithTags);
+        return <UserInputContainer formName="Corelink form" stepUserInput={corelinkInputSteps}
+                                   currentState={{"corelink_service_speed":"100000", "location_code":"MT001A"}}
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+    })
+    .add("SN7 Portselect all organisations", () => {
+        return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={sn7PortSelectInputStepsAllOrganisations}
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+    })
+    .add("SN7 Portselect selected organisation", () => {
+        return <UserInputContainer formName="SN7 portselect, showing only ports for selected organisation" stepUserInput={sn7PortSelectInputStepsSelectedOrganisation}
+                                   history=""
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+    })
+    .add("SN8 Portselect all organisations", () => {
+        return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={sn8PortSelectInputStepsAllOrganisations}
+                                   history=""
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+    })
+    .add("SN8 Portselect selected organisation", () => {
+        return <UserInputContainer formName="SN8 portselect, showing only ports for selected organisation" stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
+                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   products={PRODUCTS}/>
+    })

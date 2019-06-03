@@ -87,6 +87,7 @@ class ProcessDetail extends React.PureComponent {
                 const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
                 const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
                 //Pre-fill the value of the user_input if the current_state already contains the value
+
                 const state = processInstance.current_state || {};
                 if (!isEmpty(state) && !isEmpty(stepUserInput)) {
                     stepUserInput.forEach(userInput => userInput.value = lookupValueFromNestedState(userInput.name, state));
