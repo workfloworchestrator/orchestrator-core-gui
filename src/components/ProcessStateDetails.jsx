@@ -147,7 +147,17 @@ class ProcessStateDetails extends React.PureComponent {
                 json = step.state;
                 break;
             case "success":
-                json = (index !== 0) ? this.stateDelta(steps[index - 1].state, step.state) : step.state;
+                if (index > 0) {
+                    let prev_index = index - 1;
+                    while (prev_index > 0 && (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting" ))
+                    {
+                        prev_index--;
+                    }
+
+                    json = this.stateDelta(steps[prev_index].state, step.state);
+                } else {
+                    json = step.state
+                }
                 break;
             default:
         }
