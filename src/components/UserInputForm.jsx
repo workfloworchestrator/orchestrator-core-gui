@@ -8,7 +8,6 @@ import {isEmpty, stop} from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
-import EmailInput from "./EmailInput";
 import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import LocationCodeSelect from "./LocationCodeSelect";
 import CheckBox from "./CheckBox";
@@ -28,17 +27,13 @@ import {randomCrmIdentifier} from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
 import GenericSelect from "./GenericSelect";
-import {filterProductsByBandwidth, filterProductsByTag} from "../validations/Products";
+import {filterProductsByBandwidth} from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
-import ImsChanges from "./ImsChanges";
-import DatePickerCustom from "./DatePickerCustom";
-import DatePicker from "react-datepicker";
 import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
-import CorelinkIEEEInterfaceTypesSelect from "./CorelinkIEEEInterfaceTypesSelect";
 import "./UserInputForm.scss";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
@@ -299,12 +294,8 @@ export default class UserInputForm extends React.Component {
         let organisationId;
         switch (userInput.type) {
             case "string":
-            case "guid":
             case "uuid":
             case "crm_port_id":
-            case "ims_free_port":
-            case "port":
-            case "ims_port_id":
             case "ims_id":
             case "isalias":
             case "stp":
@@ -326,7 +317,6 @@ export default class UserInputForm extends React.Component {
                 return <BandwidthSelect stepUserInput={stepUserInput} name={name} onBlur={this.validateUserInput(name)}
                                         onChange={this.changeStringInput(name)} value={value || ""}
                                         portsKey={userInput.ports_key} disabled={userInput.readonly}/>;
-            case "vlan":
             case "vlan_range":
                 const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
                 const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
@@ -343,27 +333,6 @@ export default class UserInputForm extends React.Component {
                                       onChange={this.changeSelectInput(name)}
                                       product={value}
                                       disabled={userInput.readonly}/>;
-            case "msp_product":
-                const tags = ["MSP"];
-                const mspProducts = filterProductsByTag(products, tags);
-                return <ProductSelect products={mspProducts}
-                                      onChange={this.changeSelectInput(name)}
-                                      product={value}/>;
-
-            case "rmsp_product":
-                const rmsptags = ["RMSP"];
-                const rmspProducts = filterProductsByTag(products, rmsptags);
-                return <ProductSelect products={rmspProducts}
-                                      onChange={this.changeSelectInput(name)}
-                                      product={value}/>;
-
-            case "netherlight_msp_product":
-                const nlTags = ["MSPNL"];
-                const nlMspProducts = filterProductsByTag(products, nlTags);
-                return <ProductSelect products={nlMspProducts}
-                                      onChange={this.changeSelectInput(name)}
-                                      product={value}/>;
-
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
                     findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
@@ -383,14 +352,6 @@ export default class UserInputForm extends React.Component {
                     persons={isEmpty(value) ? [{email: "", name: "", phone: ""}] : value}
                     organisationId={organisationId}
                     onChange={this.changeNestedInput(name)}/>;
-            case "emails":
-                return <EmailInput emails={this.commaSeperatedArray(value)}
-                                   onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={true}/>;
-            case "email":
-                return <EmailInput emails={this.commaSeperatedArray(value)}
-                                   onChangeEmails={this.changeArrayInput(name)}
-                                   placeholder={""} multipleEmails={false}/>;
             case "ieee_interface_type":
                 const productId = findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
@@ -401,10 +362,6 @@ export default class UserInputForm extends React.Component {
                 return <IEEEInterfaceTypesForProductTagSelect onChange={this.changeSelectInput(name)}
                                                               interfaceType={value}
                                                               productId={propsProductId}/>;
-            case "corelink_ieee_interface_type":
-                return <CorelinkIEEEInterfaceTypesSelect onChange={this.changeSelectInput(name)}
-                                                         interfaceType={value}
-                                                         productId={productId}/>;
             case "node_id_port_select":
                 const intType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const locCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
@@ -470,13 +427,6 @@ export default class UserInputForm extends React.Component {
                               onChange={this.changeBooleanInput(name)}
                               info={I18n.t(`process.${name}`)}/>
                     <section className="form-divider"></section>
-                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
-                                              products={products}
-                                              organisations={organisations}
-                                              className="indent"/>
-                </div>;
-            case "read_only_subscription":
-                return <div>
                     <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
                                               products={products}
                                               organisations={organisations}
@@ -556,7 +506,6 @@ export default class UserInputForm extends React.Component {
                                              disabledPorts={userInput.disabledPorts}
                                              reportError={this.reportCustomError(userInput.type)}/>
                 </div>;
-            case "subscription":
             case "subscriptions":
                 const productIdForSubscription = userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
                 return <SubscriptionsSelect onChange={this.changeArrayInput(name)}
@@ -575,16 +524,6 @@ export default class UserInputForm extends React.Component {
                 return <IPPrefix preselectedPrefix={preselectedPrefix} prefix_min={parseInt(preselectedInput.prefix_min)}
                            onChange={this.changeNestedInput(name)}
                         /> ;
-            case "ims_changes":
-                return <ImsChanges changes={value} organisations={organisations}/>;
-            case "date_picker":
-                const targetDate = moment().add(14, 'days');
-                return <DatePicker
-                        dateFormat="YYYY-MM-DD"
-                        selected={moment(value)}
-                        onChange={this.changeDateInput(name)}
-                        customInput={<DatePickerCustom onClick={this.changeDateInput(name)} clear={this.clearDateInput(name, targetDate)}/>}
-                        openToDate={targetDate} />;
             case "nodes_for_location_code_and_status":
                 const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
                 const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
@@ -625,7 +564,6 @@ export default class UserInputForm extends React.Component {
                                      value={value}
                                      strict={true}
                                      readOnly={userInput.readonly || false}/>;
-            case "table_summary":
             case "migration_summary":
                 return <TableSummary data={userInput.data}/>;
             default:

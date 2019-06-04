@@ -13,10 +13,6 @@ export function filterProductsByBandwidth(products, bandwidth) {
     });
 }
 
-export function filterProductsByTag(products, tags) {
-    return products.filter(prod =>tags.includes(prod.tag));
-}
-
 export const TARGET_CREATE = "CREATE";
 export const TARGET_MODIFY = "MODIFY";
 export const TARGET_TERMINATE = "TERMINATE";
