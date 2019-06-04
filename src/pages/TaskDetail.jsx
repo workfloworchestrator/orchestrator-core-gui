@@ -45,7 +45,7 @@ export default class TaskDetail extends React.PureComponent {
 
                 const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
                 let stepUserInput = [];
-                if (taskInstance.last_status.toLowerCase() === "suspended" && userInputAllowed) {
+                if (userInputAllowed) {
                     const step = taskInstance.steps.find(step => step.name === taskInstance.last_step && step.status === "pending");
                     stepUserInput = step && step.form;
                 }

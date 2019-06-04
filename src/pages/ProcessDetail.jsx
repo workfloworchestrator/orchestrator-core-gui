@@ -79,7 +79,7 @@ class ProcessDetail extends React.PureComponent {
 
                 const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
                 let stepUserInput = [];
-                if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
+                if (userInputAllowed) {
                     const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");
                     stepUserInput = step && step.form;
                 }
