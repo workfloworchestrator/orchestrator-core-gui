@@ -75,7 +75,8 @@ export default class NewTask extends React.Component {
                                        products={products}
                                        locationCodes={[]}
                                        product={({})}
-                                       validSubmit={this.validSubmit}/>}
+                                       validSubmit={this.validSubmit}
+                                       preselectedInput={{}}/>}
                     </section>
                 </section>
             </div>

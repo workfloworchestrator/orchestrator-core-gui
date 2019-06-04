@@ -68,7 +68,7 @@ export default class UserInputForm extends React.Component {
             subscriptionsLoaded: false,
             servicePortsLoadedSN7: !!this.props.servicePortsSN7,
             servicePortsLoadedSN8: !!this.props.servicePortsSN8,
-            subscriptions: !!this.props.subscriptions,
+            subscriptions: [],
             servicePortsSN7: this.props.servicePortsSN7 ? this.props.servicePortsSN7 : [],
             servicePortsSN8: this.props.servicePortsSN8 ? this.props.servicePortsSN8 : [],
         }
