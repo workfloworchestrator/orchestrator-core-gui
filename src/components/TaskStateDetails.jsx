@@ -78,13 +78,16 @@ export default class TaskStateDetails extends React.PureComponent {
 
     renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
-
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
         const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.reduce((acc, key) => {
-            acc[key] = curr[key];
+            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
+                acc[key] = this.stateDelta(prev[key], curr[key]);
+            } else {
+                acc[key] = curr[key];
+            }
             return acc;
         }, {});
         return newState;
