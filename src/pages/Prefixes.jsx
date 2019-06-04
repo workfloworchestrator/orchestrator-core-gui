@@ -29,7 +29,7 @@ export default class Prefixes extends React.PureComponent {
         rootPrefix: [],
       },
       rootPrefixes: [],
-      ipPrefixProductId: props.products.filter(p => p.name === "IP_PREFIX").map(p => p.product_id).pop(),
+      ipPrefixProductId: props.products.filter(p => p.tag === "IP_PREFIX").map(p => p.product_id).pop(),
       availablePrefixId: 10000
     }
   };
