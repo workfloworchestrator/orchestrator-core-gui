@@ -88,14 +88,14 @@ export default class UserInputContainer extends React.Component {
     componentDidMount = () => {
         const {products, organisations, location} = this.props;
 
-        subscriptionsWithTags().then(subscriptions => {
-            let organisationName = null;
-            if (preselectedInput.organisation) {
-                const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-                organisationName = org ? org.name : organisationName;
-            }
-            this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        })
+        // subscriptionsWithTags().then(subscriptions => {
+        //     let organisationName = null;
+        //     // if (preselectedInput.organisation) {
+        //     //     const org = organisations.find(org => org.uuid === preselectedInput.organisation);
+        //     //     organisationName = org ? org.name : organisationName;
+        //     // }
+        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
+        // })
         // subscriptionsWithDetails().then(subscriptions => {
         //     let organisationName = null;
         //     if (preselectedInput.organisation) {
@@ -179,6 +179,7 @@ export default class UserInputContainer extends React.Component {
                 let servicePortsSN8 = subscriptions.filter(
                     sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
                 ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
+        console.log(subscriptions)
         return <section className="form-step divider">
             <h1>{formName}</h1>
             <UserInputForm
@@ -189,9 +190,10 @@ export default class UserInputContainer extends React.Component {
                 history="" // Not sure if we need to mock this
 
                 // Using subscriptions with enriched .tag info
-                subscriptions={subscriptions}
+                // subscriptions={subscriptions}
                 // Preloading servicePorts here
                 // Todo: disable preload en deal with service ports in UserInputForm itself? Now the call is done after start of process: seems fast enough for now
+                preloadSubscriptions={true}
                 preloadServicePortsSN7={true}
                 preloadServicePortsSN8={true}
 

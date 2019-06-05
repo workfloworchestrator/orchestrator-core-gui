@@ -46,6 +46,120 @@ export const PRODUCTS = [
 
 ]
 
+export const corelinkPorts10G = [
+        {
+            "fiber_type": "single-mode",
+            "id": 677600,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/0",
+            "status": "3"
+        },
+        {
+            "fiber_type": "multi-mode",
+            "id": 677601,
+            "iface_type": "10GBASE-SR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/1",
+            "status": "3"
+        },
+        {
+            "fiber_type": "multi-mode",
+            "id": 677602,
+            "iface_type": "10GBASE-SR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/2",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677603,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/3",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677604,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/4",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677605,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/5",
+            "status": "3"
+        },
+        {
+            "fiber_type": "multi-mode",
+            "id": 677606,
+            "iface_type": "10GBASE-SR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/6",
+            "status": "3"
+        },
+        {
+            "fiber_type": "multi-mode",
+            "id": 677607,
+            "iface_type": "10GBASE-SR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/7",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677608,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/8",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677609,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/0/9",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677610,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/2/0",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677611,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/2/1",
+            "status": "3"
+        },
+        {
+            "fiber_type": "multi-mode",
+            "id": 677612,
+            "iface_type": "10GBASE-SR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/2/2",
+            "status": "3"
+        },
+        {
+            "fiber_type": "single-mode",
+            "id": 677613,
+            "iface_type": "10GBASE-LR",
+            "node": "MT001A-JNX-ACID86-VTB",
+            "port": "1/2/3",
+            "status": "3"
+        },
+    ];
 
 export const contactPersons = [
     {
@@ -89,7 +203,6 @@ export const contactPersons = [
 ]
 
 export const subscriptions_by_tag_msp = [
-
     {
         "crm_port_id": "03490",
         "customer_id": "88503161-0911-e511-80d0-005056956c1a",
@@ -152,6 +265,7 @@ export const subscriptions_by_tag_msp = [
     },
 ];
 
+// WIth tag: have enriched info?
 export const subscriptionsWithTagSp = [
         {
             "crm_port_id": null,
@@ -214,6 +328,49 @@ export const subscriptionsWithTagSp = [
             "tag": "SP"
         }
     ];
+
+// remaining fixtures can be used to deliver subscriptions as returned by v2/subscriptions
+export const allNodeSubscriptions = [
+    {
+        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
+        "description": "Node Planned MT001A mt001a-jnx-acc-test",
+        "end_date": null,
+        "insync": true,
+        "product_description": "A product that can be used to set a planned node to in service",
+        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
+        "product_name": "Node",
+        "start_date": null,
+        "status": "provisioning",
+        "subscription_id": "d38d8b25-d9f5-4a25-b1b0-d29057c47420",
+        "tag": "Node"
+    },
+    {
+        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
+        "description": "Node Planned ASD001A asd001a-jnx-01-vtb",
+        "end_date": null,
+        "insync": true,
+        "product_description": "A product that can be used to set a planned node to in service",
+        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
+        "product_name": "Node",
+        "start_date": null,
+        "status": "provisioning",
+        "subscription_id": "5d2123e6-197d-4bb6-93c6-446d474d98fd",
+        "tag": "Node"
+    },
+    {
+        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
+        "description": "Node Planned ASD002A asd002a-jnx-01-vtb",
+        "end_date": null,
+        "insync": true,
+        "product_description": "A product that can be used to set a planned node to in service",
+        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
+        "product_name": "Node",
+        "start_date": null,
+        "status": "provisioning",
+        "subscription_id": "8674cbe7-4714-421a-b19d-aac687e9b8fc",
+        "tag": "Node"
+    },
+];
 
 export const allSubscriptionsWithTags = [
     {
@@ -3909,19 +4066,6 @@ export const allSubscriptionsWithTags = [
         "tag": "IP_PREFIX"
     },
     {
-        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
-        "description": "Node Planned ZP001A zp001a-jnx-acc-test",
-        "end_date": null,
-        "insync": true,
-        "product_description": "A product that can be used to set a planned node to in service",
-        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
-        "product_name": "Node",
-        "start_date": null,
-        "status": "provisioning",
-        "subscription_id": "d38d8b25-d9f5-4a25-b1b0-d29057c47420",
-        "tag": "Node"
-    },
-    {
         "customer_id": "146458b3-0911-e511-80d0-005056956c1a",
         "description": "ARCHIEF prefix 195.169.26.0/24",
         "end_date": null,
@@ -4609,19 +4753,6 @@ export const allSubscriptionsWithTags = [
         "status": "active",
         "subscription_id": "57c071eb-71a2-434e-bc7c-710d05238287",
         "tag": "IP_PREFIX"
-    },
-    {
-        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
-        "description": "Node Planned ASD002A asd002a-jnx-01-vtb",
-        "end_date": null,
-        "insync": true,
-        "product_description": "A product that can be used to set a planned node to in service",
-        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
-        "product_name": "Node",
-        "start_date": null,
-        "status": "provisioning",
-        "subscription_id": "8674cbe7-4714-421a-b19d-aac687e9b8fc",
-        "tag": "Node"
     },
     {
         "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",

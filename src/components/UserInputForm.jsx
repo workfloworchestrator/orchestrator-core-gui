@@ -300,8 +300,6 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const value = userInput.value;
         const {currentState, products, organisations, preselectedInput} = this.props;
-        console.log("***********")
-        console.log(currentState)
         const stepUserInput = this.state.stepUserInput;
 
         const {servicePortsSN7, servicePortsSN8, subscriptions} = this.state;

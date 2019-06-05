@@ -13,7 +13,8 @@ import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
 import UserInputForm from "../components/UserInputForm";
 import {
-    allSubscriptionsWithTags, contactPersons,
+    allNodeSubscriptions,
+    allSubscriptionsWithTags, contactPersons, corelinkPorts10G,
     LOCATION_CODES,
     ORGANISATIONS,
     PRODUCTS,
@@ -156,7 +157,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
         fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
-        fetchMock.get('/api/v2/all-subscriptions-with-tags', allSubscriptionsWithTags);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/crm/contacts/*', contactPersons);
         return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps}
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
@@ -164,13 +165,14 @@ storiesOf("UserInputForm", module)
         }
     )
     .add("Corelink", () => {
-        // const currentState = {"asn":1,"corelink_service_speed":"100000","description":"Corelink for SURFnetnetwerk","dns_zone":"dev.vtb","infra_vrf":1,"ipv4_prefix":"10.1.16.0/20","ipv6_prefix":"fd00:0:101::/48","isis_metric":"20","nso_service_id":"42344f8f-d2b5-4628-ab45-740f27239a0e","organisation":"c9b5e717-0b11-e511-80d0-005056956c1a","organisation_abbrev":"SURFnetnetwerk","organisation_name":"SURFnet netwerk","process_id":"db04bfc7-0d89-4677-95d3-69b0e0c2bee9","product":"f5f5c099-506b-4be1-a476-65891b49919d","reporter":"SYSTEM","subscription_id":"344d007d-c1a4-48d5-b7b8-79eaff39246c","workflow_target":"CREATE"}
+        const currentState = {"asn":1,"corelink_service_speed":"100000","description":"Corelink for SURFnetnetwerk","dns_zone":"dev.vtb","infra_vrf":1,"ipv4_prefix":"10.1.16.0/20","ipv6_prefix":"fd00:0:101::/48","isis_metric":"20","nso_service_id":"42344f8f-d2b5-4628-ab45-740f27239a0e","organisation":"c9b5e717-0b11-e511-80d0-005056956c1a","organisation_abbrev":"SURFnetnetwerk","organisation_name":"SURFnet netwerk","process_id":"db04bfc7-0d89-4677-95d3-69b0e0c2bee9","product":"f5f5c099-506b-4be1-a476-65891b49919d","reporter":"SYSTEM","subscription_id":"344d007d-c1a4-48d5-b7b8-79eaff39246c","workflow_target":"CREATE"}
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
         fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
-        fetchMock.get('/api/v2/all-subscriptions-with-tags', allSubscriptionsWithTags);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', allNodeSubscriptions);
+        fetchMock.get('glob:*/api/ims/free_corelink_ports/*', corelinkPorts10G);
         return <UserInputContainer formName="Corelink form" stepUserInput={corelinkInputSteps}
-                                   currentState={{"corelink_service_speed":"100000", "location_code":"MT001A"}}
+                                   currentState={currentState}
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
