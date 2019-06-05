@@ -18,8 +18,8 @@ import {
     LOCATION_CODES,
     ORGANISATIONS,
     PRODUCTS,
-    subscriptions_by_tag_msp,
-    subscriptionsWithTagSp
+    subscriptionsWithTagMSP,
+    subscriptionsWithTagSP, SN7PortSubscriptions, vlanData, SN8PortSubscriptions
 } from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
 
@@ -86,10 +86,9 @@ const sn7PortSelectInputStepsSelectedOrganisation = [
 storiesOf('Welcome', module).add('to Storybook', () =>
     <div>
         <h1>Workflows client storybook</h1>
-        <p>Welcome to the root of the storybook. We will demonstrate some of the components here.
-            The storybook will try to use the data from dev soon.</p>
-        <p><b>But for now it uses mocks that will needs some dynamic stuff (ORGANISATIONS, PRODUCTS etc), to get it
-            working with dev's data </b></p>
+        <p>Welcome to the storybook. We will demonstrate some of the components here.</p>
+        <p><b>The storybook will use mocks for the components that need data. So you could see other data then you're used to.</b></p>
+        <p>All the UserInputForms examples use a Wrapper component to simulate the form elements as they are used with the workflow engine</p>
     </div>
 );
 
@@ -126,37 +125,25 @@ storiesOf("LocationCodeSelect", module)
     .add("Default", () =>
         <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={(e) => {
             action("clicked");
-            this.selected = e.value;
-            e;
+            console.log(e)
+            // this.selected = e.value;
+            this.locationCode=e.value;
         }}/>
     )
 
-
 storiesOf("TableSummary", module)
     .add("Definition", () =>
-        <TableSummary onChange={(e) => {
-            action("clicked");
-            this.selected = e.value;
-            e;
-        }} data={tableSummaryDataDefinition}/>)
+        <TableSummary data={tableSummaryDataDefinition}/>)
     .add("Summary with headers", () =>
-        <TableSummary onChange={(e) => {
-            action("clicked");
-            this.selected = e.value;
-            e;
-        }} data={tableSummaryDataWithHeaders}/>)
+        <TableSummary data={tableSummaryDataWithHeaders}/>)
     .add("Summary with definition and headers", () =>
-        <TableSummary onChange={(e) => {
-            action("clicked");
-            this.selected = e.value;
-            e;
-        }} data={tableSummaryDataDefinitionWithHeaders}/>);
+        <TableSummary data={tableSummaryDataDefinitionWithHeaders}/>);
 
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/crm/contacts/*', contactPersons);
         return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps}
@@ -165,10 +152,10 @@ storiesOf("UserInputForm", module)
         }
     )
     .add("Corelink", () => {
-        const currentState = {"asn":1,"corelink_service_speed":"100000","description":"Corelink for SURFnetnetwerk","dns_zone":"dev.vtb","infra_vrf":1,"ipv4_prefix":"10.1.16.0/20","ipv6_prefix":"fd00:0:101::/48","isis_metric":"20","nso_service_id":"42344f8f-d2b5-4628-ab45-740f27239a0e","organisation":"c9b5e717-0b11-e511-80d0-005056956c1a","organisation_abbrev":"SURFnetnetwerk","organisation_name":"SURFnet netwerk","process_id":"db04bfc7-0d89-4677-95d3-69b0e0c2bee9","product":"f5f5c099-506b-4be1-a476-65891b49919d","reporter":"SYSTEM","subscription_id":"344d007d-c1a4-48d5-b7b8-79eaff39246c","workflow_target":"CREATE"}
+        const currentState = {"corelink_service_speed":"10000"};
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', subscriptions_by_tag_msp);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', subscriptionsWithTagSp);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', allNodeSubscriptions);
         fetchMock.get('glob:*/api/ims/free_corelink_ports/*', corelinkPorts10G);
         return <UserInputContainer formName="Corelink form" stepUserInput={corelinkInputSteps}
@@ -177,23 +164,43 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect all organisations", () => {
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', SN7PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
+        fetchMock.get('glob:*/api/ims/vlans/*', vlanData())
         return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={sn7PortSelectInputStepsAllOrganisations}
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect selected organisation", () => {
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', SN7PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
+        fetchMock.get('glob:*/api/ims/vlans/*', vlanData())
         return <UserInputContainer formName="SN7 portselect, showing only ports for selected organisation" stepUserInput={sn7PortSelectInputStepsSelectedOrganisation}
                                    history=""
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect all organisations", () => {
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
+        fetchMock.get('glob:*/api/ims/vlans/*', vlanData())
         return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={sn8PortSelectInputStepsAllOrganisations}
                                    history=""
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect selected organisation", () => {
+        fetchMock.restore();
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
+        fetchMock.get('glob:*/api/ims/vlans/*', vlanData())
         return <UserInputContainer formName="SN8 portselect, showing only ports for selected organisation" stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
                                    history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>

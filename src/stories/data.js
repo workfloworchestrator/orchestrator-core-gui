@@ -202,26 +202,27 @@ export const contactPersons = [
 
 ]
 
-export const subscriptions_by_tag_msp = [
+// WIth Tag mocks: have extra info (port_mode and crm_port_id?
+export const subscriptionsWithTagMSP= [
     {
-        "crm_port_id": "03490",
-        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
-        "description": "MSP - DESIGN ACADEMEY-10GBps-Dgl001A tbv Jive2",
+        "crm_port_id": "03161",
+        "customer_id": "ccadb9d1-0911-e511-80d0-005056956c1a",
+        "description": "CU 03161 RUG_Gn012A_1 MSP - IP poort in Gn012A van Rijksuniversiteit Groningen",
         "end_date": null,
-        "insync": true,
+        "insync": false,
         "is_ssp_and_has_parent": false,
-        "name": "MSP 10G",
+        "name": "MSP 100G Redundant",
         "port_mode": null,
-        "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+        "product_id": "0158797f-9968-496d-a768-8537da84f4a1",
         "start_date": 1516834800.0,
         "status": "active",
-        "subscription_id": "9dd843dd-4cfa-42c3-b41e-8b22ae2c8c60",
+        "subscription_id": "3f6aec46-f9aa-4cf0-8264-d7bca458c92b",
         "tag": "MSP"
     },
     {
-        "crm_port_id": "00344",
-        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
-        "description": "MSP2 - DESIGN ACADEMEY-10GBps-Dgl001A tbv Jive2",
+        "crm_port_id": "03920",
+        "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+        "description": "CU 03920 JIVE-GEANT(vlan 3003) MSP - 10G MSP voor Jive naar Latvia, via het Geant netwerk.",
         "end_date": null,
         "insync": true,
         "is_ssp_and_has_parent": false,
@@ -230,7 +231,37 @@ export const subscriptions_by_tag_msp = [
         "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
         "start_date": 1516834800.0,
         "status": "active",
-        "subscription_id": "9bc30ce1-44e6-458e-95d1-d8eb09a8d1a3",
+        "subscription_id": "4a705807-c3a6-4b5c-bac4-1b5cce5a863f",
+        "tag": "MSP"
+    },
+    {
+        "crm_port_id": "03108",
+        "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+        "description": "ASTRON MSP DGL001A 10 Gbit/s (IP) 03108",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "MSP 10G",
+        "port_mode": null,
+        "product_id": "6ca5d002-e401-42ef-96f1-e2f97506b321",
+        "start_date": 1553814000.0,
+        "status": "active",
+        "subscription_id": "a9024bfb-3c7d-470c-88c9-40d9cd6dad54",
+        "tag": "MSP"
+    },
+    {
+        "crm_port_id": null,
+        "customer_id": "ccadb9d1-0911-e511-80d0-005056956c1a",
+        "description": "RUG MSP (port not ready yet) 10 Gbit/s",
+        "end_date": null,
+        "insync": false,
+        "is_ssp_and_has_parent": false,
+        "name": "MSP 10G Redundant",
+        "port_mode": null,
+        "product_id": "820f4537-0121-4960-9728-dc071ec4c639",
+        "start_date": null,
+        "status": "initial",
+        "subscription_id": "55666350-b172-435e-aad6-5368c9569afb",
         "tag": "MSP"
     },
     {
@@ -245,7 +276,37 @@ export const subscriptions_by_tag_msp = [
         "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
         "start_date": null,
         "status": "initial",
-        "subscription_id": "817632f4-6d3e-4909-b309-b2e7587447d0",
+        "subscription_id": "ac8c28ba-60e8-4d31-9d42-6c04a616677b",
+        "tag": "MSP"
+    },
+    {
+        "crm_port_id": null,
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY MSP (port not ready yet) 1 Gbit/s",
+        "end_date": null,
+        "insync": false,
+        "is_ssp_and_has_parent": false,
+        "name": "MSP 1G",
+        "port_mode": null,
+        "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+        "start_date": null,
+        "status": "initial",
+        "subscription_id": "83c6facb-8764-4adf-8fb7-79923b111b38",
+        "tag": "MSP"
+    },
+    {
+        "crm_port_id": "12481",
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY MSP MT001A 1 Gbit/s",
+        "end_date": null,
+        "insync": false,
+        "is_ssp_and_has_parent": false,
+        "name": "MSP 1G",
+        "port_mode": null,
+        "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+        "start_date": null,
+        "status": "initial",
+        "subscription_id": "06b8c582-b68c-498d-b50f-c2b513954421",
         "tag": "MSP"
     },
     {
@@ -263,10 +324,121 @@ export const subscriptions_by_tag_msp = [
         "subscription_id": "75e155df-efa0-4723-a6c2-ef6726503ce7",
         "tag": "MSP"
     },
+    {
+        "crm_port_id": "86201",
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY MSP MT001A 1 Gbit/s",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "MSP 1G",
+        "port_mode": null,
+        "product_id": "efbe1235-93df-49ee-bbba-e51434e0be17",
+        "start_date": 1556575200.0,
+        "status": "active",
+        "subscription_id": "56c95b5e-a2b2-4766-ae76-7df1cc7406a9",
+        "tag": "MSP"
+    }
 ];
 
-// WIth tag: have enriched info?
-export const subscriptionsWithTagSp = [
+export const subscriptionsWithTagSSP= [
+    {
+        "crm_port_id": "00347",
+        "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+        "description": "CU 00347 ASTRON_Dgl001A LP",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": true,
+        "name": "SSP 10G",
+        "port_mode": null,
+        "product_id": "fbec2336-c0c9-4b9c-9b79-8a119da36da6",
+        "start_date": 1414364400.0,
+        "status": "active",
+        "subscription_id": "a681afb4-b77c-4361-852f-1bbcd89cf023",
+        "tag": "SSP"
+    },
+    {
+        "crm_port_id": "00168",
+        "customer_id": "ccadb9d1-0911-e511-80d0-005056956c1a",
+        "description": "CU 00168 2066LP_Lw01-Gn01_RUG(Lw006A)",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "SSP 1G",
+        "port_mode": null,
+        "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+        "start_date": 1428962400.0,
+        "status": "active",
+        "subscription_id": "26c36c3d-1a65-4a3e-a04c-623266d0bce8",
+        "tag": "SSP"
+    },
+    {
+        "crm_port_id": "51802",
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY SSP MT001A 1 Gbit/s",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "SSP 1G",
+        "port_mode": null,
+        "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+        "start_date": 1556661600.0,
+        "status": "active",
+        "subscription_id": "62a9f5e8-efd1-4f58-a0e4-14fffcb082a5",
+        "tag": "SSP"
+    },
+    {
+        "crm_port_id": "29446",
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY SSP MT001A 1 Gbit/s",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "SSP 1G",
+        "port_mode": null,
+        "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+        "start_date": 1556661600.0,
+        "status": "active",
+        "subscription_id": "5e735314-412a-4f63-b9e7-80d33585beae",
+        "tag": "SSP"
+    },
+    {
+        "crm_port_id": "89167",
+        "customer_id": "88503161-0911-e511-80d0-005056956c1a",
+        "description": "DESIGNACADEMY SSP MT001A 1 Gbit/s",
+        "end_date": null,
+        "insync": true,
+        "is_ssp_and_has_parent": false,
+        "name": "SSP 1G",
+        "port_mode": null,
+        "product_id": "86679a39-d14a-4c8b-85e7-36000b12a16b",
+        "start_date": 1556661600.0,
+        "status": "active",
+        "subscription_id": "642a7096-f8e0-4486-bef8-d01021083ae4",
+        "tag": "SSP"
+    }
+];
+
+export const subscriptionsWithTagMSPNL= []; // Todo: add some samples
+
+export const subscriptionsWithTagSPNL= []; // Todo: add some samples
+
+export function vlanData() {
+    let vlans = []
+
+    if (Math.floor(Math.random() * 3 >= 1)) {
+        const single = Math.floor(Math.random() * 10);
+        vlans.push([single]);
+    }
+    if (Math.floor(Math.random() * 2 >= 1)) {
+        const start = Math.floor(Math.random() * 400) + 10;
+        const end = Math.floor(Math.random() * 400) + 10 + start;
+        vlans.push([start, end]);
+    }
+    return vlans;
+}
+
+export const subscriptionsWithTagSP = [
         {
             "crm_port_id": null,
             "customer_id": "88503161-0911-e511-80d0-005056956c1a",
@@ -328,6 +500,11 @@ export const subscriptionsWithTagSp = [
             "tag": "SP"
         }
     ];
+
+export const SN7PortSubscriptions = subscriptionsWithTagMSP.concat(subscriptionsWithTagMSPNL, subscriptionsWithTagSSP);
+
+export const SN8PortSubscriptions = subscriptionsWithTagSP.concat(subscriptionsWithTagSPNL);
+
 
 // remaining fixtures can be used to deliver subscriptions as returned by v2/subscriptions
 export const allNodeSubscriptions = [
