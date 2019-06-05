@@ -126,11 +126,12 @@ export default class TaskDetail extends React.PureComponent {
 
     validSubmit = stepUserInput => {
         const {task} = this.state;
-        resumeTask(task.tid, stepUserInput)
-            .then(() => {
+        let result = resumeTask(task.tid, stepUserInput)
+        result.then(() => {
                 this.props.history.push(`/tasks`);
                 setFlash(I18n.t("task.flash.update", {name: task.workflow_name}));
             });
+        return result;
     };
 
     switchTab = tab => e => {

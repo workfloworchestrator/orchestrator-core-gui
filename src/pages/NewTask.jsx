@@ -32,11 +32,12 @@ export default class NewTask extends React.Component {
                 return acc;
             }, {});
             taskInput["workflow_key"] = workflow.value;
-            startTask(taskInput)
-                .then(() => {
+            let result = startTask(taskInput)
+            result.then(() => {
                     this.props.history.push(`/tasks`);
                     setFlash(I18n.t("task.flash.create", {name: workflow.label}));
                 });
+            return result;
         }
     };
 
