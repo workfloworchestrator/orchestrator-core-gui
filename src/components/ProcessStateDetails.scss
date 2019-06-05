@@ -52,6 +52,7 @@ section.process-state-detail {
             }
         }
     }
+
     span.process-status {
         background-color: $light-grey;
 
@@ -74,6 +75,12 @@ section.process-state-detail {
             background-color: $suspended;
         }
     }
+
+    section.traceback-container {
+        padding: 5px;
+        background-color: $light-grey;
+    }
+
     section.process-summary {
         margin: 0 0 20px 0;
         padding: 25px 0;

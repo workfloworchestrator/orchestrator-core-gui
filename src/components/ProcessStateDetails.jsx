@@ -22,7 +22,8 @@ class ProcessStateDetails extends React.PureComponent {
             raw: false,
             details: true,
             stateChanges: true,
-            copiedToClipboard: false
+            copiedToClipboard: false,
+	    traceback: false
         };
     }
 
@@ -54,7 +55,7 @@ class ProcessStateDetails extends React.PureComponent {
     };
 
     renderProcessHeaderInformation = process => {
-        const {raw, details, stateChanges} = this.state;
+        const {raw, traceback, details, stateChanges} = this.state;
         return (
             <section className="header-information">
                 <ul>
@@ -75,6 +76,8 @@ class ProcessStateDetails extends React.PureComponent {
                     </li>}
                     <li><CheckBox name="raw" value={raw} info={I18n.t("process_state.raw")}
                                   onChange={() => this.setState({raw: !raw})}/></li>
+                    {process.traceback && <li><CheckBox name="traceback" value={traceback} info={I18n.t("process_state.traceback")}
+                                                        onChange={() => this.setState({traceback: !traceback})}/></li>}
                 </ul>
             </section>
         )
@@ -219,12 +222,21 @@ class ProcessStateDetails extends React.PureComponent {
         )
     };
 
+    renderTraceback = (process) => {
+	return (
+		<section className="traceback-container">
+		    <pre>{process.traceback}</pre>
+		</section>
+	)
+    }
+
     render() {
         const {process, subscriptionProcesses} = this.props;
-        const {raw, details, stateChanges} = this.state;
+        const {raw, details, stateChanges, traceback} = this.state;
         return <section className="process-state-detail">
             {this.renderProcessHeaderInformation(process)}
             {this.renderProcessSubscriptionLink(subscriptionProcesses)}
+            {traceback && this.renderTraceback(process)}
             {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
         </section>
     }

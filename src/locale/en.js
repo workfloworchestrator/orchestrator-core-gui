@@ -542,6 +542,7 @@ I18n.translations.en = {
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",
+	traceback: "Show traceback",
         wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
         summary: {
             status: "Status",
