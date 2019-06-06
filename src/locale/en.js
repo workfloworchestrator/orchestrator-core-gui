@@ -322,7 +322,7 @@ I18n.translations.en = {
         elan_service_ports: "ELAN Service Ports",
         elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         bgp_ip_service_ports: "IP Service Ports",
-        bgp_ip_service_ports_info: "The Service Port(s) used at customer side for IP service using BGP",
+        bgp_ip_service_ports_info: "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO",
         ip_static_service_port: "IP Service Port",
         ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
         nsi_isalias: "NSI isAlias",
