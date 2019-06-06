@@ -15,7 +15,7 @@ variables:
 
 test workflows-client:
   stage: unit-test
-  image: node:10.15.1
+  image: node:10.16.0
   script:
     - yarn install
     - yarn prettier -c '**/*.{js,jsx,scss,md}'
