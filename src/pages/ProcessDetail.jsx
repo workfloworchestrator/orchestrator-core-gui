@@ -79,7 +79,7 @@ class ProcessDetail extends React.PureComponent {
 
                 const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
                 let stepUserInput = [];
-                if (processInstance.status.toLowerCase() === "suspended" && userInputAllowed) {
+                if (userInputAllowed) {
                     const step = processInstance.steps.find(step => step.name === processInstance.step && step.status === "pending");
                     stepUserInput = step && step.form;
                 }
@@ -212,11 +212,12 @@ class ProcessDetail extends React.PureComponent {
 
     validSubmit = stepUserInput => {
         const {process} = this.state;
-        resumeProcess(process.id, this.addMissingDefaults(stepUserInput))
-            .then(() => {
-                this.props.history.push(`/processes`);
-                setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
-            });
+        let result = resumeProcess(process.id, this.addMissingDefaults(stepUserInput))
+        result.then((e) => {
+            this.props.history.push(`/processes`);
+            setFlash(I18n.t("process.flash.update", {name: process.workflow_name}));
+        })
+        return result
     };
 
     switchTab = tab => e => {

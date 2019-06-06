@@ -121,12 +121,13 @@ export default class UserInputContainer extends React.Component {
                 acc[input.name] = input.value;
                 return acc;
             }, {});
-            startProcess(processInput)
-                .then(() => {
+            let result = startProcess(processInput)
+            result.then(() => {
                     this.props.history.push(`/processes`);
                     const name = products.find(prod => prod.product_id === this.state.product.value).name;
                     setFlash(I18n.t("process.flash.create", {name: name}));
                 });
+            return result;
         }
     };
 

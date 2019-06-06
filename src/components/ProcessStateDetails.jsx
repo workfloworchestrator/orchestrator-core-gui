@@ -90,12 +90,11 @@ class ProcessStateDetails extends React.PureComponent {
         const currKeys = Object.keys(curr);
         const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
         const newState = newKeys.reduce((acc, key) => {
-            // if (curr[key] === Object(curr[key]) && prev[key]) {
-            //     acc[key] = this.stateDelta(prev[key], curr[key]);
-            // } else {
-            //     acc[key] = curr[key];
-            // }
-            acc[key] = curr[key];
+            if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
+                acc[key] = this.stateDelta(prev[key], curr[key]);
+            } else {
+                acc[key] = curr[key];
+            }
             return acc;
         }, {});
         return newState;
@@ -148,7 +147,17 @@ class ProcessStateDetails extends React.PureComponent {
                 json = step.state;
                 break;
             case "success":
-                json = (index !== 0) ? this.stateDelta(steps[index - 1].state, step.state) : step.state;
+                if (index > 0) {
+                    let prev_index = index - 1;
+                    while (prev_index > 0 && (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting" ))
+                    {
+                        prev_index--;
+                    }
+
+                    json = this.stateDelta(steps[prev_index].state, step.state);
+                } else {
+                    json = step.state
+                }
                 break;
             default:
         }
