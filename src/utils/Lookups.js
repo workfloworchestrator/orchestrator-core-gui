@@ -90,7 +90,7 @@ export function capitalize(s) {
 // The unused states are set to null
 // Free and Failed are fake states for frontend use only
 // 0 Free 1 Allocated  2 (Expired) 3 Planned 4 (Reserved) 5 (Suspend)  6 Failed
-export const ipamStates = [ "Free", "Allocated", null, "Planned", "Subnet", null, "Failed"];
+export const ipamStates = [ "Free", "Allocated", null, "Planned", null, null, "Failed", "Subnet"];
 
 // AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
 //                             0      1      2      3      4       5      6

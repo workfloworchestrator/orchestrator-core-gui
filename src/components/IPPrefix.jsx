@@ -208,22 +208,22 @@ export default class IPPrefix extends React.PureComponent {
     }
 
 
-    renderContentWithPreselectedPrefix = (preselectedPrefix) => {
+    renderContentWithPreselectedPrefix = (preselectedPrefix, prefix_min) => {
         const [subnet, netmask] = preselectedPrefix.split("/");
         return (
             <section className="ipblock-selector">
                 <div>
                     <SplitPrefix subnet={subnet} netmask={netmask} prefixlen={parseInt(netmask, 10)}
-                        onChange={this.selectIpam} />
+                        prefix_min={prefix_min} onChange={this.selectIpam} />
                 </div>
             </section>
         )
     }
 
     render() {
-       const {preselectedPrefix} = this.props;
+       const {preselectedPrefix, prefix_min} = this.props;
        if (preselectedPrefix) {
-           return this.renderContentWithPreselectedPrefix(preselectedPrefix);
+           return this.renderContentWithPreselectedPrefix(preselectedPrefix, prefix_min);
        } else {
            const {loading, selected_prefix_id} = this.state;
            let filteredIpBlocks = this.filterAndSortBlocks();
@@ -237,5 +237,6 @@ export default class IPPrefix extends React.PureComponent {
 
 IPPrefix.propTypes = {
     preselectedPrefix: PropTypes.string,
+    prefix_min: PropTypes.number,
     onChange: PropTypes.func.isRequired
 };

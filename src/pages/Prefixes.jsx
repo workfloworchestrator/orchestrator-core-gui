@@ -25,11 +25,11 @@ export default class Prefixes extends React.PureComponent {
       sortOrder: {name: "prefix", descending: false},
       filterAttributes: {
         state: ipamStates.filter(s => s).map(state =>
-          ({name: state, selected: (state === "Allocated"), count: 0})),
+          ({name: state, selected: (state === "Allocated" || state === "Subnet"), count: 0})),
         rootPrefix: [],
       },
       rootPrefixes: [],
-      ipPrefixProductId: props.products.filter(p => p.name === "IP_PREFIX").map(p => p.product_id).pop(),
+      ipPrefixProductId: props.products.filter(p => p.tag === "IP_PREFIX").map(p => p.product_id).pop(),
       availablePrefixId: 10000
     }
   };
@@ -253,7 +253,7 @@ export default class Prefixes extends React.PureComponent {
 
       } else if (subscription_id === "N/A") {
         let network = prefix.split("/")[0];
-        this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}`)
+        this.props.history.push(`new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`)
       }
   }
 

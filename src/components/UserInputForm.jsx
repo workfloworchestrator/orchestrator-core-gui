@@ -92,7 +92,7 @@ export default class UserInputForm extends React.Component {
     };
 
     loadServicePortsSN8 = () => {
-        subscriptionsByTags(["SP", "SPNL"]).then(result => {
+        subscriptionsByTags(["SP", "SPNL"], ["active"]).then(result => {
             this.setState({servicePortsSN8: result, servicePortsLoadedSN8: true});
         })
     };
@@ -572,7 +572,7 @@ export default class UserInputForm extends React.Component {
                                             excludedSubscriptionIds={userInput.excluded_subscriptions}/>;
             case "ip_prefix":
                 const preselectedPrefix = isEmpty(preselectedInput.prefix) ? null : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                return <IPPrefix preselectedPrefix={preselectedPrefix}
+                return <IPPrefix preselectedPrefix={preselectedPrefix} prefix_min={parseInt(preselectedInput.prefix_min)}
                            onChange={this.changeNestedInput(name)}
                         /> ;
             case "ims_changes":

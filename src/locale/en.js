@@ -315,6 +315,10 @@ I18n.translations.en = {
         service_ports_primary_info: "The A1 and B1 side",
         service_ports_secondary: "Service Ports",
         service_ports_secondary_info: "The A2 and B2 side",
+        sn7_migrating_service_port: "SN7 service port",
+        sn7_migrating_service_port_info: "SN7 service port to be migrated",
+        sn8_migrating_service_port: "SN8 service port",
+        sn8_migrating_service_port_info: "SN8 service port to be migrated to",
         elan_service_ports: "ELAN Service Ports",
         elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         bgp_ip_service_ports: "IP Service Ports",
@@ -538,6 +542,7 @@ I18n.translations.en = {
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",
+	traceback: "Show traceback",
         wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
         summary: {
             status: "Status",

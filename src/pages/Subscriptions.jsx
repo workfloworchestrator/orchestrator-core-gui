@@ -30,9 +30,19 @@ class Subscriptions extends React.PureComponent {
             loading: true,
             pages: 99,
             sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
-            filtered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : []
+            filtered: [],
+            initialFiltered: undefined,
         };
     };
+
+    componentWillMount() {
+        if (this.props.filtered) {
+            console.log("Re-fetch needed: to load values from URL")
+            this.setState({
+                initialFiltered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : undefined,
+            })
+        }
+    }
 
     fetchData = (state, instance) => {
         this.setState({ loading: true });
@@ -51,7 +61,6 @@ class Subscriptions extends React.PureComponent {
     };
 
     updateSorted = (newSorted) => {
-        // console.log(newSorted)
         this.setState({
             sorted: newSorted
         });
@@ -59,14 +68,13 @@ class Subscriptions extends React.PureComponent {
         this.props.onChangeSorted(newSort)
     };
 
+
     updateFiltered = (newFiltered) => {
         this.setState({
+            initialFiltered: undefined, // reset any initialFilter stuff to unbind the filtered state from URL
             filtered: newFiltered
         });
-        const newFilter = newFiltered.map(item => {return `${item.id},${item.value}`})
-        this.props.onChangeFiltered(newFilter)
     };
-
 
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
@@ -79,6 +87,10 @@ class Subscriptions extends React.PureComponent {
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
+        const filterUrlParameters = this.state.initialFiltered ? this.state.initialFiltered.map(item => {return `${item.id},${item.value}`}) : this.state.filtered.map(item => {return `${item.id},${item.value}`});
+        const sortedUrlParameters = this.state.sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`});
+        this.props.onChangeSorted(sortedUrlParameters);
+        this.props.onChangeFiltered(filterUrlParameters);
         this.props.history.push("/subscription/" + subscription_id);
     };
 
@@ -87,12 +99,12 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, subscriptions, sorted, filtered} = this.state;
+        const {pages, sorted, subscriptions, initialFiltered} = this.state;
         const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div className="divider"></div>
+                <div className="divider"/>
                 <div className="subscriptions-container">
                     <ReactTable
                         columns={[
@@ -154,12 +166,12 @@ class Subscriptions extends React.PureComponent {
                         className="-striped -highlight"
                         showPaginationTop
                         showPaginationBottom
+                        filtered={initialFiltered} // Will be undefined when no filter was provided in URL
 
                         // Controlled props
+                        sorted={sorted}
                         page={page}
                         pageSize={pageSize}
-                        sorted={sorted}
-                        filtered={filtered}
 
                         // Call back heaven:
                         onPageChange={page => onChangePage(page)}
@@ -168,6 +180,7 @@ class Subscriptions extends React.PureComponent {
                             onChangePage(pageIndex);
                         }}
                         onSortedChange={this.updateSorted}
+                        // onFilteredChange={debounce(onColumnFilterChange, 1000)}
                         onFilteredChange={this.updateFiltered}
                     />
                     </div>
