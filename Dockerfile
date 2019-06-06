@@ -2,7 +2,7 @@ FROM node:10.15.1 AS builder
 COPY . /app
 WORKDIR /app
 ENV CI=true
-RUN yarn --network-concurrency 1 install && yarn test && yarn build
+RUN yarn --network-concurrency 1 install && yarn build
 
 FROM nginx:latest
 RUN apt update && apt install -y wget curl
