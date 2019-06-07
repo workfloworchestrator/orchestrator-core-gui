@@ -32,12 +32,12 @@ export default class BfdSettings extends React.PureComponent {
         return (
             <div>
                <section key={name} className={`form-divider ${name}`}>
-                <CheckBox name={name} value={value.enabled || false}
+                <CheckBox name={name} value={(value && value.enabled) || false}
                     onChange={this.changeEnabled}
                     info={I18n.t("bfd_settings.enable")}
                     disabled={readOnly}
                 />
-                {value.enabled &&
+                {value && value.enabled &&
                     <React.Fragment>
                         <label>{I18n.t("bfd_settings.minimum_interval")}</label>
                         <NumericInput min={1} max={255000} value={value.minimum_interval} onChange={this.changeMinimumInterval} readOnly={readOnly}/>

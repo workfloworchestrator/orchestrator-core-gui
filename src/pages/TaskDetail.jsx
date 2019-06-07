@@ -45,7 +45,7 @@ export default class TaskDetail extends React.PureComponent {
 
                 const userInputAllowed = (currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership));
                 let stepUserInput = [];
-                if (taskInstance.last_status.toLowerCase() === "suspended" && userInputAllowed) {
+                if (userInputAllowed) {
                     const step = taskInstance.steps.find(step => step.name === taskInstance.last_step && step.status === "pending");
                     stepUserInput = step && step.form;
                 }
@@ -126,11 +126,12 @@ export default class TaskDetail extends React.PureComponent {
 
     validSubmit = stepUserInput => {
         const {task} = this.state;
-        resumeTask(task.tid, stepUserInput)
-            .then(() => {
+        let result = resumeTask(task.tid, stepUserInput)
+        result.then(() => {
                 this.props.history.push(`/tasks`);
                 setFlash(I18n.t("task.flash.update", {name: task.workflow_name}));
             });
+        return result;
     };
 
     switchTab = tab => e => {

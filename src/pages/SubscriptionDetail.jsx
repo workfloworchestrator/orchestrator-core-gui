@@ -716,6 +716,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <section className="product-block" key={index}>
                             <h2>{`${instance.product_block.tag} - ${instance.product_block.name}`}</h2>
                             {instance.label && <p className="label">{`Label: ${instance.label}`}</p>}
+                            <p className="label">{`Instance ID: ${instance.subscription_instance_id}`}</p>
                             <table className="detail-block multiple-tbody">
                                 <thead>
                                 </thead>

@@ -18,7 +18,7 @@ const inValidRange = range => {
 };
 
 const inValidServicePort = (sp, isElan) => {
-    if ((sp.tag === "SSP" || sp.port_mode === "untagged") && (isEmpty(sp.vlan) || sp.vlan === "0")){
+    if ((sp.tag === "SSP" || sp.port_mode === "untagged") && (isEmpty(sp.vlan) || sp.vlan === "0" || sp.vlan === "")){
         return false;
     }
     if (isEmpty(sp)) {
@@ -33,18 +33,12 @@ export function doValidateUserInput(userInput, val, errors) {
     const value = val || "";
     if (type === "vlan_range") {
         errors[name] = inValidVlan(value);
-    } else if (type === "vlan") {
-        errors[name] = !/^\d{1,4}$/.test(value) || value <= 1 || value >= 4096
     } else if (type === "mtu") {
         errors[name] = !/^\d{4}$/.test(value) || value < 1500 || value > 9000
     } else if (type === "int") {
         errors[name] = !/^\+?(0|[1-9]\d*)$/.test(value)
-    } else if (type === "guid") {
-        errors[name] = !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
     } else if (type === "uuid") {
         errors[name] = !/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/.test(value)
-    } else if (type === "emails") {
-        errors[name] = isEmpty(value);
     } else if (type === "nms_service_id") {
         errors[name] = !/^[0-9]{4}$/.test(value);
     } else if (type === "contact_persons") {

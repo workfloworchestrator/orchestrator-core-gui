@@ -120,7 +120,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
         if (organisationPortsOnly) {
             inSelect = inSelect.filter(port => port.customer_id === organisationId);
         }
-        const showDelete = maximum > 2 && !servicePort.nonremovable && !disabled;
+        const showDelete = (servicePorts.length > minimum) && !servicePort.nonremovable && !disabled;
         const vlanPlaceholder = servicePort.port_mode === "untagged" ? I18n.t("vlan.untagged") :
             (servicePort.subscription_id ? I18n.t("vlan.placeholder") :
                 (isElan ? I18n.t("vlan.placeholder_no_service_port") : I18n.t("vlan.placeholder_no_service_port")));
@@ -146,7 +146,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                                 placeholder={vlanPlaceholder}
                                 servicePortTag={servicePort.port_mode}
                                 reportError={this.reportVlanError}/>
-                    {(!isElan && showDelete) && <i className={`fa fa-minus ${index < minimum ? "disabled" : "" }`}
+                    {(!isElan && showDelete) && <i className={`fa fa-minus ${!showDelete ? "disabled" : "" }`}
                                                    onClick={this.removeServicePort(index)}></i>}
                 </div>
             </div>
@@ -160,7 +160,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                            onChange={this.onChangeInternal("bandwidth", index)}
                            onBlur={this.validateMaxBandwidth(index)}
                            disabled={disabled || !servicePort.subscription_id}/>
-                    {(isElan && showDelete) && <i className={`fa fa-minus ${(index < minimum || !servicePort.nonremovable) ? "disabled" : "" }`}
+                    {(isElan && showDelete) && <i className={`fa fa-minus ${(!showDelete || !servicePort.nonremovable) ? "disabled" : "" }`}
                                                   onClick={this.removeServicePort(index)}></i>}
                 </div>
                 {bandwidthErrors[index] &&
