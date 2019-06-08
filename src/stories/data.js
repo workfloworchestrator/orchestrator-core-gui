@@ -46,6 +46,99 @@ export const PRODUCTS = [
 
 ]
 
+export const imsNodes = [
+    {
+        "id": 84015,
+        "ipv4": null,
+        "kind": "NODE",
+        "location": "MT001A",
+        "name": "MT001A-JNX-THIJS7-VTB",
+        "networkrole": null,
+        "status": "PL",
+        "type": "MX960BASE3-AC",
+        "vendor": "JUNIPER"
+    },
+    {
+        "id": 84016,
+        "ipv4": null,
+        "kind": "NODE",
+        "location": "MT001A",
+        "name": "MT001A-JNX-THIJS8-VTB",
+        "networkrole": null,
+        "status": "PL",
+        "type": "MX960BASE3-AC",
+        "vendor": "JUNIPER"
+    },
+    {
+        "id": 84017,
+        "ipv4": null,
+        "kind": "NODE",
+        "location": "MT001A",
+        "name": "MT001A-JNX-THIJS9-VTB",
+        "networkrole": null,
+        "status": "PL",
+        "type": "MX960BASE3-AC",
+        "vendor": "JUNIPER"
+    },
+    {
+        "id": 84018,
+        "ipv4": null,
+        "kind": "NODE",
+        "location": "MT001A",
+        "name": "MT001A-JNX-THIJSA-VTB",
+        "networkrole": null,
+        "status": "PL",
+        "type": "MX960BASE3-AC",
+        "vendor": "JUNIPER"
+    },
+    {
+        "id": 84024,
+        "ipv4": null,
+        "kind": "NODE",
+        "location": "MT001A",
+        "name": "MT001A-JNX-ACID85-VTB",
+        "networkrole": null,
+        "status": "PL",
+        "type": "MX960BASE3-AC",
+        "vendor": "JUNIPER"
+    }
+]
+
+export const freeCorelinkPorts = [
+    {
+        "fiber_type": "multi-mode",
+        "id": 675584,
+        "iface_type": "10GBASE-SR",
+        "node": "ASD001A-JNX-01-VTB",
+        "port": "1/0/0",
+        "status": "1"
+    },
+    {
+        "fiber_type": "multi-mode",
+        "id": 675585,
+        "iface_type": "10GBASE-SR",
+        "node": "ASD001A-JNX-01-VTB",
+        "port": "1/0/1",
+        "status": "1"
+    },
+    {
+        "fiber_type": "single-mode",
+        "id": 675586,
+        "iface_type": "10GBASE-LR",
+        "node": "ASD001A-JNX-01-VTB",
+        "port": "1/0/2",
+        "status": "1"
+    },
+    {
+        "fiber_type": "multi-mode",
+        "id": 675587,
+        "iface_type": "10GBASE-SR",
+        "node": "ASD001A-JNX-01-VTB",
+        "port": "1/0/3",
+        "status": "1"
+    },
+];
+
 export const corelinkPorts10G = [
         {
             "fiber_type": "single-mode",
@@ -505,7 +598,6 @@ export const SN7PortSubscriptions = subscriptionsWithTagMSP.concat(subscriptions
 
 export const SN8PortSubscriptions = subscriptionsWithTagSP.concat(subscriptionsWithTagSPNL);
 
-
 // remaining fixtures can be used to deliver subscriptions as returned by v2/subscriptions
 export const allNodeSubscriptions = [
     {
@@ -546,7 +638,7 @@ export const allNodeSubscriptions = [
         "status": "provisioning",
         "subscription_id": "8674cbe7-4714-421a-b19d-aac687e9b8fc",
         "tag": "Node"
-    },
+    }
 ];
 
 export const allSubscriptionsWithTags = [
@@ -4891,32 +4983,6 @@ export const allSubscriptionsWithTags = [
         "status": "active",
         "subscription_id": "99c87603-8f2d-4cc1-b23c-e7b1df1e2f58",
         "tag": "IP_PREFIX"
-    },
-    {
-        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
-        "description": "Node Planned AMR001A amr001a-jnx-01-vtb",
-        "end_date": null,
-        "insync": true,
-        "product_description": "A product that can be used to set a planned node to in service",
-        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
-        "product_name": "Node",
-        "start_date": null,
-        "status": "provisioning",
-        "subscription_id": "237495d1-49a1-46b4-a25c-54f0b5e3afdb",
-        "tag": "Node"
-    },
-    {
-        "customer_id": "c9b5e717-0b11-e511-80d0-005056956c1a",
-        "description": "Node Planned ASD001A asd001a-jnx-01-vtb",
-        "end_date": null,
-        "insync": true,
-        "product_description": "A product that can be used to set a planned node to in service",
-        "product_id": "d7a85e1f-b55b-4831-9ff5-11d7c81ab6d0",
-        "product_name": "Node",
-        "start_date": null,
-        "status": "provisioning",
-        "subscription_id": "5d2123e6-197d-4bb6-93c6-446d474d98fd",
-        "tag": "Node"
     },
     {
         "customer_id": "a6e56b42-0911-e511-80d0-005056956c1a",
