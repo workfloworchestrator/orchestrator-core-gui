@@ -168,8 +168,8 @@ storiesOf("TableSummary", module)
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/crm/contacts/*', contactPersons);
         return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps}
@@ -180,8 +180,8 @@ storiesOf("UserInputForm", module)
     .add("Corelink", () => {
         const currentState = {"corelink_service_speed":"10000"};
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', allNodeSubscriptions);
         fetchMock.get('glob:*/api/ims/free_corelink_ports/*', corelinkPorts10G);
         return <UserInputContainer formName="Corelink form" stepUserInput={corelinkSteps}
@@ -192,8 +192,8 @@ storiesOf("UserInputForm", module)
     .add("Corelink add link", () => {
         const currentState = {"node_1": "d38d8b25-d9f5-4a25-b1b0-d29057c47420", "node_2": "5d2123e6-197d-4bb6-93c6-446d474d98fd"};
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', allNodeSubscriptions);
         fetchMock.get('glob:*/api/ims/free_corelink_ports/*', freeCorelinkPorts)
         return <UserInputContainer formName="Corelink add link form" stepUserInput={addCorelinkSteps}
@@ -204,8 +204,8 @@ storiesOf("UserInputForm", module)
     .add("Nodes", () => {
         const currentState = {"location_code":"MT001A"};
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', allNodeSubscriptions);
         fetchMock.get('/api/ims/nodes/MT001A', imsNodes);
         return <UserInputContainer formName="Node form" stepUserInput={nodeSteps}
@@ -216,8 +216,8 @@ storiesOf("UserInputForm", module)
     .add("SN7 Portselect all organisations", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', SN7PortSubscriptions);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -228,8 +228,8 @@ storiesOf("UserInputForm", module)
     .add("SN7 Portselect MSP only", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', SN7PortSubscriptions);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -242,8 +242,8 @@ storiesOf("UserInputForm", module)
     .add("SN7 Portselect selected organisation", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', SN7PortSubscriptions);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', []);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -254,8 +254,8 @@ storiesOf("UserInputForm", module)
     .add("SN8 Portselect all organisations", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -266,8 +266,8 @@ storiesOf("UserInputForm", module)
     .add("SN8 Portselect tagged", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -278,8 +278,8 @@ storiesOf("UserInputForm", module)
     .add("SN8 Portselect untagged", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
@@ -290,8 +290,8 @@ storiesOf("UserInputForm", module)
     .add("SN8 Portselect selected organisation", () => {
         //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
-        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL', []);
-        fetchMock.get('/api/subscriptions/tag/SP%2CSPNL', SN8PortSubscriptions);
+        fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
+        fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
