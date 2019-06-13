@@ -212,7 +212,9 @@ class App extends React.PureComponent {
                                                                locationCodes={locationCodes}
                                                                {...props}/>}/>
                         <Route path="/subscriptions"
-                               render={props => <Subscriptions organisations={organisations} {...props}/>}/>
+                               render={props => <Subscriptions organisations={organisations}
+                                                               products={products}
+                                                               {...props}/>}/>
                         <Route path="/old-subscriptions"
                                render={props => <OldSubscriptions products={products}
                                                                   organisations={organisations}

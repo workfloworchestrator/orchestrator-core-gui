@@ -28,6 +28,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
+import MultipleServicePorts from "../components/MultipleServicePorts";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
@@ -55,7 +56,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     }
 
     componentWillMount = () => {
-        const subscriptionId = this.props.match.params.id;
+        const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match.params.id;
         this.refreshSubscription(subscriptionId);
     };
 
@@ -200,7 +201,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             <tbody>
             <tr>
                 <td>{I18n.t("subscriptions.id")}</td>
-                <td>{subscription.subscription_id}</td>
+                <td><a href={`/subscriptions/${subscription.subscription_id}`}
+                       target="_blank" rel="noopener noreferrer">{subscription.subscription_id}</a></td>
 
             </tr>
             <tr>
@@ -776,5 +778,9 @@ export default class SubscriptionDetail extends React.PureComponent {
 SubscriptionDetail.propTypes = {
     history: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    subscriptionId: PropTypes.string,
+};
+SubscriptionDetail.defaultProps = {
+    subscriptionId: undefined,
 };
