@@ -459,7 +459,6 @@ export default class UserInputForm extends React.Component {
             case "label":
                 return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
             case "service_ports":
-                debugger;
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
