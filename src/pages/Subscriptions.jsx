@@ -13,7 +13,6 @@ import {debounce} from 'lodash';
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
-import I18n from "i18n-js";
 
 
 const urlPropsQueryConfig = {

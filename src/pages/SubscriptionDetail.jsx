@@ -28,7 +28,6 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
 import {startModificationSubscription} from "../api/index";
-import MultipleServicePorts from "../components/MultipleServicePorts";
 
 export default class SubscriptionDetail extends React.PureComponent {
 
