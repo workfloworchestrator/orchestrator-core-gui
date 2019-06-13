@@ -214,7 +214,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect all organisations", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
@@ -226,7 +225,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect MSP only", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
@@ -240,7 +238,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect selected organisation", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', SN7PortSubscriptions);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);
@@ -252,7 +249,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect all organisations", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
@@ -264,7 +260,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect tagged", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
@@ -276,7 +271,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect untagged", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
@@ -288,7 +282,6 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect selected organisation", () => {
-        //TODO: provide ports_key -> service_ports in state -> for bandwith select?
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', SN8PortSubscriptions);
