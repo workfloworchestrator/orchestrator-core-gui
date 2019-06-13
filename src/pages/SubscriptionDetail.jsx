@@ -200,7 +200,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             <tbody>
             <tr>
                 <td>{I18n.t("subscriptions.id")}</td>
-                <td><a href={`/subscriptions/${subscription.subscription_id}`}
+                <td><a href={`/subscription/${subscription.subscription_id}`}
                        target="_blank" rel="noopener noreferrer">{subscription.subscription_id}</a></td>
 
             </tr>

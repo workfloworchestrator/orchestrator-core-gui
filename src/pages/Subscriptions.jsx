@@ -192,10 +192,7 @@ class Subscriptions extends React.PureComponent {
                     {subscriptionId &&
                         <Modal isOpen={true} appElement={document.getElementById('app')} overlayClassName="overlay"
                                className="subscription-modal">
-                            <div align="right"><i className="large-icon fa fa-close" onClick={e => {
-                                stop(e);
-                                this.setState({subscriptionId: undefined});
-                            }}></i></div>
+                            <div align="right"><i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail}></i></div>
                             <SubscriptionDetail history={this.props.history} organisations={this.props.organisations}
                                                 products={this.props.products} subscriptionId={subscriptionId}/>
                         </Modal>
