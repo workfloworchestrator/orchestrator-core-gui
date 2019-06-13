@@ -85,27 +85,6 @@ export default class UserInputContainer extends React.Component {
         };
     }
 
-    componentDidMount = () => {
-        const {products, organisations, location} = this.props;
-
-        // subscriptionsWithTags().then(subscriptions => {
-        //     let organisationName = null;
-        //     // if (preselectedInput.organisation) {
-        //     //     const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-        //     //     organisationName = org ? org.name : organisationName;
-        //     // }
-        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        // })
-        // subscriptionsWithDetails().then(subscriptions => {
-        //     let organisationName = null;
-        //     if (preselectedInput.organisation) {
-        //         const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-        //         organisationName = org ? org.name : organisationName;
-        //     }
-        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        // });
-    };
-
     validSubmit = products => (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
             const product = {
@@ -131,35 +110,6 @@ export default class UserInputContainer extends React.Component {
             return result;
         }
     };
-
-    // startNewProcess = () => {
-    //     const {product} = this.state;
-    //     if (!isEmpty(product)) {
-    //         this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
-    //             this.setState({product: product});
-    //             if (product) {
-    //                 Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
-    //                     const [productValidation, userInput] = result;
-    //
-    //                     const stepUserInput = userInput.filter(input => input.name !== "product");
-    //                     const {preselectedOrganisation} = this.props;
-    //                     if (preselectedOrganisation) {
-    //                         const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-    //                         if (organisatieInput) {
-    //                             organisatieInput.value = preselectedOrganisation;
-    //                             organisatieInput.readonly = true;
-    //                         }
-    //                     }
-    //                     this.setState({
-    //                         productValidation: productValidation,
-    //                         stepUserInput: stepUserInput,
-    //                         started: true
-    //                     });
-    //                 });
-    //             }
-    //         });
-    //     }
-    // };
 
     addContextToSubscription = subscriptionId => {
         const {subscriptions} = this.state;
