@@ -14,4 +14,36 @@
   }
 
 }
+.subscription-modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: white;
+  overflow: auto;
+}
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(95, 95, 95, 0.7);
+}
+
+.large-icon {
+  font-size: 2.2em;
+  padding: 5px 15px 5px 5px;
+  cursor: pointer;
+}
+
+.ReactModalPortal .ReactModal__Content {
+  max-width: 100%;
+
+  &--before-close {
+    top: -50%;
+    bottom: 100%;
+  }
+}
