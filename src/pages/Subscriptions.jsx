@@ -3,13 +3,16 @@ import PropTypes from "prop-types";
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import ReactTable from "react-table";
+import Modal from "react-modal";
 import {renderDate} from "../utils/Lookups";
 import {requestSubscriptionData} from "../utils/SubscriptionData";
 import {stop} from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
+import {debounce} from 'lodash';
 
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
+import SubscriptionDetail from "./SubscriptionDetail";
 
 
 const urlPropsQueryConfig = {
@@ -26,25 +29,36 @@ class Subscriptions extends React.PureComponent {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
+            subscriptionId: undefined,
             subscriptions: [],
             loading: true,
             pages: 99,
             sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
             filtered: [],
-            initialFiltered: undefined,
         };
+
+        this.filtering = false;
+
+        this.onFilteredChange = this.onFilteredChange.bind(this);
+        this.fetchStrategy = this.fetchStrategy.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+        this.fetchDataWithDebounce = debounce(this.fetchData, 500);
     };
 
-    componentWillMount() {
-        if (this.props.filtered) {
-            console.log("Re-fetch needed: to load values from URL")
-            this.setState({
-                initialFiltered: this.props.filtered ? this.props.filtered.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : undefined,
-            })
+    fetchStrategy(tableState) {
+        if(this.filtering) {
+            return this.fetchDataWithDebounce(tableState)
+        } else {
+            return this.fetchData(tableState);
         }
     }
 
-    fetchData = (state, instance) => {
+    onFilteredChange(column, value) {
+        this.filtering = true; // when the filter changes, that means someone is typing
+    }
+
+    fetchData = (state) => {
+        this.filtering = false;  // we've arrived either debounced or not, so filtering can be reset
         this.setState({ loading: true });
         requestSubscriptionData(
             state.pageSize,
@@ -68,14 +82,6 @@ class Subscriptions extends React.PureComponent {
         this.props.onChangeSorted(newSort)
     };
 
-
-    updateFiltered = (newFiltered) => {
-        this.setState({
-            initialFiltered: undefined, // reset any initialFilter stuff to unbind the filtered state from URL
-            filtered: newFiltered
-        });
-    };
-
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
         if (e.keyCode === 38 && page > 0) {
@@ -87,11 +93,11 @@ class Subscriptions extends React.PureComponent {
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
-        const filterUrlParameters = this.state.initialFiltered ? this.state.initialFiltered.map(item => {return `${item.id},${item.value}`}) : this.state.filtered.map(item => {return `${item.id},${item.value}`});
-        const sortedUrlParameters = this.state.sorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`});
-        this.props.onChangeSorted(sortedUrlParameters);
-        this.props.onChangeFiltered(filterUrlParameters);
-        this.props.history.push("/subscription/" + subscription_id);
+        this.setState({subscriptionId: subscription_id})
+    };
+
+    hideSubscriptionDetail = () => {
+        this.setState({subscriptionId: undefined})
     };
 
     navigateToOldSubscriptions = () => {
@@ -99,91 +105,103 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, sorted, subscriptions, initialFiltered} = this.state;
+        const {pages, sorted, subscriptions, initialFiltered, subscriptionId} = this.state;
         const {page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
                 <div className="divider"/>
                 <div className="subscriptions-container">
-                    <ReactTable
-                        columns={[
-                            {
-                                Header: "Id",
-                                id: "subscription_id",
-                                accessor: d => <a href={`/subscription/${d.subscription_id}`}
-                                                  onClick={this.showSubscriptionDetail(d.subscription_id)}>
-                                                {d.subscription_id.slice(0,8)}
-                                               </a>,
-                                width: 100
-                            },
-                            {
-                                Header: "Product",
-                                accessor: "product.name",
-                                width: 200
-                            },
-                            {
-                                Header: "Tag",
-                                accessor: "product.tag",
-                                width: 175
-                            },
-                            {
-                                Header: "Description",
-                                accessor: "description",
-                                width: 425
-                            },
-                            {
-                                Header: "In Sync",
-                                id: "insync",
-                                accessor: d => d.insync ? "yes" : "no",
-                                width: 80
-                            },
-                            {
-                                Header: "Status",
-                                accessor: "status"
-                            },
-                            {
-                                Header: "Start Date",
-                                id: "start_date",
-                                filterable: false,
-                                accessor: d => renderDate(d.start_date)
-                            },
-                            {
-                                Header: "End Date",
-                                id: "end_date",
-                                filterable: false,
-                                accessor: d => renderDate(d.end_date)
-                            }
-                        ]}
-                        manual // Forces table not to paginate or sort automatically, so we can handle it server-side
-                        data={subscriptions}
-                        pages={pages} // Display the total number of pages
-                        loading={false} // We use the spinner of the core app itself.
-                        onFetchData={this.fetchData} // Request new data when things change
-                        filterable
-                        resizable={false} // Causes bugs when enabled with description columnn
-                        defaultPageSize={25}
-                        className="-striped -highlight"
-                        showPaginationTop
-                        showPaginationBottom
-                        filtered={initialFiltered} // Will be undefined when no filter was provided in URL
+                    {<ReactTable
+                            columns={[
+                                {
+                                    Header: "Id",
+                                    id: "subscription_id",
+                                    accessor: d => <a href={`/subscription/${d.subscription_id}`}
+                                                      onClick={this.showSubscriptionDetail(d.subscription_id)}>
+                                        {d.subscription_id.slice(0,8)}
+                                    </a>,
+                                    width: 100
+                                },
+                                {
+                                    Header: "Product",
+                                    accessor: "product.name",
+                                    width: 200
+                                },
+                                {
+                                    Header: "Tag",
+                                    accessor: "product.tag",
+                                    width: 175
+                                },
+                                {
+                                    Header: "Description",
+                                    accessor: "description",
+                                    width: 425
+                                },
+                                {
+                                    Header: "In Sync",
+                                    id: "insync",
+                                    accessor: d => d.insync ? "yes" : "no",
+                                    width: 80
+                                },
+                                {
+                                    Header: "Status",
+                                    accessor: "status"
+                                },
+                                {
+                                    Header: "Start Date",
+                                    id: "start_date",
+                                    filterable: false,
+                                    accessor: d => renderDate(d.start_date)
+                                },
+                                {
+                                    Header: "End Date",
+                                    id: "end_date",
+                                    filterable: false,
+                                    accessor: d => renderDate(d.end_date)
+                                }
+                            ]}
+                            manual // Forces table not to paginate or sort automatically, so we can handle it server-side
+                            data={subscriptions}
+                            pages={pages} // Display the total number of pages
+                            loading={false} // We use the spinner of the core app itself.
+                            onFetchData={this.fetchStrategy} // Request new data when things change
+                            filterable
+                            resizable={false} // Causes bugs when enabled with description columnn
+                            defaultPageSize={25}
+                            className="-striped -highlight"
+                            showPaginationTop
+                            showPaginationBottom
+                            filtered={initialFiltered} // Will be undefined when no filter was provided in URL
 
-                        // Controlled props
-                        sorted={sorted}
-                        page={page}
-                        pageSize={pageSize}
+                            // Controlled props
+                            sorted={sorted}
+                            page={page}
+                            pageSize={pageSize}
 
-                        // Call back heaven:
-                        onPageChange={page => onChangePage(page)}
-                        onPageSizeChange={(pageSize, pageIndex) => {
-                            onChangePageSize(pageSize);
-                            onChangePage(pageIndex);
-                        }}
-                        onSortedChange={this.updateSorted}
-                        // onFilteredChange={debounce(onColumnFilterChange, 1000)}
-                        onFilteredChange={this.updateFiltered}
-                    />
-                    </div>
+                            // Call back heaven:
+                            onPageChange={page => onChangePage(page)}
+                            onPageSizeChange={(pageSize, pageIndex) => {
+                                onChangePageSize(pageSize);
+                                onChangePage(pageIndex);
+                            }}
+                            onSortedChange={this.updateSorted}
+                            onFilteredChange={this.onFilteredChange}
+                        />}
+
+                    {subscriptionId &&
+                        <Modal isOpen={true} appElement={document.getElementById('app')} overlayClassName="overlay"
+                               className="subscription-modal">
+                            <div align="right"><i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail}></i></div>
+                            <SubscriptionDetail history={this.props.history} organisations={this.props.organisations}
+                                                products={this.props.products} subscriptionId={subscriptionId}/>
+                        </Modal>
+                    }
+
+
+
+                        </div>
+
                 <MessageBox messageHeader="Info"
                             messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
                             hold shift to sort on multiple columns. When an input has focus you can use UP/DOWN arrow to paginate "
@@ -198,6 +216,7 @@ class Subscriptions extends React.PureComponent {
 Subscriptions.propTypes = {
     history: PropTypes.object.isRequired,
     organisations: PropTypes.array.isRequired,
+    products: PropTypes.array.isRequired,
 
     // Mapped to URL query parameters
     page: PropTypes.number,

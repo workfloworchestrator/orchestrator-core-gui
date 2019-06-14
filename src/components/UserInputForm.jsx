@@ -302,7 +302,7 @@ export default class UserInputForm extends React.Component {
         const {currentState, products, organisations, preselectedInput} = this.props;
         const stepUserInput = this.state.stepUserInput;
 
-        const {servicePortsSN7, servicePortsSN8, subscriptions} = this.state;
+        const {servicePortsSN7, servicePortsSN8, subscriptions, subscriptionsLoaded} = this.state;
 
         let organisationId;
         switch (userInput.type) {
@@ -541,7 +541,6 @@ export default class UserInputForm extends React.Component {
                 const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
                 const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
                 return <NodeSelect onChange={this.changeUniqueSelectInput(name, `${locationCodeNode}_${status}`)}
-                                   status={status}
                                    locationCode={locationCodeNode}
                                    node={value}/>;
             case "corelink":
@@ -556,7 +555,7 @@ export default class UserInputForm extends React.Component {
                 const nodeSubscriptionId = lookupValueFromNestedState(userInput.node_key, currentState);
                 return <NodePortSelect onChange={this.changeUniqueSelectInput(name, 'corelink')}
                        interfaceType={interfaceType}
-                       nodes={subscriptions.filter((subscription) => subscription.subscription_id === nodeSubscriptionId)}
+                       nodes={subscriptionsLoaded ? subscriptions.filter((subscription) => subscription.subscription_id === nodeSubscriptionId) : []}
                        port={value}/>;
             case "generic_select":
                 return <GenericSelect onChange={this.changeSelectInput(name)}

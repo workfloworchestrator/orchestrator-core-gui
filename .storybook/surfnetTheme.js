@@ -32,6 +32,6 @@ export default create({
     inputBorderRadius: 4,
 
     brandTitle: 'Orchestrator Storybook',
-    brandUrl: 'https://orchestrator.dev.automation.net',
-    brandImage: '/surfnet_logo.png',
+    brandUrl: 'https://docs.dev.automation.surf.net/workflows-client/',
+    brandImage: 'https://docs.dev.automation.surf.net/surfnet_logo.png',
 });

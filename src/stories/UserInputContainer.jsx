@@ -20,6 +20,7 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import {enrichSubscription} from "../utils/Lookups";
 import {getQueryParameters} from "../utils/QueryParameters";
+import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
 
 export default class UserInputContainer extends React.Component {
 
@@ -84,27 +85,6 @@ export default class UserInputContainer extends React.Component {
         };
     }
 
-    componentDidMount = () => {
-        const {products, organisations, location} = this.props;
-
-        subscriptionsWithTags().then(subscriptions => {
-            let organisationName = null;
-            if (preselectedInput.organisation) {
-                const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-                organisationName = org ? org.name : organisationName;
-            }
-            this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        })
-        // subscriptionsWithDetails().then(subscriptions => {
-        //     let organisationName = null;
-        //     if (preselectedInput.organisation) {
-        //         const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-        //         organisationName = org ? org.name : organisationName;
-        //     }
-        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        // });
-    };
-
     validSubmit = products => (stepUserInput) => {
         if (!isEmpty(this.state.product)) {
             const product = {
@@ -131,35 +111,6 @@ export default class UserInputContainer extends React.Component {
         }
     };
 
-    // startNewProcess = () => {
-    //     const {product} = this.state;
-    //     if (!isEmpty(product)) {
-    //         this.setState({stepUserInput: [], productValidation: {"valid": true, mapping: {}}, product: {}}, () => {
-    //             this.setState({product: product});
-    //             if (product) {
-    //                 Promise.all([validation(product.value), initialWorkflowInput(product.workflow.name, product.productId)]).then(result => {
-    //                     const [productValidation, userInput] = result;
-    //
-    //                     const stepUserInput = userInput.filter(input => input.name !== "product");
-    //                     const {preselectedOrganisation} = this.props;
-    //                     if (preselectedOrganisation) {
-    //                         const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-    //                         if (organisatieInput) {
-    //                             organisatieInput.value = preselectedOrganisation;
-    //                             organisatieInput.readonly = true;
-    //                         }
-    //                     }
-    //                     this.setState({
-    //                         productValidation: productValidation,
-    //                         stepUserInput: stepUserInput,
-    //                         started: true
-    //                     });
-    //                 });
-    //             }
-    //         });
-    //     }
-    // };
-
     addContextToSubscription = subscriptionId => {
         const {subscriptions} = this.state;
         const {organisations, products} = this.props;
@@ -178,6 +129,7 @@ export default class UserInputContainer extends React.Component {
                 let servicePortsSN8 = subscriptions.filter(
                     sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
                 ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
+        console.log(subscriptions)
         return <section className="form-step divider">
             <h1>{formName}</h1>
             <UserInputForm
@@ -188,14 +140,16 @@ export default class UserInputContainer extends React.Component {
                 history="" // Not sure if we need to mock this
 
                 // Using subscriptions with enriched .tag info
-                subscriptions={subscriptions}
+                // subscriptions={subscriptions}
                 // Preloading servicePorts here
                 // Todo: disable preload en deal with service ports in UserInputForm itself? Now the call is done after start of process: seems fast enough for now
+                preloadSubscriptions={true}
                 preloadServicePortsSN7={true}
                 preloadServicePortsSN8={true}
 
                 product={product}
                 validSubmit={this.validSubmit(products)}
+                currentState={this.props.currentState}
                 // refreshSubscriptions={this.refreshSubscriptions}
                 // preselectedInput={getQueryParameters(this.props.location.search)}
             />
@@ -226,4 +180,9 @@ UserInputContainer.propTypes = {
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
     preselectedDienstafname: PropTypes.string,
+    currentState: PropTypes.array,
+};
+
+UserInputContainer.defaultProps = {
+    currentState: [],
 };
