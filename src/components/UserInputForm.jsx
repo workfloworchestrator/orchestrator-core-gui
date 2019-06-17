@@ -18,8 +18,6 @@ import NodeIdPortSelect from "./NodeIdPortSelect"
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
 import GenericNOCConfirm from "./GenericNOCConfirm";
-import NOCConfirm from "./NOCConfirm";
-import NOCNetworkConfirm from "./NOCNetworkConfirm";
 import IPPrefix from "./IPPrefix";
 import {findValueFromInputStep, lookupValueFromNestedState} from "../utils/NestedState";
 import {doValidateUserInput} from "../validations/UserInput";
@@ -44,8 +42,7 @@ import TableSummary from "./TableSummary";
 import {subscriptionsByTags, subscriptionsWithTags} from "../api";
 
 
-const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_termination_confirmation",
-    "subscription_downgrade_confirmation", "label"];
+const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
 
 export default class UserInputForm extends React.Component {
@@ -408,48 +405,6 @@ export default class UserInputForm extends React.Component {
                                                       secondary={secondary}
                                                       choice={choice}/>
                 </div>
-            case "noc_modification_confirmation":
-                const {human_service_speed, new_human_service_speed, nms_service_id} = currentState;
-                const infoLabel = I18n.t(
-                    "process.noc_modification_confirmation_template",
-                    {
-                        nms_service_id: nms_service_id,
-                        human_service_speed: human_service_speed,
-                        new_human_service_speed: new_human_service_speed
-                    }
-                );
-                return <div>
-                    <CheckBox name={name} value={value||false}
-                              onChange={this.changeBooleanInput(name)}
-                              info={infoLabel}/>
-                </div>;
-            case "noc_subtask_confirmation":
-                const {is_redundant} = currentState;
-                let circuits = [];
-                if (is_redundant){
-                    const {ims_circuit_name_1, ims_circuit_name_2} = currentState;
-                    circuits = [ims_circuit_name_1, ims_circuit_name_2];
-                } else  {
-                    circuits = [currentState.ims_circuit_name];
-                };
-                return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
-                                    circuits={circuits} />;
-            case "noc_network_confirmation":
-                const {jira_ticket_uri} = currentState;
-
-                return <NOCNetworkConfirm onChange={this.changeNestedInput(name)}
-                    jira_ticket_uri={jira_ticket_uri} />;
-            case "subscription_termination_confirmation":
-                return <div>
-                    <CheckBox name={name} value={value || false}
-                              onChange={this.changeBooleanInput(name)}
-                              info={I18n.t(`process.${name}`)}/>
-                    <section className="form-divider"></section>
-                    <ReadOnlySubscriptionView subscriptionId={process.current_state.subscription_id}
-                                              products={products}
-                                              organisations={organisations}
-                                              className="indent"/>
-                </div>;
             case "accept":
                 return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "boolean":
@@ -461,9 +416,9 @@ export default class UserInputForm extends React.Component {
                                            locationCodes={this.props.locationCodes}
                                            locationCode={value}/>;
             case "label_with_state":
-                return <StateValue className={userInput.name} value={value}/>;
+                return <StateValue className={name} value={value}/>;
             case "label":
-                return <p className={`label ${userInput.name}`}>{I18n.t(`process.${userInput.name}`, userInput.i18n_state)}</p>;
+                return <p className={`label ${name}`}>{I18n.t(`process.${name}`, userInput.i18n_state)}</p>;
             case "service_ports":
                 organisationId = lookupValueFromNestedState(userInput.organisation_key, currentState) ||
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
