@@ -21,6 +21,14 @@
   right: 40px;
   bottom: 40px;
   background-color: white;
+}
+
+.scroller {
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
   overflow: auto;
 }
 
@@ -35,7 +43,7 @@
 
 .large-icon {
   font-size: 2.2em;
-  padding: 5px 15px 5px 5px;
+  padding: 2px 2px 5px 5px;
   cursor: pointer;
 }
 

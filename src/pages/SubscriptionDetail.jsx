@@ -751,7 +751,7 @@ export default class SubscriptionDetail extends React.PureComponent {
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <div className="mod-subscription-detail">
+            <div className={this.props.isModal ? "mod-subscription-detail" : "mod-subscription-detail card"}>
                 <ConfirmationDialog isOpen={confirmationDialogOpen}
                                     cancel={this.cancelConfirmation}
                                     confirm={confirmationDialogAction}
@@ -779,7 +779,9 @@ SubscriptionDetail.propTypes = {
     organisations: PropTypes.array.isRequired,
     products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string,
+    isModal: PropTypes.bool,
 };
 SubscriptionDetail.defaultProps = {
     subscriptionId: undefined,
+    isModal: false,
 };

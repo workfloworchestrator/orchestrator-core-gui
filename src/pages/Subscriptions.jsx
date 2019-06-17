@@ -191,16 +191,17 @@ class Subscriptions extends React.PureComponent {
 
                     {subscriptionId &&
                         <Modal isOpen={true} appElement={document.getElementById('app')} overlayClassName="overlay"
-                               className="subscription-modal">
+                               className="subscription-modal" closeOnEscape={true} shouldCloseOnOverlayClick={true}
+                               onRequestClose={this.hideSubscriptionDetail}>
                             <div align="right"><i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail}></i></div>
+                            <div className="scroller">
                             <SubscriptionDetail history={this.props.history} organisations={this.props.organisations}
-                                                products={this.props.products} subscriptionId={subscriptionId}/>
+                                                products={this.props.products} subscriptionId={subscriptionId}
+                                                isModal={true}/>
+                            </div>
                         </Modal>
                     }
-
-
-
-                        </div>
+                </div>
 
                 <MessageBox messageHeader="Info"
                             messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
