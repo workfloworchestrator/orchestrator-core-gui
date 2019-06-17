@@ -1,9 +1,12 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/buttons.scss";
 
+.card {
+  @include card;
+}
+
 .mod-subscription-detail {
   @include page;
-  @include card;
   padding-bottom: 15px;
   section.not-found {
     h1 {
