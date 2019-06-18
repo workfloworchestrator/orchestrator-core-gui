@@ -387,7 +387,7 @@ export default class UserInputForm extends React.Component {
                 return <DowngradeRedundantLPChoice products={products}
                                                    organisations={organisations}
                                                    onChange={this.changeStringInput(name)}
-                                                   subscriptionId={process.current_state.subscription_id}
+                                                   subscriptionId={currentState.subscription_id}
                                                    value={value}
                                                    readOnly={userInput.readonly}/>;
             case "downgrade_redundant_lp_confirmation":
@@ -401,36 +401,40 @@ export default class UserInputForm extends React.Component {
                     <section className="form-divider"></section>
                     <DowngradeRedundantLPConfirmation products={products}
                                                       organisations={organisations}
-                                                      subscriptionId={process.current_state.subscription_id}
+                                                      subscriptionId={currentState.subscription_id}
                                                       className="indent"
                                                       primary={primary}
                                                       secondary={secondary}
                                                       choice={choice}/>
                 </div>
             case "noc_modification_confirmation":
-                const {human_service_speed, new_human_service_speed, nms_service_id} = process.current_state;
-                const infoLabel = I18n.t(`process.noc_modification_confirmation_prefix`)  + nms_service_id +
-                        I18n.t(`process.noc_modification_confirmation_infix1`) +
-                        human_service_speed + I18n.t(`process.noc_modification_confirmation_infix2`)
-                    + new_human_service_speed;
+                const {human_service_speed, new_human_service_speed, nms_service_id} = currentState;
+                const infoLabel = I18n.t(
+                    "process.noc_modification_confirmation_template",
+                    {
+                        nms_service_id: nms_service_id,
+                        human_service_speed: human_service_speed,
+                        new_human_service_speed: new_human_service_speed
+                    }
+                );
                 return <div>
                     <CheckBox name={name} value={value||false}
                               onChange={this.changeBooleanInput(name)}
                               info={infoLabel}/>
                 </div>;
             case "noc_subtask_confirmation":
-                const {is_redundant} = process.current_state;
+                const {is_redundant} = currentState;
                 let circuits = [];
                 if (is_redundant){
-                    const {ims_circuit_name_1, ims_circuit_name_2} = process.current_state;
+                    const {ims_circuit_name_1, ims_circuit_name_2} = currentState;
                     circuits = [ims_circuit_name_1, ims_circuit_name_2];
                 } else  {
-                    circuits = [process.current_state.ims_circuit_name];
+                    circuits = [currentState.ims_circuit_name];
                 };
                 return <NOCConfirm onChange={this.changeNestedInput(name)} is_redundant={is_redundant}
                                     circuits={circuits} />;
             case "noc_network_confirmation":
-                const {jira_ticket_uri} = process.current_state;
+                const {jira_ticket_uri} = currentState;
 
                 return <NOCNetworkConfirm onChange={this.changeNestedInput(name)}
                     jira_ticket_uri={jira_ticket_uri} />;
