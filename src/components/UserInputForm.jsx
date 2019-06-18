@@ -17,6 +17,7 @@ import NodeIdPortSelect from "./NodeIdPortSelect"
 
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
+import GenericNOCConfirm from "./GenericNOCConfirm";
 import NOCConfirm from "./NOCConfirm";
 import NOCNetworkConfirm from "./NOCNetworkConfirm";
 import IPPrefix from "./IPPrefix";
@@ -43,7 +44,7 @@ import TableSummary from "./TableSummary";
 import {subscriptionsByTags, subscriptionsWithTags} from "../api";
 
 
-const inputTypesWithoutLabelInformation = ["boolean", "subscription_termination_confirmation",
+const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_termination_confirmation",
     "subscription_downgrade_confirmation", "label"];
 
 
@@ -450,6 +451,7 @@ export default class UserInputForm extends React.Component {
                                               className="indent"/>
                 </div>;
             case "accept":
+                return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "boolean":
                 return <CheckBox name={name} value={value || false}
                                  onChange={this.changeBooleanInput(name)}

@@ -21,6 +21,7 @@ import LocationCodeSelect from "../components/LocationCodeSelect";
 
 import fetchMock from 'fetch-mock';
 import {loadVlanMocks} from "./utils";
+import GenericNOCConfirm from '../components/GenericNOCConfirm';
 
 
 const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
@@ -151,6 +152,188 @@ storiesOf("TableSummary", module)
     .add("Summary with definition and headers", () =>
         <TableSummary data={tableSummaryDataDefinitionWithHeaders}/>);
 
+storiesOf("GenericNOCConfirm", module)
+    .add("Legacy", () => (
+        <GenericNOCConfirm
+            name="noc_remove_static_ip_confirmation"
+            onChange={action("changed checkbox: ")}
+        />
+    ))
+    .add("Complex", () => (
+        <GenericNOCConfirm
+            name="confirm_migrate_sap"
+            onChange={action("changed checkbox: ")}
+            data={[
+                ["confirm_migrate_sap", "label"],
+                ["confirm_migrate_sap_info", "info"],
+                ["next_step_service_affecting", "warning"],
+                ["http://example.com", "url"],
+                ["check_delete_sn7_service_config", "checkbox"],
+                ["check_ims_defined", "label"],
+                ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                ["check_port_patched_sn7_sn8", "checkbox?"]
+            ]}
+        />
+    ))
+    .add("Legacy in form", () => (
+        <UserInputContainer
+            formName="NOC Confirm"
+            stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+        />
+    ))
+    .add("Complex in form", () => (
+        <UserInputContainer
+            formName="NOC Confirm"
+            stepUserInput={[
+                {
+                    name: "confirm_migrate_sap",
+                    type: "accept",
+                    data: [
+                        ["confirm_migrate_sap", "label"],
+                        ["confirm_migrate_sap_info", "info"],
+                        ["next_step_service_affecting", "warning"],
+                        ["http://example.com", "url"],
+                        ["check_delete_sn7_service_config", "checkbox"],
+                        ["check_ims_defined", "label"],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                        ["check_port_patched_sn7_sn8", "checkbox?"]
+                    ]
+                }
+            ]}
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+        />
+    ))
+    .add("Remove old noc_network_confirmation", () => (
+        <UserInputContainer
+            formName="Remove old noc_network_confirmation"
+            stepUserInput={[
+                {
+                    name: "accept",
+                    type: "accept",
+                    data: [
+                        ["noc_network_confirmation", "label"],
+                        ["noc_network_confirmation_info", "info"],
+                        ["noc_upgrade_redundant_confirmation_intro", "label"],
+                        ["http://example.com", "url"],
+                        ["noc_upgrade_redundant_confirmation_steps_intro", "label"],
+                        ["noc_upgrade_redundant_confirmation_LR2_built_info", "checkbox"],
+                        ["noc_upgrade_redundant_confirmation_LPE_renamed_info", "checkbox"],
+                    ]
+                },
+                { name: "noc_network_confirmation", type: "noc_network_confirmation" }
+            ]}
+            history={{}}
+            currentUser=""
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+            currentState={{jira_ticket_uri: "http://example.com"}}
+        />
+    ))
+    .add("Remove old noc_subtask_confirmation", () => (
+        <UserInputContainer
+            formName="Organisation and contacts"
+            stepUserInput={[
+                {
+                    name: "accept",
+                    type: "accept",
+                    data: [
+                        ["noc_subtask_confirmation", "label"],
+                        ["noc_subtask_confirmation_info", "info"],
+                        ["check_service_built", "checkbox"],
+                        ["check_iface_no_errors", "checkbox"],
+                        ["check_cfm_up", "checkbox"],
+                        ["check_ims_defined", "label"],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                        ["check_cfm_up", "checkbox"],
+                        ["check_client_confirmed", "checkbox"]
+                    ]
+                },
+                { name: "noc_subtask_confirmation", type: "noc_subtask_confirmation" }
+            ]}
+            history={{}}
+            currentUser=""
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+            currentState={{
+                is_redundant: true,
+                ims_circuit_name_1: "ims circuit 1",
+                ims_circuit_name_2: "ims circuit 2"
+            }}
+        />
+    ))
+    .add("Remove old noc_subtask_confirmation2", () => (
+        <UserInputContainer
+            formName="Organisation and contacts"
+            stepUserInput={[
+                {
+                    name: "accept",
+                    type: "accept",
+                    data: [
+                        ["noc_subtask_confirmation", "label"],
+                        ["noc_subtask_confirmation_info", "info"],
+                        ["check_service_built", "checkbox"],
+                        ["check_iface_no_errors", "checkbox"],
+                        ["check_cfm_up", "checkbox"],
+                        ["check_ims_defined", "label"],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit" }],
+                        ["check_client_confirmed", "checkbox"]
+                    ]
+                },
+                { name: "noc_subtask_confirmation", type: "noc_subtask_confirmation" }
+            ]}
+            history={{}}
+            currentUser=""
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+            currentState={{ is_redundant: false, ims_circuit_name: "ims circuit" }}
+        />
+    ))
+    .add("Remove old noc_modification_confirmation", () => (
+        <UserInputContainer
+            formName="Organisation and contacts"
+            stepUserInput={[
+                {
+                    name: "accept",
+                    type: "accept",
+                    data: [
+                        ["noc_modification_confirmation", "label"],
+                        ["noc_modification_confirmation_info", "info"],
+                        [
+                            "noc_modification_confirmation_template",
+                            "checkbox",
+                            {
+                                human_service_speed: "a",
+                                new_human_service_speed: "b",
+                                nms_service_id: "1234"
+                            }
+                        ]
+                    ]
+                },
+                { name: "noc_modification_confirmation", type: "noc_modification_confirmation" }
+            ]}
+            history={{}}
+            currentUser=""
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+            currentState={{
+                human_service_speed: "a",
+                new_human_service_speed: "b",
+                nms_service_id: "1234"
+            }}
+        />
+    ));
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {
         fetchMock.restore();
