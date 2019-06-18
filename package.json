@@ -19,6 +19,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.8",
     "@storybook/addon-links": "^5.1.8",
+    "@storybook/addon-storyshots": "^5.1.8",
     "@storybook/addons": "^5.1.8",
     "@storybook/cli": "^5.1.8",
     "@storybook/react": "^5.1.8",
@@ -53,12 +54,12 @@
     "react-pretty-json": "^2.0.2",
     "react-router-dom": "^5.0.1",
     "react-select": "^1.2.0",
+    "react-test-renderer": "^16.8.6",
     "react-tooltip": "^3.10.0",
     "scroll-into-view": "^1.9.7",
     "source-map-explorer": "^2.0.0",
     "spin.js": "^4.0.0",
     "typescript": "^3.5.2"
-
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",

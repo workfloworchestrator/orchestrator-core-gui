@@ -85,7 +85,6 @@ export default class UserInputContainer extends React.Component {
                 let servicePortsSN8 = subscriptions.filter(
                     sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
                 ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
-        console.log(subscriptions)
         return <section className="form-step divider">
             <h1>{formName}</h1>
             <UserInputForm
@@ -134,9 +133,9 @@ UserInputContainer.propTypes = {
     preselectedProduct: PropTypes.string,
     preselectedOrganisation: PropTypes.string,
     preselectedDienstafname: PropTypes.string,
-    currentState: PropTypes.array,
+    currentState: PropTypes.object,
 };
 
 UserInputContainer.defaultProps = {
-    currentState: [],
+    currentState: {},
 };

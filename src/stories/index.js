@@ -64,7 +64,7 @@ const corelinkSteps = [
 
 const addCorelinkSteps = [
     {"name":"ims_port_id_1", "type":"corelink_add_link", "node_key": "node_1", "interface_type_key":"corelink_service_speed"},
-    {"name":"ims_port_id_1", "type":"corelink_add_link", "node_key": "node_2", "interface_type_key":"corelink_service_speed"}];
+    {"name":"ims_port_id_2", "type":"corelink_add_link", "node_key": "node_2", "interface_type_key":"corelink_service_speed"}];
 
 const sn7PortSelectInputStepsAllOrganisations = [
     {"name": "organisation", "type": "organisation"},
@@ -235,7 +235,7 @@ storiesOf("UserInputForm", module)
                                    products={PRODUCTS}/>
     })
     .add("Corelink add link", () => {
-        const currentState = {"node_1": "d38d8b25-d9f5-4a25-b1b0-d29057c47420", "node_2": "5d2123e6-197d-4bb6-93c6-446d474d98fd"};
+        const currentState = {"node_1": "d38d8b25-d9f5-4a25-b1b0-d29057c47420", "node_2": "5d2123e6-197d-4bb6-93c6-446d474d98fd", corelink_service_speed: "1000BASE-LX"};
         fetchMock.restore();
         fetchMock.get('/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/', []);
         fetchMock.get('glob:*/api/subscriptions/tag/SP%2CSPNL/*', []);

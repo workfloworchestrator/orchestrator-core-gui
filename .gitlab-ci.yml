@@ -19,7 +19,7 @@ test workflows-client:
   script:
     - yarn install
     - yarn prettier -c '**/*.{js,jsx,scss,md}'
-    - yarn test
+    - yarn test --coverage
   tags:
       - python-lint-ext
 

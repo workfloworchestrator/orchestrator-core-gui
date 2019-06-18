@@ -92,15 +92,12 @@ export default class UserInputForm extends React.Component {
 
     componentDidMount = () => {
         if (this.props.preloadSubscriptions) {
-            console.log("UserInputForm: Preloading subscriptions")
             this.loadSubscriptions()
         }
         if (this.props.preloadServicePortsSN7) {
-            console.log("UserInputForm: Preloading SN7 ServicePorts")
             this.loadServicePortsSN7()
         }
         if (this.props.preloadServicePortsSN8) {
-            console.log("UserInputForm: Preloading SN8 ServicePorts")
             this.loadServicePortsSN8()
         }
     }
