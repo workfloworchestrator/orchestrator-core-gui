@@ -6,14 +6,13 @@ import isEqual from "lodash/isEqual";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
-import {capitalize, renderDateTime} from "../utils/Lookups";
-import {isEmpty} from "../utils/Utils";
+import { capitalize, renderDateTime } from "../utils/Lookups";
+import { isEmpty } from "../utils/Utils";
 import HighlightCode from "./HighlightCode";
 
 import "./TaskStateDetails.scss";
 
 export default class TaskStateDetails extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -25,58 +24,78 @@ export default class TaskStateDetails extends React.PureComponent {
     }
 
     copiedToClipboard = () => {
-        this.setState({copiedToClipboard: true});
-        setTimeout(() => this.setState({copiedToClipboard: false}), 5000);
+        this.setState({ copiedToClipboard: true });
+        setTimeout(() => this.setState({ copiedToClipboard: false }), 5000);
     };
 
     renderRaw = task => {
-        const {copiedToClipboard} = this.state;
+        const { copiedToClipboard } = this.state;
         const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
         const tooltip = I18n.t(copiedToClipboard ? "task_state.copied" : "task_state.copy");
         const json = JSON.stringify(task, null, 4);
         return (
             <section>
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
-                        <span className="copy-to-clipboard-container">
-                            <button data-for="copy-to-clipboard" data-tip>
-                                <i className={`fa fa-clone ${copiedToClipBoardClassName}`}></i>
-                            </button>
-                            <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
-                        </span>
+                    <span className="copy-to-clipboard-container">
+                        <button data-for="copy-to-clipboard" data-tip>
+                            <i className={`fa fa-clone ${copiedToClipBoardClassName}`} />
+                        </button>
+                        <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
+                    </span>
                 </CopyToClipboard>
                 <HighlightCode data={JSON.stringify(task, null, 4)} />
             </section>
-        )
-
-
+        );
     };
 
     renderTaskHeaderInformation = task => {
-        const {raw, details, stateChanges} = this.state;
+        const { raw, details, stateChanges } = this.state;
         return (
             <section className="header-information">
                 <ul>
-                    <li className="task-wording"><h3>{I18n.t("task_state.wording", {
-                        workflow: task.workflow
-                    })}</h3></li>
+                    <li className="task-wording">
+                        <h3>
+                            {I18n.t("task_state.wording", {
+                                workflow: task.workflow
+                            })}
+                        </h3>
+                    </li>
                 </ul>
                 <ul>
-                    {!raw && <li className="toggle-details"><CheckBox name="details" value={details}
-                                                                      info={I18n.t("task_state.details")}
-                                                                      onChange={() => this.setState({details: !details})}/>
-                    </li>}
-                    {!raw && <li className="toggle-state-changes"><CheckBox name="state-changes" value={stateChanges}
-                                                                            info={I18n.t("task_state.stateChanges")}
-                                                                            onChange={() => this.setState({stateChanges: !stateChanges})}/>
-                    </li>}
-                    <li><CheckBox name="raw" value={raw} info={I18n.t("task_state.raw")}
-                                  onChange={() => this.setState({raw: !raw})}/></li>
+                    {!raw && (
+                        <li className="toggle-details">
+                            <CheckBox
+                                name="details"
+                                value={details}
+                                info={I18n.t("task_state.details")}
+                                onChange={() => this.setState({ details: !details })}
+                            />
+                        </li>
+                    )}
+                    {!raw && (
+                        <li className="toggle-state-changes">
+                            <CheckBox
+                                name="state-changes"
+                                value={stateChanges}
+                                info={I18n.t("task_state.stateChanges")}
+                                onChange={() => this.setState({ stateChanges: !stateChanges })}
+                            />
+                        </li>
+                    )}
+                    <li>
+                        <CheckBox
+                            name="raw"
+                            value={raw}
+                            info={I18n.t("task_state.raw")}
+                            onChange={() => this.setState({ raw: !raw })}
+                        />
+                    </li>
                 </ul>
             </section>
-        )
+        );
     };
 
-    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
+    renderSummaryValue = value => (typeof value === "string" ? capitalize(value) : renderDateTime(value));
 
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
@@ -97,7 +116,7 @@ export default class TaskStateDetails extends React.PureComponent {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)}/> : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)} /> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
@@ -105,11 +124,11 @@ export default class TaskStateDetails extends React.PureComponent {
         const status = step.status;
         let json = {};
         switch (status) {
-            case "suspend" :
-            case "abort" :
-            case "skipped" :
+            case "suspend":
+            case "abort":
+            case "skipped":
                 return null;
-            case "pending" :
+            case "pending":
                 if (isEmpty(step.form)) {
                     return null;
                 }
@@ -118,20 +137,22 @@ export default class TaskStateDetails extends React.PureComponent {
                     return acc;
                 }, {});
                 break;
-            case "failed" :
+            case "failed":
                 json = step.state;
                 break;
             case "success":
                 if (index > 0) {
                     let prev_index = index - 1;
-                    while (prev_index > 0 && (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting" ))
-                    {
+                    while (
+                        prev_index > 0 &&
+                        (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting")
+                    ) {
                         prev_index--;
                     }
 
                     json = this.stateDelta(steps[prev_index].state, step.state);
                 } else {
-                    json = step.state
+                    json = step.state;
                 }
                 break;
             default:
@@ -143,71 +164,76 @@ export default class TaskStateDetails extends React.PureComponent {
         return (
             <section className="state-changes">
                 <section className="state-divider">
-                    <i className={iconName}></i>
+                    <i className={iconName} />
                 </section>
                 <section className="state-delta">
                     <table>
                         <tbody>
-                        {Object.keys(json).map((key,index) =>
-                            <tr key={key}>
-                                <td className="key">{key}</td>
-                                <td className="value">{this.displayStateValue(json[key])}</td>
-                            </tr>
-                        )}
+                            {Object.keys(json).map((key, index) => (
+                                <tr key={key}>
+                                    <td className="key">{key}</td>
+                                    <td className="value">{this.displayStateValue(json[key])}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </section>
-            </section>);
+            </section>
+        );
     };
-
 
     renderTaskOverview = (task, details, stateChanges) => {
         const last = i => i === task.steps.length - 1;
         const summaryKeys = ["last_status", "created_by", "last_step", "started_at", "last_modified_at"];
         return (
             <section className="task-overview">
-                {details && <section className="task-summary">
-                    <table>
-                        <tbody>
-                        {summaryKeys.map(key => <tr key={key}>
-                            <td className="title">{I18n.t(`task_state.summary.${key}`)}</td>
-                            <td className="value">{this.renderSummaryValue(task[key])}</td>
-                        </tr>)}
-                        </tbody>
-                    </table>
-
-                </section>}
+                {details && (
+                    <section className="task-summary">
+                        <table>
+                            <tbody>
+                                {summaryKeys.map(key => (
+                                    <tr key={key}>
+                                        <td className="title">{I18n.t(`task_state.summary.${key}`)}</td>
+                                        <td className="value">{this.renderSummaryValue(task[key])}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                )}
                 <section className="steps">
                     {task.steps.map((step, index) => {
                         return (
                             <div key={index} className="details-container">
                                 <div className="step-container">
-                                    <Step step={step}/>
-                                    {!last(index) && <section className="step-divider">
-                                        <i className="fa fa-arrow-down"></i>
-                                    </section>}
+                                    <Step step={step} />
+                                    {!last(index) && (
+                                        <section className="step-divider">
+                                            <i className="fa fa-arrow-down" />
+                                        </section>
+                                    )}
                                 </div>
                                 {stateChanges && this.renderStateChanges(task.steps, index)}
                             </div>
-                        )
+                        );
                     })}
                 </section>
             </section>
-        )
+        );
     };
 
     render() {
-        const {task} = this.props;
-        const {raw, details, stateChanges} = this.state;
-        return <section className="task-state-detail">
-            {this.renderTaskHeaderInformation(task)}
-            {raw ? this.renderRaw(task) : this.renderTaskOverview(task, details, stateChanges)}
-        </section>
+        const { task } = this.props;
+        const { raw, details, stateChanges } = this.state;
+        return (
+            <section className="task-state-detail">
+                {this.renderTaskHeaderInformation(task)}
+                {raw ? this.renderRaw(task) : this.renderTaskOverview(task, details, stateChanges)}
+            </section>
+        );
     }
-
 }
 
 TaskStateDetails.propTypes = {
     task: PropTypes.object.isRequired
 };
-

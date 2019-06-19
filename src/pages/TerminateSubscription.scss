@@ -3,7 +3,6 @@
 @import "../stylesheets/forms.scss";
 @import "../stylesheets/media_queries.scss";
 
-
 .mod-terminate-subscription {
     @include page;
 
@@ -19,7 +18,6 @@
     section.form-step {
         padding: 20px 0;
     }
-
 }
 
 section.message-container {
@@ -65,7 +63,7 @@ section.message-container {
                         padding: 2px 40px 2px 0;
                     }
                     &.description {
-                        color: darken($orange, 25%)
+                        color: darken($orange, 25%);
                     }
                     span {
                         font-style: italic;
@@ -73,7 +71,5 @@ section.message-container {
                 }
             }
         }
-
     }
-
 }

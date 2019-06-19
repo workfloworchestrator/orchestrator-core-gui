@@ -2,23 +2,24 @@
 @import "../stylesheets/media_queries.scss";
 
 section.products-workflows-validation {
-  background-color: white;
-  padding: 15px 0 0 0;
-  margin-top: 20px;
-  box-shadow: 2px 3px 3px 0 $light-grey;
+    background-color: white;
+    padding: 15px 0 0 0;
+    margin-top: 20px;
+    box-shadow: 2px 3px 3px 0 $light-grey;
 
-  h3 {
-    margin-left: 20px;
-    margin-bottom: 15px;
-    color: $blue;
-    font-size: 18px;
-  }
+    h3 {
+        margin-left: 20px;
+        margin-bottom: 15px;
+        color: $blue;
+        font-size: 18px;
+    }
 
     table {
-      margin-bottom: 35px;
+        margin-bottom: 35px;
         width: 100%;
         word-break: break-all;
-        td, th {
+        td,
+        th {
             text-align: left;
         }
         tr {
@@ -26,7 +27,7 @@ section.products-workflows-validation {
         }
         thead {
             th {
-                padding: 5px 5px 10px 5px
+                padding: 5px 5px 10px 5px;
             }
             span {
                 text-transform: uppercase;
@@ -43,7 +44,6 @@ section.products-workflows-validation {
                 padding: 15px 5px;
             }
         }
-
     }
 
     table.products {
@@ -75,7 +75,6 @@ section.products-workflows-validation {
                 }
             }
         }
-
     }
     table.workflows {
         thead {
@@ -100,8 +99,5 @@ section.products-workflows-validation {
                 }
             }
         }
-
     }
 }
-
-

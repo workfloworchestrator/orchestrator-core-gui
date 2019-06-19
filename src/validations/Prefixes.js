@@ -1,4 +1,4 @@
-export function actionOptions(prefix, selectPrefix, statusProperty = "state" ) {
+export function actionOptions(prefix, selectPrefix, statusProperty = "state") {
     //TODO scope on the context of logged in-user
     const select = {
         icon: "fa fa-search-plus",
@@ -17,9 +17,8 @@ export function actionOptions(prefix, selectPrefix, statusProperty = "state" ) {
         case 3: //Free
             options = [select];
             break;
-        default :
-            throw new Error(`Unknown status: ${status}`)
+        default:
+            throw new Error(`Unknown status: ${status}`);
     }
     return options;
 }
-

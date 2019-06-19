@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {isEmpty, stop} from "../utils/Utils";
-import {validEmailRegExp} from "../validations/Subscriptions";
+import { isEmpty, stop } from "../utils/Utils";
+import { validEmailRegExp } from "../validations/Subscriptions";
 import Autocomplete from "./Autocomplete";
 import scrollIntoView from "scroll-into-view";
 
 import "./ContactPersons.scss";
-import {contacts} from "../api";
+import { contacts } from "../api";
 
 export default class ContactPersons extends React.PureComponent {
-
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -24,9 +23,7 @@ export default class ContactPersons extends React.PureComponent {
 
     componentDidMount = (organisationId = this.props.organisationId) => {
         if (organisationId) {
-            contacts(organisationId).then(result =>
-                this.setState({contactPersons: result})
-            );
+            contacts(organisationId).then(result => this.setState({ contactPersons: result }));
         }
     };
 
@@ -34,9 +31,9 @@ export default class ContactPersons extends React.PureComponent {
         if (nextProps.organisationId && nextProps.organisationId !== this.props.organisationId) {
             this.componentDidMount(nextProps.organisationId);
         } else if (isEmpty(nextProps.organisationId) && !isEmpty(this.props.organisationId)) {
-            this.props.onChange([{email: "", name: "", phone: ""}]);
+            this.props.onChange([{ email: "", name: "", phone: "" }]);
         }
-    };
+    }
 
     componentDidUpdate(prevProps) {
         if (prevProps.persons.length + 1 === this.props.persons.length) {
@@ -46,9 +43,9 @@ export default class ContactPersons extends React.PureComponent {
 
     validateEmail = index => e => {
         const valid = validEmailRegExp.test(e.target.value);
-        const errors = {...this.state.errors};
+        const errors = { ...this.state.errors };
         errors[index] = !valid;
-        this.setState({errors: errors});
+        this.setState({ errors: errors });
     };
 
     onChangeInternal = (name, index) => e => {
@@ -58,12 +55,14 @@ export default class ContactPersons extends React.PureComponent {
         this.props.onChange(persons);
 
         if (name !== "name") {
-            this.setState({displayAutocomplete: {}, selectedItem: -1});
+            this.setState({ displayAutocomplete: {}, selectedItem: -1 });
         } else {
             const suggestions = this.state.contactPersons;
-            const filteredSuggestions = isEmpty(value) ? [] : suggestions
-                .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
-                .filter(item => !persons.some(person => person.email === item.email));
+            const filteredSuggestions = isEmpty(value)
+                ? []
+                : suggestions
+                      .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
+                      .filter(item => !persons.some(person => person.email === item.email));
             const newDisplayAutoCompleteState = {};
             newDisplayAutoCompleteState[index] = !isEmpty(filteredSuggestions);
             this.setState({
@@ -76,7 +75,7 @@ export default class ContactPersons extends React.PureComponent {
 
     addPerson = () => {
         const persons = [...this.props.persons];
-        persons.push({email: "", name: "", phone: ""});
+        persons.push({ email: "", name: "", phone: "" });
         this.props.onChange(persons);
     };
 
@@ -95,103 +94,123 @@ export default class ContactPersons extends React.PureComponent {
         persons[personIndex].email = item.email || "";
         persons[personIndex].phone = item.phone || "";
         this.props.onChange(persons);
-        this.setState({displayAutocomplete: {}, selectedItem: -1});
+        this.setState({ displayAutocomplete: {}, selectedItem: -1 });
         if (this.personInput) {
             setTimeout(scrollIntoView(this.personInput), 150);
         }
     };
 
     onAutocompleteKeyDown = personIndex => e => {
-        const {selectedItem, filteredSuggestions} = this.state;
+        const { selectedItem, filteredSuggestions } = this.state;
         if (isEmpty(filteredSuggestions)) {
             return;
         }
-        if (e.keyCode === 40 && selectedItem < (filteredSuggestions.length - 1)) {//keyDown
+        if (e.keyCode === 40 && selectedItem < filteredSuggestions.length - 1) {
+            //keyDown
             stop(e);
-            this.setState({selectedItem: (selectedItem + 1)});
+            this.setState({ selectedItem: selectedItem + 1 });
         }
-        if (e.keyCode === 38 && selectedItem >= 0) {//keyUp
+        if (e.keyCode === 38 && selectedItem >= 0) {
+            //keyUp
             stop(e);
-            this.setState({selectedItem: (selectedItem - 1)});
+            this.setState({ selectedItem: selectedItem - 1 });
         }
-        if (e.keyCode === 13) {//enter
+        if (e.keyCode === 13) {
+            //enter
             if (selectedItem >= 0) {
                 stop(e);
                 this.itemSelected(filteredSuggestions[selectedItem], personIndex);
             }
         }
-        if (e.keyCode === 27) {//escape
+        if (e.keyCode === 27) {
+            //escape
             stop(e);
-            this.setState({selectedPerson: -1, displayAutocomplete: {}});
+            this.setState({ selectedPerson: -1, displayAutocomplete: {} });
         }
-
     };
 
     onBlurAutoComplete = e => {
         stop(e);
-        setTimeout(() => this.setState({displayAutocomplete: {}}), 350);
+        setTimeout(() => this.setState({ displayAutocomplete: {} }), 350);
     };
-
 
     renderPerson = (total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
-        return <section className="person" key={index}>
-            <div className="wrapper autocomplete-container" tabIndex="1"
-                 onBlur={this.onBlurAutoComplete}>
-                {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
-                <input ref={ref => {
-                    if (displayAutocompleteInstance) {
-                        this.personInput = ref;
-                    } else if (total - 1 === index) {
-                        this.lastPersonInput = ref;
-                    }}
-                }
-                       type="text"
-                       onChange={this.onChangeInternal("name", index)}
-                       value={person.name || ""}
-                       onKeyDown={this.onAutocompleteKeyDown(index)}
-                       placeholder={I18n.t("contact_persons.namePlaceholder")}
-                />
-                {displayAutocompleteInstance && <Autocomplete query={person.name}
-                                                              className={index === 0 ? "" : "child"}
-                                                              itemSelected={this.itemSelected}
-                                                              selectedItem={selectedItem}
-                                                              suggestions={filteredSuggestions}
-                                                              personIndex={index}/>}
-            </div>
-            <div className="wrapper">
-                {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
-                <input type="email"
-                       onChange={this.onChangeInternal("email", index)}
-                       onBlur={this.validateEmail(index)}
-                       value={person.email || ""}/>
-                {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
-            </div>
-            <div className="wrapper">
-                {index === 0 && <label>{I18n.t("contact_persons.phone")}</label>}
-                <div className="tel">
-                    <input type="tel"
-                           onChange={this.onChangeInternal("phone", index)}
-                           value={person.phone || ""}/>
-                    <i className={`fa fa-minus ${index === 0 ? "disabled" : "" }`}
-                       onClick={this.removePerson(index)}></i>
+        return (
+            <section className="person" key={index}>
+                <div className="wrapper autocomplete-container" tabIndex="1" onBlur={this.onBlurAutoComplete}>
+                    {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
+                    <input
+                        ref={ref => {
+                            if (displayAutocompleteInstance) {
+                                this.personInput = ref;
+                            } else if (total - 1 === index) {
+                                this.lastPersonInput = ref;
+                            }
+                        }}
+                        type="text"
+                        onChange={this.onChangeInternal("name", index)}
+                        value={person.name || ""}
+                        onKeyDown={this.onAutocompleteKeyDown(index)}
+                        placeholder={I18n.t("contact_persons.namePlaceholder")}
+                    />
+                    {displayAutocompleteInstance && (
+                        <Autocomplete
+                            query={person.name}
+                            className={index === 0 ? "" : "child"}
+                            itemSelected={this.itemSelected}
+                            selectedItem={selectedItem}
+                            suggestions={filteredSuggestions}
+                            personIndex={index}
+                        />
+                    )}
                 </div>
-            </div>
-        </section>
+                <div className="wrapper">
+                    {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
+                    <input
+                        type="email"
+                        onChange={this.onChangeInternal("email", index)}
+                        onBlur={this.validateEmail(index)}
+                        value={person.email || ""}
+                    />
+                    {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
+                </div>
+                <div className="wrapper">
+                    {index === 0 && <label>{I18n.t("contact_persons.phone")}</label>}
+                    <div className="tel">
+                        <input type="tel" onChange={this.onChangeInternal("phone", index)} value={person.phone || ""} />
+                        <i
+                            className={`fa fa-minus ${index === 0 ? "disabled" : ""}`}
+                            onClick={this.removePerson(index)}
+                        />
+                    </div>
+                </div>
+            </section>
+        );
     };
 
     render() {
-        const {persons} = this.props;
-        const {errors, displayAutocomplete, selectedItem, filteredSuggestions} = this.state;
+        const { persons } = this.props;
+        const { errors, displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>
-                    this.renderPerson(persons.length, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem))}
-                <div className="add-person"><i className="fa fa-plus" onClick={this.addPerson}></i></div>
+                    this.renderPerson(
+                        persons.length,
+                        person,
+                        index,
+                        errors,
+                        displayAutocomplete,
+                        filteredSuggestions,
+                        selectedItem
+                    )
+                )}
+                <div className="add-person">
+                    <i className="fa fa-plus" onClick={this.addPerson} />
+                </div>
             </section>
         );
     }
-
 }
 
 ContactPersons.propTypes = {
@@ -199,5 +218,3 @@ ContactPersons.propTypes = {
     onChange: PropTypes.func.isRequired,
     organisationId: PropTypes.string
 };
-
-

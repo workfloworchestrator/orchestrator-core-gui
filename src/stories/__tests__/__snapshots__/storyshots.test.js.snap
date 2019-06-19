@@ -1,0 +1,3934 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots GenericNOCConfirm Complex 1`] = `
+<section
+  className="storybook-container"
+>
+  <section>
+    <div>
+      <label>
+        Confirm the migration of the SAP
+      </label>
+    </div>
+    <div>
+      <em>
+        Use the info above to confirm the SAP you want to migrate
+      </em>
+    </div>
+    <div>
+      <label
+        className="warning"
+      >
+        Watch out! The next step is service impacting for the customer service
+      </label>
+    </div>
+    <div>
+      <a
+        href="http://example.com"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        http://example.com
+      </a>
+    </div>
+    <div
+      className="checkbox"
+    >
+      <input
+        disabled={false}
+        id="check_delete_sn7_service_config4"
+        name="check_delete_sn7_service_config4"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="check_delete_sn7_service_config4"
+      >
+        <span
+          tabIndex="0"
+        >
+          <i
+            className="fa fa-check"
+          />
+        </span>
+      </label>
+      <label
+        className="info"
+        htmlFor="check_delete_sn7_service_config4"
+      >
+        Delete the SURFnet7 IP service config from Alice and Bob.
+      </label>
+    </div>
+    <div>
+      <label>
+        The new path for service has been put in IMS
+      </label>
+    </div>
+    <div
+      className="level_2"
+    >
+      <input
+        disabled={false}
+        id="check_ims_circuit6"
+        name="check_ims_circuit6"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="check_ims_circuit6"
+      >
+        <span
+          tabIndex="0"
+        >
+          <i
+            className="fa fa-check"
+          />
+        </span>
+      </label>
+      <label
+        className="info"
+        htmlFor="check_ims_circuit6"
+      >
+        ims circuit 1
+      </label>
+    </div>
+    <div
+      className="level_2"
+    >
+      <input
+        disabled={false}
+        id="check_ims_circuit7"
+        name="check_ims_circuit7"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="check_ims_circuit7"
+      >
+        <span
+          tabIndex="0"
+        >
+          <i
+            className="fa fa-check"
+          />
+        </span>
+      </label>
+      <label
+        className="info"
+        htmlFor="check_ims_circuit7"
+      >
+        ims circuit 2
+      </label>
+    </div>
+    <div
+      className="checkbox"
+    >
+      <input
+        disabled={false}
+        id="check_port_patched_sn7_sn88"
+        name="check_port_patched_sn7_sn88"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="check_port_patched_sn7_sn88"
+      >
+        <span
+          tabIndex="0"
+        >
+          <i
+            className="fa fa-check"
+          />
+        </span>
+      </label>
+      <label
+        className="info"
+        htmlFor="check_port_patched_sn7_sn88"
+      >
+        Physically patch the customer port from SN7 to SN8 HW.
+      </label>
+    </div>
+  </section>
+</section>
+`;
+
+exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          NOC Confirm
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider confirm_migrate_sap"
+              >
+                <section>
+                  <div>
+                    <label>
+                      Confirm the migration of the SAP
+                    </label>
+                  </div>
+                  <div>
+                    <em>
+                      Use the info above to confirm the SAP you want to migrate
+                    </em>
+                  </div>
+                  <div>
+                    <label
+                      className="warning"
+                    >
+                      Watch out! The next step is service impacting for the customer service
+                    </label>
+                  </div>
+                  <div>
+                    <a
+                      href="http://example.com"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      http://example.com
+                    </a>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="check_delete_sn7_service_config4"
+                      name="check_delete_sn7_service_config4"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="check_delete_sn7_service_config4"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="check_delete_sn7_service_config4"
+                    >
+                      Delete the SURFnet7 IP service config from Alice and Bob.
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      The new path for service has been put in IMS
+                    </label>
+                  </div>
+                  <div
+                    className="level_2"
+                  >
+                    <input
+                      disabled={false}
+                      id="check_ims_circuit6"
+                      name="check_ims_circuit6"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="check_ims_circuit6"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="check_ims_circuit6"
+                    >
+                      ims circuit 1
+                    </label>
+                  </div>
+                  <div
+                    className="level_2"
+                  >
+                    <input
+                      disabled={false}
+                      id="check_ims_circuit7"
+                      name="check_ims_circuit7"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="check_ims_circuit7"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="check_ims_circuit7"
+                    >
+                      ims circuit 2
+                    </label>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="check_port_patched_sn7_sn88"
+                      name="check_port_patched_sn7_sn88"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="check_port_patched_sn7_sn88"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="check_port_patched_sn7_sn88"
+                    >
+                      Physically patch the customer port from SN7 to SN8 HW.
+                    </label>
+                  </div>
+                </section>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots GenericNOCConfirm Legacy 1`] = `
+<section
+  className="storybook-container"
+>
+  <label>
+    Confirm removal
+  </label>
+  <em>
+    Is this Static IP service removed from the network?
+  </em>
+  <div
+    className="checkbox"
+  >
+    <input
+      disabled={false}
+      id="noc_remove_static_ip_confirmation"
+      name="noc_remove_static_ip_confirmation"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <label
+      htmlFor="noc_remove_static_ip_confirmation"
+    >
+      <span
+        tabIndex="0"
+      >
+        <i
+          className="fa fa-check"
+        />
+      </span>
+    </label>
+    <label
+      className="info"
+      htmlFor="noc_remove_static_ip_confirmation"
+    >
+      Confirm removal
+    </label>
+  </div>
+</section>
+`;
+
+exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          NOC Confirm
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider noc_remove_static_ip_confirmation"
+              >
+                <label>
+                  Confirm removal
+                </label>
+                <em>
+                  Is this Static IP service removed from the network?
+                </em>
+                <div
+                  className="checkbox"
+                >
+                  <input
+                    disabled={false}
+                    id="noc_remove_static_ip_confirmation"
+                    name="noc_remove_static_ip_confirmation"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <label
+                    htmlFor="noc_remove_static_ip_confirmation"
+                  >
+                    <span
+                      tabIndex="0"
+                    >
+                      <i
+                        className="fa fa-check"
+                      />
+                    </span>
+                  </label>
+                  <label
+                    className="info"
+                    htmlFor="noc_remove_static_ip_confirmation"
+                  >
+                    Confirm removal
+                  </label>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots GenericSelect Default 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="Select generic-select is-clearable is-searchable Select--single"
+  >
+    <div
+      className="Select-control"
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+    >
+      <div
+        className="Select-multi-value-wrapper"
+        id="react-select-5--value"
+      >
+        <div
+          className="Select-placeholder"
+        >
+          Search or select a value...
+        </div>
+        <div
+          className="Select-input"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <input
+            aria-activedescendant="react-select-5--value"
+            aria-expanded="false"
+            aria-haspopup="false"
+            aria-owns=""
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={false}
+            role="combobox"
+            style={
+              Object {
+                "boxSizing": "content-box",
+                "width": "5px",
+              }
+            }
+            value=""
+          />
+          <div
+            style={
+              Object {
+                "height": 0,
+                "left": 0,
+                "overflow": "scroll",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "whiteSpace": "pre",
+              }
+            }
+          >
+            
+          </div>
+        </div>
+      </div>
+      <span
+        className="Select-arrow-zone"
+        onMouseDown={[Function]}
+      >
+        <span
+          className="Select-arrow"
+          onMouseDown={[Function]}
+        />
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Storyshots LocationCodeSelect Default 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="Select select-locationcode is-clearable is-searchable Select--single"
+  >
+    <div
+      className="Select-control"
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+    >
+      <div
+        className="Select-multi-value-wrapper"
+        id="react-select-6--value"
+      >
+        <div
+          className="Select-placeholder"
+        >
+          Select...
+        </div>
+        <div
+          className="Select-input"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <input
+            aria-activedescendant="react-select-6--value"
+            aria-expanded="false"
+            aria-haspopup="false"
+            aria-owns=""
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={false}
+            role="combobox"
+            style={
+              Object {
+                "boxSizing": "content-box",
+                "width": "5px",
+              }
+            }
+            value=""
+          />
+          <div
+            style={
+              Object {
+                "height": 0,
+                "left": 0,
+                "overflow": "scroll",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "whiteSpace": "pre",
+              }
+            }
+          >
+            
+          </div>
+        </div>
+      </div>
+      <span
+        className="Select-arrow-zone"
+        onMouseDown={[Function]}
+      >
+        <span
+          className="Select-arrow"
+          onMouseDown={[Function]}
+        />
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="subscription-select"
+  >
+    <div
+      className="select-box"
+    >
+      <div
+        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+      >
+        <div
+          className="Select-control"
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="Select-multi-value-wrapper"
+            id="react-select-3--value"
+          >
+            <div
+              className="Select-placeholder"
+            >
+              Select a subscription for the selected product
+            </div>
+            <div
+              aria-activedescendant="react-select-3--value"
+              aria-disabled="true"
+              aria-expanded={false}
+              aria-owns=""
+              className="Select-input"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              role="combobox"
+              style={
+                Object {
+                  "border": 0,
+                  "display": "inline-block",
+                  "width": 1,
+                }
+              }
+              tabIndex={0}
+            />
+          </div>
+          <span
+            aria-hidden="true"
+            className="Select-loading-zone"
+          >
+            <span
+              className="Select-loading"
+            />
+          </span>
+          <span
+            className="Select-arrow-zone"
+            onMouseDown={[Function]}
+          >
+            <span
+              className="Select-arrow"
+              onMouseDown={[Function]}
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+`;
+
+exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with excluded subs 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="subscription-select"
+  >
+    <div
+      className="select-box"
+    >
+      <div
+        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+      >
+        <div
+          className="Select-control"
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="Select-multi-value-wrapper"
+            id="react-select-4--value"
+          >
+            <div
+              className="Select-placeholder"
+            >
+              Select a subscription for the selected product
+            </div>
+            <div
+              aria-activedescendant="react-select-4--value"
+              aria-disabled="true"
+              aria-expanded={false}
+              aria-owns=""
+              className="Select-input"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              role="combobox"
+              style={
+                Object {
+                  "border": 0,
+                  "display": "inline-block",
+                  "width": 1,
+                }
+              }
+              tabIndex={0}
+            />
+          </div>
+          <span
+            aria-hidden="true"
+            className="Select-loading-zone"
+          >
+            <span
+              className="Select-loading"
+            />
+          </span>
+          <span
+            className="Select-arrow-zone"
+            onMouseDown={[Function]}
+          >
+            <span
+              className="Select-arrow"
+              onMouseDown={[Function]}
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+`;
+
+exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="subscription-select"
+  >
+    <div
+      className="select-box"
+    >
+      <div
+        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+      >
+        <div
+          className="Select-control"
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="Select-multi-value-wrapper"
+            id="react-select-2--value"
+          >
+            <div
+              className="Select-placeholder"
+            >
+              Select a subscription for this product tag
+            </div>
+            <div
+              aria-activedescendant="react-select-2--value"
+              aria-disabled="true"
+              aria-expanded={false}
+              aria-owns=""
+              className="Select-input"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              role="combobox"
+              style={
+                Object {
+                  "border": 0,
+                  "display": "inline-block",
+                  "width": 1,
+                }
+              }
+              tabIndex={0}
+            />
+          </div>
+          <span
+            aria-hidden="true"
+            className="Select-loading-zone"
+          >
+            <span
+              className="Select-loading"
+            />
+          </span>
+          <span
+            className="Select-arrow-zone"
+            onMouseDown={[Function]}
+          >
+            <span
+              className="Select-arrow"
+              onMouseDown={[Function]}
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+`;
+
+exports[`Storyshots TableSummary Definition 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="label"
+          >
+            Label1
+          </td>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 2
+          </td>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 3
+          </td>
+          <td
+            className="value"
+          >
+            value3 with slightly longer text
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;
+
+exports[`Storyshots TableSummary Summary with definition and headers 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Old Values
+          </th>
+          <th>
+            New Values
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="label"
+          >
+            Label1
+          </td>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+          <td
+            className="value"
+          >
+            new value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 2
+          </td>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+          <td
+            className="value"
+          >
+            new value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 3
+          </td>
+          <td
+            className="value"
+          >
+            value3
+          </td>
+          <td
+            className="value"
+          >
+            new value3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;
+
+exports[`Storyshots TableSummary Summary with headers 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Old Values
+          </th>
+          <th>
+            New Values
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+          <td
+            className="value"
+          >
+            new value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+          <td
+            className="value"
+          >
+            new value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="value"
+          >
+            value3
+          </td>
+          <td
+            className="value"
+          >
+            new value3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;
+
+exports[`Storyshots UserInputForm Contactpersons 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Organisation and contacts
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-7--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-7--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider contact_persons"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer contact persons
+                </label>
+                <em>
+                  The persons to notify when the process is finished. You can add multiple emails, names and phone numbers
+                </em>
+                <section
+                  className="contact-persons"
+                >
+                  <section
+                    className="person"
+                  >
+                    <div
+                      className="wrapper autocomplete-container"
+                      onBlur={[Function]}
+                      tabIndex="1"
+                    >
+                      <label>
+                        Name
+                      </label>
+                      <input
+                        onChange={[Function]}
+                        onKeyDown={[Function]}
+                        placeholder="Search and add contact persons..."
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      className="wrapper"
+                    >
+                      <label>
+                        Email
+                      </label>
+                      <input
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        type="email"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      className="wrapper"
+                    >
+                      <label>
+                        Phone number
+                      </label>
+                      <div
+                        className="tel"
+                      >
+                        <input
+                          onChange={[Function]}
+                          type="tel"
+                          value=""
+                        />
+                        <i
+                          className="fa fa-minus disabled"
+                          onClick={[Function]}
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <div
+                    className="add-person"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm Corelink 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Corelink form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider ims_port_id_1"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  First node and port
+                </label>
+                <em>
+                  Choose a node and port that you want to use to create the first corelink
+                </em>
+                <section
+                  className="node-port"
+                >
+                  <div
+                    className="node-select"
+                  >
+                    <label>
+                      Node
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-8--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            Select...
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-8--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="port-select"
+                  >
+                    <label>
+                      Port
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-9--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            First select a node
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-9--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </section>
+              <section
+                className="form-divider ims_port_id_2"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Second node and port
+                </label>
+                <em>
+                  Choose a node and port that you want to use to create the second corelink
+                </em>
+                <section
+                  className="node-port"
+                >
+                  <div
+                    className="node-select"
+                  >
+                    <label>
+                      Node
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-10--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            Select...
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-10--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="port-select"
+                  >
+                    <label>
+                      Port
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-11--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            First select a node
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-11--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm Corelink add link 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Corelink add link form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider ims_port_id_1"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  First node and port
+                </label>
+                <em>
+                  Choose a node and port that you want to use to create the first corelink
+                </em>
+                <section
+                  className="node-port"
+                >
+                  <div
+                    className="node-select"
+                  >
+                    <label>
+                      Node
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-12--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            Select...
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-12--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="port-select"
+                  >
+                    <label>
+                      Port
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-13--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            First select a node
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-13--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </section>
+              <section
+                className="form-divider ims_port_id_2"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Second node and port
+                </label>
+                <em>
+                  Choose a node and port that you want to use to create the second corelink
+                </em>
+                <section
+                  className="node-port"
+                >
+                  <div
+                    className="node-select"
+                  >
+                    <label>
+                      Node
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-14--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            Select...
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-14--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="port-select"
+                  >
+                    <label>
+                      Port
+                    </label>
+                    <div
+                      className="Select is-clearable is-disabled is-searchable Select--single"
+                    >
+                      <div
+                        className="Select-control"
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                      >
+                        <div
+                          className="Select-multi-value-wrapper"
+                          id="react-select-15--value"
+                        >
+                          <div
+                            className="Select-placeholder"
+                          >
+                            First select a node
+                          </div>
+                          <div
+                            aria-activedescendant="react-select-15--value"
+                            aria-disabled="true"
+                            aria-expanded={false}
+                            aria-owns=""
+                            className="Select-input"
+                            onBlur={[Function]}
+                            onFocus={[Function]}
+                            role="combobox"
+                            style={
+                              Object {
+                                "border": 0,
+                                "display": "inline-block",
+                                "width": 1,
+                              }
+                            }
+                            tabIndex={0}
+                          />
+                        </div>
+                        <span
+                          className="Select-arrow-zone"
+                          onMouseDown={[Function]}
+                        >
+                          <span
+                            className="Select-arrow"
+                            onMouseDown={[Function]}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm Nodes 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Node form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider ims_node_id"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Choose a node from IMS
+                </label>
+                <em>
+                  Choose a node that has state PLANNED or READY FOR SERVICE in IMS
+                </em>
+                <div
+                  className="node-select"
+                >
+                  <div
+                    className="Select select-node is-clearable is-disabled is-searchable Select--single"
+                  >
+                    <div
+                      className="Select-control"
+                      onKeyDown={[Function]}
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                    >
+                      <div
+                        className="Select-multi-value-wrapper"
+                        id="react-select-16--value"
+                      >
+                        <div
+                          className="Select-placeholder"
+                        >
+                          Loading nodes, please wait...
+                        </div>
+                        <div
+                          aria-activedescendant="react-select-16--value"
+                          aria-disabled="true"
+                          aria-expanded={false}
+                          aria-owns=""
+                          className="Select-input"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          role="combobox"
+                          style={
+                            Object {
+                              "border": 0,
+                              "display": "inline-block",
+                              "width": 1,
+                            }
+                          }
+                          tabIndex={0}
+                        />
+                      </div>
+                      <span
+                        className="Select-arrow-zone"
+                        onMouseDown={[Function]}
+                      >
+                        <span
+                          className="Select-arrow"
+                          onMouseDown={[Function]}
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-19--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-19--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="multiple-mps"
+                  >
+                    <section
+                      className="msp"
+                    >
+                      <div
+                        className="wrapper msp-select"
+                      >
+                        <label>
+                          Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-20--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-20--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                          <i
+                            className="fa fa-minus disabled"
+                            onClick={[Function]}
+                          />
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-msp"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-17--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-17--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="multiple-mps"
+                  >
+                    <section
+                      className="msp"
+                    >
+                      <div
+                        className="wrapper msp-select"
+                      >
+                        <label>
+                          Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-18--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-18--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                          <i
+                            className="fa fa-minus disabled"
+                            onClick={[Function]}
+                          />
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-msp"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect, showing only ports for selected organisation
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-21--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-21--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="multiple-mps"
+                  >
+                    <section
+                      className="msp"
+                    >
+                      <div
+                        className="wrapper msp-select"
+                      >
+                        <label>
+                          Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-22--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-22--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                          <i
+                            className="fa fa-minus disabled"
+                            onClick={[Function]}
+                          />
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-msp"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-23--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-23--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="service-port-container"
+                  >
+                    <section
+                      className="service-port"
+                    >
+                      <div
+                        className="wrapper service-port-select"
+                      >
+                        <label>
+                          SURFnet8 Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-24--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-24--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect, showing only ports for selected organisation
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-29--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-29--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="service-port-container"
+                  >
+                    <section
+                      className="service-port"
+                    >
+                      <div
+                        className="wrapper service-port-select"
+                      >
+                        <label>
+                          SURFnet8 Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-30--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-30--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-25--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-25--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="service-port-container"
+                  >
+                    <section
+                      className="service-port"
+                    >
+                      <div
+                        className="wrapper service-port-select"
+                      >
+                        <label>
+                          SURFnet8 Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-26--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-26--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className="Select is-clearable is-searchable Select--single"
+                >
+                  <div
+                    className="Select-control"
+                    onKeyDown={[Function]}
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                  >
+                    <div
+                      className="Select-multi-value-wrapper"
+                      id="react-select-27--value"
+                    >
+                      <div
+                        className="Select-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="Select-input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-activedescendant="react-select-27--value"
+                          aria-expanded="false"
+                          aria-haspopup="false"
+                          aria-owns=""
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          required={false}
+                          role="combobox"
+                          style={
+                            Object {
+                              "boxSizing": "content-box",
+                              "width": "5px",
+                            }
+                          }
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      className="Select-arrow-zone"
+                      onMouseDown={[Function]}
+                    >
+                      <span
+                        className="Select-arrow"
+                        onMouseDown={[Function]}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <div>
+                  <section
+                    className="service-port-container"
+                  >
+                    <section
+                      className="service-port"
+                    >
+                      <div
+                        className="wrapper service-port-select"
+                      >
+                        <label>
+                          SURFnet8 Service Port
+                        </label>
+                        <div
+                          className="Select is-clearable is-disabled is-searchable Select--single"
+                        >
+                          <div
+                            className="Select-control"
+                            onKeyDown={[Function]}
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                          >
+                            <div
+                              className="Select-multi-value-wrapper"
+                              id="react-select-28--value"
+                            >
+                              <div
+                                className="Select-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                aria-activedescendant="react-select-28--value"
+                                aria-disabled="true"
+                                aria-expanded={false}
+                                aria-owns=""
+                                className="Select-input"
+                                onBlur={[Function]}
+                                onFocus={[Function]}
+                                role="combobox"
+                                style={
+                                  Object {
+                                    "border": 0,
+                                    "display": "inline-block",
+                                    "width": 1,
+                                  }
+                                }
+                                tabIndex={0}
+                              />
+                            </div>
+                            <span
+                              className="Select-arrow-zone"
+                              onMouseDown={[Function]}
+                            >
+                              <span
+                                className="Select-arrow"
+                                onMouseDown={[Function]}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots Welcome to Storybook 1`] = `
+<section
+  className="storybook-container"
+>
+  <div>
+    <h1>
+      Workflows client storybook
+    </h1>
+    <p>
+      Welcome to the storybook. We will demonstrate some of the components here.
+    </p>
+    <p>
+      <b>
+        The storybook will use mocks for the components that need data. So you could see other data then you're used to.
+      </b>
+    </p>
+    <p>
+      All the UserInputForms examples use a Wrapper component to simulate the form elements as they are used with the workflow engine
+    </p>
+  </div>
+</section>
+`;

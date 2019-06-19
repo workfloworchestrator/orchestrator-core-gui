@@ -28,7 +28,7 @@ section.multiple-subscriptions {
                 cursor: pointer;
                 &.disabled {
                     cursor: not-allowed;
-                    color: $light-grey
+                    color: $light-grey;
                 }
             }
         }

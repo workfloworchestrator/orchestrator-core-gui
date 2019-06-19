@@ -1,6 +1,6 @@
-import {isEmpty} from "./Utils";
-import {ims_circuit_id} from "../validations/Subscriptions";
-import {getResourceTypeInfo, portByImsServiceId} from "../api";
+import { isEmpty } from "./Utils";
+import { ims_circuit_id } from "../validations/Subscriptions";
+import { getResourceTypeInfo, portByImsServiceId } from "../api";
 const productLookup = (id, products) => products.find(prod => prod.product_id === id);
 
 export function organisationNameByUuid(uuid, organisations) {
@@ -15,47 +15,49 @@ export function enrichSubscription(subscription, organisations, products) {
     subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
 }
 
-export function enrichPrimarySubscription(subscription, organisations, products){
+export function enrichPrimarySubscription(subscription, organisations, products) {
     enrichSubscription(subscription, organisations, products);
     const product = productLookup(subscription.product_id, products);
     const fi_service_speed = product.fixed_inputs.find(fi => fi.name === "service_speed");
     subscription.service_speed = fi_service_speed ? fi_service_speed.value : "-";
-    const si_primary = subscription.instances.find(si => si.label === 'Primary');
-    const si_secondary = subscription.instances.find(si =>si.label === 'Secondary');
-    subscription.nms_service_id_p = si_primary.values.find(v => v.resource_type.resource_type === 'nms_service_id').value;
-    subscription.nms_service_id_s = si_secondary.values.find(v => v.resource_type.resource_type === 'nms_service_id').value;
+    const si_primary = subscription.instances.find(si => si.label === "Primary");
+    const si_secondary = subscription.instances.find(si => si.label === "Secondary");
+    subscription.nms_service_id_p = si_primary.values.find(
+        v => v.resource_type.resource_type === "nms_service_id"
+    ).value;
+    subscription.nms_service_id_s = si_secondary.values.find(
+        v => v.resource_type.resource_type === "nms_service_id"
+    ).value;
 }
 
-
-export function enrichPortSubscription(parentSubscription, subscription){
+export function enrichPortSubscription(parentSubscription, subscription) {
     // fetch the label by subscription_id
     subscription.label = parentSubscription.instances.find(
-        i => i.product_block.name === 'Service Attach Point' && i.values.find(
-            rt => rt.resource_type.resource_type === 'port_subscription_id').value === subscription.subscription_id).label;
-    subscription.vlan = parentSubscription.instances.find(
-        i => i.label === subscription.label ).values.find(
-            v => v.resource_type.resource_type === 'vlanrange').value;
+        i =>
+            i.product_block.name === "Service Attach Point" &&
+            i.values.find(rt => rt.resource_type.resource_type === "port_subscription_id").value ===
+                subscription.subscription_id
+    ).label;
+    subscription.vlan = parentSubscription.instances
+        .find(i => i.label === subscription.label)
+        .values.find(v => v.resource_type.resource_type === "vlanrange").value;
     const vc_label_part = subscription.label.split("-")[0];
-    const prim_sec_part = (subscription.label.split("-")[1] === 'left') ? 0 : 1;
+    const prim_sec_part = subscription.label.split("-")[1] === "left" ? 0 : 1;
     const si = parentSubscription.instances.find(i => i.label === vc_label_part);
-    const imsCircuitId = si.values.find(v => v.resource_type.resource_type === 'ims_circuit_id').value;
-    const imsServicePromise = getResourceTypeInfo(ims_circuit_id,imsCircuitId );
+    const imsCircuitId = si.values.find(v => v.resource_type.resource_type === "ims_circuit_id").value;
+    const imsServicePromise = getResourceTypeInfo(ims_circuit_id, imsCircuitId);
     return new Promise((resolve, reject) => {
         imsServicePromise.then(result => {
-            portByImsServiceId(result.json.endpoints[prim_sec_part].id).then(
-                imsPort => {
-                    subscription.ims_circuit_name = imsPort.line_name;
-                    subscription.ims_node = imsPort.node;
-                    subscription.ims_port = imsPort.port;
-                    subscription.ims_iface_type = imsPort.iface_type;
-                    subscription.ims_patch_position = imsPort.patchposition;
-                    resolve(subscription);
-                }
-            );
+            portByImsServiceId(result.json.endpoints[prim_sec_part].id).then(imsPort => {
+                subscription.ims_circuit_name = imsPort.line_name;
+                subscription.ims_node = imsPort.node;
+                subscription.ims_port = imsPort.port;
+                subscription.ims_iface_type = imsPort.iface_type;
+                subscription.ims_patch_position = imsPort.patchposition;
+                resolve(subscription);
+            });
         });
     });
-
-
 }
 
 export function productNameById(id, products) {
@@ -63,12 +65,10 @@ export function productNameById(id, products) {
     return product ? product.name : id;
 }
 
-
 export function productTagById(id, products) {
     const product = productLookup(id, products);
     return product ? product.tag : id;
 }
-
 
 export function productById(id, products) {
     return productLookup(id, products);
@@ -90,34 +90,42 @@ export function capitalize(s) {
 // The unused states are set to null
 // Free and Failed are fake states for frontend use only
 // 0 Free 1 Allocated  2 (Expired) 3 Planned 4 (Reserved) 5 (Suspend)  6 Failed
-export const ipamStates = [ "Free", "Allocated", null, "Planned", null, null, "Failed", "Subnet"];
+export const ipamStates = ["Free", "Allocated", null, "Planned", null, null, "Failed", "Subnet"];
 
 // AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
 //                             0      1      2      3      4       5      6
 export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"];
 
 // States as defined in IMS (inventoryStatus, cardStatus, portStatus, serviceStatus)
-export const imsStates = {1: "PL", 2: "RFS", 3: "IS", 4: "MI", 6: "OOS", 7: "RFC"};
-
+export const imsStates = {
+    1: "PL",
+    2: "RFS",
+    3: "IS",
+    4: "MI",
+    6: "OOS",
+    7: "RFC"
+};
 
 export function ipAddressToNumber(ipAddress) {
-      const octets = ipAddress.split(".");
-      if (octets.length === 4) {
-          return (parseInt(octets[0], 10) * 16777216)
-            + (parseInt(octets[1], 10) * 65536)
-            + (parseInt(octets[2], 10) * 256)
-            + parseInt(octets[3], 10);
-      } else {
-          const hextets = ipAddress.split(":");
-          var power;
-          var result = 0;
-          for (power = 128 - 16; hextets.length > 0; power = power - 16) {
-              var hextet = parseInt(hextets[0], 16);
-              if (!isNaN(hextet)) {
-                  result += hextet * 2**power;
-              }
-              hextets.shift();
-          }
-          return result;
-      }
+    const octets = ipAddress.split(".");
+    if (octets.length === 4) {
+        return (
+            parseInt(octets[0], 10) * 16777216 +
+            parseInt(octets[1], 10) * 65536 +
+            parseInt(octets[2], 10) * 256 +
+            parseInt(octets[3], 10)
+        );
+    } else {
+        const hextets = ipAddress.split(":");
+        var power;
+        var result = 0;
+        for (power = 128 - 16; hextets.length > 0; power = power - 16) {
+            var hextet = parseInt(hextets[0], 16);
+            if (!isNaN(hextet)) {
+                result += hextet * 2 ** power;
+            }
+            hextets.shift();
+        }
+        return result;
+    }
 }

@@ -4,18 +4,26 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-
-export default function SubscriptionSearchSelect({subscriptions, subscription, onChange, disabled, organisation}) {
-
+export default function SubscriptionSearchSelect({ subscriptions, subscription, onChange, disabled, organisation }) {
     return (
         <div>
-            <Select onChange={onChange}
-                    options={subscriptions.map(sub => ({value: sub.subscription_id, label: sub.description}))}
-                    value={subscription}
-                    searchable={true}
-                    disabled={disabled || subscriptions.length === 0}
-                    placeholder={organisation ? I18n.t("subscription.namedSelectSubscriptionPlaceholder", {name: organisation}) :
-                        I18n.t("subscription.selectSubscriptionPlaceholder")}/>
+            <Select
+                onChange={onChange}
+                options={subscriptions.map(sub => ({
+                    value: sub.subscription_id,
+                    label: sub.description
+                }))}
+                value={subscription}
+                searchable={true}
+                disabled={disabled || subscriptions.length === 0}
+                placeholder={
+                    organisation
+                        ? I18n.t("subscription.namedSelectSubscriptionPlaceholder", {
+                              name: organisation
+                          })
+                        : I18n.t("subscription.selectSubscriptionPlaceholder")
+                }
+            />
         </div>
     );
 }

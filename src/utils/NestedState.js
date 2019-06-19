@@ -1,4 +1,4 @@
-import {isEmpty} from "./Utils";
+import { isEmpty } from "./Utils";
 
 export function lookupValueFromNestedState(key, state) {
     if (isEmpty(state) || isEmpty(key)) {
@@ -21,5 +21,3 @@ export function findValueFromInputStep(key, userInputArray) {
     const relatedUserInput = userInputArray.find(input => input.name === key);
     return relatedUserInput ? relatedUserInput.value : null;
 }
-
-

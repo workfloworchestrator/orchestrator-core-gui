@@ -27,7 +27,8 @@ section.autocomplete {
             border-top: 1px solid $light-grey;
             cursor: pointer;
 
-            &.active, &:hover {
+            &.active,
+            &:hover {
                 background-color: $light-grey;
             }
             td {

@@ -16,7 +16,7 @@ I18n.translations.en = {
     header: {
         title: "Orchestrator",
         links: {
-            help_html: "<a href=\"https://gitlab.surfnet.nl/automation/workflows/wikis/home\" target=\"_blank\">Help</a>",
+            help_html: '<a href="https://gitlab.surfnet.nl/automation/workflows/wikis/home" target="_blank">Help</a>',
             logout: "Logout",
             exit: "Exit"
         },
@@ -44,10 +44,10 @@ I18n.translations.en = {
         state: "State",
         start_date: "Start Date",
         select: "select",
-        filters : {
+        filters: {
             family: "IP Family",
             root_prefix: "Root Prefix",
-            state: "State",
+            state: "State"
         },
         searchPlaceHolder: "Search for IP prefixes"
     },
@@ -92,7 +92,8 @@ I18n.translations.en = {
             noc_remove_lichtpad_confirmation: "Is the LightPath of the subscription removed?",
             next_step_service_affecting: "Watch out! The next step is service impacting for the customer service",
             check_delete_sn7_service_config: "Delete the SURFnet7 IP service config from Alice and Bob.",
-            check_deactivate_bgp_session: "Deactivate the BGP sessions (IPv4 & IPv6) of the SAP you are migrating (either on Alice or Bob).",
+            check_deactivate_bgp_session:
+                "Deactivate the BGP sessions (IPv4 & IPv6) of the SAP you are migrating (either on Alice or Bob).",
             check_port_patched_sn7_sn8: "Physically patch the customer port from SN7 to SN8 HW.",
             confirm_migrate_sap: "Confirm the migration of the SAP",
             confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
@@ -100,8 +101,10 @@ I18n.translations.en = {
             check_removed_ism_config: "Remove ISM configuration (when applicable remove SN7 node)",
             check_removed_sn7_service_and_tunnel: "Remove SN7 service & tunnel from ISM",
             check_removed_sn7_node_config: "Remove SN7 service config Alice and Bob",
-            notify_run_remaining_sap_migrates: "If applicable, repeat the \"Migrate one SAP\" workflow for the other remaining SAPs",
-            check_terminate_sn7_subscription: "Do not forget to run a terminate workflow for the empty SN7 subscription",
+            notify_run_remaining_sap_migrates:
+                'If applicable, repeat the "Migrate one SAP" workflow for the other remaining SAPs',
+            check_terminate_sn7_subscription:
+                "Do not forget to run a terminate workflow for the empty SN7 subscription",
             noc_subtask_confirmation: "Are all subtasks executed correctly?",
             noc_subtask_confirmation_info: "Please check the requirements below:",
             check_service_built: "The new service has been built on the network",
@@ -111,19 +114,23 @@ I18n.translations.en = {
             check_ims_circuit: "{{circuit_name}}",
             check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)",
             noc_modification_confirmation: "NOC confirms modification of service",
-            noc_modification_confirmation_info: "Confirm that the modifications are implemented in the network as specified.",
-            noc_modification_confirmation_template: "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}",
+            noc_modification_confirmation_info:
+                "Confirm that the modifications are implemented in the network as specified.",
+            noc_modification_confirmation_template:
+                "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}",
             noc_network_confirmation: "Confirmation",
             noc_network_confirmation_info: "Confirm implementation of changes in the network",
-            noc_upgrade_redundant_confirmation_intro: "Follow this link for all details on the new redundant LightPath: ",
+            noc_upgrade_redundant_confirmation_intro:
+                "Follow this link for all details on the new redundant LightPath: ",
             noc_upgrade_redundant_confirmation_steps_intro: "Please execute the following steps:",
             noc_upgrade_redundant_confirmation_LR2_built_info: "LR2 has been built in the network",
-            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network",
+            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network"
         },
         asn_info: "Asn of the customer",
         workflow: "Process instance of workflow {{name}}",
         corelink_interface_type: "Corelink interface type",
-        corelink_interface_type_info: "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
+        corelink_interface_type_info:
+            "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
         cancel: "Cancel",
         submit: "Submit",
         notFound: "No Process found (e.g. 404)",
@@ -163,101 +170,108 @@ I18n.translations.en = {
         source: "MSP left",
         source_info: "The left MSP in the lightpath",
         source_vlan: "Port VLAN left ",
-        source_vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination: "MSP right",
         destination_info: "The right MSP in the lightpath",
         destination_vlan: "Port VLAN Right",
-        destination_vlan_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         source_1: "First Lightpath: MSP left",
         source_1_info: "The left MSP in the first lightpath",
         source_vlan_1: "First Lightpath: Port VLAN Left",
-        source_vlan_1_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_1_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination_1: "First Lightpath: MSP right",
         destination_1_info: "The right MSP in the first lightpath",
         destination_vlan_1: "First Lightpath: VLAN Port Right",
-        destination_vlan_1_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_1_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         source_2: "Second Lightpath: MSP left",
         source_2_info: "The left MSP in the second lightpath",
         source_vlan_2: "Second Lightpath: VLAN Port Left",
-        source_vlan_2_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        source_vlan_2_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         destination_2: "Second Lightpath: MSP right",
         destination_2_info: "The right MSP in the second lightpath",
         destination_vlan_2: "Second Lightpath: VLAN Port Right",
-        destination_vlan_2_info: "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        destination_vlan_2_info:
+            "VLAN range - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         capacity: "Capacity",
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         contact_persons: "Customer contact persons",
-        contact_persons_info: "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
+        contact_persons_info:
+            "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
         customer_ipv4_mtu: "IPv4 MTU",
-        customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+        customer_ipv4_mtu_info:
+            "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
         customer_ipv6_mtu: "IPv6 MTU",
-        customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+        customer_ipv6_mtu_info:
+            "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
         vlan_range: "VLAN Range",
         vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
         service_port: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
-            crm_port_id: 'The CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            crm_port_id: "The CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
             ieee_interface_type: "IEEE interface type",
-            ieee_interface_type_info: "Choose an IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type"
         },
         service_port_redundant: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
-            crm_port_id: 'The CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            crm_port_id: "The CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
             ieee_interface_type: "IEEE interface type",
-            ieee_interface_type_info: "Choose an IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type"
         },
         msp: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
-            crm_port_id: 'The CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            crm_port_id: "The CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
             ieee_interface_type: "IEEE interface type",
-            ieee_interface_type_info: "Choose an IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type"
         },
         ims_info_msp: {
             device_port_name: "Device port name",
-            device_port_name_info: "Port name to configure on the physical device",
+            device_port_name_info: "Port name to configure on the physical device"
         },
         ims_info: {
             device_port_name: "Device port name",
-            device_port_name_info: "Port name to configure on the physical device",
+            device_port_name_info: "Port name to configure on the physical device"
         },
         msp_1: {
             location_code: "First MSP location code",
             location_code_info: "Provide a valid location code",
-            crm_port_id: 'First MSP the CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            crm_port_id: "First MSP the CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
             ieee_interface_type: "First MSP IEEE interface type",
             ieee_interface_type_info: "Choose an IEEE interface type",
             device_port_name: "Device port name",
-            device_port_name_info: "Port name to configure on the physical device",
-
+            device_port_name_info: "Port name to configure on the physical device"
         },
         ims_info_msp_1: {
             device_port_name: "Device port name",
-            device_port_name_info: "Port name to configure on the physical device",
+            device_port_name_info: "Port name to configure on the physical device"
         },
         msp_2: {
             location_code: "Second MSP location code",
             location_code_info: "Provide a valid location code",
-            crm_port_id: 'Second MSP the CRM identifier for a port',
-            crm_port_id_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+            crm_port_id: "Second MSP the CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
             ieee_interface_type: "Second MSP IEEE interface type",
             ieee_interface_type_info: "Choose an IEEE interface type",
             device_port_name: "Second device port name",
-            device_port_name_info: "Port name to configure on the physical device",
-
+            device_port_name_info: "Port name to configure on the physical device"
         },
         ims_info_msp_2: {
             device_port_name: "Second device port name",
-            device_port_name_info: "Port name to configure on the physical device",
+            device_port_name_info: "Port name to configure on the physical device"
         },
-        crm_port_id_2: 'Second MSP the CRM identifier for a port',
-        crm_port_id_2_info: 'Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}',
+        crm_port_id_2: "Second MSP the CRM identifier for a port",
+        crm_port_id_2_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         ieee_interface_type_select: "First select a product type...",
@@ -296,7 +310,8 @@ I18n.translations.en = {
         configuration_ready: "Configuration ready",
         configuration_ready_info: "All of the work entailed is successfully configured",
         network_changes_ready: "NMS changes ready",
-        network_changes_ready_info: "All of the work entailed with regards to the changed LightPaths is successfully done in NMS. If IMS needs updating this will happen after this step",
+        network_changes_ready_info:
+            "All of the work entailed with regards to the changed LightPaths is successfully done in NMS. If IMS needs updating this will happen after this step",
         extra_information: "Extra information",
         extra_information_info: "Additional information to add to the subscription description and IPAM description",
         ims_changes: "Updated in IMS",
@@ -330,9 +345,11 @@ I18n.translations.en = {
         sn8_migrating_service_port: "SURFnet8 SAP",
         sn8_migrating_service_port_info: "SN8 service port to be migrated to",
         elan_service_ports: "ELAN Service Ports",
-        elan_service_ports_info: "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
+        elan_service_ports_info:
+            "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         bgp_ip_service_ports: "IP Service Ports",
-        bgp_ip_service_ports_info: "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO",
+        bgp_ip_service_ports_info:
+            "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO",
         ip_static_service_port: "IP Service Port",
         ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
         nsi_isalias: "NSI isAlias",
@@ -342,19 +359,25 @@ I18n.translations.en = {
         subscription_id2: "Subscription",
         subscription_id2_info: "The second subscription to use",
         new_subscription_id: "Subscription ID of the new subscription",
-        new_subscription_id_info: "Enter the subscription ID of the SN8 (active or provisioning) subscription as a destination for the migration",
+        new_subscription_id_info:
+            "Enter the subscription ID of the SN8 (active or provisioning) subscription as a destination for the migration",
         downgrade_redundant_lp_choice: "Redundant LP Subscription",
-        downgrade_redundant_lp_choice_info: "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+        downgrade_redundant_lp_choice_info:
+            "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
         ticket_id: "Jira ticket ID",
         ticket_id_info: "The JIRA ticket ID that will be used/mentioned in the confirmation mail",
         transition_product_downgrade: "Choose New Product",
-        transition_product_downgrade_info: "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
+        transition_product_downgrade_info:
+            "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
         transition_product_upgrade: "Choose New Product",
-        transition_product_upgrade_info: "Choose the new Product for this subscription after the upgrade (scoped by the current product)",
+        transition_product_upgrade_info:
+            "Choose the new Product for this subscription after the upgrade (scoped by the current product)",
         transition_product: "Choose New Product for this Subscription",
-        transition_product_info: "Choose a new product - scoped on the maximum capacity of the LP's using this port - with a new speed.",
+        transition_product_info:
+            "Choose a new product - scoped on the maximum capacity of the LP's using this port - with a new speed.",
         transition_product_speed: "Choose New Product",
-        transition_product_speed_info: "Choose a new product - scoped on the maximum capacity of the current ports - with a new speed.",
+        transition_product_speed_info:
+            "Choose a new product - scoped on the maximum capacity of the current ports - with a new speed.",
         workflowsPlaceholder: "Search and select a workflow...",
         workflowsEmptyPlaceholder: "First select a subscription...",
         modify_subscription: "Modify existing subscription",
@@ -370,7 +393,8 @@ I18n.translations.en = {
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "When you submit this from the Corelink will be deployed",
-        confirm_corelink_info: "Please design the physical layer of the Corelink in IMS. When you are done, please submit the form.",
+        confirm_corelink_info:
+            "Please design the physical layer of the Corelink in IMS. When you are done, please submit the form.",
         confirm_corelink_working: "Is the Corelink working?",
         confirm_corelink_working_info: "Please confirm that the corelink is working correctly",
         corelink_service_speed: "Please choose the corelink speed",
@@ -398,15 +422,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         sap2: {
             label: "Service Attach Point settings for second selected port",
@@ -421,15 +447,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         sap3: {
             label: "Service Attach Point settings for third selected port",
@@ -444,15 +472,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         sap4: {
             label: "Service Attach Point settings for fourth selected port",
@@ -467,15 +497,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         sap5: {
             label: "Service Attach Point settings for fifth selected port",
@@ -490,15 +522,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         sap6: {
             label: "Service Attach Point settings for sixth selected port",
@@ -513,15 +547,17 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             customer_ipv4_mtu: "IPv4 MTU",
-            customer_ipv4_mtu_info: "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             customer_ipv6_mtu: "IPv6 MTU",
-            customer_ipv6_mtu_info: "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
             bfd: "BFD",
             bfd_info: "Bidirectional Forwarding Detection",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
-            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?"
         },
         selected_sap: "Select a Service Attach Point",
         selected_sap_info: "Choose the SAP you want to migrate",
@@ -534,7 +570,8 @@ I18n.translations.en = {
         ipv4_prefixlen: "IPv4 Prefix length",
         ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
         service_speed: "Bandbreedte",
-        service_speed_info: "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten",
+        service_speed_info:
+            "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten",
 
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
@@ -551,7 +588,7 @@ I18n.translations.en = {
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",
-	traceback: "Show traceback",
+        traceback: "Show traceback",
         wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
         summary: {
             status: "Status",
@@ -560,7 +597,6 @@ I18n.translations.en = {
             started: "Started",
             last_modified: "Last updated"
         }
-
     },
     task_state: {
         copy: "Copy to clipboard",
@@ -576,7 +612,6 @@ I18n.translations.en = {
             started_at: "Started",
             last_modified_at: "Last modified"
         }
-
     },
     validations: {
         help: "Explain",
@@ -586,14 +621,16 @@ I18n.translations.en = {
         workflow: "Workflow",
         valid: "Valid",
         mapping: "Workflow mapping configuration ",
-        no_mapping: "The '{{name}}' workflow has no 'workflow_subscription_mapping'. This workflow can not go into production without a mapping",
+        no_mapping:
+            "The '{{name}}' workflow has no 'workflow_subscription_mapping'. This workflow can not go into production without a mapping",
         product_block: "Product Block",
         resource_type: "Resource Types",
         resource_type_sub: "(Resource type ID vs Workflow ID)",
         errors: "Errors",
         error_name: "Resource block: <span>{{name}}</span>",
         block_missing: "Resource block <span>{{name}}</span> is not configured in the Product <span>{{product}}</span>",
-        resource_type_missing: "Resource type <span>{{name}}</span> is not configured in the Resource Block <span>{{block}}</span>",
+        resource_type_missing:
+            "Resource type <span>{{name}}</span> is not configured in the Resource Block <span>{{block}}</span>",
         hide_valids: "Hide valid product configurations",
         hide_valid_subscriptions_types: "Hide workflows with no invalid subscriptions",
         resource_blocks: "Resource blocks",
@@ -606,7 +643,8 @@ I18n.translations.en = {
         },
         no_subscriptions: "No invalid subscriptions",
         workflow_key: "Invalid subscriptions for workflow {{workflow}}",
-        no_fixed_inputs: "There are no products that are either missing required fixed inputs, have incorrect values or have unknown fixed inputs",
+        no_fixed_inputs:
+            "There are no products that are either missing required fixed inputs, have incorrect values or have unknown fixed inputs",
         fetchingCRMData: "Loading CRM data. Hang on tight...",
         fixedInput: {
             title: "Invalid FixedInput settings for product {{name}}",
@@ -622,14 +660,18 @@ I18n.translations.en = {
             title: "Validation of the Products ⟺ Workflows configuration in the code / database.",
             productsWithoutWorkflow: "The following products do NOT have a {{target}} workflow.",
             productsWithWorkflow: "All products have a {{target}} workflow.",
-            workflowsWithoutProducts: "The following process workflows have no Product relations. They can never create processes.",
+            workflowsWithoutProducts:
+                "The following process workflows have no Product relations. They can never create processes.",
             workflowsWithProducts: "All process workflows have at least one Product relation",
-            productsWithMultipleWorkflow: "The following products have more then one {{target}} workflow. This is an error.",
+            productsWithMultipleWorkflow:
+                "The following products have more then one {{target}} workflow. This is an error.",
             productsWithoutMultipleWorkflow: "There are no products with more then one {{target}} workflow.",
-            workflowsWithoutImplementations: "The following workflows in the database have no corresponding code implementation. This is an error",
+            workflowsWithoutImplementations:
+                "The following workflows in the database have no corresponding code implementation. This is an error",
             workflowsWithImplementations: "All workflows in the database have a code implementation",
-            workflowsWithoutRecords: "The following workflows in the code have no corresponding database record. This is an error",
-            workflowsWithRecords: "All implementations of workflows in the code have a corresponding database record",
+            workflowsWithoutRecords:
+                "The following workflows in the code have no corresponding database record. This is an error",
+            workflowsWithRecords: "All implementations of workflows in the code have a corresponding database record"
         }
     },
     filter: {
@@ -709,13 +751,14 @@ I18n.translations.en = {
         product: "Product",
         product_tag: "Type",
         flash: {
-            delete: "Subscription {{name}} was deleted",
+            delete: "Subscription {{name}} was deleted"
         },
         fetchingRelatedSubscriptions: "Please wait until we have loaded related subscriptions",
-        noRelatedSubscriptions: "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
+        noRelatedSubscriptions:
+            "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -736,7 +779,7 @@ I18n.translations.en = {
         modify_migrate_sn7_static_ip_ipss_to_sn8: "Migrate to SN8",
         modify_migrate_sn7_static_ip_sap_to_sn8: "Migrate static SAP to SN8",
         modify_migrate_sn7_bgp_ip_sap_to_sn8: "Migrate one SAP to SN8",
-	    modify_modify_corelink_add_link: "Add a link to an existing Corelink",
+        modify_modify_corelink_add_link: "Add a link to an existing Corelink",
         modify_modify_corelink_remove_link: "Remove a Link from an existing core link",
         modify_modify_corelink_isis: "Modify Corelink ISIS metric",
         modify_modify_ssp_speed: "Modify SSP Speed",
@@ -754,7 +797,8 @@ I18n.translations.en = {
         modify_modify_sn8_service_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_modify_nl8_service_port_mode: "Change the mode of the port (Tagged, Linkmember)",
         modify_modify_sn8_static_ip_resources: "Modify SAP resource settings (IPV4/6 MTU & VLANRANGE if applicable)",
-        modify_modify_sn8_bgp_ip_resources: "Modify SAP resource settings (BGP settings, IPV4/6 MTU & VLANRANGE if applicable)",
+        modify_modify_sn8_bgp_ip_resources:
+            "Modify SAP resource settings (BGP settings, IPV4/6 MTU & VLANRANGE if applicable)",
         modify_sn8_modify_bgp_ip_add_ports: "Add port(s) to SN8 BGP IP",
         modify_sn8_modify_bgp_ip_remove_ports: "Remove port(s) from SN8 BGP IP",
         product: {
@@ -795,25 +839,33 @@ I18n.translations.en = {
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription: "This subscription can not be terminated as it is used in other subscriptions: {{unterminated_parents}}",
-        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflow-key.",
+        no_termination_parent_subscription:
+            "This subscription can not be terminated as it is used in other subscriptions: {{unterminated_parents}}",
+        no_termination_workflow:
+            "This subscription can not be terminated as the product has no termination workflow-key.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
         modify_downgrade_redundant_lichtpad_workflow: "Downgrade to non-redundant LP",
         modify_upgrade_lichtpad_to_redundant_workflow: "Upgrade to Redundant LP",
         modify_modify_elan: "Modify ELAN",
-        modifyConfirmation: "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
+        modifyConfirmation:
+            "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
-        no_modify_invalid_status: "This subscription can not be modified because of the status: {{status}}. Only subscriptions with status {{usable_when}} can be {{action}}.",
-        no_modify_deleted_related_objects: "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
-        not_in_sync: "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
-        relations_not_in_sync: "This subscription can not be modified because some related subscriptions are not insync. Locked subscriptions: {{locked_relations}}",
+        no_modify_invalid_status:
+            "This subscription can not be modified because of the status: {{status}}. Only subscriptions with status {{usable_when}} can be {{action}}.",
+        no_modify_deleted_related_objects:
+            "This subscription can not be modified because it contains references to other systems (e.g. IMS) that are deleted.",
+        not_in_sync:
+            "This subscription can not be modified because it is not in sync. This means there is some error in the registration of the subscription or that it is being modified by another workflow.",
+        relations_not_in_sync:
+            "This subscription can not be modified because some related subscriptions are not insync. Locked subscriptions: {{locked_relations}}",
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
         actions: "Actions",
         modify_modify_ip_prefix: "Modify IP Prefix",
         node_terminate_warning: "Node terminate warning",
-        node_terminate_warning_info: "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow",
+        node_terminate_warning_info:
+            "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
     },
     terminate_subscription: {
         cancel: "Cancel",
@@ -832,7 +884,7 @@ I18n.translations.en = {
         vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
         missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
         allPortsAvailable: "This MSP has no ports in use (yet).",
-        placeholder: "Enter a valid VLAN range..." ,
+        placeholder: "Enter a valid VLAN range...",
         placeholder_no_service_port: "First select a Service Port...",
         placeholder_no_msp: "First select a MSP...",
         ssp: "A SSP has a default VLAN",
@@ -896,11 +948,14 @@ I18n.translations.en = {
             status: "Status",
             status_info: "The status of this Product. This is currently not used",
             create_subscription_workflow_key: "Create Workflow",
-            create_subscription_workflow_key_info: "The unique reference to the workflow responsible for the creation of a subscription based on this product",
+            create_subscription_workflow_key_info:
+                "The unique reference to the workflow responsible for the creation of a subscription based on this product",
             modify_subscription_workflow_key: "Modify Workflows",
-            modify_subscription_workflow_key_info: "The references to the workflows responsible for modifications of a subscription based on this product",
+            modify_subscription_workflow_key_info:
+                "The references to the workflows responsible for modifications of a subscription based on this product",
             terminate_subscription_workflow_key: "Terminate Workflow",
-            terminate_subscription_workflow_key_info: "The unique reference to the workflow responsible for the termination of a subscription based on this product",
+            terminate_subscription_workflow_key_info:
+                "The unique reference to the workflow responsible for the termination of a subscription based on this product",
             created_at: "Create Date",
             created_at_info: "The date this Product was created",
             end_date: "End Date",
@@ -908,10 +963,12 @@ I18n.translations.en = {
             product_blocks: "Product Blocks",
             product_blocks_string: "Product Blocks",
             workflows_string: "Workflows",
-            product_blocks_info: "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
+            product_blocks_info:
+                "They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             fixed_inputs: "Fixed Inputs",
-            fixed_inputs_info: "These name / value pairs are used in the workflows for this Product" +
-            ". Do not change this without syncing the code",
+            fixed_inputs_info:
+                "These name / value pairs are used in the workflows for this Product" +
+                ". Do not change this without syncing the code",
             fixed_inputs_name: "Name",
             fixed_inputs_value: "Value",
             add_fixed_input: "Add Fixed Input",
@@ -927,13 +984,14 @@ I18n.translations.en = {
             no_found: "No Products",
             duplicate_name: "This name is already taken. Product names need to be unique.",
             select_add_fixed_input: "Add a Fixed Input...",
-            select_no_more_fixed_inputs: "No more Fixed Inputs to add",
+            select_no_more_fixed_inputs: "No more Fixed Inputs to add"
         },
         productBlocks: {
             searchPlaceHolder: "Search for Product Blocks",
             new: "New Product Block",
             name: "Name",
-            name_info: "The name of this Product Block. Note that this name is used in the workflow code. Do not change this without syncing the code",
+            name_info:
+                "The name of this Product Block. Note that this name is used in the workflow code. Do not change this without syncing the code",
             description: "Description",
             description_info: "Free formatted description of this Product Block",
             tag: "Tag",
@@ -951,7 +1009,8 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             resourceTypes: "Resource Types",
-            resourceTypes_info: "The Resource Types of this Product Block. They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
+            resourceTypes_info:
+                "The Resource Types of this Product Block. They define which values are stored on the subscriptions of the Products linked to the Product Block(s)",
             select_add_resource_type: "Add a Resource Type...",
             select_no_more_resource_types: "No more Resource Types to add",
             no_found: "No Product Blocks",
@@ -961,7 +1020,8 @@ I18n.translations.en = {
             searchPlaceHolder: "Search for Resource Types",
             new: "New Resource Type",
             resource_type: "Type",
-            resource_type_info: "The type of this Resource Type. Note that this value is used in the workflow code. Do not change this without syncing the code",
+            resource_type_info:
+                "The type of this Resource Type. Note that this value is used in the workflow code. Do not change this without syncing the code",
             description: "Description",
             description_info: "Free formatted description of this Resource Type",
             actions: "",
@@ -991,9 +1051,10 @@ I18n.translations.en = {
             tag: "Product tag",
             searchPlaceHolder: "Search for workflows...",
             no_found: "No workflows found",
-            explanation: "Workflows that are not the type SYSTEM - e.g. are not Tasks - and do not have a relation with any Product can never be run. These workflows are colored grey and should be subject for investigation."
+            explanation:
+                "Workflows that are not the type SYSTEM - e.g. are not Tasks - and do not have a relation with any Product can never be run. These workflows are colored grey and should be subject for investigation."
         },
-        results: "{{type}} found: {{count}}",
+        results: "{{type}} found: {{count}}"
     },
     tasks: {
         searchPlaceHolder: "Search for tasks...",
@@ -1047,7 +1108,7 @@ I18n.translations.en = {
     },
     subscription_select: {
         placeholder: "Search and select a subscription",
-        select_product: "First select a Product",
+        select_product: "First select a Product"
     },
     subscription_product_tag_select: {
         placeholder_selected_product: "Select a subscription for the selected product",
@@ -1067,7 +1128,8 @@ I18n.translations.en = {
     },
     error_dialog: {
         title: "Unexpected error",
-        body: "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",
+        body:
+            "This is embarrassing; an unexpected error has occurred. It has been logged and reported. Please try again. Still doesn't work? Please click 'Help'.",
         ok: "Close"
     },
     not_found: {
@@ -1076,12 +1138,14 @@ I18n.translations.en = {
     },
     server_error: {
         title: "500",
-        description_html: "An unexpected error occurred. It has been logged and reported. Please try again. Still doesn't" +
-        " work? Get Help."
+        description_html:
+            "An unexpected error occurred. It has been logged and reported. Please try again. Still doesn't" +
+            " work? Get Help."
     },
     not_allowed: {
         title: "403",
-        description_html: "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
+        description_html:
+            "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
     },
     confirmation_dialog: {
         title: "Please confirm",
@@ -1093,14 +1157,16 @@ I18n.translations.en = {
         leave: "Leave"
     },
     free_port_select: {
-        "no_free_ports_available": "No free ports with interface type {{interfaceType}} available at location {{location}}",
-        "free_ports_loading": "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
-        "no_free_ports_placeholder": "No free ports available",
-        "select_port": "Select a port"
+        no_free_ports_available:
+            "No free ports with interface type {{interfaceType}} available at location {{location}}",
+        free_ports_loading:
+            "Please be patient, the query for free ports with interface type {{interfaceType}} available at location {{location}} can take a while ...",
+        no_free_ports_placeholder: "No free ports available",
+        select_port: "Select a port"
     },
     service_ports: {
         servicePort: "Service Port",
-        servicePortSN8:"SURFnet8 Service Port",
+        servicePortSN8: "SURFnet8 Service Port",
         vlan: "Port Vlan",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         used_ssp: "The selected SSP is already used in a different LP(s): {{descriptions}}",
@@ -1113,13 +1179,14 @@ I18n.translations.en = {
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"
     },
-    ims_changes:{
-        circuit_changed: "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
+    ims_changes: {
+        circuit_changed:
+            "In LP Circuit {{id}} {{description}} the old endpoint references has been replaced by the new endpoint reference",
         old_endpoint: "The old endpoint",
         new_endpoint: "The new endpoint"
     },
     ip_blocks: {
-    ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
+        ip_block: "Please enter subnet/netmask e.g. 192.168.0.0/16"
     },
     node_select: {
         select_node: "Select a node",
@@ -1132,20 +1199,20 @@ I18n.translations.en = {
         select_port: "Select a port"
     },
     ipam: {
-      description: "Description",
-      prefix: "IP Prefix",
-      afi: "IP Family",
-      asn: "Autonomous System Number",
-      state: "State",
-      ipaddress: "IP Address",
-      fqdn: "FQDN",
-      assigned_address_id: "Assigned IP Address ID"
+        description: "Description",
+        prefix: "IP Prefix",
+        afi: "IP Family",
+        asn: "Autonomous System Number",
+        state: "State",
+        ipaddress: "IP Address",
+        fqdn: "FQDN",
+        assigned_address_id: "Assigned IP Address ID"
     },
     bfd_settings: {
-      enable: "Enable BFD",
-      minimum_interval: "Minumum Interval",
-      multiplier: "Multiplier",
-    },
+        enable: "Enable BFD",
+        minimum_interval: "Minumum Interval",
+        multiplier: "Multiplier"
+    }
 };
 
 export default I18n.translations.en;

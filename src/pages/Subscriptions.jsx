@@ -1,30 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes } from "react-url-query";
 
 import ReactTable from "react-table";
 import Modal from "react-modal";
-import {renderDate} from "../utils/Lookups";
-import {requestSubscriptionData} from "../utils/SubscriptionData";
-import {stop} from "../utils/Utils";
+import { renderDate } from "../utils/Lookups";
+import { requestSubscriptionData } from "../utils/SubscriptionData";
+import { stop } from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
-import {debounce} from 'lodash';
+import { debounce } from "lodash";
 
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
 
-
 const urlPropsQueryConfig = {
     page: { type: UrlQueryParamTypes.number },
     pageSize: { type: UrlQueryParamTypes.number },
     sorted: { type: UrlQueryParamTypes.array },
-    filtered: { type: UrlQueryParamTypes.array },
+    filtered: { type: UrlQueryParamTypes.array }
 };
 
-
 class Subscriptions extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -33,8 +30,12 @@ class Subscriptions extends React.PureComponent {
             subscriptions: [],
             loading: true,
             pages: 99,
-            sorted: this.props.sorted ? this.props.sorted.map(item => { return {id:item.split(",")[0], value:item.split(",")[1]}}) : [{id:"start_date", desc:true}],
-            filtered: [],
+            sorted: this.props.sorted
+                ? this.props.sorted.map(item => {
+                      return { id: item.split(",")[0], value: item.split(",")[1] };
+                  })
+                : [{ id: "start_date", desc: true }],
+            filtered: []
         };
 
         this.filtering = false;
@@ -43,11 +44,11 @@ class Subscriptions extends React.PureComponent {
         this.fetchStrategy = this.fetchStrategy.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.fetchDataWithDebounce = debounce(this.fetchData, 500);
-    };
+    }
 
     fetchStrategy(tableState) {
-        if(this.filtering) {
-            return this.fetchDataWithDebounce(tableState)
+        if (this.filtering) {
+            return this.fetchDataWithDebounce(tableState);
         } else {
             return this.fetchData(tableState);
         }
@@ -57,15 +58,10 @@ class Subscriptions extends React.PureComponent {
         this.filtering = true; // when the filter changes, that means someone is typing
     }
 
-    fetchData = (state) => {
-        this.filtering = false;  // we've arrived either debounced or not, so filtering can be reset
+    fetchData = state => {
+        this.filtering = false; // we've arrived either debounced or not, so filtering can be reset
         this.setState({ loading: true });
-        requestSubscriptionData(
-            state.pageSize,
-            state.page,
-            state.sorted,
-            state.filtered
-        ).then(res => {
+        requestSubscriptionData(state.pageSize, state.page, state.sorted, state.filtered).then(res => {
             this.setState({
                 subscriptions: res.rows,
                 pages: res.pages,
@@ -74,30 +70,32 @@ class Subscriptions extends React.PureComponent {
         });
     };
 
-    updateSorted = (newSorted) => {
+    updateSorted = newSorted => {
         this.setState({
             sorted: newSorted
         });
-        const newSort = newSorted.map(item => {return `${item.id},${item.desc ? "desc" : "asc"}`})
-        this.props.onChangeSorted(newSort)
+        const newSort = newSorted.map(item => {
+            return `${item.id},${item.desc ? "desc" : "asc"}`;
+        });
+        this.props.onChangeSorted(newSort);
     };
 
     handleKeyDown(e) {
         const page = this.props.page ? this.props.page : 0;
         if (e.keyCode === 38 && page > 0) {
-            this.props.onChangePage(page-1)
+            this.props.onChangePage(page - 1);
         } else if (e.keyCode === 40) {
-            this.props.onChangePage(page+1)
+            this.props.onChangePage(page + 1);
         }
-    };
+    }
 
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
-        this.setState({subscriptionId: subscription_id})
+        this.setState({ subscriptionId: subscription_id });
     };
 
     hideSubscriptionDetail = () => {
-        this.setState({subscriptionId: undefined})
+        this.setState({ subscriptionId: undefined });
     };
 
     navigateToOldSubscriptions = () => {
@@ -105,22 +103,27 @@ class Subscriptions extends React.PureComponent {
     };
 
     render() {
-        const {pages, sorted, subscriptions, initialFiltered, subscriptionId} = this.state;
-        const {page, onChangePage, pageSize, onChangePageSize } = this.props;
+        const { pages, sorted, subscriptions, initialFiltered, subscriptionId } = this.state;
+        const { page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div className="divider"/>
+                <div className="divider" />
                 <div className="subscriptions-container">
-                    {<ReactTable
+                    {
+                        <ReactTable
                             columns={[
                                 {
                                     Header: "Id",
                                     id: "subscription_id",
-                                    accessor: d => <a href={`/subscription/${d.subscription_id}`}
-                                                      onClick={this.showSubscriptionDetail(d.subscription_id)}>
-                                        {d.subscription_id.slice(0,8)}
-                                    </a>,
+                                    accessor: d => (
+                                        <a
+                                            href={`/subscription/${d.subscription_id}`}
+                                            onClick={this.showSubscriptionDetail(d.subscription_id)}
+                                        >
+                                            {d.subscription_id.slice(0, 8)}
+                                        </a>
+                                    ),
                                     width: 100
                                 },
                                 {
@@ -141,7 +144,7 @@ class Subscriptions extends React.PureComponent {
                                 {
                                     Header: "In Sync",
                                     id: "insync",
-                                    accessor: d => d.insync ? "yes" : "no",
+                                    accessor: d => (d.insync ? "yes" : "no"),
                                     width: 80
                                 },
                                 {
@@ -173,12 +176,10 @@ class Subscriptions extends React.PureComponent {
                             showPaginationTop
                             showPaginationBottom
                             filtered={initialFiltered} // Will be undefined when no filter was provided in URL
-
                             // Controlled props
                             sorted={sorted}
                             page={page}
                             pageSize={pageSize}
-
                             // Call back heaven:
                             onPageChange={page => onChangePage(page)}
                             onPageSizeChange={(pageSize, pageIndex) => {
@@ -187,29 +188,43 @@ class Subscriptions extends React.PureComponent {
                             }}
                             onSortedChange={this.updateSorted}
                             onFilteredChange={this.onFilteredChange}
-                        />}
+                        />
+                    }
 
-                    {subscriptionId &&
-                        <Modal isOpen={true} appElement={document.getElementById('app')} overlayClassName="overlay"
-                               className="subscription-modal" closeOnEscape={true} shouldCloseOnOverlayClick={true}
-                               onRequestClose={this.hideSubscriptionDetail}>
-                            <div align="right"><i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail}></i></div>
+                    {subscriptionId && (
+                        <Modal
+                            isOpen={true}
+                            appElement={document.getElementById("app")}
+                            overlayClassName="overlay"
+                            className="subscription-modal"
+                            closeOnEscape={true}
+                            shouldCloseOnOverlayClick={true}
+                            onRequestClose={this.hideSubscriptionDetail}
+                        >
+                            <div align="right">
+                                <i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail} />
+                            </div>
                             <div className="scroller">
-                            <SubscriptionDetail history={this.props.history} organisations={this.props.organisations}
-                                                products={this.props.products} subscriptionId={subscriptionId}
-                                                isModal={true}/>
+                                <SubscriptionDetail
+                                    history={this.props.history}
+                                    organisations={this.props.organisations}
+                                    products={this.props.products}
+                                    subscriptionId={subscriptionId}
+                                    isModal={true}
+                                />
                             </div>
                         </Modal>
-                    }
+                    )}
                 </div>
 
-                <MessageBox messageHeader="Info"
-                            messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
+                <MessageBox
+                    messageHeader="Info"
+                    messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
                             hold shift to sort on multiple columns. When an input has focus you can use UP/DOWN arrow to paginate "
-                            handleClick={this.navigateToOldSubscriptions}
-                            linkName="use old page"
+                    handleClick={this.navigateToOldSubscriptions}
+                    linkName="use old page"
                 />
-                </div>
+            </div>
         );
     }
 }
@@ -229,7 +244,7 @@ Subscriptions.propTypes = {
     onChangePage: PropTypes.func,
     onChangeFiltered: PropTypes.func,
     onChangeSorted: PropTypes.func,
-    onChangePageSize: PropTypes.func,
+    onChangePageSize: PropTypes.func
 };
 
-export default addUrlProps({ urlPropsQueryConfig })(Subscriptions)
+export default addUrlProps({ urlPropsQueryConfig })(Subscriptions);

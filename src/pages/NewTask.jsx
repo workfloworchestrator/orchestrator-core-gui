@@ -1,16 +1,15 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {initialWorkflowInput, startTask, workflowsByTarget} from "../api";
-import {isEmpty} from "../utils/Utils";
-import {setFlash} from "../utils/Flash";
+import { initialWorkflowInput, startTask, workflowsByTarget } from "../api";
+import { isEmpty } from "../utils/Utils";
+import { setFlash } from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 
 import "./NewTask.scss";
 import WorkflowSelect from "../components/WorkflowSelect";
 
 export default class NewTask extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,10 +19,10 @@ export default class NewTask extends React.Component {
         };
     }
 
-    componentDidMount = () => workflowsByTarget("SYSTEM").then(workflows => this.setState({workflows: workflows}));
+    componentDidMount = () => workflowsByTarget("SYSTEM").then(workflows => this.setState({ workflows: workflows }));
 
-    validSubmit = (stepUserInput) => {
-        const {workflow} = this.state;
+    validSubmit = stepUserInput => {
+        const { workflow } = this.state;
         if (!isEmpty(workflow)) {
             //create a copy to prevent re-rendering
             let taskInput = [...stepUserInput];
@@ -32,27 +31,27 @@ export default class NewTask extends React.Component {
                 return acc;
             }, {});
             taskInput["workflow_key"] = workflow.value;
-            let result = startTask(taskInput)
+            let result = startTask(taskInput);
             result.then(() => {
-                    this.props.history.push(`/tasks`);
-                    setFlash(I18n.t("task.flash.create", {name: workflow.label}));
-                });
+                this.props.history.push(`/tasks`);
+                setFlash(I18n.t("task.flash.create", { name: workflow.label }));
+            });
             return result;
         }
     };
 
     changeWorkflow = option => {
-        this.setState({stepUserInput: []}, () => {
-            this.setState({workflow: option});
+        this.setState({ stepUserInput: [] }, () => {
+            this.setState({ workflow: option });
             if (option) {
-                initialWorkflowInput(option.value).then(result => this.setState({stepUserInput: result}));
+                initialWorkflowInput(option.value).then(result => this.setState({ stepUserInput: result }));
             }
         });
     };
 
     render() {
-        const {workflows, workflow, stepUserInput} = this.state;
-        const {history, products} = this.props;
+        const { workflows, workflow, stepUserInput } = this.state;
+        const { history, products } = this.props;
         return (
             <div className="mod-new-task">
                 <section className="card">
@@ -64,20 +63,24 @@ export default class NewTask extends React.Component {
                             <WorkflowSelect
                                 workflows={workflows}
                                 onChange={this.changeWorkflow}
-                                workflow={isEmpty(workflows) ? undefined : workflow.value}/>
+                                workflow={isEmpty(workflows) ? undefined : workflow.value}
+                            />
                         </section>
-                        {!isEmpty(workflow) &&
-                        <UserInputForm stepUserInput={stepUserInput}
-                                       servicePorts={[]}
-                                       servicePortsSN8={[]}
-                                       history={history}
-                                       organisations={[]}
-                                       subscriptions={[]}
-                                       products={products}
-                                       locationCodes={[]}
-                                       product={({})}
-                                       validSubmit={this.validSubmit}
-                                       preselectedInput={{}}/>}
+                        {!isEmpty(workflow) && (
+                            <UserInputForm
+                                stepUserInput={stepUserInput}
+                                servicePorts={[]}
+                                servicePortsSN8={[]}
+                                history={history}
+                                organisations={[]}
+                                subscriptions={[]}
+                                products={products}
+                                locationCodes={[]}
+                                product={{}}
+                                validSubmit={this.validSubmit}
+                                preselectedInput={{}}
+                            />
+                        )}
                     </section>
                 </section>
             </div>

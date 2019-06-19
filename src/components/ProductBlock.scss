@@ -3,7 +3,6 @@
 @import "../stylesheets/forms.scss";
 
 .mod-product-block {
-
     .card {
         @include card;
         padding: 20px 40px;
@@ -38,6 +37,4 @@
             margin-left: auto;
         }
     }
-
 }
-

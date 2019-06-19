@@ -1,7 +1,7 @@
 import I18n from "i18n-js";
 import en from "../locale/en";
 import Adapter from "enzyme-adapter-react-16";
-import Enzyme from "enzyme"
+import Enzyme from "enzyme";
 
 const start = () => {
     //we need to use them, otherwise the imports are deleted when organizing them
@@ -9,7 +9,7 @@ const start = () => {
     expect(en).toBeDefined();
     I18n.locale = "en";
 
-    Enzyme.configure({ adapter: new Adapter() })
+    Enzyme.configure({ adapter: new Adapter() });
 };
 
 test("Test suite must contain at least one test", () => {});

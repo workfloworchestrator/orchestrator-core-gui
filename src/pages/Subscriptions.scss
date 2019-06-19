@@ -2,56 +2,55 @@
 @import "../stylesheets/media_queries.scss";
 
 .subscriptions-page {
-  @include  page;
-  @include card;
+    @include page;
+    @include card;
 
-  .divider {
-    height: 5px;
-  }
+    .divider {
+        height: 5px;
+    }
 
-  .subscriptions-container {
-    background-color: white;
-  }
-
+    .subscriptions-container {
+        background-color: white;
+    }
 }
 .subscription-modal {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  background-color: white;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: white;
 }
 
 .scroller {
-  position: absolute;
-  top: 35px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  overflow: auto;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow: auto;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(95, 95, 95, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(95, 95, 95, 0.7);
 }
 
 .large-icon {
-  font-size: 2.2em;
-  padding: 2px 2px 5px 5px;
-  cursor: pointer;
+    font-size: 2.2em;
+    padding: 2px 2px 5px 5px;
+    cursor: pointer;
 }
 
 .ReactModalPortal .ReactModal__Content {
-  max-width: 100%;
+    max-width: 100%;
 
-  &--before-close {
-    top: -50%;
-    bottom: 100%;
-  }
+    &--before-close {
+        top: -50%;
+        bottom: 100%;
+    }
 }

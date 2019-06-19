@@ -10,7 +10,8 @@ section.ipblock-selector {
     table.ip-blocks {
         word-break: break-all;
         width: 70%;
-        td, th {
+        td,
+        th {
             text-align: left;
         }
         tr {
@@ -49,7 +50,7 @@ section.ipblock-selector {
             display: block;
             th {
                 cursor: pointer;
-                padding: 5px 5px 10px 5px
+                padding: 5px 5px 10px 5px;
             }
             th.id {
                 min-width: 8em;
@@ -87,7 +88,6 @@ section.ipblock-selector {
             td.state {
                 min-width: 25em;
             }
-
         }
     }
 }

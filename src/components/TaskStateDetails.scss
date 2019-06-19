@@ -42,7 +42,8 @@ section.task-state-detail {
             }
             li {
                 display: inline-block;
-                &.toggle-details, &.toggle-state-changes {
+                &.toggle-details,
+                &.toggle-state-changes {
                     margin-right: 50px;
                 }
             }
@@ -93,7 +94,7 @@ section.task-state-detail {
         flex-direction: column;
         margin-left: 25%;
 
-        .details-container{
+        .details-container {
             display: flex;
         }
 
@@ -156,7 +157,5 @@ section.task-state-detail {
         i.fa {
             margin-right: 25px;
         }
-
     }
 }
-

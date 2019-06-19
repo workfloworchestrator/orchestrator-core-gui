@@ -23,7 +23,8 @@ section.validation-container {
                 }
             }
         }
-        section.product-info, section.product-mapping {
+        section.product-info,
+        section.product-mapping {
             &.product-info {
                 width: 40%;
                 tbody {
@@ -113,7 +114,7 @@ section.validation-container {
                     padding: 2px 40px 2px 0;
                 }
                 &.description {
-                    color: darken($orange, 25%)
+                    color: darken($orange, 25%);
                 }
                 span {
                     font-style: italic;
@@ -122,5 +123,3 @@ section.validation-container {
         }
     }
 }
-
-

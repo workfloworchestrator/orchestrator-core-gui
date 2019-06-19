@@ -1,5 +1,6 @@
 ---
 stages:
+  - unit-test
   - build
   - scan
   - release
@@ -11,6 +12,16 @@ variables:
   CONTAINER_MASTER_IMAGE: registry.automation.surf.net/nwa/workflows-client:master
   CONTAINER_RELEASE_IMAGE: registry.automation.surf.net/nwa/workflows-client:$CI_COMMIT_TAG
   CONTAINER_LATEST_IMAGE: registry.automation.surf.net/nwa/workflows-client:latest
+
+test workflows-client:
+  stage: unit-test
+  image: node:10.16.0
+  script:
+    - yarn install
+    - yarn prettier -c '**/*.{js,jsx,scss,md}'
+    - yarn test --coverage
+  tags:
+      - python-lint-ext
 
 build docker image:
   stage: build
