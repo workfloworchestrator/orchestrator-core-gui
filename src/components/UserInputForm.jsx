@@ -454,7 +454,7 @@ export default class UserInputForm extends React.Component {
                         products={products}
                         organisations={organisations}
                         onChange={this.changeStringInput(name)}
-                        subscriptionId={currentState.subscription_id}
+                        subscriptionId={lookupValueFromNestedState("subscription_id", currentState)}
                         value={value}
                         readOnly={userInput.readonly}
                     />
@@ -475,7 +475,7 @@ export default class UserInputForm extends React.Component {
                         <DowngradeRedundantLPConfirmation
                             products={products}
                             organisations={organisations}
-                            subscriptionId={currentState.subscription_id}
+                            subscriptionId={lookupValueFromNestedState("subscription_id", currentState)}
                             className="indent"
                             primary={primary}
                             secondary={secondary}
