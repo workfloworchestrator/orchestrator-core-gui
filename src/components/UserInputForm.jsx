@@ -256,7 +256,7 @@ export default class UserInputForm extends React.Component {
         this.setState({ errors: errors });
     };
 
-    renderInput = (userInput, process) => {
+    renderInput = userInput => {
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const error = this.state.errors[name];
@@ -266,7 +266,7 @@ export default class UserInputForm extends React.Component {
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
-                {this.chooseInput(userInput, process)}
+                {this.chooseInput(userInput)}
                 {(error || customError) && <em className="error">{I18n.t("process.format_error")}</em>}
                 {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
@@ -298,7 +298,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    chooseInput = (userInput, process) => {
+    chooseInput = userInput => {
         const name = userInput.name;
         const value = userInput.value;
         const { currentState, products, organisations, preselectedInput } = this.props;
@@ -709,7 +709,6 @@ export default class UserInputForm extends React.Component {
             stepUserInput,
             leavePage
         } = this.state;
-        const { process } = this.props;
 
         return (
             <div className="mod-process-step">
@@ -720,9 +719,7 @@ export default class UserInputForm extends React.Component {
                     leavePage={leavePage}
                 />
                 <section className="card">
-                    <section className="form-step">
-                        {stepUserInput.map(input => this.renderInput(input, process))}
-                    </section>
+                    <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
                     {this.renderButtons()}
                 </section>
             </div>
@@ -739,7 +736,6 @@ UserInputForm.propTypes = {
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
     refreshSubscriptions: PropTypes.func,
-    process: PropTypes.object,
     preselectedInput: PropTypes.object,
 
     preloadSubscriptions: PropTypes.bool,

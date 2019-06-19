@@ -301,7 +301,6 @@ class ProcessDetail extends React.PureComponent {
                         product={product}
                         currentState={process.current_state}
                         validSubmit={this.validSubmit}
-                        process={process}
                     />
                 </section>
             );
