@@ -1,5 +1,7 @@
 import React from "react";
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
+import { createBrowserHistory as createHistory } from "history";
+import {Router} from "react-router";
 import "./App.scss";
 import ErrorDialog from "../components/ErrorDialog";
 import Flash from "../components/Flash";
@@ -31,12 +33,15 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import TaskDetail from "./TaskDetail";
 import Prefixes from "../pages/Prefixes";
-import { configureUrlQuery, RouterToUrlQuery } from 'react-url-query';
+import { configureUrlQuery } from 'react-url-query';
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
+let history = createHistory()
+
 configureUrlQuery({
     entrySeparator: "--",
+    history: history,
 });
 
 
@@ -163,8 +168,7 @@ class App extends React.PureComponent {
         const {currentUser, configuration, organisations, products, locationCodes, redirectState} = this.state;
 
         return (
-            <Router>
-                <RouterToUrlQuery>
+            <Router history={history}>
                 <div>
                     <div>
                         <Flash/>
@@ -266,7 +270,6 @@ class App extends React.PureComponent {
                         <Route component={NotFound}/>
                     </Switch>
                 </div>
-                </RouterToUrlQuery>
             </Router>
 
         );
