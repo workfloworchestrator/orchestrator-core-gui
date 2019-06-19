@@ -61,6 +61,10 @@
     "spin.js": "^4.0.0",
     "typescript": "^3.5.2"
   },
+  "resolutions": {
+    "browserslist": "4.6.2",
+    "caniuse-lite": "1.0.30000974"
+  },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
