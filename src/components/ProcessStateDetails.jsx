@@ -6,16 +6,14 @@ import isEqual from "lodash/isEqual";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
-import {capitalize, renderDateTime} from "../utils/Lookups";
-import {isEmpty} from "../utils/Utils";
-import {NavLink} from "react-router-dom";
+import { capitalize, renderDateTime } from "../utils/Lookups";
+import { isEmpty } from "../utils/Utils";
+import { NavLink } from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
 
-
 class ProcessStateDetails extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -23,67 +21,95 @@ class ProcessStateDetails extends React.PureComponent {
             details: true,
             stateChanges: true,
             copiedToClipboard: false,
-	    traceback: false
+            traceback: false
         };
     }
 
     copiedToClipboard = () => {
-        this.setState({copiedToClipboard: true});
-        setTimeout(() => this.setState({copiedToClipboard: false}), 5000);
+        this.setState({ copiedToClipboard: true });
+        setTimeout(() => this.setState({ copiedToClipboard: false }), 5000);
     };
 
     renderRaw = process => {
-        const {copiedToClipboard} = this.state;
+        const { copiedToClipboard } = this.state;
         const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
         const tooltip = I18n.t(copiedToClipboard ? "process_state.copied" : "process_state.copy");
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
-                        <span className="copy-to-clipboard-container">
-                            <button data-for="copy-to-clipboard" data-tip>
-                                <i className={`fa fa-clone ${copiedToClipBoardClassName}`}></i>
-                            </button>
-                            <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]}/>
-                        </span>
+                    <span className="copy-to-clipboard-container">
+                        <button data-for="copy-to-clipboard" data-tip>
+                            <i className={`fa fa-clone ${copiedToClipBoardClassName}`} />
+                        </button>
+                        <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
+                    </span>
                 </CopyToClipboard>
                 <HighlightCode data={JSON.stringify(process, null, 2)} />
             </section>
-        )
-
-
+        );
     };
 
     renderProcessHeaderInformation = process => {
-        const {raw, traceback, details, stateChanges} = this.state;
+        const { raw, traceback, details, stateChanges } = this.state;
         return (
             <section className="header-information">
                 <ul>
-                    <li className="process-wording"><h3>{I18n.t("process_state.wording", {
-                        product: process.productName,
-                        customer: process.customerName,
-                        workflow: process.workflow_name
-                    })}</h3></li>
+                    <li className="process-wording">
+                        <h3>
+                            {I18n.t("process_state.wording", {
+                                product: process.productName,
+                                customer: process.customerName,
+                                workflow: process.workflow_name
+                            })}
+                        </h3>
+                    </li>
                 </ul>
                 <ul>
-                    {!raw && <li className="toggle-details"><CheckBox name="details" value={details}
-                                                                      info={I18n.t("process_state.details")}
-                                                                      onChange={() => this.setState({details: !details})}/>
-                    </li>}
-                    {!raw && <li className="toggle-state-changes"><CheckBox name="state-changes" value={stateChanges}
-                                                                            info={I18n.t("process_state.stateChanges")}
-                                                                            onChange={() => this.setState({stateChanges: !stateChanges})}/>
-                    </li>}
-                    <li><CheckBox name="raw" value={raw} info={I18n.t("process_state.raw")}
-                                  onChange={() => this.setState({raw: !raw})}/></li>
-                    {process.traceback && <li><CheckBox name="traceback" value={traceback} info={I18n.t("process_state.traceback")}
-                                                        onChange={() => this.setState({traceback: !traceback})}/></li>}
+                    {!raw && (
+                        <li className="toggle-details">
+                            <CheckBox
+                                name="details"
+                                value={details}
+                                info={I18n.t("process_state.details")}
+                                onChange={() => this.setState({ details: !details })}
+                            />
+                        </li>
+                    )}
+                    {!raw && (
+                        <li className="toggle-state-changes">
+                            <CheckBox
+                                name="state-changes"
+                                value={stateChanges}
+                                info={I18n.t("process_state.stateChanges")}
+                                onChange={() => this.setState({ stateChanges: !stateChanges })}
+                            />
+                        </li>
+                    )}
+                    <li>
+                        <CheckBox
+                            name="raw"
+                            value={raw}
+                            info={I18n.t("process_state.raw")}
+                            onChange={() => this.setState({ raw: !raw })}
+                        />
+                    </li>
+                    {process.traceback && (
+                        <li>
+                            <CheckBox
+                                name="traceback"
+                                value={traceback}
+                                info={I18n.t("process_state.traceback")}
+                                onChange={() => this.setState({ traceback: !traceback })}
+                            />
+                        </li>
+                    )}
                 </ul>
             </section>
-        )
+        );
     };
 
-    renderSummaryValue = value => typeof value === "string" ? capitalize(value) : renderDateTime(value);
+    renderSummaryValue = value => (typeof value === "string" ? capitalize(value) : renderDateTime(value));
 
     stateDelta = (prev, curr) => {
         const prevKeys = Object.keys(prev);
@@ -104,22 +130,27 @@ class ProcessStateDetails extends React.PureComponent {
         if (isEmpty(subscriptionProcesses)) {
             return null;
         }
-        return <section className="subscription-link">
-            {subscriptionProcesses.map((ps, index) =>
-                <div key={index}>
-                    <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
-                        <i className="fa fa-link"></i> {I18n.t("process.subscription_link_txt", {target: ps.workflow_target})}
-                    </NavLink>
-                </div>
-            )}
-        </section>
+        return (
+            <section className="subscription-link">
+                {subscriptionProcesses.map((ps, index) => (
+                    <div key={index}>
+                        <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
+                            <i className="fa fa-link" />{" "}
+                            {I18n.t("process.subscription_link_txt", {
+                                target: ps.workflow_target
+                            })}
+                        </NavLink>
+                    </div>
+                ))}
+            </section>
+        );
     };
 
     displayStateValue = value => {
         if (isEmpty(value)) {
             return "";
         }
-        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)}/> : value.toString();
+        return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)} /> : value.toString();
     };
 
     renderStateChanges = (steps, index) => {
@@ -149,14 +180,16 @@ class ProcessStateDetails extends React.PureComponent {
             case "success":
                 if (index > 0) {
                     let prev_index = index - 1;
-                    while (prev_index > 0 && (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting" ))
-                    {
+                    while (
+                        prev_index > 0 &&
+                        (steps[prev_index].status === "failed" || steps[prev_index].status === "waiting")
+                    ) {
                         prev_index--;
                     }
 
                     json = this.stateDelta(steps[prev_index].state, step.state);
                 } else {
-                    json = step.state
+                    json = step.state;
                 }
                 break;
             default:
@@ -170,26 +203,26 @@ class ProcessStateDetails extends React.PureComponent {
         return (
             <section className="state-changes">
                 <section className="state-divider">
-                    <i className={iconName}></i>
+                    <i className={iconName} />
                 </section>
 
-                <section className={ stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
+                <section className={stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
                     <table>
                         <tbody>
-                        {Object.keys(json).map((key, index) =>
-                            <tr key={key}>
-                                <td className="key">{key}</td>
-                                <td className="value">{this.displayStateValue(json[key])}</td>
-                            </tr>
-                        )}
+                            {Object.keys(json).map((key, index) => (
+                                <tr key={key}>
+                                    <td className="key">{key}</td>
+                                    <td className="value">{this.displayStateValue(json[key])}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </section>
-
-            </section>);
+            </section>
+        );
     };
 
-    toggleStep = (step) => {
+    toggleStep = step => {
         if (this.props.onChangeCollapsed) {
             // console.log(`Calling provided prop function with step: ${step}`)
             this.props.onChangeCollapsed(step);
@@ -201,66 +234,72 @@ class ProcessStateDetails extends React.PureComponent {
         const summaryKeys = ["status", "assignee", "step", "started", "last_modified"];
         return (
             <section className="process-overview">
-                {details && <section className="process-summary">
-                    <table>
-                        <tbody>
-                        {summaryKeys.map(key => <tr key={key}>
-                            <td className="title">{I18n.t(`process_state.summary.${key}`)}</td>
-                            <td className="value">{this.renderSummaryValue(process[key])}</td>
-                        </tr>)}
-                        </tbody>
-                    </table>
-
-                </section>}
+                {details && (
+                    <section className="process-summary">
+                        <table>
+                            <tbody>
+                                {summaryKeys.map(key => (
+                                    <tr key={key}>
+                                        <td className="title">{I18n.t(`process_state.summary.${key}`)}</td>
+                                        <td className="value">{this.renderSummaryValue(process[key])}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                )}
                 <section className="steps">
                     {process.steps.map((step, index) => {
                         return (
                             <div key={index} id={`step-index-${index}`} className="details-container">
                                 <div className="step-container" onClick={() => this.toggleStep(index)}>
-                                    <Step step={step}/>
-                                    {!last(index) && <section className="step-divider">
-                                        <i className="fa fa-arrow-down"></i>
-                                    </section>}
+                                    <Step step={step} />
+                                    {!last(index) && (
+                                        <section className="step-divider">
+                                            <i className="fa fa-arrow-down" />
+                                        </section>
+                                    )}
                                 </div>
                                 {stateChanges && this.renderStateChanges(process.steps, index)}
                             </div>
-                        )
+                        );
                     })}
                 </section>
             </section>
-        )
+        );
     };
 
-    renderTraceback = (process) => {
-	return (
-		<section className="traceback-container">
-		    <pre>{process.traceback}</pre>
-		</section>
-	)
-    }
+    renderTraceback = process => {
+        return (
+            <section className="traceback-container">
+                <pre>{process.traceback}</pre>
+            </section>
+        );
+    };
 
     render() {
-        const {process, subscriptionProcesses} = this.props;
-        const {raw, details, stateChanges, traceback} = this.state;
-        return <section className="process-state-detail">
-            {this.renderProcessHeaderInformation(process)}
-            {this.renderProcessSubscriptionLink(subscriptionProcesses)}
-            {traceback && this.renderTraceback(process)}
-            {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
-        </section>
+        const { process, subscriptionProcesses } = this.props;
+        const { raw, details, stateChanges, traceback } = this.state;
+        return (
+            <section className="process-state-detail">
+                {this.renderProcessHeaderInformation(process)}
+                {this.renderProcessSubscriptionLink(subscriptionProcesses)}
+                {traceback && this.renderTraceback(process)}
+                {raw ? this.renderRaw(process) : this.renderProcessOverview(process, details, stateChanges)}
+            </section>
+        );
     }
-
 }
 
 ProcessStateDetails.propTypes = {
     process: PropTypes.object.isRequired,
     subscriptionProcesses: PropTypes.array.isRequired,
     collapsed: PropTypes.array,
-    onChangeCollapsed: PropTypes.func,  // when provided it will toggle the collapse functionality
+    onChangeCollapsed: PropTypes.func // when provided it will toggle the collapse functionality
 };
 
 ProcessStateDetails.defaultProps = {
     collapsed: []
 };
 
-export default ProcessStateDetails
+export default ProcessStateDetails;

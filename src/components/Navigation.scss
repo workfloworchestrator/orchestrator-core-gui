@@ -1,36 +1,29 @@
 @import "../stylesheets/mixins.scss";
 
 .navigation-container {
+    background-color: $blue;
 
-  background-color: $blue;
+    .navigation {
+        max-width: $medium;
+        margin: 0 auto;
+        padding: 25px 15px 0 15px;
+        font-size: 20px;
+        display: flex;
 
-  .navigation {
-    max-width: $medium;
-    margin: 0 auto;
-    padding: 25px 15px 0 15px;
-    font-size: 20px;
-    display: flex;
+        a {
+            color: lighten($light-blue, 5);
+            margin-right: 50px;
+            padding-bottom: 12px;
+            @include no-text-decoration;
 
-    a {
-      color: lighten($light-blue, 5);
-      margin-right: 50px;
-      padding-bottom: 12px;
-      @include no-text-decoration;
-
-      &.active {
-        color: white;
-        font-weight: bold;
-        border-bottom: 6px solid white;
-      }
-      &.new_process {
-        margin-left: auto;
-      }
+            &.active {
+                color: white;
+                font-weight: bold;
+                border-bottom: 6px solid white;
+            }
+            &.new_process {
+                margin-left: auto;
+            }
+        }
     }
-
-  }
 }
-
-
-
-
-

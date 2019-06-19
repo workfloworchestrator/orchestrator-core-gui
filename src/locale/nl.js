@@ -5,5 +5,5 @@
 // Provide the values as: I18n.t("key", {name: "John Doe"})
 import I18n from "i18n-js";
 
-I18n.translations.nl = {}
+I18n.translations.nl = {};
 export default I18n.translations.nl;

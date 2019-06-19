@@ -3,7 +3,6 @@
 @import "../stylesheets/forms.scss";
 
 .mod-resource-type {
-
     .card {
         @include card;
         padding: 20px 40px;
@@ -26,6 +25,4 @@
             margin-left: auto;
         }
     }
-
 }
-

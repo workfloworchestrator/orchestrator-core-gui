@@ -23,7 +23,7 @@ section.contact-persons {
                     cursor: pointer;
                     &.disabled {
                         cursor: not-allowed;
-                        color: $light-grey
+                        color: $light-grey;
                     }
                 }
             }
@@ -39,5 +39,4 @@ section.contact-persons {
             cursor: pointer;
         }
     }
-
 }

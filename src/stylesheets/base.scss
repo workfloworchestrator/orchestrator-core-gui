@@ -12,18 +12,20 @@ body {
     &.ReactModal__Body--open {
         overflow: hidden;
     }
-
 }
 
 a {
     cursor: pointer;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
 }
 
-::-webkit-input-placeholder, div.Select-placeholder {
+::-webkit-input-placeholder,
+div.Select-placeholder {
     color: $blue;
 }
 

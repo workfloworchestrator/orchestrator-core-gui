@@ -18,7 +18,8 @@ section.fixed-input-configuration {
         background-color: $border-light;
         width: 100%;
         word-break: break-all;
-        td, th {
+        td,
+        th {
             padding: 5px 10px;
             text-align: left;
         }
@@ -38,5 +39,4 @@ section.fixed-input-configuration {
             width: 15%;
         }
     }
-
 }

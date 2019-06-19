@@ -5,7 +5,7 @@
     border-bottom-left-radius: $br;
     border-bottom-right-radius: $br;
     padding: 0 15px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 @mixin page {
@@ -38,7 +38,6 @@
 }
 
 @mixin select-dropdown {
-
     span.Select-clear-zone {
         display: none;
     }
@@ -71,7 +70,6 @@
             cursor: not-allowed;
         }
     }
-
 }
 
 @mixin copy-icon-pulse {
@@ -93,12 +91,12 @@
             box-shadow: 0 0 0 0 white;
         }
     }
-
 }
 
 @mixin no-text-decoration {
     text-decoration: none;
-    &:hover, &:visited {
+    &:hover,
+    &:visited {
         text-decoration: none;
     }
 }
@@ -137,5 +135,3 @@
         }
     }
 }
-
-

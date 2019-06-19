@@ -1,6 +1,6 @@
 @import "../stylesheets/vars.scss";
 
-section.service-port-container{
+section.service-port-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -10,7 +10,8 @@ section.service-port-container{
         div.wrapper {
             margin-left: 25px;
             width: 50%;
-            div.vlan, div.bandwidth {
+            div.vlan,
+            div.bandwidth {
                 display: flex;
                 align-items: center;
                 div.virtual-vlan {
@@ -23,7 +24,7 @@ section.service-port-container{
                     cursor: pointer;
                     &.disabled {
                         cursor: not-allowed;
-                        color: $light-grey
+                        color: $light-grey;
                     }
                 }
             }

@@ -2,18 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
 
-import {isEmpty} from "../utils/Utils";
-import {fetchPortSpeedByProduct, fetchPortSpeedBySubscription} from "../api";
+import { isEmpty } from "../utils/Utils";
+import { fetchPortSpeedByProduct, fetchPortSpeedBySubscription } from "../api";
 
 export default class BandwidthSelect extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
             lowestPortSpeed: "",
             exceedsPortSpeed: false,
             portIdentifiers: []
-        }
+        };
     }
 
     portSpeed = (userInput, valueOnly = false) => {
@@ -22,9 +21,9 @@ export default class BandwidthSelect extends React.PureComponent {
         } else if (userInput.type === "service_ports") {
             return userInput.value
                 .filter(m => !isEmpty(m.subscription_id))
-                .map(m => valueOnly ? m.subscription_id : fetchPortSpeedBySubscription(m.subscription_id))
+                .map(m => (valueOnly ? m.subscription_id : fetchPortSpeedBySubscription(m.subscription_id)));
         }
-        return valueOnly ? userInput.value : [fetchPortSpeedBySubscription(userInput.value)]
+        return valueOnly ? userInput.value : [fetchPortSpeedBySubscription(userInput.value)];
     };
 
     componentDidMount = (props = this.props) => {
@@ -32,21 +31,24 @@ export default class BandwidthSelect extends React.PureComponent {
         if (inputs.length > 0) {
             const promises = inputs.map(i => this.portSpeed(i));
             const flattened = promises.reduce((a, b) => a.concat(b), []);
-            Promise.all(flattened)
-                .then(results => {
-                    const lowestPortSpeed = Math.min(...results);
-                    const toHigh = this.toHighBandwidth(lowestPortSpeed, this.props.value);
-                    this.setState({lowestPortSpeed: lowestPortSpeed, exceedsPortSpeed: toHigh})
+            Promise.all(flattened).then(results => {
+                const lowestPortSpeed = Math.min(...results);
+                const toHigh = this.toHighBandwidth(lowestPortSpeed, this.props.value);
+                this.setState({
+                    lowestPortSpeed: lowestPortSpeed,
+                    exceedsPortSpeed: toHigh
                 });
+            });
         }
     };
 
     portSpeedInputValues = props => {
-        const {stepUserInput, portsKey} = props;
+        const { stepUserInput, portsKey } = props;
         if (isEmpty(portsKey) || isEmpty(stepUserInput)) {
             return [];
         }
-        return portsKey.map(key => stepUserInput.find(i => i.name === key))
+        return portsKey
+            .map(key => stepUserInput.find(i => i.name === key))
             .filter(i => !isEmpty(i))
             .filter(i => !isEmpty(i.value))
             .sort();
@@ -54,20 +56,20 @@ export default class BandwidthSelect extends React.PureComponent {
 
     componentWillReceiveProps(nextProps) {
         const next = this.portSpeedInputValues(nextProps).map(i => this.portSpeed(i, true));
-        const {portIdentifiers} = this.state;
+        const { portIdentifiers } = this.state;
         if (portIdentifiers.join() === next.join()) {
             //equality
             return;
         }
-        this.setState({portIdentifiers: [...next]});
+        this.setState({ portIdentifiers: [...next] });
         this.componentDidMount(nextProps);
     }
 
     validateMaxBandwidth = e => {
         const value = e.target.value;
-        const {lowestPortSpeed} = this.state;
+        const { lowestPortSpeed } = this.state;
         const toHigh = this.toHighBandwidth(lowestPortSpeed, value);
-        this.setState({exceedsPortSpeed: toHigh});
+        this.setState({ exceedsPortSpeed: toHigh });
         this.props.onBlur(e);
     };
 
@@ -76,18 +78,23 @@ export default class BandwidthSelect extends React.PureComponent {
     };
 
     render() {
-        const {name, value, onChange, disabled} = this.props;
-        const {exceedsPortSpeed, lowestPortSpeed} = this.state;
+        const { name, value, onChange, disabled } = this.props;
+        const { exceedsPortSpeed, lowestPortSpeed } = this.state;
         return (
             <div>
-                <input type="number" id={name} name={name}
-                       value={value}
-                       onChange={onChange} onBlur={this.validateMaxBandwidth} disabled={disabled}/>
-                {exceedsPortSpeed && <em className="error">{I18n.t("bandwidth.invalid", {max: lowestPortSpeed})}</em>}
+                <input
+                    type="number"
+                    id={name}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={this.validateMaxBandwidth}
+                    disabled={disabled}
+                />
+                {exceedsPortSpeed && <em className="error">{I18n.t("bandwidth.invalid", { max: lowestPortSpeed })}</em>}
             </div>
         );
     }
-
 }
 
 BandwidthSelect.propTypes = {
@@ -99,5 +106,3 @@ BandwidthSelect.propTypes = {
     onBlur: PropTypes.func.isRequired,
     disabled: PropTypes.bool
 };
-
-

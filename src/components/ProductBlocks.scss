@@ -39,7 +39,6 @@
             margin-left: 10px;
             margin-top: 4px;
         }
-
     }
 
     section.product-block {
@@ -51,7 +50,8 @@
     table.product-blocks {
         width: 100%;
         word-break: break-all;
-        td, th {
+        td,
+        th {
             text-align: left;
         }
         tr {
@@ -60,7 +60,7 @@
         thead {
             th {
                 cursor: pointer;
-                padding: 5px 5px 10px 5px
+                padding: 5px 5px 10px 5px;
             }
             th.name {
                 width: 10%;
@@ -118,7 +118,6 @@
                 text-align: right;
                 font-size: 18px;
                 position: relative;
-
             }
         }
 
@@ -146,9 +145,6 @@
                     color: $medium-grey;
                 }
             }
-
         }
-
     }
 }
-

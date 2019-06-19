@@ -1,9 +1,9 @@
-import {doValidateUserInput} from "../../validations/UserInput";
+import { doValidateUserInput } from "../../validations/UserInput";
 
-const test_vlanrange = (value, expected=true) => {
+const test_vlanrange = (value, expected = true) => {
     const errors = {};
-    doValidateUserInput({type: "vlan_range", name: "t"}, value, errors);
-    expect(errors["t"]).toBe(expected)
+    doValidateUserInput({ type: "vlan_range", name: "t" }, value, errors);
+    expect(errors["t"]).toBe(expected);
 };
 
 test("Validate VLAN range", () => {
@@ -34,9 +34,9 @@ test("Validate out of range too high vlan range", () => {
     test_vlanrange("2, 43-4095");
 });
 
-const test_stp = (value, expected=true) => {
+const test_stp = (value, expected = true) => {
     const errors = {};
-    doValidateUserInput({type: "stp", name: "my_stp_input"}, value, errors);
+    doValidateUserInput({ type: "stp", name: "my_stp_input" }, value, errors);
     expect(errors["my_stp_input"]).toBe(expected);
 };
 
@@ -66,9 +66,9 @@ test("Validate STP without urn:ogf:network prefix", () => {
     test_stp("urn:surfnet.nl:1990:surfnet8:source?vlan=2", true);
 });
 
-const test_ip_block = (testPattern, expected=true) => {
-	const errors = {};
-	let value = [{display_value: testPattern}];
-	doValidateUserInput({type: "ip_blocks", name: "my_ipblock_input"}, value, errors);
-	expect(errors["my_ipblock_input"]).toBe(expected);
-}
+const test_ip_block = (testPattern, expected = true) => {
+    const errors = {};
+    let value = [{ display_value: testPattern }];
+    doValidateUserInput({ type: "ip_blocks", name: "my_ipblock_input" }, value, errors);
+    expect(errors["my_ipblock_input"]).toBe(expected);
+};

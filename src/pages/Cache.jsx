@@ -3,13 +3,12 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import "./Cache.scss";
-import {stop} from "../utils/Utils";
-import {clearCache, ping} from "../api";
+import { stop } from "../utils/Utils";
+import { clearCache, ping } from "../api";
 import Select from "react-select";
-import {setFlash} from "../utils/Flash";
+import { setFlash } from "../utils/Flash";
 
 export default class Cache extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,12 +21,21 @@ export default class Cache extends React.Component {
 
     clearCache = e => {
         stop(e);
-        clearCache(this.state.cache).then(res => setFlash(I18n.t("cache.flushed", {name: I18n.t(`cache.name.${this.state.cache}`)})));
+        clearCache(this.state.cache).then(res =>
+            setFlash(
+                I18n.t("cache.flushed", {
+                    name: I18n.t(`cache.name.${this.state.cache}`)
+                })
+            )
+        );
     };
 
     render() {
-        const {caches, cache} = this.state;
-        const options = caches.map(val => ({value: val, label: I18n.t(`cache.name.${val}`)}));
+        const { caches, cache } = this.state;
+        const options = caches.map(val => ({
+            value: val,
+            label: I18n.t(`cache.name.${val}`)
+        }));
         return (
             <div className="mod-cache">
                 <section className="card">
@@ -36,15 +44,18 @@ export default class Cache extends React.Component {
                             <label>{I18n.t("cache.remove")}</label>
                             <em>{I18n.t("cache.remove_info")}</em>
                             <section className="cache-select-section">
-                            <Select onChange={option => this.setState({cache: option.value})}
+                                <Select
+                                    onChange={option => this.setState({ cache: option.value })}
                                     options={options}
                                     searchable={false}
                                     value={cache}
                                     clearable={false}
-                                    disabled={false}/>
-                            <button className="new button orange" onClick={this.clearCache}>
-                                {I18n.t("cache.clear")}<i className="fa fa-eraser"></i>
-                            </button>
+                                    disabled={false}
+                                />
+                                <button className="new button orange" onClick={this.clearCache}>
+                                    {I18n.t("cache.clear")}
+                                    <i className="fa fa-eraser" />
+                                </button>
                             </section>
                         </section>
                     </section>

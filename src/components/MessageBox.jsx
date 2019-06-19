@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./Message.scss"
-import {isEmpty} from "../utils/Utils";
+import "./Message.scss";
+import { isEmpty } from "../utils/Utils";
 
-export default function MessageBox({messageHeader,messageText,handleClick,linkName}) {
+export default function MessageBox({ messageHeader, messageText, handleClick, linkName }) {
     return (
         <section className="message-box">
             <h2>{messageHeader}</h2>
             <section className="message-body">
                 {messageText}
-                {!isEmpty(handleClick) &&
-                    <button className="message-button" onClick={handleClick}>{isEmpty(linkName) ? "Click here" : linkName}</button>
-                }
+                {!isEmpty(handleClick) && (
+                    <button className="message-button" onClick={handleClick}>
+                        {isEmpty(linkName) ? "Click here" : linkName}
+                    </button>
+                )}
             </section>
         </section>
-    )
+    );
 }
 
 MessageBox.propTypes = {
@@ -24,5 +26,3 @@ MessageBox.propTypes = {
     handleClick: PropTypes.func, // undefined -> will not render a button
     linkName: PropTypes.string
 };
-
-

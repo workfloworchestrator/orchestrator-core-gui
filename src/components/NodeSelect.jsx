@@ -2,50 +2,52 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
-import {nodesForLocationCode} from "../api";
+import { nodesForLocationCode } from "../api";
 import I18n from "i18n-js";
 
 export default class NodeSelect extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
             nodes: [],
             loading: true
-        }
+        };
     }
 
     componentWillMount() {
-        nodesForLocationCode(this.props.locationCode).then(result =>
-            this.setState({nodes: result, loading: false})
-        );
-    };
+        nodesForLocationCode(this.props.locationCode).then(result => this.setState({ nodes: result, loading: false }));
+    }
 
     render() {
-        const {nodes, loading} = this.state;
-        const {onChange, node, locationCode, disabled} = this.props;
+        const { nodes, loading } = this.state;
+        const { onChange, node, locationCode, disabled } = this.props;
 
         const noNodesAvailable = !loading && nodes.length === 0;
-        const placeholder = loading ? I18n.t("node_select.nodes_loading")
-            : noNodesAvailable ? I18n.t("node_select.no_nodes_placeholder") :
-                I18n.t("node_select.select_node");
+        const placeholder = loading
+            ? I18n.t("node_select.nodes_loading")
+            : noNodesAvailable
+            ? I18n.t("node_select.no_nodes_placeholder")
+            : I18n.t("node_select.select_node");
 
         return (
             <div className="node-select">
-                <Select className="select-node"
-                        onChange={onChange}
-                        options={nodes.map(x => { return {value: x.id, label: x.name}; })}
-                        value={node}
-                        searchable={true}
-                        disabled={disabled || nodes.length === 0}
-                        placeholder={placeholder}/>
-                {noNodesAvailable &&
-                <em className="msg warn">
-                            {I18n.t("node_select.no_nodes_message", {location: locationCode})}
-                </em>}
+                <Select
+                    className="select-node"
+                    onChange={onChange}
+                    options={nodes.map(x => {
+                        return { value: x.id, label: x.name };
+                    })}
+                    value={node}
+                    searchable={true}
+                    disabled={disabled || nodes.length === 0}
+                    placeholder={placeholder}
+                />
+                {noNodesAvailable && (
+                    <em className="msg warn">{I18n.t("node_select.no_nodes_message", { location: locationCode })}</em>
+                )}
             </div>
-        )
-    };
+        );
+    }
 }
 
 NodeSelect.propTypes = {

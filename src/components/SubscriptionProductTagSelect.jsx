@@ -5,17 +5,16 @@ import Select from "react-select";
 import "react-select/dist/react-select.css";
 
 import "./SubscriptionProductTagSelect.scss";
-import {subscriptionsByTags} from "../api";
+import { subscriptionsByTags } from "../api";
 
 export default class SubscriptionProductTagSelect extends React.PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
             subscriptions: [],
             loading: true
-        }
-    };
+        };
+    }
 
     componentDidMount = () => {
         subscriptionsByTags(this.props.tags).then(result => {
@@ -24,38 +23,41 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
                 subscriptions = subscriptions.filter(item => item.product_id === this.props.productId);
             }
             if (this.props.excludedSubscriptionIds.length > 0) {
-                subscriptions = subscriptions.filter(item => !this.props.excludedSubscriptionIds.includes(item.subscription_id));
+                subscriptions = subscriptions.filter(
+                    item => !this.props.excludedSubscriptionIds.includes(item.subscription_id)
+                );
             }
-            this.setState({subscriptions: subscriptions, loading: false})
+            this.setState({ subscriptions: subscriptions, loading: false });
         });
     };
 
     render() {
-        const {loading} = this.state;
-        const {productId, disabled, subscription} = this.props;
-        const placeholder = productId ?
-            I18n.t("subscription_product_tag_select.placeholder_selected_product") :
-            I18n.t("subscription_product_tag_select.placeholder");
+        const { loading } = this.state;
+        const { productId, disabled, subscription } = this.props;
+        const placeholder = productId
+            ? I18n.t("subscription_product_tag_select.placeholder_selected_product")
+            : I18n.t("subscription_product_tag_select.placeholder");
 
         let subscriptions = this.state.subscriptions;
         return (
             <section className="subscription-select">
-                  <div className="select-box">
-                  <Select onChange={this.props.onChange}
-                          options={
-                            subscriptions.map(s => ({
-                                value: s.subscription_id,
-                                label: `${s.subscription_id.slice(0,8)} - ${s.description} (${s.status})`})
-                            )}
-                          isLoading={loading}
-                          value={subscription}
-                          searchable={true}
-                          disabled={disabled || subscriptions.length === 0}
-                          placeholder={placeholder}/>
-                  </div>
+                <div className="select-box">
+                    <Select
+                        onChange={this.props.onChange}
+                        options={subscriptions.map(s => ({
+                            value: s.subscription_id,
+                            label: `${s.subscription_id.slice(0, 8)} - ${s.description} (${s.status})`
+                        }))}
+                        isLoading={loading}
+                        value={subscription}
+                        searchable={true}
+                        disabled={disabled || subscriptions.length === 0}
+                        placeholder={placeholder}
+                    />
+                </div>
             </section>
-          )
-    };
+        );
+    }
 }
 
 SubscriptionProductTagSelect.propTypes = {
