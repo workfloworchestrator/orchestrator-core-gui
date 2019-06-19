@@ -2,6 +2,7 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs, boolean, number, select } from "@storybook/addon-knobs";
 
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss";
@@ -26,6 +27,7 @@ import LocationCodeSelect from "../components/LocationCodeSelect";
 import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
+import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
 
 const genericSelectChoices = ["SAP 1", "SAP 2", "SAP 3"];
 const tableSummaryDataDefinition = [
@@ -338,6 +340,50 @@ storiesOf("GenericNOCConfirm", module)
             products={PRODUCTS}
         />
     ));
+
+storiesOf("SN8PortSelect", module)
+    .addDecorator(withKnobs)
+    .add("SN8PortSelect", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        loadVlanMocks();
+
+        let selected_value = [{ subscription_id: null, vlan: "" }];
+
+        return (
+            <MultipleServicePortsSN8
+                servicePorts={selected_value}
+                availableServicePorts={SN8PortSubscriptions}
+                organisations={ORGANISATIONS}
+                onChange={value => {
+                    selected_value = value;
+                    action("onChange")(value);
+                }}
+                organisationId={select(
+                    "Organisation",
+                    {
+                        "Centrum Wiskunde & Informatica": "2f47f65a-0911-e511-80d0-005056956c1a",
+                        "Design Academy Eindhoven": "88503161-0911-e511-80d0-005056956c1a",
+                        "Academisch Ziekenhuis Maastricht": "bae56b42-0911-e511-80d0-005056956c1a"
+                    },
+                    ""
+                )}
+                minimum={number("Minimum nr of ports", 1)}
+                maximum={number("Maximum nr of ports", 6)}
+                disabled={boolean("Read only?")}
+                isElan={boolean("Is ELAN")}
+                organisationPortsOnly={boolean("Organization ports only")}
+                visiblePortMode={select(
+                    "visiblePortMode",
+                    ["all", "normal", "tagged", "untagged", "link_member"],
+                    "all"
+                )}
+                disabledPorts={boolean("Disabled ports")}
+                reportError={action("reportError")}
+            />
+        );
+    });
+
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {
         fetchMock.restore();
