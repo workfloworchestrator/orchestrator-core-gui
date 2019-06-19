@@ -2,29 +2,26 @@ import React from 'react';
 
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
-import {linkTo} from '@storybook/addon-links';
 
-import {Button, Welcome} from '@storybook/react/demo';
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss"
 import "./storybook.scss"
 import GenericSelect from "../components/GenericSelect";
 import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
-import UserInputForm from "../components/UserInputForm";
 import {
     allNodeSubscriptions,
-    allSubscriptionsWithTags, contactPersons, corelinkPorts10G,
+    contactPersons, corelinkPorts10G,
     LOCATION_CODES,
     ORGANISATIONS,
     PRODUCTS,
-    subscriptionsWithTagMSP,
-    subscriptionsWithTagSP, SN7PortSubscriptions, vlanData, SN8PortSubscriptions, imsNodes, freeCorelinkPorts
+    SN7PortSubscriptions, SN8PortSubscriptions, imsNodes, freeCorelinkPorts
 } from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
 
 import fetchMock from 'fetch-mock';
 import {loadVlanMocks} from "./utils";
+import GenericNOCConfirm from '../components/GenericNOCConfirm';
 
 
 const genericSelectChoices = ['SAP 1', 'SAP 2', 'SAP 3'];
@@ -123,10 +120,7 @@ storiesOf('Welcome', module).add('to Storybook', () =>
 
 storiesOf("SubscriptionProductTagSelect", module)
     .add("Only tags", () =>
-        <SubscriptionProductTagSelect onChange={(e) => {
-            action("clicked");
-            e;
-        }} tags={["SP", "MSP"]}/>)
+        <SubscriptionProductTagSelect onChange={action("clicked")} tags={["SP", "MSP"]}/>)
     .add("Filtered on Product", () =>
         <SubscriptionProductTagSelect
             onChange={action("clicked")}
@@ -143,18 +137,11 @@ storiesOf("SubscriptionProductTagSelect", module)
 
 storiesOf("GenericSelect", module)
     .add("Default", () =>
-        <GenericSelect onChange={(e) => {
-            action("clicked");
-            return e.value;
-        }} choices={genericSelectChoices}/>);
+        <GenericSelect onChange={action("selected")} choices={genericSelectChoices}/>);
 
 storiesOf("LocationCodeSelect", module)
     .add("Default", () =>
-        <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={(e) => {
-            action("clicked");
-            console.log(e)
-            this.selected = e.value;
-        }}/>
+        <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={action("selected")}/>
     )
 
 storiesOf("TableSummary", module)
@@ -165,6 +152,64 @@ storiesOf("TableSummary", module)
     .add("Summary with definition and headers", () =>
         <TableSummary data={tableSummaryDataDefinitionWithHeaders}/>);
 
+storiesOf("GenericNOCConfirm", module)
+    .add("Legacy", () => (
+        <GenericNOCConfirm
+            name="noc_remove_static_ip_confirmation"
+            onChange={action("changed checkbox: ")}
+        />
+    ))
+    .add("Complex", () => (
+        <GenericNOCConfirm
+            name="confirm_migrate_sap"
+            onChange={action("changed checkbox: ")}
+            data={[
+                ["confirm_migrate_sap", "label"],
+                ["confirm_migrate_sap_info", "info"],
+                ["next_step_service_affecting", "warning"],
+                ["http://example.com", "url"],
+                ["check_delete_sn7_service_config", "checkbox"],
+                ["check_ims_defined", "label"],
+                ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                ["check_port_patched_sn7_sn8", "checkbox?"]
+            ]}
+        />
+    ))
+    .add("Legacy in form", () => (
+        <UserInputContainer
+            formName="NOC Confirm"
+            stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+        />
+    ))
+    .add("Complex in form", () => (
+        <UserInputContainer
+            formName="NOC Confirm"
+            stepUserInput={[
+                {
+                    name: "confirm_migrate_sap",
+                    type: "accept",
+                    data: [
+                        ["confirm_migrate_sap", "label"],
+                        ["confirm_migrate_sap_info", "info"],
+                        ["next_step_service_affecting", "warning"],
+                        ["http://example.com", "url"],
+                        ["check_delete_sn7_service_config", "checkbox"],
+                        ["check_ims_defined", "label"],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                        ["check_port_patched_sn7_sn8", "checkbox?"]
+                    ]
+                }
+            ]}
+            organisations={ORGANISATIONS}
+            locationCodes={LOCATION_CODES}
+            products={PRODUCTS}
+        />
+    ));
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {
         fetchMock.restore();
@@ -173,7 +218,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('/api/v2/all-subscriptions-with-tags', []);
         fetchMock.get('glob:*/api/crm/contacts/*', contactPersons);
         return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
         }
     )
@@ -186,7 +231,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/ims/free_corelink_ports/*', corelinkPorts10G);
         return <UserInputContainer formName="Corelink form" stepUserInput={corelinkSteps}
                                    currentState={currentState}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("Corelink add link", () => {
@@ -198,7 +243,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/ims/free_corelink_ports/*', freeCorelinkPorts)
         return <UserInputContainer formName="Corelink add link form" stepUserInput={addCorelinkSteps}
                                    currentState={currentState}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("Nodes", () => {
@@ -210,7 +255,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('/api/ims/nodes/MT001A', imsNodes);
         return <UserInputContainer formName="Node form" stepUserInput={nodeSteps}
                                    currentState={currentState}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect all organisations", () => {
@@ -221,7 +266,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={sn7PortSelectInputStepsAllOrganisations}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN7 Portselect MSP only", () => {
@@ -233,7 +278,7 @@ storiesOf("UserInputForm", module)
         loadVlanMocks();
         return <UserInputContainer formName="SN7 portselect form, showing all ports"
                                    stepUserInput={sn7PortSelectInputStepsMSPOnly}
-                                   history="" currentUser="" organisations={ORGANISATIONS}
+                                   organisations={ORGANISATIONS}
                                    locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
@@ -245,7 +290,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN7 portselect, showing only ports for selected organisation" stepUserInput={sn7PortSelectInputStepsSelectedOrganisation}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect all organisations", () => {
@@ -256,7 +301,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={sn8PortSelectInputStepsAllOrganisations}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect tagged", () => {
@@ -267,7 +312,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={sn8PortSelectInputStepsTagged}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect untagged", () => {
@@ -278,7 +323,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={sn8PortSelectInputStepsUntagged}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
     .add("SN8 Portselect selected organisation", () => {
@@ -289,6 +334,6 @@ storiesOf("UserInputForm", module)
         fetchMock.get('glob:*/api/subscriptions/parent_subscriptions/*', []);
         loadVlanMocks();
         return <UserInputContainer formName="SN8 portselect, showing only ports for selected organisation" stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
-                                   history="" currentUser="" organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
+                                   organisations={ORGANISATIONS} locationCodes={LOCATION_CODES}
                                    products={PRODUCTS}/>
     })
