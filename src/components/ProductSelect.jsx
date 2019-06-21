@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import "react-select/dist/react-select.css";
 import "./ProductSelect.scss";
 import { TARGET_CREATE } from "../validations/Products";
 
@@ -20,10 +19,10 @@ export default function ProductSelect({ onChange, product, products, disabled })
             className={`select-product ${options.length > 15 ? "large" : ""}`}
             onChange={onChange}
             options={options}
-            value={product}
-            searchable={true}
+            value={options.find(option => option.value === product)}
+            isSearchable={true}
             placeholder="Search and select a product..."
-            disabled={disabled || products.length === 0}
+            isDisabled={disabled || products.length === 0}
         />
     );
 }

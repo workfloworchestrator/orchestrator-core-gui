@@ -2,7 +2,6 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 
 import "./SubscriptionProductTagSelect.scss";
 import { subscriptionsByTags } from "../api";
@@ -39,19 +38,24 @@ export default class SubscriptionProductTagSelect extends React.PureComponent {
             : I18n.t("subscription_product_tag_select.placeholder");
 
         let subscriptions = this.state.subscriptions;
+
+        const options = subscriptions.map(s => ({
+            value: s.subscription_id,
+            label: `${s.subscription_id.slice(0, 8)} - ${s.description} (${s.status})`
+        }));
+
+        const value = options.find(option => option.value === subscription);
+
         return (
             <section className="subscription-select">
                 <div className="select-box">
                     <Select
                         onChange={this.props.onChange}
-                        options={subscriptions.map(s => ({
-                            value: s.subscription_id,
-                            label: `${s.subscription_id.slice(0, 8)} - ${s.description} (${s.status})`
-                        }))}
+                        options={options}
                         isLoading={loading}
-                        value={subscription}
-                        searchable={true}
-                        disabled={disabled || subscriptions.length === 0}
+                        value={value}
+                        isSearchable={true}
+                        isDisabled={disabled || subscriptions.length === 0}
                         placeholder={placeholder}
                     />
                 </div>

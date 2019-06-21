@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import { ip_blocks, prefix_filters } from "../api";
 
-import "react-select/dist/react-select.css";
 import "./IPPrefix.scss";
 import I18n from "i18n-js";
 import { stop } from "../utils/Utils";
@@ -172,6 +171,12 @@ export default class IPPrefix extends React.PureComponent {
                 </th>
             );
         };
+        const options = filter_prefixes.map(fp => ({
+            value: fp["id"],
+            label: fp["prefix"]
+        }));
+        const value = options.find(option => option.value === parentPrefix);
+
         return (
             <div>
                 <div>
@@ -213,14 +218,7 @@ export default class IPPrefix extends React.PureComponent {
                 <div>
                     <span>Root filter</span>
                     <span>
-                        <Select
-                            options={filter_prefixes.map(fp => ({
-                                value: fp["id"],
-                                label: fp["prefix"]
-                            }))}
-                            onChange={this.filterParentPrefix}
-                            value={parentPrefix}
-                        />
+                        <Select options={options} onChange={this.filterParentPrefix} value={value} />
                     </span>
                 </div>
                 <table className="ip-blocks">

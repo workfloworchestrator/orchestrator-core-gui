@@ -2,7 +2,6 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 
 import { subscriptionsByProductId, subscriptionsWithDetails } from "../api";
 import { isEmpty } from "../utils/Utils";
@@ -76,40 +75,45 @@ export default class SubscriptionsSelect extends React.PureComponent {
             subscriptions.length < numberOfBoxes
                 ? subscriptions.concat(Array(numberOfBoxes - subscriptions.length).fill(null))
                 : subscriptions;
+
         return (
             <section className="multiple-subscriptions">
                 <section className="subscription-select">
-                    {boxes.map((subscription, index) => (
-                        <div className="wrapper" key={index}>
-                            <div className="select-box" key={index}>
-                                <Select
-                                    onChange={this.onChangeInternal(index)}
-                                    key={index}
-                                    options={availableSubscriptions
-                                        .filter(
-                                            x =>
-                                                x.subscription_id === subscription ||
-                                                !subscriptions.includes(x.subscription_id)
-                                        )
-                                        .map(x => ({
-                                            value: x.subscription_id,
-                                            label: x.description
-                                        }))}
-                                    value={subscription}
-                                    searchable={true}
-                                    disabled={disabled || availableSubscriptions.length === 0}
-                                    placeholder={placeholder}
-                                />
-                            </div>
+                    {boxes.map((subscription, index) => {
+                        const options = availableSubscriptions
+                            .filter(
+                                x => x.subscription_id === subscription || !subscriptions.includes(x.subscription_id)
+                            )
+                            .map(x => ({
+                                value: x.subscription_id,
+                                label: x.description
+                            }));
 
-                            {maximum > minimum && (
-                                <i
-                                    className={`fa fa-minus ${index < minimum ? "disabled" : ""}`}
-                                    onClick={this.removeSubscription.bind(this, index)}
-                                />
-                            )}
-                        </div>
-                    ))}
+                        const value = options.find(option => option.value === subscription);
+
+                        return (
+                            <div className="wrapper" key={index}>
+                                <div className="select-box" key={index}>
+                                    <Select
+                                        onChange={this.onChangeInternal(index)}
+                                        key={index}
+                                        options={options}
+                                        value={value}
+                                        isSearchable={true}
+                                        isDisabled={disabled || availableSubscriptions.length === 0}
+                                        placeholder={placeholder}
+                                    />
+                                </div>
+
+                                {maximum > minimum && (
+                                    <i
+                                        className={`fa fa-minus ${index < minimum ? "disabled" : ""}`}
+                                        onClick={this.removeSubscription.bind(this, index)}
+                                    />
+                                )}
+                            </div>
+                        );
+                    })}
 
                     {showAdd && (
                         <div className="add-subscription">

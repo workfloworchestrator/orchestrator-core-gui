@@ -36,6 +36,8 @@ export default class Cache extends React.Component {
             value: val,
             label: I18n.t(`cache.name.${val}`)
         }));
+        const value = options.find(option => option.value === cache);
+
         return (
             <div className="mod-cache">
                 <section className="card">
@@ -47,10 +49,10 @@ export default class Cache extends React.Component {
                                 <Select
                                     onChange={option => this.setState({ cache: option.value })}
                                     options={options}
-                                    searchable={false}
-                                    value={cache}
-                                    clearable={false}
-                                    disabled={false}
+                                    isSearchable={false}
+                                    value={value}
+                                    isClearable={false}
+                                    isDisabled={false}
                                 />
                                 <button className="new button orange" onClick={this.clearCache}>
                                     {I18n.t("cache.clear")}
