@@ -3,23 +3,26 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import "react-select/dist/react-select.css";
-
 export default class WorkflowSelect extends React.PureComponent {
     render() {
         const { onChange, workflows, workflow, disabled } = this.props;
+
+        const options = workflows.map(wf => ({
+            label: wf.description,
+            value: wf.name
+        }));
+
+        const value = options.find(option => option.value === workflow);
+
         return (
             <Select
                 className="select-workflow"
                 onChange={onChange}
-                options={workflows.map(wf => ({
-                    label: wf.description,
-                    value: wf.name
-                }))}
-                value={workflow}
-                searchable={true}
+                options={options}
+                value={value}
+                isSearchable={true}
                 placeholder={I18n.t("process.workflowsPlaceholder")}
-                disabled={disabled || workflows.length === 0}
+                isDisabled={disabled || workflows.length === 0}
             />
         );
     }

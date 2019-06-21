@@ -2,7 +2,6 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import { usedVlans, usedVlansFiltered } from "../api";
-import "react-select/dist/react-select.css";
 import { isEmpty } from "../utils/Utils";
 import { doValidateUserInput } from "../validations/UserInput";
 

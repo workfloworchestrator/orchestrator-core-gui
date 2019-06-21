@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 import "./NodePortSelect.scss";
 
 import { freeCorelinkPortsForNodeIdAndInterfaceType } from "../api";
@@ -49,38 +48,45 @@ export default class NodePortSelect extends React.PureComponent {
         const { node, ports } = this.state;
         const { onChange, port, nodes, disabled } = this.props;
         const portPlaceholder = node ? I18n.t("node_port.select_port") : I18n.t("node_port.select_node_first");
+
+        const node_options = nodes
+            .map(aNode => ({
+                value: aNode.subscription_id,
+                label: this.nodeLabel(aNode),
+                tag: aNode.tag
+            }))
+            .sort((x, y) => x.label.localeCompare(y.label));
+        const node_value = node_options.find(option => option.value === node);
+
+        const port_options = ports
+            .map(aPort => ({
+                value: aPort.id,
+                label: `${aPort.port} (${imsStates[aPort.status]}) (${aPort.iface_type})`
+            }))
+            .sort((x, y) => x.label.localeCompare(y.label));
+        const port_value = port_options.find(option => option.value === port);
+
         return (
             <section className="node-port">
                 <div className="node-select">
                     <label>Node</label>
                     <Select
                         onChange={this.onChangeInternal("subscription_id")}
-                        options={nodes
-                            .map(aNode => ({
-                                value: aNode.subscription_id,
-                                label: this.nodeLabel(aNode),
-                                tag: aNode.tag
-                            }))
-                            .sort((x, y) => x.label.localeCompare(y.label))}
-                        value={node}
-                        searchable={true}
-                        disabled={disabled || nodes.length === 0}
+                        options={node_options}
+                        value={node_value}
+                        isSearchable={true}
+                        isDisabled={disabled || nodes.length === 0}
                     />
                 </div>
                 <div className="port-select">
                     <label>Port</label>
                     <Select
                         onChange={onChange}
-                        options={ports
-                            .map(aPort => ({
-                                value: aPort.id,
-                                label: `${aPort.port} (${imsStates[aPort.status]}) (${aPort.iface_type})`
-                            }))
-                            .sort((x, y) => x.label.localeCompare(y.label))}
+                        options={port_options}
                         placeholder={portPlaceholder}
-                        value={port}
-                        searchable={true}
-                        disabled={disabled || ports.length === 0}
+                        value={port_value}
+                        isSearchable={true}
+                        isDisabled={disabled || ports.length === 0}
                     />
                 </div>
             </section>

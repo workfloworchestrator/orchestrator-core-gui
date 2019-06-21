@@ -226,14 +226,14 @@ export default class ProductBlock extends React.Component {
                                 value: rt.resource_type_id,
                                 label: `${rt.resource_type.toUpperCase()} - ${rt.description}`
                             }))}
-                            searchable={true}
-                            clearable={false}
+                            isSearchable={true}
+                            isClearable={false}
                             placeholder={
                                 availableResourceTypes.length > 0
                                     ? I18n.t("metadata.productBlocks.select_add_resource_type")
                                     : I18n.t("metadata.productBlocks.select_no_more_resource_types")
                             }
-                            disabled={readOnly || availableResourceTypes.length === 0}
+                            isDisabled={readOnly || availableResourceTypes.length === 0}
                         />
                     )}
                 </div>

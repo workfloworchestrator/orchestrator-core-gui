@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 import { nodesForLocationCode } from "../api";
 import I18n from "i18n-js";
 
@@ -29,17 +28,20 @@ export default class NodeSelect extends React.PureComponent {
             ? I18n.t("node_select.no_nodes_placeholder")
             : I18n.t("node_select.select_node");
 
+        const options = nodes.map(x => {
+            return { value: x.id, label: x.name };
+        });
+        const value = options.find(option => option.value === node);
+
         return (
             <div className="node-select">
                 <Select
                     className="select-node"
                     onChange={onChange}
-                    options={nodes.map(x => {
-                        return { value: x.id, label: x.name };
-                    })}
-                    value={node}
-                    searchable={true}
-                    disabled={disabled || nodes.length === 0}
+                    options={options}
+                    value={value}
+                    isSearchable={true}
+                    isDisabled={disabled || nodes.length === 0}
                     placeholder={placeholder}
                 />
                 {noNodesAvailable && (

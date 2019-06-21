@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import "react-select/dist/react-select.css";
 import { transitions, productById, subscriptionsDetail } from "../api";
 
 export default class TransitionProductSelect extends React.PureComponent {
@@ -40,17 +39,24 @@ export default class TransitionProductSelect extends React.PureComponent {
     render() {
         const { onChange, product, disabled } = this.props;
         const { transitionProducts } = this.state;
+
+        const options = transitionProducts.map(p => ({
+            value: p.product_id,
+            label: p.name
+        }));
+
+        const selected_product = transitionProducts.length === 1 ? transitionProducts[0].product_id : product;
+
+        const value = options.find(option => option.value === selected_product);
+
         return (
             <Select
                 onChange={onChange}
-                options={transitionProducts.map(p => ({
-                    value: p.product_id,
-                    label: p.name
-                }))}
-                value={transitionProducts.length === 1 ? transitionProducts[0].product_id : product}
-                searchable={false}
+                options={options}
+                value={value}
+                isSearchable={false}
                 placeholder="Search and select a product..."
-                disabled={disabled || transitionProducts.length === 0 || transitionProducts.length === 1}
+                isDisabled={disabled || transitionProducts.length === 0 || transitionProducts.length === 1}
             />
         );
     }

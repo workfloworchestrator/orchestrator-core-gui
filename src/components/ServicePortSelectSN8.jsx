@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 import { isEmpty } from "../utils/Utils";
 
 export default class ServicePortSelectSN8 extends React.PureComponent {
@@ -15,19 +14,23 @@ export default class ServicePortSelectSN8 extends React.PureComponent {
 
     render() {
         const { onChange, servicePort, servicePorts, organisations, disabled } = this.props;
+
+        const options = servicePorts
+            .map(aServicePort => ({
+                value: aServicePort.subscription_id,
+                label: this.label(aServicePort, organisations),
+                tag: aServicePort.tag
+            }))
+            .sort((x, y) => x.label.localeCompare(y.label));
+        const value = options.find(option => option.value === servicePort);
+
         return (
             <Select
                 onChange={onChange}
-                options={servicePorts
-                    .map(aServicePort => ({
-                        value: aServicePort.subscription_id,
-                        label: this.label(aServicePort, organisations),
-                        tag: aServicePort.tag
-                    }))
-                    .sort((x, y) => x.label.localeCompare(y.label))}
-                value={servicePort}
-                searchable={true}
-                disabled={disabled || servicePorts.length === 0}
+                options={options}
+                value={value}
+                isSearchable={true}
+                isDisabled={disabled || servicePorts.length === 0}
             />
         );
     }

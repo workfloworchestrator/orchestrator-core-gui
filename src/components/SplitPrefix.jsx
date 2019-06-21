@@ -4,7 +4,6 @@ import Select from "react-select";
 
 import { free_subnets } from "../api";
 
-import "react-select/dist/react-select.css";
 import "./SplitPrefix.scss";
 
 export default class SplitPrefix extends React.PureComponent {
@@ -58,25 +57,23 @@ export default class SplitPrefix extends React.PureComponent {
         const max_for_version = version === 4 ? 32 : 64;
         const { desired_prefixlen, selected_subnet } = this.state;
         const prefixlengths = [...Array(max_for_version - prefix_min + 1).keys()].map(x => prefix_min + x);
+
+        const length_options = prefixlengths.map(pl => ({ value: pl, label: pl }));
+        const length_value = length_options.find(option => option.value === desired_prefixlen);
+
+        const prefix_options = this.state.subnets.map(sn => ({ label: sn, value: sn }));
+        const prefix_value = prefix_options.find(option => option.value === selected_subnet);
         return (
             <section>
                 <h3>
                     Selected prefix: {subnet}/{netmask}
                 </h3>
                 <div>Desired netmask of the new subnet:</div>
-                <Select
-                    onChange={this.changePrefixLength}
-                    options={prefixlengths.map(pl => ({ value: pl, label: pl }))}
-                    value={desired_prefixlen}
-                />
+                <Select onChange={this.changePrefixLength} options={length_options} value={length_value} />
                 {this.state.subnets && (
                     <div>
                         <div>Desired prefix:</div>
-                        <Select
-                            options={this.state.subnets.map(sn => ({ label: sn, value: sn }))}
-                            onChange={this.selectSubnet}
-                            value={selected_subnet}
-                        />
+                        <Select options={prefix_options} onChange={this.selectSubnet} value={prefix_value} />
                     </div>
                 )}
             </section>

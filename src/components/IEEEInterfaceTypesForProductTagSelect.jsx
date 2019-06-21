@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 
 import { ieeeInterfaceTypesForProductId } from "../api/index";
 import { isEmpty } from "../utils/Utils";
@@ -31,16 +30,19 @@ export default class IEEEInterfaceTypesForProductTagSelect extends React.PureCom
     render() {
         const { interfaceTypes } = this.state;
         const { onChange, interfaceType, disabled } = this.props;
+
+        const options = interfaceTypes.map(aInterfaceType => {
+            return { value: aInterfaceType, label: aInterfaceType };
+        });
+        const value = options.find(option => option.value === interfaceType);
         return (
             <Select
                 className="select-interface-type"
                 onChange={onChange}
-                options={interfaceTypes.map(aInterfaceType => {
-                    return { value: aInterfaceType, label: aInterfaceType };
-                })}
-                value={interfaceType}
-                searchable={true}
-                disabled={disabled || interfaceTypes.length === 0}
+                options={options}
+                value={value}
+                isSearchable={true}
+                isDisabled={disabled || interfaceTypes.length === 0}
                 placeholder={
                     interfaceTypes.length > 0 ? "Select an IEEE interface type..." : "First select a product type..."
                 }

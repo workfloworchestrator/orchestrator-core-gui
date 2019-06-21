@@ -35,8 +35,11 @@ export function formInput(
     );
 }
 
-export function formSelect(i18nKey, onChange, values, readOnly, value, clearable = false, multiple = false) {
+export function formSelect(i18nKey, onChange, values, readOnly, selected_value, clearable = false, multiple = false) {
     const options = isEmpty(values) ? [] : values[0].label ? values : values.map(val => ({ value: val, label: val }));
+
+    const value = options.find(option => option.value === selected_value);
+
     return (
         <section className="form-divider">
             <label>{I18n.t(i18nKey)}</label>
@@ -45,11 +48,11 @@ export function formSelect(i18nKey, onChange, values, readOnly, value, clearable
                 className="select-status"
                 onChange={onChange}
                 options={options}
-                searchable={false}
+                isSearchable={false}
                 value={value}
-                clearable={clearable}
-                disabled={readOnly}
-                multi={multiple}
+                isClearable={clearable}
+                isDisabled={readOnly}
+                isMulti={multiple}
             />
         </section>
     );

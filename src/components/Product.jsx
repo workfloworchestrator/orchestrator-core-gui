@@ -311,6 +311,10 @@ export default class Product extends React.Component {
         const fixedInputConf = allowedFixedInputs.find(fi => fi.name === fixedInput.name);
         const values = fixedInputConf ? fixedInputConf.values : [];
         const required = fixedInputConf ? fixedInputConf.required : true;
+
+        const options = values.map(val => ({ value: val, label: val }));
+        const value = options.find(option => option.value === fixedInput.value);
+
         return (
             <div key={index} className="fixed-input">
                 <div className="wrapper">
@@ -322,11 +326,11 @@ export default class Product extends React.Component {
                     <Select
                         className="select-fixed-input-value"
                         onChange={this.fixedInputValueChanged(index)}
-                        options={values.map(val => ({ value: val, label: val }))}
-                        searchable={false}
-                        value={fixedInput.value}
-                        clearable={false}
-                        disabled={readOnly}
+                        options={options}
+                        isSearchable={false}
+                        value={value}
+                        isClearable={false}
+                        isDisabled={readOnly}
                     />
                 </div>
                 {!required && <i className="fa fa-minus first" onClick={this.removeFixedInput(index)} />}
@@ -355,14 +359,14 @@ export default class Product extends React.Component {
                                 value: fi.name,
                                 label: fi.name
                             }))}
-                            searchable={false}
-                            clearable={false}
+                            isSearchable={false}
+                            isClearable={false}
                             placeholder={
                                 availableFixedInputs.length > 0
                                     ? I18n.t("metadata.products.select_add_fixed_input")
                                     : I18n.t("metadata.products.select_no_more_fixed_inputs")
                             }
-                            disabled={readOnly || availableFixedInputs.length === 0}
+                            isDisabled={readOnly || availableFixedInputs.length === 0}
                         />
                     )}
                 </div>
@@ -399,14 +403,14 @@ export default class Product extends React.Component {
                                 value: pb.product_block_id,
                                 label: `${pb.name.toUpperCase()} - ${pb.description}`
                             }))}
-                            searchable={true}
-                            clearable={false}
+                            isSearchable={true}
+                            isClearable={false}
                             placeholder={
                                 availableProductBlocks.length > 0
                                     ? I18n.t("metadata.products.select_add_product_block")
                                     : I18n.t("metadata.products.select_no_more_product_blocks")
                             }
-                            disabled={readOnly || availableProductBlocks.length === 0}
+                            isDisabled={readOnly || availableProductBlocks.length === 0}
                         />
                     )}
                 </div>

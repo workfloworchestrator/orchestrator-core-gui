@@ -487,77 +487,106 @@ exports[`Storyshots GenericSelect Default 1`] = `
   className="storybook-container"
 >
   <div
-    className="Select generic-select is-clearable is-searchable Select--single"
+    className="generic-select css-2b097c-container"
+    onKeyDown={[Function]}
   >
     <div
-      className="Select-control"
-      onKeyDown={[Function]}
+      className=" css-yk16xz-control"
       onMouseDown={[Function]}
       onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
     >
       <div
-        className="Select-multi-value-wrapper"
-        id="react-select-5--value"
+        className=" css-1hwfws3"
       >
         <div
-          className="Select-placeholder"
+          className=" css-1wa3eu0-placeholder"
         >
           Search or select a value...
         </div>
         <div
-          className="Select-input"
-          style={
-            Object {
-              "display": "inline-block",
-            }
-          }
+          className="css-1g6gooi"
         >
-          <input
-            aria-activedescendant="react-select-5--value"
-            aria-expanded="false"
-            aria-haspopup="false"
-            aria-owns=""
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={false}
-            role="combobox"
-            style={
-              Object {
-                "boxSizing": "content-box",
-                "width": "5px",
-              }
-            }
-            value=""
-          />
           <div
+            className=""
             style={
               Object {
-                "height": 0,
-                "left": 0,
-                "overflow": "scroll",
-                "position": "absolute",
-                "top": 0,
-                "visibility": "hidden",
-                "whiteSpace": "pre",
+                "display": "inline-block",
               }
             }
           >
-            
+            <input
+              aria-autocomplete="list"
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={false}
+              id="react-select-5-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              spellCheck="false"
+              style={
+                Object {
+                  "background": 0,
+                  "border": 0,
+                  "boxSizing": "content-box",
+                  "color": "inherit",
+                  "fontSize": "inherit",
+                  "label": "input",
+                  "opacity": 1,
+                  "outline": 0,
+                  "padding": 0,
+                  "width": "1px",
+                }
+              }
+              tabIndex="0"
+              type="text"
+              value=""
+            />
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "left": 0,
+                  "overflow": "scroll",
+                  "position": "absolute",
+                  "top": 0,
+                  "visibility": "hidden",
+                  "whiteSpace": "pre",
+                }
+              }
+            >
+              
+            </div>
           </div>
         </div>
       </div>
-      <span
-        className="Select-arrow-zone"
-        onMouseDown={[Function]}
+      <div
+        className=" css-1wy0on6"
       >
         <span
-          className="Select-arrow"
-          onMouseDown={[Function]}
+          className=" css-1okebmr-indicatorSeparator"
         />
-      </span>
+        <div
+          aria-hidden="true"
+          className=" css-tlfecz-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="css-19bqh2r"
+            focusable="false"
+            height={20}
+            viewBox="0 0 20 20"
+            width={20}
+          >
+            <path
+              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -568,77 +597,106 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
   className="storybook-container"
 >
   <div
-    className="Select select-locationcode is-clearable is-searchable Select--single"
+    className="select-locationcode css-2b097c-container"
+    onKeyDown={[Function]}
   >
     <div
-      className="Select-control"
-      onKeyDown={[Function]}
+      className=" css-yk16xz-control"
       onMouseDown={[Function]}
       onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
     >
       <div
-        className="Select-multi-value-wrapper"
-        id="react-select-6--value"
+        className=" css-1hwfws3"
       >
         <div
-          className="Select-placeholder"
+          className=" css-1wa3eu0-placeholder"
         >
           Select...
         </div>
         <div
-          className="Select-input"
-          style={
-            Object {
-              "display": "inline-block",
-            }
-          }
+          className="css-1g6gooi"
         >
-          <input
-            aria-activedescendant="react-select-6--value"
-            aria-expanded="false"
-            aria-haspopup="false"
-            aria-owns=""
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={false}
-            role="combobox"
-            style={
-              Object {
-                "boxSizing": "content-box",
-                "width": "5px",
-              }
-            }
-            value=""
-          />
           <div
+            className=""
             style={
               Object {
-                "height": 0,
-                "left": 0,
-                "overflow": "scroll",
-                "position": "absolute",
-                "top": 0,
-                "visibility": "hidden",
-                "whiteSpace": "pre",
+                "display": "inline-block",
               }
             }
           >
-            
+            <input
+              aria-autocomplete="list"
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={false}
+              id="react-select-6-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              spellCheck="false"
+              style={
+                Object {
+                  "background": 0,
+                  "border": 0,
+                  "boxSizing": "content-box",
+                  "color": "inherit",
+                  "fontSize": "inherit",
+                  "label": "input",
+                  "opacity": 1,
+                  "outline": 0,
+                  "padding": 0,
+                  "width": "1px",
+                }
+              }
+              tabIndex="0"
+              type="text"
+              value=""
+            />
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "left": 0,
+                  "overflow": "scroll",
+                  "position": "absolute",
+                  "top": 0,
+                  "visibility": "hidden",
+                  "whiteSpace": "pre",
+                }
+              }
+            >
+              
+            </div>
           </div>
         </div>
       </div>
-      <span
-        className="Select-arrow-zone"
-        onMouseDown={[Function]}
+      <div
+        className=" css-1wy0on6"
       >
         <span
-          className="Select-arrow"
-          onMouseDown={[Function]}
+          className=" css-1okebmr-indicatorSeparator"
         />
-      </span>
+        <div
+          aria-hidden="true"
+          className=" css-tlfecz-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="css-19bqh2r"
+            focusable="false"
+            height={20}
+            viewBox="0 0 20 20"
+            width={20}
+          >
+            <path
+              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -655,61 +713,120 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
       className="select-box"
     >
       <div
-        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+        className=" css-14jk2my-container"
+        onKeyDown={[Function]}
       >
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className=" css-1fhf3k1-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-3--value"
+            className=" css-1hwfws3"
           >
             <div
-              className="Select-placeholder"
+              className=" css-1wa3eu0-placeholder"
             >
               Select a subscription for the selected product
             </div>
             <div
-              aria-activedescendant="react-select-3--value"
-              aria-disabled="true"
-              aria-expanded={false}
-              aria-owns=""
-              className="Select-input"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              role="combobox"
-              style={
-                Object {
-                  "border": 0,
-                  "display": "inline-block",
-                  "width": 1,
+              className="css-1g6gooi"
+            >
+              <div
+                className=""
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
                 }
-              }
-              tabIndex={0}
-            />
+              >
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={true}
+                  id="react-select-3-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
           </div>
-          <span
-            aria-hidden="true"
-            className="Select-loading-zone"
+          <div
+            className=" css-1wy0on6"
           >
+            <div
+              aria-hidden="true"
+              className=" css-at12u2-loadingIndicator"
+            >
+              <span
+                className="css-d0ptw1"
+              />
+              <span
+                className="css-3utax6"
+              />
+              <span
+                className="css-1qyc6ze"
+              />
+            </div>
             <span
-              className="Select-loading"
+              className=" css-109onse-indicatorSeparator"
             />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className=" css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
-            />
-          </span>
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-19bqh2r"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -728,61 +845,120 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
       className="select-box"
     >
       <div
-        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+        className=" css-14jk2my-container"
+        onKeyDown={[Function]}
       >
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className=" css-1fhf3k1-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-4--value"
+            className=" css-1hwfws3"
           >
             <div
-              className="Select-placeholder"
+              className=" css-1wa3eu0-placeholder"
             >
               Select a subscription for the selected product
             </div>
             <div
-              aria-activedescendant="react-select-4--value"
-              aria-disabled="true"
-              aria-expanded={false}
-              aria-owns=""
-              className="Select-input"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              role="combobox"
-              style={
-                Object {
-                  "border": 0,
-                  "display": "inline-block",
-                  "width": 1,
+              className="css-1g6gooi"
+            >
+              <div
+                className=""
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
                 }
-              }
-              tabIndex={0}
-            />
+              >
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={true}
+                  id="react-select-4-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
           </div>
-          <span
-            aria-hidden="true"
-            className="Select-loading-zone"
+          <div
+            className=" css-1wy0on6"
           >
+            <div
+              aria-hidden="true"
+              className=" css-at12u2-loadingIndicator"
+            >
+              <span
+                className="css-d0ptw1"
+              />
+              <span
+                className="css-3utax6"
+              />
+              <span
+                className="css-1qyc6ze"
+              />
+            </div>
             <span
-              className="Select-loading"
+              className=" css-109onse-indicatorSeparator"
             />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className=" css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
-            />
-          </span>
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-19bqh2r"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -801,61 +977,120 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
       className="select-box"
     >
       <div
-        className="Select is-clearable is-disabled is-loading is-searchable Select--single"
+        className=" css-14jk2my-container"
+        onKeyDown={[Function]}
       >
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className=" css-1fhf3k1-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-2--value"
+            className=" css-1hwfws3"
           >
             <div
-              className="Select-placeholder"
+              className=" css-1wa3eu0-placeholder"
             >
               Select a subscription for this product tag
             </div>
             <div
-              aria-activedescendant="react-select-2--value"
-              aria-disabled="true"
-              aria-expanded={false}
-              aria-owns=""
-              className="Select-input"
-              onBlur={[Function]}
-              onFocus={[Function]}
-              role="combobox"
-              style={
-                Object {
-                  "border": 0,
-                  "display": "inline-block",
-                  "width": 1,
+              className="css-1g6gooi"
+            >
+              <div
+                className=""
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
                 }
-              }
-              tabIndex={0}
-            />
+              >
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={true}
+                  id="react-select-2-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
           </div>
-          <span
-            aria-hidden="true"
-            className="Select-loading-zone"
+          <div
+            className=" css-1wy0on6"
           >
+            <div
+              aria-hidden="true"
+              className=" css-at12u2-loadingIndicator"
+            >
+              <span
+                className="css-d0ptw1"
+              />
+              <span
+                className="css-3utax6"
+              />
+              <span
+                className="css-1qyc6ze"
+              />
+            </div>
             <span
-              className="Select-loading"
+              className=" css-109onse-indicatorSeparator"
             />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className=" css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
-            />
-          </span>
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-19bqh2r"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1092,77 +1327,106 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-7--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-7--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-7-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -1315,53 +1579,106 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       Node
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-8--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             Select...
                           </div>
                           <div
-                            aria-activedescendant="react-select-8--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-8-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1372,53 +1689,106 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       Port
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-9--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             First select a node
                           </div>
                           <div
-                            aria-activedescendant="react-select-9--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-9-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1445,53 +1815,106 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       Node
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-10--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             Select...
                           </div>
                           <div
-                            aria-activedescendant="react-select-10--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-10-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1502,53 +1925,106 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                       Port
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-11--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             First select a node
                           </div>
                           <div
-                            aria-activedescendant="react-select-11--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-11-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1626,53 +2102,106 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       Node
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-12--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             Select...
                           </div>
                           <div
-                            aria-activedescendant="react-select-12--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-12-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1683,53 +2212,106 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       Port
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-13--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             First select a node
                           </div>
                           <div
-                            aria-activedescendant="react-select-13--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-13-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1756,53 +2338,106 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       Node
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-14--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             Select...
                           </div>
                           <div
-                            aria-activedescendant="react-select-14--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-14-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1813,53 +2448,106 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                       Port
                     </label>
                     <div
-                      className="Select is-clearable is-disabled is-searchable Select--single"
+                      className=" css-14jk2my-container"
+                      onKeyDown={[Function]}
                     >
                       <div
-                        className="Select-control"
-                        onKeyDown={[Function]}
+                        className=" css-1fhf3k1-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
-                        onTouchMove={[Function]}
-                        onTouchStart={[Function]}
                       >
                         <div
-                          className="Select-multi-value-wrapper"
-                          id="react-select-15--value"
+                          className=" css-1hwfws3"
                         >
                           <div
-                            className="Select-placeholder"
+                            className=" css-1wa3eu0-placeholder"
                           >
                             First select a node
                           </div>
                           <div
-                            aria-activedescendant="react-select-15--value"
-                            aria-disabled="true"
-                            aria-expanded={false}
-                            aria-owns=""
-                            className="Select-input"
-                            onBlur={[Function]}
-                            onFocus={[Function]}
-                            role="combobox"
-                            style={
-                              Object {
-                                "border": 0,
-                                "display": "inline-block",
-                                "width": 1,
+                            className="css-1g6gooi"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
                               }
-                            }
-                            tabIndex={0}
-                          />
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={true}
+                                id="react-select-15-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <span
-                          className="Select-arrow-zone"
-                          onMouseDown={[Function]}
+                        <div
+                          className=" css-1wy0on6"
                         >
                           <span
-                            className="Select-arrow"
-                            onMouseDown={[Function]}
+                            className=" css-109onse-indicatorSeparator"
                           />
-                        </span>
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-19bqh2r"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1931,53 +2619,106 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                   className="node-select"
                 >
                   <div
-                    className="Select select-node is-clearable is-disabled is-searchable Select--single"
+                    className="select-node css-14jk2my-container"
+                    onKeyDown={[Function]}
                   >
                     <div
-                      className="Select-control"
-                      onKeyDown={[Function]}
+                      className=" css-1fhf3k1-control"
                       onMouseDown={[Function]}
                       onTouchEnd={[Function]}
-                      onTouchMove={[Function]}
-                      onTouchStart={[Function]}
                     >
                       <div
-                        className="Select-multi-value-wrapper"
-                        id="react-select-16--value"
+                        className=" css-1hwfws3"
                       >
                         <div
-                          className="Select-placeholder"
+                          className=" css-1wa3eu0-placeholder"
                         >
                           Loading nodes, please wait...
                         </div>
                         <div
-                          aria-activedescendant="react-select-16--value"
-                          aria-disabled="true"
-                          aria-expanded={false}
-                          aria-owns=""
-                          className="Select-input"
-                          onBlur={[Function]}
-                          onFocus={[Function]}
-                          role="combobox"
-                          style={
-                            Object {
-                              "border": 0,
-                              "display": "inline-block",
-                              "width": 1,
+                          className="css-1g6gooi"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
                             }
-                          }
-                          tabIndex={0}
-                        />
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={true}
+                              id="react-select-16-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <span
-                        className="Select-arrow-zone"
-                        onMouseDown={[Function]}
+                      <div
+                        className=" css-1wy0on6"
                       >
                         <span
-                          className="Select-arrow"
-                          onMouseDown={[Function]}
+                          className=" css-109onse-indicatorSeparator"
                         />
-                      </span>
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-19bqh2r"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2045,77 +2786,106 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-19--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-19--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-19-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -2167,53 +2937,106 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                           Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-20--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-20--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-20-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2319,77 +3142,106 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-17--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-17--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-17-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -2441,53 +3293,106 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                           Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-18--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-18--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-18-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2593,77 +3498,106 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-21--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-21--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-21-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -2715,53 +3649,106 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                           Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-22--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-22--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-22-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2867,77 +3854,106 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-23--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-23--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-23-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -2989,53 +4005,106 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           SURFnet8 Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-24--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-24--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-24-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -3137,77 +4206,106 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-29--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-29--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-29-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -3259,53 +4357,106 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                           SURFnet8 Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-30--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-30--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-30-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -3407,77 +4558,106 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-25--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-25--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-25-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -3529,53 +4709,106 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           SURFnet8 Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-26--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-26--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-26-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -3677,77 +4910,106 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   Search and select the customer for the product
                 </em>
                 <div
-                  className="Select is-clearable is-searchable Select--single"
+                  className=" css-2b097c-container"
+                  onKeyDown={[Function]}
                 >
                   <div
-                    className="Select-control"
-                    onKeyDown={[Function]}
+                    className=" css-yk16xz-control"
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
-                    onTouchMove={[Function]}
-                    onTouchStart={[Function]}
                   >
                     <div
-                      className="Select-multi-value-wrapper"
-                      id="react-select-27--value"
+                      className=" css-1hwfws3"
                     >
                       <div
-                        className="Select-placeholder"
+                        className=" css-1wa3eu0-placeholder"
                       >
                         Search and select a customer...
                       </div>
                       <div
-                        className="Select-input"
-                        style={
-                          Object {
-                            "display": "inline-block",
-                          }
-                        }
+                        className="css-1g6gooi"
                       >
-                        <input
-                          aria-activedescendant="react-select-27--value"
-                          aria-expanded="false"
-                          aria-haspopup="false"
-                          aria-owns=""
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          required={false}
-                          role="combobox"
-                          style={
-                            Object {
-                              "boxSizing": "content-box",
-                              "width": "5px",
-                            }
-                          }
-                          value=""
-                        />
                         <div
+                          className=""
                           style={
                             Object {
-                              "height": 0,
-                              "left": 0,
-                              "overflow": "scroll",
-                              "position": "absolute",
-                              "top": 0,
-                              "visibility": "hidden",
-                              "whiteSpace": "pre",
+                              "display": "inline-block",
                             }
                           }
                         >
-                          
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-27-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <span
-                      className="Select-arrow-zone"
-                      onMouseDown={[Function]}
+                    <div
+                      className=" css-1wy0on6"
                     >
                       <span
-                        className="Select-arrow"
-                        onMouseDown={[Function]}
+                        className=" css-1okebmr-indicatorSeparator"
                       />
-                    </span>
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -3799,53 +5061,106 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                           SURFnet8 Service Port
                         </label>
                         <div
-                          className="Select is-clearable is-disabled is-searchable Select--single"
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
                         >
                           <div
-                            className="Select-control"
-                            onKeyDown={[Function]}
+                            className=" css-1fhf3k1-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
-                            onTouchMove={[Function]}
-                            onTouchStart={[Function]}
                           >
                             <div
-                              className="Select-multi-value-wrapper"
-                              id="react-select-28--value"
+                              className=" css-1hwfws3"
                             >
                               <div
-                                className="Select-placeholder"
+                                className=" css-1wa3eu0-placeholder"
                               >
                                 Select...
                               </div>
                               <div
-                                aria-activedescendant="react-select-28--value"
-                                aria-disabled="true"
-                                aria-expanded={false}
-                                aria-owns=""
-                                className="Select-input"
-                                onBlur={[Function]}
-                                onFocus={[Function]}
-                                role="combobox"
-                                style={
-                                  Object {
-                                    "border": 0,
-                                    "display": "inline-block",
-                                    "width": 1,
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
                                   }
-                                }
-                                tabIndex={0}
-                              />
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-28-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <span
-                              className="Select-arrow-zone"
-                              onMouseDown={[Function]}
+                            <div
+                              className=" css-1wy0on6"
                             >
                               <span
-                                className="Select-arrow"
-                                onMouseDown={[Function]}
+                                className=" css-109onse-indicatorSeparator"
                               />
-                            </span>
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
