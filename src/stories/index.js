@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, array, boolean, number, select } from "@storybook/addon-knobs";
 import { withState } from "@dump247/storybook-state";
-
+import "react-datepicker/dist/react-datepicker.css";
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss";
 import "./storybook.scss";
@@ -29,6 +29,7 @@ import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
 import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
+import { formDate } from "../forms/Builder";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -310,6 +311,21 @@ storiesOf("TableSummary", module)
     .add("Definition", () => <TableSummary data={tableSummaryDataDefinition} />)
     .add("Summary with headers", () => <TableSummary data={tableSummaryDataWithHeaders} />)
     .add("Summary with definition and headers", () => <TableSummary data={tableSummaryDataDefinitionWithHeaders} />);
+
+storiesOf("DatePicker", module).add(
+    "Definition",
+    withState({ date: new Date() })(({ store }) =>
+        formDate(
+            "metadata.productBlocks.created_at",
+            e => {
+                action("onChange")(e);
+                store.set({ date: e });
+            },
+            false,
+            store.state.date
+        )
+    )
+);
 
 storiesOf("GenericNOCConfirm", module)
     .add("Legacy", () => (
