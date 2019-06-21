@@ -37,7 +37,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { subscriptionsByTags, subscriptionsWithTags } from "../api";
+import {allSubscriptions, subscriptionsByTags} from "../api";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -68,7 +68,7 @@ export default class UserInputForm extends React.Component {
     }
 
     loadSubscriptions = () => {
-        subscriptionsWithTags().then(subscriptions => {
+        allSubscriptions().then(subscriptions => {
             this.setState({
                 subscriptionsLoaded: true,
                 subscriptions: subscriptions
@@ -590,7 +590,7 @@ export default class UserInputForm extends React.Component {
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const nodeSubscriptions = subscriptions.length
                     ? subscriptions.filter(
-                          subscription => subscription.tag === "Node" && subscription.status !== "terminated"
+                          subscription => subscription.product.tag === "Node" && subscription.status !== "terminated"
                       )
                     : [];
                 return (

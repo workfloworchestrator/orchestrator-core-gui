@@ -478,7 +478,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
         return (
             <UserInputContainer
@@ -495,7 +495,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
         return (
             <UserInputContainer
@@ -517,7 +517,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
         return (
             <UserInputContainer
@@ -535,7 +535,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("/api/ims/nodes/MT001A", imsNodes);
         return (
             <UserInputContainer
@@ -552,7 +552,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -569,7 +569,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -586,7 +586,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -639,7 +639,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -656,7 +656,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -673,7 +673,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -690,7 +690,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
