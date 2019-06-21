@@ -21,7 +21,6 @@ import GenericNOCConfirm from "./GenericNOCConfirm";
 import IPPrefix from "./IPPrefix";
 import { findValueFromInputStep, lookupValueFromNestedState } from "../utils/NestedState";
 import { doValidateUserInput } from "../validations/UserInput";
-import VirtualLAN from "./VirtualLAN";
 import { randomCrmIdentifier } from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
@@ -359,19 +358,6 @@ export default class UserInputForm extends React.Component {
                         value={value || ""}
                         portsKey={userInput.ports_key}
                         disabled={userInput.readonly}
-                    />
-                );
-            case "vlan_range":
-                const subscriptionIdMSP = findValueFromInputStep(userInput.msp_key, stepUserInput);
-                const imsCircuitId = lookupValueFromNestedState(userInput.ims_circuit_id, currentState);
-                return (
-                    <VirtualLAN
-                        vlan={value}
-                        onChange={this.changeStringInput(name)}
-                        subscriptionIdMSP={subscriptionIdMSP}
-                        onBlur={this.validateUserInput(name)}
-                        imsCircuitId={imsCircuitId}
-                        reportError={this.reportCustomError(userInput.type)}
                     />
                 );
             case "organisation":
