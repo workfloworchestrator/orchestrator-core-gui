@@ -1,6 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
+import { isDate } from "date-fns";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
@@ -10,7 +11,6 @@ import { allWorkflows, productBlocks, productById, products, saveProduct } from 
 import { setFlash } from "../utils/Flash";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
-import * as moment from "moment";
 import { formDate, formInput, formSelect } from "../forms/Builder";
 import "./Product.scss";
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
@@ -251,7 +251,7 @@ export default class Product extends React.Component {
     changeProperty = name => e => {
         const { product, fixedInputConf } = this.state;
         let value;
-        if (isEmpty(e) || e._isAMomentObject) {
+        if (isEmpty(e) || isDate(e)) {
             value = e;
         } else {
             value = e.target ? e.target.value : e.value;
@@ -437,9 +437,9 @@ export default class Product extends React.Component {
         } = this.state;
         const endDate = isEmpty(product.end_date)
             ? null
-            : product.end_date._isAMomentObject
+            : isDate(product.end_date)
             ? product.end_date
-            : moment(product.end_date * 1000);
+            : new Date(product.end_date * 1000);
         return (
             <div className="mod-product">
                 <ConfirmationDialog
@@ -521,15 +521,9 @@ export default class Product extends React.Component {
                         "metadata.products.created_at",
                         () => false,
                         true,
-                        product.created_at ? moment(product.created_at * 1000) : moment()
+                        product.created_at ? new Date(product.created_at * 1000) : new Date()
                     )}
-                    {formDate(
-                        "metadata.products.end_date",
-                        this.changeProperty("end_date"),
-                        readOnly,
-                        endDate,
-                        moment().add(100, "years")
-                    )}
+                    {formDate("metadata.products.end_date", this.changeProperty("end_date"), readOnly, endDate)}
                     {this.renderButtons(readOnly, initial, product)}
                 </section>
             </div>
