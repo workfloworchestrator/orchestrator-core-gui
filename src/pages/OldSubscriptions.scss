@@ -2,185 +2,183 @@
 @import "../stylesheets/media_queries.scss";
 
 .mod-subscriptions {
-  @include page;
+    @include page;
 
-  .card {
-    @include card;
-    padding: 15px;
-  }
-  .options {
-    display: flex;
-    padding-top: 25px;
-    flex-direction: row;
-    align-items: center;
-  }
-  section.search {
-    padding: 0 15px 0 0;
-    position: relative;
-    flex-grow: 5;
+    .card {
+        @include card;
+        padding: 15px;
+    }
+    .options {
+        display: flex;
+        padding-top: 25px;
+        flex-direction: row;
+        align-items: center;
+    }
+    section.search {
+        padding: 0 15px 0 0;
+        position: relative;
+        flex-grow: 5;
 
-    input {
-      padding: 12px;
-      margin-left: auto;
-      margin-top: 0;
-      border: 1px solid $lighter-grey;
-      border-bottom-left-radius: $br;
-      border-top-left-radius: $br;
-      font-size: 14px;
-      width: 100%;
-      height: 100%;
-    }
-
-    i.fa-search {
-      color: lighten($blue, 5);
-      position: absolute;
-      right: 24px;
-      top: 8px;
-      font-size: 24px;
-    }
-  }
-  section.subscriptions {
-    display: flex;
-    padding: 0 20px 20px 20px;
-    background-color: white;
-  }
-
-  table.subscriptions {
-    width: 100%;
-    word-break: break-all;
-    td, th {
-      text-align: left;
-    }
-    tr {
-      border-bottom: 1px solid $light-grey;
-      &.related-subscription {
-        background-color: $light-grey;
-        border-left: 5px solid $blue;
-      }
-      &.related-subscription-warning {
-        background-color: $light-orange;
-        border-left: 5px solid $blue;
-      }
-    }
-    thead {
-      th {
-        cursor: pointer;
-        padding: 5px 0 10px;
-        i.fa {
-          float: right;
-          margin-right: 15px;
-          color: $medium-grey;
-          font-size: 18px;
+        input {
+            padding: 12px;
+            margin-left: auto;
+            margin-top: 0;
+            border: 1px solid $lighter-grey;
+            border-bottom-left-radius: $br;
+            border-top-left-radius: $br;
+            font-size: 14px;
+            width: 100%;
+            height: 100%;
         }
 
-      }
-      th.customer_name {
-        width: 14%;
-      }
-      th.subscription_id {
-        width: 8%;
-      }
-      th.description {
-        width: 16%;
-      }
-      th.insync {
-        width: 10%;
-        text-align: center;
-      }
-      th.product_name {
-        width: 15%;
-      }
-      th.status {
-        width: 7%;
-      }
-      th.tag {
-        width: 10%;
-      }
-      th.start_date_epoch {
-        width: 10%;
-      }
-      th.end_date_epoch {
-        width: 10%;
-      }
-      span {
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: larger;
-        color: $medium-grey;
-        padding: 7px 2px 7px 0;
-      }
+        i.fa-search {
+            color: lighten($blue, 5);
+            position: absolute;
+            right: 24px;
+            top: 8px;
+            font-size: 24px;
+        }
     }
-    tbody {
-      tr {
-        cursor: pointer;
-        &:hover {
-          background-color: $hover;
-        }
-      }
-      td {
-        word-break: break-word;
-        word-wrap: break-word;
-        padding: 3px 0;
-        &.insync {
-          display: flex;
-          justify-content: center;
-        }
-        &.actions {
-          i.fa-trash {
-            color: $red;
-            font-size: 22px;
-            padding: 0 20px;
-          }
-        }
-        i.fa-plus-circle, i.fa-minus-circle {
-          padding: 0 20px;
-          font-size: 24px;
-          color: $blue;
-        }
-      }
-    }
-    section.fetching-related-subscriptions {
-      display: flex;
-      align-items: center;
-      padding: 5px 0;
-      em {
-        display: inline-block;
-        margin-left: 15px;
-        font-size: 12px;
-      }
-      i {
-        margin-left: 18px;
-        font-size: 16px;
-      }
+    section.subscriptions {
+        display: flex;
+        padding: 0 20px 20px 20px;
+        background-color: white;
     }
 
-    @include phone {
-      thead {
-        display: none;
-      }
-      tr {
-        margin-bottom: 10px;
-        display: block;
-        border-bottom: 2px solid $lighter-grey;
-      }
-      td {
-        display: block;
-        text-align: right;
-        border-bottom: 1px dotted $light-blue;
-        padding: 8px 0;
-
-        &:before {
-          content: attr(data-label);
-          float: left;
-          text-transform: uppercase;
-          font-weight: bold;
-          font-size: 14px;
-          color: $medium-grey;
+    table.subscriptions {
+        width: 100%;
+        word-break: break-all;
+        td,
+        th {
+            text-align: left;
         }
-      }
+        tr {
+            border-bottom: 1px solid $light-grey;
+            &.related-subscription {
+                background-color: $light-grey;
+                border-left: 5px solid $blue;
+            }
+            &.related-subscription-warning {
+                background-color: $light-orange;
+                border-left: 5px solid $blue;
+            }
+        }
+        thead {
+            th {
+                cursor: pointer;
+                padding: 5px 0 10px;
+                i.fa {
+                    float: right;
+                    margin-right: 15px;
+                    color: $medium-grey;
+                    font-size: 18px;
+                }
+            }
+            th.customer_name {
+                width: 14%;
+            }
+            th.subscription_id {
+                width: 8%;
+            }
+            th.description {
+                width: 16%;
+            }
+            th.insync {
+                width: 10%;
+                text-align: center;
+            }
+            th.product_name {
+                width: 15%;
+            }
+            th.status {
+                width: 7%;
+            }
+            th.tag {
+                width: 10%;
+            }
+            th.start_date_epoch {
+                width: 10%;
+            }
+            th.end_date_epoch {
+                width: 10%;
+            }
+            span {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: larger;
+                color: $medium-grey;
+                padding: 7px 2px 7px 0;
+            }
+        }
+        tbody {
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: $hover;
+                }
+            }
+            td {
+                word-break: break-word;
+                word-wrap: break-word;
+                padding: 3px 0;
+                &.insync {
+                    display: flex;
+                    justify-content: center;
+                }
+                &.actions {
+                    i.fa-trash {
+                        color: $red;
+                        font-size: 22px;
+                        padding: 0 20px;
+                    }
+                }
+                i.fa-plus-circle,
+                i.fa-minus-circle {
+                    padding: 0 20px;
+                    font-size: 24px;
+                    color: $blue;
+                }
+            }
+        }
+        section.fetching-related-subscriptions {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            em {
+                display: inline-block;
+                margin-left: 15px;
+                font-size: 12px;
+            }
+            i {
+                margin-left: 18px;
+                font-size: 16px;
+            }
+        }
 
+        @include phone {
+            thead {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+                display: block;
+                border-bottom: 2px solid $lighter-grey;
+            }
+            td {
+                display: block;
+                text-align: right;
+                border-bottom: 1px dotted $light-blue;
+                padding: 8px 0;
+
+                &:before {
+                    content: attr(data-label);
+                    float: left;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: $medium-grey;
+                }
+            }
+        }
     }
-
-  }
 }
-

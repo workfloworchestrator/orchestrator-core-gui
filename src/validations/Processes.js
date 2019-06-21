@@ -1,4 +1,4 @@
-export function actionOptions(process, showAction, retryAction, deleteAction, abortAction, statusProperty = "status" ) {
+export function actionOptions(process, showAction, retryAction, deleteAction, abortAction, statusProperty = "status") {
     //TODO scope on the context of logged in-user
     const details = {
         icon: "fa fa-search-plus",
@@ -48,9 +48,8 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
         case "suspended":
             options = [userInput, abort, _delete];
             break;
-        default :
-            throw new Error(`Unknown status: ${status}`)
+        default:
+            throw new Error(`Unknown status: ${status}`);
     }
     return options;
 }
-

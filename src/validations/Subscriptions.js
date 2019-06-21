@@ -1,19 +1,26 @@
-import {isEmpty} from "../utils/Utils";
+import { isEmpty } from "../utils/Utils";
 
 export function subscriptionInstanceValues(subscription) {
-    return subscription.instances.reduce((acc, instance) =>
-        acc.concat(instance.values.map(item => ({...item, instance_label: instance.label}))), []);
+    return subscription.instances.reduce(
+        (acc, instance) =>
+            acc.concat(
+                instance.values.map(item => ({
+                    ...item,
+                    instance_label: instance.label
+                }))
+            ),
+        []
+    );
 }
 
 const searchableSubscriptionsColumnsMapping = {
-    "customer": "customer_name",
-    "id": "subscription_id",
-    "description": "description",
-    "product": "product_name",
-    "status": "status",
-    "type": "product_tag"
+    customer: "customer_name",
+    id: "subscription_id",
+    description: "description",
+    product: "product_name",
+    status: "status",
+    type: "product_tag"
 };
-
 
 export function searchConstruct(query) {
     const queryToLower = query.toLowerCase();
@@ -42,16 +49,15 @@ export function searchConstruct(query) {
                 if (Array.isArray(value)) {
                     const lastValue = value[value.length - 1];
                     if (isEmpty(lastValue) || inSeparator) {
-                        value[value.length - 1] = value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
+                        value[value.length - 1] =
+                            value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
                     } else {
                         value.push(part === " " ? part : part.trim().toLowerCase());
                     }
-
                 } else {
                     searchOptions[key] = value + (part === " " ? part : part.trim().toLowerCase());
                 }
-            }
-            else if (part === " " && !inSeparator) {
+            } else if (part === " " && !inSeparator) {
                 let subParts = parts.slice(i);
                 const remainder = subParts.join("");
                 if (remainder.indexOf(":") < 0) {
@@ -60,15 +66,14 @@ export function searchConstruct(query) {
                 }
             } else if (parts.length === i) {
                 searchOptions["global_search"] = parts.toLowerCase().trim();
-            }
-            else if (customSearchableColumns.includes(part.trim()) && !inSeparator) {
+            } else if (customSearchableColumns.includes(part.trim()) && !inSeparator) {
                 let key = searchableSubscriptionsColumnsMapping[part];
                 if (lastSearchItem === part) {
                     const previous = searchOptions[key];
                     if (Array.isArray(previous)) {
                         previous.push("");
                     } else {
-                        searchOptions[key] = [previous, ""]
+                        searchOptions[key] = [previous, ""];
                     }
                 } else {
                     searchOptions[key] = "";
@@ -83,20 +88,20 @@ export function searchConstruct(query) {
                 if (Array.isArray(value)) {
                     const lastValue = value[value.length - 1];
                     if (isEmpty(lastValue) || inSeparator) {
-                        value[value.length - 1] = value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
+                        value[value.length - 1] =
+                            value[value.length - 1] + (part === " " ? part : part.trim().toLowerCase());
                     } else {
                         value.push(part === " " ? part : part.trim().toLowerCase());
                     }
                 } else {
                     searchOptions[key] = value + (part === " " ? part : part.trim().toLowerCase());
                 }
-
             }
         }
         Object.keys(searchOptions).forEach(key => {
             const value = searchOptions[key];
             if (Array.isArray(value)) {
-                 searchOptions[key] = value.map(val => val.trim()).filter(val => !isEmpty(val));
+                searchOptions[key] = value.map(val => val.trim()).filter(val => !isEmpty(val));
             } else {
                 searchOptions[key] = searchOptions[key].trim();
             }
@@ -109,7 +114,6 @@ export function searchConstruct(query) {
 }
 
 export const validEmailRegExp = /^\S+@\S+$/;
-
 
 export const port_subscription_id = "port_subscription_id";
 export const ims_circuit_id = "ims_circuit_id";

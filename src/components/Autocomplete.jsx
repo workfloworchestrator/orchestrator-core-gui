@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import scrollIntoView from "scroll-into-view";
 
 import "./Autocomplete.scss";
-import {isEmpty} from "../utils/Utils";
+import { isEmpty } from "../utils/Utils";
 
 export default class Autocomplete extends React.PureComponent {
-
     componentDidUpdate(prevProps) {
-        if (this.selectedRow && prevProps.selectedItem !== this.props.selectedItem && !isEmpty(this.props.suggestions)) {
+        if (
+            this.selectedRow &&
+            prevProps.selectedItem !== this.props.selectedItem &&
+            !isEmpty(this.props.suggestions)
+        ) {
             scrollIntoView(this.selectedRow);
         }
     }
@@ -20,11 +23,17 @@ export default class Autocomplete extends React.PureComponent {
         const first = name.substring(0, indexOf);
         const middle = name.substring(indexOf, indexOf + query.length);
         const last = name.substring(indexOf + query.length);
-        return <span>{first}<span className="matched">{middle}</span>{last}</span>;
+        return (
+            <span>
+                {first}
+                <span className="matched">{middle}</span>
+                {last}
+            </span>
+        );
     };
 
     render() {
-        const {suggestions, query, selectedItem, personIndex, itemSelected, className} = this.props;
+        const { suggestions, query, selectedItem, personIndex, itemSelected, className } = this.props;
         if (isEmpty(suggestions)) {
             return null;
         }
@@ -32,29 +41,28 @@ export default class Autocomplete extends React.PureComponent {
             <section className={`autocomplete ${className || ""}`}>
                 <table className="result">
                     <tbody>
-                    {suggestions
-                        .map((item, index) => (
-                                <tr key={index}
-                                    className={selectedItem === index ? "active" : ""}
-                                    onClick={() => itemSelected(item, personIndex)}
-                                    ref={ref => {
-                                        if (selectedItem === index) {
-                                            this.selectedRow = ref;
-                                        } else if (suggestions.length - 1 === index) {
-                                            this.lastRow = ref;
-                                        }
-                                    }}>
-                                    <td>{this.itemName(item, query)}</td>
-                                    <td>{item.email || ""}</td>
-                                </tr>
-                            )
-                        )}
+                        {suggestions.map((item, index) => (
+                            <tr
+                                key={index}
+                                className={selectedItem === index ? "active" : ""}
+                                onClick={() => itemSelected(item, personIndex)}
+                                ref={ref => {
+                                    if (selectedItem === index) {
+                                        this.selectedRow = ref;
+                                    } else if (suggestions.length - 1 === index) {
+                                        this.lastRow = ref;
+                                    }
+                                }}
+                            >
+                                <td>{this.itemName(item, query)}</td>
+                                <td>{item.email || ""}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </section>
         );
     }
-
 }
 
 Autocomplete.propTypes = {
@@ -63,7 +71,5 @@ Autocomplete.propTypes = {
     selectedItem: PropTypes.number,
     personIndex: PropTypes.number.isRequired,
     itemSelected: PropTypes.func.isRequired,
-    className: PropTypes.string,
+    className: PropTypes.string
 };
-
-

@@ -1,7 +1,6 @@
 @import "../stylesheets/mixins.scss";
 
 div.date_picker_custom {
-
     width: 180px;
     display: flex;
     border: 1px solid $lighter-grey;
@@ -35,5 +34,4 @@ div.date_picker_custom {
             border-right: 1px solid $lighter-grey;
         }
     }
-
 }

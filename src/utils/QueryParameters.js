@@ -1,8 +1,7 @@
 const QueryParameter = {
-
     //shameless refactor of https://gist.githubusercontent.com/pduey/2764606/raw/e8b9d6099f1e4161f7dd9f81d71c2c7a1fecbd5b/querystring.js
 
-    searchToHash: function (windowLocationSearch) {
+    searchToHash: function(windowLocationSearch) {
         const h = {};
         if (windowLocationSearch === undefined || windowLocationSearch.length < 1) {
             return h;
@@ -21,8 +20,7 @@ const QueryParameter = {
         return h;
     },
 
-
-    hashToSearch: function (newSearchHash) {
+    hashToSearch: function(newSearchHash) {
         let search = "?";
         for (const key in newSearchHash) {
             if (newSearchHash.hasOwnProperty(key)) {
@@ -34,7 +32,6 @@ const QueryParameter = {
         }
         return search;
     }
-
 };
 
 export function replaceQueryParameter(windowLocationSearch, name, value) {
@@ -45,7 +42,6 @@ export function replaceQueryParameter(windowLocationSearch, name, value) {
 }
 
 export function getParameterByName(name, windowLocationSearch) {
-
     const replacedName = name.replace(/[[]/, "[").replace(/[\]]/, "\\]");
     const regex = new RegExp("[\\?&]" + replacedName + "=([^&#]*)"),
         results = regex.exec(windowLocationSearch);
@@ -61,6 +57,6 @@ export function getQueryParameters(windowLocationSearch) {
         } else {
             squashed[key] = val;
         }
-    };
+    }
     return squashed;
 }

@@ -1,4 +1,4 @@
-import {isEmpty} from "../utils/Utils";
+import { isEmpty } from "../utils/Utils";
 
 export function filterProductsByBandwidth(products, bandwidth) {
     return products.filter(prod => {

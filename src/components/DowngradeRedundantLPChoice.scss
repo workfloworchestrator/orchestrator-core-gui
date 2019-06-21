@@ -27,18 +27,17 @@
         text-transform: uppercase;
     }
 
-
-
     .rlp_heading td {
         padding: 1px;
         white-space: nowrap;
-      }
+    }
 
     .rlp_heading h3 {
         text-align: left;
     }
 
-    .rlp_heading thead, .rlp_heading .label {
+    .rlp_heading thead,
+    .rlp_heading .label {
         background-color: $light-grey;
         padding-right: 10px;
     }
@@ -58,6 +57,4 @@
     .highlight-on {
         border: 1px solid red;
     }
-
 }
-

@@ -3,7 +3,6 @@
 @import "../stylesheets/forms.scss";
 
 .mod-process-step {
-
     .card {
         @include card;
         padding-bottom: 15px;
@@ -20,12 +19,16 @@
             em {
                 margin-bottom: 10px;
             }
-            &.first_lightpath, &.second_lightpath, p.label {
+            &.first_lightpath,
+            &.second_lightpath,
+            p.label {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: $blue;
             }
-            &.downgrade_redundant_lp_choice, &.service_ports_primary, &.service_ports_secondary {
+            &.downgrade_redundant_lp_choice,
+            &.service_ports_primary,
+            &.service_ports_secondary {
                 margin-left: 40px;
             }
         }
@@ -52,6 +55,4 @@
             margin-right: 10px;
         }
     }
-
 }
-

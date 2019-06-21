@@ -1,77 +1,75 @@
 @import "../stylesheets/vars.scss";
 
 section.filter-drop-down {
+    position: relative;
 
-  position: relative;
-
-  border: 1px solid $lighter-grey;
-  border-radius: $br;
-  padding-top: 1px;
-  margin-right: 25px;
-  min-width: 215px;
-  display: inline-block;
-  font-weight: bold;
-
-  div.filtered {
-    display: flex;
-    padding: 10px;
-    cursor: pointer;
-
-    .filter-label, .filter-label-divider {
-      color: $medium-grey;
-    }
-
-    .filter-name {
-      color: $blue;
-      margin: 0 15px;
-    }
-
-    span:last-child {
-      margin-left: auto;
-    }
-
-    i {
-      color: $blue;
-      &.fa-undo {
-          padding-right: 8px;
-      }
-
-    }
-  }
-
-  ul.drop-down {
-    position: absolute;
-    z-index: 2;
-    top: 40px;
-    right: 0;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 1px 2px 6px 1px $medium-grey;
-    min-width: 210px;
-    display: inline-block;
+    border: 1px solid $lighter-grey;
     border-radius: $br;
+    padding-top: 1px;
+    margin-right: 25px;
+    min-width: 215px;
+    display: inline-block;
+    font-weight: bold;
 
-    li {
-      display: flex;
-      color: $medium-grey;
-      align-items: center;
-      cursor: pointer;
+    div.filtered {
+        display: flex;
+        padding: 10px;
+        cursor: pointer;
 
-      label {
-          margin-left: auto;
-          padding-right: 8px;
-          cursor: pointer;
-
-      }
-
-      i {
-        &.fa-filter {
-          color: $blue;
-          &:hover {
-              color: $darkest-blue;
-          }
+        .filter-label,
+        .filter-label-divider {
+            color: $medium-grey;
         }
-      }
+
+        .filter-name {
+            color: $blue;
+            margin: 0 15px;
+        }
+
+        span:last-child {
+            margin-left: auto;
+        }
+
+        i {
+            color: $blue;
+            &.fa-undo {
+                padding-right: 8px;
+            }
+        }
     }
-  }
+
+    ul.drop-down {
+        position: absolute;
+        z-index: 2;
+        top: 40px;
+        right: 0;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 1px 2px 6px 1px $medium-grey;
+        min-width: 210px;
+        display: inline-block;
+        border-radius: $br;
+
+        li {
+            display: flex;
+            color: $medium-grey;
+            align-items: center;
+            cursor: pointer;
+
+            label {
+                margin-left: auto;
+                padding-right: 8px;
+                cursor: pointer;
+            }
+
+            i {
+                &.fa-filter {
+                    color: $blue;
+                    &:hover {
+                        color: $darkest-blue;
+                    }
+                }
+            }
+        }
+    }
 }

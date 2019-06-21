@@ -5,8 +5,14 @@ import I18n from "i18n-js";
 
 import "./ConfirmationDialog.scss";
 
-export default function ConfirmationDialog({isOpen = false, cancel, confirm, question = "",
-                                               leavePage = false, isError = false}) {
+export default function ConfirmationDialog({
+    isOpen = false,
+    cancel,
+    confirm,
+    question = "",
+    leavePage = false,
+    isError = false
+}) {
     return (
         <Modal
             isOpen={isOpen}
@@ -15,19 +21,19 @@ export default function ConfirmationDialog({isOpen = false, cancel, confirm, que
             className="confirmation-dialog-content"
             overlayClassName="confirmation-dialog-overlay"
             closeTimeoutMS={250}
-            appElement={document.getElementById('app')}
+            appElement={document.getElementById("app")}
         >
-            <section className="dialog-header">
-                {I18n.t("confirmation_dialog.title")}
-            </section>
-            {leavePage ?
+            <section className="dialog-header">{I18n.t("confirmation_dialog.title")}</section>
+            {leavePage ? (
                 <section className={`dialog-content ${isError ? " error" : ""}`}>
                     <h2>{I18n.t("confirmation_dialog.leavePage")}</h2>
                     <p>{I18n.t("confirmation_dialog.leavePageSub")}</p>
-                </section> :
+                </section>
+            ) : (
                 <section className="dialog-content">
                     <h2>{question}</h2>
-                </section>}
+                </section>
+            )}
             <section className="dialog-buttons">
                 <button className="button" onClick={cancel}>
                     {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
@@ -38,7 +44,6 @@ export default function ConfirmationDialog({isOpen = false, cancel, confirm, que
             </section>
         </Modal>
     );
-
 }
 
 ConfirmationDialog.propTypes = {
@@ -49,5 +54,3 @@ ConfirmationDialog.propTypes = {
     leavePage: PropTypes.bool,
     isError: PropTypes.bool
 };
-
-

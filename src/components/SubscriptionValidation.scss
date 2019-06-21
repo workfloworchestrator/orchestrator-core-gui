@@ -23,7 +23,8 @@ section.subscription-validation {
     table.subscriptions {
         width: 100%;
         word-break: break-all;
-        td, th {
+        td,
+        th {
             text-align: left;
         }
         tr {
@@ -32,7 +33,7 @@ section.subscription-validation {
         thead {
             th {
                 cursor: pointer;
-                padding: 5px 0 10px
+                padding: 5px 0 10px;
             }
             th.customer_name {
                 width: 20%;
@@ -119,11 +120,6 @@ section.subscription-validation {
                     color: $medium-grey;
                 }
             }
-
         }
-
     }
-
 }
-
-

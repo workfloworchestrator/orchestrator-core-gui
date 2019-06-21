@@ -1,32 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import "react-select/dist/react-select.css";
 
 export default class ServicePortSelect extends React.PureComponent {
-
     label = (servicePort, organisations) => {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
         const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
-        return `${crm_port_id} - ${servicePort.subscription_id.substring(0,8)} ${description.trim()} ${organisationName}`
+        return `${crm_port_id} - ${servicePort.subscription_id.substring(
+            0,
+            8
+        )} ${description.trim()} ${organisationName}`;
     };
 
     render() {
-        const {onChange, servicePort, servicePorts, organisations, disabled} = this.props;
-        return <Select onChange={onChange}
-                       options={servicePorts
-                           .map(aServicePort => ({
-                               value: aServicePort.subscription_id,
-                               label: this.label(aServicePort, organisations),
-                               tag: aServicePort.tag,
-                           }))
-                           .sort((x, y) => x.label.localeCompare(y.label))
-                       }
-                       value={servicePort}
-                       searchable={true}
-                       disabled={disabled || servicePorts.length === 0}/>
+        const { onChange, servicePort, servicePorts, organisations, disabled } = this.props;
+
+        const options = servicePorts
+            .map(aServicePort => ({
+                value: aServicePort.subscription_id,
+                label: this.label(aServicePort, organisations),
+                tag: aServicePort.tag
+            }))
+            .sort((x, y) => x.label.localeCompare(y.label));
+        const value = options.find(option => option.value === servicePort);
+
+        return (
+            <Select
+                onChange={onChange}
+                options={options}
+                value={value}
+                isSearchable={true}
+                isDisabled={disabled || servicePorts.length === 0}
+            />
+        );
     }
 }
 

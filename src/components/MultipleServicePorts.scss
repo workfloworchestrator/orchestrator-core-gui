@@ -10,7 +10,8 @@ section.multiple-mps {
         div.wrapper {
             margin-left: 25px;
             width: 50%;
-            div.vlan, div.bandwidth {
+            div.vlan,
+            div.bandwidth {
                 display: flex;
                 align-items: center;
                 div.virtual-vlan {
@@ -23,7 +24,7 @@ section.multiple-mps {
                     cursor: pointer;
                     &.disabled {
                         cursor: not-allowed;
-                        color: $light-grey
+                        color: $light-grey;
                     }
                 }
             }
