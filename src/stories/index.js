@@ -265,22 +265,33 @@ storiesOf("Welcome", module).add("to Storybook", () => (
 ));
 
 storiesOf("SubscriptionProductTagSelect", module)
-    .add("Only tags", () => <SubscriptionProductTagSelect onChange={action("clicked")} tags={["SP", "MSP"]} />)
-    .add("Filtered on Product", () => (
+    .add("Only tags", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return (<SubscriptionProductTagSelect onChange={action("clicked")} tags={["SP", "MSP"]} />)
+        })
+    .add("Filtered on Product", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return (<SubscriptionProductTagSelect
+            onChange={action("clicked")}
+            tags={["SP", "MSP"]}
+            // Fetch MSP 1G
+            productId="efbe1235-93df-49ee-bbba-e51434e0be17"
+        />)
+    })
+    .add("Filtered on Product with excluded subs", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return (
         <SubscriptionProductTagSelect
             onChange={action("clicked")}
-            tags={["IPS"]}
-            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"
-        />
-    ))
-    .add("Filtered on Product with excluded subs", () => (
-        <SubscriptionProductTagSelect
-            onChange={action("clicked")}
-            tags={["IPS"]}
-            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"
-            excludedSubscriptionIds={["08ac5baa-4053-4d01-98e0-505e957d73c7"]}
-        />
-    ));
+            tags={["SP", "MSP"]}
+            // Fetch MSP 1G
+            productId="efbe1235-93df-49ee-bbba-e51434e0be17"
+            excludedSubscriptionIds={["ac8c28ba-60e8-4d31-9d42-6c04a616677b", "83c6facb-8764-4adf-8fb7-79923b111b38"]}
+        />)
+    });
 
 storiesOf("GenericSelect", module)
     .addDecorator(withKnobs)

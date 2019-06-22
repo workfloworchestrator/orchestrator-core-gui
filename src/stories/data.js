@@ -2185,22 +2185,22 @@ export const subscriptionsWithTagMSP = [
         port_mode: null,
         product_id: "efbe1235-93df-49ee-bbba-e51434e0be17",
         start_date: null,
-        status: "initial",
+        status: "active",
         subscription_id: "ac8c28ba-60e8-4d31-9d42-6c04a616677b",
         tag: "MSP"
     },
     {
         crm_port_id: null,
         customer_id: "88503161-0911-e511-80d0-005056956c1a",
-        description: "DESIGNACADEMY MSP (port not ready yet) 1 Gbit/s",
+        description: "DESIGNACADEMY MSP Mocked 1 Gbit/s",
         end_date: null,
-        insync: false,
+        insync: true,
         is_ssp_and_has_parent: false,
         name: "MSP 1G",
         port_mode: null,
         product_id: "efbe1235-93df-49ee-bbba-e51434e0be17",
         start_date: null,
-        status: "initial",
+        status: "active",
         subscription_id: "83c6facb-8764-4adf-8fb7-79923b111b38",
         tag: "MSP"
     },
@@ -2215,7 +2215,7 @@ export const subscriptionsWithTagMSP = [
         port_mode: null,
         product_id: "efbe1235-93df-49ee-bbba-e51434e0be17",
         start_date: null,
-        status: "initial",
+        status: "active",
         subscription_id: "06b8c582-b68c-498d-b50f-c2b513954421",
         tag: "MSP"
     },
@@ -12891,7 +12891,7 @@ export const allSubscriptionsWithTags = [
     },
     {
         customer_id: "88503161-0911-e511-80d0-005056956c1a",
-        description: "DESIGNACADEMY MSP (port not ready yet) 1 Gbit/s",
+        description: "DESIGNACADEMY MSP mocked 1 Gbit/s",
         end_date: null,
         insync: false,
         product: {
@@ -12905,7 +12905,7 @@ export const allSubscriptionsWithTags = [
             tag: "MSP"
         },
         start_date: null,
-        status: "initial",
+        status: "active",
         subscription_id: "83c6facb-8764-4adf-8fb7-79923b111b38"
     },
     {
