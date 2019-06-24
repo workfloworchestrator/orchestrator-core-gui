@@ -29,7 +29,6 @@ import { filterProductsByBandwidth } from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
-import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
 import "./UserInputForm.scss";
@@ -190,15 +189,6 @@ export default class UserInputForm extends React.Component {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
         this.validateUserInput(name)({ target: { value: value } });
-    };
-
-    changeDateInput = name => dd => {
-        const value = moment(dd).format("YYYY-MM-DD");
-        this.changeUserInput(name, value);
-    };
-
-    clearDateInput = (name, target) => trigger => {
-        this.changeUserInput(name, target);
     };
 
     changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
