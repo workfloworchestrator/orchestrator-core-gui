@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, array, boolean, number, select } from "@storybook/addon-knobs";
-import { withState } from "@dump247/storybook-state";
+import { State, Store, StateDecorator } from "@sambego/storybook-state";
 import "react-datepicker/dist/react-datepicker.css";
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss";
@@ -238,6 +238,13 @@ const sn8PortSelectInputStepsSelectedOrganisation = [
     }
 ];
 
+const store = new Store({
+    servicePorts: [{ subscription_id: null, vlan: "" }],
+    selected: "",
+    locationCode: "",
+    date: new Date()
+});
+
 storiesOf("Welcome", module).add("to Storybook", () => (
     <div>
         <h1>Workflows client storybook</h1>
@@ -275,57 +282,54 @@ storiesOf("SubscriptionProductTagSelect", module)
 
 storiesOf("GenericSelect", module)
     .addDecorator(withKnobs)
-    .add(
-        "Default",
-        withState({ selected: "" })(({ store }) => (
-            <GenericSelect
-                selected={store.state.selected}
-                onChange={e => {
-                    action("onChange")(e);
-                    store.set({ selected: e.value });
-                }}
-                disabled={boolean("Disabled")}
-                choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
-            />
-        ))
-    );
+    .addDecorator(StateDecorator(store))
+    .add("Default", () => (
+        <GenericSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            disabled={boolean("Disabled")}
+            choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
+        />
+    ));
 
 storiesOf("LocationCodeSelect", module)
     .addDecorator(withKnobs)
-    .add(
-        "Default",
-        withState({ locationCode: "" })(({ store }) => (
-            <LocationCodeSelect
-                locationCode={store.state.locationCode}
-                locationCodes={array("Values", LOCATION_CODES)}
-                onChange={e => {
-                    action("onChange")(e);
-                    store.set({ locationCode: e.value });
-                }}
-                disabled={boolean("Disabled")}
-            />
-        ))
-    );
+    .addDecorator(StateDecorator(store))
+    .add("Default", () => (
+        <LocationCodeSelect
+            locationCode={store.state.locationCode}
+            locationCodes={array("Values", LOCATION_CODES)}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ locationCode: e.value });
+            }}
+            disabled={boolean("Disabled")}
+        />
+    ));
 
 storiesOf("TableSummary", module)
     .add("Definition", () => <TableSummary data={tableSummaryDataDefinition} />)
     .add("Summary with headers", () => <TableSummary data={tableSummaryDataWithHeaders} />)
     .add("Summary with definition and headers", () => <TableSummary data={tableSummaryDataDefinitionWithHeaders} />);
 
-storiesOf("DatePicker", module).add(
-    "Definition",
-    withState({ date: new Date() })(({ store }) =>
-        formDate(
-            "metadata.productBlocks.created_at",
-            e => {
-                action("onChange")(e);
-                store.set({ date: e });
-            },
-            false,
-            store.state.date
-        )
-    )
-);
+storiesOf("DatePicker", module).add("Definition", () => (
+    <State store={store}>
+        {state =>
+            formDate(
+                "metadata.productBlocks.created_at",
+                e => {
+                    action("onChange")(e);
+                    store.set({ date: e });
+                },
+                false,
+                state.date
+            )
+        }
+    </State>
+));
 
 storiesOf("GenericNOCConfirm", module)
     .add("Legacy", () => (
@@ -385,47 +389,45 @@ storiesOf("GenericNOCConfirm", module)
 
 storiesOf("MultipleServicePortsSN8", module)
     .addDecorator(withKnobs)
-    .add(
-        "MultipleServicePortsSN8",
-        withState({ servicePorts: [{ subscription_id: null, vlan: "" }] })(({ store }) => {
-            fetchMock.restore();
-            fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
-            loadVlanMocks();
+    .addDecorator(StateDecorator(store))
+    .add("MultipleServicePortsSN8", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        loadVlanMocks();
 
-            return (
-                <MultipleServicePortsSN8
-                    servicePorts={store.state.servicePorts}
-                    availableServicePorts={SN8PortSubscriptions}
-                    organisations={ORGANISATIONS}
-                    onChange={value => {
-                        action("onChange")(value);
-                        store.set({ servicePorts: value });
-                    }}
-                    organisationId={select(
-                        "Organisation",
-                        {
-                            "Centrum Wiskunde & Informatica": "2f47f65a-0911-e511-80d0-005056956c1a",
-                            "Design Academy Eindhoven": "88503161-0911-e511-80d0-005056956c1a",
-                            "Academisch Ziekenhuis Maastricht": "bae56b42-0911-e511-80d0-005056956c1a"
-                        },
-                        ""
-                    )}
-                    minimum={number("Minimum nr of ports", 1)}
-                    maximum={number("Maximum nr of ports", 6)}
-                    disabled={boolean("Read only?")}
-                    isElan={boolean("Is ELAN")}
-                    organisationPortsOnly={boolean("Organization ports only")}
-                    visiblePortMode={select(
-                        "visiblePortMode",
-                        ["all", "normal", "tagged", "untagged", "link_member"],
-                        "all"
-                    )}
-                    disabledPorts={boolean("Disabled ports")}
-                    reportError={action("reportError")}
-                />
-            );
-        })
-    );
+        return (
+            <MultipleServicePortsSN8
+                servicePorts={store.state.servicePorts}
+                availableServicePorts={SN8PortSubscriptions}
+                organisations={ORGANISATIONS}
+                onChange={value => {
+                    action("onChange")(value);
+                    store.set({ servicePorts: value });
+                }}
+                organisationId={select(
+                    "Organisation",
+                    {
+                        "Centrum Wiskunde & Informatica": "2f47f65a-0911-e511-80d0-005056956c1a",
+                        "Design Academy Eindhoven": "88503161-0911-e511-80d0-005056956c1a",
+                        "Academisch Ziekenhuis Maastricht": "bae56b42-0911-e511-80d0-005056956c1a"
+                    },
+                    ""
+                )}
+                minimum={number("Minimum nr of ports", 1)}
+                maximum={number("Maximum nr of ports", 6)}
+                disabled={boolean("Read only?")}
+                isElan={boolean("Is ELAN")}
+                organisationPortsOnly={boolean("Organization ports only")}
+                visiblePortMode={select(
+                    "visiblePortMode",
+                    ["all", "normal", "tagged", "untagged", "link_member"],
+                    "all"
+                )}
+                disabledPorts={boolean("Disabled ports")}
+                reportError={action("reportError")}
+            />
+        );
+    });
 
 storiesOf("UserInputForm", module)
     .add("Contactpersons", () => {

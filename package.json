@@ -30,7 +30,7 @@
     "spin.js": "^4.0.0"
   },
   "devDependencies": {
-    "@dump247/storybook-state": "^1.6.1",
+    "@sambego/storybook-state": "^1.3.5",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-knobs": "^5.1.9",
     "@storybook/addon-links": "^5.1.9",
