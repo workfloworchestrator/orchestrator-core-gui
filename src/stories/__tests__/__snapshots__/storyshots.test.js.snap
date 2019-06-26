@@ -41,7 +41,7 @@ exports[`Storyshots DatePicker Definition 1`] = `
           <button
             onClick={[Function]}
           >
-            06/24/2019
+            01/01/1970
           </button>
           <span
             className="clear"

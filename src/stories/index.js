@@ -243,7 +243,7 @@ const store = new Store({
     servicePorts: [{ subscription_id: null, vlan: "" }],
     selected: "",
     locationCode: "",
-    date: new Date(),
+    date: new Date(1),
     value: "1000"
 });
 
