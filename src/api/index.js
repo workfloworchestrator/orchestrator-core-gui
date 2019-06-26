@@ -352,10 +352,6 @@ export function processes() {
     return fetchJson("processes");
 }
 
-export function fetchPortSpeedByProduct(productId) {
-    return fetchJson(`fixed_inputs/port_speed_by_product_id/${productId}`);
-}
-
 export function fetchPortSpeedBySubscription(subscriptionId) {
     return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
 }

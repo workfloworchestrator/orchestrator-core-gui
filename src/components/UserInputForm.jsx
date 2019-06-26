@@ -325,15 +325,15 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "bandwidth":
+                const servicePorts = findValueFromInputStep(userInput.ports_key, stepUserInput);
                 return (
                     <BandwidthSelect
-                        stepUserInput={stepUserInput}
+                        servicePorts={servicePorts}
                         name={name}
-                        onBlur={this.validateUserInput(name)}
                         onChange={this.changeStringInput(name)}
                         value={value || ""}
-                        portsKey={userInput.ports_key}
                         disabled={userInput.readonly}
+                        reportError={this.reportCustomError(userInput.type)}
                     />
                 );
             case "organisation":

@@ -9,6 +9,7 @@ import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSe
 import "../pages/App.scss";
 import "./storybook.scss";
 import GenericSelect from "../components/GenericSelect";
+import BandwidthSelect from "../components/BandwidthSelect";
 import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
 import {
@@ -242,7 +243,8 @@ const store = new Store({
     servicePorts: [{ subscription_id: null, vlan: "" }],
     selected: "",
     locationCode: "",
-    date: new Date()
+    date: new Date(),
+    value: "1000"
 });
 
 storiesOf("Welcome", module).add("to Storybook", () => (
@@ -429,7 +431,49 @@ storiesOf("MultipleServicePortsSN8", module)
         );
     });
 
+storiesOf("Bandwidth", module)
+    .addDecorator(withKnobs)
+    .add("Bandwidth", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/48f28a55-7764-4c84-9848-964d14906a27", [
+            1000
+        ]);
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/55c96135-e308-4126-b53f-0a3cf23331f5", [
+            10000
+        ]);
+        return (
+            <State store={store}>
+                {state => (
+                    <BandwidthSelect
+                        servicePorts={select(
+                            "servicePorts",
+                            {
+                                "Restricted by service port 1G": [
+                                    { subscription_id: "48f28a55-7764-4c84-9848-964d14906a27", tag: "MSP", vlan: "2" }
+                                ],
+                                "Restricted by service port 10G": [
+                                    { subscription_id: "55c96135-e308-4126-b53f-0a3cf23331f5", tag: "MSP", vlan: "2" }
+                                ],
+                                "Not restricted by service port": []
+                            },
+                            [{ subscription_id: "48f28a55-7764-4c84-9848-964d14906a27", tag: "MSP", vlan: "2" }]
+                        )}
+                        name="bandwidth"
+                        reportError={action("reportError")}
+                        onChange={e => {
+                            store.set({ value: e.target.value });
+                            action("onChange")(e);
+                        }}
+                        value={state.value}
+                        disabled={boolean("Read only")}
+                    />
+                )}
+            </State>
+        );
+    });
+
 storiesOf("UserInputForm", module)
+    .addDecorator(withKnobs)
     .add("Contactpersons", () => {
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
@@ -552,6 +596,42 @@ storiesOf("UserInputForm", module)
                 organisations={ORGANISATIONS}
                 locationCodes={LOCATION_CODES}
                 products={PRODUCTS}
+            />
+        );
+    })
+    .add("SN7 Portselect bandwidth", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
+        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
+        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
+        loadVlanMocks();
+        return (
+            <UserInputContainer
+                formName="SN7 portselect form, showing all ports"
+                stepUserInput={[
+                    {
+                        name: "service_ports",
+                        type: "service_ports",
+                        bandwidth_key: "current_bandwidth"
+                    },
+                    {
+                        name: "current_bandwidth",
+                        type: "bandwidth",
+                        readonly: true,
+                        value: number("bandwidth", 1000)
+                    },
+                    {
+                        name: "new_bandwidth",
+                        type: "bandwidth",
+                        ports_key: "service_ports"
+                    }
+                ]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+                currentState={{ current_bandwidth: number("bandwidth", 1000) }}
             />
         );
     })

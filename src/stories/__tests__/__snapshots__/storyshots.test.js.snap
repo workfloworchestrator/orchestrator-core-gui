@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots Bandwidth Bandwidth 1`] = `
+<section
+  className="storybook-container"
+>
+  <div>
+    <input
+      id="bandwidth"
+      name="bandwidth"
+      onChange={[Function]}
+      type="number"
+      value="1000"
+    />
+  </div>
+</section>
+`;
+
 exports[`Storyshots DatePicker Definition 1`] = `
 <section
   className="storybook-container"
@@ -3110,7 +3126,6 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -3466,7 +3481,6 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -3666,6 +3680,386 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
 </section>
 `;
 
+exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Service Ports
+                </label>
+                <em>
+                  Choose Service Ports
+                </em>
+                <div>
+                  <section
+                    className="multiple-mps"
+                  >
+                    <section
+                      className="msp"
+                    >
+                      <div
+                        className="wrapper msp-select"
+                      >
+                        <label>
+                          Service Port
+                        </label>
+                        <div
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
+                        >
+                          <div
+                            className=" css-1fhf3k1-control"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <div
+                              className=" css-1hwfws3"
+                            >
+                              <div
+                                className=" css-1wa3eu0-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
+                                  }
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-24-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className=" css-1wy0on6"
+                            >
+                              <span
+                                className=" css-109onse-indicatorSeparator"
+                              />
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <label>
+                          Port Vlan
+                        </label>
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      className="msp"
+                    >
+                      <div
+                        className="wrapper msp-select"
+                      >
+                        <div
+                          className=" css-14jk2my-container"
+                          onKeyDown={[Function]}
+                        >
+                          <div
+                            className=" css-1fhf3k1-control"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <div
+                              className=" css-1hwfws3"
+                            >
+                              <div
+                                className=" css-1wa3eu0-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                className="css-1g6gooi"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
+                                  }
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={true}
+                                    id="react-select-25-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className=" css-1wy0on6"
+                            >
+                              <span
+                                className=" css-109onse-indicatorSeparator"
+                              />
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-19bqh2r"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <div
+                          className="vlan"
+                        >
+                          <div
+                            className="virtual-vlan"
+                          >
+                            <input
+                              disabled={true}
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              placeholder="First select a Service Port..."
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </section>
+                </div>
+              </section>
+              <section
+                className="form-divider current_bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Current bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={true}
+                    id="current_bandwidth"
+                    name="current_bandwidth"
+                    onChange={[Function]}
+                    type="number"
+                    value={1000}
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider new_bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  New bandwidth
+                </label>
+                <em>
+                  New bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    id="new_bandwidth"
+                    name="new_bandwidth"
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                onClick={[Function]}
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
 exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
 <section
   className="storybook-container"
@@ -3822,7 +4216,6 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -4092,7 +4485,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-24-input"
+                            id="react-select-26-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -4178,7 +4571,6 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -4243,7 +4635,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-25-input"
+                                    id="react-select-27-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4444,7 +4836,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-30-input"
+                            id="react-select-32-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -4530,7 +4922,6 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -4595,7 +4986,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-31-input"
+                                    id="react-select-33-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4796,7 +5187,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-26-input"
+                            id="react-select-28-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -4882,7 +5273,6 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -4947,7 +5337,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-27-input"
+                                    id="react-select-29-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5148,7 +5538,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-28-input"
+                            id="react-select-30-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -5234,7 +5624,6 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                     disabled={false}
                     id="bandwidth"
                     name="bandwidth"
-                    onBlur={[Function]}
                     onChange={[Function]}
                     type="number"
                     value=""
@@ -5299,7 +5688,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-29-input"
+                                    id="react-select-31-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
