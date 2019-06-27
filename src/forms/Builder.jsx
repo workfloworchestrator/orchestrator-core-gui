@@ -4,7 +4,6 @@ import Select from "react-select";
 import DatePickerCustom from "../components/DatePickerCustom";
 import DatePicker from "react-datepicker";
 import { isEmpty } from "../utils/Utils";
-import * as moment from "moment";
 
 export function formInput(
     i18nKey,
@@ -58,7 +57,7 @@ export function formSelect(i18nKey, onChange, values, readOnly, selected_value, 
     );
 }
 
-export function formDate(i18nKey, onChange, readOnly, value, openToDate = moment()) {
+export function formDate(i18nKey, onChange, readOnly, value, openToDate = new Date()) {
     return (
         <section className="form-divider">
             <label>{I18n.t(i18nKey)}</label>
@@ -68,7 +67,7 @@ export function formDate(i18nKey, onChange, readOnly, value, openToDate = moment
                 isClearable={false}
                 onChange={onChange}
                 openToDate={openToDate}
-                customInput={<DatePickerCustom disabled={readOnly} onClick={onChange} clear={onChange} />}
+                customInput={<DatePickerCustom disabled={readOnly} onClick={onChange} clear={() => onChange(null)} />}
                 disabled={readOnly}
             />
         </section>

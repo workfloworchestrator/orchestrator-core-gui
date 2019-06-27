@@ -2,11 +2,14 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-
+import { withKnobs, array, boolean, number, select } from "@storybook/addon-knobs";
+import { State, Store, StateDecorator } from "@sambego/storybook-state";
+import "react-datepicker/dist/react-datepicker.css";
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
 import "../pages/App.scss";
 import "./storybook.scss";
 import GenericSelect from "../components/GenericSelect";
+import BandwidthSelect from "../components/BandwidthSelect";
 import TableSummary from "../components/TableSummary";
 import UserInputContainer from "./UserInputContainer";
 import {
@@ -26,8 +29,9 @@ import LocationCodeSelect from "../components/LocationCodeSelect";
 import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
+import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
+import { formDate } from "../forms/Builder";
 
-const genericSelectChoices = ["SAP 1", "SAP 2", "SAP 3"];
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
     { columns: [["value1", "value2", "value3 with slightly longer text"]] }
@@ -235,6 +239,14 @@ const sn8PortSelectInputStepsSelectedOrganisation = [
     }
 ];
 
+const store = new Store({
+    servicePorts: [{ subscription_id: null, vlan: "" }],
+    selected: "",
+    locationCode: "",
+    date: new Date(1),
+    value: "1000"
+});
+
 storiesOf("Welcome", module).add("to Storybook", () => (
     <div>
         <h1>Workflows client storybook</h1>
@@ -270,18 +282,56 @@ storiesOf("SubscriptionProductTagSelect", module)
         />
     ));
 
-storiesOf("GenericSelect", module).add("Default", () => (
-    <GenericSelect onChange={action("selected")} choices={genericSelectChoices} />
-));
+storiesOf("GenericSelect", module)
+    .addDecorator(withKnobs)
+    .addDecorator(StateDecorator(store))
+    .add("Default", () => (
+        <GenericSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            disabled={boolean("Disabled")}
+            choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
+        />
+    ));
 
-storiesOf("LocationCodeSelect", module).add("Default", () => (
-    <LocationCodeSelect locationCodes={LOCATION_CODES} onChange={action("selected")} />
-));
+storiesOf("LocationCodeSelect", module)
+    .addDecorator(withKnobs)
+    .addDecorator(StateDecorator(store))
+    .add("Default", () => (
+        <LocationCodeSelect
+            locationCode={store.state.locationCode}
+            locationCodes={array("Values", LOCATION_CODES)}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ locationCode: e.value });
+            }}
+            disabled={boolean("Disabled")}
+        />
+    ));
 
 storiesOf("TableSummary", module)
     .add("Definition", () => <TableSummary data={tableSummaryDataDefinition} />)
     .add("Summary with headers", () => <TableSummary data={tableSummaryDataWithHeaders} />)
     .add("Summary with definition and headers", () => <TableSummary data={tableSummaryDataDefinitionWithHeaders} />);
+
+storiesOf("DatePicker", module).add("Definition", () => (
+    <State store={store}>
+        {state =>
+            formDate(
+                "metadata.productBlocks.created_at",
+                e => {
+                    action("onChange")(e);
+                    store.set({ date: e });
+                },
+                false,
+                state.date
+            )
+        }
+    </State>
+));
 
 storiesOf("GenericNOCConfirm", module)
     .add("Legacy", () => (
@@ -338,7 +388,92 @@ storiesOf("GenericNOCConfirm", module)
             products={PRODUCTS}
         />
     ));
+
+storiesOf("MultipleServicePortsSN8", module)
+    .addDecorator(withKnobs)
+    .addDecorator(StateDecorator(store))
+    .add("MultipleServicePortsSN8", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        loadVlanMocks();
+
+        return (
+            <MultipleServicePortsSN8
+                servicePorts={store.state.servicePorts}
+                availableServicePorts={SN8PortSubscriptions}
+                organisations={ORGANISATIONS}
+                onChange={value => {
+                    action("onChange")(value);
+                    store.set({ servicePorts: value });
+                }}
+                organisationId={select(
+                    "Organisation",
+                    {
+                        "Centrum Wiskunde & Informatica": "2f47f65a-0911-e511-80d0-005056956c1a",
+                        "Design Academy Eindhoven": "88503161-0911-e511-80d0-005056956c1a",
+                        "Academisch Ziekenhuis Maastricht": "bae56b42-0911-e511-80d0-005056956c1a"
+                    },
+                    ""
+                )}
+                minimum={number("Minimum nr of ports", 1)}
+                maximum={number("Maximum nr of ports", 6)}
+                disabled={boolean("Read only?")}
+                isElan={boolean("Is ELAN")}
+                organisationPortsOnly={boolean("Organization ports only")}
+                visiblePortMode={select(
+                    "visiblePortMode",
+                    ["all", "normal", "tagged", "untagged", "link_member"],
+                    "all"
+                )}
+                disabledPorts={boolean("Disabled ports")}
+                reportError={action("reportError")}
+            />
+        );
+    });
+
+storiesOf("Bandwidth", module)
+    .addDecorator(withKnobs)
+    .add("Bandwidth", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/48f28a55-7764-4c84-9848-964d14906a27", [
+            1000
+        ]);
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/55c96135-e308-4126-b53f-0a3cf23331f5", [
+            10000
+        ]);
+        return (
+            <State store={store}>
+                {state => (
+                    <BandwidthSelect
+                        servicePorts={select(
+                            "servicePorts",
+                            {
+                                "Restricted by service port 1G": [
+                                    { subscription_id: "48f28a55-7764-4c84-9848-964d14906a27", tag: "MSP", vlan: "2" }
+                                ],
+                                "Restricted by service port 10G": [
+                                    { subscription_id: "55c96135-e308-4126-b53f-0a3cf23331f5", tag: "MSP", vlan: "2" }
+                                ],
+                                "Not restricted by service port": []
+                            },
+                            [{ subscription_id: "48f28a55-7764-4c84-9848-964d14906a27", tag: "MSP", vlan: "2" }]
+                        )}
+                        name="bandwidth"
+                        reportError={action("reportError")}
+                        onChange={e => {
+                            store.set({ value: e.target.value });
+                            action("onChange")(e);
+                        }}
+                        value={state.value}
+                        disabled={boolean("Read only")}
+                    />
+                )}
+            </State>
+        );
+    });
+
 storiesOf("UserInputForm", module)
+    .addDecorator(withKnobs)
     .add("Contactpersons", () => {
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
@@ -461,6 +596,42 @@ storiesOf("UserInputForm", module)
                 organisations={ORGANISATIONS}
                 locationCodes={LOCATION_CODES}
                 products={PRODUCTS}
+            />
+        );
+    })
+    .add("SN7 Portselect bandwidth", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
+        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
+        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
+        loadVlanMocks();
+        return (
+            <UserInputContainer
+                formName="SN7 portselect form, showing all ports"
+                stepUserInput={[
+                    {
+                        name: "service_ports",
+                        type: "service_ports",
+                        bandwidth_key: "current_bandwidth"
+                    },
+                    {
+                        name: "current_bandwidth",
+                        type: "bandwidth",
+                        readonly: true,
+                        value: number("bandwidth", 1000)
+                    },
+                    {
+                        name: "new_bandwidth",
+                        type: "bandwidth",
+                        ports_key: "service_ports"
+                    }
+                ]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+                currentState={{ current_bandwidth: number("bandwidth", 1000) }}
             />
         );
     })

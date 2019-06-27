@@ -29,7 +29,6 @@ import { filterProductsByBandwidth } from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
-import * as moment from "moment";
 import NodeSelect from "./NodeSelect";
 import NodePortSelect from "./NodePortSelect";
 import "./UserInputForm.scss";
@@ -120,7 +119,7 @@ export default class UserInputForm extends React.Component {
             let promise = this.props.validSubmit(stepUserInput);
             promise.catch(err => {
                 if (err.response && err.response.status === 400) {
-                    err.response.json().then(json => json => {
+                    err.response.json().then(json => {
                         const errors = { ...this.state.errors };
                         json.forEach(item => {
                             errors[item.loc[0]] = true;
@@ -190,15 +189,6 @@ export default class UserInputForm extends React.Component {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
         this.validateUserInput(name)({ target: { value: value } });
-    };
-
-    changeDateInput = name => dd => {
-        const value = moment(dd).format("YYYY-MM-DD");
-        this.changeUserInput(name, value);
-    };
-
-    clearDateInput = (name, target) => trigger => {
-        this.changeUserInput(name, target);
     };
 
     changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
@@ -310,29 +300,16 @@ export default class UserInputForm extends React.Component {
             case "string":
             case "uuid":
             case "crm_port_id":
-            case "ims_id":
+            case "nms_service_id":
             case "isalias":
+            case "jira_ticket":
             case "stp":
-            case "isis_metric":
-            case "mtu":
                 return (
                     <input
                         type="text"
                         id={name}
                         name={name}
                         value={value || ""}
-                        readOnly={userInput.readonly}
-                        onChange={this.changeStringInput(name)}
-                        onBlur={this.validateUserInput(name)}
-                    />
-                );
-            case "jira_ticket":
-                return (
-                    <input
-                        type="text"
-                        id={name}
-                        name={name}
-                        value={value || `${userInput.jira_ticket_suffix}-`}
                         readOnly={userInput.readonly}
                         onChange={this.changeStringInput(name)}
                         onBlur={this.validateUserInput(name)}
@@ -347,17 +324,16 @@ export default class UserInputForm extends React.Component {
                         className="indent"
                     />
                 );
-            case "nms_service_id":
             case "bandwidth":
+                const servicePorts = findValueFromInputStep(userInput.ports_key, stepUserInput);
                 return (
                     <BandwidthSelect
-                        stepUserInput={stepUserInput}
+                        servicePorts={servicePorts}
                         name={name}
-                        onBlur={this.validateUserInput(name)}
                         onChange={this.changeStringInput(name)}
                         value={value || ""}
-                        portsKey={userInput.ports_key}
                         disabled={userInput.readonly}
+                        reportError={this.reportCustomError(userInput.type)}
                     />
                 );
             case "organisation":
@@ -380,9 +356,7 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "transition_product":
-                const subscriptionId =
-                    lookupValueFromNestedState(userInput.subscription_id_key, currentState) ||
-                    findValueFromInputStep(userInput.subscription_id_key, stepUserInput);
+                const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState);
                 const newProductId = lookupValueFromNestedState("product", currentState);
                 return (
                     <TransitionProductSelect

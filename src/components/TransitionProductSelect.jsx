@@ -16,23 +16,20 @@ export default class TransitionProductSelect extends React.PureComponent {
     };
 
     filterProductFromState = (subscriptionId, transitionType, newProductId) => {
-        subscriptionsDetail(subscriptionId).then(result => {
-            if (result.product_id === newProductId) {
-                transitions(subscriptionId, transitionType).then(result =>
-                    this.setState({ transitionProducts: result })
-                );
-            } else {
-                productById(newProductId).then(prod => {
-                    transitions(subscriptionId, transitionType).then(result => {
-                        result.map(res => {
-                            if (prod.product_id === res.product_id) {
-                                this.setState({ transitionProducts: [prod] });
+        subscriptionsDetail(subscriptionId).then(subscription => {
+            transitions(subscriptionId, transitionType).then(transitionProducts => {
+                if (subscription.product_id === newProductId) {
+                    this.setState({ transitionProducts: transitionProducts });
+                } else {
+                    productById(newProductId).then(newProduct => {
+                        transitionProducts.foreach(transitionProduct => {
+                            if (newProduct.product_id === transitionProduct.product_id) {
+                                this.setState({ transitionProducts: [newProduct] });
                             }
-                            return {};
                         });
                     });
-                });
-            }
+                }
+            });
         });
     };
 

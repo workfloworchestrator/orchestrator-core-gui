@@ -1,4 +1,5 @@
 import escape from "lodash.escape";
+import { isDate } from "date-fns";
 
 export function stop(e) {
     if (e !== undefined && e !== null) {
@@ -10,6 +11,9 @@ export function stop(e) {
 export function isEmpty(obj) {
     if (obj === undefined || obj === null) {
         return true;
+    }
+    if (isDate(obj)) {
+        return false;
     }
     if (Array.isArray(obj)) {
         return obj.length === 0;
