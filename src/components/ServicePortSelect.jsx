@@ -21,7 +21,7 @@ export default class ServicePortSelect extends React.PureComponent {
             .map(aServicePort => ({
                 value: aServicePort.subscription_id,
                 label: this.label(aServicePort, organisations),
-                tag: aServicePort.tag
+                tag: aServicePort.product.tag
             }))
             .sort((x, y) => x.label.localeCompare(y.label));
         const value = options.find(option => option.value === servicePort);
