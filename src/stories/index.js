@@ -632,7 +632,7 @@ storiesOf("UserInputForm", module)
         fetchMock.restore();
         fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
         fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
         loadVlanMocks();
