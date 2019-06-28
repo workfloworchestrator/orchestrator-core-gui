@@ -630,8 +630,8 @@ storiesOf("UserInputForm", module)
     })
     .add("SN7 Portselect bandwidth", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", SN7PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
