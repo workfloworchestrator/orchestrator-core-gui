@@ -371,40 +371,52 @@ storiesOf("GenericNOCConfirm", module)
             ]}
         />
     ))
-    .add("Legacy in form", () => (
-        <UserInputContainer
-            formName="NOC Confirm"
-            stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            products={PRODUCTS}
-        />
-    ))
-    .add("Complex in form", () => (
-        <UserInputContainer
-            formName="NOC Confirm"
-            stepUserInput={[
-                {
-                    name: "confirm_migrate_sap",
-                    type: "accept",
-                    data: [
-                        ["confirm_migrate_sap", "label"],
-                        ["confirm_migrate_sap_info", "info"],
-                        ["next_step_service_affecting", "warning"],
-                        ["http://example.com", "url"],
-                        ["check_delete_sn7_service_config", "checkbox"],
-                        ["check_ims_defined", "label"],
-                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
-                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
-                        ["check_port_patched_sn7_sn8", "checkbox?"]
-                    ]
-                }
-            ]}
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            products={PRODUCTS}
-        />
-    ));
+    .add("Legacy in form", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
+        return (
+            <UserInputContainer
+                formName="NOC Confirm"
+                stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+            />
+        );
+    })
+    .add("Complex in form", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
+        return (
+            <UserInputContainer
+                formName="NOC Confirm"
+                stepUserInput={[
+                    {
+                        name: "confirm_migrate_sap",
+                        type: "accept",
+                        data: [
+                            ["confirm_migrate_sap", "label"],
+                            ["confirm_migrate_sap_info", "info"],
+                            ["next_step_service_affecting", "warning"],
+                            ["http://example.com", "url"],
+                            ["check_delete_sn7_service_config", "checkbox"],
+                            ["check_ims_defined", "label"],
+                            ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                            ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                            ["check_port_patched_sn7_sn8", "checkbox?"]
+                        ]
+                    }
+                ]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+            />
+        );
+    });
 
 storiesOf("MultipleServicePortsSN8", module)
     .addDecorator(withKnobs)
