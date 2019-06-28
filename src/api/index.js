@@ -180,7 +180,9 @@ export function subscriptionsByTags(tagList, statusList = []) {
 export function portSubscriptions(tagList, statusList = []) {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(
-        `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${statusList.length ? optionalStatusFilter : ""}`
+        `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
+            statusList.length ? optionalStatusFilter : ""
+        }`
     );
 }
 
