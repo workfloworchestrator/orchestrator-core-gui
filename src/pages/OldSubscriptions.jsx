@@ -7,7 +7,7 @@ import { isEmpty, stop } from "../utils/Utils";
 
 import "./OldSubscriptions.scss";
 import FilterDropDown from "../components/FilterDropDown";
-import { organisationNameByUuid, productNameById, productTagById, renderDate } from "../utils/Lookups";
+import { organisationNameByUuid, renderDate } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { deleteSubscription } from "../api/index";
