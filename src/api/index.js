@@ -234,10 +234,6 @@ export function usedVlans(subscriptionId) {
     return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`);
 }
 
-export function usedVlansFiltered(subscriptionId, imsCircuitId) {
-    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}/${imsCircuitId}`);
-}
-
 export function portByImsPortId(portId) {
     return fetchJson(`ims/port_by_ims_port/${portId}`);
 }

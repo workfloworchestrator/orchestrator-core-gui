@@ -357,7 +357,6 @@ export default class UserInputForm extends React.Component {
                 );
             case "transition_product":
                 const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState);
-                const newProductId = lookupValueFromNestedState("product", currentState);
                 return (
                     <TransitionProductSelect
                         onChange={this.changeSelectInput(name)}
@@ -365,7 +364,6 @@ export default class UserInputForm extends React.Component {
                         subscriptionId={subscriptionId}
                         disabled={userInput.readonly}
                         transitionType={userInput.transition_type}
-                        newProductId={newProductId}
                     />
                 );
             case "contact_persons":
@@ -577,14 +575,9 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "nodes_for_location_code_and_status":
-                const status = lookupValueFromNestedState(userInput.node_status_key, currentState);
                 const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
                 return (
-                    <NodeSelect
-                        onChange={this.changeUniqueSelectInput(name, `${locationCodeNode}_${status}`)}
-                        locationCode={locationCodeNode}
-                        node={value}
-                    />
+                    <NodeSelect onChange={this.changeSelectInput(name)} locationCode={locationCodeNode} node={value} />
                 );
             case "corelink":
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
