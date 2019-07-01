@@ -117,7 +117,7 @@ export default class MultipleServicePorts extends React.PureComponent {
         // TC above check already implemented in new-process.jsx
         if (isElan || mspOnly) {
             // >2 == ELAN
-            inSelect = inSelect.filter(port => port.tag === "MSP" || port.tag === "MSPNL");
+            inSelect = inSelect.filter(port => port.product.tag === "MSP" || port.product.tag === "MSPNL");
         }
 
         if (organisationPortsOnly) {

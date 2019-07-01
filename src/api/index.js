@@ -154,26 +154,17 @@ export function deleteResourceType(id) {
 }
 
 //API
-export function subscriptions() {
-    return fetchJson(`v2/subscriptions`);
+export function allSubscriptions() {
+    return fetchJson(`v2/subscriptions/all`);
 }
 
 export function paginatedSubscriptions(range = "0,24", sort = ["start_date", "desc"], filter) {
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
-export function paginated_subscriptions() {
-    return fetchJson("v2/subscriptions");
-}
-
 // OldSubscriptions including dynamic properties (SLOW)
 export function subscriptionsWithDetails() {
     return fetchJson("subscriptions/with_details");
-}
-
-// New call : just plain subs with enriched product.tag
-export function subscriptionsWithTags() {
-    return fetchJson("v2/all-subscriptions-with-tags");
 }
 
 export function subscriptionsDetail(subscription_id) {
@@ -183,6 +174,15 @@ export function subscriptionsDetail(subscription_id) {
 export function subscriptionsByTags(tagList, statusList = []) {
     return fetchJson(
         `subscriptions/tag/${encodeURIComponent(tagList.join(","))}/${encodeURIComponent(statusList.join(","))}`
+    );
+}
+
+export function portSubscriptions(tagList, statusList = []) {
+    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
+    return fetchJson(
+        `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
+            statusList.length ? optionalStatusFilter : ""
+        }`
     );
 }
 

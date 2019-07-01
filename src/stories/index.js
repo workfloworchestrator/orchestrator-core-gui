@@ -265,22 +265,39 @@ storiesOf("Welcome", module).add("to Storybook", () => (
 ));
 
 storiesOf("SubscriptionProductTagSelect", module)
-    .add("Only tags", () => <SubscriptionProductTagSelect onChange={action("clicked")} tags={["SP", "MSP"]} />)
-    .add("Filtered on Product", () => (
-        <SubscriptionProductTagSelect
-            onChange={action("clicked")}
-            tags={["IPS"]}
-            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"
-        />
-    ))
-    .add("Filtered on Product with excluded subs", () => (
-        <SubscriptionProductTagSelect
-            onChange={action("clicked")}
-            tags={["IPS"]}
-            productId="077e6583-a1f8-42bd-87b0-60f7051c8d42"
-            excludedSubscriptionIds={["08ac5baa-4053-4d01-98e0-505e957d73c7"]}
-        />
-    ));
+    .add("Only tags", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return <SubscriptionProductTagSelect onChange={action("clicked")} tags={["SP", "MSP"]} />;
+    })
+    .add("Filtered on Product", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return (
+            <SubscriptionProductTagSelect
+                onChange={action("clicked")}
+                tags={["SP", "MSP"]}
+                // Fetch MSP 1G
+                productId="efbe1235-93df-49ee-bbba-e51434e0be17"
+            />
+        );
+    })
+    .add("Filtered on Product with excluded subs", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/subscriptions/tag/SP%2CMSP/", SN7PortSubscriptions);
+        return (
+            <SubscriptionProductTagSelect
+                onChange={action("clicked")}
+                tags={["SP", "MSP"]}
+                // Fetch MSP 1G
+                productId="efbe1235-93df-49ee-bbba-e51434e0be17"
+                excludedSubscriptionIds={[
+                    "ac8c28ba-60e8-4d31-9d42-6c04a616677b",
+                    "83c6facb-8764-4adf-8fb7-79923b111b38"
+                ]}
+            />
+        );
+    });
 
 storiesOf("GenericSelect", module)
     .addDecorator(withKnobs)
@@ -354,40 +371,52 @@ storiesOf("GenericNOCConfirm", module)
             ]}
         />
     ))
-    .add("Legacy in form", () => (
-        <UserInputContainer
-            formName="NOC Confirm"
-            stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            products={PRODUCTS}
-        />
-    ))
-    .add("Complex in form", () => (
-        <UserInputContainer
-            formName="NOC Confirm"
-            stepUserInput={[
-                {
-                    name: "confirm_migrate_sap",
-                    type: "accept",
-                    data: [
-                        ["confirm_migrate_sap", "label"],
-                        ["confirm_migrate_sap_info", "info"],
-                        ["next_step_service_affecting", "warning"],
-                        ["http://example.com", "url"],
-                        ["check_delete_sn7_service_config", "checkbox"],
-                        ["check_ims_defined", "label"],
-                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
-                        ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
-                        ["check_port_patched_sn7_sn8", "checkbox?"]
-                    ]
-                }
-            ]}
-            organisations={ORGANISATIONS}
-            locationCodes={LOCATION_CODES}
-            products={PRODUCTS}
-        />
-    ));
+    .add("Legacy in form", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
+        return (
+            <UserInputContainer
+                formName="NOC Confirm"
+                stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+            />
+        );
+    })
+    .add("Complex in form", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
+        return (
+            <UserInputContainer
+                formName="NOC Confirm"
+                stepUserInput={[
+                    {
+                        name: "confirm_migrate_sap",
+                        type: "accept",
+                        data: [
+                            ["confirm_migrate_sap", "label"],
+                            ["confirm_migrate_sap_info", "info"],
+                            ["next_step_service_affecting", "warning"],
+                            ["http://example.com", "url"],
+                            ["check_delete_sn7_service_config", "checkbox"],
+                            ["check_ims_defined", "label"],
+                            ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
+                            ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
+                            ["check_port_patched_sn7_sn8", "checkbox?"]
+                        ]
+                    }
+                ]}
+                organisations={ORGANISATIONS}
+                locationCodes={LOCATION_CODES}
+                products={PRODUCTS}
+            />
+        );
+    });
 
 storiesOf("MultipleServicePortsSN8", module)
     .addDecorator(withKnobs)
@@ -476,9 +505,9 @@ storiesOf("UserInputForm", module)
     .addDecorator(withKnobs)
     .add("Contactpersons", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
         return (
             <UserInputContainer
@@ -493,9 +522,9 @@ storiesOf("UserInputForm", module)
     .add("Corelink", () => {
         const currentState = { corelink_service_speed: "10000" };
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
         return (
             <UserInputContainer
@@ -515,9 +544,9 @@ storiesOf("UserInputForm", module)
             corelink_service_speed: "1000BASE-LX"
         };
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
         return (
             <UserInputContainer
@@ -533,9 +562,9 @@ storiesOf("UserInputForm", module)
     .add("Nodes", () => {
         const currentState = { location_code: "MT001A" };
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", allNodeSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("/api/ims/nodes/MT001A", imsNodes);
         return (
             <UserInputContainer
@@ -550,9 +579,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN7 Portselect all organisations", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", SN7PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -567,9 +596,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN7 Portselect MSP only", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", SN7PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -584,9 +613,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN7 Portselect selected organisation", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", SN7PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -601,9 +630,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN7 Portselect bandwidth", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", SN7PortSubscriptions);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", []);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", SN7PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
         loadVlanMocks();
@@ -637,9 +666,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect all organisations", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", SN8PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -654,9 +683,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect tagged", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", SN8PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -671,9 +700,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect untagged", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", SN8PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (
@@ -688,9 +717,9 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect selected organisation", () => {
         fetchMock.restore();
-        fetchMock.get("/api/subscriptions/tag/MSP%2CSSP%2CMSPNL/", []);
-        fetchMock.get("glob:*/api/subscriptions/tag/SP%2CSPNL/*", SN8PortSubscriptions);
-        fetchMock.get("/api/v2/all-subscriptions-with-tags", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", SN8PortSubscriptions);
+        fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
         loadVlanMocks();
         return (

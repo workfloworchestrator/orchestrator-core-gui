@@ -8,7 +8,7 @@ import {
     subscriptionWorkflows,
     subscriptionsWithDetails,
     validation,
-    subscriptionsWithTags
+    allSubscriptions
 } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
@@ -65,7 +65,7 @@ export default class NewProcess extends React.Component {
 
         // Todo: refactor this call in endpoint so it load subs with only enriched tag info
         // temp call with all tags -> refactor needed in backend
-        subscriptionsWithTags().then(subscriptions => {
+        allSubscriptions().then(subscriptions => {
             let organisationName = null;
             if (preselectedInput.organisation) {
                 const org = organisations.find(org => org.uuid === preselectedInput.organisation);
