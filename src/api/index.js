@@ -162,11 +162,6 @@ export function paginatedSubscriptions(range = "0,24", sort = ["start_date", "de
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
-// OldSubscriptions including dynamic properties (SLOW)
-export function subscriptionsWithDetails() {
-    return fetchJson("subscriptions/with_details");
-}
-
 export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }

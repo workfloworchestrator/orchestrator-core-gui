@@ -6,7 +6,6 @@ import {
     startModificationSubscription,
     startProcess,
     subscriptionWorkflows,
-    subscriptionsWithDetails,
     validation,
     allSubscriptions
 } from "../api";
@@ -76,18 +75,10 @@ export default class NewProcess extends React.Component {
                 organisationName: organisationName
             });
         });
-        // subscriptionsWithDetails().then(subscriptions => {
-        //     let organisationName = null;
-        //     if (preselectedInput.organisation) {
-        //         const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-        //         organisationName = org ? org.name : organisationName;
-        //     }
-        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        // });
     };
 
     refreshSubscriptions = () => {
-        subscriptionsWithDetails().then(subscriptions => {
+        allSubscriptions().then(subscriptions => {
             this.setState({ subscriptions: subscriptions });
         });
     };
