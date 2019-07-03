@@ -172,6 +172,11 @@ export function subscriptionsByTags(tagList, statusList = []) {
     );
 }
 
+export function nodeSubscriptions(statusList = []) {
+    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
+    return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
+}
+
 export function portSubscriptions(tagList, statusList = []) {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(

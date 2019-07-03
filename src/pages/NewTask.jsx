@@ -69,16 +69,12 @@ export default class NewTask extends React.Component {
                         {!isEmpty(workflow) && (
                             <UserInputForm
                                 stepUserInput={stepUserInput}
-                                servicePorts={[]}
-                                servicePortsSN8={[]}
                                 history={history}
                                 organisations={[]}
-                                subscriptions={[]}
                                 products={products}
                                 locationCodes={[]}
                                 product={{}}
                                 validSubmit={this.validSubmit}
-                                preselectedInput={{}}
                             />
                         )}
                     </section>

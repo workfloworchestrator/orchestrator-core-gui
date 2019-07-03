@@ -37,7 +37,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { portSubscriptions } from "../api";
+import { portSubscriptions, nodeSubscriptions } from "../api";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -58,23 +58,14 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
-            subscriptionsLoaded: false,
-            servicePortsLoadedSN7: !!this.props.servicePortsSN7,
-            servicePortsLoadedSN8: !!this.props.servicePortsSN8,
-            subscriptions: [],
-            servicePortsSN7: this.props.servicePortsSN7 ? this.props.servicePortsSN7 : [],
-            servicePortsSN8: this.props.servicePortsSN8 ? this.props.servicePortsSN8 : []
+            servicePortsLoadedSN7: false,
+            servicePortsLoadedSN8: false,
+            nodeSubscriptionsLoaded: false,
+            servicePortsSN7: [],
+            servicePortsSN8: [],
+            nodeSubscriptions: []
         };
     }
-
-    loadSubscriptions = () => {
-        allSubscriptions().then(subscriptions => {
-            this.setState({
-                subscriptionsLoaded: true,
-                subscriptions: subscriptions
-            });
-        });
-    };
 
     loadServicePortsSN7 = () => {
         portSubscriptions(["MSP", "SSP", "MSPNL"]).then(result => {
@@ -88,15 +79,23 @@ export default class UserInputForm extends React.Component {
         });
     };
 
+    loadNodeSubscriptions = () => {
+        nodeSubscriptions(["active", "provisioning"]).then(result => {
+            this.setState({ nodeSubscriptions: result, nodeSubscriptionsLoaded: true });
+        });
+    };
+
     componentDidMount = () => {
-        if (this.props.preloadSubscriptions) {
-            this.loadSubscriptions();
-        }
-        if (this.props.preloadServicePortsSN7) {
+        const { servicePortsLoadedSN7, servicePortsLoadedSN8, nodeSubscriptionsLoaded, stepUserInput } = this.state;
+
+        if (!servicePortsLoadedSN7 && stepUserInput.find(input => input.type === "service_ports") !== undefined) {
             this.loadServicePortsSN7();
         }
-        if (this.props.preloadServicePortsSN8) {
+        if (!servicePortsLoadedSN8 && stepUserInput.find(input => input.type === "service_ports_sn8") !== undefined) {
             this.loadServicePortsSN8();
+        }
+        if (!nodeSubscriptionsLoaded && stepUserInput.find(input => input.type.startsWith("corelink")) !== undefined) {
+            this.loadNodeSubscriptions();
         }
     };
 
@@ -293,7 +292,7 @@ export default class UserInputForm extends React.Component {
         const { currentState, products, organisations, preselectedInput } = this.props;
         const stepUserInput = this.state.stepUserInput;
 
-        const { servicePortsSN7, servicePortsSN8, subscriptions, subscriptionsLoaded } = this.state;
+        const { servicePortsSN7, servicePortsSN8, nodeSubscriptions } = this.state;
 
         let organisationId;
         switch (userInput.type) {
@@ -581,11 +580,6 @@ export default class UserInputForm extends React.Component {
                 );
             case "corelink":
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
-                const nodeSubscriptions = subscriptions.length
-                    ? subscriptions.filter(
-                          subscription => subscription.product.tag === "Node" && subscription.status !== "terminated"
-                      )
-                    : [];
                 return (
                     <NodePortSelect
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
@@ -602,8 +596,8 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
                         interfaceType={interfaceType}
                         nodes={
-                            subscriptionsLoaded
-                                ? subscriptions.filter(
+                            nodeSubscriptionId
+                                ? nodeSubscriptions.filter(
                                       subscription => subscription.subscription_id === nodeSubscriptionId
                                   )
                                 : []
@@ -688,21 +682,9 @@ UserInputForm.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
-    preselectedInput: PropTypes.object,
-
-    preloadSubscriptions: PropTypes.bool,
-    preloadServicePortsSN7: PropTypes.bool,
-    preloadServicePortsSN8: PropTypes.bool,
-    subscriptions: PropTypes.array,
-    servicePortsSN7: PropTypes.array,
-    servicePortsSN8: PropTypes.array
+    preselectedInput: PropTypes.object
 };
 
 UserInputForm.defaultProps = {
-    preloadSubscriptions: false,
-    preloadServicePortsSN7: false,
-    preloadServicePortsSN8: false,
-    subscriptions: [],
-    servicePortsSN7: [],
-    servicePortsSN8: []
+    preselectedInput: {}
 };
