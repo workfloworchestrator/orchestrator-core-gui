@@ -541,8 +541,7 @@ export default class UserInputForm extends React.Component {
                     </div>
                 );
             case "subscriptions":
-                const productIdForSubscription =
-                    userInput.product_id || findValueFromInputStep(userInput.product_key, stepUserInput);
+                const productIdForSubscription = userInput.product_id;
                 return (
                     <SubscriptionsSelect
                         onChange={this.changeArrayInput(name)}
