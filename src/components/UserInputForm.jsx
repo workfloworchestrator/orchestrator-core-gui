@@ -37,7 +37,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { subscriptionsByTags, subscriptionsWithTags } from "../api";
+import { allSubscriptions, portSubscriptions } from "../api";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -68,7 +68,7 @@ export default class UserInputForm extends React.Component {
     }
 
     loadSubscriptions = () => {
-        subscriptionsWithTags().then(subscriptions => {
+        allSubscriptions().then(subscriptions => {
             this.setState({
                 subscriptionsLoaded: true,
                 subscriptions: subscriptions
@@ -77,13 +77,13 @@ export default class UserInputForm extends React.Component {
     };
 
     loadServicePortsSN7 = () => {
-        subscriptionsByTags(["MSP", "SSP", "MSPNL"]).then(result => {
+        portSubscriptions(["MSP", "SSP", "MSPNL"]).then(result => {
             this.setState({ servicePortsSN7: result, servicePortsLoadedSN7: true });
         });
     };
 
     loadServicePortsSN8 = () => {
-        subscriptionsByTags(["SP", "SPNL"], ["active"]).then(result => {
+        portSubscriptions(["SP", "SPNL"], ["active"]).then(result => {
             this.setState({ servicePortsSN8: result, servicePortsLoadedSN8: true });
         });
     };
@@ -478,7 +478,7 @@ export default class UserInputForm extends React.Component {
                 const availableServicePorts =
                     productIds.length === products.length
                         ? servicePortsSN7
-                        : servicePortsSN7.filter(sp => productIds.includes(sp.product_id));
+                        : servicePortsSN7.filter(sp => productIds.includes(sp.product.product_id));
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
                 return (
                     <div>
@@ -517,7 +517,7 @@ export default class UserInputForm extends React.Component {
                 const availableServicePortsSN8 =
                     productIdsSN8.length === products.length
                         ? servicePortsSN8
-                        : servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product_id));
+                        : servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product.product_id));
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
                 return (
                     <div>
@@ -590,7 +590,7 @@ export default class UserInputForm extends React.Component {
                 const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 const nodeSubscriptions = subscriptions.length
                     ? subscriptions.filter(
-                          subscription => subscription.tag === "Node" && subscription.status !== "terminated"
+                          subscription => subscription.product.tag === "Node" && subscription.status !== "terminated"
                       )
                     : [];
                 return (

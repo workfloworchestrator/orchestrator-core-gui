@@ -2,12 +2,12 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
-import { childSubscriptions, parentSubscriptions, subscriptions } from "../api";
+import { childSubscriptions, parentSubscriptions, allSubscriptions } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 
 import "./OldSubscriptions.scss";
 import FilterDropDown from "../components/FilterDropDown";
-import { organisationNameByUuid, productNameById, productTagById, renderDate } from "../utils/Lookups";
+import { organisationNameByUuid, renderDate } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { deleteSubscription } from "../api/index";
@@ -45,12 +45,12 @@ export default class OldSubscriptions extends React.PureComponent {
     }
 
     componentDidMount = () =>
-        subscriptions().then(results => {
+        allSubscriptions().then(results => {
             const { organisations, products } = this.props;
             const collapsibleSubscriptions = [];
             results.forEach(subscription => {
                 this.enrichSubscription(subscription, organisations, products);
-                if (collapsibleProductTags.includes(subscription.product_tag)) {
+                if (collapsibleProductTags.includes(subscription.product.tag)) {
                     collapsibleSubscriptions.push(subscription.subscription_id);
                 }
             });
@@ -60,7 +60,7 @@ export default class OldSubscriptions extends React.PureComponent {
                 newFilterAttributesProduct.push({
                     name: tag,
                     selected: true,
-                    count: results.filter(result => result.product_tag === tag).length
+                    count: results.filter(result => result.product.tag === tag).length
                 });
             });
             const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
@@ -87,8 +87,6 @@ export default class OldSubscriptions extends React.PureComponent {
 
     enrichSubscription = (subscription, organisations, products) => {
         subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
-        subscription.product_name = productNameById(subscription.product_id, products);
-        subscription.product_tag = productTagById(subscription.product_id, products);
     };
 
     showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
@@ -131,7 +129,7 @@ export default class OldSubscriptions extends React.PureComponent {
             }
         }
         subscriptions = subscriptions.filter(subscription => {
-            const productFilter = filterAttributesProduct.find(attr => attr.name === subscription.product_tag);
+            const productFilter = filterAttributesProduct.find(attr => attr.name === subscription.product.tag);
             return productFilter ? productFilter.selected : true;
         });
         subscriptions = subscriptions.filter(subscription => {
@@ -235,7 +233,7 @@ export default class OldSubscriptions extends React.PureComponent {
             collapsedSubscriptions.splice(indexOf, 1);
         } else {
             collapsedSubscriptions.push(id);
-            const isServicePort = productServicePortTags.includes(subscription.product_tag);
+            const isServicePort = productServicePortTags.includes(subscription.product.tag);
             if (
                 (isServicePort && subscription.parentSubscriptions === undefined) ||
                 (!isServicePort && subscription.childSubscriptions === undefined)
@@ -259,7 +257,7 @@ export default class OldSubscriptions extends React.PureComponent {
         stop(e);
         this.confirmation(
             I18n.t("subscriptions.deleteConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.name,
                 customer: subscription.customer_name
             }),
             () =>
@@ -267,7 +265,7 @@ export default class OldSubscriptions extends React.PureComponent {
                     this.componentDidMount();
                     setFlash(
                         I18n.t("subscriptions.flash.delete", {
-                            name: subscription.product_name
+                            name: subscription.product.name
                         })
                     );
                 })
@@ -356,7 +354,7 @@ export default class OldSubscriptions extends React.PureComponent {
         const isCollapsible = collapsibleSubscriptions.includes(subscriptionId);
         const isCollapsed = isCollapsible && collapsedSubscriptions.includes(subscriptionId);
         const icon = isCollapsed ? "minus" : "plus";
-        const isServicePort = productServicePortTags.includes(subscription.product_tag);
+        const isServicePort = productServicePortTags.includes(subscription.product.tag);
         const relatedSubscriptions = isServicePort
             ? this.filterRelatedSubscriptions(subscription.parentSubscriptions)
             : this.filterRelatedSubscriptions(subscription.childSubscriptions);
@@ -436,14 +434,14 @@ export default class OldSubscriptions extends React.PureComponent {
                 <td data-label={I18n.t("subscriptions.insync")} className="insync">
                     <CheckBox value={subscription.insync} name="insync" readOnly={true} />
                 </td>
-                <td data-label={I18n.t("subscriptions.product_name")} className="product_name">
-                    {subscription.product_name}
+                <td data-label={I18n.t("subscriptions.product.name")} className="product.name">
+                    {subscription.product.name}
                 </td>
                 <td data-label={I18n.t("subscriptions.status")} className="status">
                     {subscription.status}
                 </td>
-                <td data-label={I18n.t("subscriptions.product_tag")} className="tag">
-                    {subscription.product_tag}
+                <td data-label={I18n.t("subscriptions.product.tag")} className="tag">
+                    {subscription.product.tag}
                 </td>
                 <td data-label={I18n.t("subscriptions.start_date_epoch")} className="start_date_epoch">
                     {renderDate(subscription.start_date)}
