@@ -37,7 +37,7 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { allSubscriptions, portSubscriptions } from "../api";
+import { portSubscriptions } from "../api";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -480,9 +480,9 @@ export default class UserInputForm extends React.Component {
                 const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
                 return (
                     <div>
-                        {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && (
+                        {!userInput.readonly && (
                             <section className="refresh-service-ports">
-                                <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions} />
+                                <i className="fa fa-refresh" onClick={this.loadServicePortsSN7} />
                             </section>
                         )}
                         <MultipleServicePorts
@@ -519,9 +519,9 @@ export default class UserInputForm extends React.Component {
                 const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
                 return (
                     <div>
-                        {!isEmpty(this.props.refreshSubscriptions) && !userInput.readonly && (
+                        {!userInput.readonly && (
                             <section className="refresh-service-ports">
-                                <i className="fa fa-refresh" onClick={this.props.refreshSubscriptions} />
+                                <i className="fa fa-refresh" onClick={this.loadServicePortsSN8} />
                             </section>
                         )}
                         <MultipleServicePortsSN8
@@ -688,7 +688,6 @@ UserInputForm.propTypes = {
     locationCodes: PropTypes.array.isRequired,
     product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
-    refreshSubscriptions: PropTypes.func,
     preselectedInput: PropTypes.object,
 
     preloadSubscriptions: PropTypes.bool,

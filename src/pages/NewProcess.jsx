@@ -77,12 +77,6 @@ export default class NewProcess extends React.Component {
         });
     };
 
-    refreshSubscriptions = () => {
-        allSubscriptions().then(subscriptions => {
-            this.setState({ subscriptions: subscriptions });
-        });
-    };
-
     validSubmit = products => stepUserInput => {
         if (!isEmpty(this.state.product)) {
             const product = {
@@ -278,7 +272,6 @@ export default class NewProcess extends React.Component {
                         preloadServicePortsSN8={true}
                         product={product}
                         validSubmit={this.validSubmit(products)}
-                        refreshSubscriptions={this.refreshSubscriptions}
                         preselectedInput={getQueryParameters(this.props.location.search)}
                     />
                 )}

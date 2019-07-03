@@ -118,7 +118,6 @@ export default class UserInputContainer extends React.Component {
                     product={product}
                     validSubmit={action("submit")}
                     currentState={this.props.currentState}
-                    // refreshSubscriptions={this.refreshSubscriptions}
                     // preselectedInput={getQueryParameters(this.props.location.search)}
                 />
             </section>
