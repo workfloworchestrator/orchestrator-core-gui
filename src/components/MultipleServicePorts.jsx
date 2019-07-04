@@ -39,7 +39,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                 } else {
                     this.clearErrors(index);
                 }
-                servicePorts[index].tag = port.tag;
+                servicePorts[index].tag = port.product.tag;
             } else {
                 this.clearErrors(index);
             }

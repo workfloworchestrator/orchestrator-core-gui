@@ -49,6 +49,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     this.clearErrors(index);
                 }
                 servicePorts[index].port_mode = port.port_mode;
+                servicePorts[index].tag = port.product.tag;
             } else {
                 this.clearErrors(index);
             }

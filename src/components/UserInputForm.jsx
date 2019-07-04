@@ -120,7 +120,7 @@ export default class UserInputForm extends React.Component {
                 if (err.response && err.response.status === 400) {
                     err.response.json().then(json => {
                         const errors = { ...this.state.errors };
-                        json.forEach(item => {
+                        json.validation_errors.forEach(item => {
                             errors[item.loc[0]] = true;
                         });
                         this.setState({ errors: errors, processing: false });
