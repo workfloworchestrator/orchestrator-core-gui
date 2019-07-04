@@ -3145,6 +3145,14 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </em>
                 <div>
                   <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
+                  <section
                     className="multiple-mps"
                   >
                     <section
@@ -3500,6 +3508,14 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </em>
                 <div>
                   <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
+                  <section
                     className="multiple-mps"
                   >
                     <section
@@ -3717,6 +3733,14 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                   Choose Service Ports
                 </em>
                 <div>
+                  <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
                   <section
                     className="multiple-mps"
                   >
@@ -4235,6 +4259,14 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </em>
                 <div>
                   <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
+                  <section
                     className="multiple-mps"
                   >
                     <section
@@ -4590,6 +4622,14 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </em>
                 <div>
                   <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
+                  <section
                     className="service-port-container"
                   >
                     <section
@@ -4940,6 +4980,14 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
                 <div>
+                  <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
                   <section
                     className="service-port-container"
                   >
@@ -5292,6 +5340,14 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </em>
                 <div>
                   <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
+                  <section
                     className="service-port-container"
                   >
                     <section
@@ -5642,6 +5698,14 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
                 <div>
+                  <section
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </section>
                   <section
                     className="service-port-container"
                   >

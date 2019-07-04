@@ -181,10 +181,7 @@ export default class TaskDetail extends React.PureComponent {
                         stepUserInput={stepUserInput}
                         products={products}
                         organisations={[]}
-                        subscriptions={[]}
                         history={history}
-                        servicePorts={[]}
-                        servicePortsSN8={[]}
                         product={{}}
                         currentState={task.current_state}
                         validSubmit={this.validSubmit}

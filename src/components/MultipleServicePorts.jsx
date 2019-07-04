@@ -39,7 +39,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                 } else {
                     this.clearErrors(index);
                 }
-                servicePorts[index].tag = port.tag;
+                servicePorts[index].tag = port.product.tag;
             } else {
                 this.clearErrors(index);
             }
@@ -158,7 +158,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                         <VirtualLAN
                             vlan={servicePort.tag === "SSP" ? "0" : servicePort.vlan}
                             onChange={this.onChangeInternal("vlan", index)}
-                            subscriptionIdMSP={servicePort.subscription_id}
+                            subscriptionId={servicePort.subscription_id}
                             disabled={disabled || servicePort.tag === "SSP" || !servicePort.subscription_id}
                             placeholder={vlanPlaceholder}
                             servicePortTag={servicePort.tag}

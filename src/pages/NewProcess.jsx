@@ -6,7 +6,6 @@ import {
     startModificationSubscription,
     startProcess,
     subscriptionWorkflows,
-    subscriptionsWithDetails,
     validation,
     allSubscriptions
 } from "../api";
@@ -75,20 +74,6 @@ export default class NewProcess extends React.Component {
                 subscriptions: subscriptions,
                 organisationName: organisationName
             });
-        });
-        // subscriptionsWithDetails().then(subscriptions => {
-        //     let organisationName = null;
-        //     if (preselectedInput.organisation) {
-        //         const org = organisations.find(org => org.uuid === preselectedInput.organisation);
-        //         organisationName = org ? org.name : organisationName;
-        //     }
-        //     this.setState({subscriptions: subscriptions, organisationName: organisationName});
-        // });
-    };
-
-    refreshSubscriptions = () => {
-        subscriptionsWithDetails().then(subscriptions => {
-            this.setState({ subscriptions: subscriptions });
         });
     };
 
@@ -243,14 +228,6 @@ export default class NewProcess extends React.Component {
         locationCodes,
         preselectedProduct
     ) {
-        // Todo: delegate complete servicePort stuff to UserInput (e.g. determine when a service_port input is used -> and fetch data)
-        /* let showInitialMsps = this.state.showInitialMsps;
-        let servicePortsSN7 = subscriptions.filter(
-                sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-            ).filter(sub => ((sub.tag === "MSP" || sub.tag === "MSPNL") && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
-        let servicePortsSN8 = subscriptions.filter(
-            sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-        ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.new_process")}</h3>
@@ -279,15 +256,8 @@ export default class NewProcess extends React.Component {
                         products={products}
                         organisations={organisations}
                         history={history}
-                        // Using already loaded subscriptions with enriched .tag info
-                        subscriptions={subscriptions}
-                        // Preloading servicePorts here
-                        // Todo: disable preload en deal with service ports in UserInputForm itself? Now the call is done after start of process: seems fast enough for now
-                        preloadServicePortsSN7={true}
-                        preloadServicePortsSN8={true}
                         product={product}
                         validSubmit={this.validSubmit(products)}
-                        refreshSubscriptions={this.refreshSubscriptions}
                         preselectedInput={getQueryParameters(this.props.location.search)}
                     />
                 )}

@@ -55,8 +55,6 @@ class ProcessDetail extends React.PureComponent {
             loaded: false,
             subscriptions: [],
             stepUserInput: [],
-            servicePortsSN7: [],
-            servicePortsSN8: [],
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
@@ -294,10 +292,6 @@ class ProcessDetail extends React.PureComponent {
                         products={products}
                         organisations={organisations}
                         history={history}
-                        // Todo: determine if we are going to preload here? We know which input types are requested...
-                        preloadSubscriptions={true}
-                        preloadServicePortsSN7={true}
-                        preloadServicePortsSN8={true}
                         product={product}
                         currentState={process.current_state}
                         validSubmit={this.validSubmit}

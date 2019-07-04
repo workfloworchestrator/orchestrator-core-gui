@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import { transitions, productById, subscriptionsDetail } from "../api";
+import { transitions } from "../api";
 
 export default class TransitionProductSelect extends React.PureComponent {
     constructor(props, context) {
@@ -11,25 +11,9 @@ export default class TransitionProductSelect extends React.PureComponent {
     }
 
     componentDidMount = () => {
-        const { subscriptionId, transitionType, newProductId } = this.props;
-        this.filterProductFromState(subscriptionId, transitionType, newProductId);
-    };
-
-    filterProductFromState = (subscriptionId, transitionType, newProductId) => {
-        subscriptionsDetail(subscriptionId).then(subscription => {
-            transitions(subscriptionId, transitionType).then(transitionProducts => {
-                if (subscription.product_id === newProductId) {
-                    this.setState({ transitionProducts: transitionProducts });
-                } else {
-                    productById(newProductId).then(newProduct => {
-                        transitionProducts.foreach(transitionProduct => {
-                            if (newProduct.product_id === transitionProduct.product_id) {
-                                this.setState({ transitionProducts: [newProduct] });
-                            }
-                        });
-                    });
-                }
-            });
+        const { subscriptionId, transitionType } = this.props;
+        transitions(subscriptionId, transitionType).then(transitionProducts => {
+            this.setState({ transitionProducts: transitionProducts });
         });
     };
 
@@ -64,6 +48,5 @@ TransitionProductSelect.propTypes = {
     subscriptionId: PropTypes.string,
     product: PropTypes.string,
     transitionType: PropTypes.string,
-    disabled: PropTypes.bool,
-    newProductId: PropTypes.string
+    disabled: PropTypes.bool
 };
