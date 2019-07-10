@@ -49,6 +49,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                     this.clearErrors(index);
                 }
                 servicePorts[index].port_mode = port.port_mode;
+                servicePorts[index].tag = port.product.tag;
             } else {
                 this.clearErrors(index);
             }
@@ -178,7 +179,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                         <VirtualLAN
                             vlan={servicePort.port_mode === "untagged" ? "0" : servicePort.vlan}
                             onChange={this.onChangeInternal("vlan", index)}
-                            subscriptionIdMSP={servicePort.subscription_id}
+                            subscriptionId={servicePort.subscription_id}
                             disabled={
                                 disabled ||
                                 servicePort.port_mode === "untagged" ||

@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import { usedVlans, usedVlansFiltered } from "../api";
+import { usedVlans } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { doValidateUserInput } from "../validations/UserInput";
 
@@ -16,26 +16,18 @@ export default class VirtualLAN extends React.PureComponent {
         };
     }
 
-    componentDidMount = (subscriptionIdMSP = this.props.subscriptionIdMSP) => {
-        if (this.props.servicePortTag === "SSP" || this.props.servicePortTag === "untagged") {
-            this.setState({ missingInIms: false, usedVlans: [] });
-        } else {
-            if (subscriptionIdMSP) {
-                const { imsCircuitId } = this.props;
-                const promise = imsCircuitId
-                    ? usedVlansFiltered(subscriptionIdMSP, imsCircuitId)
-                    : usedVlans(subscriptionIdMSP);
-                promise
-                    .then(result => this.setState({ usedVlans: result, missingInIms: false }))
-                    .catch(() => this.setState({ missingInIms: true }));
-            }
+    componentDidMount = (subscriptionId = this.props.subscriptionId) => {
+        if (subscriptionId) {
+            usedVlans(subscriptionId)
+                .then(result => this.setState({ usedVlans: result, missingInIms: false }))
+                .catch(() => this.setState({ missingInIms: true }));
         }
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.subscriptionIdMSP && nextProps.subscriptionIdMSP !== this.props.subscriptionIdMSP) {
-            this.componentDidMount(nextProps.subscriptionIdMSP);
-        } else if (isEmpty(nextProps.subscriptionIdMSP)) {
+        if (nextProps.subscriptionId && nextProps.subscriptionId !== this.props.subscriptionId) {
+            this.componentDidMount(nextProps.subscriptionId);
+        } else if (isEmpty(nextProps.subscriptionId)) {
             this.setState({ usedVlans: [] });
         }
     }
@@ -83,22 +75,22 @@ export default class VirtualLAN extends React.PureComponent {
 
     render() {
         const { usedVlans, vlansInUse, missingInIms, invalidFormat } = this.state;
-        const { onChange, vlan, subscriptionIdMSP, disabled, placeholder, servicePortTag } = this.props;
+        const { onChange, vlan, subscriptionId, disabled, placeholder, servicePortTag } = this.props;
         const showAllPortsAvailable =
-            subscriptionIdMSP &&
+            subscriptionId &&
             isEmpty(usedVlans) &&
             !missingInIms &&
             (!servicePortTag === "SSP" || !servicePortTag === "untagged");
         const showWhichPortsAreInUse = !isEmpty(usedVlans) && !disabled && !missingInIms;
         const derivedPlaceholder =
-            placeholder || (subscriptionIdMSP ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
+            placeholder || (subscriptionId ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_msp"));
         return (
             <div className="virtual-vlan">
                 <input
                     type="text"
                     value={vlan || ""}
                     placeholder={derivedPlaceholder}
-                    disabled={!subscriptionIdMSP || disabled}
+                    disabled={!subscriptionId || disabled}
                     onChange={onChange}
                     onBlur={this.validateUsedVlans}
                 />
@@ -127,8 +119,7 @@ VirtualLAN.propTypes = {
     onBlur: PropTypes.func,
     reportError: PropTypes.func.isRequired,
     vlan: PropTypes.string,
-    subscriptionIdMSP: PropTypes.string,
-    imsCircuitId: PropTypes.string,
+    subscriptionId: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     servicePortTag: PropTypes.string

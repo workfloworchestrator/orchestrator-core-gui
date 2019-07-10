@@ -91,14 +91,6 @@ export default class UserInputContainer extends React.Component {
         preselectedProduct,
         formName
     ) {
-        // Todo: delegate complete servicePort stuff to UserInput (e.g. determine when a service_port input is used -> and fetch data)
-        /*        let showInitialMsps = this.state.showInitialMsps;
-                let servicePortsSN7 = subscriptions.filter(
-                        sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-                    ).filter(sub => ((sub.tag === "MSP" || sub.tag === "MSPNL") && (sub.insync || showInitialMsps)) || sub.tag === "SSP");
-                let servicePortsSN8 = subscriptions.filter(
-                    sub => sub.status === "initial" || sub.status === "provisioning" || sub.status === "active"
-                ).filter(sub => ((sub.tag === "SP") && (sub.insync || showInitialMsps)));*/
         return (
             <section className="form-step divider">
                 <h1>{formName}</h1>
@@ -108,18 +100,9 @@ export default class UserInputContainer extends React.Component {
                     products={products}
                     organisations={organisations}
                     history={{}} // Not sure if we need to mock this
-                    // Using subscriptions with enriched .tag info
-                    // subscriptions={subscriptions}
-                    // Preloading servicePorts here
-                    // Todo: disable preload en deal with service ports in UserInputForm itself? Now the call is done after start of process: seems fast enough for now
-                    preloadSubscriptions={true}
-                    preloadServicePortsSN7={true}
-                    preloadServicePortsSN8={true}
                     product={product}
                     validSubmit={action("submit")}
                     currentState={this.props.currentState}
-                    // refreshSubscriptions={this.refreshSubscriptions}
-                    // preselectedInput={getQueryParameters(this.props.location.search)}
                 />
             </section>
         );

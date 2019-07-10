@@ -162,11 +162,6 @@ export function paginatedSubscriptions(range = "0,24", sort = ["start_date", "de
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
-// OldSubscriptions including dynamic properties (SLOW)
-export function subscriptionsWithDetails() {
-    return fetchJson("subscriptions/with_details");
-}
-
 export function subscriptionsDetail(subscription_id) {
     return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
 }
@@ -175,6 +170,11 @@ export function subscriptionsByTags(tagList, statusList = []) {
     return fetchJson(
         `subscriptions/tag/${encodeURIComponent(tagList.join(","))}/${encodeURIComponent(statusList.join(","))}`
     );
+}
+
+export function nodeSubscriptions(statusList = []) {
+    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
+    return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
 
 export function portSubscriptions(tagList, statusList = []) {
@@ -232,10 +232,6 @@ export function nodesForLocationCode(locationCode) {
 
 export function usedVlans(subscriptionId) {
     return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`);
-}
-
-export function usedVlansFiltered(subscriptionId, imsCircuitId) {
-    return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}/${imsCircuitId}`);
 }
 
 export function portByImsPortId(portId) {

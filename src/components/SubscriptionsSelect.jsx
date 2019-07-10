@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import { subscriptionsByProductId, subscriptionsWithDetails } from "../api";
+import { subscriptionsByProductId, allSubscriptions } from "../api";
 import { isEmpty } from "../utils/Utils";
 import "./SubscriptionsSelect.scss";
 
@@ -25,9 +25,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
                 this.setState({ availableSubscriptions: result, loading: false })
             );
         } else {
-            subscriptionsWithDetails().then(result =>
-                this.setState({ availableSubscriptions: result, loading: false })
-            );
+            allSubscriptions().then(result => this.setState({ availableSubscriptions: result, loading: false }));
         }
     };
 
