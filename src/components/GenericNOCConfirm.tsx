@@ -7,7 +7,7 @@ import "./GenericNOCConfirm.scss";
 interface IProps {
     name: string;
     data: any[][];
-    onChange: (accept: boolean) => any;
+    onChange: (skip_workflow: boolean, value: boolean) => any;
 }
 
 interface IState {
@@ -24,7 +24,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
         const target = e.target as HTMLInputElement;
         let skip_workflow = target.checked;
         //after (un)skip always uncheck all checkboxes
-        this.props.onChange(!skip_workflow);
+        this.props.onChange(!skip_workflow, skip_workflow);
         this.setState({skip_workflow:  skip_workflow, checks: {}});
     }
 
@@ -50,7 +50,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                 )
                 .map((entry: (boolean | string[])[]) => entry[1] as boolean)
                 .every((check: boolean) => check);
-            this.props.onChange(allValid);
+            this.props.onChange(allValid, allValid);
 
             this.setState({ checks: checks });
         };

@@ -43,7 +43,7 @@ export function doValidateUserInput(userInput, val, errors) {
     } else if (type === "service_ports" || type === "service_ports_sn8") {
         errors[name] =
             isEmpty(value) || (Array.isArray(value) && value.some(sp => inValidServicePort(sp, userInput.elan)));
-    } else if (type === "accept") {
+    } else if (type === "accept" || type === "accept_or_skip") {
         errors[name] = !value;
     } else if (type === "boolean") {
         errors[name] = isEmpty(!!value);
@@ -60,7 +60,8 @@ export function doValidateUserInput(userInput, val, errors) {
             const localpart = value.replace(ogf_network, "").replace(label);
             errors[name] = !(ogf_network.test(value) && localpart.includes(":") && label.test(value));
         }
-    } else if (type === "label" || type === "ims_changes" || type === "table_summary" || type === "migration_summary") {
+    } else if (type === "label" || type === "ims_changes" || type === "table_summary" || type === "migration_summary"
+    ) {
         errors[name] = false;
     } else if (type === "jira_ticket") {
         errors[name] = !/^[A-Z]{4}-[0-9]{4,10}$/i.test(value);
