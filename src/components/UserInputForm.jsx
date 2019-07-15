@@ -68,7 +68,7 @@ export default class UserInputForm extends React.Component {
     }
 
     loadServicePortsSN7 = () => {
-        portSubscriptions(["MSP", "SSP", "MSPNL"]).then(result => {
+        portSubscriptions(["MSP", "SSP", "MSPNL"], ["active"]).then(result => {
             this.setState({ servicePortsSN7: result, servicePortsLoadedSN7: true });
         });
     };
