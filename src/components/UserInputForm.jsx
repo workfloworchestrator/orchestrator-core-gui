@@ -235,8 +235,6 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({ target: { value: from_skip } });
     };
 
-
-
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
