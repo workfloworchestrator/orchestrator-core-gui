@@ -22,8 +22,8 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
     onChangeSkip = (e: React.FormEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
         let skip_workflow = target.checked;
-        //after (un)skip always uncheck all checkboxes
         this.props.onChange(!skip_workflow, skip_workflow);
+        //after (un)skip always uncheck all checkboxes
         this.setState({skip_workflow:  skip_workflow, checks: {}});
     }
 

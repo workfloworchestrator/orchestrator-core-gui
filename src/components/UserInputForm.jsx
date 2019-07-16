@@ -140,7 +140,15 @@ export default class UserInputForm extends React.Component {
 
     validateAllUserInput = stepUserInput => {
         const errors = { ...this.state.errors };
-        stepUserInput.forEach(input => doValidateUserInput(input, input.value, errors));
+        stepUserInput.forEach(input => {
+            //the value can be true or false, but there is datavalidation
+            //dependent on whether the SKIP AcceptType checkbox is checked or all others
+            //as implemented in changeAcceptOrSkip function
+            //this is a hack to make the front-end validation work
+            if (input.type !== "accept_or_skip") {
+                doValidateUserInput(input, input.value, errors);
+            }
+        });
         this.setState({ errors: errors });
         return !Object.keys(errors).some(key => errors[key]);
     };
