@@ -20,7 +20,6 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
     readonly state: IState = { checks: {}, skip_workflow: false };
 
     onChangeSkip = (e: React.FormEvent<HTMLInputElement>) => {
-        let {data} = this.props;
         const target = e.target as HTMLInputElement;
         let skip_workflow = target.checked;
         //after (un)skip always uncheck all checkboxes
@@ -31,7 +30,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
 
     onChangeInternal = (index: number) => {
         return (e: React.FormEvent<HTMLInputElement>) => {
-            const { checks, skip_workflow } = this.state;
+            const { checks } = this.state;
             let { data } = this.props;
             if (!data) {
                 // Legacy mode
