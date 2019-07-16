@@ -43,7 +43,7 @@ export function doValidateUserInput(userInput, val, errors) {
     } else if (type === "service_ports" || type === "service_ports_sn8") {
         errors[name] =
             isEmpty(value) || (Array.isArray(value) && value.some(sp => inValidServicePort(sp, userInput.elan)));
-    } else if (type === "accept") {
+    } else if (type === "accept" || type === "accept_or_skip") {
         errors[name] = !value;
     } else if (type === "boolean") {
         errors[name] = isEmpty(!!value);

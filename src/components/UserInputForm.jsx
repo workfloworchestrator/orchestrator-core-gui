@@ -230,6 +230,11 @@ export default class UserInputForm extends React.Component {
         this.validateUserInput(name)({ target: { value: newValue } });
     };
 
+    changeAcceptOrSkip = name => (newValue, from_skip) => {
+        this.changeUserInput(name, newValue);
+        this.validateUserInput(name)({ target: { value: from_skip } });
+    };
+
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
@@ -442,6 +447,8 @@ export default class UserInputForm extends React.Component {
                 );
             case "accept":
                 return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
+            case "accept_or_skip":
+                return <GenericNOCConfirm name={name} onChange={this.changeAcceptOrSkip(name)} data={userInput.data} />;
             case "boolean":
                 return (
                     <CheckBox
