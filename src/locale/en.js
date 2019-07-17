@@ -29,7 +29,7 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
-        prefixes: "IP Prefixes",
+        prefixes: "LIR Prefixes",
         cache: "Cache",
         new_process: "New Process +"
     },
@@ -725,8 +725,6 @@ I18n.translations.en = {
         Free: "Free",
         Allocated: "Allocated",
         Planned: "Planned",
-        Failed: "Failed",
-        Subnet: "Subnet",
         IPv4: "IPv4",
         IPv6: "IPv6",
         SP: "SN8 Service Port",
