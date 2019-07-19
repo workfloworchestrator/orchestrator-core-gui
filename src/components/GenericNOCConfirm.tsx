@@ -7,16 +7,26 @@ import "./GenericNOCConfirm.scss";
 interface IProps {
     name: string;
     data: any[][];
-    onChange: (accept: boolean) => any;
+    onChange: (skip_workflow: boolean, value: boolean) => any;
 }
 
 interface IState {
     checks: { [key: number]: boolean };
+    skip_workflow: boolean;
 }
 
 export default class GenericNOCConfirm extends React.PureComponent<IProps, IState> {
     static propTypes: {};
-    readonly state: IState = { checks: {} };
+    readonly state: IState = { checks: {}, skip_workflow: false };
+
+    onChangeSkip = (e: React.FormEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+        let skip_workflow = target.checked;
+        this.props.onChange(!skip_workflow, skip_workflow);
+        //after (un)skip always uncheck all checkboxes
+        this.setState({skip_workflow:  skip_workflow, checks: {}});
+    }
+
 
     onChangeInternal = (index: number) => {
         return (e: React.FormEvent<HTMLInputElement>) => {
@@ -39,14 +49,14 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                 )
                 .map((entry: (boolean | string[])[]) => entry[1] as boolean)
                 .every((check: boolean) => check);
-            this.props.onChange(allValid);
+            this.props.onChange(allValid, allValid);
 
             this.setState({ checks: checks });
         };
     };
 
     renderCheck(index: number, name: string, type: string, i18n_params: { [key: string]: any }) {
-        const { checks } = this.state;
+        const { checks, skip_workflow } = this.state;
 
         const label = I18n.t(`process.accept.${name}`, i18n_params);
 
@@ -77,6 +87,18 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                         <label className="warning">{label}</label>
                     </div>
                 );
+            case "skip":
+                return (
+                    <CheckBox
+                        key={index}
+                        name={name} // Index needed to allow checkboxes with same name
+
+                        onChange={this.onChangeSkip}
+                        value={skip_workflow}
+                        info={label}
+                        className={"skip"}
+                    />
+                );
             default:
                 return (
                     <CheckBox
@@ -86,6 +108,8 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                         onChange={this.onChangeInternal(index)}
                         value={checks[index]}
                         info={label}
+                        readOnly={skip_workflow}
+                        ref={name + index}
                     />
                 );
         }

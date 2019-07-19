@@ -87,6 +87,8 @@ I18n.translations.en = {
         refresh: "Refresh automatically every 3 seconds?"
     },
     process: {
+        confirm_migrate_sap: "Confirm the migration of the SAP",
+        confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
         accept: {
             noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
             noc_remove_lichtpad_confirmation: "Is the LightPath of the subscription removed?",
@@ -97,6 +99,8 @@ I18n.translations.en = {
             check_port_patched_sn7_sn8: "Physically patch the customer port from SN7 to SN8 HW.",
             confirm_migrate_sap: "Confirm the migration of the SAP",
             confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
+            skip_migrate_sap_workflow:
+                "do not continue with the migration and return to the original state, this will end the workflow without making any changes",
             check_sn7_port_terminated: "Terminate SN7 SSP/MSP",
             check_removed_ism_config: "Remove ISM configuration (when applicable remove SN7 node)",
             check_removed_sn7_service_and_tunnel: "Remove SN7 service & tunnel from ISM",

@@ -250,7 +250,7 @@ export default class Prefixes extends React.PureComponent {
             return (
                 prefix.prefix.toLowerCase().includes(queryToLower) ||
                 prefix.customer.toLowerCase().includes(queryToLower) ||
-                prefix.description.toLowerCase().includes(queryToLower) ||
+                (prefix.description !== null && prefix.description.toLowerCase().includes(queryToLower)) ||
                 ipamStates[prefix.state].toLowerCase().includes(queryToLower) ||
                 queryToLower === familyFullName[prefix.family].toLowerCase() ||
                 prefix.start_date_as_str.includes(query)
