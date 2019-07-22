@@ -89,9 +89,15 @@ export default class Prefixes extends React.PureComponent {
                     })
                 )
                 .then(result => {
-                    this.setState(prevState => ({
-                        prefixes: prevState.prefixes.concat(result)
-                    }));
+                    //deduping is added as a temporary fix removing the IP "root_prefix" filter
+                    //a more thorough redesign is called for in wf-client ticket #255
+                    this.setState(prevState => {
+                        let newPrefixes = prevState.prefixes.concat(result);
+                        newPrefixes = Array.from(new Set(newPrefixes.map(p => p.id))).map(id => {
+                            return newPrefixes.find(s => s.id === id);
+                        });
+                        return { prefixes: newPrefixes };
+                    });
                 })
         );
     };
@@ -200,9 +206,8 @@ export default class Prefixes extends React.PureComponent {
         const { state, rootPrefix } = this.state.filterAttributes;
         return unfiltered.filter(prefix => {
             const stateFilter = state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
-            const rootPrefixFilter = rootPrefix.find(attr => attr.name === prefix.parent);
 
-            return (stateFilter ? stateFilter.selected : true) && (rootPrefixFilter ? rootPrefixFilter.selected : true);
+            return stateFilter ? stateFilter.selected : true;
         });
     };
 
@@ -303,19 +308,10 @@ export default class Prefixes extends React.PureComponent {
         const { prefixes, query, searchResults, filterAttributes } = this.state;
         const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
         const sortedPrefixes = this.sort(filteredPrefixes);
-
         return (
             <div className="mod-prefixes">
                 <div className="card">
                     <div className="options">
-                        <FilterDropDown
-                            items={filterAttributes.rootPrefix}
-                            filterBy={this.setFilter("rootPrefix")}
-                            singleSelectFilter={this.singleSelectFilter("rootPrefix")}
-                            selectAll={this.selectAll("rootPrefix")}
-                            label={I18n.t("prefixes.filters.root_prefix")}
-                            noTrans={true}
-                        />
                         <FilterDropDown
                             items={filterAttributes.state}
                             filterBy={this.setFilter("state")}
