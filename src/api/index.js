@@ -273,6 +273,7 @@ export function getResourceTypeInfo(type, identifier) {
             break;
         case "ip_prefix_subscription_id":
         case "internetpinnen_prefix_subscription_id":
+        case "parent_ip_prefix_subscription_id":
         case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;

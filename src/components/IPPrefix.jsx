@@ -44,6 +44,7 @@ export default class IPPrefix extends React.PureComponent {
         const { preselectedPrefix } = this.props;
         if (preselectedPrefix) {
             this.setState({ loading: false });
+            this.props.onChange(preselectedPrefix);
         } else {
             prefix_filters().then(result => {
                 let { filter } = this.state;
@@ -148,6 +149,7 @@ export default class IPPrefix extends React.PureComponent {
                 selected_prefix: prefix["prefix"],
                 selected_prefix_state: prefix.state
             });
+            this.props.onChange(prefix["prefix"]);
         }
     };
 
