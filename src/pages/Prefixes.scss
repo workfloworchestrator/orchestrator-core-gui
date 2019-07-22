@@ -95,10 +95,6 @@
                     background-color: darken($light-green, 10%);
                 }
             }
-            tr.Subnet {
-                background-color: darken($light-blue, 30%);
-                cursor: default;
-            }
             tr.selected {
                 background-color: $dark-grey;
                 color: white;
@@ -165,9 +161,6 @@
                         }
                         &.Allocated {
                             background-color: darken($light-blue, 10%);
-                        }
-                        &.Failed {
-                            background-color: darken($light-red, 10%);
                         }
                     }
                 }

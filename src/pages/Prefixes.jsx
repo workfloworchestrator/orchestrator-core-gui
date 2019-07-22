@@ -30,7 +30,7 @@ export default class Prefixes extends React.PureComponent {
                     .filter(s => s)
                     .map(state => ({
                         name: state,
-                        selected: state === "Allocated" || state === "Subnet",
+                        selected: state === "Allocated",
                         count: 0
                     })),
                 rootPrefix: []
