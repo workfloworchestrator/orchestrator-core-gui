@@ -1,7 +1,8 @@
 @import "../stylesheets/vars.scss";
 
 div.checkbox,
-div.level_2 {
+div.level_2,
+div.skip {
     input[type="checkbox"] {
         display: none;
     }
@@ -61,4 +62,8 @@ div.level_2 {
 
     label {
     }
+}
+
+div.skip {
+    font-style: italic;
 }

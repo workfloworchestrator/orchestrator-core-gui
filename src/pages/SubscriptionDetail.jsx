@@ -87,7 +87,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                             obj =>
                                 obj.type === port_subscription_id ||
                                 obj.type === "ip_prefix_subscription_id" ||
-                                obj.type === "internetpinnen_prefix_subscription_id"
+                                obj.type === "internetpinnen_prefix_subscription_id" ||
+                                obj.type === "parent_ip_prefix_subscription_id"
                         )
                         .map(obj => obj.json);
                     const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
@@ -778,6 +779,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             case port_subscription_id:
             case "ip_prefix_subscription_id":
             case "internetpinnen_prefix_subscription_id":
+            case "parent_ip_prefix_subscription_id":
                 target = subscriptions.find(sub => sub.subscription_id === identifier);
                 return this.renderSubscriptionDetail(target, 0, "related-subscription");
             case "ipam_prefix_id":

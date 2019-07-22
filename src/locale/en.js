@@ -29,7 +29,7 @@ I18n.translations.en = {
         subscriptions: "Subscriptions",
         metadata: "Metadata",
         tasks: "Tasks",
-        prefixes: "IP Prefixes",
+        prefixes: "LIR Prefixes",
         cache: "Cache",
         new_process: "New Process +"
     },
@@ -87,6 +87,8 @@ I18n.translations.en = {
         refresh: "Refresh automatically every 3 seconds?"
     },
     process: {
+        confirm_migrate_sap: "Confirm the migration of the SAP",
+        confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
         accept: {
             noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
             noc_remove_lichtpad_confirmation: "Is the LightPath of the subscription removed?",
@@ -97,6 +99,8 @@ I18n.translations.en = {
             check_port_patched_sn7_sn8: "Physically patch the customer port from SN7 to SN8 HW.",
             confirm_migrate_sap: "Confirm the migration of the SAP",
             confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
+            skip_migrate_sap_workflow:
+                "do not continue with the migration and return to the original state, this will end the workflow without making any changes",
             check_sn7_port_terminated: "Terminate SN7 SSP/MSP",
             check_removed_ism_config: "Remove ISM configuration (when applicable remove SN7 node)",
             check_removed_sn7_service_and_tunnel: "Remove SN7 service & tunnel from ISM",
@@ -336,6 +340,8 @@ I18n.translations.en = {
         surfcert_filter_info: "Type of SURFcert filter",
         service_ports: "Service Ports",
         service_ports_info: "Choose Service Ports",
+        service_ports_input: "Service Ports",
+        service_ports_input_info: "Choose Service Ports",
         service_ports_primary: "Service Ports",
         service_ports_primary_info: "The A1 and B1 side",
         service_ports_secondary: "Service Ports",
@@ -580,7 +586,9 @@ I18n.translations.en = {
         to_internet: "TO_INTERNET",
         customer_aggregate: "CUSTOMER_AGGREGATE",
         sap_summary_sn7: "Summary of available SN7 SAP's",
-        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details"
+        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details",
+        speed_policer: "Speed policer",
+        remote_port_shutdown: "Remote port shutdown"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -721,8 +729,6 @@ I18n.translations.en = {
         Free: "Free",
         Allocated: "Allocated",
         Planned: "Planned",
-        Failed: "Failed",
-        Subnet: "Subnet",
         IPv4: "IPv4",
         IPv6: "IPv6",
         SP: "SN8 Service Port",

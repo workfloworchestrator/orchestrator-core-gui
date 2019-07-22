@@ -2,7 +2,7 @@ import { isEmpty } from "../utils/Utils";
 import { validEmailRegExp } from "./Subscriptions";
 
 const inValidVlan = vlan => {
-    const value = vlan || "";
+    const value = vlan || "0";
 
     const stripped = value.toString().replace(/ /g, "");
     return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) || stripped.split(",").some(inValidRange);
@@ -45,6 +45,8 @@ export function doValidateUserInput(userInput, val, errors) {
             isEmpty(value) || (Array.isArray(value) && value.some(sp => inValidServicePort(sp, userInput.elan)));
     } else if (type === "accept") {
         errors[name] = !value;
+    } else if (type === "accept_or_skip") {
+        errors[name] = false;
     } else if (type === "boolean") {
         errors[name] = isEmpty(!!value);
     } else if (type === "crm_port_id") {

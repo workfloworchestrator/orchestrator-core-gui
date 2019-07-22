@@ -31,10 +31,6 @@ build docker image:
     - docker push $CONTAINER_TEST_IMAGE
   tags:
     - docker-ct-builder-ext
-  only:
-    - dev@automation/workflows-client
-    - master@automation/workflows-client
-    - tags
 
 scan docker images:
   stage: scan
