@@ -203,7 +203,7 @@ export default class Prefixes extends React.PureComponent {
     };
 
     filter = unfiltered => {
-        const { state, rootPrefix } = this.state.filterAttributes;
+        const { state } = this.state.filterAttributes;
         return unfiltered.filter(prefix => {
             const stateFilter = state.find(attr => ipamStates.indexOf(attr.name) === prefix.state);
 
