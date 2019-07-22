@@ -340,6 +340,8 @@ I18n.translations.en = {
         surfcert_filter_info: "Type of SURFcert filter",
         service_ports: "Service Ports",
         service_ports_info: "Choose Service Ports",
+        service_ports_input: "Service Ports",
+        service_ports_input_info: "Choose Service Ports",
         service_ports_primary: "Service Ports",
         service_ports_primary_info: "The A1 and B1 side",
         service_ports_secondary: "Service Ports",
@@ -584,7 +586,9 @@ I18n.translations.en = {
         to_internet: "TO_INTERNET",
         customer_aggregate: "CUSTOMER_AGGREGATE",
         sap_summary_sn7: "Summary of available SN7 SAP's",
-        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details"
+        sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details",
+        speed_policer: "Speed policer",
+        remote_port_shutdown: "Remote port shutdown"
     },
     process_state: {
         copy: "Copy to clipboard",
