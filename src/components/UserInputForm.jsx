@@ -293,9 +293,9 @@ export default class UserInputForm extends React.Component {
 
     initialPorts = minimum => {
         if (minimum === 1) {
-            return [{ subscription_id: null, vlan: "" }];
+            return [{ subscription_id: null, vlan: "0" }];
         } else {
-            return [{ subscription_id: null, vlan: "" }, { subscription_id: null, vlan: "" }];
+            return [{ subscription_id: null, vlan: "0" }, { subscription_id: null, vlan: "0" }];
         }
     };
 

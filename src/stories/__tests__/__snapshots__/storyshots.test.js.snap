@@ -3286,7 +3286,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                           <i
@@ -3649,7 +3649,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                           <i
@@ -3875,7 +3875,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
@@ -4006,7 +4006,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
@@ -4400,7 +4400,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                           <i
@@ -4763,7 +4763,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
@@ -5122,7 +5122,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
@@ -5481,7 +5481,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
@@ -5840,7 +5840,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                               onChange={[Function]}
                               placeholder="First select a Service Port..."
                               type="text"
-                              value=""
+                              value="0"
                             />
                           </div>
                         </div>
