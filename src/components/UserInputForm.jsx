@@ -325,6 +325,7 @@ export default class UserInputForm extends React.Component {
                         readOnly={userInput.readonly}
                         onChange={this.changeStringInput(name)}
                         onBlur={this.validateUserInput(name)}
+                        autoComplete="no-value"
                     />
                 );
             case "subscription_id":
