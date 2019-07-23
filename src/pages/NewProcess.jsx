@@ -234,9 +234,9 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="product">{I18n.t("process.product")}</label>
                     <ProductSelect
-                        products={this.props.products.filter(
-                            prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE))
-                        )}
+                        products={this.props.products
+                            .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
+                            .filter(prod => prod.status === "active")}
                         onChange={this.changeProduct}
                         product={isEmpty(product) ? undefined : product.value}
                         disabled={!isEmpty(preselectedProduct)}
