@@ -302,7 +302,7 @@ export default class NewProcess extends React.Component {
                 let workflow = workflows.terminate[0];
 
                 this.setState({
-                    notTerminatableMessage: I18n.t(workflow.reason, workflow)
+                    notTerminatableMessage: workflow.reason ? I18n.t(workflow.reason, workflows) : ""
                 });
             });
         }

@@ -846,8 +846,8 @@ I18n.translations.en = {
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription:
-            "This subscription can not be terminated as it is used in other subscriptions: {{unterminated_parents}}",
+        no_modify_parent_subscription:
+            "This subscription can not be {{action}} as it is used in other subscriptions: {{unterminated_parents}}",
         no_termination_workflow:
             "This subscription can not be terminated as the product has no termination workflow-key.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",
