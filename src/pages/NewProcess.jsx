@@ -170,9 +170,10 @@ export default class NewProcess extends React.Component {
         const preselectedInput = getQueryParameters(location.search);
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
+        debugger;
         this.confirmation(
             I18n.t("subscription.modifyConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.description,
                 customer: subscription.customer_name,
                 change: change
             }),
@@ -189,7 +190,7 @@ export default class NewProcess extends React.Component {
         const subscription = this.addContextToSubscription(terminateSubscription);
         this.confirmation(
             I18n.t("subscription.terminateConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.description,
                 customer: subscription.customer_name
             }),
             () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`)
