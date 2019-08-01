@@ -65,9 +65,7 @@ class ProcessDetail extends React.PureComponent {
     componentDidMount = () => {
         process(this.props.match.params.id).then(processInstance => {
             /**
-             * This is the hook to enforce the correct membership for editing the user_input. For now we
-             * don't enforce anything.
-             * TODO
+             * Ensure correct user memberships and populate UserInput form with values
              */
 
             const { configuration, currentUser, organisations, products } = this.props;
@@ -87,12 +85,14 @@ class ProcessDetail extends React.PureComponent {
             const requiredTeamMembership = configuration[processInstance.assignee];
             const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
             const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
-            //Pre-fill the value of the user_input if the current_state already contains the value
 
             const state = processInstance.current_state || {};
+            // Try to populate the form values via the process state first and when that doesn't exist use the input value
             if (!isEmpty(state) && !isEmpty(stepUserInput)) {
+                // NOTE: when using the workflows domain model you should be careful with the root state variables as they could
+                // overwrite what you provide via the value paramter of: `input("name", "type" value="I want this value")`
                 stepUserInput.forEach(
-                    userInput => (userInput.value = lookupValueFromNestedState(userInput.name, state))
+                    userInput => (userInput.value = lookupValueFromNestedState(userInput.name, state) || userInput.value)
                 );
             }
             this.setState({
