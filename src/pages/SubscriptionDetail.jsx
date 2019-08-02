@@ -21,7 +21,7 @@ import { absent, ims_circuit_id, nms_service_id, subscriptionInstanceValues } fr
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
-import { startModificationSubscription } from "../api/index";
+import { startProcess } from "../api/index";
 
 export default class SubscriptionDetail extends React.PureComponent {
     constructor(props) {
@@ -215,7 +215,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 change: change
             }),
             () =>
-                startModificationSubscription(subscription.subscription_id, workflow_name).then(() => {
+                startProcess(workflow_name, { subscription_id: subscription.subscription_id }).then(() => {
                     this.props.history.push("/processes");
                 })
         );

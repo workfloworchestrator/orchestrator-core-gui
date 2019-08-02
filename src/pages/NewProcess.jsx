@@ -1,14 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import {
-    initialWorkflowInput,
-    startModificationSubscription,
-    startProcess,
-    subscriptionWorkflows,
-    validation,
-    allSubscriptions
-} from "../api";
+import { initialWorkflowInput, startProcess, subscriptionWorkflows, validation, allSubscriptions } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
@@ -94,7 +87,7 @@ export default class NewProcess extends React.Component {
                 return acc;
             }, {});
 
-            let result = startProcess(processInput);
+            let result = startProcess(this.state.product.workflow.name, processInput);
             result.then(() => {
                 this.props.history.push(`/processes`);
                 const name = products.find(prod => prod.product_id === this.state.product.value).name;
@@ -166,8 +159,6 @@ export default class NewProcess extends React.Component {
     startModifyProcess = e => {
         stop(e);
         const { modifySubscription, modifyWorkflow } = this.state;
-        const { location } = this.props;
-        const preselectedInput = getQueryParameters(location.search);
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         debugger;
@@ -178,7 +169,7 @@ export default class NewProcess extends React.Component {
                 change: change
             }),
             () =>
-                startModificationSubscription(modifySubscription, modifyWorkflow, preselectedInput.product).then(() => {
+                startProcess(modifyWorkflow, { subscription_id: modifySubscription }).then(() => {
                     this.props.history.push("/processes");
                 })
         );
