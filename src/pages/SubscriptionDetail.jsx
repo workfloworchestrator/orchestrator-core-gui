@@ -17,15 +17,7 @@ import {
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import { isEmpty, stop } from "../utils/Utils";
-import {
-    absent,
-    ims_circuit_id,
-    ims_port_id,
-    nms_service_id,
-    parent_subscriptions,
-    port_subscription_id,
-    subscriptionInstanceValues
-} from "../validations/Subscriptions";
+import { absent, ims_circuit_id, nms_service_id, subscriptionInstanceValues } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./SubscriptionDetail.scss";
@@ -70,39 +62,38 @@ export default class SubscriptionDetail extends React.PureComponent {
                 const promises = [
                     processSubscriptionsBySubscriptionId(subscription.subscription_id),
                     productById(subscription.product_id),
-                    subscriptionWorkflows(subscription.subscription_id)
-                ].concat(values.map(val => getResourceTypeInfo(val.resource_type.resource_type, val.value)));
-                if (
-                    values.some(val => val.resource_type.resource_type === ims_circuit_id) &&
-                    !values.some(val => val.resource_type.resource_type === nms_service_id)
-                ) {
-                    //add the parent subscriptions where this subscription is used as a MSP (or SSP)
-                    promises.push(parentSubscriptions(subscription.subscription_id));
-                }
+                    subscriptionWorkflows(subscription.subscription_id),
+                    //add the parent subscriptions where this subscription is used
+                    parentSubscriptions(subscription.subscription_id)
+                ]
+                    // Add child subscriptions and other external resources
+                    .concat(values.map(val => getResourceTypeInfo(val.resource_type.resource_type, val.value)));
+
                 Promise.all(promises).then(result => {
-                    const relatedObjects = result.slice(3);
+                    const relatedObjects = result.slice(4);
                     const notFoundRelatedObjects = relatedObjects.filter(obj => obj.type === absent);
-                    let subscriptions = relatedObjects
+
+                    let childSubscriptions = relatedObjects
                         .filter(
                             obj =>
-                                obj.type === port_subscription_id ||
+                                obj.type === "port_subscription_id" ||
                                 obj.type === "ip_prefix_subscription_id" ||
                                 obj.type === "internetpinnen_prefix_subscription_id" ||
-                                obj.type === "parent_ip_prefix_subscription_id"
+                                obj.type === "parent_ip_prefix_subscription_id" ||
+                                obj.type === "node_subscription_id"
                         )
                         .map(obj => obj.json);
-                    const subscription_used = relatedObjects.find(obj => obj.type === parent_subscriptions);
-                    if (subscription_used) {
-                        subscriptions = subscriptions.concat(subscription_used.json);
-                    }
-                    subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
+
+                    // Enrich parent subscriptions
+                    let parentSubscriptions = result[3].json;
+                    parentSubscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
 
                     const allImsServices = relatedObjects
                         .filter(
                             obj =>
-                                obj.type === ims_circuit_id ||
+                                obj.type === "ims_circuit_id" ||
                                 obj.type === "ims_corelink_trunk_id" ||
-                                obj.type === ims_port_id
+                                obj.type === "ims_port_id"
                         )
                         .map(obj => obj.json);
 
@@ -129,7 +120,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                         imsServices: imsServices,
                         ipamPrefixes: ipamPrefixes,
                         ipamAddresses: ipamAddresses,
-                        subscriptions: subscriptions,
+                        childSubscriptions: childSubscriptions,
+                        parentSubscriptions: parentSubscriptions,
                         notFoundRelatedObjects: notFoundRelatedObjects,
                         loadedAllRelatedObjects: true
                     });
@@ -295,11 +287,10 @@ export default class SubscriptionDetail extends React.PureComponent {
         </table>
     );
 
-    renderSubscriptions = (subscriptions, subscription, organisations, products) => {
-        if (isEmpty(subscriptions)) {
+    renderSubscriptions = (parentSubscriptions, subscription, organisations, products) => {
+        if (isEmpty(parentSubscriptions)) {
             return null;
         }
-        subscriptions.forEach(sub => enrichSubscription(sub, organisations, products));
 
         const values = subscriptionInstanceValues(this.state.subscription);
         const isLPSubscription = values.some(val => val.resource_type.resource_type === nms_service_id);
@@ -338,7 +329,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                             <tr>{columns.map((column, index) => th(index))}</tr>
                         </thead>
                         <tbody>
-                            {subscriptions.map((subscription, index) => (
+                            {parentSubscriptions.map((subscription, index) => (
                                 <tr key={index}>
                                     <td data-label={I18n.t("subscriptions.customer_name")} className="customer_name">
                                         {subscription.customer_name}
@@ -768,15 +759,15 @@ export default class SubscriptionDetail extends React.PureComponent {
         this.setState({ collapsedObjects: [...collapsedObjects] });
     };
 
-    renderRelatedObject = (subscriptions, imsServices, type, identifier, isSubscriptionValue, imsEndpoints) => {
+    renderRelatedObject = (subscriptions, imsServices, type, identifier, imsEndpoints) => {
         var target;
         switch (type) {
             case "ims_corelink_trunk_id":
                 return <div>Todo: implement fetch</div>;
-            case ims_circuit_id:
+            case "ims_circuit_id":
                 target = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
                 return this.renderImsServiceDetail(target, 0, imsEndpoints, "related-subscription");
-            case port_subscription_id:
+            case "port_subscription_id":
             case "ip_prefix_subscription_id":
             case "internetpinnen_prefix_subscription_id":
             case "parent_ip_prefix_subscription_id":
@@ -799,7 +790,6 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderResourceTypeRow = (
-        subscription,
         subscriptionInstanceValue,
         loadedAllRelatedObjects,
         notFoundRelatedObjects,
@@ -817,7 +807,7 @@ export default class SubscriptionDetail extends React.PureComponent {
             );
         const isSubscriptionValue = subscriptionInstanceValue.resource_type.resource_type.endsWith("subscription_id");
         const externalLinks = [
-            ims_circuit_id,
+            "ims_circuit_id",
             "ims_corelink_trunk_id",
             "ptp_ipv4_ipam_id",
             "ptp_ipv6_ipam_id",
@@ -873,7 +863,6 @@ export default class SubscriptionDetail extends React.PureComponent {
                                 imsServices,
                                 subscriptionInstanceValue.resource_type.resource_type,
                                 subscriptionInstanceValue.value,
-                                isSubscriptionValue,
                                 imsEndpoints
                             )}
                         </td>
@@ -921,7 +910,6 @@ export default class SubscriptionDetail extends React.PureComponent {
                                         )
                                         .map((value, i) =>
                                             this.renderResourceTypeRow(
-                                                subscription,
                                                 value,
                                                 loadedAllRelatedObjects,
                                                 notFoundRelatedObjects,
@@ -956,7 +944,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             product,
             imsServices,
             imsEndpoints,
-            subscriptions,
+            childSubscriptions,
+            parentSubscriptions,
             confirmationDialogOpen,
             confirmationDialogAction,
             confirmationDialogQuestion,
@@ -987,13 +976,13 @@ export default class SubscriptionDetail extends React.PureComponent {
                             loadedAllRelatedObjects,
                             imsServices,
                             collapsedObjects,
-                            subscriptions,
+                            childSubscriptions,
                             imsEndpoints
                         )}
                         {this.renderActions(subscription, loadedAllRelatedObjects, notFoundRelatedObjects, workflows)}
                         {this.renderProduct(product)}
                         {this.renderProcesses(subscriptionProcesses)}
-                        {this.renderSubscriptions(subscriptions, subscription, organisations, products)}
+                        {this.renderSubscriptions(parentSubscriptions, subscription, organisations, products)}
                     </div>
                 )}
                 {renderNotFound && (
