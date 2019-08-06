@@ -1,4 +1,4 @@
-// Interpolation works as follows:
+//o Interpolation works as follows:
 //
 // Make a key with the translation and enclose the variable with {{}}
 // ie "Hello {{name}}" Do not add any spaces around the variable name.
@@ -413,6 +413,9 @@ I18n.translations.en = {
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
         port_mode_info: "The port mode as sent to IMS and NSO",
+        auto_negotiation_info:
+            "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
+        auto_negotiation: "Auto Negotiation",
         old_subscription_label: "Old Subscription",
         old_subscription_label_info: "The old subscription in this workflow",
         sap1: {

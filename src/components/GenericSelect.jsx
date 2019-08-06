@@ -9,8 +9,8 @@ export default function GenericSelect({ onChange, choices, selected, disabled, d
 
     let value = options.find(option => option.value === selected);
 
-    if (value === undefined && defaultValue !== undefined){
-        value = options.find(option => option.value === defaultValue)
+    if (value === undefined && defaultValue !== undefined) {
+        value = options.find(option => option.value === defaultValue);
         onChange(value);
     }
 
