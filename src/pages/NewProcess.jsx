@@ -74,17 +74,7 @@ export default class NewProcess extends React.Component {
 
     validSubmit = products => stepUserInput => {
         if (!isEmpty(this.state.product)) {
-            const product = {
-                name: "product",
-                type: "product",
-                value: this.state.product.value,
-                tag: this.state.product.tag
-            };
-            //create a copy to prevent re-rendering
-            let processInput = [...stepUserInput];
-            processInput.push(product);
-
-            processInput = processInput.reduce((acc, input) => {
+            const processInput = stepUserInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
                 return acc;
             }, {});
@@ -127,9 +117,13 @@ export default class NewProcess extends React.Component {
                             validation(product.value),
                             initialWorkflowInput(product.workflow.name, product.productId)
                         ]).then(result => {
-                            const [productValidation, userInput] = result;
+                            const [productValidation, stepUserInput] = result;
 
-                            const stepUserInput = userInput.filter(input => input.name !== "product");
+                            const productInput = stepUserInput.find(x => x.name === "product");
+                            if (productInput) {
+                                productInput.type = "hidden";
+                                productInput.value = product.value;
+                            }
                             const { preselectedOrganisation } = this.props;
                             if (preselectedOrganisation) {
                                 const organisatieInput = stepUserInput.find(x => x.name === "organisation");
@@ -252,7 +246,6 @@ export default class NewProcess extends React.Component {
                 {!isEmpty(stepUserInput) && (
                     <UserInputForm
                         stepUserInput={stepUserInput}
-                        product={product}
                         validSubmit={this.validSubmit(products)}
                         preselectedInput={getQueryParameters(this.props.location.search)}
                     />

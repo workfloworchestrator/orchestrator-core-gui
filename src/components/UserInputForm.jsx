@@ -265,6 +265,10 @@ export default class UserInputForm extends React.Component {
     };
 
     renderInput = userInput => {
+        if (userInput.type === "hidden") {
+            return;
+        }
+
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const error = this.state.errors[name];
@@ -394,21 +398,13 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "ieee_interface_type":
-                const productId = findValueFromInputStep(userInput.product_key, stepUserInput);
+                const key = userInput.product_key || "product";
+                const productId = findValueFromInputStep(key, stepUserInput);
                 return (
                     <IEEEInterfaceTypesForProductTagSelect
                         onChange={this.changeSelectInput(name)}
                         interfaceType={value}
                         productId={productId}
-                    />
-                );
-            case "ieee_interface_type_for_product_tag":
-                const propsProductId = this.props.product.value || this.props.product.product_id;
-                return (
-                    <IEEEInterfaceTypesForProductTagSelect
-                        onChange={this.changeSelectInput(name)}
-                        interfaceType={value}
-                        productId={propsProductId}
                     />
                 );
             case "node_id_port_select":
@@ -694,15 +690,13 @@ export default class UserInputForm extends React.Component {
 
 UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
-    product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
-    preselectedInput: PropTypes.object
+    preselectedInput: PropTypes.object,
     currentState: PropTypes.object
 };
 
 UserInputForm.defaultProps = {
     preselectedInput: {},
-    product: { value: undefined, product_id: undefined } // Only needed for ieee_interface_type_for_product_tag
     currentState: {}
 };
 
