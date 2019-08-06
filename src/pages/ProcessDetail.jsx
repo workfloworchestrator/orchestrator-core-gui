@@ -92,7 +92,8 @@ class ProcessDetail extends React.PureComponent {
                 // NOTE: when using the workflows domain model you should be careful with the root state variables as they could
                 // overwrite what you provide via the value paramter of: `input("name", "type" value="I want this value")`
                 stepUserInput.forEach(
-                    userInput => (userInput.value = lookupValueFromNestedState(userInput.name, state) || userInput.value)
+                    userInput =>
+                        (userInput.value = lookupValueFromNestedState(userInput.name, state) || userInput.value)
                 );
             }
             this.setState({
