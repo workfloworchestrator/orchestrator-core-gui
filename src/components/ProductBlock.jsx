@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { isDate } from "date-fns";
 
 import ConfirmationDialog from "./ConfirmationDialog";
@@ -14,6 +13,7 @@ import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import { formDate, formInput, formSelect } from "../forms/Builder";
 import { deleteProductBlock } from "../api";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ProductBlock extends React.Component {
     constructor(props) {
@@ -21,7 +21,7 @@ export default class ProductBlock extends React.Component {
         this.state = {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.props.history.push("/metadata/product_blocks"),
+            cancelDialogAction: () => this.context.redirect("/metadata/product_blocks"),
             confirmationDialogQuestion: "",
             leavePage: true,
             errors: {},
@@ -54,7 +54,7 @@ export default class ProductBlock extends React.Component {
             confirmationDialogOpen: true,
             leavePage: true,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.props.history.push("/metadata/product_blocks")
+            cancelDialogAction: () => this.context.redirect("/metadata/product_blocks")
         });
     };
 
@@ -68,7 +68,7 @@ export default class ProductBlock extends React.Component {
         const action = () =>
             deleteProductBlock(productBlock.product_block_id)
                 .then(() => {
-                    this.props.history.push("/metadata/product_blocks");
+                    this.context.redirect("/metadata/product_blocks");
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             type: "Product Block",
@@ -100,7 +100,7 @@ export default class ProductBlock extends React.Component {
         if (!invalid) {
             this.setState({ processing: true });
             saveProductBlock(productBlock).then(() => {
-                this.props.history.push("/metadata/product_blocks");
+                this.context.redirect("/metadata/product_blocks");
                 setFlash(
                     I18n.t(productBlock.product_block_id ? "metadata.flash.updated" : "metadata.flash.created", {
                         type: "Product Block",
@@ -117,7 +117,7 @@ export default class ProductBlock extends React.Component {
         if (readOnly) {
             return (
                 <section className="buttons">
-                    <button className="button" onClick={() => this.props.history.push("/metadata/product_blocks")}>
+                    <button className="button" onClick={() => this.context.redirect("/metadata/product_blocks")}>
                         {I18n.t("metadata.productBlocks.back")}
                     </button>
                 </section>
@@ -319,6 +319,6 @@ export default class ProductBlock extends React.Component {
     }
 }
 
-ProductBlock.propTypes = {
-    history: PropTypes.object.isRequired
-};
+ProductBlock.propTypes = {};
+
+ProductBlock.contextType = ApplicationContext;

@@ -3,13 +3,14 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import "./FixedInputProductValidation.scss";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class FixedInputProductValidation extends React.Component {
     render() {
-        const { history, validation } = this.props;
+        const { validation } = this.props;
         return (
             <section className="fixed-input-validation">
-                <h3 onClick={() => history.push("/product/" + validation.id)} className="description">
+                <h3 onClick={() => this.context.redirect("/product/" + validation.id)} className="description">
                     {I18n.t("validations.fixedInput.title", { name: validation.name })}
                 </h3>
                 <table>
@@ -38,6 +39,7 @@ export default class FixedInputProductValidation extends React.Component {
 }
 
 FixedInputProductValidation.propTypes = {
-    history: PropTypes.object.isRequired,
     validation: PropTypes.object.isRequired
 };
+
+FixedInputProductValidation.contextType = ApplicationContext;

@@ -14,10 +14,11 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { enrichSubscription } from "../utils/Lookups";
 import { getQueryParameters } from "../utils/QueryParameters";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class NewProcess extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             product: {},
             stepUserInput: [],
@@ -40,7 +41,8 @@ export default class NewProcess extends React.Component {
     }
 
     componentDidMount = () => {
-        const { products, organisations, location } = this.props;
+        const { location } = this.props;
+        const { products, organisations } = this.context;
         let preselectedInput = getQueryParameters(location.search);
         if (preselectedInput.product) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedInput.product.toLowerCase());
@@ -89,7 +91,7 @@ export default class NewProcess extends React.Component {
 
             let result = startProcess(this.state.product.workflow.name, processInput);
             result.then(() => {
-                this.props.history.push(`/processes`);
+                this.context.redirect(`/processes`);
                 const name = products.find(prod => prod.product_id === this.state.product.value).name;
                 setFlash(I18n.t("process.flash.create", { name: name }));
             });
@@ -150,7 +152,7 @@ export default class NewProcess extends React.Component {
 
     addContextToSubscription = subscriptionId => {
         const { subscriptions } = this.state;
-        const { organisations, products } = this.props;
+        const { organisations, products } = this.context;
         const subscription = subscriptions.find(sub => sub.subscription_id === subscriptionId);
         enrichSubscription(subscription, organisations, products);
         return subscription;
@@ -170,7 +172,7 @@ export default class NewProcess extends React.Component {
             }),
             () =>
                 startProcess(modifyWorkflow, { subscription_id: modifySubscription }).then(() => {
-                    this.props.history.push("/processes");
+                    this.context.redirect("/processes");
                 })
         );
     };
@@ -184,7 +186,7 @@ export default class NewProcess extends React.Component {
                 name: subscription.product.description,
                 customer: subscription.customer_name
             }),
-            () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`)
+            () => this.context.redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
         );
     };
 
@@ -220,8 +222,6 @@ export default class NewProcess extends React.Component {
         showProductValidation,
         productValidation,
         stepUserInput,
-        subscriptions,
-        history,
         organisations,
         products,
         locationCodes,
@@ -234,7 +234,7 @@ export default class NewProcess extends React.Component {
                     <label htmlFor="product">{I18n.t("process.product")}</label>
                     <ProductSelect
                         id="select-product"
-                        products={this.props.products
+                        products={this.context.products
                             .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
                             .filter(prod => prod.status === "active")}
                         onChange={this.changeProduct}
@@ -251,11 +251,7 @@ export default class NewProcess extends React.Component {
                 {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
                 {!isEmpty(stepUserInput) && (
                     <UserInputForm
-                        locationCodes={locationCodes}
                         stepUserInput={stepUserInput}
-                        products={products}
-                        organisations={organisations}
-                        history={history}
                         product={product}
                         validSubmit={this.validSubmit(products)}
                         preselectedInput={getQueryParameters(this.props.location.search)}
@@ -301,7 +297,7 @@ export default class NewProcess extends React.Component {
                 let workflow = workflows.terminate[0];
 
                 this.setState({
-                    notTerminatableMessage: workflow.reason ? I18n.t(workflow.reason, workflows) : ""
+                    notTerminatableMessage: workflow.reason ? I18n.t(workflow.reason, workflow) : ""
                 });
             });
         }
@@ -403,7 +399,8 @@ export default class NewProcess extends React.Component {
             confirmationDialogAction,
             confirmationDialogQuestion
         } = this.state;
-        const { organisations, locationCodes, history, preselectedProduct, products } = this.props;
+        const { preselectedProduct } = this.props;
+        const { organisations, locationCodes, products } = this.context;
         const showProductValidation =
             (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
         const showModify = isEmpty(stepUserInput);
@@ -422,8 +419,6 @@ export default class NewProcess extends React.Component {
                         showProductValidation,
                         productValidation,
                         stepUserInput,
-                        subscriptions,
-                        history,
                         organisations,
                         products,
                         locationCodes,
@@ -453,12 +448,9 @@ export default class NewProcess extends React.Component {
 }
 
 NewProcess.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired,
     preselectedProduct: PropTypes.string,
-    preselectedOrganisation: PropTypes.string,
-    preselectedDienstafname: PropTypes.string
+    preselectedOrganisation: PropTypes.string
 };
+
+NewProcess.contextType = ApplicationContext;

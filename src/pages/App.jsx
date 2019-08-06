@@ -34,6 +34,7 @@ import NewTask from "./NewTask";
 import TaskDetail from "./TaskDetail";
 import Prefixes from "./Prefixes";
 import { configureUrlQuery } from "react-url-query";
+import ApplicationContext from "../utils/ApplicationContext";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
@@ -49,11 +50,14 @@ class App extends React.PureComponent {
         super(props, context);
         this.state = {
             loading: true,
-            currentUser: {},
-            configuration: {},
-            organisations: [],
-            locationCodes: [],
-            products: [],
+            applicationContext: {
+                currentUser: {},
+                configuration: {},
+                organisations: [],
+                locationCodes: [],
+                products: [],
+                redirect: url => history.push(url)
+            },
             error: false,
             errorDialogOpen: false,
             redirectState: "/processes",
@@ -151,11 +155,14 @@ class App extends React.PureComponent {
                                 const [allOrganisations, allProducts, allLocationCodes] = result;
                                 this.setState({
                                     loading: false,
-                                    currentUser: currentUser,
-                                    configuration: configuration,
-                                    organisations: allOrganisations,
-                                    locationCodes: allLocationCodes,
-                                    products: allProducts.sort((a, b) => a.name.localeCompare(b.name))
+                                    applicationContext: {
+                                        currentUser: currentUser,
+                                        configuration: configuration,
+                                        organisations: allOrganisations,
+                                        locationCodes: allLocationCodes,
+                                        products: allProducts.sort((a, b) => a.name.localeCompare(b.name)),
+                                        redirect: url => history.push(url)
+                                    }
                                 });
                             });
                         } else {
@@ -174,180 +181,80 @@ class App extends React.PureComponent {
     }
 
     render() {
-        const { loading, errorDialogAction, errorDialogOpen } = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext, redirectState } = this.state;
 
         if (loading) {
             return null; // render null when app is not ready yet for static mySpinner
         }
 
-        const { currentUser, configuration, organisations, products, locationCodes, redirectState } = this.state;
-
         return (
             <Router history={history}>
-                <div>
+                <ApplicationContext.Provider value={applicationContext}>
                     <div>
-                        <Flash />
-                        <Header currentUser={currentUser} />
-                        <Navigation currentUser={currentUser} {...this.props} />
-                        <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
+                        <div>
+                            <Flash />
+                            <Header />
+                            <Navigation />
+                            <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
+                        </div>
+                        <Switch>
+                            <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
+                            <Route exact path="/" render={() => <Redirect to="/processes" />} />
+                            <ProtectedRoute path="/processes" render={() => <Processes />} />
+                            <ProtectedRoute
+                                path="/validations/:type"
+                                render={props => <Validations match={props.match} />}
+                            />
+                            <ProtectedRoute
+                                path="/new-process"
+                                render={props => (
+                                    <NewProcess
+                                        preselectedProduct={getParameterByName("product", props.location.search)}
+                                        preselectedOrganisation={getParameterByName(
+                                            "organisation",
+                                            props.location.search
+                                        )}
+                                        location={props.location}
+                                    />
+                                )}
+                            />
+                            <ProtectedRoute
+                                path="/terminate-subscription"
+                                render={props => (
+                                    <TerminateSubscription
+                                        subscriptionId={getParameterByName("subscription", props.location.search)}
+                                    />
+                                )}
+                            />
+                            <Route path="/process/:id" render={props => <ProcessDetail {...props} />} />
+                            <Route path="/subscriptions" render={props => <Subscriptions {...props} />} />
+                            <Route path="/old-subscriptions" render={() => <OldSubscriptions />} />
+                            <Route
+                                path="/subscription/:id"
+                                render={props => <SubscriptionDetail match={props.match} />}
+                            />
+                            <ProtectedRoute path="/metadata/:type" render={props => <MetaData match={props.match} />} />
+                            <ProtectedRoute path="/product/:id" render={props => <Product match={props.match} />} />
+                            <ProtectedRoute
+                                path="/product-block/:id"
+                                render={props => <ProductBlock match={props.match} />}
+                            />
+                            <ProtectedRoute
+                                path="/resource-type/:id"
+                                render={props => <ResourceType match={props.match} />}
+                            />
+                            <ProtectedRoute path="/cache" render={() => <Cache />} />
+                            <ProtectedRoute path="/tasks" render={() => <Tasks />} />
+                            <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
+                            <ProtectedRoute path="/new-task" render={() => <NewTask />} />
+                            <Route path="/task/:id" render={props => <TaskDetail match={props.match} />} />
+                            <Route path="/help" render={() => <Help />} />
+                            <Route path="/not-allowed" render={() => <NotAllowed />} />
+                            <Route path="/error" render={() => <ServerError />} />
+                            <Route component={NotFound} />
+                        </Switch>
                     </div>
-                    <Switch>
-                        <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
-                        <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                        <ProtectedRoute
-                            path="/processes"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => (
-                                <Processes
-                                    currentUser={currentUser}
-                                    {...props}
-                                    products={products}
-                                    organisations={organisations}
-                                />
-                            )}
-                        />
-                        <ProtectedRoute
-                            path="/validations/:type"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => (
-                                <Validations {...props} products={products} organisations={organisations} />
-                            )}
-                        />
-                        <ProtectedRoute
-                            path="/new-process"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => (
-                                <NewProcess
-                                    currentUser={currentUser}
-                                    products={products}
-                                    organisations={organisations}
-                                    locationCodes={locationCodes}
-                                    preselectedProduct={getParameterByName("product", props.location.search)}
-                                    preselectedOrganisation={getParameterByName("organisation", props.location.search)}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <ProtectedRoute
-                            path="/terminate-subscription"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => (
-                                <TerminateSubscription
-                                    currentUser={currentUser}
-                                    products={products}
-                                    organisations={organisations}
-                                    subscriptionId={getParameterByName("subscription", props.location.search)}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/process/:id"
-                            render={props => (
-                                <ProcessDetail
-                                    currentUser={currentUser}
-                                    organisations={organisations}
-                                    configuration={configuration}
-                                    products={products}
-                                    locationCodes={locationCodes}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/subscriptions"
-                            render={props => (
-                                <Subscriptions organisations={organisations} products={products} {...props} />
-                            )}
-                        />
-                        <Route
-                            path="/old-subscriptions"
-                            render={props => (
-                                <OldSubscriptions products={products} organisations={organisations} {...props} />
-                            )}
-                        />
-                        <Route
-                            path="/subscription/:id"
-                            render={props => (
-                                <SubscriptionDetail organisations={organisations} products={products} {...props} />
-                            )}
-                        />
-                        <ProtectedRoute
-                            path="/metadata/:type"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <MetaData {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/product/:id"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <Product {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/product-block/:id"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <ProductBlock {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/resource-type/:id"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <ResourceType {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/cache"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <Cache {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/tasks"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <Tasks currentUser={currentUser} {...props} />}
-                        />
-                        <ProtectedRoute
-                            path="/prefixes"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => (
-                                <Prefixes
-                                    currentuser={currentUser}
-                                    organisations={organisations}
-                                    products={products}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <ProtectedRoute
-                            path="/new-task"
-                            currentUser={currentUser}
-                            configuration={configuration}
-                            render={props => <NewTask currentUser={currentUser} products={products} {...props} />}
-                        />
-                        <Route
-                            path="/task/:id"
-                            render={props => (
-                                <TaskDetail
-                                    currentUser={currentUser}
-                                    configuration={configuration}
-                                    products={products}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <Route path="/help" render={props => <Help currentUser={currentUser} {...props} />} />
-                        <Route path="/not-allowed" render={props => <NotAllowed {...props} />} />
-                        <Route path="/error" render={props => <ServerError {...props} />} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </div>
+                </ApplicationContext.Provider>
             </Router>
         );
     }

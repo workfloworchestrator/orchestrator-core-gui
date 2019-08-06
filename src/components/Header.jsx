@@ -1,11 +1,11 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { unmountComponentAtNode } from "react-dom";
 import { Link } from "react-router-dom";
 import logo from "../images/network-automation.png";
 import "./Header.scss";
 import UserProfile from "./UserProfile";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class Header extends React.PureComponent {
     constructor() {
@@ -63,7 +63,7 @@ export default class Header extends React.PureComponent {
         environment === "production" ? null : <li className="environment">{environment}</li>;
 
     render() {
-        const { currentUser } = this.props;
+        const { currentUser } = this.context;
         const { environment } = this.state;
         return (
             <div className="header-container">
@@ -80,11 +80,9 @@ export default class Header extends React.PureComponent {
                             {this.renderProfileLink(currentUser)}
                             {this.renderDropDown(currentUser)}
                         </li>
-                        <li
-                            dangerouslySetInnerHTML={{
-                                __html: I18n.t("header.links.help_html")
-                            }}
-                        />
+                        <li>
+                            <Link to="/help">{I18n.t("header.links.help")}</Link>
+                        </li>
                         {this.renderExitLogout()}
                     </ul>
                 </div>
@@ -93,6 +91,6 @@ export default class Header extends React.PureComponent {
     }
 }
 
-Header.propTypes = {
-    currentUser: PropTypes.object.isRequired
-};
+Header.propTypes = {};
+
+Header.contextType = ApplicationContext;

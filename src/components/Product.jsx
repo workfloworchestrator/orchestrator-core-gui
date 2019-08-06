@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { isDate } from "date-fns";
 
 import ConfirmationDialog from "./ConfirmationDialog";
@@ -15,6 +14,7 @@ import { formDate, formInput, formSelect } from "../forms/Builder";
 import "./Product.scss";
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
 import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
+import ApplicationContext from "../utils/ApplicationContext";
 
 const TAG_LIGHTPATH = "LightPath";
 
@@ -24,7 +24,7 @@ export default class Product extends React.Component {
         this.state = {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.props.history.push("/metadata/products"),
+            cancelDialogAction: () => this.context.redirect("/metadata/products"),
             confirmationDialogQuestion: "",
             leavePage: true,
             errors: {},
@@ -120,7 +120,7 @@ export default class Product extends React.Component {
             confirmationDialogOpen: true,
             leavePage: true,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.props.history.push("/metadata/products")
+            cancelDialogAction: () => this.context.redirect("/metadata/products")
         });
     };
 
@@ -134,7 +134,7 @@ export default class Product extends React.Component {
         const action = () =>
             deleteProduct(product.product_id)
                 .then(() => {
-                    this.props.history.push("/metadata/products");
+                    this.context.redirect("/metadata/products");
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             name: product.name,
@@ -166,7 +166,7 @@ export default class Product extends React.Component {
         if (!invalid) {
             this.setState({ processing: true });
             saveProduct(product).then(() => {
-                this.props.history.push("/metadata/products");
+                this.context.redirect("/metadata/products");
                 setFlash(
                     I18n.t(product.product_id ? "metadata.flash.updated" : "metadata.flash.created", {
                         type: "Product",
@@ -183,7 +183,7 @@ export default class Product extends React.Component {
         if (readOnly) {
             return (
                 <section className="buttons">
-                    <button className="button" onClick={() => this.props.history.push("/metadata/products")}>
+                    <button className="button" onClick={() => this.context.redirect("/metadata/products")}>
                         {I18n.t("metadata.products.back")}
                     </button>
                 </section>
@@ -531,6 +531,6 @@ export default class Product extends React.Component {
     }
 }
 
-Product.propTypes = {
-    history: PropTypes.object.isRequired
-};
+Product.propTypes = {};
+
+Product.contextType = ApplicationContext;

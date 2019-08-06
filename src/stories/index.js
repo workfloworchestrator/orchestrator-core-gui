@@ -1,6 +1,6 @@
 import React from "react";
 
-import { storiesOf } from "@storybook/react";
+import { storiesOf, addDecorator } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, array, boolean, number, select } from "@storybook/addon-knobs";
 import { State, Store, StateDecorator } from "@sambego/storybook-state";
@@ -25,7 +25,7 @@ import {
     freeCorelinkPorts
 } from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
-
+import ApplicationContext from "../utils/ApplicationContext";
 import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
@@ -247,6 +247,24 @@ const store = new Store({
     value: "1000"
 });
 
+function withContext(storyFn) {
+    return (
+        <ApplicationContext.Provider
+            value={{
+                organisations: ORGANISATIONS,
+                locationCodes: LOCATION_CODES,
+                products: PRODUCTS,
+                currentUser: {},
+                configuration: undefined,
+                redirect: action("Change url")
+            }}
+        >
+            {storyFn()}
+        </ApplicationContext.Provider>
+    );
+}
+addDecorator(withContext);
+
 storiesOf("Welcome", module).add("to Storybook", () => (
     <div>
         <h1>Workflows client storybook</h1>
@@ -380,9 +398,6 @@ storiesOf("GenericNOCConfirm", module)
             <UserInputContainer
                 formName="NOC Confirm"
                 stepUserInput={[{ name: "noc_remove_static_ip_confirmation", type: "accept" }]}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -411,9 +426,6 @@ storiesOf("GenericNOCConfirm", module)
                         ]
                     }
                 ]}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     });
@@ -509,15 +521,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
-        return (
-            <UserInputContainer
-                formName="Organisation and contacts"
-                stepUserInput={contactPersonSteps}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
-            />
-        );
+        return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps} />;
     })
     .add("Corelink", () => {
         const currentState = { corelink_service_speed: "10000" };
@@ -528,14 +532,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
         return (
-            <UserInputContainer
-                formName="Corelink form"
-                stepUserInput={corelinkSteps}
-                currentState={currentState}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
-            />
+            <UserInputContainer formName="Corelink form" stepUserInput={corelinkSteps} currentState={currentState} />
         );
     })
     .add("Corelink add link", () => {
@@ -555,9 +552,6 @@ storiesOf("UserInputForm", module)
                 formName="Corelink add link form"
                 stepUserInput={addCorelinkSteps}
                 currentState={currentState}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -568,16 +562,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("/api/ims/nodes/MT001A", imsNodes);
-        return (
-            <UserInputContainer
-                formName="Node form"
-                stepUserInput={nodeSteps}
-                currentState={currentState}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
-            />
-        );
+        return <UserInputContainer formName="Node form" stepUserInput={nodeSteps} currentState={currentState} />;
     })
     .add("SN7 Portselect all organisations", () => {
         fetchMock.restore();
@@ -590,9 +575,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN7 portselect form, showing all ports"
                 stepUserInput={sn7PortSelectInputStepsAllOrganisations}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -607,9 +589,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN7 portselect form, showing all ports"
                 stepUserInput={sn7PortSelectInputStepsMSPOnly}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -624,9 +603,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN7 portselect, showing only ports for selected organisation"
                 stepUserInput={sn7PortSelectInputStepsSelectedOrganisation}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -659,9 +635,6 @@ storiesOf("UserInputForm", module)
                         ports_key: "service_ports"
                     }
                 ]}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
                 currentState={{ current_bandwidth: number("bandwidth", 1000) }}
             />
         );
@@ -677,9 +650,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN8 portselect form, showing all ports"
                 stepUserInput={sn8PortSelectInputStepsAllOrganisations}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -694,9 +664,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN8 portselect form, showing all ports"
                 stepUserInput={sn8PortSelectInputStepsTagged}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -711,9 +678,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN8 portselect form, showing all ports"
                 stepUserInput={sn8PortSelectInputStepsUntagged}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     })
@@ -728,9 +692,6 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN8 portselect, showing only ports for selected organisation"
                 stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
-                organisations={ORGANISATIONS}
-                locationCodes={LOCATION_CODES}
-                products={PRODUCTS}
             />
         );
     });

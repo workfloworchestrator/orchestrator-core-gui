@@ -6,6 +6,7 @@ import ContactPersons from "../components/ContactPersons";
 import { startProcess, subscriptionsDetail, productById } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
@@ -34,7 +35,7 @@ export default class TerminateSubscription extends React.Component {
 
     cancel = e => {
         stop(e);
-        this.props.history.push("/subscription/" + this.props.subscriptionId);
+        this.context.redirect("/subscription/" + this.props.subscriptionId);
     };
 
     renderButtons = () => {
@@ -61,7 +62,7 @@ export default class TerminateSubscription extends React.Component {
                 subscription_id: this.props.subscriptionId,
                 contact_persons: this.state.contactPersons
             }).then(res => {
-                this.props.history.push(`/processes`);
+                this.context.redirect(`/processes`);
                 setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId }));
             });
         }
@@ -74,7 +75,7 @@ export default class TerminateSubscription extends React.Component {
     render() {
         //TODO use the form_input from workflow to render UserForm
         const { contactPersons, organisationId, product } = this.state;
-        const { subscriptionId, products, organisations } = this.props;
+        const { subscriptionId } = this.props;
 
         return (
             <div className="mod-terminate-subscription">
@@ -105,11 +106,7 @@ export default class TerminateSubscription extends React.Component {
                     )}
 
                     <section className="form-step">
-                        <ReadOnlySubscriptionView
-                            subscriptionId={subscriptionId}
-                            products={products}
-                            organisations={organisations}
-                        />
+                        <ReadOnlySubscriptionView subscriptionId={subscriptionId} />
                     </section>
 
                     {product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink" && (
@@ -133,9 +130,7 @@ export default class TerminateSubscription extends React.Component {
 }
 
 TerminateSubscription.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string
 };
+
+TerminateSubscription.contextType = ApplicationContext;

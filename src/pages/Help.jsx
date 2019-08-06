@@ -11,7 +11,15 @@ export default class Help extends React.PureComponent {
     render() {
         return (
             <section className="help">
-                <p>TODO</p>
+                <p>
+                    <a
+                        href="https://wiki.surfnet.nl/display/SNM/SURFnet+Netwerk+Management+Home"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        SURFnet Netwerk Management Wiki
+                    </a>
+                </p>
             </section>
         );
     }

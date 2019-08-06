@@ -5,6 +5,7 @@ import { isEmpty } from "../utils/Utils";
 import { getResourceTypeInfo, productById, subscriptionsDetail } from "../api/index";
 import { enrichSubscription } from "../utils/Lookups";
 import { port_subscription_id, subscriptionInstanceValues } from "../validations/Subscriptions";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./ReadOnlySubscriptionView.scss";
 
@@ -19,7 +20,8 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
     }
 
     componentWillMount() {
-        const { subscriptionId, organisations, products } = this.props;
+        const { subscriptionId } = this.props;
+        const { organisations, products } = this.context;
         subscriptionsDetail(subscriptionId).then(subscription => {
             enrichSubscription(subscription, organisations, products);
             this.setState({ subscription: subscription });
@@ -157,8 +159,8 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
 }
 
 ReadOnlySubscriptionView.propTypes = {
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string.isRequired,
     className: PropTypes.string
 };
+
+ReadOnlySubscriptionView.contextType = ApplicationContext;

@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { abortProcess, deleteProcess, processes, retryProcess } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
@@ -14,6 +13,7 @@ import { organisationNameByUuid, productNameById, renderDateTime } from "../util
 import CheckBox from "../components/CheckBox";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class Processes extends React.PureComponent {
     constructor(props) {
@@ -54,7 +54,7 @@ export default class Processes extends React.PureComponent {
 
     refresh = () =>
         processes().then(results => {
-            const { organisations, products } = this.props;
+            const { organisations, products } = this.context;
             results.forEach(process => {
                 process.customer_name = organisationNameByUuid(process.customer, organisations);
                 process.product_name = productNameById(process.product, products);
@@ -101,12 +101,12 @@ export default class Processes extends React.PureComponent {
 
     showProcess = process => () => {
         clearInterval(this.interval);
-        this.props.history.push("/process/" + process.id);
+        this.context.redirect("/process/" + process.id);
     };
 
     newProcess = () => {
         clearInterval(this.interval);
-        this.props.history.push("/new-process");
+        this.context.redirect("/new-process");
     };
 
     search = e => {
@@ -380,7 +380,7 @@ export default class Processes extends React.PureComponent {
             filterAttributesStatus,
             refresh
         } = this.state;
-        const { organisations } = this.props;
+        const { organisations } = this.context;
         return (
             <div className="mod-processes">
                 <ConfirmationDialog
@@ -439,9 +439,6 @@ export default class Processes extends React.PureComponent {
     }
 }
 
-Processes.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired
-};
+Processes.propTypes = {};
+
+Processes.contextType = ApplicationContext;

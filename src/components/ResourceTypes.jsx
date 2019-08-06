@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -9,6 +8,7 @@ import "./ResourceTypes.scss";
 import DropDownActions from "../components/DropDownActions";
 import { setFlash } from "../utils/Flash";
 import { deleteResourceType, resourceTypes } from "../api/index";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ResourceTypes extends React.Component {
     constructor(props) {
@@ -40,7 +40,7 @@ export default class ResourceTypes extends React.Component {
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
     editResourceType = (resourceType, readOnly = true, newResourceType = false) => () => {
-        this.props.history.push(
+        this.context.redirect(
             `/resource-type/${newResourceType ? "new" : resourceType.resource_type_id}?readOnly=${readOnly}`
         );
     };
@@ -275,6 +275,6 @@ export default class ResourceTypes extends React.Component {
     }
 }
 
-ResourceTypes.propTypes = {
-    history: PropTypes.object.isRequired
-};
+ResourceTypes.propTypes = {};
+
+ResourceTypes.contextType = ApplicationContext;

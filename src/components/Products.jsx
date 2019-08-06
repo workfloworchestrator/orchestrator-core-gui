@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -11,6 +10,7 @@ import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
 import { deleteProduct, products } from "../api/index";
 import FilterDropDown from "./FilterDropDown";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class Products extends React.Component {
     constructor(props) {
@@ -69,7 +69,7 @@ export default class Products extends React.Component {
     editProduct = (product, readOnly = true, newProduct = false, clone = false) => () => {
         const productId = clone ? "clone" : newProduct ? "new" : product.product_id;
         const cloneId = clone ? `&productId=${product.product_id}` : "";
-        this.props.history.push(`/product/${productId}?readOnly=${readOnly}${cloneId}`);
+        this.context.redirect(`/product/${productId}?readOnly=${readOnly}${cloneId}`);
     };
 
     search = e => {
@@ -378,6 +378,6 @@ export default class Products extends React.Component {
     }
 }
 
-Products.propTypes = {
-    history: PropTypes.object.isRequired
-};
+Products.propTypes = {};
+
+Products.contextType = ApplicationContext;
