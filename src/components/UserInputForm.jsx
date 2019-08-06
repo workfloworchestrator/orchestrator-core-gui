@@ -313,7 +313,7 @@ export default class UserInputForm extends React.Component {
     chooseInput = userInput => {
         const name = userInput.name;
         const value = userInput.value;
-        const { currentState, preselectedInput } = this.props;
+        const { currentState } = this.props;
         const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
 
@@ -577,13 +577,10 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "ip_prefix":
-                const preselectedPrefix = isEmpty(preselectedInput.prefix)
-                    ? null
-                    : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return (
                     <IPPrefix
-                        preselectedPrefix={preselectedPrefix}
-                        prefix_min={parseInt(preselectedInput.prefix_min)}
+                        preselectedPrefix={value}
+                        prefix_min={parseInt(userInput.prefix_min)}
                         onChange={this.changeNestedInput(name)}
                     />
                 );
@@ -691,12 +688,10 @@ export default class UserInputForm extends React.Component {
 UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
     validSubmit: PropTypes.func.isRequired,
-    preselectedInput: PropTypes.object,
     currentState: PropTypes.object
 };
 
 UserInputForm.defaultProps = {
-    preselectedInput: {},
     currentState: {}
 };
 

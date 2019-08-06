@@ -22,7 +22,7 @@ import Navigation from "../components/Navigation";
 import { config, locationCodes, me, organisations, products, redirectToAuthorizationServer, reportError } from "../api";
 import "../locale/en";
 import "../locale/nl";
-import { getParameterByName } from "../utils/QueryParameters";
+import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import TerminateSubscription from "./TerminateSubscription";
 import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
@@ -208,14 +208,7 @@ class App extends React.PureComponent {
                             <ProtectedRoute
                                 path="/new-process"
                                 render={props => (
-                                    <NewProcess
-                                        preselectedProduct={getParameterByName("product", props.location.search)}
-                                        preselectedOrganisation={getParameterByName(
-                                            "organisation",
-                                            props.location.search
-                                        )}
-                                        location={props.location}
-                                    />
+                                    <NewProcess preselectedInput={getQueryParameters(props.location.search)} />
                                 )}
                             />
                             <ProtectedRoute

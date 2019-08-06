@@ -13,7 +13,6 @@ import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
 import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { enrichSubscription } from "../utils/Lookups";
-import { getQueryParameters } from "../utils/QueryParameters";
 import ApplicationContext from "../utils/ApplicationContext";
 
 export default class NewProcess extends React.Component {
@@ -41,9 +40,8 @@ export default class NewProcess extends React.Component {
     }
 
     componentDidMount = () => {
-        const { location } = this.props;
+        const { preselectedInput } = this.props;
         const { products, organisations } = this.context;
-        let preselectedInput = getQueryParameters(location.search);
         if (preselectedInput.product) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedInput.product.toLowerCase());
             if (product) {
@@ -119,19 +117,31 @@ export default class NewProcess extends React.Component {
                         ]).then(result => {
                             const [productValidation, stepUserInput] = result;
 
+                            const { preselectedInput } = this.props;
+
                             const productInput = stepUserInput.find(x => x.name === "product");
                             if (productInput) {
                                 productInput.type = "hidden";
                                 productInput.value = product.value;
                             }
-                            const { preselectedOrganisation } = this.props;
-                            if (preselectedOrganisation) {
+
+                            if (preselectedInput.organisation) {
                                 const organisatieInput = stepUserInput.find(x => x.name === "organisation");
                                 if (organisatieInput) {
-                                    organisatieInput.value = preselectedOrganisation;
+                                    organisatieInput.value = preselectedInput.organisation;
                                     organisatieInput.readonly = true;
                                 }
                             }
+
+                            if (preselectedInput.prefix) {
+                                const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
+                                if (prefixInput) {
+                                    prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+                                    prefixInput.readonly = true;
+                                    prefixInput.prefix_min = preselectedInput.prefix_min;
+                                }
+                            }
+
                             this.setState({
                                 productValidation: productValidation,
                                 stepUserInput: stepUserInput,
@@ -202,7 +212,6 @@ export default class NewProcess extends React.Component {
     };
 
     changeProduct = option => {
-        console.log(option);
         this.setState({
             stepUserInput: [],
             productValidation: { valid: true, mapping: {} },
@@ -244,11 +253,7 @@ export default class NewProcess extends React.Component {
                 )}
                 {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
                 {!isEmpty(stepUserInput) && (
-                    <UserInputForm
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.validSubmit(products)}
-                        preselectedInput={getQueryParameters(this.props.location.search)}
-                    />
+                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
                 )}
             </section>
         );
@@ -392,7 +397,7 @@ export default class NewProcess extends React.Component {
             confirmationDialogAction,
             confirmationDialogQuestion
         } = this.state;
-        const { preselectedProduct } = this.props;
+        const { preselectedInput } = this.props;
         const { organisations, locationCodes, products } = this.context;
         const showProductValidation =
             (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
@@ -415,7 +420,7 @@ export default class NewProcess extends React.Component {
                         organisations,
                         products,
                         locationCodes,
-                        preselectedProduct
+                        preselectedInput.product
                     )}
                     {showModify &&
                         this.renderModifyProduct(
@@ -441,9 +446,7 @@ export default class NewProcess extends React.Component {
 }
 
 NewProcess.propTypes = {
-    location: PropTypes.object.isRequired,
-    preselectedProduct: PropTypes.string,
-    preselectedOrganisation: PropTypes.string
+    preselectedInput: PropTypes.object.isRequired
 };
 
 NewProcess.contextType = ApplicationContext;
