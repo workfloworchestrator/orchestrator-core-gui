@@ -5,7 +5,7 @@ import { initialWorkflowInput, startProcess, subscriptionWorkflows, validation, 
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProductValidation from "../components/ProductValidation";
 import "./NewProcess.scss";
 import { TARGET_CREATE } from "../validations/Products";
@@ -255,7 +255,7 @@ export default class NewProcess extends React.Component {
                 )}
                 {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
                 {!isEmpty(stepUserInput) && (
-                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
                 )}
             </section>
         );

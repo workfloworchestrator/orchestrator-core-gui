@@ -3,7 +3,7 @@ import I18n from "i18n-js";
 import { initialWorkflowInput, startTask, workflowsByTarget } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import WorkflowSelect from "../components/WorkflowSelect";
 
@@ -24,7 +24,7 @@ export default class NewTask extends React.Component {
     validSubmit = taskInput => {
         const { workflow } = this.state;
         if (!isEmpty(workflow)) {
-            let result = startTask(workflow.value, [taskInput]);
+            let result = startTask(workflow.value, taskInput);
             result.then(() => {
                 this.context.redirect(`/tasks`);
                 setFlash(I18n.t("task.flash.create", { name: workflow.label }));
@@ -59,7 +59,7 @@ export default class NewTask extends React.Component {
                             />
                         </section>
                         {!isEmpty(workflow) && (
-                            <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                            <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                         )}
                     </section>
                 </section>

@@ -137,6 +137,8 @@ I18n.translations.en = {
             "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
         cancel: "Cancel",
         submit: "Submit",
+        next: "Next",
+        previous: "Previous",
         notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         uniquenessViolation: "Value selected more than once",

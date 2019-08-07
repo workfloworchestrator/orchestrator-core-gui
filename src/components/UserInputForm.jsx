@@ -146,19 +146,27 @@ export default class UserInputForm extends React.Component {
             }, {});
 
             let promise = this.props.validSubmit(processInput);
-            promise.catch(err => {
-                if (err.response && err.response.status === 400) {
-                    err.response.json().then(json => {
-                        this.updateValidationErrors(json);
+            promise
+                .catch(err => {
+                    if (err.response && err.response.status === 400) {
+                        err.response.json().then(json => {
+                            const errors = { ...this.state.errors };
+                            json.validation_errors.forEach(item => {
+                                errors[item.loc[0]] = true;
+                            });
+                            this.setState({ errors: errors, processing: false });
+                        });
+                    } else if (err.response && err.response.status === 500) {
                         this.setState({ processing: false });
-                    });
-                } else if (err.response && err.response.status === 500) {
-                    this.setState({ processing: false });
-                    setFlash(`Unknown server error with status code: ${err.response.status}`);
-                } else {
-                    throw err;
-                }
-            });
+                        setFlash(`Unknown server error with status code: ${err.response.status}`);
+                        throw err;
+                    } else {
+                        throw err;
+                    }
+                })
+                .then(() => {
+                    this.setState({ errors: [], processing: false });
+                });
         }
     };
 
@@ -185,20 +193,44 @@ export default class UserInputForm extends React.Component {
 
     renderButtons = () => {
         const invalid = this.isInvalid() || this.state.processing;
+        const { hasNext, hasPrev } = this.props;
+
+        const prevButton = hasPrev ? (
+            <button type="button" className="button" id="button-prev-form-submit" onClick={this.props.previous}>
+                {I18n.t("process.previous")}
+            </button>
+        ) : (
+            <button type="button" className="button" id="button-cancel-form-submit" onClick={this.cancel}>
+                {I18n.t("process.cancel")}
+            </button>
+        );
+
+        const nextButton = hasNext ? (
+            <button
+                type="submit"
+                id="button-next-form-submit"
+                tabIndex={0}
+                className={`button ${invalid ? "grey disabled" : "blue"}`}
+                onClick={this.submit}
+            >
+                {I18n.t("process.next")}
+            </button>
+        ) : (
+            <button
+                type="submit"
+                id="button-submit-form-submit"
+                tabIndex={0}
+                className={`button ${invalid ? "grey disabled" : "blue"}`}
+                onClick={this.submit}
+            >
+                {I18n.t("process.submit")}
+            </button>
+        );
+
         return (
             <section className="buttons">
-                <button type="submit" id="cancel-form-submit" className="button" onClick={this.cancel}>
-                    {I18n.t("process.cancel")}
-                </button>
-                <button
-                    type="submit"
-                    id="submit-new-process"
-                    tabIndex={0}
-                    className={`button ${invalid ? "grey disabled" : "blue"}`}
-                    onClick={this.submit}
-                >
-                    {I18n.t("process.submit")}
-                </button>
+                {prevButton}
+                {nextButton}
             </section>
         );
     };
@@ -703,9 +735,16 @@ export default class UserInputForm extends React.Component {
 
 UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
-    validSubmit: PropTypes.func.isRequired
+    validSubmit: PropTypes.func.isRequired,
+    previous: PropTypes.func,
+    hasNext: PropTypes.bool,
+    hasPrev: PropTypes.bool
 };
 
-UserInputForm.defaultProps = {};
+UserInputForm.defaultProps = {
+    previous: () => {},
+    hasPrev: false,
+    hasNext: false
+};
 
 UserInputForm.contextType = ApplicationContext;

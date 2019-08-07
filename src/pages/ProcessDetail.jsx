@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { process, resumeProcess } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
@@ -224,7 +224,7 @@ class ProcessDetail extends React.PureComponent {
 
     validSubmit = processInput => {
         const { process } = this.state;
-        let result = resumeProcess(process.id, [processInput]);
+        let result = resumeProcess(process.id, processInput);
         result
             .then(e => {
                 this.context.redirect(`/processes`);
@@ -270,7 +270,7 @@ class ProcessDetail extends React.PureComponent {
                             })}
                         </h3>
                     </section>
-                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }
