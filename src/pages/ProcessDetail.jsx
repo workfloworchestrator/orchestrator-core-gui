@@ -8,7 +8,6 @@ import { setFlash } from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
-import { lookupValueFromNestedState } from "../utils/NestedState";
 import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
 
 import "./ProcessDetail.scss";
@@ -87,16 +86,6 @@ class ProcessDetail extends React.PureComponent {
             const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
             const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
 
-            const state = processInstance.current_state || {};
-            // Try to populate the form values via the process state first and when that doesn't exist use the input value
-            if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                // NOTE: when using the workflows domain model you should be careful with the root state variables as they could
-                // overwrite what you provide via the value paramter of: `input("name", "type" value="I want this value")`
-                stepUserInput.forEach(
-                    userInput =>
-                        (userInput.value = lookupValueFromNestedState(userInput.name, state) || userInput.value)
-                );
-            }
             this.setState({
                 process: processInstance,
                 stepUserInput: stepUserInput,
@@ -288,11 +277,7 @@ class ProcessDetail extends React.PureComponent {
                             })}
                         </h3>
                     </section>
-                    <UserInputForm
-                        stepUserInput={stepUserInput}
-                        currentState={process.current_state}
-                        validSubmit={this.validSubmit}
-                    />
+                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }

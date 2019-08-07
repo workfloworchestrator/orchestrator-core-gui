@@ -19,7 +19,7 @@ import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
 import MultipleServicePorts from "./MultipleServicePorts";
 import GenericNOCConfirm from "./GenericNOCConfirm";
 import IPPrefix from "./IPPrefix";
-import { findValueFromInputStep, lookupValueFromNestedState } from "../utils/NestedState";
+import { findValueFromInputStep } from "../utils/NestedState";
 import { doValidateUserInput } from "../validations/UserInput";
 import { randomCrmIdentifier } from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
@@ -313,7 +313,6 @@ export default class UserInputForm extends React.Component {
     chooseInput = userInput => {
         const name = userInput.name;
         const value = userInput.value;
-        const { currentState } = this.props;
         const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
 
@@ -375,20 +374,18 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "transition_product":
-                const subscriptionId = lookupValueFromNestedState(userInput.subscription_id_key, currentState);
                 return (
                     <TransitionProductSelect
                         onChange={this.changeSelectInput(name)}
                         product={value}
-                        subscriptionId={subscriptionId}
+                        subscriptionId={userInput.subscription_id}
                         disabled={userInput.readonly}
                         transitionType={userInput.transition_type}
                     />
                 );
             case "contact_persons":
                 organisationId =
-                    lookupValueFromNestedState(userInput.organisation_key, currentState) ||
-                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                    userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return (
                     <ContactPersons
                         id="contact"
@@ -408,14 +405,11 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "node_id_port_select":
-                const intType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
-                const locCode = lookupValueFromNestedState(userInput.location_code_key, currentState);
-
                 return (
                     <NodeIdPortSelect
                         onChange={this.changeSelectInput(name)}
-                        locationCode={locCode}
-                        interfaceType={intType}
+                        locationCode={userInput.location_code}
+                        interfaceType={userInput.interface_type}
                     />
                 );
             case "downgrade_redundant_lp_choice":
@@ -424,15 +418,12 @@ export default class UserInputForm extends React.Component {
                         products={products}
                         organisations={organisations}
                         onChange={this.changeStringInput(name)}
-                        subscriptionId={lookupValueFromNestedState("subscription_id", currentState)}
+                        subscriptionId={userInput.subscription_id}
                         value={value}
                         readOnly={userInput.readonly}
                     />
                 );
             case "downgrade_redundant_lp_confirmation":
-                const primary = lookupValueFromNestedState(userInput.primary, currentState);
-                const secondary = lookupValueFromNestedState(userInput.secondary, currentState);
-                const choice = lookupValueFromNestedState(userInput.choice, currentState);
                 return (
                     <div>
                         <CheckBox
@@ -445,11 +436,11 @@ export default class UserInputForm extends React.Component {
                         <DowngradeRedundantLPConfirmation
                             products={products}
                             organisations={organisations}
-                            subscriptionId={lookupValueFromNestedState("subscription_id", currentState)}
+                            subscriptionId={userInput.subscription_id}
                             className="indent"
-                            primary={primary}
-                            secondary={secondary}
-                            choice={choice}
+                            primary={userInput.primary}
+                            secondary={userInput.secondary}
+                            choice={userInput.choice}
                         />
                     </div>
                 );
@@ -480,12 +471,9 @@ export default class UserInputForm extends React.Component {
                 return <p className={`label ${name}`}>{I18n.t(`process.${name}`, userInput.i18n_state)}</p>;
             case "service_ports":
                 organisationId =
-                    lookupValueFromNestedState(userInput.organisation_key, currentState) ||
-                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                    userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
-                const bandwidthMsp =
-                    findValueFromInputStep(bandwidthKey, stepUserInput) ||
-                    lookupValueFromNestedState(bandwidthKey, currentState);
+                const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) || userInput.bandwidth;
                 const productIds = filterProductsByBandwidth(products, bandwidthMsp).map(product => product.product_id);
                 const availableServicePorts =
                     productIds.length === products.length
@@ -517,12 +505,10 @@ export default class UserInputForm extends React.Component {
                 );
             case "service_ports_sn8":
                 organisationId =
-                    lookupValueFromNestedState(userInput.organisation_key, currentState) ||
-                    findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                    userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKeySN8 = userInput.bandwidth_key || "bandwidth";
                 const bandwidthServicePortSN8 =
-                    findValueFromInputStep(bandwidthKeySN8, stepUserInput) ||
-                    lookupValueFromNestedState(bandwidthKeySN8, currentState);
+                    findValueFromInputStep(bandwidthKeySN8, stepUserInput) || userInput.bandwidth;
                 const productIdsSN8 = filterProductsByBandwidth(products, bandwidthServicePortSN8).map(
                     product => product.product_id
                 );
@@ -571,7 +557,7 @@ export default class UserInputForm extends React.Component {
                     <SubscriptionProductTagSelect
                         onChange={this.changeSelectInput(name)}
                         tags={userInput.tags}
-                        productId={lookupValueFromNestedState(userInput.product_key, currentState)}
+                        productId={userInput.product_id}
                         subscription={value}
                         excludedSubscriptionIds={userInput.excluded_subscriptions}
                     />
@@ -585,31 +571,31 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "nodes_for_location_code_and_status":
-                const locationCodeNode = lookupValueFromNestedState(userInput.location_code_key, currentState);
                 return (
-                    <NodeSelect onChange={this.changeSelectInput(name)} locationCode={locationCodeNode} node={value} />
+                    <NodeSelect
+                        onChange={this.changeSelectInput(name)}
+                        locationCode={userInput.location_code}
+                        node={value}
+                    />
                 );
             case "corelink":
-                const corelinkInterfaceSpeed = lookupValueFromNestedState(userInput.interface_type_key, currentState);
                 return (
                     <NodePortSelect
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
-                        interfaceType={corelinkInterfaceSpeed}
+                        interfaceType={userInput.interface_speed}
                         nodes={nodeSubscriptions}
                         port={value}
                     />
                 );
             case "corelink_add_link":
-                const interfaceType = lookupValueFromNestedState(userInput.interface_type_key, currentState);
-                const nodeSubscriptionId = lookupValueFromNestedState(userInput.node_key, currentState);
                 return (
                     <NodePortSelect
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
-                        interfaceType={interfaceType}
+                        interfaceType={userInput.interface_speed}
                         nodes={
-                            nodeSubscriptionId
+                            userInput.node
                                 ? nodeSubscriptions.filter(
-                                      subscription => subscription.subscription_id === nodeSubscriptionId
+                                      subscription => subscription.subscription_id === userInput.node
                                   )
                                 : []
                         }
@@ -635,9 +621,6 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "numeric":
-                if (userInput.state_key_for_maximum !== "") {
-                    userInput.maximum = lookupValueFromNestedState(userInput.state_key_for_maximum, currentState);
-                }
                 return (
                     <NumericInput
                         onChange={this.changeNumericInput(name)}
@@ -687,12 +670,9 @@ export default class UserInputForm extends React.Component {
 
 UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
-    validSubmit: PropTypes.func.isRequired,
-    currentState: PropTypes.object
+    validSubmit: PropTypes.func.isRequired
 };
 
-UserInputForm.defaultProps = {
-    currentState: {}
-};
+UserInputForm.defaultProps = {};
 
 UserInputForm.contextType = ApplicationContext;
