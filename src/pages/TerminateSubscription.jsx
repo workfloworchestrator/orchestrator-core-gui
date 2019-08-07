@@ -39,7 +39,7 @@ export default class TerminateSubscription extends React.Component {
         const { product } = this.state;
         const terminate_workflow = product.workflows.find(wf => wf.target === TARGET_TERMINATE);
 
-        return startProcess(terminate_workflow.name, processInput).then(res => {
+        return startProcess(terminate_workflow.name, [processInput]).then(res => {
             this.context.redirect(`/processes`);
             setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId }));
         });

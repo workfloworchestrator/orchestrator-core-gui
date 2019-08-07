@@ -342,7 +342,8 @@ export function invalidSubscriptions(workflowKey) {
 }
 
 export function initialWorkflowInput(workflowKey, productId) {
-    return productId ? fetchJson(`workflows/${workflowKey}/${productId}`) : fetchJson(`workflows/${workflowKey}`);
+    const initialForm = productId ? [{ product: productId }] : [];
+    return postPutJson(`workflows/${workflowKey}`, initialForm, "post");
 }
 
 export function processes() {

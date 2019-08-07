@@ -139,7 +139,7 @@ export default class TaskDetail extends React.PureComponent {
 
     validSubmit = processInput => {
         const { task } = this.state;
-        let result = resumeTask(task.tid, processInput);
+        let result = resumeTask(task.tid, [processInput]);
         result.then(() => {
             this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.update", { name: task.workflow_name }));

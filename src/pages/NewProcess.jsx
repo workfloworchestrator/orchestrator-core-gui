@@ -72,7 +72,10 @@ export default class NewProcess extends React.Component {
 
     validSubmit = products => processInput => {
         if (!isEmpty(this.state.product)) {
-            let result = startProcess(this.state.product.workflow.name, processInput);
+            let result = startProcess(this.state.product.workflow.name, [
+                { product: this.state.product.productId },
+                processInput
+            ]);
             result
                 .then(() => {
                     this.context.redirect(`/processes`);
@@ -174,7 +177,7 @@ export default class NewProcess extends React.Component {
                 change: change
             }),
             () =>
-                startProcess(modifyWorkflow, { subscription_id: modifySubscription }).then(() => {
+                startProcess(modifyWorkflow, [{ subscription_id: modifySubscription }]).then(() => {
                     this.context.redirect("/processes");
                 })
         );

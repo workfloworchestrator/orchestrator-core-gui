@@ -24,7 +24,7 @@ export default class NewTask extends React.Component {
     validSubmit = taskInput => {
         const { workflow } = this.state;
         if (!isEmpty(workflow)) {
-            let result = startTask(workflow.value, taskInput);
+            let result = startTask(workflow.value, [taskInput]);
             result.then(() => {
                 this.context.redirect(`/tasks`);
                 setFlash(I18n.t("task.flash.create", { name: workflow.label }));
