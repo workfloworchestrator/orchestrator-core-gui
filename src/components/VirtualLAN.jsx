@@ -25,6 +25,7 @@ export default class VirtualLAN extends React.PureComponent {
     };
 
     componentWillReceiveProps(nextProps) {
+        debugger;
         if (nextProps.subscriptionId && nextProps.subscriptionId !== this.props.subscriptionId) {
             this.componentDidMount(nextProps.subscriptionId);
         } else if (isEmpty(nextProps.subscriptionId)) {
