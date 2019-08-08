@@ -37,9 +37,8 @@ import NumericInput from "react-numeric-input";
 import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { portSubscriptions, nodeSubscriptions } from "../api";
+import { portSubscriptions, nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -105,6 +104,8 @@ export default class UserInputForm extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
             this.setState({ stepUserInput: [...nextProps.stepUserInput] });
+
+            this.componentDidMount();
         }
     }
 
@@ -132,6 +133,7 @@ export default class UserInputForm extends React.Component {
     submit = e => {
         stop(e);
         const { stepUserInput, processing } = this.state;
+
         if (this.validateAllUserInput(stepUserInput) && !processing) {
             this.setState({ processing: true, errors: {} });
 
@@ -146,27 +148,15 @@ export default class UserInputForm extends React.Component {
             }, {});
 
             let promise = this.props.validSubmit(processInput);
-            promise
-                .catch(err => {
-                    if (err.response && err.response.status === 400) {
-                        err.response.json().then(json => {
-                            const errors = { ...this.state.errors };
-                            json.validation_errors.forEach(item => {
-                                errors[item.loc[0]] = true;
-                            });
-                            this.setState({ errors: errors, processing: false });
-                        });
-                    } else if (err.response && err.response.status === 500) {
-                        this.setState({ processing: false });
-                        setFlash(`Unknown server error with status code: ${err.response.status}`);
-                        throw err;
-                    } else {
-                        throw err;
-                    }
-                })
-                .then(() => {
-                    this.setState({ errors: [], processing: false });
+            catchErrorStatus(promise, 400, json => {
+                const errors = { ...this.state.errors };
+                json.validation_errors.forEach(item => {
+                    errors[item.loc[0]] = true;
                 });
+                this.setState({ errors: errors, processing: false });
+            }).then(() => {
+                this.setState({ errors: [], processing: false });
+            });
         }
     };
 

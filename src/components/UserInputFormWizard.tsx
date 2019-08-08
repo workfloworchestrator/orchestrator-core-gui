@@ -4,6 +4,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import UserInputForm from "./UserInputForm";
 import { stop } from "../utils/Utils";
 import isEqual from "lodash/isEqual";
+import { catchErrorStatus } from "../api/index";
 
 interface Form {
     form: any[];
@@ -12,23 +13,23 @@ interface Form {
 
 interface IProps {
     stepUserInput: any[];
-    validSubmit: (form: any[][]) => Promise<{ response: { status: number; json: () => Promise<any> } }>;
+    validSubmit: (form: {}[]) => Promise<{ response: { status: number; json: () => Promise<any> } }>;
     hasNext: boolean;
 }
 
 interface IState {
     forms: Form[];
+    userInputs: {}[];
 }
 
 export default class UserInputFormWizard extends React.Component<IProps, IState> {
     static propTypes: {};
     static defaultProps: {};
-    state: IState = { forms: [] };
 
     constructor(props: IProps) {
         super(props);
 
-        this.state = { forms: [{ form: props.stepUserInput, hasNext: props.hasNext }] };
+        this.state = { forms: [{ form: props.stepUserInput, hasNext: props.hasNext }], userInputs: [] };
     }
 
     componentWillReceiveProps(nextProps: IProps) {
@@ -46,19 +47,15 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         this.setState({ forms: forms });
     };
 
-    submit = (currentForm: any[]) => {
-        const { forms } = this.state;
-        let result = this.props.validSubmit(forms.map(f => f.form));
-        result.catch(err => {
-            if (err.response && err.response.status === 510) {
-                err.response.json().then((json: any) => {
-                    this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }] });
-                });
-            } else {
-                throw err;
-            }
+    submit = (currentFormData: {}) => {
+        const { forms, userInputs } = this.state;
+        let newUserInputs = userInputs.slice(0, forms.length - 1);
+        newUserInputs.push(currentFormData);
+
+        let result = this.props.validSubmit(newUserInputs);
+        return catchErrorStatus(result, 510, (json: any) => {
+            this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }], userInputs: newUserInputs });
         });
-        return result;
     };
 
     render() {
