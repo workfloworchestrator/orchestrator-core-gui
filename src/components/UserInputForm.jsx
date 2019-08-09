@@ -627,7 +627,6 @@ export default class UserInputForm extends React.Component {
                         choices={userInput.choices}
                         selected={value}
                         disabled={userInput.readonly}
-                        defaultValue={userInput.default_value}
                     />
                 );
             case "bfd":
