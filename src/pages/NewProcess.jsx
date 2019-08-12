@@ -200,7 +200,14 @@ export default class NewProcess extends React.Component {
     renderActions = (start, disabled) => {
         return (
             <section className="actions-buttons">
-                <button tabIndex={0} className={`button ${disabled ? "grey disabled" : "blue"}`} onClick={start}>
+                <button
+                    type="submit"
+                    tabIndex={0}
+                    className={`button ${disabled ? "grey disabled" : "blue"}`}
+                    onClick={start}
+                    name="start-process"
+                    id="start-process"
+                >
                     {I18n.t("subscription.start")}
                 </button>
             </section>
@@ -235,6 +242,7 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="product">{I18n.t("process.product")}</label>
                     <ProductSelect
+                        id="select-product"
                         products={this.props.products
                             .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
                             .filter(prod => prod.status === "active")}
@@ -302,7 +310,7 @@ export default class NewProcess extends React.Component {
                 let workflow = workflows.terminate[0];
 
                 this.setState({
-                    notTerminatableMessage: I18n.t(workflow.reason, workflow)
+                    notTerminatableMessage: workflow.reason ? I18n.t(workflow.reason, workflows) : ""
                 });
             });
         }
@@ -329,6 +337,7 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
+                        id="modify-subscription-search-select"
                         subscriptions={subscriptions.filter(
                             sub =>
                                 (sub.status === "active" && sub.insync) ||
@@ -370,6 +379,7 @@ export default class NewProcess extends React.Component {
                 <section className="form-divider">
                     <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
+                        id="terminate-subscription-search-select"
                         subscriptions={subscriptions.filter(sub => sub.status !== "terminated")}
                         subscription={terminateSubscription}
                         onChange={this.changeTerminateSubscription}

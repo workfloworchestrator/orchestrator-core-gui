@@ -4,7 +4,7 @@ import Select from "react-select";
 
 export default class OrganisationSelect extends React.PureComponent {
     render() {
-        const { onChange, organisation, organisations, disabled } = this.props;
+        const { id, onChange, organisation, organisations, disabled } = this.props;
 
         const options = organisations.map(org => ({
             value: org.uuid,
@@ -14,6 +14,7 @@ export default class OrganisationSelect extends React.PureComponent {
 
         return (
             <Select
+                id={id}
                 onChange={onChange}
                 options={options}
                 value={value}
@@ -26,6 +27,7 @@ export default class OrganisationSelect extends React.PureComponent {
 }
 
 OrganisationSelect.propTypes = {
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     organisations: PropTypes.array.isRequired,
     organisation: PropTypes.string,

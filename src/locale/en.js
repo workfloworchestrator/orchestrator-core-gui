@@ -413,6 +413,9 @@ I18n.translations.en = {
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
         port_mode_info: "The port mode as sent to IMS and NSO",
+        auto_negotiation_info:
+            "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
+        auto_negotiation: "Auto Negotiation",
         old_subscription_label: "Old Subscription",
         old_subscription_label_info: "The old subscription in this workflow",
         sap1: {
@@ -846,8 +849,8 @@ I18n.translations.en = {
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
-        no_termination_parent_subscription:
-            "This subscription can not be terminated as it is used in other subscriptions: {{unterminated_parents}}",
+        no_modify_parent_subscription:
+            "This subscription can not be {{action}} as it is used in other subscriptions: {{unterminated_parents}}",
         no_termination_workflow:
             "This subscription can not be terminated as the product has no termination workflow-key.",
         modify_modify_ssp_msp_lichtpad: "Modify bandwidth",

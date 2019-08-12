@@ -157,10 +157,16 @@ export default class UserInputForm extends React.Component {
         const invalid = this.isInvalid() || this.state.processing;
         return (
             <section className="buttons">
-                <button className="button" onClick={this.cancel}>
+                <button type="submit" id="cancel-form-submit" className="button" onClick={this.cancel}>
                     {I18n.t("process.cancel")}
                 </button>
-                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
+                <button
+                    type="submit"
+                    id="submit-new-process"
+                    tabIndex={0}
+                    className={`button ${invalid ? "grey disabled" : "blue"}`}
+                    onClick={this.submit}
+                >
                     {I18n.t("process.submit")}
                 </button>
             </section>
@@ -352,6 +358,7 @@ export default class UserInputForm extends React.Component {
             case "organisation":
                 return (
                     <OrganisationSelect
+                        id="select-customer-organisation"
                         key={name}
                         organisations={organisations}
                         onChange={this.changeSelectInput(name)}
@@ -385,6 +392,7 @@ export default class UserInputForm extends React.Component {
                     findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return (
                     <ContactPersons
+                        id="contact"
                         persons={isEmpty(value) ? [{ email: "", name: "", phone: "" }] : value}
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}
