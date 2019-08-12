@@ -3,7 +3,14 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-export default function SubscriptionSearchSelect({ subscriptions, subscription, onChange, disabled, organisation }) {
+export default function SubscriptionSearchSelect({
+    id,
+    subscriptions,
+    subscription,
+    onChange,
+    disabled,
+    organisation
+}) {
     const options = subscriptions.map(sub => ({
         value: sub.subscription_id,
         label: sub.description
@@ -14,6 +21,7 @@ export default function SubscriptionSearchSelect({ subscriptions, subscription, 
     return (
         <div>
             <Select
+                id={id}
                 onChange={onChange}
                 options={options}
                 value={value}
@@ -31,6 +39,7 @@ export default function SubscriptionSearchSelect({ subscriptions, subscription, 
     );
 }
 SubscriptionSearchSelect.propTypes = {
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     subscriptions: PropTypes.array,

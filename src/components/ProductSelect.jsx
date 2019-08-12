@@ -5,7 +5,7 @@ import Select from "react-select";
 import "./ProductSelect.scss";
 import { TARGET_CREATE } from "../validations/Products";
 
-export default function ProductSelect({ onChange, product, products, disabled }) {
+export default function ProductSelect({ id, onChange, product, products, disabled }) {
     const options = products.map(aProduct => ({
         value: aProduct.product_id,
         label: aProduct.name,
@@ -16,6 +16,7 @@ export default function ProductSelect({ onChange, product, products, disabled })
     }));
     return (
         <Select
+            id={id}
             className={`select-product ${options.length > 15 ? "large" : ""}`}
             onChange={onChange}
             options={options}
@@ -28,6 +29,7 @@ export default function ProductSelect({ onChange, product, products, disabled })
 }
 
 ProductSelect.propTypes = {
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     products: PropTypes.array.isRequired,
     product: PropTypes.string,

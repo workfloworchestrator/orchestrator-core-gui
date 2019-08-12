@@ -397,14 +397,18 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -527,14 +531,18 @@ exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -1549,6 +1557,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -1673,10 +1682,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       onBlur={[Function]}
                       tabIndex="1"
                     >
-                      <label>
+                      <label
+                        htmlFor="contact-name-0"
+                      >
                         Name
                       </label>
                       <input
+                        id="contact-name-0"
                         onChange={[Function]}
                         onKeyDown={[Function]}
                         placeholder="Search and add contact persons..."
@@ -1687,10 +1699,13 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                     <div
                       className="wrapper"
                     >
-                      <label>
+                      <label
+                        htmlFor="contact-email-0"
+                      >
                         Email
                       </label>
                       <input
+                        id="contact-email-0"
                         onBlur={[Function]}
                         onChange={[Function]}
                         type="email"
@@ -1700,13 +1715,16 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                     <div
                       className="wrapper"
                     >
-                      <label>
+                      <label
+                        htmlFor="contact-phone-0"
+                      >
                         Phone number
                       </label>
                       <div
                         className="tel"
                       >
                         <input
+                          id="contact-phone-0"
                           onChange={[Function]}
                           type="tel"
                           value=""
@@ -1734,14 +1752,18 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -2257,14 +2279,18 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -2780,14 +2806,18 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -2950,14 +2980,18 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -3008,6 +3042,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -3313,14 +3348,18 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -3371,6 +3410,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -3676,14 +3716,18 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -4064,14 +4108,18 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -4122,6 +4170,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4427,14 +4476,18 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -4485,6 +4538,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4786,14 +4840,18 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -4844,6 +4902,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5145,14 +5204,18 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -5203,6 +5266,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5504,14 +5568,18 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
@@ -5562,6 +5630,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
+                  id="select-customer-organisation"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5863,14 +5932,18 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
             >
               <button
                 className="button"
+                id="cancel-form-submit"
                 onClick={[Function]}
+                type="submit"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
+                id="submit-new-process"
                 onClick={[Function]}
                 tabIndex={0}
+                type="submit"
               >
                 Submit
               </button>
