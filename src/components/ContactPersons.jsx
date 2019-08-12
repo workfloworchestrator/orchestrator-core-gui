@@ -134,13 +134,14 @@ export default class ContactPersons extends React.PureComponent {
         setTimeout(() => this.setState({ displayAutocomplete: {} }), 350);
     };
 
-    renderPerson = (total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
+    renderPerson = (id, total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
         return (
             <section className="person" key={index}>
                 <div className="wrapper autocomplete-container" tabIndex="1" onBlur={this.onBlurAutoComplete}>
-                    {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
+                    {index === 0 && <label htmlFor={`${id}-name-${index}`}>{I18n.t("contact_persons.name")}</label>}
                     <input
+                        id={`${id}-name-${index}`}
                         ref={ref => {
                             if (displayAutocompleteInstance) {
                                 this.personInput = ref;
@@ -166,8 +167,9 @@ export default class ContactPersons extends React.PureComponent {
                     )}
                 </div>
                 <div className="wrapper">
-                    {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
+                    {index === 0 && <label htmlFor={`${id}-email-${index}`}>{I18n.t("contact_persons.email")}</label>}
                     <input
+                        id={`${id}-email-${index}`}
                         type="email"
                         onChange={this.onChangeInternal("email", index)}
                         onBlur={this.validateEmail(index)}
@@ -176,9 +178,14 @@ export default class ContactPersons extends React.PureComponent {
                     {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
                 </div>
                 <div className="wrapper">
-                    {index === 0 && <label>{I18n.t("contact_persons.phone")}</label>}
+                    {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
                     <div className="tel">
-                        <input type="tel" onChange={this.onChangeInternal("phone", index)} value={person.phone || ""} />
+                        <input
+                            id={`${id}-phone-${index}`}
+                            type="tel"
+                            onChange={this.onChangeInternal("phone", index)}
+                            value={person.phone || ""}
+                        />
                         <i
                             className={`fa fa-minus ${index === 0 ? "disabled" : ""}`}
                             onClick={this.removePerson(index)}
@@ -190,12 +197,13 @@ export default class ContactPersons extends React.PureComponent {
     };
 
     render() {
-        const { persons } = this.props;
+        const { persons, id } = this.props;
         const { errors, displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>
                     this.renderPerson(
+                        id,
                         persons.length,
                         person,
                         index,
@@ -214,6 +222,7 @@ export default class ContactPersons extends React.PureComponent {
 }
 
 ContactPersons.propTypes = {
+    id: PropTypes.string.isRequired,
     persons: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     organisationId: PropTypes.string

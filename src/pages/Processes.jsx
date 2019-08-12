@@ -411,7 +411,13 @@ export default class Processes extends React.PureComponent {
                             />
                             <i className="fa fa-search" />
                         </section>
-                        <button className="new button green" onClick={this.newProcess}>
+                        <button
+                            type="submit"
+                            name="new-process"
+                            id="new-process"
+                            className="new button green"
+                            onClick={this.newProcess}
+                        >
                             {I18n.t("processes.new")} <i className="fa fa-plus" />
                         </button>
                     </div>

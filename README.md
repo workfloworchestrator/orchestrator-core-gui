@@ -95,3 +95,17 @@ Deploys of GUI Workflows are in the form of a Docker image with nginx.
 ```
 new-process?product=58695551-e386-437a-a999-41c1296f84b8&organisation=ad93daef-0911-e511-80d0-005056956c1a
 ```
+
+### Packages
+
+We are using Prettier as a code formatter. You can run prettier like this:
+
+```shell
+    yarn prettier -c --write '**/*.{js,jsx,scss,md}'
+```
+
+Similarly you can run other packages that can be found in the package.json
+
+To run the unit-tests, do: `yarn test`.
+
+To run the storybook, do: `yarn storybook`.
