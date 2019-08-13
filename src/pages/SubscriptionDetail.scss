@@ -235,6 +235,66 @@
             }
         }
     }
+    table.processes {
+        margin-top: 20px;
+        margin-left: 30px;
+        width: 90%;
+        word-break: break-all;
+        td,
+        th {
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid $light-grey;
+            border-left: 1px solid $blue;
+            &:nth-child(even) {
+                background: white;
+            }
+            &:nth-child(odd) {
+                background: $table-odd-even;
+            }
+        }
+        th,
+        td {
+            padding: 8px 15px;
+            word-break: break-word;
+            word-wrap: break-word;
+        }
+        th.target {
+            width: 10%;
+        }
+        th.name {
+            width: 20%;
+        }
+        th.id {
+            width: 28%;
+        }
+        th.started_at {
+            width: 16%;
+            text-align: center;
+        }
+        th.status {
+            width: 9%;
+        }
+        th.modified_at {
+            width: 16%;
+        }
+        span {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: larger;
+            color: $medium-grey;
+            padding: 7px 2px 7px 0;
+        }
+        tbody {
+            td {
+                &.insync {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+    }
     p.label {
         color: $blue;
         margin-left: 25px;
