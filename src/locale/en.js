@@ -16,7 +16,7 @@ I18n.translations.en = {
     header: {
         title: "Orchestrator",
         links: {
-            help_html: '<a href="https://gitlab.surfnet.nl/automation/workflows/wikis/home" target="_blank">Help</a>',
+            help: "Help",
             logout: "Logout",
             exit: "Exit"
         },
@@ -1144,18 +1144,17 @@ I18n.translations.en = {
     },
     not_found: {
         title: "404",
-        description_html: "The requested page could not be found"
+        description: "The requested page could not be found"
     },
     server_error: {
         title: "500",
-        description_html:
+        description:
             "An unexpected error occurred. It has been logged and reported. Please try again. Still doesn't" +
             " work? Get Help."
     },
     not_allowed: {
         title: "403",
-        description_html:
-            "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
+        description: "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
     },
     confirmation_dialog: {
         title: "Please confirm",

@@ -361,18 +361,6 @@ export function deleteSubscription(subscriptionId) {
     return fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
 }
 
-export function terminateSubscription(process) {
-    return postPutJson("processes/terminate-subscription", process, "post", false, false);
-}
-
-export function startModificationSubscription(subscriptionId, workflow_name, product = null) {
-    const body = { subscription_id: subscriptionId };
-    if (!isEmpty(product)) {
-        body.product = product;
-    }
-    return postPutJson(`processes/modify-subscription/${workflow_name}`, body, "post", false, false);
-}
-
 //IPAM IP Prefixes
 export function ip_blocks(parentPrefix) {
     return fetchJson("ipam/ip_blocks/" + parentPrefix);
@@ -419,8 +407,8 @@ export function process(processId) {
     return fetchJsonWithCustomErrorHandling("processes/" + processId);
 }
 
-export function startProcess(process) {
-    return postPutJson("processes", process, "post", false, false);
+export function startProcess(workflow_name, process) {
+    return postPutJson("processes/" + workflow_name, process, "post", false, false);
 }
 
 export function resumeProcess(processId, userInput) {
@@ -452,8 +440,8 @@ export function resumeAll() {
     return fetchJsonWithCustomErrorHandling("tasks/resumeall");
 }
 
-export function startTask(task) {
-    return postPutJson("tasks", task, "post", false, false);
+export function startTask(workflow_name, task) {
+    return postPutJson(`tasks/${workflow_name}`, task, "post", false, false);
 }
 
 export function resumeTask(taskId, userInput) {

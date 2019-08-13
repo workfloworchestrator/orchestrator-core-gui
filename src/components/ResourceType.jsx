@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
@@ -12,6 +11,7 @@ import { setFlash } from "../utils/Flash";
 import "react-datepicker/dist/react-datepicker.css";
 import { formInput } from "../forms/Builder";
 import { deleteResourceType } from "../api";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ResourceType extends React.Component {
     constructor(props) {
@@ -217,6 +217,6 @@ export default class ResourceType extends React.Component {
     }
 }
 
-ResourceType.propTypes = {
-    history: PropTypes.object.isRequired
-};
+ResourceType.propTypes = {};
+
+ResourceType.contextType = ApplicationContext;

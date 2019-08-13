@@ -1,8 +1,8 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { isEmpty, stop, isValidUUIDv4 } from "../utils/Utils";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./Prefixes.scss";
 import { freeSubnets, prefix_filters, prefixSubscriptionsByRootPrefix } from "../api";
@@ -11,8 +11,8 @@ import { organisationNameByUuid, renderDate, ipamStates, ipAddressToNumber, fami
 import ScrollUpButton from "react-scroll-up-button";
 
 export default class Prefixes extends React.PureComponent {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.debouncedCount = debounce(this.count, 1500, {
             leading: true,
@@ -36,7 +36,7 @@ export default class Prefixes extends React.PureComponent {
                 rootPrefix: []
             },
             rootPrefixes: [],
-            ipPrefixProductId: props.products
+            ipPrefixProductId: this.context.products
                 .filter(p => p.tag === "IP_PREFIX")
                 .map(p => p.product_id)
                 .pop(),
@@ -71,7 +71,7 @@ export default class Prefixes extends React.PureComponent {
     }
 
     getPrefixSubscriptions = roots => {
-        const { organisations } = this.props;
+        const { organisations } = this.context;
         return roots.map(p =>
             prefixSubscriptionsByRootPrefix(p.id)
                 .then(result =>
@@ -275,10 +275,10 @@ export default class Prefixes extends React.PureComponent {
         const { subscription_id, prefix, prefixlen } = selection;
         const product_id = this.state.ipPrefixProductId;
         if (isValidUUIDv4(subscription_id)) {
-            this.props.history.push("/subscription/" + subscription_id);
+            this.context.redirect("/subscription/" + subscription_id);
         } else if (subscription_id === "N/A") {
             let network = prefix.split("/")[0];
-            this.props.history.push(
+            this.context.redirect(
                 `new-process/?product=${product_id}&prefix=${network}&prefixlen=${prefixlen}&prefix_min=${prefixlen}`
             );
         }
@@ -382,8 +382,6 @@ export default class Prefixes extends React.PureComponent {
     }
 }
 
-Prefixes.propTypes = {
-    history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired
-};
+Prefixes.propTypes = {};
+
+Prefixes.contextType = ApplicationContext;

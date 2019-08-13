@@ -9,6 +9,7 @@ import { requestSubscriptionData } from "../utils/SubscriptionData";
 import { stop } from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
 import { debounce } from "lodash";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
@@ -99,7 +100,7 @@ class Subscriptions extends React.PureComponent {
     };
 
     navigateToOldSubscriptions = () => {
-        this.props.history.push("/old-subscriptions/");
+        this.context.redirect("/old-subscriptions/");
     };
 
     render() {
@@ -205,13 +206,7 @@ class Subscriptions extends React.PureComponent {
                                 <i className="large-icon fa fa-close" onClick={this.hideSubscriptionDetail} />
                             </div>
                             <div className="scroller">
-                                <SubscriptionDetail
-                                    history={this.props.history}
-                                    organisations={this.props.organisations}
-                                    products={this.props.products}
-                                    subscriptionId={subscriptionId}
-                                    isModal={true}
-                                />
+                                <SubscriptionDetail subscriptionId={subscriptionId} />
                             </div>
                         </Modal>
                     )}
@@ -230,10 +225,6 @@ class Subscriptions extends React.PureComponent {
 }
 
 Subscriptions.propTypes = {
-    history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
-
     // Mapped to URL query parameters
     page: PropTypes.number,
     filtered: PropTypes.array,
@@ -246,5 +237,7 @@ Subscriptions.propTypes = {
     onChangeSorted: PropTypes.func,
     onChangePageSize: PropTypes.func
 };
+
+Subscriptions.contextType = ApplicationContext;
 
 export default addUrlProps({ urlPropsQueryConfig })(Subscriptions);

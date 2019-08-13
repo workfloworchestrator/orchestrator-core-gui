@@ -19,9 +19,10 @@ import CheckBox from "../components/CheckBox";
 import { isEmpty, stop } from "../utils/Utils";
 import { absent, ims_circuit_id, nms_service_id, subscriptionInstanceValues } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./SubscriptionDetail.scss";
-import { startModificationSubscription } from "../api/index";
+import { startProcess } from "../api/index";
 
 export default class SubscriptionDetail extends React.PureComponent {
     constructor(props) {
@@ -53,7 +54,7 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     refreshSubscription(subscriptionId) {
-        const { organisations, products } = this.props;
+        const { organisations, products } = this.context;
         subscriptionsDetail(subscriptionId)
             .then(subscription => {
                 enrichSubscription(subscription, organisations, products);
@@ -186,8 +187,8 @@ export default class SubscriptionDetail extends React.PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        const id = this.props.match.params.id;
-        const nextId = nextProps.match.params.id;
+        const id = this.props.subscriptionId ? this.props.subscriptionId : this.props.match.params.id;
+        const nextId = nextProps.subscriptionId ? nextProps.subscriptionId : nextProps.match.params.id;
         if (id !== nextId) {
             this.refreshSubscription(nextId);
             window.scrollTo(0, 0);
@@ -201,7 +202,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 name: subscription.product_name,
                 customer: subscription.customer_name
             }),
-            () => this.props.history.push(`/terminate-subscription?subscription=${subscription.subscription_id}`)
+            () => this.context.redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
         );
     };
 
@@ -215,8 +216,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                 change: change
             }),
             () =>
-                startModificationSubscription(subscription.subscription_id, workflow_name).then(() => {
-                    this.props.history.push("/processes");
+                startProcess(workflow_name, { subscription_id: subscription.subscription_id }).then(() => {
+                    this.context.redirect("/processes");
                 })
         );
     };
@@ -426,7 +427,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 </tr>
                 <tr>
                     <td>{I18n.t("subscription.ims_service.customer")}</td>
-                    <td>{organisationNameByUuid(service.customer_id, this.props.organisations)}</td>
+                    <td>{organisationNameByUuid(service.customer_id, this.context.organisations)}</td>
                 </tr>
                 <tr>
                     <td>{I18n.t("subscription.ims_service.extra_info")}</td>
@@ -954,11 +955,11 @@ export default class SubscriptionDetail extends React.PureComponent {
             collapsedObjects,
             workflows
         } = this.state;
-        const { organisations, products } = this.props;
+        const { organisations, products } = this.context;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <div className={this.props.isModal ? "mod-subscription-detail" : "mod-subscription-detail card"}>
+            <div className={this.props.subscriptionId ? "mod-subscription-detail" : "mod-subscription-detail card"}>
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}
@@ -996,13 +997,9 @@ export default class SubscriptionDetail extends React.PureComponent {
 }
 
 SubscriptionDetail.propTypes = {
-    history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
-    subscriptionId: PropTypes.string,
-    isModal: PropTypes.bool
+    subscriptionId: PropTypes.string
 };
 SubscriptionDetail.defaultProps = {
-    subscriptionId: undefined,
-    isModal: false
+    subscriptionId: undefined
 };
+SubscriptionDetail.contextType = ApplicationContext;

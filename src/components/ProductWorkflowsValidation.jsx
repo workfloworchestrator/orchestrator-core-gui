@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "./ProductWorkflowsValidation.scss";
 import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
 import { isEmpty } from "../utils/Utils";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ProductWorkflowsValidation extends React.Component {
     renderWorkflows(workflows, msg, nonPresentMsg) {
@@ -189,7 +190,8 @@ export default class ProductWorkflowsValidation extends React.Component {
     );
 
     render() {
-        const { products, workflowCodeImplementations, workflows } = this.props;
+        const { workflowCodeImplementations, workflows } = this.props;
+        const { products } = this.context;
         return (
             <section className="products-workflows-validation">
                 {this.renderProductsWithoutTargetWorkflow(products)}
@@ -203,8 +205,8 @@ export default class ProductWorkflowsValidation extends React.Component {
 }
 
 ProductWorkflowsValidation.propTypes = {
-    history: PropTypes.object.isRequired,
-    products: PropTypes.array.isRequired,
     workflowCodeImplementations: PropTypes.array.isRequired,
     workflows: PropTypes.array.isRequired
 };
+
+ProductWorkflowsValidation.contextType = ApplicationContext;

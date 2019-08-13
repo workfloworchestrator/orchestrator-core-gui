@@ -38,6 +38,7 @@ import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
 import { portSubscriptions, nodeSubscriptions } from "../api";
+import ApplicationContext from "../utils/ApplicationContext";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -47,7 +48,7 @@ export default class UserInputForm extends React.Component {
         this.state = {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.props.history.push("/processes"),
+            cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
             errors: {},
             customErrors: {},
@@ -264,6 +265,10 @@ export default class UserInputForm extends React.Component {
     };
 
     renderInput = userInput => {
+        if (userInput.type === "hidden") {
+            return;
+        }
+
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const error = this.state.errors[name];
@@ -308,7 +313,8 @@ export default class UserInputForm extends React.Component {
     chooseInput = userInput => {
         const name = userInput.name;
         const value = userInput.value;
-        const { currentState, products, organisations, preselectedInput } = this.props;
+        const { currentState } = this.props;
+        const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
 
         const { servicePortsSN7, servicePortsSN8, nodeSubscriptions } = this.state;
@@ -335,14 +341,7 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "subscription_id":
-                return (
-                    <ReadOnlySubscriptionView
-                        subscriptionId={value}
-                        products={products}
-                        organisations={organisations}
-                        className="indent"
-                    />
-                );
+                return <ReadOnlySubscriptionView subscriptionId={value} className="indent" />;
             case "bandwidth":
                 const servicePorts = findValueFromInputStep(userInput.ports_key, stepUserInput);
                 return (
@@ -399,21 +398,13 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "ieee_interface_type":
-                const productId = findValueFromInputStep(userInput.product_key, stepUserInput);
+                const key = userInput.product_key || "product";
+                const productId = findValueFromInputStep(key, stepUserInput);
                 return (
                     <IEEEInterfaceTypesForProductTagSelect
                         onChange={this.changeSelectInput(name)}
                         interfaceType={value}
                         productId={productId}
-                    />
-                );
-            case "ieee_interface_type_for_product_tag":
-                const propsProductId = this.props.product.value || this.props.product.product_id;
-                return (
-                    <IEEEInterfaceTypesForProductTagSelect
-                        onChange={this.changeSelectInput(name)}
-                        interfaceType={value}
-                        productId={propsProductId}
                     />
                 );
             case "node_id_port_select":
@@ -479,7 +470,7 @@ export default class UserInputForm extends React.Component {
                 return (
                     <LocationCodeSelect
                         onChange={this.changeSelectInput(name)}
-                        locationCodes={this.props.locationCodes}
+                        locationCodes={locationCodes}
                         locationCode={value}
                     />
                 );
@@ -586,13 +577,10 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "ip_prefix":
-                const preselectedPrefix = isEmpty(preselectedInput.prefix)
-                    ? null
-                    : `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
                 return (
                     <IPPrefix
-                        preselectedPrefix={preselectedPrefix}
-                        prefix_min={parseInt(preselectedInput.prefix_min)}
+                        preselectedPrefix={value}
+                        prefix_min={parseInt(userInput.prefix_min)}
                         onChange={this.changeNestedInput(name)}
                     />
                 );
@@ -698,16 +686,13 @@ export default class UserInputForm extends React.Component {
 }
 
 UserInputForm.propTypes = {
-    history: PropTypes.object.isRequired,
     stepUserInput: PropTypes.array.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired,
-    product: PropTypes.object,
     validSubmit: PropTypes.func.isRequired,
-    preselectedInput: PropTypes.object
+    currentState: PropTypes.object
 };
 
 UserInputForm.defaultProps = {
-    preselectedInput: {}
+    currentState: {}
 };
+
+UserInputForm.contextType = ApplicationContext;

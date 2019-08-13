@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import { resumeTask, task } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
@@ -13,6 +12,7 @@ import { abortTask, deleteTask, retryTask } from "../api/index";
 import "./TaskDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class TaskDetail extends React.PureComponent {
     constructor(props) {
@@ -40,7 +40,7 @@ export default class TaskDetail extends React.PureComponent {
                  * TODO
                  */
 
-                const { configuration, currentUser } = this.props;
+                const { configuration, currentUser } = this.context;
 
                 const userInputAllowed =
                     currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership);
@@ -82,7 +82,7 @@ export default class TaskDetail extends React.PureComponent {
         stop(e);
         this.confirmation(I18n.t("tasks.deleteConfirmation", { name: task.workflow }), () =>
             deleteTask(task.tid).then(() => {
-                this.props.history.push(`/tasks`);
+                this.context.redirect(`/tasks`);
                 setFlash(I18n.t("tasks.flash.delete", { name: task.workflow }));
             })
         );
@@ -92,7 +92,7 @@ export default class TaskDetail extends React.PureComponent {
         stop(e);
         this.confirmation(I18n.t("tasks.abortConfirmation", { name: task.workflow }), () =>
             abortTask(task.tid).then(() => {
-                this.props.history.push(`/tasks`);
+                this.context.redirect(`/tasks`);
                 setFlash(I18n.t("tasks.flash.abort", { name: task.workflow }));
             })
         );
@@ -102,7 +102,7 @@ export default class TaskDetail extends React.PureComponent {
         stop(e);
         this.confirmation(I18n.t("tasks.retryConfirmation", { name: task.workflow }), () =>
             retryTask(task.tid).then(() => {
-                this.props.history.push(`/tasks`);
+                this.context.redirect(`/tasks`);
                 setFlash(I18n.t("tasks.flash.retry", { name: task.workflow }));
             })
         );
@@ -148,7 +148,7 @@ export default class TaskDetail extends React.PureComponent {
         const { task } = this.state;
         let result = resumeTask(task.tid, stepUserInput);
         result.then(() => {
-            this.props.history.push(`/tasks`);
+            this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.update", { name: task.workflow_name }));
         });
         return result;
@@ -160,8 +160,6 @@ export default class TaskDetail extends React.PureComponent {
     };
 
     renderTabContent = (renderStepForm, selectedTab, task, step, stepUserInput) => {
-        const { history, products } = this.props;
-
         if (selectedTab === "task") {
             return (
                 <section className="card">
@@ -177,15 +175,9 @@ export default class TaskDetail extends React.PureComponent {
                         <h3>{I18n.t("task.userInput", { name: step.name })}</h3>
                     </section>
                     <UserInputForm
-                        locationCodes={[]}
                         stepUserInput={stepUserInput}
-                        products={products}
-                        organisations={[]}
-                        history={history}
-                        product={{}}
                         currentState={task.current_state}
                         validSubmit={this.validSubmit}
-                        task={task}
                     />
                 </section>
             );
@@ -234,9 +226,6 @@ export default class TaskDetail extends React.PureComponent {
     }
 }
 
-TaskDetail.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    configuration: PropTypes.object.isRequired,
-    products: PropTypes.array.isRequired
-};
+TaskDetail.propTypes = {};
+
+TaskDetail.contextType = ApplicationContext;

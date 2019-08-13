@@ -1,13 +1,13 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { initialWorkflowInput, startTask, workflowsByTarget } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
+import ApplicationContext from "../utils/ApplicationContext";
+import WorkflowSelect from "../components/WorkflowSelect";
 
 import "./NewTask.scss";
-import WorkflowSelect from "../components/WorkflowSelect";
 
 export default class NewTask extends React.Component {
     constructor(props) {
@@ -30,10 +30,9 @@ export default class NewTask extends React.Component {
                 acc[input.name] = input.value;
                 return acc;
             }, {});
-            taskInput["workflow_key"] = workflow.value;
-            let result = startTask(taskInput);
+            let result = startTask(workflow.value, taskInput);
             result.then(() => {
-                this.props.history.push(`/tasks`);
+                this.context.redirect(`/tasks`);
                 setFlash(I18n.t("task.flash.create", { name: workflow.label }));
             });
             return result;
@@ -51,7 +50,6 @@ export default class NewTask extends React.Component {
 
     render() {
         const { workflows, workflow, stepUserInput } = this.state;
-        const { history, products } = this.props;
         return (
             <div className="mod-new-task">
                 <section className="card">
@@ -67,15 +65,7 @@ export default class NewTask extends React.Component {
                             />
                         </section>
                         {!isEmpty(workflow) && (
-                            <UserInputForm
-                                stepUserInput={stepUserInput}
-                                history={history}
-                                organisations={[]}
-                                products={products}
-                                locationCodes={[]}
-                                product={{}}
-                                validSubmit={this.validSubmit}
-                            />
+                            <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                         )}
                     </section>
                 </section>
@@ -84,8 +74,6 @@ export default class NewTask extends React.Component {
     }
 }
 
-NewTask.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    products: PropTypes.array.isRequired
-};
+NewTask.propTypes = {};
+
+NewTask.contextType = ApplicationContext;

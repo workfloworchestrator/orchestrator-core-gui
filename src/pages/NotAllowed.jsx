@@ -6,11 +6,7 @@ export default function NotAllowed() {
     return (
         <div className="mod-not-allowed">
             <h1>{I18n.t("not_allowed.title")}</h1>
-            <p
-                dangerouslySetInnerHTML={{
-                    __html: I18n.t("not_allowed.description_html")
-                }}
-            />
+            <p>{I18n.t("not_allowed.description")}</p>
         </div>
     );
 }

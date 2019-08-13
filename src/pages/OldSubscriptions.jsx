@@ -1,9 +1,9 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { childSubscriptions, parentSubscriptions, allSubscriptions } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
+import ApplicationContext from "../utils/ApplicationContext";
 
 import "./OldSubscriptions.scss";
 import FilterDropDown from "../components/FilterDropDown";
@@ -46,7 +46,7 @@ export default class OldSubscriptions extends React.PureComponent {
 
     componentDidMount = () =>
         allSubscriptions().then(results => {
-            const { organisations, products } = this.props;
+            const { organisations, products } = this.context;
             const collapsibleSubscriptions = [];
             results.forEach(subscription => {
                 this.enrichSubscription(subscription, organisations, products);
@@ -89,7 +89,7 @@ export default class OldSubscriptions extends React.PureComponent {
         subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
     };
 
-    showSubscription = subscription => () => this.props.history.push("/subscription/" + subscription.subscription_id);
+    showSubscription = subscription => () => this.context.redirect("/subscription/" + subscription.subscription_id);
 
     search = e => {
         const query = e.target.value;
@@ -243,7 +243,7 @@ export default class OldSubscriptions extends React.PureComponent {
                     const filteredSubscriptions = [...this.state.filteredSubscriptions];
                     const subscriptionToBeEnriched = filteredSubscriptions.find(sub => sub.subscription_id === id);
                     const attributeName = isServicePort ? "parentSubscriptions" : "childSubscriptions";
-                    const { organisations, products } = this.props;
+                    const { organisations, products } = this.context;
                     result.json.forEach(sub => this.enrichSubscription(sub, organisations, products));
                     subscriptionToBeEnriched[attributeName] = result.json;
                     this.setState({ filteredSubscriptions: filteredSubscriptions });
@@ -509,8 +509,6 @@ export default class OldSubscriptions extends React.PureComponent {
     }
 }
 
-OldSubscriptions.propTypes = {
-    history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired
-};
+OldSubscriptions.propTypes = {};
+
+OldSubscriptions.contextType = ApplicationContext;

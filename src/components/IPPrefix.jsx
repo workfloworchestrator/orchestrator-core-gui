@@ -284,7 +284,7 @@ export default class IPPrefix extends React.PureComponent {
 
     render() {
         const { preselectedPrefix, prefix_min } = this.props;
-        if (preselectedPrefix) {
+        if (prefix_min) {
             return this.renderContentWithPreselectedPrefix(preselectedPrefix, prefix_min);
         } else {
             const { loading, selected_prefix_id } = this.state;
