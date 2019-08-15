@@ -821,6 +821,14 @@ I18n.translations.en = {
             status: "Status",
             tag: "Tag"
         },
+        process: {
+            target: "Target",
+            name: "Name",
+            id: "Id",
+            started_at: "Started at",
+            status: "Status",
+            modified_at: "Modified at"
+        },
         ims_service: {
             id: "IMS service ID ({{index}})",
             identifier: "IMS service ID",

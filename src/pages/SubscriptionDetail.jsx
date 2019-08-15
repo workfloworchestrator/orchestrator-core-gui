@@ -695,21 +695,38 @@ export default class SubscriptionDetail extends React.PureComponent {
     };
 
     renderProcesses = subscriptionProcesses => {
+        const columns = ["target", "name", "id", "status", "started_at", "modified_at"];
+
+        const th = index => {
+            const name = columns[index];
+            return (
+                <th key={index} className={name}>
+                    <span>{I18n.t(`subscription.process.${name}`)}</span>
+                </th>
+            );
+        };
+
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.process_link")}</h3>
                 <div className="form-container-parent">
-                    <table className="detail-block">
-                        <thead />
+                    <table className="processes">
+                        <thead>
+                            <tr>{columns.map((column, index) => th(index))}</tr>
+                        </thead>
                         <tbody>
                             {subscriptionProcesses.map((ps, index) => (
                                 <tr key={index}>
-                                    <td>{`${ps.workflow_target} - ${ps.process.workflow}`}</td>
+                                    <td>{ps.workflow_target}</td>
+                                    <td>{ps.process.workflow}</td>
                                     <td>
                                         <a target="_blank" rel="noopener noreferrer" href={`/process/${ps.pid}`}>
                                             {ps.pid}
                                         </a>
                                     </td>
+                                    <td>{ps.process.last_status}</td>
+                                    <td>{renderDateTime(ps.process.started_at)}</td>
+                                    <td>{renderDateTime(ps.process.last_modified_at)}</td>
                                 </tr>
                             ))}
                             {isEmpty(subscriptionProcesses) && (
