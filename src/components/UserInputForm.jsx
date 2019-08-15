@@ -51,6 +51,7 @@ export default class UserInputForm extends React.Component {
             cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
             errors: {},
+            validationErrors: {},
             customErrors: {},
             uniqueErrors: {},
             uniqueSelectInputs: {},
@@ -111,6 +112,28 @@ export default class UserInputForm extends React.Component {
         this.setState({ confirmationDialogOpen: true });
     };
 
+    updateValidationErrors = validationErrors => {
+        const errors = { ...this.state.errors };
+
+        let newValidationErrors = {};
+
+        console.log(errors);
+        console.log(validationErrors.validation_errors);
+        validationErrors.validation_errors.forEach(item => {
+            console.log(item.loc[0])
+            errors[item.loc[0]] = true;
+            if (item.loc[0] in newValidationErrors) {
+                // multiple errors in one input
+
+            }
+            else {
+               newValidationErrors[item.loc[0]] = item.msg
+            }
+            // item.loc = true;
+        });
+        this.setState({ errors: errors, validationErrors: newValidationErrors });
+    };
+
     submit = e => {
         stop(e);
         const { stepUserInput, processing } = this.state;
@@ -131,16 +154,14 @@ export default class UserInputForm extends React.Component {
             promise.catch(err => {
                 if (err.response && err.response.status === 400) {
                     err.response.json().then(json => {
-                        const errors = { ...this.state.errors };
-                        json.validation_errors.forEach(item => {
-                            errors[item.loc[0]] = true;
-                        });
-                        this.setState({ errors: errors, processing: false });
+                        this.updateValidationErrors(json);
+                        this.setState({ processing: false });
                     });
-                } else {
+                }
+                else {
                     throw err;
                 }
-            });
+            })
         }
     };
 
@@ -378,6 +399,7 @@ export default class UserInputForm extends React.Component {
             case "product":
                 return (
                     <ProductSelect
+                        id="select-product"
                         products={products}
                         onChange={this.changeSelectInput(name)}
                         product={value}

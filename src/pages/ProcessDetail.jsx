@@ -228,6 +228,11 @@ class ProcessDetail extends React.PureComponent {
         result.then(e => {
             this.context.redirect(`/processes`);
             setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
+            debugger;
+            return Promise.resolve()
+        }).catch(error => {
+            //unexpected: this catches the Bad request a second time
+            console.log(error)
         });
         return result;
     };
