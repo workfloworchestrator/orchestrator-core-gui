@@ -114,22 +114,16 @@ export default class UserInputForm extends React.Component {
 
     updateValidationErrors = validationErrors => {
         const errors = { ...this.state.errors };
-
         let newValidationErrors = {};
 
-        console.log(errors);
-        console.log(validationErrors.validation_errors);
         validationErrors.validation_errors.forEach(item => {
-            console.log(item.loc[0])
             errors[item.loc[0]] = true;
             if (item.loc[0] in newValidationErrors) {
-                // multiple errors in one input
-
+                // multiple errors for one input
+                newValidationErrors[item.loc[0]] = `${newValidationErrors[item.loc[0]]} or ${item.msg}`;
+            } else {
+                newValidationErrors[item.loc[0]] = item.msg;
             }
-            else {
-               newValidationErrors[item.loc[0]] = item.msg
-            }
-            // item.loc = true;
         });
         this.setState({ errors: errors, validationErrors: newValidationErrors });
     };
@@ -157,11 +151,10 @@ export default class UserInputForm extends React.Component {
                         this.updateValidationErrors(json);
                         this.setState({ processing: false });
                     });
-                }
-                else {
+                } else {
                     throw err;
                 }
-            })
+            });
         }
     };
 
@@ -306,12 +299,15 @@ export default class UserInputForm extends React.Component {
         const error = this.state.errors[name];
         const customError = this.state.customErrors[name];
         const uniqueError = this.state.uniqueErrors[name];
+        const validationError = this.state.validationErrors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput)}
-                {(error || customError) && <em className="error">{I18n.t("process.format_error")}</em>}
+                {(error || customError || validationError) && (
+                    <em className="error">{validationError ? validationError : I18n.t("process.format_error")}</em>
+                )}
                 {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
         );

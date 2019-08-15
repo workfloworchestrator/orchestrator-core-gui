@@ -73,14 +73,16 @@ export default class NewProcess extends React.Component {
     validSubmit = products => processInput => {
         if (!isEmpty(this.state.product)) {
             let result = startProcess(this.state.product.workflow.name, processInput);
-            result.then(() => {
-                this.context.redirect(`/processes`);
-                const name = products.find(prod => prod.product_id === this.state.product.value).name;
-                setFlash(I18n.t("process.flash.create", { name: name }));
-            }).catch(error => {
-                //unexpected: this catches the Bad request a second time
-                console.log(error)
-            });
+            result
+                .then(() => {
+                    this.context.redirect(`/processes`);
+                    const name = products.find(prod => prod.product_id === this.state.product.value).name;
+                    setFlash(I18n.t("process.flash.create", { name: name }));
+                })
+                .catch(error => {
+                    //unexpected: this catches the Bad request a second time
+                    console.log(error);
+                });
             return result;
         }
     };
