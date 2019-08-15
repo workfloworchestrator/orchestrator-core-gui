@@ -70,13 +70,8 @@ export default class NewProcess extends React.Component {
         });
     };
 
-    validSubmit = products => stepUserInput => {
+    validSubmit = products => processInput => {
         if (!isEmpty(this.state.product)) {
-            const processInput = stepUserInput.reduce((acc, input) => {
-                acc[input.name] = input.value;
-                return acc;
-            }, {});
-
             let result = startProcess(this.state.product.workflow.name, processInput);
             result.then(() => {
                 this.context.redirect(`/processes`);

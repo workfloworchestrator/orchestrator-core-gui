@@ -116,7 +116,18 @@ export default class UserInputForm extends React.Component {
         const { stepUserInput, processing } = this.state;
         if (this.validateAllUserInput(stepUserInput) && !processing) {
             this.setState({ processing: true });
-            let promise = this.props.validSubmit(stepUserInput);
+
+            const processInput = stepUserInput.reduce((acc, input) => {
+                acc[input.name] = input.value;
+
+                // Add missing default
+                if (input.type === "boolean" && input.value === undefined) {
+                    acc[input.name] = false;
+                }
+                return acc;
+            }, {});
+
+            let promise = this.props.validSubmit(processInput);
             promise.catch(err => {
                 if (err.response && err.response.status === 400) {
                     err.response.json().then(json => {

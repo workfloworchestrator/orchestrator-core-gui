@@ -222,20 +222,9 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    addMissingDefaults = inputs => {
-        let list = [];
-        for (let input of inputs) {
-            if (input.type === "boolean" && input.value === undefined) {
-                input.value = false;
-            }
-            list.push(input);
-        }
-        return list;
-    };
-
-    validSubmit = stepUserInput => {
+    validSubmit = processInput => {
         const { process } = this.state;
-        let result = resumeProcess(process.id, this.addMissingDefaults(stepUserInput));
+        let result = resumeProcess(process.id, processInput);
         result.then(e => {
             this.context.redirect(`/processes`);
             setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));

@@ -21,15 +21,9 @@ export default class NewTask extends React.Component {
 
     componentDidMount = () => workflowsByTarget("SYSTEM").then(workflows => this.setState({ workflows: workflows }));
 
-    validSubmit = stepUserInput => {
+    validSubmit = taskInput => {
         const { workflow } = this.state;
         if (!isEmpty(workflow)) {
-            //create a copy to prevent re-rendering
-            let taskInput = [...stepUserInput];
-            taskInput = taskInput.reduce((acc, input) => {
-                acc[input.name] = input.value;
-                return acc;
-            }, {});
             let result = startTask(workflow.value, taskInput);
             result.then(() => {
                 this.context.redirect(`/tasks`);
