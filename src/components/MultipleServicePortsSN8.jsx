@@ -20,6 +20,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
     onChangeInternal = (name, index) => e => {
         const servicePorts = [...this.props.servicePorts];
         let value;
+        this.clearErrors(index);
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
@@ -41,20 +42,14 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                             usedUntaggedServicePorts: usedUntaggedServicePorts
                         });
                     });
-                } else {
-                    // TODO: check if this is needed and ensure it works with SN8 SP's
-                    console.log(
-                        "Warning: not all business logic is implemented/clear for untagged SP's: investigate clearErrors()..."
-                    );
-                    this.clearErrors(index);
                 }
                 servicePorts[index].port_mode = port.port_mode;
                 servicePorts[index].tag = port.product.tag;
-            } else {
-                this.clearErrors(index);
+                // Reset VLAN to ensure a correct switch from TAGGED to UNTAGGED
+                servicePorts[index].vlan = "";
             }
         } else {
-            value = e.target ? e.target.value : null;
+            value = e.target ? e.target.value : 0;
         }
         servicePorts[index][name] = value;
         this.props.onChange(servicePorts);
@@ -247,6 +242,10 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
             visiblePortMode,
             disabledPorts
         } = this.props;
+
+        console.log("SP's");
+        console.log(servicePorts);
+
         const { bandwidthErrors, usedUntaggedServicePorts } = this.state;
         const showAdd = maximum > 2 && servicePorts.length < maximum && !disabled;
         return (

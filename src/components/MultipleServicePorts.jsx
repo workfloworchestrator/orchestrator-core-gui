@@ -20,6 +20,7 @@ export default class MultipleServicePorts extends React.PureComponent {
     onChangeInternal = (name, index) => e => {
         const servicePorts = [...this.props.servicePorts];
         let value;
+        this.clearErrors(index);
         if (name === "subscription_id") {
             value = e ? e.value : null;
             if (e !== null) {
@@ -36,12 +37,10 @@ export default class MultipleServicePorts extends React.PureComponent {
                         }
                         this.setState({ usedSSPDescriptions: usedSSPDescriptions });
                     });
-                } else {
-                    this.clearErrors(index);
+                    // Reset VLAN to ensure a correct switch from MSP to SSP
+                    servicePorts[index].vlan = "";
                 }
                 servicePorts[index].tag = port.product.tag;
-            } else {
-                this.clearErrors(index);
             }
         } else {
             value = e.target ? e.target.value : null;
