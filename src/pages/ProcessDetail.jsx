@@ -232,7 +232,7 @@ class ProcessDetail extends React.PureComponent {
                 return Promise.resolve();
             })
             .catch(error => {
-                // Todo: handle 500 and 510 better. On production it will show Error Dialog on dev a stack trace + Error Dialog
+                // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
             });
         return result;
     };

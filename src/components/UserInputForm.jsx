@@ -39,6 +39,7 @@ import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
 import { portSubscriptions, nodeSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -132,7 +133,7 @@ export default class UserInputForm extends React.Component {
         stop(e);
         const { stepUserInput, processing } = this.state;
         if (this.validateAllUserInput(stepUserInput) && !processing) {
-            this.setState({ processing: true });
+            this.setState({ processing: true, errors: {} });
 
             const processInput = stepUserInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
@@ -151,6 +152,9 @@ export default class UserInputForm extends React.Component {
                         this.updateValidationErrors(json);
                         this.setState({ processing: false });
                     });
+                } else if (err.response && err.response.status === 500) {
+                    this.setState({ processing: false });
+                    setFlash(`Unknown server error with status code: ${err.response.status}`);
                 } else {
                     throw err;
                 }
