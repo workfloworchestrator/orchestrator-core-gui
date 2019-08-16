@@ -20,7 +20,7 @@ export default class VirtualLAN extends React.PureComponent {
         if (subscriptionId) {
             usedVlans(subscriptionId)
                 .then(result => {
-                    this.setState({ usedVlans: [], missingInIms: false });
+                    this.setState({ usedVlans: result, missingInIms: false });
                 })
                 .catch(() => {
                     this.setState({ missingInIms: true });

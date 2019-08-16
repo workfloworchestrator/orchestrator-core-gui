@@ -225,15 +225,15 @@ class ProcessDetail extends React.PureComponent {
     validSubmit = processInput => {
         const { process } = this.state;
         let result = resumeProcess(process.id, processInput);
-        result.then(e => {
-            this.context.redirect(`/processes`);
-            setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
-            debugger;
-            return Promise.resolve()
-        }).catch(error => {
-            //unexpected: this catches the Bad request a second time
-            console.log(error)
-        });
+        result
+            .then(e => {
+                this.context.redirect(`/processes`);
+                setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
+                return Promise.resolve();
+            })
+            .catch(error => {
+                // Todo: handle 500 and 510 better. On production it will show Error Dialog on dev a stack trace + Error Dialog
+            });
         return result;
     };
 

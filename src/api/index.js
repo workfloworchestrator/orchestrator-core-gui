@@ -408,11 +408,11 @@ export function process(processId) {
 }
 
 export function startProcess(workflow_name, process) {
-    return postPutJson("processes/" + workflow_name, process, "post", false, false);
+    return postPutJson("processes/" + workflow_name, process, "post", true, false);
 }
 
 export function resumeProcess(processId, userInput) {
-    return postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
+    return postPutJson(`processes/${processId}/resume`, userInput, "put", true, false);
 }
 
 export function retryProcess(processId) {

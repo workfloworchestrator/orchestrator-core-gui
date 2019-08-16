@@ -80,8 +80,7 @@ export default class NewProcess extends React.Component {
                     setFlash(I18n.t("process.flash.create", { name: name }));
                 })
                 .catch(error => {
-                    //unexpected: this catches the Bad request a second time
-                    console.log(error);
+                    // Todo: handle 500 and 510 better. On production it will show Error Dialog on dev a stack trace + Error Dialog
                 });
             return result;
         }
