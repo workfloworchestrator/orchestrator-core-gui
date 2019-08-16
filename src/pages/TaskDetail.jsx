@@ -6,7 +6,6 @@ import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import UserInputForm from "../components/UserInputForm";
 import TaskStateDetails from "../components/TaskStateDetails";
-import { lookupValueFromNestedState } from "../utils/NestedState";
 import { abortTask, deleteTask, retryTask } from "../api/index";
 
 import "./TaskDetail.scss";
@@ -54,13 +53,7 @@ export default class TaskDetail extends React.PureComponent {
                 const requiredTeamMembership = configuration[taskInstance.assignee];
                 const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["task"];
                 const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "task";
-                //Pre-fill the value of the user_input if the current_state already contains the value
-                const state = taskInstance.current_state || {};
-                if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                    stepUserInput.forEach(
-                        userInput => (userInput.value = lookupValueFromNestedState(userInput.name, state))
-                    );
-                }
+
                 this.setState({
                     task: taskInstance,
                     loaded: true,
@@ -144,9 +137,9 @@ export default class TaskDetail extends React.PureComponent {
         );
     };
 
-    validSubmit = stepUserInput => {
+    validSubmit = processInput => {
         const { task } = this.state;
-        let result = resumeTask(task.tid, stepUserInput);
+        let result = resumeTask(task.tid, processInput);
         result.then(() => {
             this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.update", { name: task.workflow_name }));
@@ -174,11 +167,7 @@ export default class TaskDetail extends React.PureComponent {
                         <h3>{I18n.t("task.workflow", { name: task.workflow })}</h3>
                         <h3>{I18n.t("task.userInput", { name: step.name })}</h3>
                     </section>
-                    <UserInputForm
-                        stepUserInput={stepUserInput}
-                        currentState={task.current_state}
-                        validSubmit={this.validSubmit}
-                    />
+                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }

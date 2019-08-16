@@ -412,11 +412,6 @@ export function startProcess(workflow_name, process) {
 }
 
 export function resumeProcess(processId, userInput) {
-    userInput = userInput.reduce((acc, input) => {
-        acc[input.name] = input.value;
-        return acc;
-    }, {});
-
     return postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
 }
 
@@ -445,11 +440,6 @@ export function startTask(workflow_name, task) {
 }
 
 export function resumeTask(taskId, userInput) {
-    userInput = userInput.reduce((acc, input) => {
-        acc[input.name] = input.value;
-        return acc;
-    }, {});
-
     return postPutJson(`tasks/${taskId}/resume`, userInput, "put", false, false);
 }
 

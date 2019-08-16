@@ -56,7 +56,7 @@ const nodeSteps = [
     {
         name: "ims_node_id",
         type: "nodes_for_location_code_and_status",
-        location_code_key: "location_code"
+        location_code: "MT001A"
     }
 ];
 
@@ -71,16 +71,16 @@ const contactPersonSteps = [
 
 const corelinkSteps = [
     {
-        interface_type_key: "corelink_service_speed",
+        service_speed: "1000BASE-LX",
         name: "ims_port_id_1",
         type: "corelink",
-        location_code_key: "location_code"
+        location_code: "MT001A"
     },
     {
-        interface_type_key: "corelink_service_speed",
+        service_speed: "1000BASE-LX",
         name: "ims_port_id_2",
         type: "corelink",
-        location_code_key: "location_code"
+        location_code: "MT001A"
     }
 ];
 
@@ -88,14 +88,14 @@ const addCorelinkSteps = [
     {
         name: "ims_port_id_1",
         type: "corelink_add_link",
-        node_key: "node_1",
-        interface_type_key: "corelink_service_speed"
+        node: "d38d8b25-d9f5-4a25-b1b0-d29057c47420",
+        service_speed: "1000BASE-LX"
     },
     {
         name: "ims_port_id_2",
         type: "corelink_add_link",
-        node_key: "node_2",
-        interface_type_key: "corelink_service_speed"
+        node: "5d2123e6-197d-4bb6-93c6-446d474d98fd",
+        service_speed: "1000BASE-LX"
     }
 ];
 
@@ -524,45 +524,30 @@ storiesOf("UserInputForm", module)
         return <UserInputContainer formName="Organisation and contacts" stepUserInput={contactPersonSteps} />;
     })
     .add("Corelink", () => {
-        const currentState = { corelink_service_speed: "10000" };
         fetchMock.restore();
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions?filter=tags,Node&filter=statuses,active-provisioning", []);
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
-        return (
-            <UserInputContainer formName="Corelink form" stepUserInput={corelinkSteps} currentState={currentState} />
-        );
+        return <UserInputContainer formName="Corelink form" stepUserInput={corelinkSteps} />;
     })
     .add("Corelink add link", () => {
-        const currentState = {
-            node_1: "d38d8b25-d9f5-4a25-b1b0-d29057c47420",
-            node_2: "5d2123e6-197d-4bb6-93c6-446d474d98fd",
-            corelink_service_speed: "1000BASE-LX"
-        };
         fetchMock.restore();
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions?filter=tags,Node&filter=statuses,active-provisioning", []);
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
-        return (
-            <UserInputContainer
-                formName="Corelink add link form"
-                stepUserInput={addCorelinkSteps}
-                currentState={currentState}
-            />
-        );
+        return <UserInputContainer formName="Corelink add link form" stepUserInput={addCorelinkSteps} />;
     })
     .add("Nodes", () => {
-        const currentState = { location_code: "MT001A" };
         fetchMock.restore();
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL", []);
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
         fetchMock.get("/api/ims/nodes/MT001A", imsNodes);
-        return <UserInputContainer formName="Node form" stepUserInput={nodeSteps} currentState={currentState} />;
+        return <UserInputContainer formName="Node form" stepUserInput={nodeSteps} />;
     })
     .add("SN7 Portselect all organisations", () => {
         fetchMock.restore();
@@ -635,7 +620,6 @@ storiesOf("UserInputForm", module)
                         ports_key: "service_ports"
                     }
                 ]}
-                currentState={{ current_bandwidth: number("bandwidth", 1000) }}
             />
         );
     })

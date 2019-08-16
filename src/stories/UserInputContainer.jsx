@@ -5,17 +5,13 @@ import UserInputForm from "../components/UserInputForm";
 
 export default class UserInputContainer extends React.Component {
     render() {
-        const { stepUserInput, formName, currentState } = this.props;
+        const { stepUserInput, formName } = this.props;
         return (
             <div className="mod-new-process">
                 <section className="card">
                     <section className="form-step divider">
                         <h1>{formName}</h1>
-                        <UserInputForm
-                            stepUserInput={stepUserInput}
-                            validSubmit={action("submit")}
-                            currentState={currentState}
-                        />
+                        <UserInputForm stepUserInput={stepUserInput} validSubmit={action("submit")} />
                     </section>
                 </section>
             </div>
@@ -25,10 +21,7 @@ export default class UserInputContainer extends React.Component {
 
 UserInputContainer.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
-    formName: PropTypes.string.isRequired,
-    currentState: PropTypes.object
+    formName: PropTypes.string.isRequired
 };
 
-UserInputContainer.defaultProps = {
-    currentState: {}
-};
+UserInputContainer.defaultProps = {};
