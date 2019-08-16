@@ -35,14 +35,9 @@ export default class TerminateSubscription extends React.Component {
         this.context.redirect("/subscription/" + this.props.subscriptionId);
     };
 
-    submit = stepUserInput => {
+    submit = processInput => {
         const { product } = this.state;
         const terminate_workflow = product.workflows.find(wf => wf.target === TARGET_TERMINATE);
-
-        const processInput = stepUserInput.reduce((acc, input) => {
-            acc[input.name] = input.value;
-            return acc;
-        }, {});
 
         return startProcess(terminate_workflow.name, processInput).then(res => {
             this.context.redirect(`/processes`);
