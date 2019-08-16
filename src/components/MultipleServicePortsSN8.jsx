@@ -243,9 +243,6 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
             disabledPorts
         } = this.props;
 
-        console.log("SP's");
-        console.log(servicePorts);
-
         const { bandwidthErrors, usedUntaggedServicePorts } = this.state;
         const showAdd = maximum > 2 && servicePorts.length < maximum && !disabled;
         return (
