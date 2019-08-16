@@ -2,11 +2,10 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import { stop } from "../utils/Utils";
-import ContactPersons from "../components/ContactPersons";
 import { startProcess, subscriptionsDetail, productById } from "../api/index";
 import { setFlash } from "../utils/Flash";
-import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
 import ApplicationContext from "../utils/ApplicationContext";
+import UserInputForm from "../components/UserInputForm";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
@@ -15,8 +14,6 @@ export default class TerminateSubscription extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactPersons: [{ email: "", name: "", phone: "" }],
-            processing: false,
             organisationId: null,
             product: { tag: "", workflows: [] }
         };
@@ -38,34 +35,19 @@ export default class TerminateSubscription extends React.Component {
         this.context.redirect("/subscription/" + this.props.subscriptionId);
     };
 
-    renderButtons = () => {
-        const invalid = false;
-        return (
-            <section className="buttons">
-                <button className="button" onClick={this.cancel}>
-                    {I18n.t("terminate_subscription.cancel")}
-                </button>
-                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
-                    {I18n.t("terminate_subscription.submit")}
-                </button>
-            </section>
-        );
-    };
-
-    submit = () => {
+    submit = stepUserInput => {
         const { product } = this.state;
         const terminate_workflow = product.workflows.find(wf => wf.target === TARGET_TERMINATE);
 
-        if (terminate_workflow) {
-            this.setState({ processing: true });
-            startProcess(terminate_workflow.name, {
-                subscription_id: this.props.subscriptionId,
-                contact_persons: this.state.contactPersons
-            }).then(res => {
-                this.context.redirect(`/processes`);
-                setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId }));
-            });
-        }
+        const processInput = stepUserInput.reduce((acc, input) => {
+            acc[input.name] = input.value;
+            return acc;
+        }, {});
+
+        return startProcess(terminate_workflow.name, processInput).then(res => {
+            this.context.redirect(`/processes`);
+            setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId }));
+        });
     };
 
     changeUserInput = value => {
@@ -73,8 +55,7 @@ export default class TerminateSubscription extends React.Component {
     };
 
     render() {
-        //TODO use the form_input from workflow to render UserForm
-        const { contactPersons, organisationId, product } = this.state;
+        const { organisationId, product } = this.state;
         const { subscriptionId } = this.props;
 
         return (
@@ -105,24 +86,17 @@ export default class TerminateSubscription extends React.Component {
                         </section>
                     )}
 
-                    <section className="form-step">
-                        <ReadOnlySubscriptionView subscriptionId={subscriptionId} />
-                    </section>
-
-                    {product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink" && (
-                        <section className="form-step">
-                            <section className="form-divider">
-                                {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
-                                {<em>{I18n.t("process.contact_persons")}</em>}
-                                <ContactPersons
-                                    persons={contactPersons}
-                                    onChange={this.changeUserInput}
-                                    organisationId={organisationId}
-                                />
-                            </section>
-                        </section>
-                    )}
-                    {this.renderButtons()}
+                    <UserInputForm
+                        stepUserInput={
+                            product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink"
+                                ? [
+                                      { name: "subscription_id", type: "subscription_id", value: subscriptionId },
+                                      { name: "contact_persons", type: "contact_persons", organisation: organisationId }
+                                  ]
+                                : [{ name: "subscription_id", type: "subscription_id", value: subscriptionId }]
+                        }
+                        validSubmit={this.submit}
+                    />
                 </section>
             </div>
         );
