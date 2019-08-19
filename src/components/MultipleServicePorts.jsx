@@ -38,7 +38,7 @@ export default class MultipleServicePorts extends React.PureComponent {
                         this.setState({ usedSSPDescriptions: usedSSPDescriptions });
                     });
                     // Reset VLAN to ensure a correct switch from MSP to SSP
-                    servicePorts[index].vlan = "";
+                    servicePorts[index].vlan = "0";
                 }
                 servicePorts[index].tag = port.product.tag;
             }

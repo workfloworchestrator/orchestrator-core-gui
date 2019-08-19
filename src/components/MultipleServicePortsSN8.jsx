@@ -46,7 +46,7 @@ export default class MultipleServicePortsSN8 extends React.PureComponent {
                 servicePorts[index].port_mode = port.port_mode;
                 servicePorts[index].tag = port.product.tag;
                 // Reset VLAN to ensure a correct switch from TAGGED to UNTAGGED
-                servicePorts[index].vlan = "";
+                servicePorts[index].vlan = "0";
             }
         } else {
             value = e.target ? e.target.value : 0;
