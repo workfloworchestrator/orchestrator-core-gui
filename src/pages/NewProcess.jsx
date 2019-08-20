@@ -399,8 +399,7 @@ export default class NewProcess extends React.Component {
         } = this.state;
         const { preselectedInput } = this.props;
         const { organisations, locationCodes, products } = this.context;
-        const showProductValidation =
-            (isEmpty(productValidation.mapping) || !productValidation.valid) && productValidation.product;
+        const showProductValidation = !productValidation.valid && productValidation.product;
         const showModify = isEmpty(stepUserInput);
         return (
             <div className="mod-new-process">
