@@ -374,7 +374,7 @@ export default class NewProcess extends React.Component {
             <section className="form-step divider">
                 <h3>{I18n.t("process.terminate_subscription")}</h3>
                 <section className="form-divider">
-                    <label htmlFor="subscription">{I18n.t("process.subscription")}</label>
+                    <label htmlFor="terminate-subscription-search-select">{I18n.t("process.subscription")}</label>
                     <SubscriptionSearchSelect
                         id="terminate-subscription-search-select"
                         subscriptions={subscriptions.filter(sub => sub.status !== "terminated")}

@@ -35,10 +35,10 @@ export default function ConfirmationDialog({
                 </section>
             )}
             <section className="dialog-buttons">
-                <button className="button" onClick={cancel}>
+                <button id="dialog-cancel" className="button" onClick={cancel}>
                     {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
                 </button>
-                <button className="button blue" onClick={confirm}>
+                <button id="dialog-confirm" className="button blue" onClick={confirm}>
                     {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
                 </button>
             </section>

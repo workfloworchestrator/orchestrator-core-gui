@@ -16,7 +16,7 @@ import {
 } from "../api";
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
-import { isEmpty, stop } from "../utils/Utils";
+import { applyIdNamingConvention, isEmpty, stop } from "../utils/Utils";
 import { absent, ims_circuit_id, nms_service_id, subscriptionInstanceValues } from "../validations/Subscriptions";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -239,8 +239,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             <thead />
             <tbody>
                 <tr>
-                    <td>{I18n.t("subscriptions.id")}</td>
-                    <td>
+                    <td id="subscriptions-id-k">{I18n.t("subscriptions.id")}</td>
+                    <td id="subscriptions-id-v">
                         <a
                             href={`/subscription/${subscription.subscription_id}`}
                             target="_blank"
@@ -251,38 +251,38 @@ export default class SubscriptionDetail extends React.PureComponent {
                     </td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.name")}</td>
-                    <td>{subscription.name}</td>
+                    <td id="subscriptions-name-k">{I18n.t("subscriptions.name")}</td>
+                    <td id="subscriptions-name-v">{subscription.name}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.description")}</td>
-                    <td>{subscription.description}</td>
+                    <td id="subscriptions-description-k">{I18n.t("subscriptions.description")}</td>
+                    <td id="subscriptions-description-v">{subscription.description}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.start_date_epoch")}</td>
-                    <td>{renderDate(subscription.start_date)}</td>
+                    <td id="subscriptions-startdate-k">{I18n.t("subscriptions.start_date_epoch")}</td>
+                    <td id="subscriptions-startdate-v">{renderDate(subscription.start_date)}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.end_date_epoch")}</td>
-                    <td>{renderDate(subscription.end_date)}</td>
+                    <td id="subscriptions-enddate-k">{I18n.t("subscriptions.end_date_epoch")}</td>
+                    <td id="subscriptions-enddate-v">{renderDate(subscription.end_date)}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.status")}</td>
-                    <td>{subscription.status}</td>
+                    <td id="subscriptions-status-k">{I18n.t("subscriptions.status")}</td>
+                    <td id="subscriptions-status-v">{subscription.status}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.insync")}</td>
-                    <td>
+                    <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
+                    <td id="subscriptions-insync-v">
                         <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
                     </td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.customer_name")}</td>
-                    <td>{subscription.customer_name || ""}</td>
+                    <td id="subscriptions-customer-name-k">{I18n.t("subscriptions.customer_name")}</td>
+                    <td id="subscriptions-customer-name-v">{subscription.customer_name || ""}</td>
                 </tr>
                 <tr>
-                    <td>{I18n.t("subscriptions.customer_id")}</td>
-                    <td>{subscription.customer_id}</td>
+                    <td id="subscriptions-customer-id-k">{I18n.t("subscriptions.customer_id")}</td>
+                    <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
                 </tr>
             </tbody>
         </table>
@@ -401,14 +401,18 @@ export default class SubscriptionDetail extends React.PureComponent {
                                   "status"
                               ].map(attr => (
                                   <tr key={attr}>
-                                      <td>{I18n.t(`subscription.ims_port.${attr}`)}</td>
-                                      <td>{endpoint[attr]}</td>
+                                      <td id={`${applyIdNamingConvention(attr)}-k`}>
+                                          {I18n.t(`subscription.ims_port.${attr}`)}
+                                      </td>
+                                      <td id={`${applyIdNamingConvention(attr)}-v`}>{endpoint[attr]}</td>
                                   </tr>
                               ))
                             : ["name", "product", "speed", "status"].map(attr => (
                                   <tr key={attr}>
-                                      <td>{I18n.t(`subscription.ims_service.${attr}`)}</td>
-                                      <td>{endpoint[attr]}</td>
+                                      <td id={`${applyIdNamingConvention(attr)}-k`}>
+                                          {I18n.t(`subscription.ims_service.${attr}`)}
+                                      </td>
+                                      <td id={`${applyIdNamingConvention(attr)}-v`}>{endpoint[attr]}</td>
                                   </tr>
                               ))}
                     </tbody>
@@ -486,20 +490,20 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <thead />
                 <tbody>
                     <tr>
-                        <td>{I18n.t("ipam.assigned_address_id")}</td>
-                        <td>{address.id}</td>
+                        <td id="block-ipam-address-id-k">{I18n.t("ipam.assigned_address_id")}</td>
+                        <td id="block-ipam-address-id-v">{address.id}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.state")}</td>
-                        <td>{ipamStates[address.state]}</td>
+                        <td id="block-ipam-state-k">{I18n.t("ipam.state")}</td>
+                        <td id="block-ipam-state-v">{ipamStates[address.state]}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.ipaddress")}</td>
-                        <td>{address.address}</td>
+                        <td id="block-ipam-address-k">{I18n.t("ipam.ipaddress")}</td>
+                        <td id="block-ipam-address-v">{address.address}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.fqdn")}</td>
-                        <td>{address.fqdn}</td>
+                        <td id="block-ipam-fqdn-k">{I18n.t("ipam.fqdn")}</td>
+                        <td id="block-ipam-fqdn-v">{address.fqdn}</td>
                     </tr>
                 </tbody>
             </table>
@@ -515,39 +519,39 @@ export default class SubscriptionDetail extends React.PureComponent {
                 <thead />
                 <tbody>
                     <tr>
-                        <td>{I18n.t("ipam.description")}</td>
-                        <td>{prefix.description}</td>
+                        <td id="ipam-description-k">{I18n.t("ipam.description")}</td>
+                        <td id="ipam-description-v">{prefix.description}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.prefix")}</td>
-                        <td>{prefix.prefix}</td>
+                        <td id="ipam-prefix-k">{I18n.t("ipam.prefix")}</td>
+                        <td id="ipam-prefix-v">{prefix.prefix}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.afi")}</td>
-                        <td>{prefix.afi}</td>
+                        <td id="ipam-afi-k">{I18n.t("ipam.afi")}</td>
+                        <td id="ipam-afi-v">{prefix.afi}</td>
                     </tr>
                     <tr>
-                        <td>{I18n.t("ipam.asn")}</td>
-                        <td>{prefix.asn}</td>
+                        <td id="ipam-asn-k">{I18n.t("ipam.asn")}</td>
+                        <td id="ipam-asn-v">{prefix.asn}</td>
                     </tr>
                     {prefix.addresses &&
                         prefix.addresses.map((address, idx) => (
                             <React.Fragment>
                                 <tr>
-                                    <td>{I18n.t("ipam.assigned_address_id")}</td>
-                                    <td>{address.id}</td>
+                                    <td id={`${idx}-assigned_address_id-k`}>{I18n.t("ipam.assigned_address_id")}</td>
+                                    <td id={`${idx}-assigned_address_id-v`}>{address.id}</td>
                                 </tr>
                                 <tr>
-                                    <td>{I18n.t("ipam.state")}</td>
-                                    <td>{ipamStates[address.state]}</td>
+                                    <td id={`${idx}-state-k`}>{I18n.t("ipam.state")}</td>
+                                    <td id={`${idx}-state-v`}>{ipamStates[address.state]}</td>
                                 </tr>
                                 <tr>
-                                    <td>{I18n.t("ipam.ipaddress")}</td>
-                                    <td>{address.address}</td>
+                                    <td id={`${idx}-ipaddress-k`}>{I18n.t("ipam.ipaddress")}</td>
+                                    <td id={`${idx}-ipaddress-v`}>{address.address}</td>
                                 </tr>
                                 <tr>
-                                    <td>{I18n.t("ipam.fqdn")}</td>
-                                    <td>{address.fqdn}</td>
+                                    <td id={`${idx}-fqdn-k`}>{I18n.t("ipam.fqdn")}</td>
+                                    <td id={`${idx}-fqdn-v`}>{address.fqdn}</td>
                                 </tr>
                             </React.Fragment>
                         ))}
@@ -568,8 +572,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <thead />
                         <tbody>
                             <tr>
-                                <td>{I18n.t("subscription.product.name")}</td>
-                                <td>
+                                <td id="sub-prod-name-k">{I18n.t("subscription.product.name")}</td>
+                                <td id="sub-prod-name-v">
                                     <a
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -580,28 +584,28 @@ export default class SubscriptionDetail extends React.PureComponent {
                                 </td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.description")}</td>
-                                <td>{product.description}</td>
+                                <td id="description-k">{I18n.t("subscription.product.description")}</td>
+                                <td id="description-v">{product.description}</td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.product_type")}</td>
-                                <td>{product.product_type}</td>
+                                <td id="product-type-k">{I18n.t("subscription.product.product_type")}</td>
+                                <td id="product-type-v">{product.product_type}</td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.tag")}</td>
-                                <td>{product.tag || ""}</td>
+                                <td id="tag-k">{I18n.t("subscription.product.tag")}</td>
+                                <td id="tag-v">{product.tag || ""}</td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.status")}</td>
-                                <td>{product.status || ""}</td>
+                                <td id="status-k">{I18n.t("subscription.product.status")}</td>
+                                <td id="status-v">{product.status || ""}</td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.created")}</td>
-                                <td>{renderDateTime(product.created_at)}</td>
+                                <td id="created-k">{I18n.t("subscription.product.created")}</td>
+                                <td id="created-v">{renderDateTime(product.created_at)}</td>
                             </tr>
                             <tr>
-                                <td>{I18n.t("subscription.product.end_date")}</td>
-                                <td>{renderDateTime(product.end_date)}</td>
+                                <td id="end-date-k">{I18n.t("subscription.product.end_date")}</td>
+                                <td id="end-date-v">{renderDateTime(product.end_date)}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -628,15 +632,22 @@ export default class SubscriptionDetail extends React.PureComponent {
                         <tbody>
                             {workflows.terminate.map((wf, index) => (
                                 <tr key={index}>
-                                    <td>
+                                    <td id={`${index}-k`}>
                                         {!wf.reason && (
-                                            <a href="/modify" key={wf.name} onClick={this.terminate(subscription)}>
+                                            <a
+                                                id="terminate-link"
+                                                href="/modify"
+                                                key={wf.name}
+                                                onClick={this.terminate(subscription)}
+                                            >
                                                 {I18n.t(`subscription.terminate`)}
                                             </a>
                                         )}
                                         {wf.reason && <span>{I18n.t(`subscription.terminate`)}</span>}
                                     </td>
-                                    <td>{wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}</td>
+                                    <td id={`${index}-v`}>
+                                        {wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}
+                                    </td>
                                     {!loadedAllRelatedObjects && (
                                         <td>
                                             <section className="terminate-link-waiting">
@@ -659,6 +670,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     <td>
                                         {!wf.reason && (
                                             <a
+                                                id="modify-link"
                                                 href="/modify"
                                                 key={wf.name}
                                                 onClick={this.modify(subscription, wf.name)}
@@ -756,8 +768,8 @@ export default class SubscriptionDetail extends React.PureComponent {
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((fi, index) => (
                                 <tr key={index}>
-                                    <td>{fi.name}</td>
-                                    <td>{fi.value}</td>
+                                    <td id={`${applyIdNamingConvention(fi.name)}-k`}>{fi.name}</td>
+                                    <td id={`${applyIdNamingConvention(fi.name)}-v`}>{fi.value}</td>
                                 </tr>
                             ))}
                     </tbody>
