@@ -216,7 +216,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                 change: change
             }),
             () =>
-                startProcess(workflow_name, { subscription_id: subscription.subscription_id }).then(() => {
+                startProcess(workflow_name, [{ subscription_id: subscription.subscription_id }]).then(() => {
                     this.context.redirect("/processes");
                 })
         );

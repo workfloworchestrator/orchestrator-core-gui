@@ -4,7 +4,7 @@ import I18n from "i18n-js";
 import { resumeTask, task } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import TaskStateDetails from "../components/TaskStateDetails";
 import { abortTask, deleteTask, retryTask } from "../api/index";
 
@@ -167,7 +167,7 @@ export default class TaskDetail extends React.PureComponent {
                         <h3>{I18n.t("task.workflow", { name: task.workflow })}</h3>
                         <h3>{I18n.t("task.userInput", { name: step.name })}</h3>
                     </section>
-                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }

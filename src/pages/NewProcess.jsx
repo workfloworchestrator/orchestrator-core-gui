@@ -1,11 +1,11 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import { initialWorkflowInput, startProcess, subscriptionWorkflows, validation, allSubscriptions } from "../api";
+import { startProcess, subscriptionWorkflows, validation, allSubscriptions, catchErrorStatus } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import ProductSelect from "../components/ProductSelect";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProductValidation from "../components/ProductValidation";
 import "./NewProcess.scss";
 import { TARGET_CREATE } from "../validations/Products";
@@ -21,6 +21,7 @@ export default class NewProcess extends React.Component {
         this.state = {
             product: {},
             stepUserInput: [],
+            hasNext: false,
             productValidation: { valid: true, mapping: {} },
             subscriptions: [],
             modifyWorkflows: [],
@@ -72,7 +73,10 @@ export default class NewProcess extends React.Component {
 
     validSubmit = products => processInput => {
         if (!isEmpty(this.state.product)) {
-            let result = startProcess(this.state.product.workflow.name, processInput);
+            let result = startProcess(this.state.product.workflow.name, [
+                { product: this.state.product.productId },
+                ...processInput
+            ]);
             result
                 .then(() => {
                     this.context.redirect(`/processes`);
@@ -110,40 +114,49 @@ export default class NewProcess extends React.Component {
                 () => {
                     this.setState({ product: product });
                     if (product) {
+                        let promise = startProcess(product.workflow.name, [{ product: product.productId }]);
                         Promise.all([
-                            validation(product.value),
-                            initialWorkflowInput(product.workflow.name, product.productId)
-                        ]).then(result => {
-                            const [productValidation, stepUserInput] = result;
+                            validation(product.value).then(productValidation => {
+                                this.setState({
+                                    productValidation: productValidation
+                                });
+                            }),
+                            catchErrorStatus(promise, 510, json => {
+                                let stepUserInput = json.form;
+                                let hasNext = json.hasNext;
 
-                            const { preselectedInput } = this.props;
+                                const { preselectedInput } = this.props;
 
-                            const productInput = stepUserInput.find(x => x.name === "product");
-                            if (productInput) {
-                                productInput.type = "hidden";
-                                productInput.value = product.value;
-                            }
-
-                            if (preselectedInput.organisation) {
-                                const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-                                if (organisatieInput) {
-                                    organisatieInput.value = preselectedInput.organisation;
-                                    organisatieInput.readonly = true;
+                                const productInput = stepUserInput.find(x => x.name === "product");
+                                if (productInput) {
+                                    productInput.type = "hidden";
+                                    productInput.value = product.value;
                                 }
-                            }
 
-                            if (preselectedInput.prefix) {
-                                const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
-                                if (prefixInput) {
-                                    prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                                    prefixInput.readonly = true;
-                                    prefixInput.prefix_min = preselectedInput.prefix_min;
+                                if (preselectedInput.organisation) {
+                                    const organisatieInput = stepUserInput.find(x => x.name === "organisation");
+                                    if (organisatieInput) {
+                                        organisatieInput.value = preselectedInput.organisation;
+                                        organisatieInput.readonly = true;
+                                    }
                                 }
-                            }
 
+                                if (preselectedInput.prefix) {
+                                    const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
+                                    if (prefixInput) {
+                                        prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+                                        prefixInput.readonly = true;
+                                        prefixInput.prefix_min = preselectedInput.prefix_min;
+                                    }
+                                }
+
+                                this.setState({
+                                    stepUserInput: stepUserInput,
+                                    hasNext: hasNext
+                                });
+                            })
+                        ]).then(() => {
                             this.setState({
-                                productValidation: productValidation,
-                                stepUserInput: stepUserInput,
                                 started: true
                             });
                         });
@@ -174,7 +187,7 @@ export default class NewProcess extends React.Component {
                 change: change
             }),
             () =>
-                startProcess(modifyWorkflow, { subscription_id: modifySubscription }).then(() => {
+                startProcess(modifyWorkflow, [{ subscription_id: modifySubscription }]).then(() => {
                     this.context.redirect("/processes");
                 })
         );
@@ -252,7 +265,7 @@ export default class NewProcess extends React.Component {
                 )}
                 {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
                 {!isEmpty(stepUserInput) && (
-                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
                 )}
             </section>
         );

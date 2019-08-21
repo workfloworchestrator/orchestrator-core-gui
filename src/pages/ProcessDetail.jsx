@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { process, resumeProcess } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
@@ -229,7 +229,6 @@ class ProcessDetail extends React.PureComponent {
             .then(e => {
                 this.context.redirect(`/processes`);
                 setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
-                return Promise.resolve();
             })
             .catch(error => {
                 // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
@@ -271,7 +270,7 @@ class ProcessDetail extends React.PureComponent {
                             })}
                         </h3>
                     </section>
-                    <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }

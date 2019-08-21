@@ -31,6 +31,7 @@ import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
 import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
 import { formDate } from "../forms/Builder";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -676,6 +677,47 @@ storiesOf("UserInputForm", module)
             <UserInputContainer
                 formName="SN8 portselect, showing only ports for selected organisation"
                 stepUserInput={sn8PortSelectInputStepsSelectedOrganisation}
+            />
+        );
+    });
+
+storiesOf("UserInputFormWizard", module)
+    .addDecorator(withKnobs)
+    .add("Wizard", () => {
+        let tries = 0;
+        return (
+            <UserInputFormWizard
+                validSubmit={forms => {
+                    action("submit")(forms);
+                    if (forms.length == 1) {
+                        return Promise.reject({
+                            response: {
+                                status: 510,
+                                json: () =>
+                                    Promise.resolve({
+                                        form: [
+                                            {
+                                                name: "ims_port_id_2",
+                                                type: "generic_select",
+                                                choices: ["1", "2", "3"]
+                                            }
+                                        ],
+                                        hasNext: false
+                                    })
+                            }
+                        });
+                    } else {
+                        return Promise.resolve();
+                    }
+                }}
+                stepUserInput={[
+                    {
+                        name: "ims_port_id_1",
+                        type: "generic_select",
+                        choices: ["a", "b", "c"]
+                    }
+                ]}
+                hasNext={true}
             />
         );
     });

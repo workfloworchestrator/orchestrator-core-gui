@@ -1,9 +1,9 @@
 import React from "react";
 import I18n from "i18n-js";
-import { initialWorkflowInput, startTask, workflowsByTarget } from "../api";
+import { startTask, workflowsByTarget, catchErrorStatus } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import WorkflowSelect from "../components/WorkflowSelect";
 
@@ -15,7 +15,8 @@ export default class NewTask extends React.Component {
         this.state = {
             workflows: [],
             workflow: {},
-            stepUserInput: []
+            stepUserInput: [],
+            hasNext: false
         };
     }
 
@@ -34,16 +35,17 @@ export default class NewTask extends React.Component {
     };
 
     changeWorkflow = option => {
-        this.setState({ stepUserInput: [] }, () => {
-            this.setState({ workflow: option });
-            if (option) {
-                initialWorkflowInput(option.value).then(result => this.setState({ stepUserInput: result }));
-            }
-        });
+        this.setState({ workflow: option });
+        if (option) {
+            let promise = startTask(option.value, []);
+            catchErrorStatus(promise, 510, json => {
+                this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
+            });
+        }
     };
 
     render() {
-        const { workflows, workflow, stepUserInput } = this.state;
+        const { workflows, workflow, stepUserInput, hasNext } = this.state;
         return (
             <div className="mod-new-task">
                 <section className="card">
@@ -59,7 +61,11 @@ export default class NewTask extends React.Component {
                             />
                         </section>
                         {!isEmpty(workflow) && (
-                            <UserInputForm stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                            <UserInputFormWizard
+                                stepUserInput={stepUserInput}
+                                validSubmit={this.validSubmit}
+                                hasNext={hasNext}
+                            />
                         )}
                     </section>
                 </section>

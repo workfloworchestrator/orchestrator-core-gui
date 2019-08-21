@@ -5,7 +5,7 @@ import { stop } from "../utils/Utils";
 import { startProcess, subscriptionsDetail, productById } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
@@ -81,7 +81,7 @@ export default class TerminateSubscription extends React.Component {
                         </section>
                     )}
 
-                    <UserInputForm
+                    <UserInputFormWizard
                         stepUserInput={
                             product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink"
                                 ? [
