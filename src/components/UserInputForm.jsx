@@ -39,6 +39,7 @@ import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
 import { portSubscriptions, nodeSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -51,6 +52,7 @@ export default class UserInputForm extends React.Component {
             cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
             errors: {},
+            validationErrors: {},
             customErrors: {},
             uniqueErrors: {},
             uniqueSelectInputs: {},
@@ -111,11 +113,27 @@ export default class UserInputForm extends React.Component {
         this.setState({ confirmationDialogOpen: true });
     };
 
+    updateValidationErrors = validationErrors => {
+        const errors = { ...this.state.errors };
+        let newValidationErrors = {};
+
+        validationErrors.validation_errors.forEach(item => {
+            errors[item.loc[0]] = true;
+            if (item.loc[0] in newValidationErrors) {
+                // multiple errors for one input
+                newValidationErrors[item.loc[0]] = `${newValidationErrors[item.loc[0]]} or ${item.msg}`;
+            } else {
+                newValidationErrors[item.loc[0]] = item.msg;
+            }
+        });
+        this.setState({ errors: errors, validationErrors: newValidationErrors });
+    };
+
     submit = e => {
         stop(e);
         const { stepUserInput, processing } = this.state;
         if (this.validateAllUserInput(stepUserInput) && !processing) {
-            this.setState({ processing: true });
+            this.setState({ processing: true, errors: {} });
 
             const processInput = stepUserInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
@@ -131,12 +149,12 @@ export default class UserInputForm extends React.Component {
             promise.catch(err => {
                 if (err.response && err.response.status === 400) {
                     err.response.json().then(json => {
-                        const errors = { ...this.state.errors };
-                        json.validation_errors.forEach(item => {
-                            errors[item.loc[0]] = true;
-                        });
-                        this.setState({ errors: errors, processing: false });
+                        this.updateValidationErrors(json);
+                        this.setState({ processing: false });
                     });
+                } else if (err.response && err.response.status === 500) {
+                    this.setState({ processing: false });
+                    setFlash(`Unknown server error with status code: ${err.response.status}`);
                 } else {
                     throw err;
                 }
@@ -285,12 +303,15 @@ export default class UserInputForm extends React.Component {
         const error = this.state.errors[name];
         const customError = this.state.customErrors[name];
         const uniqueError = this.state.uniqueErrors[name];
+        const validationError = this.state.validationErrors[name];
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput)}
-                {(error || customError) && <em className="error">{I18n.t("process.format_error")}</em>}
+                {(error || customError || validationError) && (
+                    <em className="error">{validationError ? validationError : I18n.t("process.format_error")}</em>
+                )}
                 {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
         );
@@ -378,6 +399,7 @@ export default class UserInputForm extends React.Component {
             case "product":
                 return (
                     <ProductSelect
+                        id="select-product"
                         products={products}
                         onChange={this.changeSelectInput(name)}
                         product={value}

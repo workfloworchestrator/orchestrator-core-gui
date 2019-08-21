@@ -73,11 +73,15 @@ export default class NewProcess extends React.Component {
     validSubmit = products => processInput => {
         if (!isEmpty(this.state.product)) {
             let result = startProcess(this.state.product.workflow.name, processInput);
-            result.then(() => {
-                this.context.redirect(`/processes`);
-                const name = products.find(prod => prod.product_id === this.state.product.value).name;
-                setFlash(I18n.t("process.flash.create", { name: name }));
-            });
+            result
+                .then(() => {
+                    this.context.redirect(`/processes`);
+                    const name = products.find(prod => prod.product_id === this.state.product.value).name;
+                    setFlash(I18n.t("process.flash.create", { name: name }));
+                })
+                .catch(error => {
+                    // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+                });
             return result;
         }
     };

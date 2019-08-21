@@ -225,10 +225,15 @@ class ProcessDetail extends React.PureComponent {
     validSubmit = processInput => {
         const { process } = this.state;
         let result = resumeProcess(process.id, processInput);
-        result.then(e => {
-            this.context.redirect(`/processes`);
-            setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
-        });
+        result
+            .then(e => {
+                this.context.redirect(`/processes`);
+                setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
+                return Promise.resolve();
+            })
+            .catch(error => {
+                // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+            });
         return result;
     };
 
