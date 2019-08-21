@@ -1,11 +1,11 @@
 @import "../stylesheets/vars.scss";
 
-section.multiple-mps {
+section.service-port-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 
-    section.msp {
+    section.service-port {
         display: flex;
         div.wrapper {
             margin-left: 25px;
@@ -17,20 +17,24 @@ section.multiple-mps {
                 div.virtual-vlan {
                     width: 100%;
                 }
-                i.fa-minus {
-                    padding-left: 5px;
-                    color: $red;
-                    font-size: 30px;
-                    cursor: pointer;
-                    &.disabled {
-                        cursor: not-allowed;
-                        color: $light-grey;
-                    }
-                }
             }
         }
+        i.fa-minus {
+            padding-left: 5px;
+            color: $red;
+            font-size: 30px;
+            cursor: pointer;
+            &.disabled {
+                cursor: not-allowed;
+                color: $light-grey;
+            }
+        }
+
+        &:first-of-type i.fa-minus {
+            margin-top: 20px;
+        }
     }
-    div.msp-select {
+    div.service-port-select {
         margin-top: 5px;
         div.Select-control {
             max-height: 30px;
@@ -39,12 +43,22 @@ section.multiple-mps {
             }
         }
     }
-    div.add-msp {
+    div.add-service-port {
         display: flex;
         i.fa-plus {
             margin-left: auto;
             padding: 10px 2px 0 0;
             color: $green;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+
+    div.refresh-service-ports {
+        i.fa-refresh {
+            margin-left: auto;
+            margin-top: 0px;
+            color: $blue;
             font-size: 30px;
             cursor: pointer;
         }
