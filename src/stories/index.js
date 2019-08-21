@@ -338,6 +338,7 @@ storiesOf("LocationCodeSelect", module)
     .addDecorator(StateDecorator(store))
     .add("Default", () => (
         <LocationCodeSelect
+            id="location-code-select"
             locationCode={store.state.locationCode}
             locationCodes={array("Values", LOCATION_CODES)}
             onChange={e => {

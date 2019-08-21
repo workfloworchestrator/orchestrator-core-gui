@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import { isEmpty } from "../utils/Utils";
 
-export default function LocationCodeSelect({ onChange, locationCode, locationCodes, disabled }) {
+export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled }) {
     if (!isEmpty(locationCode) && !locationCodes.includes(locationCode)) {
         const toUpperCase = locationCode.toUpperCase();
         locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase);
@@ -17,6 +17,7 @@ export default function LocationCodeSelect({ onChange, locationCode, locationCod
 
     return (
         <Select
+            id={id}
             className="select-locationcode"
             onChange={onChange}
             options={options}
@@ -28,6 +29,7 @@ export default function LocationCodeSelect({ onChange, locationCode, locationCod
 }
 
 LocationCodeSelect.propTypes = {
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     locationCodes: PropTypes.array.isRequired,
     locationCode: PropTypes.string,

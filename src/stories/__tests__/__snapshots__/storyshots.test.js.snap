@@ -671,6 +671,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
 >
   <div
     className="select-locationcode css-2b097c-container"
+    id="location-code-select"
     onKeyDown={[Function]}
   >
     <div
@@ -1557,7 +1558,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -1683,12 +1684,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       tabIndex="1"
                     >
                       <label
-                        htmlFor="contact-name-0"
+                        htmlFor="contact-persons-name-0"
                       >
                         Name
                       </label>
                       <input
-                        id="contact-name-0"
+                        id="contact-persons-name-0"
                         onChange={[Function]}
                         onKeyDown={[Function]}
                         placeholder="Search and add contact persons..."
@@ -1700,12 +1701,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       className="wrapper"
                     >
                       <label
-                        htmlFor="contact-email-0"
+                        htmlFor="contact-persons-email-0"
                       >
                         Email
                       </label>
                       <input
-                        id="contact-email-0"
+                        id="contact-persons-email-0"
                         onBlur={[Function]}
                         onChange={[Function]}
                         type="email"
@@ -1716,7 +1717,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       className="wrapper"
                     >
                       <label
-                        htmlFor="contact-phone-0"
+                        htmlFor="contact-persons-phone-0"
                       >
                         Phone number
                       </label>
@@ -1724,7 +1725,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="tel"
                       >
                         <input
-                          id="contact-phone-0"
+                          id="contact-persons-phone-0"
                           onChange={[Function]}
                           type="tel"
                           value=""
@@ -3042,7 +3043,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -3410,7 +3411,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4170,7 +4171,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4538,7 +4539,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4902,7 +4903,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5266,7 +5267,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5630,7 +5631,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div

@@ -20,6 +20,7 @@ import FixedInputProductValidation from "../components/FixedInputProductValidati
 import ProductWorkflowsValidation from "../components/ProductWorkflowsValidation";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
+import { applyIdNamingConvention } from "../utils/Utils";
 
 export default class Validations extends React.Component {
     constructor(props) {
@@ -183,7 +184,12 @@ export default class Validations extends React.Component {
     isValidValidation = validation => validation.valid && (isEmpty(validation.product) || !isEmpty(validation.mapping));
 
     renderTab = (tab, selectedTab) => (
-        <span key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
+        <span
+            id={`${applyIdNamingConvention(tab)}`}
+            key={tab}
+            className={tab === selectedTab ? "active" : ""}
+            onClick={this.switchTab(tab)}
+        >
             {I18n.t(`validations.tabs.${tab}`)}
         </span>
     );

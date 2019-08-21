@@ -1,7 +1,7 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import { isEmpty } from "../utils/Utils";
+import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
 import { getResourceTypeInfo, productById, subscriptionsDetail } from "../api/index";
 import { enrichSubscription } from "../utils/Lookups";
 import { port_subscription_id, subscriptionInstanceValues } from "../validations/Subscriptions";
@@ -66,16 +66,34 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
     renderSingleSubscription = (subscription, className = "", index = 0) => (
         <div key={`${subscription.subscription_id}_${index}`} className={`form-container ${className}`}>
             <section className="part">
-                <label className="title">{I18n.t("subscriptions.customer_name")}</label>
-                <input type="text" readOnly={true} value={subscription.customer_name} />
-                <label className="title">{I18n.t("subscriptions.name")}</label>
-                <input type="text" readOnly={true} value={subscription.name} />
+                <label htmlFor="input-subscription-customer-name" className="title">
+                    {I18n.t("subscriptions.customer_name")}
+                </label>
+                <input
+                    id="input-subscription-customer-name"
+                    type="text"
+                    readOnly={true}
+                    value={subscription.customer_name}
+                />
+                <label htmlFor="input-subscription-name" className="title">
+                    {I18n.t("subscriptions.name")}
+                </label>
+                <input id="input-subscription-name" type="text" readOnly={true} value={subscription.name} />
             </section>
             <section className="part">
-                <label className="title">{I18n.t("subscriptions.status")}</label>
-                <input type="text" readOnly={true} value={subscription.status} />
-                <label className="title">{I18n.t("subscriptions.description")}</label>
-                <input type="text" readOnly={true} value={subscription.description} />
+                <label htmlFor="input-subscription-status" className="title">
+                    {I18n.t("subscriptions.status")}
+                </label>
+                <input id="input-subscription-status" type="text" readOnly={true} value={subscription.status} />
+                <label htmlFor="input-subscription-description" className="title">
+                    {I18n.t("subscriptions.description")}
+                </label>
+                <input
+                    id="input-subscription-description"
+                    type="text"
+                    readOnly={true}
+                    value={subscription.description}
+                />
             </section>
         </div>
     );
@@ -89,11 +107,16 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
 
     renderSubscriptionInstanceValue = (val, index) => (
         <div key={index}>
-            <label className="title">
+            <label htmlFor={`${applyIdNamingConvention(val.resource_type.resource_type)}`} className="title">
                 {val.resource_type.resource_type}
                 {val.instance_label ? ` : ${val.instance_label}` : ""}
             </label>
-            <input type="text" readOnly={true} value={val.value} />
+            <input
+                id={`${applyIdNamingConvention(val.resource_type.resource_type)}`}
+                type="text"
+                readOnly={true}
+                value={val.value}
+            />
         </div>
     );
 
@@ -128,16 +151,24 @@ export default class ReadOnlySubscriptionView extends React.PureComponent {
                 <h3>{I18n.t("subscription.product_title")}</h3>
                 <div className="form-container">
                     <section className="part">
-                        <label className="title">{I18n.t("subscription.product.name")}</label>
-                        <input type="text" readOnly={true} value={product.name} />
-                        <label className="title">{I18n.t("subscription.product.description")}</label>
-                        <input type="text" readOnly={true} value={product.description} />
+                        <label htmlFor="input-product-name" className="title">
+                            {I18n.t("subscription.product.name")}
+                        </label>
+                        <input id="input-product-name" type="text" readOnly={true} value={product.name} />
+                        <label htmlFor="input-product-description" className="title">
+                            {I18n.t("subscription.product.description")}
+                        </label>
+                        <input id="input-product-description" type="text" readOnly={true} value={product.description} />
                     </section>
                     <section className="part">
-                        <label className="title">{I18n.t("subscription.product.product_type")}</label>
-                        <input type="text" readOnly={true} value={product.product_type} />
-                        <label className="title">{I18n.t("subscription.product.tag")}</label>
-                        <input type="text" readOnly={true} value={product.tag} />
+                        <label htmlFor="input-product-type" className="title">
+                            {I18n.t("subscription.product.product_type")}
+                        </label>
+                        <input id="input-product-type" type="text" readOnly={true} value={product.product_type} />
+                        <label htmlFor="input-product-tag" className="title">
+                            {I18n.t("subscription.product.tag")}
+                        </label>
+                        <input id="input-product-tag" type="text" readOnly={true} value={product.tag} />
                     </section>
                 </div>
             </section>

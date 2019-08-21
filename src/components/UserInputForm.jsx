@@ -39,6 +39,7 @@ import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
 import { portSubscriptions, nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
+import { applyIdNamingConvention } from "../utils/Utils";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -384,7 +385,7 @@ export default class UserInputForm extends React.Component {
                 return (
                     <input
                         type="text"
-                        id={name}
+                        id={`${applyIdNamingConvention(name)}`}
                         name={name}
                         value={value || ""}
                         readOnly={userInput.readonly}
@@ -410,7 +411,7 @@ export default class UserInputForm extends React.Component {
             case "organisation":
                 return (
                     <OrganisationSelect
-                        id="select-customer-organisation"
+                        id="organisation-select"
                         key={name}
                         organisations={organisations}
                         onChange={this.changeSelectInput(name)}
@@ -421,7 +422,7 @@ export default class UserInputForm extends React.Component {
             case "product":
                 return (
                     <ProductSelect
-                        id="select-product"
+                        id="product-select"
                         products={products}
                         onChange={this.changeSelectInput(name)}
                         product={value}
@@ -443,7 +444,7 @@ export default class UserInputForm extends React.Component {
                     userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 return (
                     <ContactPersons
-                        id="contact"
+                        id="contact-persons"
                         persons={isEmpty(value) ? [{ email: "", name: "", phone: "" }] : value}
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}
@@ -515,6 +516,7 @@ export default class UserInputForm extends React.Component {
             case "location_code":
                 return (
                     <LocationCodeSelect
+                        id="location-code-select"
                         onChange={this.changeSelectInput(name)}
                         locationCodes={locationCodes}
                         locationCode={value}
