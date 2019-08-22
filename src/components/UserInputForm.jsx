@@ -128,7 +128,7 @@ export default class UserInputForm extends React.Component {
                 newValidationErrors[item.loc[0]] = item.msg;
             }
         });
-        this.setState({ errors: errors, validationErrors: newValidationErrors });
+        this.setState({ errors: errors, validationErrors: newValidationErrors, processing: false });
     };
 
     submit = e => {
