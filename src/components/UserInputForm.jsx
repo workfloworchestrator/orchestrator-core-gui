@@ -150,11 +150,7 @@ export default class UserInputForm extends React.Component {
 
             let promise = this.props.validSubmit(processInput);
             catchErrorStatus(promise, 400, json => {
-                const errors = { ...this.state.errors };
-                json.validation_errors.forEach(item => {
-                    errors[item.loc[0]] = true;
-                });
-                this.setState({ errors: errors, processing: false });
+                this.updateValidationErrors(json);
             }).then(() => {
                 this.setState({ errors: [], processing: false });
             });
