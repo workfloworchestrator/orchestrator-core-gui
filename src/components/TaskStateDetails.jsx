@@ -11,6 +11,7 @@ import { isEmpty } from "../utils/Utils";
 import HighlightCode from "./HighlightCode";
 
 import "./TaskStateDetails.scss";
+import { NavLink } from "react-router-dom";
 
 export default class TaskStateDetails extends React.PureComponent {
     constructor(props) {
@@ -110,6 +111,23 @@ export default class TaskStateDetails extends React.PureComponent {
             return acc;
         }, {});
         return newState;
+    };
+
+    renderProcessSubscriptionLink = subscription_id => {
+        if (isEmpty(subscription_id)) {
+            return null;
+        }
+        return (
+            <section className="subscription-link">
+                <NavLink to={`/subscription/${subscription_id}`} className="button green">
+                    <i className="fa fa-link" />{" "}
+                    {I18n.t("process.subscription_link_txt", {
+                        target: "_blank"
+                    })}
+                </NavLink>
+                ))}
+            </section>
+        );
     };
 
     displayStateValue = value => {

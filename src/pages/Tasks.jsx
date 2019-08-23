@@ -24,7 +24,7 @@ export default class Tasks extends React.PureComponent {
             filteredTasks: [],
             query: "",
             actions: { show: false, tid: "" },
-            sorted: { name: "last_modified", descending: true },
+            sorted: { name: "last_modified_at", descending: true },
             filterAttributesStatus: [
                 { name: "created", selected: true, count: 0 },
                 { name: "failed", selected: true, count: 0 },
