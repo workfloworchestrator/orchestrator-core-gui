@@ -113,21 +113,18 @@ export default class TaskStateDetails extends React.PureComponent {
         return newState;
     };
 
-    renderProcessSubscriptionLink = subscription_id => {
-        if (isEmpty(subscription_id)) {
-            return null;
+    renderSubscriptionLink = task => {
+        if (task.current_state.hasOwnProperty("subscription_id")) {
+            return (
+                <section className="subscription-link">
+                    <NavLink to={`/subscription/${task.current_state.subscription_id}`} className="button green">
+                        <i className="fa fa-link" />
+                        {I18n.t("task.subscription_link_txt")}
+                    </NavLink>
+                </section>
+            );
         }
-        return (
-            <section className="subscription-link">
-                <NavLink to={`/subscription/${subscription_id}`} className="button green">
-                    <i className="fa fa-link" />{" "}
-                    {I18n.t("process.subscription_link_txt", {
-                        target: "_blank"
-                    })}
-                </NavLink>
-                ))}
-            </section>
-        );
+        return null;
     };
 
     displayStateValue = value => {
@@ -246,6 +243,7 @@ export default class TaskStateDetails extends React.PureComponent {
         return (
             <section className="task-state-detail">
                 {this.renderTaskHeaderInformation(task)}
+                {this.renderSubscriptionLink(task)}
                 {raw ? this.renderRaw(task) : this.renderTaskOverview(task, details, stateChanges)}
             </section>
         );
