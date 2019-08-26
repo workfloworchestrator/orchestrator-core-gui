@@ -1116,6 +1116,7 @@ I18n.translations.en = {
         notFound: "No Task found (e.g. 404)",
         format_error: "Required input / invalid format",
         userInput: "User input for step {{name}}",
+        subscription_link_txt: "Show Subscription related by this task",
         tabs: {
             user_input: "User input",
             task: "Task"
