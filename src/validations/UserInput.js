@@ -1,12 +1,12 @@
 import { isEmpty } from "../utils/Utils";
 import { validEmailRegExp } from "./Subscriptions";
 
-const inValidVlan = vlan => {
+export function inValidVlan(vlan) {
     const value = vlan || "0";
 
     const stripped = value.toString().replace(/ /g, "");
     return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) || stripped.split(",").some(inValidRange);
-};
+}
 
 const inValidRange = range => {
     if (range.indexOf("-") > -1) {

@@ -25,7 +25,6 @@ import { randomCrmIdentifier } from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
 import GenericSelect from "./GenericSelect";
-import { filterProductsByBandwidth } from "../validations/Products";
 import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 import TransitionProductSelect from "./TransitionProductSelect";
 import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
@@ -34,10 +33,9 @@ import NodePortSelect from "./NodePortSelect";
 import "./UserInputForm.scss";
 import BfdSettings from "./BfdSettings";
 import NumericInput from "react-numeric-input";
-import MultipleServicePortsSN8 from "./MultipleServicePortsSN8";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import TableSummary from "./TableSummary";
-import { portSubscriptions, nodeSubscriptions, catchErrorStatus } from "../api";
+import { nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
 import { applyIdNamingConvention } from "../utils/Utils";
 
@@ -61,26 +59,10 @@ export default class UserInputForm extends React.Component {
             product: {},
             processing: false,
             randomCrm: randomCrmIdentifier(),
-            servicePortsLoadedSN7: false,
-            servicePortsLoadedSN8: false,
             nodeSubscriptionsLoaded: false,
-            servicePortsSN7: [],
-            servicePortsSN8: [],
             nodeSubscriptions: []
         };
     }
-
-    loadServicePortsSN7 = () => {
-        portSubscriptions(["MSP", "SSP", "MSPNL"], ["active"]).then(result => {
-            this.setState({ servicePortsSN7: result, servicePortsLoadedSN7: true });
-        });
-    };
-
-    loadServicePortsSN8 = () => {
-        portSubscriptions(["SP", "SPNL"], ["active"]).then(result => {
-            this.setState({ servicePortsSN8: result, servicePortsLoadedSN8: true });
-        });
-    };
 
     loadNodeSubscriptions = () => {
         nodeSubscriptions(["active", "provisioning"]).then(result => {
@@ -89,14 +71,8 @@ export default class UserInputForm extends React.Component {
     };
 
     componentDidMount = () => {
-        const { servicePortsLoadedSN7, servicePortsLoadedSN8, nodeSubscriptionsLoaded, stepUserInput } = this.state;
+        const { nodeSubscriptionsLoaded, stepUserInput } = this.state;
 
-        if (!servicePortsLoadedSN7 && stepUserInput.find(input => input.type === "service_ports") !== undefined) {
-            this.loadServicePortsSN7();
-        }
-        if (!servicePortsLoadedSN8 && stepUserInput.find(input => input.type === "service_ports_sn8") !== undefined) {
-            this.loadServicePortsSN8();
-        }
         if (!nodeSubscriptionsLoaded && stepUserInput.find(input => input.type.startsWith("corelink")) !== undefined) {
             this.loadNodeSubscriptions();
         }
@@ -353,21 +329,13 @@ export default class UserInputForm extends React.Component {
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
-    initialPorts = minimum => {
-        if (minimum === 1) {
-            return [{ subscription_id: null, vlan: "0" }];
-        } else {
-            return [{ subscription_id: null, vlan: "0" }, { subscription_id: null, vlan: "0" }];
-        }
-    };
-
     chooseInput = userInput => {
         const name = userInput.name;
         const value = userInput.value;
         const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
 
-        const { servicePortsSN7, servicePortsSN8, nodeSubscriptions } = this.state;
+        const { nodeSubscriptions } = this.state;
 
         let organisationId;
         switch (userInput.type) {
@@ -401,7 +369,7 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeStringInput(name)}
                         value={value || ""}
                         disabled={userInput.readonly}
-                        reportError={this.reportCustomError(userInput.type)}
+                        reportError={this.reportCustomError(name)}
                     />
                 );
             case "organisation":
@@ -523,76 +491,27 @@ export default class UserInputForm extends React.Component {
             case "label":
                 return <p className={`label ${name}`}>{I18n.t(`process.${name}`, userInput.i18n_state)}</p>;
             case "service_ports":
-                organisationId =
-                    userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
-                const bandwidthKey = userInput.bandwidth_key || "bandwidth";
-                const bandwidthMsp = findValueFromInputStep(bandwidthKey, stepUserInput) || userInput.bandwidth;
-                const productIds = filterProductsByBandwidth(products, bandwidthMsp).map(product => product.product_id);
-                const availableServicePorts =
-                    productIds.length === products.length
-                        ? servicePortsSN7
-                        : servicePortsSN7.filter(sp => productIds.includes(sp.product.product_id));
-                const ports = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
-                return (
-                    <div>
-                        {!userInput.readonly && (
-                            <section className="refresh-service-ports">
-                                <i className="fa fa-refresh" onClick={this.loadServicePortsSN7} />
-                            </section>
-                        )}
-                        <MultipleServicePorts
-                            servicePorts={ports}
-                            availableServicePorts={availableServicePorts}
-                            organisations={organisations}
-                            onChange={this.changeNestedInput(name)}
-                            organisationId={organisationId}
-                            minimum={userInput.minimum}
-                            maximum={userInput.maximum}
-                            disabled={userInput.readonly}
-                            isElan={userInput.elan}
-                            organisationPortsOnly={userInput.organisationPortsOnly}
-                            mspOnly={userInput.mspOnly}
-                            reportError={this.reportCustomError(userInput.type)}
-                        />
-                    </div>
-                );
             case "service_ports_sn8":
                 organisationId =
                     userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
-                const bandwidthKeySN8 = userInput.bandwidth_key || "bandwidth";
-                const bandwidthServicePortSN8 =
-                    findValueFromInputStep(bandwidthKeySN8, stepUserInput) || userInput.bandwidth;
-                const productIdsSN8 = filterProductsByBandwidth(products, bandwidthServicePortSN8).map(
-                    product => product.product_id
-                );
-                const availableServicePortsSN8 =
-                    productIdsSN8.length === products.length
-                        ? servicePortsSN8
-                        : servicePortsSN8.filter(sp => productIdsSN8.includes(sp.product.product_id));
-                const portsSN8 = isEmpty(value) ? this.initialPorts(userInput.minimum) : value;
+                const bandwidthKey = userInput.bandwidth_key || "bandwidth";
+                const bandwidth = findValueFromInputStep(bandwidthKey, stepUserInput) || userInput.bandwidth;
                 return (
-                    <div>
-                        {!userInput.readonly && (
-                            <section className="refresh-service-ports">
-                                <i className="fa fa-refresh" onClick={this.loadServicePortsSN8} />
-                            </section>
-                        )}
-                        <MultipleServicePortsSN8
-                            servicePorts={portsSN8}
-                            availableServicePorts={availableServicePortsSN8}
-                            organisations={organisations}
-                            onChange={this.changeNestedInput(name)}
-                            organisationId={organisationId}
-                            minimum={userInput.minimum}
-                            maximum={userInput.maximum}
-                            disabled={userInput.readonly}
-                            isElan={userInput.elan}
-                            organisationPortsOnly={userInput.organisationPortsOnly}
-                            visiblePortMode={userInput.visiblePortMode}
-                            disabledPorts={userInput.disabledPorts}
-                            reportError={this.reportCustomError(userInput.type)}
-                        />
-                    </div>
+                    <MultipleServicePorts
+                        servicePorts={value}
+                        sn8={userInput.type === "service_ports_sn8"}
+                        organisations={organisations}
+                        onChange={this.changeNestedInput(name)}
+                        organisationId={organisationId}
+                        minimum={userInput.minimum}
+                        maximum={userInput.maximum}
+                        disabled={userInput.readonly}
+                        isElan={userInput.elan}
+                        organisationPortsOnly={userInput.organisationPortsOnly}
+                        mspOnly={userInput.mspOnly}
+                        reportError={this.reportCustomError(name)}
+                        bandwidth={bandwidth}
+                    />
                 );
             case "subscriptions":
                 const productIdForSubscription = userInput.product_id;

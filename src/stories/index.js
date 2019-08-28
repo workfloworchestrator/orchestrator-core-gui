@@ -29,7 +29,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
-import MultipleServicePortsSN8 from "../components/MultipleServicePortsSN8";
+import MultipleServicePorts from "../components/MultipleServicePorts";
 import { formDate } from "../forms/Builder";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 
@@ -106,8 +106,7 @@ const sn7PortSelectInputStepsAllOrganisations = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
@@ -126,8 +125,7 @@ const sn7PortSelectInputStepsMSPOnly = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
@@ -146,8 +144,7 @@ const sn7PortSelectInputStepsSelectedOrganisation = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
@@ -166,12 +163,11 @@ const sn8PortSelectInputStepsAllOrganisations = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
-        maximum: 6,
-        minimum: 1,
+        maximum: 2,
+        minimum: 2,
         name: "bgp_ip_service_ports",
         organisationPortsOnly: false,
         organisation_key: "organisation",
@@ -186,12 +182,11 @@ const sn8PortSelectInputStepsTagged = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
-        minimum: 1,
+        minimum: 2,
         name: "bgp_ip_service_ports",
         organisationPortsOnly: false,
         organisation_key: "organisation",
@@ -206,8 +201,7 @@ const sn8PortSelectInputStepsUntagged = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
@@ -226,8 +220,7 @@ const sn8PortSelectInputStepsSelectedOrganisation = [
         name: "bandwidth",
         ports_key: ["service_ports"],
         readonly: false,
-        type: "bandwidth",
-        value: null
+        type: "bandwidth"
     },
     {
         maximum: 6,
@@ -432,18 +425,22 @@ storiesOf("GenericNOCConfirm", module)
         );
     });
 
-storiesOf("MultipleServicePortsSN8", module)
+storiesOf("MultipleServicePorts", module)
     .addDecorator(withKnobs)
     .addDecorator(StateDecorator(store))
-    .add("MultipleServicePortsSN8", () => {
+    .add("SN8 MultipleServicePorts", () => {
         fetchMock.restore();
-        fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
+        fetchMock.get(
+            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+            SN8PortSubscriptions.filter(p => p.status === "active")
+        );
         loadVlanMocks();
 
         return (
-            <MultipleServicePortsSN8
+            <MultipleServicePorts
                 servicePorts={store.state.servicePorts}
-                availableServicePorts={SN8PortSubscriptions.filter(p => p.status === "active")}
+                sn8={true}
                 organisations={ORGANISATIONS}
                 onChange={value => {
                     action("onChange")(value);
@@ -470,6 +467,46 @@ storiesOf("MultipleServicePortsSN8", module)
                 )}
                 disabledPorts={boolean("Disabled ports")}
                 reportError={action("reportError")}
+                bandwidth={number("Minimum bandwith")}
+            />
+        );
+    })
+    .add("SN7 MultipleServicePorts", () => {
+        fetchMock.restore();
+        fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
+        fetchMock.get(
+            "/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active",
+            SN7PortSubscriptions.filter(p => p.status === "active")
+        );
+        loadVlanMocks();
+
+        return (
+            <MultipleServicePorts
+                servicePorts={store.state.servicePorts}
+                sn8={false}
+                organisations={ORGANISATIONS}
+                onChange={value => {
+                    action("onChange")(value);
+                    store.set({ servicePorts: value });
+                }}
+                organisationId={select(
+                    "Organisation",
+                    {
+                        "Centrum Wiskunde & Informatica": "2f47f65a-0911-e511-80d0-005056956c1a",
+                        "Design Academy Eindhoven": "88503161-0911-e511-80d0-005056956c1a",
+                        "Academisch Ziekenhuis Maastricht": "bae56b42-0911-e511-80d0-005056956c1a"
+                    },
+                    ""
+                )}
+                minimum={number("Minimum nr of ports", 1)}
+                maximum={number("Maximum nr of ports", 6)}
+                disabled={boolean("Read only?")}
+                isElan={boolean("Is ELAN")}
+                organisationPortsOnly={boolean("Organization ports only")}
+                mspOnly={boolean("MSP only")}
+                disabledPorts={boolean("Disabled ports")}
+                reportError={action("reportError")}
+                bandwidth={number("Minimum bandwith")}
             />
         );
     });
@@ -620,7 +657,8 @@ storiesOf("UserInputForm", module)
                     {
                         name: "service_ports",
                         type: "service_ports",
-                        bandwidth_key: "current_bandwidth"
+                        bandwidth_key: "current_bandwidth",
+                        minimum: 1
                     },
                     {
                         name: "current_bandwidth",
@@ -709,12 +747,11 @@ storiesOf("UserInputForm", module)
 storiesOf("UserInputFormWizard", module)
     .addDecorator(withKnobs)
     .add("Wizard", () => {
-        let tries = 0;
         return (
             <UserInputFormWizard
                 validSubmit={forms => {
                     action("submit")(forms);
-                    if (forms.length == 1) {
+                    if (forms.length === 1) {
                         return Promise.reject({
                             response: {
                                 status: 510,
