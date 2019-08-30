@@ -111,7 +111,7 @@ export default class UserInputForm extends React.Component {
         stop(e);
         const { stepUserInput, processing } = this.state;
 
-        if (this.validateAllUserInput(stepUserInput) && !processing) {
+        if (this.validateAllUserInput(stepUserInput) && !this.isInvalid() && !processing) {
             this.setState({ processing: true, errors: {} });
 
             const processInput = stepUserInput.reduce((acc, input) => {
