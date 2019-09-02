@@ -40,6 +40,19 @@ export function escapeDeep(obj) {
     }
 }
 
+export function applyIdNamingConvention(value, prefix = "") {
+    // Convert camel case to snake case with "-" and replace all "_" with "-"
+    const result = value
+        .split(/(?=[A-Z])/)
+        .join("-")
+        .replace(/_/g, "-")
+        .toLowerCase();
+    if (prefix) {
+        return `${prefix}-${result}`;
+    }
+    return result;
+}
+
 const UUIDv4RegEx = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 export function isValidUUIDv4(id) {
     return UUIDv4RegEx.test(id);

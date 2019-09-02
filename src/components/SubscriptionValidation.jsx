@@ -9,11 +9,13 @@ import CheckBox from "../components/CheckBox";
 import { setFlash } from "../utils/Flash";
 import { deleteSubscription } from "../api/index";
 import ConfirmationDialog from "./ConfirmationDialog";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class SubscriptionValidation extends React.Component {
-    constructor(props) {
-        super(props);
-        const { organisations, products, subscriptions } = this.props;
+    constructor(props, context) {
+        super(props, context);
+        const { subscriptions } = this.props;
+        const { organisations, products } = this.context;
         subscriptions.forEach(subscription => enrichSubscription(subscription, organisations, products));
         this.state = {
             sorted: { name: "status", descending: false },
@@ -28,7 +30,7 @@ export default class SubscriptionValidation extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { subscriptions } = nextProps;
         if (subscriptions.length !== this.state.subscriptions.length) {
-            const { organisations, products } = this.props;
+            const { organisations, products } = this.context;
             subscriptions.forEach(subscription => enrichSubscription(subscription, organisations, products));
             this.setState({ subscriptions: subscriptions });
         }
@@ -196,10 +198,9 @@ export default class SubscriptionValidation extends React.Component {
 }
 
 SubscriptionValidation.propTypes = {
-    history: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
     subscriptions: PropTypes.array.isRequired,
     workflow: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 };
+
+SubscriptionValidation.contextType = ApplicationContext;

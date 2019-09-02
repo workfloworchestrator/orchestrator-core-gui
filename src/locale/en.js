@@ -16,7 +16,7 @@ I18n.translations.en = {
     header: {
         title: "Orchestrator",
         links: {
-            help_html: '<a href="https://gitlab.surfnet.nl/automation/workflows/wikis/home" target="_blank">Help</a>',
+            help: "Help",
             logout: "Logout",
             exit: "Exit"
         },
@@ -137,6 +137,8 @@ I18n.translations.en = {
             "Select an interface-type/speed for the first 2 link members of this corelink aggregate",
         cancel: "Cancel",
         submit: "Submit",
+        next: "Next",
+        previous: "Previous",
         notFound: "No Process found (e.g. 404)",
         format_error: "Required input / invalid format",
         uniquenessViolation: "Value selected more than once",
@@ -821,6 +823,14 @@ I18n.translations.en = {
             status: "Status",
             tag: "Tag"
         },
+        process: {
+            target: "Target",
+            name: "Name",
+            id: "Id",
+            started_at: "Started at",
+            status: "Status",
+            modified_at: "Modified at"
+        },
         ims_service: {
             id: "IMS service ID ({{index}})",
             identifier: "IMS service ID",
@@ -890,15 +900,14 @@ I18n.translations.en = {
         namePlaceholder: "Search and add contact persons..."
     },
     vlan: {
-        vlansInUseError: "VLAN ports {{vlans}} are already in use for the selected MSP",
-        vlansInUse: "Already used VLAN ranges for this MSP: {{vlans}}",
+        vlansInUseError: "VLAN range {{vlans}} are already in use for the selected service port",
+        vlansInUse: "Already used VLAN ranges for this service port: {{vlans}}",
         missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
-        allPortsAvailable: "This MSP has no ports in use (yet).",
+        allPortsAvailable: "This service port has no VLANs in use (yet).",
         placeholder: "Enter a valid VLAN range...",
         placeholder_no_service_port: "First select a Service Port...",
-        placeholder_no_msp: "First select a MSP...",
-        ssp: "A SSP has a default VLAN",
-        untagged: "An UNTAGGED SN8 Serviceport has a default VLAN"
+        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+        untaggedPortInUse: "This service port is already in use and cannot be chosen"
     },
     clipboard: {
         copied: "Copied!",
@@ -1106,6 +1115,7 @@ I18n.translations.en = {
         notFound: "No Task found (e.g. 404)",
         format_error: "Required input / invalid format",
         userInput: "User input for step {{name}}",
+        subscription_link_txt: "Show Subscription related by this task",
         tabs: {
             user_input: "User input",
             task: "Task"
@@ -1144,18 +1154,17 @@ I18n.translations.en = {
     },
     not_found: {
         title: "404",
-        description_html: "The requested page could not be found"
+        description: "The requested page could not be found"
     },
     server_error: {
         title: "500",
-        description_html:
+        description:
             "An unexpected error occurred. It has been logged and reported. Please try again. Still doesn't" +
             " work? Get Help."
     },
     not_allowed: {
         title: "403",
-        description_html:
-            "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
+        description: "This page is restricted. You don't have access based on your group memberships and / or SAB roles"
     },
     confirmation_dialog: {
         title: "Please confirm",
@@ -1176,15 +1185,13 @@ I18n.translations.en = {
     },
     service_ports: {
         servicePort: "Service Port",
-        servicePortSN8: "SURFnet8 Service Port",
         vlan: "Port Vlan",
-        invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
-        used_ssp: "The selected SP is already used in a different subscription(s): {{descriptions}}",
+        used_ssp: "The selected service port is already used in a different subscription(s): {{descriptions}}",
         bandwidth: "Bandwidth",
-        bandwidth_placeholder: "Enter the bandwidth of this MSP...",
-        bandwidth_no_msp_placeholder: "First select a MSP...",
-        bandwidth_no_service_port_placeholder: "First select a Tagged Service Port",
-        invalid_bandwidth: "The bandwidth is invalid. Maximum bandwidth based on the selected MSP is {{max}} Mbit/s"
+        bandwidth_placeholder: "Enter the bandwidth of this service port...",
+        bandwidth_no_service_port_placeholder: "First select a service port...",
+        invalid_bandwidth:
+            "The bandwidth is invalid. Maximum bandwidth based on the selected service port is {{max}} Mbit/s"
     },
     bandwidth: {
         invalid: "Invalid bandwidth. The maximum based on the selected ports / products is {{max}} Mbit/s"

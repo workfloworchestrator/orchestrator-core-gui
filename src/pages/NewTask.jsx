@@ -1,13 +1,13 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
-import { initialWorkflowInput, startTask, workflowsByTarget } from "../api";
+import { startTask, workflowsByTarget, catchErrorStatus } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+import ApplicationContext from "../utils/ApplicationContext";
+import WorkflowSelect from "../components/WorkflowSelect";
 
 import "./NewTask.scss";
-import WorkflowSelect from "../components/WorkflowSelect";
 
 export default class NewTask extends React.Component {
     constructor(props) {
@@ -15,25 +15,19 @@ export default class NewTask extends React.Component {
         this.state = {
             workflows: [],
             workflow: {},
-            stepUserInput: []
+            stepUserInput: [],
+            hasNext: false
         };
     }
 
     componentDidMount = () => workflowsByTarget("SYSTEM").then(workflows => this.setState({ workflows: workflows }));
 
-    validSubmit = stepUserInput => {
+    validSubmit = taskInput => {
         const { workflow } = this.state;
         if (!isEmpty(workflow)) {
-            //create a copy to prevent re-rendering
-            let taskInput = [...stepUserInput];
-            taskInput = taskInput.reduce((acc, input) => {
-                acc[input.name] = input.value;
-                return acc;
-            }, {});
-            taskInput["workflow_key"] = workflow.value;
-            let result = startTask(taskInput);
+            let result = startTask(workflow.value, taskInput);
             result.then(() => {
-                this.props.history.push(`/tasks`);
+                this.context.redirect(`/tasks`);
                 setFlash(I18n.t("task.flash.create", { name: workflow.label }));
             });
             return result;
@@ -41,17 +35,17 @@ export default class NewTask extends React.Component {
     };
 
     changeWorkflow = option => {
-        this.setState({ stepUserInput: [] }, () => {
-            this.setState({ workflow: option });
-            if (option) {
-                initialWorkflowInput(option.value).then(result => this.setState({ stepUserInput: result }));
-            }
-        });
+        this.setState({ workflow: option });
+        if (option) {
+            let promise = startTask(option.value, []);
+            catchErrorStatus(promise, 510, json => {
+                this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
+            });
+        }
     };
 
     render() {
-        const { workflows, workflow, stepUserInput } = this.state;
-        const { history, products } = this.props;
+        const { workflows, workflow, stepUserInput, hasNext } = this.state;
         return (
             <div className="mod-new-task">
                 <section className="card">
@@ -67,14 +61,10 @@ export default class NewTask extends React.Component {
                             />
                         </section>
                         {!isEmpty(workflow) && (
-                            <UserInputForm
+                            <UserInputFormWizard
                                 stepUserInput={stepUserInput}
-                                history={history}
-                                organisations={[]}
-                                products={products}
-                                locationCodes={[]}
-                                product={{}}
                                 validSubmit={this.validSubmit}
+                                hasNext={hasNext}
                             />
                         )}
                     </section>
@@ -84,8 +74,6 @@ export default class NewTask extends React.Component {
     }
 }
 
-NewTask.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    products: PropTypes.array.isRequired
-};
+NewTask.propTypes = {};
+
+NewTask.contextType = ApplicationContext;

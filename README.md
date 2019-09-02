@@ -109,3 +109,4 @@ Similarly you can run other packages that can be found in the package.json
 To run the unit-tests, do: `yarn test`.
 
 To run the storybook, do: `yarn storybook`.
+Your browser should open to http://localhost:9009/?path=/story/welcome--to-storybook.

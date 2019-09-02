@@ -5,10 +5,9 @@ import PropTypes from "prop-types";
 import { process, resumeProcess } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import UserInputForm from "../components/UserInputForm";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
-import { lookupValueFromNestedState } from "../utils/NestedState";
 import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
 
 import "./ProcessDetail.scss";
@@ -16,6 +15,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
 import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from "react-url-query";
+import ApplicationContext from "../utils/ApplicationContext";
 
 /**
  * Map from url query params to props. The values in `url` will still be encoded
@@ -68,7 +68,7 @@ class ProcessDetail extends React.PureComponent {
              * Ensure correct user memberships and populate UserInput form with values
              */
 
-            const { configuration, currentUser, organisations, products } = this.props;
+            const { configuration, currentUser, organisations, products } = this.context;
 
             processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
             processInstance.productName = productNameById(processInstance.product, products);
@@ -86,16 +86,6 @@ class ProcessDetail extends React.PureComponent {
             const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
             const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
 
-            const state = processInstance.current_state || {};
-            // Try to populate the form values via the process state first and when that doesn't exist use the input value
-            if (!isEmpty(state) && !isEmpty(stepUserInput)) {
-                // NOTE: when using the workflows domain model you should be careful with the root state variables as they could
-                // overwrite what you provide via the value paramter of: `input("name", "type" value="I want this value")`
-                stepUserInput.forEach(
-                    userInput =>
-                        (userInput.value = lookupValueFromNestedState(userInput.name, state) || userInput.value)
-                );
-            }
             this.setState({
                 process: processInstance,
                 stepUserInput: stepUserInput,
@@ -126,7 +116,7 @@ class ProcessDetail extends React.PureComponent {
             }),
             () =>
                 deleteProcess(process.id).then(() => {
-                    this.props.history.push(`/processes`);
+                    this.context.redirect(`/processes`);
                     setFlash(I18n.t("processes.flash.delete", { name: process.productName }));
                 })
         );
@@ -141,7 +131,7 @@ class ProcessDetail extends React.PureComponent {
             }),
             () =>
                 abortProcess(process.id).then(() => {
-                    this.props.history.push(`/processes`);
+                    this.context.redirect(`/processes`);
                     setFlash(I18n.t("processes.flash.abort", { name: process.productName }));
                 })
         );
@@ -156,7 +146,7 @@ class ProcessDetail extends React.PureComponent {
             }),
             () =>
                 retryProcess(process.id).then(() => {
-                    this.props.history.push(`/processes`);
+                    this.context.redirect(`/processes`);
                     setFlash(I18n.t("processes.flash.retry", { name: process.productName }));
                 })
         );
@@ -212,6 +202,7 @@ class ProcessDetail extends React.PureComponent {
             <section className="process-actions">
                 {options.map((option, index) => (
                     <button
+                        id="abort"
                         key={index}
                         className={`button ${option.danger ? " red" : " blue"}`}
                         onClick={option.action}
@@ -232,24 +223,17 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    addMissingDefaults = inputs => {
-        let list = [];
-        for (let input of inputs) {
-            if (input.type === "boolean" && input.value === undefined) {
-                input.value = false;
-            }
-            list.push(input);
-        }
-        return list;
-    };
-
-    validSubmit = stepUserInput => {
+    validSubmit = processInput => {
         const { process } = this.state;
-        let result = resumeProcess(process.id, this.addMissingDefaults(stepUserInput));
-        result.then(e => {
-            this.props.history.push(`/processes`);
-            setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
-        });
+        let result = resumeProcess(process.id, processInput);
+        result
+            .then(e => {
+                this.context.redirect(`/processes`);
+                setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
+            })
+            .catch(error => {
+                // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+            });
         return result;
     };
 
@@ -258,8 +242,8 @@ class ProcessDetail extends React.PureComponent {
         this.setState({ selectedTab: tab });
     };
 
-    renderTabContent = (renderStepForm, selectedTab, process, step, stepUserInput, subscriptionProcesses) => {
-        const { locationCodes, products, organisations, history } = this.props;
+    renderTabContent = (selectedTab, process, step, stepUserInput, subscriptionProcesses) => {
+        const { products } = this.context;
         const product = products.find(prod => prod.product_id === process.product);
         const productName = product.name;
         if (selectedTab === "process") {
@@ -287,16 +271,7 @@ class ProcessDetail extends React.PureComponent {
                             })}
                         </h3>
                     </section>
-                    <UserInputForm
-                        locationCodes={locationCodes}
-                        stepUserInput={stepUserInput}
-                        products={products}
-                        organisations={organisations}
-                        history={history}
-                        product={product}
-                        currentState={process.current_state}
-                        validSubmit={this.validSubmit}
-                    />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
                 </section>
             );
         }
@@ -324,7 +299,6 @@ class ProcessDetail extends React.PureComponent {
         const step = process.steps.find(step => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
-        const renderStepForm = renderContent && !isEmpty(stepUserInput);
         return (
             <div className="mod-process-detail">
                 <ConfirmationDialog
@@ -335,14 +309,7 @@ class ProcessDetail extends React.PureComponent {
                 />
                 <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
                 {renderContent &&
-                    this.renderTabContent(
-                        renderStepForm,
-                        selectedTab,
-                        process,
-                        step,
-                        stepUserInput,
-                        subscriptionProcesses
-                    )}
+                    this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
                 {renderNotFound && (
                     <section className="not-found card">
                         <h1>{I18n.t("process.notFound")}</h1>
@@ -355,13 +322,6 @@ class ProcessDetail extends React.PureComponent {
 }
 
 ProcessDetail.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    configuration: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
-    locationCodes: PropTypes.array.isRequired,
-
     // URL query controlled
     scrollToStep: PropTypes.number,
     onChangeScrollToStep: PropTypes.func,
@@ -373,5 +333,7 @@ ProcessDetail.defaultProps = {
     collapsed: [],
     scrollToStep: 0
 };
+
+ProcessDetail.contextType = ApplicationContext;
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(ProcessDetail);

@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import "./Cache.scss";
 import { stop } from "../utils/Utils";
@@ -67,7 +66,4 @@ export default class Cache extends React.Component {
     }
 }
 
-Cache.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired
-};
+Cache.propTypes = {};

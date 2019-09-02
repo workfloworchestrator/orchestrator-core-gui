@@ -9,6 +9,8 @@ import Products from "../components/Products";
 import FixedInputConfiguration from "../components/FixedInputConfiguration";
 import WorkFlows from "../components/WorkFlows";
 import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "../utils/ApplicationContext";
+import { applyIdNamingConvention } from "../utils/Utils";
 
 export default class MetaData extends React.Component {
     constructor(props) {
@@ -19,18 +21,17 @@ export default class MetaData extends React.Component {
         };
     }
 
-    componentDidMount() {
-        const type = this.props.match.params.type;
-        this.setState({ selectedTab: type });
-    }
-
     switchTab = tab => () => {
-        this.setState({ selectedTab: tab });
-        this.props.history.push(`/metadata/${tab}`);
+        this.context.redirect(`/metadata/${tab}`);
     };
 
     renderTab = (tab, selectedTab) => (
-        <span key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
+        <span
+            id={`${applyIdNamingConvention(tab)}`}
+            key={tab}
+            className={tab === selectedTab ? "active" : ""}
+            onClick={this.switchTab(tab)}
+        >
             {I18n.t(`metadata.tabs.${tab}`)}
         </span>
     );
@@ -38,11 +39,11 @@ export default class MetaData extends React.Component {
     renderTabContent = selectedTab => {
         switch (selectedTab) {
             case "products":
-                return <Products history={this.props.history} />;
+                return <Products />;
             case "product_blocks":
-                return <ProductBlocks history={this.props.history} />;
+                return <ProductBlocks />;
             case "resource_types":
-                return <ResourceTypes history={this.props.history} />;
+                return <ResourceTypes />;
             case "fixed_inputs":
                 return <FixedInputConfiguration />;
             case "workflows":
@@ -53,7 +54,8 @@ export default class MetaData extends React.Component {
     };
 
     render() {
-        const { tabs, selectedTab } = this.state;
+        const { tabs } = this.state;
+        const selectedTab = this.props.match.params.type;
         return (
             <div className="mod-metadata">
                 <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
@@ -65,5 +67,7 @@ export default class MetaData extends React.Component {
 }
 
 MetaData.propTypes = {
-    history: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired
 };
+
+MetaData.contextType = ApplicationContext;

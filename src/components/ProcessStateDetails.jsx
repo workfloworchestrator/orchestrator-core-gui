@@ -7,7 +7,7 @@ import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
 import Step from "./Step";
 import { capitalize, renderDateTime } from "../utils/Lookups";
-import { isEmpty } from "../utils/Utils";
+import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
 import { NavLink } from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
@@ -211,8 +211,12 @@ class ProcessStateDetails extends React.PureComponent {
                         <tbody>
                             {Object.keys(json).map((key, index) => (
                                 <tr key={key}>
-                                    <td className="key">{key}</td>
-                                    <td className="value">{this.displayStateValue(json[key])}</td>
+                                    <td id={`${applyIdNamingConvention(key)}-k`} className="key">
+                                        {key}
+                                    </td>
+                                    <td id={`${applyIdNamingConvention(key)}-v`} className="value">
+                                        {this.displayStateValue(json[key])}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

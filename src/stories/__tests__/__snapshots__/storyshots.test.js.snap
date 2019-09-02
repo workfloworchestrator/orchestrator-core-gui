@@ -397,15 +397,15 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -531,15 +531,15 @@ exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -671,6 +671,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
 >
   <div
     className="select-locationcode css-2b097c-container"
+    id="location-code-select"
     onKeyDown={[Function]}
   >
     <div
@@ -775,13 +776,21 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
 </section>
 `;
 
-exports[`Storyshots MultipleServicePortsSN8 MultipleServicePortsSN8 1`] = `
+exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
 <section
   className="storybook-container"
 >
   <section
     className="service-port-container"
   >
+    <div
+      className="refresh-service-ports"
+    >
+      <i
+        className="fa fa-refresh"
+        onClick={[Function]}
+      />
+    </div>
     <section
       className="service-port"
     >
@@ -789,14 +798,14 @@ exports[`Storyshots MultipleServicePortsSN8 MultipleServicePortsSN8 1`] = `
         className="wrapper service-port-select"
       >
         <label>
-          SURFnet8 Service Port
+          Service Port
         </label>
         <div
-          className=" css-2b097c-container"
+          className=" css-14jk2my-container"
           onKeyDown={[Function]}
         >
           <div
-            className=" css-yk16xz-control"
+            className=" css-1fhf3k1-control"
             onMouseDown={[Function]}
             onTouchEnd={[Function]}
           >
@@ -824,7 +833,167 @@ exports[`Storyshots MultipleServicePortsSN8 MultipleServicePortsSN8 1`] = `
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
-                    disabled={false}
+                    disabled={true}
+                    id="react-select-8-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    spellCheck="false"
+                    style={
+                      Object {
+                        "background": 0,
+                        "border": 0,
+                        "boxSizing": "content-box",
+                        "color": "inherit",
+                        "fontSize": "inherit",
+                        "label": "input",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "1px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style={
+                      Object {
+                        "height": 0,
+                        "left": 0,
+                        "overflow": "scroll",
+                        "position": "absolute",
+                        "top": 0,
+                        "visibility": "hidden",
+                        "whiteSpace": "pre",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className=" css-1wy0on6"
+            >
+              <span
+                className=" css-109onse-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className=" css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="css-19bqh2r"
+                  focusable="false"
+                  height={20}
+                  viewBox="0 0 20 20"
+                  width={20}
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="wrapper vlan"
+      >
+        <label>
+          Port Vlan
+        </label>
+        <div
+          className="virtual-vlan"
+        >
+          <input
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="First select a Service Port..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </section>
+    <div
+      className="add-service-port"
+    >
+      <i
+        className="fa fa-plus"
+        onClick={[Function]}
+      />
+    </div>
+  </section>
+</section>
+`;
+
+exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="service-port-container"
+  >
+    <div
+      className="refresh-service-ports"
+    >
+      <i
+        className="fa fa-refresh"
+        onClick={[Function]}
+      />
+    </div>
+    <section
+      className="service-port"
+    >
+      <div
+        className="wrapper service-port-select"
+      >
+        <label>
+          Service Port
+        </label>
+        <div
+          className=" css-14jk2my-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className=" css-1fhf3k1-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className=" css-1hwfws3"
+            >
+              <div
+                className=" css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <div
+                className="css-1g6gooi"
+              >
+                <div
+                  className=""
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    disabled={true}
                     id="react-select-7-input"
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -870,7 +1039,7 @@ exports[`Storyshots MultipleServicePortsSN8 MultipleServicePortsSN8 1`] = `
               className=" css-1wy0on6"
             >
               <span
-                className=" css-1okebmr-indicatorSeparator"
+                className=" css-109onse-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
@@ -896,26 +1065,22 @@ exports[`Storyshots MultipleServicePortsSN8 MultipleServicePortsSN8 1`] = `
         </div>
       </div>
       <div
-        className="wrapper"
+        className="wrapper vlan"
       >
         <label>
           Port Vlan
         </label>
         <div
-          className="vlan"
+          className="virtual-vlan"
         >
-          <div
-            className="virtual-vlan"
-          >
-            <input
-              disabled={true}
-              onBlur={[Function]}
-              onChange={[Function]}
-              placeholder="First select a Service Port..."
-              type="text"
-              value=""
-            />
-          </div>
+          <input
+            disabled={true}
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="First select a Service Port..."
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </section>
@@ -1557,7 +1722,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -1590,7 +1755,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-8-input"
+                            id="react-select-9-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -1683,12 +1848,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       tabIndex="1"
                     >
                       <label
-                        htmlFor="contact-name-0"
+                        htmlFor="contact-persons-name-0"
                       >
                         Name
                       </label>
                       <input
-                        id="contact-name-0"
+                        id="contact-persons-name-0"
                         onChange={[Function]}
                         onKeyDown={[Function]}
                         placeholder="Search and add contact persons..."
@@ -1700,12 +1865,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       className="wrapper"
                     >
                       <label
-                        htmlFor="contact-email-0"
+                        htmlFor="contact-persons-email-0"
                       >
                         Email
                       </label>
                       <input
-                        id="contact-email-0"
+                        id="contact-persons-email-0"
                         onBlur={[Function]}
                         onChange={[Function]}
                         type="email"
@@ -1716,7 +1881,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       className="wrapper"
                     >
                       <label
-                        htmlFor="contact-phone-0"
+                        htmlFor="contact-persons-phone-0"
                       >
                         Phone number
                       </label>
@@ -1724,7 +1889,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         className="tel"
                       >
                         <input
-                          id="contact-phone-0"
+                          id="contact-persons-phone-0"
                           onChange={[Function]}
                           type="tel"
                           value=""
@@ -1752,15 +1917,15 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -1855,7 +2020,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-9-input"
+                                id="react-select-10-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -1965,7 +2130,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-10-input"
+                                id="react-select-11-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2091,7 +2256,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-11-input"
+                                id="react-select-12-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2201,7 +2366,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-12-input"
+                                id="react-select-13-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2279,15 +2444,15 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -2382,7 +2547,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-13-input"
+                                id="react-select-14-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2492,7 +2657,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-14-input"
+                                id="react-select-15-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2618,7 +2783,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-15-input"
+                                id="react-select-16-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2728,7 +2893,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={true}
-                                id="react-select-16-input"
+                                id="react-select-17-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2806,15 +2971,15 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -2903,7 +3068,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={true}
-                              id="react-select-17-input"
+                              id="react-select-18-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2980,15 +3145,15 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
                 className="button blue"
-                id="submit-new-process"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -3042,7 +3207,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -3075,7 +3240,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-20-input"
+                            id="react-select-21-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -3178,169 +3343,164 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 <em>
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="multiple-mps"
+                    className="service-port"
                   >
-                    <section
-                      className="msp"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper msp-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-22-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-21-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                          <i
-                            className="fa fa-minus disabled"
-                            onClick={[Function]}
-                          />
-                        </div>
-                      </div>
-                    </section>
+                    </div>
                     <div
-                      className="add-msp"
+                      className="wrapper vlan"
                     >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </section>
-                </div>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
             </section>
             <section
@@ -3348,15 +3508,15 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -3410,7 +3570,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -3443,7 +3603,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-18-input"
+                            id="react-select-19-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -3546,169 +3706,164 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 <em>
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="multiple-mps"
+                    className="service-port"
                   >
-                    <section
-                      className="msp"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper msp-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-20-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-19-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                          <i
-                            className="fa fa-minus disabled"
-                            onClick={[Function]}
-                          />
-                        </div>
-                      </div>
-                    </section>
+                    </div>
                     <div
-                      className="add-msp"
+                      className="wrapper vlan"
                     >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </section>
-                </div>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
             </section>
             <section
@@ -3716,15 +3871,15 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -3776,288 +3931,164 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 <em>
                   Choose Service Ports
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="multiple-mps"
+                    className="service-port"
                   >
-                    <section
-                      className="msp"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper msp-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-25-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-24-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                    <section
-                      className="msp"
+                    </div>
+                    <div
+                      className="wrapper vlan"
                     >
+                      <label>
+                        Port Vlan
+                      </label>
                       <div
-                        className="wrapper msp-select"
+                        className="virtual-vlan"
                       >
-                        <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-25-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
+                    </div>
                   </section>
-                </div>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
               <section
                 className="form-divider current_bandwidth"
@@ -4108,15 +4139,15 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -4170,7 +4201,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4203,7 +4234,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             autoComplete="off"
                             autoCorrect="off"
                             disabled={false}
-                            id="react-select-22-input"
+                            id="react-select-23-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -4306,169 +4337,164 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 <em>
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="multiple-mps"
+                    className="service-port"
                   >
-                    <section
-                      className="msp"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper msp-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-24-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-23-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                          <i
-                            className="fa fa-minus disabled"
-                            onClick={[Function]}
-                          />
-                        </div>
-                      </div>
-                    </section>
+                    </div>
                     <div
-                      className="add-msp"
+                      className="wrapper vlan"
                     >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </section>
-                </div>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
             </section>
             <section
@@ -4476,15 +4502,15 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -4538,7 +4564,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -4674,165 +4700,283 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 <em>
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="service-port-container"
+                    className="service-port"
                   >
-                    <section
-                      className="service-port"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper service-port-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          SURFnet8 Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-27-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-27-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div
+                      className="wrapper vlan"
+                    >
+                      <label>
+                        Port Vlan
+                      </label>
                       <div
-                        className="wrapper"
+                        className="virtual-vlan"
                       >
-                        <label>
-                          Port Vlan
-                        </label>
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <section
+                    className="service-port"
+                  >
+                    <div
+                      className="wrapper service-port-select"
+                    >
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
                         <div
-                          className="vlan"
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className="virtual-vlan"
+                            className=" css-1hwfws3"
                           >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-28-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
                             />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </section>
+                    </div>
                     <div
-                      className="add-service-port"
+                      className="wrapper vlan"
                     >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </section>
-                </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
             </section>
             <section
@@ -4840,15 +4984,15 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -4902,7 +5046,860 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </em>
                 <div
                   className=" css-2b097c-container"
-                  id="select-customer-organisation"
+                  id="organisation-select"
+                  onKeyDown={[Function]}
+                >
+                  <div
+                    className=" css-yk16xz-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className=" css-1hwfws3"
+                    >
+                      <div
+                        className=" css-1wa3eu0-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="css-1g6gooi"
+                      >
+                        <div
+                          className=""
+                          style={
+                            Object {
+                              "display": "inline-block",
+                            }
+                          }
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-34-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className=" css-1wy0on6"
+                    >
+                      <span
+                        className=" css-1okebmr-indicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <section
+                  className="service-port-container"
+                >
+                  <div
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </div>
+                  <section
+                    className="service-port"
+                  >
+                    <div
+                      className="wrapper service-port-select"
+                    >
+                      <label>
+                        Service Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-35-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="wrapper vlan"
+                    >
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                id="button-cancel-form-submit"
+                onClick={[Function]}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="button grey disabled"
+                id="button-submit-form-submit"
+                onClick={[Function]}
+                tabIndex={0}
+                type="submit"
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className=" css-2b097c-container"
+                  id="organisation-select"
+                  onKeyDown={[Function]}
+                >
+                  <div
+                    className=" css-yk16xz-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className=" css-1hwfws3"
+                    >
+                      <div
+                        className=" css-1wa3eu0-placeholder"
+                      >
+                        Search and select a customer...
+                      </div>
+                      <div
+                        className="css-1g6gooi"
+                      >
+                        <div
+                          className=""
+                          style={
+                            Object {
+                              "display": "inline-block",
+                            }
+                          }
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect="off"
+                            disabled={false}
+                            id="react-select-29-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            spellCheck="false"
+                            style={
+                              Object {
+                                "background": 0,
+                                "border": 0,
+                                "boxSizing": "content-box",
+                                "color": "inherit",
+                                "fontSize": "inherit",
+                                "label": "input",
+                                "opacity": 1,
+                                "outline": 0,
+                                "padding": 0,
+                                "width": "1px",
+                              }
+                            }
+                            tabIndex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style={
+                              Object {
+                                "height": 0,
+                                "left": 0,
+                                "overflow": "scroll",
+                                "position": "absolute",
+                                "top": 0,
+                                "visibility": "hidden",
+                                "whiteSpace": "pre",
+                              }
+                            }
+                          >
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className=" css-1wy0on6"
+                    >
+                      <span
+                        className=" css-1okebmr-indicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className=" css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-19bqh2r"
+                          focusable="false"
+                          height={20}
+                          viewBox="0 0 20 20"
+                          width={20}
+                        >
+                          <path
+                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                className="form-divider bandwidth"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Bandwidth
+                </label>
+                <em>
+                  Desired bandwidth in Mbit/s
+                </em>
+                <div>
+                  <input
+                    disabled={false}
+                    id="bandwidth"
+                    name="bandwidth"
+                    onChange={[Function]}
+                    type="number"
+                    value=""
+                  />
+                </div>
+              </section>
+              <section
+                className="form-divider bgp_ip_service_ports"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  IP Service Ports
+                </label>
+                <em>
+                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                </em>
+                <section
+                  className="service-port-container"
+                >
+                  <div
+                    className="refresh-service-ports"
+                  >
+                    <i
+                      className="fa fa-refresh"
+                      onClick={[Function]}
+                    />
+                  </div>
+                  <section
+                    className="service-port"
+                  >
+                    <div
+                      className="wrapper service-port-select"
+                    >
+                      <label>
+                        Service Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-30-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="wrapper vlan"
+                    >
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <section
+                    className="service-port"
+                  >
+                    <div
+                      className="wrapper service-port-select"
+                    >
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-31-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="wrapper vlan"
+                    >
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </section>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                id="button-cancel-form-submit"
+                onClick={[Function]}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="button grey disabled"
+                id="button-submit-form-submit"
+                onClick={[Function]}
+                tabIndex={0}
+                type="submit"
+              >
+                Submit
+              </button>
+            </section>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider organisation"
+              >
+                <label
+                  htmlFor="name"
+                >
+                  Customer
+                </label>
+                <em>
+                  Search and select the customer for the product
+                </em>
+                <div
+                  className=" css-2b097c-container"
+                  id="organisation-select"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -5038,165 +6035,164 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 <em>
                   The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
                 </em>
-                <div>
-                  <section
+                <section
+                  className="service-port-container"
+                >
+                  <div
                     className="refresh-service-ports"
                   >
                     <i
                       className="fa fa-refresh"
                       onClick={[Function]}
                     />
-                  </section>
+                  </div>
                   <section
-                    className="service-port-container"
+                    className="service-port"
                   >
-                    <section
-                      className="service-port"
+                    <div
+                      className="wrapper service-port-select"
                     >
+                      <label>
+                        Service Port
+                      </label>
                       <div
-                        className="wrapper service-port-select"
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
                       >
-                        <label>
-                          SURFnet8 Service Port
-                        </label>
                         <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
+                            className=" css-1hwfws3"
                           >
                             <div
-                              className=" css-1hwfws3"
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-1g6gooi"
                             >
                               <div
-                                className=" css-1wa3eu0-placeholder"
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
                               >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-33-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
                                   style={
                                     Object {
-                                      "display": "inline-block",
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
                                     }
                                   }
                                 >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-33-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div
+                            className=" css-1wy0on6"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
                             <div
-                              className=" css-1wy0on6"
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
                             >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
+                              <svg
                                 aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
+                                className="css-19bqh2r"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
                               >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
+                    </div>
                     <div
-                      className="add-service-port"
+                      className="wrapper vlan"
                     >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
+                      <label>
+                        Port Vlan
+                      </label>
+                      <div
+                        className="virtual-vlan"
+                      >
+                        <input
+                          disabled={true}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          placeholder="First select a Service Port..."
+                          type="text"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </section>
-                </div>
+                  <div
+                    className="add-service-port"
+                  >
+                    <i
+                      className="fa fa-plus"
+                      onClick={[Function]}
+                    />
+                  </div>
+                </section>
+                <em
+                  className="error"
+                >
+                  Required input / invalid format
+                </em>
               </section>
             </section>
             <section
@@ -5204,15 +6200,15 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
             >
               <button
                 className="button"
-                id="cancel-form-submit"
+                id="button-cancel-form-submit"
                 onClick={[Function]}
-                type="submit"
+                type="button"
               >
                 Cancel
               </button>
               <button
-                className="button blue"
-                id="submit-new-process"
+                className="button grey disabled"
+                id="button-submit-form-submit"
                 onClick={[Function]}
                 tabIndex={0}
                 type="submit"
@@ -5228,728 +6224,155 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
+exports[`Storyshots UserInputFormWizard Wizard 1`] = `
 <section
   className="storybook-container"
 >
   <div
-    className="mod-new-process"
+    className="mod-process-step"
   >
     <section
       className="card"
     >
       <section
-        className="form-step divider"
+        className="form-step"
       >
-        <h1>
-          SN8 portselect form, showing all ports
-        </h1>
-        <div
-          className="mod-process-step"
+        <section
+          className="form-divider ims_port_id_1"
         >
-          <section
-            className="card"
+          <label
+            htmlFor="name"
           >
-            <section
-              className="form-step"
+            First node and port
+          </label>
+          <em>
+            Choose a node and port that you want to use to create the first corelink
+          </em>
+          <div
+            className="generic-select css-2b097c-container"
+            onKeyDown={[Function]}
+          >
+            <div
+              className=" css-yk16xz-control"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
             >
-              <section
-                className="form-divider organisation"
+              <div
+                className=" css-1hwfws3"
               >
-                <label
-                  htmlFor="name"
-                >
-                  Customer
-                </label>
-                <em>
-                  Search and select the customer for the product
-                </em>
                 <div
-                  className=" css-2b097c-container"
-                  id="select-customer-organisation"
-                  onKeyDown={[Function]}
+                  className=" css-1wa3eu0-placeholder"
+                >
+                  Search or select a value...
+                </div>
+                <div
+                  className="css-1g6gooi"
                 >
                   <div
-                    className=" css-yk16xz-control"
-                    onMouseDown={[Function]}
-                    onTouchEnd={[Function]}
+                    className=""
+                    style={
+                      Object {
+                        "display": "inline-block",
+                      }
+                    }
                   >
+                    <input
+                      aria-autocomplete="list"
+                      autoCapitalize="none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      disabled={false}
+                      id="react-select-36-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      spellCheck="false"
+                      style={
+                        Object {
+                          "background": 0,
+                          "border": 0,
+                          "boxSizing": "content-box",
+                          "color": "inherit",
+                          "fontSize": "inherit",
+                          "label": "input",
+                          "opacity": 1,
+                          "outline": 0,
+                          "padding": 0,
+                          "width": "1px",
+                        }
+                      }
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
                     <div
-                      className=" css-1hwfws3"
+                      style={
+                        Object {
+                          "height": 0,
+                          "left": 0,
+                          "overflow": "scroll",
+                          "position": "absolute",
+                          "top": 0,
+                          "visibility": "hidden",
+                          "whiteSpace": "pre",
+                        }
+                      }
                     >
-                      <div
-                        className=" css-1wa3eu0-placeholder"
-                      >
-                        Search and select a customer...
-                      </div>
-                      <div
-                        className="css-1g6gooi"
-                      >
-                        <div
-                          className=""
-                          style={
-                            Object {
-                              "display": "inline-block",
-                            }
-                          }
-                        >
-                          <input
-                            aria-autocomplete="list"
-                            autoCapitalize="none"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            disabled={false}
-                            id="react-select-28-input"
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            spellCheck="false"
-                            style={
-                              Object {
-                                "background": 0,
-                                "border": 0,
-                                "boxSizing": "content-box",
-                                "color": "inherit",
-                                "fontSize": "inherit",
-                                "label": "input",
-                                "opacity": 1,
-                                "outline": 0,
-                                "padding": 0,
-                                "width": "1px",
-                              }
-                            }
-                            tabIndex="0"
-                            type="text"
-                            value=""
-                          />
-                          <div
-                            style={
-                              Object {
-                                "height": 0,
-                                "left": 0,
-                                "overflow": "scroll",
-                                "position": "absolute",
-                                "top": 0,
-                                "visibility": "hidden",
-                                "whiteSpace": "pre",
-                              }
-                            }
-                          >
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className=" css-1wy0on6"
-                    >
-                      <span
-                        className=" css-1okebmr-indicatorSeparator"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className=" css-tlfecz-indicatorContainer"
-                        onMouseDown={[Function]}
-                        onTouchEnd={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="css-19bqh2r"
-                          focusable="false"
-                          height={20}
-                          viewBox="0 0 20 20"
-                          width={20}
-                        >
-                          <path
-                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                          />
-                        </svg>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
-              </section>
-              <section
-                className="form-divider bandwidth"
+              </div>
+              <div
+                className=" css-1wy0on6"
               >
-                <label
-                  htmlFor="name"
+                <span
+                  className=" css-1okebmr-indicatorSeparator"
+                />
+                <div
+                  aria-hidden="true"
+                  className=" css-tlfecz-indicatorContainer"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
                 >
-                  Bandwidth
-                </label>
-                <em>
-                  Desired bandwidth in Mbit/s
-                </em>
-                <div>
-                  <input
-                    disabled={false}
-                    id="bandwidth"
-                    name="bandwidth"
-                    onChange={[Function]}
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </section>
-              <section
-                className="form-divider bgp_ip_service_ports"
-              >
-                <label
-                  htmlFor="name"
-                >
-                  IP Service Ports
-                </label>
-                <em>
-                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
-                </em>
-                <div>
-                  <section
-                    className="refresh-service-ports"
+                  <svg
+                    aria-hidden="true"
+                    className="css-19bqh2r"
+                    focusable="false"
+                    height={20}
+                    viewBox="0 0 20 20"
+                    width={20}
                   >
-                    <i
-                      className="fa fa-refresh"
-                      onClick={[Function]}
+                    <path
+                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
                     />
-                  </section>
-                  <section
-                    className="service-port-container"
-                  >
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          SURFnet8 Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-29-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                    <div
-                      className="add-service-port"
-                    >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
-                    </div>
-                  </section>
+                  </svg>
                 </div>
-              </section>
-            </section>
-            <section
-              className="buttons"
-            >
-              <button
-                className="button"
-                id="cancel-form-submit"
-                onClick={[Function]}
-                type="submit"
-              >
-                Cancel
-              </button>
-              <button
-                className="button blue"
-                id="submit-new-process"
-                onClick={[Function]}
-                tabIndex={0}
-                type="submit"
-              >
-                Submit
-              </button>
-            </section>
-          </section>
-        </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
-    </section>
-  </div>
-</section>
-`;
-
-exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
-<section
-  className="storybook-container"
->
-  <div
-    className="mod-new-process"
-  >
-    <section
-      className="card"
-    >
       <section
-        className="form-step divider"
+        className="buttons"
       >
-        <h1>
-          SN8 portselect form, showing all ports
-        </h1>
-        <div
-          className="mod-process-step"
+        <button
+          className="button"
+          id="button-cancel-form-submit"
+          onClick={[Function]}
+          type="button"
         >
-          <section
-            className="card"
-          >
-            <section
-              className="form-step"
-            >
-              <section
-                className="form-divider organisation"
-              >
-                <label
-                  htmlFor="name"
-                >
-                  Customer
-                </label>
-                <em>
-                  Search and select the customer for the product
-                </em>
-                <div
-                  className=" css-2b097c-container"
-                  id="select-customer-organisation"
-                  onKeyDown={[Function]}
-                >
-                  <div
-                    className=" css-yk16xz-control"
-                    onMouseDown={[Function]}
-                    onTouchEnd={[Function]}
-                  >
-                    <div
-                      className=" css-1hwfws3"
-                    >
-                      <div
-                        className=" css-1wa3eu0-placeholder"
-                      >
-                        Search and select a customer...
-                      </div>
-                      <div
-                        className="css-1g6gooi"
-                      >
-                        <div
-                          className=""
-                          style={
-                            Object {
-                              "display": "inline-block",
-                            }
-                          }
-                        >
-                          <input
-                            aria-autocomplete="list"
-                            autoCapitalize="none"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            disabled={false}
-                            id="react-select-30-input"
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            spellCheck="false"
-                            style={
-                              Object {
-                                "background": 0,
-                                "border": 0,
-                                "boxSizing": "content-box",
-                                "color": "inherit",
-                                "fontSize": "inherit",
-                                "label": "input",
-                                "opacity": 1,
-                                "outline": 0,
-                                "padding": 0,
-                                "width": "1px",
-                              }
-                            }
-                            tabIndex="0"
-                            type="text"
-                            value=""
-                          />
-                          <div
-                            style={
-                              Object {
-                                "height": 0,
-                                "left": 0,
-                                "overflow": "scroll",
-                                "position": "absolute",
-                                "top": 0,
-                                "visibility": "hidden",
-                                "whiteSpace": "pre",
-                              }
-                            }
-                          >
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className=" css-1wy0on6"
-                    >
-                      <span
-                        className=" css-1okebmr-indicatorSeparator"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className=" css-tlfecz-indicatorContainer"
-                        onMouseDown={[Function]}
-                        onTouchEnd={[Function]}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="css-19bqh2r"
-                          focusable="false"
-                          height={20}
-                          viewBox="0 0 20 20"
-                          width={20}
-                        >
-                          <path
-                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <section
-                className="form-divider bandwidth"
-              >
-                <label
-                  htmlFor="name"
-                >
-                  Bandwidth
-                </label>
-                <em>
-                  Desired bandwidth in Mbit/s
-                </em>
-                <div>
-                  <input
-                    disabled={false}
-                    id="bandwidth"
-                    name="bandwidth"
-                    onChange={[Function]}
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </section>
-              <section
-                className="form-divider bgp_ip_service_ports"
-              >
-                <label
-                  htmlFor="name"
-                >
-                  IP Service Ports
-                </label>
-                <em>
-                  The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
-                </em>
-                <div>
-                  <section
-                    className="refresh-service-ports"
-                  >
-                    <i
-                      className="fa fa-refresh"
-                      onClick={[Function]}
-                    />
-                  </section>
-                  <section
-                    className="service-port-container"
-                  >
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          SURFnet8 Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-31-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="vlan"
-                        >
-                          <div
-                            className="virtual-vlan"
-                          >
-                            <input
-                              disabled={true}
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              placeholder="First select a Service Port..."
-                              type="text"
-                              value="0"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                    <div
-                      className="add-service-port"
-                    >
-                      <i
-                        className="fa fa-plus"
-                        onClick={[Function]}
-                      />
-                    </div>
-                  </section>
-                </div>
-              </section>
-            </section>
-            <section
-              className="buttons"
-            >
-              <button
-                className="button"
-                id="cancel-form-submit"
-                onClick={[Function]}
-                type="submit"
-              >
-                Cancel
-              </button>
-              <button
-                className="button blue"
-                id="submit-new-process"
-                onClick={[Function]}
-                tabIndex={0}
-                type="submit"
-              >
-                Submit
-              </button>
-            </section>
-          </section>
-        </div>
+          Cancel
+        </button>
+        <button
+          className="button blue"
+          id="button-next-form-submit"
+          onClick={[Function]}
+          tabIndex={0}
+          type="submit"
+        >
+          Next
+        </button>
       </section>
     </section>
   </div>

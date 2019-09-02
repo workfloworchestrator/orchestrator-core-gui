@@ -68,6 +68,18 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
     return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog));
 }
 
+export function catchErrorStatus(promise, status, callback) {
+    return promise.catch(err => {
+        if (err.response && err.response.status === status) {
+            err.response.json().then(json => {
+                callback(json);
+            });
+        } else {
+            throw err;
+        }
+    });
+}
+
 function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
     return validFetch(path, options, headers, showErrorDialog).then(res => (result ? res.json() : {}));
 }
@@ -341,10 +353,6 @@ export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
 }
 
-export function initialWorkflowInput(workflowKey, productId) {
-    return productId ? fetchJson(`workflows/${workflowKey}/${productId}`) : fetchJson(`workflows/${workflowKey}`);
-}
-
 export function processes() {
     return fetchJson("processes");
 }
@@ -359,18 +367,6 @@ export function fetchServiceSpeedByProduct(productId) {
 
 export function deleteSubscription(subscriptionId) {
     return fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
-}
-
-export function terminateSubscription(process) {
-    return postPutJson("processes/terminate-subscription", process, "post", false, false);
-}
-
-export function startModificationSubscription(subscriptionId, workflow_name, product = null) {
-    const body = { subscription_id: subscriptionId };
-    if (!isEmpty(product)) {
-        body.product = product;
-    }
-    return postPutJson(`processes/modify-subscription/${workflow_name}`, body, "post", false, false);
 }
 
 //IPAM IP Prefixes
@@ -419,16 +415,11 @@ export function process(processId) {
     return fetchJsonWithCustomErrorHandling("processes/" + processId);
 }
 
-export function startProcess(process) {
-    return postPutJson("processes", process, "post", false, false);
+export function startProcess(workflow_name, process) {
+    return postPutJson("processes/" + workflow_name, process, "post", false, false);
 }
 
 export function resumeProcess(processId, userInput) {
-    userInput = userInput.reduce((acc, input) => {
-        acc[input.name] = input.value;
-        return acc;
-    }, {});
-
     return postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
 }
 
@@ -452,16 +443,11 @@ export function resumeAll() {
     return fetchJsonWithCustomErrorHandling("tasks/resumeall");
 }
 
-export function startTask(task) {
-    return postPutJson("tasks", task, "post", false, false);
+export function startTask(workflow_name, task) {
+    return postPutJson(`tasks/${workflow_name}`, task, "post", false, false);
 }
 
 export function resumeTask(taskId, userInput) {
-    userInput = userInput.reduce((acc, input) => {
-        acc[input.name] = input.value;
-        return acc;
-    }, {});
-
     return postPutJson(`tasks/${taskId}/resume`, userInput, "put", false, false);
 }
 

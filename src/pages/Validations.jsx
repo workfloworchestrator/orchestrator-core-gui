@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import {
     allWorkflowCodeImplementations,
@@ -20,6 +19,8 @@ import SubscriptionValidation from "../components/SubscriptionValidation";
 import FixedInputProductValidation from "../components/FixedInputProductValidation";
 import ProductWorkflowsValidation from "../components/ProductWorkflowsValidation";
 import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "../utils/ApplicationContext";
+import { applyIdNamingConvention } from "../utils/Utils";
 
 export default class Validations extends React.Component {
     constructor(props) {
@@ -78,7 +79,7 @@ export default class Validations extends React.Component {
     switchTab = tab => e => {
         stop(e);
         this.setState({ selectedTab: tab });
-        this.props.history.push(`/validations/${tab}`);
+        this.context.redirect(`/validations/${tab}`);
     };
 
     renderSubscriptionValidations = (invalidSubscriptions, hideValidSubscriptionTypes) => {
@@ -105,9 +106,6 @@ export default class Validations extends React.Component {
                 <section className="validations">
                     {filteredSubscriptiops.map(ws => (
                         <SubscriptionValidation
-                            history={this.props.history}
-                            organisations={this.props.organisations}
-                            products={this.props.products}
                             subscriptions={ws.subscriptions}
                             workflow={ws.name}
                             onChange={this.onSubscriptionsChange}
@@ -129,7 +127,7 @@ export default class Validations extends React.Component {
             <section className="header">{this.renderExplain()}</section>
             <section className="validations">
                 {fixedInputValidations.map((validation, index) => (
-                    <FixedInputProductValidation key={index} history={this.props.history} validation={validation} />
+                    <FixedInputProductValidation key={index} validation={validation} />
                 ))}
                 {isEmpty(fixedInputValidations) && (
                     <div className={"no-errors"}>
@@ -166,7 +164,6 @@ export default class Validations extends React.Component {
             <section className="header">{this.renderExplain()}</section>
             <section className="validations">
                 <ProductWorkflowsValidation
-                    history={this.props.history}
                     products={products}
                     workflowCodeImplementations={workflowCodeImplementations}
                     workflows={workflows}
@@ -187,7 +184,12 @@ export default class Validations extends React.Component {
     isValidValidation = validation => validation.valid && (isEmpty(validation.product) || !isEmpty(validation.mapping));
 
     renderTab = (tab, selectedTab) => (
-        <span key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
+        <span
+            id={`${applyIdNamingConvention(tab)}`}
+            key={tab}
+            className={tab === selectedTab ? "active" : ""}
+            onClick={this.switchTab(tab)}
+        >
             {I18n.t(`validations.tabs.${tab}`)}
         </span>
     );
@@ -258,8 +260,6 @@ export default class Validations extends React.Component {
     }
 }
 
-Validations.propTypes = {
-    history: PropTypes.object.isRequired,
-    products: PropTypes.array.isRequired,
-    organisations: PropTypes.array.isRequired
-};
+Validations.propTypes = {};
+
+Validations.contextType = ApplicationContext;

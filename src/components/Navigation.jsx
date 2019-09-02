@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import { Spinner } from "spin.js";
 import mySpinner from "../lib/Spin";
@@ -71,6 +70,4 @@ export default class Navigation extends React.PureComponent {
     }
 }
 
-Navigation.propTypes = {
-    currentUser: PropTypes.object.isRequired
-};
+Navigation.propTypes = {};

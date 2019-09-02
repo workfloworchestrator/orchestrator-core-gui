@@ -78,7 +78,7 @@ export default class BandwidthSelect extends React.PureComponent {
 }
 
 BandwidthSelect.propTypes = {
-    servicePorts: PropTypes.array.isRequired,
+    servicePorts: PropTypes.array,
     name: PropTypes.string.isRequired,
     value: PropTypes.string,
     onChange: PropTypes.func.isRequired,

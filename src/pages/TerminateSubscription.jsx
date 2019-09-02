@@ -2,59 +2,45 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import { stop } from "../utils/Utils";
-import ContactPersons from "../components/ContactPersons";
-import { terminateSubscription, subscriptionsDetail } from "../api/index";
+import { startProcess, subscriptionsDetail, productById } from "../api/index";
 import { setFlash } from "../utils/Flash";
-import ReadOnlySubscriptionView from "../components/ReadOnlySubscriptionView";
+import ApplicationContext from "../utils/ApplicationContext";
+import UserInputFormWizard from "../components/UserInputFormWizard";
 
 import "./TerminateSubscription.scss";
+import { TARGET_TERMINATE } from "../validations/Products";
 
 export default class TerminateSubscription extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactPersons: [{ email: "", name: "", phone: "" }],
-            processing: false,
             organisationId: null,
-            productTag: null
+            product: { tag: "", workflows: [] }
         };
     }
 
     componentDidMount = () => {
         subscriptionsDetail(this.props.subscriptionId).then(sub =>
-            this.setState({
-                organisationId: sub.customer_id,
-                productTag: sub.product.tag
-            })
+            productById(sub.product.product_id).then(product =>
+                this.setState({
+                    organisationId: sub.customer_id,
+                    product: product
+                })
+            )
         );
     };
 
     cancel = e => {
         stop(e);
-        this.props.history.push("/subscription/" + this.props.subscriptionId);
+        this.context.redirect("/subscription/" + this.props.subscriptionId);
     };
 
-    renderButtons = () => {
-        const invalid = false;
-        return (
-            <section className="buttons">
-                <button className="button" onClick={this.cancel}>
-                    {I18n.t("terminate_subscription.cancel")}
-                </button>
-                <button tabIndex={0} className={`button ${invalid ? "grey disabled" : "blue"}`} onClick={this.submit}>
-                    {I18n.t("terminate_subscription.submit")}
-                </button>
-            </section>
-        );
-    };
+    submit = processInput => {
+        const { product } = this.state;
+        const terminate_workflow = product.workflows.find(wf => wf.target === TARGET_TERMINATE);
 
-    submit = () => {
-        this.setState({ processing: true });
-        terminateSubscription({
-            subscription_id: this.props.subscriptionId,
-            contact_persons: this.state.contactPersons
-        }).then(res => {
-            this.props.history.push(`/processes`);
+        return startProcess(terminate_workflow.name, processInput).then(res => {
+            this.context.redirect(`/processes`);
             setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId }));
         });
     };
@@ -64,15 +50,14 @@ export default class TerminateSubscription extends React.Component {
     };
 
     render() {
-        //TODO use the form_input from workflow to render UserForm
-        const { contactPersons, organisationId, productTag } = this.state;
-        const { subscriptionId, products, organisations } = this.props;
+        const { organisationId, product } = this.state;
+        const { subscriptionId } = this.props;
 
         return (
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h1>{I18n.t("subscription.terminate")}</h1>
-                    {productTag === "Node" && (
+                    {product.tag === "Node" && (
                         <section className="message-container">
                             <section className="message">
                                 <section className="status-icon">
@@ -96,28 +81,17 @@ export default class TerminateSubscription extends React.Component {
                         </section>
                     )}
 
-                    <section className="form-step">
-                        <ReadOnlySubscriptionView
-                            subscriptionId={subscriptionId}
-                            products={products}
-                            organisations={organisations}
-                        />
-                    </section>
-
-                    {productTag !== "IP_PREFIX" && productTag !== "Node" && productTag !== "Corelink" && (
-                        <section className="form-step">
-                            <section className="form-divider">
-                                {<label htmlFor="name">{I18n.t("process.contact_persons")}</label>}
-                                {<em>{I18n.t("process.contact_persons")}</em>}
-                                <ContactPersons
-                                    persons={contactPersons}
-                                    onChange={this.changeUserInput}
-                                    organisationId={organisationId}
-                                />
-                            </section>
-                        </section>
-                    )}
-                    {this.renderButtons()}
+                    <UserInputFormWizard
+                        stepUserInput={
+                            product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink"
+                                ? [
+                                      { name: "subscription_id", type: "subscription_id", value: subscriptionId },
+                                      { name: "contact_persons", type: "contact_persons", organisation: organisationId }
+                                  ]
+                                : [{ name: "subscription_id", type: "subscription_id", value: subscriptionId }]
+                        }
+                        validSubmit={this.submit}
+                    />
                 </section>
             </div>
         );
@@ -125,9 +99,7 @@ export default class TerminateSubscription extends React.Component {
 }
 
 TerminateSubscription.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string
 };
+
+TerminateSubscription.contextType = ApplicationContext;

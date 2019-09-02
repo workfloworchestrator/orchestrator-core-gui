@@ -1,6 +1,5 @@
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import { abortTask, deleteTask, retryTask, tasks, resumeAll } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
@@ -14,6 +13,7 @@ import { renderDateTime } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class Tasks extends React.PureComponent {
     constructor(props) {
@@ -24,7 +24,7 @@ export default class Tasks extends React.PureComponent {
             filteredTasks: [],
             query: "",
             actions: { show: false, tid: "" },
-            sorted: { name: "last_modified", descending: true },
+            sorted: { name: "last_modified_at", descending: true },
             filterAttributesStatus: [
                 { name: "created", selected: true, count: 0 },
                 { name: "failed", selected: true, count: 0 },
@@ -83,12 +83,12 @@ export default class Tasks extends React.PureComponent {
 
     showTask = task => () => {
         clearInterval(this.interval);
-        this.props.history.push("/task/" + task.tid);
+        this.context.redirect("/task/" + task.tid);
     };
 
     newTask = () => {
         clearInterval(this.interval);
-        this.props.history.push("/new-task");
+        this.context.redirect("/new-task");
     };
 
     runAllTasks = () => {
@@ -372,7 +372,6 @@ export default class Tasks extends React.PureComponent {
     }
 }
 
-Tasks.propTypes = {
-    history: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired
-};
+Tasks.propTypes = {};
+
+Tasks.contextType = ApplicationContext;
