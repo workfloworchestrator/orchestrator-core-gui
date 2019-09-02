@@ -100,7 +100,13 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
         if (props.subscriptionId) {
             usedVlans(props.subscriptionId)
                 .then(result => {
-                    this.setState({ usedVlans: numbersFromGroupedArray(result), missingInIms: false });
+                    let usedVlans = numbersFromGroupedArray(result);
+
+                    // Filter currently used vlans because they are probably from the current subscription
+                    const currentVlans = getAllNumbersForVlanRange(props.vlan);
+                    usedVlans = usedVlans.filter(n => !currentVlans.includes(n));
+
+                    this.setState({ usedVlans: usedVlans, missingInIms: false });
 
                     // Don't validate if disabled (untagged shows as disable but needs validation)
                     if (!props.disabled) {
