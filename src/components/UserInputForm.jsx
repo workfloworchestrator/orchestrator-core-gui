@@ -404,8 +404,8 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "contact_persons":
-                organisationId =
-                    userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
+                const organisation_key = userInput.organisation_key || "organisation";
+                organisationId = userInput.organisation || findValueFromInputStep(organisation_key, stepUserInput);
                 return (
                     <ContactPersons
                         id="contact-persons"
