@@ -26,7 +26,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
-        if (servicePort.product.tag === "SP") {
+        if (["SP", "SPNL"].includes(servicePort.product.tag)) {
             const portMode = isEmpty(servicePort.port_mode) ? "<No port_mode>" : servicePort.port_mode.toUpperCase();
             return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
         } else {
