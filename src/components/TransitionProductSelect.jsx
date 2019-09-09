@@ -7,13 +7,18 @@ import { transitions } from "../api";
 export default class TransitionProductSelect extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
-        this.state = { transitionProducts: [], subscription: {} };
+        this.state = { transitionProducts: [] };
     }
 
     componentDidMount = () => {
-        const { subscriptionId, transitionType } = this.props;
+        const { subscriptionId, transitionType, onChange } = this.props;
         transitions(subscriptionId, transitionType).then(transitionProducts => {
             this.setState({ transitionProducts: transitionProducts });
+
+            // If only one product is selectable set this as selected value
+            if (transitionProducts.length === 1) {
+                onChange({ value: transitionProducts[0].product_id });
+            }
         });
     };
 
@@ -26,9 +31,7 @@ export default class TransitionProductSelect extends React.PureComponent {
             label: p.name
         }));
 
-        const selected_product = transitionProducts.length === 1 ? transitionProducts[0].product_id : product;
-
-        const value = options.find(option => option.value === selected_product);
+        const value = options.find(option => option.value === product);
 
         return (
             <Select
