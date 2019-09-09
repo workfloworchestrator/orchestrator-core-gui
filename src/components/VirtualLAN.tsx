@@ -115,6 +115,7 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
                 })
                 .catch(e => {
                     this.setState({ missingInIms: true });
+                    this.props.reportError(true);
                 });
         }
     }
@@ -131,7 +132,7 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
         // on mount to check if an untagged port is not already used
 
         const { vlansExtraInUse } = this.props;
-        const { usedVlans } = this.state;
+        const { usedVlans, missingInIms } = this.state;
 
         const allUsedVlans = groupedArrayFromNumbers(usedVlans.concat(getAllNumbersForVlanRange(vlansExtraInUse)));
         const invalidFormat = !this.validFormat(vlanRange);
@@ -144,7 +145,7 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
         }
 
         this.setState({ vlansInUse: inUse, invalidFormat: invalidFormat });
-        this.props.reportError(!isEmpty(inUse) || invalidFormat);
+        this.props.reportError(!isEmpty(inUse) || invalidFormat || missingInIms);
     };
 
     onChangeInternal = (e: React.FormEvent<HTMLInputElement>) => {
