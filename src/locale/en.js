@@ -360,6 +360,8 @@ I18n.translations.en = {
             "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO",
         ip_static_service_port: "IP Service Port",
         ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
+        sn8_ip_static_service_port: "SURFnet8 SAP",
+        sn8_ip_static_service_port_info: "SN8 service port to be migrated to",
         nsi_isalias: "NSI isAlias",
         nsi_isalias_info: "",
         subscription_id1: "Subscription",
