@@ -8,7 +8,7 @@ export default class WorkflowSelect extends React.PureComponent {
         const { onChange, workflows, workflow, disabled } = this.props;
 
         const options = workflows.map(wf => ({
-            label: wf.description,
+            label: I18n.t(`workflow.${wf.name}`),
             value: wf.name
         }));
 
