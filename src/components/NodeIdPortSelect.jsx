@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 import "./NodePortSelect.scss";
 
-import { getNodeByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType } from "../api";
+import { getNodesByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType } from "../api";
 import I18n from "i18n-js";
 import { imsStates } from "../utils/Lookups.js";
 
@@ -40,7 +40,7 @@ export default class NodeIdPortSelect extends React.PureComponent {
     };
 
     getNodesOnLocation = location => {
-        getNodeByLocationAndStatus(location, "IS").then(result => this.setState({ nodes: result, loading: false }));
+        getNodesByLocationAndStatus(location, "IS").then(result => this.setState({ nodes: result, loading: false }));
     };
 
     onChangeNodes = name => e => {

@@ -16,7 +16,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import { nodesForLocationCode } from "../api";
+import { getNodesByLocationAndStatus } from "../api";
 import I18n from "i18n-js";
 
 export default class NodeSelect extends React.PureComponent {
@@ -29,7 +29,8 @@ export default class NodeSelect extends React.PureComponent {
     }
 
     componentWillMount() {
-        nodesForLocationCode(this.props.locationCode).then(result => this.setState({ nodes: result, loading: false }));
+        const status = this.props.status ? this.props.status : "PL";
+        getNodesByLocationAndStatus(this.props.locationCode, status).then(result => this.setState({ nodes: result, loading: false }));
     }
 
     render() {
@@ -71,5 +72,6 @@ NodeSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     node: PropTypes.number,
     locationCode: PropTypes.string.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    status: PropTypes.string
 };
