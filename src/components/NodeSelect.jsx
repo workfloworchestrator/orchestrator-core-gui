@@ -30,7 +30,9 @@ export default class NodeSelect extends React.PureComponent {
 
     componentWillMount() {
         const status = this.props.status ? this.props.status : "PL";
-        getNodesByLocationAndStatus(this.props.locationCode, status).then(result => this.setState({ nodes: result, loading: false }));
+        getNodesByLocationAndStatus(this.props.locationCode, status).then(result =>
+            this.setState({ nodes: result, loading: false })
+        );
     }
 
     render() {

@@ -204,7 +204,7 @@ export function nodeSubscriptions(statusList = []) {
     return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
 
-export function portSubscriptions(tagList, statusList = [], node=null) {
+export function portSubscriptions(tagList, statusList = [], node = null) {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(
         `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
