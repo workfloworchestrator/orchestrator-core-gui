@@ -208,7 +208,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
     modify = (subscription, workflow_name) => e => {
         stop(e);
-        const change = I18n.t(`subscription.modify_${workflow_name}`).toLowerCase();
+        const change = I18n.t(`workflow.${workflow_name}`).toLowerCase();
         this.confirmation(
             I18n.t("subscription.modifyConfirmation", {
                 name: subscription.product_name,
@@ -675,10 +675,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                                                 key={wf.name}
                                                 onClick={this.modify(subscription, wf.name)}
                                             >
-                                                {I18n.t(`subscription.modify_${wf.name}`)}
+                                                {I18n.t(`workflow.${wf.name}`)}
                                             </a>
                                         )}
-                                        {wf.reason && <span>{I18n.t(`subscription.modify_${wf.name}`)}</span>}
+                                        {wf.reason && <span>{I18n.t(`workflow.${wf.name}`)}</span>}
                                     </td>
                                     <td>{wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}</td>
 
@@ -695,7 +695,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                             {isEmpty(workflows.modify) && (
                                 <tr>
                                     <td>
-                                        <em className="error">{I18n.t("subscription.no_modify_workflow")}</em>
+                                        <em className="error">{I18n.t("subworkflow_workflow")}</em>
                                     </td>
                                 </tr>
                             )}
