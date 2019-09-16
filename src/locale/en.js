@@ -1244,7 +1244,7 @@ I18n.translations.en = {
         validate_sn7_light_path: "Validate SN7 Light Path",
         validate_node: "Validate Node",
         validate_sn7_service_port: "Validate SN7 Service Port",
-        validate_sn7_ip_static: "Validate SN7 IP Staticip",
+        validate_sn7_ip_static: "Validate SN7 IP Static",
         validate_sn7_ip_bgp: "Validate SN7 IP BGP",
         validate_sn8_ip_static: "Validate SN8 IP Static",
         validate_sn8_ip_bgp: "Validate SN8 IP BGP",
