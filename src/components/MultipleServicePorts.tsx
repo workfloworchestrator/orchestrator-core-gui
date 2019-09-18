@@ -252,6 +252,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         disabled={vlanDisabled}
                         reportError={this.reportVlanError(index)}
                         vlansExtraInUse={vlansJustChosen}
+                        portMode={servicePort.port_mode}
                     />
                 </div>
                 {isElan && (

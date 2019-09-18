@@ -894,7 +894,8 @@ I18n.translations.en = {
         placeholder: "Enter a valid VLAN range...",
         placeholder_no_service_port: "First select a Service Port...",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
-        untaggedPortInUse: "This service port is already in use and cannot be chosen"
+        untaggedPortInUse: "This service port is already in use and cannot be chosen",
+        taggedOnly: "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.",
     },
     clipboard: {
         copied: "Copied!",
