@@ -19,7 +19,7 @@ function getAllNumbersForVlanRange(vlanRange: string) {
         vlanRange
             .replace(/ /g, "")
             .split(",")
-            .map(sl => sl.split("-").map(parseInt))
+            .map(sl => sl.split("-").map(Number))
     );
 }
 
