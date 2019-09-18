@@ -69,6 +69,9 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
 
         return (
             <UserInputForm
+                // Generate a key based on input widget names that results in a new
+                // instance of UserInputForm if the form changes
+                key={currentForm.form.map(item => item.name).join()}
                 stepUserInput={currentForm.form}
                 validSubmit={this.submit}
                 previous={this.previous}
