@@ -278,7 +278,7 @@ class ProcessDetail extends React.PureComponent {
     };
 
     renderTab = (tab, selectedTab) => (
-        <span key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
+        <span id={tab} key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
             {I18n.t(`process.tabs.${tab}`)}
         </span>
     );
