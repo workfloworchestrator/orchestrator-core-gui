@@ -14,6 +14,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
+import I18n from "i18n-js";
 
 const urlPropsQueryConfig = {
     page: { type: UrlQueryParamTypes.number },
@@ -29,6 +30,7 @@ class Subscriptions extends React.PureComponent {
         this.state = {
             subscriptionId: undefined,
             subscriptions: [],
+            advancedSearchQuery: [],
             loading: true,
             pages: 99,
             sorted: this.props.sorted
@@ -109,7 +111,25 @@ class Subscriptions extends React.PureComponent {
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div className="divider" />
+                <div className="advanced-search-container">
+                    <section className="search">
+                        <input
+                            className="allowed"
+                            placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
+                            type="text"
+                            // onChange={this.search}
+                        />
+                    </section>
+                    <button
+                        type="submit"
+                        name="new-process"
+                        id="new-process"
+                        className="new button green"
+                        onClick={this.newProcess}
+                    >
+                        {I18n.t("subscriptions.submitSearch")} <i className="fa fa-search" />
+                    </button>{" "}
+                </div>
                 <div className="subscriptions-container">
                     {
                         <ReactTable
