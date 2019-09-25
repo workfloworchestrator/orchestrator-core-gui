@@ -15,6 +15,8 @@ import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
 import I18n from "i18n-js";
+import ValidationsExplain from "./Validations";
+import Explain from "../components/Explain";
 
 const urlPropsQueryConfig = {
     page: { type: UrlQueryParamTypes.number },
@@ -143,11 +145,38 @@ class Subscriptions extends React.PureComponent {
     }
 
     render() {
-        const { pages, sorted, subscriptions, initialFiltered, subscriptionId } = this.state;
+        const { pages, sorted, subscriptions, initialFiltered, subscriptionId, showExplanation } = this.state;
         const { page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
+                <Explain
+                    close={() => this.setState({ showExplanation: false })}
+                    render={() => (
+                        <React.Fragment>
+                            <h1>Using the advanced search</h1>
+                            <p>
+                                The advanced search allows you to search on all resource types of product types. So if
+                                you know a IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, you can find it by using the advanced
+                                search
+                            </p>
+                            <h1>Patterns</h1>
+                            <p>
+                                Any `keyword: value(s)` substring becomes a `phraseto_tsquery`. Just a bunch of
+                                values/words becomes a `plainto_tsquery` unless any of the values/words has a word
+                                splitting character such as '-' or '_'. The bunch of values/words then becomes a
+                                `phraseto_tsquery`. Examples:: # ordering does not matter, also finds `Asd001a` before
+                                `VU` `VU Asd001a` -> plainto_tsquery('VU Asd001a') # ordering matters, finds only `VU
+                                Asd001a` `description: VU Asd001a` -> phraseto_tsquery(description: 'VU Asd001a') #
+                                combine no ordering with ordering `bla die blah crm_port_id: 12345 ->
+                                (plainto_tsquery('bla die blah') && phraseto_tsquery('crm_port_id: 12345'))
+                            </p>
+                        </React.Fragment>
+                    )}
+                    isVisible={showExplanation}
+                    title="How does it work"
+                    content="Blaat"
+                />
                 <div className="advanced-search-container">
                     <section className="header">{this.renderExplain()}</section>
                     <section className="search">

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import HighlightCode from "./HighlightCode";
 
 import "./Explain.scss";
 
@@ -12,15 +11,11 @@ export default class Explain extends React.PureComponent {
     }
 
     render() {
-        const { close, isVisible, content, title } = this.props;
+        const { close, isVisible, render, title } = this.props;
         const className = isVisible ? "" : "hide";
 
         return (
-            <div
-                className={`explain ${className}`}
-                onBlur={close}
-                ref={ref => (this.main = ref)}
-            >
+            <div className={`explain-container ${className}`} onBlur={close} ref={ref => (this.main = ref)}>
                 <section className="container">
                     <section className="title">
                         <p>{title}</p>
@@ -29,6 +24,7 @@ export default class Explain extends React.PureComponent {
                         </button>
                     </section>
                     Explanation
+                    {render()}
                 </section>
             </div>
         );
@@ -36,8 +32,8 @@ export default class Explain extends React.PureComponent {
 }
 
 Explain.propTypes = {
-    isVisible: PropTypes.boolean.isRequired,
+    isVisible: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    render: PropTypes.func.isRequired
 };
