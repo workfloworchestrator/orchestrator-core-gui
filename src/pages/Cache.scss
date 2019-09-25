@@ -41,7 +41,7 @@
         section.cache-select-section {
             margin-top: 25px;
             display: flex;
-            div.Select {
+            & > div {
                 width: 100%;
             }
             a.button {
