@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 import Modal from "react-modal";
 import { renderDate } from "../utils/Lookups";
 import { requestSubscriptionData } from "../utils/SubscriptionData";
-import { stop } from "../utils/Utils";
+import { isEmpty, stop } from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
 import { debounce } from "lodash";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -30,7 +30,7 @@ class Subscriptions extends React.PureComponent {
         this.state = {
             subscriptionId: undefined,
             subscriptions: [],
-            advancedSearchQuery: [],
+            advancedSearchPhrase: "",
             loading: true,
             pages: 99,
             sorted: this.props.sorted
@@ -61,16 +61,18 @@ class Subscriptions extends React.PureComponent {
         this.filtering = true; // when the filter changes, that means someone is typing
     }
 
-    fetchData = state => {
+    fetchData = tableState => {
         this.filtering = false; // we've arrived either debounced or not, so filtering can be reset
-        this.setState({ loading: true });
-        requestSubscriptionData(state.pageSize, state.page, state.sorted, state.filtered).then(res => {
-            this.setState({
-                subscriptions: res.rows,
-                pages: res.pages,
-                loading: false
-            });
-        });
+        this.setState({ loading: true, filtered: tableState.filtered }); // Ensure state "filtered" is synced with tableState
+        requestSubscriptionData(tableState.pageSize, tableState.page, tableState.sorted, tableState.filtered).then(
+            res => {
+                this.setState({
+                    subscriptions: res.rows,
+                    pages: res.pages,
+                    loading: false
+                });
+            }
+        );
     };
 
     updateSorted = newSorted => {
@@ -92,6 +94,30 @@ class Subscriptions extends React.PureComponent {
         }
     }
 
+    handleAdvancedSearch = () => {
+        let tableState = this.state;
+        tableState.page = this.props.page ? this.props.page : 0;
+        tableState.pageSize = this.props.pageSize ? this.props.pageSize : 25;
+
+        if (!isEmpty(tableState.advancedSearchPhrase)) {
+            let i;
+            let found = false;
+            for (i = 0; i < tableState.filtered.length; i++) {
+                if (tableState.filtered[i].id === "tsv") {
+                    tableState.filtered[i].value = tableState.advancedSearchPhrase;
+                    found = true;
+                }
+            }
+            if (!found) {
+                tableState.filtered.push({ id: "tsv", value: tableState.advancedSearchPhrase });
+            }
+        } else {
+            tableState.filtered = tableState.filtered.filter(item => item.id !== "tsv")
+        }
+
+        this.fetchData(tableState);
+    };
+
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
         this.setState({ subscriptionId: subscription_id });
@@ -105,6 +131,15 @@ class Subscriptions extends React.PureComponent {
         this.context.redirect("/old-subscriptions/");
     };
 
+    renderExplain() {
+        return (
+            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
+                <i className="fa fa-question-circle" />
+                <span>{I18n.t("validations.help")}</span>
+            </section>
+        );
+    }
+
     render() {
         const { pages, sorted, subscriptions, initialFiltered, subscriptionId } = this.state;
         const { page, onChangePage, pageSize, onChangePageSize } = this.props;
@@ -112,12 +147,14 @@ class Subscriptions extends React.PureComponent {
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
                 <div className="advanced-search-container">
+                    <section className="header">{this.renderExplain()}</section>
                     <section className="search">
                         <input
                             className="allowed"
                             placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
                             type="text"
-                            // onChange={this.search}
+                            name="advancedSearchPhrase"
+                            onChange={e => this.setState({ advancedSearchPhrase: e.target.value })}
                         />
                     </section>
                     <button
@@ -125,7 +162,7 @@ class Subscriptions extends React.PureComponent {
                         name="new-process"
                         id="new-process"
                         className="new button green"
-                        onClick={this.newProcess}
+                        onClick={this.handleAdvancedSearch}
                     >
                         {I18n.t("subscriptions.submitSearch")} <i className="fa fa-search" />
                     </button>{" "}
