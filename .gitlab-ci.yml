@@ -18,7 +18,7 @@ test workflows-client:
   image: node:10.16.0
   script:
     - yarn install
-    - yarn prettier -c '**/*.{js,jsx,scss,md}'
+    - yarn prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'
     - yarn test --coverage
   tags:
       - python-lint-ext
