@@ -31,6 +31,7 @@ class Subscriptions extends React.PureComponent {
             subscriptionId: undefined,
             subscriptions: [],
             advancedSearchPhrase: "",
+            showExplanation: false,
             loading: true,
             pages: 99,
             sorted: this.props.sorted
@@ -57,7 +58,7 @@ class Subscriptions extends React.PureComponent {
         }
     }
 
-    onFilteredChange(column, value) {
+    onFilteredChange() {
         this.filtering = true; // when the filter changes, that means someone is typing
     }
 
@@ -102,17 +103,19 @@ class Subscriptions extends React.PureComponent {
         if (!isEmpty(tableState.advancedSearchPhrase)) {
             let i;
             let found = false;
+            // find or update the advancedSearchPhrase in the filter list
             for (i = 0; i < tableState.filtered.length; i++) {
                 if (tableState.filtered[i].id === "tsv") {
                     tableState.filtered[i].value = tableState.advancedSearchPhrase;
                     found = true;
                 }
             }
+            // add a new object if needed
             if (!found) {
                 tableState.filtered.push({ id: "tsv", value: tableState.advancedSearchPhrase });
             }
         } else {
-            tableState.filtered = tableState.filtered.filter(item => item.id !== "tsv")
+            tableState.filtered = tableState.filtered.filter(item => item.id !== "tsv");
         }
 
         this.fetchData(tableState);
@@ -135,7 +138,6 @@ class Subscriptions extends React.PureComponent {
         return (
             <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
                 <i className="fa fa-question-circle" />
-                <span>{I18n.t("validations.help")}</span>
             </section>
         );
     }
