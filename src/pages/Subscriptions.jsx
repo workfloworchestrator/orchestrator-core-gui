@@ -21,7 +21,7 @@ import ReactTable from "react-table";
 import Modal from "react-modal";
 import { renderDate } from "../utils/Lookups";
 import { requestSubscriptionData } from "../utils/SubscriptionData";
-import { stop } from "../utils/Utils";
+import { isEmpty, stop } from "../utils/Utils";
 import MessageBox from "../components/MessageBox";
 import { debounce } from "lodash";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -29,6 +29,8 @@ import ApplicationContext from "../utils/ApplicationContext";
 import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
+import I18n from "i18n-js";
+import Explain from "../components/Explain";
 
 const urlPropsQueryConfig = {
     page: { type: UrlQueryParamTypes.number },
@@ -44,6 +46,8 @@ class Subscriptions extends React.PureComponent {
         this.state = {
             subscriptionId: undefined,
             subscriptions: [],
+            advancedSearchPhrase: "",
+            showExplanation: false,
             loading: true,
             pages: 99,
             sorted: this.props.sorted
@@ -70,20 +74,22 @@ class Subscriptions extends React.PureComponent {
         }
     }
 
-    onFilteredChange(column, value) {
+    onFilteredChange() {
         this.filtering = true; // when the filter changes, that means someone is typing
     }
 
-    fetchData = state => {
+    fetchData = tableState => {
         this.filtering = false; // we've arrived either debounced or not, so filtering can be reset
-        this.setState({ loading: true });
-        requestSubscriptionData(state.pageSize, state.page, state.sorted, state.filtered).then(res => {
-            this.setState({
-                subscriptions: res.rows,
-                pages: res.pages,
-                loading: false
-            });
-        });
+        this.setState({ loading: true, filtered: tableState.filtered }); // Ensure state "filtered" is synced with tableState
+        requestSubscriptionData(tableState.pageSize, tableState.page, tableState.sorted, tableState.filtered).then(
+            res => {
+                this.setState({
+                    subscriptions: res.rows,
+                    pages: res.pages,
+                    loading: false
+                });
+            }
+        );
     };
 
     updateSorted = newSorted => {
@@ -105,6 +111,38 @@ class Subscriptions extends React.PureComponent {
         }
     }
 
+    handleAdvancedSearchKeyDown = e => {
+        if (e.key === "Enter") {
+            this.handleAdvancedSearch();
+        }
+    };
+
+    handleAdvancedSearch = () => {
+        let tableState = this.state;
+        tableState.page = this.props.page ? this.props.page : 0;
+        tableState.pageSize = this.props.pageSize ? this.props.pageSize : 25;
+
+        if (!isEmpty(tableState.advancedSearchPhrase)) {
+            let i;
+            let found = false;
+            // find or update the advancedSearchPhrase in the filter list
+            for (i = 0; i < tableState.filtered.length; i++) {
+                if (tableState.filtered[i].id === "tsv") {
+                    tableState.filtered[i].value = tableState.advancedSearchPhrase;
+                    found = true;
+                }
+            }
+            // add a new object if needed
+            if (!found) {
+                tableState.filtered.push({ id: "tsv", value: tableState.advancedSearchPhrase });
+            }
+        } else {
+            tableState.filtered = tableState.filtered.filter(item => item.id !== "tsv");
+        }
+
+        this.fetchData(tableState);
+    };
+
     showSubscriptionDetail = subscription_id => e => {
         stop(e);
         this.setState({ subscriptionId: subscription_id });
@@ -118,13 +156,94 @@ class Subscriptions extends React.PureComponent {
         this.context.redirect("/old-subscriptions/");
     };
 
+    renderExplain() {
+        return (
+            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
+                <i className="fa fa-question-circle" />
+            </section>
+        );
+    }
+
     render() {
-        const { pages, sorted, subscriptions, initialFiltered, subscriptionId } = this.state;
+        const { pages, sorted, subscriptions, initialFiltered, subscriptionId, showExplanation } = this.state;
         const { page, onChangePage, pageSize, onChangePageSize } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
-                <div className="divider" />
+                <Explain
+                    close={() => this.setState({ showExplanation: false })}
+                    render={() => (
+                        <React.Fragment>
+                            <h1>Using the advanced search</h1>
+                            <p>
+                                The advanced search allows you to search on all resource types of product types. So if
+                                you know a IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, you can find it by using the advanced
+                                search. The values in the search boxes above the columns allow you to refine/narrow
+                                these search results. It's important to remember that the advanced search will only find
+                                complete words, but it wil split words with "-", "," and "_"
+                            </p>
+                            <p>
+                                For example, to search for all subscriptions of a particular customer the search phrase
+                                would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However as the UUID
+                                is unique simply searching for
+                                <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even <i>"d253130e"</i> would yield the
+                                same results.
+                            </p>
+                            <p>
+                                The full text search can contain multiple search criteria that will AND-ed together. For
+                                example
+                                <i>
+                                    "customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"
+                                </i>{" "}
+                                would only return subscriptions matching the supplied <i>customer_id</i>, <i>status</i>{" "}
+                                and <i>tag</i>i>. Due to how full text search works that query could be simplified to:{" "}
+                                <i>"d253130e active ip_prefix"</i>.
+                            </p>
+                            <h1>Patterns</h1>
+                            <p>
+                                <b>by customer:</b> customer_id:uuid
+                                <br />
+                                <b>by ims_circuit_id:</b> ims_circuit_id:int
+                                <br />
+                                <b>by ipam_prefix_id:</b> ipam_prefix_id:int
+                                <br />
+                                <b>by nso_service_id:</b> nso_service_ud:int
+                                <br />
+                                <b>by service_speed:</b> nso_service_ud:int
+                                <br />
+                                <b>by asn:</b> asn:int
+                                <br />
+                                <b>by crm_port_id:</b> crm_port_id:int
+                                <br />
+                            </p>
+                        </React.Fragment>
+                    )}
+                    isVisible={showExplanation}
+                    title="Advanced search"
+                    content="Blaat"
+                />
+                <div className="advanced-search-container">
+                    <section className="header">{this.renderExplain()}</section>
+                    <section className="search">
+                        <input
+                            className="allowed"
+                            placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
+                            type="text"
+                            name="advancedSearchPhrase"
+                            onChange={e => this.setState({ advancedSearchPhrase: e.target.value })}
+                            onKeyUp={this.handleAdvancedSearchKeyDown}
+                        />
+                    </section>
+                    <button
+                        type="submit"
+                        name="new-process"
+                        id="new-process"
+                        className="new button green"
+                        onClick={this.handleAdvancedSearch}
+                    >
+                        {I18n.t("subscriptions.submitSearch")} <i className="fa fa-search" />
+                    </button>{" "}
+                </div>
                 <div className="subscriptions-container">
                     {
                         <ReactTable
