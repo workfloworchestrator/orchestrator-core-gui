@@ -20,14 +20,60 @@
     @include page;
     @include card;
 
-    .divider {
-        height: 5px;
-    }
-
     .subscriptions-container {
         background-color: white;
     }
+
+    .explain {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 22px;
+        i {
+            color: lighten($blue, 5);
+            font-size: 30px;
+            margin-right: 15px;
+        }
+
+        span {
+            color: $blue;
+            font-weight: bold;
+        }
+    }
+
+    .advanced-search-container {
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 12px;
+        flex-direction: row;
+        align-items: center;
+    }
+    section.search {
+        padding: 0 15px 0 0;
+        position: relative;
+        flex-grow: 5;
+
+        input {
+            padding: 12px;
+            margin-left: auto;
+            margin-top: 0;
+            border: 1px solid $lighter-grey;
+            border-bottom-left-radius: $br;
+            border-top-left-radius: $br;
+            font-size: 14px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    a.button {
+        i.fa-search {
+            font-size: inherit;
+            margin-left: 10px;
+            margin-top: 4px;
+        }
+    }
 }
+
 .subscription-modal {
     position: absolute;
     top: 40px;
