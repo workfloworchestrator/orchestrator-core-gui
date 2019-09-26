@@ -86,6 +86,7 @@ interface IProps {
     disabled: boolean;
     reportError: (isValid: boolean) => void;
     onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    portMode?: string;
 }
 
 interface IState {
@@ -178,7 +179,7 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
 
     render() {
         const { usedVlans, vlansInUse, missingInIms, invalidFormat } = this.state;
-        const { vlan, subscriptionId, disabled, vlansExtraInUse } = this.props;
+        const { vlan, subscriptionId, disabled, vlansExtraInUse, portMode } = this.props;
         const allUsedVlans = vlanRangeFromNumbers(usedVlans.concat(getAllNumbersForVlanRange(vlansExtraInUse)));
         const placeholder = subscriptionId ? I18n.t("vlan.placeholder") : I18n.t("vlan.placeholder_no_service_port");
 
@@ -192,8 +193,10 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
                 : I18n.t("vlan.vlansInUseError", { vlans: vlansInUse.join(", ") })
             : undefined;
         const message = isEmpty(allUsedVlans)
-            ? I18n.t("vlan.allPortsAvailable")
-            : I18n.t("vlan.vlansInUse", { vlans: allUsedVlans });
+            ? (portMode === "tagged"
+                ? I18n.t("vlan.allPortsAvailable")
+                : I18n.t("vlan.taggedOnly"))
+            : I18n.t("vlan.vlansInUse", { vlans: allUsedVlans })
         return (
             <div className="virtual-vlan">
                 <input
@@ -217,9 +220,11 @@ VirtualLAN.propTypes = {
     vlansExtraInUse: PropTypes.string,
     vlan: PropTypes.string,
     subscriptionId: PropTypes.string.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    portMode: PropTypes.string
 };
 
 VirtualLAN.defaultProps = {
-    vlansExtraInUse: ""
+    vlansExtraInUse: "",
+    portMode: ""
 };

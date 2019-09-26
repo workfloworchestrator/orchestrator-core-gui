@@ -612,7 +612,9 @@ I18n.translations.en = {
         sap_summary_sn7: "Summary of available SN7 SAP's",
         sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details",
         speed_policer: "Speed policer",
-        remote_port_shutdown: "Remote port shutdown"
+        remote_port_shutdown: "Remote port shutdown",
+        link_member_port: "Link Member",
+        link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -896,7 +898,8 @@ I18n.translations.en = {
         placeholder: "Enter a valid VLAN range...",
         placeholder_no_service_port: "First select a Service Port...",
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
-        untaggedPortInUse: "This service port is already in use and cannot be chosen"
+        untaggedPortInUse: "This service port is already in use and cannot be chosen",
+        taggedOnly: "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
     },
     clipboard: {
         copied: "Copied!",

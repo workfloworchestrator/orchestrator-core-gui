@@ -97,8 +97,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                     port.port_mode || (["MSP", "MSPNL"].includes(port.product.tag) ? "tagged" : "untagged");
                 servicePorts[index].tag = port.product.tag;
 
-                // Reset vlan since we cannot change it for untagged and it can't be 0 for tagged
-                servicePorts[index].vlan = servicePorts[index].port_mode === "untagged" ? "0" : "";
+                // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
+                servicePorts[index].vlan =
+                    (["untagged", "link_member"].includes(port.port_mode) ? "0" : "");
             }
         }
 
@@ -251,6 +252,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         disabled={vlanDisabled}
                         reportError={this.reportVlanError(index)}
                         vlansExtraInUse={vlansJustChosen}
+                        portMode={servicePort.port_mode}
                     />
                 </div>
                 {isElan && (
@@ -319,7 +321,8 @@ MultipleServicePorts.propTypes = {
     visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
     disabledPorts: PropTypes.bool,
     mspOnly: PropTypes.bool,
-    bandwidth: PropTypes.string
+    bandwidth: PropTypes.string,
+    node: PropTypes.number
 };
 
 MultipleServicePorts.defaultProps = {
@@ -327,7 +330,8 @@ MultipleServicePorts.defaultProps = {
     visiblePortMode: "all",
     disabledPorts: false,
     mspOnly: false,
-    servicePorts: []
+    servicePorts: [],
+    node: null
 };
 
 MultipleServicePorts.contextType = ApplicationContext;
