@@ -97,6 +97,12 @@ class Subscriptions extends React.PureComponent {
         }
     }
 
+    handleAdvancedSearchKeyDown = e => {
+        if (e.key === "Enter") {
+            this.handleAdvancedSearch();
+        }
+    };
+
     handleAdvancedSearch = () => {
         let tableState = this.state;
         tableState.page = this.props.page ? this.props.page : 0;
@@ -158,23 +164,48 @@ class Subscriptions extends React.PureComponent {
                             <p>
                                 The advanced search allows you to search on all resource types of product types. So if
                                 you know a IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, you can find it by using the advanced
-                                search
+                                search. The values in the search boxes above the columns allow you to refine/narrow
+                                these search results. It's important to remember that the advanced search will only find
+                                complete words, but it wil split words with "-", "," and "_"
+                            </p>
+                            <p>
+                                For example, to search for all subscriptions of a particular customer the search phrase
+                                would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However as the UUID
+                                is unique simply searching for
+                                <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even <i>"d253130e"</i> would yield the
+                                same results.
+                            </p>
+                            <p>
+                                The full text search can contain multiple search criteria that will AND-ed together. For
+                                example
+                                <i>
+                                    "customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"
+                                </i>{" "}
+                                would only return subscriptions matching the supplied <i>customer_id</i>, <i>status</i>{" "}
+                                and <i>tag</i>i>. Due to how full text search works that query could be simplified to:{" "}
+                                <i>"d253130e active ip_prefix"</i>.
                             </p>
                             <h1>Patterns</h1>
                             <p>
-                                Any `keyword: value(s)` substring becomes a `phraseto_tsquery`. Just a bunch of
-                                values/words becomes a `plainto_tsquery` unless any of the values/words has a word
-                                splitting character such as '-' or '_'. The bunch of values/words then becomes a
-                                `phraseto_tsquery`. Examples:: # ordering does not matter, also finds `Asd001a` before
-                                `VU` `VU Asd001a` -> plainto_tsquery('VU Asd001a') # ordering matters, finds only `VU
-                                Asd001a` `description: VU Asd001a` -> phraseto_tsquery(description: 'VU Asd001a') #
-                                combine no ordering with ordering `bla die blah crm_port_id: 12345 ->
-                                (plainto_tsquery('bla die blah') && phraseto_tsquery('crm_port_id: 12345'))
+                                <b>by customer:</b> customer_id:uuid
+                                <br />
+                                <b>by ims_circuit_id:</b> ims_circuit_id:int
+                                <br />
+                                <b>by ipam_prefix_id:</b> ipam_prefix_id:int
+                                <br />
+                                <b>by nso_service_id:</b> nso_service_ud:int
+                                <br />
+                                <b>by service_speed:</b> nso_service_ud:int
+                                <br />
+                                <b>by asn:</b> asn:int
+                                <br />
+                                <b>by crm_port_id:</b> crm_port_id:int
+                                <br />
                             </p>
                         </React.Fragment>
                     )}
                     isVisible={showExplanation}
-                    title="How does it work"
+                    title="Advanced search"
                     content="Blaat"
                 />
                 <div className="advanced-search-container">
@@ -186,6 +217,7 @@ class Subscriptions extends React.PureComponent {
                             type="text"
                             name="advancedSearchPhrase"
                             onChange={e => this.setState({ advancedSearchPhrase: e.target.value })}
+                            onKeyUp={this.handleAdvancedSearchKeyDown}
                         />
                     </section>
                     <button

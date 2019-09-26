@@ -22,7 +22,22 @@
     }
 
     p {
-        margin-top: 5px;
+        margin-top: 15px;
+    }
+    h1,
+    h2,
+    h3 {
+        margin-top: 15px;
+        color: $blue;
+    }
+    h1 {
+        font-size: 1.25em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    h3 {
+        font-size: 1.15em;
     }
 
     span {
@@ -49,8 +64,6 @@
         }
     }
 
-    .explanation,
-    .example,
     .details {
         padding: 10px;
     }

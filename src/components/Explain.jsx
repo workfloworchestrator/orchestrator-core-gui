@@ -23,8 +23,7 @@ export default class Explain extends React.PureComponent {
                             <i className="fa fa-remove" />
                         </button>
                     </section>
-                    Explanation
-                    {render()}
+                    <section className="details">{render()}</section>
                 </section>
             </div>
         );
