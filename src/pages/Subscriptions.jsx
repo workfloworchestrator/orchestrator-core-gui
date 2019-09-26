@@ -15,7 +15,6 @@ import "./Subscriptions.scss";
 import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
 import I18n from "i18n-js";
-import ValidationsExplain from "./Validations";
 import Explain from "../components/Explain";
 
 const urlPropsQueryConfig = {
