@@ -196,7 +196,7 @@ class Subscriptions extends React.PureComponent {
                                     "customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"
                                 </i>{" "}
                                 would only return subscriptions matching the supplied <i>customer_id</i>, <i>status</i>{" "}
-                                and <i>tag</i>i>. Due to how full text search works that query could be simplified to:{" "}
+                                and <i>tag</i>. Due to how full text search works that query could be simplified to:{" "}
                                 <i>"d253130e active ip_prefix"</i>.
                             </p>
                             <h1>Patterns</h1>

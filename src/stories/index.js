@@ -600,7 +600,7 @@ storiesOf("UserInputForm", module)
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
-        fetchMock.get("/api/ims/nodes/MT001A", imsNodes);
+        fetchMock.get("/api/ims/nodes/MT001A/PL", imsNodes);
         return <UserInputContainer formName="Node form" stepUserInput={nodeSteps} />;
     })
     .add("SN7 Portselect all organisations", () => {

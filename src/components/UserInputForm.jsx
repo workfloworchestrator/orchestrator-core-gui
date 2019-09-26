@@ -526,6 +526,7 @@ export default class UserInputForm extends React.Component {
                         mspOnly={userInput.mspOnly}
                         reportError={this.reportCustomError(name)}
                         bandwidth={bandwidth}
+                        nodeId={userInput.node}
                     />
                 );
             case "subscriptions":
@@ -563,6 +564,7 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeSelectInput(name)}
                         locationCode={userInput.location_code}
                         node={value}
+                        status={userInput.status}
                     />
                 );
             case "corelink":

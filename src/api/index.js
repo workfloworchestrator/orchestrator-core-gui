@@ -204,7 +204,7 @@ export function nodeSubscriptions(statusList = []) {
     return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
 
-export function portSubscriptions(tagList, statusList = []) {
+export function portSubscriptions(tagList, statusList = [], node = null) {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(
         `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
@@ -237,7 +237,7 @@ export function corelinkIEEEInterfaceTypes() {
     return fetchJson("products/corelink_ieee_interface_types");
 }
 
-export function getNodeByLocationAndStatus(locationCode, status) {
+export function getNodesByLocationAndStatus(locationCode, status) {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
 
