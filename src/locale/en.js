@@ -1244,6 +1244,7 @@ I18n.translations.en = {
         modify_sn7_service_port_msp_replace: "Replace MSP with another MSP",
         modify_sn7_service_port_ssp_replace: "Replace SSP with another SSP",
         modify_sn7_service_port_ssp_speed: "Modify SSP Speed",
+        modify_sn8_aggregated_service_port: "Modify aggregated service port",
         modify_sn8_ip_bgp_add_ports: "Add port(s) to SN8 BGP IP",
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 BGP IP",
         modify_sn8_ip_bgp_remove_ports: "Remove port(s) from SN8 BGP IP",
