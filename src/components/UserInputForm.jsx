@@ -524,6 +524,7 @@ export default class UserInputForm extends React.Component {
                         isElan={userInput.elan}
                         organisationPortsOnly={userInput.organisationPortsOnly}
                         mspOnly={userInput.mspOnly}
+                        visiblePortMode={userInput.visiblePortMode}
                         reportError={this.reportCustomError(name)}
                         bandwidth={bandwidth}
                         nodeId={userInput.node}
