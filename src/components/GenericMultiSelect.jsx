@@ -18,36 +18,42 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import { subscriptionsByProductId, allSubscriptions } from "../api";
+import { selectionsByProductId, allSubscriptions } from "../api";
 import { isEmpty } from "../utils/Utils";
 import "./SubscriptionsSelect.scss";
 
-export default class MultipleItemSelect extends React.PureComponent {
+export default class GenericMultiSelect extends React.PureComponent {
     constructor(props) {
         super(props);
-        const { subscriptions, minimum } = this.props;
-        const nboxes = subscriptions.length > minimum ? subscriptions.length : minimum;
+        const { selections, minimum } = this.props;
+        const nboxes = selections.length > minimum ? selections.length : minimum;
         this.state = {
-            availableItems: [],
+            availableChoices: [],
             numberOfBoxes: nboxes
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        // todo: not sure we need this?
-        if (nextProps.items && nextProps.items !== this.props.items) {
-            this.setState({ availableItems: [] });
-        }
-    }
+    componentDidMount = () => {
+        const { choices } = this.props;
+        this.setState({ availableChoices: choices })
+    };
+
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.productId && nextProps.productId !== this.props.productId) {
+    //         this.componentDidMount(nextProps.productId);
+    //     } else if (isEmpty(nextProps.productId)) {
+    //         this.setState({ availableChoices: [] });
+    //     }
+    // }
 
     onChangeInternal = index => selection => {
-        const { items } = this.props;
+        const { selections } = this.props;
         if (selection && selection.value) {
-            items[index] = selection.value;
+            selections[index] = selection.value;
         } else {
-            items[index] = null;
+            selections[index] = null;
         }
-        this.props.onChange(items);
+        this.props.onChange(selections);
     };
 
     addSubscription() {
@@ -56,39 +62,45 @@ export default class MultipleItemSelect extends React.PureComponent {
     }
 
     removeSubscription(index) {
-        const { items } = this.props;
+        const { selections } = this.props;
         const nboxes = this.state.numberOfBoxes - 1;
-        if (items.length > nboxes) {
-            items.splice(index, 1);
-            this.props.onChange(items);
+        if (selections.length > nboxes) {
+            selections.splice(index, 1);
+            this.props.onChange(selections);
         }
         this.setState({ numberOfBoxes: nboxes });
     }
 
     render() {
-        const { availableItems, numberOfBoxes } = this.state;
-        const { disabled, items, minimum, maximum } = this.props;
-        const placeholder = I18n.t("multiple_item_select.select_item");
-        const showAdd = maximum > minimum && items.length < maximum;
+        const { availableChoices, numberOfBoxes } = this.state;
+        const { productId, disabled, selections, minimum, maximum } = this.props;
+        const placeholder = productId
+            ? I18n.t("subscription_select.placeholder")
+            : I18n.t("subscription_select.select_product");
+        const showAdd = maximum > minimum && selections.length < maximum;
         const boxes =
-            subscriptions.length < numberOfBoxes
-                ? items.concat(Array(numberOfBoxes - items.length).fill(null))
-                : items;
+            selections.length < numberOfBoxes
+                ? selections.concat(Array(numberOfBoxes - selections.length).fill(null))
+                : selections;
 
         return (
             <section className="multiple-subscriptions">
                 <section className="subscription-select">
-                    {boxes.map((item, index) => {
-                        const options = availableItems
-                            .filter(
-                                x => x.subscription_id === item || !items.includes(x.subscription_id)
-                            )
+                    {boxes.map((selection, index) => {
+                        const notModifiable = selection && selection.hasOwnProperty("modifiable")? !selection.modifiable : false;
+                        const options = availableChoices
+                            // .filter(
+                            //     x => x.value === selection || !selections.includes(x.value)
+                            // )
                             .map(x => ({
-                                value: x.subscription_id,
-                                label: x.description
+                                value: x.value,
+                                label: x.label
                             }));
 
-                        const value = options.find(option => option.value === item);
+                        let value;
+                        if (selection && selection.hasOwnProperty("value")) {
+                            value = options.find(option => option.value === selection.value);
+                        }
 
                         return (
                             <div className="wrapper" key={index}>
@@ -99,7 +111,7 @@ export default class MultipleItemSelect extends React.PureComponent {
                                         options={options}
                                         value={value}
                                         isSearchable={true}
-                                        isDisabled={disabled || availableItems.length === 0}
+                                        isDisabled={disabled || availableChoices.length === 0 || notModifiable}
                                         placeholder={placeholder}
                                     />
                                 </div>
@@ -107,7 +119,7 @@ export default class MultipleItemSelect extends React.PureComponent {
                                 {maximum > minimum && (
                                     <i
                                         className={`fa fa-minus ${index < minimum ? "disabled" : ""}`}
-                                        onClick={this.removeItem.bind(this, index)}
+                                        onClick={this.removeSubscription.bind(this, index)}
                                     />
                                 )}
                             </div>
@@ -115,8 +127,8 @@ export default class MultipleItemSelect extends React.PureComponent {
                     })}
 
                     {showAdd && (
-                        <div className="add-item">
-                            <i className="fa fa-plus" onClick={this.addItem.bind(this)} />
+                        <div className="add-subscription">
+                            <i className="fa fa-plus" onClick={this.addSubscription.bind(this)} />
                         </div>
                     )}
                 </section>
@@ -125,15 +137,17 @@ export default class MultipleItemSelect extends React.PureComponent {
     }
 }
 
-MultipleItemSelect.propTypes = {
+GenericMultiSelect.propTypes = {
+    selections: PropTypes.array.isRequired,
+    choices: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
+    productId: PropTypes.string,
     disabled: PropTypes.bool,
-    items: PropTypes.array, // array of values or array of {value: "20", label: "My 20 birthday"}
     minimum: PropTypes.number,
     maximum: PropTypes.number
 };
 
-MultipleItemSelect.defaultProps = {
+GenericMultiSelect.defaultProps = {
     minimum: 1,
     maximum: 1
 };
