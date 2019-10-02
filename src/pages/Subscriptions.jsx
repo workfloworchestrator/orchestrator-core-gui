@@ -236,8 +236,8 @@ class Subscriptions extends React.PureComponent {
                     </section>
                     <button
                         type="submit"
-                        name="new-process"
-                        id="new-process"
+                        name="advanced-search"
+                        id="advanced-search"
                         className="new button green"
                         onClick={this.handleAdvancedSearch}
                     >
