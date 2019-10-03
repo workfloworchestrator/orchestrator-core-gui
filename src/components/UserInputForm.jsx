@@ -608,8 +608,6 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeNestedInput(name)}
                         selections={value}
                         choices={userInput.choices}
-                        productId="f5b3fabf-e81a-4fab-98b4-deb6760bfd26"
-                        subscriptions={["Floemp1"]}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
                     />

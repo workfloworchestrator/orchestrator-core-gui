@@ -28,40 +28,26 @@ export default class GenericMultiSelect extends React.PureComponent {
         const { selections, minimum } = this.props;
         const nboxes = selections.length > minimum ? selections.length : minimum;
         this.state = {
-            availableChoices: [],
             numberOfBoxes: nboxes
         };
     }
 
-    componentDidMount = () => {
-        const { choices } = this.props;
-        this.setState({ availableChoices: choices })
-    };
-
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.productId && nextProps.productId !== this.props.productId) {
-    //         this.componentDidMount(nextProps.productId);
-    //     } else if (isEmpty(nextProps.productId)) {
-    //         this.setState({ availableChoices: [] });
-    //     }
-    // }
-
     onChangeInternal = index => selection => {
         const { selections } = this.props;
         if (selection && selection.value) {
-            selections[index] = selection.value;
+            selections[index] = { value: selection.value, label: selection.label };
         } else {
             selections[index] = null;
         }
         this.props.onChange(selections);
     };
 
-    addSubscription() {
+    addItem() {
         const nboxes = this.state.numberOfBoxes + 1;
         this.setState({ numberOfBoxes: nboxes });
     }
 
-    removeSubscription(index) {
+    removeItem(index) {
         const { selections } = this.props;
         const nboxes = this.state.numberOfBoxes - 1;
         if (selections.length > nboxes) {
@@ -72,11 +58,9 @@ export default class GenericMultiSelect extends React.PureComponent {
     }
 
     render() {
-        const { availableChoices, numberOfBoxes } = this.state;
-        const { productId, disabled, selections, minimum, maximum } = this.props;
-        const placeholder = productId
-            ? I18n.t("subscription_select.placeholder")
-            : I18n.t("subscription_select.select_product");
+        const { numberOfBoxes } = this.state;
+        const { choices, disabled, selections, minimum, maximum } = this.props;
+        const placeholder = I18n.t("generic_multi_select.placeholder");
         const showAdd = maximum > minimum && selections.length < maximum;
         const boxes =
             selections.length < numberOfBoxes
@@ -87,11 +71,14 @@ export default class GenericMultiSelect extends React.PureComponent {
             <section className="multiple-subscriptions">
                 <section className="subscription-select">
                     {boxes.map((selection, index) => {
-                        const notModifiable = selection && selection.hasOwnProperty("modifiable")? !selection.modifiable : false;
-                        const options = availableChoices
-                            // .filter(
-                            //     x => x.value === selection || !selections.includes(x.value)
-                            // )
+                        const notModifiable =
+                            selection && selection.hasOwnProperty("modifiable") ? !selection.modifiable : false;
+                        const options = choices
+                            .filter(
+                                x =>
+                                    !selections.find(y => y.value === x.value) ||
+                                    (selection && x.value === selection.value)
+                            )
                             .map(x => ({
                                 value: x.value,
                                 label: x.label
@@ -111,7 +98,7 @@ export default class GenericMultiSelect extends React.PureComponent {
                                         options={options}
                                         value={value}
                                         isSearchable={true}
-                                        isDisabled={disabled || availableChoices.length === 0 || notModifiable}
+                                        isDisabled={disabled || choices.length === 0 || notModifiable}
                                         placeholder={placeholder}
                                     />
                                 </div>
@@ -119,7 +106,7 @@ export default class GenericMultiSelect extends React.PureComponent {
                                 {maximum > minimum && (
                                     <i
                                         className={`fa fa-minus ${index < minimum ? "disabled" : ""}`}
-                                        onClick={this.removeSubscription.bind(this, index)}
+                                        onClick={this.removeItem.bind(this, index)}
                                     />
                                 )}
                             </div>
@@ -128,7 +115,7 @@ export default class GenericMultiSelect extends React.PureComponent {
 
                     {showAdd && (
                         <div className="add-subscription">
-                            <i className="fa fa-plus" onClick={this.addSubscription.bind(this)} />
+                            <i className="fa fa-plus" onClick={this.addItem.bind(this)} />
                         </div>
                     )}
                 </section>
@@ -141,7 +128,6 @@ GenericMultiSelect.propTypes = {
     selections: PropTypes.array.isRequired,
     choices: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    productId: PropTypes.string,
     disabled: PropTypes.bool,
     minimum: PropTypes.number,
     maximum: PropTypes.number

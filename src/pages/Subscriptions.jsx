@@ -177,17 +177,16 @@ class Subscriptions extends React.PureComponent {
                             <h1>Using the advanced search</h1>
                             <p>
                                 The advanced search allows you to search on all resource types of product types. So if
-                                you know a IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, you can find it by using the advanced
-                                search. The values in the search boxes above the columns allow you to refine/narrow
-                                these search results. It's important to remember that the advanced search will only find
-                                complete words, but it wil split words with "-", "," and "_"
+                                you know an IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, then you can find it by the use of the
+                                advanced search. The values in the search boxes above the columns, allow you to
+                                refine/narrow these search results. It's important to remember that the advanced search
+                                will only find complete words, but it will split words with "-", "," and "_".
                             </p>
                             <p>
-                                For example, to search for all subscriptions of a particular customer the search phrase
-                                would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However as the UUID
-                                is unique simply searching for
-                                <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even <i>"d253130e"</i> would yield the
-                                same results.
+                                For example, to search for all subscriptions of a particular customer, the search phrase
+                                would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However, as the UUID
+                                is unique, simply searching for <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even
+                                <i>"d253130e"</i> would yield the same results.
                             </p>
                             <p>
                                 The full text search can contain multiple search criteria that will AND-ed together. For
