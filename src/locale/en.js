@@ -614,7 +614,11 @@ I18n.translations.en = {
         speed_policer: "Speed policer",
         remote_port_shutdown: "Remote port shutdown",
         link_member_port: "Link Member",
-        link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown"
+        link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown",
+        added_service_ports: "Add ports",
+        added_service_ports_info: "Select some link_member ports to add them to this aggregated service port",
+        removed_service_ports: "Remove ports",
+        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port",
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -900,6 +904,10 @@ I18n.translations.en = {
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         untaggedPortInUse: "This service port is already in use and cannot be chosen",
         taggedOnly: "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
+    },
+    generic_multi_select: {
+        placeholder: "Select an item",
+        placeholder_no_items: "No items available"
     },
     clipboard: {
         copied: "Copied!",

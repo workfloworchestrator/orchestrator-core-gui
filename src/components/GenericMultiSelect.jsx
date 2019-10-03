@@ -18,9 +18,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-import { selectionsByProductId, allSubscriptions } from "../api";
-import { isEmpty } from "../utils/Utils";
-import "./SubscriptionsSelect.scss";
+import "./GenericMultiSelect.scss";
 
 export default class GenericMultiSelect extends React.PureComponent {
     constructor(props) {
@@ -49,6 +47,12 @@ export default class GenericMultiSelect extends React.PureComponent {
 
     removeItem(index) {
         const { selections } = this.props;
+
+        // Don't allow when disabled
+        if (selections[index].nonremovable === true) {
+            return;
+        }
+
         const nboxes = this.state.numberOfBoxes - 1;
         if (selections.length > nboxes) {
             selections.splice(index, 1);
@@ -68,11 +72,12 @@ export default class GenericMultiSelect extends React.PureComponent {
                 : selections;
 
         return (
-            <section className="multiple-subscriptions">
-                <section className="subscription-select">
+            <section className="multiple-selections-container">
+                <section className="item-select">
                     {boxes.map((selection, index) => {
                         const notModifiable =
                             selection && selection.hasOwnProperty("modifiable") ? !selection.modifiable : false;
+                        const showDelete = selections.length > minimum && !disabled;
                         const options = choices
                             .filter(
                                 x =>
@@ -98,14 +103,18 @@ export default class GenericMultiSelect extends React.PureComponent {
                                         options={options}
                                         value={value}
                                         isSearchable={true}
-                                        isDisabled={disabled || choices.length === 0 || notModifiable}
-                                        placeholder={placeholder}
+                                        isDisabled={disabled || options.length === 0 || notModifiable}
+                                        placeholder={
+                                            options.length === 0
+                                                ? I18n.t("generic_multi_select.placeholder_no_items")
+                                                : placeholder
+                                        }
                                     />
                                 </div>
 
-                                {maximum > minimum && (
+                                {showDelete && (
                                     <i
-                                        className={`fa fa-minus ${index < minimum ? "disabled" : ""}`}
+                                        className={`fa fa-minus ${selection && selection.nonremovable ? "disabled" : ""}`}
                                         onClick={this.removeItem.bind(this, index)}
                                     />
                                 )}
@@ -114,7 +123,7 @@ export default class GenericMultiSelect extends React.PureComponent {
                     })}
 
                     {showAdd && (
-                        <div className="add-subscription">
+                        <div className="add-item">
                             <i className="fa fa-plus" onClick={this.addItem.bind(this)} />
                         </div>
                     )}

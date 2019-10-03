@@ -47,6 +47,7 @@ import GenericNOCConfirm from "../components/GenericNOCConfirm";
 import MultipleServicePorts from "../components/MultipleServicePorts";
 import { formDate } from "../forms/Builder";
 import UserInputFormWizard from "../components/UserInputFormWizard";
+import GenericMultiSelect from "../components/GenericMultiSelect";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -338,6 +339,66 @@ storiesOf("GenericSelect", module)
             }}
             disabled={boolean("Disabled")}
             choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
+        />
+    ));
+
+storiesOf("GenericMultiSelect", module)
+    .addDecorator(withKnobs)
+    .addDecorator(StateDecorator(store))
+    .add("Default", () => (
+        <GenericMultiSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            selections={[]}
+            minimum={1}
+            maximum={10}
+            disabled={boolean("Disabled")}
+            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+        />
+    ))
+    .add("With selections", () => (
+        <GenericMultiSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            selections={[{value: "1", label: "SAP 1"}]}
+            minimum={1}
+            maximum={10}
+            disabled={boolean("Disabled")}
+            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+        />
+    ))
+    .add("Non modifiable selection", () => (
+        <GenericMultiSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            selections={[{value: "1", label: "SAP 1", modifiable: false}, {value: "2", label: "SAP 2"}]}
+            minimum={1}
+            maximum={10}
+            disabled={boolean("Disabled")}
+            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+        />
+    ))
+    .add("Non removable selection", () => (
+        <GenericMultiSelect
+            selected={store.state.selected}
+            onChange={e => {
+                action("onChange")(e);
+                store.set({ selected: e.value });
+            }}
+            selections={[{value: "1", label: "SAP 1"}, {value: "2", label: "SAP 2", nonremovable: true}]}
+            minimum={1}
+            maximum={10}
+            disabled={boolean("Disabled")}
+            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
         />
     ));
 
