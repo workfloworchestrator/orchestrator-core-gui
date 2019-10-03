@@ -356,7 +356,13 @@ storiesOf("GenericMultiSelect", module)
             minimum={1}
             maximum={10}
             disabled={boolean("Disabled")}
-            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+            choices={array("Values", [
+                { value: "1", label: "SAP 1" },
+                { value: "2", label: "SAP 2" },
+                { value: "3", label: "SAP 3" },
+                { value: "4", label: "SAP 4" },
+                { value: "5", label: "SAP 5" }
+            ])}
         />
     ))
     .add("With selections", () => (
@@ -366,11 +372,17 @@ storiesOf("GenericMultiSelect", module)
                 action("onChange")(e);
                 store.set({ selected: e.value });
             }}
-            selections={[{value: "1", label: "SAP 1"}]}
+            selections={[{ value: "1", label: "SAP 1" }]}
             minimum={1}
             maximum={10}
             disabled={boolean("Disabled")}
-            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+            choices={array("Values", [
+                { value: "1", label: "SAP 1" },
+                { value: "2", label: "SAP 2" },
+                { value: "3", label: "SAP 3" },
+                { value: "4", label: "SAP 4" },
+                { value: "5", label: "SAP 5" }
+            ])}
         />
     ))
     .add("Non modifiable selection", () => (
@@ -380,11 +392,17 @@ storiesOf("GenericMultiSelect", module)
                 action("onChange")(e);
                 store.set({ selected: e.value });
             }}
-            selections={[{value: "1", label: "SAP 1", modifiable: false}, {value: "2", label: "SAP 2"}]}
+            selections={[{ value: "1", label: "SAP 1", modifiable: false }, { value: "2", label: "SAP 2" }]}
             minimum={1}
             maximum={10}
             disabled={boolean("Disabled")}
-            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+            choices={array("Values", [
+                { value: "1", label: "SAP 1" },
+                { value: "2", label: "SAP 2" },
+                { value: "3", label: "SAP 3" },
+                { value: "4", label: "SAP 4" },
+                { value: "5", label: "SAP 5" }
+            ])}
         />
     ))
     .add("Non removable selection", () => (
@@ -394,11 +412,17 @@ storiesOf("GenericMultiSelect", module)
                 action("onChange")(e);
                 store.set({ selected: e.value });
             }}
-            selections={[{value: "1", label: "SAP 1"}, {value: "2", label: "SAP 2", nonremovable: true}]}
+            selections={[{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2", nonremovable: true }]}
             minimum={1}
             maximum={10}
             disabled={boolean("Disabled")}
-            choices={array("Values", [{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2" }, { value: "3", label: "SAP 3" }, { value: "4", label: "SAP 4" }, { value: "5", label: "SAP 5" }])}
+            choices={array("Values", [
+                { value: "1", label: "SAP 1" },
+                { value: "2", label: "SAP 2" },
+                { value: "3", label: "SAP 3" },
+                { value: "4", label: "SAP 4" },
+                { value: "5", label: "SAP 5" }
+            ])}
         />
     ));
 

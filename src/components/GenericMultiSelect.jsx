@@ -114,7 +114,9 @@ export default class GenericMultiSelect extends React.PureComponent {
 
                                 {showDelete && (
                                     <i
-                                        className={`fa fa-minus ${selection && selection.nonremovable ? "disabled" : ""}`}
+                                        className={`fa fa-minus ${
+                                            selection && selection.nonremovable ? "disabled" : ""
+                                        }`}
                                         onClick={this.removeItem.bind(this, index)}
                                     />
                                 )}
