@@ -618,7 +618,7 @@ I18n.translations.en = {
         added_service_ports: "Add ports",
         added_service_ports_info: "Select some link_member ports to add them to this aggregated service port",
         removed_service_ports: "Remove ports",
-        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port",
+        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port"
     },
     process_state: {
         copy: "Copy to clipboard",
