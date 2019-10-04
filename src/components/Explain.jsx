@@ -19,7 +19,7 @@ export default class Explain extends React.PureComponent {
                 <section className="container">
                     <section className="title">
                         <p>{title}</p>
-                        <button className="close" onClick={close}>
+                        <button type="submit" id="close-explain-container" className="close" onClick={close}>
                             <i className="fa fa-remove" />
                         </button>
                     </section>
