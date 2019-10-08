@@ -98,8 +98,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                 servicePorts[index].tag = port.product.tag;
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
-                servicePorts[index].vlan =
-                    (["untagged", "link_member"].includes(port.port_mode) ? "0" : "");
+                servicePorts[index].vlan = ["untagged", "link_member"].includes(port.port_mode) ? "0" : "";
             }
         }
 

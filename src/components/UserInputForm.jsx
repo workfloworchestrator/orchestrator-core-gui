@@ -53,6 +53,7 @@ import TableSummary from "./TableSummary";
 import { nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
 import { applyIdNamingConvention } from "../utils/Utils";
+import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -600,6 +601,16 @@ export default class UserInputForm extends React.Component {
                         choices={userInput.choices}
                         selected={value}
                         disabled={userInput.readonly}
+                    />
+                );
+            case "generic_multi_select":
+                return (
+                    <GenericMultiSelect
+                        onChange={this.changeNestedInput(name)}
+                        selections={value}
+                        choices={userInput.choices}
+                        minimum={userInput.minimum}
+                        maximum={userInput.maximum}
                     />
                 );
             case "bfd":
