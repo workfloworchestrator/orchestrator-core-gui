@@ -433,7 +433,7 @@ I18n.translations.en = {
         ims_port_id_2: "Second node and port",
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
-        port_mode_info: "The port mode as sent to IMS and NSO",
+        port_mode_info: "The port mode of the new service port",
         auto_negotiation_info:
             "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
         auto_negotiation: "Auto Negotiation",
