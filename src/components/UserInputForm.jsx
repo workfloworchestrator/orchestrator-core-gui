@@ -189,7 +189,7 @@ export default class UserInputForm extends React.Component {
                 type="submit"
                 id="button-next-form-submit"
                 tabIndex={0}
-                className={`button ${invalid ? "grey disabled" : "blue"}`}
+                className={`button blue`}
                 onClick={this.submit}
             >
                 {I18n.t("process.next")}
@@ -199,7 +199,7 @@ export default class UserInputForm extends React.Component {
                 type="submit"
                 id="button-submit-form-submit"
                 tabIndex={0}
-                className={`button ${invalid ? "grey disabled" : "blue"}`}
+                className={`button blue`}
                 onClick={this.submit}
             >
                 {I18n.t("process.submit")}
