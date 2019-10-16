@@ -1,0 +1,46 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := .Values.nameOverride -}}
+{{- $ingressPaths := .Values.ingress.paths -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.nameOverride }}
+    helm.sh/chart: {{ include "orchestrator-client.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+{{- if .Values.ingress.tls }}
+  tls:
+    - hosts:
+      {{- if .Values.ingress.defaultHost }}
+        - {{ .Values.ingress.defaultHost }}
+      {{- end }}
+      {{- if .Values.ingress.environmentUrl }}
+        - {{ .Values.ingress.environmentUrl }}
+      {{- end }}
+      secretName: {{ .Values.ingress.tls.secretName }}-{{ .Release.Namespace }}-{{ .Values.nameOverride }}
+{{- end }}
+  rules:
+  - host: {{ .Values.ingress.defaultHost }}
+    http:
+      &httpRule
+      paths:
+      {{- range $ingressPaths }}
+          - path: {{ . }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: http
+	  {{- end }}
+  {{- if .Values.ingress.environmentUrl }}
+  - host: {{ .Values.ingress.environmentUrl }}
+    http:
+      <<: *httpRule
+  {{- end -}}
+{{- end }}

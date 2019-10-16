@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.nameOverride }}
   labels:
     app.kubernetes.io/name: {{ .Values.nameOverride }}
-    helm.sh/chart: {{ include "workflows-client.chart" . }}
+    helm.sh/chart: {{ include "orchestrator-client.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
@@ -19,8 +19,12 @@ spec:
         app.kubernetes.io/name: {{ .Values.nameOverride }}
         app.kubernetes.io/instance: {{ .Release.Name }}
       annotations:
+        configmap.reloader.stakater.com/reload: {{ .Values.configMapName }}-{{ .Release.Namespace }}
         checksum/config: {{ include (print $.Template.BasePath "/config-map.yaml") . | sha256sum }}
+        checksum/application-secrets: "{{ .Values.secret.secretChecksum }}"
     spec:
+      imagePullSecrets:
+{{ toYaml .Values.image.secrets | indent 10 }}
       containers:
         - name: {{ .Values.nameOverride }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -28,6 +32,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: env-vars-{{ .Values.nameOverride }}
+          {{- if .Values.secret.secretName }}
+            - secretRef:
+                name: {{ .Values.secret.secretName }}
+           {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.internalPort }}
