@@ -108,19 +108,18 @@ export default class UserInputForm extends React.Component {
     };
 
     updateValidationErrors = validationErrors => {
-        const errors = { ...this.state.errors };
         let newValidationErrors = {};
 
         validationErrors.validation_errors.forEach(item => {
-            errors[item.loc[0]] = true;
+            // errors[item.loc[0]] = true;
             if (item.loc[0] in newValidationErrors) {
                 // multiple errors for one input
-                newValidationErrors[item.loc[0]] = `${newValidationErrors[item.loc[0]]} or ${item.msg}`;
+                newValidationErrors[item.loc[0]].push(item.msg);
             } else {
-                newValidationErrors[item.loc[0]] = item.msg;
+                newValidationErrors[item.loc[0]] = [item.msg];
             }
         });
-        this.setState({ errors: errors, validationErrors: newValidationErrors, processing: false });
+        this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 
     submit = e => {
@@ -157,16 +156,16 @@ export default class UserInputForm extends React.Component {
 
     validateAllUserInput = stepUserInput => {
         const errors = { ...this.state.errors };
-        stepUserInput.forEach(input => {
-            //the value can be true or false, but there is datavalidation
-            //dependent on whether the SKIP AcceptType checkbox is checked or all others
-            //as implemented in changeAcceptOrSkip function
-            //this is a hack to make the front-end validation work
-            if (input.type !== "accept_or_skip") {
-                doValidateUserInput(input, input.value, errors);
-            }
-        });
-        this.setState({ errors: errors });
+        // stepUserInput.forEach(input => {
+        //     //the value can be true or false, but there is datavalidation
+        //     //dependent on whether the SKIP AcceptType checkbox is checked or all others
+        //     //as implemented in changeAcceptOrSkip function
+        //     //this is a hack to make the front-end validation work
+        //     if (input.type !== "accept_or_skip") {
+        //         doValidateUserInput(input, input.value, errors);
+        //     }
+        // });
+        // this.setState({ errors: errors });
         return !Object.keys(errors).some(key => errors[key]);
     };
 
@@ -193,6 +192,7 @@ export default class UserInputForm extends React.Component {
                 onClick={this.submit}
             >
                 {I18n.t("process.next")}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin"/>}
             </button>
         ) : (
             <button
@@ -203,6 +203,7 @@ export default class UserInputForm extends React.Component {
                 onClick={this.submit}
             >
                 {I18n.t("process.submit")}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin"/>}
             </button>
         );
 
@@ -321,7 +322,7 @@ export default class UserInputForm extends React.Component {
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput)}
                 {(error || customError || validationError) && (
-                    <em className="error">{validationError ? validationError : I18n.t("process.format_error")}</em>
+                    <em className="error">{validationError ? validationError.map(e => `<div>${e}</div>`) : I18n.t("process.format_error")}</em>
                 )}
                 {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
