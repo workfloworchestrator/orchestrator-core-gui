@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
-import { isEmpty, stop } from "../utils/Utils";
+import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
@@ -126,7 +126,7 @@ export default class UserInputForm extends React.Component {
         stop(e);
         const { stepUserInput, processing } = this.state;
 
-        if (this.validateAllUserInput(stepUserInput) && !this.isInvalid() && !processing) {
+        if (!processing) {
             this.setState({ processing: true, errors: {} });
 
             const processInput = stepUserInput.reduce((acc, input) => {
@@ -149,9 +149,9 @@ export default class UserInputForm extends React.Component {
     };
 
     reportCustomError = name => isError => {
-        const customErrors = { ...this.state.customErrors };
-        customErrors[name] = isError;
-        this.setState({ customErrors: customErrors });
+        // const customErrors = { ...this.state.customErrors };
+        // customErrors[name] = isError;
+        // this.setState({ customErrors: customErrors });
     };
 
     validateAllUserInput = stepUserInput => {
@@ -192,7 +192,7 @@ export default class UserInputForm extends React.Component {
                 onClick={this.submit}
             >
                 {I18n.t("process.next")}
-                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin"/>}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
             </button>
         ) : (
             <button
@@ -203,7 +203,7 @@ export default class UserInputForm extends React.Component {
                 onClick={this.submit}
             >
                 {I18n.t("process.submit")}
-                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin"/>}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
             </button>
         );
 
@@ -215,11 +215,11 @@ export default class UserInputForm extends React.Component {
         );
     };
 
-    isInvalid = () =>
-        Object.values(this.state.errors)
-            .concat(Object.values(this.state.uniqueErrors))
-            .concat(Object.values(this.state.customErrors))
-            .some(val => val);
+    isInvalid = () => false;
+    // Object.values(this.state.errors)
+    //     .concat(Object.values(this.state.uniqueErrors))
+    //     .concat(Object.values(this.state.customErrors))
+    //     .some(val => val);
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -237,13 +237,13 @@ export default class UserInputForm extends React.Component {
     changeBooleanInput = name => e => {
         const value = e.target.checked;
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
+        // this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeSelectInput = name => option => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
+        // this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
@@ -278,31 +278,31 @@ export default class UserInputForm extends React.Component {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
         this.enforceSelectInputUniqueness(hash, name, value);
-        this.validateUserInput(name)({ target: { value: value } });
+        // this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeNestedInput = name => newValue => {
         this.changeUserInput(name, newValue);
-        this.validateUserInput(name)({ target: { value: newValue } });
+        // this.validateUserInput(name)({ target: { value: newValue } });
     };
 
     changeAcceptOrSkip = name => (newValue, from_skip) => {
         this.changeUserInput(name, newValue);
-        this.validateUserInput(name)({ target: { value: from_skip } });
+        // this.validateUserInput(name)({ target: { value: from_skip } });
     };
 
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
+        // this.validateUserInput(name)({ target: { value: value } });
     };
 
     validateUserInput = name => e => {
-        const value = e.target.value;
-        const userInput = this.state.stepUserInput.find(input => input.name === name);
-        const errors = { ...this.state.errors };
-        doValidateUserInput(userInput, value, errors);
-        this.setState({ errors: errors });
+        // const value = e.target.value;
+        // const userInput = this.state.stepUserInput.find(input => input.name === name);
+        // const errors = { ...this.state.errors };
+        // doValidateUserInput(userInput, value, errors);
+        // this.setState({ errors: errors });
     };
 
     renderInput = userInput => {
@@ -322,7 +322,11 @@ export default class UserInputForm extends React.Component {
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput)}
                 {(error || customError || validationError) && (
-                    <em className="error">{validationError ? validationError.map(e => `<div>${e}</div>`) : I18n.t("process.format_error")}</em>
+                    <em className="error">
+                        {validationError
+                            ? validationError.map(e => <div>{capitalizeFirstLetter(e)}.</div>)
+                            : I18n.t("process.format_error")}
+                    </em>
                 )}
                 {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
@@ -655,9 +659,11 @@ export default class UserInputForm extends React.Component {
             confirmationDialogAction,
             cancelDialogAction,
             stepUserInput,
-            leavePage
+            leavePage,
+            validationErrors
         } = this.state;
 
+        console.log();
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog
@@ -668,6 +674,11 @@ export default class UserInputForm extends React.Component {
                 />
                 <section className="card">
                     <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
+                    {Object.keys(validationErrors).length > 0 && (
+                        <em className="error">
+                            {Object.keys(validationErrors).length} input fields have validation errors
+                        </em>
+                    )}
                     {this.renderButtons()}
                 </section>
             </div>

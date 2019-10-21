@@ -57,10 +57,10 @@ export default class ContactPersons extends React.PureComponent {
     }
 
     validateEmail = index => e => {
-        const valid = validEmailRegExp.test(e.target.value);
-        const errors = { ...this.state.errors };
-        errors[index] = !valid;
-        this.setState({ errors: errors });
+        // const valid = validEmailRegExp.test(e.target.value);
+        // const errors = { ...this.state.errors };
+        // errors[index] = !valid;
+        // this.setState({ errors: errors });
     };
 
     onChangeInternal = (name, index) => e => {
