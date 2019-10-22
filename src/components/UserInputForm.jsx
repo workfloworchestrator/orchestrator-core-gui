@@ -614,6 +614,10 @@ export default class UserInputForm extends React.Component {
                     />
                 );
             case "bfd":
+                if (typeof value.enabled === "string") {
+                    // Todo: remove after a fix is implemented in the backend: https://git.ia.surfsara.nl/automation/orchestrator/issues/422/designs
+                    value.enabled = value.enabled !== "False";
+                }
                 return (
                     <BfdSettings
                         name={name}
