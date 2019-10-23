@@ -1264,7 +1264,7 @@ I18n.translations.en = {
         modify_sn8_light_path: "Modify SN8 LightPath",
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_sn8_service_port_nl_port_mode: "Change the mode of the port (Tagged, Linkmember)",
-
+        modify_sn8_sp_auto_negotiation: "Change the value for auto_negotiation for this port",
         task_cache_warmer: "Refresh the cache of slow API calls",
         task_clean_up_tasks: "Clean up old tasks",
         task_resume_workflows: "Resume all workflows that are stuck on tasks with the status 'waiting'",
