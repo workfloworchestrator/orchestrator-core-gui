@@ -135,16 +135,18 @@ export default class GenericMultiSelect extends React.PureComponent {
     }
 }
 
+GenericMultiSelect.defaultProps = {
+    minimum: 1,
+    maximum: 1,
+    errors: []
+};
+
 GenericMultiSelect.propTypes = {
     selections: PropTypes.array.isRequired,
     choices: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     minimum: PropTypes.number,
-    maximum: PropTypes.number
-};
-
-GenericMultiSelect.defaultProps = {
-    minimum: 1,
-    maximum: 1
+    maximum: PropTypes.number,
+    errors: PropTypes.array
 };

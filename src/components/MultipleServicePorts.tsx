@@ -43,7 +43,6 @@ interface IProps {
     disabledPorts: boolean;
     bandwidth: number;
     onChange: (servicePorts: ServicePort[]) => void;
-    reportError: (hasErrors: boolean) => void;
 }
 
 interface IState {
@@ -170,11 +169,8 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     };
 
     bubbleUpErrorState = () => {
-        const { bandwidthErrors, vlanErrors } = this.state;
-        const inValid = Object.values(bandwidthErrors)
-            .concat(Object.values(vlanErrors))
-            .some(val => val);
-        this.props.reportError(inValid);
+        console.log("Deprecated bubbleUpErrorState called!")
+        // Todo: decide if VLAN is still allowed to do "internal" error handling
     };
 
     renderServicePort = (servicePort: ServicePort, index: number) => {
@@ -316,7 +312,6 @@ MultipleServicePorts.propTypes = {
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
     organisationPortsOnly: PropTypes.bool,
-    reportError: PropTypes.func.isRequired,
     visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
     disabledPorts: PropTypes.bool,
     mspOnly: PropTypes.bool,

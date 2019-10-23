@@ -110,9 +110,9 @@ export default class ContactPersons extends React.PureComponent {
         persons[personIndex].phone = item.phone || "";
         this.props.onChange(persons);
         this.setState({ displayAutocomplete: {}, selectedItem: -1 });
-        if (this.personInput) {
-            setTimeout(scrollIntoView(this.personInput), 150);
-        }
+        // if (this.personInput) {
+        //     setTimeout(scrollIntoView(this.personInput), 150);
+        // }
     };
 
     onAutocompleteKeyDown = personIndex => e => {
@@ -235,10 +235,14 @@ export default class ContactPersons extends React.PureComponent {
         );
     }
 }
+ContactPersons.defaultProps = {
+    errors: []
+};
 
 ContactPersons.propTypes = {
     id: PropTypes.string.isRequired,
     persons: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    organisationId: PropTypes.string
+    organisationId: PropTypes.string,
+    errors: PropTypes.array
 };
