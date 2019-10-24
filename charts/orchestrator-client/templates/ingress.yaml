@@ -1,7 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := .Values.nameOverride -}}
 {{- $ingressPaths := .Values.ingress.paths -}}
-{{- $additionalHosts := .Values.ingress.additionalHosts -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -20,12 +19,10 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
     - hosts:
-      {{- if .Values.ingress.environmentUrl }}
         - {{ .Values.ingress.environmentUrl }}
-      {{- end }}
-      {{- if $additionalHosts }}
-      {{- range   $additionalHosts }}
-        - {{ . }}
+      {{- if .Values.ingress.additionalHosts }}
+      {{- range $host := .Values.ingress.additionalHosts }}
+        - {{ $host }}
       {{- end -}}
       {{- end }}
       secretName: {{ .Values.ingress.tls.secretName }}-{{ .Release.Namespace }}-{{ .Values.nameOverride }}
@@ -41,11 +38,11 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: http
 	  {{- end }}
-{{- if $additionalHosts }}
-{{- range $additionalHosts }}
-  - host: {{ . }}
+{{- if .Values.ingress.additionalHosts }}
+{{- range $host := .Values.ingress.additionalHosts }}
+  - host: {{ $host }}
     http:
       <<: *httpRule
-  {{- end -}}
+  {{- end }}
 {{- end }}
 {{- end}}
