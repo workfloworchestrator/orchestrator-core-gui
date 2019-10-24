@@ -16,10 +16,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import { isEmpty, stop } from "../utils/Utils";
-import { validEmailRegExp } from "../validations/Subscriptions";
+import {capitalizeFirstLetter, isEmpty, stop} from "../utils/Utils";
 import Autocomplete from "./Autocomplete";
-import scrollIntoView from "scroll-into-view";
 
 import "./ContactPersons.scss";
 import { contacts } from "../api";
@@ -28,7 +26,6 @@ export default class ContactPersons extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            errors: {},
             displayAutocomplete: {},
             filteredSuggestions: [],
             selectedItem: -1,
@@ -141,6 +138,12 @@ export default class ContactPersons extends React.PureComponent {
 
     renderPerson = (id, total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
+
+        let emailError = errors.filter(e => e.loc[1] === index && e.loc.length === 3);
+        emailError = emailError.length > 0 ? capitalizeFirstLetter(emailError[0].msg) : undefined;
+
+        const fieldError = (errors.length && errors[0].loc.length === 1) ? capitalizeFirstLetter(errors[0].msg) : undefined;
+
         return (
             <section className="person" key={index}>
                 <div className="wrapper autocomplete-container" tabIndex="1" onBlur={this.onBlurAutoComplete}>
@@ -160,6 +163,7 @@ export default class ContactPersons extends React.PureComponent {
                         onKeyDown={this.onAutocompleteKeyDown(index)}
                         placeholder={I18n.t("contact_persons.namePlaceholder")}
                     />
+
                     {displayAutocompleteInstance && (
                         <Autocomplete
                             query={person.name}
@@ -170,6 +174,7 @@ export default class ContactPersons extends React.PureComponent {
                             personIndex={index}
                         />
                     )}
+                    {fieldError && <em className="error">{fieldError}</em>}
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-email-${index}`}>{I18n.t("contact_persons.email")}</label>}
@@ -179,7 +184,7 @@ export default class ContactPersons extends React.PureComponent {
                         onChange={this.onChangeInternal("email", index)}
                         value={person.email || ""}
                     />
-                    {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
+                    {emailError && <em className="error">{emailError}</em>}
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
@@ -201,8 +206,8 @@ export default class ContactPersons extends React.PureComponent {
     };
 
     render() {
-        const { persons, id } = this.props;
-        const { errors, displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
+        const { persons, id, errors } = this.props;
+        const { displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>

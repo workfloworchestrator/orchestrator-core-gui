@@ -55,6 +55,7 @@ import { applyIdNamingConvention } from "../utils/Utils";
 import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
+const inputTypesWithDelegatedValidation = ["contact_persons", "generic_multi_select", "service_ports", "service_ports_sn8", "subscriptions"]
 
 export default class UserInputForm extends React.Component {
     constructor(props) {
@@ -64,7 +65,7 @@ export default class UserInputForm extends React.Component {
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
             cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
-            validationErrors: {},
+            validationErrors: [],
             uniqueErrors: {},
             uniqueSelectInputs: {},
             isNew: true,
@@ -105,15 +106,22 @@ export default class UserInputForm extends React.Component {
     };
 
     updateValidationErrors = validationErrors => {
-        let newValidationErrors = {};
+        const { stepUserInput } = this.state;
+        let newValidationErrors = validationErrors.validation_errors;
 
-        validationErrors.validation_errors.forEach(item => {
-            if (item.loc[0] in newValidationErrors) {
-                newValidationErrors[item.loc[0]].push(item.msg);
+        // resolve input type for all validation errors and enrich it with input type
+        // (maybe better to add this form the backend)
+        newValidationErrors.forEach(item => {
+            const step = stepUserInput.filter(step => step.name === item.loc[0]);
+            if (step.length === 1) {
+                item.input_type = step[0].type;
             } else {
-                newValidationErrors[item.loc[0]] = [item.msg];
+                console.log(`Weird stuf for item: ${item}`)
+                debugger;
+                item.input_type = "root";
             }
         });
+        console.log(newValidationErrors)
         this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 
@@ -254,17 +262,17 @@ export default class UserInputForm extends React.Component {
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
         const uniqueError = this.state.uniqueErrors[name];
-        const validationError = this.state.validationErrors[name];
-        // Todo: exclude combined inputs like service port
+        const validationError = this.state.validationErrors.filter(item => item.loc[0] === name);
+
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
-                {this.chooseInput(userInput)}
-                {validationError && (
+                {this.chooseInput(userInput, validationError)}
+                {validationError && !inputTypesWithDelegatedValidation.includes(userInput.type) && (
                     <em className="error">
                         {validationError
-                            ? validationError.map(e => <div>{capitalizeFirstLetter(e)}.</div>)
+                            ? validationError.map(e => <div>{capitalizeFirstLetter(e.msg)}.</div>)
                             : I18n.t("process.format_error")}
                     </em>
                 )}
@@ -290,15 +298,14 @@ export default class UserInputForm extends React.Component {
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
-    chooseInput = userInput => {
+    chooseInput = (userInput, validationError) => {
+        const { nodeSubscriptions } = this.state;
+        const { products, organisations, locationCodes } = this.context;
         const name = userInput.name;
         const value = userInput.value;
-        const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
-
-        const { nodeSubscriptions } = this.state;
-
         let organisationId;
+
         switch (userInput.type) {
             case "string":
             case "uuid":
@@ -370,7 +377,7 @@ export default class UserInputForm extends React.Component {
                         persons={isEmpty(value) ? [{ email: "", name: "", phone: "" }] : value}
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}
-                        errors={[]}
+                        errors={validationError}
                     />
                 );
             case "ieee_interface_type":
@@ -481,7 +488,7 @@ export default class UserInputForm extends React.Component {
                     <SubscriptionsSelect
                         onChange={this.changeArrayInput(name)}
                         productId={productIdForSubscription}
-                        subscriptions={this.commaSeperatedArray(value)}
+                        subscriptions={this.commaSeparatedArray(value)}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
                         errors={[]}
@@ -592,7 +599,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    commaSeperatedArray = input => (input ? input.split(",") : []);
+    commaSeparatedArray = input => (input ? input.split(",") : []);
 
     render() {
         const {
@@ -603,8 +610,8 @@ export default class UserInputForm extends React.Component {
             leavePage,
             validationErrors
         } = this.state;
+        const numberOfValidationErrors = Object.keys(validationErrors).length;
 
-        console.log();
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog
@@ -616,10 +623,11 @@ export default class UserInputForm extends React.Component {
                 <section className="card">
                     <form onSubmit={this.submit}>
                         <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
-                        {Object.keys(validationErrors).length > 0 && (
+                        {/* Show root validation errors + meta info about backend validation errors */}
+                        {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error">
-                                    {Object.keys(validationErrors).length} input field(s) have validation errors.
+                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}.
                                 </em>
                             </section>
                         )}

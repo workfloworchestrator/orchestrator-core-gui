@@ -17,9 +17,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default class BandwidthSelect extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const { name, value, onChange, disabled } = this.props;

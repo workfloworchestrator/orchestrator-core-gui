@@ -172,6 +172,7 @@ I18n.translations.en = {
         port_id_redundant_info: "Select a port",
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
         internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable",
+        input_fields_have_validation_errors: "input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
