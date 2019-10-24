@@ -42,7 +42,7 @@ export default class ContactPersons extends React.PureComponent {
         }
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.organisationId && nextProps.organisationId !== this.props.organisationId) {
             this.componentDidMount(nextProps.organisationId);
         } else if (isEmpty(nextProps.organisationId) && !isEmpty(this.props.organisationId)) {
@@ -50,18 +50,11 @@ export default class ContactPersons extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.persons.length + 1 === this.props.persons.length) {
             this.lastPersonInput.focus();
         }
     }
-
-    validateEmail = index => e => {
-        // const valid = validEmailRegExp.test(e.target.value);
-        // const errors = { ...this.state.errors };
-        // errors[index] = !valid;
-        // this.setState({ errors: errors });
-    };
 
     onChangeInternal = (name, index) => e => {
         const persons = [...this.props.persons];
@@ -110,9 +103,6 @@ export default class ContactPersons extends React.PureComponent {
         persons[personIndex].phone = item.phone || "";
         this.props.onChange(persons);
         this.setState({ displayAutocomplete: {}, selectedItem: -1 });
-        // if (this.personInput) {
-        //     setTimeout(scrollIntoView(this.personInput), 150);
-        // }
     };
 
     onAutocompleteKeyDown = personIndex => e => {
@@ -187,7 +177,6 @@ export default class ContactPersons extends React.PureComponent {
                         id={`${id}-email-${index}`}
                         type="email"
                         onChange={this.onChangeInternal("email", index)}
-                        onBlur={this.validateEmail(index)}
                         value={person.email || ""}
                     />
                     {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
