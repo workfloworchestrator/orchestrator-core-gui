@@ -53,6 +53,7 @@ import TableSummary from "./TableSummary";
 import { nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
 import { applyIdNamingConvention } from "../utils/Utils";
+import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 
@@ -521,9 +522,11 @@ export default class UserInputForm extends React.Component {
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
                         disabled={userInput.readonly}
+                        disabledPorts={userInput.disabledPorts}
                         isElan={userInput.elan}
                         organisationPortsOnly={userInput.organisationPortsOnly}
                         mspOnly={userInput.mspOnly}
+                        visiblePortMode={userInput.visiblePortMode}
                         reportError={this.reportCustomError(name)}
                         bandwidth={bandwidth}
                         nodeId={userInput.node}
@@ -600,7 +603,21 @@ export default class UserInputForm extends React.Component {
                         disabled={userInput.readonly}
                     />
                 );
+            case "generic_multi_select":
+                return (
+                    <GenericMultiSelect
+                        onChange={this.changeNestedInput(name)}
+                        selections={value}
+                        choices={userInput.choices}
+                        minimum={userInput.minimum}
+                        maximum={userInput.maximum}
+                    />
+                );
             case "bfd":
+                if (typeof value.enabled === "string") {
+                    // Todo: remove after a fix is implemented in the backend: https://git.ia.surfsara.nl/automation/orchestrator/issues/422/designs
+                    value.enabled = value.enabled !== "False";
+                }
                 return (
                     <BfdSettings
                         name={name}

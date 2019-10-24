@@ -433,7 +433,7 @@ I18n.translations.en = {
         ims_port_id_2: "Second node and port",
         ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
         port_mode: "Port Mode",
-        port_mode_info: "The port mode as sent to IMS and NSO",
+        port_mode_info: "The port mode of the new service port",
         auto_negotiation_info:
             "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
         auto_negotiation: "Auto Negotiation",
@@ -614,7 +614,11 @@ I18n.translations.en = {
         speed_policer: "Speed policer",
         remote_port_shutdown: "Remote port shutdown",
         link_member_port: "Link Member",
-        link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown"
+        link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown",
+        added_service_ports: "Add ports",
+        added_service_ports_info: "Select some link_member ports to add them to this aggregated service port",
+        removed_service_ports: "Remove ports",
+        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -900,6 +904,10 @@ I18n.translations.en = {
         invalid_vlan: "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
         untaggedPortInUse: "This service port is already in use and cannot be chosen",
         taggedOnly: "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
+    },
+    generic_multi_select: {
+        placeholder: "Select an item",
+        placeholder_no_items: "No items available"
     },
     clipboard: {
         copied: "Copied!",
@@ -1244,6 +1252,7 @@ I18n.translations.en = {
         modify_sn7_service_port_msp_replace: "Replace MSP with another MSP",
         modify_sn7_service_port_ssp_replace: "Replace SSP with another SSP",
         modify_sn7_service_port_ssp_speed: "Modify SSP Speed",
+        modify_sn8_aggregated_service_port: "Modify aggregated service port",
         modify_sn8_ip_bgp_add_ports: "Add port(s) to SN8 BGP IP",
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 BGP IP",
         modify_sn8_ip_bgp_remove_ports: "Remove port(s) from SN8 BGP IP",

@@ -52,7 +52,9 @@ export default class Header extends React.PureComponent {
 
     renderExitLogout = () => (
         <li className="border-left">
-            <button onClick={this.logout}>{I18n.t("header.links.logout")}</button>
+            <button id="logout" onClick={this.logout}>
+                {I18n.t("header.links.logout")}
+            </button>
         </li>
     );
 
