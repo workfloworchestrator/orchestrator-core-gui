@@ -33,7 +33,7 @@ ingress:
   paths:
     - /(.*)
   environmentUrl:
-  additionalHosts:
+  additionalHosts: []
   tls:
     secretName: tls-secret
 
