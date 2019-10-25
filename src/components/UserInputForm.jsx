@@ -121,7 +121,7 @@ export default class UserInputForm extends React.Component {
             if (step.length === 1) {
                 item.input_type = step[0].type;
             } else {
-                console.log(`Weird stuff for item: ${item}`);
+                console.log(`Weird stuff for item: ${item}: check debugger`);
                 debugger;
                 item.input_type = "root";
             }
@@ -569,7 +569,7 @@ export default class UserInputForm extends React.Component {
                         choices={userInput.choices}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
-                        errors={[]}
+                        errors={validationError}
                     />
                 );
             case "bfd":
@@ -629,7 +629,7 @@ export default class UserInputForm extends React.Component {
                 <section className="card">
                     <form onSubmit={this.submit}>
                         <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
-                        {/* Show top level validation info about backend validation errors */}
+                        {/* Show top level validation info about backend validation */}
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error">

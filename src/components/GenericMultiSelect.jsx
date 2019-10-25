@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 import "./GenericMultiSelect.scss";
-import {capitalizeFirstLetter} from "../utils/Utils";
+import { capitalizeFirstLetter } from "../utils/Utils";
 
 export default class GenericMultiSelect extends React.PureComponent {
     constructor(props) {
