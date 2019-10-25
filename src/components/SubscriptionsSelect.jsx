@@ -94,6 +94,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
             <section className="multiple-subscriptions">
                 <section className="subscription-select">
                     {boxes.map((subscription, index) => {
+                        const fieldErrors = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
                         const options = availableSubscriptions
                             .filter(
                                 x => x.subscription_id === subscription || !subscriptions.includes(x.subscription_id)
@@ -118,6 +119,15 @@ export default class SubscriptionsSelect extends React.PureComponent {
                                         placeholder={placeholder}
                                     />
                                 </div>
+                                {fieldErrors && (
+                                    <em className="error">
+                                        {fieldErrors.map((e, index) => (
+                                            <div key={index}>
+                                                {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                            </div>
+                                        ))}
+                                    </em>
+                                )}
 
                                 {maximum > minimum && (
                                     <i
@@ -130,11 +140,11 @@ export default class SubscriptionsSelect extends React.PureComponent {
                     })}
 
                     {rootFieldErrors && (
-                      <em className="error root-error">
-                          {rootFieldErrors.map((e, index) => (
-                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
-                          ))}
-                      </em>
+                        <em className="error root-error">
+                            {rootFieldErrors.map((e, index) => (
+                                <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            ))}
+                        </em>
                     )}
 
                     {showAdd && (

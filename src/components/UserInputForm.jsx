@@ -629,7 +629,7 @@ export default class UserInputForm extends React.Component {
                 <section className="card">
                     <form onSubmit={this.submit}>
                         <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
-                        {/* Show root validation errors + meta info about backend validation errors */}
+                        {/* Show top level validation info about backend validation errors */}
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error">

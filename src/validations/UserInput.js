@@ -27,5 +27,3 @@ const inValidRange = range => {
     }
     return range < 2 || range > 4094;
 };
-
-

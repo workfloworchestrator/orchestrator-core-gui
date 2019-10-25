@@ -17,19 +17,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default class BandwidthSelect extends React.PureComponent {
-
     render() {
         const { name, value, onChange, disabled } = this.props;
         return (
             <div>
-                <input
-                    type="number"
-                    id={name}
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    disabled={disabled}
-                />
+                <input type="number" id={name} name={name} value={value} onChange={onChange} disabled={disabled} />
             </div>
         );
     }
