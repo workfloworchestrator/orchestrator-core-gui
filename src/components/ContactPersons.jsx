@@ -139,10 +139,8 @@ export default class ContactPersons extends React.PureComponent {
     renderPerson = (id, total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
 
-        let emailError = errors.filter(e => e.loc[1] === index && e.loc.length === 3);
-        emailError = emailError.length > 0 ? capitalizeFirstLetter(emailError[0].msg) : undefined;
-
-        const fieldError = (errors.length && errors[0].loc.length === 1) ? capitalizeFirstLetter(errors[0].msg) : undefined;
+        let fieldError = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
+        fieldError = fieldError.length > 0 ? capitalizeFirstLetter(fieldError[0].msg) : undefined;
 
         return (
             <section className="person" key={index}>
@@ -174,7 +172,7 @@ export default class ContactPersons extends React.PureComponent {
                             personIndex={index}
                         />
                     )}
-                    {fieldError && <em className="error">{fieldError}</em>}
+
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-email-${index}`}>{I18n.t("contact_persons.email")}</label>}
@@ -184,7 +182,7 @@ export default class ContactPersons extends React.PureComponent {
                         onChange={this.onChangeInternal("email", index)}
                         value={person.email || ""}
                     />
-                    {emailError && <em className="error">{emailError}</em>}
+                    {fieldError && <em className="error">{fieldError}</em>}
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
@@ -208,6 +206,8 @@ export default class ContactPersons extends React.PureComponent {
     render() {
         const { persons, id, errors } = this.props;
         const { displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
+
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>
@@ -221,6 +221,13 @@ export default class ContactPersons extends React.PureComponent {
                         filteredSuggestions,
                         selectedItem
                     )
+                )}
+                {rootFieldErrors && (
+                    <em className="error root-error">
+                        {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                        ))}
+                    </em>
                 )}
                 <div className="add-person">
                     <i className="fa fa-plus" onClick={this.addPerson} />

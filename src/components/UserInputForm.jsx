@@ -116,11 +116,12 @@ export default class UserInputForm extends React.Component {
             if (step.length === 1) {
                 item.input_type = step[0].type;
             } else {
-                console.log(`Weird stuf for item: ${item}`)
+                console.log(`Weird stuff for item: ${item}`)
                 debugger;
                 item.input_type = "root";
             }
         });
+        console.log("Validation info after enrich:")
         console.log(newValidationErrors)
         this.setState({ validationErrors: newValidationErrors, processing: false });
     };
@@ -272,7 +273,7 @@ export default class UserInputForm extends React.Component {
                 {validationError && !inputTypesWithDelegatedValidation.includes(userInput.type) && (
                     <em className="error">
                         {validationError
-                            ? validationError.map(e => <div>{capitalizeFirstLetter(e.msg)}.</div>)
+                            ? validationError.map((e, index) => <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>)
                             : I18n.t("process.format_error")}
                     </em>
                 )}
@@ -479,7 +480,7 @@ export default class UserInputForm extends React.Component {
                         visiblePortMode={userInput.visiblePortMode}
                         bandwidth={bandwidth}
                         nodeId={userInput.node}
-                        errors={[]}
+                        errors={validationError}
                     />
                 );
             case "subscriptions":

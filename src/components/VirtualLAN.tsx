@@ -97,7 +97,7 @@ interface IState {
 }
 
 /**
- * If you want to use this component you have to use the the key prop with the subscriptionId as value.
+ * If you want to use this component you have to use the key prop with the subscriptionId as value.
  * See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
  */
 export default class VirtualLAN extends React.PureComponent<IProps> {
@@ -219,7 +219,7 @@ VirtualLAN.propTypes = {
     reportError: PropTypes.func.isRequired,
     vlansExtraInUse: PropTypes.string,
     vlan: PropTypes.string,
-    subscriptionId: PropTypes.string.isRequired,
+    subscriptionId: PropTypes.string,
     disabled: PropTypes.bool,
     portMode: PropTypes.string
 };
