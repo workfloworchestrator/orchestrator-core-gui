@@ -392,7 +392,7 @@ storiesOf("GenericMultiSelect", module)
                 action("onChange")(e);
                 store.set({ selected: e.value });
             }}
-            selections={[{ value: "1", label: "SAP 1", modifiable: false }, { value: "2", label: "SAP 2" }]}
+            selections={[{ value: "1", label: "SAP 1", modifiable: false, nonremovable: true }, { value: "2", label: "SAP 2" }]}
             minimum={1}
             maximum={10}
             disabled={boolean("Disabled")}

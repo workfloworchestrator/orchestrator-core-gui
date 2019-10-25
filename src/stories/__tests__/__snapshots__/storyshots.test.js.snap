@@ -185,7 +185,13 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
       </div>
+      <em
+        className="error root-error"
+      />
       <div
         className="add-item"
       >
@@ -319,8 +325,11 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
         <i
-          className="fa fa-minus "
+          className="fa fa-minus disabled"
           onClick={[Function]}
         />
       </div>
@@ -434,11 +443,17 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
         <i
           className="fa fa-minus "
           onClick={[Function]}
         />
       </div>
+      <em
+        className="error root-error"
+      />
       <div
         className="add-item"
       >
@@ -572,6 +587,9 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
         <i
           className="fa fa-minus "
           onClick={[Function]}
@@ -687,11 +705,17 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
         <i
           className="fa fa-minus disabled"
           onClick={[Function]}
         />
       </div>
+      <em
+        className="error root-error"
+      />
       <div
         className="add-item"
       >
@@ -825,7 +849,13 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
             </div>
           </div>
         </div>
+        <em
+          className="error"
+        />
       </div>
+      <em
+        className="error root-error"
+      />
       <div
         className="add-item"
       >
