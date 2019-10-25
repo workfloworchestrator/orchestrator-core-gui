@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 import { subscriptionsByProductId, allSubscriptions } from "../api";
-import { isEmpty } from "../utils/Utils";
+import { capitalizeFirstLetter, isEmpty } from "../utils/Utils";
 import "./SubscriptionsSelect.scss";
 
 export default class SubscriptionsSelect extends React.PureComponent {
@@ -79,7 +79,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
 
     render() {
         const { availableSubscriptions, numberOfBoxes } = this.state;
-        const { productId, disabled, subscriptions, minimum, maximum } = this.props;
+        const { productId, disabled, subscriptions, minimum, maximum, errors } = this.props;
         const placeholder = productId
             ? I18n.t("subscription_select.placeholder")
             : I18n.t("subscription_select.select_product");
@@ -88,6 +88,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
             subscriptions.length < numberOfBoxes
                 ? subscriptions.concat(Array(numberOfBoxes - subscriptions.length).fill(null))
                 : subscriptions;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
 
         return (
             <section className="multiple-subscriptions">
@@ -127,6 +128,14 @@ export default class SubscriptionsSelect extends React.PureComponent {
                             </div>
                         );
                     })}
+
+                    {rootFieldErrors && (
+                      <em className="error root-error">
+                          {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                          ))}
+                      </em>
+                    )}
 
                     {showAdd && (
                         <div className="add-subscription">

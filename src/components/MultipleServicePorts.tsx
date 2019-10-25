@@ -187,10 +187,12 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         const { bandwidthErrors, availableServicePorts } = this.state;
         const { products } = this.context;
         const portErrors = errors.filter(
-            error => error.loc[1] === index && error.loc.length === 3 && error.loc[2] !== "tag" && error.loc[2] !== "vlan"
+            error =>
+                error.loc[1] === index && error.loc.length === 3 && error.loc[2] !== "tag" && error.loc[2] !== "vlan"
         );
         const vlanErrors = errors.filter(
-            error => error.loc[1] === index && error.loc.length === 3 && (error.loc[2] === "tag" || error.loc[2] === "vlan")
+            error =>
+                error.loc[1] === index && error.loc.length === 3 && (error.loc[2] === "tag" || error.loc[2] === "vlan")
         );
         let inSelect = availableServicePorts;
 

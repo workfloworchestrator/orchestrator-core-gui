@@ -16,7 +16,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {capitalizeFirstLetter, isEmpty, stop} from "../utils/Utils";
+import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import Autocomplete from "./Autocomplete";
 
 import "./ContactPersons.scss";
@@ -172,7 +172,6 @@ export default class ContactPersons extends React.PureComponent {
                             personIndex={index}
                         />
                     )}
-
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-email-${index}`}>{I18n.t("contact_persons.email")}</label>}

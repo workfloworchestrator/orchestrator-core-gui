@@ -116,7 +116,6 @@ export default class UserInputForm extends React.Component {
         let newValidationErrors = validationErrors.validation_errors;
 
         // resolve input type for all validation errors and enrich it with input type
-        // (maybe better to add this form the backend)
         newValidationErrors.forEach(item => {
             const step = stepUserInput.filter(step => step.name === item.loc[0]);
             if (step.length === 1) {
@@ -498,7 +497,7 @@ export default class UserInputForm extends React.Component {
                         subscriptions={this.commaSeparatedArray(value)}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
-                        errors={[]}
+                        errors={validationError}
                     />
                 );
             case "subscription_product_tag":
