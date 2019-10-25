@@ -46,6 +46,11 @@
             &.service_ports_secondary {
                 margin-left: 40px;
             }
+            b {
+                // styles the arrows of numeric input
+                margin-top: 4px;
+                margin-left: 1px;
+            }
         }
     }
     section.form-errors {
