@@ -16,10 +16,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import {stop, isEmpty, capitalizeFirstLetter} from "../utils/Utils";
+import { stop, isEmpty, capitalizeFirstLetter } from "../utils/Utils";
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import {ServicePortSubscription, ServicePort, Organization, Product, ValidationError} from "../utils/types";
+import { ServicePortSubscription, ServicePort, Organization, Product, ValidationError } from "../utils/types";
 import { filterProductsByBandwidth } from "../validations/Products";
 import { range } from "lodash";
 
@@ -186,9 +186,12 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         } = this.props;
         const { bandwidthErrors, availableServicePorts } = this.state;
         const { products } = this.context;
-        const validationErrors = errors.filter(error => error.loc[1] === index);
-        // const portErrors =
-
+        const portErrors = errors.filter(
+            error => error.loc[1] === index && error.loc.length === 3 && error.loc[2] !== "tag" && error.loc[2] !== "vlan"
+        );
+        const vlanErrors = errors.filter(
+            error => error.loc[1] === index && error.loc.length === 3 && (error.loc[2] === "tag" || error.loc[2] === "vlan")
+        );
         let inSelect = availableServicePorts;
 
         const productIds = filterProductsByBandwidth(products, bandwidth).map((product: Product) => product.product_id);
@@ -235,6 +238,16 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         organisations={organisations}
                         disabled={portDisabled}
                     />
+
+                    {portErrors && (
+                        <em className="error">
+                            {portErrors.map((e, index) => (
+                                <div key={index}>
+                                    {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                </div>
+                            ))}
+                        </em>
+                    )}
                 </div>
                 <div className="wrapper vlan">
                     {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
@@ -248,6 +261,14 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         vlansExtraInUse={vlansJustChosen}
                         portMode={servicePort.port_mode}
                     />
+
+                    {vlanErrors && (
+                        <em className="error">
+                            {vlanErrors.map((e, index) => (
+                                <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            ))}
+                        </em>
+                    )}
                 </div>
                 {isElan && (
                     <div className="wrapper bandwidth">

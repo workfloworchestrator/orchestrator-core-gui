@@ -55,7 +55,13 @@ import { applyIdNamingConvention } from "../utils/Utils";
 import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
-const inputTypesWithDelegatedValidation = ["contact_persons", "generic_multi_select", "service_ports", "service_ports_sn8", "subscriptions"]
+const inputTypesWithDelegatedValidation = [
+    "contact_persons",
+    "generic_multi_select",
+    "service_ports",
+    "service_ports_sn8",
+    "subscriptions"
+];
 
 export default class UserInputForm extends React.Component {
     constructor(props) {
@@ -116,13 +122,13 @@ export default class UserInputForm extends React.Component {
             if (step.length === 1) {
                 item.input_type = step[0].type;
             } else {
-                console.log(`Weird stuff for item: ${item}`)
+                console.log(`Weird stuff for item: ${item}`);
                 debugger;
                 item.input_type = "root";
             }
         });
-        console.log("Validation info after enrich:")
-        console.log(newValidationErrors)
+        console.log("Validation info after enrich:");
+        console.log(newValidationErrors);
         this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 

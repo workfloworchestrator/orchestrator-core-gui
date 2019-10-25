@@ -53,11 +53,8 @@ section.service-port-container {
     .virtual-vlan {
         input {
             height: 38px;
-
         }
     }
-
-
 
     div.service-port-select {
         margin-top: 5px;
@@ -68,6 +65,7 @@ section.service-port-container {
             }
         }
     }
+
     div.add-service-port {
         display: flex;
         i.fa-plus {
