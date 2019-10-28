@@ -64,6 +64,13 @@ export default class BfdSettings extends React.PureComponent {
                                 onChange={this.changeMinimumInterval}
                                 readOnly={readOnly}
                             />
+
+                            {errors
+                                .filter(error => error.loc.length === 2 && error.loc[1] === "minimum_interval")
+                                .map((error, index) => (
+                                  <em className="error root-error">{capitalizeFirstLetter(error.msg)}</em>
+                                ))}
+
                             <label>{I18n.t("bfd_settings.multiplier")}</label>
                             <NumericInput
                                 min={1}
@@ -72,18 +79,24 @@ export default class BfdSettings extends React.PureComponent {
                                 onChange={this.changeMultiplier}
                                 readOnly={readOnly}
                             />
+
+                            {errors
+                              .filter(error => error.loc.length === 2 && error.loc[1] === "multiplier")
+                              .map((error, index) => (
+                                <em className="error root-error">{capitalizeFirstLetter(error.msg)}</em>
+                              ))}
+
                         </React.Fragment>
                     )}
                 </section>
 
                 {rootFieldErrors && (
-                  <em className="error root-error">
-                      {rootFieldErrors.map((e, index) => (
-                        <div key={index}>ROOT:{capitalizeFirstLetter(e.msg)}.</div>
-                      ))}
-                  </em>
+                    <em className="error root-error">
+                        {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                        ))}
+                    </em>
                 )}
-
             </div>
         );
     }

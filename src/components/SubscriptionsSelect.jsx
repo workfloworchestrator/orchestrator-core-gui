@@ -74,6 +74,8 @@ export default class SubscriptionsSelect extends React.PureComponent {
         if (index < minimum) {
             return;
         }
+
+        // Handle remove
         const nboxes = this.state.numberOfBoxes - 1;
         if (subscriptions.length > nboxes) {
             subscriptions.splice(index, 1);
