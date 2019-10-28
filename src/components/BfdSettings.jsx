@@ -68,7 +68,7 @@ export default class BfdSettings extends React.PureComponent {
                             {errors
                                 .filter(error => error.loc.length === 2 && error.loc[1] === "minimum_interval")
                                 .map((error, index) => (
-                                  <em className="error root-error">{capitalizeFirstLetter(error.msg)}</em>
+                                  <em className="error" key={index}>{capitalizeFirstLetter(error.msg)}</em>
                                 ))}
 
                             <label>{I18n.t("bfd_settings.multiplier")}</label>
@@ -83,7 +83,7 @@ export default class BfdSettings extends React.PureComponent {
                             {errors
                               .filter(error => error.loc.length === 2 && error.loc[1] === "multiplier")
                               .map((error, index) => (
-                                <em className="error root-error">{capitalizeFirstLetter(error.msg)}</em>
+                                <em className="error" key={index}>{capitalizeFirstLetter(error.msg)}</em>
                               ))}
 
                         </React.Fragment>
