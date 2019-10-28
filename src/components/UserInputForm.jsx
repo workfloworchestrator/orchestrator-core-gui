@@ -122,13 +122,10 @@ export default class UserInputForm extends React.Component {
             if (step.length === 1) {
                 item.input_type = step[0].type;
             } else {
-                console.log(`Weird stuff for item: ${item}: check debugger`);
-                debugger;
+                console.log(`Unhandled exception in validation response for item: ${item}`);
                 item.input_type = "root";
             }
         });
-        console.log("Validation info after enrich:");
-        console.log(newValidationErrors);
         this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 
