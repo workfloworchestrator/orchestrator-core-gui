@@ -68,7 +68,12 @@ export default class SubscriptionsSelect extends React.PureComponent {
     }
 
     removeSubscription(index) {
-        const { subscriptions } = this.props;
+        const { subscriptions, maximum, minimum } = this.props;
+
+        // Don't allow when constraints are reached
+        if (index < minimum) {
+            return;
+        }
         const nboxes = this.state.numberOfBoxes - 1;
         if (subscriptions.length > nboxes) {
             subscriptions.splice(index, 1);
@@ -158,16 +163,18 @@ export default class SubscriptionsSelect extends React.PureComponent {
     }
 }
 
+SubscriptionsSelect.defaultProps = {
+    minimum: 1,
+    maximum: 1,
+    errors: []
+};
+
 SubscriptionsSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     productId: PropTypes.string,
     disabled: PropTypes.bool,
     subscriptions: PropTypes.array,
     minimum: PropTypes.number,
-    maximum: PropTypes.number
-};
-
-SubscriptionsSelect.defaultProps = {
-    minimum: 1,
-    maximum: 1
+    maximum: PropTypes.number,
+    errors: PropTypes.array
 };

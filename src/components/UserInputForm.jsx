@@ -56,6 +56,7 @@ import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 const inputTypesWithDelegatedValidation = [
+    "bfd",
     "contact_persons",
     "generic_multi_select",
     "service_ports",
@@ -583,6 +584,7 @@ export default class UserInputForm extends React.Component {
                         value={value}
                         onChange={this.changeUserInput}
                         readOnly={userInput.readonly}
+                        errors={validationError}
                     />
                 );
             case "numeric":

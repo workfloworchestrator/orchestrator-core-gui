@@ -1228,7 +1228,7 @@ I18n.translations.en = {
     },
     bfd_settings: {
         enable: "Enable BFD",
-        minimum_interval: "Minumum Interval",
+        minimum_interval: "Minimum Interval",
         multiplier: "Multiplier"
     },
     workflow: {
