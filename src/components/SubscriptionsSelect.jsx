@@ -68,7 +68,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
     }
 
     removeSubscription(index) {
-        const { subscriptions, maximum, minimum } = this.props;
+        const { subscriptions, minimum } = this.props;
 
         // Don't allow when constraints are reached
         if (index < minimum) {
