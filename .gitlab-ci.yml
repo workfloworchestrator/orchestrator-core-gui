@@ -54,7 +54,7 @@ deploy review:
     paths: [environment_url.txt]
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: https://$CI_COMMIT_REF_NAME-$CI_PROJECT_NAME.$KUBE_INGRESS_BASE_DOMAIN/crm/ui
+    url: https://$CI_COMMIT_REF_NAME-$CI_PROJECT_NAME.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: stop_review
   except:
     refs:
@@ -63,9 +63,31 @@ deploy review:
       - tags
       - schedules
 
+deploy review base:
+  variables:
+    KUBE_INGRESS_BASE_DOMAIN: orchestrator.review.automation.surf.net
+  extends: .auto-deploy
+  stage: development
+  <<: *deploy_script
+  only:
+    refs:
+      - dev
+    kubernetes: active
+  artifacts:
+    paths: [environment_url.txt]
+  environment:
+    name: review
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    refs:
+      - master
+      - tags
+      - schedules
+
 deploy dev:
   variables:
     KUBE_INGRESS_BASE_DOMAIN: orchestrator.dev.automation.surf.net
+    DEPLOY_NAMESPACE: development
   extends: .auto-deploy
   stage: development
   <<: *deploy_script
@@ -77,10 +99,9 @@ deploy dev:
     paths: [environment_url.txt]
   environment:
     name: development
-    url: https://$KUBE_INGRESS_BASE_DOMAIN/crm/ui/
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
   except:
     refs:
-      - branches
       - master
       - tags
       - schedules
@@ -88,6 +109,7 @@ deploy dev:
 deploy staging:
   variables:
     KUBE_INGRESS_BASE_DOMAIN: orchestrator.staging.automation.surf.net
+    DEPLOY_NAMESPACE: staging
   extends: .auto-deploy
   stage: staging
   <<: *deploy_script
@@ -99,10 +121,9 @@ deploy staging:
     paths: [environment_url.txt]
   environment:
     name: staging
-    url: https://$KUBE_INGRESS_BASE_DOMAIN/crm/ui
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
   except:
     refs:
-      - branches
       - dev
       - tags
       - schedules
@@ -110,6 +131,7 @@ deploy staging:
 deploy production:
   variables:
     KUBE_INGRESS_BASE_DOMAIN: orchestrator.automation.surf.net
+    DEPLOY_NAMESPACE: production
   extends: .auto-deploy
   stage: production
   <<: *deploy_script
@@ -121,7 +143,7 @@ deploy production:
     paths: [environment_url.txt]
   environment:
     name: production
-    url: https://$KUBE_INGRESS_BASE_DOMAIN/crm/ui
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
   except:
     refs:
       - dev
