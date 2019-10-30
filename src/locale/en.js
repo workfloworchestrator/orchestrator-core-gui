@@ -1050,7 +1050,8 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             no_found: "No Resource Types",
-            duplicate_name: "This type is already taken. Resource Types types need to be unique"
+            duplicate_name: "This type is already taken. Resource Types types need to be unique",
+            resource_type_id: "Resource type ID"
         },
         fixedInputs: {
             tags: "Fixed Inputs for Product tag: {{tag}}",

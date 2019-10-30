@@ -107,7 +107,7 @@ export default class ResourceTypes extends React.Component {
     };
 
     renderResourceTypes(resourceTypes, sorted) {
-        const columns = ["resource_type", "description"];
+        const columns = ["resource_type", "description", "resource_type_id"];
         const th = index => {
             const name = columns[index];
             return (
@@ -135,6 +135,12 @@ export default class ResourceTypes extends React.Component {
                                 </td>
                                 <td data-label={I18n.t("metadata.resourceTypes.description")} className="description">
                                     {resourceType.description}
+                                </td>
+                                <td
+                                    data-label={I18n.t("metadata.resourceTypes.resource_type_id")}
+                                    className="resource_type_id"
+                                >
+                                    {resourceType.resource_type_id}
                                 </td>
                             </tr>
                         ))}
