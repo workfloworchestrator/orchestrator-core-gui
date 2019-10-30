@@ -172,6 +172,7 @@ I18n.translations.en = {
         port_id_redundant_info: "Select a port",
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
         internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable",
+        input_fields_have_validation_errors: "input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
@@ -350,7 +351,7 @@ I18n.translations.en = {
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
-        subscription_id_info: "The subscription that will be terminated",
+        subscription_id_info: "The subscription for this action",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
         surfcert_filter: "SURFcert filter",
@@ -1049,7 +1050,8 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             no_found: "No Resource Types",
-            duplicate_name: "This type is already taken. Resource Types types need to be unique"
+            duplicate_name: "This type is already taken. Resource Types types need to be unique",
+            resource_type_id: "Resource type ID"
         },
         fixedInputs: {
             tags: "Fixed Inputs for Product tag: {{tag}}",
@@ -1227,7 +1229,7 @@ I18n.translations.en = {
     },
     bfd_settings: {
         enable: "Enable BFD",
-        minimum_interval: "Minumum Interval",
+        minimum_interval: "Minimum Interval",
         multiplier: "Multiplier"
     },
     workflow: {

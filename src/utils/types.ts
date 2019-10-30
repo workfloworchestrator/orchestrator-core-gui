@@ -43,3 +43,15 @@ export interface Organization {
     uuid: string;
     name: string;
 }
+
+export interface ValidationError {
+    input_type: string;
+    loc: (string|number)[];
+    msg: string;
+    type: string;
+    ctx?: ValidationErrorContext;
+}
+
+export interface ValidationErrorContext {
+    [index: string]: string;
+}

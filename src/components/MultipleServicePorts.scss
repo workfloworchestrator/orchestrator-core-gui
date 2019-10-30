@@ -23,7 +23,7 @@ section.service-port-container {
     section.service-port {
         display: flex;
         div.wrapper {
-            margin-left: 25px;
+            padding-right: 9px;
             width: 50%;
             div.vlan,
             div.bandwidth {
@@ -49,6 +49,19 @@ section.service-port-container {
             margin-top: 20px;
         }
     }
+
+    .virtual-vlan {
+        input {
+            height: 38px;
+        }
+    }
+
+    .bandwidth {
+        input {
+            height: 38px;
+        }
+    }
+
     div.service-port-select {
         margin-top: 5px;
         div.Select-control {
@@ -58,6 +71,7 @@ section.service-port-container {
             }
         }
     }
+
     div.add-service-port {
         display: flex;
         i.fa-plus {

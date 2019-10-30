@@ -19,6 +19,7 @@ import I18n from "i18n-js";
 
 import NumericInput from "react-numeric-input";
 import CheckBox from "./CheckBox";
+import { capitalizeFirstLetter } from "../utils/Utils";
 
 export default class BfdSettings extends React.PureComponent {
     changeMultiplier = (valueAsNumber, valueAsString, inputElement) => {
@@ -41,7 +42,8 @@ export default class BfdSettings extends React.PureComponent {
     };
 
     render() {
-        const { name, value, readOnly } = this.props;
+        const { name, value, readOnly, errors } = this.props;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
         return (
             <div>
                 <section key={name} className={`form-divider ${name}`}>
@@ -62,6 +64,15 @@ export default class BfdSettings extends React.PureComponent {
                                 onChange={this.changeMinimumInterval}
                                 readOnly={readOnly}
                             />
+
+                            {errors
+                                .filter(error => error.loc.length === 2 && error.loc[1] === "minimum_interval")
+                                .map((error, index) => (
+                                    <em className="error" key={index}>
+                                        {capitalizeFirstLetter(error.msg)}
+                                    </em>
+                                ))}
+
                             <label>{I18n.t("bfd_settings.multiplier")}</label>
                             <NumericInput
                                 min={1}
@@ -70,17 +81,38 @@ export default class BfdSettings extends React.PureComponent {
                                 onChange={this.changeMultiplier}
                                 readOnly={readOnly}
                             />
+
+                            {errors
+                                .filter(error => error.loc.length === 2 && error.loc[1] === "multiplier")
+                                .map((error, index) => (
+                                    <em className="error" key={index}>
+                                        {capitalizeFirstLetter(error.msg)}
+                                    </em>
+                                ))}
                         </React.Fragment>
                     )}
                 </section>
+
+                {rootFieldErrors && (
+                    <em className="error root-error">
+                        {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                        ))}
+                    </em>
+                )}
             </div>
         );
     }
 }
 
+BfdSettings.defaultProps = {
+    errors: []
+};
+
 BfdSettings.propTypes = {
     name: PropTypes.string,
     value: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool
+    readOnly: PropTypes.bool,
+    errors: PropTypes.array
 };

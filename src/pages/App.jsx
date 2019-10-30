@@ -41,7 +41,6 @@ import { getParameterByName, getQueryParameters } from "../utils/QueryParameters
 import TerminateSubscription from "./TerminateSubscription";
 import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
-import ResourceType from "../components/ResourceType";
 import Product from "../components/Product";
 import Cache from "./Cache";
 import Tasks from "./Tasks";
@@ -246,10 +245,6 @@ class App extends React.PureComponent {
                             <ProtectedRoute
                                 path="/product-block/:id"
                                 render={props => <ProductBlock match={props.match} />}
-                            />
-                            <ProtectedRoute
-                                path="/resource-type/:id"
-                                render={props => <ResourceType match={props.match} />}
                             />
                             <ProtectedRoute path="/cache" render={() => <Cache />} />
                             <ProtectedRoute path="/tasks" render={() => <Tasks />} />
