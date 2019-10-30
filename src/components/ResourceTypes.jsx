@@ -17,12 +17,9 @@ import React from "react";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import { isEmpty, stop } from "../utils/Utils";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 
 import "./ResourceTypes.scss";
-import DropDownActions from "../components/DropDownActions";
-import { setFlash } from "../utils/Flash";
-import { deleteResourceType, resourceTypes } from "../api/index";
+import { resourceTypes } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ResourceTypes extends React.Component {
@@ -32,12 +29,7 @@ export default class ResourceTypes extends React.Component {
             resourceTypes: [],
             filteredResourceTypes: [],
             query: "",
-            actions: { show: false, id: "" },
             sorted: { name: "name", descending: true },
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
             refresh: true
         };
     }
@@ -51,14 +43,6 @@ export default class ResourceTypes extends React.Component {
             this.setState({ resourceTypes: res, filteredResourceTypes: res });
         });
     }
-
-    cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
-
-    editResourceType = (resourceType, readOnly = true, newResourceType = false) => () => {
-        this.context.redirect(
-            `/resource-type/${newResourceType ? "new" : resourceType.resource_type_id}?readOnly=${readOnly}`
-        );
-    };
 
     search = e => {
         const query = e.target.value;
@@ -89,77 +73,6 @@ export default class ResourceTypes extends React.Component {
         });
     }, 250);
 
-    toggleActions = (resourceType, actions) => e => {
-        stop(e);
-        const newShow = actions.id === resourceType.resource_type_id ? !actions.show : true;
-        this.setState({
-            actions: { show: newShow, id: resourceType.resource_type_id }
-        });
-    };
-
-    handleDeleteResourceType = resourceType => e => {
-        stop(e);
-        this.confirmation(
-            I18n.t("metadata.deleteConfirmation", {
-                type: "Resource Type",
-                name: resourceType.resource_type
-            }),
-            () =>
-                deleteResourceType(resourceType.resource_type_id)
-                    .then(() => {
-                        this.componentDidMount();
-                        setFlash(
-                            I18n.t("metadata.flash.delete", {
-                                type: "Resource Type",
-                                name: resourceType.resource_type
-                            })
-                        );
-                    })
-                    .catch(err => {
-                        if (err.response && err.response.status === 400) {
-                            err.response.json().then(json => setFlash(json["error"], "error"));
-                        } else {
-                            throw err;
-                        }
-                    })
-        );
-    };
-
-    confirmation = (question, action) =>
-        this.setState({
-            confirmationDialogOpen: true,
-            confirmationDialogQuestion: question,
-            confirmationDialogAction: () => {
-                this.cancelConfirmation();
-                action();
-            }
-        });
-
-    renderActions = (resourceType, actions) => {
-        const actionId = resourceType.resource_type_id;
-        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
-            return null;
-        }
-        const view = {
-            icon: "fa fa-search-plus",
-            label: "view",
-            action: this.editResourceType(resourceType, true, false)
-        };
-        const edit = {
-            icon: "fa fa-pencil-square-o",
-            label: "edit",
-            action: this.editResourceType(resourceType, false, false)
-        };
-        const _delete = {
-            icon: "fa fa-trash",
-            label: "delete",
-            action: this.handleDeleteResourceType(resourceType),
-            danger: true
-        };
-        const options = [view, edit, _delete];
-        return <DropDownActions options={options} i18nPrefix="metadata.resourceTypes" />;
-    };
-
     sortBy = name => (a, b) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
@@ -179,7 +92,7 @@ export default class ResourceTypes extends React.Component {
         });
     };
 
-    filter = item => {
+    filter = () => {
         const { filteredResourceTypes, sorted, query } = this.state;
         this.setState({
             filteredResourceTypes: this.doSearchAndSort(query, filteredResourceTypes, sorted)
@@ -193,8 +106,8 @@ export default class ResourceTypes extends React.Component {
         return <i />;
     };
 
-    renderResourceTypes(resourceTypes, actions, sorted) {
-        const columns = ["resource_type", "description", "actions"];
+    renderResourceTypes(resourceTypes, sorted) {
+        const columns = ["resource_type", "description"];
         const th = index => {
             const name = columns[index];
             return (
@@ -213,10 +126,7 @@ export default class ResourceTypes extends React.Component {
                     </thead>
                     <tbody>
                         {resourceTypes.map((resourceType, index) => (
-                            <tr
-                                key={`${resourceType.resource_type_id}_${index}`}
-                                onClick={this.editResourceType(resourceType, false, false)}
-                            >
+                            <tr key={`${resourceType.resource_type_id}_${index}`}>
                                 <td
                                     data-label={I18n.t("metadata.resourceTypes.resource_type")}
                                     className="resource_type"
@@ -225,16 +135,6 @@ export default class ResourceTypes extends React.Component {
                                 </td>
                                 <td data-label={I18n.t("metadata.resourceTypes.description")} className="description">
                                     {resourceType.description}
-                                </td>
-                                <td
-                                    data-label={I18n.t("metadata.resourceTypes.actions")}
-                                    className="actions"
-                                    onClick={this.toggleActions(resourceType, actions)}
-                                    tabIndex="1"
-                                    onBlur={() => this.setState({ actions: { show: false, id: "" } })}
-                                >
-                                    <i className="fa fa-ellipsis-h" />
-                                    {this.renderActions(resourceType, actions)}
                                 </td>
                             </tr>
                         ))}
@@ -250,23 +150,9 @@ export default class ResourceTypes extends React.Component {
     }
 
     render() {
-        const {
-            filteredResourceTypes,
-            actions,
-            query,
-            confirmationDialogOpen,
-            confirmationDialogAction,
-            confirmationDialogQuestion,
-            sorted
-        } = this.state;
+        const { filteredResourceTypes, query, sorted } = this.state;
         return (
             <div className="mod-resource-types">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
                 <div className="options">
                     <section className="search">
                         <input
@@ -278,13 +164,8 @@ export default class ResourceTypes extends React.Component {
                         />
                         <i className="fa fa-search" />
                     </section>
-                    <button className="new button green" onClick={this.editResourceType({}, false, true)}>
-                        {I18n.t("metadata.resourceTypes.new")} <i className="fa fa-plus" />
-                    </button>
                 </div>
-                <section className="resource-type">
-                    {this.renderResourceTypes(filteredResourceTypes, actions, sorted)}
-                </section>
+                <section className="resource-type">{this.renderResourceTypes(filteredResourceTypes, sorted)}</section>
             </div>
         );
     }
