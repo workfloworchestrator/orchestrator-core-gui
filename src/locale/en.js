@@ -351,7 +351,7 @@ I18n.translations.en = {
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
-        subscription_id_info: "The subscription that will be terminated",
+        subscription_id_info: "The subscription for this action",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
         surfcert_filter: "SURFcert filter",
