@@ -1254,9 +1254,9 @@ I18n.translations.en = {
         modify_sn7_service_port_ssp_speed: "Modify SSP Speed",
         modify_sn8_aggregated_service_port: "Modify aggregated service port",
         modify_sn8_ip_bgp: "Modify SN8 SURFinternet BGP",
-        modify_sn8_ip_bgp_add_ports: "Add port(s) to  SN8 SURFinternet BGP",
-        modify_sn8_ip_bgp_change_port: "Replace port of  SN8 SURFinternet BGP",
-        modify_sn8_ip_bgp_remove_ports: "Remove port(s) from  SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_add_ports: "Add port(s) to SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_remove_ports: "Remove port(s) from SN8 SURFinternet BGP",
         modify_sn8_ip_bgp_resources:
             "Modify SAP resource settings (BGP settings, IPV4/6 MTU & VLANRANGE if applicable)",
         modify_sn8_ip_ipss: "Change the IP Service Settings (IPSS)",
