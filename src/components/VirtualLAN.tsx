@@ -193,17 +193,17 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
                 : I18n.t("vlan.vlansInUseError", { vlans: vlansInUse.join(", ") })
             : undefined;
         const message = isEmpty(allUsedVlans)
-            ? (portMode === "tagged"
+            ? portMode === "tagged"
                 ? I18n.t("vlan.allPortsAvailable")
-                : I18n.t("vlan.taggedOnly"))
-            : I18n.t("vlan.vlansInUse", { vlans: allUsedVlans })
+                : I18n.t("vlan.taggedOnly")
+            : I18n.t("vlan.vlansInUse", { vlans: allUsedVlans });
         return (
             <div className="virtual-vlan">
                 <input
                     type="text"
                     value={vlan}
                     placeholder={placeholder}
-                    disabled={!subscriptionId || disabled || vlan === "0"}
+                    disabled={!subscriptionId || disabled || portMode === "untagged"}
                     onChange={this.props.onChange}
                     onBlur={this.onBlur}
                 />
