@@ -16,10 +16,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import { stop, isEmpty } from "../utils/Utils";
+import { stop, isEmpty, capitalizeFirstLetter } from "../utils/Utils";
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ServicePortSubscription, ServicePort, Organization, Product } from "../utils/types";
+import { ServicePortSubscription, ServicePort, Organization, Product, ValidationError } from "../utils/types";
 import { filterProductsByBandwidth } from "../validations/Products";
 import { range } from "lodash";
 
@@ -43,7 +43,7 @@ interface IProps {
     disabledPorts: boolean;
     bandwidth: number;
     onChange: (servicePorts: ServicePort[]) => void;
-    reportError: (hasErrors: boolean) => void;
+    errors: ValidationError[];
 }
 
 interface IState {
@@ -147,13 +147,13 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         let { bandwidthErrors, vlanErrors } = this.state;
         vlanErrors[index] = false;
         bandwidthErrors[index] = false;
-        this.setState({ vlanErrors: vlanErrors, bandwidthErrors: bandwidthErrors }, this.bubbleUpErrorState);
+        this.setState({ vlanErrors: vlanErrors, bandwidthErrors: bandwidthErrors });
     };
 
     reportVlanError = (index: number) => (isError: boolean) => {
         let { vlanErrors } = this.state;
         vlanErrors[index] = isError;
-        this.setState({ vlanErrors: vlanErrors }, this.bubbleUpErrorState);
+        this.setState({ vlanErrors: vlanErrors });
     };
 
     validateMaxBandwidth = (index: number) => (e: React.FormEvent<HTMLInputElement>) => {
@@ -164,17 +164,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
             fetchPortSpeedBySubscription(servicePort.subscription_id).then(res => {
                 let { bandwidthErrors } = this.state;
                 bandwidthErrors[index] = parseInt(bandwidth, 10) > parseInt(res, 10);
-                this.setState({ bandwidthErrors: bandwidthErrors }, this.bubbleUpErrorState);
+                this.setState({ bandwidthErrors: bandwidthErrors });
             });
         }
-    };
-
-    bubbleUpErrorState = () => {
-        const { bandwidthErrors, vlanErrors } = this.state;
-        const inValid = Object.values(bandwidthErrors)
-            .concat(Object.values(vlanErrors))
-            .some(val => val);
-        this.props.reportError(inValid);
     };
 
     renderServicePort = (servicePort: ServicePort, index: number) => {
@@ -189,11 +181,19 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
             organisationPortsOnly,
             visiblePortMode,
             disabledPorts,
-            bandwidth
+            bandwidth,
+            errors
         } = this.props;
         const { bandwidthErrors, availableServicePorts } = this.state;
         const { products } = this.context;
-
+        const portErrors = errors.filter(
+            error =>
+                error.loc[1] === index && error.loc.length === 3 && error.loc[2] !== "tag" && error.loc[2] !== "vlan"
+        );
+        const vlanErrors = errors.filter(
+            error =>
+                error.loc[1] === index && error.loc.length === 3 && (error.loc[2] === "tag" || error.loc[2] === "vlan")
+        );
         let inSelect = availableServicePorts;
 
         const productIds = filterProductsByBandwidth(products, bandwidth).map((product: Product) => product.product_id);
@@ -240,6 +240,16 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         organisations={organisations}
                         disabled={portDisabled}
                     />
+
+                    {portErrors && (
+                        <em className="error">
+                            {portErrors.map((e, index) => (
+                                <div key={index}>
+                                    {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                </div>
+                            ))}
+                        </em>
+                    )}
                 </div>
                 <div className="wrapper vlan">
                     {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
@@ -253,6 +263,14 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         vlansExtraInUse={vlansJustChosen}
                         portMode={servicePort.port_mode}
                     />
+
+                    {vlanErrors && (
+                        <em className="error">
+                            {vlanErrors.map((e, index) => (
+                                <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            ))}
+                        </em>
+                    )}
                 </div>
                 {isElan && (
                     <div className="wrapper bandwidth">
@@ -285,8 +303,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     };
 
     render() {
-        const { servicePorts, maximum, disabled } = this.props;
+        const { servicePorts, maximum, disabled, errors } = this.props;
         const showAdd = (!maximum || servicePorts.length < maximum) && !disabled;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
         return (
             <section className="service-port-container">
                 {!disabled && (
@@ -295,6 +314,13 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                     </div>
                 )}
                 {servicePorts.map((servicePort, index) => this.renderServicePort(servicePort, index))}
+                {rootFieldErrors && (
+                    <em className="error">
+                        {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                        ))}
+                    </em>
+                )}
                 {showAdd && (
                     <div className="add-service-port">
                         <i className="fa fa-plus" onClick={this.addServicePort} />
@@ -316,12 +342,12 @@ MultipleServicePorts.propTypes = {
     disabled: PropTypes.bool,
     isElan: PropTypes.bool,
     organisationPortsOnly: PropTypes.bool,
-    reportError: PropTypes.func.isRequired,
     visiblePortMode: PropTypes.string.isRequired, // all, tagged, untagged, link_member
     disabledPorts: PropTypes.bool,
     mspOnly: PropTypes.bool,
     bandwidth: PropTypes.string,
-    node: PropTypes.number
+    node: PropTypes.number,
+    errors: PropTypes.array
 };
 
 MultipleServicePorts.defaultProps = {
@@ -330,7 +356,8 @@ MultipleServicePorts.defaultProps = {
     disabledPorts: false,
     mspOnly: false,
     servicePorts: [],
-    node: null
+    node: null,
+    errors: []
 };
 
 MultipleServicePorts.contextType = ApplicationContext;

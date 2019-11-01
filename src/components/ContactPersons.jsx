@@ -16,10 +16,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import I18n from "i18n-js";
-import { isEmpty, stop } from "../utils/Utils";
-import { validEmailRegExp } from "../validations/Subscriptions";
+import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import Autocomplete from "./Autocomplete";
-import scrollIntoView from "scroll-into-view";
 
 import "./ContactPersons.scss";
 import { contacts } from "../api";
@@ -28,7 +26,6 @@ export default class ContactPersons extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            errors: {},
             displayAutocomplete: {},
             filteredSuggestions: [],
             selectedItem: -1,
@@ -42,7 +39,7 @@ export default class ContactPersons extends React.PureComponent {
         }
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.organisationId && nextProps.organisationId !== this.props.organisationId) {
             this.componentDidMount(nextProps.organisationId);
         } else if (isEmpty(nextProps.organisationId) && !isEmpty(this.props.organisationId)) {
@@ -50,18 +47,11 @@ export default class ContactPersons extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.persons.length + 1 === this.props.persons.length) {
             this.lastPersonInput.focus();
         }
     }
-
-    validateEmail = index => e => {
-        const valid = validEmailRegExp.test(e.target.value);
-        const errors = { ...this.state.errors };
-        errors[index] = !valid;
-        this.setState({ errors: errors });
-    };
 
     onChangeInternal = (name, index) => e => {
         const persons = [...this.props.persons];
@@ -110,9 +100,6 @@ export default class ContactPersons extends React.PureComponent {
         persons[personIndex].phone = item.phone || "";
         this.props.onChange(persons);
         this.setState({ displayAutocomplete: {}, selectedItem: -1 });
-        if (this.personInput) {
-            setTimeout(scrollIntoView(this.personInput), 150);
-        }
     };
 
     onAutocompleteKeyDown = personIndex => e => {
@@ -151,6 +138,10 @@ export default class ContactPersons extends React.PureComponent {
 
     renderPerson = (id, total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
+
+        let fieldError = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
+        fieldError = fieldError.length > 0 ? capitalizeFirstLetter(fieldError[0].msg) : undefined;
+
         return (
             <section className="person" key={index}>
                 <div className="wrapper autocomplete-container" tabIndex="1" onBlur={this.onBlurAutoComplete}>
@@ -170,6 +161,7 @@ export default class ContactPersons extends React.PureComponent {
                         onKeyDown={this.onAutocompleteKeyDown(index)}
                         placeholder={I18n.t("contact_persons.namePlaceholder")}
                     />
+
                     {displayAutocompleteInstance && (
                         <Autocomplete
                             query={person.name}
@@ -187,10 +179,9 @@ export default class ContactPersons extends React.PureComponent {
                         id={`${id}-email-${index}`}
                         type="email"
                         onChange={this.onChangeInternal("email", index)}
-                        onBlur={this.validateEmail(index)}
                         value={person.email || ""}
                     />
-                    {errors[index] && <em className="error">{I18n.t("contact_persons.invalid_email")}</em>}
+                    {fieldError && <em className="error">{fieldError}</em>}
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
@@ -212,8 +203,10 @@ export default class ContactPersons extends React.PureComponent {
     };
 
     render() {
-        const { persons, id } = this.props;
-        const { errors, displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
+        const { persons, id, errors } = this.props;
+        const { displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
+
         return (
             <section className="contact-persons">
                 {persons.map((person, index) =>
@@ -228,6 +221,13 @@ export default class ContactPersons extends React.PureComponent {
                         selectedItem
                     )
                 )}
+                {rootFieldErrors && (
+                    <em className="error root-error">
+                        {rootFieldErrors.map((e, index) => (
+                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                        ))}
+                    </em>
+                )}
                 <div className="add-person">
                     <i className="fa fa-plus" onClick={this.addPerson} />
                 </div>
@@ -235,10 +235,14 @@ export default class ContactPersons extends React.PureComponent {
         );
     }
 }
+ContactPersons.defaultProps = {
+    errors: []
+};
 
 ContactPersons.propTypes = {
     id: PropTypes.string.isRequired,
     persons: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    organisationId: PropTypes.string
+    organisationId: PropTypes.string,
+    errors: PropTypes.array
 };

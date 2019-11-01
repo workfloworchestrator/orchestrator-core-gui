@@ -19,6 +19,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 import "./GenericMultiSelect.scss";
+import { capitalizeFirstLetter } from "../utils/Utils";
 
 export default class GenericMultiSelect extends React.PureComponent {
     constructor(props) {
@@ -63,18 +64,20 @@ export default class GenericMultiSelect extends React.PureComponent {
 
     render() {
         const { numberOfBoxes } = this.state;
-        const { choices, disabled, selections, minimum, maximum } = this.props;
+        const { choices, disabled, selections, minimum, maximum, errors } = this.props;
         const placeholder = I18n.t("generic_multi_select.placeholder");
         const showAdd = maximum > minimum && selections.length < maximum;
         const boxes =
             selections.length < numberOfBoxes
                 ? selections.concat(Array(numberOfBoxes - selections.length).fill(null))
                 : selections;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
 
         return (
             <section className="multiple-selections-container">
                 <section className="item-select">
                     {boxes.map((selection, index) => {
+                        const fieldErrors = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
                         const notModifiable =
                             selection && selection.hasOwnProperty("modifiable") ? !selection.modifiable : false;
                         const showDelete = selections.length > minimum && !disabled;
@@ -111,6 +114,15 @@ export default class GenericMultiSelect extends React.PureComponent {
                                         }
                                     />
                                 </div>
+                                {fieldErrors && (
+                                    <em className="error">
+                                        {fieldErrors.map((e, index) => (
+                                            <div key={index}>
+                                                {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                            </div>
+                                        ))}
+                                    </em>
+                                )}
 
                                 {showDelete && (
                                     <i
@@ -124,6 +136,14 @@ export default class GenericMultiSelect extends React.PureComponent {
                         );
                     })}
 
+                    {rootFieldErrors && (
+                        <em className="error root-error">
+                            {rootFieldErrors.map((e, index) => (
+                                <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            ))}
+                        </em>
+                    )}
+
                     {showAdd && (
                         <div className="add-item">
                             <i className="fa fa-plus" onClick={this.addItem.bind(this)} />
@@ -135,16 +155,18 @@ export default class GenericMultiSelect extends React.PureComponent {
     }
 }
 
+GenericMultiSelect.defaultProps = {
+    minimum: 1,
+    maximum: 1,
+    errors: []
+};
+
 GenericMultiSelect.propTypes = {
     selections: PropTypes.array.isRequired,
     choices: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     minimum: PropTypes.number,
-    maximum: PropTypes.number
-};
-
-GenericMultiSelect.defaultProps = {
-    minimum: 1,
-    maximum: 1
+    maximum: PropTypes.number,
+    errors: PropTypes.array
 };

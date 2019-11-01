@@ -172,6 +172,7 @@ I18n.translations.en = {
         port_id_redundant_info: "Select a port",
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
         internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable",
+        input_fields_have_validation_errors: "input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
@@ -350,7 +351,7 @@ I18n.translations.en = {
         subscription: "Subscription",
         subscription_info: "Subscription GUID",
         subscription_id: "Subscription",
-        subscription_id_info: "The subscription that will be terminated",
+        subscription_id_info: "The subscription for this action",
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
         surfcert_filter: "SURFcert filter",
@@ -1049,7 +1050,8 @@ I18n.translations.en = {
             edit: "Edit",
             delete: "Delete",
             no_found: "No Resource Types",
-            duplicate_name: "This type is already taken. Resource Types types need to be unique"
+            duplicate_name: "This type is already taken. Resource Types types need to be unique",
+            resource_type_id: "Resource type ID"
         },
         fixedInputs: {
             tags: "Fixed Inputs for Product tag: {{tag}}",
@@ -1227,7 +1229,7 @@ I18n.translations.en = {
     },
     bfd_settings: {
         enable: "Enable BFD",
-        minimum_interval: "Minumum Interval",
+        minimum_interval: "Minimum Interval",
         multiplier: "Multiplier"
     },
     workflow: {
@@ -1253,9 +1255,10 @@ I18n.translations.en = {
         modify_sn7_service_port_ssp_replace: "Replace SSP with another SSP",
         modify_sn7_service_port_ssp_speed: "Modify SSP Speed",
         modify_sn8_aggregated_service_port: "Modify aggregated service port",
-        modify_sn8_ip_bgp_add_ports: "Add port(s) to SN8 BGP IP",
-        modify_sn8_ip_bgp_change_port: "Replace port of SN8 BGP IP",
-        modify_sn8_ip_bgp_remove_ports: "Remove port(s) from SN8 BGP IP",
+        modify_sn8_ip_bgp: "Modify SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_add_ports: "Add port(s) to SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp_remove_ports: "Remove port(s) from SN8 SURFinternet BGP",
         modify_sn8_ip_bgp_resources:
             "Modify SAP resource settings (BGP settings, IPV4/6 MTU & VLANRANGE if applicable)",
         modify_sn8_ip_ipss: "Change the IP Service Settings (IPSS)",
@@ -1264,6 +1267,7 @@ I18n.translations.en = {
         modify_sn8_light_path: "Modify SN8 LightPath",
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_sn8_service_port_nl_port_mode: "Change the mode of the port (Tagged, Linkmember)",
+        modify_sn8_sp_auto_negotiation: "Modify the auto_negotiation setting for a SN8 Service Port",
 
         task_cache_warmer: "Refresh the cache of slow API calls",
         task_clean_up_tasks: "Clean up old tasks",
