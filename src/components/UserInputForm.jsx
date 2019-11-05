@@ -276,11 +276,15 @@ export default class UserInputForm extends React.Component {
                 {validationError && !inputTypesWithDelegatedValidation.includes(userInput.type) && (
                     <em className="error">
                         {validationError
-                            ? validationError.map((e, index) => <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>)
+                            ? validationError.map((e, index) => (
+                                  <div className="backend-validation" key={index}>
+                                      {capitalizeFirstLetter(e.msg)}.
+                                  </div>
+                              ))
                             : I18n.t("process.format_error")}
                     </em>
                 )}
-                {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
+                {uniqueError && <em className="error backend-validation">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
         );
     };
@@ -631,7 +635,7 @@ export default class UserInputForm extends React.Component {
                         {/* Show top level validation info about backend validation */}
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
-                                <em className="error">
+                                <em className="error backend-validation-metadata">
                                     {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}.
                                 </em>
                             </section>
