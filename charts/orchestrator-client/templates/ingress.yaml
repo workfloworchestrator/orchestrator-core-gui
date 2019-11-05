@@ -25,7 +25,7 @@ spec:
         - {{ $host }}
       {{- end -}}
       {{- end }}
-      secretName: {{ .Values.ingress.tls.secretName }}-{{ .Release.Namespace }}-{{ .Values.nameOverride }}
+      secretName: {{ .Values.ingress.tls.secretName }}
 {{- end }}
   rules:
   - host: {{ .Values.ingress.environmentUrl }}
