@@ -19,9 +19,9 @@ spec:
         app.kubernetes.io/name: {{ .Values.nameOverride }}
         app.kubernetes.io/instance: {{ .Release.Name }}
       annotations:
-        configmap.reloader.stakater.com/reload: {{ .Values.configMapName }}-{{ .Release.Namespace }}
         checksum/config: {{ include (print $.Template.BasePath "/config-map.yaml") . | sha256sum }}
-        checksum/application-secrets: "{{ .Values.secret.secretChecksum }}"
+        {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+        {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
     spec:
       imagePullSecrets:
 {{ toYaml .Values.image.secrets | indent 10 }}
