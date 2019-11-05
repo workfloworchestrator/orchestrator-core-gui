@@ -129,7 +129,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
                                 {fieldErrors && (
                                     <em className="error">
                                         {fieldErrors.map((e, index) => (
-                                            <div key={index}>
+                                            <div key={index} className="backend-validation">
                                                 {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
                                             </div>
                                         ))}
@@ -149,7 +149,9 @@ export default class SubscriptionsSelect extends React.PureComponent {
                     {rootFieldErrors && (
                         <em className="error root-error">
                             {rootFieldErrors.map((e, index) => (
-                                <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                                <div key={index} className="backend-validation">
+                                    {capitalizeFirstLetter(e.msg)}.
+                                </div>
                             ))}
                         </em>
                     )}

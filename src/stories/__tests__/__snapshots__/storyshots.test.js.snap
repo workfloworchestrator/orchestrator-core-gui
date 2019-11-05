@@ -1720,7 +1720,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
           </div>
         </div>
         <em
-          className="error"
+          className="error backend-validation"
         />
       </div>
       <div
@@ -1889,7 +1889,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
           </div>
         </div>
         <em
-          className="error"
+          className="error backend-validation"
         />
       </div>
       <div
@@ -4342,7 +4342,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -4718,7 +4718,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -4950,7 +4950,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5375,7 +5375,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5751,7 +5751,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5887,7 +5887,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6252,7 +6252,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6628,7 +6628,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6764,7 +6764,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -7137,7 +7137,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
