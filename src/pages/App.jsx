@@ -188,7 +188,7 @@ class App extends React.PureComponent {
                                     }
                                 });
                                 if (log) {
-                                    logUserInfo(currentUser.edu_person_principal_name, "logged in");
+                                    logUserInfo(currentUser.email, "logged in");
                                 }
                             });
                         } else {
