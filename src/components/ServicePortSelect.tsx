@@ -63,6 +63,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
 
         return (
             <Select
+                id="port-choice"
                 onChange={onChange as (value: ValueType<OptionType>) => void}
                 options={options}
                 value={value}
