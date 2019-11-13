@@ -474,6 +474,7 @@ export default class UserInputForm extends React.Component {
                     <MultipleServicePorts
                         servicePorts={value}
                         sn8={userInput.type === "service_ports_sn8"}
+                        productTags={userInput.tags}
                         organisations={organisations}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}

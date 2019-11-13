@@ -31,6 +31,7 @@ import "./MultipleServicePorts.scss";
 interface IProps {
     servicePorts: ServicePort[];
     sn8: boolean;
+    productTags: string[];
     minimum: number;
     maximum: number;
     disabled: boolean;
@@ -75,10 +76,20 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     };
 
     loadServicePorts = () => {
-        const tags = this.props.sn8 ? ["SP", "SPNL"] : ["MSP", "SSP", "MSPNL"];
+        const tags = this.props.productTags;
+        console.log(tags);
 
         portSubscriptions(tags, ["active"]).then(result => {
-            this.setState({ availableServicePorts: result });
+            const servicePorts: ServicePort[] = result;
+            this.setState({
+                availableServicePorts: servicePorts.map(sp => {
+                    // Todo: delegate this to backend: it should provide a valid port mode for MSC
+                    if (sp.product.tag === "MSC" || sp.product.tag === "MSCNL") {
+                        sp.port_mode = "tagged";
+                    }
+                    return sp;
+                })
+            });
         });
     };
 
@@ -94,7 +105,8 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 
                 // TODO: Leave these out, they are properties of the subscription
                 servicePorts[index].port_mode =
-                    port.port_mode || (["MSP", "MSPNL"].includes(port.product.tag) ? "tagged" : "untagged");
+                    port.port_mode ||
+                    (["MSP", "MSPNL", "MSC", "MSC-NL"].includes(port.product.tag) ? "tagged" : "untagged");
                 servicePorts[index].tag = port.product.tag;
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
@@ -267,7 +279,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                     {vlanErrors && (
                         <em className="error">
                             {vlanErrors.map((e, index) => (
-                                <div key={index} className="backend-validation">{capitalizeFirstLetter(e.msg)}.</div>
+                                <div key={index} className="backend-validation">
+                                    {capitalizeFirstLetter(e.msg)}.
+                                </div>
                             ))}
                         </em>
                     )}
@@ -336,6 +350,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 MultipleServicePorts.propTypes = {
     onChange: PropTypes.func.isRequired,
     sn8: PropTypes.bool.isRequired,
+    tags: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     organisationId: PropTypes.string,
