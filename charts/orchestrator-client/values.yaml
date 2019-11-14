@@ -64,6 +64,10 @@ readinessProbe:
 
 env:
 
+gitlab:
+  app:
+  env:
+
 secret:
   secretChecksum:
   secretName:
