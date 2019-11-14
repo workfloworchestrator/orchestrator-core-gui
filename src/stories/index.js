@@ -535,7 +535,7 @@ storiesOf("MultipleServicePorts", module)
         fetchMock.restore();
         fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
         fetchMock.get(
-            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-AGGSP-MSC-MSCNL&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
         );
         loadVlanMocks();
@@ -571,6 +571,7 @@ storiesOf("MultipleServicePorts", module)
                 disabledPorts={boolean("Disabled ports")}
                 reportError={action("reportError")}
                 bandwidth={number("Minimum bandwith")}
+                productTags={["SP", "SPNL", "AGGSP", "MSC", "MSCNL"]}
             />
         );
     })

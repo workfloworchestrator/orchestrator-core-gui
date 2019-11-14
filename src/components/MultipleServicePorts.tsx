@@ -79,10 +79,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         const tags = this.props.productTags;
         console.log(tags);
 
-        portSubscriptions(tags, ["active"]).then(result => {
-            const servicePorts: ServicePort[] = result;
+        portSubscriptions(tags, ["active"]).then((result: ServicePort[]) => {
             this.setState({
-                availableServicePorts: servicePorts.map(sp => {
+                availableServicePorts: result.map(sp => {
                     // Todo: delegate this to backend: it should provide a valid port mode for MSC
                     if (sp.product.tag === "MSC" || sp.product.tag === "MSCNL") {
                         sp.port_mode = "tagged";
