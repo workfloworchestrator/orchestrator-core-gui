@@ -38,6 +38,7 @@ unit test:
     - auto-deploy prepare_chart
     - auto-deploy create_secret
     - auto-deploy deploy
+    - auto-deploy publish_chart
     - auto-deploy persist_environment_url
 
 deploy review:
