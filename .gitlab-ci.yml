@@ -85,6 +85,15 @@ deploy review base:
       - tags
       - schedules
 
+run system tests on dev:
+  stage: development
+  trigger:
+    project: automation/automation-testers/system-tests
+    branch: dev
+  only:
+    refs:
+      - dev
+
 deploy dev:
   variables:
     KUBE_INGRESS_BASE_DOMAIN: orchestrator.dev.automation.surf.net
@@ -106,6 +115,15 @@ deploy dev:
       - master
       - tags
       - schedules
+
+run system tests on staging:
+  stage: staging
+  trigger:
+    project: automation/automation-testers/system-tests
+    branch: master
+  only:
+    refs:
+      - master
 
 deploy staging:
   variables:
