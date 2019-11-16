@@ -77,7 +77,6 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 
     loadServicePorts = () => {
         const tags = this.props.productTags;
-        console.log(tags);
 
         portSubscriptions(tags, ["active"]).then((result: ServicePort[]) => {
             this.setState({
