@@ -62,6 +62,7 @@
     "prettier": "1.17.1",
     "react-test-renderer": "^16.8.6",
     "source-map-explorer": "^2.0.0",
+    "storybook-react-router": "^1.0.8",
     "typescript": "^3.5.2"
   },
   "resolutions": {
