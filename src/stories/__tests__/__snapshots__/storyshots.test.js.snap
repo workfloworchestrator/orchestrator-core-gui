@@ -1947,7 +1947,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
         id="process"
         onClick={[Function]}
       >
-        process
+        Process
       </span>
     </section>
     <section
@@ -3928,7 +3928,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
         id="process"
         onClick={[Function]}
       >
-        process
+        Process
       </span>
     </section>
     <section
@@ -4051,19 +4051,21 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
   className="storybook-container"
 >
   <div
-    className="mod-task-detail"
+    className="mod-process-detail"
   >
     <section
       className="tabs"
     >
       <span
         className="active"
+        id="user_input"
         onClick={[Function]}
       >
         User input
       </span>
       <span
         className=""
+        id="process"
         onClick={[Function]}
       >
         Task
@@ -4131,6 +4133,55 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
         </section>
       </div>
     </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
   </div>
 </section>
 `;
@@ -4140,13 +4191,14 @@ exports[`Storyshots ProcessDetail Task 1`] = `
   className="storybook-container"
 >
   <div
-    className="mod-task-detail"
+    className="mod-process-detail"
   >
     <section
       className="tabs"
     >
       <span
         className="active"
+        id="process"
         onClick={[Function]}
       >
         Task
@@ -4156,39 +4208,60 @@ exports[`Storyshots ProcessDetail Task 1`] = `
       className="card"
     >
       <section
-        className="task-actions"
+        className="process-actions"
       >
         <button
           className="button  blue"
+          id="retry"
           onClick={[Function]}
         >
           Retry
         </button>
         <button
           className="button  red"
+          id="abort"
           onClick={[Function]}
         >
           Abort
         </button>
         <button
           className="button  red"
+          id="delete"
           onClick={[Function]}
         >
           Delete
         </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
       </section>
       <section
-        className="task-state-detail"
+        className="process-state-detail"
       >
         <section
           className="header-information"
         >
           <ul>
             <li
-              className="task-wording"
+              className="process-wording"
             >
               <h3>
-                Task of workflow [missing {{workflow}} value]
+                Task of workflow create_sn8_service_port
               </h3>
             </li>
           </ul>
@@ -4290,28 +4363,44 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 </label>
               </div>
             </li>
+            <li>
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={false}
+                  disabled={false}
+                  id="traceback"
+                  name="traceback"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="traceback"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="traceback"
+                >
+                  Show traceback
+                </label>
+              </div>
+            </li>
           </ul>
         </section>
         <section
-          className="subscription-link"
-        >
-          <a
-            aria-current={null}
-            className="button green"
-            href="/subscription/ae6cb63d-a7fa-4167-b0e9-ee311d757397"
-            onClick={[Function]}
-          >
-            <i
-              className="fa fa-link"
-            />
-            Show Subscription related by this task
-          </a>
-        </section>
-        <section
-          className="task-overview"
+          className="process-overview"
         >
           <section
-            className="task-summary"
+            className="process-summary"
           >
             <table>
               <tbody>
@@ -4360,14 +4449,14 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <td
                     className="value"
                   >
-                    
+                    11/15/2019, 12:36:33 PM CET
                   </td>
                 </tr>
                 <tr>
                   <td
                     className="title"
                   >
-                    Last modified
+                    Last updated
                   </td>
                   <td
                     className="value"
@@ -4383,9 +4472,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
           >
             <div
               className="details-container"
+              id="step-index-0"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4432,11 +4523,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-contact-persons-k"
                         >
                           contact_persons
                         </td>
                         <td
                           className="value"
+                          id="0-contact-persons-v"
                         >
                           <pre>
                             <code
@@ -4458,11 +4551,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-organisation-k"
                         >
                           organisation
                         </td>
                         <td
                           className="value"
+                          id="0-organisation-v"
                         >
                           6a608b90-0c11-e511-80d0-005056956c1a
                         </td>
@@ -4470,11 +4565,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-port-mode-k"
                         >
                           port_mode
                         </td>
                         <td
                           className="value"
+                          id="0-port-mode-v"
                         >
                           tagged
                         </td>
@@ -4482,11 +4579,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-process-id-k"
                         >
                           process_id
                         </td>
                         <td
                           className="value"
+                          id="0-process-id-v"
                         >
                           1a5686d9-eaa2-4d0b-96eb-1ec081c62a08
                         </td>
@@ -4494,11 +4593,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-product-k"
                         >
                           product
                         </td>
                         <td
                           className="value"
+                          id="0-product-v"
                         >
                           214aae3d-f804-4270-a86b-66bcf2861809
                         </td>
@@ -4506,11 +4607,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-reporter-k"
                         >
                           reporter
                         </td>
                         <td
                           className="value"
+                          id="0-reporter-v"
                         >
                           SYSTEM
                         </td>
@@ -4518,11 +4621,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-service-port-k"
                         >
                           service_port
                         </td>
                         <td
                           className="value"
+                          id="0-service-port-v"
                         >
                           <pre>
                             <code
@@ -4541,11 +4646,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="0-workflow-target-k"
                         >
                           workflow_target
                         </td>
                         <td
                           className="value"
+                          id="0-workflow-target-v"
                         >
                           CREATE
                         </td>
@@ -4557,9 +4664,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-1"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4606,11 +4715,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="1-organisation-abbrev-k"
                         >
                           organisation_abbrev
                         </td>
                         <td
                           className="value"
+                          id="1-organisation-abbrev-v"
                         >
                           FNAL
                         </td>
@@ -4618,11 +4729,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="1-organisation-name-k"
                         >
                           organisation_name
                         </td>
                         <td
                           className="value"
+                          id="1-organisation-name-v"
                         >
                           Fermi National Accelerator Laboratory
                         </td>
@@ -4630,11 +4743,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="1-port-speed-k"
                         >
                           port_speed
                         </td>
                         <td
                           className="value"
+                          id="1-port-speed-v"
                         >
                           10000
                         </td>
@@ -4642,11 +4757,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="1-product-tag-k"
                         >
                           product_tag
                         </td>
                         <td
                           className="value"
+                          id="1-product-tag-v"
                         >
                           SP
                         </td>
@@ -4654,11 +4771,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="1-subscription-name-k"
                         >
                           subscription_name
                         </td>
                         <td
                           className="value"
+                          id="1-subscription-name-v"
                         >
                           FNAL SP (port not ready yet) 10 Gbit/s
                         </td>
@@ -4670,9 +4789,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-2"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4719,11 +4840,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="2-subscription-id-k"
                         >
                           subscription_id
                         </td>
                         <td
                           className="value"
+                          id="2-subscription-id-v"
                         >
                           ae6cb63d-a7fa-4167-b0e9-ee311d757397
                         </td>
@@ -4735,9 +4858,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-3"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4769,9 +4894,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-4"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4818,11 +4945,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="4-ticket-id-k"
                         >
                           ticket_id
                         </td>
                         <td
                           className="value"
+                          id="4-ticket-id-v"
                         >
                           SNNP-79379
                         </td>
@@ -4834,9 +4963,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-5"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step suspend"
@@ -4868,9 +4999,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-6"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4902,9 +5035,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-7"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4936,9 +5071,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-8"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -4970,9 +5107,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-9"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5004,9 +5143,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-10"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5038,9 +5179,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-11"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step suspend"
@@ -5072,9 +5215,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-12"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5121,11 +5266,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="12-port-id-k"
                         >
                           port_id
                         </td>
                         <td
                           className="value"
+                          id="12-port-id-v"
                         >
                           680884
                         </td>
@@ -5137,9 +5284,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-13"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5171,9 +5320,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-14"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5220,11 +5371,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="14-ims-info-k"
                         >
                           ims_info
                         </td>
                         <td
                           className="value"
+                          id="14-ims-info-v"
                         >
                           <pre>
                             <code
@@ -5249,9 +5402,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-15"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5298,11 +5453,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="15-subscription-name-k"
                         >
                           subscription_name
                         </td>
                         <td
                           className="value"
+                          id="15-subscription-name-v"
                         >
                           FNAL SP ZP001A 10 Gbit/s
                         </td>
@@ -5314,9 +5471,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-16"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5363,11 +5522,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="16-port-info-k"
                         >
                           port_info
                         </td>
                         <td
                           className="value"
+                          id="16-port-info-v"
                         >
                           <pre>
                             <code
@@ -5398,9 +5559,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-17"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5447,11 +5610,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="17-nso-payload-k"
                         >
                           nso_payload
                         </td>
                         <td
                           className="value"
+                          id="17-nso-payload-v"
                         >
                           <pre>
                             <code
@@ -5477,11 +5642,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="17-nso-service-id-k"
                         >
                           nso_service_id
                         </td>
                         <td
                           className="value"
+                          id="17-nso-service-id-v"
                         >
                           54fd79f5-947f-459f-9b02-e463c2e69134
                         </td>
@@ -5493,9 +5660,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-18"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5527,9 +5696,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-19"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step skipped"
@@ -5561,9 +5732,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-20"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5595,9 +5768,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-21"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5629,9 +5804,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-22"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step success"
@@ -5678,11 +5855,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="22-jira-ticket-completed-k"
                         >
                           jira_ticket_completed
                         </td>
                         <td
                           className="value"
+                          id="22-jira-ticket-completed-v"
                         >
                           2019-11-15T11:37:08 +0000
                         </td>
@@ -5694,9 +5873,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-23"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step failed"
@@ -5743,11 +5924,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="23-class-k"
                         >
                           class
                         </td>
                         <td
                           className="value"
+                          id="23-class-v"
                         >
                           ConnectionRefusedError
                         </td>
@@ -5755,11 +5938,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="23-error-k"
                         >
                           error
                         </td>
                         <td
                           className="value"
+                          id="23-error-v"
                         >
                           [Errno 111] Connection refused
                         </td>
@@ -5767,11 +5952,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="23-executed-at-k"
                         >
                           executed_at
                         </td>
                         <td
                           className="value"
+                          id="23-executed-at-v"
                         >
                           <pre>
                             <code
@@ -5790,11 +5977,13 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                       <tr>
                         <td
                           className="key"
+                          id="23-retries-k"
                         >
                           retries
                         </td>
                         <td
                           className="value"
+                          id="23-retries-v"
                         >
                           2
                         </td>
@@ -5806,9 +5995,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-24"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step pending"
@@ -5835,9 +6026,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-25"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step pending"
@@ -5864,9 +6057,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-26"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step pending"
@@ -5893,9 +6088,11 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             </div>
             <div
               className="details-container"
+              id="step-index-27"
             >
               <div
                 className="step-container"
+                onClick={[Function]}
               >
                 <section
                   className="step pending"
@@ -5917,6 +6114,55 @@ exports[`Storyshots ProcessDetail Task 1`] = `
         </section>
       </section>
     </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
   </div>
 </section>
 `;

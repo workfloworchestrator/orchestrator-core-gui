@@ -16,7 +16,7 @@
 import React from "react";
 import I18n from "i18n-js";
 
-import { startTask, workflowsByTarget, catchErrorStatus } from "../api";
+import { startProcess, workflowsByTarget, catchErrorStatus } from "../api";
 import { setFlash } from "../utils/Flash";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -51,22 +51,24 @@ export default class NewTask extends React.Component<{}, IState> {
             return Promise.reject();
         }
 
-        let result = startTask(workflow.value, taskInput);
-        result
-            .then(() => {
-                this.context.redirect(`/tasks`);
-                setFlash(I18n.t("task.flash.create", { name: workflow.label }));
-            })
-            .catch(error => {
-                // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-            });
+        let result = startProcess(workflow.value, taskInput);
+        result.then(() => {
+            this.context.redirect(`/tasks`);
+            setFlash(I18n.t("task.flash.create", { name: workflow.label }));
+        });
+        catchErrorStatus(result, 510, (json: FormNotCompleteResponse) => {
+            this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
+        });
+        result.catch(error => {
+            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+        });
         return result;
     };
 
     changeWorkflow = (option: Option) => {
         this.setState({ workflow: option });
         if (option) {
-            let promise = startTask(option.value, []);
+            let promise = startProcess(option.value, []);
             catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
                 this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
             });
@@ -89,7 +91,7 @@ export default class NewTask extends React.Component<{}, IState> {
                                 workflow={!workflows || !workflow ? undefined : workflow.value}
                             />
                         </section>
-                        {!workflow && (
+                        {workflow && (
                             <UserInputFormWizard
                                 stepUserInput={stepUserInput}
                                 validSubmit={this.validSubmit}

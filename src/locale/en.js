@@ -163,7 +163,7 @@ I18n.translations.en = {
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {
             user_input: "User input",
-            process: "process"
+            process: "Process"
         },
         port_id: "Port",
         port_id_info: "Select a port",
@@ -632,28 +632,15 @@ I18n.translations.en = {
         details: "Show details",
         stateChanges: "Show state input",
         traceback: "Show traceback",
-        wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
+        wording_process: "Process {{product}} of workflow {{workflow}} for {{customer}}",
+        wording_task: "Task of workflow {{workflow}}",
         summary: {
             status: "Status",
             assignee: "Assignee",
+            created_by: "Created by",
             step: "Current step",
             started: "Started",
             last_modified: "Last updated"
-        }
-    },
-    task_state: {
-        copy: "Copy to clipboard",
-        copied: "Copied",
-        raw: "Show raw JSON",
-        details: "Show details",
-        stateChanges: "Show state input",
-        wording: "Task of workflow {{workflow}}",
-        summary: {
-            last_status: "Status",
-            created_by: "Created by",
-            last_step: "Current step",
-            started_at: "Started",
-            last_modified_at: "Last modified"
         }
     },
     validations: {
@@ -1084,12 +1071,12 @@ I18n.translations.en = {
     tasks: {
         searchPlaceHolder: "Search for tasks...",
         new: "New Task",
-        last_step: "Current step",
-        last_status: "Status",
-        workflow: "Workflow",
-        started_at: "Started",
+        step: "Current step",
+        status: "Status",
+        workflow_name: "Workflow",
+        started: "Started",
         failed_reason: "Failed reason",
-        last_modified_at: "Last modified",
+        last_modified: "Last modified",
         created_by: "Created by",
         actions: "",
         none: "",
@@ -1124,7 +1111,7 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription related by this task",
         tabs: {
             user_input: "User input",
-            task: "Task"
+            process: "Task"
         },
         new_task: "New task",
         flash: {

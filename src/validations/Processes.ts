@@ -13,7 +13,7 @@
  *
  */
 
-import { Process, Task } from "../utils/types";
+import { Process } from "../utils/types";
 
 interface Action {
     icon: string;
@@ -23,7 +23,7 @@ interface Action {
 }
 
 export function actionOptions(
-    process: Process | Task,
+    process: Process,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,

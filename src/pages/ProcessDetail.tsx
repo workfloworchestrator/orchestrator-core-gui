@@ -44,6 +44,7 @@ interface MatchParams {
 interface IProps extends RouteComponentProps<MatchParams> {
     query: DecodedValueMap<typeof queryConfig>;
     setQuery: SetQuery<typeof queryConfig>;
+    isProcess: boolean;
 }
 
 interface IState {
@@ -135,46 +136,82 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
-        this.confirmation(
-            I18n.t("processes.deleteConfirmation", {
+
+        let message;
+        if (this.props.isProcess) {
+            message = I18n.t("processes.deleteConfirmation", {
                 name: process.productName,
                 customer: process.customerName
-            }),
-            () =>
-                deleteProcess(process.id).then(() => {
-                    this.context.redirect(`/processes`);
-                    setFlash(I18n.t("processes.flash.delete", { name: process.productName }));
-                })
+            });
+        } else {
+            message = I18n.t("tasks.deleteConfirmation", {
+                name: process.workflow_name
+            });
+        }
+
+        this.confirmation(message, () =>
+            deleteProcess(process.id).then(() => {
+                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                setFlash(
+                    I18n.t(`${this.props.isProcess ? "processes" : "tasks"}.flash.delete`, {
+                        name: process.productName
+                    })
+                );
+            })
         );
     };
 
     handleAbortProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
-        this.confirmation(
-            I18n.t("processes.abortConfirmation", {
+
+        let message;
+        if (this.props.isProcess) {
+            message = I18n.t("processes.abortConfirmation", {
                 name: process.productName,
                 customer: process.customerName
-            }),
-            () =>
-                abortProcess(process.id).then(() => {
-                    this.context.redirect(`/processes`);
-                    setFlash(I18n.t("processes.flash.abort", { name: process.productName }));
-                })
+            });
+        } else {
+            message = I18n.t("tasks.abortConfirmation", {
+                name: process.workflow_name
+            });
+        }
+
+        this.confirmation(message, () =>
+            abortProcess(process.id).then(() => {
+                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                setFlash(
+                    I18n.t(`${this.props.isProcess ? "processes" : "tasks"}.flash.abort`, {
+                        name: process.productName
+                    })
+                );
+            })
         );
     };
 
     handleRetryProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
-        this.confirmation(
-            I18n.t("processes.retryConfirmation", {
+
+        let message;
+        if (this.props.isProcess) {
+            message = I18n.t("processes.retryConfirmation", {
                 name: process.productName,
                 customer: process.customerName
-            }),
-            () =>
-                retryProcess(process.id).then(() => {
-                    this.context.redirect(`/processes`);
-                    setFlash(I18n.t("processes.flash.retry", { name: process.productName }));
-                })
+            });
+        } else {
+            message = I18n.t("tasks.retryConfirmation", {
+                name: process.workflow_name
+            });
+        }
+
+        this.confirmation(message, () =>
+            retryProcess(process.id).then(() => {
+                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                setFlash(
+                    I18n.t(`${this.props.isProcess ? "processes" : "tasks"}.flash.retry`, {
+                        name: process.productName
+                    })
+                );
+            })
         );
     };
 
@@ -234,7 +271,11 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             this.handleRetryProcess(process),
             this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
-        ).filter(option => option.label !== "user_input" && option.label !== "details" && option.label !== "delete");
+        ).filter(option => option.label !== "user_input" && option.label !== "details");
+
+        if (this.props.isProcess) {
+            options = options.filter(option => option.label !== "delete");
+        }
 
         const lastStepIndex = process.steps.findIndex((item: Step) => item.name === process.step);
 
@@ -272,8 +313,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         let result = resumeProcess(process.id, processInput);
         result
             .then(e => {
-                this.context.redirect(`/processes`);
-                setFlash(I18n.t("process.flash.update", { name: process.workflow_name }));
+                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                setFlash(
+                    I18n.t(`${this.props.isProcess ? "process" : "task"}.flash.update`, { name: process.workflow_name })
+                );
             })
             .catch(error => {
                 // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
@@ -305,6 +348,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         subscriptionProcesses={subscriptionProcesses}
                         collapsed={this.props.query.collapsed}
                         onChangeCollapsed={this.handleCollapse}
+                        isProcess={this.props.isProcess}
                     />
                 </section>
             );
@@ -312,9 +356,13 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return (
                 <section className="card">
                     <section className="header-info">
-                        <h3>{I18n.t("process.workflow", { name: process.workflow_name })}</h3>
                         <h3>
-                            {I18n.t("process.userInput", {
+                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.workflow`, {
+                                name: process.workflow_name
+                            })}
+                        </h3>
+                        <h3>
+                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.userInput`, {
                                 name: step.name,
                                 product: productName || ""
                             })}
@@ -328,7 +376,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     renderTab = (tab: string, selectedTab: string) => (
         <span id={tab} key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
-            {I18n.t(`process.tabs.${tab}`)}
+            {I18n.t(`${this.props.isProcess ? "process" : "task"}.tabs.${tab}`)}
         </span>
     );
 
@@ -365,7 +413,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
                 {renderNotFound && (
                     <section className="not-found card">
-                        <h1>{I18n.t("process.notFound")}</h1>
+                        <h1>{I18n.t(`${this.props.isProcess ? "process" : "task"}.notFound`)}</h1>
                     </section>
                 )}
                 <ScrollUpButton />

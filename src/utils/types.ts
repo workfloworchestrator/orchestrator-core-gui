@@ -84,22 +84,6 @@ export interface Process {
     [index: string]: any;
 }
 
-export interface Task {
-    id: string;
-    workflow: string;
-    product?: string;
-    customer?: string;
-    assignee: string;
-    last_status: string;
-    failed_reason: string;
-    traceback: string;
-    last_step: string;
-    created_by: string;
-    started: number;
-    last_modified_at: number;
-    [index: string]: any;
-}
-
 export interface ProcessWithDetails extends Process {
     steps: Step[];
 }
@@ -138,11 +122,6 @@ export interface State {
 export interface ShowActions {
     show: boolean;
     id: string;
-}
-
-export interface ShowTaskActions {
-    show: boolean;
-    tid: string;
 }
 
 export interface SortSettings {

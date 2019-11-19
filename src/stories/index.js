@@ -40,9 +40,7 @@ import {
     imsNodes,
     freeCorelinkPorts,
     FAILED_PROCESS_JSON,
-    SUSPENDED_PROCESS_JSON,
-    FAILED_TASK_JSON,
-    SUSPENDED_TASK_JSON
+    SUSPENDED_PROCESS_JSON
 } from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -54,7 +52,6 @@ import { formDate } from "../forms/Builder";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import GenericMultiSelect from "../components/GenericMultiSelect";
 import ProcessDetail from "../pages/ProcessDetail";
-import TaskDetail from "../pages/TaskDetail";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -914,26 +911,26 @@ storiesOf("ProcessDetail", module)
         fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
         fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
 
-        return <ProcessDetail match={{ params: { id: "pid" } }} />;
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
     })
     .add("Task", () => {
         fetchMock.restore();
-        fetchMock.get("/api/tasks/pid", FAILED_TASK_JSON);
+        fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
         fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
 
-        return <TaskDetail match={{ params: { id: "pid" } }} />;
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
     })
     .add("Suspended Process", () => {
         fetchMock.restore();
         fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
         fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
 
-        return <ProcessDetail match={{ params: { id: "pid" } }} />;
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
     })
     .add("Suspended Task", () => {
         fetchMock.restore();
-        fetchMock.get("/api/tasks/pid", SUSPENDED_TASK_JSON);
+        fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
         fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
 
-        return <TaskDetail match={{ params: { id: "pid" } }} />;
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
     });

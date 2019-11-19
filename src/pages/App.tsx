@@ -251,7 +251,10 @@ class App extends React.PureComponent<{}, IState> {
                                         />
                                     )}
                                 />
-                                <Route path="/process/:id" render={props => <ProcessDetail {...props} />} />
+                                <Route
+                                    path="/process/:id"
+                                    render={props => <ProcessDetail {...props} isProcess={true} />}
+                                />
                                 <Route path="/subscriptions" render={props => <Subscriptions {...props} />} />
                                 <Route path="/old-subscriptions" render={() => <OldSubscriptions />} />
                                 <Route
@@ -274,7 +277,10 @@ class App extends React.PureComponent<{}, IState> {
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />
-                                <Route path="/task/:id" render={props => <ProcessDetail {...props} />} />
+                                <Route
+                                    path="/task/:id"
+                                    render={props => <ProcessDetail {...props} isProcess={false} />}
+                                />
                                 <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={() => <ServerError />} />

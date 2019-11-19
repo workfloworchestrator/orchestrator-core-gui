@@ -27,7 +27,7 @@ import { NavLink } from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
-import { Step, State, Process, ProcessSubscription } from "../utils/types";
+import { Step, State, ProcessSubscription } from "../utils/types";
 import { CustomProcessWithDetails } from "../pages/ProcessDetail";
 
 interface IProps {
@@ -35,6 +35,7 @@ interface IProps {
     subscriptionProcesses: ProcessSubscription[];
     collapsed?: number[];
     onChangeCollapsed: (index: number) => void; // when provided it will toggle the collapse functionality
+    isProcess: boolean;
 }
 
 interface IState {
@@ -64,7 +65,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
     renderRaw = (process: CustomProcessWithDetails) => {
         const { copiedToClipboard } = this.state;
         const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
-        const tooltip = I18n.t(copiedToClipboard ? "process_state.copied" : "process_state.copy");
+        const tooltip = I18n.t(copiedToClipboard ? `process_state.copied` : `process_state.copy`);
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
@@ -81,18 +82,23 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         );
     };
 
-    renderProcessHeaderInformation = (process: Process) => {
+    renderProcessHeaderInformation = (process: CustomProcessWithDetails) => {
         const { raw, traceback, details, stateChanges } = this.state;
         return (
             <section className="header-information">
                 <ul>
                     <li className="process-wording">
                         <h3>
-                            {I18n.t("process_state.wording", {
-                                product: process.productName,
-                                customer: process.customerName,
-                                workflow: process.workflow_name
-                            })}
+                            {this.props.isProcess &&
+                                I18n.t("process_state.wording_process", {
+                                    product: process.productName,
+                                    customer: process.customerName,
+                                    workflow: process.workflow_name
+                                })}
+                            {!this.props.isProcess &&
+                                I18n.t("process_state.wording_task", {
+                                    workflow: process.workflow_name
+                                })}
                         </h3>
                     </li>
                 </ul>
@@ -102,7 +108,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             <CheckBox
                                 name="details"
                                 value={details}
-                                info={I18n.t("process_state.details")}
+                                info={I18n.t(`process_state.details`)}
                                 onChange={() => this.setState({ details: !details })}
                             />
                         </li>
@@ -112,7 +118,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             <CheckBox
                                 name="state-changes"
                                 value={stateChanges}
-                                info={I18n.t("process_state.stateChanges")}
+                                info={I18n.t(`process_state.stateChanges`)}
                                 onChange={() => this.setState({ stateChanges: !stateChanges })}
                             />
                         </li>
@@ -121,7 +127,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                         <CheckBox
                             name="raw"
                             value={raw}
-                            info={I18n.t("process_state.raw")}
+                            info={I18n.t(`process_state.raw`)}
                             onChange={() => this.setState({ raw: !raw })}
                         />
                     </li>
@@ -130,7 +136,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             <CheckBox
                                 name="traceback"
                                 value={traceback}
-                                info={I18n.t("process_state.traceback")}
+                                info={I18n.t(`process_state.traceback`)}
                                 onChange={() => this.setState({ traceback: !traceback })}
                             />
                         </li>
@@ -168,7 +174,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                     <div key={index}>
                         <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
                             <i className="fa fa-link" />{" "}
-                            {I18n.t("process.subscription_link_txt", {
+                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
                                 target: ps.workflow_target
                             })}
                         </NavLink>
@@ -269,7 +275,13 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
 
     renderProcessOverview = (process: CustomProcessWithDetails, details: boolean, stateChanges: boolean) => {
         const last = (i: number) => i === process.steps.length - 1;
-        const summaryKeys = ["status", "assignee", "step", "started", "last_modified"];
+        const summaryKeys = [
+            "status",
+            this.props.isProcess ? "assignee" : "created_by",
+            "step",
+            "started",
+            "last_modified"
+        ];
         return (
             <section className="process-overview">
                 {details && (

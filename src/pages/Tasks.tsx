@@ -18,7 +18,7 @@ import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import ScrollUpButton from "react-scroll-up-button";
 
-import { abortTask, deleteTask, retryTask, processes, resumeAll } from "../api";
+import { abortProcess, deleteProcess, retryProcess, processes } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import FilterDropDown from "../components/FilterDropDown";
@@ -28,15 +28,15 @@ import { renderDateTime } from "../utils/Lookups";
 import CheckBox from "../components/CheckBox";
 import { actionOptions } from "../validations/Processes";
 import ApplicationContext from "../utils/ApplicationContext";
-import { Task, FilterAttribute, ShowTaskActions, SortSettings } from "../utils/types";
+import { Process, FilterAttribute, ShowActions, SortSettings } from "../utils/types";
 
 import "./Tasks.scss";
 
 interface IState {
-    tasks: Task[];
-    filteredTasks: Task[];
+    tasks: Process[];
+    filteredTasks: Process[];
     query: string;
-    actions: ShowTaskActions;
+    actions: ShowActions;
     sorted: SortSettings;
     filterAttributesStatus: FilterAttribute[];
     confirmationDialogOpen: boolean;
@@ -55,8 +55,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             tasks: [],
             filteredTasks: [],
             query: "",
-            actions: { show: false, tid: "" },
-            sorted: { name: "last_modified_at", descending: true },
+            actions: { show: false, id: "" },
+            sorted: { name: "last_modified", descending: true },
             filterAttributesStatus: [
                 { name: "created", selected: true, count: 0 },
                 { name: "failed", selected: true, count: 0 },
@@ -81,14 +81,14 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     refresh = () =>
-        processes().then(results => {
+        processes(true).then(results => {
             const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
             newFilterAttributesStatus.forEach(
                 (attr: FilterAttribute) =>
-                    (attr.count = results.filter((task: Task) => task.status === attr.name).length)
+                    (attr.count = results.filter((task: Process) => task.status === attr.name).length)
             );
 
-            results = results.filter((process: Task) => process.assignee === "SYSTEM");
+            results = results.filter((process: Process) => process.assignee === "SYSTEM");
 
             const filteredTasks = this.doSearchAndSortAndFilter(
                 "",
@@ -120,7 +120,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    showTask = (task: Task) => () => {
+    showTask = (task: Process) => () => {
         clearInterval(this.state.interval);
         this.context.redirect("/task/" + task.id);
     };
@@ -132,7 +132,10 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     runAllTasks = () => {
         this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
-            resumeAll().then(() => {});
+            this.state.tasks
+                .filter((task: Process) => task.status === "failed")
+                .map(task => task.id)
+                .forEach(retryProcess);
         });
     };
 
@@ -145,20 +148,20 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     doSearchAndSortAndFilter = (
         query: string,
-        tasks: Task[],
+        tasks: Process[],
         sorted: SortSettings,
         filterAttributesStatus: FilterAttribute[]
     ) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
             const searchable = ["created_by", "failed_reason", "status", "step", "workflow_name"];
-            tasks = tasks.filter((task: Task) =>
+            tasks = tasks.filter((task: Process) =>
                 searchable
                     .map(search => (task[search] || "").toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
         }
-        tasks = tasks.filter((task: Task) => {
+        tasks = tasks.filter((task: Process) => {
             const statusFilter = filterAttributesStatus.find((attr: FilterAttribute) => attr.name === task.status);
             return statusFilter ? statusFilter.selected : true;
         });
@@ -176,40 +179,40 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         });
     }, 250);
 
-    toggleActions = (task: Task, actions: ShowTaskActions) => (e: React.MouseEvent) => {
+    toggleActions = (task: Process, actions: ShowActions) => (e: React.MouseEvent) => {
         stop(e);
-        const newShow = actions.tid === task.id ? !actions.show : true;
-        this.setState({ actions: { show: newShow, tid: task.id } });
+        const newShow = actions.id === task.id ? !actions.show : true;
+        this.setState({ actions: { show: newShow, id: task.id } });
     };
 
-    handleDeleteTask = (task: Task) => (e: React.MouseEvent) => {
+    handleDeleteTask = (task: Process) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(I18n.t("tasks.deleteConfirmation", { name: task.workflow_name }), () =>
-            deleteTask(task.id).then(() => {
+            deleteProcess(task.id).then(() => {
                 this.refresh();
                 setFlash(I18n.t("tasks.flash.delete", { name: task.workflow_name }));
             })
         );
     };
 
-    handleAbortTask = (task: Task) => (e: React.MouseEvent) => {
+    handleAbortTask = (task: Process) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(
             I18n.t("tasks.abortConfirmation", {
                 name: task.workflow_name
             }),
             () =>
-                abortTask(task.id).then(() => {
+                abortProcess(task.id).then(() => {
                     this.refresh();
                     setFlash(I18n.t("tasks.flash.abort", { name: task.workflow_name }));
                 })
         );
     };
 
-    handleRetryTask = (task: Task) => (e: React.MouseEvent) => {
+    handleRetryTask = (task: Process) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(I18n.t("tasks.retryConfirmation", { name: task.workflow_name }), () =>
-            retryTask(task.id).then(() => {
+            retryProcess(task.id).then(() => {
                 this.refresh();
                 setFlash(I18n.t("tasks.flash.retry", { name: task.workflow_name }));
             })
@@ -226,9 +229,9 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             }
         });
 
-    renderActions = (task: Task, actions: ShowTaskActions) => {
+    renderActions = (task: Process, actions: ShowActions) => {
         const actionId = task.id;
-        if (actions.tid !== actionId || (actions.tid === actionId && !actions.show)) {
+        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
         }
         const options = actionOptions(
@@ -237,12 +240,12 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             this.handleRetryTask(task),
             this.handleDeleteTask(task),
             this.handleAbortTask(task),
-            "last_status"
+            "status"
         );
         return <DropDownActions options={options} i18nPrefix="tasks" />;
     };
 
-    sortBy = (name: string) => (a: Task, b: Task) => {
+    sortBy = (name: string) => (a: Process, b: Process) => {
         const aSafe = a[name] || "";
         const bSafe = b[name] || "";
         return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
@@ -282,14 +285,14 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         return <i />;
     };
 
-    renderTasksTable(tasks: Task[], actions: ShowTaskActions, sorted: SortSettings) {
+    renderTasksTable(tasks: Process[], actions: ShowActions, sorted: SortSettings) {
         const columns = [
-            "last_step",
-            "last_status",
-            "workflow",
-            "started_at",
+            "step",
+            "status",
+            "workflow_name",
+            "started",
             "failed_reason",
-            "last_modified_at",
+            "last_modified",
             "created_by",
             "actions"
         ];
@@ -311,24 +314,24 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     </thead>
                     <tbody>
                         {tasks.map((task, index) => (
-                            <tr key={`${task.tid}_${index}`} onClick={this.showTask(task)} className={task.status}>
-                                <td data-label={I18n.t("tasks.last_step")} className="last_step">
-                                    {task.last_step}
+                            <tr key={`${task.id}_${index}`} onClick={this.showTask(task)} className={task.status}>
+                                <td data-label={I18n.t("tasks.step")} className="step">
+                                    {task.step}
                                 </td>
-                                <td data-label={I18n.t("tasks.last_status")} className="last_status">
-                                    {task.last_status}
+                                <td data-label={I18n.t("tasks.status")} className="status">
+                                    {task.status}
                                 </td>
-                                <td data-label={I18n.t("tasks.workflow")} className="workflow">
-                                    {task.workflow}
+                                <td data-label={I18n.t("tasks.workflow_name")} className="workflow_name">
+                                    {task.workflow_name}
                                 </td>
-                                <td data-label={I18n.t("tasks.started_at")} className="started_at">
-                                    {renderDateTime(task.started_at)}
+                                <td data-label={I18n.t("tasks.started")} className="started">
+                                    {renderDateTime(task.started)}
                                 </td>
                                 <td data-label={I18n.t("tasks.failed_reason")} className="failed_reason">
                                     {task.failed_reason}
                                 </td>
-                                <td data-label={I18n.t("tasks.last_modified_at")} className="last_modified_at">
-                                    {renderDateTime(task.last_modified_at)}
+                                <td data-label={I18n.t("tasks.last_modified")} className="last_modified">
+                                    {renderDateTime(task.last_modified)}
                                 </td>
                                 <td data-label={I18n.t("tasks.created_by")} className="created_by">
                                     {task.created_by}
@@ -338,7 +341,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                                     className="actions"
                                     onClick={this.toggleActions(task, actions)}
                                     tabIndex={1}
-                                    onBlur={() => this.setState({ actions: { show: false, tid: "" } })}
+                                    onBlur={() => this.setState({ actions: { show: false, id: "" } })}
                                 >
                                     <i className="fa fa-ellipsis-h" />
                                     {this.renderActions(task, actions)}
@@ -381,7 +384,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                         <FilterDropDown
                             items={filterAttributesStatus}
                             filterBy={this.filter}
-                            label={I18n.t("tasks.last_status")}
+                            label={I18n.t("tasks.status")}
                         />
                         <section className="search">
                             <input
