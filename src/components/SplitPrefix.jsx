@@ -84,11 +84,21 @@ export default class SplitPrefix extends React.PureComponent {
                     Selected prefix: {subnet}/{netmask}
                 </h3>
                 <div>Desired netmask of the new subnet:</div>
-                <Select onChange={this.changePrefixLength} options={length_options} value={length_value} />
+                <Select
+                    id="desired-netmask"
+                    onChange={this.changePrefixLength}
+                    options={length_options}
+                    value={length_value}
+                />
                 {this.state.subnets && (
                     <div>
                         <div>Desired prefix:</div>
-                        <Select options={prefix_options} onChange={this.selectSubnet} value={prefix_value} />
+                        <Select
+                            id="desired-prefix"
+                            options={prefix_options}
+                            onChange={this.selectSubnet}
+                            value={prefix_value}
+                        />
                     </div>
                 )}
             </section>
