@@ -3285,6 +3285,69 @@ export const SN8PortSubscriptions = [
     {
         crm_port_id: null,
         customer_id: "88503161-0911-e511-80d0-005056956c1a",
+        description: "DESIGNACADEMY MSCNL EHV001A 1 Gbit/s",
+        end_date: null,
+        insync: true,
+        port_mode: null,
+        product: {
+            created_at: 1570789685.0,
+            description: "SURFnet8 Multi Service Carrier for NetherLight",
+            end_date: null,
+            name: "NL8 MSCNL",
+            product_id: "da8de8a6-5546-40e8-817b-ee20eb5189dd",
+            product_type: "Port",
+            status: "active",
+            tag: "MSCNL"
+        },
+        start_date: 1573686000.0,
+        status: "active",
+        subscription_id: "8a600d14-3901-43e0-89e2-9961294821e4"
+    },
+    {
+        crm_port_id: null,
+        customer_id: "88503161-0911-e511-80d0-005056956c1a",
+        description: "DESIGNACADEMY MSC EHV001A 1 Gbit/s",
+        end_date: null,
+        insync: true,
+        port_mode: null,
+        product: {
+            created_at: 1570789685.0,
+            description: "SURFnet8 Multi Service Carrier",
+            end_date: null,
+            name: "SN8 MSC",
+            product_id: "bfa0935f-f6fb-4e6c-b4da-47812adcd9c3",
+            product_type: "Port",
+            status: "active",
+            tag: "MSC"
+        },
+        start_date: 1573686000.0,
+        status: "active",
+        subscription_id: "095b8344-5bd4-4d81-a84c-309de5cb6308"
+    },
+    {
+        crm_port_id: null,
+        customer_id: "88503161-0911-e511-80d0-005056956c1a",
+        description: "DESIGNACADEMY AGGSP EHV001A-EHV001A",
+        end_date: null,
+        insync: false,
+        port_mode: "tagged",
+        product: {
+            created_at: 1569506573.0,
+            description: "Aggregated Service Port on SURFnet8",
+            end_date: null,
+            name: "SN8 Aggregated Service Port",
+            product_id: "be0adc68-cb91-4843-ba87-0743f0c36e76",
+            product_type: "Port",
+            status: "active",
+            tag: "AGGSP"
+        },
+        start_date: 1569448800.0,
+        status: "active",
+        subscription_id: "85c379b7-fa57-4d36-a033-617c890592ba"
+    },
+    {
+        crm_port_id: null,
+        customer_id: "88503161-0911-e511-80d0-005056956c1a",
         description: "DESIGNACADEMY SP MT001A 1 Gbit/s",
         end_date: null,
         insync: true,

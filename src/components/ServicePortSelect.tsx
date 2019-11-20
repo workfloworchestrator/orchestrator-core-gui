@@ -41,12 +41,12 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
-        if (["SP", "SPNL"].includes(servicePort.product.tag)) {
-            const portMode = isEmpty(servicePort.port_mode) ? "<No port_mode>" : servicePort.port_mode.toUpperCase();
-            return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
-        } else {
+        if (["MSP", "MSPNL", "SSP"].includes(servicePort.product.tag)) {
             const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
             return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
+        } else {
+            const portMode = isEmpty(servicePort.port_mode) ? "<No port_mode>" : servicePort.port_mode.toUpperCase();
+            return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
         }
     };
 

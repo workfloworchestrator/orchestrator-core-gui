@@ -131,7 +131,8 @@ const sn7PortSelectInputStepsAllOrganisations = [
         organisationPortsOnly: false,
         organisation_key: "organisation",
         type: "service_ports",
-        mspOnly: false
+        mspOnly: false,
+        tags: ["MSP", "SSP", "MSPNL"]
     }
 ];
 
@@ -150,7 +151,8 @@ const sn7PortSelectInputStepsMSPOnly = [
         organisationPortsOnly: false,
         organisation_key: "organisation",
         type: "service_ports",
-        mspOnly: true
+        mspOnly: true,
+        tags: ["MSP", "MSPNL"]
     }
 ];
 
@@ -169,7 +171,8 @@ const sn7PortSelectInputStepsSelectedOrganisation = [
         organisationPortsOnly: true,
         organisation_key: "organisation",
         type: "service_ports",
-        mspOnly: false
+        mspOnly: false,
+        tags: ["MSP", "SSP", "MSPNL"]
     }
 ];
 
@@ -188,7 +191,8 @@ const sn8PortSelectInputStepsAllOrganisations = [
         organisationPortsOnly: false,
         organisation_key: "organisation",
         type: "service_ports_sn8",
-        visiblePortMode: "normal"
+        visiblePortMode: "normal",
+        tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
     }
 ];
 
@@ -207,7 +211,8 @@ const sn8PortSelectInputStepsTagged = [
         organisationPortsOnly: false,
         organisation_key: "organisation",
         type: "service_ports_sn8",
-        visiblePortMode: "tagged"
+        visiblePortMode: "tagged",
+        tags: ["SP", "SPNL"]
     }
 ];
 
@@ -226,7 +231,8 @@ const sn8PortSelectInputStepsUntagged = [
         organisationPortsOnly: false,
         organisation_key: "organisation",
         type: "service_ports_sn8",
-        visiblePortMode: "untagged"
+        visiblePortMode: "untagged",
+        tags: ["SP", "SPNL"]
     }
 ];
 
@@ -245,7 +251,8 @@ const sn8PortSelectInputStepsSelectedOrganisation = [
         organisationPortsOnly: true,
         organisation_key: "organisation",
         type: "service_ports_sn8",
-        visiblePortMode: "normal"
+        visiblePortMode: "normal",
+        tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
     }
 ];
 
@@ -535,7 +542,7 @@ storiesOf("MultipleServicePorts", module)
         fetchMock.restore();
         fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
         fetchMock.get(
-            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-AGGSP-MSC-MSCNL&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
         );
         loadVlanMocks();
@@ -571,6 +578,7 @@ storiesOf("MultipleServicePorts", module)
                 disabledPorts={boolean("Disabled ports")}
                 reportError={action("reportError")}
                 bandwidth={number("Minimum bandwith")}
+                productTags={["SP", "SPNL", "AGGSP", "MSC", "MSCNL"]}
             />
         );
     })
@@ -610,6 +618,7 @@ storiesOf("MultipleServicePorts", module)
                 disabledPorts={boolean("Disabled ports")}
                 reportError={action("reportError")}
                 bandwidth={number("Minimum bandwith")}
+                productTags={["MSP", "SSP", "MSPNL"]}
             />
         );
     });
@@ -711,8 +720,10 @@ storiesOf("UserInputForm", module)
     .add("SN7 Portselect MSP only", () => {
         fetchMock.restore();
         fetchMock.get(
-            "/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active",
-            SN7PortSubscriptions.filter(p => p.status === "active")
+            "/api/v2/subscriptions/ports?filter=tags,MSP-MSPNL&filter=statuses,active",
+            SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
+                sn7PortSelectInputStepsMSPOnly[2].tags.includes(p.product.tag)
+            )
         );
         fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active", []);
         fetchMock.get("/api/v2/subscriptions/all", []);
@@ -761,7 +772,8 @@ storiesOf("UserInputForm", module)
                         name: "service_ports",
                         type: "service_ports",
                         bandwidth_key: "current_bandwidth",
-                        minimum: 1
+                        minimum: 1,
+                        tags: ["MSP", "SSP", "MSPNL"]
                     },
                     {
                         name: "current_bandwidth",
@@ -780,7 +792,7 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect all organisations", () => {
         fetchMock.restore();
-        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active", []);
+        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,SP-SPNL-MSC-MSCNL-AGGSP&filter=statuses,active", []);
         fetchMock.get(
             "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
@@ -797,10 +809,11 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect tagged", () => {
         fetchMock.restore();
-        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active", []);
         fetchMock.get(
             "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
+                .filter(p => sn8PortSelectInputStepsTagged[2].tags.includes(p.product.tag))
+                .filter(p => p.port_mode === "tagged")
         );
         fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
@@ -814,10 +827,11 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect untagged", () => {
         fetchMock.restore();
-        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active", []);
         fetchMock.get(
             "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
+                .filter(p => sn8PortSelectInputStepsUntagged[2].tags.includes(p.product.tag))
+                .filter(p => p.port_mode === "untagged")
         );
         fetchMock.get("/api/v2/subscriptions/all", []);
         fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
@@ -831,9 +845,8 @@ storiesOf("UserInputForm", module)
     })
     .add("SN8 Portselect selected organisation", () => {
         fetchMock.restore();
-        fetchMock.get("/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active", []);
         fetchMock.get(
-            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+            "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-MSC-MSCNL-AGGSP&filter=statuses,active",
             SN8PortSubscriptions.filter(p => p.status === "active")
         );
         fetchMock.get("/api/v2/subscriptions/all", []);
