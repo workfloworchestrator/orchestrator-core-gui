@@ -232,7 +232,8 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         const showDelete = servicePorts.length > minimum && !disabled;
         const notmodifiable = servicePort.modifiable === false;
         const portDisabled = disabled || notmodifiable || disabledPorts;
-        const vlanDisabled = disabled || !servicePort.subscription_id || notmodifiable;
+        const vlanDisabled =
+            disabled || !servicePort.subscription_id || visiblePortMode === "link_member" || notmodifiable;
         const vlansJustChosen = servicePorts
             .filter(sp => sp.subscription_id === servicePort.subscription_id && sp !== servicePort)
             .map(sp => sp.vlan)
