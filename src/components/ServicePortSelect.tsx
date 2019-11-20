@@ -41,7 +41,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
-        if (["MSP", "MSPNL", "SSP", "SSPNL"].includes(servicePort.product.tag)) {
+        if (["MSP", "MSPNL", "SSP"].includes(servicePort.product.tag)) {
             const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
             return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
         } else {
