@@ -56,17 +56,11 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import TaskDetail from "./TaskDetail";
 import Prefixes from "./Prefixes";
-import { configureUrlQuery } from "react-url-query";
 import ApplicationContext from "../utils/ApplicationContext";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
 let history = createHistory();
-
-configureUrlQuery({
-    entrySeparator: "--",
-    history: history
-});
 
 class App extends React.PureComponent {
     constructor(props, context) {

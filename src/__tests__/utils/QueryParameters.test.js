@@ -13,22 +13,7 @@
  *
  */
 
-import { replaceQueryParameter, getParameterByName, getQueryParameters } from "../../utils/QueryParameters";
-
-test("Replace query parameters", () => {
-    const replaced = replaceQueryParameter("?test=bogus", "test", "value");
-    expect(replaced).toBe("?test=value");
-});
-
-test("Replace query parameters preserve existing", () => {
-    const replaced = replaceQueryParameter("?test=bogus&name=x", "test", "value");
-    expect(replaced).toBe("?name=x&test=value");
-});
-
-test("Replace query parameters", () => {
-    const replaced = replaceQueryParameter("", "test", "value");
-    expect(replaced).toBe("?test=value");
-});
+import { getParameterByName, getQueryParameters } from "../../utils/QueryParameters";
 
 test("Parameter by name", () => {
     expect(getParameterByName("name", "?name=value")).toBe("value");

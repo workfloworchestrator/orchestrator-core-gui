@@ -15,7 +15,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { addUrlProps, UrlQueryParamTypes } from "react-url-query";
+import { withQueryParams, NumberParam } from "use-query-params";
 
 import ReactTable from "react-table";
 import Modal from "react-modal";
@@ -31,18 +31,32 @@ import "./TableStyle.scss";
 import SubscriptionDetail from "./SubscriptionDetail";
 import I18n from "i18n-js";
 import Explain from "../components/Explain";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../utils/QueryParameters";
 
-const urlPropsQueryConfig = {
-    page: { type: UrlQueryParamTypes.number },
-    pageSize: { type: UrlQueryParamTypes.number },
-    sorted: { type: UrlQueryParamTypes.array },
-    filtered: { type: UrlQueryParamTypes.array }
+const queryConfig = {
+    page: NumberParam,
+    pageSize: NumberParam,
+    sorted: CommaSeparatedStringArrayParam,
+    filtered: CommaSeparatedNumericArrayParam
 };
 
 class Subscriptions extends React.PureComponent {
     constructor(props) {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+
+        let sorted = [];
+
+        if (props.query.sorted)
+            for (let i = 0; i < props.query.sorted.length; i += 2) {
+                if (i + 1 < props.query.sorted.length) {
+                    sorted.push({ id: props.query.sorted[i], desc: props.query.sorted[i + 1] === "desc" });
+                }
+            }
+        else {
+            sorted.push({ id: "start_date", desc: true });
+        }
+
         this.state = {
             subscriptionId: undefined,
             subscriptions: [],
@@ -50,11 +64,7 @@ class Subscriptions extends React.PureComponent {
             showExplanation: false,
             loading: true,
             pages: 99,
-            sorted: this.props.sorted
-                ? this.props.sorted.map(item => {
-                      return { id: item.split(",")[0], value: item.split(",")[1] };
-                  })
-                : [{ id: "start_date", desc: true }],
+            sorted: sorted,
             filtered: []
         };
 
@@ -99,16 +109,18 @@ class Subscriptions extends React.PureComponent {
         const newSort = newSorted.map(item => {
             return `${item.id},${item.desc ? "desc" : "asc"}`;
         });
-        this.props.onChangeSorted(newSort);
+        this.props.setQuery({ sorted: newSort }, "replaceIn");
     };
 
     handleKeyDown(e) {
-        const page = this.props.page ? this.props.page : 0;
+        const page = this.props.query.page ? this.props.query.page : 0;
+        var new_page;
         if (e.keyCode === 38 && page > 0) {
-            this.props.onChangePage(page - 1);
+            new_page = page - 1;
         } else if (e.keyCode === 40) {
-            this.props.onChangePage(page + 1);
+            new_page = page + 1;
         }
+        this.props.setQuery({ page: new_page }, "replaceIn");
     }
 
     handleAdvancedSearchKeyDown = e => {
@@ -119,8 +131,8 @@ class Subscriptions extends React.PureComponent {
 
     handleAdvancedSearch = () => {
         let tableState = this.state;
-        tableState.page = this.props.page ? this.props.page : 0;
-        tableState.pageSize = this.props.pageSize ? this.props.pageSize : 25;
+        tableState.page = this.props.query.page ? this.props.query.page : 0;
+        tableState.pageSize = this.props.query.pageSize ? this.props.query.pageSize : 25;
 
         if (!isEmpty(tableState.advancedSearchPhrase)) {
             let i;
@@ -166,7 +178,7 @@ class Subscriptions extends React.PureComponent {
 
     render() {
         const { pages, sorted, subscriptions, initialFiltered, subscriptionId, showExplanation } = this.state;
-        const { page, onChangePage, pageSize, onChangePageSize } = this.props;
+        const { query, setQuery } = this.props;
 
         return (
             <div className="subscriptions-page" onKeyDown={this.handleKeyDown}>
@@ -312,13 +324,12 @@ class Subscriptions extends React.PureComponent {
                             filtered={initialFiltered} // Will be undefined when no filter was provided in URL
                             // Controlled props
                             sorted={sorted}
-                            page={page}
-                            pageSize={pageSize}
+                            page={query.page}
+                            pageSize={query.pageSize}
                             // Call back heaven:
-                            onPageChange={page => onChangePage(page)}
+                            onPageChange={page => setQuery({ page: page }, "replaceIn")}
                             onPageSizeChange={(pageSize, pageIndex) => {
-                                onChangePageSize(pageSize);
-                                onChangePage(pageIndex);
+                                setQuery({ pageSize: pageSize, page: pageIndex }, "replaceIn");
                             }}
                             onSortedChange={this.updateSorted}
                             onFilteredChange={this.onFilteredChange}
@@ -358,19 +369,10 @@ class Subscriptions extends React.PureComponent {
 }
 
 Subscriptions.propTypes = {
-    // Mapped to URL query parameters
-    page: PropTypes.number,
-    filtered: PropTypes.array,
-    sorted: PropTypes.array,
-    pageSize: PropTypes.number,
-
-    // Functions to change URL query paramaters
-    onChangePage: PropTypes.func,
-    onChangeFiltered: PropTypes.func,
-    onChangeSorted: PropTypes.func,
-    onChangePageSize: PropTypes.func
+    query: PropTypes.object,
+    setQuery: PropTypes.func
 };
 
 Subscriptions.contextType = ApplicationContext;
 
-export default addUrlProps({ urlPropsQueryConfig })(Subscriptions);
+export default withQueryParams(queryConfig, Subscriptions);

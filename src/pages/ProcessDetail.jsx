@@ -29,34 +29,11 @@ import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
-import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from "react-url-query";
 import ApplicationContext from "../utils/ApplicationContext";
+import { withQueryParams, NumberParam } from "use-query-params";
+import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
 
-/**
- * Map from url query params to props. The values in `url` will still be encoded
- * as strings since we did not pass a `urlPropsQueryConfig` to addUrlProps.
- */
-function mapUrlToProps(url, props) {
-    return {
-        collapsed: url.collapsed
-            ? decode(UrlQueryParamTypes.string, url.collapsed)
-                  .split(",")
-                  .map(item => parseInt(item))
-            : [],
-        scrollToStep: decode(UrlQueryParamTypes.number, url.scrollToStep)
-    };
-}
-
-/**
- * Manually specify how to deal with changes to URL query param props.
- * We do this since we are not using a urlPropsQueryConfig and have specific contents in the `collapsed` array.
- */
-function mapUrlChangeHandlersToProps(props) {
-    return {
-        onChangeCollapsed: value => replaceInUrlQuery("collapsed", encode(UrlQueryParamTypes.number, value)),
-        onChangeScrollToStep: value => replaceInUrlQuery("scrollToStep", encode(UrlQueryParamTypes.number, value))
-    };
-}
+const queryConfig = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
 class ProcessDetail extends React.PureComponent {
     constructor(props) {
@@ -168,26 +145,37 @@ class ProcessDetail extends React.PureComponent {
     };
 
     handleCollapse = step => {
-        let { collapsed } = this.props;
-        if (collapsed.includes(step)) {
-            this.props.onChangeCollapsed(collapsed.filter(item => item !== step));
+        let { collapsed } = this.props.query;
+        if (collapsed && collapsed.includes(step)) {
+            this.props.setQuery({ collapsed: collapsed.filter(item => item !== step) }, "replaceIn");
         } else {
+            if (!collapsed) {
+                collapsed = [];
+            }
+
             collapsed.push(step);
-            this.props.onChangeCollapsed(collapsed);
+            this.props.setQuery({ collapsed: collapsed }, "replaceIn");
         }
     };
 
     handleCollapseAll = () => {
-        this.props.onChangeCollapsed(this.state.process.steps.map((i, index) => index));
+        if (this.state.process) {
+            this.props.setQuery({ collapsed: this.state.process.steps.map((i, index) => index) }, "replaceIn");
+        }
     };
 
     handleExpandAll = () => {
-        this.props.onChangeCollapsed([]);
+        this.props.setQuery({ collapsed: [] }, "replaceIn");
     };
 
     handleScrollTo = step => {
-        document.getElementById(`step-index-${step}`).scrollIntoView();
-        this.props.onChangeScrollToStep(step);
+        const el = document.getElementById(`step-index-${step}`);
+        if (!el) {
+            return;
+        }
+
+        el.scrollIntoView();
+        this.props.setQuery({ scrollToStep: step }, "replaceIn");
     };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
@@ -268,9 +256,8 @@ class ProcessDetail extends React.PureComponent {
                     <ProcessStateDetails
                         process={process}
                         subscriptionProcesses={subscriptionProcesses}
-                        collapsed={this.props.collapsed}
+                        collapsed={this.props.query.collapsed}
                         onChangeCollapsed={this.handleCollapse}
-                        scrollToStep={this.props.scrollToStep}
                     />
                 </section>
             );
@@ -338,17 +325,12 @@ class ProcessDetail extends React.PureComponent {
 
 ProcessDetail.propTypes = {
     // URL query controlled
-    scrollToStep: PropTypes.number,
-    onChangeScrollToStep: PropTypes.func,
-    collapsed: PropTypes.array,
-    onChangeCollapsed: PropTypes.func
+    query: PropTypes.object,
+    setQuery: PropTypes.func
 };
 
-ProcessDetail.defaultProps = {
-    collapsed: [],
-    scrollToStep: 0
-};
+ProcessDetail.defaultProps = {};
 
 ProcessDetail.contextType = ApplicationContext;
 
-export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(ProcessDetail);
+export default withQueryParams(queryConfig, ProcessDetail);

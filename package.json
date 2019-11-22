@@ -24,10 +24,10 @@
     "react-select": "^3.0.4",
     "react-table": "^6.10.0",
     "react-tooltip": "^3.10.0",
-    "react-url-query": "^1.4.0",
     "reactjs-popup": "^1.4.1",
     "scroll-into-view": "^1.9.7",
-    "spin.js": "^4.0.0"
+    "spin.js": "^4.0.0",
+    "use-query-params": "^0.4.5"
   },
   "devDependencies": {
     "@sambego/storybook-state": "^1.3.5",
