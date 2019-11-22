@@ -1958,7 +1958,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
       >
         <button
           className="button  blue"
-          id="abort"
+          id="retry"
           onClick={[Function]}
         >
           Retry

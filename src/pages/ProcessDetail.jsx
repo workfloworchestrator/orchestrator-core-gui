@@ -217,7 +217,7 @@ class ProcessDetail extends React.PureComponent {
             <section className="process-actions">
                 {options.map((option, index) => (
                     <button
-                        id="abort"
+                        id={option.label}
                         key={index}
                         className={`button ${option.danger ? " red" : " blue"}`}
                         onClick={option.action}
