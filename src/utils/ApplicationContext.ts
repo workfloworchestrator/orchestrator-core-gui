@@ -14,13 +14,23 @@
  */
 
 import React from "react";
+import { Organization, Product, AppConfig, User } from "./types";
+
+export interface ApplicationContextInterface {
+    currentUser?: User;
+    configuration?: AppConfig;
+    organisations: Organization[];
+    locationCodes: string[];
+    products: Product[];
+    redirect: (_url: string) => void;
+}
 
 // Don't just add stuff here. This is reserved for things that don't change during the lifetime of the application
-let ApplicationContext = React.createContext({
+let ApplicationContext = React.createContext<ApplicationContextInterface>({
     organisations: [],
     locationCodes: [],
     products: [],
-    redirect: _url => {}
+    redirect: (_url: string) => {}
 });
 
 export default ApplicationContext;

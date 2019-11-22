@@ -17,45 +17,78 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
+import { RouteComponentProps } from "react-router-dom";
 import { process, resumeProcess } from "../api";
-import { isEmpty, stop } from "../utils/Utils";
+import { stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
-
-import "./ProcessDetail.scss";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
-import { withQueryParams, NumberParam } from "use-query-params";
+import { ProcessWithDetails, Step, State, ProcessSubscription, Product, InputField } from "../utils/types";
+import { withQueryParams, NumberParam, DecodedValueMap, SetQuery } from "use-query-params";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
+
+import "./ProcessDetail.scss";
 
 const queryConfig = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
-class ProcessDetail extends React.PureComponent {
-    constructor(props) {
+interface MatchParams {
+    id: string;
+}
+
+interface IProps extends RouteComponentProps<MatchParams> {
+    query: DecodedValueMap<typeof queryConfig>;
+    setQuery: SetQuery<typeof queryConfig>;
+}
+
+interface IState {
+    process?: CustomProcessWithDetails;
+    notFound: boolean;
+    tabs: string[];
+    selectedTab: string;
+    subscriptionProcesses: ProcessSubscription[];
+    loaded: boolean;
+    stepUserInput?: InputField[];
+    confirmationDialogOpen: boolean;
+    confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    confirmationDialogQuestion: string;
+    product?: Product;
+}
+
+export interface CustomProcessWithDetails extends ProcessWithDetails {
+    productName: string;
+    customerName: string;
+}
+
+class ProcessDetail extends React.PureComponent<IProps, IState> {
+    static defaultProps: {};
+    static propTypes: {};
+
+    constructor(props: IProps) {
         super(props);
         this.state = {
-            process: { steps: [] },
+            process: undefined,
             notFound: false,
             tabs: ["user_input", "process"],
             selectedTab: "process",
             subscriptionProcesses: [],
             loaded: false,
-            subscriptions: [],
             stepUserInput: [],
             confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
+            confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
+            confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirmationDialogQuestion: ""
         };
     }
 
     componentDidMount = () => {
-        process(this.props.match.params.id).then(processInstance => {
+        process(this.props.match.params.id).then((processInstance: CustomProcessWithDetails) => {
             /**
              * Ensure correct user memberships and populate UserInput form with values
              */
@@ -66,17 +99,18 @@ class ProcessDetail extends React.PureComponent {
             processInstance.productName = productNameById(processInstance.product, products);
 
             const userInputAllowed =
-                currentUser || currentUser.memberships.find(membership => membership === requiredTeamMembership);
-            let stepUserInput = [];
+                currentUser ||
+                currentUser.memberships.find((membership: string) => membership === requiredTeamMembership);
+            let stepUserInput: InputField[] | undefined = [];
             if (userInputAllowed) {
                 const step = processInstance.steps.find(
-                    step => step.name === processInstance.step && step.status === "pending"
+                    (step: Step) => step.name === processInstance.step && step.status === "pending"
                 );
                 stepUserInput = step && step.form;
             }
             const requiredTeamMembership = configuration[processInstance.assignee];
-            const tabs = !isEmpty(stepUserInput) ? this.state.tabs : ["process"];
-            const selectedTab = !isEmpty(stepUserInput) ? "user_input" : "process";
+            const tabs = stepUserInput ? this.state.tabs : ["process"];
+            const selectedTab = stepUserInput ? "user_input" : "process";
 
             this.setState({
                 process: processInstance,
@@ -99,7 +133,7 @@ class ProcessDetail extends React.PureComponent {
         });
     };
 
-    handleDeleteProcess = process => e => {
+    handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.deleteConfirmation", {
@@ -114,7 +148,7 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    handleAbortProcess = process => e => {
+    handleAbortProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.abortConfirmation", {
@@ -129,7 +163,7 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    handleRetryProcess = process => e => {
+    handleRetryProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.retryConfirmation", {
@@ -144,10 +178,10 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    handleCollapse = step => {
+    handleCollapse = (step: number) => {
         let { collapsed } = this.props.query;
         if (collapsed && collapsed.includes(step)) {
-            this.props.setQuery({ collapsed: collapsed.filter(item => item !== step) }, "replaceIn");
+            this.props.setQuery({ collapsed: collapsed.filter((item: number) => item !== step) }, "replaceIn");
         } else {
             if (!collapsed) {
                 collapsed = [];
@@ -160,7 +194,10 @@ class ProcessDetail extends React.PureComponent {
 
     handleCollapseAll = () => {
         if (this.state.process) {
-            this.props.setQuery({ collapsed: this.state.process.steps.map((i, index) => index) }, "replaceIn");
+            this.props.setQuery(
+                { collapsed: this.state.process.steps.map((i: any, index: number) => index) },
+                "replaceIn"
+            );
         }
     };
 
@@ -168,7 +205,7 @@ class ProcessDetail extends React.PureComponent {
         this.props.setQuery({ collapsed: [] }, "replaceIn");
     };
 
-    handleScrollTo = step => {
+    handleScrollTo = (step: number) => {
         const el = document.getElementById(`step-index-${step}`);
         if (!el) {
             return;
@@ -180,18 +217,18 @@ class ProcessDetail extends React.PureComponent {
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    confirmation = (question, action) =>
+    confirmation = (question: string, action: (e: React.MouseEvent<HTMLButtonElement>) => void) =>
         this.setState({
             confirmationDialogOpen: true,
             confirmationDialogQuestion: question,
-            confirmationDialogAction: () => {
+            confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {
                 this.cancelConfirmation();
-                action();
+                action(e);
             }
         });
 
-    renderActions = process => {
-        const options = actionOptions(
+    renderActions = (process: CustomProcessWithDetails) => {
+        let options = actionOptions(
             process,
             () => false,
             this.handleRetryProcess(process),
@@ -199,7 +236,7 @@ class ProcessDetail extends React.PureComponent {
             this.handleAbortProcess(process)
         ).filter(option => option.label !== "user_input" && option.label !== "details" && option.label !== "delete");
 
-        const lastStepIndex = process.steps.findIndex(item => item.name === process.step);
+        const lastStepIndex = process.steps.findIndex((item: Step) => item.name === process.step);
 
         return (
             <section className="process-actions">
@@ -226,8 +263,12 @@ class ProcessDetail extends React.PureComponent {
         );
     };
 
-    validSubmit = processInput => {
+    validSubmit = (processInput: State) => {
         const { process } = this.state;
+        if (!process) {
+            return Promise.reject();
+        }
+
         let result = resumeProcess(process.id, processInput);
         result
             .then(e => {
@@ -240,16 +281,22 @@ class ProcessDetail extends React.PureComponent {
         return result;
     };
 
-    switchTab = tab => e => {
+    switchTab = (tab: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         this.setState({ selectedTab: tab });
     };
 
-    renderTabContent = (selectedTab, process, step, stepUserInput, subscriptionProcesses) => {
+    renderTabContent = (
+        selectedTab: string,
+        process: CustomProcessWithDetails,
+        step: Step | undefined,
+        stepUserInput: InputField[] | undefined,
+        subscriptionProcesses: ProcessSubscription[]
+    ) => {
         const { products } = this.context;
-        const product = products.find(prod => prod.product_id === process.product);
-        const productName = product.name;
-        if (selectedTab === "process") {
+        const product: Product | undefined = products.find((prod: Product) => prod.product_id === process.product);
+        const productName = product && product.name;
+        if (!step || !stepUserInput || selectedTab === "process") {
             return (
                 <section className="card">
                     {this.renderActions(process)}
@@ -269,17 +316,17 @@ class ProcessDetail extends React.PureComponent {
                         <h3>
                             {I18n.t("process.userInput", {
                                 name: step.name,
-                                product: productName
+                                product: productName || ""
                             })}
                         </h3>
                     </section>
-                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} />
+                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} hasNext={false} />
                 </section>
             );
         }
     };
 
-    renderTab = (tab, selectedTab) => (
+    renderTab = (tab: string, selectedTab: string) => (
         <span id={tab} key={tab} className={tab === selectedTab ? "active" : ""} onClick={this.switchTab(tab)}>
             {I18n.t(`process.tabs.${tab}`)}
         </span>
@@ -298,7 +345,11 @@ class ProcessDetail extends React.PureComponent {
             confirmationDialogAction,
             confirmationDialogQuestion
         } = this.state;
-        const step = process.steps.find(step => step.status === "pending");
+        if (!process) {
+            return null;
+        }
+
+        const step = process.steps.find((step: Step) => step.status === "pending");
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (

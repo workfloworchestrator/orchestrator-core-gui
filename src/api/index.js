@@ -185,7 +185,7 @@ export function allSubscriptions() {
     return fetchJson(`v2/subscriptions/all`);
 }
 
-export function paginatedSubscriptions(range = "0,24", sort = ["start_date", "desc"], filter) {
+export function paginatedSubscriptions(range = "0,24", sort = "start_date,desc", filter) {
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 

@@ -23,7 +23,7 @@ import { catchErrorStatus } from "../api/index";
 
 interface Form {
     form: any[];
-    hasNext: boolean;
+    hasNext?: boolean;
 }
 
 interface IProps {
