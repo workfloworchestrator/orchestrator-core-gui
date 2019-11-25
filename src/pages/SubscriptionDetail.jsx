@@ -159,7 +159,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     }
                                     if (service.product === "SVLAN") {
                                         // Todo: investigate why this crashes for a LP over MSC
-                                        return service
+                                        return service;
                                     }
                                     debugger;
                                     return portByImsServiceId(endpoint.id).then(result =>

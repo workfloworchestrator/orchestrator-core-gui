@@ -617,9 +617,9 @@ I18n.translations.en = {
         link_member_port: "Link Member",
         link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown",
         added_service_ports: "Add ports",
-        added_service_ports_info: "Select some link_member ports to add them to this aggregated service port",
+        added_service_ports_info: "Select some ports to add them to this subscription",
         removed_service_ports: "Remove ports",
-        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port"
+        removed_service_ports_info: "Select some ports to remove them from this subscription"
     },
     process_state: {
         copy: "Copy to clipboard",
