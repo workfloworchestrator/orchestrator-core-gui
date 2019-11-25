@@ -161,7 +161,6 @@ export default class SubscriptionDetail extends React.PureComponent {
                                         // Todo: investigate why this crashes for a LP over MSC
                                         return service;
                                     }
-                                    debugger;
                                     return portByImsServiceId(endpoint.id).then(result =>
                                         Object.assign(result, {
                                             serviceId: endpoint.id,
