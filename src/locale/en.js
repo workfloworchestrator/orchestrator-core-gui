@@ -622,7 +622,8 @@ I18n.translations.en = {
         added_service_ports: "Add ports",
         added_service_ports_info: "Select some ports to add them to this subscription",
         removed_service_ports: "Remove ports",
-        removed_service_ports_info: "Select some ports to remove them from this subscription"
+        removed_service_ports_info: "Select some ports to remove them from this subscription",
+        zone_info: "DNS Zone to check"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -1283,7 +1284,9 @@ I18n.translations.en = {
         validate_sn7_ip_bgp: "Validate SN7 IP BGP",
         validate_sn8_ip_static: "Validate SN8 IP Static",
         validate_sn8_ip_bgp: "Validate SN8 IP BGP",
-        validate_sn8_service_port: "Validate SN8 Service Port"
+        validate_sn8_service_port: "Validate SN8 Service Port",
+        validate_sn8_msc: "Validate SN8 MSC",
+        validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
     }
 };
 
