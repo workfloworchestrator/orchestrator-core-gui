@@ -34,14 +34,22 @@ import ServerError from "./ServerError";
 import NotAllowed from "./NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import { config, locationCodes, me, organisations, products, redirectToAuthorizationServer, reportError } from "../api";
+import {
+    config,
+    locationCodes,
+    logUserInfo,
+    me,
+    organisations,
+    products,
+    redirectToAuthorizationServer,
+    reportError
+} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import TerminateSubscription from "./TerminateSubscription";
 import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
-import ResourceType from "../components/ResourceType";
 import Product from "../components/Product";
 import Cache from "./Cache";
 import Tasks from "./Tasks";
@@ -140,7 +148,7 @@ class App extends React.PureComponent {
             if (stateMatch) {
                 this.setState({ redirectState: atob(stateMatch[1]) });
             }
-            this.fetchUser();
+            this.fetchUser(true);
         } else if (window.location.href.indexOf("error") > -1) {
             this.setState({ loading: false });
         } else {
@@ -159,7 +167,7 @@ class App extends React.PureComponent {
         }
     }
 
-    fetchUser() {
+    fetchUser(log = false) {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
@@ -179,6 +187,9 @@ class App extends React.PureComponent {
                                         redirect: url => history.push(url)
                                     }
                                 });
+                                if (log) {
+                                    logUserInfo(currentUser.email, "logged in");
+                                }
                             });
                         } else {
                             this.handleBackendDown();
@@ -246,10 +257,6 @@ class App extends React.PureComponent {
                             <ProtectedRoute
                                 path="/product-block/:id"
                                 render={props => <ProductBlock match={props.match} />}
-                            />
-                            <ProtectedRoute
-                                path="/resource-type/:id"
-                                render={props => <ResourceType match={props.match} />}
                             />
                             <ProtectedRoute path="/cache" render={() => <Cache />} />
                             <ProtectedRoute path="/tasks" render={() => <Tasks />} />

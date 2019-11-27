@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 import { subscriptionsByProductId, allSubscriptions } from "../api";
-import { isEmpty } from "../utils/Utils";
+import { capitalizeFirstLetter, isEmpty } from "../utils/Utils";
 import "./SubscriptionsSelect.scss";
 
 export default class SubscriptionsSelect extends React.PureComponent {
@@ -68,7 +68,14 @@ export default class SubscriptionsSelect extends React.PureComponent {
     }
 
     removeSubscription(index) {
-        const { subscriptions } = this.props;
+        const { subscriptions, minimum } = this.props;
+
+        // Don't allow when constraints are reached
+        if (index < minimum) {
+            return;
+        }
+
+        // Handle remove
         const nboxes = this.state.numberOfBoxes - 1;
         if (subscriptions.length > nboxes) {
             subscriptions.splice(index, 1);
@@ -79,7 +86,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
 
     render() {
         const { availableSubscriptions, numberOfBoxes } = this.state;
-        const { productId, disabled, subscriptions, minimum, maximum } = this.props;
+        const { productId, disabled, subscriptions, minimum, maximum, errors } = this.props;
         const placeholder = productId
             ? I18n.t("subscription_select.placeholder")
             : I18n.t("subscription_select.select_product");
@@ -88,11 +95,13 @@ export default class SubscriptionsSelect extends React.PureComponent {
             subscriptions.length < numberOfBoxes
                 ? subscriptions.concat(Array(numberOfBoxes - subscriptions.length).fill(null))
                 : subscriptions;
+        const rootFieldErrors = errors.filter(error => error.loc.length === 1);
 
         return (
             <section className="multiple-subscriptions">
                 <section className="subscription-select">
                     {boxes.map((subscription, index) => {
+                        const fieldErrors = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
                         const options = availableSubscriptions
                             .filter(
                                 x => x.subscription_id === subscription || !subscriptions.includes(x.subscription_id)
@@ -117,6 +126,15 @@ export default class SubscriptionsSelect extends React.PureComponent {
                                         placeholder={placeholder}
                                     />
                                 </div>
+                                {fieldErrors && (
+                                    <em className="error">
+                                        {fieldErrors.map((e, index) => (
+                                            <div key={index} className="backend-validation">
+                                                {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                            </div>
+                                        ))}
+                                    </em>
+                                )}
 
                                 {maximum > minimum && (
                                     <i
@@ -127,6 +145,16 @@ export default class SubscriptionsSelect extends React.PureComponent {
                             </div>
                         );
                     })}
+
+                    {rootFieldErrors && (
+                        <em className="error root-error">
+                            {rootFieldErrors.map((e, index) => (
+                                <div key={index} className="backend-validation">
+                                    {capitalizeFirstLetter(e.msg)}.
+                                </div>
+                            ))}
+                        </em>
+                    )}
 
                     {showAdd && (
                         <div className="add-subscription">
@@ -139,16 +167,18 @@ export default class SubscriptionsSelect extends React.PureComponent {
     }
 }
 
+SubscriptionsSelect.defaultProps = {
+    minimum: 1,
+    maximum: 1,
+    errors: []
+};
+
 SubscriptionsSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     productId: PropTypes.string,
     disabled: PropTypes.bool,
     subscriptions: PropTypes.array,
     minimum: PropTypes.number,
-    maximum: PropTypes.number
-};
-
-SubscriptionsSelect.defaultProps = {
-    minimum: 1,
-    maximum: 1
+    maximum: PropTypes.number,
+    errors: PropTypes.array
 };

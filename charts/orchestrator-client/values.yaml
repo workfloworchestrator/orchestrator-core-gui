@@ -1,0 +1,73 @@
+# Default values for orchestrator-client.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: git.ia.surfsara.nl:5050/automation/orchestrator-client/dev
+  tag: latest
+  pullPolicy: IfNotPresent
+  secrets: "gitlab-registry"
+
+configMapName: "orchestrator-client-configuration"
+
+nameOverride: "orchestrator-client"
+fullnameOverride: "orchestrator-client_service"
+
+service:
+  name: orchestrator-client
+  type: ClusterIP
+  port: 80
+  internalPort: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/issuer: letsencrypt
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/whitelist-source-range: 195.169.126.0/23,145.101.126.0/24,145.145.2.81/32,145.144.240.0/24
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+  paths:
+    - /(.*)
+  environmentUrl:
+  additionalHosts: []
+  tls:
+    secretName: tls-secret-orchestrator
+
+resources:
+   limits:
+     memory: 128Mi
+   requests:
+     memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+  path: /api/user/config
+  failureThreshold: 3
+  periodSeconds: 30
+  timeoutSeconds: 10
+
+readinessProbe:
+  path: /api/user/config
+  failureThreshold: 3
+  periodSeconds: 30
+  timeoutSeconds: 10
+
+env:
+
+gitlab:
+  app:
+  env:
+
+secret:
+  secretChecksum:
+  secretName:

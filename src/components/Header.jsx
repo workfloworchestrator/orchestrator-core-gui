@@ -21,6 +21,7 @@ import logo from "../images/network-automation.png";
 import "./Header.scss";
 import UserProfile from "./UserProfile";
 import ApplicationContext from "../utils/ApplicationContext";
+import { logUserInfo } from "../api";
 
 export default class Header extends React.PureComponent {
     constructor() {
@@ -40,8 +41,10 @@ export default class Header extends React.PureComponent {
     }
 
     logout = () => {
+        const { currentUser } = this.context;
         const node = document.getElementById("app");
         unmountComponentAtNode(node);
+        logUserInfo(currentUser.email, "logged out");
         localStorage.clear();
         window.location.href = "/";
     };

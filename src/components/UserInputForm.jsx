@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
-import { isEmpty, stop } from "../utils/Utils";
+import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
 import isEqual from "lodash/isEqual";
@@ -35,7 +35,6 @@ import MultipleServicePorts from "./MultipleServicePorts";
 import GenericNOCConfirm from "./GenericNOCConfirm";
 import IPPrefix from "./IPPrefix";
 import { findValueFromInputStep } from "../utils/NestedState";
-import { doValidateUserInput } from "../validations/UserInput";
 import { randomCrmIdentifier } from "../locale/en";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import BandwidthSelect from "./BandwidthSelect";
@@ -56,6 +55,14 @@ import { applyIdNamingConvention } from "../utils/Utils";
 import GenericMultiSelect from "./GenericMultiSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
+const inputTypesWithDelegatedValidation = [
+    "bfd",
+    "contact_persons",
+    "generic_multi_select",
+    "service_ports",
+    "service_ports_sn8",
+    "subscriptions"
+];
 
 export default class UserInputForm extends React.Component {
     constructor(props) {
@@ -65,9 +72,7 @@ export default class UserInputForm extends React.Component {
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
             cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
-            errors: {},
-            validationErrors: {},
-            customErrors: {},
+            validationErrors: [],
             uniqueErrors: {},
             uniqueSelectInputs: {},
             isNew: true,
@@ -108,32 +113,33 @@ export default class UserInputForm extends React.Component {
     };
 
     updateValidationErrors = validationErrors => {
-        const errors = { ...this.state.errors };
-        let newValidationErrors = {};
+        const { stepUserInput } = this.state;
+        let newValidationErrors = validationErrors.validation_errors;
 
-        validationErrors.validation_errors.forEach(item => {
-            errors[item.loc[0]] = true;
-            if (item.loc[0] in newValidationErrors) {
-                // multiple errors for one input
-                newValidationErrors[item.loc[0]] = `${newValidationErrors[item.loc[0]]} or ${item.msg}`;
+        // resolve input type for all validation errors and enrich it with input type
+        newValidationErrors.forEach(item => {
+            const step = stepUserInput.filter(step => step.name === item.loc[0]);
+            if (step.length === 1) {
+                item.input_type = step[0].type;
             } else {
-                newValidationErrors[item.loc[0]] = item.msg;
+                console.log(`Unhandled exception in validation response for item: ${item}`);
+                item.input_type = "root";
             }
         });
-        this.setState({ errors: errors, validationErrors: newValidationErrors, processing: false });
+        this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 
     submit = e => {
         stop(e);
         const { stepUserInput, processing } = this.state;
 
-        if (this.validateAllUserInput(stepUserInput) && !this.isInvalid() && !processing) {
-            this.setState({ processing: true, errors: {} });
+        if (!processing) {
+            this.setState({ processing: true });
 
             const processInput = stepUserInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
 
-                // Add missing default
+                // Add missing defaults
                 if (input.type === "boolean" && input.value === undefined) {
                     acc[input.name] = false;
                 }
@@ -144,34 +150,12 @@ export default class UserInputForm extends React.Component {
             catchErrorStatus(promise, 400, json => {
                 this.updateValidationErrors(json);
             }).then(() => {
-                this.setState({ errors: [], processing: false });
+                this.setState({ processing: false });
             });
         }
     };
 
-    reportCustomError = name => isError => {
-        const customErrors = { ...this.state.customErrors };
-        customErrors[name] = isError;
-        this.setState({ customErrors: customErrors });
-    };
-
-    validateAllUserInput = stepUserInput => {
-        const errors = { ...this.state.errors };
-        stepUserInput.forEach(input => {
-            //the value can be true or false, but there is datavalidation
-            //dependent on whether the SKIP AcceptType checkbox is checked or all others
-            //as implemented in changeAcceptOrSkip function
-            //this is a hack to make the front-end validation work
-            if (input.type !== "accept_or_skip") {
-                doValidateUserInput(input, input.value, errors);
-            }
-        });
-        this.setState({ errors: errors });
-        return !Object.keys(errors).some(key => errors[key]);
-    };
-
     renderButtons = () => {
-        const invalid = this.isInvalid() || this.state.processing;
         const { hasNext, hasPrev } = this.props;
 
         const prevButton = hasPrev ? (
@@ -185,24 +169,14 @@ export default class UserInputForm extends React.Component {
         );
 
         const nextButton = hasNext ? (
-            <button
-                type="submit"
-                id="button-next-form-submit"
-                tabIndex={0}
-                className={`button ${invalid ? "grey disabled" : "blue"}`}
-                onClick={this.submit}
-            >
+            <button type="submit" id="button-next-form-submit" tabIndex={0} className={`button blue`}>
                 {I18n.t("process.next")}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
             </button>
         ) : (
-            <button
-                type="submit"
-                id="button-submit-form-submit"
-                tabIndex={0}
-                className={`button ${invalid ? "grey disabled" : "blue"}`}
-                onClick={this.submit}
-            >
+            <button type="submit" id="button-submit-form-submit" tabIndex={0} className={`button blue`}>
                 {I18n.t("process.submit")}
+                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
             </button>
         );
 
@@ -213,12 +187,6 @@ export default class UserInputForm extends React.Component {
             </section>
         );
     };
-
-    isInvalid = () =>
-        Object.values(this.state.errors)
-            .concat(Object.values(this.state.uniqueErrors))
-            .concat(Object.values(this.state.customErrors))
-            .some(val => val);
 
     changeUserInput = (name, value) => {
         const userInput = [...this.state.stepUserInput];
@@ -236,13 +204,11 @@ export default class UserInputForm extends React.Component {
     changeBooleanInput = name => e => {
         const value = e.target.checked;
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeSelectInput = name => option => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
@@ -277,31 +243,19 @@ export default class UserInputForm extends React.Component {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
         this.enforceSelectInputUniqueness(hash, name, value);
-        this.validateUserInput(name)({ target: { value: value } });
     };
 
     changeNestedInput = name => newValue => {
         this.changeUserInput(name, newValue);
-        this.validateUserInput(name)({ target: { value: newValue } });
     };
 
     changeAcceptOrSkip = name => (newValue, from_skip) => {
         this.changeUserInput(name, newValue);
-        this.validateUserInput(name)({ target: { value: from_skip } });
     };
 
     changeArrayInput = name => arr => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
-        this.validateUserInput(name)({ target: { value: value } });
-    };
-
-    validateUserInput = name => e => {
-        const value = e.target.value;
-        const userInput = this.state.stepUserInput.find(input => input.name === name);
-        const errors = { ...this.state.errors };
-        doValidateUserInput(userInput, value, errors);
-        this.setState({ errors: errors });
     };
 
     renderInput = userInput => {
@@ -311,19 +265,26 @@ export default class UserInputForm extends React.Component {
 
         const name = userInput.name;
         const ignoreLabel = inputTypesWithoutLabelInformation.indexOf(userInput.type) > -1;
-        const error = this.state.errors[name];
-        const customError = this.state.customErrors[name];
         const uniqueError = this.state.uniqueErrors[name];
-        const validationError = this.state.validationErrors[name];
+        const validationError = this.state.validationErrors.filter(item => item.loc[0] === name);
+
         return (
             <section key={name} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
-                {this.chooseInput(userInput)}
-                {(error || customError || validationError) && (
-                    <em className="error">{validationError ? validationError : I18n.t("process.format_error")}</em>
+                {this.chooseInput(userInput, validationError)}
+                {validationError && !inputTypesWithDelegatedValidation.includes(userInput.type) && (
+                    <em className="error">
+                        {validationError
+                            ? validationError.map((e, index) => (
+                                  <div className="backend-validation" key={index}>
+                                      {capitalizeFirstLetter(e.msg)}.
+                                  </div>
+                              ))
+                            : I18n.t("process.format_error")}
+                    </em>
                 )}
-                {uniqueError && <em className="error">{I18n.t("process.uniquenessViolation")}</em>}
+                {uniqueError && <em className="error backend-validation">{I18n.t("process.uniquenessViolation")}</em>}
             </section>
         );
     };
@@ -345,15 +306,14 @@ export default class UserInputForm extends React.Component {
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
-    chooseInput = userInput => {
+    chooseInput = (userInput, validationError) => {
+        const { nodeSubscriptions } = this.state;
+        const { products, organisations, locationCodes } = this.context;
         const name = userInput.name;
         const value = userInput.value;
-        const { products, organisations, locationCodes } = this.context;
         const stepUserInput = this.state.stepUserInput;
-
-        const { nodeSubscriptions } = this.state;
-
         let organisationId;
+
         switch (userInput.type) {
             case "string":
             case "uuid":
@@ -370,22 +330,19 @@ export default class UserInputForm extends React.Component {
                         value={value || ""}
                         readOnly={userInput.readonly}
                         onChange={this.changeStringInput(name)}
-                        onBlur={this.validateUserInput(name)}
                         autoComplete="no-value"
                     />
                 );
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value} className="indent" />;
             case "bandwidth":
-                const servicePorts = findValueFromInputStep(userInput.ports_key, stepUserInput);
+                // Todo: without the validation a refactor to a generic number field would also be possible
                 return (
                     <BandwidthSelect
-                        servicePorts={servicePorts}
                         name={name}
                         onChange={this.changeStringInput(name)}
                         value={value || ""}
                         disabled={userInput.readonly}
-                        reportError={this.reportCustomError(name)}
                     />
                 );
             case "organisation":
@@ -428,6 +385,7 @@ export default class UserInputForm extends React.Component {
                         persons={isEmpty(value) ? [{ email: "", name: "", phone: "" }] : value}
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}
+                        errors={validationError}
                     />
                 );
             case "ieee_interface_type":
@@ -516,6 +474,7 @@ export default class UserInputForm extends React.Component {
                     <MultipleServicePorts
                         servicePorts={value}
                         sn8={userInput.type === "service_ports_sn8"}
+                        productTags={userInput.tags}
                         organisations={organisations}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}
@@ -527,9 +486,9 @@ export default class UserInputForm extends React.Component {
                         organisationPortsOnly={userInput.organisationPortsOnly}
                         mspOnly={userInput.mspOnly}
                         visiblePortMode={userInput.visiblePortMode}
-                        reportError={this.reportCustomError(name)}
                         bandwidth={bandwidth}
                         nodeId={userInput.node}
+                        errors={validationError}
                     />
                 );
             case "subscriptions":
@@ -538,9 +497,10 @@ export default class UserInputForm extends React.Component {
                     <SubscriptionsSelect
                         onChange={this.changeArrayInput(name)}
                         productId={productIdForSubscription}
-                        subscriptions={this.commaSeperatedArray(value)}
+                        subscriptions={this.commaSeparatedArray(value)}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
+                        errors={validationError}
                     />
                 );
             case "subscription_product_tag":
@@ -559,6 +519,7 @@ export default class UserInputForm extends React.Component {
                         preselectedPrefix={value}
                         prefix_min={parseInt(userInput.prefix_min)}
                         onChange={this.changeNestedInput(name)}
+                        errors={[]}
                     />
                 );
             case "nodes_for_location_code_and_status":
@@ -611,6 +572,7 @@ export default class UserInputForm extends React.Component {
                         choices={userInput.choices}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
+                        errors={validationError}
                     />
                 );
             case "bfd":
@@ -624,6 +586,7 @@ export default class UserInputForm extends React.Component {
                         value={value}
                         onChange={this.changeUserInput}
                         readOnly={userInput.readonly}
+                        errors={validationError}
                     />
                 );
             case "numeric":
@@ -646,7 +609,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    commaSeperatedArray = input => (input ? input.split(",") : []);
+    commaSeparatedArray = input => (input ? input.split(",") : []);
 
     render() {
         const {
@@ -654,8 +617,10 @@ export default class UserInputForm extends React.Component {
             confirmationDialogAction,
             cancelDialogAction,
             stepUserInput,
-            leavePage
+            leavePage,
+            validationErrors
         } = this.state;
+        const numberOfValidationErrors = Object.keys(validationErrors).length;
 
         return (
             <div className="mod-process-step">
@@ -666,8 +631,18 @@ export default class UserInputForm extends React.Component {
                     leavePage={leavePage}
                 />
                 <section className="card">
-                    <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
-                    {this.renderButtons()}
+                    <form onSubmit={this.submit}>
+                        <section className="form-step">{stepUserInput.map(input => this.renderInput(input))}</section>
+                        {/* Show top level validation info about backend validation */}
+                        {numberOfValidationErrors > 0 && (
+                            <section className="form-errors">
+                                <em className="error backend-validation-metadata">
+                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}.
+                                </em>
+                            </section>
+                        )}
+                        {this.renderButtons()}
+                    </form>
                 </section>
             </div>
         );

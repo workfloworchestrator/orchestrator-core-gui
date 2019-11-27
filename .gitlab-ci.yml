@@ -1,172 +1,193 @@
----
-stages:
-  - unit-test
-  - build
-  - scan
-  - release
-  - deploy
+image: alpine:latest
+
+.auto-deploy:
+  image: "git.ia.surfsara.nl:5050/automation/build-container/master"
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.automation.surf.net/nwa/workflows-client:$CI_COMMIT_SHA
-  CONTAINER_DEV_IMAGE: registry.automation.surf.net/nwa/workflows-client:dev
-  CONTAINER_MASTER_IMAGE: registry.automation.surf.net/nwa/workflows-client:master
-  CONTAINER_RELEASE_IMAGE: registry.automation.surf.net/nwa/workflows-client:$CI_COMMIT_TAG
-  CONTAINER_LATEST_IMAGE: registry.automation.surf.net/nwa/workflows-client:latest
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  ROLLOUT_RESOURCE_TYPE: "deployment"
 
-test workflows-client:
-  stage: unit-test
+stages:
+  - build
+  - test
+  - review
+  - development
+  - staging
+  - production
+  - performance
+  - cleanup
+
+include:
+  - template: Jobs/Build.gitlab-ci.yml
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: Jobs/Browser-Performance-Testing.gitlab-ci.yml
+
+unit test:
   image: node:10.16.0
+  stage: test
   script:
     - yarn install
     - yarn prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'
     - yarn test --coverage
-  tags:
-      - python-lint-ext
 
-build docker image:
-  stage: build
-  image: docker:latest
+.deploy_script: &deploy_script
   script:
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
-  tags:
-    - docker-ct-builder-ext
+    - auto-deploy ensure_namespace
+    - auto-deploy initialize_helm
+    - auto-deploy prepare_chart
+    - auto-deploy create_secret
+    - auto-deploy deploy
+    - auto-deploy publish_chart
+    - auto-deploy persist_environment_url
 
-scan docker images:
-  stage: scan
-  dependencies:
-    - build docker image
-  image:
-    name: anchore/anchore-engine:v0.3.0
-    entrypoint: [""]
-  services:
-    - name: anchore/engine-db-preload:v0.3.0
-      alias: anchore-db
-
+deploy review:
   variables:
-    GIT_STRATEGY: none
-    ANCHORE_FAIL_ON_POLICY: "false"
-    ANCHORE_TIMEOUT: 500
-
-  script:
-    - |
-      curl -o /tmp/anchore_ci_tools.py https://raw.githubusercontent.com/anchore/ci-tools/v0.3.0/scripts/anchore_ci_tools.py
-      chmod +x /tmp/anchore_ci_tools.py
-      ln -s /tmp/anchore_ci_tools.py /usr/local/bin/anchore_ci_tools
-    - anchore_ci_tools --setup
-    - anchore-cli registry add registry.automatuion.surf.net foo  bar --skip-validate
-    - anchore_ci_tools --analyze --report --image "$CONTAINER_TEST_IMAGE" --timeout "$ANCHORE_TIMEOUT"
-    - |
-      if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ]; then
-        anchore-cli evaluate check "$CONTAINER_TEST_IMAGE"
-      else
-        set +o pipefail
-        anchore-cli evaluate check "$CONTAINER_TEST_IMAGE" | tee /dev/null
-      fi
-
+    KUBE_INGRESS_BASE_DOMAIN: review.automation.surf.net
+  extends: .auto-deploy
+  stage: review
+  <<: *deploy_script
+  only:
+    refs:
+      - branches
+    kubernetes: active
   artifacts:
-    name: ${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}
-    paths:
-      - anchore-reports/*
-  tags:
-    - docker-ct-builder-ext
-  only:
-    - tags
+    paths: [environment_url.txt]
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://$CI_COMMIT_REF_SLUG-$CI_PROJECT_NAME.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: stop_review
+  except:
+    refs:
+      - dev
+      - master
+      - tags
+      - schedules
 
-anchore_reports:
-  stage: release
-  image: alpine:latest
-  dependencies:
-    - scan docker images
-
+deploy review base:
   variables:
-    GIT_STRATEGY: none
-
-  script:
-    - apk add jq
-    - |
-        echo "Parsing anchore reports."
-        printf "\n%s\n" "The following vulnerabilites were found on ${CONTAINER_TEST_IMAGE}:"
-        jq '[.vulnerabilities | group_by(.package) | .[] | {package: .[0].package, vuln: [.[].vuln], severity: [.[].severity]}]' anchore-reports/image-vuln-report.json || true
-  tags:
-    - docker-ct-builder-ext
+    KUBE_INGRESS_BASE_DOMAIN: orchestrator.review.automation.surf.net
+  extends: .auto-deploy
+  stage: development
+  <<: *deploy_script
   only:
-    - tags
+    refs:
+      - dev
+    kubernetes: active
+  artifacts:
+    paths: [environment_url.txt]
+  environment:
+    name: review
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    refs:
+      - master
+      - tags
+      - schedules
 
-release image dev:
-  stage: release
-  image: docker:latest
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_DEV_IMAGE
-    - docker push $CONTAINER_DEV_IMAGE
-  tags:
-    - docker-ct-builder-ext
+run system tests on dev:
+  stage: development
+  trigger:
+    project: automation/automation-testers/system-tests
+    branch: dev
   only:
     refs:
       - dev
 
-release image staging:
-  stage: release
-  image: docker:latest
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_MASTER_IMAGE
-    - docker push $CONTAINER_MASTER_IMAGE
-  tags:
-    - docker-ct-builder-ext
+deploy dev:
+  variables:
+    KUBE_INGRESS_BASE_DOMAIN: orchestrator.dev.automation.surf.net
+    DEPLOY_NAMESPACE: development
+  extends: .auto-deploy
+  stage: development
+  <<: *deploy_script
   only:
     refs:
-      - master
-
-release image prod:
-  stage: release
-  image: docker:latest
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_LATEST_IMAGE
-    - docker push $CONTAINER_LATEST_IMAGE
-  tags:
-    - docker-ct-builder-ext
-  only:
-    - tags
-
-deploy to dev:
-  stage: deploy
-  script:
-    - ssh deploy@swarm01.dev.automation.surf.net  "sudo docker service update --image $CONTAINER_DEV_IMAGE dev_workflows-client"
+      - dev
+    kubernetes: active
+  artifacts:
+    paths: [environment_url.txt]
   environment:
     name: development
-    url: https://orchestrator.dev.automation.surf.net/
-  tags:
-    - shell-ext
-  only:
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
+  except:
     refs:
-      - dev
+      - master
+      - tags
+      - schedules
 
-deploy to staging:
-  stage: deploy
-  script:
-    - ssh deploy@swarm01.staging.automation.surf.net  "sudo docker service update --image $CONTAINER_MASTER_IMAGE staging_workflows-client"
-  environment:
-    name: staging
-    url: https://orchestrator.staging.automation.surf.net/
-  tags:
-    - shell-ext
+run system tests on staging:
+  stage: staging
+  trigger:
+    project: automation/automation-testers/system-tests
+    branch: master
   only:
     refs:
       - master
 
-deploy to prod:
- stage: deploy
- script:
-   - ssh deploy@swarm01.automation.surf.net  "sudo docker service update --image $CONTAINER_RELEASE_IMAGE prod_workflows-client"
- environment:
-   name: production
-   url: https://orchestrator.automation.surf.net/
- tags:
-   - shell-ext
- only:
-   - tags
+deploy staging:
+  variables:
+    KUBE_INGRESS_BASE_DOMAIN: orchestrator.staging.automation.surf.net
+    DEPLOY_NAMESPACE: staging
+  extends: .auto-deploy
+  stage: staging
+  <<: *deploy_script
+  only:
+    refs:
+      - master
+    kubernetes: active
+  artifacts:
+    paths: [environment_url.txt]
+  environment:
+    name: staging
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    refs:
+      - dev
+      - tags
+      - schedules
+
+deploy production:
+  variables:
+    KUBE_INGRESS_BASE_DOMAIN: orchestrator.automation.surf.net
+    DEPLOY_NAMESPACE: production
+  extends: .auto-deploy
+  stage: production
+  <<: *deploy_script
+  only:
+    refs:
+      - tags
+    kubernetes: active
+  artifacts:
+    paths: [environment_url.txt]
+  environment:
+    name: production
+    url: https://$KUBE_INGRESS_BASE_DOMAIN
+  except:
+    refs:
+      - dev
+      - master
+      - schedules
+
+stop_review:
+  extends: .auto-deploy
+  stage: cleanup
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - auto-deploy initialize_helm
+    - auto-deploy delete
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  when: manual
+  allow_failure: true
+  only:
+    refs:
+      - branches
+    kubernetes: active
+  except:
+    refs:
+      - dev
+      - master
+      - tags

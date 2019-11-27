@@ -35,8 +35,11 @@ em {
     &.error {
         color: $red;
         &.with-checkbox {
-            margin-bottom: 15px;
+            margin-bottom: 1px;
         }
+    }
+    &.root-error {
+        padding-top: 5px;
     }
 }
 
@@ -51,7 +54,7 @@ textarea {
     padding: 6px;
     border-radius: $br;
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: 4px;
     &[disabled],
     &:read-only {
         background-color: $lightest-grey;
