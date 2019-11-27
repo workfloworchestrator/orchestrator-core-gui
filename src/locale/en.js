@@ -789,7 +789,8 @@ I18n.translations.en = {
             "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
+        failed_task: "See task {{pid}}"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
