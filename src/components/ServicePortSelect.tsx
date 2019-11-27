@@ -17,7 +17,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import { ValueType } from "react-select/src/types";
-import { isEmpty } from "../utils/Utils";
 import { ServicePortSubscription, Organization } from "../utils/types";
 
 interface OptionType {
@@ -45,7 +44,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
             const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
             return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
         } else {
-            const portMode = isEmpty(servicePort.port_mode) ? "<No port_mode>" : servicePort.port_mode.toUpperCase();
+            const portMode = servicePort.port_mode ? servicePort.port_mode.toUpperCase() : "<No port_mode>";
             return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
         }
     };
