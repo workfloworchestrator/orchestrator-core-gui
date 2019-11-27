@@ -65,7 +65,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     componentDidMount = () => {
         const extra = Math.max(0, this.props.minimum - this.props.servicePorts.length);
         const servicePorts = [...this.props.servicePorts];
-        range(extra).forEach(() => servicePorts.push({ subscription_id: null, vlan: "" }));
+        range(extra).forEach(() => servicePorts.push({ subscription_id: null, vlan: "", port_mode: "tagged" }));
         this.props.onChange(servicePorts);
 
         const { availableServicePorts } = this.state;
@@ -108,7 +108,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                 servicePorts[index].tag = port.product.tag;
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
-                servicePorts[index].vlan = ["untagged", "link_member"].includes(port.port_mode) ? "0" : "";
+                servicePorts[index].vlan = ["untagged", "link_member"].includes(servicePorts[index].port_mode) ? "0" : "";
             }
         }
 
@@ -135,7 +135,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
         //todo: we might need to add tag and port_mode
-        servicePorts.push({ subscription_id: null, vlan: "" });
+        servicePorts.push({ subscription_id: null, vlan: "", port_mode: "tagged" });
         this.props.onChange(servicePorts);
     };
 
