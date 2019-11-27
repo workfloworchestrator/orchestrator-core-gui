@@ -40,12 +40,12 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         const organisationName = organisation ? organisation.name : "";
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
-        if (["SP", "SPNL"].includes(servicePort.product.tag)) {
-            const portMode = servicePort.port_mode ? servicePort.port_mode.toUpperCase() : "<No port_mode>";
-            return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
-        } else {
+        if (["MSP", "MSPNL", "SSP"].includes(servicePort.product.tag)) {
             const crm_port_id = servicePort.crm_port_id || "<No CRM port ID>";
             return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
+        } else {
+            const portMode = servicePort.port_mode ? servicePort.port_mode.toUpperCase() : "<No port_mode>";
+            return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
         }
     };
 
@@ -62,6 +62,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
 
         return (
             <Select
+                id="port-choice"
                 onChange={onChange as (value: ValueType<OptionType>) => void}
                 options={options}
                 value={value}

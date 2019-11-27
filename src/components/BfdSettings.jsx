@@ -68,7 +68,7 @@ export default class BfdSettings extends React.PureComponent {
                             {errors
                                 .filter(error => error.loc.length === 2 && error.loc[1] === "minimum_interval")
                                 .map((error, index) => (
-                                    <em className="error" key={index}>
+                                    <em className="error backend-validation" key={index}>
                                         {capitalizeFirstLetter(error.msg)}
                                     </em>
                                 ))}
@@ -85,7 +85,7 @@ export default class BfdSettings extends React.PureComponent {
                             {errors
                                 .filter(error => error.loc.length === 2 && error.loc[1] === "multiplier")
                                 .map((error, index) => (
-                                    <em className="error" key={index}>
+                                    <em className="error backend-validation" key={index}>
                                         {capitalizeFirstLetter(error.msg)}
                                     </em>
                                 ))}
@@ -96,7 +96,9 @@ export default class BfdSettings extends React.PureComponent {
                 {rootFieldErrors && (
                     <em className="error root-error">
                         {rootFieldErrors.map((e, index) => (
-                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            <div key={index} className="backend-validation">
+                                {capitalizeFirstLetter(e.msg)}.
+                            </div>
                         ))}
                     </em>
                 )}

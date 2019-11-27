@@ -1618,6 +1618,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
         </label>
         <div
           className=" css-14jk2my-container"
+          id="port-choice"
           onKeyDown={[Function]}
         >
           <div
@@ -1720,7 +1721,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
           </div>
         </div>
         <em
-          className="error"
+          className="error backend-validation"
         />
       </div>
       <div
@@ -1787,6 +1788,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
         </label>
         <div
           className=" css-14jk2my-container"
+          id="port-choice"
           onKeyDown={[Function]}
         >
           <div
@@ -1889,7 +1891,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
           </div>
         </div>
         <em
-          className="error"
+          className="error backend-validation"
         />
       </div>
       <div
@@ -4240,6 +4242,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -4342,7 +4345,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -4616,6 +4619,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -4718,7 +4722,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -4848,6 +4852,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -4950,7 +4955,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5273,6 +5278,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -5375,7 +5381,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5649,6 +5655,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -5751,7 +5758,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -5785,6 +5792,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       >
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -5887,7 +5895,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6150,6 +6158,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -6252,7 +6261,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6526,6 +6535,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -6628,7 +6638,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -6662,6 +6672,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       >
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -6764,7 +6775,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div
@@ -7035,6 +7046,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         </label>
                         <div
                           className=" css-14jk2my-container"
+                          id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -7137,7 +7149,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                           </div>
                         </div>
                         <em
-                          className="error"
+                          className="error backend-validation"
                         />
                       </div>
                       <div

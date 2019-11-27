@@ -203,6 +203,7 @@ export default class IPPrefix extends React.PureComponent {
                     <span>State:</span>
                     <span>
                         <input
+                            id="checkbox-allocated"
                             type="checkbox"
                             name="state"
                             onChange={this.filterState}
@@ -213,6 +214,7 @@ export default class IPPrefix extends React.PureComponent {
                     </span>
                     <span>
                         <input
+                            id="checkbox-planned"
                             type="checkbox"
                             name="state"
                             onChange={this.filterState}
@@ -223,6 +225,7 @@ export default class IPPrefix extends React.PureComponent {
                     </span>
                     <span>
                         <input
+                            id="checkbox-free"
                             type="checkbox"
                             name="state"
                             onChange={this.filterState}
@@ -235,7 +238,13 @@ export default class IPPrefix extends React.PureComponent {
                 <div>
                     <span>Root filter</span>
                     <span>
-                        <Select options={options} onChange={this.filterParentPrefix} value={value} />
+                        <Select
+                            id="root-filter"
+                            name="root-filter"
+                            options={options}
+                            onChange={this.filterParentPrefix}
+                            value={value}
+                        />
                     </span>
                 </div>
                 <table className="ip-blocks">

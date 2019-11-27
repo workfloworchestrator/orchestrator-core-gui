@@ -181,7 +181,7 @@ export default class ContactPersons extends React.PureComponent {
                         onChange={this.onChangeInternal("email", index)}
                         value={person.email || ""}
                     />
-                    {fieldError && <em className="error">{fieldError}</em>}
+                    {fieldError && <em className="error backend-validation">{fieldError}</em>}
                 </div>
                 <div className="wrapper">
                     {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
@@ -224,7 +224,9 @@ export default class ContactPersons extends React.PureComponent {
                 {rootFieldErrors && (
                     <em className="error root-error">
                         {rootFieldErrors.map((e, index) => (
-                            <div key={index}>{capitalizeFirstLetter(e.msg)}.</div>
+                            <div key={index} className="backend-validation">
+                                {capitalizeFirstLetter(e.msg)}.
+                            </div>
                         ))}
                     </em>
                 )}

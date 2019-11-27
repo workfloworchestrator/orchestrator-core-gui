@@ -34,7 +34,16 @@ import ServerError from "./ServerError";
 import NotAllowed from "./NotAllowed";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import { config, locationCodes, me, organisations, products, redirectToAuthorizationServer, reportError } from "../api";
+import {
+    config,
+    locationCodes,
+    logUserInfo,
+    me,
+    organisations,
+    products,
+    redirectToAuthorizationServer,
+    reportError
+} from "../api";
 import "../locale/en";
 import "../locale/nl";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
@@ -139,7 +148,7 @@ class App extends React.PureComponent {
             if (stateMatch) {
                 this.setState({ redirectState: atob(stateMatch[1]) });
             }
-            this.fetchUser();
+            this.fetchUser(true);
         } else if (window.location.href.indexOf("error") > -1) {
             this.setState({ loading: false });
         } else {
@@ -158,7 +167,7 @@ class App extends React.PureComponent {
         }
     }
 
-    fetchUser() {
+    fetchUser(log = false) {
         config()
             .catch(err => this.handleBackendDown(err))
             .then(configuration => {
@@ -178,6 +187,9 @@ class App extends React.PureComponent {
                                         redirect: url => history.push(url)
                                     }
                                 });
+                                if (log) {
+                                    logUserInfo(currentUser.email, "logged in");
+                                }
                             });
                         } else {
                             this.handleBackendDown();

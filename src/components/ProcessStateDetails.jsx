@@ -224,12 +224,12 @@ class ProcessStateDetails extends React.PureComponent {
                 <section className={stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
                     <table>
                         <tbody>
-                            {Object.keys(json).map((key, index) => (
+                            {Object.keys(json).map(key => (
                                 <tr key={key}>
-                                    <td id={`${applyIdNamingConvention(key)}-k`} className="key">
+                                    <td id={`${index}-${applyIdNamingConvention(key)}-k`} className="key">
                                         {key}
                                     </td>
-                                    <td id={`${applyIdNamingConvention(key)}-v`} className="value">
+                                    <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
                                         {this.displayStateValue(json[key])}
                                     </td>
                                 </tr>

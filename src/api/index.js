@@ -506,6 +506,10 @@ export function clearCache(name) {
     return postPutJson("user/clearCache", { name: name }, "put", true, false);
 }
 
+export function logUserInfo(username, message) {
+    return postPutJson(`user/log/${username}`, { message: message }, "post", true, false);
+}
+
 export function ping() {
     return fetchJson("user/ping");
 }
