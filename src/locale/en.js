@@ -104,6 +104,9 @@ I18n.translations.en = {
     process: {
         confirm_migrate_sap: "Confirm the migration of the SAP",
         confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
+        confirm_port_removal: "Replacement confirmation",
+        confirm_port_removal_info:
+            "Please confirm that the old service has been replaced by a new service with one port replaced",
         accept: {
             noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
             noc_remove_lichtpad_confirmation: "Is the LightPath of the subscription removed?",
@@ -1247,6 +1250,7 @@ I18n.translations.en = {
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
         modify_sn7_light_path_msp_only_speed: "Modify Service Speed",
+        modify_sn7_light_path_replace_port: "Replace port of SN7 Light Path",
         modify_sn7_light_path_upgrade_to_redundant: "Upgrade to Redundant LP",
         modify_sn7_service_port_netherlight_isalias: "Modify Netherlight isAlias",
         modify_sn7_service_port_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
