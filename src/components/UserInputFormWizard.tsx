@@ -69,6 +69,8 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
 
         let result = this.props.validSubmit(newUserInputs);
         return catchErrorStatus(result, 510, (json: any) => {
+            // Scroll to top when navigating to next screen of wizard
+            window.scrollTo(0, 0);
             this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }], userInputs: newUserInputs });
         });
     };
