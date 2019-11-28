@@ -349,7 +349,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 MultipleServicePorts.propTypes = {
     onChange: PropTypes.func.isRequired,
     sn8: PropTypes.bool.isRequired,
-    tags: PropTypes.array.isRequired,
+    productTags: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     organisationId: PropTypes.string,
