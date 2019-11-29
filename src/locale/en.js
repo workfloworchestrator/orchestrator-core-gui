@@ -347,7 +347,8 @@ I18n.translations.en = {
         product_validation: "Product / Workflow validation",
         flash: {
             create: "Created process for workflow {{name}}",
-            update: "Resumed process for workflow {{name}}"
+            update: "Resumed process for workflow {{name}}",
+            wizard_next_step: "Navigated to next step in form wizard"
         },
         split_prefix: "Split IP Prefix",
         split_prefix_info: "Select the subnet from all subnets of the given prefix length",
