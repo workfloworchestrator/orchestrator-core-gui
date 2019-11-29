@@ -17696,3 +17696,2570 @@ export const allSubscriptionsWithTags = [
         subscription_id: "05cdffc1-e23e-44d9-b477-bdaaf6e03713"
     }
 ];
+
+export const FAILED_PROCESS_JSON = {
+    assignee: "SYSTEM",
+    created_by: "SYSTEM",
+    current_state: {
+        contact_persons: [
+            {
+                email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                name: "Hiram",
+                phone: ""
+            }
+        ],
+        ims_info: {
+            device_port_name: "CU  FNAL_Zp001A SP",
+            ims_circuit_id: "44251",
+            ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+            ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+        },
+        jira_ticket_completed: "2019-11-15T11:37:08 +0000",
+        nso_payload: {
+            "ptp:ptp": {
+                customer_name: "FNAL",
+                device: "zp001a-jnx-acc-test",
+                interface: "xe-1/0/0",
+                name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                ptptype: "tagged",
+                speed: "10g",
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+            }
+        },
+        nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+        organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+        organisation_abbrev: "FNAL",
+        organisation_name: "Fermi National Accelerator Laboratory",
+        port_id: 680884,
+        port_info: {
+            connector_type: "LC/PC",
+            fiber_type: "multi-mode",
+            id: 680884,
+            iface_type: "10GBASE-SR",
+            line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+            location: "ZP001A",
+            node: "ZP001A-JNX-ACC-TEST",
+            patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+            port: "1/0/0",
+            status: "3"
+        },
+        port_mode: "tagged",
+        port_speed: "10000",
+        process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+        product: "214aae3d-f804-4270-a86b-66bcf2861809",
+        product_tag: "SP",
+        reporter: "SYSTEM",
+        service_port: {
+            ieee_interface_type: "10GBASE-SR",
+            location_code: "Zp001A"
+        },
+        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+        subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+        ticket_id: "SNNP-79379",
+        workflow_target: "CREATE"
+    },
+    customer: "6a608b90-0c11-e511-80d0-005056956c1a",
+    failed_reason: "[Errno 111] Connection refused",
+    id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+    last_modified: 1574096538,
+    product: "99e527b2-7424-48eb-9015-6f46e8a40923",
+    started: 1573817793,
+    status: "failed",
+    step: "Send confirmation mail to customer",
+    steps: [
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817793,
+            name: "Start",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                port_mode: "tagged",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817794,
+            name: "Load state from input",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817794,
+            name: "Create subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817794,
+            name: "Create Process Subscription relation",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817801,
+            name: "Create JIRA ticket",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817801,
+            name: "Approve Request",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "suspend"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817803,
+            name: "Approve Request",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817803,
+            name: "Load state from input",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817809,
+            name: "Update JIRA ticket",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817810,
+            name: "Approve JIRA ticket",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817811,
+            name: "Assign JIRA ticket to -1",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817811,
+            name: "Input free port",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "suspend"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817817,
+            name: "Input free port",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817817,
+            name: "Start JIRA ticket",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817822,
+            name: "Reserve port SP in IMS",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP (port not ready yet) 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817822,
+            name: "Update Subscription description with free port",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817823,
+            name: "Update JIRA ticket with free port SP",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817824,
+            name: "Make NSO payload",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817827,
+            name: "Deploy payload to register port in NSO",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817827,
+            name: "Confirm configuration",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "skipped"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817827,
+            name: "Set port for SP to in Service in IMS",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817828,
+            name: "Update subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1573817833,
+            name: "Complete JIRA ticket",
+            state: {
+                contact_persons: [
+                    {
+                        email: "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        name: "Hiram",
+                        phone: ""
+                    }
+                ],
+                ims_info: {
+                    device_port_name: "CU  FNAL_Zp001A SP",
+                    ims_circuit_id: "44251",
+                    ims_circuit_name: "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    ims_extra_info: "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                jira_ticket_completed: "2019-11-15T11:37:08 +0000",
+                nso_payload: {
+                    "ptp:ptp": {
+                        customer_name: "FNAL",
+                        device: "zp001a-jnx-acc-test",
+                        interface: "xe-1/0/0",
+                        name: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        ptptype: "tagged",
+                        speed: "10g",
+                        subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                nso_service_id: "54fd79f5-947f-459f-9b02-e463c2e69134",
+                organisation: "6a608b90-0c11-e511-80d0-005056956c1a",
+                organisation_abbrev: "FNAL",
+                organisation_name: "Fermi National Accelerator Laboratory",
+                port_id: 680884,
+                port_info: {
+                    connector_type: "LC/PC",
+                    fiber_type: "multi-mode",
+                    id: 680884,
+                    iface_type: "10GBASE-SR",
+                    line_name: "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    location: "ZP001A",
+                    node: "ZP001A-JNX-ACC-TEST",
+                    patchposition: "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    port: "1/0/0",
+                    status: "3"
+                },
+                port_mode: "tagged",
+                port_speed: "10000",
+                process_id: "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                product: "214aae3d-f804-4270-a86b-66bcf2861809",
+                product_tag: "SP",
+                reporter: "SYSTEM",
+                service_port: {
+                    ieee_interface_type: "10GBASE-SR",
+                    location_code: "Zp001A"
+                },
+                subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                subscription_name: "FNAL SP ZP001A 10 Gbit/s",
+                ticket_id: "SNNP-79379",
+                workflow_target: "CREATE"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            executed: 1574096538,
+            name: "Send confirmation mail to customer",
+            state: {
+                class: "ConnectionRefusedError",
+                error: "[Errno 111] Connection refused",
+                executed_at: ["2019-11-15 12:37:14.186858+01:00", "2019-11-15 12:37:15.775995+01:00"],
+                retries: 2
+            },
+            status: "failed"
+        },
+        {
+            form: null,
+            name: "Send confirmation mail to customer",
+            status: "pending"
+        },
+        {
+            name: "Close JIRA ticket",
+            status: "pending"
+        },
+        {
+            name: "Activate subscription",
+            status: "pending"
+        },
+        {
+            name: "Done",
+            status: "pending"
+        }
+    ],
+    subscriptions: [
+        {
+            crm_port_id: null,
+            customer_id: "6a608b90-0c11-e511-80d0-005056956c1a",
+            description: "FNAL SP ZP001A 10 Gbit/s",
+            end_date: null,
+            insync: false,
+            name: "SN8 Service Port 10G",
+            port_mode: "tagged",
+            product_id: "214aae3d-f804-4270-a86b-66bcf2861809",
+            start_date: null,
+            status: "initial",
+            subscription_id: "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+            tag: "SP"
+        }
+    ],
+    traceback:
+        'ConnectionRefusedError: [Errno 111] Connection refused\n  File "/home/hiram/git/workflows/server/db.py", line 164, in _transactional\n    result: Either[ErrorState, R] = f(*args, **kwargs)\n  File "/home/hiram/git/workflows/server/workflows/service_port/shared_service_port.py", line 495, in it\n    mail_method(new_state)\n  File "/home/hiram/git/workflows/server/mail.py", line 195, in send_sp_workflow_confirmation_mail\n    state=state,\n  File "/home/hiram/git/workflows/server/mail.py", line 41, in _do_send_mail\n    current_app.mail.send(msg)\n  File "/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py", line 491, in send\n    with self.connect() as connection:\n  File "/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py", line 144, in __enter__\n    self.host = self.configure_host()\n  File "/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py", line 158, in configure_host\n    host = smtplib.SMTP(self.mail.server, self.mail.port)\n  File "/usr/lib/python3.7/smtplib.py", line 251, in __init__\n    (code, msg) = self.connect(host, port)\n  File "/usr/lib/python3.7/smtplib.py", line 336, in connect\n    self.sock = self._get_socket(host, port, self.timeout)\n  File "/usr/lib/python3.7/smtplib.py", line 307, in _get_socket\n    self.source_address)\n  File "/usr/lib/python3.7/socket.py", line 727, in create_connection\n    raise err\n  File "/usr/lib/python3.7/socket.py", line 716, in create_connection\n    sock.connect(sa)\n',
+    workflow_name: "create_sn8_service_port",
+    customerName: "Fermi National Accelerator Laboratory",
+    productName: "SN8 Service Port 10G"
+};
+
+export const SUSPENDED_PROCESS_JSON = {
+    assignee: "NOC",
+    current_state: {
+        contact_persons: [
+            {
+                email: "nwa-helpdesk-dev@list.surfnet.nl"
+            }
+        ],
+        insync: false,
+        ip_routing_type: "Static",
+        ip_static_service_port: [
+            {
+                subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                tag: "MSP",
+                vlan: "2"
+            }
+        ],
+        new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+        new_subscription: {
+            bandwidth: "2000",
+            domain: "SURFNET8",
+            ims_circuit_id: "43697",
+            insync: false,
+            internetpinnen: "True",
+            internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+            ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            ip_routing_type: "Static",
+            is_elan: false,
+            multicast: "False",
+            nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+            organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+            process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+            product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+            service_speed: "2000",
+            subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+            subscription_name: "SN8 SURFinternet Static",
+            surfcert_filter: "default"
+        },
+        new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+        old_subscription: {
+            bandwidth: "2000",
+            domain: "SURFNET7",
+            ims_circuit_id: "43870",
+            ims_service_code: "IP",
+            internetpinnen: "True",
+            internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+            internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            ip_routing_type: "Static",
+            ip_static_service_port: [
+                {
+                    subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                    tag: "MSP",
+                    vlan: "2"
+                }
+            ],
+            is_elan: false,
+            multicast: "False",
+            nms_service_id: "9898",
+            organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+            organisation_abbrev: "ASTRON",
+            organisation_name: "ASTRON",
+            process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+            product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+            sap1: {
+                connector_type: "LC/PC",
+                crm_port_id: "98541",
+                customer_ipv4_address: "10.1.34.18",
+                customer_ipv4_mtu: "1500",
+                customer_ipv6_address: "",
+                customer_ipv6_mtu: "1500",
+                fiber_type: "multi-mode",
+                id: 680067,
+                iface_type: "10GBASE-SR",
+                ims_circuit_id: 36715,
+                instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                line_name: "ASD001A_MSP_HVA_98541",
+                location: "ASD001A",
+                node: "ASD001A_5410FAKE_HANS72",
+                patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                port: "9/10",
+                port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                ptp_ipv4_ipam_id: "5302",
+                status: "3",
+                vlanrange: "2"
+            },
+            service_speed: "2000",
+            subscription_description: "ASTRON IP ASD001A",
+            subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+            subscription_name: "SURFinternet 2G Static",
+            surfcert_filter: "default"
+        },
+        old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+        organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+        organisation_name: "ASTRON",
+        process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+        product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+        reporter: "SYSTEM",
+        service_speed: "2000",
+        subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+        ticket_id: "SNNP-66408",
+        workflow_target: "MODIFY"
+    },
+    customer: "7c41e5e3-0911-e511-80d0-005056956c1a",
+    failed_reason: null,
+    id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+    last_modified: 1573576181,
+    product: "99e527b2-7424-48eb-9015-6f46e8a40923",
+    started: 1573576172,
+    status: "suspended",
+    step: "Select new SAP to migrate to",
+    steps: [
+        {
+            commit_hash: "",
+            executed: 1573576172,
+            name: "Start",
+            state: {
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576172,
+            name: "Lock subscription",
+            state: {
+                insync: false,
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576172,
+            name: "Acquire NOC mail from environment",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576172,
+            name: "Load product fixed inputs",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576173,
+            name: "Get SN8 product.",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576173,
+            name: "Modify Subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                workflow_target: "MODIFY"
+            },
+            status: "suspend"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576180,
+            name: "Modify Subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576180,
+            name: "Prepare state for sub states",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    service_speed: "2000",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576180,
+            name: "Load subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576180,
+            name: "Lock subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    insync: false,
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576180,
+            name: "Load subscription",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Verify that SN8 subscription does not have any existing SAPs",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Load initial state",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Load organisation information",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Copy ip_prefix_subscriptions from old_subscription to new_subscription.",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_mtu: "1500",
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Load SN7 SAP data",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        connector_type: "LC/PC",
+                        crm_port_id: "98541",
+                        customer_ipv4_address: "10.1.34.18",
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_address: "",
+                        customer_ipv6_mtu: "1500",
+                        fiber_type: "multi-mode",
+                        id: 680067,
+                        iface_type: "10GBASE-SR",
+                        ims_circuit_id: 36715,
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        line_name: "ASD001A_MSP_HVA_98541",
+                        location: "ASD001A",
+                        node: "ASD001A_5410FAKE_HANS72",
+                        patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        port: "9/10",
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        status: "3",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Create Process Subscription relation",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        connector_type: "LC/PC",
+                        crm_port_id: "98541",
+                        customer_ipv4_address: "10.1.34.18",
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_address: "",
+                        customer_ipv6_mtu: "1500",
+                        fiber_type: "multi-mode",
+                        id: 680067,
+                        iface_type: "10GBASE-SR",
+                        ims_circuit_id: 36715,
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        line_name: "ASD001A_MSP_HVA_98541",
+                        location: "ASD001A",
+                        node: "ASD001A_5410FAKE_HANS72",
+                        patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        port: "9/10",
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        status: "3",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Create Process Subscription relation",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        connector_type: "LC/PC",
+                        crm_port_id: "98541",
+                        customer_ipv4_address: "10.1.34.18",
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_address: "",
+                        customer_ipv6_mtu: "1500",
+                        fiber_type: "multi-mode",
+                        id: 680067,
+                        iface_type: "10GBASE-SR",
+                        ims_circuit_id: 36715,
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        line_name: "ASD001A_MSP_HVA_98541",
+                        location: "ASD001A",
+                        node: "ASD001A_5410FAKE_HANS72",
+                        patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        port: "9/10",
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        status: "3",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Unfocus ip_static_service_port for port selector",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                ip_static_service_port: [
+                    {
+                        subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        tag: "MSP",
+                        vlan: "2"
+                    }
+                ],
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        connector_type: "LC/PC",
+                        crm_port_id: "98541",
+                        customer_ipv4_address: "10.1.34.18",
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_address: "",
+                        customer_ipv6_mtu: "1500",
+                        fiber_type: "multi-mode",
+                        id: 680067,
+                        iface_type: "10GBASE-SR",
+                        ims_circuit_id: 36715,
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        line_name: "ASD001A_MSP_HVA_98541",
+                        location: "ASD001A",
+                        node: "ASD001A_5410FAKE_HANS72",
+                        patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        port: "9/10",
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        status: "3",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "success"
+        },
+        {
+            commit_hash: "",
+            executed: 1573576181,
+            name: "Select new SAP to migrate to",
+            state: {
+                contact_persons: [
+                    {
+                        email: "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                insync: false,
+                ip_routing_type: "Static",
+                ip_static_service_port: [
+                    {
+                        subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        tag: "MSP",
+                        vlan: "2"
+                    }
+                ],
+                new_product_id: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                new_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET8",
+                    ims_circuit_id: "43697",
+                    insync: false,
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    is_elan: false,
+                    multicast: "False",
+                    nso_service_id: "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    service_speed: "2000",
+                    subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    subscription_name: "SN8 SURFinternet Static",
+                    surfcert_filter: "default"
+                },
+                new_subscription_id: "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                old_subscription: {
+                    bandwidth: "2000",
+                    domain: "SURFNET7",
+                    ims_circuit_id: "43870",
+                    ims_service_code: "IP",
+                    internetpinnen: "True",
+                    internetpinnen_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                    internetpinnen_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_prefix_subscriptions: "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    ip_routing_type: "Static",
+                    ip_static_service_port: [
+                        {
+                            subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            tag: "MSP",
+                            vlan: "2"
+                        }
+                    ],
+                    is_elan: false,
+                    multicast: "False",
+                    nms_service_id: "9898",
+                    organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    organisation_abbrev: "ASTRON",
+                    organisation_name: "ASTRON",
+                    process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    sap1: {
+                        connector_type: "LC/PC",
+                        crm_port_id: "98541",
+                        customer_ipv4_address: "10.1.34.18",
+                        customer_ipv4_mtu: "1500",
+                        customer_ipv6_address: "",
+                        customer_ipv6_mtu: "1500",
+                        fiber_type: "multi-mode",
+                        id: 680067,
+                        iface_type: "10GBASE-SR",
+                        ims_circuit_id: 36715,
+                        instance_id: "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        ip_prefix_subscription_id: ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
+                        line_name: "ASD001A_MSP_HVA_98541",
+                        location: "ASD001A",
+                        node: "ASD001A_5410FAKE_HANS72",
+                        patchposition: "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        port: "9/10",
+                        port_subscription_id: "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        ptp_ipv4_ipam_id: "5302",
+                        status: "3",
+                        vlanrange: "2"
+                    },
+                    service_speed: "2000",
+                    subscription_description: "ASTRON IP ASD001A",
+                    subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                    subscription_name: "SURFinternet 2G Static",
+                    surfcert_filter: "default"
+                },
+                old_subscription_label: "4129c9cb ASTRON IP ASD001A",
+                organisation: "7c41e5e3-0911-e511-80d0-005056956c1a",
+                organisation_name: "ASTRON",
+                process_id: "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                product: "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                reporter: "SYSTEM",
+                service_speed: "2000",
+                subscription_id: "4129c9cb-1885-484c-b561-94896bac06ee",
+                ticket_id: "SNNP-66408",
+                workflow_target: "MODIFY"
+            },
+            status: "suspend"
+        },
+        {
+            form: [
+                {
+                    name: "ip_static_service_port",
+                    type: "label"
+                }
+            ],
+            name: "Select new SAP to migrate to",
+            status: "pending"
+        },
+        {
+            name: "Focus sn8_ip_static_service_port for further processing",
+            status: "pending"
+        },
+        {
+            name: "Convert Internetpinnen Prefix Subscriptions IDs",
+            status: "pending"
+        },
+        {
+            name: "Load organisation information",
+            status: "pending"
+        },
+        {
+            name: "Load port information",
+            status: "pending"
+        },
+        {
+            name: "Show NOC confirmation dialog.",
+            status: "pending"
+        },
+        {
+            name: "Construct SN8 SAP",
+            status: "pending"
+        },
+        {
+            name: "Load IMS data",
+            status: "pending"
+        },
+        {
+            name: "Remove Sap from SN7 IMS Service",
+            status: "pending"
+        },
+        {
+            name: "Load IMS data",
+            status: "pending"
+        },
+        {
+            name: "Add Sap to SN8 IMS Service",
+            status: "pending"
+        },
+        {
+            name: "Update name of IMS service",
+            status: "pending"
+        },
+        {
+            name: "Update subscription",
+            status: "pending"
+        },
+        {
+            name: "Load SAP instance IDs.",
+            status: "pending"
+        },
+        {
+            name: "Update Subscription Description",
+            status: "pending"
+        },
+        {
+            name: "Load IP Prefix Subscriptions",
+            status: "pending"
+        },
+        {
+            name: "Update SAP1 with IPAM information",
+            status: "pending"
+        },
+        {
+            name: "Update the description field of PTP prefixes",
+            status: "pending"
+        },
+        {
+            name: "Deploy NSO service model",
+            status: "pending"
+        },
+        {
+            name: "IMS circuit is now in service",
+            status: "pending"
+        },
+        {
+            name: "Adjust PTP FQDN in IPAM",
+            status: "pending"
+        },
+        {
+            name: "Remove SAP from SN7 Static IP subscription",
+            status: "pending"
+        },
+        {
+            name: "Add SAP to SN8 Static IP subscription",
+            status: "pending"
+        },
+        {
+            name: "Conditionally set subscription to active",
+            status: "pending"
+        },
+        {
+            name: "Show customer confirmation dialog.",
+            status: "pending"
+        },
+        {
+            name: "Send confirmation mail to customer",
+            status: "pending"
+        },
+        {
+            name: "Cleanup confirmation dialog.",
+            status: "pending"
+        },
+        {
+            name: "Unlock subscription",
+            status: "pending"
+        },
+        {
+            name: "Unlock subscription",
+            status: "pending"
+        },
+        {
+            name: "Done",
+            status: "pending"
+        }
+    ],
+    traceback: null,
+    workflow_name: "migrate_sn7_ip_static_sap_to_sn8",
+    customerName: "ASTRON",
+    productName: "SURFinternet 2G Static"
+};

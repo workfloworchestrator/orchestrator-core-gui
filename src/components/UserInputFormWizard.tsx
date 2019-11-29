@@ -25,7 +25,7 @@ import I18n from "i18n-js";
 
 interface Form {
     form: any[];
-    hasNext: boolean;
+    hasNext?: boolean;
 }
 
 interface IProps {

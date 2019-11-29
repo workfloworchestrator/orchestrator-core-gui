@@ -185,7 +185,7 @@ export function allSubscriptions() {
     return fetchJson(`v2/subscriptions/all`);
 }
 
-export function paginatedSubscriptions(range = "0,24", sort = ["start_date", "desc"], filter) {
+export function paginatedSubscriptions(range = "0,24", sort = "start_date,desc", filter) {
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
@@ -368,8 +368,8 @@ export function invalidSubscriptions(workflowKey) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
 }
 
-export function processes() {
-    return fetchJson("processes");
+export function processes(showTasks = false) {
+    return fetchJson(`processes?showTasks=${showTasks}`);
 }
 
 export function fetchPortSpeedBySubscription(subscriptionId) {
@@ -442,40 +442,8 @@ export function retryProcess(processId) {
     return postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
 }
 
-export function tasks() {
-    return fetchJson("tasks");
-}
-
 export function fixedInputConfiguration() {
     return fetchJson("fixed_inputs/configuration");
-}
-
-export function task(taskId) {
-    return fetchJsonWithCustomErrorHandling("tasks/" + taskId);
-}
-
-export function resumeAll() {
-    return fetchJsonWithCustomErrorHandling("tasks/resumeall");
-}
-
-export function startTask(workflow_name, task) {
-    return postPutJson(`tasks/${workflow_name}`, task, "post", false, false);
-}
-
-export function resumeTask(taskId, userInput) {
-    return postPutJson(`tasks/${taskId}/resume`, userInput, "put", false, false);
-}
-
-export function retryTask(taskId) {
-    return postPutJson(`tasks/${taskId}/resume`, {}, "put", true, false);
-}
-
-export function deleteTask(taskId) {
-    return fetchJson(`tasks/${taskId}`, { method: "DELETE" }, {}, true, false);
-}
-
-export function abortTask(taskId) {
-    return fetchJson(`tasks/${taskId}/abort`, { method: "PUT" }, {}, true, false);
 }
 
 export function validations() {

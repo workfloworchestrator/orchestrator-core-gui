@@ -1,3 +1,10 @@
+import {
+    encodeDelimitedNumericArray,
+    decodeDelimitedNumericArray,
+    encodeDelimitedArray,
+    decodeDelimitedArray
+} from "use-query-params";
+
 /*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,13 +56,6 @@ const QueryParameter = {
     }
 };
 
-export function replaceQueryParameter(windowLocationSearch, name, value) {
-    const newSearchHash = QueryParameter.searchToHash(windowLocationSearch);
-    delete newSearchHash[name];
-    newSearchHash[decodeURIComponent(name)] = [decodeURIComponent(value)];
-    return QueryParameter.hashToSearch(newSearchHash);
-}
-
 export function getParameterByName(name, windowLocationSearch) {
     const replacedName = name.replace(/[[]/, "[").replace(/[\]]/, "\\]");
     const regex = new RegExp("[\\?&]" + replacedName + "=([^&#]*)"),
@@ -75,3 +75,13 @@ export function getQueryParameters(windowLocationSearch) {
     }
     return squashed;
 }
+
+export const CommaSeparatedNumericArrayParam = {
+    encode: value => encodeDelimitedNumericArray(value, ","),
+    decode: strValue => decodeDelimitedNumericArray(strValue, ",")
+};
+
+export const CommaSeparatedStringArrayParam = {
+    encode: value => encodeDelimitedArray(value, ","),
+    decode: strValue => decodeDelimitedArray(strValue, ",")
+};
