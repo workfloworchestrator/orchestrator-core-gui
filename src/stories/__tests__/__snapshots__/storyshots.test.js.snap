@@ -6401,7 +6401,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     ASN
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6419,7 +6419,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     INTERNETPINNEN
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6437,7 +6437,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     MULTICAST
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6455,7 +6455,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     SURFCERT_FILTER
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6490,7 +6490,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     BFD
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6508,7 +6508,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     BGP_EXPORT_POLICY
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6526,7 +6526,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     BGP_HASH_ALGORITHM
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6544,7 +6544,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     BGP_PASSWORD
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6562,7 +6562,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     BGP_SESSION_PRIORITY
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6580,7 +6580,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     CUSTOMER_IPV4_MTU
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6598,7 +6598,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     PORT_SUBSCRIPTION_ID
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6624,7 +6624,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     PTP_IPV4_IPAM_ID
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6646,7 +6646,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     VLANRANGE
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6681,7 +6681,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     IMS_CIRCUIT_ID
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6703,7 +6703,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     NSO_SERVICE_ID
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"
@@ -6721,7 +6721,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     SERVICE_SPEED
                   </td>
                   <td
-                    colSpan="2"
+                    colSpan={2}
                   >
                     <div
                       className="resource-type"

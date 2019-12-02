@@ -1,3 +1,5 @@
+import { SubscriptionWithDetails, InstanceValue, SubscriptionInstance } from "../utils/types";
+
 /*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +15,15 @@
  *
  */
 
-export function subscriptionInstanceValues(subscription) {
+interface InstanceValueWithLabel extends InstanceValue {
+    instance_label: string;
+}
+
+export function subscriptionInstanceValues(subscription: SubscriptionWithDetails) {
     return subscription.instances.reduce(
-        (acc, instance) =>
+        (acc: InstanceValueWithLabel[], instance: SubscriptionInstance) =>
             acc.concat(
-                instance.values.map(item => ({
+                instance.values.map((item: InstanceValue) => ({
                     ...item,
                     instance_label: instance.label
                 }))

@@ -255,10 +255,7 @@ class App extends React.PureComponent<{}, IState> {
                                     render={props => <ProcessDetail {...props} isProcess={true} />}
                                 />
                                 <Route path="/subscriptions" render={props => <Subscriptions {...props} />} />
-                                <Route
-                                    path="/subscription/:id"
-                                    render={props => <SubscriptionDetail match={props.match} />}
-                                />
+                                <Route path="/subscription/:id" render={props => <SubscriptionDetail {...props} />} />
                                 <ProtectedRoute
                                     path="/metadata/:type"
                                     render={props => <MetaData match={props.match} />}
