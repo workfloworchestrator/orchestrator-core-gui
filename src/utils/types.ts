@@ -72,6 +72,7 @@ export interface Subscription {
     customer_id: string;
     start_date: number;
     end_date: number;
+    note: string;
 }
 
 export interface SubscriptionWithDetails extends Subscription {

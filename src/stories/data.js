@@ -20633,5 +20633,6 @@ export const SUBSCRIPTION_JSON = {
     start_date: 1574726400,
     status: "active",
     subscription_id: "9c8c13d5-6954-461a-a931-32894c193aa0",
-    tag: "IPBGP"
+    tag: "IPBGP",
+    note: "Some text"
 };

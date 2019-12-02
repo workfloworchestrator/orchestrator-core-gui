@@ -764,6 +764,7 @@ I18n.translations.en = {
         dienstafnameGuid: "Dienstafname Guid",
         dienstafnameCode: "Dienstafname Code",
         dienstafnameStatus: "Dienstafname Status",
+        note: "Note",
         id: "Subscription ID",
         subscription_id: "ID",
         description: "Description",

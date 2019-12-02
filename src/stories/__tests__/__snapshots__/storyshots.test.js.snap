@@ -6325,6 +6325,18 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   5203e539-0a11-e511-80d0-005056956c1a
                 </td>
               </tr>
+              <tr>
+                <td
+                  id="subscriptions-note-k"
+                >
+                  Note
+                </td>
+                <td
+                  id="subscriptions-note-v"
+                >
+                  Some text
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

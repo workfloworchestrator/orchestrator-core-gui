@@ -466,6 +466,10 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <td id="subscriptions-customer-id-k">{I18n.t("subscriptions.customer_id")}</td>
                     <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
                 </tr>
+                <tr>
+                    <td id="subscriptions-note-k">{I18n.t("subscriptions.note")}</td>
+                    <td id="subscriptions-note-v">{subscription.note}</td>
+                </tr>
             </tbody>
         </table>
     );
