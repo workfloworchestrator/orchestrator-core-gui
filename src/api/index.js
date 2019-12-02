@@ -506,3 +506,7 @@ export function redirectToAuthorizationServer() {
         );
     });
 }
+
+export function dienstafnameBySubscription(subscriptionId) {
+    return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
+}

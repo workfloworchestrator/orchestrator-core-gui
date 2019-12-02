@@ -6333,6 +6333,48 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
         className="details"
       >
         <h3>
+          Dienstafname
+        </h3>
+        <div
+          className="form-container-parent"
+        >
+          <table
+            className="detail-block"
+          >
+            <thead />
+            <tbody>
+              <tr>
+                <td>
+                  Dienstafname Guid
+                </td>
+                <td>
+                  d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Dienstafname Code
+                </td>
+                <td>
+                  MSP
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Dienstafname Status
+                </td>
+                <td>
+                  _Opgezegd
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        className="details"
+      >
+        <h3>
           Fixed Inputs
         </h3>
         <div

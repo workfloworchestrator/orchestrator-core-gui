@@ -760,6 +760,10 @@ I18n.translations.en = {
     subscriptions: {
         customer_name: "Customer",
         customer_id: "Customer UUID",
+        dienstafname: "Dienstafname",
+        dienstafnameGuid: "Dienstafname Guid",
+        dienstafnameCode: "Dienstafname Code",
+        dienstafnameStatus: "Dienstafname Status",
         id: "Subscription ID",
         subscription_id: "ID",
         description: "Description",

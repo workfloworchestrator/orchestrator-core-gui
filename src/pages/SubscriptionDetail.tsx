@@ -18,6 +18,7 @@ import I18n from "i18n-js";
 import PropTypes from "prop-types";
 
 import {
+    dienstafnameBySubscription,
     getResourceTypeInfo,
     parentSubscriptions,
     portByImsPortId,
@@ -79,6 +80,13 @@ interface IState {
     workflows: WorkflowReasons;
     childSubscriptions: SubscriptionWithDetails[];
     parentSubscriptions: SubscriptionWithDetails[];
+    dienstafname?: Dienstafname;
+}
+
+interface Dienstafname {
+    guid: string;
+    code: string;
+    status: string;
 }
 
 interface RelatedObject {
@@ -205,7 +213,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     productById(subscription.product_id),
                     subscriptionWorkflows(subscription.subscription_id),
                     //add the parent subscriptions where this subscription is used
-                    parentSubscriptions(subscription.subscription_id)
+                    parentSubscriptions(subscription.subscription_id),
+                    dienstafnameBySubscription(subscription.subscription_id)
                 ]
                     // Add child subscriptions and other external resources
                     .concat(
@@ -215,9 +224,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     );
 
                 Promise.all(promises).then(result => {
-                    const relatedObjects: RelatedObject[] = result.slice(4).filter(obj => obj.type !== "absent");
+                    const relatedObjects: RelatedObject[] = result.slice(5).filter(obj => obj.type !== "absent");
                     const notFoundRelatedObjects: AbsentRelatedObject[] = result
-                        .slice(4)
+                        .slice(5)
                         .filter(obj => obj.type === "absent");
 
                     let childSubscriptions = relatedObjects
@@ -266,6 +275,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         subscriptionProcesses: result[0],
                         product: result[1],
                         workflows: result[2],
+                        dienstafname: result[4],
                         imsServices: imsServices,
                         ipamPrefixes: ipamPrefixes,
                         ipamAddresses: ipamAddresses,
@@ -459,6 +469,37 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             </tbody>
         </table>
     );
+
+    renderDienstafname = () => {
+        if (!this.state.dienstafname) {
+            return null;
+        }
+
+        return (
+            <section className="details">
+                <h3>{I18n.t("subscriptions.dienstafname")}</h3>
+                <div className="form-container-parent">
+                    <table className={"detail-block"}>
+                        <thead />
+                        <tbody>
+                            <tr>
+                                <td>{I18n.t("subscriptions.dienstafnameGuid")}</td>
+                                <td>{this.state.dienstafname.guid}</td>
+                            </tr>
+                            <tr>
+                                <td>{I18n.t("subscriptions.dienstafnameCode")}</td>
+                                <td>{this.state.dienstafname.code}</td>
+                            </tr>
+                            <tr>
+                                <td>{I18n.t("subscriptions.dienstafnameStatus")}</td>
+                                <td>{this.state.dienstafname.status}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        );
+    };
 
     renderSubscriptions = (parentSubscriptions: SubscriptionWithDetails[], subscription: Subscription) => {
         if (!subscription || isEmpty(parentSubscriptions)) {
@@ -1195,6 +1236,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                 {renderContent && (
                     <div>
                         {this.renderDetails(subscription!, subscriptionProcesses)}
+                        {this.renderDienstafname()}
                         {this.renderFixedInputs(product)}
                         {this.renderProductBlocks(
                             subscription!,

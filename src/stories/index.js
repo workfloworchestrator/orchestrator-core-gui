@@ -1088,6 +1088,11 @@ storiesOf("SubscriptionDetail", module)
             vrf: 1,
             vrf__label: "global"
         });
+        fetchMock.get("/api/v2/crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0", {
+            guid: "d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26",
+            code: "MSP",
+            status: "_Opgezegd"
+        });
 
         return <SubscriptionDetail match={{ params: { id: "pid" } }} />;
     });
