@@ -24,7 +24,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "./NotFound";
 import Help from "./Help";
 import Processes from "./Processes";
-import OldSubscriptions from "./OldSubscriptions";
 import Subscriptions from "./Subscriptions";
 import Validations from "./Validations";
 import NewProcess from "./NewProcess";
@@ -256,7 +255,6 @@ class App extends React.PureComponent<{}, IState> {
                                     render={props => <ProcessDetail {...props} isProcess={true} />}
                                 />
                                 <Route path="/subscriptions" render={props => <Subscriptions {...props} />} />
-                                <Route path="/old-subscriptions" render={() => <OldSubscriptions />} />
                                 <Route
                                     path="/subscription/:id"
                                     render={props => <SubscriptionDetail match={props.match} />}
