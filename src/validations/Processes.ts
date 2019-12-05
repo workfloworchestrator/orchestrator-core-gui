@@ -79,6 +79,9 @@ export function actionOptions(
         case "suspended":
             options = [userInput, abort, _delete];
             break;
+        case "created":
+            options = [retry, abort, _delete];
+            break;
         default:
             throw new Error(`Unknown status: ${status}`);
     }
