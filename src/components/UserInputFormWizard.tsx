@@ -20,10 +20,12 @@ import UserInputForm from "./UserInputForm";
 import { stop } from "../utils/Utils";
 import isEqual from "lodash/isEqual";
 import { catchErrorStatus } from "../api/index";
+import { setFlash } from "../utils/Flash";
+import I18n from "i18n-js";
 
 interface Form {
     form: any[];
-    hasNext: boolean;
+    hasNext?: boolean;
 }
 
 interface IProps {
@@ -69,6 +71,9 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
 
         let result = this.props.validSubmit(newUserInputs);
         return catchErrorStatus(result, 510, (json: any) => {
+            // Scroll to top when navigating to next screen of wizard
+            window.scrollTo(0, 0);
+            setFlash(I18n.t("process.flash.wizard_next_step"));
             this.setState({ forms: [...forms, { form: json.form, hasNext: json.hasNext }], userInputs: newUserInputs });
         });
     };

@@ -20,35 +20,52 @@ import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import ReactTooltip from "react-tooltip";
 import CheckBox from "./CheckBox";
-import Step from "./Step";
+import StepDetails from "./Step";
 import { capitalize, renderDateTime } from "../utils/Lookups";
 import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
 import { NavLink } from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
+import { Step, State, ProcessSubscription } from "../utils/types";
+import { CustomProcessWithDetails } from "../pages/ProcessDetail";
 
-class ProcessStateDetails extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            raw: false,
-            details: true,
-            stateChanges: true,
-            copiedToClipboard: false,
-            traceback: false
-        };
-    }
+interface IProps {
+    process: CustomProcessWithDetails;
+    subscriptionProcesses: ProcessSubscription[];
+    collapsed?: number[];
+    onChangeCollapsed: (index: number) => void; // when provided it will toggle the collapse functionality
+    isProcess: boolean;
+}
+
+interface IState {
+    raw: boolean;
+    details: boolean;
+    stateChanges: boolean;
+    copiedToClipboard: boolean;
+    traceback: boolean;
+}
+
+class ProcessStateDetails extends React.PureComponent<IProps, IState> {
+    static defaultProps: {};
+    static propTypes: {};
+    state: IState = {
+        raw: false,
+        details: true,
+        stateChanges: true,
+        copiedToClipboard: false,
+        traceback: false
+    };
 
     copiedToClipboard = () => {
         this.setState({ copiedToClipboard: true });
         setTimeout(() => this.setState({ copiedToClipboard: false }), 5000);
     };
 
-    renderRaw = process => {
+    renderRaw = (process: CustomProcessWithDetails) => {
         const { copiedToClipboard } = this.state;
         const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
-        const tooltip = I18n.t(copiedToClipboard ? "process_state.copied" : "process_state.copy");
+        const tooltip = I18n.t(copiedToClipboard ? `process_state.copied` : `process_state.copy`);
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
@@ -65,18 +82,23 @@ class ProcessStateDetails extends React.PureComponent {
         );
     };
 
-    renderProcessHeaderInformation = process => {
+    renderProcessHeaderInformation = (process: CustomProcessWithDetails) => {
         const { raw, traceback, details, stateChanges } = this.state;
         return (
             <section className="header-information">
                 <ul>
                     <li className="process-wording">
                         <h3>
-                            {I18n.t("process_state.wording", {
-                                product: process.productName,
-                                customer: process.customerName,
-                                workflow: process.workflow_name
-                            })}
+                            {this.props.isProcess &&
+                                I18n.t("process_state.wording_process", {
+                                    product: process.productName,
+                                    customer: process.customerName,
+                                    workflow: process.workflow_name
+                                })}
+                            {!this.props.isProcess &&
+                                I18n.t("process_state.wording_task", {
+                                    workflow: process.workflow_name
+                                })}
                         </h3>
                     </li>
                 </ul>
@@ -86,7 +108,7 @@ class ProcessStateDetails extends React.PureComponent {
                             <CheckBox
                                 name="details"
                                 value={details}
-                                info={I18n.t("process_state.details")}
+                                info={I18n.t(`process_state.details`)}
                                 onChange={() => this.setState({ details: !details })}
                             />
                         </li>
@@ -96,7 +118,7 @@ class ProcessStateDetails extends React.PureComponent {
                             <CheckBox
                                 name="state-changes"
                                 value={stateChanges}
-                                info={I18n.t("process_state.stateChanges")}
+                                info={I18n.t(`process_state.stateChanges`)}
                                 onChange={() => this.setState({ stateChanges: !stateChanges })}
                             />
                         </li>
@@ -105,7 +127,7 @@ class ProcessStateDetails extends React.PureComponent {
                         <CheckBox
                             name="raw"
                             value={raw}
-                            info={I18n.t("process_state.raw")}
+                            info={I18n.t(`process_state.raw`)}
                             onChange={() => this.setState({ raw: !raw })}
                         />
                     </li>
@@ -114,7 +136,7 @@ class ProcessStateDetails extends React.PureComponent {
                             <CheckBox
                                 name="traceback"
                                 value={traceback}
-                                info={I18n.t("process_state.traceback")}
+                                info={I18n.t(`process_state.traceback`)}
                                 onChange={() => this.setState({ traceback: !traceback })}
                             />
                         </li>
@@ -124,13 +146,14 @@ class ProcessStateDetails extends React.PureComponent {
         );
     };
 
-    renderSummaryValue = value => (typeof value === "string" ? capitalize(value) : renderDateTime(value));
+    renderSummaryValue = (value: string | number) =>
+        typeof value === "string" ? capitalize(value) : renderDateTime(value);
 
-    stateDelta = (prev, curr) => {
+    stateDelta = (prev: State, curr: State) => {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
         const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
-        const newState = newKeys.reduce((acc, key) => {
+        const newState = newKeys.reduce((acc: State, key) => {
             if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
                 acc[key] = this.stateDelta(prev[key], curr[key]);
             } else {
@@ -141,17 +164,17 @@ class ProcessStateDetails extends React.PureComponent {
         return newState;
     };
 
-    renderProcessSubscriptionLink = subscriptionProcesses => {
+    renderProcessSubscriptionLink = (subscriptionProcesses: ProcessSubscription[]) => {
         if (isEmpty(subscriptionProcesses)) {
             return null;
         }
         return (
             <section className="subscription-link">
-                {subscriptionProcesses.map((ps, index) => (
+                {subscriptionProcesses.map((ps, index: number) => (
                     <div key={index}>
                         <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
                             <i className="fa fa-link" />{" "}
-                            {I18n.t("process.subscription_link_txt", {
+                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
                                 target: ps.workflow_target
                             })}
                         </NavLink>
@@ -161,24 +184,26 @@ class ProcessStateDetails extends React.PureComponent {
         );
     };
 
-    displayStateValue = value => {
+    displayStateValue = (value: any) => {
         if (isEmpty(value)) {
             return "";
         }
         return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)} /> : value.toString();
     };
 
-    renderStateChanges = (steps, index) => {
+    renderStateChanges = (steps: Step[], index: number) => {
         const step = steps[index];
         const status = step.status;
-        let json = {};
+        let json: {
+            [index: string]: any;
+        } = {};
         switch (status) {
             case "suspend":
             case "abort":
             case "skipped":
                 return null;
             case "pending":
-                if (isEmpty(step.form)) {
+                if (!step.form) {
                     return null;
                 }
                 json = step.form.reduce((acc, field) => {
@@ -213,7 +238,7 @@ class ProcessStateDetails extends React.PureComponent {
             return null;
         }
         const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
-        const stepIsCollapsed = this.props.collapsed.includes(index);
+        const stepIsCollapsed = this.props.collapsed && this.props.collapsed.includes(index);
 
         return (
             <section className="state-changes">
@@ -241,16 +266,22 @@ class ProcessStateDetails extends React.PureComponent {
         );
     };
 
-    toggleStep = step => {
+    toggleStep = (index: number) => {
         if (this.props.onChangeCollapsed) {
-            // console.log(`Calling provided prop function with step: ${step}`)
-            this.props.onChangeCollapsed(step);
+            // console.log(`Calling provided prop function with step: ${index}`)
+            this.props.onChangeCollapsed(index);
         }
     };
 
-    renderProcessOverview = (process, details, stateChanges) => {
-        const last = i => i === process.steps.length - 1;
-        const summaryKeys = ["status", "assignee", "step", "started", "last_modified"];
+    renderProcessOverview = (process: CustomProcessWithDetails, details: boolean, stateChanges: boolean) => {
+        const last = (i: number) => i === process.steps.length - 1;
+        const summaryKeys = [
+            "status",
+            this.props.isProcess ? "assignee" : "created_by",
+            "step",
+            "started",
+            "last_modified"
+        ];
         return (
             <section className="process-overview">
                 {details && (
@@ -268,11 +299,11 @@ class ProcessStateDetails extends React.PureComponent {
                     </section>
                 )}
                 <section className="steps">
-                    {process.steps.map((step, index) => {
+                    {process.steps.map((step: Step, index: number) => {
                         return (
                             <div key={index} id={`step-index-${index}`} className="details-container">
                                 <div className="step-container" onClick={() => this.toggleStep(index)}>
-                                    <Step step={step} />
+                                    <StepDetails step={step} />
                                     {!last(index) && (
                                         <section className="step-divider">
                                             <i className="fa fa-arrow-down" />
@@ -288,7 +319,7 @@ class ProcessStateDetails extends React.PureComponent {
         );
     };
 
-    renderTraceback = process => {
+    renderTraceback = (process: CustomProcessWithDetails) => {
         return (
             <section className="traceback-container">
                 <pre>{process.traceback}</pre>

@@ -15,6 +15,7 @@
 
 import React from "react";
 
+import StoryRouter from "storybook-react-router";
 import { storiesOf, addDecorator } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, array, boolean, number, select } from "@storybook/addon-knobs";
@@ -37,7 +38,9 @@ import {
     SN7PortSubscriptions,
     SN8PortSubscriptions,
     imsNodes,
-    freeCorelinkPorts
+    freeCorelinkPorts,
+    FAILED_PROCESS_JSON,
+    SUSPENDED_PROCESS_JSON
 } from "./data";
 import LocationCodeSelect from "../components/LocationCodeSelect";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -48,6 +51,7 @@ import MultipleServicePorts from "../components/MultipleServicePorts";
 import { formDate } from "../forms/Builder";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import GenericMultiSelect from "../components/GenericMultiSelect";
+import ProcessDetail from "../pages/ProcessDetail";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -272,7 +276,7 @@ function withContext(storyFn) {
                 locationCodes: LOCATION_CODES,
                 products: PRODUCTS,
                 currentUser: {},
-                configuration: undefined,
+                configuration: {},
                 redirect: action("Change url")
             }}
         >
@@ -898,4 +902,35 @@ storiesOf("UserInputFormWizard", module)
                 hasNext={true}
             />
         );
+    });
+
+storiesOf("ProcessDetail", module)
+    .addDecorator(StoryRouter())
+    .add("Process", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
+        fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
+
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
+    })
+    .add("Task", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
+        fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
+
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
+    })
+    .add("Suspended Process", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
+        fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
+
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
+    })
+    .add("Suspended Task", () => {
+        fetchMock.restore();
+        fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
+        fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
+
+        return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
     });

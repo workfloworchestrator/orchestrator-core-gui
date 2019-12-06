@@ -13,7 +13,23 @@
  *
  */
 
-export function actionOptions(process, showAction, retryAction, deleteAction, abortAction, statusProperty = "status") {
+import { Process } from "../utils/types";
+
+interface Action {
+    icon: string;
+    label: string;
+    action: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    danger?: boolean;
+}
+
+export function actionOptions(
+    process: Process,
+    showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    abortAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    statusProperty: string = "status"
+): Action[] {
     //TODO scope on the context of logged in-user
     const details = {
         icon: "fa fa-search-plus",
@@ -62,6 +78,9 @@ export function actionOptions(process, showAction, retryAction, deleteAction, ab
             break;
         case "suspended":
             options = [userInput, abort, _delete];
+            break;
+        case "created":
+            options = [retry, abort, _delete];
             break;
         default:
             throw new Error(`Unknown status: ${status}`);

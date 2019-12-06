@@ -1617,12 +1617,12 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
           Service Port
         </label>
         <div
-          className=" css-14jk2my-container"
+          className=" css-2b097c-container"
           id="port-choice"
           onKeyDown={[Function]}
         >
           <div
-            className=" css-1fhf3k1-control"
+            className=" css-yk16xz-control"
             onMouseDown={[Function]}
             onTouchEnd={[Function]}
           >
@@ -1650,7 +1650,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
-                    disabled={true}
+                    disabled={false}
                     id="react-select-14-input"
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -1696,7 +1696,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
               className=" css-1wy0on6"
             >
               <span
-                className=" css-109onse-indicatorSeparator"
+                className=" css-1okebmr-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
@@ -1787,12 +1787,12 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
           Service Port
         </label>
         <div
-          className=" css-14jk2my-container"
+          className=" css-2b097c-container"
           id="port-choice"
           onKeyDown={[Function]}
         >
           <div
-            className=" css-1fhf3k1-control"
+            className=" css-yk16xz-control"
             onMouseDown={[Function]}
             onTouchEnd={[Function]}
           >
@@ -1820,7 +1820,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
-                    disabled={true}
+                    disabled={false}
                     id="react-select-13-input"
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -1866,7 +1866,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
               className=" css-1wy0on6"
             >
               <span
-                className=" css-109onse-indicatorSeparator"
+                className=" css-1okebmr-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
@@ -1929,6 +1929,4241 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
       />
     </div>
   </section>
+</section>
+`;
+
+exports[`Storyshots ProcessDetail Process 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-process-detail"
+  >
+    <section
+      className="tabs"
+    >
+      <span
+        className="active"
+        id="process"
+        onClick={[Function]}
+      >
+        Process
+      </span>
+    </section>
+    <section
+      className="card"
+    >
+      <section
+        className="process-actions"
+      >
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
+        >
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
+      </section>
+      <section
+        className="process-state-detail"
+      >
+        <section
+          className="header-information"
+        >
+          <ul>
+            <li
+              className="process-wording"
+            >
+              <h3>
+                Process SSP 10G of workflow create_sn8_service_port for 6a608b90-0c11-e511-80d0-005056956c1a
+              </h3>
+            </li>
+          </ul>
+          <ul>
+            <li
+              className="toggle-details"
+            >
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="details"
+                  name="details"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="details"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="details"
+                >
+                  Show details
+                </label>
+              </div>
+            </li>
+            <li
+              className="toggle-state-changes"
+            >
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="state-changes"
+                  name="state-changes"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="state-changes"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="state-changes"
+                >
+                  Show state input
+                </label>
+              </div>
+            </li>
+            <li>
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={false}
+                  disabled={false}
+                  id="raw"
+                  name="raw"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="raw"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="raw"
+                >
+                  Show raw JSON
+                </label>
+              </div>
+            </li>
+            <li>
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={false}
+                  disabled={false}
+                  id="traceback"
+                  name="traceback"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="traceback"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="traceback"
+                >
+                  Show traceback
+                </label>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section
+          className="process-overview"
+        >
+          <section
+            className="process-summary"
+          >
+            <table>
+              <tbody>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Status
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    Failed
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Assignee
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    SYSTEM
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Current step
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    Send confirmation mail to customer
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Started
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    11/15/2019, 12:36:33 PM CET
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Last updated
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    11/18/2019, 6:02:18 PM CET
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section
+            className="steps"
+          >
+            <div
+              className="details-container"
+              id="step-index-0"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Start
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:33 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-user"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-contact-persons-k"
+                        >
+                          contact_persons
+                        </td>
+                        <td
+                          className="value"
+                          id="0-contact-persons-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "[
+   {
+      <span class=\\"hljs-attr\\">\\"email\\"</span>: <span class=\\"hljs-string\\">\\"hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl\\"</span>,
+      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Hiram\\"</span>,
+      <span class=\\"hljs-attr\\">\\"phone\\"</span>: <span class=\\"hljs-string\\">\\"\\"</span>
+   }
+]",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-organisation-k"
+                        >
+                          organisation
+                        </td>
+                        <td
+                          className="value"
+                          id="0-organisation-v"
+                        >
+                          6a608b90-0c11-e511-80d0-005056956c1a
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-port-mode-k"
+                        >
+                          port_mode
+                        </td>
+                        <td
+                          className="value"
+                          id="0-port-mode-v"
+                        >
+                          tagged
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-process-id-k"
+                        >
+                          process_id
+                        </td>
+                        <td
+                          className="value"
+                          id="0-process-id-v"
+                        >
+                          1a5686d9-eaa2-4d0b-96eb-1ec081c62a08
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-product-k"
+                        >
+                          product
+                        </td>
+                        <td
+                          className="value"
+                          id="0-product-v"
+                        >
+                          214aae3d-f804-4270-a86b-66bcf2861809
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-reporter-k"
+                        >
+                          reporter
+                        </td>
+                        <td
+                          className="value"
+                          id="0-reporter-v"
+                        >
+                          SYSTEM
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-service-port-k"
+                        >
+                          service_port
+                        </td>
+                        <td
+                          className="value"
+                          id="0-service-port-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"ieee_interface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
+   <span class=\\"hljs-attr\\">\\"location_code\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-workflow-target-k"
+                        >
+                          workflow_target
+                        </td>
+                        <td
+                          className="value"
+                          id="0-workflow-target-v"
+                        >
+                          CREATE
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-1"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Load state from input
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-organisation-abbrev-k"
+                        >
+                          organisation_abbrev
+                        </td>
+                        <td
+                          className="value"
+                          id="1-organisation-abbrev-v"
+                        >
+                          FNAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-organisation-name-k"
+                        >
+                          organisation_name
+                        </td>
+                        <td
+                          className="value"
+                          id="1-organisation-name-v"
+                        >
+                          Fermi National Accelerator Laboratory
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-port-speed-k"
+                        >
+                          port_speed
+                        </td>
+                        <td
+                          className="value"
+                          id="1-port-speed-v"
+                        >
+                          10000
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-product-tag-k"
+                        >
+                          product_tag
+                        </td>
+                        <td
+                          className="value"
+                          id="1-product-tag-v"
+                        >
+                          SP
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-subscription-name-k"
+                        >
+                          subscription_name
+                        </td>
+                        <td
+                          className="value"
+                          id="1-subscription-name-v"
+                        >
+                          FNAL SP (port not ready yet) 10 Gbit/s
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-2"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="2-subscription-id-k"
+                        >
+                          subscription_id
+                        </td>
+                        <td
+                          className="value"
+                          id="2-subscription-id-v"
+                        >
+                          ae6cb63d-a7fa-4167-b0e9-ee311d757397
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-3"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create Process Subscription relation
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-4"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:41 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="4-ticket-id-k"
+                        >
+                          ticket_id
+                        </td>
+                        <td
+                          className="value"
+                          id="4-ticket-id-v"
+                        >
+                          SNNP-79379
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-5"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step suspend"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve Request
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Suspend
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:41 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-6"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve Request
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:43 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-7"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Load state from input
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:43 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-8"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:49 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-9"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:50 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-10"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Assign JIRA ticket to -1
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:51 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-11"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step suspend"
+                >
+                  <span
+                    className="name"
+                  >
+                    Input free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Suspend
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:51 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-12"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Input free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:57 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-user"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="12-port-id-k"
+                        >
+                          port_id
+                        </td>
+                        <td
+                          className="value"
+                          id="12-port-id-v"
+                        >
+                          680884
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-13"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Start JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:57 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-14"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Reserve port SP in IMS
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:02 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="14-ims-info-k"
+                        >
+                          ims_info
+                        </td>
+                        <td
+                          className="value"
+                          id="14-ims-info-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"device_port_name\\"</span>: <span class=\\"hljs-string\\">\\"CU  FNAL_Zp001A SP\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_circuit_id\\"</span>: <span class=\\"hljs-string\\">\\"44251\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_circuit_name\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A_SP_tagged_FNAL_ae6cb63d\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_extra_info\\"</span>: <span class=\\"hljs-string\\">\\"10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-15"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update Subscription description with free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:02 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="15-subscription-name-k"
+                        >
+                          subscription_name
+                        </td>
+                        <td
+                          className="value"
+                          id="15-subscription-name-v"
+                        >
+                          FNAL SP ZP001A 10 Gbit/s
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-16"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update JIRA ticket with free port SP
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:03 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="16-port-info-k"
+                        >
+                          port_info
+                        </td>
+                        <td
+                          className="value"
+                          id="16-port-info-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"connector_type\\"</span>: <span class=\\"hljs-string\\">\\"LC/PC\\"</span>,
+   <span class=\\"hljs-attr\\">\\"fiber_type\\"</span>: <span class=\\"hljs-string\\">\\"multi-mode\\"</span>,
+   <span class=\\"hljs-attr\\">\\"id\\"</span>: <span class=\\"hljs-number\\">680884</span>,
+   <span class=\\"hljs-attr\\">\\"iface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
+   <span class=\\"hljs-attr\\">\\"line_name\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A_SP_TAGGED_FNAL_AE6CB63D\\"</span>,
+   <span class=\\"hljs-attr\\">\\"location\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A\\"</span>,
+   <span class=\\"hljs-attr\\">\\"node\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A-JNX-ACC-TEST\\"</span>,
+   <span class=\\"hljs-attr\\">\\"patchposition\\"</span>: <span class=\\"hljs-string\\">\\"DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)\\"</span>,
+   <span class=\\"hljs-attr\\">\\"port\\"</span>: <span class=\\"hljs-string\\">\\"1/0/0\\"</span>,
+   <span class=\\"hljs-attr\\">\\"status\\"</span>: <span class=\\"hljs-string\\">\\"3\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-17"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Make NSO payload
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:04 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="17-nso-payload-k"
+                        >
+                          nso_payload
+                        </td>
+                        <td
+                          className="value"
+                          id="17-nso-payload-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"ptp:ptp\\"</span>: {
+      <span class=\\"hljs-attr\\">\\"customer_name\\"</span>: <span class=\\"hljs-string\\">\\"FNAL\\"</span>,
+      <span class=\\"hljs-attr\\">\\"device\\"</span>: <span class=\\"hljs-string\\">\\"zp001a-jnx-acc-test\\"</span>,
+      <span class=\\"hljs-attr\\">\\"interface\\"</span>: <span class=\\"hljs-string\\">\\"xe-1/0/0\\"</span>,
+      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"54fd79f5-947f-459f-9b02-e463c2e69134\\"</span>,
+      <span class=\\"hljs-attr\\">\\"ptptype\\"</span>: <span class=\\"hljs-string\\">\\"tagged\\"</span>,
+      <span class=\\"hljs-attr\\">\\"speed\\"</span>: <span class=\\"hljs-string\\">\\"10g\\"</span>,
+      <span class=\\"hljs-attr\\">\\"subscription_id\\"</span>: <span class=\\"hljs-string\\">\\"ae6cb63d-a7fa-4167-b0e9-ee311d757397\\"</span>
+   }
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="17-nso-service-id-k"
+                        >
+                          nso_service_id
+                        </td>
+                        <td
+                          className="value"
+                          id="17-nso-service-id-v"
+                        >
+                          54fd79f5-947f-459f-9b02-e463c2e69134
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-18"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Deploy payload to register port in NSO
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-19"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step skipped"
+                >
+                  <span
+                    className="name"
+                  >
+                    Confirm configuration
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Skipped
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-20"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Set port for SP to in Service in IMS
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-21"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:08 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-22"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Complete JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:13 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="22-jira-ticket-completed-k"
+                        >
+                          jira_ticket_completed
+                        </td>
+                        <td
+                          className="value"
+                          id="22-jira-ticket-completed-v"
+                        >
+                          2019-11-15T11:37:08 +0000
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-23"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step failed"
+                >
+                  <span
+                    className="name"
+                  >
+                    Send confirmation mail to customer
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Failed
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/18/2019, 6:02:18 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-class-k"
+                        >
+                          class
+                        </td>
+                        <td
+                          className="value"
+                          id="23-class-v"
+                        >
+                          ConnectionRefusedError
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-error-k"
+                        >
+                          error
+                        </td>
+                        <td
+                          className="value"
+                          id="23-error-v"
+                        >
+                          [Errno 111] Connection refused
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-executed-at-k"
+                        >
+                          executed_at
+                        </td>
+                        <td
+                          className="value"
+                          id="23-executed-at-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "[
+   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:14.186858+01:00\\"</span>,
+   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:15.775995+01:00\\"</span>
+]",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-retries-k"
+                        >
+                          retries
+                        </td>
+                        <td
+                          className="value"
+                          id="23-retries-v"
+                        >
+                          2
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-24"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Send confirmation mail to customer
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-25"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Close JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-26"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Activate subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-27"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Done
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
+  </div>
+</section>
+`;
+
+exports[`Storyshots ProcessDetail Suspended Process 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-process-detail"
+  >
+    <section
+      className="tabs"
+    >
+      <span
+        className="active"
+        id="user_input"
+        onClick={[Function]}
+      >
+        User input
+      </span>
+      <span
+        className=""
+        id="process"
+        onClick={[Function]}
+      >
+        Process
+      </span>
+    </section>
+    <section
+      className="card"
+    >
+      <section
+        className="header-info"
+      >
+        <h3>
+          Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
+        </h3>
+        <h3>
+          User input for step Select new SAP to migrate to for product SSP 10G
+        </h3>
+      </section>
+      <div
+        className="mod-process-step"
+      >
+        <section
+          className="card"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider ip_static_service_port"
+              >
+                <p
+                  className="label ip_static_service_port"
+                >
+                  IP Service Port
+                </p>
+                <em
+                  className="error"
+                />
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                id="button-cancel-form-submit"
+                onClick={[Function]}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                id="button-submit-form-submit"
+                tabIndex={0}
+                type="submit"
+              >
+                Submit
+              </button>
+            </section>
+          </form>
+        </section>
+      </div>
+    </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
+  </div>
+</section>
+`;
+
+exports[`Storyshots ProcessDetail Suspended Task 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-process-detail"
+  >
+    <section
+      className="tabs"
+    >
+      <span
+        className="active"
+        id="user_input"
+        onClick={[Function]}
+      >
+        User input
+      </span>
+      <span
+        className=""
+        id="process"
+        onClick={[Function]}
+      >
+        Task
+      </span>
+    </section>
+    <section
+      className="card"
+    >
+      <section
+        className="header-info"
+      >
+        <h3>
+          Workflow
+        </h3>
+        <h3>
+          User input for step Select new SAP to migrate to
+        </h3>
+      </section>
+      <div
+        className="mod-process-step"
+      >
+        <section
+          className="card"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <section
+              className="form-step"
+            >
+              <section
+                className="form-divider ip_static_service_port"
+              >
+                <p
+                  className="label ip_static_service_port"
+                >
+                  IP Service Port
+                </p>
+                <em
+                  className="error"
+                />
+              </section>
+            </section>
+            <section
+              className="buttons"
+            >
+              <button
+                className="button"
+                id="button-cancel-form-submit"
+                onClick={[Function]}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="button blue"
+                id="button-submit-form-submit"
+                tabIndex={0}
+                type="submit"
+              >
+                Submit
+              </button>
+            </section>
+          </form>
+        </section>
+      </div>
+    </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
+  </div>
+</section>
+`;
+
+exports[`Storyshots ProcessDetail Task 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-process-detail"
+  >
+    <section
+      className="tabs"
+    >
+      <span
+        className="active"
+        id="process"
+        onClick={[Function]}
+      >
+        Task
+      </span>
+    </section>
+    <section
+      className="card"
+    >
+      <section
+        className="process-actions"
+      >
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
+        >
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button  red"
+          id="delete"
+          onClick={[Function]}
+        >
+          Delete
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
+      </section>
+      <section
+        className="process-state-detail"
+      >
+        <section
+          className="header-information"
+        >
+          <ul>
+            <li
+              className="process-wording"
+            >
+              <h3>
+                Task of workflow create_sn8_service_port
+              </h3>
+            </li>
+          </ul>
+          <ul>
+            <li
+              className="toggle-details"
+            >
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="details"
+                  name="details"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="details"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="details"
+                >
+                  Show details
+                </label>
+              </div>
+            </li>
+            <li
+              className="toggle-state-changes"
+            >
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="state-changes"
+                  name="state-changes"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="state-changes"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="state-changes"
+                >
+                  Show state input
+                </label>
+              </div>
+            </li>
+            <li>
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={false}
+                  disabled={false}
+                  id="raw"
+                  name="raw"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="raw"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="raw"
+                >
+                  Show raw JSON
+                </label>
+              </div>
+            </li>
+            <li>
+              <div
+                className="checkbox"
+              >
+                <input
+                  checked={false}
+                  disabled={false}
+                  id="traceback"
+                  name="traceback"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="traceback"
+                >
+                  <span
+                    tabIndex="0"
+                  >
+                    <i
+                      className="fa fa-check"
+                    />
+                  </span>
+                </label>
+                <label
+                  className="info"
+                  htmlFor="traceback"
+                >
+                  Show traceback
+                </label>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section
+          className="process-overview"
+        >
+          <section
+            className="process-summary"
+          >
+            <table>
+              <tbody>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Status
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    Failed
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Created by
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    SYSTEM
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Current step
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    Send confirmation mail to customer
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Started
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    11/15/2019, 12:36:33 PM CET
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="title"
+                  >
+                    Last updated
+                  </td>
+                  <td
+                    className="value"
+                  >
+                    11/18/2019, 6:02:18 PM CET
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section
+            className="steps"
+          >
+            <div
+              className="details-container"
+              id="step-index-0"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Start
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:33 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-user"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-contact-persons-k"
+                        >
+                          contact_persons
+                        </td>
+                        <td
+                          className="value"
+                          id="0-contact-persons-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "[
+   {
+      <span class=\\"hljs-attr\\">\\"email\\"</span>: <span class=\\"hljs-string\\">\\"hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl\\"</span>,
+      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"Hiram\\"</span>,
+      <span class=\\"hljs-attr\\">\\"phone\\"</span>: <span class=\\"hljs-string\\">\\"\\"</span>
+   }
+]",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-organisation-k"
+                        >
+                          organisation
+                        </td>
+                        <td
+                          className="value"
+                          id="0-organisation-v"
+                        >
+                          6a608b90-0c11-e511-80d0-005056956c1a
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-port-mode-k"
+                        >
+                          port_mode
+                        </td>
+                        <td
+                          className="value"
+                          id="0-port-mode-v"
+                        >
+                          tagged
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-process-id-k"
+                        >
+                          process_id
+                        </td>
+                        <td
+                          className="value"
+                          id="0-process-id-v"
+                        >
+                          1a5686d9-eaa2-4d0b-96eb-1ec081c62a08
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-product-k"
+                        >
+                          product
+                        </td>
+                        <td
+                          className="value"
+                          id="0-product-v"
+                        >
+                          214aae3d-f804-4270-a86b-66bcf2861809
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-reporter-k"
+                        >
+                          reporter
+                        </td>
+                        <td
+                          className="value"
+                          id="0-reporter-v"
+                        >
+                          SYSTEM
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-service-port-k"
+                        >
+                          service_port
+                        </td>
+                        <td
+                          className="value"
+                          id="0-service-port-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"ieee_interface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
+   <span class=\\"hljs-attr\\">\\"location_code\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="0-workflow-target-k"
+                        >
+                          workflow_target
+                        </td>
+                        <td
+                          className="value"
+                          id="0-workflow-target-v"
+                        >
+                          CREATE
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-1"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Load state from input
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-organisation-abbrev-k"
+                        >
+                          organisation_abbrev
+                        </td>
+                        <td
+                          className="value"
+                          id="1-organisation-abbrev-v"
+                        >
+                          FNAL
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-organisation-name-k"
+                        >
+                          organisation_name
+                        </td>
+                        <td
+                          className="value"
+                          id="1-organisation-name-v"
+                        >
+                          Fermi National Accelerator Laboratory
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-port-speed-k"
+                        >
+                          port_speed
+                        </td>
+                        <td
+                          className="value"
+                          id="1-port-speed-v"
+                        >
+                          10000
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-product-tag-k"
+                        >
+                          product_tag
+                        </td>
+                        <td
+                          className="value"
+                          id="1-product-tag-v"
+                        >
+                          SP
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="1-subscription-name-k"
+                        >
+                          subscription_name
+                        </td>
+                        <td
+                          className="value"
+                          id="1-subscription-name-v"
+                        >
+                          FNAL SP (port not ready yet) 10 Gbit/s
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-2"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="2-subscription-id-k"
+                        >
+                          subscription_id
+                        </td>
+                        <td
+                          className="value"
+                          id="2-subscription-id-v"
+                        >
+                          ae6cb63d-a7fa-4167-b0e9-ee311d757397
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-3"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create Process Subscription relation
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:34 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-4"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Create JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:41 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="4-ticket-id-k"
+                        >
+                          ticket_id
+                        </td>
+                        <td
+                          className="value"
+                          id="4-ticket-id-v"
+                        >
+                          SNNP-79379
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-5"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step suspend"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve Request
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Suspend
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:41 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-6"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve Request
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:43 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-7"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Load state from input
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:43 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-8"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:49 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-9"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Approve JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:50 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-10"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Assign JIRA ticket to -1
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:51 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-11"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step suspend"
+                >
+                  <span
+                    className="name"
+                  >
+                    Input free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Suspend
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:51 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-12"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Input free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:57 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-user"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="12-port-id-k"
+                        >
+                          port_id
+                        </td>
+                        <td
+                          className="value"
+                          id="12-port-id-v"
+                        >
+                          680884
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-13"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Start JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:36:57 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-14"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Reserve port SP in IMS
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:02 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="14-ims-info-k"
+                        >
+                          ims_info
+                        </td>
+                        <td
+                          className="value"
+                          id="14-ims-info-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"device_port_name\\"</span>: <span class=\\"hljs-string\\">\\"CU  FNAL_Zp001A SP\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_circuit_id\\"</span>: <span class=\\"hljs-string\\">\\"44251\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_circuit_name\\"</span>: <span class=\\"hljs-string\\">\\"Zp001A_SP_tagged_FNAL_ae6cb63d\\"</span>,
+   <span class=\\"hljs-attr\\">\\"ims_extra_info\\"</span>: <span class=\\"hljs-string\\">\\"10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-15"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update Subscription description with free port
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:02 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="15-subscription-name-k"
+                        >
+                          subscription_name
+                        </td>
+                        <td
+                          className="value"
+                          id="15-subscription-name-v"
+                        >
+                          FNAL SP ZP001A 10 Gbit/s
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-16"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update JIRA ticket with free port SP
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:03 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="16-port-info-k"
+                        >
+                          port_info
+                        </td>
+                        <td
+                          className="value"
+                          id="16-port-info-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"connector_type\\"</span>: <span class=\\"hljs-string\\">\\"LC/PC\\"</span>,
+   <span class=\\"hljs-attr\\">\\"fiber_type\\"</span>: <span class=\\"hljs-string\\">\\"multi-mode\\"</span>,
+   <span class=\\"hljs-attr\\">\\"id\\"</span>: <span class=\\"hljs-number\\">680884</span>,
+   <span class=\\"hljs-attr\\">\\"iface_type\\"</span>: <span class=\\"hljs-string\\">\\"10GBASE-SR\\"</span>,
+   <span class=\\"hljs-attr\\">\\"line_name\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A_SP_TAGGED_FNAL_AE6CB63D\\"</span>,
+   <span class=\\"hljs-attr\\">\\"location\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A\\"</span>,
+   <span class=\\"hljs-attr\\">\\"node\\"</span>: <span class=\\"hljs-string\\">\\"ZP001A-JNX-ACC-TEST\\"</span>,
+   <span class=\\"hljs-attr\\">\\"patchposition\\"</span>: <span class=\\"hljs-string\\">\\"DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)\\"</span>,
+   <span class=\\"hljs-attr\\">\\"port\\"</span>: <span class=\\"hljs-string\\">\\"1/0/0\\"</span>,
+   <span class=\\"hljs-attr\\">\\"status\\"</span>: <span class=\\"hljs-string\\">\\"3\\"</span>
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-17"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Make NSO payload
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:04 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="17-nso-payload-k"
+                        >
+                          nso_payload
+                        </td>
+                        <td
+                          className="value"
+                          id="17-nso-payload-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "{
+   <span class=\\"hljs-attr\\">\\"ptp:ptp\\"</span>: {
+      <span class=\\"hljs-attr\\">\\"customer_name\\"</span>: <span class=\\"hljs-string\\">\\"FNAL\\"</span>,
+      <span class=\\"hljs-attr\\">\\"device\\"</span>: <span class=\\"hljs-string\\">\\"zp001a-jnx-acc-test\\"</span>,
+      <span class=\\"hljs-attr\\">\\"interface\\"</span>: <span class=\\"hljs-string\\">\\"xe-1/0/0\\"</span>,
+      <span class=\\"hljs-attr\\">\\"name\\"</span>: <span class=\\"hljs-string\\">\\"54fd79f5-947f-459f-9b02-e463c2e69134\\"</span>,
+      <span class=\\"hljs-attr\\">\\"ptptype\\"</span>: <span class=\\"hljs-string\\">\\"tagged\\"</span>,
+      <span class=\\"hljs-attr\\">\\"speed\\"</span>: <span class=\\"hljs-string\\">\\"10g\\"</span>,
+      <span class=\\"hljs-attr\\">\\"subscription_id\\"</span>: <span class=\\"hljs-string\\">\\"ae6cb63d-a7fa-4167-b0e9-ee311d757397\\"</span>
+   }
+}",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="17-nso-service-id-k"
+                        >
+                          nso_service_id
+                        </td>
+                        <td
+                          className="value"
+                          id="17-nso-service-id-v"
+                        >
+                          54fd79f5-947f-459f-9b02-e463c2e69134
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-18"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Deploy payload to register port in NSO
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-19"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step skipped"
+                >
+                  <span
+                    className="name"
+                  >
+                    Confirm configuration
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Skipped
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-20"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Set port for SP to in Service in IMS
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:07 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-21"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Update subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:08 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-22"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step success"
+                >
+                  <span
+                    className="name"
+                  >
+                    Complete JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Success
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/15/2019, 12:37:13 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="22-jira-ticket-completed-k"
+                        >
+                          jira_ticket_completed
+                        </td>
+                        <td
+                          className="value"
+                          id="22-jira-ticket-completed-v"
+                        >
+                          2019-11-15T11:37:08 +0000
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-23"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step failed"
+                >
+                  <span
+                    className="name"
+                  >
+                    Send confirmation mail to customer
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Failed
+                  </span>
+                  <span
+                    className="started"
+                  >
+                    11/18/2019, 6:02:18 PM CET
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+              <section
+                className="state-changes"
+              >
+                <section
+                  className="state-divider"
+                >
+                  <i
+                    className="fa fa-cloud"
+                  />
+                </section>
+                <section
+                  className="state-delta"
+                >
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-class-k"
+                        >
+                          class
+                        </td>
+                        <td
+                          className="value"
+                          id="23-class-v"
+                        >
+                          ConnectionRefusedError
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-error-k"
+                        >
+                          error
+                        </td>
+                        <td
+                          className="value"
+                          id="23-error-v"
+                        >
+                          [Errno 111] Connection refused
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-executed-at-k"
+                        >
+                          executed_at
+                        </td>
+                        <td
+                          className="value"
+                          id="23-executed-at-v"
+                        >
+                          <pre>
+                            <code
+                              dangerouslySetInnerHTML={
+                                Object {
+                                  "__html": "[
+   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:14.186858+01:00\\"</span>,
+   <span class=\\"hljs-string\\">\\"2019-11-15 12:37:15.775995+01:00\\"</span>
+]",
+                                }
+                              }
+                            />
+                          </pre>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="key"
+                          id="23-retries-k"
+                        >
+                          retries
+                        </td>
+                        <td
+                          className="value"
+                          id="23-retries-v"
+                        >
+                          2
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </section>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-24"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Send confirmation mail to customer
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-25"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Close JIRA ticket
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-26"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Activate subscription
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+                <section
+                  className="step-divider"
+                >
+                  <i
+                    className="fa fa-arrow-down"
+                  />
+                </section>
+              </div>
+            </div>
+            <div
+              className="details-container"
+              id="step-index-27"
+            >
+              <div
+                className="step-container"
+                onClick={[Function]}
+              >
+                <section
+                  className="step pending"
+                >
+                  <span
+                    className="name"
+                  >
+                    Done
+                  </span>
+                  <span
+                    className="status"
+                  >
+                    Pending
+                  </span>
+                </section>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+    <aside
+      aria-label="Scroll to top of page"
+      className="ScrollUpButton__Container "
+      data-testid="react-scroll-up-button"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "WebkitTransition": "all 0.5s ease-in-out",
+          "backgroundColor": "rgba(50, 50, 50, 0.5)",
+          "bottom": 20,
+          "cursor": "pointer",
+          "height": 50,
+          "opacity": 0,
+          "position": "fixed",
+          "right": -50,
+          "transition": "all 0.5s ease-in-out",
+          "transitionProperty": "opacity, right",
+          "width": 50,
+          "zIndex": 1000,
+        }
+      }
+      tabIndex={-1}
+    >
+      <svg
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "white",
+            "height": "100%",
+            "stroke": "white",
+            "strokeWidth": 0,
+            "width": "100%",
+          }
+        }
+        version="1.1"
+        viewBox="0 0 32 32"
+        x="0"
+        xmlSpace="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="M19.196 23.429q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411zM19.196 16.571q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"
+          transform="scale(1.4) translate(1,-5)"
+        />
+      </svg>
+    </aside>
+  </div>
 </section>
 `;
 
@@ -2020,20 +6255,6 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
           <div
             className=" css-1wy0on6"
           >
-            <div
-              aria-hidden="true"
-              className=" css-at12u2-loadingIndicator"
-            >
-              <span
-                className="css-d0ptw1"
-              />
-              <span
-                className="css-3utax6"
-              />
-              <span
-                className="css-1qyc6ze"
-              />
-            </div>
             <span
               className=" css-109onse-indicatorSeparator"
             />
@@ -2152,20 +6373,6 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
           <div
             className=" css-1wy0on6"
           >
-            <div
-              aria-hidden="true"
-              className=" css-at12u2-loadingIndicator"
-            >
-              <span
-                className="css-d0ptw1"
-              />
-              <span
-                className="css-3utax6"
-              />
-              <span
-                className="css-1qyc6ze"
-              />
-            </div>
             <span
               className=" css-109onse-indicatorSeparator"
             />
@@ -2207,11 +6414,11 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
       className="select-box"
     >
       <div
-        className=" css-14jk2my-container"
+        className=" css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
-          className=" css-1fhf3k1-control"
+          className=" css-yk16xz-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
         >
@@ -2239,7 +6446,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
                   autoCapitalize="none"
                   autoComplete="off"
                   autoCorrect="off"
-                  disabled={true}
+                  disabled={false}
                   id="react-select-2-input"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -2284,22 +6491,8 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
           <div
             className=" css-1wy0on6"
           >
-            <div
-              aria-hidden="true"
-              className=" css-at12u2-loadingIndicator"
-            >
-              <span
-                className="css-d0ptw1"
-              />
-              <span
-                className="css-3utax6"
-              />
-              <span
-                className="css-1qyc6ze"
-              />
-            </div>
             <span
-              className=" css-109onse-indicatorSeparator"
+              className=" css-1okebmr-indicatorSeparator"
             />
             <div
               aria-hidden="true"
@@ -3900,11 +8093,11 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                     className="node-select"
                   >
                     <div
-                      className="select-node css-14jk2my-container"
+                      className="select-node css-2b097c-container"
                       onKeyDown={[Function]}
                     >
                       <div
-                        className=" css-1fhf3k1-control"
+                        className=" css-yk16xz-control"
                         onMouseDown={[Function]}
                         onTouchEnd={[Function]}
                       >
@@ -3914,7 +8107,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                           <div
                             className=" css-1wa3eu0-placeholder"
                           >
-                            Loading nodes, please wait...
+                            Select a node
                           </div>
                           <div
                             className="css-1g6gooi"
@@ -3932,7 +8125,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                                 autoCapitalize="none"
                                 autoComplete="off"
                                 autoCorrect="off"
-                                disabled={true}
+                                disabled={false}
                                 id="react-select-24-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
@@ -3978,7 +8171,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                           className=" css-1wy0on6"
                         >
                           <span
-                            className=" css-109onse-indicatorSeparator"
+                            className=" css-1okebmr-indicatorSeparator"
                           />
                           <div
                             aria-hidden="true"
@@ -4241,12 +8434,12 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                           Service Port
                         </label>
                         <div
-                          className=" css-14jk2my-container"
+                          className=" css-2b097c-container"
                           id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
+                            className=" css-yk16xz-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
                           >
@@ -4274,7 +8467,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                                     autoCapitalize="none"
                                     autoComplete="off"
                                     autoCorrect="off"
-                                    disabled={true}
+                                    disabled={false}
                                     id="react-select-28-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
@@ -4320,7 +8513,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                               className=" css-1wy0on6"
                             >
                               <span
-                                className=" css-109onse-indicatorSeparator"
+                                className=" css-1okebmr-indicatorSeparator"
                               />
                               <div
                                 aria-hidden="true"
@@ -4618,12 +8811,12 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                           Service Port
                         </label>
                         <div
-                          className=" css-14jk2my-container"
+                          className=" css-2b097c-container"
                           id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
+                            className=" css-yk16xz-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
                           >
@@ -4651,7 +8844,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                                     autoCapitalize="none"
                                     autoComplete="off"
                                     autoCorrect="off"
-                                    disabled={true}
+                                    disabled={false}
                                     id="react-select-26-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
@@ -4697,7 +8890,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                               className=" css-1wy0on6"
                             >
                               <span
-                                className=" css-109onse-indicatorSeparator"
+                                className=" css-1okebmr-indicatorSeparator"
                               />
                               <div
                                 aria-hidden="true"
@@ -4841,146 +9034,6 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-31-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -6534,12 +10587,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           Service Port
                         </label>
                         <div
-                          className=" css-14jk2my-container"
+                          className=" css-2b097c-container"
                           id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
+                            className=" css-yk16xz-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
                           >
@@ -6567,7 +10620,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                     autoCapitalize="none"
                                     autoComplete="off"
                                     autoCorrect="off"
-                                    disabled={true}
+                                    disabled={false}
                                     id="react-select-36-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
@@ -6613,7 +10666,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                               className=" css-1wy0on6"
                             >
                               <span
-                                className=" css-109onse-indicatorSeparator"
+                                className=" css-1okebmr-indicatorSeparator"
                               />
                               <div
                                 aria-hidden="true"
@@ -6671,12 +10724,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         className="wrapper service-port-select"
                       >
                         <div
-                          className=" css-14jk2my-container"
+                          className=" css-2b097c-container"
                           id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
+                            className=" css-yk16xz-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
                           >
@@ -6704,7 +10757,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                                     autoCapitalize="none"
                                     autoComplete="off"
                                     autoCorrect="off"
-                                    disabled={true}
+                                    disabled={false}
                                     id="react-select-37-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
@@ -6750,7 +10803,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                               className=" css-1wy0on6"
                             >
                               <span
-                                className=" css-109onse-indicatorSeparator"
+                                className=" css-1okebmr-indicatorSeparator"
                               />
                               <div
                                 aria-hidden="true"
@@ -7045,12 +11098,12 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                           Service Port
                         </label>
                         <div
-                          className=" css-14jk2my-container"
+                          className=" css-2b097c-container"
                           id="port-choice"
                           onKeyDown={[Function]}
                         >
                           <div
-                            className=" css-1fhf3k1-control"
+                            className=" css-yk16xz-control"
                             onMouseDown={[Function]}
                             onTouchEnd={[Function]}
                           >
@@ -7078,7 +11131,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                                     autoCapitalize="none"
                                     autoComplete="off"
                                     autoCorrect="off"
-                                    disabled={true}
+                                    disabled={false}
                                     id="react-select-39-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
@@ -7124,7 +11177,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                               className=" css-1wy0on6"
                             >
                               <span
-                                className=" css-109onse-indicatorSeparator"
+                                className=" css-1okebmr-indicatorSeparator"
                               />
                               <div
                                 aria-hidden="true"

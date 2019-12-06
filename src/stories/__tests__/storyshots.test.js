@@ -17,4 +17,30 @@ import initStoryshots from "@storybook/addon-storyshots";
 
 initStoryshots({
     /* configuration options */
+    asyncJest: true,
+    test: ({
+        story,
+        context,
+        renderTree,
+        snapshotFilename,
+        done // --> callback passed to test method when asyncJest option is true
+    }) => {
+        // mount the story
+        const tree = renderTree(story, context, {});
+
+        // wait until the mount is updated
+        const waitTime = 1;
+        setTimeout(() => {
+            tree.update(story.render());
+            const updated_tree = tree.toJSON();
+
+            if (snapshotFilename) {
+                expect(updated_tree).toMatchSpecificSnapshot(snapshotFilename);
+            } else {
+                expect(updated_tree).toMatchSnapshot();
+            }
+
+            done();
+        }, waitTime);
+    }
 });

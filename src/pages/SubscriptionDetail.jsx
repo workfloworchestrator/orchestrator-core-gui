@@ -157,6 +157,10 @@ export default class SubscriptionDetail extends React.PureComponent {
                                     if (service.speed === "TG") {
                                         return service;
                                     }
+                                    if (service.product === "SVLAN") {
+                                        // Todo: investigate why this crashes for a LP over MSC
+                                        return service;
+                                    }
                                     return portByImsServiceId(endpoint.id).then(result =>
                                         Object.assign(result, {
                                             serviceId: endpoint.id,
@@ -249,7 +253,21 @@ export default class SubscriptionDetail extends React.PureComponent {
             }
         });
 
-    renderSubscriptionDetail = (subscription, index, className = "") => (
+    renderFailedTask = subscriptionProcesses => {
+        let failed_tasks = subscriptionProcesses
+            .filter(sp => sp.workflow_target === "SYSTEM")
+            .map(sp => sp.process)
+            .filter(process => process.last_status === "failed");
+
+        if (failed_tasks.length)
+            return (
+                <a target="_blank" rel="noopener noreferrer" href={`/task/${failed_tasks[0].pid}`}>
+                    {I18n.t("subscriptions.failed_task", failed_tasks[0])}
+                </a>
+            );
+    };
+
+    renderSubscriptionDetail = (subscription, index, className = "", subscriptionProcesses = []) => (
         <table className={`detail-block ${className}`} key={index}>
             <thead />
             <tbody>
@@ -289,6 +307,7 @@ export default class SubscriptionDetail extends React.PureComponent {
                     <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
                     <td id="subscriptions-insync-v">
                         <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
+                        {this.renderFailedTask(subscriptionProcesses)}
                     </td>
                 </tr>
                 <tr>
@@ -733,6 +752,8 @@ export default class SubscriptionDetail extends React.PureComponent {
             );
         };
 
+        subscriptionProcesses = subscriptionProcesses.filter(process => process.workflow_target !== "SYSTEM");
+
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.process_link")}</h3>
@@ -973,10 +994,12 @@ export default class SubscriptionDetail extends React.PureComponent {
         );
     };
 
-    renderDetails = subscription => (
+    renderDetails = (subscription, subscriptionProcesses) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
-            <div className="form-container-parent">{this.renderSubscriptionDetail(subscription, 0)}</div>
+            <div className="form-container-parent">
+                {this.renderSubscriptionDetail(subscription, 0, "", subscriptionProcesses)}
+            </div>
         </section>
     );
 
@@ -1013,7 +1036,7 @@ export default class SubscriptionDetail extends React.PureComponent {
 
                 {renderContent && (
                     <div>
-                        {this.renderDetails(subscription)}
+                        {this.renderDetails(subscription, subscriptionProcesses)}
                         {this.renderFixedInputs(product)}
                         {this.renderProductBlocks(
                             subscription,
