@@ -16,18 +16,83 @@
 export interface Product {
     name: string;
     tag: string;
+    description: string;
     product_id: string;
+    created_at: number;
+    product_type: string;
+    end_date: number;
+    status: string;
+    fixed_inputs: FixedInput[];
+}
+
+export interface ProductWithDetails extends Product {
+    workflows?: Workflow[];
+}
+
+export interface FixedInput {
+    name: string;
+    value: string;
+}
+
+export interface SubscriptionProcesses {
+    pid: string;
+    subscription_id: string;
+    workflow_target: string;
+    process: Process;
+}
+
+export interface SubscriptionInstance {
+    subscription_instance_id: string;
+    product_block: ProductBlock;
+    label: string;
+    values: InstanceValue[];
+}
+
+export interface InstanceValue {
+    resource_type: ResourceType;
+    value: string;
+}
+
+export interface ResourceType {
+    resource_type: string;
+}
+
+export interface ProductBlock {
+    name: string;
+    tag: string;
 }
 
 export interface Subscription {
     subscription_id: string;
     description: string;
     product: Product;
+    product_id: string;
     status: string;
     insync: boolean;
     customer_id: string;
     start_date: number;
     end_date: number;
+    note: string;
+}
+
+export interface SubscriptionWithDetails extends Subscription {
+    product_name: string;
+    customer_name: string;
+    instances: SubscriptionInstance[];
+    end_date_epoch: number;
+    start_date_epoch: number;
+
+    // Used by enrich functions
+    service_speed: string;
+    nms_service_id_p: string;
+    nms_service_id_s: string;
+    label: string;
+    ims_circuit_name: string;
+    ims_node: string;
+    ims_port: string;
+    ims_iface_type: string;
+    ims_patch_position: string;
+    vlan: string;
 }
 
 export interface ServicePortSubscription extends Subscription {
@@ -43,7 +108,6 @@ export interface ServicePort {
     bandwidth?: number;
     nonremovable?: boolean;
     modifiable?: boolean;
-    [index: string]: any; // To allow indexing
 }
 
 export interface Organization {
@@ -69,10 +133,24 @@ export interface FormNotCompleteResponse {
 }
 
 export interface Process {
+    pid: string;
+    workflow: string;
+    assignee: string;
+    last_status: string;
+    failed_reason: string;
+    traceback: string;
+    step: string;
+    created_by: string;
+    started_at: number;
+    last_modified_at: number;
+    is_task: boolean;
+}
+
+export interface ProcessWithDetails {
     id: string;
     workflow_name: string;
-    product?: string;
-    customer?: string;
+    product: string;
+    customer: string;
     assignee: string;
     status: string;
     failed_reason: string;
@@ -81,7 +159,7 @@ export interface Process {
     created_by: string;
     started: number;
     last_modified: number;
-    [index: string]: any;
+    is_task: boolean;
 }
 
 export interface ProcessWithDetails extends Process {
@@ -104,7 +182,7 @@ export interface Step {
     name: string;
     executed: number;
     status: string;
-    state: { [index: string]: any };
+    state: State;
     commit_hash: string;
     form?: InputField[];
 }
@@ -136,6 +214,7 @@ export interface Option {
 
 export interface Workflow {
     name: string;
+    target: string;
 }
 
 export interface AppError extends Error {
@@ -157,5 +236,22 @@ export interface User {
     user_name: string;
     displayName: string;
     sub: string;
-    [index: string]: any;
+}
+
+export function typedKeys<T>(o: T): (keyof T)[] {
+    // type cast should be safe because that's what really Object.keys() does
+    return Object.keys(o) as (keyof T)[];
+}
+
+export function prop<T, K extends keyof T>(obj: T, key: K): T[K] {
+    return obj[key];
+}
+
+export function optionalProp<T>(obj: T, key: string): any | undefined {
+    // @ts-ignore
+    return obj[key];
+}
+
+export function setProp<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
+    obj[key] = value;
 }

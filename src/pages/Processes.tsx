@@ -28,16 +28,36 @@ import { organisationNameByUuid, productNameById, renderDateTime } from "../util
 import CheckBox from "../components/CheckBox";
 import { actionOptions } from "../validations/Processes";
 import ApplicationContext from "../utils/ApplicationContext";
-import { Process, FilterAttribute, ShowActions, SortSettings } from "../utils/types";
+import { FilterAttribute, ShowActions, SortSettings, ProcessWithDetails, prop, optionalProp } from "../utils/types";
 
 import "./Processes.scss";
 
+interface CustomProcessWithDetails extends ProcessWithDetails {
+    product_name: string;
+    customer_name: string;
+}
+
+type ProcessSortKeys =
+    | "assignee"
+    | "step"
+    | "status"
+    | "customer"
+    | "product"
+    | "workflow_name"
+    | "started"
+    | "last_modified"
+    | "actions";
+
+interface ProcessSortSettings extends SortSettings {
+    name: ProcessSortKeys;
+}
+
 interface IState {
-    processes: Process[];
-    filteredProcesses: Process[];
+    processes: CustomProcessWithDetails[];
+    filteredProcesses: CustomProcessWithDetails[];
     query: string;
     actions: ShowActions;
-    sorted: SortSettings;
+    sorted: ProcessSortSettings;
     filterAttributesAssignee: FilterAttribute[];
     filterAttributesStatus: FilterAttribute[];
     confirmationDialogOpen: boolean;
@@ -87,20 +107,20 @@ export default class Processes extends React.PureComponent<{}, IState> {
     };
 
     refresh = () =>
-        processes().then(results => {
+        processes().then((results: CustomProcessWithDetails[]) => {
             const { organisations, products } = this.context;
-            results.forEach((process: Process) => {
+            results.forEach(process => {
                 process.customer_name = organisationNameByUuid(process.customer, organisations);
                 process.product_name = productNameById(process.product, products);
             });
             const newFilterAttributesAssignee = [...this.state.filterAttributesAssignee];
             newFilterAttributesAssignee.forEach(
-                attr => (attr.count = results.filter((process: Process) => process.assignee === attr.name).length)
+                attr => (attr.count = results.filter(process => process.assignee === attr.name).length)
             );
 
             const newFilterAttributesStatus = [...this.state.filterAttributesStatus];
             newFilterAttributesStatus.forEach(
-                attr => (attr.count = results.filter((process: Process) => process.status === attr.name).length)
+                attr => (attr.count = results.filter(process => process.status === attr.name).length)
             );
 
             const filteredProcesses = this.doSearchAndSortAndFilter(
@@ -135,7 +155,7 @@ export default class Processes extends React.PureComponent<{}, IState> {
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    showProcess = (process: Process) => () => {
+    showProcess = (process: ProcessWithDetails) => () => {
         clearInterval(this.state.interval);
         this.context.redirect("/process/" + process.id);
     };
@@ -154,28 +174,35 @@ export default class Processes extends React.PureComponent<{}, IState> {
 
     doSearchAndSortAndFilter = (
         query: string,
-        processes: Process[],
-        sorted: SortSettings,
+        processes: CustomProcessWithDetails[],
+        sorted: ProcessSortSettings,
         filterAttributesAssignee: FilterAttribute[],
         filterAttributesStatus: FilterAttribute[]
     ) => {
         if (!isEmpty(query)) {
             const queryToLower = query.toLowerCase();
-            const searchable = ["assignee", "step", "customer_name", "product_name", "workflow_name"];
-            processes = processes.filter((process: Process) =>
+            const searchable: (keyof CustomProcessWithDetails)[] = [
+                "assignee",
+                "step",
+                "customer_name",
+                "product_name",
+                "workflow_name"
+            ];
+            processes = processes.filter(process =>
                 searchable
-                    .map(search => process[search]).filter(s => s != null)
+                    .map(search => prop(process, search) as string)
+                    .filter(s => s != null)
                     .map(search => search.toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
         }
-        processes = processes.filter((process: Process) => {
+        processes = processes.filter(process => {
             const assigneeFilter = filterAttributesAssignee.find(
                 (attr: FilterAttribute) => attr.name === process.assignee
             );
             return assigneeFilter ? assigneeFilter.selected : true;
         });
-        processes = processes.filter((process: Process) => {
+        processes = processes.filter(process => {
             const statusFilter = filterAttributesStatus.find((attr: FilterAttribute) => attr.name === process.status);
             return statusFilter ? statusFilter.selected : true;
         });
@@ -200,13 +227,13 @@ export default class Processes extends React.PureComponent<{}, IState> {
         });
     }, 250);
 
-    toggleActions = (process: Process, actions: ShowActions) => (e: React.MouseEvent) => {
+    toggleActions = (process: CustomProcessWithDetails, actions: ShowActions) => (e: React.MouseEvent) => {
         stop(e);
         const newShow = actions.id === process.id ? !actions.show : true;
         this.setState({ actions: { show: newShow, id: process.id } });
     };
 
-    handleDeleteProcess = (process: Process) => (e: React.MouseEvent) => {
+    handleDeleteProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.deleteConfirmation", {
@@ -221,7 +248,7 @@ export default class Processes extends React.PureComponent<{}, IState> {
         );
     };
 
-    handleAbortProcess = (process: Process) => (e: React.MouseEvent) => {
+    handleAbortProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.abortConfirmation", {
@@ -236,7 +263,7 @@ export default class Processes extends React.PureComponent<{}, IState> {
         );
     };
 
-    handleRetryProcess = (process: Process) => (e: React.MouseEvent) => {
+    handleRetryProcess = (process: CustomProcessWithDetails) => (e: React.MouseEvent) => {
         stop(e);
         this.confirmation(
             I18n.t("processes.retryConfirmation", {
@@ -261,7 +288,7 @@ export default class Processes extends React.PureComponent<{}, IState> {
             }
         });
 
-    renderActions = (process: Process, actions: ShowActions) => {
+    renderActions = (process: CustomProcessWithDetails, actions: ShowActions) => {
         const actionId = process.id;
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
@@ -278,13 +305,13 @@ export default class Processes extends React.PureComponent<{}, IState> {
         return <DropDownActions options={options} i18nPrefix="processes" />;
     };
 
-    sortBy = (name: string) => (a: Process, b: Process) => {
-        const aSafe = a[name] || "";
-        const bSafe = b[name] || "";
+    sortBy = (name: ProcessSortKeys) => (a: CustomProcessWithDetails, b: CustomProcessWithDetails) => {
+        const aSafe: any = optionalProp(a, name) || "";
+        const bSafe: any = optionalProp(b, name) || "";
         return typeof aSafe === "string" ? aSafe.toLowerCase().localeCompare(bSafe.toLowerCase()) : aSafe - bSafe;
     };
 
-    sort = (name: string) => (e: React.MouseEvent) => {
+    sort = (name: ProcessSortKeys) => (e: React.MouseEvent) => {
         stop(e);
         const sorted = { ...this.state.sorted };
         const filteredProcesses = [...this.state.filteredProcesses].sort(this.sortBy(name));
@@ -331,8 +358,8 @@ export default class Processes extends React.PureComponent<{}, IState> {
         return <i />;
     };
 
-    renderProcessesTable(processes: Process[], actions: ShowActions, sorted: SortSettings) {
-        const columns = [
+    renderProcessesTable(processes: CustomProcessWithDetails[], actions: ShowActions, sorted: SortSettings) {
+        const columns: ProcessSortKeys[] = [
             "assignee",
             "step",
             "status",
