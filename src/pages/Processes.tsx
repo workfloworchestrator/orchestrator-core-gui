@@ -164,7 +164,8 @@ export default class Processes extends React.PureComponent<{}, IState> {
             const searchable = ["assignee", "step", "customer_name", "product_name", "workflow_name"];
             processes = processes.filter((process: Process) =>
                 searchable
-                    .map(search => process[search].toLowerCase().indexOf(queryToLower))
+                    .map(search => process[search]).filter(s => s != null)
+                    .map(search => search.toLowerCase().indexOf(queryToLower))
                     .some(indexOf => indexOf > -1)
             );
         }
