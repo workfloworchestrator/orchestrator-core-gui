@@ -27,7 +27,7 @@ import { NavLink } from "react-router-dom";
 
 import "./ProcessStateDetails.scss";
 import HighlightCode from "./HighlightCode";
-import { Step, State, ProcessSubscription } from "../utils/types";
+import { Step, State, ProcessSubscription, prop, ProcessWithDetails } from "../utils/types";
 import { CustomProcessWithDetails } from "../pages/ProcessDetail";
 
 interface IProps {
@@ -146,8 +146,8 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         );
     };
 
-    renderSummaryValue = (value: string | number) =>
-        typeof value === "string" ? capitalize(value) : renderDateTime(value);
+    renderSummaryValue = (value: string | number | any) =>
+        typeof value === "string" ? capitalize(value) : typeof value === "number" ? renderDateTime(value) : value;
 
     stateDelta = (prev: State, curr: State) => {
         const prevKeys = Object.keys(prev);
@@ -275,7 +275,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
 
     renderProcessOverview = (process: CustomProcessWithDetails, details: boolean, stateChanges: boolean) => {
         const last = (i: number) => i === process.steps.length - 1;
-        const summaryKeys = [
+        const summaryKeys: (keyof ProcessWithDetails)[] = [
             "status",
             this.props.isProcess ? "assignee" : "created_by",
             "step",
@@ -291,7 +291,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                 {summaryKeys.map(key => (
                                     <tr key={key}>
                                         <td className="title">{I18n.t(`process_state.summary.${key}`)}</td>
-                                        <td className="value">{this.renderSummaryValue(process[key])}</td>
+                                        <td className="value">{this.renderSummaryValue(prop(process, key))}</td>
                                     </tr>
                                 ))}
                             </tbody>

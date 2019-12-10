@@ -24,7 +24,6 @@ import I18n from "i18n-js";
 import { renderDate } from "../utils/Lookups";
 import { requestSubscriptionData } from "../utils/SubscriptionData";
 import { stop } from "../utils/Utils";
-import MessageBox from "../components/MessageBox";
 import ApplicationContext from "../utils/ApplicationContext";
 
 import "./Subscriptions.scss";
@@ -170,10 +169,6 @@ class Subscriptions extends React.PureComponent<IProps, IState> {
 
     hideSubscriptionDetail = () => {
         this.setState({ subscriptionId: undefined });
-    };
-
-    navigateToOldSubscriptions = () => {
-        this.context.redirect("/old-subscriptions/");
     };
 
     renderExplain() {
@@ -362,14 +357,6 @@ class Subscriptions extends React.PureComponent<IProps, IState> {
                         </Modal>
                     )}
                 </div>
-
-                <MessageBox
-                    messageHeader="Info"
-                    messageText="Experimental new subscriptions page. Tips: search for status 'a' for active subs and
-                            hold shift to sort on multiple columns. When an input has focus you can use UP/DOWN arrow to paginate "
-                    handleClick={this.navigateToOldSubscriptions}
-                    linkName="use old page"
-                />
             </div>
         );
     }

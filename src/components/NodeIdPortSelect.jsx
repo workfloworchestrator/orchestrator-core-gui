@@ -20,7 +20,7 @@ import "./NodePortSelect.scss";
 
 import { getNodesByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType } from "../api";
 import I18n from "i18n-js";
-import { imsStates } from "../utils/Lookups.js";
+import { imsStates } from "../utils/Lookups";
 
 export default class NodeIdPortSelect extends React.PureComponent {
     constructor(props) {

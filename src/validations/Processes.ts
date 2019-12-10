@@ -13,7 +13,7 @@
  *
  */
 
-import { Process } from "../utils/types";
+import { prop, ProcessWithDetails } from "../utils/types";
 
 interface Action {
     icon: string;
@@ -23,12 +23,11 @@ interface Action {
 }
 
 export function actionOptions(
-    process: Process,
+    process: ProcessWithDetails,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
-    abortAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
-    statusProperty: string = "status"
+    abortAction: (e: React.MouseEvent<HTMLButtonElement>) => void
 ): Action[] {
     //TODO scope on the context of logged in-user
     const details = {
@@ -59,7 +58,7 @@ export function actionOptions(
         danger: true
     };
     let options = [];
-    const status = process[statusProperty];
+    const status = prop(process, "status");
     switch (status) {
         case "failed":
             options = [details, retry, abort, _delete];
