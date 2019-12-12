@@ -361,7 +361,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         stop(e);
         this.confirmation(
             I18n.t("subscription.terminateConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.name,
                 customer: subscription.customer_name
             }),
             () => this.context.redirect(`/terminate-subscription?subscription=${subscription.subscription_id}`)
@@ -373,7 +373,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         const change = I18n.t(`workflow.${workflow_name}`).toLowerCase();
         this.confirmation(
             I18n.t("subscription.modifyConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.name,
                 customer: subscription.customer_name,
                 change: change
             }),
@@ -565,7 +565,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                         <CheckBox value={subscription.insync} name="insync" readOnly={true} />
                                     </td>
                                     <td data-label={I18n.t("subscriptions.product_name")} className="product_name">
-                                        {subscription.product_name}
+                                        {subscription.product.name}
                                     </td>
                                     <td data-label={I18n.t("subscriptions.status")} className="status">
                                         {subscription.status}

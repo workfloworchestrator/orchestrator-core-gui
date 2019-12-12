@@ -95,7 +95,7 @@ export default class SubscriptionValidation extends React.Component {
         stop(e);
         this.confirmation(
             I18n.t("subscriptions.deleteConfirmation", {
-                name: subscription.product_name,
+                name: subscription.product.name,
                 customer: subscription.customer_name
             }),
             () =>
@@ -103,7 +103,7 @@ export default class SubscriptionValidation extends React.Component {
                     this.props.onChange();
                     setFlash(
                         I18n.t("subscriptions.flash.delete", {
-                            name: subscription.product_name
+                            name: subscription.product.name
                         })
                     );
                 })
@@ -156,7 +156,7 @@ export default class SubscriptionValidation extends React.Component {
                                     <CheckBox value={subscription.insync} name="insync" readOnly={true} />
                                 </td>
                                 <td data-label={I18n.t("subscriptions.product_name")} className="product_name">
-                                    {subscription.product_name}
+                                    {subscription.product.name}
                                 </td>
                                 <td data-label={I18n.t("subscriptions.status")} className="status">
                                     {subscription.status}
