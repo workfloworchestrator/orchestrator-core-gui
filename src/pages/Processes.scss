@@ -192,6 +192,9 @@
                 font-weight: bold;
                 padding-right: 15px;
             }
+            td.assignee i.fa-caret-right {
+                transform: translateX(-15px);
+            }
             td.actions {
                 cursor: pointer;
                 text-align: right;
