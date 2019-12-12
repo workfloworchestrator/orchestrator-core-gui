@@ -205,7 +205,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         this.confirmation(message, () =>
             retryProcess(process.id).then(() => {
-                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                this.context.redirect(`/${this.props.isProcess ? `processes?highlight=${process.id}` : "tasks"}`);
                 setFlash(
                     I18n.t(`${this.props.isProcess ? "processes" : "tasks"}.flash.retry`, {
                         name: process.productName
@@ -313,7 +313,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         let result = resumeProcess(process.id, processInput);
         result
             .then(e => {
-                this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`);
+                this.context.redirect(`/${this.props.isProcess ? `processes?highlight=${process.id}` : "tasks"}`);
                 setFlash(
                     I18n.t(`${this.props.isProcess ? "process" : "task"}.flash.update`, { name: process.workflow_name })
                 );

@@ -231,7 +231,7 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                <ProtectedRoute path="/processes" render={() => <Processes />} />
+                                <ProtectedRoute path="/processes" render={props => <Processes highlight={getParameterByName("highlight", props.location.search)}/>} />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}

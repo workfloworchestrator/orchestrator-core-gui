@@ -346,7 +346,7 @@ I18n.translations.en = {
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
-            create: "Created process for workflow {{name}}",
+            create: "Created process for workflow {{name}} with pid {{pid}}",
             update: "Resumed process for workflow {{name}}",
             wizard_next_step: "Navigated to next step in form wizard"
         },
