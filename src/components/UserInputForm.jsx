@@ -333,6 +333,18 @@ export default class UserInputForm extends React.Component {
                         autoComplete="no-value"
                     />
                 );
+            case "text":
+                return (
+                    <textarea
+                        id={`${applyIdNamingConvention(name)}`}
+                        name={name}
+                        value={value || ""}
+                        readOnly={userInput.readonly}
+                        onChange={this.changeStringInput(name)}
+                        cols={30}
+                        rows={5}
+                    />
+                );
             case "subscription_id":
                 return <ReadOnlySubscriptionView subscriptionId={value} className="indent" />;
             case "bandwidth":

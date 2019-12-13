@@ -896,7 +896,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                     <td>
                                         {!wf.reason && (
                                             <a
-                                                id="modify-link"
+                                                id={`modify-link-${wf.name.replace(/_/g, "-")}`}
                                                 href="/modify"
                                                 key={wf.name}
                                                 onClick={this.modify(subscription, wf.name)}

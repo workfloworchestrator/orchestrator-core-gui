@@ -6825,7 +6825,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 <td>
                   <a
                     href="/modify"
-                    id="modify-link"
+                    id="modify-link-modify-sn8-ip-bgp-change-port"
                     onClick={[Function]}
                   >
                     Replace port of SN8 SURFinternet BGP
@@ -6837,7 +6837,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 <td>
                   <a
                     href="/modify"
-                    id="modify-link"
+                    id="modify-link-modify-sn8-ip-bgp"
                     onClick={[Function]}
                   >
                     Modify SN8 SURFinternet BGP
