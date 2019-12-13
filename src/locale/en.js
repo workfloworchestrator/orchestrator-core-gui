@@ -326,6 +326,8 @@ I18n.translations.en = {
         noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
+        note: "Notes",
+        note_info: "Notes, reminders and feedback about this description.",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         current_bandwidth: "Bandwidth",
         current_bandwidth_info: "Current bandwidth in Mbit/s",
@@ -346,7 +348,7 @@ I18n.translations.en = {
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
-            create: "Created process for workflow {{name}}",
+            create: "Created process for workflow {{name}} with pid {{pid}}",
             update: "Resumed process for workflow {{name}}",
             wizard_next_step: "Navigated to next step in form wizard"
         },
@@ -1241,6 +1243,7 @@ I18n.translations.en = {
         modify_core_link_isis_metric: "Modify Corelink ISIS metric",
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",
+        modify_note: "Modify subscription note",
         modify_sn7_elan: "Modify ELAN",
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",

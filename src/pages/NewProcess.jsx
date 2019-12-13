@@ -93,10 +93,11 @@ export default class NewProcess extends React.Component {
                 ...processInput
             ]);
             result
-                .then(() => {
-                    this.context.redirect(`/processes`);
+                .then(process => {
+                    const pid = process.id;
+                    this.context.redirect(`/processes?highlight=${pid}`);
                     const name = products.find(prod => prod.product_id === this.state.product.value).name;
-                    setFlash(I18n.t("process.flash.create", { name: name }));
+                    setFlash(I18n.t("process.flash.create", { name: name, pid: pid }));
                 })
                 .catch(error => {
                     // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
@@ -202,8 +203,9 @@ export default class NewProcess extends React.Component {
                 change: change
             }),
             () =>
-                startProcess(modifyWorkflow, [{ subscription_id: modifySubscription }]).then(() => {
-                    this.context.redirect("/processes");
+                startProcess(modifyWorkflow, [{ subscription_id: modifySubscription }]).then(process => {
+                    const pid = process.id;
+                    this.context.redirect(`/processes?highlight=${pid}`);
                 })
         );
     };

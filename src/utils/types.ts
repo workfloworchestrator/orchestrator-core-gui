@@ -76,7 +76,6 @@ export interface Subscription {
 }
 
 export interface SubscriptionWithDetails extends Subscription {
-    product_name: string;
     customer_name: string;
     instances: SubscriptionInstance[];
     end_date_epoch: number;

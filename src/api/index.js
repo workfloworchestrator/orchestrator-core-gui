@@ -431,7 +431,7 @@ export function process(processId) {
 }
 
 export function startProcess(workflow_name, process) {
-    return postPutJson("processes/" + workflow_name, process, "post", false, false);
+    return postPutJson("processes/" + workflow_name, process, "post", false, true);
 }
 
 export function resumeProcess(processId, userInput) {

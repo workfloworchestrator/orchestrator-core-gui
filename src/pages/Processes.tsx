@@ -52,6 +52,10 @@ interface ProcessSortSettings extends SortSettings {
     name: ProcessSortKeys;
 }
 
+interface IProps {
+    highlight: string;
+}
+
 interface IState {
     processes: CustomProcessWithDetails[];
     filteredProcesses: CustomProcessWithDetails[];
@@ -68,8 +72,8 @@ interface IState {
     interval?: number;
 }
 
-export default class Processes extends React.PureComponent<{}, IState> {
-    constructor(props: {}) {
+export default class Processes extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -370,6 +374,7 @@ export default class Processes extends React.PureComponent<{}, IState> {
             "last_modified",
             "actions"
         ];
+	const {highlight} = this.props;
         const th = (index: number) => {
             const name = columns[index];
             return (
@@ -389,11 +394,13 @@ export default class Processes extends React.PureComponent<{}, IState> {
                     <tbody>
                         {processes.map((process, index) => (
                             <tr
+			    	id={process.id}
                                 key={`${process.id}_${index}`}
                                 onClick={this.showProcess(process)}
                                 className={process.status}
                             >
                                 <td data-label={I18n.t("processes.assignee")} className="assignee">
+				    {process.id === highlight && <i className="fa fa-caret-right" />}
                                     {process.assignee}
                                 </td>
                                 <td data-label={I18n.t("processes.step")} className="step">
