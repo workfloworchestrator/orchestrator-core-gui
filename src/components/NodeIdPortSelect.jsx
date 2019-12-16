@@ -89,7 +89,7 @@ export default class NodeIdPortSelect extends React.PureComponent {
         const port_options = ports
             .map(aPort => ({
                 value: aPort.id,
-                label: `${aPort.port} (${imsStates[aPort.status]})`
+                label: `${aPort.port} (${aPort.status})`
             }))
             .sort((x, y) => x.label.localeCompare(y.label));
         const port_value = port_options.find(option => option.value === port);
