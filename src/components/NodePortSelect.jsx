@@ -20,7 +20,6 @@ import "./NodePortSelect.scss";
 
 import { freeCorelinkPortsForNodeIdAndInterfaceType } from "../api";
 import I18n from "i18n-js";
-import { imsStates } from "../utils/Lookups";
 
 export default class NodePortSelect extends React.PureComponent {
     constructor(props) {
@@ -76,7 +75,7 @@ export default class NodePortSelect extends React.PureComponent {
         const port_options = ports
             .map(aPort => ({
                 value: aPort.id,
-                label: `${aPort.port} (${imsStates[aPort.status]}) (${aPort.iface_type})`
+                label: `${aPort.port} (${aPort.status}) (${aPort.iface_type})`
             }))
             .sort((x, y) => x.label.localeCompare(y.label));
         const port_value = port_options.find(option => option.value === port);
