@@ -14,8 +14,15 @@
  */
 
 import { paginatedSubscriptions } from "../api";
+import { SortingRule, Filter } from "react-table";
+import { Subscription } from "./types";
 
-export const requestSubscriptionData = (pageSize, page, sorted, filtered) => {
+export const requestSubscriptionData = (
+    pageSize: number,
+    page: number,
+    sorted: SortingRule[],
+    filtered: Filter[]
+): Promise<{ rows: Subscription[]; pages: number }> => {
     console.log(`Requesting data -> Page: ${page}, pageSize: ${pageSize}`);
     // console.log(filtered);
     // console.log(sorted);
@@ -36,7 +43,7 @@ export const requestSubscriptionData = (pageSize, page, sorted, filtered) => {
     const sort_query = sorted.length > 0 ? sort_parameters : "";
     const filter_query = filtered.length > 0 ? filter_parameters : "";
 
-    return paginatedSubscriptions(paginate_query, sort_query, filter_query).then(results => {
+    return paginatedSubscriptions(paginate_query, sort_query, filter_query).then((results: Subscription[]) => {
         const res = {
             rows: results,
             pages: 99 // todo: get it from header

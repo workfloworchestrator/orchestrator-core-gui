@@ -16,14 +16,14 @@
 import escape from "lodash.escape";
 import { isDate } from "date-fns";
 
-export function stop(e) {
+export function stop(e: React.SyntheticEvent) {
     if (e !== undefined && e !== null) {
         e.preventDefault();
         e.stopPropagation();
     }
 }
 
-export function isEmpty(obj) {
+export function isEmpty(obj: any) {
     if (obj === undefined || obj === null) {
         return true;
     }
@@ -42,11 +42,13 @@ export function isEmpty(obj) {
     return false;
 }
 
-export function escapeDeep(obj) {
+export function escapeDeep(obj: object) {
     if (!isEmpty(obj)) {
         Object.keys(obj).forEach(key => {
+            // @ts-ignore
             const val = obj[key];
-            if (typeof val === "string" || val instanceof String) {
+            if (typeof val === "string") {
+                // @ts-ignore
                 obj[key] = escape(val);
             } else if (typeof val === "object" || val instanceof Object) {
                 escapeDeep(val);
@@ -55,7 +57,7 @@ export function escapeDeep(obj) {
     }
 }
 
-export function applyIdNamingConvention(value, prefix = "") {
+export function applyIdNamingConvention(value: string, prefix: string = "") {
     // Convert camel case to snake case with "-" and replace all "_" with "-"
     const result = value
         .split(/(?=[A-Z])/)
@@ -69,10 +71,10 @@ export function applyIdNamingConvention(value, prefix = "") {
 }
 
 const UUIDv4RegEx = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
-export function isValidUUIDv4(id) {
+export function isValidUUIDv4(id: string) {
     return UUIDv4RegEx.test(id);
 }
 
-export function capitalizeFirstLetter(string) {
+export function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

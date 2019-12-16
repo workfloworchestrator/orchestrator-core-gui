@@ -24,10 +24,12 @@ include:
   - template: Jobs/Browser-Performance-Testing.gitlab-ci.yml
 
 unit test:
-  image: node:10.16.0
+  image: node:12.13.1
   stage: test
+  variables:
+    TZ: Europe/Amsterdam
   script:
-    - yarn install
+    - yarn install --frozen-lockfile
     - yarn prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'
     - yarn test --coverage
 

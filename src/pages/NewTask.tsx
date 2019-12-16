@@ -15,49 +15,61 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import { startTask, workflowsByTarget, catchErrorStatus } from "../api";
-import { isEmpty } from "../utils/Utils";
+
+import { startProcess, workflowsByTarget, catchErrorStatus } from "../api";
 import { setFlash } from "../utils/Flash";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import WorkflowSelect from "../components/WorkflowSelect";
+import { State, Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/types";
 
 import "./NewTask.scss";
 
-export default class NewTask extends React.Component {
-    constructor(props) {
+interface IState {
+    workflows: Workflow[];
+    workflow?: Option;
+    stepUserInput: InputField[];
+    hasNext?: boolean;
+}
+
+export default class NewTask extends React.Component<{}, IState> {
+    constructor(props: {}) {
         super(props);
         this.state = {
             workflows: [],
-            workflow: {},
             stepUserInput: [],
             hasNext: false
         };
     }
 
-    componentDidMount = () => workflowsByTarget("SYSTEM").then(workflows => this.setState({ workflows: workflows }));
+    componentDidMount = () =>
+        workflowsByTarget("SYSTEM").then((workflows: Workflow[]) => this.setState({ workflows: workflows }));
 
-    validSubmit = taskInput => {
+    validSubmit = (taskInput: State) => {
         const { workflow } = this.state;
-        if (!isEmpty(workflow)) {
-            let result = startTask(workflow.value, taskInput);
-            result
-                .then(() => {
-                    this.context.redirect(`/tasks`);
-                    setFlash(I18n.t("task.flash.create", { name: workflow.label }));
-                })
-                .catch(error => {
-                    // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-                });
-            return result;
+        if (!workflow) {
+            return Promise.reject();
         }
+
+        let result = startProcess(workflow.value, taskInput);
+        result.then(() => {
+            this.context.redirect(`/tasks`);
+            setFlash(I18n.t("task.flash.create", { name: workflow.label }));
+        });
+        catchErrorStatus(result, 510, (json: FormNotCompleteResponse) => {
+            this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
+        });
+        result.catch(error => {
+            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+        });
+        return result;
     };
 
-    changeWorkflow = option => {
+    changeWorkflow = (option: Option) => {
         this.setState({ workflow: option });
         if (option) {
-            let promise = startTask(option.value, []);
-            catchErrorStatus(promise, 510, json => {
+            let promise = startProcess(option.value, []);
+            catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
                 this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
             });
         }
@@ -76,14 +88,14 @@ export default class NewTask extends React.Component {
                             <WorkflowSelect
                                 workflows={workflows}
                                 onChange={this.changeWorkflow}
-                                workflow={isEmpty(workflows) ? undefined : workflow.value}
+                                workflow={!workflows || !workflow ? undefined : workflow.value}
                             />
                         </section>
-                        {!isEmpty(workflow) && (
+                        {workflow && (
                             <UserInputFormWizard
                                 stepUserInput={stepUserInput}
                                 validSubmit={this.validSubmit}
-                                hasNext={hasNext}
+                                hasNext={hasNext || false}
                             />
                         )}
                     </section>
@@ -92,7 +104,5 @@ export default class NewTask extends React.Component {
         );
     }
 }
-
-NewTask.propTypes = {};
 
 NewTask.contextType = ApplicationContext;

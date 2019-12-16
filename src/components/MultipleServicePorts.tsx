@@ -19,7 +19,7 @@ import I18n from "i18n-js";
 import { stop, isEmpty, capitalizeFirstLetter } from "../utils/Utils";
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ServicePortSubscription, ServicePort, Organization, Product, ValidationError } from "../utils/types";
+import { ServicePortSubscription, ServicePort, Organization, Product, ValidationError, setProp } from "../utils/types";
 import { filterProductsByBandwidth } from "../validations/Products";
 import { range } from "lodash";
 
@@ -78,7 +78,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     loadServicePorts = () => {
         const tags = this.props.productTags;
 
-        portSubscriptions(tags, ["active"]).then((result: ServicePort[]) => {
+        portSubscriptions(tags, ["active"]).then((result: ServicePortSubscription[]) => {
             this.setState({
                 availableServicePorts: result.map(sp => {
                     // Todo: delegate this to backend: it should provide a valid port mode for MSC
@@ -108,7 +108,9 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                 servicePorts[index].tag = port.product.tag;
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
-                servicePorts[index].vlan = ["untagged", "link_member"].includes(servicePorts[index].port_mode) ? "0" : "";
+                servicePorts[index].vlan = ["untagged", "link_member"].includes(servicePorts[index].port_mode)
+                    ? "0"
+                    : "";
             }
         }
 
@@ -117,11 +119,11 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         this.props.onChange(servicePorts);
     };
 
-    onChangeInternal = (name: string, index: number) => (e: React.FormEvent<HTMLInputElement>) => {
+    onChangeInternal = (name: keyof ServicePort, index: number) => (e: React.FormEvent<HTMLInputElement>) => {
         const servicePorts = [...this.props.servicePorts];
         const target = e.target as HTMLInputElement;
         let value = e.target ? target.value : null;
-        servicePorts[index][name] = value;
+        setProp(servicePorts[index], name, value);
 
         this.clearErrors(index);
 
@@ -256,7 +258,8 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         <em className="error backend-validation">
                             {portErrors.map((e, index) => (
                                 <div key={index}>
-                                    {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                    {capitalizeFirstLetter(((e.loc as unknown) as string)[2])}:{" "}
+                                    {capitalizeFirstLetter(e.msg)}.
                                 </div>
                             ))}
                         </em>
@@ -349,7 +352,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 MultipleServicePorts.propTypes = {
     onChange: PropTypes.func.isRequired,
     sn8: PropTypes.bool.isRequired,
-    tags: PropTypes.array.isRequired,
+    productTags: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
     organisations: PropTypes.array.isRequired,
     organisationId: PropTypes.string,

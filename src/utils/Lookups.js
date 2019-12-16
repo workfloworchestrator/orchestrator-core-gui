@@ -25,7 +25,7 @@ export function organisationNameByUuid(uuid, organisations) {
 
 export function enrichSubscription(subscription, organisations, products) {
     subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
-    subscription.product_name = productNameById(subscription.product_id, products);
+    subscription.product = productLookup(subscription.product_id, products);
     subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
     subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
 }
@@ -110,16 +110,6 @@ export const ipamStates = ["Free", "Allocated", null, "Planned", null, null];
 // AFI returned by IPAM as index in this array returns IPv4 for 4 and IPv6 for 6 and "N/A" for other cases
 //                             0      1      2      3      4       5      6
 export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"];
-
-// States as defined in IMS (inventoryStatus, cardStatus, portStatus, serviceStatus)
-export const imsStates = {
-    1: "PL",
-    2: "RFS",
-    3: "IS",
-    4: "MI",
-    6: "OOS",
-    7: "RFC"
-};
 
 export function ipAddressToNumber(ipAddress) {
     const octets = ipAddress.split(".");

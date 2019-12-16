@@ -104,6 +104,9 @@ I18n.translations.en = {
     process: {
         confirm_migrate_sap: "Confirm the migration of the SAP",
         confirm_migrate_sap_info: "Use the info above to confirm the SAP you want to migrate",
+        confirm_port_removal: "Replacement confirmation",
+        confirm_port_removal_info:
+            "Please confirm that the old service has been replaced by a new service with one port replaced",
         accept: {
             noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?",
             noc_remove_lichtpad_confirmation: "Is the LightPath of the subscription removed?",
@@ -160,7 +163,7 @@ I18n.translations.en = {
         userInput: "User input for step {{name}} for product {{product}}",
         tabs: {
             user_input: "User input",
-            process: "process"
+            process: "Process"
         },
         port_id: "Port",
         port_id_info: "Select a port",
@@ -323,6 +326,8 @@ I18n.translations.en = {
         noc_downgrade_lichtpad_confirmation_info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
         noc_confirmation: "Confirmed",
         bandwidth: "Bandwidth",
+        note: "Notes",
+        note_info: "Notes, reminders and feedback about this description.",
         bandwidth_info: "Desired bandwidth in Mbit/s",
         current_bandwidth: "Bandwidth",
         current_bandwidth_info: "Current bandwidth in Mbit/s",
@@ -343,8 +348,9 @@ I18n.translations.en = {
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
-            create: "Created process for workflow {{name}}",
-            update: "Resumed process for workflow {{name}}"
+            create: "Created process for workflow {{name}} with pid {{pid}}",
+            update: "Resumed process for workflow {{name}}",
+            wizard_next_step: "Navigated to next step in form wizard"
         },
         split_prefix: "Split IP Prefix",
         split_prefix_info: "Select the subnet from all subnets of the given prefix length",
@@ -617,9 +623,10 @@ I18n.translations.en = {
         link_member_port: "Link Member",
         link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown",
         added_service_ports: "Add ports",
-        added_service_ports_info: "Select some link_member ports to add them to this aggregated service port",
+        added_service_ports_info: "Select some ports to add them to this subscription",
         removed_service_ports: "Remove ports",
-        removed_service_ports_info: "Select some link_member ports to remove them from this aggregated service port"
+        removed_service_ports_info: "Select some ports to remove them from this subscription",
+        zone_info: "DNS Zone to check"
     },
     process_state: {
         copy: "Copy to clipboard",
@@ -628,28 +635,15 @@ I18n.translations.en = {
         details: "Show details",
         stateChanges: "Show state input",
         traceback: "Show traceback",
-        wording: "Process {{product}} of workflow {{workflow}} for {{customer}}",
+        wording_process: "Process {{product}} of workflow {{workflow}} for {{customer}}",
+        wording_task: "Task of workflow {{workflow}}",
         summary: {
             status: "Status",
             assignee: "Assignee",
+            created_by: "Created by",
             step: "Current step",
             started: "Started",
             last_modified: "Last updated"
-        }
-    },
-    task_state: {
-        copy: "Copy to clipboard",
-        copied: "Copied",
-        raw: "Show raw JSON",
-        details: "Show details",
-        stateChanges: "Show state input",
-        wording: "Task of workflow {{workflow}}",
-        summary: {
-            last_status: "Status",
-            created_by: "Created by",
-            last_step: "Current step",
-            started_at: "Started",
-            last_modified_at: "Last modified"
         }
     },
     validations: {
@@ -768,6 +762,11 @@ I18n.translations.en = {
     subscriptions: {
         customer_name: "Customer",
         customer_id: "Customer UUID",
+        dienstafname: "Dienstafname",
+        dienstafnameGuid: "Dienstafname Guid",
+        dienstafnameCode: "Dienstafname Code",
+        dienstafnameStatus: "Dienstafname Status",
+        note: "Note",
         id: "Subscription ID",
         subscription_id: "ID",
         description: "Description",
@@ -797,7 +796,8 @@ I18n.translations.en = {
             "Standalone subscription: there are no subscriptions connected to the {{description}} subscription.",
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
-        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!"
+        terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
+        failed_task: "See task {{pid}}"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
@@ -1080,12 +1080,12 @@ I18n.translations.en = {
     tasks: {
         searchPlaceHolder: "Search for tasks...",
         new: "New Task",
-        last_step: "Current step",
-        last_status: "Status",
-        workflow: "Workflow",
-        started_at: "Started",
+        step: "Current step",
+        status: "Status",
+        workflow_name: "Workflow",
+        started: "Started",
         failed_reason: "Failed reason",
-        last_modified_at: "Last modified",
+        last_modified: "Last modified",
         created_by: "Created by",
         actions: "",
         none: "",
@@ -1120,7 +1120,7 @@ I18n.translations.en = {
         subscription_link_txt: "Show Subscription related by this task",
         tabs: {
             user_input: "User input",
-            task: "Task"
+            process: "Task"
         },
         new_task: "New task",
         flash: {
@@ -1243,10 +1243,12 @@ I18n.translations.en = {
         modify_core_link_isis_metric: "Modify Corelink ISIS metric",
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",
+        modify_note: "Modify subscription note",
         modify_sn7_elan: "Modify ELAN",
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
         modify_sn7_light_path_msp_only_speed: "Modify Service Speed",
+        modify_sn7_light_path_replace_port: "Replace port of SN7 Light Path",
         modify_sn7_light_path_upgrade_to_redundant: "Upgrade to Redundant LP",
         modify_sn7_service_port_netherlight_isalias: "Modify Netherlight isAlias",
         modify_sn7_service_port_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",
@@ -1279,7 +1281,10 @@ I18n.translations.en = {
         validate_sn7_ip_bgp: "Validate SN7 IP BGP",
         validate_sn8_ip_static: "Validate SN8 IP Static",
         validate_sn8_ip_bgp: "Validate SN8 IP BGP",
-        validate_sn8_service_port: "Validate SN8 Service Port"
+        validate_sn8_light_path: "Validate SN8 Light Path",
+        validate_sn8_service_port: "Validate SN8 Service Port",
+        validate_sn8_msc: "Validate SN8 MSC",
+        validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
     }
 };
 
