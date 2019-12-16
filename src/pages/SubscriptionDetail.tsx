@@ -378,8 +378,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                 change: change
             }),
             () =>
-                startProcess(workflow_name, [{ subscription_id: subscription.subscription_id }]).then(() => {
-                    this.context.redirect("/processes");
+                startProcess(workflow_name, [{ subscription_id: subscription.subscription_id }]).then(process => {
+                    this.context.redirect(`/processes?highlight=${process.id}`);
                 })
         );
     };
