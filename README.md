@@ -58,6 +58,8 @@ Mac OS:
 
 #### Linux
 
+This project currently only works with Node.js 12 (if you also want to be able to run the tests).
+
 ```
 npm install yarn -g
 npm install npm-run-all --save-dev -g
@@ -79,6 +81,8 @@ Browse to the [application homepage](http://localhost:3000/).
 Copy `.env.local.example` to `.env.local`
 
 This overrides the `BACKEND_URL` variable. You should make local changes to `.env.local`
+
+There is also a .env file checked in that points to a backend that runs locally (https://localhost:8080).
 
 ### Add new dependencies
 
@@ -107,6 +111,9 @@ We are using Prettier as a code formatter. You can run prettier like this:
 Similarly you can run other packages that can be found in the package.json
 
 To run the unit-tests, do: `yarn test`.
+
+If this fails, you might want to increase your inotify limit. For more information, see
+https://unix.stackexchange.com/questions/13751/kernel-inotify-watch-limit-reached
 
 To run the storybook, do: `yarn storybook`.
 Your browser should open to http://localhost:9009/?path=/story/welcome--to-storybook.
