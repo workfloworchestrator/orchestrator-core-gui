@@ -106,8 +106,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
     componentDidMount = () => {
         this.refresh();
-        const interval = window.setInterval(this.refresh, 3000);
-        this.setState({ interval: interval });
+        // const interval = window.setInterval(this.refresh, 3000);
+        // this.setState({ interval: interval });
     };
 
     refresh = () =>
