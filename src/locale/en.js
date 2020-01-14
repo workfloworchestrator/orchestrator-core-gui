@@ -1261,6 +1261,8 @@ I18n.translations.en = {
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
         modify_sn8_light_path: "Modify SN8 LightPath",
+        modify_sn8_light_path_upgrade_to_redundant: "Modify SN8 LightPath: Upgrade to Redundant",
+        modify_sn8_light_path_downgrade_from_redundant: "Modify SN8 LightPath Redundant: Downgrade to SN8 LightPath",
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_sn8_service_port_nl_port_mode: "Change the mode of the port (Tagged, Linkmember)",
         modify_sn8_sp_auto_negotiation: "Modify the auto_negotiation setting for a SN8 Service Port",
