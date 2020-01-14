@@ -34,8 +34,10 @@ import {
 
 interface LRSubscription extends SubscriptionWithDetails, ServicePortSubscription {
     // Added by `enrichPrimarySubscription`
-    nms_service_id_p: string;
-    nms_service_id_s: string;
+    nms_service_id_p?: string;
+    nms_service_id_s?: string;
+    nso_service_id_p?: string;
+    nso_service_id_s?: string;
     service_speed: string;
 }
 interface PortSubscription extends LRSubscription {
@@ -56,16 +58,32 @@ function enrichPrimarySubscription(
 ) {
     enrichSubscription(subscription, organisations, products);
     const product = productById(subscription.product_id!, products);
-    const fi_service_speed = product.fixed_inputs.find((fi: FixedInput) => fi.name === "service_speed");
-    subscription.service_speed = fi_service_speed ? fi_service_speed.value : "-";
+    const fi_domain = product.fixed_inputs.find((fi: FixedInput) => fi.name === "domain");
+
     const si_primary = subscription.instances!.find(si => si.label === "Primary");
     const si_secondary = subscription.instances!.find(si => si.label === "Secondary");
-    subscription.nms_service_id_p = si_primary!.values.find(
-        v => v.resource_type.resource_type === "nms_service_id" || v.resource_type.resource_type === "nso_service_id"
-    )!.value;
-    subscription.nms_service_id_s = si_secondary!.values.find(
-        v => v.resource_type.resource_type === "nms_service_id" || v.resource_type.resource_type === "nso_service_id"
-    )!.value;
+
+    let fi_service_speed;
+    if (fi_domain!.value === "SURFNET8") {
+        fi_service_speed = si_primary!.values.find(v => v.resource_type.resource_type === "service_speed");
+
+        subscription.nso_service_id_p = si_primary!.values.find(
+            v => v.resource_type.resource_type === "nso_service_id"
+        )!.value;
+        subscription.nso_service_id_s = si_secondary!.values.find(
+            v => v.resource_type.resource_type === "nso_service_id"
+        )!.value;
+    } else {
+        fi_service_speed = product.fixed_inputs.find((fi: FixedInput) => fi.name === "service_speed");
+
+        subscription.nms_service_id_p = si_primary!.values.find(
+            v => v.resource_type.resource_type === "nms_service_id"
+        )!.value;
+        subscription.nms_service_id_s = si_secondary!.values.find(
+            v => v.resource_type.resource_type === "nms_service_id"
+        )!.value;
+    }
+    subscription.service_speed = fi_service_speed ? fi_service_speed.value : "-";
 }
 
 function enrichPortSubscription(
@@ -151,10 +169,10 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                 const portPromises = children.map(sub => enrichPortSubscription(subscription, sub));
                 Promise.all(portPromises).then((results: PortSubscription[]) => {
                     this.setState({
-                        spPL: results.find(r => r.label === "Primary-left"),
-                        spPR: results.find(r => r.label === "Primary-right"),
-                        spSL: results.find(r => r.label === "Secondary-left"),
-                        spSR: results.find(r => r.label === "Secondary-right")
+                        spPL: results.find(r => r.label.toLowerCase() === "primary-left"),
+                        spPR: results.find(r => r.label.toLowerCase() === "primary-right"),
+                        spSL: results.find(r => r.label.toLowerCase() === "secondary-left"),
+                        spSR: results.find(r => r.label.toLowerCase() === "secondary-right")
                     });
                 });
                 this.setState({ childSubscriptions: children });
@@ -183,7 +201,8 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                     <td colSpan={2}>{title}</td>
                 </tr>
                 {servicePort && this.renderValue("klant", servicePort.customer_name, 1)}
-                {servicePort && this.renderValue("CRM port ID", servicePort.crm_port_id || "-", 1)}
+                {servicePort && servicePort.crm_port_id && this.renderValue("CRM port ID", servicePort.crm_port_id, 1)}
+                {servicePort && servicePort.port_mode && this.renderValue("Port Mode", servicePort.port_mode, 1)}
                 {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name, 1)}
                 {servicePort && this.renderValue("IMS node", servicePort.ims_node, 1)}
                 {servicePort && this.renderValue("IMS port", servicePort.ims_port, 1)}
@@ -237,11 +256,18 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                                     {this.renderValue("klant", subscription.customer_name, 4)}
                                     {this.renderValue("protection", "redundant", 4)}
                                     {this.renderValue("speed", subscription.service_speed, 4)}
-                                    {this.renderValue(
-                                        "nms_service_id",
-                                        subscription.nms_service_id_p + " en " + subscription.nms_service_id_s,
-                                        4
-                                    )}
+                                    {subscription.nms_service_id_p &&
+                                        this.renderValue(
+                                            "nms_service_id",
+                                            subscription.nms_service_id_p + " en " + subscription.nms_service_id_s,
+                                            4
+                                        )}
+                                    {subscription.nso_service_id_p &&
+                                        this.renderValue(
+                                            "nso_service_id",
+                                            subscription.nso_service_id_p + " en " + subscription.nso_service_id_s,
+                                            4
+                                        )}
                                     {this.renderValue(
                                         "subscription",
                                         this.renderSubscriptionLink(subscription.subscription_id),
