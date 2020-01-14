@@ -14,42 +14,47 @@
  */
 
 import { isEmpty } from "./Utils";
+import { Organization, SubscriptionWithDetails, Product } from "./types";
 
-export function organisationNameByUuid(uuid, organisations) {
+export function organisationNameByUuid(uuid: string, organisations: Organization[]) {
     const organisation = organisations.find(org => org.uuid === uuid);
     return organisation ? organisation.name : uuid;
 }
 
-export function enrichSubscription(subscription, organisations, products) {
-    subscription.customer_name = organisationNameByUuid(subscription.customer_id, organisations);
-    subscription.product = productById(subscription.product_id, products);
+export function enrichSubscription(
+    subscription: Partial<SubscriptionWithDetails>,
+    organisations: Organization[],
+    products: Product[]
+) {
+    subscription.customer_name = organisationNameByUuid(subscription.customer_id!, organisations);
+    subscription.product = productById(subscription.product_id!, products);
     subscription.end_date_epoch = subscription.end_date ? new Date(subscription.end_date).getTime() : 0;
     subscription.start_date_epoch = subscription.start_date ? new Date(subscription.start_date).getTime() : 0;
 }
 
-export function productNameById(id, products) {
+export function productNameById(id: string, products: Product[]): string {
     const product = productById(id, products);
     return product ? product.name : id;
 }
 
-export function productTagById(id, products) {
+export function productTagById(id: string, products: Product[]): string {
     const product = productById(id, products);
     return product ? product.tag : id;
 }
 
-export function productById(id, products) {
-    return products.find(prod => prod.product_id === id);
+export function productById(id: string, products: Product[]): Product {
+    return products.find(prod => prod.product_id === id)!;
 }
 
-export function renderDateTime(epoch) {
+export function renderDateTime(epoch: number) {
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleString("nl-NL") + " CET";
 }
 
-export function renderDate(epoch) {
+export function renderDate(epoch: number) {
     return isEmpty(epoch) ? "" : new Date(epoch * 1000).toLocaleDateString("nl-NL") + " CET";
 }
 
-export function capitalize(s) {
+export function capitalize(s: string) {
     return isEmpty(s) ? "" : s.charAt(0).toUpperCase() + s.slice(1);
 }
 
@@ -63,7 +68,7 @@ export const ipamStates = ["Free", "Allocated", null, "Planned", null, null];
 //                             0      1      2      3      4       5      6
 export const familyFullName = ["N/A", "N/A", "N/A", "N/A", "IPv4", "N/A", "IPv6"];
 
-export function ipAddressToNumber(ipAddress) {
+export function ipAddressToNumber(ipAddress: string) {
     const octets = ipAddress.split(".");
     if (octets.length === 4) {
         return (
