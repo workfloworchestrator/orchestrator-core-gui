@@ -74,7 +74,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             confirmationDialogAction: () => {},
             confirm: () => {},
             confirmationDialogQuestion: "",
-            refresh: true,
+            refresh: false,
             interval: undefined
         };
     }
