@@ -100,7 +100,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogAction: () => this,
             confirm: () => this,
             confirmationDialogQuestion: "",
-            refresh: true
+            refresh: false
         };
     }
 
