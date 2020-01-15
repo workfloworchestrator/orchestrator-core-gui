@@ -865,7 +865,7 @@ I18n.translations.en = {
         no_termination_workflow:
             "This subscription can not be terminated as the product has no termination workflow-key.",
         modifyConfirmation:
-            "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
+            "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}? This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status:
             "This subscription can not be modified because of the status: {{status}}. Only subscriptions with status {{usable_when}} can be {{action}}.",
