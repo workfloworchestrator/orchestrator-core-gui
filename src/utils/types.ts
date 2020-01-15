@@ -80,18 +80,6 @@ export interface SubscriptionWithDetails extends Subscription {
     instances: SubscriptionInstance[];
     end_date_epoch: number;
     start_date_epoch: number;
-
-    // Used by enrich functions
-    service_speed: string;
-    nms_service_id_p: string;
-    nms_service_id_s: string;
-    label: string;
-    ims_circuit_name: string;
-    ims_node: string;
-    ims_port: string;
-    ims_iface_type: string;
-    ims_patch_position: string;
-    vlan: string;
 }
 
 export interface ServicePortSubscription extends Subscription {
@@ -253,4 +241,33 @@ export function optionalProp<T>(obj: T, key: string): any | undefined {
 
 export function setProp<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
     obj[key] = value;
+}
+
+export interface IMSEndpoint {
+    id: number;
+    type: string;
+    endpointType: string;
+    serviceId: number;
+    vlanranges: { start: number; end: number }[];
+    connector_type: string;
+    fiber_type: string;
+    iface_type: string;
+    line_name: string;
+    location: string;
+    node: string;
+    patchposition: string;
+    port: string;
+    status: string;
+}
+export interface IMSService {
+    id: number;
+    customer_id: string;
+    extra_info: string;
+    name: string;
+    product: string;
+    speed: number;
+    status: string;
+    order_id: string;
+    aliases: string[];
+    endpoints: IMSEndpoint[];
 }
