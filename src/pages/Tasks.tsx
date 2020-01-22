@@ -81,8 +81,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     componentDidMount = () => {
         this.refresh();
-        const interval = window.setInterval(this.refresh, 3000);
-        this.setState({ interval: interval });
+        // const interval = window.setInterval(this.refresh, 3000);
+        // this.setState({ interval: interval });
     };
 
     refresh = () =>

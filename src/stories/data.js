@@ -20271,7 +20271,7 @@ export const SUSPENDED_PROCESS_JSON = {
             status: "pending"
         },
         {
-            name: "Show NOC confirmation dialog.",
+            name: "Show NOC confirmation dialog",
             status: "pending"
         },
         {

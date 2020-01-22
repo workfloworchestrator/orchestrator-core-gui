@@ -47,7 +47,9 @@ import {
     SubscriptionProcesses,
     SubscriptionWithDetails,
     prop,
-    ProductWithDetails
+    ProductWithDetails,
+    IMSService,
+    IMSEndpoint
 } from "../utils/types";
 import { RouteComponentProps } from "react-router";
 
@@ -111,35 +113,6 @@ interface AbsentRelatedObject {
     type: "absent";
     requestedType: string;
     identifier: string;
-}
-
-interface IMSEndpoint {
-    id: number;
-    type: string;
-    endpointType: string;
-    serviceId: number;
-    vlanranges: { start: number; end: number }[];
-    connector_type: string;
-    fiber_type: string;
-    iface_type: string;
-    line_name: string;
-    location: string;
-    node: string;
-    patchposition: string;
-    port: string;
-    status: string;
-}
-interface IMSService {
-    id: number;
-    customer_id: string;
-    extra_info: string;
-    name: string;
-    product: string;
-    speed: number;
-    status: string;
-    order_id: string;
-    aliases: string[];
-    endpoints: IMSEndpoint[];
 }
 
 interface IPAMAddress {

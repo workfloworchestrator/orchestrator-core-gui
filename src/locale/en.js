@@ -174,7 +174,7 @@ I18n.translations.en = {
         port_id_redundant: "Redundant port",
         port_id_redundant_info: "Select a port",
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
-        internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable",
+        internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable.",
         input_fields_have_validation_errors: "input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
@@ -424,6 +424,8 @@ I18n.translations.en = {
         ip_prefix_subscriptions_info: "Specify one or more IP prefix subscriptions reserved for this customer.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
+        ieee_interface_type: "IEEE interface type",
+        ieee_interface_type_info: "Choose an IEEE interface type",
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "When you submit this from the Corelink will be deployed",
@@ -865,7 +867,7 @@ I18n.translations.en = {
         no_termination_workflow:
             "This subscription can not be terminated as the product has no termination workflow-key.",
         modifyConfirmation:
-            "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}. This will start a new modify process immediately!",
+            "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}? This will start a new modify process immediately!",
         no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
         no_modify_invalid_status:
             "This subscription can not be modified because of the status: {{status}}. Only subscriptions with status {{usable_when}} can be {{action}}.",
@@ -1261,6 +1263,8 @@ I18n.translations.en = {
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
         modify_sn8_light_path: "Modify SN8 LightPath",
+        modify_sn8_light_path_upgrade_to_redundant: "Modify SN8 LightPath: Upgrade to Redundant",
+        modify_sn8_light_path_downgrade_from_redundant: "Modify SN8 LightPath Redundant: Downgrade to SN8 LightPath",
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_sn8_service_port_nl_port_mode: "Change the mode of the port (Tagged, Linkmember)",
         modify_sn8_sp_auto_negotiation: "Modify the auto_negotiation setting for a SN8 Service Port",
@@ -1271,6 +1275,8 @@ I18n.translations.en = {
         task_update_surf_net_txt_record: "Update the surf.net zone to check correct functionality",
         task_validate_customer_ip_prefix_records: "Validate all customer ip prefixes against subscriptions",
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
+
+        reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
         validate_core_link: "Validate Core Link",
         validate_ip_prefix: "Validate IP Prefix",
