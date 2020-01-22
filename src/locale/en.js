@@ -424,6 +424,8 @@ I18n.translations.en = {
         ip_prefix_subscriptions_info: "Specify one or more IP prefix subscriptions reserved for this customer.",
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
+        ieee_interface_type: "IEEE interface type",
+        ieee_interface_type_info: "Choose an IEEE interface type",
         ims_node_id: "Choose a node from IMS",
         ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
         confirm_corelink: "When you submit this from the Corelink will be deployed",
