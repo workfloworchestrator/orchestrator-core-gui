@@ -282,7 +282,11 @@ export default class NewProcess extends React.Component {
                 )}
                 {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
                 {!isEmpty(stepUserInput) && (
-                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit(products)} />
+                    <UserInputFormWizard
+                        stepUserInput={stepUserInput}
+                        validSubmit={this.validSubmit(products)}
+                        cancel={() => this.context.redirect("/processes")}
+                    />
                 )}
             </section>
         );

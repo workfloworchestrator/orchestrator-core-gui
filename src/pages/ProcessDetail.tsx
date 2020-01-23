@@ -368,7 +368,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                             })}
                         </h3>
                     </section>
-                    <UserInputFormWizard stepUserInput={stepUserInput} validSubmit={this.validSubmit} hasNext={false} />
+                    <UserInputFormWizard
+                        stepUserInput={stepUserInput}
+                        validSubmit={this.validSubmit}
+                        hasNext={false}
+                        cancel={() => this.context.redirect(`/${this.props.isProcess ? "processes" : "tasks"}`)}
+                    />
                 </section>
             );
         }

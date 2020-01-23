@@ -56,9 +56,6 @@ export default class NewTask extends React.Component<{}, IState> {
             this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.create", { name: workflow.label }));
         });
-        catchErrorStatus(result, 510, (json: FormNotCompleteResponse) => {
-            this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
-        });
         result.catch(error => {
             // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
         });
@@ -96,6 +93,7 @@ export default class NewTask extends React.Component<{}, IState> {
                                 stepUserInput={stepUserInput}
                                 validSubmit={this.validSubmit}
                                 hasNext={hasNext || false}
+                                cancel={() => this.context.redirect("/tasks")}
                             />
                         )}
                     </section>
