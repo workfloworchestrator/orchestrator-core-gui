@@ -65,7 +65,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     componentDidMount = () => {
         const extra = Math.max(0, this.props.minimum - this.props.servicePorts.length);
         const servicePorts = [...this.props.servicePorts];
-        range(extra).forEach(() => servicePorts.push({ subscription_id: null, vlan: "", port_mode: "tagged" }));
+        range(extra).forEach(() => servicePorts.push({ subscription_id: "", vlan: "", port_mode: "tagged" }));
         this.props.onChange(servicePorts);
 
         const { availableServicePorts } = this.state;
@@ -122,7 +122,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     onChangeInternal = (name: keyof ServicePort, index: number) => (e: React.FormEvent<HTMLInputElement>) => {
         const servicePorts = [...this.props.servicePorts];
         const target = e.target as HTMLInputElement;
-        let value = e.target ? target.value : null;
+        let value = e.target ? target.value : "";
         setProp(servicePorts[index], name, value);
 
         this.clearErrors(index);
@@ -137,7 +137,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
         //todo: we might need to add tag and port_mode
-        servicePorts.push({ subscription_id: null, vlan: "", port_mode: "tagged" });
+        servicePorts.push({ subscription_id: "", vlan: "", port_mode: "tagged" });
         this.props.onChange(servicePorts);
     };
 

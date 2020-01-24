@@ -29,7 +29,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ProcessWithDetails, Step, State, ProcessSubscription, Product, InputField } from "../utils/types";
+import { ProcessWithDetails, Step, ProcessSubscription, Product, InputField, Process } from "../utils/types";
 import { withQueryParams, NumberParam, DecodedValueMap, SetQuery } from "use-query-params";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
 
@@ -89,38 +89,39 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     }
 
     componentDidMount = () => {
-        process(this.props.match.params.id).then((processInstance: CustomProcessWithDetails) => {
+        process(this.props.match.params.id).then((processInstance: Process) => {
             /**
              * Ensure correct user memberships and populate UserInput form with values
              */
 
             const { configuration, currentUser, organisations, products } = this.context;
 
-            processInstance.customerName = organisationNameByUuid(processInstance.customer, organisations);
-            processInstance.productName = productNameById(processInstance.product, products);
+            let enrichedProcess = processInstance as CustomProcessWithDetails;
+            enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
+            enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
             const userInputAllowed =
                 currentUser ||
                 currentUser.memberships.find((membership: string) => membership === requiredTeamMembership);
             let stepUserInput: InputField[] | undefined = [];
             if (userInputAllowed) {
-                const step = processInstance.steps.find(
-                    (step: Step) => step.name === processInstance.step && step.status === "pending"
+                const step = enrichedProcess.steps.find(
+                    (step: Step) => step.name === enrichedProcess.step && step.status === "pending"
                 );
                 stepUserInput = step && step.form;
             }
-            const requiredTeamMembership = configuration[processInstance.assignee];
+            const requiredTeamMembership = configuration[enrichedProcess.assignee];
             const tabs = stepUserInput ? this.state.tabs : ["process"];
             const selectedTab = stepUserInput ? "user_input" : "process";
 
             this.setState({
-                process: processInstance,
+                process: enrichedProcess,
                 stepUserInput: stepUserInput,
                 tabs: tabs,
                 selectedTab: selectedTab,
-                product: productById(processInstance.product, products)
+                product: productById(enrichedProcess.product, products)
             });
-            processSubscriptionsByProcessId(processInstance.id)
+            processSubscriptionsByProcessId(enrichedProcess.id)
                 .then(res => {
                     this.setState({ subscriptionProcesses: res, loaded: true });
                 })
@@ -304,7 +305,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         );
     };
 
-    validSubmit = (processInput: State) => {
+    validSubmit = (processInput: {}[]) => {
         const { process } = this.state;
         if (!process) {
             return Promise.reject();

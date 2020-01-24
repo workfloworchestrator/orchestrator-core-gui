@@ -55,7 +55,7 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
-import { Product, AppError } from "../utils/types";
+import { Product, AppError, Organization } from "../utils/types";
 
 import "./App.scss";
 
@@ -170,19 +170,20 @@ class App extends React.PureComponent<{}, IState> {
     }
 
     fetchUser(log = false) {
-        config()
-            .catch(err => this.handleBackendDown())
-            .then(configuration => {
-                me()
-                    .then(currentUser => {
-                        if (currentUser && (currentUser.sub || currentUser.user_name)) {
-                            Promise.all([organisations(), products(), locationCodes()]).then(result => {
+        let promise = config();
+        promise.catch(err => this.handleBackendDown());
+        promise.then(configuration => {
+            me()
+                .then(currentUser => {
+                    if (currentUser && (currentUser.sub || currentUser.user_name)) {
+                        Promise.all([organisations(), products(), locationCodes()]).then(
+                            (result: [Organization[], Product[], string[]]) => {
                                 const [allOrganisations, allProducts, allLocationCodes] = result;
                                 this.setState({
                                     loading: false,
                                     applicationContext: {
                                         currentUser: currentUser,
-                                        configuration: configuration,
+                                        configuration: configuration!,
                                         organisations: allOrganisations,
                                         locationCodes: allLocationCodes,
                                         products: allProducts.sort((a: Product, b: Product) =>
@@ -194,20 +195,21 @@ class App extends React.PureComponent<{}, IState> {
                                 if (log) {
                                     logUserInfo(currentUser.email, "logged in");
                                 }
-                            });
-                        } else {
-                            this.handleBackendDown();
-                        }
-                    })
-                    .catch(err => {
-                        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-                            localStorage.removeItem("access_token");
-                            this.componentDidMount();
-                        } else {
-                            throw err;
-                        }
-                    });
-            });
+                            }
+                        );
+                    } else {
+                        this.handleBackendDown();
+                    }
+                })
+                .catch(err => {
+                    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                        localStorage.removeItem("access_token");
+                        this.componentDidMount();
+                    } else {
+                        throw err;
+                    }
+                });
+        });
     }
 
     render() {
