@@ -56,15 +56,10 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
     submit = (processInput: {}[]) => {
         const { subscriptionId, workflowName } = this.props;
 
-        let result = startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]);
-        result.then(res => {
+        return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then(res => {
             this.context.redirect(`/processes?highlight=${res.id}`);
             setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
         });
-        result.catch(error => {
-            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-        });
-        return result;
     };
 
     render() {

@@ -51,15 +51,10 @@ export default class NewTask extends React.Component<{}, IState> {
             return Promise.reject();
         }
 
-        let result = startProcess(workflow.value, taskInput);
-        result.then(() => {
+        return startProcess(workflow.value, taskInput).then(() => {
             this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.create", { name: workflow.label }));
         });
-        result.catch(error => {
-            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-        });
-        return result;
     };
 
     changeWorkflow = (option: Option) => {

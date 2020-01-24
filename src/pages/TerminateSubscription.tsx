@@ -64,15 +64,12 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
         const { product } = this.state;
         const terminate_workflow = product!.workflows!.find(wf => wf.target === TARGET_TERMINATE)!;
 
-        let result = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]);
-        result.then(res => {
-            this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
-        });
-        result.catch(error => {
-            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-        });
-        return result;
+        return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
+            res => {
+                this.context.redirect(`/processes?highlight=${res.id}`);
+                setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+            }
+        );
     };
 
     render() {

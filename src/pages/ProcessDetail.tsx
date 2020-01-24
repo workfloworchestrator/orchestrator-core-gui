@@ -311,18 +311,12 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return Promise.reject();
         }
 
-        let result = resumeProcess(process.id, processInput);
-        result
-            .then(e => {
-                this.context.redirect(`/${this.props.isProcess ? `processes?highlight=${process.id}` : "tasks"}`);
-                setFlash(
-                    I18n.t(`${this.props.isProcess ? "process" : "task"}.flash.update`, { name: process.workflow_name })
-                );
-            })
-            .catch(error => {
-                // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-            });
-        return result;
+        return resumeProcess(process.id, processInput).then(e => {
+            this.context.redirect(`/${this.props.isProcess ? `processes?highlight=${process.id}` : "tasks"}`);
+            setFlash(
+                I18n.t(`${this.props.isProcess ? "process" : "task"}.flash.update`, { name: process.workflow_name })
+            );
+        });
     };
 
     switchTab = (tab: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
