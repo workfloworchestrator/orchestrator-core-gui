@@ -30,24 +30,26 @@ interface IProps {
 }
 
 interface IState {
-    organisationId?: string;
     product?: ProductWithDetails;
-    stepUserInput: InputField[];
+    stepUserInput?: InputField[];
 }
 
 export default class TerminateSubscription extends React.Component<IProps, IState> {
     static propTypes: {};
-    state: IState = {
-        stepUserInput: []
-    };
+    state: IState = {};
 
     componentDidMount = () => {
-        subscriptionsDetail(this.props.subscriptionId).then(sub =>
+        const { subscriptionId } = this.props;
+
+        subscriptionsDetail(subscriptionId).then(sub =>
             productById(sub.product.product_id).then(product => {
                 const terminate_workflow = product.workflows!.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
-                let promise = startProcess(terminate_workflow.name, [{ subscription_id: this.props.subscriptionId }]);
+                let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
+                    this.context.redirect(`/processes?highlight=${res.id}`);
+                    setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+                });
                 catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
-                    this.setState({ stepUserInput: json.form, organisationId: sub.customer_id, product: product });
+                    this.setState({ stepUserInput: json.form, product: product });
                 });
             })
         );
@@ -58,16 +60,14 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     };
 
     submit = (processInput: {}[]) => {
+        const { subscriptionId } = this.props;
         const { product } = this.state;
         const terminate_workflow = product!.workflows!.find(wf => wf.target === TARGET_TERMINATE)!;
 
-        let result = startProcess(terminate_workflow.name, [
-            { subscription_id: this.props.subscriptionId },
-            ...processInput
-        ]);
+        let result = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]);
         result.then(res => {
             this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId, pid: res.id }));
+            setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
         });
         result.catch(error => {
             // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
@@ -76,9 +76,9 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     };
 
     render() {
-        const { product } = this.state;
+        const { stepUserInput, product } = this.state;
 
-        if (!product) {
+        if (!stepUserInput || !product) {
             return null;
         }
 
@@ -111,7 +111,7 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
                     )}
 
                     <UserInputFormWizard
-                        stepUserInput={this.state.stepUserInput}
+                        stepUserInput={stepUserInput}
                         validSubmit={this.submit}
                         cancel={this.cancel}
                         hasNext={false}
@@ -123,7 +123,7 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
 }
 
 TerminateSubscription.propTypes = {
-    subscriptionId: PropTypes.string
+    subscriptionId: PropTypes.string.isRequired
 };
 
 TerminateSubscription.contextType = ApplicationContext;
