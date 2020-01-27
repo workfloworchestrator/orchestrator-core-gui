@@ -83,29 +83,6 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h1>{I18n.t("subscription.terminate")}</h1>
-                    {product.tag === "Node" && (
-                        <section className="message-container">
-                            <section className="message">
-                                <section className="status-icon">
-                                    <i className="fa fa-exclamation-triangle" />
-                                </section>
-                                <section className="status-info">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>{I18n.t("subscription.node_terminate_warning")}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>{I18n.t("subscription.node_terminate_warning_info")}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </section>
-                        </section>
-                    )}
 
                     <UserInputFormWizard
                         stepUserInput={stepUserInput}

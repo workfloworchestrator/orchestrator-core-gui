@@ -28,63 +28,10 @@
             font-size: 22px;
             color: $darker-blue;
             padding-top: 15px;
+            padding-bottom: 15px;
         }
     }
     section.form-step {
         padding: 20px 0;
-    }
-}
-
-section.message-container {
-    width: 50%;
-    background-color: $lightest-grey;
-    padding: 10px;
-    margin: 15px 0 5px 0;
-    box-shadow: 1px 1px 1px 1px $light-red;
-
-    section.message {
-        width: 95%;
-        display: flex;
-        align-items: center;
-        section.status-icon {
-            text-align: center;
-            margin-top: 5px;
-            margin-right: 15px;
-            i {
-                font-size: 50px;
-                &.fa-check {
-                    color: $green;
-                }
-                &.fa-exclamation-triangle {
-                    color: $red;
-                }
-            }
-        }
-        section.status-info {
-            table {
-                width: 100%;
-                font-size: 15px;
-                th {
-                    text-align: left;
-                    text-transform: uppercase;
-                    color: $red;
-                    padding: 4px 0;
-                }
-                td {
-                    &.name {
-                        text-transform: uppercase;
-                        font-weight: bold;
-                        color: $medium-grey;
-                        padding: 2px 40px 2px 0;
-                    }
-                    &.description {
-                        color: darken($orange, 25%);
-                    }
-                    span {
-                        font-style: italic;
-                    }
-                }
-            }
-        }
     }
 }
