@@ -162,9 +162,21 @@ export interface ProcessSubscription {
     workflow_target: string;
 }
 
-export interface InputField {
-    [index: string]: any;
+export interface ProcessV2 {
+	assignee: string;
+	creator: string;
+	failure: string;
+	modified: string;
+	pid: string;
+	started: string;
+	status: string;
+	step: string;
+	subscriptions: Array<Subscription>;
+	workflow: string;
 }
+
+export interface InputField {
+    [index: string]: any;}
 
 export interface Step {
     name: string;
