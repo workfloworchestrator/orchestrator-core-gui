@@ -16,57 +16,71 @@
 import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import { stop } from "../utils/Utils";
-import { startProcess, subscriptionsDetail, productById } from "../api/index";
+import { startProcess, subscriptionsDetail, productById, catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
+import { ProductWithDetails, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
 
-export default class TerminateSubscription extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            organisationId: null,
-            product: { tag: "", workflows: [] }
-        };
-    }
+interface IProps {
+    subscriptionId: string;
+}
+
+interface IState {
+    organisationId?: string;
+    product?: ProductWithDetails;
+    stepUserInput: InputField[];
+}
+
+export default class TerminateSubscription extends React.Component<IProps, IState> {
+    static propTypes: {};
+    state: IState = {
+        stepUserInput: []
+    };
 
     componentDidMount = () => {
         subscriptionsDetail(this.props.subscriptionId).then(sub =>
-            productById(sub.product.product_id).then(product =>
-                this.setState({
-                    organisationId: sub.customer_id,
-                    product: product
-                })
-            )
+            productById(sub.product.product_id).then(product => {
+                const terminate_workflow = product.workflows!.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
+                let promise = startProcess(terminate_workflow.name, [{ subscription_id: this.props.subscriptionId }]);
+                catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
+                    this.setState({ stepUserInput: json.form, organisationId: sub.customer_id, product: product });
+                });
+            })
         );
     };
 
-    cancel = e => {
-        stop(e);
+    cancel = () => {
         this.context.redirect("/subscription/" + this.props.subscriptionId);
     };
 
-    submit = processInput => {
+    submit = (processInput: {}[]) => {
         const { product } = this.state;
-        const terminate_workflow = product.workflows.find(wf => wf.target === TARGET_TERMINATE);
+        const terminate_workflow = product!.workflows!.find(wf => wf.target === TARGET_TERMINATE)!;
 
-        return startProcess(terminate_workflow.name, processInput).then(res => {
+        let result = startProcess(terminate_workflow.name, [
+            { subscription_id: this.props.subscriptionId },
+            ...processInput
+        ]);
+        result.then(res => {
             this.context.redirect(`/processes?highlight=${res.id}`);
             setFlash(I18n.t("process.flash.create", { name: this.props.subscriptionId, pid: res.id }));
         });
-    };
-
-    changeUserInput = value => {
-        this.setState({ contactPersons: [...value] });
+        result.catch(error => {
+            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
+        });
+        return result;
     };
 
     render() {
-        const { organisationId, product } = this.state;
-        const { subscriptionId } = this.props;
+        const { product } = this.state;
+
+        if (!product) {
+            return null;
+        }
 
         return (
             <div className="mod-terminate-subscription">
@@ -97,15 +111,10 @@ export default class TerminateSubscription extends React.Component {
                     )}
 
                     <UserInputFormWizard
-                        stepUserInput={
-                            product.tag !== "IP_PREFIX" && product.tag !== "Node" && product.tag !== "Corelink"
-                                ? [
-                                      { name: "subscription_id", type: "subscription_id", value: subscriptionId },
-                                      { name: "contact_persons", type: "contact_persons", organisation: organisationId }
-                                  ]
-                                : [{ name: "subscription_id", type: "subscription_id", value: subscriptionId }]
-                        }
+                        stepUserInput={this.state.stepUserInput}
                         validSubmit={this.submit}
+                        cancel={this.cancel}
+                        hasNext={false}
                     />
                 </section>
             </div>

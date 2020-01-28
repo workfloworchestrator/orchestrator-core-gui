@@ -902,6 +902,7 @@ storiesOf("UserInputFormWizard", module)
                     }
                 ]}
                 hasNext={true}
+                cancel={action("cancel")}
             />
         );
     });
