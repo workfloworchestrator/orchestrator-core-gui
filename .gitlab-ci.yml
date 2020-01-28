@@ -27,7 +27,7 @@ unit test:
     TZ: Europe/Amsterdam
   script:
     - yarn install --frozen-lockfile
-    - yarn prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'
+    - yarn prettier -c '{**/*.{js,jsx,scss,md,ts,tsx},public/**/*.html}'
     - yarn test --coverage
 
 .deploy_script: &deploy_script

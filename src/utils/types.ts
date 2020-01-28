@@ -163,20 +163,21 @@ export interface ProcessSubscription {
 }
 
 export interface ProcessV2 {
-	assignee: string;
-	creator: string;
-	failure: string;
-	modified: string;
-	pid: string;
-	started: string;
-	status: string;
-	step: string;
-	subscriptions: Array<Subscription>;
-	workflow: string;
+    assignee: string;
+    creator: string;
+    failure: string;
+    modified: string;
+    pid: string;
+    started: string;
+    status: string;
+    step: string;
+    subscriptions: Array<Subscription>;
+    workflow: string;
 }
 
 export interface InputField {
-    [index: string]: any;}
+    [index: string]: any;
+}
 
 export interface Step {
     name: string;
