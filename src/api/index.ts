@@ -446,7 +446,7 @@ export function processesFilterable(
     showTasks = false
 ) {
     return fetchJson(
-        `v2/processes?range=${range}&sort=${sort}&filter=${filter}${showTasks ? "is_task,true" : "is_task,false"}`
+        `v2/processes?range=${range}&sort=${sort}&filter=${filter}${showTasks ? ",is_task,true" : ",is_task,false"}`
     );
 }
 export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
