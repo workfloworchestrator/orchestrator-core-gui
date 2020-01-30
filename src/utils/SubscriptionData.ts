@@ -17,6 +17,10 @@ import { paginatedSubscriptions } from "../api";
 import { SortingRule, Filter } from "react-table";
 import { Subscription } from "./types";
 
+const encodeValue = (string: string) => {
+    return encodeURIComponent(string.replace(/,/g, "_"));
+};
+
 export const requestSubscriptionData = (
     pageSize: number,
     page: number,
@@ -30,7 +34,7 @@ export const requestSubscriptionData = (
 
     const filter_parameters = filtered
         .map(item => {
-            return `${item.id},${item.value}`;
+            return `${item.id},${encodeValue(item.value)}`;
         })
         .join(",");
     const sort_parameters = sorted
