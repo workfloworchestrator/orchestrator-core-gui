@@ -8796,6 +8796,236 @@ exports[`Storyshots ProcessDetail Task 1`] = `
 </section>
 `;
 
+exports[`Storyshots ProcessesTable Processes Table 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-processes"
+  >
+    <div>
+      <table
+        className="processes"
+      >
+        <thead>
+          <tr>
+            <th
+              colSpan={1}
+              style={
+                Object {
+                  "cursor": undefined,
+                }
+              }
+            >
+              pid
+               
+              
+            </th>
+            <th
+              colSpan={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Assignee
+               
+              <i
+                className="fa fa-sort"
+              />
+            </th>
+            <th
+              colSpan={1}
+              style={
+                Object {
+                  "cursor": undefined,
+                }
+              }
+            >
+              Last step
+               
+              
+            </th>
+            <th
+              colSpan={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Status
+               
+              <i
+                className="fa fa-sort"
+              />
+            </th>
+            <th
+              colSpan={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Workflow
+               
+              <i
+                className="fa fa-sort"
+              />
+            </th>
+            <th
+              colSpan={1}
+              style={
+                Object {
+                  "cursor": undefined,
+                }
+              }
+            >
+              Customers
+               
+              
+            </th>
+            <th
+              colSpan={1}
+              style={
+                Object {
+                  "cursor": undefined,
+                }
+              }
+            >
+              Subscriptions
+               
+              
+            </th>
+            <th
+              colSpan={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Started
+               
+              <i
+                className="fa fa-sort"
+              />
+            </th>
+            <th
+              colSpan={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+              title="Toggle SortBy"
+            >
+              Last Modified
+               
+              <i
+                className="fa fa-sort-down"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+      <div
+        className="pagination"
+      >
+        <button
+          disabled={true}
+          onClick={[Function]}
+        >
+          &lt;&lt;
+        </button>
+         
+        <button
+          disabled={true}
+          onClick={[Function]}
+        >
+          &lt;
+        </button>
+         
+        <button
+          disabled={false}
+          onClick={[Function]}
+        >
+          &gt;
+        </button>
+         
+        <button
+          disabled={false}
+          onClick={[Function]}
+        >
+          &gt;&gt;
+        </button>
+         
+        <span>
+          Page
+           
+          <strong>
+            1
+             of 
+            99
+          </strong>
+           
+        </span>
+        <span>
+          | Go to page:
+           
+          <input
+            defaultValue="1"
+            onChange={[Function]}
+            style={
+              Object {
+                "width": "100px",
+              }
+            }
+            type="number"
+          />
+        </span>
+         
+        <select
+          onChange={[Function]}
+          value={25}
+        >
+          <option
+            value={25}
+          >
+            Show 
+            25
+          </option>
+          <option
+            value={50}
+          >
+            Show 
+            50
+          </option>
+          <option
+            value={100}
+          >
+            Show 
+            100
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
 exports[`Storyshots SubscriptionDetail Subscription 1`] = `
 <section
   className="storybook-container"

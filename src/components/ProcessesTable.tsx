@@ -1,19 +1,26 @@
 import React from "react";
-import { Cell, Column, useTable, useFilters, useSortBy, usePagination } from "react-table";
+import { Cell, Column, ColumnInstance, useTable, useFilters, useSortBy, usePagination, useAsyncDebounce } from "react-table";
 import "./ProcessesTable.scss";
 import { processesFilterable } from "../api/index.js";
-import { Subscription } from "../utils/types";
-import {renderDateTime} from "../utils/Lookups";
+import { ProcessV2, Subscription } from "../utils/types";
+import { renderDateTime } from "../utils/Lookups";
 
 interface GenericTableProps {
-	columns: Column[]
-	data: object[]
-	fetchData(options: object): any
+    columns: Column[];
+    data: object[];
+    fetchData(options: object): any;
+    controlledPageCount: number;
+}
+
+
+interface FilterArgument {
+	id: string;
+        values: string[];
 }
 
 function GenericTable(props: GenericTableProps) {
-    // const { columns, data, fetchData, pageCount } = props;
-    const { columns, data, fetchData } = props;
+    const { columns, data, fetchData, controlledPageCount } = props;
+    // const { columns, data, fetchData } = props;
     const {
         getTableProps,
         getTableBodyProps,
@@ -28,20 +35,42 @@ function GenericTable(props: GenericTableProps) {
         nextPage,
         previousPage,
         setPageSize,
-        state: { pageIndex, pageSize }
+        state: { pageIndex, pageSize, sortBy }
     } = useTable(
         {
             columns,
             data,
-            initialState: { pageIndex: 0 }, 
+            initialState: { pageIndex: 0, pageSize: 25, sortBy: [{ id: "modified", desc: true }] },
+            manualPagination: true,
+            manualSortBy: true,
+            autoResetSortBy: false,
+            pageCount: controlledPageCount
         },
+        useSortBy,
         usePagination
     );
 
 
+    //const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
+
     React.useEffect(() => {
-	    fetchData({ pageIndex, pageSize })
-    }, [fetchData, pageIndex, pageSize])
+        fetchData({ pageIndex, pageSize, sortBy });
+    }, [fetchData, pageIndex, pageSize, sortBy]);
+
+    const sortIcon = (col: ColumnInstance) => {
+	if (!col.canSort) {
+		return "";
+	}
+	if (col.isSorted) {
+		if (col.isSortedDesc) {
+			return <i className="fa fa-sort-down"></i>;
+		} else {
+			return <i className="fa fa-sort-up"></i>;
+		}
+	} else {
+		return <i className="fa fa-sort"></i>;
+	}
+    }
 
     return (
         <div>
@@ -50,7 +79,9 @@ function GenericTable(props: GenericTableProps) {
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} >
+                                    {column.render("Header")}{sortIcon(column)}
+                                </th>
                             ))}
                         </tr>
                     ))}
@@ -105,7 +136,7 @@ function GenericTable(props: GenericTableProps) {
                         setPageSize(Number(e.target.value));
                     }}
                 >
-                    {[10, 20, 30, 40, 50].map(pageSize => (
+                    {[25, 50, 100].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
                             Show {pageSize}
                         </option>
@@ -116,100 +147,121 @@ function GenericTable(props: GenericTableProps) {
     );
 }
 
-function renderSubscriptionsCell({cell}: {cell: Cell}) {
-	const subscriptions: Subscription[] = cell.value;
-	return subscriptions.map((subscription: Subscription) => {
-		return (<p key={subscription.subscription_id}>
-			<a href={`/subscriptions/${subscription.subscription_id}`}>
-			{subscription.description}
-			</a>
-			</p>)});
+function renderSubscriptionsCell({ cell }: { cell: Cell }) {
+    const subscriptions: Subscription[] = cell.value;
+    return subscriptions.map((subscription: Subscription) => {
+        return (
+            <p key={subscription.subscription_id}>
+                {subscription.product.name}: <a href={`/subscriptions/${subscription.subscription_id}`}>
+                    {subscription.description}
+                </a>
+            </p>
+        );
+    });
 }
 
-function renderProductsCell({cell}: {cell: Cell}) {
-	const subscriptions: Subscription[] = cell.value;
-	return subscriptions.map((subscription) => subscription.product.name).join(", ");
+function renderCustomersCell({ cell }: { cell: Cell }) {
+    const subscriptions: Subscription[] = cell.value;
+    return subscriptions.map(subscription => subscription.customer_id).join(", ");
 }
 
-function renderTimestampCell({cell}: {cell: Cell}) {
-	const timestamp: number = cell.value;
-	return renderDateTime(timestamp);
-
+function renderTimestampCell({ cell }: { cell: Cell }) {
+    const timestamp: number = cell.value;
+    return renderDateTime(timestamp);
 }
 
-function renderPidCell({cell}: {cell: Cell}) {
-	const pid: string = cell.value;
-	return (<a href={`/process/${pid}`} title={pid}>{pid.slice(0,8)}</a>)
+function renderPidCell({ cell }: { cell: Cell }) {
+    const pid: string = cell.value;
+    return (
+        <a href={`/process/${pid}`} title={pid}>
+            {pid.slice(0, 8)}
+        </a>
+    );
 }
 
 function ProcessesTable() {
-	const columns = React.useMemo(
-		() => [
-			{
-				Header: "pid",
-				accessor: "pid",
-				Cell: renderPidCell,
-			},
-			{
-				Header: "Assignee",
-				accessor: "assignee",
-			},
-			{
-				Header: "Last step",
-				accessor: "step",
-			},
-			{
-				Header: "Status",
-				accessor: "status",
-			},
-			{
-				Header: "Workflow",
-				accessor:"workflow",
-			},
-			{
-				Header: "Product(s)",
-				accessor: "subscriptions",
-				Cell: renderProductsCell,
-			},
-			{
-				Header: "Subscriptions",
-				accessor: "subscriptions",
-				Cell: renderSubscriptionsCell,
-			},
-			{
-				Header: "Started",
-				accessor: "started",
-				Cell: renderTimestampCell,
-			},
-			{
-				Header: "Last Modified",
-				accessor: "modified",
-				Cell: renderTimestampCell,
-			}
-		], []
-	)
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: "pid",
+                accessor: "pid",
+                disableSortBy: true,
+                Cell: renderPidCell
+            },
+            {
+                Header: "Assignee",
+                accessor: "assignee"
+            },
+            {
+                Header: "Last step",
+                accessor: "step",
+                disableSortBy: true
+            },
+            {
+                Header: "Status",
+                accessor: "status",
+            },
+            {
+                Header: "Workflow",
+                accessor: "workflow",
+            },
+            {
+                Header: "Customer",
+                accessor: "subscriptions",
+                disableSortBy: true,
+                Cell: renderCustomersCell
+            },
+            {
+                Header: "Subscriptions",
+                accessor: "subscriptions",
+                disableSortBy: true,
+                Cell: renderSubscriptionsCell
+            },
+            {
+                Header: "Started",
+                accessor: "started",
+                Cell: renderTimestampCell
+            },
+            {
+                Header: "Last Modified",
+                accessor: "modified",
+                Cell: renderTimestampCell
+            }
+        ],
+        []
+    );
 
-	const [data, setData] = React.useState([]);
-	const [loading, setLoading] = React.useState(false);
-	// const [pageCount, setPageCount] = React.useState(0);
-	const fetchIdRef = React.useRef(0);
+    const [data, setData] = React.useState<ProcessV2[]>([]);
+    const [loading, setLoading] = React.useState(false);
+    const [pageCount, setPageCount] = React.useState(0);
+    const fetchIdRef = React.useRef(0);
+    const [filterBy, setFilterBy] = React.useState<FilterArgument[]>([
+	    {id: "status", values: ["running", "suspended", "failed"]},
+	    {id: "is_task", values: ["false"]}
+    ])
 
-	const fetchData = React.useCallback(({ pageSize, pageIndex }) => {
-		const fetchId = ++fetchIdRef.current;
+    const fetchData = React.useCallback(({ pageSize, pageIndex, sortBy}) => {
+        const fetchId = ++fetchIdRef.current;
 
-		setLoading(true);
+        setLoading(true);
+        setPageCount(99);
+        const startRow = pageSize * pageIndex;
+        const endRow = startRow + pageSize;
 
-		const startRow = pageSize * pageIndex;
-		const endRow = startRow + pageSize;
-		
-		processesFilterable().then((processes) => {
-			setData(processes);
-			setLoading(false);
-		});
-	}, []);
+        processesFilterable(startRow, endRow, sortBy, filterBy).then(processes => {
+            // Only update the data if this is the latest fetch.
+            if (fetchId === fetchIdRef.current) {
+                setData(processes);
+                setLoading(false);
+            }
+        });
+    }, [filterBy]);
 
-	return <GenericTable columns={columns} data={data} fetchData={fetchData} />
+    return (
+        <div className="mod-processes">
+            <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
+        </div>
+    );
 }
-
 
 export default ProcessesTable;

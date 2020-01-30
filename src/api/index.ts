@@ -439,16 +439,18 @@ export function processes(showTasks = false): Promise<ProcessWithDetails[]> {
     return fetchJson(`processes?showTasks=${showTasks}`);
 }
 
-export function processesFilterable(
-    range = "0,24",
-    sort = "modified,desc",
-    filter = "status,running-suspended-failed",
-    showTasks = false
-) {
-    return fetchJson(
-        `v2/processes?range=${range}&sort=${sort}&filter=${filter}${showTasks ? ",is_task,true" : ",is_task,false"}`
-    );
+function fetchFilterableWrapper(endpoint) {
+	function fetchFilterable(startRow, endRow, sortBy, filterBy) {
+	    const range = `${startRow},${endRow}`;
+	    const sort = sortBy.map(({id, desc}) => `${id},${desc ? "desc" : "asc"}`).join(",");
+	    const filter = filterBy.map(({ id, values }) => `${id},${values.join("-")}`).join(",");
+	    return fetchJson(`${endpoint}?range=${range}&sort=${sort}&filter=${filter}`);
+	}
+	return fetchFilterable;
 }
+
+export const processesFilterable = fetchFilterableWrapper("v2/processes");
+
 export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
     return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
 }
