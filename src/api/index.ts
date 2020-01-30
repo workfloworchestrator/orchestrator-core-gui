@@ -20,24 +20,49 @@ import {
     child_subscriptions,
     ims_circuit_id,
     ims_port_id,
-    parent_subscriptions,
     port_subscription_id
 } from "../validations/Subscriptions";
+import {
+    Product,
+    ProductBlock,
+    ResourceType,
+    AppConfig,
+    IMSService,
+    IMSPort,
+    Subscription,
+    ServicePortSubscription,
+    Organization,
+    User,
+    Workflow,
+    Process,
+    ProcessSubscription,
+    ProcessWithDetails,
+    ProductWithDetails
+} from "../utils/types";
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
-let configuration = {};
+let configuration: AppConfig | null = null;
 
-function apiUrl(path) {
+function apiUrl(path: string) {
     return apiPath + path;
 }
 
 let started = 0;
 let ended = 0;
 
-function validateResponse(showErrorDialog) {
-    return res => {
+class ResponseError extends Error {
+    response: Response;
+
+    constructor(response: Response) {
+        super(response.statusText);
+        this.response = response;
+    }
+}
+
+function validateResponse(showErrorDialog: boolean) {
+    return (res: Response) => {
         ++ended;
         if (started <= ended) {
             mySpinner.stop();
@@ -50,8 +75,7 @@ function validateResponse(showErrorDialog) {
                 setTimeout(() => window.location.reload(true), 100);
                 return res;
             }
-            const error = new Error(res.statusText);
-            error.response = res;
+            const error = new ResponseError(res);
 
             if (showErrorDialog) {
                 setTimeout(() => {
@@ -64,7 +88,7 @@ function validateResponse(showErrorDialog) {
     };
 }
 
-function validFetch(path, options, headers = {}, showErrorDialog = true) {
+function validFetch(path: string, options: {}, headers = {}, showErrorDialog = true) {
     const access_token = localStorage.getItem("access_token");
     const contentHeaders = {
         Accept: "application/json",
@@ -83,10 +107,10 @@ function validFetch(path, options, headers = {}, showErrorDialog = true) {
     return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog));
 }
 
-export function catchErrorStatus(promise, status, callback) {
+export function catchErrorStatus(promise: Promise<any>, status: number, callback: (json: any) => void) {
     return promise.catch(err => {
         if (err.response && err.response.status === status) {
-            err.response.json().then(json => {
+            err.response.json().then((json: {}) => {
                 callback(json);
             });
         } else {
@@ -95,20 +119,32 @@ export function catchErrorStatus(promise, status, callback) {
     });
 }
 
-function fetchJson(path, options = {}, headers = {}, showErrorDialog = true, result = true) {
-    return validFetch(path, options, headers, showErrorDialog).then(res => (result ? res.json() : {}));
+function fetchJson<R = {}>(
+    path: string,
+    options = {},
+    headers = {},
+    showErrorDialog = true,
+    result = true
+): Promise<R> {
+    return validFetch(path, options, headers, showErrorDialog).then(res => (result ? res.json() : null));
 }
 
-function fetchJsonWithCustomErrorHandling(path) {
-    return fetchJson(path, {}, {}, false, true);
+function fetchJsonWithCustomErrorHandling<R = {}>(path: string): Promise<R> {
+    return fetchJson<R>(path, {}, {}, false, true);
 }
 
-function postPutJson(path, body, method, showErrorDialog = true, result = true) {
-    return fetchJson(path, { method: method, body: JSON.stringify(body) }, {}, showErrorDialog, result);
+function postPutJson<R = {}>(
+    path: string,
+    body: {},
+    method: string,
+    showErrorDialog = true,
+    result = true
+): Promise<R> {
+    return fetchJson<R>(path, { method: method, body: JSON.stringify(body) }, {}, showErrorDialog, result);
 }
 
 //API metadata
-export function products() {
+export function products(): Promise<Product[]> {
     return fetchJson("products");
 }
 
@@ -124,15 +160,15 @@ export function productStatuses() {
     return fetchJson("products/statuses/all");
 }
 
-export function productById(productId) {
+export function productById(productId: string): Promise<ProductWithDetails> {
     return fetchJson(`products/${productId}`);
 }
 
-export function saveProduct(product) {
+export function saveProduct(product: Product) {
     return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", true, false);
 }
 
-export function deleteProduct(id) {
+export function deleteProduct(id: string) {
     return fetchJson(`products/${id}`, { method: "DELETE" }, {}, false, false);
 }
 
@@ -140,11 +176,11 @@ export function productBlocks() {
     return fetchJson("product_blocks");
 }
 
-export function productBlockById(id) {
+export function productBlockById(id: string) {
     return fetchJson(`product_blocks/${id}`);
 }
 
-export function saveProductBlock(productBlock) {
+export function saveProductBlock(productBlock: ProductBlock) {
     return postPutJson(
         "product_blocks",
         productBlock,
@@ -154,7 +190,7 @@ export function saveProductBlock(productBlock) {
     );
 }
 
-export function deleteProductBlock(id) {
+export function deleteProductBlock(id: string) {
     return fetchJson(`product_blocks/${id}`, { method: "DELETE" }, {}, false, false);
 }
 
@@ -162,11 +198,11 @@ export function resourceTypes() {
     return fetchJson("resource_types");
 }
 
-export function resourceType(id) {
+export function resourceType(id: string) {
     return fetchJson(`resource_types/${id}`);
 }
 
-export function saveResourceType(resourceType) {
+export function saveResourceType(resourceType: ResourceType) {
     return postPutJson(
         "resource_types",
         resourceType,
@@ -176,7 +212,7 @@ export function saveResourceType(resourceType) {
     );
 }
 
-export function deleteResourceType(id) {
+export function deleteResourceType(id: string) {
     return fetchJson(`resource_types/${id}`, { method: "DELETE" }, {}, false, false);
 }
 
@@ -185,15 +221,19 @@ export function allSubscriptions() {
     return fetchJson(`v2/subscriptions/all`);
 }
 
-export function paginatedSubscriptions(range = "0,24", sort = "start_date,desc", filter) {
+export function paginatedSubscriptions(
+    range = "0,24",
+    sort = "start_date,desc",
+    filter: string
+): Promise<Subscription[]> {
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
-export function subscriptionsDetail(subscription_id) {
-    return fetchJsonWithCustomErrorHandling(`subscriptions/${subscription_id}`);
+export function subscriptionsDetail(subscription_id: string): Promise<Subscription> {
+    return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/${subscription_id}`);
 }
 
-export function subscriptionsByTags(tagList, statusList = []) {
+export function subscriptionsByTags(tagList: string[], statusList: string[] = []) {
     return fetchJson(
         `subscriptions/tag/${encodeURIComponent(tagList.join(","))}/${encodeURIComponent(statusList.join(","))}`
     );
@@ -204,7 +244,11 @@ export function nodeSubscriptions(statusList = []) {
     return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
 
-export function portSubscriptions(tagList, statusList = [], node = null) {
+export function portSubscriptions(
+    tagList: string[],
+    statusList: string[] = [],
+    node = null
+): Promise<ServicePortSubscription[]> {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(
         `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
@@ -213,23 +257,23 @@ export function portSubscriptions(tagList, statusList = [], node = null) {
     );
 }
 
-export function subscriptionsByProductType(type) {
+export function subscriptionsByProductType(type: string) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptionWorkflows(subscription_id) {
+export function subscriptionWorkflows(subscription_id: string) {
     return fetchJson(`v2/subscriptions/workflows/${subscription_id}`);
 }
 
-export function subscriptionsByProductId(productId) {
+export function subscriptionsByProductId(productId: string) {
     return fetchJson(`subscriptions/product/${productId}`);
 }
 
-export function organisations() {
+export function organisations(): Promise<Organization[]> {
     return fetchJson("crm/organisations");
 }
 
-export function ieeeInterfaceTypesForProductId(id) {
+export function ieeeInterfaceTypesForProductId(id: string) {
     return fetchJson(`products/ieee_interface_types/${id}`);
 }
 
@@ -237,59 +281,62 @@ export function corelinkIEEEInterfaceTypes() {
     return fetchJson("products/corelink_ieee_interface_types");
 }
 
-export function getNodesByLocationAndStatus(locationCode, status) {
+export function getNodesByLocationAndStatus(locationCode: string, status: string) {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
 
-export function getFreePortsByNodeIdAndInterfaceType(nodeId, interfaceType, status, mode) {
+export function getFreePortsByNodeIdAndInterfaceType(
+    nodeId: number,
+    interfaceType: string,
+    status: string,
+    mode: string
+) {
     return fetchJson(`ims/free_ports/${nodeId}/${interfaceType}/${status}/${mode}`);
 }
 
-export function freePortsForLocationCodeAndInterfaceType(locationCode, interfaceType) {
+export function freePortsForLocationCodeAndInterfaceType(locationCode: string, interfaceType: string) {
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`);
 }
 
-export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId, interfaceType) {
+export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId: number, interfaceType: string) {
     return fetchJson(`ims/free_corelink_ports/${nodeId}/${interfaceType}`);
 }
 
-export function nodesForLocationCode(locationCode) {
+export function nodesForLocationCode(locationCode: string) {
     return fetchJson(`ims/nodes/${locationCode}`);
 }
 
-export function usedVlans(subscriptionId) {
+export function usedVlans(subscriptionId: string): Promise<number[][]> {
     return fetchJsonWithCustomErrorHandling(`ims/vlans/${subscriptionId}`);
 }
 
-export function portByImsPortId(portId) {
+export function portByImsPortId(portId: number) {
     return fetchJson(`ims/port_by_ims_port/${portId}`);
 }
 
-export function internalPortByImsPortId(portId) {
+export function internalPortByImsPortId(portId: number) {
     return fetchJson(`ims/internal_port_by_ims_port/${portId}`);
 }
 
-export function portByImsServiceId(serviceId) {
+export function portByImsServiceId(serviceId: number): Promise<IMSPort> {
     return fetchJson(`ims/port_by_ims_service/${serviceId}`);
 }
 
-export function serviceByImsServiceId(serviceId) {
+export function serviceByImsServiceId(serviceId: number): Promise<IMSService> {
     return fetchJson(`ims/service_by_ims_service_id/${serviceId}`);
 }
 
-export function parentSubscriptions(childSubscriptionId) {
-    return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`).then(json => {
-        return { type: parent_subscriptions, json: json };
-    });
+export function parentSubscriptions(childSubscriptionId: string): Promise<Subscription[]> {
+    return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`);
 }
 
-export function childSubscriptions(parentSubscriptionId) {
+export function childSubscriptions(parentSubscriptionId: string) {
     return fetchJson(`subscriptions/child_subscriptions/${parentSubscriptionId}`).then(json => {
         return { type: child_subscriptions, json: json };
     });
 }
 
-export function getResourceTypeInfo(type, identifier) {
+export function getResourceTypeInfo(type: string, identifier: string) {
     let promise;
     switch (type) {
         case ims_port_id:
@@ -332,19 +379,19 @@ export function getResourceTypeInfo(type, identifier) {
     );
 }
 
-export function processSubscriptionsBySubscriptionId(subscriptionId) {
+export function processSubscriptionsBySubscriptionId(subscriptionId: string) {
     return fetchJsonWithCustomErrorHandling(
         `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
     ).catch(err => Promise.resolve({}));
 }
 
-export function processSubscriptionsByProcessId(processId) {
-    return fetchJsonWithCustomErrorHandling(`processes/process-subscriptions-by-pid/${processId}`).catch(err =>
-        Promise.resolve({})
-    );
+export function processSubscriptionsByProcessId(processId: string): Promise<ProcessSubscription[]> {
+    return fetchJsonWithCustomErrorHandling<ProcessSubscription[]>(
+        `processes/process-subscriptions-by-pid/${processId}`
+    ).catch(err => []);
 }
 
-export function locationCodes() {
+export function locationCodes(): Promise<string[]> {
     return fetchJson("crm/location_codes");
 }
 
@@ -360,32 +407,32 @@ export function allWorkflowsWithProductTags() {
     return fetchJson("workflows/with_product_tags");
 }
 
-export function workflowsByTarget(target) {
+export function workflowsByTarget(target: string): Promise<Workflow[]> {
     return fetchJson(`workflows?target=${target}`);
 }
 
-export function invalidSubscriptions(workflowKey) {
+export function invalidSubscriptions(workflowKey: string) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
 }
 
-export function processes(showTasks = false) {
+export function processes(showTasks = false): Promise<ProcessWithDetails[]> {
     return fetchJson(`processes?showTasks=${showTasks}`);
 }
 
-export function fetchPortSpeedBySubscription(subscriptionId) {
+export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
     return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
 }
 
-export function fetchServiceSpeedByProduct(productId) {
+export function fetchServiceSpeedByProduct(productId: string) {
     return fetchJson(`fixed_inputs/service_speed_by_product_id/${productId}`);
 }
 
-export function deleteSubscription(subscriptionId) {
+export function deleteSubscription(subscriptionId: string) {
     return fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
 }
 
 //IPAM IP Prefixes
-export function ip_blocks(parentPrefix) {
+export function ip_blocks(parentPrefix: string) {
     return fetchJson("ipam/ip_blocks/" + parentPrefix);
 }
 
@@ -394,7 +441,7 @@ export function prefix_filters() {
     return fetchJson("ipam/prefix_filters");
 }
 
-export function prefixSubscriptionsByRootPrefix(parentId) {
+export function prefixSubscriptionsByRootPrefix(parentId: string) {
     return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
 }
 
@@ -402,43 +449,43 @@ export function prefixSubscriptions() {
     return fetchJson(`ipam/prefix_subscriptions/`);
 }
 
-export function prefixById(prefixId) {
+export function prefixById(prefixId: number) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
 
-export function freeSubnets(supernet) {
+export function freeSubnets(supernet: string) {
     return fetchJson(`ipam/free_subnets/${supernet}`);
 }
 
-export function subnets(subnet, netmask, prefixlen) {
+export function subnets(subnet: string, netmask: number, prefixlen: number) {
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
-export function free_subnets(subnet, netmask, prefixlen) {
+export function free_subnets(subnet: string, netmask: number, prefixlen: number) {
     return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
-export function deleteProcess(processId) {
+export function deleteProcess(processId: string) {
     return fetchJson(`processes/${processId}`, { method: "DELETE" }, {}, true, false);
 }
 
-export function abortProcess(processId) {
+export function abortProcess(processId: string) {
     return fetchJson(`processes/${processId}/abort`, { method: "PUT" }, {}, true, false);
 }
 
-export function process(processId) {
+export function process(processId: string): Promise<Process> {
     return fetchJsonWithCustomErrorHandling("processes/" + processId);
 }
 
-export function startProcess(workflow_name, process) {
+export function startProcess(workflow_name: string, process: {}[]): Promise<{ id: string }> {
     return postPutJson("processes/" + workflow_name, process, "post", false, true);
 }
 
-export function resumeProcess(processId, userInput) {
+export function resumeProcess(processId: string, userInput: {}[]) {
     return postPutJson(`processes/${processId}/resume`, userInput, "put", false, false);
 }
 
-export function retryProcess(processId) {
+export function retryProcess(processId: string) {
     return postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
 }
 
@@ -454,27 +501,27 @@ export function fixedInputValidations() {
     return fetchJson("fixed_inputs/validations");
 }
 
-export function validation(productId) {
+export function validation(productId: string) {
     return fetchJson(`products/${productId}/validate`);
 }
 
-export function transitions(subscriptionId, transitionType) {
+export function transitions(subscriptionId: string, transitionType: string) {
     return fetchJson(`products/transitions/${subscriptionId}/${transitionType}`);
 }
 
-export function contacts(organisationId) {
+export function contacts(organisationId: string) {
     return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true).catch(err => Promise.resolve([]));
 }
 
-export function reportError(error) {
+export function reportError(error: {}) {
     return postPutJson("user/error", error, "post", false);
 }
 
-export function clearCache(name) {
+export function clearCache(name: string) {
     return postPutJson("user/clearCache", { name: name }, "put", true, false);
 }
 
-export function logUserInfo(username, message) {
+export function logUserInfo(username: string, message: string) {
     return postPutJson(`user/log/${username}`, { message: message }, "post", true, false);
 }
 
@@ -482,15 +529,15 @@ export function ping() {
     return fetchJson("user/ping");
 }
 
-export function me() {
+export function me(): Promise<User> {
     return fetchJson("user/me", {}, {}, false);
 }
 
-export function config() {
-    return isEmpty(configuration)
-        ? fetchJson("user/config").then(conf => {
+export function config(): Promise<AppConfig> {
+    return !configuration
+        ? fetchJson<AppConfig>("user/config").then((conf: AppConfig) => {
               configuration = conf;
-              return Promise.resolve(conf);
+              return conf;
           })
         : Promise.resolve(configuration);
 }
@@ -499,7 +546,7 @@ export function redirectToAuthorizationServer() {
     const re = /http[s]?:\/\/?[^/\s]+\/(.*)/;
     const res = re.exec(window.location.href);
     const state = res ? "/" + res[1] : "/";
-    config().then(conf => {
+    config().then((conf: AppConfig) => {
         window.location.replace(
             `${conf.oauthAuthorizeUrl}?response_type=token&client_id=${conf.clientId}` +
                 `&scope=${conf.scope.join("+")}&redirect_uri=${conf.redirectUri}&state=${btoa(state)}`
@@ -507,6 +554,6 @@ export function redirectToAuthorizationServer() {
     });
 }
 
-export function dienstafnameBySubscription(subscriptionId) {
+export function dienstafnameBySubscription(subscriptionId: string) {
     return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
 }

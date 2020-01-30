@@ -21,7 +21,7 @@ import { setFlash } from "../utils/Flash";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import WorkflowSelect from "../components/WorkflowSelect";
-import { State, Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/types";
+import { Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/types";
 
 import "./NewTask.scss";
 
@@ -45,21 +45,16 @@ export default class NewTask extends React.Component<{}, IState> {
     componentDidMount = () =>
         workflowsByTarget("SYSTEM").then((workflows: Workflow[]) => this.setState({ workflows: workflows }));
 
-    validSubmit = (taskInput: State) => {
+    validSubmit = (taskInput: {}[]) => {
         const { workflow } = this.state;
         if (!workflow) {
             return Promise.reject();
         }
 
-        let result = startProcess(workflow.value, taskInput);
-        result.then(() => {
+        return startProcess(workflow.value, taskInput).then(() => {
             this.context.redirect(`/tasks`);
             setFlash(I18n.t("task.flash.create", { name: workflow.label }));
         });
-        result.catch(error => {
-            // Todo: handle errors in a more uniform way. The error dialog is behind stack trace when enabled. This catch shouldn't be needed.
-        });
-        return result;
     };
 
     changeWorkflow = (option: Option) => {

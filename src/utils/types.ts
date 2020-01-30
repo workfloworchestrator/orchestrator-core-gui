@@ -54,10 +54,12 @@ export interface InstanceValue {
 }
 
 export interface ResourceType {
+    resource_type_id: string;
     resource_type: string;
 }
 
 export interface ProductBlock {
+    product_block_id: string;
     name: string;
     tag: string;
 }
@@ -88,7 +90,7 @@ export interface ServicePortSubscription extends Subscription {
 }
 
 export interface ServicePort {
-    subscription_id: string | null;
+    subscription_id: string;
     vlan: string;
     tag?: string;
     port_mode: string;
@@ -223,6 +225,7 @@ export interface User {
     user_name: string;
     displayName: string;
     sub: string;
+    email: string;
 }
 
 export function typedKeys<T>(o: T): (keyof T)[] {
@@ -265,9 +268,17 @@ export interface IMSService {
     extra_info: string;
     name: string;
     product: string;
-    speed: number;
+    speed: string;
     status: string;
     order_id: string;
     aliases: string[];
     endpoints: IMSEndpoint[];
+}
+
+export interface IMSPort {
+    line_name: string;
+    node: string;
+    port: string;
+    iface_type: string;
+    patchposition: string;
 }

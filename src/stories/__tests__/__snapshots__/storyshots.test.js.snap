@@ -9442,6 +9442,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -9819,6 +9820,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -10338,6 +10340,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -10715,6 +10718,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -10849,6 +10853,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -11218,6 +11223,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -11595,6 +11601,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -11729,6 +11736,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"
@@ -12106,6 +12114,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             type="text"
                             value=""
                           />
+                          
                         </div>
                         <em
                           className="error"

@@ -46,6 +46,7 @@ import {
 import "../locale/en";
 import "../locale/nl";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
+import ModifySubscription from "./ModifySubscription";
 import TerminateSubscription from "./TerminateSubscription";
 import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
@@ -55,7 +56,7 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
-import { Product, AppError } from "../utils/types";
+import { Product, AppError, Organization } from "../utils/types";
 
 import "./App.scss";
 
@@ -170,19 +171,20 @@ class App extends React.PureComponent<{}, IState> {
     }
 
     fetchUser(log = false) {
-        config()
-            .catch(err => this.handleBackendDown())
-            .then(configuration => {
-                me()
-                    .then(currentUser => {
-                        if (currentUser && (currentUser.sub || currentUser.user_name)) {
-                            Promise.all([organisations(), products(), locationCodes()]).then(result => {
+        let promise = config();
+        promise.catch(err => this.handleBackendDown());
+        promise.then(configuration => {
+            me()
+                .then(currentUser => {
+                    if (currentUser && (currentUser.sub || currentUser.user_name)) {
+                        Promise.all([organisations(), products(), locationCodes()]).then(
+                            (result: [Organization[], Product[], string[]]) => {
                                 const [allOrganisations, allProducts, allLocationCodes] = result;
                                 this.setState({
                                     loading: false,
                                     applicationContext: {
                                         currentUser: currentUser,
-                                        configuration: configuration,
+                                        configuration: configuration!,
                                         organisations: allOrganisations,
                                         locationCodes: allLocationCodes,
                                         products: allProducts.sort((a: Product, b: Product) =>
@@ -194,20 +196,21 @@ class App extends React.PureComponent<{}, IState> {
                                 if (log) {
                                     logUserInfo(currentUser.email, "logged in");
                                 }
-                            });
-                        } else {
-                            this.handleBackendDown();
-                        }
-                    })
-                    .catch(err => {
-                        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-                            localStorage.removeItem("access_token");
-                            this.componentDidMount();
-                        } else {
-                            throw err;
-                        }
-                    });
-            });
+                            }
+                        );
+                    } else {
+                        this.handleBackendDown();
+                    }
+                })
+                .catch(err => {
+                    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                        localStorage.removeItem("access_token");
+                        this.componentDidMount();
+                    } else {
+                        throw err;
+                    }
+                });
+        });
     }
 
     render() {
@@ -231,7 +234,12 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                <ProtectedRoute path="/processes" render={props => <Processes highlight={getParameterByName("highlight", props.location.search)}/>} />
+                                <ProtectedRoute
+                                    path="/processes"
+                                    render={props => (
+                                        <Processes highlight={getParameterByName("highlight", props.location.search)} />
+                                    )}
+                                />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}
@@ -240,6 +248,15 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/new-process"
                                     render={props => (
                                         <NewProcess preselectedInput={getQueryParameters(props.location.search)} />
+                                    )}
+                                />
+                                <ProtectedRoute
+                                    path="/modify-subscription"
+                                    render={props => (
+                                        <ModifySubscription
+                                            workflowName={getParameterByName("workflow", props.location.search)}
+                                            subscriptionId={getParameterByName("subscription", props.location.search)}
+                                        />
                                     )}
                                 />
                                 <ProtectedRoute

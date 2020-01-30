@@ -55,8 +55,8 @@ function enrichPrimarySubscription(
     subscription: Partial<LRSubscription>,
     organisations: Organization[],
     products: Product[]
-) {
-    enrichSubscription(subscription, organisations, products);
+): LRSubscription {
+    subscription = enrichSubscription(subscription, organisations, products);
     const product = productById(subscription.product_id!, products);
     const fi_domain = product.fixed_inputs.find((fi: FixedInput) => fi.name === "domain");
 
@@ -84,6 +84,8 @@ function enrichPrimarySubscription(
         )!.value;
     }
     subscription.service_speed = fi_service_speed ? fi_service_speed.value : "-";
+
+    return subscription as LRSubscription;
 }
 
 function enrichPortSubscription(
@@ -154,9 +156,9 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
     componentWillMount() {
         const { subscriptionId, organisations, products } = this.props;
         subscriptionsDetail(subscriptionId).then(subscription => {
-            enrichPrimarySubscription(subscription, organisations, products);
-            this.setState({ subscription: subscription });
-            const values = subscriptionInstanceValues(subscription);
+            const lrSubscription = enrichPrimarySubscription(subscription, organisations, products);
+            this.setState({ subscription: lrSubscription });
+            const values = subscriptionInstanceValues(lrSubscription);
             const portSubscriptionResourceTypes = values.filter(
                 val => val.resource_type.resource_type === port_subscription_id
             );
@@ -166,7 +168,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
             Promise.all(promises).then(results => {
                 const children: SubscriptionWithDetails[] = results.map((obj: any) => obj.json);
                 children.forEach(sub => enrichSubscription(sub, organisations, products));
-                const portPromises = children.map(sub => enrichPortSubscription(subscription, sub));
+                const portPromises = children.map(sub => enrichPortSubscription(lrSubscription, sub));
                 Promise.all(portPromises).then((results: PortSubscription[]) => {
                     this.setState({
                         spPL: results.find(r => r.label.toLowerCase() === "primary-left"),

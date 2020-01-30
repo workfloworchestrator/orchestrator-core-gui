@@ -111,8 +111,9 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     };
 
     refresh = () =>
-        processes().then((results: CustomProcessWithDetails[]) => {
+        processes().then(processes => {
             const { organisations, products } = this.context;
+            let results = processes as CustomProcessWithDetails[];
             results.forEach(process => {
                 process.customer_name = organisationNameByUuid(process.customer, organisations);
                 process.product_name = productNameById(process.product, products);
@@ -374,7 +375,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             "last_modified",
             "actions"
         ];
-	const {highlight} = this.props;
+        const { highlight } = this.props;
         const th = (index: number) => {
             const name = columns[index];
             return (
@@ -394,13 +395,13 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     <tbody>
                         {processes.map((process, index) => (
                             <tr
-			    	id={process.id}
+                                id={process.id}
                                 key={`${process.id}_${index}`}
                                 onClick={this.showProcess(process)}
                                 className={process.status}
                             >
                                 <td data-label={I18n.t("processes.assignee")} className="assignee">
-				    {process.id === highlight && <i className="fa fa-caret-right" />}
+                                    {process.id === highlight && <i className="fa fa-caret-right" />}
                                     {process.assignee}
                                 </td>
                                 <td data-label={I18n.t("processes.step")} className="step">

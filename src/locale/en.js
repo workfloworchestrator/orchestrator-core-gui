@@ -146,7 +146,10 @@ I18n.translations.en = {
                 "Follow this link for all details on the new redundant LightPath: ",
             noc_upgrade_redundant_confirmation_steps_intro: "Please execute the following steps:",
             noc_upgrade_redundant_confirmation_LR2_built_info: "LR2 has been built in the network",
-            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network"
+            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network",
+            node_terminate_warning: "Node terminate warning",
+            node_terminate_warning_info:
+                "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
         },
         asn_info: "Asn of the customer",
         workflow: "Process instance of workflow {{name}}",
@@ -882,10 +885,7 @@ I18n.translations.en = {
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
-        actions: "Actions",
-        node_terminate_warning: "Node terminate warning",
-        node_terminate_warning_info:
-            "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
+        actions: "Actions"
     },
     terminate_subscription: {
         cancel: "Cancel",

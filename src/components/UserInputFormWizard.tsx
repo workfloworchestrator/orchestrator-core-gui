@@ -30,7 +30,7 @@ interface Form {
 
 interface IProps {
     stepUserInput: any[];
-    validSubmit: (form: {}[]) => Promise<{ response: { status: number; json: () => Promise<any> } }>;
+    validSubmit: (form: {}[]) => Promise<any>;
     cancel: () => void;
     hasNext: boolean;
 }
