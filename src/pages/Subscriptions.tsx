@@ -205,7 +205,7 @@ class Subscriptions extends React.PureComponent<IProps, IState> {
                             </p>
                             <p>
                                 One can also use the keywords <i>and</i> and <i>or</i>. And one can use <i>-</i> to
-                                exclude a keyword. To make sure all words in the search aare found in matching order use
+                                exclude a keyword. To make sure all words in the search are found in matching order use
                                 quotes <i>"</i> around the sentence. Example:{" "}
                                 <i>(star wars) or "luke skywalker" -scotty</i> searches for star and wars or luke but
                                 excluding scotty.
