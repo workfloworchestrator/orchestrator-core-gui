@@ -70,7 +70,6 @@ export default class UserInputForm extends React.Component {
         this.state = {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.context.redirect("/processes"),
             leavePage: true,
             validationErrors: [],
             uniqueErrors: {},
@@ -627,18 +626,18 @@ export default class UserInputForm extends React.Component {
         const {
             confirmationDialogOpen,
             confirmationDialogAction,
-            cancelDialogAction,
             stepUserInput,
             leavePage,
             validationErrors
         } = this.state;
+        const { cancel } = this.props;
         const numberOfValidationErrors = Object.keys(validationErrors).length;
 
         return (
             <div className="mod-process-step">
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
-                    cancel={cancelDialogAction}
+                    cancel={cancel}
                     confirm={confirmationDialogAction}
                     leavePage={leavePage}
                 />
@@ -664,6 +663,7 @@ export default class UserInputForm extends React.Component {
 UserInputForm.propTypes = {
     stepUserInput: PropTypes.array.isRequired,
     validSubmit: PropTypes.func.isRequired,
+    cancel: PropTypes.func.isRequired,
     previous: PropTypes.func,
     hasNext: PropTypes.bool,
     hasPrev: PropTypes.bool

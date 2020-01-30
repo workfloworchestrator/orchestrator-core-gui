@@ -146,7 +146,10 @@ I18n.translations.en = {
                 "Follow this link for all details on the new redundant LightPath: ",
             noc_upgrade_redundant_confirmation_steps_intro: "Please execute the following steps:",
             noc_upgrade_redundant_confirmation_LR2_built_info: "LR2 has been built in the network",
-            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network"
+            noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network",
+            node_terminate_warning: "Node terminate warning",
+            node_terminate_warning_info:
+                "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
         },
         asn_info: "Asn of the customer",
         workflow: "Process instance of workflow {{name}}",
@@ -186,6 +189,8 @@ I18n.translations.en = {
         lightpath_ssp_1: "The first SSP in this LP",
         lightpath_msp_2: "The second MSP in this LP",
         lightpath_ssp_2: "The second SSP in this LP",
+        new_service_port: "Select Service Port that needs to be replaced",
+        new_service_port_info: "Select replacement Service Port.",
         first_lightpath: "Primary LP",
         second_lightpath: "Secondary LP",
         first_msp: "The first port in this redundant MSP",
@@ -880,10 +885,7 @@ I18n.translations.en = {
         selectSubscriptionPlaceholder: "Search and select a subscription...",
         namedSelectSubscriptionPlaceholder: "Select a subscription from {{name}}",
         start: "Start process",
-        actions: "Actions",
-        node_terminate_warning: "Node terminate warning",
-        node_terminate_warning_info:
-            "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
+        actions: "Actions"
     },
     terminate_subscription: {
         cancel: "Cancel",
@@ -1250,7 +1252,7 @@ I18n.translations.en = {
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
         modify_sn7_light_path_msp_only_speed: "Modify Service Speed",
-        modify_sn7_light_path_replace_port: "Replace port of SN7 Light Path",
+        modify_sn7_light_path_replace_port: "Replace port for SN7 Light Path",
         modify_sn7_light_path_upgrade_to_redundant: "Upgrade to Redundant LP",
         modify_sn7_service_port_netherlight_isalias: "Modify Netherlight isAlias",
         modify_sn7_service_port_msp_redundancy_downgrade: "Downgrade a RMSP to a MSP",

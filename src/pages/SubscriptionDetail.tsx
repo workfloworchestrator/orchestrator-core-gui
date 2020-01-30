@@ -38,7 +38,6 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 
 import "./SubscriptionDetail.scss";
-import { startProcess } from "../api/index";
 import {
     Product,
     Subscription,
@@ -177,10 +176,10 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     refreshSubscription(subscriptionId: string) {
         const { organisations, products } = this.context;
         subscriptionsDetail(subscriptionId)
-            .then((subscription: SubscriptionWithDetails) => {
-                enrichSubscription(subscription, organisations, products);
-                const values = subscriptionInstanceValues(subscription);
-                this.setState({ subscription: subscription, loaded: true });
+            .then((subscription: Subscription) => {
+                const enrichedSubscription = enrichSubscription(subscription, organisations, products);
+                const values = subscriptionInstanceValues(enrichedSubscription);
+                this.setState({ subscription: enrichedSubscription, loaded: true });
                 const promises = [
                     processSubscriptionsBySubscriptionId(subscription.subscription_id),
                     productById(subscription.product_id),
@@ -195,122 +194,124 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             getResourceTypeInfo(val.resource_type.resource_type, val.value)
                         )
                     );
+                Promise.all(promises).then(
+                    // @ts-ignore
+                    (result: [any, Product, WorkflowReasons, Subscription[], any, ...RelatedObject]) => {
+                        const relatedObjects = result.slice(5).filter(obj => obj.type !== "absent") as RelatedObject[];
+                        const notFoundRelatedObjects = result
+                            .slice(5)
+                            .filter(obj => obj.type === "absent") as AbsentRelatedObject[];
 
-                Promise.all(promises).then(result => {
-                    const relatedObjects: RelatedObject[] = result.slice(5).filter(obj => obj.type !== "absent");
-                    const notFoundRelatedObjects: AbsentRelatedObject[] = result
-                        .slice(5)
-                        .filter(obj => obj.type === "absent");
+                        let childSubscriptions = relatedObjects
+                            .filter(
+                                obj =>
+                                    obj.type === "port_subscription_id" ||
+                                    obj.type === "ip_prefix_subscription_id" ||
+                                    obj.type === "internetpinnen_prefix_subscription_id" ||
+                                    obj.type === "parent_ip_prefix_subscription_id" ||
+                                    obj.type === "node_subscription_id"
+                            )
+                            .map(obj => obj.json);
 
-                    let childSubscriptions = relatedObjects
-                        .filter(
-                            obj =>
-                                obj.type === "port_subscription_id" ||
-                                obj.type === "ip_prefix_subscription_id" ||
-                                obj.type === "internetpinnen_prefix_subscription_id" ||
-                                obj.type === "parent_ip_prefix_subscription_id" ||
-                                obj.type === "node_subscription_id"
-                        )
-                        .map(obj => obj.json);
+                        // Enrich parent subscriptions
+                        let parentSubscriptions = result[3].map((sub: Subscription) =>
+                            enrichSubscription(sub, organisations, products)
+                        );
 
-                    // Enrich parent subscriptions
-                    let parentSubscriptions: SubscriptionWithDetails[] = result[3].json;
-                    parentSubscriptions.forEach((sub: Subscription) =>
-                        enrichSubscription(sub, organisations, products)
-                    );
+                        const allImsServices: IMSService[] = relatedObjects
+                            .filter(
+                                obj =>
+                                    obj.type === "ims_circuit_id" ||
+                                    obj.type === "ims_corelink_trunk_id" ||
+                                    obj.type === "ims_port_id"
+                            )
+                            .map(obj => obj.json);
 
-                    const allImsServices: IMSService[] = relatedObjects
-                        .filter(
-                            obj =>
-                                obj.type === "ims_circuit_id" ||
-                                obj.type === "ims_corelink_trunk_id" ||
-                                obj.type === "ims_port_id"
-                        )
-                        .map(obj => obj.json);
+                        // There are service duplicates for port_id and circuit_id
+                        const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
 
-                    // There are service duplicates for port_id and circuit_id
-                    const imsServices = allImsServices.filter((item, i, ar) => ar.indexOf(item) === i);
+                        const ipamPrefixes = relatedObjects
+                            .filter(
+                                obj =>
+                                    obj.type === "ptp_ipv4_ipam_id" ||
+                                    obj.type === "ptp_ipv6_ipam_id" ||
+                                    obj.type === "ipam_prefix_id"
+                            )
+                            .map(obj => obj.json);
 
-                    const ipamPrefixes = relatedObjects
-                        .filter(
-                            obj =>
-                                obj.type === "ptp_ipv4_ipam_id" ||
-                                obj.type === "ptp_ipv6_ipam_id" ||
-                                obj.type === "ipam_prefix_id"
-                        )
-                        .map(obj => obj.json);
+                        const ipamAddresses = relatedObjects
+                            .filter(obj => obj.type === "node_ipv4_ipam_id" || obj.type === "node_ipv6_ipam_id")
+                            .map(obj => obj.json);
 
-                    const ipamAddresses = relatedObjects
-                        .filter(obj => obj.type === "node_ipv4_ipam_id" || obj.type === "node_ipv6_ipam_id")
-                        .map(obj => obj.json);
+                        this.setState({
+                            subscriptionProcesses: result[0],
+                            product: result[1],
+                            workflows: result[2],
+                            dienstafname: result[4],
+                            imsServices: imsServices,
+                            ipamPrefixes: ipamPrefixes,
+                            ipamAddresses: ipamAddresses,
+                            childSubscriptions: childSubscriptions,
+                            parentSubscriptions: parentSubscriptions,
+                            notFoundRelatedObjects: notFoundRelatedObjects,
+                            loadedAllRelatedObjects: true
+                        });
 
-                    this.setState({
-                        subscriptionProcesses: result[0],
-                        product: result[1],
-                        workflows: result[2],
-                        dienstafname: result[4],
-                        imsServices: imsServices,
-                        ipamPrefixes: ipamPrefixes,
-                        ipamAddresses: ipamAddresses,
-                        childSubscriptions: childSubscriptions,
-                        parentSubscriptions: parentSubscriptions,
-                        notFoundRelatedObjects: notFoundRelatedObjects,
-                        loadedAllRelatedObjects: true
-                    });
-
-                    const uniquePortPromises = imsServices
-                        .map(resource =>
-                            (resource.endpoints || []).map(async endpoint => {
-                                if (endpoint.type === "service") {
-                                    // Fix for https://app.asana.com/0/483691603643478/819968465785951/f
-                                    // Todo: handle this in redux or refactor? -> seems like a noop to wait for an result
-                                    const service = await serviceByImsServiceId(endpoint.id).then(result =>
-                                        Object.assign(result, {
-                                            serviceId: endpoint.id,
-                                            endpointType: "trunk"
-                                        })
-                                    );
-                                    if (service.speed === "TG") {
-                                        return service;
+                        const uniquePortPromises = imsServices
+                            .map(resource =>
+                                (resource.endpoints || []).map(async endpoint => {
+                                    if (endpoint.type === "service") {
+                                        // Fix for https://app.asana.com/0/483691603643478/819968465785951/f
+                                        // Todo: handle this in redux or refactor? -> seems like a noop to wait for an result
+                                        const service = await serviceByImsServiceId(endpoint.id).then(result =>
+                                            Object.assign(result, {
+                                                serviceId: endpoint.id,
+                                                endpointType: "trunk"
+                                            })
+                                        );
+                                        if (service.speed === "TG") {
+                                            return service;
+                                        }
+                                        if (service.product === "SVLAN") {
+                                            // Todo: investigate why this crashes for a LP over MSC
+                                            return service;
+                                        }
+                                        return portByImsServiceId(endpoint.id).then(result =>
+                                            Object.assign(result, {
+                                                serviceId: endpoint.id,
+                                                endpointType: endpoint.type
+                                            })
+                                        );
+                                    } else if (endpoint.type === "port") {
+                                        return portByImsPortId(endpoint.id).then(result =>
+                                            Object.assign(result, {
+                                                serviceId: endpoint.id,
+                                                endpointType: endpoint.type
+                                            })
+                                        );
+                                    } else if (endpoint.type === "internal_port") {
+                                        return internalPortByImsPortId(endpoint.id).then(result =>
+                                            Object.assign(result, {
+                                                serviceId: endpoint.id,
+                                                endpointType: endpoint.type
+                                            })
+                                        );
+                                    } else {
+                                        // Todo: Refactor this stuff, couldn't reach this else during my tests...
+                                        return serviceByImsServiceId(endpoint.id).then(result =>
+                                            Object.assign(result, {
+                                                serviceId: endpoint.id,
+                                                endpointType: endpoint.type
+                                            })
+                                        );
                                     }
-                                    if (service.product === "SVLAN") {
-                                        // Todo: investigate why this crashes for a LP over MSC
-                                        return service;
-                                    }
-                                    return portByImsServiceId(endpoint.id).then(result =>
-                                        Object.assign(result, {
-                                            serviceId: endpoint.id,
-                                            endpointType: endpoint.type
-                                        })
-                                    );
-                                } else if (endpoint.type === "port") {
-                                    return portByImsPortId(endpoint.id).then(result =>
-                                        Object.assign(result, {
-                                            serviceId: endpoint.id,
-                                            endpointType: endpoint.type
-                                        })
-                                    );
-                                } else if (endpoint.type === "internal_port") {
-                                    return internalPortByImsPortId(endpoint.id).then(result =>
-                                        Object.assign(result, {
-                                            serviceId: endpoint.id,
-                                            endpointType: endpoint.type
-                                        })
-                                    );
-                                } else {
-                                    // Todo: Refactor this stuff, couldn't reach this else during my tests...
-                                    return serviceByImsServiceId(endpoint.id).then(result =>
-                                        Object.assign(result, {
-                                            serviceId: endpoint.id,
-                                            endpointType: endpoint.type
-                                        })
-                                    );
-                                }
-                            })
-                        )
-                        .reduce((a, b) => a.concat(b), []);
-                    Promise.all(uniquePortPromises).then(result => this.setState({ imsEndpoints: result }));
-                });
+                                })
+                            )
+                            .reduce((a, b) => a.concat(b), []);
+                        // @ts-ignore
+                        Promise.all(uniquePortPromises).then(result => this.setState({ imsEndpoints: result }));
+                    }
+                );
             })
             .catch(err => {
                 if (err.response && err.response.status === 404) {
@@ -351,9 +352,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                 change: change
             }),
             () =>
-                startProcess(workflow_name, [{ subscription_id: subscription.subscription_id }]).then(process => {
-                    this.context.redirect(`/processes?highlight=${process.id}`);
-                })
+                this.context.redirect(
+                    `/modify-subscription?workflow=${workflow_name}&subscription=${subscription.subscription_id}`
+                )
         );
     };
 

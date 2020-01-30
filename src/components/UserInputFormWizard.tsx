@@ -30,7 +30,8 @@ interface Form {
 
 interface IProps {
     stepUserInput: any[];
-    validSubmit: (form: {}[]) => Promise<{ response: { status: number; json: () => Promise<any> } }>;
+    validSubmit: (form: {}[]) => Promise<any>;
+    cancel: () => void;
     hasNext: boolean;
 }
 
@@ -97,6 +98,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
                 previous={this.previous}
                 hasNext={currentForm.hasNext}
                 hasPrev={forms.length > 1}
+                cancel={this.props.cancel}
             />
         );
     }

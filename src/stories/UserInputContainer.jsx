@@ -26,7 +26,11 @@ export default class UserInputContainer extends React.Component {
                 <section className="card">
                     <section className="form-step divider">
                         <h1>{formName}</h1>
-                        <UserInputForm stepUserInput={stepUserInput} validSubmit={action("submit")} />
+                        <UserInputForm
+                            stepUserInput={stepUserInput}
+                            validSubmit={action("submit")}
+                            cancel={action("cancel")}
+                        />
                     </section>
                 </section>
             </div>
