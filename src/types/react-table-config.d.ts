@@ -114,4 +114,13 @@ declare module "react-table" {
             UseGroupByRowProps<D>,
             UseRowSelectRowProps<D>,
             UseRowStateRowProps<D> {}
+
+    // [PF] only key is in TableKeyedProps in @types/react-table
+    export interface TableCellProps extends TableKeyedProps {
+        className: string;
+    }
+
+    export interface TableRowProps extends TableKeyedProps {
+        className: string;
+    }
 }

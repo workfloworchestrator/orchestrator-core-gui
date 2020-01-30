@@ -55,6 +55,7 @@ import GenericMultiSelect from "../components/GenericMultiSelect";
 import ProcessDetail from "../pages/ProcessDetail";
 import SubscriptionDetail from "../pages/SubscriptionDetail";
 import ProcessesTable from "../components/ProcessesTable";
+import { ALL_PROCESSES } from "./processes.js";
 
 const tableSummaryDataDefinition = [
     { labels: ["Label1", "Label 2", "Label 3"] },
@@ -270,65 +271,6 @@ const store = new Store({
     date: new Date(1),
     value: "1000"
 });
-
-const processesTablesData = [
-    {
-        assignee: "SYSTEM",
-        creator: "SYSTEM",
-        failure: null,
-        modified: 1574864328.240151,
-        pid: "9979cf87-5bcb-4601-ad57-2bcdc2e4116c",
-        started: 1574864297.107448,
-        status: "completed",
-        step: "Done",
-        subscriptions: [
-            {
-                customer_id: "2f47f65a-0911-e511-80d0-005056956c1a",
-                description: "CWI SSP (port not ready yet) 1 Gbit/s",
-                end_date: null,
-                insync: true,
-                product: {
-                    description: "Single Service Port 1G",
-                    name: "SSP 1G",
-                    product_id: "86679a39-d14a-4c8b-85e7-36000b12a16b",
-                    tag: "SSP"
-                },
-                start_date: 1574864328.240151,
-                status: "active",
-                subscription_id: "cf637698-6ccf-45e7-846d-74f11db40a8e"
-            }
-        ],
-        workflow: "create_sn7_service_port_ssp"
-    },
-    {
-        assignee: "SYSTEM",
-        creator: "SYSTEM",
-        failure: null,
-        modified: 1574864295.577113,
-        pid: "c8700f3e-7b26-4382-8c28-ab55f5aa4653",
-        started: 1574864249.396514,
-        status: "completed",
-        step: "Done",
-        subscriptions: [
-            {
-                customer_id: "2f47f65a-0911-e511-80d0-005056956c1a",
-                description: "CWI SSP (port not ready yet) 1 Gbit/s",
-                end_date: null,
-                insync: true,
-                product: {
-                    description: "Single Service Port 1G",
-                    name: "SSP 1G",
-                    product_id: "86679a39-d14a-4c8b-85e7-36000b12a16b",
-                    tag: "SSP"
-                },
-                start_date: 1574864295.577113,
-                status: "active",
-                subscription_id: "08d2d68b-9127-4349-8f0d-a0e40dcfa688"
-            }
-        ],
-        workflow: "create_sn7_service_port_ssp"
-    }
-];
 
 function withContext(storyFn) {
     return (
@@ -973,7 +915,11 @@ storiesOf("ProcessesTable", module)
         fetchMock.restore();
         fetchMock.get(
             "/api/v2/processes?range=0,25&sort=modified,desc&filter=status,running-suspended-failed,is_task,false",
-            processesTablesData
+            ALL_PROCESSES.slice(0, 25)
+        );
+        fetchMock.get(
+            "/api/v2/processes?range=25,50&sort=modified,desc&filter=status,running-suspended-failed,is_task,false",
+            ALL_PROCESSES.slice(25, 50)
         );
 
         return <ProcessesTable />;

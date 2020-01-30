@@ -440,13 +440,13 @@ export function processes(showTasks = false): Promise<ProcessWithDetails[]> {
 }
 
 function fetchFilterableWrapper(endpoint) {
-	function fetchFilterable(startRow, endRow, sortBy, filterBy) {
-	    const range = `${startRow},${endRow}`;
-	    const sort = sortBy.map(({id, desc}) => `${id},${desc ? "desc" : "asc"}`).join(",");
-	    const filter = filterBy.map(({ id, values }) => `${id},${values.join("-")}`).join(",");
-	    return fetchJson(`${endpoint}?range=${range}&sort=${sort}&filter=${filter}`);
-	}
-	return fetchFilterable;
+    function fetchFilterable(startRow, endRow, sortBy, filterBy) {
+        const range = `${startRow},${endRow}`;
+        const sort = sortBy.map(({ id, desc }) => `${id},${desc ? "desc" : "asc"}`).join(",");
+        const filter = filterBy.map(({ id, values }) => `${id},${values.join("-")}`).join(",");
+        return fetchJson(`${endpoint}?range=${range}&sort=${sort}&filter=${filter}`);
+    }
+    return fetchFilterable;
 }
 
 export const processesFilterable = fetchFilterableWrapper("v2/processes");

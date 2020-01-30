@@ -1,9 +1,21 @@
 import React from "react";
-import { Cell, Column, ColumnInstance, useTable, useFilters, useSortBy, usePagination, useAsyncDebounce } from "react-table";
-import "./ProcessesTable.scss";
+import {
+    Cell,
+    Column,
+    ColumnInstance,
+    useTable,
+    useFilters,
+    useSortBy,
+    usePagination,
+    useAsyncDebounce
+} from "react-table";
+import "./GenericTable.scss";
 import { processesFilterable } from "../api/index.js";
-import { ProcessV2, Subscription } from "../utils/types";
+import { Organization, ProcessV2, Subscription } from "../utils/types";
 import { renderDateTime } from "../utils/Lookups";
+import uniq from "lodash/uniq";
+import ApplicationContext from "../utils/ApplicationContext";
+import { organisationNameByUuid } from "../utils/Lookups";
 
 interface GenericTableProps {
     columns: Column[];
@@ -12,10 +24,9 @@ interface GenericTableProps {
     controlledPageCount: number;
 }
 
-
 interface FilterArgument {
-	id: string;
-        values: string[];
+    id: string;
+    values: string[];
 }
 
 function GenericTable(props: GenericTableProps) {
@@ -50,7 +61,6 @@ function GenericTable(props: GenericTableProps) {
         usePagination
     );
 
-
     //const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
 
     React.useEffect(() => {
@@ -58,29 +68,30 @@ function GenericTable(props: GenericTableProps) {
     }, [fetchData, pageIndex, pageSize, sortBy]);
 
     const sortIcon = (col: ColumnInstance) => {
-	if (!col.canSort) {
-		return "";
-	}
-	if (col.isSorted) {
-		if (col.isSortedDesc) {
-			return <i className="fa fa-sort-down"></i>;
-		} else {
-			return <i className="fa fa-sort-up"></i>;
-		}
-	} else {
-		return <i className="fa fa-sort"></i>;
-	}
-    }
+        if (!col.canSort) {
+            return "";
+        }
+        if (col.isSorted) {
+            if (col.isSortedDesc) {
+                return <i className="fa fa-sort-down" />;
+            } else {
+                return <i className="fa fa-sort-up" />;
+            }
+        } else {
+            return <i className="fa fa-sort" />;
+        }
+    };
 
     return (
         <div>
-            <table className="processes" {...getTableProps()}>
+            <table className="nwa-table" {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())} >
-                                    {column.render("Header")}{sortIcon(column)}
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render("Header")}
+                                    {sortIcon(column)}
                                 </th>
                             ))}
                         </tr>
@@ -90,9 +101,13 @@ function GenericTable(props: GenericTableProps) {
                     {page.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps([{ className: row.values.status }])}>
                                 {row.cells.map(cell => {
-                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                    return (
+                                        <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                            {cell.render("Cell")}
+                                        </td>
+                                    );
                                 })}
                             </tr>
                         );
@@ -101,16 +116,16 @@ function GenericTable(props: GenericTableProps) {
             </table>
             <div className="pagination">
                 <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                    {"<<"}
+                    <i className="fa fa-angle-double-left" />
                 </button>{" "}
                 <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                    {"<"}
+                    <i className="fa fa-angle-left" />
                 </button>{" "}
                 <button onClick={() => nextPage()} disabled={!canNextPage}>
-                    {">"}
+                    <i className="fa fa-angle-right" />
                 </button>{" "}
                 <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                    {">>"}
+                    <i className="fa fa-angle-double-right" />
                 </button>{" "}
                 <span>
                     Page{" "}
@@ -127,7 +142,6 @@ function GenericTable(props: GenericTableProps) {
                             const page = e.target.value ? Number(e.target.value) - 1 : 0;
                             gotoPage(page);
                         }}
-                        style={{ width: "100px" }}
                     />
                 </span>{" "}
                 <select
@@ -152,17 +166,21 @@ function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     return subscriptions.map((subscription: Subscription) => {
         return (
             <p key={subscription.subscription_id}>
-                {subscription.product.name}: <a href={`/subscriptions/${subscription.subscription_id}`}>
-                    {subscription.description}
-                </a>
+                {subscription.product.name}:{" "}
+                <a href={`/subscriptions/${subscription.subscription_id}`}>{subscription.description}</a>
             </p>
         );
     });
 }
 
-function renderCustomersCell({ cell }: { cell: Cell }) {
-    const subscriptions: Subscription[] = cell.value;
-    return subscriptions.map(subscription => subscription.customer_id).join(", ");
+function renderCustomersCell(organisations: Organization[]) {
+    return function doRenderCustomersCell({ cell }: { cell: Cell }) {
+        const lookup = (uuid: string) => organisationNameByUuid(uuid, organisations);
+        const subscriptions: Subscription[] = cell.value;
+        return uniq(subscriptions.map(subscription => subscription.customer_id))
+            .map(lookup)
+            .join(", ");
+    };
 }
 
 function renderTimestampCell({ cell }: { cell: Cell }) {
@@ -180,6 +198,7 @@ function renderPidCell({ cell }: { cell: Cell }) {
 }
 
 function ProcessesTable() {
+    const { organisations } = React.useContext(ApplicationContext);
     const columns = React.useMemo(
         () => [
             {
@@ -199,17 +218,18 @@ function ProcessesTable() {
             },
             {
                 Header: "Status",
-                accessor: "status",
+                accessor: "status"
             },
             {
                 Header: "Workflow",
-                accessor: "workflow",
+                accessor: "workflow"
             },
             {
                 Header: "Customer",
+                id: "customer", // Normally the accessor is used as id, but we extract the customer from the subscriptions.
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell
+                Cell: renderCustomersCell(organisations)
             },
             {
                 Header: "Subscriptions",
@@ -236,32 +256,31 @@ function ProcessesTable() {
     const [pageCount, setPageCount] = React.useState(0);
     const fetchIdRef = React.useRef(0);
     const [filterBy, setFilterBy] = React.useState<FilterArgument[]>([
-	    {id: "status", values: ["running", "suspended", "failed"]},
-	    {id: "is_task", values: ["false"]}
-    ])
+        { id: "status", values: ["running", "suspended", "failed"] },
+        { id: "is_task", values: ["false"] }
+    ]);
 
-    const fetchData = React.useCallback(({ pageSize, pageIndex, sortBy}) => {
-        const fetchId = ++fetchIdRef.current;
+    const fetchData = React.useCallback(
+        ({ pageSize, pageIndex, sortBy }) => {
+            const fetchId = ++fetchIdRef.current;
 
-        setLoading(true);
-        setPageCount(99);
-        const startRow = pageSize * pageIndex;
-        const endRow = startRow + pageSize;
+            setLoading(true);
+            setPageCount(99);
+            const startRow = pageSize * pageIndex;
+            const endRow = startRow + pageSize;
 
-        processesFilterable(startRow, endRow, sortBy, filterBy).then(processes => {
-            // Only update the data if this is the latest fetch.
-            if (fetchId === fetchIdRef.current) {
-                setData(processes);
-                setLoading(false);
-            }
-        });
-    }, [filterBy]);
-
-    return (
-        <div className="mod-processes">
-            <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
-        </div>
+            processesFilterable(startRow, endRow, sortBy, filterBy).then(processes => {
+                // Only update the data if this is the latest fetch.
+                if (fetchId === fetchIdRef.current) {
+                    setData(processes);
+                    setLoading(false);
+                }
+            });
+        },
+        [filterBy]
     );
+
+    return <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />;
 }
 
 export default ProcessesTable;

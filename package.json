@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@storybook/preset-create-react-app": "^1.5.2",
     "date-fns": "^2.0.0-alpha.23",
     "events": "^3.0.0",
     "highlight.js": "^9.15.8",
