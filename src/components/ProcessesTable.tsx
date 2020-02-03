@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
     Cell,
     Column,
@@ -16,6 +16,8 @@ import { renderDateTime } from "../utils/Lookups";
 import uniq from "lodash/uniq";
 import ApplicationContext from "../utils/ApplicationContext";
 import { organisationNameByUuid } from "../utils/Lookups";
+import OrganisationSelect from "./OrganisationSelect";
+import FilterDropDown from "./FilterDropDown";
 
 interface GenericTableProps {
     columns: Column[];
@@ -28,6 +30,7 @@ interface FilterArgument {
     id: string;
     values: string[];
 }
+
 
 function GenericTable(props: GenericTableProps) {
     const { columns, data, fetchData, controlledPageCount } = props;
@@ -167,7 +170,7 @@ function renderSubscriptionsCell({ cell }: { cell: Cell }) {
         return (
             <p key={subscription.subscription_id}>
                 {subscription.product.name}:{" "}
-                <a href={`/subscriptions/${subscription.subscription_id}`}>{subscription.description}</a>
+                <a href={`/subscription/${subscription.subscription_id}`}>{subscription.description}</a>
             </p>
         );
     });
@@ -195,6 +198,53 @@ function renderPidCell({ cell }: { cell: Cell }) {
             {pid.slice(0, 8)}
         </a>
     );
+}
+
+enum ProcessStatus {
+    CREATED = "created",
+    FAILED = "failed",
+    RUNNING = "running",
+    SUSPENDED = "suspended",
+    ABORTED = "aborted",
+    COMPLETED = "completed"
+}
+
+type FilterAction = { type: "organisation"; organisation: string } | { type: "status"; status: string };
+
+function filterReducer(state: FilterArgument[], action: FilterAction) {
+    console.log(state, action);
+    switch (action.type) {
+        case "organisation":
+            return [
+                ...state.filter(elem => elem.id !== "organisation"),
+                { id: "organisation", values: [action.organisation] }
+            ];
+        case "status":
+            const filterArg = state.find(elem => elem.id === "status");
+	    console.log("Current filterArg:", filterArg);
+            if (filterArg === undefined) {
+                return [...state, { id: "status", values: [action.status] }];
+            } else if (filterArg.values.includes(action.status)) {
+		if (filterArg.values.length === 1) {
+			console.log("Remove status filter", filterArg);
+			return state.filter(elem => elem.id !== "status");
+		} else {
+			console.log("Remove status from filter", filterArg)
+			return [
+			    ...state.filter(elem => elem.id !== "status"),
+			    { id: "status", values: filterArg.values.filter(elem => elem !== action.status) }
+			];
+		}
+            } else {
+		console.log("Add the status to the filter", filterArg);
+                return [
+                    ...state.filter(elem => elem.id !== "status"),
+                    { id: "status", values: [...filterArg.values, action.status] }
+                ];
+            }
+        default:
+            throw new Error();
+    }
 }
 
 function ProcessesTable() {
@@ -226,7 +276,7 @@ function ProcessesTable() {
             },
             {
                 Header: "Customer",
-                id: "customer", // Normally the accessor is used as id, but we extract the customer from the subscriptions.
+                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderCustomersCell(organisations)
@@ -248,17 +298,43 @@ function ProcessesTable() {
                 Cell: renderTimestampCell
             }
         ],
-        []
+        [organisations]
     );
 
     const [data, setData] = React.useState<ProcessV2[]>([]);
     const [loading, setLoading] = React.useState(false);
     const [pageCount, setPageCount] = React.useState(0);
     const fetchIdRef = React.useRef(0);
-    const [filterBy, setFilterBy] = React.useState<FilterArgument[]>([
-        { id: "status", values: ["running", "suspended", "failed"] },
-        { id: "is_task", values: ["false"] }
+    const [filterBy, filterDispatch] = React.useReducer(filterReducer, [
+        { id: "isTask", values: ["false"] }
     ]);
+    console.log("filterBy", filterBy);
+    const selectedOrganisation = filterBy.reduce((org: string, elem: FilterArgument) => {
+        return elem.id === "organisation" ? elem.values[0] : org;
+    }, "");
+
+    const setOrganisationFilter = ({ value }: { value: string }) =>
+        filterDispatch({ type: "organisation", organisation: value });
+
+    const filterAttributesStatus = () => {
+        const statesInFilter = filterBy.reduce((states: ProcessStatus[], elem: FilterArgument) => {
+            return elem.id === "status" ? (elem.values as ProcessStatus[]) : states;
+        }, []);
+	console.log("statesInFilter:", statesInFilter);
+	return [{ name: ProcessStatus.CREATED, selected: statesInFilter.includes(ProcessStatus.CREATED), count: 0 },
+		    { name: ProcessStatus.FAILED, selected: statesInFilter.includes(ProcessStatus.FAILED), count: 0 },
+		    { name: ProcessStatus.RUNNING, selected: statesInFilter.includes(ProcessStatus.RUNNING), count: 0 },
+		    { name: ProcessStatus.SUSPENDED, selected: statesInFilter.includes(ProcessStatus.SUSPENDED), count: 0},
+		    { name: ProcessStatus.ABORTED, selected: statesInFilter.includes(ProcessStatus.ABORTED), count: 0},
+		    { name: ProcessStatus.COMPLETED, selected: statesInFilter.includes(ProcessStatus.COMPLETED), count: 0},
+	    ]
+    };
+
+
+    const setStatusFilter = (attr: {name: string, selected: boolean, count: number}) => {
+	    console.log(attr);
+	    filterDispatch({ type: "status", status: attr.name})
+    };
 
     const fetchData = React.useCallback(
         ({ pageSize, pageIndex, sortBy }) => {
@@ -280,7 +356,21 @@ function ProcessesTable() {
         [filterBy]
     );
 
-    return <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />;
+    return (
+        <section className={"processes"}>
+            <div className={"processes-filter-select"}>
+                <OrganisationSelect
+                    id={"organisations-filter"}
+                    onChange={setOrganisationFilter}
+                    organisations={organisations}
+                    organisation={selectedOrganisation}
+                />
+                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+            </div>
+
+            <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
+        </section>
+    );
 }
 
 export default ProcessesTable;
