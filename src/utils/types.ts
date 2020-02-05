@@ -13,6 +13,11 @@
  *
  */
 
+export interface FilterArgument {
+    id: string;
+    values: string[];
+}
+
 export interface Product {
     name: string;
     tag: string;

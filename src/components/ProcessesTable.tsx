@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback, useEffect, useRef, useState, useReducer } from "react";
 import {
     Cell,
     Column,
@@ -7,11 +7,10 @@ import {
     useFilters,
     useSortBy,
     usePagination,
-    useAsyncDebounce
 } from "react-table";
 import "./GenericTable.scss";
-import { processesFilterable } from "../api/index.js";
-import { Organization, ProcessV2, Subscription } from "../utils/types";
+import { processesFilterable } from "../api/processes";
+import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
 import { renderDateTime } from "../utils/Lookups";
 import uniq from "lodash/uniq";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -26,9 +25,29 @@ interface GenericTableProps {
     controlledPageCount: number;
 }
 
-interface FilterArgument {
-    id: string;
-    values: string[];
+
+/*
+* Stolen from https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+* permission to copy paste in blog post 
+*/
+function useInterval(callback: () => void, delay: number) {
+  const savedCallback = useRef<() => void>(() => {return;}); // To satisfy typescript the initial value should be a noop callback.
+
+  // Remember the latest function.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
 
 
@@ -64,11 +83,16 @@ function GenericTable(props: GenericTableProps) {
         usePagination
     );
 
-    //const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
+    // const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchData({ pageIndex, pageSize, sortBy });
-    }, [fetchData, pageIndex, pageSize, sortBy]);
+    }, [pageIndex, pageSize, sortBy]);
+
+    useInterval(() => {
+	fetchData({ pageIndex, pageSize, sortBy });
+    }, 1500)
+
 
     const sortIcon = (col: ColumnInstance) => {
         if (!col.canSort) {
@@ -153,7 +177,7 @@ function GenericTable(props: GenericTableProps) {
                         setPageSize(Number(e.target.value));
                     }}
                 >
-                    {[25, 50, 100].map(pageSize => (
+                    {[5, 10, 25, 50, 100].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
                             Show {pageSize}
                         </option>
@@ -209,7 +233,9 @@ enum ProcessStatus {
     COMPLETED = "completed"
 }
 
-type FilterAction = { type: "organisation"; organisation: string } | { type: "status"; status: string };
+type FilterAction =
+    | { type: "organisation"; organisation: string }
+    | { type: "status"; selected: boolean; status: string };
 
 function filterReducer(state: FilterArgument[], action: FilterAction) {
     console.log(state, action);
@@ -221,30 +247,36 @@ function filterReducer(state: FilterArgument[], action: FilterAction) {
             ];
         case "status":
             const filterArg = state.find(elem => elem.id === "status");
-	    console.log("Current filterArg:", filterArg);
-            if (filterArg === undefined) {
+            console.log("Current filterArg:", filterArg);
+            if (filterArg === undefined && !action.selected) {
                 return [...state, { id: "status", values: [action.status] }];
-            } else if (filterArg.values.includes(action.status)) {
-		if (filterArg.values.length === 1) {
-			console.log("Remove status filter", filterArg);
-			return state.filter(elem => elem.id !== "status");
-		} else {
-			console.log("Remove status from filter", filterArg)
-			return [
-			    ...state.filter(elem => elem.id !== "status"),
-			    { id: "status", values: filterArg.values.filter(elem => elem !== action.status) }
-			];
-		}
-            } else {
-		console.log("Add the status to the filter", filterArg);
+            } else if (filterArg && filterArg.values.includes(action.status) && action.selected) {
+                if (filterArg.values.length === 1) {
+                    console.log("Remove status filter", filterArg);
+                    return state.filter(elem => elem.id !== "status");
+                } else {
+                    console.log("Remove status from filter", filterArg);
+                    return [
+                        ...state.filter(elem => elem.id !== "status"),
+                        { id: "status", values: filterArg.values.filter(elem => elem !== action.status) }
+                    ];
+                }
+            } else if (filterArg) {
+                console.log("Add the status to the filter", filterArg);
                 return [
                     ...state.filter(elem => elem.id !== "status"),
                     { id: "status", values: [...filterArg.values, action.status] }
                 ];
+            } else {
+                return state;
             }
         default:
             throw new Error();
     }
+}
+
+function resetFilter(filter: FilterArgument[]) {
+    return [{ id: "isTask", values: ["false"] }];
 }
 
 function ProcessesTable() {
@@ -301,14 +333,12 @@ function ProcessesTable() {
         [organisations]
     );
 
-    const [data, setData] = React.useState<ProcessV2[]>([]);
-    const [loading, setLoading] = React.useState(false);
-    const [pageCount, setPageCount] = React.useState(0);
+    const [data, setData] = useState<ProcessV2[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [pageCount, setPageCount] = useState(0);
     const fetchIdRef = React.useRef(0);
-    const [filterBy, filterDispatch] = React.useReducer(filterReducer, [
-        { id: "isTask", values: ["false"] }
-    ]);
-    console.log("filterBy", filterBy);
+    const entityTag = React.useRef<string | null>(null)
+    const [filterBy, filterDispatch] = useReducer(filterReducer, [], resetFilter);
     const selectedOrganisation = filterBy.reduce((org: string, elem: FilterArgument) => {
         return elem.id === "organisation" ? elem.values[0] : org;
     }, "");
@@ -320,20 +350,20 @@ function ProcessesTable() {
         const statesInFilter = filterBy.reduce((states: ProcessStatus[], elem: FilterArgument) => {
             return elem.id === "status" ? (elem.values as ProcessStatus[]) : states;
         }, []);
-	console.log("statesInFilter:", statesInFilter);
-	return [{ name: ProcessStatus.CREATED, selected: statesInFilter.includes(ProcessStatus.CREATED), count: 0 },
-		    { name: ProcessStatus.FAILED, selected: statesInFilter.includes(ProcessStatus.FAILED), count: 0 },
-		    { name: ProcessStatus.RUNNING, selected: statesInFilter.includes(ProcessStatus.RUNNING), count: 0 },
-		    { name: ProcessStatus.SUSPENDED, selected: statesInFilter.includes(ProcessStatus.SUSPENDED), count: 0},
-		    { name: ProcessStatus.ABORTED, selected: statesInFilter.includes(ProcessStatus.ABORTED), count: 0},
-		    { name: ProcessStatus.COMPLETED, selected: statesInFilter.includes(ProcessStatus.COMPLETED), count: 0},
-	    ]
+        console.log("statesInFilter:", statesInFilter);
+        return [
+            { name: ProcessStatus.CREATED, selected: statesInFilter.includes(ProcessStatus.CREATED), count: 0 },
+            { name: ProcessStatus.FAILED, selected: statesInFilter.includes(ProcessStatus.FAILED), count: 0 },
+            { name: ProcessStatus.RUNNING, selected: statesInFilter.includes(ProcessStatus.RUNNING), count: 0 },
+            { name: ProcessStatus.SUSPENDED, selected: statesInFilter.includes(ProcessStatus.SUSPENDED), count: 0 },
+            { name: ProcessStatus.ABORTED, selected: statesInFilter.includes(ProcessStatus.ABORTED), count: 0 },
+            { name: ProcessStatus.COMPLETED, selected: statesInFilter.includes(ProcessStatus.COMPLETED), count: 0 }
+        ];
     };
 
-
-    const setStatusFilter = (attr: {name: string, selected: boolean, count: number}) => {
-	    console.log(attr);
-	    filterDispatch({ type: "status", status: attr.name})
+    const setStatusFilter = (attr: { name: string; selected: boolean; count: number }) => {
+        console.log(attr);
+        filterDispatch({ type: "status", selected: attr.selected, status: attr.name });
     };
 
     const fetchData = React.useCallback(
@@ -341,15 +371,16 @@ function ProcessesTable() {
             const fetchId = ++fetchIdRef.current;
 
             setLoading(true);
-            setPageCount(99);
             const startRow = pageSize * pageIndex;
             const endRow = startRow + pageSize;
 
-            processesFilterable(startRow, endRow, sortBy, filterBy).then(processes => {
-                // Only update the data if this is the latest fetch.
-                if (fetchId === fetchIdRef.current) {
+            processesFilterable(startRow, endRow, sortBy, filterBy, entityTag.current).then(([processes, total, eTag]) => {
+                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
+                if (fetchId === fetchIdRef.current && processes) {
+		    setPageCount(Math.ceil(total / pageSize));
                     setData(processes);
                     setLoading(false);
+		    entityTag.current = eTag
                 }
             });
         },
@@ -357,19 +388,19 @@ function ProcessesTable() {
     );
 
     return (
-        <section className={"processes"}>
-            <div className={"processes-filter-select"}>
-                <OrganisationSelect
-                    id={"organisations-filter"}
-                    onChange={setOrganisationFilter}
-                    organisations={organisations}
-                    organisation={selectedOrganisation}
-                />
-                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
-            </div>
+            <section className={"processes"}>
+                <div className={"processes-filter-select"}>
+                    <OrganisationSelect
+                        id={"organisations-filter"}
+                        onChange={setOrganisationFilter}
+                        organisations={organisations}
+                        organisation={selectedOrganisation}
+                    />
+                    <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+                </div>
 
-            <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
-        </section>
+                <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
+            </section>
     );
 }
 
