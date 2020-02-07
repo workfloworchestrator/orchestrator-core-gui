@@ -730,6 +730,8 @@ I18n.translations.en = {
         suspended: "Suspended",
         running: "Running",
         failed: "Failed",
+        api_unavailable: "API Unavailable",
+        inconsistent_data: "Inconsistent Data",
         IPS: "IP Static",
         IPBGP: "IP BGP",
         IP_PREFIX: "IP Prefix",

@@ -98,6 +98,12 @@
             &.running {
                 background-color: $light-green;
             }
+            &.api_unavailable {
+                background-color: $light-blue;
+            }
+            &.inconsistent_data {
+                background-color: $light-red;
+            }
         }
         thead {
             th {
@@ -153,6 +159,12 @@
                     }
                     &.running {
                         background-color: darken($light-green, 10%);
+                    }
+                    &.api_unavailable {
+                        background-color: darken($light-blue, 10%);
+                    }
+                    &.inconsistent_data {
+                        background-color: darken($light-red, 10%);
                     }
                     td.actions i.fa-ellipsis-h {
                         color: $blue;
