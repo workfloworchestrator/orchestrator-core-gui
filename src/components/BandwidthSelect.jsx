@@ -29,7 +29,7 @@ export default class BandwidthSelect extends React.PureComponent {
 
 BandwidthSelect.propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.number,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool
 };
