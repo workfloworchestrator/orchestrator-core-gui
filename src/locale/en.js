@@ -182,7 +182,7 @@ I18n.translations.en = {
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
-        organisation_info: "Search and select the customer for the product",
+        organisation_info: "Search and select the customer for the product.",
         lightpath_msp: "The MSP in this LP",
         lightpath_ssp: "The SSP in this LP",
         lightpath_msp_1: "The first MSP in this LP",
@@ -231,7 +231,7 @@ I18n.translations.en = {
         capacity_info: "The capacity / speed of the lightpath in megabit per second",
         contact_persons: "Customer contact persons",
         contact_persons_info:
-            "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers",
+            "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.",
         customer_ipv4_mtu: "IPv4 MTU",
         customer_ipv4_mtu_info:
             "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
@@ -366,7 +366,7 @@ I18n.translations.en = {
         subscription_link: "Subscription",
         subscription_link_txt: "Show Subscription related by this {{target}} Process",
         surfcert_filter: "SURFcert filter",
-        surfcert_filter_info: "Type of SURFcert filter",
+        surfcert_filter_info: "Type of the SURFcert filter.",
         old_service_port: "Service Port",
         old_service_port_info: "Choose Service Ports to change",
         service_ports: "Service Ports",
@@ -386,7 +386,7 @@ I18n.translations.en = {
             "All off the Service Ports that will be connected to each other in this E-LAN virtual private network - minimum is 2",
         bgp_ip_service_ports: "IP Service Ports",
         bgp_ip_service_ports_info:
-            "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO",
+            "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.",
         ip_static_service_port: "IP Service Port",
         ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
         sn8_ip_static_service_port: "SURFnet8 SAP",
@@ -613,9 +613,9 @@ I18n.translations.en = {
         new_isis_metric_info: "New desired value for the ISIS metric of this Corelink subscription",
         ipv4_prefixlen: "IPv4 Prefix length",
         ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
-        service_speed: "Bandbreedte",
+        service_speed: "Speed",
         service_speed_info:
-            "Bandbreedte in MBit/sec. N.B.: Mag niet groter zijn dan de kleinste bandbreedte van de onderliggende poort of poorten",
+            "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
 
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
