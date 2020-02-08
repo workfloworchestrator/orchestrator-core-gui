@@ -1,13 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState, useReducer } from "react";
-import {
-    Cell,
-    Column,
-    ColumnInstance,
-    useTable,
-    useFilters,
-    useSortBy,
-    usePagination,
-} from "react-table";
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState, useReducer } from "react";
+import { Cell, Column, ColumnInstance, useTable, useFilters, useSortBy, usePagination } from "react-table";
 import "./GenericTable.scss";
 import { processesFilterable } from "../api/processes";
 import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
@@ -17,42 +9,44 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { organisationNameByUuid } from "../utils/Lookups";
 import OrganisationSelect from "./OrganisationSelect";
 import FilterDropDown from "./FilterDropDown";
+import CheckBox from "./CheckBox";
+import NumericInput from "react-numeric-input";
 
 interface GenericTableProps {
     columns: Column[];
     data: object[];
     fetchData(options: object): any;
     controlledPageCount: number;
+    autoRefreshDelay: number;
 }
-
 
 /*
-* Stolen from https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-* permission to copy paste in blog post 
-*/
+ * Inspired by https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+ */
 function useInterval(callback: () => void, delay: number) {
-  const savedCallback = useRef<() => void>(() => {return;}); // To satisfy typescript the initial value should be a noop callback.
+    const savedCallback = useRef<() => void>(() => {
+        return;
+    }); // To satisfy typescript the initial value should be a noop callback.
 
-  // Remember the latest function.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+    // Remember the latest function.
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
 
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
+    // Set up the interval.
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
+        if (delay !== -1) {
+            let id = setInterval(tick, delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
 }
 
-
 function GenericTable(props: GenericTableProps) {
-    const { columns, data, fetchData, controlledPageCount } = props;
+    const { columns, data, fetchData, controlledPageCount, autoRefreshDelay } = props;
     // const { columns, data, fetchData } = props;
     const {
         getTableProps,
@@ -90,9 +84,8 @@ function GenericTable(props: GenericTableProps) {
     }, [pageIndex, pageSize, sortBy]);
 
     useInterval(() => {
-	fetchData({ pageIndex, pageSize, sortBy });
-    }, 1500)
-
+        fetchData({ pageIndex, pageSize, sortBy });
+    }, autoRefreshDelay);
 
     const sortIcon = (col: ColumnInstance) => {
         if (!col.canSort) {
@@ -335,9 +328,11 @@ function ProcessesTable() {
 
     const [data, setData] = useState<ProcessV2[]>([]);
     const [loading, setLoading] = useState(false);
+    const [refresh, setRefresh] = useState(true);
+    const [delay, setDelay] = useState(1500);
     const [pageCount, setPageCount] = useState(0);
     const fetchIdRef = React.useRef(0);
-    const entityTag = React.useRef<string | null>(null)
+    const entityTag = React.useRef<string | null>(null);
     const [filterBy, filterDispatch] = useReducer(filterReducer, [], resetFilter);
     const selectedOrganisation = filterBy.reduce((org: string, elem: FilterArgument) => {
         return elem.id === "organisation" ? elem.values[0] : org;
@@ -374,33 +369,39 @@ function ProcessesTable() {
             const startRow = pageSize * pageIndex;
             const endRow = startRow + pageSize;
 
-            processesFilterable(startRow, endRow, sortBy, filterBy, entityTag.current).then(([processes, total, eTag]) => {
-                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
-                if (fetchId === fetchIdRef.current && processes) {
-		    setPageCount(Math.ceil(total / pageSize));
-                    setData(processes);
+            processesFilterable(startRow, endRow, sortBy, filterBy, entityTag.current).then(
+                ([processes, total, eTag]) => {
+                    // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
+                    if (fetchId === fetchIdRef.current && processes) {
+                        setPageCount(Math.ceil(total / pageSize));
+                        setData(processes);
+                        entityTag.current = eTag;
+                    }
                     setLoading(false);
-		    entityTag.current = eTag
                 }
-            });
+            );
         },
         [filterBy]
     );
 
     return (
-            <section className={"processes"}>
-                <div className={"processes-filter-select"}>
-                    <OrganisationSelect
-                        id={"organisations-filter"}
-                        onChange={setOrganisationFilter}
-                        organisations={organisations}
-                        organisation={selectedOrganisation}
-                    />
-                    <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
-                </div>
+        <section className={"processes"}>
+            <div className={"processes-filter-select"}>
+                <OrganisationSelect
+                    id={"organisations-filter"}
+                    onChange={setOrganisationFilter}
+                    organisations={organisations}
+                    organisation={selectedOrganisation}
+                />
+                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+	    <span title={refresh ? `Autorefresh every ${delay}ms`: "Autofresh disabled" } onClick={() => setRefresh(!refresh)} className={refresh ? loading ? "pulse": "rest": "dead"}>
+	    { refresh ? <i className={"fa fa-heart"} /> : <i className={"fa fa-heart-broken"} /> }
+	    </span>
+		<NumericInput  onChange={(valueAsNumber, valuesAsString, inputElement) => {valueAsNumber && setDelay(valueAsNumber)}} min={500} max={10000} step={500} value={delay} strict={true} />
+            </div>
 
-                <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} />
-            </section>
+            <GenericTable columns={columns} data={data} fetchData={fetchData} controlledPageCount={pageCount} autoRefreshDelay={refresh ? delay: -1} />
+        </section>
     );
 }
 

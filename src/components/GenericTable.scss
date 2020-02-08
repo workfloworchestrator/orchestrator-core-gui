@@ -118,3 +118,14 @@ table.nwa-table {
         display: inline;
     }
 }
+
+span.pulse {
+	color: $red;
+}
+span.rest {
+	color: $dark-grey;
+}
+
+span.dead {
+	color: $medium-grey;
+}
