@@ -23,8 +23,8 @@ import Flash from "../components/Flash";
 import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "./NotFound";
 import Help from "./Help";
-import Processes from "./Processes";
-import ProcessesTable from "../components/ProcessesTable";
+import Processes from "./ProcessesV2";
+//import ProcessesTable from "../components/ProcessesTable";
 import Subscriptions from "./Subscriptions";
 import Validations from "./Validations";
 import NewProcess from "./NewProcess";
@@ -241,7 +241,6 @@ class App extends React.PureComponent<{}, IState> {
                                         <Processes highlight={getParameterByName("highlight", props.location.search)} />
                                     )}
                                 />
-                                <ProtectedRoute path="/processesV2" render={() => <ProcessesTable />} />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}

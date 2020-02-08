@@ -2,9 +2,9 @@ import axios from "axios";
 import { ProcessV2, FilterArgument } from "../utils/types";
 import { CommaSeparatedStringArrayParam } from "../utils/QueryParameters.js";
 import { SortingRule } from "react-table";
+import { setFlash } from "../utils/Flash";
 
-
-var axiosInstance = axios.create({baseURL: "/api/"});
+var axiosInstance = axios.create({ baseURL: "/api/" });
 
 function getHeaders(eTag?: string | null) {
     const token = localStorage.getItem("access_token");
@@ -44,16 +44,34 @@ export function filterableEndpoint(
             },
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304
         })
-        .then(response => {
-            switch (response.status) {
-                case 200:
-                    return [response.data, ...extractResponseHeaders(response.headers)];
-                case 304:
-                    return [null, ...extractResponseHeaders(response.headers)];
-                default:
-                    return Promise.reject(response);
+        .then(
+            response => {
+                switch (response.status) {
+                    case 200:
+                        return [response.data, ...extractResponseHeaders(response.headers)];
+                    case 304:
+                        return [null, ...extractResponseHeaders(response.headers)];
+                    default:
+                        return Promise.reject(response);
+                }
+            },
+            error => {
+                var message: string;
+                if (error.response) {
+                    message = `${error.config.baseURL}${error.config.path} returned with HTTP status ${
+                        error.response.status
+                    }: ${error.response.statusText}`;
+                } else if (error.request) {
+                    message = `${error.config.baseURL}${error.config.path} failed with status ${error.request.status}`;
+                } else {
+                    message = error.message;
+                }
+                setFlash(message, "error");
+                console.log(message);
+
+                return Promise.reject(error);
             }
-        });
+        );
 }
 
 export const processesFilterable = filterableEndpoint.bind(null, "v2/processes");
