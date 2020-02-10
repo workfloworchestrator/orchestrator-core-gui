@@ -106,6 +106,7 @@ export interface ServicePort {
 export interface Organization {
     uuid: string;
     name: string;
+    abbr: string;
 }
 
 export interface ValidationError {

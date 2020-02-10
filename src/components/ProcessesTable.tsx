@@ -3,7 +3,6 @@ import { Cell, Column, ColumnInstance, useTable, useFilters, useSortBy, usePagin
 import "./GenericTable.scss";
 import { processesFilterable } from "../api/processes";
 import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
-import { renderDateTime } from "../utils/Lookups";
 import uniq from "lodash/uniq";
 import ApplicationContext from "../utils/ApplicationContext";
 import { organisationNameByUuid } from "../utils/Lookups";
@@ -82,7 +81,8 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
             manualSortBy: true,
             autoResetSortBy: false,
             pageCount: controlledPageCount,
-            debug: true
+            debug: true,
+	    stateReducer: function(newState: any, action: any, oldState: any) { console.log(oldState, action, newState);return newState},
         },
         useSortBy,
         usePagination
@@ -94,8 +94,8 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
 
     // synchronize table settings with parent
     useEffect(() => {
-        settingsDispatch({ type: "override", settings: { pageSize, hiddenColumns } });
-    }, [pageSize, hiddenColumns]);
+        settingsDispatch({ type: "override", settings: { pageSize, hiddenColumns, sortBy} });
+    }, [pageSize, sortBy, hiddenColumns]);
 
     // fetch new data whenever page index, size or sort changes
     useEffect(() => {
@@ -128,7 +128,7 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
 
     return (
         <div>
-            {flatColumns.map(column => (
+            {settings.show && flatColumns.map(column => (
                 <div key={column.id}>
                     <label>
                         <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
@@ -165,6 +165,9 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
                     })}
                 </tbody>
             </table>
+	    {data.length === 0 ?
+		    <div className={"noResults"}>No Results found.</div>
+		    :
             <div className="pagination">
                 <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                     <i className="fa fa-angle-double-left" />
@@ -208,6 +211,7 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
                     ))}
                 </select>
             </div>
+	    }
         </div>
     );
 }
@@ -217,16 +221,27 @@ function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     return subscriptions.map((subscription: Subscription) => {
         return (
             <p key={subscription.subscription_id}>
-                {subscription.product.name}:{" "}
                 <a href={`/subscription/${subscription.subscription_id}`}>{subscription.description}</a>
             </p>
         );
     });
 }
 
-function renderCustomersCell(organisations: Organization[]) {
+function renderProductsCell({ cell }: { cell: Cell }) {
+    const subscriptions: Subscription[] = cell.value;
+    return uniq(subscriptions.map((subscription: Subscription) => subscription.product.name))
+	.map((product_name, idx) => 
+		<p key={`product_${idx}`}>{product_name}</p>
+    );
+}
+
+function renderCustomersCell(organisations: Organization[], abbreviate: boolean) {
+    function lookup(uuid: string) {
+	    const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
+	    return organisation ? abbreviate ? organisation.abbr : organisation.name : uuid;
+		    
+    }
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
-        const lookup = (uuid: string) => organisationNameByUuid(uuid, organisations);
         const subscriptions: Subscription[] = cell.value;
         return uniq(subscriptions.map(subscription => subscription.customer_id))
             .map(lookup)
@@ -236,7 +251,13 @@ function renderCustomersCell(organisations: Organization[]) {
 
 function renderTimestampCell({ cell }: { cell: Cell }) {
     const timestamp: number = cell.value;
-    return renderDateTime(timestamp);
+    const datetime = new Date(timestamp * 1000);
+    const today = new Date();
+    if (datetime.getFullYear() === today.getFullYear() && datetime.getMonth() === today.getMonth() && datetime.getDay() === today.getDay()) {
+    	return datetime.toLocaleTimeString("nl-NL").substring(0,5) + " CET";
+    } else {
+	return datetime.toLocaleDateString("nl-NL");
+    }
 }
 
 function renderPidCell({ cell }: { cell: Cell }) {
@@ -248,9 +269,17 @@ function renderPidCell({ cell }: { cell: Cell }) {
     );
 }
 
+function renderProductTag({ cell }: { cell: Cell}) {
+	const subscriptions: Subscription[] = cell.value;
+	return uniq(subscriptions.map((subscription: Subscription) => {
+		return subscription.product.tag;
+	})).join(", ");
+}
+
 type ProcessStatus = "created" | "failed" | "running" | "suspended" | "aborted" | "completed";
 
 interface TableSettings {
+    show: boolean;
     hiddenColumns: string[];
     filterBy: FilterArgument[];
     sortBy: SortingRule<string>[];
@@ -262,13 +291,15 @@ interface TableSettings {
 type TableSettingsAction =
     | { type: "noop" }
     | { type: "override"; settings: Partial<TableSettings> }
-    | { type: "filter/set"; id: string; value: string }
-    | { type: "filter/unset"; id: string; value: string }
+    | { type: "filter/add"; id: string; value: string }
+    | { type: "filter/remove"; id: string; value: string }
+    | { type: "filter/replace"; id: string; value: string }
     | { type: "filter/clear"; id: string }
     | { type: "refresh/flip" }
     | { type: "refresh/disable" }
     | { type: "refresh/enable" }
-    | { type: "refresh/delay"; delay: number };
+    | { type: "refresh/delay"; delay: number }
+    | { type: "showSettings/toggle" }
 
 const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = (
     state: TableSettings,
@@ -282,7 +313,7 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
             case "override":
                 Object.assign(draft, action.settings);
                 break;
-            case "filter/set": {
+            case "filter/add": {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: [action.value] });
@@ -292,7 +323,7 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
                 }
                 break;
             }
-            case "filter/unset": {
+            case "filter/remove": {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index > -1) {
                     let valueIdx = draft.filterBy[index].values.findIndex(value => value === action.value);
@@ -302,6 +333,15 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
                 }
                 break;
             }
+	    case "filter/replace": {
+                   let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+		    if (index === -1) {
+			    draft.filterBy.push({id: action.id, values: [action.value] });
+		    } else {
+			    draft.filterBy[index].values =  [action.value];
+		    }
+		    break;
+	    }
             case "filter/clear": {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index > -1) {
@@ -321,6 +361,9 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
             case "refresh/delay":
                 draft.delay = action.delay;
                 break;
+	    case "showSettings/toggle":
+		draft.show = !draft.show;
+		break;
             default:
                 console.log(`Action ${action} not implemented`);
         }
@@ -345,6 +388,7 @@ function ProcessesTable(props: ProcessesTableProps) {
         ];
         const initialSortBy = [{ id: "modified", desc: true }];
         return {
+	    show: false,
             hiddenColumns: [],
             filterBy: initialFilterBy,
             sortBy: initialSortBy,
@@ -404,8 +448,29 @@ function ProcessesTable(props: ProcessesTableProps) {
                 id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations)
+                Cell: renderCustomersCell(organisations, false),
             },
+	    {
+		    Header: "Abbr.",
+		    id: "abbrev",
+		    accessor: "subscriptions",
+		    disableSortBy: true,
+		    Cell: renderCustomersCell(organisations, true),
+	    },
+	    {
+		    Header: "Product(s)",
+		    id: "products",
+		    accessor: "subscriptions",
+		    disableSortBy: true,
+		    Cell: renderProductsCell,
+	    },
+	    {
+		    Header: "Tag(s)",
+		    id: "tags",
+		    accessor: "subscriptions",
+		    disableSortBy: true,
+		    Cell: renderProductTag,
+	    },
             {
                 Header: "Subscriptions",
                 accessor: "subscriptions",
@@ -422,7 +487,7 @@ function ProcessesTable(props: ProcessesTableProps) {
                 Cell: renderTimestampCell
             },
             {
-                Header: "Last Modified",
+                Header: "Modified",
                 accessor: "modified",
                 Cell: renderTimestampCell
             }
@@ -453,9 +518,9 @@ function ProcessesTable(props: ProcessesTableProps) {
 
     const setStatusFilter = (attr: { name: string; selected: boolean; count: number }) => {
         if (attr.selected) {
-            tableSettingsDispatch({ type: "filter/unset", id: "status", value: attr.name });
+            tableSettingsDispatch({ type: "filter/remove", id: "status", value: attr.name });
         } else {
-            tableSettingsDispatch({ type: "filter/set", id: "status", value: attr.name });
+            tableSettingsDispatch({ type: "filter/add", id: "status", value: attr.name });
         }
     };
 
@@ -489,18 +554,19 @@ function ProcessesTable(props: ProcessesTableProps) {
             });
     }, []);
 
-    const setOrgFilter = (organisation: string) =>
-        tableSettingsDispatch({ type: "filter/set", id: "organisation", value: organisation });
+    const setOrgFilter = (option: any) => {
+	if (option && option.value) {	
+		console.log(option.value);
+        	tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
+	} else {
+		tableSettingsDispatch({type: "filter/clear", id: "organisation"});
+	}
+    }
     return (
-        <section className={"processes"}>
+	    <div className={"card"}>
             <div className={"processes-filter-select"}>
-                <OrganisationSelect
-                    id={"organisations-filter"}
-                    onChange={setOrgFilter}
-                    organisations={organisations}
-                    organisation={selectedOrganisation}
-                />
-                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+	        <span title={"open settings"} onClick={() => tableSettingsDispatch({ type: "showSettings/toggle" })}><i className={"fa fa-code"} /></span>
+	        <span title={"reset settings"} onClick={() => tableSettingsDispatch({ type: "override", settings: initialTableSettings})} ><i className={"fa fa-trash"} /></span>
                 <span
                     title={
                         tableSettings.refresh ? `Autorefresh every ${tableSettings.delay}ms` : "Autorefresh disabled"
@@ -518,6 +584,14 @@ function ProcessesTable(props: ProcessesTableProps) {
                         <i className={"fa fa-circle-o"} />
                     )}
                 </span>
+	        {tableSettings.show && <>
+                <OrganisationSelect
+                    id={"organisations-filter"}
+                    onChange={setOrgFilter}
+                    organisations={organisations}
+                    organisation={selectedOrganisation}
+                />
+                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
                 <NumericInput
                     onChange={valueAsNumber => {
                         valueAsNumber && tableSettingsDispatch({ type: "refresh/delay", delay: valueAsNumber });
@@ -528,8 +602,10 @@ function ProcessesTable(props: ProcessesTableProps) {
                     value={tableSettings.delay}
                     strict={true}
                 />
-            </div>
-
+			</>
+		}
+         </div>
+        <section className={props.name}>
             <GenericTable<ProcessV2>
                 columns={columns}
                 data={data}
@@ -539,6 +615,7 @@ function ProcessesTable(props: ProcessesTableProps) {
                 controlledPageCount={pageCount}
             />
         </section>
+	    </div>
     );
 }
 
