@@ -370,7 +370,11 @@ I18n.translations.en = {
         old_service_port: "Service Port",
         old_service_port_info: "Choose Service Ports to change",
         service_ports: "Service Ports",
+		primary_service_ports: "Primary Service Ports",
+		secondary_service_ports: "Secondary Service Ports",
         service_ports_info: "Choose Service Ports",
+        primary_service_ports_info: "Choose Primary Service Ports",
+        secondary_service_ports_info: "Choose Secondary Service Ports",
         service_ports_input: "Service Ports",
         service_ports_input_info: "Choose Service Ports",
         service_ports_primary: "Service Ports",
@@ -616,6 +620,10 @@ I18n.translations.en = {
         service_speed: "Speed",
         service_speed_info:
             "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+        primary_service_speed_info:
+            "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+        secondary_service_speed_info:
+            "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
 
         confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
         confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
@@ -626,7 +634,11 @@ I18n.translations.en = {
         sap_summary_sn7: "Summary of available SN7 SAP's",
         sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details",
         speed_policer: "Speed policer",
+        primary_speed_policer: "Primary Speed policer",
+        secondary_speed_policer: "Secondary Speed policer",
         remote_port_shutdown: "Remote port shutdown",
+        primary_remote_port_shutdown: "Primary Remote port shutdown",
+        secondary_remote_port_shutdown: "Secondary Remote port shutdown",
         link_member_port: "Link Member",
         link_member_port_info: "Choose a Service Port - only link_member ports for the selected organisation are shown",
         added_service_ports: "Add ports",
@@ -1265,6 +1277,7 @@ I18n.translations.en = {
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
         modify_sn8_light_path: "Modify SN8 LightPath",
+        modify_sn8_light_path_redundant: "Modify SN8 LightPath Redundant",
         modify_sn8_light_path_upgrade_to_redundant: "Modify SN8 LightPath: Upgrade to Redundant",
         modify_sn8_light_path_downgrade_from_redundant: "Modify SN8 LightPath Redundant: Downgrade to SN8 LightPath",
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
