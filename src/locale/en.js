@@ -618,6 +618,8 @@ I18n.translations.en = {
         ipv4_prefixlen: "IPv4 Prefix length",
         ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
         service_speed: "Speed",
+        primary_service_speed: "Primary Speed",
+        secondary_service_speed: "Secondary Speed",
         service_speed_info:
             "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
         primary_service_speed_info:
