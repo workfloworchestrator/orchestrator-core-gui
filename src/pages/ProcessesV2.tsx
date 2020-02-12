@@ -55,21 +55,21 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
-	    <ProcessesTable
-		name={"completed-processes"}
-		showTasks={false}
-		initialStatuses={["completed"]}
-		hiddenColumns={["status", "assignee"]}
-		initialPageSize={5}
-	    />
+                <ProcessesTable
+                    name={"completed-processes"}
+                    showTasks={false}
+                    initialStatuses={["completed"]}
+                    hiddenColumns={["status", "assignee"]}
+                    initialPageSize={5}
+                />
 
-	<ProcessesTable
-	name={"active-processes"}
-	showTasks={false}
-	initialStatuses={["created", "running", "suspended", "failed"]}
-	hiddenColumns={[]}
-	initialPageSize={25}
-	/>
+                <ProcessesTable
+                    name={"active-processes"}
+                    showTasks={false}
+                    initialStatuses={["created", "running", "suspended", "failed"]}
+                    hiddenColumns={[]}
+                    initialPageSize={25}
+                />
             </div>
         );
     }

@@ -78,8 +78,7 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.5.2"
   },
-  "resolutions": {
-  },
+  "resolutions": {},
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",

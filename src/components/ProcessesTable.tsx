@@ -66,7 +66,7 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
         previousPage,
         setPageSize,
         flatColumns,
-        state: { pageIndex, pageSize, sortBy, hiddenColumns },
+        state: { pageIndex, pageSize, sortBy, hiddenColumns }
     } = useTable(
         {
             columns,
@@ -82,7 +82,10 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
             autoResetSortBy: false,
             pageCount: controlledPageCount,
             debug: true,
-	    stateReducer: function(newState: any, action: any, oldState: any) { console.log(oldState, action, newState);return newState},
+            stateReducer: function(newState: any, action: any, oldState: any) {
+                console.log(oldState, action, newState);
+                return newState;
+            }
         },
         useSortBy,
         usePagination
@@ -94,7 +97,7 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
 
     // synchronize table settings with parent
     useEffect(() => {
-        settingsDispatch({ type: "override", settings: { pageSize, hiddenColumns, sortBy} });
+        settingsDispatch({ type: "override", settings: { pageSize, hiddenColumns, sortBy } });
     }, [pageSize, sortBy, hiddenColumns]);
 
     // fetch new data whenever page index, size or sort changes
@@ -128,13 +131,14 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
 
     return (
         <div>
-            {settings.show && flatColumns.map(column => (
-                <div key={column.id}>
-                    <label>
-                        <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                    </label>
-                </div>
-            ))}
+            {settings.show &&
+                flatColumns.map(column => (
+                    <div key={column.id}>
+                        <label>
+                            <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
+                        </label>
+                    </div>
+                ))}
             <table className="nwa-table" {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
@@ -165,53 +169,53 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
                     })}
                 </tbody>
             </table>
-	    {data.length === 0 ?
-		    <div className={"noResults"}>No Results found.</div>
-		    :
-            <div className="pagination">
-                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                    <i className="fa fa-angle-double-left" />
-                </button>{" "}
-                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                    <i className="fa fa-angle-left" />
-                </button>{" "}
-                <button onClick={() => nextPage()} disabled={!canNextPage}>
-                    <i className="fa fa-angle-right" />
-                </button>{" "}
-                <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                    <i className="fa fa-angle-double-right" />
-                </button>{" "}
-                <span>
-                    Page{" "}
-                    <strong>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </strong>{" "}
-                </span>
-                <span>
-                    | Go to page:{" "}
-                    <input
-                        type="number"
-                        defaultValue={(pageIndex + 1).toString()}
+            {data.length === 0 ? (
+                <div className={"noResults"}>No Results found.</div>
+            ) : (
+                <div className="pagination">
+                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                        <i className="fa fa-angle-double-left" />
+                    </button>{" "}
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                        <i className="fa fa-angle-left" />
+                    </button>{" "}
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                        <i className="fa fa-angle-right" />
+                    </button>{" "}
+                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                        <i className="fa fa-angle-double-right" />
+                    </button>{" "}
+                    <span>
+                        Page{" "}
+                        <strong>
+                            {pageIndex + 1} of {pageOptions.length}
+                        </strong>{" "}
+                    </span>
+                    <span>
+                        | Go to page:{" "}
+                        <input
+                            type="number"
+                            defaultValue={(pageIndex + 1).toString()}
+                            onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                                gotoPage(page);
+                            }}
+                        />
+                    </span>{" "}
+                    <select
+                        value={pageSize}
                         onChange={e => {
-                            const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                            gotoPage(page);
+                            setPageSize(Number(e.target.value));
                         }}
-                    />
-                </span>{" "}
-                <select
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value));
-                    }}
-                >
-                    {[5, 25, 50, 100].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
-	    }
+                    >
+                        {[5, 25, 50, 100].map(pageSize => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            )}
         </div>
     );
 }
@@ -229,17 +233,15 @@ function renderSubscriptionsCell({ cell }: { cell: Cell }) {
 
 function renderProductsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
-    return uniq(subscriptions.map((subscription: Subscription) => subscription.product.name))
-	.map((product_name, idx) => 
-		<p key={`product_${idx}`}>{product_name}</p>
+    return uniq(subscriptions.map((subscription: Subscription) => subscription.product.name)).map(
+        (product_name, idx) => <p key={`product_${idx}`}>{product_name}</p>
     );
 }
 
 function renderCustomersCell(organisations: Organization[], abbreviate: boolean) {
     function lookup(uuid: string) {
-	    const organisation: Organization | undefined = organisations.find((org) => org.uuid === uuid);
-	    return organisation ? abbreviate ? organisation.abbr : organisation.name : uuid;
-		    
+        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
     }
     return function doRenderCustomersCell({ cell }: { cell: Cell }) {
         const subscriptions: Subscription[] = cell.value;
@@ -253,10 +255,14 @@ function renderTimestampCell({ cell }: { cell: Cell }) {
     const timestamp: number = cell.value;
     const datetime = new Date(timestamp * 1000);
     const today = new Date();
-    if (datetime.getFullYear() === today.getFullYear() && datetime.getMonth() === today.getMonth() && datetime.getDay() === today.getDay()) {
-    	return datetime.toLocaleTimeString("nl-NL").substring(0,5) + " CET";
+    if (
+        datetime.getFullYear() === today.getFullYear() &&
+        datetime.getMonth() === today.getMonth() &&
+        datetime.getDay() === today.getDay()
+    ) {
+        return datetime.toLocaleTimeString("nl-NL").substring(0, 5) + " CET";
     } else {
-	return datetime.toLocaleDateString("nl-NL");
+        return datetime.toLocaleDateString("nl-NL");
     }
 }
 
@@ -269,11 +275,13 @@ function renderPidCell({ cell }: { cell: Cell }) {
     );
 }
 
-function renderProductTag({ cell }: { cell: Cell}) {
-	const subscriptions: Subscription[] = cell.value;
-	return uniq(subscriptions.map((subscription: Subscription) => {
-		return subscription.product.tag;
-	})).join(", ");
+function renderProductTag({ cell }: { cell: Cell }) {
+    const subscriptions: Subscription[] = cell.value;
+    return uniq(
+        subscriptions.map((subscription: Subscription) => {
+            return subscription.product.tag;
+        })
+    ).join(", ");
 }
 
 type ProcessStatus = "created" | "failed" | "running" | "suspended" | "aborted" | "completed";
@@ -299,7 +307,7 @@ type TableSettingsAction =
     | { type: "refresh/disable" }
     | { type: "refresh/enable" }
     | { type: "refresh/delay"; delay: number }
-    | { type: "showSettings/toggle" }
+    | { type: "showSettings/toggle" };
 
 const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = (
     state: TableSettings,
@@ -333,15 +341,15 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
                 }
                 break;
             }
-	    case "filter/replace": {
-                   let index = draft.filterBy.findIndex(entry => entry.id === action.id);
-		    if (index === -1) {
-			    draft.filterBy.push({id: action.id, values: [action.value] });
-		    } else {
-			    draft.filterBy[index].values =  [action.value];
-		    }
-		    break;
-	    }
+            case "filter/replace": {
+                let index = draft.filterBy.findIndex(entry => entry.id === action.id);
+                if (index === -1) {
+                    draft.filterBy.push({ id: action.id, values: [action.value] });
+                } else {
+                    draft.filterBy[index].values = [action.value];
+                }
+                break;
+            }
             case "filter/clear": {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index > -1) {
@@ -361,9 +369,9 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
             case "refresh/delay":
                 draft.delay = action.delay;
                 break;
-	    case "showSettings/toggle":
-		draft.show = !draft.show;
-		break;
+            case "showSettings/toggle":
+                draft.show = !draft.show;
+                break;
             default:
                 console.log(`Action ${action} not implemented`);
         }
@@ -388,7 +396,7 @@ function ProcessesTable(props: ProcessesTableProps) {
         ];
         const initialSortBy = [{ id: "modified", desc: true }];
         return {
-	    show: false,
+            show: false,
             hiddenColumns: [],
             filterBy: initialFilterBy,
             sortBy: initialSortBy,
@@ -448,29 +456,29 @@ function ProcessesTable(props: ProcessesTableProps) {
                 id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, false),
+                Cell: renderCustomersCell(organisations, false)
             },
-	    {
-		    Header: "Abbr.",
-		    id: "abbrev",
-		    accessor: "subscriptions",
-		    disableSortBy: true,
-		    Cell: renderCustomersCell(organisations, true),
-	    },
-	    {
-		    Header: "Product(s)",
-		    id: "products",
-		    accessor: "subscriptions",
-		    disableSortBy: true,
-		    Cell: renderProductsCell,
-	    },
-	    {
-		    Header: "Tag(s)",
-		    id: "tags",
-		    accessor: "subscriptions",
-		    disableSortBy: true,
-		    Cell: renderProductTag,
-	    },
+            {
+                Header: "Abbr.",
+                id: "abbrev",
+                accessor: "subscriptions",
+                disableSortBy: true,
+                Cell: renderCustomersCell(organisations, true)
+            },
+            {
+                Header: "Product(s)",
+                id: "products",
+                accessor: "subscriptions",
+                disableSortBy: true,
+                Cell: renderProductsCell
+            },
+            {
+                Header: "Tag(s)",
+                id: "tags",
+                accessor: "subscriptions",
+                disableSortBy: true,
+                Cell: renderProductTag
+            },
             {
                 Header: "Subscriptions",
                 accessor: "subscriptions",
@@ -479,7 +487,7 @@ function ProcessesTable(props: ProcessesTableProps) {
             },
             {
                 Header: "Created by",
-                accessor: "creator"
+                accessor: "creator",
             },
             {
                 Header: "Started",
@@ -555,18 +563,25 @@ function ProcessesTable(props: ProcessesTableProps) {
     }, []);
 
     const setOrgFilter = (option: any) => {
-	if (option && option.value) {	
-		console.log(option.value);
-        	tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
-	} else {
-		tableSettingsDispatch({type: "filter/clear", id: "organisation"});
-	}
-    }
+        if (option && option.value) {
+            console.log(option.value);
+            tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
+        } else {
+            tableSettingsDispatch({ type: "filter/clear", id: "organisation" });
+        }
+    };
     return (
-	    <div className={"card"}>
+        <div className={"card"}>
             <div className={"processes-filter-select"}>
-	        <span title={"open settings"} onClick={() => tableSettingsDispatch({ type: "showSettings/toggle" })}><i className={"fa fa-code"} /></span>
-	        <span title={"reset settings"} onClick={() => tableSettingsDispatch({ type: "override", settings: initialTableSettings})} ><i className={"fa fa-trash"} /></span>
+                <span title={"open settings"} onClick={() => tableSettingsDispatch({ type: "showSettings/toggle" })}>
+                    <i className={"fa fa-code"} />
+                </span>
+                <span
+                    title={"reset settings"}
+                    onClick={() => tableSettingsDispatch({ type: "override", settings: initialTableSettings })}
+                >
+                    <i className={"fa fa-trash"} />
+                </span>
                 <span
                     title={
                         tableSettings.refresh ? `Autorefresh every ${tableSettings.delay}ms` : "Autorefresh disabled"
@@ -584,38 +599,39 @@ function ProcessesTable(props: ProcessesTableProps) {
                         <i className={"fa fa-circle-o"} />
                     )}
                 </span>
-	        {tableSettings.show && <>
-                <OrganisationSelect
-                    id={"organisations-filter"}
-                    onChange={setOrgFilter}
-                    organisations={organisations}
-                    organisation={selectedOrganisation}
+                {tableSettings.show && (
+                    <>
+                        <OrganisationSelect
+                            id={"organisations-filter"}
+                            onChange={setOrgFilter}
+                            organisations={organisations}
+                            organisation={selectedOrganisation}
+                        />
+                        <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+                        <NumericInput
+                            onChange={valueAsNumber => {
+                                valueAsNumber && tableSettingsDispatch({ type: "refresh/delay", delay: valueAsNumber });
+                            }}
+                            min={500}
+                            max={10000}
+                            step={500}
+                            value={tableSettings.delay}
+                            strict={true}
+                        />
+                    </>
+                )}
+            </div>
+            <section className={props.name}>
+                <GenericTable<ProcessV2>
+                    columns={columns}
+                    data={data}
+                    fetchData={fetchData}
+                    settings={tableSettings}
+                    settingsDispatch={tableSettingsDispatch}
+                    controlledPageCount={pageCount}
                 />
-                <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
-                <NumericInput
-                    onChange={valueAsNumber => {
-                        valueAsNumber && tableSettingsDispatch({ type: "refresh/delay", delay: valueAsNumber });
-                    }}
-                    min={500}
-                    max={10000}
-                    step={500}
-                    value={tableSettings.delay}
-                    strict={true}
-                />
-			</>
-		}
-         </div>
-        <section className={props.name}>
-            <GenericTable<ProcessV2>
-                columns={columns}
-                data={data}
-                fetchData={fetchData}
-                settings={tableSettings}
-                settingsDispatch={tableSettingsDispatch}
-                controlledPageCount={pageCount}
-            />
-        </section>
-	    </div>
+            </section>
+        </div>
     );
 }
 
