@@ -63,6 +63,12 @@ export function actionOptions(
         case "failed":
             options = [details, retry, abort, _delete];
             break;
+        case "api_unavailable":
+            options = [details, retry, abort, _delete];
+            break;
+        case "inconsistent_data":
+            options = [details, retry, abort, _delete];
+            break;
         case "waiting":
             options = [details, retry, abort, _delete];
             break;

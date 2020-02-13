@@ -15,14 +15,6 @@
 
 @import "../stylesheets/mixins.scss";
 
-//process statuses
-$failed: $red;
-$waiting: $orange;
-$aborted: $darkest-blue;
-$completed: $blue;
-$running: $dark-green;
-$suspended: $gold;
-
 section.process-state-detail {
     padding: 15px 0 10px 0;
     pre {
@@ -66,29 +58,6 @@ section.process-state-detail {
             &:last-child {
                 margin-left: auto;
             }
-        }
-    }
-
-    span.process-status {
-        background-color: $light-grey;
-
-        &.failed {
-            background-color: $failed;
-        }
-        &.waiting {
-            background-color: $waiting;
-        }
-        &.aborted {
-            background-color: $aborted;
-        }
-        &.completed {
-            background-color: $completed;
-        }
-        &.running {
-            background-color: $running;
-        }
-        &.suspended {
-            background-color: $suspended;
         }
     }
 
