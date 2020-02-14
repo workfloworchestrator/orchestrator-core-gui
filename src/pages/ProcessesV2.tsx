@@ -25,8 +25,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 
 import "./Processes.scss";
 
-interface IProps {
-}
+interface IProps {}
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -53,12 +52,14 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         const completedSettings = initialProcessTableSettings(
             "table.processes.completed",
             initialProcessesFilterAndSort(false, ["completed"]),
-            ["pid", "step", "status", "assignee", "creator", "started", "abbrev"]
+            ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
+	    {showPaginator: false, pageSize: 5, refresh: true}
         );
         const activeSettings = initialProcessTableSettings(
             "table.processes.active",
             initialProcessesFilterAndSort(false, ["created", "running", "suspended", "failed"]),
-            ["pid", "step", "tags", "customer"]
+            ["pid", "step", "tags", "customer"],
+	    {refresh: true}
         );
 
         return (

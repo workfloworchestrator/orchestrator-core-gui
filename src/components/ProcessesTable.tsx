@@ -33,15 +33,6 @@ interface IFetchData {
     (pageIndex: number, pageSize: number, sortBy: SortingRule<string>[], filterBy: FilterArgument[]): void;
 }
 
-interface INwaTableProps {
-    columns: Column[];
-    initialState: TableState;
-    onChange: (state: TableState) => void;
-    endpoint: string;
-    initialTableSettings: TableSettings;
-    highlight?: string;
-}
-
 /*
  * Inspired by https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  */
@@ -67,13 +58,21 @@ function useInterval(callback: () => void, delay: number) {
     }, [delay]);
 }
 
+interface INwaTableProps {
+    columns: Column[];
+    initialState: TableState;
+    onChange: (state: TableState) => void;
+    endpoint: string;
+    initialTableSettings: TableSettings;
+    highlight?: string;
+}
+
 function NwaTable<T extends object>({
     columns,
     initialState,
     onChange,
     endpoint,
-    initialTableSettings,
-    highlight,
+    initialTableSettings
 }: INwaTableProps) {
     const [data, setData] = useState<T[]>([]);
     const [pageCount, setPageCount] = useState(0);
@@ -97,8 +96,8 @@ function NwaTable<T extends object>({
         {
             columns,
             data,
-            manualPagination: true,
             pageCount,
+            manualPagination: true,
             manualSortBy: true,
             autoResetSortBy: false,
             debug: true,
@@ -106,7 +105,7 @@ function NwaTable<T extends object>({
             initialState: initialState
         },
         useSortBy,
-        usePagination
+        usePagination,
     );
     const {
         name,
@@ -118,7 +117,8 @@ function NwaTable<T extends object>({
         delay,
         hiddenColumns,
         pageIndex,
-        pageSize
+        pageSize,
+        minimized
     } = state;
 
     const preferencesProps = {
@@ -181,6 +181,7 @@ function NwaTable<T extends object>({
     useEffect(() => {
         onChange(state);
     }, [
+	onChange,
         showSettings,
         showPaginator,
         hiddenColumns,
@@ -192,7 +193,8 @@ function NwaTable<T extends object>({
         refresh,
         delay,
         filterBy,
-        sortBy
+        sortBy,
+	minimized,
     ]);
 
     // fetch new data whenever page index, size or sort changes
@@ -227,29 +229,34 @@ function NwaTable<T extends object>({
     return (
         <div>
             <TablePreferences {...preferencesProps} />
-            <table className="nwa-table" {...getTableProps()}>
-                <caption>{I18n.t(name)}</caption>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                    {column.render("Header")}
-                                    {sortIcon(column)}
-                                </th>
+            {!minimized && (
+                <>
+                    <table className="nwa-table" {...getTableProps()}>
+                        <caption>{I18n.t(name)}</caption>
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("Header")}
+                                            {sortIcon(column)}
+					    <div>{column.canFilter && column.render("Filter")}</div>
+                                        </th>
+                                    ))}
+                                </tr>
                             ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row: Row, i) => {
-                        prepareRow(row);
-                        return row.allCells[0].render("HyperLinkedRow");
-                    })}
-                </tbody>
-            </table>
-            {data.length === 0 && <div className={"noResults"}>No Results found.</div>}
-            {showPaginator && <Paginator {...paginatorProps} />}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row: Row, i) => {
+                                prepareRow(row);
+                                return row.allCells[0].render("HyperLinkedRow");
+                            })}
+                        </tbody>
+                    </table>
+                    {data.length === 0 && <div className={"noResults"}>No Results found.</div>}
+                    {showPaginator && <Paginator {...paginatorProps} />}
+                </>
+            )}
         </div>
     );
 }
@@ -402,7 +409,9 @@ enum ActionType {
     REFRESH_ENABLE = "refresh/enable",
     REFRESH_DISABLE = "refresh/disable",
     REFRESH_DELAY = "refresh/delay",
-    SHOW_SETTINGS_TOGGLE = "show-settings/toggle"
+    SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
+    MINIMIZE = "table/minimize",
+    MAXIMIZE = "table/maximize"
 }
 
 type TableSettingsAction =
@@ -417,7 +426,9 @@ type TableSettingsAction =
     | { type: ActionType.REFRESH_DISABLE }
     | { type: ActionType.REFRESH_ENABLE }
     | { type: ActionType.REFRESH_TOGGLE }
-    | { type: ActionType.SHOW_SETTINGS_TOGGLE };
+    | { type: ActionType.SHOW_SETTINGS_TOGGLE }
+    | { type: ActionType.MINIMIZE }
+    | { type: ActionType.MAXIMIZE };
 
 const tableSettingsReducer = (newState: TableState, action: TableSettingsAction, prevState: TableState) => {
     console.log(action);
@@ -483,6 +494,15 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
             case ActionType.LOADING_STOP:
                 draft.loading = false;
                 break;
+            case ActionType.MINIMIZE:
+                draft.minimized = true;
+                draft.refresh = false;
+                draft.showSettings = false;
+                break;
+            case ActionType.MAXIMIZE:
+                draft.minimized = false;
+                draft.refresh = true;
+                break;
             default:
                 console.log(action);
         }
@@ -516,7 +536,8 @@ export function initialProcessTableSettings(
         refresh: false,
         delay: 3000,
         pageSize: 25,
-        pageIndex: 0
+        pageIndex: 0,
+        minimized: false
     };
     let rest = optional ? Object.assign(defaults, optional) : defaults;
     return {
@@ -528,28 +549,32 @@ export function initialProcessTableSettings(
 }
 
 export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
-    const [highlight, setHighlight] = useQueryParam('highlight', StringParam);
+    const [highlight, setHighlight] = useQueryParam("highlight", StringParam);
 
-    const initialize = useMemo(() => function(current: TableSettings): TableState {
-        // First get LocalState from LocalStorage
-        const settingsFromLocalStorage: LocalTableSettings | {} = JSON.parse(
-            localStorage.getItem(`table-settings:${current.name}`) || "{}"
-        );
-        // Then get settings from SessionStorage
-        const settingsFromSessionStorage: SessionTableSettings | {} = JSON.parse(
-            sessionStorage.getItem(`table-settings:${current.name}`) || "{}"
-        );
-        // TODO: Then get settings from URL
-        const settingsFromURL = {};
-        // merge everything and return as new controlled table state. Each object from left to right can override keys from the previous object.
-        return Object.assign(
-            { loading: true, pageCount: 0 },
-            current,
-            settingsFromLocalStorage,
-            settingsFromSessionStorage,
-            settingsFromURL
-        );
-    },[])
+    const initialize = useMemo(
+        () =>
+            function(current: TableSettings): TableState {
+                // First get LocalState from LocalStorage
+                const settingsFromLocalStorage: LocalTableSettings | {} = JSON.parse(
+                    localStorage.getItem(`table-settings:${current.name}`) || "{}"
+                );
+                // Then get settings from SessionStorage
+                const settingsFromSessionStorage: SessionTableSettings | {} = JSON.parse(
+                    sessionStorage.getItem(`table-settings:${current.name}`) || "{}"
+                );
+                // TODO: Then get settings from URL
+                const settingsFromURL = {};
+                // merge everything and return as new controlled table state. Each object from left to right can override keys from the previous object.
+                return Object.assign(
+                    { loading: true, pageCount: 0 },
+                    current,
+                    settingsFromLocalStorage,
+                    settingsFromSessionStorage,
+                    settingsFromURL
+                );
+            },
+        []
+    );
 
     const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings]);
     const { organisations, redirect } = useContext(ApplicationContext);
@@ -560,21 +585,29 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                 accessor: "pid",
                 disableSortBy: true,
                 Cell: renderPidCell,
-		HyperLinkedRow: ({cell, row}: {cell: Cell, row: Row}) => {
-			    let highlighted = (row.values.pid === highlight) ? " highlighted" : "";
-                            return (<tr onClick={() => {window.location.replace(`/processes/${cell.value}`)}} {...row.getRowProps([{ className: `${row.values.status}${highlighted}` }])}>
-                                {row.cells.map(cell => {
-                                    return (
-                                        <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
-                            </tr>)
-    	    }},
+                HyperLinkedRow: ({ cell, row }: { cell: Cell; row: Row }) => {
+                    let highlighted = row.values.pid === highlight ? " highlighted" : "";
+                    return (
+                        <tr
+                            onClick={() => {
+                                redirect(`/process/${cell.value}`);
+                            }}
+                            {...row.getRowProps([{ className: `${row.values.status}${highlighted}` }])}
+                        >
+                            {row.cells.map(cell => {
+                                return (
+                                    <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                        {cell.render("Cell")}
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    );
+                }
+            },
             {
                 Header: "Assignee",
-                accessor: "assignee"
+                accessor: "assignee",
             },
             {
                 Header: "Last step",
@@ -638,7 +671,7 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                 Cell: renderTimestampCell
             }
         ],
-        [organisations]
+        [organisations, highlight]
     );
 
     const saveState = useCallback(state => {
@@ -657,7 +690,8 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
             "refresh",
             "delay",
             "filterBy",
-            "sortBy"
+            "sortBy",
+            "minimized"
         ]);
         sessionStorage.setItem(`table-settings:${state.name}`, JSON.stringify(session));
     }, []);
@@ -671,7 +705,7 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                     onChange={saveState}
                     endpoint={"/v2/processes"}
                     initialTableSettings={initialTableSettings}
-	    	    highlight={highlight}
+                    highlight={highlight}
                 />
             </section>
         </div>
@@ -734,9 +768,10 @@ interface ITablePreferencesProps {
 }
 
 function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }: ITablePreferencesProps) {
+    const { name, minimized, refresh, delay, loading, showSettings } = state;
     return (
         <>
-            <div className={"table-preferences-icon-bar"}>
+            <div className={`table-preferences-icon-bar${minimized ? " minimized":""}`}>
                 <span
                     title={I18n.t("table.preferences.edit")}
                     onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
@@ -746,15 +781,15 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                 {"   "}
                 <span
                     title={
-                        state.refresh
-                            ? I18n.t("table.preferences.refresh", {delay: state.delay})
+                        refresh
+                            ? I18n.t("table.preferences.refresh", { delay: delay })
                             : I18n.t("table.preferences.norefresh")
                     }
                     onClick={() => dispatch({ type: ActionType.REFRESH_TOGGLE })}
-                    className={state.refresh ? (state.loading ? "pulse" : "rest") : "dead"}
+                    className={refresh ? (loading ? "pulse" : "rest") : "dead"}
                 >
-                    {state.refresh ? (
-                        state.loading ? (
+                    {refresh ? (
+                        loading ? (
                             <i className={"fa fa-bullseye"} />
                         ) : (
                             <i className={"fa fa-circle"} />
@@ -763,14 +798,38 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                         <i className={"fa fa-circle-o"} />
                     )}
                 </span>
+	        {"   "}
+                <span className={"table-name"}>
+                    {I18n.t(name)}
+                    {minimized && I18n.t("table.is_minimized")}
+                </span>
+	        {minimized ?
+                <span
+                    className={"icon-right"}
+                    title={I18n.t("table.preferences.maximize")}
+                    onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
+                >
+                    <i className={"fa fa-window-maximize"} />
+                </span> :
+                <span
+                    className={"icon-right"}
+                    title={I18n.t("table.preferences.minimize")}
+                    onClick={() => dispatch({ type: ActionType.MINIMIZE })}
+                >
+                    <i className={"fa fa-window-minimize"} />
+                </span> 
+		}
             </div>
-            {state.showSettings && (
+            {showSettings && (
                 <div className={"preferences"}>
-                    <button className={"button red"} onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}>
+                    <button
+                        className={"button red"}
+                        onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
+                    >
                         {I18n.t("table.preferences.reset")}
                         <i className={"fa fa-refresh"} />
                     </button>
-		    <h2>{I18n.t("table.preferences.autorefresh")}</h2>
+                    <h2>{I18n.t("table.preferences.autorefresh")}</h2>
                     <NumericInput
                         onChange={valueAsNumber => {
                             valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
@@ -781,7 +840,7 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                         value={state.delay}
                         strict={true}
                     />
-		    <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
+                    <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
                     {flatColumns.map(column => {
                         return (
                             <div className={"column-checkbox"} key={column.id}>

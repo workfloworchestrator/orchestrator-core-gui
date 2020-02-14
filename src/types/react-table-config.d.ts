@@ -103,6 +103,7 @@ declare module "react-table" {
         delay: number;
         pageSize: number;
         pageIndex: number;
+        minimized: boolean;
     }
 
     export interface TableSettings extends LocalTableSettings, SessionTableSettings {
@@ -147,9 +148,9 @@ declare module "react-table" {
         extends UseExpandedRowProps<D>,
             UseGroupByRowProps<D>,
             UseRowSelectRowProps<D>,
-	    UseRowStateRowProps<D> {
-		allCells: Cell[];
-	}
+            UseRowStateRowProps<D> {
+        allCells: Cell[];
+    }
 
     // [PF] only key is in TableKeyedProps in @types/react-table
     export interface TableCellProps extends TableKeyedProps {

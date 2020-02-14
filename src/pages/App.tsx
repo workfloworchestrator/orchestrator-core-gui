@@ -24,7 +24,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "./NotFound";
 import Help from "./Help";
 import Processes from "./ProcessesV2";
-//import ProcessesTable from "../components/ProcessesTable";
 import Subscriptions from "./Subscriptions";
 import Validations from "./Validations";
 import NewProcess from "./NewProcess";
@@ -235,12 +234,7 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                <ProtectedRoute
-                                    path="/processes"
-                                    render={props => (
-                                        <Processes />
-                                    )}
-                                />
+                                <ProtectedRoute path="/processes" render={props => <Processes />} />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}

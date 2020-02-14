@@ -16,14 +16,31 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/media_queries.scss";
 
+.table-preferences-icon-bar {
+    padding: 6px;
+    font-size: larger;
+    &.minimized {
+	    background-color: $light-grey;
+    }
+    .icon-right {
+        float: right;
+    }
+    .table-name {
+        font-weight: bold;
+        font-variant: small-caps;
+        font-size: larger;
+    }
+}
+
 table.nwa-table {
     margin: 20px;
-    width: 100%;
+    padding: 8px;
+    width: 98%;
     word-break: break-all;
     caption {
-	    font-weight: bold;
-	    font-variant: small-caps;
-	    font-size: larger;
+        font-weight: bold;
+        font-variant: small-caps;
+        font-size: larger;
     }
     td,
     th {
@@ -38,21 +55,21 @@ table.nwa-table {
         &.running {
             background-color: $light-green;
         }
-	&.failed {
-	    background-color: lighten($red, 20%);
-	    color: $light-grey;
-	}
-	&.highlight {
-		border-top: 3px double $medium-grey;
-		border-bottom: 3px double $medium-grey;
+        &.failed {
+            background-color: lighten($red, 20%);
+            color: $light-grey;
+        }
+        &.highlighted {
+            border-top: 3px double $medium-grey;
+            border-bottom: 3px double $medium-grey;
 
-		td:first-child:before {
-		font-family: FontAwesome; 
-		font-size: larger;
-		transform: translateX(-40px);
-		content: "\f0da";
-	}
-	}
+            td:first-child:before {
+                font-family: FontAwesome;
+                font-size: larger;
+                transform: translateX(-40px);
+                content: "\f0da ";
+            }
+        }
     }
     thead {
         th {
@@ -84,6 +101,10 @@ table.nwa-table {
                 &.running {
                     background-color: darken($light-green, 10%);
                 }
+		&.failed {
+		    color: black;
+		    background-color: lighten($red, 40%);
+	    	}
                 td.actions i.fa-ellipsis-h {
                     color: $blue;
                 }
