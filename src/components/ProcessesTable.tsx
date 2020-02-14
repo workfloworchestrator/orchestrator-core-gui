@@ -1,27 +1,45 @@
 import React, { Dispatch, useCallback, useEffect, useRef, useState, useReducer, useMemo, useContext } from "react";
-import { Cell, Column, ColumnInstance, useTable, useFilters, useSortBy, usePagination, SortingRule } from "react-table";
-import "./GenericTable.scss";
-import { processesFilterable } from "../api/processes";
+import {
+    Cell,
+    Column,
+    ColumnInstance,
+    Row,
+    useTable,
+    useFilters,
+    useSortBy,
+    usePagination,
+    SortingRule,
+    TableState,
+    FilterAndSort,
+    TableSettings,
+    LocalTableSettings,
+    SessionTableSettings
+} from "react-table";
+import "./NwaTable.scss";
+import "../stylesheets/buttons.scss";
+import { filterableEndpoint } from "../api/filterable";
 import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
 import uniq from "lodash/uniq";
+import pick from "lodash/pick";
 import ApplicationContext from "../utils/ApplicationContext";
-import { organisationNameByUuid } from "../utils/Lookups";
 import OrganisationSelect from "./OrganisationSelect";
 import FilterDropDown from "./FilterDropDown";
 import NumericInput from "react-numeric-input";
+import { useQueryParam, StringParam } from "use-query-params";
 import produce from "immer";
+import I18n from "i18n-js";
 
 interface IFetchData {
     (pageIndex: number, pageSize: number, sortBy: SortingRule<string>[], filterBy: FilterArgument[]): void;
 }
 
-interface GenericTableProps<T extends object> {
+interface INwaTableProps {
     columns: Column[];
-    data: T[];
-    fetchData: IFetchData;
-    settings: TableSettings;
-    settingsDispatch: Dispatch<TableSettingsAction>;
-    controlledPageCount: number;
+    initialState: TableState;
+    onChange: (state: TableState) => void;
+    endpoint: string;
+    initialTableSettings: TableSettings;
+    highlight?: string;
 }
 
 /*
@@ -49,8 +67,16 @@ function useInterval(callback: () => void, delay: number) {
     }, [delay]);
 }
 
-function GenericTable<T extends object>(props: GenericTableProps<T>) {
-    const { columns, data, fetchData, settings, settingsDispatch, controlledPageCount } = props;
+function NwaTable<T extends object>({
+    columns,
+    initialState,
+    onChange,
+    endpoint,
+    initialTableSettings,
+    highlight,
+}: INwaTableProps) {
+    const [data, setData] = useState<T[]>([]);
+    const [pageCount, setPageCount] = useState(0);
     const {
         getTableProps,
         getTableBodyProps,
@@ -60,58 +86,127 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
         canPreviousPage,
         canNextPage,
         pageOptions,
-        pageCount,
         gotoPage,
         nextPage,
         previousPage,
         setPageSize,
         flatColumns,
-        state: { pageIndex, pageSize, sortBy, hiddenColumns }
+        state,
+        dispatch
     } = useTable(
         {
             columns,
             data,
-            initialState: {
-                pageIndex: 0,
-                pageSize: settings.pageSize,
-                sortBy: settings.sortBy,
-                hiddenColumns: settings.hiddenColumns
-            },
             manualPagination: true,
+            pageCount,
             manualSortBy: true,
             autoResetSortBy: false,
-            pageCount: controlledPageCount,
             debug: true,
-            stateReducer: function(newState: any, action: any, oldState: any) {
-                console.log(oldState, action, newState);
-                return newState;
-            }
+            stateReducer: tableSettingsReducer,
+            initialState: initialState
         },
         useSortBy,
         usePagination
     );
+    const {
+        name,
+        sortBy,
+        filterBy,
+        showSettings,
+        showPaginator,
+        refresh,
+        delay,
+        hiddenColumns,
+        pageIndex,
+        pageSize
+    } = state;
+
+    const preferencesProps = {
+        state,
+        flatColumns,
+        dispatch,
+        initialTableSettings
+    };
+    const paginatorProps = {
+        canNextPage,
+        canPreviousPage,
+        gotoPage,
+        nextPage,
+        pageCount,
+        pageIndex,
+        pageOptions,
+        pageSize,
+        previousPage,
+        setPageSize
+    };
+
+    /*
+     * fetchIdRef is used to track refreshes and prevent older fetches to overwrite data from newer fetches
+     * entityTag is generated server side to be able to return 304 when there are no changes
+     */
+    const fetchIdRef = React.useRef(0);
+    const entityTag = React.useRef<string | null>(null);
+    const fetchData: IFetchData = useCallback((pageIndex, pageSize, sortBy, filterBy) => {
+        const fetchId = ++fetchIdRef.current;
+
+        dispatch({ type: ActionType.LOADING_START });
+        const startRow = pageSize * pageIndex;
+        const endRow = startRow + pageSize;
+
+        filterableEndpoint(endpoint, startRow, endRow, sortBy, filterBy, entityTag.current)
+            .then(([processes, total, eTag]) => {
+                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
+                if (fetchId === fetchIdRef.current && processes) {
+                    let pages = Math.ceil(total / pageSize);
+                    setPageCount(pages);
+                    setData(processes);
+                    entityTag.current = eTag;
+                }
+                dispatch({ type: ActionType.LOADING_STOP });
+            })
+            .catch(() => {
+                dispatch({ type: ActionType.LOADING_STOP });
+                dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests
+            });
+        return () => {
+            fetchIdRef.current = 0;
+            entityTag.current = null;
+        }; // clean up prevents state update after mount and 304 on return.
+    }, []);
 
     /* debounce leads to strange behaviour and seems unnecessary at the moment.
      * const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
      */
 
-    // synchronize table settings with parent
     useEffect(() => {
-        settingsDispatch({ type: "override", settings: { pageSize, hiddenColumns, sortBy } });
-    }, [pageSize, sortBy, hiddenColumns]);
+        onChange(state);
+    }, [
+        showSettings,
+        showPaginator,
+        hiddenColumns,
+        delay,
+        filterBy,
+        sortBy,
+        pageIndex,
+        pageSize,
+        refresh,
+        delay,
+        filterBy,
+        sortBy
+    ]);
 
     // fetch new data whenever page index, size or sort changes
     useEffect(() => {
-        fetchData(pageIndex, pageSize, sortBy, settings.filterBy);
-    }, [fetchData, pageIndex, pageSize, sortBy, settings]);
+        fetchData(pageIndex, pageSize, sortBy, filterBy);
+    }, [fetchData, pageIndex, pageSize, sortBy, filterBy]);
 
     /*
      * poll for updates at an interval. because this is a hook the interval will be
      * removed when the table is unmounted
      */
-    const autoRefreshDelay = settings.refresh ? settings.delay : -1;
+    const autoRefreshDelay = refresh ? delay : -1;
     useInterval(() => {
-        fetchData(pageIndex, pageSize, sortBy, settings.filterBy);
+        fetchData(pageIndex, pageSize, sortBy, filterBy);
     }, autoRefreshDelay);
 
     const sortIcon = (col: ColumnInstance) => {
@@ -131,15 +226,9 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
 
     return (
         <div>
-            {settings.show &&
-                flatColumns.map(column => (
-                    <div key={column.id}>
-                        <label>
-                            <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                        </label>
-                    </div>
-                ))}
+            <TablePreferences {...preferencesProps} />
             <table className="nwa-table" {...getTableProps()}>
+                <caption>{I18n.t(name)}</caption>
                 <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
@@ -153,69 +242,84 @@ function GenericTable<T extends object>(props: GenericTableProps<T>) {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
+                    {page.map((row: Row, i) => {
                         prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps([{ className: row.values.status }])}>
-                                {row.cells.map(cell => {
-                                    return (
-                                        <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
+                        return row.allCells[0].render("HyperLinkedRow");
                     })}
                 </tbody>
             </table>
-            {data.length === 0 ? (
-                <div className={"noResults"}>No Results found.</div>
-            ) : (
-                <div className="pagination">
-                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                        <i className="fa fa-angle-double-left" />
-                    </button>{" "}
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                        <i className="fa fa-angle-left" />
-                    </button>{" "}
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>
-                        <i className="fa fa-angle-right" />
-                    </button>{" "}
-                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                        <i className="fa fa-angle-double-right" />
-                    </button>{" "}
-                    <span>
-                        Page{" "}
-                        <strong>
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{" "}
-                    </span>
-                    <span>
-                        | Go to page:{" "}
-                        <input
-                            type="number"
-                            defaultValue={(pageIndex + 1).toString()}
-                            onChange={e => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                                gotoPage(page);
-                            }}
-                        />
-                    </span>{" "}
-                    <select
-                        value={pageSize}
-                        onChange={e => {
-                            setPageSize(Number(e.target.value));
-                        }}
-                    >
-                        {[5, 25, 50, 100].map(pageSize => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            )}
+            {data.length === 0 && <div className={"noResults"}>No Results found.</div>}
+            {showPaginator && <Paginator {...paginatorProps} />}
+        </div>
+    );
+}
+
+interface IPaginatorProps {
+    canNextPage: boolean;
+    canPreviousPage: boolean;
+    gotoPage: (arg: number) => void;
+    nextPage: () => void;
+    pageIndex: number;
+    pageOptions: number[];
+    pageSize: number;
+    previousPage: () => void;
+    setPageSize: (arg: number) => void;
+}
+
+function Paginator({
+    canNextPage,
+    canPreviousPage,
+    gotoPage,
+    nextPage,
+    pageIndex,
+    pageOptions,
+    pageSize,
+    previousPage,
+    setPageSize
+}: IPaginatorProps) {
+    return (
+        <div className="pagination">
+            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                <i className="fa fa-angle-double-left" />
+            </button>{" "}
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                <i className="fa fa-angle-left" />
+            </button>{" "}
+            <button onClick={() => nextPage()} disabled={!canNextPage}>
+                <i className="fa fa-angle-right" />
+            </button>{" "}
+            <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
+                <i className="fa fa-angle-double-right" />
+            </button>{" "}
+            <span>
+                Page{" "}
+                <strong>
+                    {pageIndex + 1} of {pageOptions.length}
+                </strong>{" "}
+            </span>
+            <span>
+                | Go to page:{" "}
+                <NumericInput
+                    min={1}
+                    max={pageOptions.length}
+                    value={pageIndex + 1}
+                    onChange={valueAsNumber => {
+                        valueAsNumber && gotoPage(valueAsNumber - 1);
+                    }}
+                />
+            </span>{" "}
+            <select
+                value={pageSize}
+                onChange={e => {
+                    setPageSize(Number(e.target.value));
+                }}
+            >
+                {[5, 25, 50, 100].map(pageSize => (
+                    <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                    </option>
+                ))}
+            </select>
         </div>
     );
 }
@@ -286,42 +390,43 @@ function renderProductTag({ cell }: { cell: Cell }) {
 
 type ProcessStatus = "created" | "failed" | "running" | "suspended" | "aborted" | "completed";
 
-interface TableSettings {
-    show: boolean;
-    hiddenColumns: string[];
-    filterBy: FilterArgument[];
-    sortBy: SortingRule<string>[];
-    refresh: boolean;
-    delay: number;
-    pageSize: number;
+enum ActionType {
+    OVERRIDE = "override",
+    FILTER_ADD = "filter/add",
+    FILTER_REMOVE = "filter/remove",
+    FILTER_REPLACE = "filter/replace",
+    FILTER_CLEAR = "filter/clear",
+    LOADING_START = "loading/start",
+    LOADING_STOP = "loading/stop",
+    REFRESH_TOGGLE = "refresh/toggle",
+    REFRESH_ENABLE = "refresh/enable",
+    REFRESH_DISABLE = "refresh/disable",
+    REFRESH_DELAY = "refresh/delay",
+    SHOW_SETTINGS_TOGGLE = "show-settings/toggle"
 }
 
 type TableSettingsAction =
-    | { type: "noop" }
-    | { type: "override"; settings: Partial<TableSettings> }
-    | { type: "filter/add"; id: string; value: string }
-    | { type: "filter/remove"; id: string; value: string }
-    | { type: "filter/replace"; id: string; value: string }
-    | { type: "filter/clear"; id: string }
-    | { type: "refresh/flip" }
-    | { type: "refresh/disable" }
-    | { type: "refresh/enable" }
-    | { type: "refresh/delay"; delay: number }
-    | { type: "showSettings/toggle" };
+    | { type: ActionType.FILTER_ADD; id: string; value: string }
+    | { type: ActionType.FILTER_CLEAR; id: string }
+    | { type: ActionType.FILTER_REMOVE; id: string; value: string }
+    | { type: ActionType.FILTER_REPLACE; id: string; value: string }
+    | { type: ActionType.LOADING_START }
+    | { type: ActionType.LOADING_STOP }
+    | { type: ActionType.OVERRIDE; settings: Partial<TableSettings> }
+    | { type: ActionType.REFRESH_DELAY; delay: number }
+    | { type: ActionType.REFRESH_DISABLE }
+    | { type: ActionType.REFRESH_ENABLE }
+    | { type: ActionType.REFRESH_TOGGLE }
+    | { type: ActionType.SHOW_SETTINGS_TOGGLE };
 
-const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = (
-    state: TableSettings,
-    action: TableSettingsAction
-) => {
+const tableSettingsReducer = (newState: TableState, action: TableSettingsAction, prevState: TableState) => {
     console.log(action);
-    const newState = produce(state, draft => {
+    const changedState = produce(newState, draft => {
         switch (action.type) {
-            case "noop":
-                break;
-            case "override":
+            case ActionType.OVERRIDE:
                 Object.assign(draft, action.settings);
                 break;
-            case "filter/add": {
+            case ActionType.FILTER_ADD: {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: [action.value] });
@@ -331,17 +436,17 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
                 }
                 break;
             }
-            case "filter/remove": {
+            case ActionType.FILTER_REMOVE: {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index > -1) {
-                    let valueIdx = draft.filterBy[index].values.findIndex(value => value === action.value);
+                    let valueIdx = draft.filterBy[index].values.findIndex((value: string) => value === action.value);
                     if (valueIdx > -1) {
                         draft.filterBy[index].values.splice(valueIdx);
                     }
                 }
                 break;
             }
-            case "filter/replace": {
+            case ActionType.FILTER_REPLACE: {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: [action.value] });
@@ -350,81 +455,103 @@ const tableSettingsReducer: React.Reducer<TableSettings, TableSettingsAction> = 
                 }
                 break;
             }
-            case "filter/clear": {
+            case ActionType.FILTER_CLEAR: {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index > -1) {
                     draft.filterBy.splice(index);
                 }
                 break;
             }
-            case "refresh/flip":
+            case ActionType.REFRESH_TOGGLE:
                 draft.refresh = !draft.refresh;
                 break;
-            case "refresh/disable":
+            case ActionType.REFRESH_DISABLE:
                 draft.refresh = false;
                 break;
-            case "refresh/enable":
+            case ActionType.REFRESH_ENABLE:
                 draft.refresh = true;
                 break;
-            case "refresh/delay":
+            case ActionType.REFRESH_DELAY:
                 draft.delay = action.delay;
                 break;
-            case "showSettings/toggle":
-                draft.show = !draft.show;
+            case ActionType.SHOW_SETTINGS_TOGGLE:
+                draft.showSettings = !draft.showSettings;
+                break;
+            case ActionType.LOADING_START:
+                draft.loading = true;
+                break;
+            case ActionType.LOADING_STOP:
+                draft.loading = false;
                 break;
             default:
-                console.log(`Action ${action} not implemented`);
+                console.log(action);
         }
     });
     console.log(newState);
-    return newState;
+    return changedState;
 };
 
 interface ProcessesTableProps {
-    name: string;
-    showTasks: boolean;
-    initialStatuses: ProcessStatus[];
-    hiddenColumns: string[];
-    initialPageSize: number;
+    initialTableSettings: TableSettings;
 }
 
-function ProcessesTable(props: ProcessesTableProps) {
-    const initialTableSettings = useMemo<TableSettings>(() => {
-        const initialFilterBy = [
-            { id: "isTask", values: [`${props.showTasks ? "true" : "false"}`] },
-            { id: "status", values: props.initialStatuses }
-        ];
-        const initialSortBy = [{ id: "modified", desc: true }];
-        return {
-            show: false,
-            hiddenColumns: [],
-            filterBy: initialFilterBy,
-            sortBy: initialSortBy,
-            refresh: true,
-            delay: 1500,
-            pageSize: props.initialPageSize
-        };
-    }, [props.showTasks, props.initialPageSize, props.initialStatuses]);
+export function initialProcessesFilterAndSort(showTasks: boolean, statuses: ProcessStatus[]) {
+    const initialFilterBy = [
+        { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
+        { id: "status", values: statuses }
+    ];
+    const initialSortBy = [{ id: "modified", desc: true }];
+    return { filterBy: initialFilterBy, sortBy: initialSortBy };
+}
 
-    function initializeFromLocalStorage(current: TableSettings) {
-        const settingsFromLocalStorage = JSON.parse(localStorage.getItem(`table-settings:${props.name}`) || "null");
-        if (settingsFromLocalStorage) {
-            return settingsFromLocalStorage as TableSettings;
-        } else {
-            return current;
-        }
-    }
+export function initialProcessTableSettings(
+    name: string,
+    filterAndSort: FilterAndSort,
+    hiddenColumns: string[],
+    optional?: Partial<TableSettings>
+): TableSettings {
+    const defaults = {
+        showSettings: true,
+        showPaginator: true,
+        refresh: false,
+        delay: 3000,
+        pageSize: 25,
+        pageIndex: 0
+    };
+    let rest = optional ? Object.assign(defaults, optional) : defaults;
+    return {
+        ...filterAndSort,
+        name: name,
+        hiddenColumns: hiddenColumns,
+        ...rest
+    };
+}
 
-    const [tableSettings, tableSettingsDispatch] = useReducer(
-        tableSettingsReducer,
-        initialTableSettings,
-        initializeFromLocalStorage
-    );
+export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
+    const [highlight, setHighlight] = useQueryParam('highlight', StringParam);
 
-    useEffect(() => {
-        localStorage.setItem(`table-settings:${props.name}`, JSON.stringify(tableSettings));
-    }, [tableSettings, props.name]);
+    const initialize = useMemo(() => function(current: TableSettings): TableState {
+        // First get LocalState from LocalStorage
+        const settingsFromLocalStorage: LocalTableSettings | {} = JSON.parse(
+            localStorage.getItem(`table-settings:${current.name}`) || "{}"
+        );
+        // Then get settings from SessionStorage
+        const settingsFromSessionStorage: SessionTableSettings | {} = JSON.parse(
+            sessionStorage.getItem(`table-settings:${current.name}`) || "{}"
+        );
+        // TODO: Then get settings from URL
+        const settingsFromURL = {};
+        // merge everything and return as new controlled table state. Each object from left to right can override keys from the previous object.
+        return Object.assign(
+            { loading: true, pageCount: 0 },
+            current,
+            settingsFromLocalStorage,
+            settingsFromSessionStorage,
+            settingsFromURL
+        );
+    },[])
 
+    const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings]);
     const { organisations, redirect } = useContext(ApplicationContext);
     const columns = React.useMemo(
         () => [
@@ -432,8 +559,19 @@ function ProcessesTable(props: ProcessesTableProps) {
                 Header: "pid",
                 accessor: "pid",
                 disableSortBy: true,
-                Cell: renderPidCell
-            },
+                Cell: renderPidCell,
+		HyperLinkedRow: ({cell, row}: {cell: Cell, row: Row}) => {
+			    let highlighted = (row.values.pid === highlight) ? " highlighted" : "";
+                            return (<tr onClick={() => {window.location.replace(`/processes/${cell.value}`)}} {...row.getRowProps([{ className: `${row.values.status}${highlighted}` }])}>
+                                {row.cells.map(cell => {
+                                    return (
+                                        <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                            {cell.render("Cell")}
+                                        </td>
+                                    );
+                                })}
+                            </tr>)
+    	    }},
             {
                 Header: "Assignee",
                 accessor: "assignee"
@@ -480,14 +618,14 @@ function ProcessesTable(props: ProcessesTableProps) {
                 Cell: renderProductTag
             },
             {
-                Header: "Subscriptions",
+                Header: "Subscription(s)",
                 accessor: "subscriptions",
                 disableSortBy: true,
                 Cell: renderSubscriptionsCell
             },
             {
                 Header: "Created by",
-                accessor: "creator",
+                accessor: "creator"
             },
             {
                 Header: "Started",
@@ -503,94 +641,120 @@ function ProcessesTable(props: ProcessesTableProps) {
         [organisations]
     );
 
-    const [data, setData] = useState<ProcessV2[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [pageCount, setPageCount] = useState(0);
-    const selectedOrganisation = tableSettings.filterBy.reduce((org: string, elem: FilterArgument) => {
-        return elem.id === "organisation" ? elem.values[0] : org;
-    }, "");
-
-    const filterAttributesStatus = () => {
-        const statesInFilter = tableSettings.filterBy.reduce((states: ProcessStatus[], elem: FilterArgument) => {
-            return elem.id === "status" ? (elem.values as ProcessStatus[]) : states;
-        }, []);
-        return [
-            { name: "created", selected: statesInFilter.includes("created"), count: 0 },
-            { name: "failed", selected: statesInFilter.includes("failed"), count: 0 },
-            { name: "running", selected: statesInFilter.includes("running"), count: 0 },
-            { name: "suspended", selected: statesInFilter.includes("suspended"), count: 0 },
-            { name: "aborted", selected: statesInFilter.includes("aborted"), count: 0 },
-            { name: "completed", selected: statesInFilter.includes("completed"), count: 0 }
-        ];
-    };
-
-    const setStatusFilter = (attr: { name: string; selected: boolean; count: number }) => {
-        if (attr.selected) {
-            tableSettingsDispatch({ type: "filter/remove", id: "status", value: attr.name });
-        } else {
-            tableSettingsDispatch({ type: "filter/add", id: "status", value: attr.name });
-        }
-    };
-
-    /*
-     * fetchIdRef is used to track refreshes and prevent older fetches to overwrite data from newer fetches
-     * entityTag is generated server side to be able to return 304 when there are no changes
-     */
-    const fetchIdRef = React.useRef(0);
-    const entityTag = React.useRef<string | null>(null);
-    const fetchData: IFetchData = useCallback((pageIndex, pageSize, sortBy, filterBy) => {
-        const fetchId = ++fetchIdRef.current;
-
-        setLoading(true);
-        const startRow = pageSize * pageIndex;
-        const endRow = startRow + pageSize;
-
-        processesFilterable(startRow, endRow, sortBy, filterBy, entityTag.current)
-            .then(([processes, total, eTag]) => {
-                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
-                if (fetchId === fetchIdRef.current && processes) {
-                    let pages = Math.ceil(total / pageSize);
-                    setPageCount(pages);
-                    setData(processes as ProcessV2[]);
-                    entityTag.current = eTag;
-                }
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-                tableSettingsDispatch({ type: "refresh/disable" }); // disable autorefresh on errors to not swamp the logs with failed requests
-            });
+    const saveState = useCallback(state => {
+        const local: LocalTableSettings = pick(state, [
+            "showSettings",
+            "showPaginator",
+            "hiddenColumns",
+            "delay",
+            "filterBy",
+            "sortBy"
+        ]);
+        localStorage.setItem(`table-settings:${state.name}`, JSON.stringify(local));
+        const session: SessionTableSettings = pick(state, [
+            "pageIndex",
+            "pageSize",
+            "refresh",
+            "delay",
+            "filterBy",
+            "sortBy"
+        ]);
+        sessionStorage.setItem(`table-settings:${state.name}`, JSON.stringify(session));
     }, []);
 
-    const setOrgFilter = (option: any) => {
-        if (option && option.value) {
-            console.log(option.value);
-            tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
-        } else {
-            tableSettingsDispatch({ type: "filter/clear", id: "organisation" });
-        }
-    };
     return (
         <div className={"card"}>
-            <div className={"processes-filter-select"}>
-                <span title={"open settings"} onClick={() => tableSettingsDispatch({ type: "showSettings/toggle" })}>
-                    <i className={"fa fa-code"} />
-                </span>
+            <section className={"nwa-table"}>
+                <NwaTable<ProcessV2>
+                    columns={columns}
+                    initialState={initialState}
+                    onChange={saveState}
+                    endpoint={"/v2/processes"}
+                    initialTableSettings={initialTableSettings}
+	    	    highlight={highlight}
+                />
+            </section>
+        </div>
+    );
+}
+
+//const selectedOrganisation = tableSettings.filterBy.reduce((org: string, elem: FilterArgument) => {
+//return elem.id === "organisation" ? elem.values[0] : org;
+//}, "");
+
+//const filterAttributesStatus = () => {
+//const statesInFilter = tableSettings.filterBy.reduce((states: ProcessStatus[], elem: FilterArgument) => {
+//return elem.id === "status" ? (elem.values as ProcessStatus[]) : states;
+//}, []);
+//return [
+//{ name: "created", selected: statesInFilter.includes("created"), count: 0 },
+//{ name: "failed", selected: statesInFilter.includes("failed"), count: 0 },
+//{ name: "running", selected: statesInFilter.includes("running"), count: 0 },
+//{ name: "suspended", selected: statesInFilter.includes("suspended"), count: 0 },
+//{ name: "aborted", selected: statesInFilter.includes("aborted"), count: 0 },
+//{ name: "completed", selected: statesInFilter.includes("completed"), count: 0 }
+//];
+//};
+
+//const setStatusFilter = (attr: { name: string; selected: boolean; count: number }) => {
+//if (attr.selected) {
+//tableSettingsDispatch({ type: "filter/remove", id: "status", value: attr.name });
+//} else {
+//tableSettingsDispatch({ type: "filter/add", id: "status", value: attr.name });
+//}
+//};
+//const setOrgFilter = (option: any) => {
+//if (option && option.value) {
+//console.log(option.value);
+//tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
+//} else {
+//tableSettingsDispatch({ type: "filter/clear", id: "organisation" });
+//}
+//};
+//function OrganisationFilter(props) {
+
+//<OrganisationSelect
+//id={"organisations-filter"}
+//onChange={setOrgFilter}
+//organisations={organisations}
+//organisation={selectedOrganisation}
+///>
+//}
+
+//function ProcessStatusFilter(props) {
+
+//<FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
+//}
+
+interface ITablePreferencesProps {
+    dispatch: Dispatch<TableSettingsAction>;
+    flatColumns: ColumnInstance[];
+    initialTableSettings: TableSettings;
+    state: TableState;
+}
+
+function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }: ITablePreferencesProps) {
+    return (
+        <>
+            <div className={"table-preferences-icon-bar"}>
                 <span
-                    title={"reset settings"}
-                    onClick={() => tableSettingsDispatch({ type: "override", settings: initialTableSettings })}
+                    title={I18n.t("table.preferences.edit")}
+                    onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
                 >
-                    <i className={"fa fa-trash"} />
+                    <i className={"fa fa-edit"} />
                 </span>
+                {"   "}
                 <span
                     title={
-                        tableSettings.refresh ? `Autorefresh every ${tableSettings.delay}ms` : "Autorefresh disabled"
+                        state.refresh
+                            ? I18n.t("table.preferences.refresh", {delay: state.delay})
+                            : I18n.t("table.preferences.norefresh")
                     }
-                    onClick={() => tableSettingsDispatch({ type: "refresh/flip" })}
-                    className={tableSettings.refresh ? (loading ? "pulse" : "rest") : "dead"}
+                    onClick={() => dispatch({ type: ActionType.REFRESH_TOGGLE })}
+                    className={state.refresh ? (state.loading ? "pulse" : "rest") : "dead"}
                 >
-                    {tableSettings.refresh ? (
-                        loading ? (
+                    {state.refresh ? (
+                        state.loading ? (
                             <i className={"fa fa-bullseye"} />
                         ) : (
                             <i className={"fa fa-circle"} />
@@ -599,39 +763,37 @@ function ProcessesTable(props: ProcessesTableProps) {
                         <i className={"fa fa-circle-o"} />
                     )}
                 </span>
-                {tableSettings.show && (
-                    <>
-                        <OrganisationSelect
-                            id={"organisations-filter"}
-                            onChange={setOrgFilter}
-                            organisations={organisations}
-                            organisation={selectedOrganisation}
-                        />
-                        <FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
-                        <NumericInput
-                            onChange={valueAsNumber => {
-                                valueAsNumber && tableSettingsDispatch({ type: "refresh/delay", delay: valueAsNumber });
-                            }}
-                            min={500}
-                            max={10000}
-                            step={500}
-                            value={tableSettings.delay}
-                            strict={true}
-                        />
-                    </>
-                )}
             </div>
-            <section className={props.name}>
-                <GenericTable<ProcessV2>
-                    columns={columns}
-                    data={data}
-                    fetchData={fetchData}
-                    settings={tableSettings}
-                    settingsDispatch={tableSettingsDispatch}
-                    controlledPageCount={pageCount}
-                />
-            </section>
-        </div>
+            {state.showSettings && (
+                <div className={"preferences"}>
+                    <button className={"button red"} onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}>
+                        {I18n.t("table.preferences.reset")}
+                        <i className={"fa fa-refresh"} />
+                    </button>
+		    <h2>{I18n.t("table.preferences.autorefresh")}</h2>
+                    <NumericInput
+                        onChange={valueAsNumber => {
+                            valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
+                        }}
+                        min={500}
+                        max={10000}
+                        step={500}
+                        value={state.delay}
+                        strict={true}
+                    />
+		    <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
+                    {flatColumns.map(column => {
+                        return (
+                            <div className={"column-checkbox"} key={column.id}>
+                                <label>
+                                    <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </>
     );
 }
 

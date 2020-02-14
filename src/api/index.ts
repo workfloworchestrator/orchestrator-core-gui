@@ -75,9 +75,9 @@ function validateResponse(showErrorDialog: boolean) {
             const error = new ResponseError(res);
 
             if (showErrorDialog) {
-                setTimeout(() => {
-                    throw error;
-                }, 250);
+            setTimeout(() => {
+            throw error;
+            }, 250);
             }
             throw error;
         }

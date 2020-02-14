@@ -238,7 +238,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <ProtectedRoute
                                     path="/processes"
                                     render={props => (
-                                        <Processes highlight={getParameterByName("highlight", props.location.search)} />
+                                        <Processes />
                                     )}
                                 />
                                 <ProtectedRoute

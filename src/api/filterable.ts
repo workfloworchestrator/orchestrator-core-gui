@@ -73,5 +73,3 @@ export function filterableEndpoint(
             }
         );
 }
-
-export const processesFilterable = filterableEndpoint.bind(null, "v2/processes");

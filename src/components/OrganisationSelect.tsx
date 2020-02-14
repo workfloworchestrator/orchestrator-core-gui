@@ -42,6 +42,7 @@ export default class OrganisationSelect extends React.PureComponent<IProps> {
                 options={options}
                 value={value}
                 isSearchable={true}
+                isClearable={true}
                 placeholder="Search and select a customer..."
                 isDisabled={disabled || organisations.length === 0}
             />

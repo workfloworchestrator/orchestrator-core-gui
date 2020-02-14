@@ -20,6 +20,11 @@ table.nwa-table {
     margin: 20px;
     width: 100%;
     word-break: break-all;
+    caption {
+	    font-weight: bold;
+	    font-variant: small-caps;
+	    font-size: larger;
+    }
     td,
     th {
         text-align: left;
@@ -33,6 +38,21 @@ table.nwa-table {
         &.running {
             background-color: $light-green;
         }
+	&.failed {
+	    background-color: lighten($red, 20%);
+	    color: $light-grey;
+	}
+	&.highlight {
+		border-top: 3px double $medium-grey;
+		border-bottom: 3px double $medium-grey;
+
+		td:first-child:before {
+		font-family: FontAwesome; 
+		font-size: larger;
+		transform: translateX(-40px);
+		content: "\f0da";
+	}
+	}
     }
     thead {
         th {

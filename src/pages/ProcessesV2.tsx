@@ -15,14 +15,17 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import ProcessesTable from "../components/ProcessesTable";
+import {
+    initialProcessesFilterAndSort,
+    initialProcessTableSettings,
+    ProcessesTable
+} from "../components/ProcessesTable";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 
 import "./Processes.scss";
 
 interface IProps {
-    highlight: string;
 }
 
 interface IState {
@@ -47,6 +50,17 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
     render() {
+        const completedSettings = initialProcessTableSettings(
+            "table.processes.completed",
+            initialProcessesFilterAndSort(false, ["completed"]),
+            ["pid", "step", "status", "assignee", "creator", "started", "abbrev"]
+        );
+        const activeSettings = initialProcessTableSettings(
+            "table.processes.active",
+            initialProcessesFilterAndSort(false, ["created", "running", "suspended", "failed"]),
+            ["pid", "step", "tags", "customer"]
+        );
+
         return (
             <div className="mod-processes">
                 <ConfirmationDialog
@@ -55,21 +69,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
-                <ProcessesTable
-                    name={"completed-processes"}
-                    showTasks={false}
-                    initialStatuses={["completed"]}
-                    hiddenColumns={["status", "assignee"]}
-                    initialPageSize={5}
-                />
-
-                <ProcessesTable
-                    name={"active-processes"}
-                    showTasks={false}
-                    initialStatuses={["created", "running", "suspended", "failed"]}
-                    hiddenColumns={[]}
-                    initialPageSize={25}
-                />
+                <ProcessesTable initialTableSettings={activeSettings} />
+                <ProcessesTable initialTableSettings={completedSettings} />
             </div>
         );
     }

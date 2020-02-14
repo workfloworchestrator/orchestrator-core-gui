@@ -1,4 +1,6 @@
 import {
+    FilterArgument,
+    SortingRule,
     UseColumnOrderInstanceProps,
     UseColumnOrderState,
     UseExpandedHooks,
@@ -83,6 +85,36 @@ declare module "react-table" {
             UseRowStateInstanceProps<D>,
             UseSortByInstanceProps<D> {}
 
+    /* [PF] The following interfaces are added specifically for our implementation */
+    export interface FilterAndSort {
+        filterBy: FilterArgument[];
+        sortBy: SortingRule<string>[];
+    }
+
+    export interface LocalTableSettings extends FilterAndSort {
+        showSettings: boolean;
+        showPaginator: boolean;
+        hiddenColumns: string[];
+        delay: number;
+    }
+
+    export interface SessionTableSettings extends FilterAndSort {
+        refresh: boolean;
+        delay: number;
+        pageSize: number;
+        pageIndex: number;
+    }
+
+    export interface TableSettings extends LocalTableSettings, SessionTableSettings {
+        name: string;
+    }
+
+    export interface ApiTableState {
+        loading: boolean;
+        pageCount: number;
+    }
+    /* end of our specific interfaces */
+
     export interface TableState<D extends object = {}>
         extends UseColumnOrderState<D>,
             UseExpandedState<D>,
@@ -93,7 +125,9 @@ declare module "react-table" {
             UseResizeColumnsState<D>,
             UseRowSelectState<D>,
             UseRowStateState<D>,
-            UseSortByState<D> {}
+            UseSortByState<D>,
+            TableSettings,
+            ApiTableState {}
 
     export interface Column<D extends object = {}>
         extends UseFiltersColumnOptions<D>,
@@ -113,7 +147,9 @@ declare module "react-table" {
         extends UseExpandedRowProps<D>,
             UseGroupByRowProps<D>,
             UseRowSelectRowProps<D>,
-            UseRowStateRowProps<D> {}
+	    UseRowStateRowProps<D> {
+		allCells: Cell[];
+	}
 
     // [PF] only key is in TableKeyedProps in @types/react-table
     export interface TableCellProps extends TableKeyedProps {

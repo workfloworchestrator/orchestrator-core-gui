@@ -1319,6 +1319,20 @@ I18n.translations.en = {
     external: {
         errors: {
             crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!"
+    }
+    },
+    table: {
+        preferences: {
+            edit: "Edit table preferences",
+            reset: "Reset table preferences to defaults",
+        autorefresh: "Set autorefresh delay in milliseconds",
+            norefresh: "Autorefresh disabled",
+            refresh: "Autorefresh for {{delay}}ms",
+        hidden_columns: "Show/Hide columns:",
+        },
+        processes: {
+            active: "Active Processes",
+            completed: "Completed Processes"
         }
     }
 };
