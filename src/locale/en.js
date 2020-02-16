@@ -1329,7 +1329,9 @@ I18n.translations.en = {
             autorefresh: "Set autorefresh delay in milliseconds",
             norefresh: "Autorefresh disabled",
             refresh: "Autorefresh for {{delay}}ms",
-            hidden_columns: "Show/Hide columns:"
+            hidden_columns: "Show/Hide columns:",
+            show_paginator: "Show Paginator",
+            hide_paginator: "Hide Paginator"
         },
         processes: {
             active: "Active Processes",

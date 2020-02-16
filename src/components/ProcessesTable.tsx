@@ -21,11 +21,16 @@ import { filterableEndpoint } from "../api/filterable";
 import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
 import uniq from "lodash/uniq";
 import pick from "lodash/pick";
+import last from "lodash/last";
+import chunk from "lodash/chunk";
+import omitBy from "lodash/omitBy";
+import isNull from "lodash/isNull";
+import toInteger from "lodash/toInteger";
 import ApplicationContext from "../utils/ApplicationContext";
 import OrganisationSelect from "./OrganisationSelect";
 import FilterDropDown from "./FilterDropDown";
 import NumericInput from "react-numeric-input";
-import { useQueryParam, StringParam } from "use-query-params";
+import { useQueryParam, StringParam, ArrayParam } from "use-query-params";
 import produce from "immer";
 import I18n from "i18n-js";
 
@@ -181,7 +186,7 @@ function NwaTable<T extends object>({
     useEffect(() => {
         onChange(state);
     }, [
-	onChange,
+        onChange,
         showSettings,
         showPaginator,
         hiddenColumns,
@@ -194,7 +199,7 @@ function NwaTable<T extends object>({
         delay,
         filterBy,
         sortBy,
-	minimized,
+        minimized
     ]);
 
     // fetch new data whenever page index, size or sort changes
@@ -410,6 +415,7 @@ enum ActionType {
     REFRESH_DISABLE = "refresh/disable",
     REFRESH_DELAY = "refresh/delay",
     SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
+    SHOW_PAGINATOR_TOGGLE = "show-paginator/toggle",
     MINIMIZE = "table/minimize",
     MAXIMIZE = "table/maximize"
 }
@@ -427,6 +433,7 @@ type TableSettingsAction =
     | { type: ActionType.REFRESH_ENABLE }
     | { type: ActionType.REFRESH_TOGGLE }
     | { type: ActionType.SHOW_SETTINGS_TOGGLE }
+    | { type: ActionType.SHOW_PAGINATOR_TOGGLE }
     | { type: ActionType.MINIMIZE }
     | { type: ActionType.MAXIMIZE };
 
@@ -487,6 +494,9 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
                 break;
             case ActionType.SHOW_SETTINGS_TOGGLE:
                 draft.showSettings = !draft.showSettings;
+                break;
+            case ActionType.SHOW_PAGINATOR_TOGGLE:
+                draft.showPaginator = !draft.showPaginator;
                 break;
             case ActionType.LOADING_START:
                 draft.loading = true;
@@ -549,7 +559,12 @@ export function initialProcessTableSettings(
 }
 
 export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
-    const [highlight, setHighlight] = useQueryParam("highlight", StringParam);
+    const { name } = initialTableSettings;
+    const queryNameSpace = last(name.split("."));
+    const [highlightQ, setHighlightQ] = useQueryParam("highlight", StringParam);
+    const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", StringParam);
+    const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", StringParam);
+    const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", StringParam);
 
     const initialize = useMemo(
         () =>
@@ -563,7 +578,34 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                     sessionStorage.getItem(`table-settings:${current.name}`) || "{}"
                 );
                 // TODO: Then get settings from URL
-                const settingsFromURL = {};
+                let pageIndex: number | null = null;
+                let pageSize: number | null = null;
+                let sortBy: { id: string; desc: boolean }[] | null = null;
+                let filterBy: { id: string; values: string[] }[] | null = null;
+                if (pageQ) {
+                    let args = pageQ.split("s").map(toInteger);
+                    if (args.length == 2) {
+                        pageIndex = args[0];
+                        pageSize = args[1];
+                    }
+                }
+                try {
+                    if (sortQ) {
+                        sortBy = chunk(sortQ.split(","), 2).map(([id, desc]) => ({ id, desc: desc === "d" }));
+                    }
+                    if (filterQ) {
+                        filterBy = chunk(filterQ.split(","), 2).map(([id, values]) => ({
+                            id: id,
+                            values: values.split("-")
+                        }));
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+                const settingsFromURL = omitBy(
+                    { pageIndex: pageIndex, pageSize: pageSize, sortBy: sortBy, filterBy: filterBy },
+                    isNull
+                );
                 // merge everything and return as new controlled table state. Each object from left to right can override keys from the previous object.
                 return Object.assign(
                     { loading: true, pageCount: 0 },
@@ -586,7 +628,7 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                 disableSortBy: true,
                 Cell: renderPidCell,
                 HyperLinkedRow: ({ cell, row }: { cell: Cell; row: Row }) => {
-                    let highlighted = row.values.pid === highlight ? " highlighted" : "";
+                    let highlighted = row.values.pid === highlightQ ? " highlighted" : "";
                     return (
                         <tr
                             onClick={() => {
@@ -607,7 +649,7 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
             },
             {
                 Header: "Assignee",
-                accessor: "assignee",
+                accessor: "assignee"
             },
             {
                 Header: "Last step",
@@ -669,9 +711,27 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                 Header: "Modified",
                 accessor: "modified",
                 Cell: renderTimestampCell
+            },
+            {
+                Header: <i className={"fa fa-bug"} />,
+                accessor: "failure",
+                disableSortBy: true,
+                Cell: ({ row, cell }: { row: Row; cell: Cell }) => (
+                    <span {...row.getExpandedToggleProps()}>
+                        {cell.value ? (
+                            row.isExpanded ? (
+                                <i className={"fa fa-exclamation-triangle"} />
+                            ) : (
+                                <i className={"fa fa-window-close"} />
+                            )
+                        ) : (
+                            ""
+                        )}
+                    </span>
+                )
             }
         ],
-        [organisations, highlight]
+        [organisations, highlightQ]
     );
 
     const saveState = useCallback(state => {
@@ -688,12 +748,24 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
             "pageIndex",
             "pageSize",
             "refresh",
-            "delay",
             "filterBy",
             "sortBy",
             "minimized"
         ]);
         sessionStorage.setItem(`table-settings:${state.name}`, JSON.stringify(session));
+        setPageQ(`${session.pageIndex}s${session.pageSize}`);
+        setSortQ(
+            session.sortBy
+                .map(({ id, desc }) => [id, desc ? "d" : "a"])
+                .flat()
+                .join(",")
+        );
+        setFilterQ(
+            session.filterBy
+                .map(({ id, values }) => [id, values.join("-")])
+                .flat()
+                .join(",")
+        );
     }, []);
 
     return (
@@ -705,7 +777,6 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                     onChange={saveState}
                     endpoint={"/v2/processes"}
                     initialTableSettings={initialTableSettings}
-                    highlight={highlight}
                 />
             </section>
         </div>
@@ -768,10 +839,10 @@ interface ITablePreferencesProps {
 }
 
 function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }: ITablePreferencesProps) {
-    const { name, minimized, refresh, delay, loading, showSettings } = state;
+    const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
     return (
         <>
-            <div className={`table-preferences-icon-bar${minimized ? " minimized":""}`}>
+            <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span
                     title={I18n.t("table.preferences.edit")}
                     onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
@@ -798,27 +869,28 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                         <i className={"fa fa-circle-o"} />
                     )}
                 </span>
-	        {"   "}
+                {"   "}
                 <span className={"table-name"}>
                     {I18n.t(name)}
                     {minimized && I18n.t("table.is_minimized")}
                 </span>
-	        {minimized ?
-                <span
-                    className={"icon-right"}
-                    title={I18n.t("table.preferences.maximize")}
-                    onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
-                >
-                    <i className={"fa fa-window-maximize"} />
-                </span> :
-                <span
-                    className={"icon-right"}
-                    title={I18n.t("table.preferences.minimize")}
-                    onClick={() => dispatch({ type: ActionType.MINIMIZE })}
-                >
-                    <i className={"fa fa-window-minimize"} />
-                </span> 
-		}
+                {minimized ? (
+                    <span
+                        className={"icon-right"}
+                        title={I18n.t("table.preferences.maximize")}
+                        onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
+                    >
+                        <i className={"fa fa-window-maximize"} />
+                    </span>
+                ) : (
+                    <span
+                        className={"icon-right"}
+                        title={I18n.t("table.preferences.minimize")}
+                        onClick={() => dispatch({ type: ActionType.MINIMIZE })}
+                    >
+                        <i className={"fa fa-window-minimize"} />
+                    </span>
+                )}
             </div>
             {showSettings && (
                 <div className={"preferences"}>
@@ -829,7 +901,12 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                         {I18n.t("table.preferences.reset")}
                         <i className={"fa fa-refresh"} />
                     </button>
-                    <h2>{I18n.t("table.preferences.autorefresh")}</h2>
+                    <button className={"button"} onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}>
+                        {showPaginator
+                            ? I18n.t("table.preferences.hide_paginator")
+                            : I18n.t("table.preferences.show_paginator")}
+                    </button>
+                    <h1>{I18n.t("table.preferences.autorefresh")}</h1>
                     <NumericInput
                         onChange={valueAsNumber => {
                             valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
@@ -843,11 +920,9 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                     <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
                     {flatColumns.map(column => {
                         return (
-                            <div className={"column-checkbox"} key={column.id}>
-                                <label>
-                                    <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                                </label>
-                            </div>
+                            <label key={column.id}>
+                                <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
+                            </label>
                         );
                     })}
                 </div>

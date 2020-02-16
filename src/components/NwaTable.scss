@@ -20,7 +20,7 @@
     padding: 6px;
     font-size: larger;
     &.minimized {
-	    background-color: $light-grey;
+        background-color: $light-grey;
     }
     .icon-right {
         float: right;
@@ -29,6 +29,13 @@
         font-weight: bold;
         font-variant: small-caps;
         font-size: larger;
+    }
+}
+
+.preferences {
+    label {
+        display: inline-block;
+        margin: 10px;
     }
 }
 
@@ -101,10 +108,10 @@ table.nwa-table {
                 &.running {
                     background-color: darken($light-green, 10%);
                 }
-		&.failed {
-		    color: black;
-		    background-color: lighten($red, 40%);
-	    	}
+                &.failed {
+                    color: black;
+                    background-color: lighten($red, 40%);
+                }
                 td.actions i.fa-ellipsis-h {
                     color: $blue;
                 }

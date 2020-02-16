@@ -100,7 +100,6 @@ declare module "react-table" {
 
     export interface SessionTableSettings extends FilterAndSort {
         refresh: boolean;
-        delay: number;
         pageSize: number;
         pageIndex: number;
         minimized: boolean;
