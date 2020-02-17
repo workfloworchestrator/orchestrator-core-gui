@@ -91,6 +91,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             filterAttributesStatus: [
                 { name: "created", selected: true, count: 0 },
                 { name: "failed", selected: true, count: 0 },
+                { name: "api_unavailable", selected: true, count: 0 },
+                { name: "inconsistent_data", selected: true, count: 0 },
                 { name: "aborted", selected: false, count: 0 },
                 { name: "completed", selected: false, count: 0 },
                 { name: "running", selected: true, count: 0 },
@@ -139,8 +141,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             this.setState({
                 processes: results,
                 filteredProcesses: filteredProcesses,
-                filterAttributesAssignee: newFilterAttributesAssignee.filter(attr => attr.count > 0),
-                filterAttributesStatus: newFilterAttributesStatus.filter(attr => attr.count > 0)
+                filterAttributesAssignee: newFilterAttributesAssignee,
+                filterAttributesStatus: newFilterAttributesStatus
             });
         });
 
@@ -408,7 +410,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                                     {process.step}
                                 </td>
                                 <td data-label={I18n.t("processes.status")} className="status">
-                                    {process.status}
+                                    {process.status.replace("_", " ")}
                                 </td>
                                 <td data-label={I18n.t("processes.customer")} className="customer">
                                     {process.customer_name}

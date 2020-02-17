@@ -87,7 +87,7 @@ deploy review base:
 run system tests on dev:
   stage: development
   trigger:
-    project: automation/automation-testers/system-tests
+    project: automation/projects/system-tests
     branch: dev
   only:
     refs:
@@ -118,7 +118,7 @@ deploy dev:
 run system tests on staging:
   stage: staging
   trigger:
-    project: automation/automation-testers/system-tests
+    project: automation/projects/system-tests
     branch: master
   only:
     refs:

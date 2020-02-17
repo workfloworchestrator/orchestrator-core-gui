@@ -60,6 +60,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             filterAttributesStatus: [
                 { name: "created", selected: true, count: 0 },
                 { name: "failed", selected: true, count: 0 },
+                { name: "api_unavailable", selected: true, count: 0 },
+                { name: "inconsistent_data", selected: true, count: 0 },
                 { name: "aborted", selected: false, count: 0 },
                 { name: "completed", selected: false, count: 0 },
                 { name: "running", selected: true, count: 0 },
@@ -87,8 +89,6 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 (attr: FilterAttribute) => (attr.count = results.filter(task => task.status === attr.name).length)
             );
 
-            results = results.filter(process => process.assignee === "SYSTEM");
-
             const filteredTasks = this.doSearchAndSortAndFilter(
                 "",
                 results,
@@ -99,7 +99,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             this.setState({
                 tasks: results,
                 filteredTasks: filteredTasks,
-                filterAttributesStatus: newFilterAttributesStatus.filter((attr: FilterAttribute) => attr.count > 0)
+                filterAttributesStatus: newFilterAttributesStatus
             });
         });
 
@@ -132,7 +132,9 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     runAllTasks = () => {
         this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
             this.state.tasks
-                .filter((task: ProcessWithDetails) => task.status === "failed")
+                .filter((task: ProcessWithDetails) =>
+                    ["failed", "api_unavailable", "data_invalid"].indexOf(task.status)
+                )
                 .map(task => task.id)
                 .forEach(retryProcess);
         });
@@ -317,7 +319,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                                     {task.step}
                                 </td>
                                 <td data-label={I18n.t("tasks.status")} className="status">
-                                    {task.status}
+                                    {task.status.replace("_", " ")}
                                 </td>
                                 <td data-label={I18n.t("tasks.workflow_name")} className="workflow_name">
                                     {task.workflow_name}

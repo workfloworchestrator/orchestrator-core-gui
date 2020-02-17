@@ -7629,12 +7629,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -7748,12 +7748,12 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   className="form-divider contact_persons"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer contact persons"
                   >
                     Customer contact persons
                   </label>
                   <em>
-                    The persons to notify when the process is finished. You can add multiple emails, names and phone numbers
+                    The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
                   </em>
                   <section
                     className="contact-persons"
@@ -7894,7 +7894,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   className="form-divider ims_port_id_1"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="First node and port"
                   >
                     First node and port
                   </label>
@@ -8133,7 +8133,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   className="form-divider ims_port_id_2"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Second node and port"
                   >
                     Second node and port
                   </label>
@@ -8430,7 +8430,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   className="form-divider ims_port_id_1"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="First node and port"
                   >
                     First node and port
                   </label>
@@ -8669,7 +8669,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   className="form-divider ims_port_id_2"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Second node and port"
                   >
                     Second node and port
                   </label>
@@ -8966,7 +8966,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                   className="form-divider ims_node_id"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Choose a node from IMS"
                   >
                     Choose a node from IMS
                   </label>
@@ -9146,12 +9146,12 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -9265,7 +9265,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -9290,12 +9290,12 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -9524,12 +9524,12 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -9643,7 +9643,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -9668,12 +9668,12 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -9902,7 +9902,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                   className="form-divider service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Service Ports"
                   >
                     Service Ports
                   </label>
@@ -9937,7 +9937,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                   className="form-divider current_bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -9962,7 +9962,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                   className="form-divider new_bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="New bandwidth"
                   >
                     New bandwidth
                   </label>
@@ -10044,12 +10044,12 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -10163,7 +10163,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -10188,12 +10188,12 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -10422,12 +10422,12 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -10541,7 +10541,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -10566,12 +10566,12 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -10927,12 +10927,12 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -11046,7 +11046,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -11071,12 +11071,12 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -11305,12 +11305,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -11424,7 +11424,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -11449,12 +11449,12 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -11818,12 +11818,12 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   className="form-divider organisation"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Customer"
                   >
                     Customer
                   </label>
                   <em>
-                    Search and select the customer for the product
+                    Search and select the customer for the product.
                   </em>
                   <div
                     className=" css-2b097c-container"
@@ -11937,7 +11937,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   className="form-divider bandwidth"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="Bandwidth"
                   >
                     Bandwidth
                   </label>
@@ -11962,12 +11962,12 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   className="form-divider bgp_ip_service_ports"
                 >
                   <label
-                    htmlFor="name"
+                    htmlFor="IP Service Ports"
                   >
                     IP Service Ports
                   </label>
                   <em>
-                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
                   </em>
                   <section
                     className="service-port-container"
@@ -12184,7 +12184,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
             className="form-divider ims_port_id_1"
           >
             <label
-              htmlFor="name"
+              htmlFor="First node and port"
             >
               First node and port
             </label>

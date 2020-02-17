@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: git.ia.surfsara.nl:5050/automation/orchestrator-client/dev
+  repository: git.ia.surfsara.nl:5050/automation/projects/orchestrator-client/dev
   tag: latest
   pullPolicy: IfNotPresent
   secrets: "gitlab-registry"

@@ -56,8 +56,11 @@ export default class BfdSettings extends React.PureComponent {
                     />
                     {value && value.enabled && (
                         <React.Fragment>
-                            <label>{I18n.t("bfd_settings.minimum_interval")}</label>
+                            <label htmlFor={I18n.t("bfd_settings.minimum_interval")}>
+                                {I18n.t("bfd_settings.minimum_interval")}
+                            </label>
                             <NumericInput
+                                id={I18n.t("bfd_settings.minimum_interval")}
                                 min={1}
                                 max={255000}
                                 value={value.minimum_interval}
@@ -73,8 +76,11 @@ export default class BfdSettings extends React.PureComponent {
                                     </em>
                                 ))}
 
-                            <label>{I18n.t("bfd_settings.multiplier")}</label>
+                            <label htmlFor={I18n.t("bfd_settings.multiplier")}>
+                                {I18n.t("bfd_settings.multiplier")}
+                            </label>
                             <NumericInput
+                                id={I18n.t("bfd_settings.multiplier")}
                                 min={1}
                                 max={255}
                                 value={value.multiplier}
