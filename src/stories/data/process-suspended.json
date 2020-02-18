@@ -1,0 +1,1570 @@
+{
+    "assignee": "NOC",
+    "current_state": {
+        "contact_persons": [
+            {
+                "email": "nwa-helpdesk-dev@list.surfnet.nl"
+            }
+        ],
+        "insync": false,
+        "ip_routing_type": "Static",
+        "ip_static_service_port": [
+            {
+                "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                "tag": "MSP",
+                "vlan": "2"
+            }
+        ],
+        "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+        "new_subscription": {
+            "bandwidth": "2000",
+            "domain": "SURFNET8",
+            "ims_circuit_id": "43697",
+            "insync": false,
+            "internetpinnen": "True",
+            "internetpinnen_prefix_subscription_id": [
+                "333cbc26-3553-43fa-aa4c-262a5b062f36"
+            ],
+            "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            "ip_routing_type": "Static",
+            "is_elan": false,
+            "multicast": "False",
+            "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+            "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+            "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+            "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+            "service_speed": "2000",
+            "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+            "subscription_name": "SN8 SURFinternet Static",
+            "surfcert_filter": "default"
+        },
+        "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+        "old_subscription": {
+            "bandwidth": "2000",
+            "domain": "SURFNET7",
+            "ims_circuit_id": "43870",
+            "ims_service_code": "IP",
+            "internetpinnen": "True",
+            "internetpinnen_prefix_subscription_id": [
+                "333cbc26-3553-43fa-aa4c-262a5b062f36"
+            ],
+            "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+            "ip_routing_type": "Static",
+            "ip_static_service_port": [
+                {
+                    "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                    "tag": "MSP",
+                    "vlan": "2"
+                }
+            ],
+            "is_elan": false,
+            "multicast": "False",
+            "nms_service_id": "9898",
+            "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+            "organisation_abbrev": "ASTRON",
+            "organisation_name": "ASTRON",
+            "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+            "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+            "sap1": {
+                "connector_type": "LC/PC",
+                "crm_port_id": "98541",
+                "customer_ipv4_address": "10.1.34.18",
+                "customer_ipv4_mtu": "1500",
+                "customer_ipv6_address": "",
+                "customer_ipv6_mtu": "1500",
+                "fiber_type": "multi-mode",
+                "id": 680067,
+                "iface_type": "10GBASE-SR",
+                "ims_circuit_id": 36715,
+                "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                "ip_prefix_subscription_id": [
+                    "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                ],
+                "line_name": "ASD001A_MSP_HVA_98541",
+                "location": "ASD001A",
+                "node": "ASD001A_5410FAKE_HANS72",
+                "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                "port": "9/10",
+                "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                "ptp_ipv4_ipam_id": "5302",
+                "status": "3",
+                "vlanrange": "2"
+            },
+            "service_speed": "2000",
+            "subscription_description": "ASTRON IP ASD001A",
+            "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+            "subscription_name": "SURFinternet 2G Static",
+            "surfcert_filter": "default"
+        },
+        "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+        "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+        "organisation_name": "ASTRON",
+        "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+        "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+        "reporter": "SYSTEM",
+        "service_speed": "2000",
+        "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+        "ticket_id": "SNNP-66408",
+        "workflow_target": "MODIFY"
+    },
+    "customer": "7c41e5e3-0911-e511-80d0-005056956c1a",
+    "failed_reason": null,
+    "id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+    "last_modified": 1573576181,
+    "product": "99e527b2-7424-48eb-9015-6f46e8a40923",
+    "started": 1573576172,
+    "status": "suspended",
+    "step": "Select new SAP to migrate to",
+    "steps": [
+        {
+            "commit_hash": "",
+            "executed": 1573576172,
+            "name": "Start",
+            "state": {
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576172,
+            "name": "Lock subscription",
+            "state": {
+                "insync": false,
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576172,
+            "name": "Acquire NOC mail from environment",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576172,
+            "name": "Load product fixed inputs",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576173,
+            "name": "Get SN8 product.",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576173,
+            "name": "Modify Subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "workflow_target": "MODIFY"
+            },
+            "status": "suspend"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576180,
+            "name": "Modify Subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576180,
+            "name": "Prepare state for sub states",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "service_speed": "2000",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576180,
+            "name": "Load subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576180,
+            "name": "Lock subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "insync": false,
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576180,
+            "name": "Load subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Verify that SN8 subscription does not have any existing SAPs",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Load initial state",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Load organisation information",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Copy ip_prefix_subscriptions from old_subscription to new_subscription.",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_mtu": "1500",
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Load SN7 SAP data",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "connector_type": "LC/PC",
+                        "crm_port_id": "98541",
+                        "customer_ipv4_address": "10.1.34.18",
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_address": "",
+                        "customer_ipv6_mtu": "1500",
+                        "fiber_type": "multi-mode",
+                        "id": 680067,
+                        "iface_type": "10GBASE-SR",
+                        "ims_circuit_id": 36715,
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "line_name": "ASD001A_MSP_HVA_98541",
+                        "location": "ASD001A",
+                        "node": "ASD001A_5410FAKE_HANS72",
+                        "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        "port": "9/10",
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "status": "3",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Create Process Subscription relation",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "connector_type": "LC/PC",
+                        "crm_port_id": "98541",
+                        "customer_ipv4_address": "10.1.34.18",
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_address": "",
+                        "customer_ipv6_mtu": "1500",
+                        "fiber_type": "multi-mode",
+                        "id": 680067,
+                        "iface_type": "10GBASE-SR",
+                        "ims_circuit_id": 36715,
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "line_name": "ASD001A_MSP_HVA_98541",
+                        "location": "ASD001A",
+                        "node": "ASD001A_5410FAKE_HANS72",
+                        "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        "port": "9/10",
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "status": "3",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Create Process Subscription relation",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "connector_type": "LC/PC",
+                        "crm_port_id": "98541",
+                        "customer_ipv4_address": "10.1.34.18",
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_address": "",
+                        "customer_ipv6_mtu": "1500",
+                        "fiber_type": "multi-mode",
+                        "id": 680067,
+                        "iface_type": "10GBASE-SR",
+                        "ims_circuit_id": 36715,
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "line_name": "ASD001A_MSP_HVA_98541",
+                        "location": "ASD001A",
+                        "node": "ASD001A_5410FAKE_HANS72",
+                        "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        "port": "9/10",
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "status": "3",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Unfocus ip_static_service_port for port selector",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "ip_static_service_port": [
+                    {
+                        "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "tag": "MSP",
+                        "vlan": "2"
+                    }
+                ],
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "connector_type": "LC/PC",
+                        "crm_port_id": "98541",
+                        "customer_ipv4_address": "10.1.34.18",
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_address": "",
+                        "customer_ipv6_mtu": "1500",
+                        "fiber_type": "multi-mode",
+                        "id": 680067,
+                        "iface_type": "10GBASE-SR",
+                        "ims_circuit_id": 36715,
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "line_name": "ASD001A_MSP_HVA_98541",
+                        "location": "ASD001A",
+                        "node": "ASD001A_5410FAKE_HANS72",
+                        "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        "port": "9/10",
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "status": "3",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "",
+            "executed": 1573576181,
+            "name": "Select new SAP to migrate to",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "nwa-helpdesk-dev@list.surfnet.nl"
+                    }
+                ],
+                "insync": false,
+                "ip_routing_type": "Static",
+                "ip_static_service_port": [
+                    {
+                        "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "tag": "MSP",
+                        "vlan": "2"
+                    }
+                ],
+                "new_product_id": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                "new_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET8",
+                    "ims_circuit_id": "43697",
+                    "insync": false,
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nso_service_id": "032a8e26-3379-4a04-a49c-8464e31f9483",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "077e6583-a1f8-42bd-87b0-60f7051c8d42",
+                    "service_speed": "2000",
+                    "subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                    "subscription_name": "SN8 SURFinternet Static",
+                    "surfcert_filter": "default"
+                },
+                "new_subscription_id": "694efdb8-4e13-4603-8be3-214c3b4c5659",
+                "old_subscription": {
+                    "bandwidth": "2000",
+                    "domain": "SURFNET7",
+                    "ims_circuit_id": "43870",
+                    "ims_service_code": "IP",
+                    "internetpinnen": "True",
+                    "internetpinnen_prefix_subscription_id": [
+                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                    ],
+                    "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
+                    "ip_routing_type": "Static",
+                    "ip_static_service_port": [
+                        {
+                            "subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                            "tag": "MSP",
+                            "vlan": "2"
+                        }
+                    ],
+                    "is_elan": false,
+                    "multicast": "False",
+                    "nms_service_id": "9898",
+                    "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                    "organisation_abbrev": "ASTRON",
+                    "organisation_name": "ASTRON",
+                    "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                    "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                    "sap1": {
+                        "connector_type": "LC/PC",
+                        "crm_port_id": "98541",
+                        "customer_ipv4_address": "10.1.34.18",
+                        "customer_ipv4_mtu": "1500",
+                        "customer_ipv6_address": "",
+                        "customer_ipv6_mtu": "1500",
+                        "fiber_type": "multi-mode",
+                        "id": 680067,
+                        "iface_type": "10GBASE-SR",
+                        "ims_circuit_id": 36715,
+                        "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
+                        "ip_prefix_subscription_id": [
+                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
+                        ],
+                        "line_name": "ASD001A_MSP_HVA_98541",
+                        "location": "ASD001A",
+                        "node": "ASD001A_5410FAKE_HANS72",
+                        "patchposition": "DDFODF_ASD001A_5410FAKE_HANS72_10G/10 (LC/PC)",
+                        "port": "9/10",
+                        "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
+                        "ptp_ipv4_ipam_id": "5302",
+                        "status": "3",
+                        "vlanrange": "2"
+                    },
+                    "service_speed": "2000",
+                    "subscription_description": "ASTRON IP ASD001A",
+                    "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                    "subscription_name": "SURFinternet 2G Static",
+                    "surfcert_filter": "default"
+                },
+                "old_subscription_label": "4129c9cb ASTRON IP ASD001A",
+                "organisation": "7c41e5e3-0911-e511-80d0-005056956c1a",
+                "organisation_name": "ASTRON",
+                "process_id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
+                "product": "3a882848-bb3c-47d7-866f-0cc56b02ab71",
+                "reporter": "SYSTEM",
+                "service_speed": "2000",
+                "subscription_id": "4129c9cb-1885-484c-b561-94896bac06ee",
+                "ticket_id": "SNNP-66408",
+                "workflow_target": "MODIFY"
+            },
+            "status": "suspend"
+        },
+        {
+            "form": [
+                {
+                    "name": "ip_static_service_port",
+                    "type": "label"
+                }
+            ],
+            "name": "Select new SAP to migrate to",
+            "status": "pending"
+        },
+        {
+            "name": "Focus sn8_ip_static_service_port for further processing",
+            "status": "pending"
+        },
+        {
+            "name": "Convert Internetpinnen Prefix Subscriptions IDs",
+            "status": "pending"
+        },
+        {
+            "name": "Load organisation information",
+            "status": "pending"
+        },
+        {
+            "name": "Load port information",
+            "status": "pending"
+        },
+        {
+            "name": "Show NOC confirmation dialog",
+            "status": "pending"
+        },
+        {
+            "name": "Construct SN8 SAP",
+            "status": "pending"
+        },
+        {
+            "name": "Load IMS data",
+            "status": "pending"
+        },
+        {
+            "name": "Remove Sap from SN7 IMS Service",
+            "status": "pending"
+        },
+        {
+            "name": "Load IMS data",
+            "status": "pending"
+        },
+        {
+            "name": "Add Sap to SN8 IMS Service",
+            "status": "pending"
+        },
+        {
+            "name": "Update name of IMS service",
+            "status": "pending"
+        },
+        {
+            "name": "Update subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Load SAP instance IDs.",
+            "status": "pending"
+        },
+        {
+            "name": "Update Subscription Description",
+            "status": "pending"
+        },
+        {
+            "name": "Load IP Prefix Subscriptions",
+            "status": "pending"
+        },
+        {
+            "name": "Update SAP1 with IPAM information",
+            "status": "pending"
+        },
+        {
+            "name": "Update the description field of PTP prefixes",
+            "status": "pending"
+        },
+        {
+            "name": "Deploy NSO service model",
+            "status": "pending"
+        },
+        {
+            "name": "IMS circuit is now in service",
+            "status": "pending"
+        },
+        {
+            "name": "Adjust PTP FQDN in IPAM",
+            "status": "pending"
+        },
+        {
+            "name": "Remove SAP from SN7 Static IP subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Add SAP to SN8 Static IP subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Conditionally set subscription to active",
+            "status": "pending"
+        },
+        {
+            "name": "Show customer confirmation dialog.",
+            "status": "pending"
+        },
+        {
+            "name": "Send confirmation mail to customer",
+            "status": "pending"
+        },
+        {
+            "name": "Cleanup confirmation dialog.",
+            "status": "pending"
+        },
+        {
+            "name": "Unlock subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Unlock subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Done",
+            "status": "pending"
+        }
+    ],
+    "traceback": null,
+    "workflow_name": "migrate_sn7_ip_static_sap_to_sn8",
+    "customerName": "ASTRON",
+    "productName": "SURFinternet 2G Static"
+}

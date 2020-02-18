@@ -1,0 +1,1939 @@
+[
+    {
+        "created_at": 1519636650.0,
+        "description": "Single Service Port 40G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "9e57e16d-d385-43ab-9c3e-d0fe9125d6dd",
+                "name": "tagged",
+                "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+                "value": "no"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "a391dc85-d2c7-4d2c-aac6-e42268570e69",
+                "name": "redundant",
+                "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "450712ac-d5c2-4ad8-8a16-91160e1756f8",
+                "name": "aggregate",
+                "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+                "value": "False"
+            },
+            {
+                "created_at": 1519636650.0,
+                "fixed_input_id": "1ef5a5b5-c5e2-4c37-a076-0c4a3b20cb32",
+                "name": "port_speed",
+                "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+                "value": "40000"
+            },
+            {
+                "created_at": 1519636650.0,
+                "fixed_input_id": "6a323dd2-e3e8-4676-ac37-a85e96bba5bc",
+                "name": "domain",
+                "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+                "value": "SURFNET7"
+            }
+        ],
+        "name": "SSP 40G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "e2620adb-d28c-4525-9110-ca14e7afca46",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace SSP",
+                "name": "modify_ssp_replace",
+                "target": "MODIFY",
+                "workflow_id": "dc5de76e-3f6f-44b7-87c8-0f349cacdc93"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP aanvragen",
+                "name": "create_ssp_workflow",
+                "target": "CREATE",
+                "workflow_id": "a4a4594c-5af1-4c6b-a487-d530f417ac34"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP opzeggen",
+                "name": "ssp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "ecdbf284-d2b4-4044-af4d-d6b91683b07c"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "Up/Downgrade the SSP speed",
+                "name": "modify_ssp_speed",
+                "target": "MODIFY",
+                "workflow_id": "3e1b5943-ea2c-4ef9-a1e4-b8cbd5d9bab0"
+            }
+        ]
+    },
+    {
+        "created_at": 1519636650.0,
+        "description": "Single Service Port 100G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "39b3e222-64ee-4bb7-a332-d54aaf670ce6",
+                "name": "tagged",
+                "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+                "value": "no"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "72ed05e0-c7a8-486a-a43b-293d6ed80a8f",
+                "name": "redundant",
+                "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "5e3cc6a3-3563-4a2d-b96f-bd6cc5d052e2",
+                "name": "aggregate",
+                "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+                "value": "False"
+            },
+            {
+                "created_at": 1519636650.0,
+                "fixed_input_id": "a6140005-2462-4b77-972b-c6ec379c7820",
+                "name": "port_speed",
+                "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+                "value": "100000"
+            },
+            {
+                "created_at": 1519636650.0,
+                "fixed_input_id": "b3696c1e-50c6-4916-8bdd-c74ee80029e3",
+                "name": "domain",
+                "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+                "value": "SURFNET7"
+            }
+        ],
+        "name": "SSP 100G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "78925941-83f7-4e96-925b-0d518db1b970",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace SSP",
+                "name": "modify_ssp_replace",
+                "target": "MODIFY",
+                "workflow_id": "dc5de76e-3f6f-44b7-87c8-0f349cacdc93"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP aanvragen",
+                "name": "create_ssp_workflow",
+                "target": "CREATE",
+                "workflow_id": "a4a4594c-5af1-4c6b-a487-d530f417ac34"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP opzeggen",
+                "name": "ssp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "ecdbf284-d2b4-4044-af4d-d6b91683b07c"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "Up/Downgrade the SSP speed",
+                "name": "modify_ssp_speed",
+                "target": "MODIFY",
+                "workflow_id": "3e1b5943-ea2c-4ef9-a1e4-b8cbd5d9bab0"
+            }
+        ]
+    },
+    {
+        "created_at": 1519636650.0,
+        "description": "Single Service Port 1G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "d36bdae1-ea14-48d6-bab6-8bdad8d48bd9",
+                "name": "redundant",
+                "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "ca28b15f-4682-42fe-bbe8-73c7851ce881",
+                "name": "tagged",
+                "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+                "value": "no"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "03f3c857-22b6-450b-8a05-8a4bad8262c7",
+                "name": "aggregate",
+                "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+                "value": "False"
+            },
+            {
+                "created_at": 1527670552.0,
+                "fixed_input_id": "26ce0c79-4a21-48a4-84fa-9ac91bca57f7",
+                "name": "port_speed",
+                "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+                "value": "1000"
+            },
+            {
+                "created_at": 1527670552.0,
+                "fixed_input_id": "0ab4e5b7-492f-4a66-9f0b-b01baf370629",
+                "name": "domain",
+                "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+                "value": "SURFNET7"
+            }
+        ],
+        "name": "SSP 1G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "ed0e1c83-d76f-40a4-b325-a2a300a6e7d7",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace SSP",
+                "name": "modify_ssp_replace",
+                "target": "MODIFY",
+                "workflow_id": "dc5de76e-3f6f-44b7-87c8-0f349cacdc93"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP aanvragen",
+                "name": "create_ssp_workflow",
+                "target": "CREATE",
+                "workflow_id": "a4a4594c-5af1-4c6b-a487-d530f417ac34"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP opzeggen",
+                "name": "ssp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "ecdbf284-d2b4-4044-af4d-d6b91683b07c"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "Up/Downgrade the SSP speed",
+                "name": "modify_ssp_speed",
+                "target": "MODIFY",
+                "workflow_id": "3e1b5943-ea2c-4ef9-a1e4-b8cbd5d9bab0"
+            }
+        ]
+    },
+    {
+        "created_at": 1519636650.0,
+        "description": "Single Service Port 10G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "f067474e-52c6-4461-8848-6198cfbef140",
+                "name": "aggregate",
+                "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "e9fd451d-4129-4919-b835-dc79a59a861f",
+                "name": "tagged",
+                "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+                "value": "no"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "ccc554f3-22d2-4b2d-be60-22dfe2749a71",
+                "name": "redundant",
+                "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+                "value": "False"
+            },
+            {
+                "created_at": 1527670566.0,
+                "fixed_input_id": "5a10b9bb-3cb7-42c2-92ad-67216f61b3df",
+                "name": "port_speed",
+                "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+                "value": "10000"
+            },
+            {
+                "created_at": 1527670566.0,
+                "fixed_input_id": "3a0413a3-cacf-4f71-bf66-15b5e633171c",
+                "name": "domain",
+                "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+                "value": "SURFNET7"
+            }
+        ],
+        "name": "SSP 10G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "99e527b2-7424-48eb-9015-6f46e8a40923",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace SSP",
+                "name": "modify_ssp_replace",
+                "target": "MODIFY",
+                "workflow_id": "dc5de76e-3f6f-44b7-87c8-0f349cacdc93"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP aanvragen",
+                "name": "create_ssp_workflow",
+                "target": "CREATE",
+                "workflow_id": "a4a4594c-5af1-4c6b-a487-d530f417ac34"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "SSP opzeggen",
+                "name": "ssp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "ecdbf284-d2b4-4044-af4d-d6b91683b07c"
+            },
+            {
+                "created_at": 1527608200.0,
+                "description": "Up/Downgrade the SSP speed",
+                "name": "modify_ssp_speed",
+                "target": "MODIFY",
+                "workflow_id": "3e1b5943-ea2c-4ef9-a1e4-b8cbd5d9bab0"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608200.0,
+        "description": "Multi Service Port 1GE Redundant",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "59cdd0f8-8985-42c5-8950-de20ff5d7fa0",
+                "name": "tagged",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "d4e89a6f-bd16-4770-9c49-fe4fc9bf841b",
+                "name": "redundant",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "True"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "86043fa2-53a1-4017-a868-fcc4889783b0",
+                "name": "aggregate",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "4736702f-5011-435e-8b6d-2fb061ece093",
+                "name": "protection_type",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "c9616ff2-e078-4272-b988-d65d78fb7a8b",
+                "name": "domain",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "05842789-8d6a-43f4-a707-47806e5520ca",
+                "name": "port_speed",
+                "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+                "value": "1000"
+            }
+        ],
+        "name": "MSP 1G Redundant",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "37b38e37-70f7-461f-ac3e-defc34a18803",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (downgrade)",
+                "name": "modify_msp_redundancy_downgrade",
+                "target": "MODIFY",
+                "workflow_id": "6f7a3858-ea0c-487a-bd46-ae62ee692a57"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608200.0,
+        "description": "Multi Service Port 10GE Redundant",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "b68922a1-ea0e-4aff-9f54-78c9a1a55a2b",
+                "name": "tagged",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "a8d021c2-757f-4298-b2a2-a0f4fe7787ed",
+                "name": "redundant",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "True"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "20c7dfb6-dc2a-4123-a24d-e62a79371927",
+                "name": "aggregate",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "68e83b2b-f535-4850-bc28-6dea14ecc94e",
+                "name": "protection_type",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "ba555306-15ec-4292-a28d-36a06071d6b5",
+                "name": "domain",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "a083fca6-459d-4a3d-b082-fa65d409f44d",
+                "name": "port_speed",
+                "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+                "value": "10000"
+            }
+        ],
+        "name": "MSP 10G Redundant",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "c738fc9e-cd74-4ade-8716-1fcd2c24da8b",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (downgrade)",
+                "name": "modify_msp_redundancy_downgrade",
+                "target": "MODIFY",
+                "workflow_id": "6f7a3858-ea0c-487a-bd46-ae62ee692a57"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608200.0,
+        "description": "Multi Service Port 40GE Redundant",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "569c4349-c7f3-4290-8e25-26be47e37c5b",
+                "name": "tagged",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "0b15e30c-cc66-46c6-abb9-e1df9462c3ef",
+                "name": "redundant",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "True"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "01cffcf7-a9e6-488e-b5de-1037884b8427",
+                "name": "aggregate",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "c174e0e6-fab4-400d-8616-61b5d46818be",
+                "name": "protection_type",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "479bce6b-1395-40ba-b9b6-5a98a28e68d2",
+                "name": "domain",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "a6ec6076-0186-49a1-97af-1569caecfcfd",
+                "name": "port_speed",
+                "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+                "value": "40000"
+            }
+        ],
+        "name": "MSP 40G Redundant",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "cd9f4a88-300c-415c-9d49-e4a2594a6770",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (downgrade)",
+                "name": "modify_msp_redundancy_downgrade",
+                "target": "MODIFY",
+                "workflow_id": "6f7a3858-ea0c-487a-bd46-ae62ee692a57"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608200.0,
+        "description": "Multi Service Port 100GE Redundant",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "67ef0461-e287-4f77-b82c-90b762106dea",
+                "name": "tagged",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "678beb83-0ec7-4b4d-84b4-e7cc9a92c532",
+                "name": "redundant",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "True"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "b76bfb8c-396b-4d17-8216-0e3663b2fde6",
+                "name": "aggregate",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "26bf031b-b669-411e-9b5e-080dc34c4f49",
+                "name": "protection_type",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "f77d63dd-99db-441d-957b-bb75d9970043",
+                "name": "domain",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "7f13e8be-9a89-444f-9cf3-a854e245420b",
+                "name": "port_speed",
+                "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+                "value": "100000"
+            }
+        ],
+        "name": "MSP 100G Redundant",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "16b98a8b-9cdd-424c-9f4a-96380a7b1526",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (downgrade)",
+                "name": "modify_msp_redundancy_downgrade",
+                "target": "MODIFY",
+                "workflow_id": "6f7a3858-ea0c-487a-bd46-ae62ee692a57"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608206.0,
+        "description": "Multi Service Port 1G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "342798e2-dd0f-458a-9c86-f0071c547dbf",
+                "name": "port_speed",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "1000"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "5a0e8b3f-d4e0-4849-8129-bfb29225cabe",
+                "name": "protection_type",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "e02d54e3-97ab-4750-9e99-4adc014c063d",
+                "name": "domain",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "718c93de-1318-4665-ae0a-860fae994abc",
+                "name": "tagged",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "036ce799-c048-4848-8fe7-3f5e6ffc3d58",
+                "name": "redundant",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "9f8bff71-d53b-42f6-b153-43bc5a4c431e",
+                "name": "aggregate",
+                "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+                "value": "False"
+            }
+        ],
+        "name": "MSP 1G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "62320721-e305-4900-a7d5-cc2d4ad6ca75",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (upgrade)",
+                "name": "modify_msp_redundancy_upgrade",
+                "target": "MODIFY",
+                "workflow_id": "58726dae-6cc6-4452-9c25-efc516e000df"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608206.0,
+        "description": "Multi Service Port 10G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "0ba27513-e50a-43d7-83c6-03fd796964a1",
+                "name": "port_speed",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "10000"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "171f99ab-63d3-4388-8b07-91906e402a1e",
+                "name": "protection_type",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "e61e39ab-e47f-495e-8c69-b73331beecbb",
+                "name": "domain",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "5688f3e3-097b-4d1b-aa6f-01c9bc3aa171",
+                "name": "tagged",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "a3e25635-35ec-4219-a1f2-b14ebfbdf2a7",
+                "name": "redundant",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "3ab340c5-1317-43f0-9ec8-73256c6a8523",
+                "name": "aggregate",
+                "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+                "value": "False"
+            }
+        ],
+        "name": "MSP 10G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "45b04171-a197-4c85-a4fa-72bbd1d18590",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (upgrade)",
+                "name": "modify_msp_redundancy_upgrade",
+                "target": "MODIFY",
+                "workflow_id": "58726dae-6cc6-4452-9c25-efc516e000df"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608206.0,
+        "description": "Multi Service Port 40G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "42b74071-d461-4dbb-81da-deefe7f1bd5e",
+                "name": "port_speed",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "40000"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "2bec1332-ce2a-4e59-8829-a62c54dc6474",
+                "name": "protection_type",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "e7b90529-29ce-4494-a98e-66462ede0a10",
+                "name": "domain",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "1113134b-cae8-45d8-b591-920bddaf0d6f",
+                "name": "tagged",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "2565c696-ca8a-4b2d-86bf-0a896cdcddf1",
+                "name": "redundant",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "7b9553f7-d2ac-489d-b413-1a6a342e42a9",
+                "name": "aggregate",
+                "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+                "value": "False"
+            }
+        ],
+        "name": "MSP 40G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "1932f718-67a3-4029-961f-e6cd3ad30c80",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (upgrade)",
+                "name": "modify_msp_redundancy_upgrade",
+                "target": "MODIFY",
+                "workflow_id": "58726dae-6cc6-4452-9c25-efc516e000df"
+            }
+        ]
+    },
+    {
+        "created_at": 1527608206.0,
+        "description": "Multi Service Port 100G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "c3b6827f-1934-491b-8064-bd7f89e3d51a",
+                "name": "port_speed",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "100000"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "ce32119a-2a6b-4bb6-9377-eeef3fb4d0cc",
+                "name": "protection_type",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "049a9552-9d6a-4306-8bb2-e81a31840972",
+                "name": "domain",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "62f4206c-6290-4052-9080-3d0b051e5833",
+                "name": "tagged",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "d4ff6925-d702-4123-81b7-865af6fb0e48",
+                "name": "redundant",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608206.0,
+                "fixed_input_id": "93bf800a-6f4d-4e2e-a8cb-5ca065930890",
+                "name": "aggregate",
+                "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+                "value": "False"
+            }
+        ],
+        "name": "MSP 100G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "36bf20d3-a1e6-41a7-8ac7-1bd669953fcf",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSP",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSP",
+                "name": "msp_request",
+                "target": "CREATE",
+                "workflow_id": "49310c39-c062-48cc-862c-2f2f222f3b4c"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Change the msp redundancy (upgrade)",
+                "name": "modify_msp_redundancy_upgrade",
+                "target": "MODIFY",
+                "workflow_id": "58726dae-6cc6-4452-9c25-efc516e000df"
+            }
+        ]
+    },
+    {
+        "created_at": 1515525156.0,
+        "description": "Netherlight MSP 1G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "5ba313e7-314f-4727-8482-335dab67c38d",
+                "name": "redundant",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "31c950a1-e431-473e-8db9-187b79e399a6",
+                "name": "tagged",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "d79b7bea-7b48-46f6-a2cc-fabdf8a970ba",
+                "name": "aggregate",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "False"
+            },
+            {
+                "created_at": 1517394435.0,
+                "fixed_input_id": "e212b62f-7dd1-4172-809b-5b105934fb3d",
+                "name": "protection_type",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1516106014.0,
+                "fixed_input_id": "70974777-ab77-4bc5-b872-6a177c429143",
+                "name": "domain",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1515525156.0,
+                "fixed_input_id": "3cf60eea-0953-458e-83fb-0315ef285802",
+                "name": "port_speed",
+                "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+                "value": "1000"
+            }
+        ],
+        "name": "Netherlight MSP 1G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "0b8fae88-9d5a-4d0f-b086-0207b3a8b737",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSPNL",
+        "workflows": [
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSPNL",
+                "name": "netherlight_msp_request",
+                "target": "CREATE",
+                "workflow_id": "9af9c46b-5e4f-4fcf-897d-a02b62828b23"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            },
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            }
+        ]
+    },
+    {
+        "created_at": 1517301850.0,
+        "description": "Netherlight MSP 10G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "b81b8da7-d976-4d80-a3f5-d172afc42f38",
+                "name": "tagged",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "single"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "3c5212b4-35f6-4f68-83c7-359c2707dca8",
+                "name": "redundant",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "6a9644d0-3afb-44bd-8ee1-99acfa058b06",
+                "name": "aggregate",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "False"
+            },
+            {
+                "created_at": 1517394448.0,
+                "fixed_input_id": "b05e66d8-6646-471b-b771-0a41a7a26234",
+                "name": "protection_type",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1517301850.0,
+                "fixed_input_id": "3da06f2a-e1dc-4928-8b20-51e3d55d525a",
+                "name": "port_speed",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "10000"
+            },
+            {
+                "created_at": 1517301850.0,
+                "fixed_input_id": "201c5873-51e9-4d88-b22c-594f10069494",
+                "name": "domain",
+                "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+                "value": "SURFNET7"
+            }
+        ],
+        "name": "Netherlight MSP 10G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "e3247076-6b34-43ec-857d-c93d018fac09",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSPNL",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSPNL",
+                "name": "netherlight_msp_request",
+                "target": "CREATE",
+                "workflow_id": "9af9c46b-5e4f-4fcf-897d-a02b62828b23"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            }
+        ]
+    },
+    {
+        "created_at": 1517390568.0,
+        "description": "Netherlight MSP 100G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "ad1e81a0-c799-44e4-8856-9b9cbf16f7cb",
+                "name": "redundant",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "362fa90d-91e2-400c-9542-c13b3e0626fa",
+                "name": "tagged",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "single"
+            },
+            {
+                "created_at": 1517390568.0,
+                "fixed_input_id": "88ad54d0-0f55-4a99-9818-16cfcdb93b3d",
+                "name": "domain",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1517394458.0,
+                "fixed_input_id": "2ba70365-3994-4c0d-a475-f1f2460acc9b",
+                "name": "protection_type",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "Unprotected"
+            },
+            {
+                "created_at": 1517390568.0,
+                "fixed_input_id": "20582264-3cb4-48d7-b7c0-bc29318734a3",
+                "name": "port_speed",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "100000"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "15a04d13-1577-4c9a-9c52-7518f6542276",
+                "name": "aggregate",
+                "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+                "value": "False"
+            }
+        ],
+        "name": "Netherlight MSP 100G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "25206585-358f-4422-be60-61cc03bda46f",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSPNL",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSPNL",
+                "name": "netherlight_msp_request",
+                "target": "CREATE",
+                "workflow_id": "9af9c46b-5e4f-4fcf-897d-a02b62828b23"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            }
+        ]
+    },
+    {
+        "created_at": 1517573898.0,
+        "description": "Netherlight MSP 40G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "d9fe4a7a-7a44-43d3-a2e6-3d68b852b3a2",
+                "name": "redundant",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "9fbf345f-9063-443a-b7a8-27020547b5e3",
+                "name": "aggregate",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "False"
+            },
+            {
+                "created_at": 1527608200.0,
+                "fixed_input_id": "23c9969a-3355-4a1a-a5fa-83ff190f6934",
+                "name": "tagged",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "single"
+            },
+            {
+                "created_at": 1517573898.0,
+                "fixed_input_id": "f51ea88a-ed0f-419b-a663-93efeea08a58",
+                "name": "domain",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "SURFNET7"
+            },
+            {
+                "created_at": 1517573898.0,
+                "fixed_input_id": "a79d45de-3355-49b4-9f73-1eab2c1e0596",
+                "name": "port_speed",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "40000"
+            },
+            {
+                "created_at": 1517573898.0,
+                "fixed_input_id": "7a31496e-9f16-493d-ad08-19241789f8ed",
+                "name": "protection_type",
+                "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+                "value": "Unprotected"
+            }
+        ],
+        "name": "Netherlight MSP 40G",
+        "product_blocks": [
+            {
+                "created_at": 1512057367.0,
+                "description": "This is the model of Service Port (MSP, SSP) on the network",
+                "end_date": null,
+                "name": "Service Port",
+                "product_block_id": "e72632f1-e683-4cdb-bae8-094de954dc7b",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "e6c9a282-c16b-4828-81ca-29957d4d848d",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSPNL",
+        "workflows": [
+            {
+                "created_at": 1529423939.0,
+                "description": "Replace MSP",
+                "name": "modify_msp_replace",
+                "target": "MODIFY",
+                "workflow_id": "045ddb31-61e9-4cb0-9997-935634ce74bc"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "Create MSPNL",
+                "name": "netherlight_msp_request",
+                "target": "CREATE",
+                "workflow_id": "9af9c46b-5e4f-4fcf-897d-a02b62828b23"
+            },
+            {
+                "created_at": 1527608198.0,
+                "description": "MSP opzeggen",
+                "name": "msp_opzeggen",
+                "target": "TERMINATE",
+                "workflow_id": "bb04d78d-a7a5-428f-abe5-58b32136ef06"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port 1G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "050ce5b7-4420-436f-a03d-ed2b2222e7fb",
+                "name": "domain",
+                "product_id": "e9a60875-d187-4737-a35d-0329b9ec1f28",
+                "value": "SURFNET8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "e53206ad-c900-4ebd-8fea-53a63dfccc84",
+                "name": "port_speed",
+                "product_id": "e9a60875-d187-4737-a35d-0329b9ec1f28",
+                "value": "1000"
+            }
+        ],
+        "name": "SN8 Service Port 1G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "e9a60875-d187-4737-a35d-0329b9ec1f28",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SP",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port product",
+                "name": "sn8_sp_request",
+                "target": "CREATE",
+                "workflow_id": "4aaf1f6c-c097-4e60-9838-6aff088ee574"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Service Port",
+                "name": "terminate_sn8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "d48c7699-ffeb-4dd0-a8bf-32d5260f95db"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Service Port port mode",
+                "name": "modify_sn8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "421b9992-93b2-4bc8-8da2-67d9f8fd3ae2"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port 10G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "09748b00-134d-4878-b47d-bd87e5ad6486",
+                "name": "domain",
+                "product_id": "7f0c30ee-a988-4830-b247-d5a1d5587155",
+                "value": "SURFNET8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "9c310308-6426-4255-ad02-cc2a1025e73a",
+                "name": "port_speed",
+                "product_id": "7f0c30ee-a988-4830-b247-d5a1d5587155",
+                "value": "10000"
+            }
+        ],
+        "name": "SN8 Service Port 10G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "7f0c30ee-a988-4830-b247-d5a1d5587155",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SP",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port product",
+                "name": "sn8_sp_request",
+                "target": "CREATE",
+                "workflow_id": "4aaf1f6c-c097-4e60-9838-6aff088ee574"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Service Port port mode",
+                "name": "modify_sn8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "421b9992-93b2-4bc8-8da2-67d9f8fd3ae2"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Service Port",
+                "name": "terminate_sn8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "d48c7699-ffeb-4dd0-a8bf-32d5260f95db"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port 40G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "ce656329-929b-49d5-ac8f-0fd5beb20986",
+                "name": "domain",
+                "product_id": "8e1a49ec-6176-4f21-9e83-fca7356cec3c",
+                "value": "SURFNET8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "c96c77a5-e93c-4a0d-befc-14eb50fd5e0f",
+                "name": "port_speed",
+                "product_id": "8e1a49ec-6176-4f21-9e83-fca7356cec3c",
+                "value": "40000"
+            }
+        ],
+        "name": "SN8 Service Port 40G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "8e1a49ec-6176-4f21-9e83-fca7356cec3c",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SP",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port product",
+                "name": "sn8_sp_request",
+                "target": "CREATE",
+                "workflow_id": "4aaf1f6c-c097-4e60-9838-6aff088ee574"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Service Port port mode",
+                "name": "modify_sn8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "421b9992-93b2-4bc8-8da2-67d9f8fd3ae2"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Service Port",
+                "name": "terminate_sn8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "d48c7699-ffeb-4dd0-a8bf-32d5260f95db"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port 100G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "fa21d4d9-69c2-4840-bc43-281ca4b4848b",
+                "name": "domain",
+                "product_id": "04f3a816-b892-474a-ba4d-58350b357e11",
+                "value": "SURFNET8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "2f4aab23-1a40-49ed-b45b-6d67e25196f5",
+                "name": "port_speed",
+                "product_id": "04f3a816-b892-474a-ba4d-58350b357e11",
+                "value": "100000"
+            }
+        ],
+        "name": "SN8 Service Port 100G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "04f3a816-b892-474a-ba4d-58350b357e11",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SP",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port product",
+                "name": "sn8_sp_request",
+                "target": "CREATE",
+                "workflow_id": "4aaf1f6c-c097-4e60-9838-6aff088ee574"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Service Port port mode",
+                "name": "modify_sn8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "421b9992-93b2-4bc8-8da2-67d9f8fd3ae2"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Service Port",
+                "name": "terminate_sn8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "d48c7699-ffeb-4dd0-a8bf-32d5260f95db"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port Netherlight 10G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "5b228cad-13d3-4ffd-bd89-f02ec63bc0b0",
+                "name": "domain",
+                "product_id": "c9b3fbf5-677c-46c3-ad79-06b3beeffdca",
+                "value": "NETHERLIGHT8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "3134ce05-5fb3-4b75-914c-9d72fc916d27",
+                "name": "port_speed",
+                "product_id": "c9b3fbf5-677c-46c3-ad79-06b3beeffdca",
+                "value": "10000"
+            }
+        ],
+        "name": "NL8 Service Port 10G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "c9b3fbf5-677c-46c3-ad79-06b3beeffdca",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SPNL",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port NL product",
+                "name": "sn8_spnl_request",
+                "target": "CREATE",
+                "workflow_id": "12cc5c1c-14ea-49dd-974a-2d89a3982f9e"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Netherlight Service Port",
+                "name": "terminate_nl8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "82bdfe73-4c42-473a-a60e-94e7e14b317e"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Netherlight Service Port port mode",
+                "name": "modify_nl8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "1469250a-476d-4798-82b1-4182b7d86d69"
+            }
+        ]
+    },
+    {
+        "created_at": 1545141521.0,
+        "description": "Service Port Netherlight 100G",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "fff6d4e7-c449-469e-a9a3-19cfdc2dbcb9",
+                "name": "domain",
+                "product_id": "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
+                "value": "NETHERLIGHT8"
+            },
+            {
+                "created_at": 1545141521.0,
+                "fixed_input_id": "b77ad6b8-2727-490b-930b-088da7d142af",
+                "name": "port_speed",
+                "product_id": "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
+                "value": "100000"
+            }
+        ],
+        "name": "NL8 Service Port 100G",
+        "product_blocks": [
+            {
+                "created_at": 1545141521.0,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "d30cecdc-c17f-4536-a9e4-727f15da97cf",
+                "status": "active",
+                "tag": "SP"
+            }
+        ],
+        "product_id": "9a8bd1ea-6650-4900-b820-3c7f0f16ef1d",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SPNL",
+        "workflows": [
+            {
+                "created_at": 1545141521.0,
+                "description": "New subscription workflow for SN8 Service Port NL product",
+                "name": "sn8_spnl_request",
+                "target": "CREATE",
+                "workflow_id": "12cc5c1c-14ea-49dd-974a-2d89a3982f9e"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Modify Netherlight Service Port port mode",
+                "name": "modify_nl8_service_port_mode",
+                "target": "MODIFY",
+                "workflow_id": "1469250a-476d-4798-82b1-4182b7d86d69"
+            },
+            {
+                "created_at": 1545141521.0,
+                "description": "Terminate Netherlight Service Port",
+                "name": "terminate_nl8_serviceport",
+                "target": "TERMINATE",
+                "workflow_id": "82bdfe73-4c42-473a-a60e-94e7e14b317e"
+            }
+        ]
+    },
+    {
+        "created_at": 1553777225,
+        "description": "SN8 SURFinternet connection using BGP",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1553777225,
+                "fixed_input_id": "25337b27-e37e-4ee2-85be-81dd025f7162",
+                "name": "ip_routing_type",
+                "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
+                "value": "BGP"
+            },
+            {
+                "created_at": 1553777225,
+                "fixed_input_id": "eb4f4621-f55d-4c07-9ecb-699dfb246683",
+                "name": "domain",
+                "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
+                "value": "SURFNET8"
+            }
+        ],
+        "name": "SN8 SURFinternet BGP",
+        "product_blocks": [
+            {
+                "created_at": 1529997837,
+                "description": "Service settings exclusive to IP products",
+                "end_date": null,
+                "name": "IP Service Settings",
+                "product_block_id": "37edae3d-174f-4fe2-b847-3aed75d68c4b",
+                "status": "active",
+                "tag": "IPSS"
+            },
+            {
+                "created_at": 1512057451,
+                "description": "Service Attach Point describes the port for this service",
+                "end_date": null,
+                "name": "Service Attach Point",
+                "product_block_id": "c3e955bf-4e7c-4df8-9a92-65da12a5755e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            {
+                "created_at": 1512057415,
+                "description": "Virtual Circuit represents the point to point circuit between minimal two endpoints",
+                "end_date": null,
+                "name": "Virtual Circuit",
+                "product_block_id": "86238ed2-e8a1-45fa-a3c3-6b9a562103f4",
+                "status": "active",
+                "tag": "VC"
+            }
+        ],
+        "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
+        "product_type": "IP",
+        "status": "active",
+        "tag": "IPBGP",
+        "workflows": [
+            {
+                "created_at": 1571908307,
+                "description": "Change a SN8 IP BGP subscription",
+                "name": "modify_sn8_ip_bgp",
+                "target": "MODIFY",
+                "workflow_id": "4cfb32e8-5195-428d-aa93-4367d17ed87d"
+            },
+            {
+                "created_at": 1569406425,
+                "description": "Change a port to a different port in a SN8 IP BGP subscription",
+                "name": "modify_sn8_ip_bgp_change_port",
+                "target": "MODIFY",
+                "workflow_id": "36b25e39-eb9d-470a-bfcd-2a26d1263e29"
+            },
+            {
+                "created_at": 1551438093,
+                "description": "Terminate SN8 IP BGP",
+                "name": "terminate_sn8_ip_bgp",
+                "target": "TERMINATE",
+                "workflow_id": "2fabf195-978f-4f91-939c-70573186edfc"
+            },
+            {
+                "created_at": 1553777225,
+                "description": "Modify SN8 IP: Change Service Settings",
+                "name": "modify_sn8_ip_ipss",
+                "target": "MODIFY",
+                "workflow_id": "6cd944eb-c69e-4ed5-ab6e-443253dbde8a"
+            },
+            {
+                "created_at": 1553777225,
+                "description": "Modify SN8 IP BGP: Remove Ports",
+                "name": "modify_sn8_ip_bgp_remove_ports",
+                "target": "MODIFY",
+                "workflow_id": "6a9bbbfd-b35f-4c34-939a-4381af130ee6"
+            },
+            {
+                "created_at": 1553777225,
+                "description": "Modify SN8 IP BGP: Add Ports",
+                "name": "modify_sn8_ip_bgp_add_ports",
+                "target": "MODIFY",
+                "workflow_id": "de8a7389-2c60-4c0f-87c2-eab8e72b1a2c"
+            },
+            {
+                "created_at": 1551359422,
+                "description": "Modify SN8 IP BGP: Change SAP Settings",
+                "name": "modify_sn8_ip_bgp_resources",
+                "target": "MODIFY",
+                "workflow_id": "69627f42-ad64-4a4c-a032-1978df0d7ecf"
+            },
+            {
+                "created_at": 1549550363,
+                "description": "Create SN8 IP BGP",
+                "name": "create_sn8_ip_bgp",
+                "target": "CREATE",
+                "workflow_id": "ed223e62-aaeb-4b91-8dca-45ee097e332a"
+            }
+        ]
+    }
+]
