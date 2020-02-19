@@ -1935,5 +1935,90 @@
                 "workflow_id": "ed223e62-aaeb-4b91-8dca-45ee097e332a"
             }
         ]
+    },
+    {
+        "created_at": 1579012220.260219,
+        "description": "Redundant Surfnet8 Lightpath using L2VPN",
+        "end_date": null,
+        "fixed_inputs": [
+            {
+                "created_at": 1579012220.260219,
+                "fixed_input_id": "4e4be6b9-8d08-44a8-a9db-10944808d7c4",
+                "name": "protection_type",
+                "product_id": "182b7c39-6c98-40da-9122-d7d27f61d449",
+                "value": "Redundant"
+            },
+            {
+                "created_at": 1579012220.260219,
+                "fixed_input_id": "f7bdc774-c6ba-4b0d-9eab-526623c5d616",
+                "name": "domain",
+                "product_id": "182b7c39-6c98-40da-9122-d7d27f61d449",
+                "value": "SURFNET8"
+            }
+        ],
+        "name": "SN8 LightPath Redundant",
+        "product_blocks": [
+            {
+                "created_at": 1562772588.585191,
+                "description": "Virtual Circuit for SURFnet8 LighPath",
+                "end_date": null,
+                "name": "SN8 Light Path Virtual Circuit",
+                "product_block_id": "9c44aa52-c688-4276-89ef-900242abf664",
+                "status": "active",
+                "tag": "VC"
+            },
+            {
+                "created_at": 1562772588.585191,
+                "description": "Service Attach Point for SURFnet8 LightPath",
+                "end_date": null,
+                "name": "SN8 Light Path Service Attach Point",
+                "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            {
+                "created_at": 1580418692.674864,
+                "description": "Light Path Redundant Service Settings",
+                "end_date": null,
+                "name": "LR Service Settings",
+                "product_block_id": "a68fdaa5-64b1-4dba-beeb-b7651e5cae4d",
+                "status": "active",
+                "tag": "LRSS"
+            }
+        ],
+        "product_id": "182b7c39-6c98-40da-9122-d7d27f61d449",
+        "product_type": "LightPath",
+        "status": "active",
+        "tag": "LR",
+        "workflows": [
+            {
+                "created_at": 1576536431.645804,
+                "description": "Modify Note",
+                "name": "modify_note",
+                "target": "MODIFY",
+                "workflow_id": "e9aace0e-71ad-4636-ade5-fca800915307"
+            },
+            {
+                "created_at": 1579536962.77097,
+                "description": "Modify SN8 LightPath: Downgrade from redundant",
+                "name": "modify_sn8_light_path_downgrade_from_redundant",
+                "target": "MODIFY",
+                "workflow_id": "2d39e4c6-4d65-40fb-9915-10778d15251e"
+            },
+            {
+                "created_at": 1580418692.674864,
+                "description": "Validate SN8 Light Path Redundant",
+                "name": "validate_sn8_light_path_redundant",
+                "target": "SYSTEM",
+                "workflow_id": "014a992d-3359-4cba-9d14-32a0485ebd67"
+            },
+            {
+                "created_at": 1581940144.842161,
+                "description": "Modify SN8 Light Path Redundant",
+                "name": "modify_sn8_light_path_redundant",
+                "target": "MODIFY",
+                "workflow_id": "87d8bdd4-4556-44a6-a4a5-81bd2972fb24"
+            }
+        ]
     }
 ]
