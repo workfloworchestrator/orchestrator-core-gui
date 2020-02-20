@@ -14,23 +14,30 @@
  */
 
 import React from "react";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
 
 import { TARGET_CREATE } from "../validations/Products";
-import { Product } from "../utils/types";
+import { Product, Option, FixedInput, Workflow } from "../utils/types";
 
 import "./ProductSelect.scss";
 
+export interface ProductOption extends Option {
+    workflow?: Workflow;
+    tag: string;
+    productId: string;
+    fixed_inputs: FixedInput[];
+}
+
 interface IProps {
     id: string;
-    onChange: () => {};
+    onChange: (option: ProductOption) => void;
     products: Product[];
-    product: string;
+    product?: string;
     disabled: boolean;
 }
 
 export default function ProductSelect({ id, onChange, products, product, disabled }: IProps) {
-    const options = products.map((aProduct: Product) => ({
+    const options: ProductOption[] = products.map((aProduct: Product) => ({
         value: aProduct.product_id,
         label: aProduct.name,
         workflow: aProduct.workflows.find(wf => wf.target === TARGET_CREATE),
@@ -45,7 +52,7 @@ export default function ProductSelect({ id, onChange, products, product, disable
         <Select
             id={id}
             className={`select-product ${options.length > 15 ? "large" : ""}`}
-            onChange={onChange}
+            onChange={onChange as (value: ValueType<ProductOption>) => void}
             options={options}
             value={value}
             isSearchable={true}

@@ -48,33 +48,31 @@ interface IState {
 }
 
 export default class Tasks extends React.PureComponent<{}, IState> {
-    constructor(props: {}) {
-        super(props);
+    context!: React.ContextType<typeof ApplicationContext>;
 
-        this.state = {
-            tasks: [],
-            filteredTasks: [],
-            query: "",
-            actions: { show: false, id: "" },
-            sorted: { name: "last_modified", descending: true },
-            filterAttributesStatus: [
-                { name: "created", selected: true, count: 0 },
-                { name: "failed", selected: true, count: 0 },
-                { name: "api_unavailable", selected: true, count: 0 },
-                { name: "inconsistent_data", selected: true, count: 0 },
-                { name: "aborted", selected: false, count: 0 },
-                { name: "completed", selected: false, count: 0 },
-                { name: "running", selected: true, count: 0 },
-                { name: "suspended", selected: true, count: 0 }
-            ],
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => {},
-            confirm: () => {},
-            confirmationDialogQuestion: "",
-            refresh: false,
-            interval: undefined
-        };
-    }
+    state: IState = {
+        tasks: [],
+        filteredTasks: [],
+        query: "",
+        actions: { show: false, id: "" },
+        sorted: { name: "last_modified", descending: true },
+        filterAttributesStatus: [
+            { name: "created", selected: true, count: 0 },
+            { name: "failed", selected: true, count: 0 },
+            { name: "api_unavailable", selected: true, count: 0 },
+            { name: "inconsistent_data", selected: true, count: 0 },
+            { name: "aborted", selected: false, count: 0 },
+            { name: "completed", selected: false, count: 0 },
+            { name: "running", selected: true, count: 0 },
+            { name: "suspended", selected: true, count: 0 }
+        ],
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => {},
+        confirm: () => {},
+        confirmationDialogQuestion: "",
+        refresh: false,
+        interval: undefined
+    };
 
     componentDidMount = () => {
         this.refresh();

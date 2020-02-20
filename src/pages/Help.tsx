@@ -39,5 +39,3 @@ export default class Help extends React.PureComponent {
         );
     }
 }
-
-Help.propTypes = {};

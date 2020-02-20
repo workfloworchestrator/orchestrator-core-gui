@@ -56,6 +56,7 @@ interface IState {
 }
 
 export default class DowngradeRedundantLPConfirmation extends React.PureComponent<IProps, IState> {
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {};
 
     componentWillMount() {
@@ -91,10 +92,10 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
         );
     };
 
-    renderSubscriptionDetail = (subscription: SubscriptionWithDetails, className: string = "", index: number = 0) => (
+    renderSubscriptionDetail = (subscription: SubscriptionWithDetails) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
-            <div key={`${subscription.subscription_id}_${index}`} className={`form-container ${className}`}>
+            <div key={`${subscription.subscription_id}`} className={"form-container"}>
                 <section className="part">
                     <label className="title">{I18n.t("subscriptions.customer_name")}</label>
                     <input type="text" readOnly={true} value={subscription.customer_name} />

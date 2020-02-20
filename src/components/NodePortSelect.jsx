@@ -111,7 +111,7 @@ export default class NodePortSelect extends React.PureComponent {
 NodePortSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
     nodes: PropTypes.array.isRequired,
-    interfaceType: PropTypes.string.isRequired,
+    interfaceType: PropTypes.string,
     nodePort: PropTypes.string,
     disabled: PropTypes.bool,
     port: PropTypes.number

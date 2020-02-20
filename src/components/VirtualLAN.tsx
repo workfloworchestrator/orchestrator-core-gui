@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { usedVlans } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { inValidVlan } from "../validations/UserInput";
@@ -101,8 +100,6 @@ interface IState {
  * See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
  */
 export default class VirtualLAN extends React.PureComponent<IProps> {
-    static propTypes: {};
-    static defaultProps: {};
     state: IState = {
         usedVlans: [],
         vlansInUse: [],
@@ -213,18 +210,3 @@ export default class VirtualLAN extends React.PureComponent<IProps> {
         );
     }
 }
-
-VirtualLAN.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    reportError: PropTypes.func.isRequired,
-    vlansExtraInUse: PropTypes.string,
-    vlan: PropTypes.string,
-    subscriptionId: PropTypes.string,
-    disabled: PropTypes.bool,
-    portMode: PropTypes.string
-};
-
-VirtualLAN.defaultProps = {
-    vlansExtraInUse: "",
-    portMode: ""
-};

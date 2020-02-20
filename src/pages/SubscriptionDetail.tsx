@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import {
     dienstafnameBySubscription,
@@ -47,7 +46,8 @@ import {
     prop,
     Product,
     IMSService,
-    IMSEndpoint
+    IMSEndpoint,
+    WorkflowReasons
 } from "../utils/types";
 import { RouteComponentProps } from "react-router";
 
@@ -128,44 +128,29 @@ interface IPAMPrefix {
     addresses: IPAMAddress[];
 }
 
-interface WorkflowReason {
-    name: string;
-    reason: string;
-}
-
-interface WorkflowReasons {
-    modify: WorkflowReason[];
-    terminate: WorkflowReason[];
-    reason?: string;
-}
-
 export default class SubscriptionDetail extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
-    static defaultProps: {};
+    context!: React.ContextType<typeof ApplicationContext>;
 
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            subscriptionProcesses: [],
-            imsServices: [],
-            imsEndpoints: [],
-            ipamPrefixes: [],
-            ipamAddresses: [],
-            subscriptions: [],
-            childSubscriptions: [],
-            parentSubscriptions: [],
-            notFound: false,
-            loaded: false,
-            loadedAllRelatedObjects: false,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
-            notFoundRelatedObjects: [],
-            collapsedObjects: [],
-            workflows: { terminate: [], modify: [] }
-        };
-    }
+    state: IState = {
+        subscriptionProcesses: [],
+        imsServices: [],
+        imsEndpoints: [],
+        ipamPrefixes: [],
+        ipamAddresses: [],
+        subscriptions: [],
+        childSubscriptions: [],
+        parentSubscriptions: [],
+        notFound: false,
+        loaded: false,
+        loadedAllRelatedObjects: false,
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: "",
+        notFoundRelatedObjects: [],
+        collapsedObjects: [],
+        workflows: { terminate: [], modify: [] }
+    };
 
     componentWillMount = () => {
         const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
@@ -1239,10 +1224,4 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     }
 }
 
-SubscriptionDetail.propTypes = {
-    subscriptionId: PropTypes.string
-};
-SubscriptionDetail.defaultProps = {
-    subscriptionId: undefined
-};
 SubscriptionDetail.contextType = ApplicationContext;

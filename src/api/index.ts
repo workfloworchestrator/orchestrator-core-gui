@@ -36,7 +36,9 @@ import {
     Process,
     ProcessSubscription,
     ProcessWithDetails,
-    Product
+    Product,
+    WorkflowReasons,
+    ProductValidation
 } from "../utils/types";
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
@@ -106,10 +108,10 @@ function validFetch(path: string, options: {}, headers = {}, showErrorDialog = t
     return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog));
 }
 
-export function catchErrorStatus(promise: Promise<any>, status: number, callback: (json: any) => void) {
+export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
     return promise.catch(err => {
         if (err.response && err.response.status === status) {
-            err.response.json().then((json: {}) => {
+            err.response.json().then((json: T) => {
                 callback(json);
             });
         } else {
@@ -216,7 +218,7 @@ export function deleteResourceType(id: string) {
 }
 
 //API
-export function allSubscriptions() {
+export function allSubscriptions(): Promise<Subscription[]> {
     return fetchJson(`v2/subscriptions/all`);
 }
 
@@ -238,7 +240,7 @@ export function subscriptionsByTags(tagList: string[], statusList: string[] = []
     );
 }
 
-export function nodeSubscriptions(statusList = []) {
+export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
@@ -260,7 +262,7 @@ export function subscriptionsByProductType(type: string) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptionWorkflows(subscription_id: string) {
+export function subscriptionWorkflows(subscription_id: string): Promise<WorkflowReasons> {
     return fetchJson(`v2/subscriptions/workflows/${subscription_id}`);
 }
 
@@ -500,7 +502,7 @@ export function fixedInputValidations() {
     return fetchJson("fixed_inputs/validations");
 }
 
-export function validation(productId: string) {
+export function validation(productId: string): Promise<ProductValidation> {
     return fetchJson(`products/${productId}/validate`);
 }
 

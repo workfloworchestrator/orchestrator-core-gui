@@ -14,12 +14,12 @@
  */
 
 import React from "react";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
 import { Organization, Option } from "../utils/types";
 
 interface IProps {
     id: string;
-    onChange: () => {};
+    onChange: (option: Option) => void;
     organisation: string;
     organisations: Organization[];
     disabled: boolean;
@@ -38,7 +38,7 @@ export default class OrganisationSelect extends React.PureComponent<IProps> {
         return (
             <Select
                 id={id}
-                onChange={onChange}
+                onChange={onChange as (value: ValueType<Option>) => void}
                 options={options}
                 value={value}
                 isSearchable={true}

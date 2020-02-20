@@ -10,7 +10,7 @@ exports[`Storyshots Bandwidth Bandwidth 1`] = `
       name="bandwidth"
       onChange={[Function]}
       type="number"
-      value="1000"
+      value={1000}
     />
   </div>
 </section>
@@ -11483,7 +11483,6 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -11720,7 +11719,6 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -11897,7 +11895,6 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                       name="new_bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -12099,7 +12096,6 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -12336,7 +12332,6 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -12573,7 +12568,6 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -12810,7 +12804,6 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em
@@ -13047,7 +13040,6 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       name="bandwidth"
                       onChange={[Function]}
                       type="number"
-                      value=""
                     />
                   </div>
                   <em

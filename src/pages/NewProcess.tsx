@@ -15,13 +15,12 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { startProcess, subscriptionWorkflows, validation, allSubscriptions, catchErrorStatus } from "../api";
 import { isEmpty, stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
-import ProductSelect from "../components/ProductSelect";
+import ProductSelect, { ProductOption } from "../components/ProductSelect";
+import ProductValidationComponent from "../components/ProductValidation";
 import UserInputFormWizard from "../components/UserInputFormWizard";
-import ProductValidation from "../components/ProductValidation";
 import "./NewProcess.scss";
 import { TARGET_CREATE } from "../validations/Products";
 import SubscriptionSearchSelect from "../components/SubscriptionSearchSelect";
@@ -29,44 +28,76 @@ import WorkflowSelect from "../components/WorkflowSelect";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import { enrichSubscription } from "../utils/Lookups";
 import ApplicationContext from "../utils/ApplicationContext";
+import {
+    FormNotCompleteResponse,
+    InputField,
+    Subscription,
+    Product,
+    Option,
+    WorkflowReason,
+    ProductValidation
+} from "../utils/types";
+import { LocationSearchSquashedHash } from "../utils/QueryParameters";
 
-export default class NewProcess extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            product: {},
-            stepUserInput: [],
-            hasNext: false,
-            productValidation: { valid: true, mapping: {} },
-            subscriptions: [],
-            modifyWorkflows: [],
-            modifySubscription: undefined,
-            modifyWorkflow: undefined,
-            terminateSubscription: undefined,
-            notModifiableMessage: undefined,
-            notTerminatableMessage: undefined,
-            organisationName: undefined,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
-            started: false,
-            showInitialMsps: false
-        };
-    }
+interface PreselectedInput {
+    product: string;
+    organisation: string;
+}
+
+interface IProps {
+    preselectedInput: LocationSearchSquashedHash;
+}
+
+interface IState {
+    product?: ProductOption;
+    stepUserInput?: InputField[];
+    hasNext?: boolean;
+    productValidation?: ProductValidation;
+    subscriptions: Subscription[];
+    modifyWorkflows: WorkflowReason[];
+    modifySubscription?: string;
+    modifyWorkflow?: string;
+    terminateSubscription?: string;
+    notModifiableMessage?: string;
+    notTerminatableMessage?: string;
+    organisationName?: string | null;
+    confirmationDialogOpen: boolean;
+    confirmationDialogAction: () => void;
+    confirm: () => void;
+    confirmationDialogQuestion: string;
+    started: boolean;
+    showInitialMsps: boolean;
+}
+
+export default class NewProcess extends React.Component<IProps, IState> {
+    context!: React.ContextType<typeof ApplicationContext>;
+
+    state: IState = {
+        hasNext: false,
+        subscriptions: [],
+        modifyWorkflows: [],
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: "",
+        started: false,
+        showInitialMsps: false
+    };
 
     componentDidMount = () => {
-        const { preselectedInput } = this.props;
+        // @ts-ignore
+        const preselectedInput: PreselectedInput = this.props.preselectedInput;
         const { products, organisations } = this.context;
         if (preselectedInput.product) {
             const product = products.find(x => x.product_id.toLowerCase() === preselectedInput.product.toLowerCase());
             if (product) {
-                this.setState({ product: product });
                 this.changeProduct({
+                    label: "",
                     value: product.product_id,
                     workflow: product.workflows.find(wf => wf.target === TARGET_CREATE),
                     productId: product.product_id,
-                    tag: product.tag
+                    tag: product.tag,
+                    fixed_inputs: product.fixed_inputs
                 });
             }
         }
@@ -86,22 +117,24 @@ export default class NewProcess extends React.Component {
         });
     };
 
-    validSubmit = products => processInput => {
-        if (!isEmpty(this.state.product)) {
+    validSubmit = (products: Product[]) => (processInput: {}[]) => {
+        if (this.state.product && this.state.product.workflow) {
             return startProcess(this.state.product.workflow.name, [
                 { product: this.state.product.productId },
                 ...processInput
             ]).then(process => {
                 this.context.redirect(`/processes?highlight=${process.id}`);
-                const name = products.find(prod => prod.product_id === this.state.product.value).name;
+                const name = products.find(prod => prod.product_id === this.state.product!.value)!.name;
                 setFlash(I18n.t("process.flash.create", { name: name, pid: process.id }));
             });
+        } else {
+            return Promise.reject();
         }
     };
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    confirmation = (question, action) =>
+    confirmation = (question: string, action: () => void) =>
         this.setState({
             confirmationDialogOpen: true,
             confirmationDialogQuestion: question,
@@ -111,26 +144,26 @@ export default class NewProcess extends React.Component {
             }
         });
 
-    startNewProcess = () => {
+    startNewProcess = (e: React.MouseEvent<HTMLButtonElement>) => {
         const { product } = this.state;
-        if (!isEmpty(product)) {
+        if (product && product.workflow) {
             this.setState(
                 {
-                    stepUserInput: [],
-                    productValidation: { valid: true, mapping: {} },
-                    product: {}
+                    stepUserInput: undefined,
+                    productValidation: undefined,
+                    product: undefined
                 },
                 () => {
                     this.setState({ product: product });
                     if (product) {
-                        let promise = startProcess(product.workflow.name, [{ product: product.productId }]);
+                        let promise = startProcess(product.workflow!.name, [{ product: product.productId }]);
                         Promise.all([
-                            validation(product.value).then(productValidation => {
+                            validation(product.value).then(productValidation =>
                                 this.setState({
                                     productValidation: productValidation
-                                });
-                            }),
-                            catchErrorStatus(promise, 510, json => {
+                                })
+                            ),
+                            catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
                                 let stepUserInput = json.form;
                                 let hasNext = json.hasNext;
 
@@ -175,17 +208,22 @@ export default class NewProcess extends React.Component {
         }
     };
 
-    addContextToSubscription = subscriptionId => {
+    addContextToSubscription = (subscriptionId?: string) => {
         const { subscriptions } = this.state;
         const { organisations, products } = this.context;
-        const subscription = subscriptions.find(sub => sub.subscription_id === subscriptionId);
-        enrichSubscription(subscription, organisations, products);
-        return subscription;
+        const subscription = subscriptions.find(sub => sub.subscription_id === subscriptionId)!;
+        const subscriptionWithDetails = enrichSubscription(subscription, organisations, products);
+        return subscriptionWithDetails;
     };
 
-    startModifyProcess = e => {
+    startModifyProcess = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         const { modifySubscription, modifyWorkflow } = this.state;
+
+        if (!modifyWorkflow) {
+            return;
+        }
+
         const subscription = this.addContextToSubscription(modifySubscription);
         const change = I18n.t(`subscription.modify_${modifyWorkflow}`).toLowerCase();
         debugger;
@@ -203,7 +241,7 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    startTerminateProcess = e => {
+    startTerminateProcess = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         const { terminateSubscription } = this.state;
         const subscription = this.addContextToSubscription(terminateSubscription);
@@ -216,7 +254,7 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    renderActions = (start, disabled) => {
+    renderActions = (start: (e: React.MouseEvent<HTMLButtonElement>) => void, disabled: boolean) => {
         return (
             <section className="actions-buttons">
                 <button
@@ -233,24 +271,22 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    changeProduct = option => {
+    changeProduct = (option: ProductOption) => {
         this.setState({
-            stepUserInput: [],
-            productValidation: { valid: true, mapping: {} },
+            stepUserInput: undefined,
+            productValidation: undefined,
             product: option,
             showInitialMsps: option.tag === "IP"
         });
     };
 
     renderCreateProduct(
-        product,
-        showProductValidation,
-        productValidation,
-        stepUserInput,
-        organisations,
-        products,
-        locationCodes,
-        preselectedProduct
+        product: ProductOption | undefined,
+        showProductValidation: boolean,
+        productValidation: ProductValidation | undefined,
+        stepUserInput: InputField[] | undefined,
+        products: Product[],
+        preselectedProduct: string
     ) {
         return (
             <section className="form-step divider">
@@ -263,18 +299,18 @@ export default class NewProcess extends React.Component {
                             .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
                             .filter(prod => prod.status === "active")}
                         onChange={this.changeProduct}
-                        product={isEmpty(product) ? undefined : product.value}
+                        product={product && product.value}
                         disabled={!isEmpty(preselectedProduct)}
                     />
                 </section>
                 {showProductValidation && (
                     <section>
                         <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                        <ProductValidation validation={productValidation} />
+                        <ProductValidationComponent validation={productValidation} />
                     </section>
                 )}
-                {isEmpty(stepUserInput) && this.renderActions(this.startNewProcess, isEmpty(product))}
-                {!isEmpty(stepUserInput) && (
+                {!stepUserInput && this.renderActions(this.startNewProcess, !product)}
+                {stepUserInput && (
                     <UserInputFormWizard
                         stepUserInput={stepUserInput}
                         validSubmit={this.validSubmit(products)}
@@ -285,12 +321,12 @@ export default class NewProcess extends React.Component {
         );
     }
 
-    changeModifySubscription = products => option => {
+    changeModifySubscription = (products: Product[]) => (option: Option) => {
         const subscriptionSelected = option && option.value;
         const { subscriptions } = this.state;
 
         if (subscriptionSelected) {
-            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
+            const subscription = subscriptions.find(sub => sub.subscription_id === option.value)!;
 
             subscriptionWorkflows(subscription.subscription_id).then(workflows => {
                 this.setState({
@@ -305,18 +341,18 @@ export default class NewProcess extends React.Component {
         });
     };
 
-    changeModifyWorkflow = option => {
+    changeModifyWorkflow = (option: Option) => {
         this.setState({
-            modifyWorkflow: option ? option.value : undefined
+            modifyWorkflow: option && option.value
         });
     };
 
-    changeTerminateSubscription = option => {
+    changeTerminateSubscription = (option: Option) => {
         const subscriptionSelected = option && option.value;
 
         const { subscriptions } = this.state;
         if (subscriptionSelected) {
-            const subscription = subscriptions.find(sub => sub.subscription_id === option.value);
+            const subscription = subscriptions.find(sub => sub.subscription_id === option.value)!;
             subscriptionWorkflows(subscription.subscription_id).then(workflows => {
                 let workflow = workflows.terminate[0];
 
@@ -332,13 +368,13 @@ export default class NewProcess extends React.Component {
     };
 
     renderModifyProduct = (
-        subscriptions,
-        modifySubscription,
-        modifyWorkflow,
-        products,
-        notModifiableMessage,
-        modifyWorkflows,
-        organisationName
+        subscriptions: Subscription[],
+        modifySubscription: string | undefined,
+        modifyWorkflow: string | undefined,
+        products: Product[],
+        notModifiableMessage: string | undefined,
+        modifyWorkflows: WorkflowReason[],
+        organisationName?: string | null
     ) => {
         const noModifyWorkflows =
             modifySubscription && modifyWorkflows.length === 0 ? I18n.t("subscription.no_modify_workflow") : null;
@@ -352,7 +388,7 @@ export default class NewProcess extends React.Component {
                         subscriptions={subscriptions.filter(
                             sub =>
                                 (sub.status === "active" && sub.insync) ||
-                                (sub.status === "provisioning" && sub.insync && sub.tag === "Node") ||
+                                (sub.status === "provisioning" && sub.insync && sub.product.tag === "Node") ||
                                 sub.status === "migrating"
                         )}
                         subscription={modifySubscription}
@@ -367,11 +403,6 @@ export default class NewProcess extends React.Component {
                         workflows={modifyWorkflows}
                         workflow={modifyWorkflow}
                         onChange={this.changeModifyWorkflow}
-                        placeholder={
-                            isEmpty(modifyWorkflows)
-                                ? I18n.t("process.workflowsEmptyPlaceholder")
-                                : I18n.t("process.workflowsPlaceholder")
-                        }
                     />
                     {noModifyWorkflows && <em className="error">{noModifyWorkflows}</em>}
                 </section>
@@ -383,7 +414,12 @@ export default class NewProcess extends React.Component {
         );
     };
 
-    renderTerminateProduct = (subscriptions, terminateSubscription, notTerminatableMessage, organisationName) => {
+    renderTerminateProduct = (
+        subscriptions: Subscription[],
+        terminateSubscription?: string,
+        notTerminatableMessage?: string,
+        organisationName?: string | null
+    ) => {
         return (
             <section className="form-step divider">
                 <h3>{I18n.t("process.terminate_subscription")}</h3>
@@ -398,10 +434,7 @@ export default class NewProcess extends React.Component {
                     />
                     {notTerminatableMessage && <em className="error">{notTerminatableMessage}</em>}
                 </section>
-                {this.renderActions(
-                    this.startTerminateProcess,
-                    isEmpty(terminateSubscription) || !isEmpty(notTerminatableMessage)
-                )}
+                {this.renderActions(this.startTerminateProcess, !terminateSubscription || !!notTerminatableMessage)}
             </section>
         );
     };
@@ -424,9 +457,9 @@ export default class NewProcess extends React.Component {
             confirmationDialogQuestion
         } = this.state;
         const { preselectedInput } = this.props;
-        const { organisations, locationCodes, products } = this.context;
-        const showProductValidation = !productValidation.valid && productValidation.product;
-        const showModify = isEmpty(stepUserInput);
+        const { products } = this.context;
+        const showProductValidation = !!productValidation && !productValidation.valid && !!productValidation.product;
+        const showModify = !stepUserInput;
         return (
             <div className="mod-new-process">
                 <ConfirmationDialog
@@ -442,10 +475,8 @@ export default class NewProcess extends React.Component {
                         showProductValidation,
                         productValidation,
                         stepUserInput,
-                        organisations,
                         products,
-                        locationCodes,
-                        preselectedInput.product
+                        preselectedInput.product as string
                     )}
                     {showModify &&
                         this.renderModifyProduct(
@@ -469,9 +500,5 @@ export default class NewProcess extends React.Component {
         );
     }
 }
-
-NewProcess.propTypes = {
-    preselectedInput: PropTypes.object.isRequired
-};
 
 NewProcess.contextType = ApplicationContext;

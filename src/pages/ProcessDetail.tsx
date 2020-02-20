@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import { RouteComponentProps } from "react-router-dom";
 import { process, resumeProcess } from "../api";
@@ -29,13 +28,13 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ProcessWithDetails, Step, ProcessSubscription, InputField, Process, Product } from "../utils/types";
-import { withQueryParams, NumberParam, DecodedValueMap, SetQuery } from "use-query-params";
+import { ProcessWithDetails, Step, ProcessSubscription, InputField, Process, Product, prop } from "../utils/types";
+import { withQueryParams, NumberParam, DecodedValueMap, SetQuery, QueryParamConfigMap } from "use-query-params";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
 
 import "./ProcessDetail.scss";
 
-const queryConfig = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
+const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
 interface MatchParams {
     id: string;
@@ -68,8 +67,7 @@ export interface CustomProcessWithDetails extends ProcessWithDetails {
 }
 
 class ProcessDetail extends React.PureComponent<IProps, IState> {
-    static defaultProps: {};
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
 
     constructor(props: IProps) {
         super(props);
@@ -100,17 +98,18 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
             enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
-            const userInputAllowed =
-                currentUser ||
-                currentUser.memberships.find((membership: string) => membership === requiredTeamMembership);
-            let stepUserInput: InputField[] | undefined = [];
+            const requiredTeamMembership = prop(configuration!, enrichedProcess.assignee);
+            let userInputAllowed = true;
+            if (requiredTeamMembership && currentUser && currentUser.memberships) {
+                userInputAllowed = !!currentUser.memberships.find(membership => membership === requiredTeamMembership);
+            }
+            let stepUserInput: InputField[] | undefined = undefined;
             if (userInputAllowed) {
                 const step = enrichedProcess.steps.find(
-                    (step: Step) => step.name === enrichedProcess.step && step.status === "pending"
+                    step => step.name === enrichedProcess.step && step.status === "pending"
                 );
                 stepUserInput = step && step.form;
             }
-            const requiredTeamMembership = configuration[enrichedProcess.assignee];
             const tabs = stepUserInput ? this.state.tabs : ["process"];
             const selectedTab = stepUserInput ? "user_input" : "process";
 
@@ -421,14 +420,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         );
     }
 }
-
-ProcessDetail.propTypes = {
-    // URL query controlled
-    query: PropTypes.object,
-    setQuery: PropTypes.func
-};
-
-ProcessDetail.defaultProps = {};
 
 ProcessDetail.contextType = ApplicationContext;
 

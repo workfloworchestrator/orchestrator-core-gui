@@ -275,6 +275,4 @@ export default class Validations extends React.Component {
     }
 }
 
-Validations.propTypes = {};
-
 Validations.contextType = ApplicationContext;

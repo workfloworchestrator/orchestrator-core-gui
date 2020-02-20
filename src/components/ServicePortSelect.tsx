@@ -16,22 +16,19 @@
 import React from "react";
 import Select from "react-select";
 import { ValueType } from "react-select/src/types";
-import { ServicePortSubscription, Organization } from "../utils/types";
+import { ServicePortSubscription, Organization, Option } from "../utils/types";
 import ApplicationContext from "../utils/ApplicationContext";
-
-interface OptionType {
-    value: string;
-    label: string;
-}
 
 interface IProps {
     servicePort: string | null;
     servicePorts: ServicePortSubscription[];
     disabled: boolean;
-    onChange: (value: OptionType) => void;
+    onChange: (value: Option) => void;
 }
 
 export default class ServicePortSelect extends React.PureComponent<IProps> {
+    context!: React.ContextType<typeof ApplicationContext>;
+
     label = (servicePort: ServicePortSubscription, organisations: Organization[]) => {
         const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
         const organisationName = organisation ? organisation.name : "";
@@ -61,7 +58,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         return (
             <Select
                 id="port-choice"
-                onChange={onChange as (value: ValueType<OptionType>) => void}
+                onChange={onChange as (value: ValueType<Option>) => void}
                 options={options}
                 value={value}
                 isSearchable={true}

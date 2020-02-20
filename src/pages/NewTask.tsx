@@ -33,14 +33,13 @@ interface IState {
 }
 
 export default class NewTask extends React.Component<{}, IState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            workflows: [],
-            stepUserInput: [],
-            hasNext: false
-        };
-    }
+    context!: React.ContextType<typeof ApplicationContext>;
+
+    state: IState = {
+        workflows: [],
+        stepUserInput: [],
+        hasNext: false
+    };
 
     componentDidMount = () =>
         workflowsByTarget("SYSTEM").then((workflows: Workflow[]) => this.setState({ workflows: workflows }));
@@ -61,7 +60,7 @@ export default class NewTask extends React.Component<{}, IState> {
         this.setState({ workflow: option });
         if (option) {
             let promise = startProcess(option.value, []);
-            catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
+            catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
                 this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
             });
         }
@@ -80,7 +79,7 @@ export default class NewTask extends React.Component<{}, IState> {
                             <WorkflowSelect
                                 workflows={workflows}
                                 onChange={this.changeWorkflow}
-                                workflow={!workflows || !workflow ? undefined : workflow.value}
+                                workflow={workflow && workflow.value}
                             />
                         </section>
                         {workflow && (

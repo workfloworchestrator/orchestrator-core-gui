@@ -14,17 +14,18 @@
  */
 
 import React from "react";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
+import { Option } from "../utils/types";
 
 interface IProps {
     id: string;
-    onChange: () => {};
+    onChange: (option: Option) => void;
     locationCode: string;
     locationCodes: string[];
-    disabled: boolean;
+    disabled?: boolean;
 }
 
-export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled }: IProps) {
+export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled = false }: IProps) {
     if (locationCode && !locationCodes.includes(locationCode)) {
         const toUpperCase = locationCode.toUpperCase();
         locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase)!;
@@ -40,7 +41,7 @@ export default function LocationCodeSelect({ id, onChange, locationCode, locatio
         <Select
             id={id}
             className="select-locationcode"
-            onChange={onChange}
+            onChange={onChange as (value: ValueType<Option>) => void}
             options={options}
             value={value}
             isSearchable={true}

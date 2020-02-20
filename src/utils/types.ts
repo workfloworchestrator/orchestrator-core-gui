@@ -139,7 +139,7 @@ export interface ProcessWithDetails {
     workflow_name: string;
     product: string;
     customer: string;
-    assignee: string;
+    assignee: "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
     status: string;
     failed_reason: string;
     traceback: string;
@@ -218,6 +218,7 @@ export interface AppConfig {
     NOC: string;
     CHANGES: string;
     KLANT_SUPPORT: string;
+    SYSTEM: string;
 }
 
 export interface User {
@@ -225,6 +226,7 @@ export interface User {
     displayName: string;
     sub: string;
     email: string;
+    memberships: string[];
 }
 
 export function typedKeys<T>(o: T): (keyof T)[] {
@@ -280,4 +282,22 @@ export interface IMSPort {
     port: string;
     iface_type: string;
     patchposition: string;
+}
+
+export interface WorkflowReason {
+    name: string;
+    reason: string;
+}
+
+export interface WorkflowReasons {
+    modify: WorkflowReason[];
+    terminate: WorkflowReason[];
+    reason?: string;
+}
+
+export interface ProductValidation {
+    errors: string[];
+    mapping: {};
+    product: { description: string; name: string; workflow: string };
+    valid: boolean;
 }

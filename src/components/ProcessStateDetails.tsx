@@ -14,7 +14,6 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import CopyToClipboard from "react-copy-to-clipboard";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
@@ -47,8 +46,10 @@ interface IState {
 }
 
 class ProcessStateDetails extends React.PureComponent<IProps, IState> {
-    static defaultProps: {};
-    static propTypes: {};
+    public static defaultProps = {
+        collapsed: []
+    };
+
     state: IState = {
         raw: false,
         details: true,
@@ -340,16 +341,5 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         );
     }
 }
-
-ProcessStateDetails.propTypes = {
-    process: PropTypes.object.isRequired,
-    subscriptionProcesses: PropTypes.array.isRequired,
-    collapsed: PropTypes.array,
-    onChangeCollapsed: PropTypes.func // when provided it will toggle the collapse functionality
-};
-
-ProcessStateDetails.defaultProps = {
-    collapsed: []
-};
 
 export default ProcessStateDetails;
