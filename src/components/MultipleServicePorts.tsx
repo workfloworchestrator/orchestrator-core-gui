@@ -19,7 +19,7 @@ import I18n from "i18n-js";
 import { stop, isEmpty, capitalizeFirstLetter } from "../utils/Utils";
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ServicePortSubscription, ServicePort, Organization, Product, ValidationError, setProp } from "../utils/types";
+import { ServicePortSubscription, ServicePort, Product, ValidationError, setProp } from "../utils/types";
 import { filterProductsByBandwidth } from "../validations/Products";
 import { range } from "lodash";
 
@@ -35,7 +35,6 @@ interface IProps {
     minimum: number;
     maximum: number;
     disabled: boolean;
-    organisations: Organization[];
     organisationId: string;
     isElan: boolean;
     mspOnly: boolean;
@@ -184,7 +183,6 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     renderServicePort = (servicePort: ServicePort, index: number) => {
         const {
             servicePorts,
-            organisations,
             organisationId,
             minimum,
             disabled,
@@ -250,7 +248,6 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         onChange={this.onChangeSubscription(index)}
                         servicePort={servicePort.subscription_id}
                         servicePorts={inSelect}
-                        organisations={organisations}
                         disabled={portDisabled}
                     />
 
@@ -354,7 +351,6 @@ MultipleServicePorts.propTypes = {
     sn8: PropTypes.bool.isRequired,
     productTags: PropTypes.array.isRequired,
     servicePorts: PropTypes.array.isRequired,
-    organisations: PropTypes.array.isRequired,
     organisationId: PropTypes.string,
     minimum: PropTypes.number,
     maximum: PropTypes.number.isRequired,

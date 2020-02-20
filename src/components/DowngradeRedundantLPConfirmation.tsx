@@ -15,30 +15,60 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { subscriptionsDetail } from "../api/index";
 import { enrichSubscription } from "../utils/Lookups";
 
 import "./DowngradeRedundantLPConfirmation.scss";
 import CheckBox from "./CheckBox";
+import { SubscriptionWithDetails } from "../utils/types";
+import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
+import ApplicationContext from "../utils/ApplicationContext";
 
-export default class DowngradeRedundantLPConfirmation extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            subscription: { instances: [] }
-        };
-    }
+interface IMSPortData {
+    location: string;
+    node: string;
+    patchposition: string;
+    connector_type: string;
+    customer_name: string;
+}
+
+interface PortData {
+    description: string;
+    ims_port: IMSPortData;
+}
+
+interface LegData {
+    left: PortData;
+    right: PortData;
+    ims_circuit_id: number;
+    ims_protection_circuit_id: number;
+}
+
+interface IProps {
+    subscriptionId: string;
+    primary: LegData;
+    secondary: LegData;
+    choice: "Primary" | "Secondary";
+}
+
+interface IState {
+    subscription?: SubscriptionWithDetails;
+}
+
+export default class DowngradeRedundantLPConfirmation extends React.PureComponent<IProps, IState> {
+    state: IState = {};
 
     componentWillMount() {
-        const { subscriptionId, organisations, products } = this.props;
+        const { subscriptionId } = this.props;
+        const { organisations, products } = this.context;
+
         subscriptionsDetail(subscriptionId).then(subscription => {
-            enrichSubscription(subscription, organisations, products);
-            this.setState({ subscription: subscription });
+            const enriched_subscription = enrichSubscription(subscription, organisations, products);
+            this.setState({ subscription: enriched_subscription });
         });
     }
 
-    renderChoice = choice => {
+    renderChoice = (choice: "Primary" | "Secondary") => {
         const primary = choice === "Primary";
         return (
             <section className="choice">
@@ -61,7 +91,7 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
         );
     };
 
-    renderSubscriptionDetail = (subscription, className = "", index = 0) => (
+    renderSubscriptionDetail = (subscription: SubscriptionWithDetails, className: string = "", index: number = 0) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
             <div key={`${subscription.subscription_id}_${index}`} className={`form-container ${className}`}>
@@ -81,7 +111,7 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
         </section>
     );
 
-    renderDetail = (port, label) => (
+    renderDetail = (port: PortData, label: string) => (
         <div>
             <p className="child">{label}</p>
             <label className="title">{I18n.t("downgrade_redundant_lp.description")}</label>
@@ -103,7 +133,7 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
         </div>
     );
 
-    renderLightPath = (lp, prefix) => (
+    renderLightPath = (lp: LegData, prefix: string) => (
         <section className="subscription_child">
             <label className="title">{I18n.t("downgrade_redundant_lp.ims_circuit_id")}</label>
             <input type="text" readOnly={true} value={lp.ims_circuit_id} />
@@ -114,7 +144,7 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
         </section>
     );
 
-    renderDetails = (primary, secondary) => {
+    renderDetails = (primary: LegData, secondary: LegData) => {
         return (
             <section className="lightpaths">
                 <div className={`form-container`}>
@@ -134,6 +164,11 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
     render() {
         const { subscription } = this.state;
         const { primary, secondary, choice } = this.props;
+
+        if (!subscription) {
+            return null;
+        }
+
         return (
             <div className="mod-downgrade-redundant-lp-confirmation">
                 {this.renderSubscriptionDetail(subscription)}
@@ -144,11 +179,4 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
     }
 }
 
-DowngradeRedundantLPConfirmation.propTypes = {
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
-    subscriptionId: PropTypes.string.isRequired,
-    primary: PropTypes.object.isRequired,
-    secondary: PropTypes.object.isRequired,
-    choice: PropTypes.string.isRequired
-};
+DowngradeRedundantLPChoice.contextType = ApplicationContext;

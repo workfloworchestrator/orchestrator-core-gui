@@ -23,14 +23,14 @@ import UserInputFormWizard from "../components/UserInputFormWizard";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
-import { ProductWithDetails, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
+import { Product, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
 
 interface IProps {
     subscriptionId: string;
 }
 
 interface IState {
-    product?: ProductWithDetails;
+    product?: Product;
     stepUserInput?: InputField[];
 }
 
@@ -43,7 +43,7 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
 
         subscriptionsDetail(subscriptionId).then(sub =>
             productById(sub.product.product_id).then(product => {
-                const terminate_workflow = product.workflows!.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
+                const terminate_workflow = product.workflows.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
                 let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
                     this.context.redirect(`/processes?highlight=${res.id}`);
                     setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
@@ -62,7 +62,7 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     submit = (processInput: {}[]) => {
         const { subscriptionId } = this.props;
         const { product } = this.state;
-        const terminate_workflow = product!.workflows!.find(wf => wf.target === TARGET_TERMINATE)!;
+        const terminate_workflow = product!.workflows.find(wf => wf.target === TARGET_TERMINATE)!;
 
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
             res => {

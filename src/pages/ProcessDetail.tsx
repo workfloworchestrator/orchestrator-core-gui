@@ -29,7 +29,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import { actionOptions } from "../validations/Processes";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ProcessWithDetails, Step, ProcessSubscription, Product, InputField, Process } from "../utils/types";
+import { ProcessWithDetails, Step, ProcessSubscription, InputField, Process, Product } from "../utils/types";
 import { withQueryParams, NumberParam, DecodedValueMap, SetQuery } from "use-query-params";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
 

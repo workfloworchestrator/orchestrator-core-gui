@@ -56,7 +56,7 @@ import Tasks from "./Tasks";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
-import { Product, AppError, Organization } from "../utils/types";
+import { AppError, Organization, Product } from "../utils/types";
 
 import "./App.scss";
 

@@ -23,10 +23,8 @@ export interface Product {
     end_date: number;
     status: string;
     fixed_inputs: FixedInput[];
-}
-
-export interface ProductWithDetails extends Product {
-    workflows?: Workflow[];
+    workflows: Workflow[];
+    product_blocks: ProductBlock[];
 }
 
 export interface FixedInput {
@@ -65,6 +63,7 @@ export interface ProductBlock {
 }
 
 export interface Subscription {
+    name: string;
     subscription_id: string;
     description: string;
     product: Product;

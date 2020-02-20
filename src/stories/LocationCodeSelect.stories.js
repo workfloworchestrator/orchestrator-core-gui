@@ -21,8 +21,6 @@ import { Store } from "@sambego/storybook-state";
 
 import LocationCodeSelect from "../components/LocationCodeSelect";
 
-import LOCATION_CODES from "./data/location_codes.json";
-
 const store = new Store({
     locationCode: ""
 });
@@ -36,7 +34,6 @@ export const __Default = () => (
     <LocationCodeSelect
         id="location-code-select"
         locationCode={store.state.locationCode}
-        locationCodes={array("Values", LOCATION_CODES)}
         onChange={e => {
             action("onChange")(e);
             store.set({ locationCode: e.value });

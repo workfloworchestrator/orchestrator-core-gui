@@ -23,7 +23,6 @@ import {
     port_subscription_id
 } from "../validations/Subscriptions";
 import {
-    Product,
     ProductBlock,
     ResourceType,
     AppConfig,
@@ -37,7 +36,7 @@ import {
     Process,
     ProcessSubscription,
     ProcessWithDetails,
-    ProductWithDetails
+    Product
 } from "../utils/types";
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
@@ -160,7 +159,7 @@ export function productStatuses() {
     return fetchJson("products/statuses/all");
 }
 
-export function productById(productId: string): Promise<ProductWithDetails> {
+export function productById(productId: string): Promise<Product> {
     return fetchJson(`products/${productId}`);
 }
 

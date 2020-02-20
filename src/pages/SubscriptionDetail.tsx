@@ -39,14 +39,13 @@ import ApplicationContext from "../utils/ApplicationContext";
 
 import "./SubscriptionDetail.scss";
 import {
-    Product,
     Subscription,
     SubscriptionInstance,
     InstanceValue,
     SubscriptionProcesses,
     SubscriptionWithDetails,
     prop,
-    ProductWithDetails,
+    Product,
     IMSService,
     IMSEndpoint
 } from "../utils/types";
@@ -62,7 +61,7 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>> {
 
 interface IState {
     subscription?: SubscriptionWithDetails;
-    product?: ProductWithDetails;
+    product?: Product;
     subscriptionProcesses: SubscriptionProcesses[];
     imsServices: IMSService[];
     imsEndpoints: IMSEndpoint[];
@@ -808,8 +807,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    workflowByTarget = (product: ProductWithDetails, target: string) =>
-        product.workflows!.find(wf => wf.target === target);
+    workflowByTarget = (product: Product, target: string) => product.workflows.find(wf => wf.target === target);
 
     renderActions = (
         subscription: SubscriptionWithDetails,
@@ -959,7 +957,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    renderFixedInputs = (product?: ProductWithDetails) => {
+    renderFixedInputs = (product?: Product) => {
         if (!product) {
             return null;
         }

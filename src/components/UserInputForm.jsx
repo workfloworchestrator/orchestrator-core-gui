@@ -307,7 +307,7 @@ export default class UserInputForm extends React.Component {
 
     chooseInput = (userInput, validationError) => {
         const { nodeSubscriptions } = this.state;
-        const { products, organisations, locationCodes } = this.context;
+        const { products } = this.context;
         const name = userInput.name;
         const value = userInput.value;
         const stepUserInput = this.state.stepUserInput;
@@ -361,7 +361,6 @@ export default class UserInputForm extends React.Component {
                     <OrganisationSelect
                         id="organisation-select"
                         key={name}
-                        organisations={organisations}
                         onChange={this.changeSelectInput(name)}
                         organisation={value}
                         disabled={userInput.readonly}
@@ -438,8 +437,6 @@ export default class UserInputForm extends React.Component {
                         />
                         <section className="form-divider" />
                         <DowngradeRedundantLPConfirmation
-                            products={products}
-                            organisations={organisations}
                             subscriptionId={userInput.subscription_id}
                             className="indent"
                             primary={userInput.primary}
@@ -466,7 +463,6 @@ export default class UserInputForm extends React.Component {
                     <LocationCodeSelect
                         id="location-code-select"
                         onChange={this.changeSelectInput(name)}
-                        locationCodes={locationCodes}
                         locationCode={value}
                     />
                 );
@@ -485,7 +481,6 @@ export default class UserInputForm extends React.Component {
                         servicePorts={value}
                         sn8={userInput.type === "service_ports_sn8"}
                         productTags={userInput.tags}
-                        organisations={organisations}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}
                         minimum={userInput.minimum}

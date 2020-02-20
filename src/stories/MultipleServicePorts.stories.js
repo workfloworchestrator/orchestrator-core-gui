@@ -25,7 +25,6 @@ import MultipleServicePorts from "../components/MultipleServicePorts";
 
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
-import ORGANISATIONS from "./data/organisations.json";
 
 const store = new Store({
     servicePorts: [{ subscription_id: null, vlan: "" }]
@@ -49,7 +48,6 @@ export const Sn8MultipleServicePorts = () => {
         <MultipleServicePorts
             servicePorts={store.state.servicePorts}
             sn8={true}
-            organisations={ORGANISATIONS}
             onChange={value => {
                 action("onChange")(value);
                 store.set({ servicePorts: value });
@@ -94,7 +92,6 @@ export const Sn7MultipleServicePorts = () => {
         <MultipleServicePorts
             servicePorts={store.state.servicePorts}
             sn8={false}
-            organisations={ORGANISATIONS}
             onChange={value => {
                 action("onChange")(value);
                 store.set({ servicePorts: value });

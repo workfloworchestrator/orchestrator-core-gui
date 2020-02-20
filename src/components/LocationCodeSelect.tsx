@@ -14,14 +14,20 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import Select from "react-select";
-import { isEmpty } from "../utils/Utils";
 
-export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled }) {
-    if (!isEmpty(locationCode) && !locationCodes.includes(locationCode)) {
+interface IProps {
+    id: string;
+    onChange: () => {};
+    locationCode: string;
+    locationCodes: string[];
+    disabled: boolean;
+}
+
+export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled }: IProps) {
+    if (locationCode && !locationCodes.includes(locationCode)) {
         const toUpperCase = locationCode.toUpperCase();
-        locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase);
+        locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase)!;
     }
 
     const options = locationCodes.map(aLocationCode => {
@@ -42,11 +48,3 @@ export default function LocationCodeSelect({ id, onChange, locationCode, locatio
         />
     );
 }
-
-LocationCodeSelect.propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    locationCodes: PropTypes.array.isRequired,
-    locationCode: PropTypes.string,
-    disabled: PropTypes.bool
-};

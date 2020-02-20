@@ -14,14 +14,23 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import Select from "react-select";
 
-import "./ProductSelect.scss";
 import { TARGET_CREATE } from "../validations/Products";
+import { Product } from "../utils/types";
 
-export default function ProductSelect({ id, onChange, product, products, disabled }) {
-    const options = products.map(aProduct => ({
+import "./ProductSelect.scss";
+
+interface IProps {
+    id: string;
+    onChange: () => {};
+    products: Product[];
+    product: string;
+    disabled: boolean;
+}
+
+export default function ProductSelect({ id, onChange, products, product, disabled }: IProps) {
+    const options = products.map((aProduct: Product) => ({
         value: aProduct.product_id,
         label: aProduct.name,
         workflow: aProduct.workflows.find(wf => wf.target === TARGET_CREATE),
@@ -29,24 +38,19 @@ export default function ProductSelect({ id, onChange, product, products, disable
         productId: aProduct.product_id,
         fixed_inputs: aProduct.fixed_inputs
     }));
+
+    const value = options.find(option => option.value === product);
+
     return (
         <Select
             id={id}
             className={`select-product ${options.length > 15 ? "large" : ""}`}
             onChange={onChange}
             options={options}
-            value={options.find(option => option.value === product)}
+            value={value}
             isSearchable={true}
             placeholder="Search and select a product..."
             isDisabled={disabled || products.length === 0}
         />
     );
 }
-
-ProductSelect.propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
-    product: PropTypes.string,
-    disabled: PropTypes.bool
-};
