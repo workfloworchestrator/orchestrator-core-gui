@@ -14,7 +14,21 @@
  */
 
 import fetchMock from "fetch-mock";
-import { vlanData } from "./data";
+
+export function vlanData() {
+    let vlans = [];
+
+    if (Math.floor(Math.random() * 3 >= 1)) {
+        const single = Math.floor(Math.random() * 10);
+        vlans.push([single]);
+    }
+    if (Math.floor(Math.random() * 2 >= 1)) {
+        const start = Math.floor(Math.random() * 400) + 10;
+        const end = Math.floor(Math.random() * 400) + 10 + start;
+        vlans.push([start, end]);
+    }
+    return vlans;
+}
 
 export function loadVlanMocks() {
     fetchMock.get("glob:*/api/ims/vlans/0*", vlanData());

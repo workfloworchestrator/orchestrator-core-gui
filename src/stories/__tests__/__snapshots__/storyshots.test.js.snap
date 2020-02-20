@@ -65,6 +65,2210 @@ exports[`Storyshots DatePicker Definition 1`] = `
 </section>
 `;
 
+exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-downgrade-redundant-lp"
+  >
+    <section
+      className="lightpaths"
+    >
+      <div
+        className="form-container"
+      >
+        <div
+          style={
+            Object {
+              "flexDirection": "column",
+            }
+          }
+        >
+          <div
+            className="rlp_container"
+          >
+            <table
+              className="rlp_heading"
+            >
+              <thead>
+                <tr>
+                  <th
+                    colSpan={5}
+                  >
+                    <h3>
+                      redundant lichtpad
+                    </h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    klant
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    025a376f-0d11-e511-80d0-005056956c1a
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    protection
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    redundant
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    speed
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    4
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    nso_service_id
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    456b0625-7c01-4ec7-9f7d-9f26a66ff647 en 12b7a967-423d-4322-be92-629d28b770bb
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    subscription
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    <a
+                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      d61e7664-73ac-4f14-ad29-d6a33c243d5d
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="vspacer"
+                    colSpan={5}
+                  />
+                </tr>
+                <tr>
+                  <td
+                    className="border-off"
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-on"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Primary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A-JNX-02
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            0/1/1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            10GBASE-SR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A-JNX-02
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            0/1/1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            5
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            10GBASE-SR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/85c379b7-fa57-4d36-a033-617c890592ba"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              85c379b7-fa57-4d36-a033-617c890592ba
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td
+                    className="spacer"
+                  />
+                  <td
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-off"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Secondary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            6
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              8a600d14-3901-43e0-89e2-9961294821e4
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            7
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              46fd5ba3-0a1c-433d-8bc9-ff324a5b4550
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      className="choice"
+    >
+      <h3>
+        Which lightpath should be removed from this redundant LP?
+      </h3>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={true}
+          disabled={false}
+          id="primary"
+          name="primary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="primary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="primary"
+        >
+          Primary LP
+        </label>
+      </div>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={false}
+          disabled={false}
+          id="secondary"
+          name="secondary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="secondary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="secondary"
+        >
+          Secondary LP
+        </label>
+      </div>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-downgrade-redundant-lp"
+  >
+    <section
+      className="lightpaths"
+    >
+      <div
+        className="form-container"
+      >
+        <div
+          style={
+            Object {
+              "flexDirection": "column",
+            }
+          }
+        >
+          <div
+            className="rlp_container"
+          >
+            <table
+              className="rlp_heading"
+            >
+              <thead>
+                <tr>
+                  <th
+                    colSpan={5}
+                  >
+                    <h3>
+                      redundant lichtpad
+                    </h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    klant
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    025a376f-0d11-e511-80d0-005056956c1a
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    protection
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    redundant
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    speed
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    4
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    nso_service_id
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    456b0625-7c01-4ec7-9f7d-9f26a66ff647 en 12b7a967-423d-4322-be92-629d28b770bb
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    subscription
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    <a
+                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      d61e7664-73ac-4f14-ad29-d6a33c243d5d
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="vspacer"
+                    colSpan={5}
+                  />
+                </tr>
+                <tr>
+                  <td
+                    className="border-off"
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-on"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Primary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_MSCNL_TAGGED_HVA_9BD8664F
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_MSCNL_TAGGED_HVA_9BD8664F
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            5
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/85c379b7-fa57-4d36-a033-617c890592ba"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              85c379b7-fa57-4d36-a033-617c890592ba
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td
+                    className="spacer"
+                  />
+                  <td
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-off"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Secondary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            6
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              8a600d14-3901-43e0-89e2-9961294821e4
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            7
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              46fd5ba3-0a1c-433d-8bc9-ff324a5b4550
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      className="choice"
+    >
+      <h3>
+        Which lightpath should be removed from this redundant LP?
+      </h3>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={true}
+          disabled={false}
+          id="primary"
+          name="primary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="primary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="primary"
+        >
+          Primary LP
+        </label>
+      </div>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={false}
+          disabled={false}
+          id="secondary"
+          name="secondary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="secondary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="secondary"
+        >
+          Secondary LP
+        </label>
+      </div>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-downgrade-redundant-lp"
+  >
+    <section
+      className="lightpaths"
+    >
+      <div
+        className="form-container"
+      >
+        <div
+          style={
+            Object {
+              "flexDirection": "column",
+            }
+          }
+        >
+          <div
+            className="rlp_container"
+          >
+            <table
+              className="rlp_heading"
+            >
+              <thead>
+                <tr>
+                  <th
+                    colSpan={5}
+                  >
+                    <h3>
+                      redundant lichtpad
+                    </h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    klant
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    025a376f-0d11-e511-80d0-005056956c1a
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    protection
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    redundant
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    speed
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    4
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    nso_service_id
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    456b0625-7c01-4ec7-9f7d-9f26a66ff647 en 12b7a967-423d-4322-be92-629d28b770bb
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="label"
+                  >
+                    subscription
+                  </td>
+                  <td
+                    className="value"
+                    colSpan={4}
+                  >
+                    <a
+                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      d61e7664-73ac-4f14-ad29-d6a33c243d5d
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="vspacer"
+                    colSpan={5}
+                  />
+                </tr>
+                <tr>
+                  <td
+                    className="border-off"
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-on"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Primary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            6
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              8a600d14-3901-43e0-89e2-9961294821e4
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td
+                    className="spacer"
+                  />
+                  <td
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-off"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Secondary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            6
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              8a600d14-3901-43e0-89e2-9961294821e4
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            Design Academy Eindhoven
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            untagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      className="choice"
+    >
+      <h3>
+        Which lightpath should be removed from this redundant LP?
+      </h3>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={true}
+          disabled={false}
+          id="primary"
+          name="primary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="primary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="primary"
+        >
+          Primary LP
+        </label>
+      </div>
+      <div
+        className="checkbox"
+      >
+        <input
+          checked={false}
+          disabled={false}
+          id="secondary"
+          name="secondary"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="secondary"
+        >
+          <span
+            tabIndex="0"
+          >
+            <i
+              className="fa fa-check"
+            />
+          </span>
+        </label>
+        <label
+          className="info"
+          htmlFor="secondary"
+        >
+          Secondary LP
+        </label>
+      </div>
+    </section>
+  </div>
+</section>
+`;
+
 exports[`Storyshots GenericMultiSelect Default 1`] = `
 <section
   className="storybook-container"
@@ -99,7 +2303,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
                   Select an item
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -115,7 +2319,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={false}
-                      id="react-select-6-input"
+                      id="react-select-2-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -157,7 +2361,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-1okebmr-indicatorSeparator"
@@ -170,7 +2374,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -239,7 +2443,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                   SAP 1
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -255,7 +2459,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={true}
-                      id="react-select-8-input"
+                      id="react-select-4-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -297,7 +2501,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-109onse-indicatorSeparator"
@@ -310,7 +2514,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -357,7 +2561,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                   SAP 2
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -373,7 +2577,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={false}
-                      id="react-select-9-input"
+                      id="react-select-5-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -415,7 +2619,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-1okebmr-indicatorSeparator"
@@ -428,7 +2632,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -501,7 +2705,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                   SAP 1
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -517,7 +2721,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={false}
-                      id="react-select-10-input"
+                      id="react-select-6-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -559,7 +2763,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-1okebmr-indicatorSeparator"
@@ -572,7 +2776,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -619,7 +2823,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                   SAP 2
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -635,7 +2839,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={false}
-                      id="react-select-11-input"
+                      id="react-select-7-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -677,7 +2881,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-1okebmr-indicatorSeparator"
@@ -690,7 +2894,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -763,7 +2967,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
                   SAP 1
                 </div>
                 <div
-                  className="css-1g6gooi"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className=""
@@ -779,7 +2983,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
                       autoComplete="off"
                       autoCorrect="off"
                       disabled={false}
-                      id="react-select-7-input"
+                      id="react-select-3-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -821,7 +3025,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
                 </div>
               </div>
               <div
-                className=" css-1wy0on6"
+                className=" css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className=" css-1okebmr-indicatorSeparator"
@@ -834,7 +3038,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-19bqh2r"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -1393,7 +3597,7 @@ exports[`Storyshots GenericSelect Default 1`] = `
           Search or select a value...
         </div>
         <div
-          className="css-1g6gooi"
+          className="css-b8ldur-Input"
         >
           <div
             className=""
@@ -1409,7 +3613,7 @@ exports[`Storyshots GenericSelect Default 1`] = `
               autoComplete="off"
               autoCorrect="off"
               disabled={false}
-              id="react-select-5-input"
+              id="react-select-8-input"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -1451,7 +3655,7 @@ exports[`Storyshots GenericSelect Default 1`] = `
         </div>
       </div>
       <div
-        className=" css-1wy0on6"
+        className=" css-1hb7zxy-IndicatorsContainer"
       >
         <span
           className=" css-1okebmr-indicatorSeparator"
@@ -1464,7 +3668,7 @@ exports[`Storyshots GenericSelect Default 1`] = `
         >
           <svg
             aria-hidden="true"
-            className="css-19bqh2r"
+            className="css-6q0nyr-Svg"
             focusable="false"
             height={20}
             viewBox="0 0 20 20"
@@ -1504,7 +3708,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
           Select...
         </div>
         <div
-          className="css-1g6gooi"
+          className="css-b8ldur-Input"
         >
           <div
             className=""
@@ -1520,7 +3724,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
               autoComplete="off"
               autoCorrect="off"
               disabled={false}
-              id="react-select-12-input"
+              id="react-select-9-input"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -1562,7 +3766,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
         </div>
       </div>
       <div
-        className=" css-1wy0on6"
+        className=" css-1hb7zxy-IndicatorsContainer"
       >
         <span
           className=" css-1okebmr-indicatorSeparator"
@@ -1575,7 +3779,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
         >
           <svg
             aria-hidden="true"
-            className="css-19bqh2r"
+            className="css-6q0nyr-Svg"
             focusable="false"
             height={20}
             viewBox="0 0 20 20"
@@ -1635,7 +3839,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
                 Select...
               </div>
               <div
-                className="css-1g6gooi"
+                className="css-b8ldur-Input"
               >
                 <div
                   className=""
@@ -1651,7 +3855,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
                     autoComplete="off"
                     autoCorrect="off"
                     disabled={false}
-                    id="react-select-14-input"
+                    id="react-select-11-input"
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
@@ -1693,7 +3897,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
               </div>
             </div>
             <div
-              className=" css-1wy0on6"
+              className=" css-1hb7zxy-IndicatorsContainer"
             >
               <span
                 className=" css-1okebmr-indicatorSeparator"
@@ -1706,7 +3910,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="css-19bqh2r"
+                  className="css-6q0nyr-Svg"
                   focusable="false"
                   height={20}
                   viewBox="0 0 20 20"
@@ -1805,7 +4009,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
                 Select...
               </div>
               <div
-                className="css-1g6gooi"
+                className="css-b8ldur-Input"
               >
                 <div
                   className=""
@@ -1821,7 +4025,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
                     autoComplete="off"
                     autoCorrect="off"
                     disabled={false}
-                    id="react-select-13-input"
+                    id="react-select-10-input"
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
@@ -1863,7 +4067,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
               </div>
             </div>
             <div
-              className=" css-1wy0on6"
+              className=" css-1hb7zxy-IndicatorsContainer"
             >
               <span
                 className=" css-1okebmr-indicatorSeparator"
@@ -1876,7 +4080,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="css-19bqh2r"
+                  className="css-6q0nyr-Svg"
                   focusable="false"
                   height={20}
                   viewBox="0 0 20 20"
@@ -7079,7 +9283,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
               Select a subscription for the selected product
             </div>
             <div
-              className="css-1g6gooi"
+              className="css-b8ldur-Input"
             >
               <div
                 className=""
@@ -7095,7 +9299,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
                   autoComplete="off"
                   autoCorrect="off"
                   disabled={true}
-                  id="react-select-3-input"
+                  id="react-select-13-input"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -7137,7 +9341,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
             </div>
           </div>
           <div
-            className=" css-1wy0on6"
+            className=" css-1hb7zxy-IndicatorsContainer"
           >
             <span
               className=" css-109onse-indicatorSeparator"
@@ -7150,7 +9354,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-19bqh2r"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -7197,7 +9401,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
               Select a subscription for the selected product
             </div>
             <div
-              className="css-1g6gooi"
+              className="css-b8ldur-Input"
             >
               <div
                 className=""
@@ -7213,7 +9417,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
                   autoComplete="off"
                   autoCorrect="off"
                   disabled={true}
-                  id="react-select-4-input"
+                  id="react-select-14-input"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -7255,7 +9459,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
             </div>
           </div>
           <div
-            className=" css-1wy0on6"
+            className=" css-1hb7zxy-IndicatorsContainer"
           >
             <span
               className=" css-109onse-indicatorSeparator"
@@ -7268,7 +9472,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
             >
               <svg
                 aria-hidden="true"
-                className="css-19bqh2r"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -7315,7 +9519,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
               Select a subscription for this product tag
             </div>
             <div
-              className="css-1g6gooi"
+              className="css-b8ldur-Input"
             >
               <div
                 className=""
@@ -7331,7 +9535,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
                   autoComplete="off"
                   autoCorrect="off"
                   disabled={false}
-                  id="react-select-2-input"
+                  id="react-select-12-input"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -7373,7 +9577,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
             </div>
           </div>
           <div
-            className=" css-1wy0on6"
+            className=" css-1hb7zxy-IndicatorsContainer"
           >
             <span
               className=" css-1okebmr-indicatorSeparator"
@@ -7386,7 +9590,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-19bqh2r"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -7655,7 +9859,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -7713,7 +9917,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -7726,7 +9930,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -7928,7 +10132,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                               Select...
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -7986,7 +10190,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -7999,7 +10203,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8038,7 +10242,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                               First select a node
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8096,7 +10300,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8109,7 +10313,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8167,7 +10371,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                               Select...
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8225,7 +10429,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8238,7 +10442,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8277,7 +10481,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                               First select a node
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8335,7 +10539,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8348,7 +10552,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8464,7 +10668,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                               Select...
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8522,7 +10726,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8535,7 +10739,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8574,7 +10778,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                               First select a node
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8632,7 +10836,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8645,7 +10849,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8703,7 +10907,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                               Select...
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8761,7 +10965,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8774,7 +10978,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8813,7 +11017,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                               First select a node
                             </div>
                             <div
-                              className="css-1g6gooi"
+                              className="css-b8ldur-Input"
                             >
                               <div
                                 className=""
@@ -8871,7 +11075,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             </div>
                           </div>
                           <div
-                            className=" css-1wy0on6"
+                            className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
                               className=" css-109onse-indicatorSeparator"
@@ -8884,7 +11088,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                className="css-19bqh2r"
+                                className="css-6q0nyr-Svg"
                                 focusable="false"
                                 height={20}
                                 viewBox="0 0 20 20"
@@ -8994,7 +11198,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                             Select a node
                           </div>
                           <div
-                            className="css-1g6gooi"
+                            className="css-b8ldur-Input"
                           >
                             <div
                               className=""
@@ -9052,7 +11256,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                           </div>
                         </div>
                         <div
-                          className=" css-1wy0on6"
+                          className=" css-1hb7zxy-IndicatorsContainer"
                         >
                           <span
                             className=" css-1okebmr-indicatorSeparator"
@@ -9065,7 +11269,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                           >
                             <svg
                               aria-hidden="true"
-                              className="css-19bqh2r"
+                              className="css-6q0nyr-Svg"
                               focusable="false"
                               height={20}
                               viewBox="0 0 20 20"
@@ -9172,7 +11376,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -9230,7 +11434,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -9243,7 +11447,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -9308,147 +11512,6 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-2b097c-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-yk16xz-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={false}
-                                    id="react-select-28-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-1okebmr-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -9550,7 +11613,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -9608,7 +11671,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -9621,7 +11684,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -9686,147 +11749,6 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-2b097c-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-yk16xz-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={false}
-                                    id="react-select-26-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-1okebmr-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -10070,7 +11992,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -10128,7 +12050,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -10141,7 +12063,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -10206,147 +12128,6 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-30-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -10448,7 +12229,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -10506,7 +12287,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -10519,7 +12300,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -10584,285 +12365,17 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-33-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <div
-                          className=" css-14jk2my-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-34-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
                   </section>
                 </section>
               </section>
@@ -10953,7 +12466,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -11011,7 +12524,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -11024,7 +12537,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -11089,147 +12602,6 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-14jk2my-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-1fhf3k1-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={true}
-                                    id="react-select-41-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-109onse-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -11331,7 +12703,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -11389,7 +12761,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -11402,7 +12774,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -11467,282 +12839,6 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-2b097c-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-yk16xz-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={false}
-                                    id="react-select-36-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-1okebmr-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <div
-                          className=" css-2b097c-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-yk16xz-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={false}
-                                    id="react-select-37-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-1okebmr-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -11844,7 +12940,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                           Search and select a customer...
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-b8ldur-Input"
                         >
                           <div
                             className=""
@@ -11902,7 +12998,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         </div>
                       </div>
                       <div
-                        className=" css-1wy0on6"
+                        className=" css-1hb7zxy-IndicatorsContainer"
                       >
                         <span
                           className=" css-1okebmr-indicatorSeparator"
@@ -11915,7 +13011,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="css-19bqh2r"
+                            className="css-6q0nyr-Svg"
                             focusable="false"
                             height={20}
                             viewBox="0 0 20 20"
@@ -11980,147 +13076,6 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         onClick={[Function]}
                       />
                     </div>
-                    <section
-                      className="service-port"
-                    >
-                      <div
-                        className="wrapper service-port-select"
-                      >
-                        <label>
-                          Service Port
-                        </label>
-                        <div
-                          className=" css-2b097c-container"
-                          id="port-choice"
-                          onKeyDown={[Function]}
-                        >
-                          <div
-                            className=" css-yk16xz-control"
-                            onMouseDown={[Function]}
-                            onTouchEnd={[Function]}
-                          >
-                            <div
-                              className=" css-1hwfws3"
-                            >
-                              <div
-                                className=" css-1wa3eu0-placeholder"
-                              >
-                                Select...
-                              </div>
-                              <div
-                                className="css-1g6gooi"
-                              >
-                                <div
-                                  className=""
-                                  style={
-                                    Object {
-                                      "display": "inline-block",
-                                    }
-                                  }
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autoCapitalize="none"
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    disabled={false}
-                                    id="react-select-39-input"
-                                    onBlur={[Function]}
-                                    onChange={[Function]}
-                                    onFocus={[Function]}
-                                    spellCheck="false"
-                                    style={
-                                      Object {
-                                        "background": 0,
-                                        "border": 0,
-                                        "boxSizing": "content-box",
-                                        "color": "inherit",
-                                        "fontSize": "inherit",
-                                        "label": "input",
-                                        "opacity": 1,
-                                        "outline": 0,
-                                        "padding": 0,
-                                        "width": "1px",
-                                      }
-                                    }
-                                    tabIndex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style={
-                                      Object {
-                                        "height": 0,
-                                        "left": 0,
-                                        "overflow": "scroll",
-                                        "position": "absolute",
-                                        "top": 0,
-                                        "visibility": "hidden",
-                                        "whiteSpace": "pre",
-                                      }
-                                    }
-                                  >
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              className=" css-1wy0on6"
-                            >
-                              <span
-                                className=" css-1okebmr-indicatorSeparator"
-                              />
-                              <div
-                                aria-hidden="true"
-                                className=" css-tlfecz-indicatorContainer"
-                                onMouseDown={[Function]}
-                                onTouchEnd={[Function]}
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  className="css-19bqh2r"
-                                  focusable="false"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <path
-                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error backend-validation"
-                        />
-                      </div>
-                      <div
-                        className="wrapper vlan"
-                      >
-                        <label>
-                          Port Vlan
-                        </label>
-                        <div
-                          className="virtual-vlan"
-                        >
-                          <input
-                            disabled={true}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            placeholder="First select a Service Port..."
-                            type="text"
-                            value=""
-                          />
-                          
-                        </div>
-                        <em
-                          className="error"
-                        />
-                      </div>
-                    </section>
                     <em
                       className="error"
                     />
@@ -12209,7 +13164,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                     Search or select a value...
                   </div>
                   <div
-                    className="css-1g6gooi"
+                    className="css-b8ldur-Input"
                   >
                     <div
                       className=""
@@ -12267,7 +13222,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                   </div>
                 </div>
                 <div
-                  className=" css-1wy0on6"
+                  className=" css-1hb7zxy-IndicatorsContainer"
                 >
                   <span
                     className=" css-1okebmr-indicatorSeparator"
@@ -12280,7 +13235,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      className="css-19bqh2r"
+                      className="css-6q0nyr-Svg"
                       focusable="false"
                       height={20}
                       viewBox="0 0 20 20"
@@ -12321,29 +13276,6 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
         </section>
       </form>
     </section>
-  </div>
-</section>
-`;
-
-exports[`Storyshots Welcome to Storybook 1`] = `
-<section
-  className="storybook-container"
->
-  <div>
-    <h1>
-      Workflows client storybook
-    </h1>
-    <p>
-      Welcome to the storybook. We will demonstrate some of the components here.
-    </p>
-    <p>
-      <b>
-        The storybook will use mocks for the components that need data. So you could see other data then you're used to.
-      </b>
-    </p>
-    <p>
-      All the UserInputForms examples use a Wrapper component to simulate the form elements as they are used with the workflow engine
-    </p>
   </div>
 </section>
 `;

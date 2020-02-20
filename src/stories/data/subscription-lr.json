@@ -1,0 +1,356 @@
+{
+    "crm_port_id": null,
+    "customer_descriptions": [],
+    "customer_id": "025a376f-0d11-e511-80d0-005056956c1a",
+    "description": "AMPATH LR AMF001A-UT001A-AMF001A-UT001A 4 Mbit/s",
+    "end_date": null,
+    "instances": [
+        {
+            "label": "Primary",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Virtual Circuit for SURFnet8 LighPath",
+                "end_date": null,
+                "name": "SN8 Light Path Virtual Circuit",
+                "product_block_id": "9c44aa52-c688-4276-89ef-900242abf664",
+                "status": "active",
+                "tag": "VC"
+            },
+            "product_block_id": "9c44aa52-c688-4276-89ef-900242abf664",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "Policer speed in Mbps",
+                        "resource_type": "service_speed",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c",
+                    "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+                    "subscription_instance_value_id": "a6106b06-23d3-40cc-a7ec-a9b58cb14c2f",
+                    "value": "4"
+                },
+                {
+                    "resource_type": {
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type": "ims_circuit_id",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83",
+                    "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+                    "subscription_instance_value_id": "8d470395-bdf6-45d7-91bc-797d6c40f59d",
+                    "value": "41096"
+                },
+                {
+                    "resource_type": {
+                        "description": "The UUID of a NSO service",
+                        "resource_type": "nso_service_id",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402",
+                    "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+                    "subscription_instance_value_id": "1a26d41c-3dc9-4d15-99a8-253382715887",
+                    "value": "456b0625-7c01-4ec7-9f7d-9f26a66ff647"
+                },
+                {
+                    "resource_type": {
+                        "description": "Enable the Remote Port Shutdown feature for this service in the network",
+                        "resource_type": "remote_port_shutdown",
+                        "resource_type_id": "e3ac7f76-9f09-450e-b88c-66c6399e1436"
+                    },
+                    "resource_type_id": "e3ac7f76-9f09-450e-b88c-66c6399e1436",
+                    "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+                    "subscription_instance_value_id": "f5eb6c3c-5085-4636-a12d-e8285a76aa51",
+                    "value": "False"
+                },
+                {
+                    "resource_type": {
+                        "description": "Enable network speed policer equal to the SERVICE_SPEED",
+                        "resource_type": "speed_policer",
+                        "resource_type_id": "d8bc332b-d3da-417a-a137-8e7cc26ffdcd"
+                    },
+                    "resource_type_id": "d8bc332b-d3da-417a-a137-8e7cc26ffdcd",
+                    "subscription_instance_id": "1ba81035-332b-4a4c-8880-368d27271282",
+                    "subscription_instance_value_id": "88295da5-2438-4988-8971-c4c21b82739c",
+                    "value": "False"
+                }
+            ]
+        },
+        {
+            "label": "Secondary",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Virtual Circuit for SURFnet8 LighPath",
+                "end_date": null,
+                "name": "SN8 Light Path Virtual Circuit",
+                "product_block_id": "9c44aa52-c688-4276-89ef-900242abf664",
+                "status": "active",
+                "tag": "VC"
+            },
+            "product_block_id": "9c44aa52-c688-4276-89ef-900242abf664",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "The UUID of a NSO service",
+                        "resource_type": "nso_service_id",
+                        "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402"
+                    },
+                    "resource_type_id": "4530f9b7-e6f0-4985-9640-228207045402",
+                    "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+                    "subscription_instance_value_id": "83f9ba47-34b8-4f40-aae6-235def663517",
+                    "value": "12b7a967-423d-4322-be92-629d28b770bb"
+                },
+                {
+                    "resource_type": {
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type": "ims_circuit_id",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83",
+                    "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+                    "subscription_instance_value_id": "58b903ba-de88-4d93-b749-e8caff60269a",
+                    "value": "41097"
+                },
+                {
+                    "resource_type": {
+                        "description": "Policer speed in Mbps",
+                        "resource_type": "service_speed",
+                        "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c"
+                    },
+                    "resource_type_id": "bbb5e12b-ae1b-471b-9d2f-ca188a0e633c",
+                    "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+                    "subscription_instance_value_id": "d95a311a-da4f-43a5-a8e2-5acb6a0b1996",
+                    "value": "7"
+                },
+                {
+                    "resource_type": {
+                        "description": "Enable network speed policer equal to the SERVICE_SPEED",
+                        "resource_type": "speed_policer",
+                        "resource_type_id": "d8bc332b-d3da-417a-a137-8e7cc26ffdcd"
+                    },
+                    "resource_type_id": "d8bc332b-d3da-417a-a137-8e7cc26ffdcd",
+                    "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+                    "subscription_instance_value_id": "eddb27ef-5b81-4798-a86d-f04fe836b984",
+                    "value": "False"
+                },
+                {
+                    "resource_type": {
+                        "description": "Enable the Remote Port Shutdown feature for this service in the network",
+                        "resource_type": "remote_port_shutdown",
+                        "resource_type_id": "e3ac7f76-9f09-450e-b88c-66c6399e1436"
+                    },
+                    "resource_type_id": "e3ac7f76-9f09-450e-b88c-66c6399e1436",
+                    "subscription_instance_id": "6c8f6377-cf12-4b88-ac0a-98ba6f628ce6",
+                    "subscription_instance_value_id": "5bef977a-819d-4287-8a2a-a4a0d7947ddf",
+                    "value": "False"
+                }
+            ]
+        },
+        {
+            "label": "Secondary-Left",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Service Attach Point for SURFnet8 LightPath",
+                "end_date": null,
+                "name": "SN8 Light Path Service Attach Point",
+                "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "808d7792-6c83-4abe-8dd1-cbb0dc40a401",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "VLAN range op de bijbehorende port voor deze service",
+                        "resource_type": "vlanrange",
+                        "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408"
+                    },
+                    "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
+                    "subscription_instance_id": "808d7792-6c83-4abe-8dd1-cbb0dc40a401",
+                    "subscription_instance_value_id": "9770ed07-6e05-4797-a6ca-86526e32cadf",
+                    "value": "6"
+                },
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "808d7792-6c83-4abe-8dd1-cbb0dc40a401",
+                    "subscription_instance_value_id": "af90245f-a447-4079-a2a9-b45b468fca7b",
+                    "value": "8a600d14-3901-43e0-89e2-9961294821e4"
+                }
+            ]
+        },
+        {
+            "label": "Primary-Left",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Service Attach Point for SURFnet8 LightPath",
+                "end_date": null,
+                "name": "SN8 Light Path Service Attach Point",
+                "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "94aac3b4-04ef-4d94-be36-7225c2304291",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "94aac3b4-04ef-4d94-be36-7225c2304291",
+                    "subscription_instance_value_id": "06853e11-ef66-4177-9024-d415a3ea171f",
+                    "value": "6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                },
+                {
+                    "resource_type": {
+                        "description": "VLAN range op de bijbehorende port voor deze service",
+                        "resource_type": "vlanrange",
+                        "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408"
+                    },
+                    "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
+                    "subscription_instance_id": "94aac3b4-04ef-4d94-be36-7225c2304291",
+                    "subscription_instance_value_id": "363884a7-ebd9-42f6-a203-ea152c76d019",
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "label": null,
+            "product_block": {
+                "created_at": 1580418692.674864,
+                "description": "Light Path Redundant Service Settings",
+                "end_date": null,
+                "name": "LR Service Settings",
+                "product_block_id": "a68fdaa5-64b1-4dba-beeb-b7651e5cae4d",
+                "status": "active",
+                "tag": "LRSS"
+            },
+            "product_block_id": "a68fdaa5-64b1-4dba-beeb-b7651e5cae4d",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "a045efd3-c74c-4d60-b535-7c7916bc34d0",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "The Id of the IMS protection circuit for redundant circuits / services",
+                        "resource_type": "ims_protection_circuit_id",
+                        "resource_type_id": "71eb09d6-8387-45b1-8388-435f9e2111c2"
+                    },
+                    "resource_type_id": "71eb09d6-8387-45b1-8388-435f9e2111c2",
+                    "subscription_instance_id": "a045efd3-c74c-4d60-b535-7c7916bc34d0",
+                    "subscription_instance_value_id": "eba65f30-21ea-4afc-8466-3d2e6bb1061a",
+                    "value": "7602"
+                }
+            ]
+        },
+        {
+            "label": "Primary-Right",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Service Attach Point for SURFnet8 LightPath",
+                "end_date": null,
+                "name": "SN8 Light Path Service Attach Point",
+                "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "deffb96c-56ba-49ef-93e4-e79449d44ecd",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "deffb96c-56ba-49ef-93e4-e79449d44ecd",
+                    "subscription_instance_value_id": "211a8acc-c6e8-4e45-bd99-21387b453338",
+                    "value": "85c379b7-fa57-4d36-a033-617c890592ba"
+                },
+                {
+                    "resource_type": {
+                        "description": "VLAN range op de bijbehorende port voor deze service",
+                        "resource_type": "vlanrange",
+                        "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408"
+                    },
+                    "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
+                    "subscription_instance_id": "deffb96c-56ba-49ef-93e4-e79449d44ecd",
+                    "subscription_instance_value_id": "c8a449f9-1b21-4ec2-9335-68b07ed61d7b",
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "label": "Secondary-Right",
+            "product_block": {
+                "created_at": 1562772588.585191,
+                "description": "Service Attach Point for SURFnet8 LightPath",
+                "end_date": null,
+                "name": "SN8 Light Path Service Attach Point",
+                "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+                "status": "active",
+                "tag": "SAP"
+            },
+            "product_block_id": "e880c5a1-73e9-47b0-9075-4d084f73c49e",
+            "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+            "subscription_instance_id": "e8ce4ac8-9ce2-47c6-9bcc-20414629713f",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "e8ce4ac8-9ce2-47c6-9bcc-20414629713f",
+                    "subscription_instance_value_id": "9f2f341d-0955-405a-afd4-ae939dc30f1d",
+                    "value": "46fd5ba3-0a1c-433d-8bc9-ff324a5b4550"
+                },
+                {
+                    "resource_type": {
+                        "description": "VLAN range op de bijbehorende port voor deze service",
+                        "resource_type": "vlanrange",
+                        "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408"
+                    },
+                    "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
+                    "subscription_instance_id": "e8ce4ac8-9ce2-47c6-9bcc-20414629713f",
+                    "subscription_instance_value_id": "8e3e9923-4c89-4af5-ad73-88c0bb9b658b",
+                    "value": "7"
+                }
+            ]
+        }
+    ],
+    "insync": true,
+    "name": "SN8 LightPath Redundant",
+    "note": null,
+    "port_mode": null,
+    "product": {
+        "created_at": 1579012220.260219,
+        "description": "Redundant Surfnet8 Lightpath using L2VPN",
+        "end_date": null,
+        "name": "SN8 LightPath Redundant",
+        "product_id": "182b7c39-6c98-40da-9122-d7d27f61d449",
+        "product_type": "LightPath",
+        "status": "active",
+        "tag": "LR"
+    },
+    "product_id": "182b7c39-6c98-40da-9122-d7d27f61d449",
+    "start_date": 1581943313.832655,
+    "status": "active",
+    "subscription_id": "d61e7664-73ac-4f14-ad29-d6a33c243d5d",
+    "tag": "LR"
+}

@@ -1,0 +1,1071 @@
+{
+    "assignee": "SYSTEM",
+    "created_by": "SYSTEM",
+    "current_state": {
+        "contact_persons": [
+            {
+                "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                "name": "Hiram",
+                "phone": ""
+            }
+        ],
+        "ims_info": {
+            "device_port_name": "CU  FNAL_Zp001A SP",
+            "ims_circuit_id": "44251",
+            "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+            "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+        },
+        "jira_ticket_completed": "2019-11-15T11:37:08 +0000",
+        "nso_payload": {
+            "ptp:ptp": {
+                "customer_name": "FNAL",
+                "device": "zp001a-jnx-acc-test",
+                "interface": "xe-1/0/0",
+                "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "ptptype": "tagged",
+                "speed": "10g",
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+            }
+        },
+        "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+        "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+        "organisation_abbrev": "FNAL",
+        "organisation_name": "Fermi National Accelerator Laboratory",
+        "port_id": 680884,
+        "port_info": {
+            "connector_type": "LC/PC",
+            "fiber_type": "multi-mode",
+            "id": 680884,
+            "iface_type": "10GBASE-SR",
+            "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+            "location": "ZP001A",
+            "node": "ZP001A-JNX-ACC-TEST",
+            "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+            "port": "1/0/0",
+            "status": "3"
+        },
+        "port_mode": "tagged",
+        "port_speed": "10000",
+        "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+        "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+        "product_tag": "SP",
+        "reporter": "SYSTEM",
+        "service_port": {
+            "ieee_interface_type": "10GBASE-SR",
+            "location_code": "Zp001A"
+        },
+        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+        "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+        "ticket_id": "SNNP-79379",
+        "workflow_target": "CREATE"
+    },
+    "customer": "6a608b90-0c11-e511-80d0-005056956c1a",
+    "failed_reason": "[Errno 111] Connection refused",
+    "id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+    "last_modified": 1574096538,
+    "product": "99e527b2-7424-48eb-9015-6f46e8a40923",
+    "started": 1573817793,
+    "status": "failed",
+    "step": "Send confirmation mail to customer",
+    "steps": [
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817793,
+            "name": "Start",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "port_mode": "tagged",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817794,
+            "name": "Load state from input",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817794,
+            "name": "Create subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817794,
+            "name": "Create Process Subscription relation",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817801,
+            "name": "Create JIRA ticket",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817801,
+            "name": "Approve Request",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "suspend"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817803,
+            "name": "Approve Request",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817803,
+            "name": "Load state from input",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817809,
+            "name": "Update JIRA ticket",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817810,
+            "name": "Approve JIRA ticket",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817811,
+            "name": "Assign JIRA ticket to -1",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817811,
+            "name": "Input free port",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "suspend"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817817,
+            "name": "Input free port",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817817,
+            "name": "Start JIRA ticket",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817822,
+            "name": "Reserve port SP in IMS",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP (port not ready yet) 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817822,
+            "name": "Update Subscription description with free port",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817823,
+            "name": "Update JIRA ticket with free port SP",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817824,
+            "name": "Make NSO payload",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817827,
+            "name": "Deploy payload to register port in NSO",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817827,
+            "name": "Confirm configuration",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "skipped"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817827,
+            "name": "Set port for SP to in Service in IMS",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817828,
+            "name": "Update subscription",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1573817833,
+            "name": "Complete JIRA ticket",
+            "state": {
+                "contact_persons": [
+                    {
+                        "email": "hiramvanpaassen+surfnet-dev@dutchcodersnetwork.nl",
+                        "name": "Hiram",
+                        "phone": ""
+                    }
+                ],
+                "ims_info": {
+                    "device_port_name": "CU  FNAL_Zp001A SP",
+                    "ims_circuit_id": "44251",
+                    "ims_circuit_name": "Zp001A_SP_tagged_FNAL_ae6cb63d",
+                    "ims_extra_info": "10 Gbit/s SP te ZUTPHEN van Fermi National Accelerator Laboratory"
+                },
+                "jira_ticket_completed": "2019-11-15T11:37:08 +0000",
+                "nso_payload": {
+                    "ptp:ptp": {
+                        "customer_name": "FNAL",
+                        "device": "zp001a-jnx-acc-test",
+                        "interface": "xe-1/0/0",
+                        "name": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                        "ptptype": "tagged",
+                        "speed": "10g",
+                        "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397"
+                    }
+                },
+                "nso_service_id": "54fd79f5-947f-459f-9b02-e463c2e69134",
+                "organisation": "6a608b90-0c11-e511-80d0-005056956c1a",
+                "organisation_abbrev": "FNAL",
+                "organisation_name": "Fermi National Accelerator Laboratory",
+                "port_id": 680884,
+                "port_info": {
+                    "connector_type": "LC/PC",
+                    "fiber_type": "multi-mode",
+                    "id": 680884,
+                    "iface_type": "10GBASE-SR",
+                    "line_name": "ZP001A_SP_TAGGED_FNAL_AE6CB63D",
+                    "location": "ZP001A",
+                    "node": "ZP001A-JNX-ACC-TEST",
+                    "patchposition": "DDFODF_ZP001A-JNX-ACC-TEST_1G/41 (LC/PC)",
+                    "port": "1/0/0",
+                    "status": "3"
+                },
+                "port_mode": "tagged",
+                "port_speed": "10000",
+                "process_id": "1a5686d9-eaa2-4d0b-96eb-1ec081c62a08",
+                "product": "214aae3d-f804-4270-a86b-66bcf2861809",
+                "product_tag": "SP",
+                "reporter": "SYSTEM",
+                "service_port": {
+                    "ieee_interface_type": "10GBASE-SR",
+                    "location_code": "Zp001A"
+                },
+                "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+                "subscription_name": "FNAL SP ZP001A 10 Gbit/s",
+                "ticket_id": "SNNP-79379",
+                "workflow_target": "CREATE"
+            },
+            "status": "success"
+        },
+        {
+            "commit_hash": "76db2ad66e6c5646c091a7e2a6884e7449b83ede",
+            "executed": 1574096538,
+            "name": "Send confirmation mail to customer",
+            "state": {
+                "class": "ConnectionRefusedError",
+                "error": "[Errno 111] Connection refused",
+                "executed_at": [
+                    "2019-11-15 12:37:14.186858+01:00",
+                    "2019-11-15 12:37:15.775995+01:00"
+                ],
+                "retries": 2
+            },
+            "status": "failed"
+        },
+        {
+            "form": null,
+            "name": "Send confirmation mail to customer",
+            "status": "pending"
+        },
+        {
+            "name": "Close JIRA ticket",
+            "status": "pending"
+        },
+        {
+            "name": "Activate subscription",
+            "status": "pending"
+        },
+        {
+            "name": "Done",
+            "status": "pending"
+        }
+    ],
+    "subscriptions": [
+        {
+            "crm_port_id": null,
+            "customer_id": "6a608b90-0c11-e511-80d0-005056956c1a",
+            "description": "FNAL SP ZP001A 10 Gbit/s",
+            "end_date": null,
+            "insync": false,
+            "name": "SN8 Service Port 10G",
+            "port_mode": "tagged",
+            "product_id": "214aae3d-f804-4270-a86b-66bcf2861809",
+            "start_date": null,
+            "status": "initial",
+            "subscription_id": "ae6cb63d-a7fa-4167-b0e9-ee311d757397",
+            "tag": "SP"
+        }
+    ],
+    "traceback": "\"ConnectionRefusedError\": [Errno 111] Connection refused\n  File \"/home/hiram/git/workflows/server/db.py\", line 164, in _transactional\n    \"result\": Either[ErrorState, R] = f(*args, **kwargs)\n  File \"/home/hiram/git/workflows/server/workflows/service_port/shared_service_port.py\", line 495, in it\n    mail_method(new_state)\n  File \"/home/hiram/git/workflows/server/mail.py\", line 195, in send_sp_workflow_confirmation_mail\n    state=state,\n  File \"/home/hiram/git/workflows/server/mail.py\", line 41, in _do_send_mail\n    current_app.mail.send(msg)\n  File \"/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py\", line 491, in send\n    with self.connect() as \"connection\":\n  File \"/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py\", line 144, in __enter__\n    self.host = self.configure_host()\n  File \"/home/hiram/.virtualenvs/workflows/lib/python3.7/site-packages/flask_mail.py\", line 158, in configure_host\n    host = smtplib.SMTP(self.mail.server, self.mail.port)\n  File \"/usr/lib/python3.7/smtplib.py\", line 251, in __init__\n    (code, msg) = self.connect(host, port)\n  File \"/usr/lib/python3.7/smtplib.py\", line 336, in connect\n    self.sock = self._get_socket(host, port, self.timeout)\n  File \"/usr/lib/python3.7/smtplib.py\", line 307, in _get_socket\n    self.source_address)\n  File \"/usr/lib/python3.7/socket.py\", line 727, in create_connection\n    raise err\n  File \"/usr/lib/python3.7/socket.py\", line 716, in create_connection\n    sock.connect(sa)\n'",
+    "workflow_name": "create_sn8_service_port",
+    "customerName": "Fermi National Accelerator Laboratory",
+    "productName": "SN8 Service Port 10G"
+}
