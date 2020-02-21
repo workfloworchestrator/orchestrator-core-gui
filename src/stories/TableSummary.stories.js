@@ -34,7 +34,10 @@ export const SummaryWithHeaders = () => (
         data={[
             { headers: ["Old Values", "New Values"] },
             {
-                columns: [["value1", "value2", "value3"], ["new value1", "new value2", "new value3"]]
+                columns: [
+                    ["value1", "value2", "value3"],
+                    ["new value1", "new value2", "new value3"]
+                ]
             }
         ]}
     />
@@ -50,7 +53,10 @@ export const SummaryWithDefinitionAndHeaders = () => (
             { labels: ["Label1", "Label 2", "Label 3"] },
             { headers: ["Old Values", "New Values"] },
             {
-                columns: [["value1", "value2", "value3"], ["new value1", "new value2", "new value3"]]
+                columns: [
+                    ["value1", "value2", "value3"],
+                    ["new value1", "new value2", "new value3"]
+                ]
             }
         ]}
     />
