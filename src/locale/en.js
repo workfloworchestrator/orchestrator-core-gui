@@ -242,7 +242,7 @@ I18n.translations.en = {
         vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
         vlan_retagging: "Enable VLAN retagging? When Checked; only one VLAN ID per SAP is allowed.",
         bum_filter:
-            "Enable BUM Filter? When checked; broadcast, unlearnt unicast and multicast traffic will be limited to 10% of the the port speed.",
+            "Enable BUM Filter? When checked; broadcast, unlearned unicast and multicast traffic will be limited to 10% of the the port speed.",
         service_port: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
