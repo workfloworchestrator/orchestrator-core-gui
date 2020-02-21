@@ -16,34 +16,22 @@
 import React from "react";
 import Select, { ValueType } from "react-select";
 
-import { TARGET_CREATE } from "../validations/Products";
-import { Product, Option, FixedInput, Workflow } from "../utils/types";
+import { Product, Option } from "../utils/types";
 
 import "./ProductSelect.scss";
 
-export interface ProductOption extends Option {
-    workflow?: Workflow;
-    tag: string;
-    productId: string;
-    fixed_inputs: FixedInput[];
-}
-
 interface IProps {
     id: string;
-    onChange: (option: ProductOption) => void;
+    onChange: (option: Option) => void;
     products: Product[];
     product?: string;
     disabled: boolean;
 }
 
 export default function ProductSelect({ id, onChange, products, product, disabled }: IProps) {
-    const options: ProductOption[] = products.map((aProduct: Product) => ({
+    const options: Option[] = products.map((aProduct: Product) => ({
         value: aProduct.product_id,
-        label: aProduct.name,
-        workflow: aProduct.workflows.find(wf => wf.target === TARGET_CREATE),
-        tag: aProduct.tag,
-        productId: aProduct.product_id,
-        fixed_inputs: aProduct.fixed_inputs
+        label: aProduct.name
     }));
 
     const value = options.find(option => option.value === product);
@@ -52,7 +40,7 @@ export default function ProductSelect({ id, onChange, products, product, disable
         <Select
             id={id}
             className={`select-product ${options.length > 15 ? "large" : ""}`}
-            onChange={onChange as (value: ValueType<ProductOption>) => void}
+            onChange={onChange as (value: ValueType<Option>) => void}
             options={options}
             value={value}
             isSearchable={true}

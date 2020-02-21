@@ -46,7 +46,13 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
                 const terminate_workflow = product.workflows.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
                 let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
                     this.context.redirect(`/processes?highlight=${res.id}`);
-                    setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+                    setFlash(
+                        I18n.t("process.flash.create_modify", {
+                            name: I18n.t(`workflow.${terminate_workflow.name}`),
+                            subscriptionId: subscriptionId,
+                            pid: res.id
+                        })
+                    );
                 });
                 catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
                     this.setState({ stepUserInput: json.form, product: product });
@@ -67,7 +73,13 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
             res => {
                 this.context.redirect(`/processes?highlight=${res.id}`);
-                setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+                setFlash(
+                    I18n.t("process.flash.create_modify", {
+                        name: I18n.t(`workflow.${terminate_workflow.name}`),
+                        subscriptionId: subscriptionId,
+                        pid: res.id
+                    })
+                );
             }
         );
     };

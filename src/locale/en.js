@@ -353,7 +353,8 @@ I18n.translations.en = {
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
-            create: "Created process for workflow {{name}} with pid {{pid}}",
+            create_create: "Created create process for product {{name}} with pid {{pid}}",
+            create_modify: "Created {{name}} process for subscription {{subscriptionId}} with pid {{pid}}",
             update: "Resumed process for workflow {{name}}",
             wizard_next_step: "Navigated to next step in form wizard"
         },
@@ -1144,7 +1145,7 @@ I18n.translations.en = {
         },
         new_task: "New task",
         flash: {
-            create: "Created task for workflow {{name}}",
+            create: "Created task for workflow {{name}} with pid {{pid}}",
             update: "Resumed task for workflow {{name}}"
         }
     },
@@ -1310,6 +1311,11 @@ I18n.translations.en = {
         validate_sn8_service_port: "Validate SN8 Service Port",
         validate_sn8_msc: "Validate SN8 MSC",
         validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
+    },
+    external: {
+        errors: {
+            crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!"
+        }
     }
 };
 

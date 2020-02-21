@@ -396,7 +396,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     <OrganisationSelect
                         id="organisation-select"
                         key={name}
-                        organisations={organisations}
+                        organisations={organisations || []}
                         onChange={this.changeSelectInput(name)}
                         organisation={value}
                         disabled={userInput.readonly}
@@ -498,7 +498,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     <LocationCodeSelect
                         id="location-code-select"
                         onChange={this.changeSelectInput(name)}
-                        locationCodes={locationCodes}
+                        locationCodes={locationCodes || []}
                         locationCode={value}
                     />
                 );

@@ -12,6 +12,7 @@
  * limitations under the License.
  *
  */
+import I18n from "i18n-js";
 
 import mySpinner from "../lib/Spin";
 import { isEmpty } from "../utils/Utils";
@@ -40,6 +41,7 @@ import {
     WorkflowReasons,
     ProductValidation
 } from "../utils/types";
+import { setFlash } from "../utils/Flash";
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
@@ -270,8 +272,19 @@ export function subscriptionsByProductId(productId: string) {
     return fetchJson(`subscriptions/product/${productId}`);
 }
 
-export function organisations(): Promise<Organization[]> {
-    return fetchJson("crm/organisations");
+export function organisations(): Promise<Organization[] | undefined> {
+    //@ts-ignore
+    return fetchJson("crm/organisations", {}, {}, false).catch(() => {
+        setTimeout(() => {
+            setFlash(
+                I18n.t("external.errors.crm_unavailable", {
+                    type: "Organisations"
+                }),
+                "error"
+            );
+        });
+        return undefined;
+    });
 }
 
 export function ieeeInterfaceTypesForProductId(id: string) {
@@ -392,8 +405,19 @@ export function processSubscriptionsByProcessId(processId: string): Promise<Proc
     ).catch(err => []);
 }
 
-export function locationCodes(): Promise<string[]> {
-    return fetchJson("crm/location_codes");
+export function locationCodes(): Promise<string[] | undefined> {
+    // @ts-ignore
+    return fetchJson("crm/location_codes", {}, {}, false).catch(() => {
+        setTimeout(() => {
+            setFlash(
+                I18n.t("external.errors.crm_unavailable", {
+                    type: "Locations"
+                }),
+                "error"
+            );
+        });
+        return undefined;
+    });
 }
 
 export function allWorkflows() {

@@ -46,7 +46,7 @@ interface PortSubscription extends LRSubscription {
 
 function enrichPrimarySubscription(
     subscription: Partial<LRSubscription>,
-    organisations: Organization[],
+    organisations: Organization[] | undefined,
     products: Product[]
 ): LRSubscription {
     subscription = enrichSubscription(subscription, organisations, products);

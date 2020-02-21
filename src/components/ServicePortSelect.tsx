@@ -29,9 +29,9 @@ interface IProps {
 export default class ServicePortSelect extends React.PureComponent<IProps> {
     context!: React.ContextType<typeof ApplicationContext>;
 
-    label = (servicePort: ServicePortSubscription, organisations: Organization[]) => {
-        const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
-        const organisationName = organisation ? organisation.name : "";
+    label = (servicePort: ServicePortSubscription, organisations?: Organization[]) => {
+        const organisation = organisations && organisations.find(org => org.uuid === servicePort.customer_id);
+        const organisationName = organisation ? organisation.name : servicePort.customer_id.substring(0, 8);
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
         if (["MSP", "MSPNL", "SSP"].includes(servicePort.product.tag)) {

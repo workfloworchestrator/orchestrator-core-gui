@@ -178,7 +178,7 @@ class App extends React.PureComponent<{}, IState> {
                 .then(currentUser => {
                     if (currentUser && (currentUser.sub || currentUser.user_name)) {
                         Promise.all([organisations(), products(), locationCodes()]).then(
-                            (result: [Organization[], Product[], string[]]) => {
+                            (result: [Organization[] | undefined, Product[] | undefined, string[] | undefined]) => {
                                 const [allOrganisations, allProducts, allLocationCodes] = result;
                                 this.setState({
                                     loading: false,
@@ -187,7 +187,7 @@ class App extends React.PureComponent<{}, IState> {
                                         configuration: configuration!,
                                         organisations: allOrganisations,
                                         locationCodes: allLocationCodes,
-                                        products: allProducts.sort((a: Product, b: Product) =>
+                                        products: allProducts!.sort((a: Product, b: Product) =>
                                             a.name.localeCompare(b.name)
                                         ),
                                         redirect: url => history.push(url)

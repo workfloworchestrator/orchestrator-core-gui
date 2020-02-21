@@ -26,20 +26,16 @@ import { Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/
 import "./NewTask.scss";
 
 interface IState {
-    workflows: Workflow[];
-    workflow?: Option;
-    stepUserInput: InputField[];
+    workflows?: Workflow[];
+    workflow?: string;
+    stepUserInput?: InputField[];
     hasNext?: boolean;
 }
 
 export default class NewTask extends React.Component<{}, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
-    state: IState = {
-        workflows: [],
-        stepUserInput: [],
-        hasNext: false
-    };
+    state: IState = {};
 
     componentDidMount = () =>
         workflowsByTarget("SYSTEM").then((workflows: Workflow[]) => this.setState({ workflows: workflows }));
@@ -50,14 +46,14 @@ export default class NewTask extends React.Component<{}, IState> {
             return Promise.reject();
         }
 
-        return startProcess(workflow.value, taskInput).then(() => {
-            this.context.redirect(`/tasks`);
-            setFlash(I18n.t("task.flash.create", { name: workflow.label }));
+        return startProcess(workflow, taskInput).then(process => {
+            this.context.redirect(`/tasks?highlight=${process.id}`);
+            setFlash(I18n.t("task.flash.create", { name: I18n.t(`workflow.${workflow}`), pid: process.id }));
         });
     };
 
     changeWorkflow = (option: Option) => {
-        this.setState({ workflow: option });
+        this.setState({ workflow: option.value });
         if (option) {
             let promise = startProcess(option.value, []);
             catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
@@ -77,12 +73,12 @@ export default class NewTask extends React.Component<{}, IState> {
                             <label>{I18n.t("task.workflow")}</label>
                             <em>{I18n.t("task.workflow_info")}</em>
                             <WorkflowSelect
-                                workflows={workflows}
+                                workflows={workflows || []}
                                 onChange={this.changeWorkflow}
-                                workflow={workflow && workflow.value}
+                                workflow={workflow}
                             />
                         </section>
-                        {workflow && (
+                        {stepUserInput && (
                             <UserInputFormWizard
                                 stepUserInput={stepUserInput}
                                 validSubmit={this.validSubmit}
