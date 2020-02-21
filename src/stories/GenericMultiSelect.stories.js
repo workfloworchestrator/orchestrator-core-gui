@@ -111,10 +111,7 @@ export const NonRemovableSelection = () => (
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
-        selections={[
-            { value: "1", label: "SAP 1" },
-            { value: "2", label: "SAP 2", nonremovable: true }
-        ]}
+        selections={[{ value: "1", label: "SAP 1" }, { value: "2", label: "SAP 2", nonremovable: true }]}
         minimum={1}
         maximum={10}
         disabled={boolean("Disabled")}
