@@ -44,6 +44,7 @@ table.nwa-table {
     padding: 8px;
     width: 98%;
     word-break: break-all;
+
     caption {
         font-weight: bold;
         font-variant: small-caps;
@@ -64,18 +65,15 @@ table.nwa-table {
         }
         &.failed {
             background-color: lighten($red, 20%);
-            color: $light-grey;
+            td,
+            td.assignee {
+                color: white;
+            }
         }
         &.highlighted {
             border-top: 3px double $medium-grey;
             border-bottom: 3px double $medium-grey;
-
-            td:first-child:before {
-                font-family: FontAwesome;
-                font-size: larger;
-                transform: translateX(-40px);
-                content: "\f0da ";
-            }
+            box-shadow: 2px 4px 4px 4px black;
         }
     }
     thead {
@@ -95,6 +93,46 @@ table.nwa-table {
             margin-right: 15px;
             color: $medium-grey;
             font-size: 18px;
+        }
+        input {
+            font-size: 14px;
+            border-radius: 6px;
+        }
+        .dropdown-container {
+            button {
+                border-radius: 6px;
+                text-align: center;
+                border-color: $light-grey;
+		background-color: white;
+		color: blue;
+		min-width: 4em;
+
+	        &.filtering {
+			    border-color: $blue;
+			    i.fa {
+			    color: $blue;
+		    }
+	        }
+                i.fa {
+                    float: none;
+                    text-align: justify;
+                    margin: 2px;
+                    padding: 0px;
+                    font-size: 14px;
+                }
+            }
+            .dropdown {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 16em;
+                box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+                padding: 8px;
+                z-index: 1;
+                &.open {
+                    display: block;
+                }
+            }
         }
     }
     tbody {
@@ -147,8 +185,8 @@ table.nwa-table {
             font-weight: bold;
             padding-right: 15px;
         }
-        td.assignee i.fa-caret-right {
-            transform: translateX(-15px);
+        td.highlight i.fa-caret-right {
+            font-size: x-large;
         }
         td.actions {
             cursor: pointer;
@@ -159,6 +197,12 @@ table.nwa-table {
     }
 }
 
+.no-results {
+    font-weight: bold;
+    font-variant: small-caps;
+    margin: 0em 0em 0em 2em;
+    font-size: large;
+}
 .pagination {
     margin: 20px;
     input[type="number"] {

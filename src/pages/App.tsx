@@ -40,6 +40,8 @@ import {
     me,
     organisations,
     products,
+    assignees,
+    processStatuses,
     redirectToAuthorizationServer,
     reportError
 } from "../api";
@@ -81,6 +83,8 @@ class App extends React.PureComponent<{}, IState> {
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
+                assignees: [],
+                processStatuses: [],
                 products: [],
                 redirect: url => history.push(url)
             },
@@ -177,27 +181,39 @@ class App extends React.PureComponent<{}, IState> {
             me()
                 .then(currentUser => {
                     if (currentUser && (currentUser.sub || currentUser.user_name)) {
-                        Promise.all([organisations(), products(), locationCodes()]).then(
-                            (result: [Organization[] | undefined, Product[] | undefined, string[] | undefined]) => {
-                                const [allOrganisations, allProducts, allLocationCodes] = result;
-                                this.setState({
-                                    loading: false,
-                                    applicationContext: {
-                                        currentUser: currentUser,
-                                        configuration: configuration!,
-                                        organisations: allOrganisations,
-                                        locationCodes: allLocationCodes,
-                                        products: allProducts!.sort((a: Product, b: Product) =>
-                                            a.name.localeCompare(b.name)
-                                        ),
-                                        redirect: url => history.push(url)
-                                    }
-                                });
-                                if (log) {
-                                    logUserInfo(currentUser.email, "logged in");
+                        Promise.all([
+                            organisations(),
+                            products(),
+                            locationCodes(),
+                            assignees(),
+                            processStatuses()
+                        ]).then((result: [Organization[], Product[], string[], string[], string[]]) => {
+                            const [
+                                allOrganisations,
+                                allProducts,
+                                allLocationCodes,
+                                allAssignees,
+                                allProcessStatuses
+                            ] = result;
+                            this.setState({
+                                loading: false,
+                                applicationContext: {
+                                    currentUser: currentUser,
+                                    configuration: configuration!,
+                                    organisations: allOrganisations,
+                                    locationCodes: allLocationCodes,
+                                    assignees: allAssignees,
+                                    processStatuses: allProcessStatuses,
+                                    products: allProducts!.sort((a: Product, b: Product) =>
+                                        a.name.localeCompare(b.name)
+                                    ),
+                                    redirect: url => history.push(url)
                                 }
+                            });
+                            if (log) {
+                                logUserInfo(currentUser.email, "logged in");
                             }
-                        );
+                        });
                     } else {
                         this.handleBackendDown();
                     }

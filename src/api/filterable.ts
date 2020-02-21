@@ -1,10 +1,12 @@
 import axios from "axios";
-import { ProcessV2, FilterArgument } from "../utils/types";
+import { FilterArgument } from "../utils/types";
 import { CommaSeparatedStringArrayParam } from "../utils/QueryParameters.js";
 import { SortingRule } from "react-table";
 import { setFlash } from "../utils/Flash";
 
-var axiosInstance = axios.create({ baseURL: "/api/" });
+var axiosInstance = axios.create({ baseURL: "/api/v2/" });
+
+export const cancel = axios.CancelToken.source();
 
 function getHeaders(eTag?: string | null) {
     const token = localStorage.getItem("access_token");
@@ -22,11 +24,13 @@ export function filterableEndpoint(
     eTag?: string | null
 ) {
     const requestHeaders = getHeaders(eTag);
-    const range = `${startRow},${endRow}`;
+    const range = CommaSeparatedStringArrayParam.encode([startRow, endRow]);
     const sort = CommaSeparatedStringArrayParam.encode(
         sortBy.map(({ id, desc }) => (desc ? [id, "desc"] : [id, "asc"])).flat()
     );
-    const filter = filterBy.map(({ id, values }) => `${id},${values.join("-")}`).join(",");
+    const filter = CommaSeparatedStringArrayParam.encode(
+        filterBy.map(({ id, values }) => [id, values.join("-")]).flat()
+    );
     const extractResponseHeaders = (headers: any) => {
         const etag: string | undefined = headers["etag"];
         const contentRange: string | undefined = headers["content-range"];
@@ -42,7 +46,8 @@ export function filterableEndpoint(
                 sort: sort,
                 filter: filter
             },
-            validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304
+            validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
+            cancelToken: cancel.token
         })
         .then(
             response => {
@@ -56,18 +61,21 @@ export function filterableEndpoint(
                 }
             },
             error => {
-                var message: string;
-                if (error.response) {
-                    message = `${error.config.baseURL}${error.config.path} returned with HTTP status ${
-                        error.response.status
-                    }: ${error.response.statusText}`;
+                if (axios.isCancel(error)) {
+                    console.log(`Request canceled: ${error.message}`);
+                    // don't set a message to flash, we are canceled.
+                } else if (error.response) {
+                    setFlash(
+                        `${error.config.baseURL}${path} returned with HTTP status ${error.response.status}: ${
+                            error.response.statusText
+                        }`,
+                        "error"
+                    );
                 } else if (error.request) {
-                    message = `${error.config.baseURL}${error.config.path} failed with status ${error.request.status}`;
+                    setFlash(`${error.config.baseURL}${path} failed with status ${error.request.status}`, "error");
                 } else {
-                    message = error.message;
+                    setFlash(error.message, "error");
                 }
-                setFlash(message, "error");
-                console.log(message);
 
                 return Promise.reject(error);
             }

@@ -406,8 +406,8 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 return (
                     <ProductSelect
                         id="product-select"
-                        products={products}
                         onChange={this.changeSelectInput(name)}
+                        products={products}
                         product={value}
                         disabled={userInput.readonly}
                     />

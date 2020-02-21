@@ -415,6 +415,14 @@ export function locationCodes(): Promise<string[] | undefined> {
     });
 }
 
+export function assignees(): Promise<string[]> {
+    return fetchJson("v2/processes/assignees");
+}
+
+export function processStatuses(): Promise<string[]> {
+    return fetchJson("v2/processes/statuses");
+}
+
 export function allWorkflows() {
     return fetchJson("workflows");
 }

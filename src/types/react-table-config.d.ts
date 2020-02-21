@@ -1,4 +1,5 @@
 import {
+    IdType,
     FilterArgument,
     SortingRule,
     UseColumnOrderInstanceProps,
@@ -91,10 +92,10 @@ declare module "react-table" {
         sortBy: SortingRule<string>[];
     }
 
-    export interface LocalTableSettings extends FilterAndSort {
+    export interface LocalTableSettings<D> extends FilterAndSort {
         showSettings: boolean;
         showPaginator: boolean;
-        hiddenColumns: string[];
+        hiddenColumns?: IdType<D>[];
         delay: number;
     }
 
@@ -105,13 +106,14 @@ declare module "react-table" {
         minimized: boolean;
     }
 
-    export interface TableSettings extends LocalTableSettings, SessionTableSettings {
-        name: string;
-    }
-
-    export interface ApiTableState {
+    export interface ApiTableState<D> {
         loading: boolean;
         pageCount: number;
+        data: D[];
+    }
+
+    export interface TableSettings<D> extends LocalTableSettings<D>, SessionTableSettings {
+        name: string;
     }
     /* end of our specific interfaces */
 
@@ -126,11 +128,12 @@ declare module "react-table" {
             UseRowSelectState<D>,
             UseRowStateState<D>,
             UseSortByState<D>,
-            TableSettings,
-            ApiTableState {}
+            TableSettings<D>,
+            ApiTableState<D> {}
 
     export interface Column<D extends object = {}>
         extends UseFiltersColumnOptions<D>,
+            UseFiltersColumnOptions<D>,
             UseGroupByColumnOptions<D>,
             UseResizeColumnsColumnOptions<D>,
             UseSortByColumnOptions<D> {}
@@ -149,6 +152,8 @@ declare module "react-table" {
             UseRowSelectRowProps<D>,
             UseRowStateRowProps<D> {
         allCells: Cell[];
+        toggleRowExpanded: any;
+        getToggleRowExpandedProps: any;
     }
 
     // [PF] only key is in TableKeyedProps in @types/react-table

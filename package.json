@@ -76,7 +76,8 @@
     "source-map-explorer": "^2.0.0",
     "storybook-react-router": "^1.0.8",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "use-trace-update": "^1.3.0"
   },
   "resolutions": {},
   "scripts": {

@@ -1,4 +1,5 @@
-import React, { Dispatch, useCallback, useEffect, useRef, useState, useReducer, useMemo, useContext } from "react";
+import React, { Dispatch, useCallback, useEffect, useRef, useState, useMemo, useContext } from "react";
+import useTraceUpdate from "use-trace-update";
 import {
     Cell,
     Column,
@@ -8,34 +9,126 @@ import {
     useFilters,
     useSortBy,
     usePagination,
+    useExpanded,
     SortingRule,
     TableState,
     FilterAndSort,
     TableSettings,
     LocalTableSettings,
-    SessionTableSettings
+    SessionTableSettings,
+    RowPropGetter
 } from "react-table";
 import "./NwaTable.scss";
 import "../stylesheets/buttons.scss";
-import { filterableEndpoint } from "../api/filterable";
+import { filterableEndpoint, cancel } from "../api/filterable";
 import { FilterArgument, Organization, ProcessV2, Subscription } from "../utils/types";
 import uniq from "lodash/uniq";
-import pick from "lodash/pick";
 import last from "lodash/last";
 import chunk from "lodash/chunk";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
-import toInteger from "lodash/toInteger";
+import debounce from "lodash/debounce";
+import sortedUniq from "lodash/sortedUniq";
 import ApplicationContext from "../utils/ApplicationContext";
 import OrganisationSelect from "./OrganisationSelect";
-import FilterDropDown from "./FilterDropDown";
 import NumericInput from "react-numeric-input";
-import { useQueryParam, StringParam, ArrayParam } from "use-query-params";
+import { useQueryParam, StringParam } from "use-query-params";
+import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "../utils/QueryParameters.js";
 import produce from "immer";
 import I18n from "i18n-js";
+import axios from "axios";
+import Select from "react-select";
 
-interface IFetchData {
-    (pageIndex: number, pageSize: number, sortBy: SortingRule<string>[], filterBy: FilterArgument[]): void;
+enum ActionType {
+    OVERRIDE = "override",
+    FILTER_ADD = "filter/add",
+    FILTER_REMOVE = "filter/remove",
+    FILTER_REPLACE = "filter/replace",
+    FILTER_CLEAR = "filter/clear",
+    LOADING_START = "loading/start",
+    LOADING_STOP = "loading/stop",
+    REFRESH_TOGGLE = "refresh/toggle",
+    REFRESH_ENABLE = "refresh/enable",
+    REFRESH_DISABLE = "refresh/disable",
+    REFRESH_DELAY = "refresh/delay",
+    SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
+    SHOW_PAGINATOR_TOGGLE = "show-paginator/toggle",
+    MINIMIZE = "table/minimize",
+    MAXIMIZE = "table/maximize",
+    UPDATE_DATA = "data/update"
+}
+
+type TableSettingsAction<T extends object> =
+    | { type: ActionType.FILTER_ADD; id: string; value: string }
+    | { type: ActionType.FILTER_CLEAR; id: string }
+    | { type: ActionType.FILTER_REMOVE; id: string; value: string }
+    | { type: ActionType.FILTER_REPLACE; id: string; values: string[] }
+    | { type: ActionType.LOADING_START }
+    | { type: ActionType.LOADING_STOP }
+    | { type: ActionType.OVERRIDE; settings: Partial<TableSettings<T>> }
+    | { type: ActionType.REFRESH_DELAY; delay: number }
+    | { type: ActionType.REFRESH_DISABLE }
+    | { type: ActionType.REFRESH_ENABLE }
+    | { type: ActionType.REFRESH_TOGGLE }
+    | { type: ActionType.SHOW_SETTINGS_TOGGLE }
+    | { type: ActionType.SHOW_PAGINATOR_TOGGLE }
+    | { type: ActionType.MINIMIZE }
+    | { type: ActionType.MAXIMIZE }
+    | { type: ActionType.UPDATE_DATA; data: T[]; pageCount: number };
+
+interface IFetchData<T extends object> {
+    (
+        dispatch: Dispatch<TableSettingsAction<T>>,
+        pageIndex: number,
+        pageSize: number,
+        sortBy: SortingRule<string>[],
+        filterBy: FilterArgument[]
+    ): void;
+}
+
+
+
+
+function useFilterableDataFetcher<T extends object>(endpoint: string): [T[], number, IFetchData<T>] {
+    const [pageCount, setPageCount] = useState(0);
+    const [data, setData] = useState<T[]>([]);
+    /*
+     * fetchIdRef is used to track refreshes and prevent older fetches to overwrite data from newer fetches
+     * entityTag is generated server side to be able to return 304 when there are no changes
+     */
+    const fetchIdRef = useRef(0);
+    const entityTag = useRef<string | null>(null);
+    const fetchData = useCallback((dispatch, pageIndex, pageSize, sortBy, filterBy) => {
+        const fetchId = ++fetchIdRef.current;
+        dispatch({ type: ActionType.LOADING_START });
+        const startRow = pageSize * pageIndex;
+        const endRow = startRow + pageSize;
+
+        filterableEndpoint(endpoint, startRow, endRow, sortBy, filterBy, entityTag.current)
+            .then(([processes, total, eTag]) => {
+                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
+                if (fetchId === fetchIdRef.current && processes) {
+                    let pages = Math.ceil(total / pageSize);
+                    setPageCount(pages);
+                    setData(processes as T[]);
+                    entityTag.current = eTag;
+                }
+                dispatch({ type: ActionType.LOADING_STOP });
+            })
+            .catch(error => {
+                if (!axios.isCancel(error)) {
+                    // don't call dispatch on cancellation, the hook was unmounted.
+                    dispatch({ type: ActionType.LOADING_STOP });
+                    dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests
+                }
+            });
+        return () => {
+            fetchIdRef.current = 0;
+            entityTag.current = null;
+            cancel.cancel();
+        }; // clean up prevents state update after mount and 304 on return.
+    }, [endpoint]);
+    return [data, pageCount, fetchData];
 }
 
 /*
@@ -63,24 +156,40 @@ function useInterval(callback: () => void, delay: number) {
     }, [delay]);
 }
 
-interface INwaTableProps {
-    columns: Column[];
-    initialState: TableState;
-    onChange: (state: TableState) => void;
+/* this type guard makes it possible to differentiate between the settings meant for localStorage
+ * vs. the session and URL. It only checks for hiddenColumns, but as all invocations of persistSettings are type safe
+ * this is enough.
+ */
+function isLocalTableSettings<T>(
+    settings: LocalTableSettings<T> | SessionTableSettings
+): settings is LocalTableSettings<T> {
+    return (settings as LocalTableSettings<T>).hiddenColumns !== undefined;
+}
+
+/*
+ * Reusable NWA table implementation using react-table 7. */
+
+interface INwaTableProps<T extends object> {
+    columns: Column<T>[];
+    initialState: TableState<T>;
+    persistSettings: (state: LocalTableSettings<T> | SessionTableSettings) => void;
     endpoint: string;
-    initialTableSettings: TableSettings;
-    highlight?: string;
+    initialTableSettings: TableSettings<T>;
+    extraRowPropGetter: RowPropGetter<T>;
+    renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
 }
 
 function NwaTable<T extends object>({
     columns,
     initialState,
-    onChange,
+    persistSettings,
     endpoint,
-    initialTableSettings
-}: INwaTableProps) {
-    const [data, setData] = useState<T[]>([]);
-    const [pageCount, setPageCount] = useState(0);
+    initialTableSettings,
+    extraRowPropGetter,
+    renderSubComponent
+}: INwaTableProps<T>) {
+    useTraceUpdate({columns, initialState, persistSettings, endpoint, initialTableSettings, extraRowPropGetter, renderSubComponent});
+    const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
         getTableProps,
         getTableBodyProps,
@@ -94,23 +203,32 @@ function NwaTable<T extends object>({
         nextPage,
         previousPage,
         setPageSize,
-        flatColumns,
+        allColumns,
+        visibleColumns,
         state,
         dispatch
-    } = useTable(
+    } = useTable<T>(
         {
             columns,
             data,
             pageCount,
+            manualFilters: true,
             manualPagination: true,
             manualSortBy: true,
+            autoResetFilters: false,
             autoResetSortBy: false,
+            autoResetExpanded: false,
             debug: true,
             stateReducer: tableSettingsReducer,
             initialState: initialState
         },
+        hooks => {
+            hooks.getRowProps.push(extraRowPropGetter);
+        },
+        useFilters,
         useSortBy,
-        usePagination,
+        useExpanded,
+        usePagination
     );
     const {
         name,
@@ -128,7 +246,7 @@ function NwaTable<T extends object>({
 
     const preferencesProps = {
         state,
-        flatColumns,
+        allColumns,
         dispatch,
         initialTableSettings
     };
@@ -146,66 +264,21 @@ function NwaTable<T extends object>({
     };
 
     /*
-     * fetchIdRef is used to track refreshes and prevent older fetches to overwrite data from newer fetches
-     * entityTag is generated server side to be able to return 304 when there are no changes
-     */
-    const fetchIdRef = React.useRef(0);
-    const entityTag = React.useRef<string | null>(null);
-    const fetchData: IFetchData = useCallback((pageIndex, pageSize, sortBy, filterBy) => {
-        const fetchId = ++fetchIdRef.current;
-
-        dispatch({ type: ActionType.LOADING_START });
-        const startRow = pageSize * pageIndex;
-        const endRow = startRow + pageSize;
-
-        filterableEndpoint(endpoint, startRow, endRow, sortBy, filterBy, entityTag.current)
-            .then(([processes, total, eTag]) => {
-                // Only update the data if this is the latest fetch and processes is not null (in case of 304 NOT MODIFIED).
-                if (fetchId === fetchIdRef.current && processes) {
-                    let pages = Math.ceil(total / pageSize);
-                    setPageCount(pages);
-                    setData(processes);
-                    entityTag.current = eTag;
-                }
-                dispatch({ type: ActionType.LOADING_STOP });
-            })
-            .catch(() => {
-                dispatch({ type: ActionType.LOADING_STOP });
-                dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests
-            });
-        return () => {
-            fetchIdRef.current = 0;
-            entityTag.current = null;
-        }; // clean up prevents state update after mount and 304 on return.
-    }, []);
-
-    /* debounce leads to strange behaviour and seems unnecessary at the moment.
-     * const fetchDataDebounced = useAsyncDebounce(fetchData, 250);
+     * Update localStorage, sessionStorage and URL.
      */
 
     useEffect(() => {
-        onChange(state);
-    }, [
-        onChange,
-        showSettings,
-        showPaginator,
-        hiddenColumns,
-        delay,
-        filterBy,
-        sortBy,
-        pageIndex,
-        pageSize,
-        refresh,
-        delay,
-        filterBy,
-        sortBy,
-        minimized
-    ]);
+        persistSettings({ showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy });
+    }, [persistSettings, showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy ]);
 
-    // fetch new data whenever page index, size or sort changes
     useEffect(() => {
-        fetchData(pageIndex, pageSize, sortBy, filterBy);
-    }, [fetchData, pageIndex, pageSize, sortBy, filterBy]);
+        persistSettings({ showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy });
+    }, [persistSettings, showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy ]);
+
+    // fetch new data whenever page index, size sort or filter changes
+    useEffect(() => {
+        fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
+    }, [fetchData, dispatch, pageIndex, pageSize, sortBy, filterBy]);
 
     /*
      * poll for updates at an interval. because this is a hook the interval will be
@@ -213,10 +286,10 @@ function NwaTable<T extends object>({
      */
     const autoRefreshDelay = refresh ? delay : -1;
     useInterval(() => {
-        fetchData(pageIndex, pageSize, sortBy, filterBy);
+        fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
     }, autoRefreshDelay);
 
-    const sortIcon = (col: ColumnInstance) => {
+    const sortIcon = (col: ColumnInstance<T>) => {
         if (!col.canSort) {
             return "";
         }
@@ -232,37 +305,60 @@ function NwaTable<T extends object>({
     };
 
     return (
-        <div>
-            <TablePreferences {...preferencesProps} />
+        <>
+            <TablePreferences<T> {...preferencesProps} />
             {!minimized && (
                 <>
                     <table className="nwa-table" {...getTableProps()}>
                         <caption>{I18n.t(name)}</caption>
                         <thead>
                             {headerGroups.map(headerGroup => (
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                            {column.render("Header")}
-                                            {sortIcon(column)}
-					    <div>{column.canFilter && column.render("Filter")}</div>
-                                        </th>
-                                    ))}
-                                </tr>
+                                <>
+                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                        {headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                                {column.render("Header")}
+                                                {sortIcon(column)}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                    <tr>
+                                        {headerGroup.headers.map(column => (
+                                            <th>{column.canFilter && column.render("Filter")}</th>
+                                        ))}
+                                    </tr>
+                                </>
                             ))}
                         </thead>
                         <tbody {...getTableBodyProps()}>
-                            {page.map((row: Row, i) => {
+                            {page.map((row: Row<T>, i) => {
                                 prepareRow(row);
-                                return row.allCells[0].render("HyperLinkedRow");
+                                return (
+                                    <>
+                                        <tr {...row.getRowProps()}>
+                                            {row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                                        {cell.render("Cell")}
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                        {row.isExpanded && (
+                                            <tr>
+                                                <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
+                                            </tr>
+                                        )}
+                                    </>
+                                );
                             })}
                         </tbody>
                     </table>
-                    {data.length === 0 && <div className={"noResults"}>No Results found.</div>}
+                    {data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
                     {showPaginator && <Paginator {...paginatorProps} />}
                 </>
             )}
-        </div>
+        </>
     );
 }
 
@@ -400,44 +496,165 @@ function renderProductTag({ cell }: { cell: Cell }) {
     ).join(", ");
 }
 
-type ProcessStatus = "created" | "failed" | "running" | "suspended" | "aborted" | "completed";
-
-enum ActionType {
-    OVERRIDE = "override",
-    FILTER_ADD = "filter/add",
-    FILTER_REMOVE = "filter/remove",
-    FILTER_REPLACE = "filter/replace",
-    FILTER_CLEAR = "filter/clear",
-    LOADING_START = "loading/start",
-    LOADING_STOP = "loading/stop",
-    REFRESH_TOGGLE = "refresh/toggle",
-    REFRESH_ENABLE = "refresh/enable",
-    REFRESH_DISABLE = "refresh/disable",
-    REFRESH_DELAY = "refresh/delay",
-    SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
-    SHOW_PAGINATOR_TOGGLE = "show-paginator/toggle",
-    MINIMIZE = "table/minimize",
-    MAXIMIZE = "table/maximize"
+function DropDownContainer({filtering, title, content}: { filtering: boolean, title: string; content: (disabled: boolean) => JSX.Element }) {
+    const [active, setActive] = useState(false);
+    const [hover, setHover] = useState(false);
+    return (
+	<div className={"dropdown-container"}>
+            <button
+		className={filtering ? "filtering": "not-filtering"}
+                onClick={() => {if(active) { setActive(false); setHover(false);} else {setActive(true)}}}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                title={title}
+            >
+		
+	    {active ? <i className={"fa fa-toggle-on"} /> : hover ? <i className={"fa fa-toggle-off"} />: filtering ? <i className={"fa fa-filter"} />: <i className={"fa fa-list-alt"} />}
+            </button>
+            <div
+                className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+		onClick={() => {if (!active) {setActive(true)}}}
+            >
+                {content(!active)}
+            </div>
+        </div>
+    );
 }
 
-type TableSettingsAction =
-    | { type: ActionType.FILTER_ADD; id: string; value: string }
-    | { type: ActionType.FILTER_CLEAR; id: string }
-    | { type: ActionType.FILTER_REMOVE; id: string; value: string }
-    | { type: ActionType.FILTER_REPLACE; id: string; value: string }
-    | { type: ActionType.LOADING_START }
-    | { type: ActionType.LOADING_STOP }
-    | { type: ActionType.OVERRIDE; settings: Partial<TableSettings> }
-    | { type: ActionType.REFRESH_DELAY; delay: number }
-    | { type: ActionType.REFRESH_DISABLE }
-    | { type: ActionType.REFRESH_ENABLE }
-    | { type: ActionType.REFRESH_TOGGLE }
-    | { type: ActionType.SHOW_SETTINGS_TOGGLE }
-    | { type: ActionType.SHOW_PAGINATOR_TOGGLE }
-    | { type: ActionType.MINIMIZE }
-    | { type: ActionType.MAXIMIZE };
+function renderCustomersFilter({
+    state,
+    dispatch,
+    column
+}: {
+    state: TableState<ProcessV2>;
+    dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
+    column: ColumnInstance;
+}) {
+    /*
+     * Note: The organisation UUID contains hyphens and hyphens are used as separators for the filter values
+     * in the URL. To track the organisation filter value we either needed to keep an extra state value, pick another
+     * separator string (with new edge cases) or embrace the separator and see the organisation as an array of
+     * UUID parts. The last option is used here.
+     */
+    const current = state.filterBy.find(filter => filter.id === "organisation");
+    const selectedOrganisation = current ? current.values.join("-") : null;
+    return (
+        <DropDownContainer
+	    filtering={(selectedOrganisation !== null)}
+            title={column.id}
+            content={disabled => (
+                <OrganisationSelect
+                    id={`${state.name}.filter.${column.id}`}
+                    organisation={selectedOrganisation}
+                    onChange={(selected, action) => {
+                        // See https://github.com/JedWatson/react-select/issues/2902 why we need this.
+                        if (Array.isArray(selected)) {
+                            throw new Error("Expected a single value from react-select");
+                        }
+                        if (action.action === "select-option" && selected) {
+                            dispatch({
+                                type: ActionType.FILTER_REPLACE,
+                                id: "organisation",
+                                values: (selected as { value: string; label: string }).value.split("-")
+                            });
+                        } else if (action.action === "clear") {
+                            dispatch({ type: ActionType.FILTER_CLEAR, id: "organisation" });
+                        }
+                    }}
+                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    abbreviate={column.id === "abbrev"}
+                    disabled={disabled}
+                />
+            )}
+        />
+    );
+}
 
-const tableSettingsReducer = (newState: TableState, action: TableSettingsAction, prevState: TableState) => {
+
+function renderMultiSelectFilter(
+    allOptions: string[],
+    {
+        state,
+        dispatch,
+        column
+    }: {
+        state: TableState<ProcessV2>;
+        dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
+        column: ColumnInstance;
+    }
+) {
+    const current = state.filterBy.find(filter => filter.id === column.id);
+    const currentFilter = current ? current.values : null;
+    const options = allOptions.map(val => ({ value: val, label: val }));
+    const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
+    const onChange = (selected: any, action: any) => {
+        console.log(action);
+        if (action && action.action === "select-option") {
+            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option.value });
+        } else if (action.action === "remove-value") {
+            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue.value });
+        } else if (action.action === "clear") {
+            dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
+        }
+    };
+    return (
+        <DropDownContainer
+	    filtering={(selected.length > 0)}
+            title={column.id}
+            content={disabled => (
+                <Select
+                    isDisabled={disabled}
+                    isMulti
+                    defaultValue={selected}
+                    name={"multi-select"}
+                    options={options}
+                    onChange={onChange}
+                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                />
+            )}
+        />
+    );
+}
+
+const debouncedFilterReplace = debounce((dispatch, id, values) => {
+    dispatch({ type: ActionType.FILTER_REPLACE, id, values });
+}, 300);
+
+function renderILikeFilter({
+    state,
+    dispatch,
+    column
+}: {
+    state: TableState<ProcessV2>;
+    dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
+    column: ColumnInstance;
+}) {
+    const current = state.filterBy.find(filter => filter.id === column.id);
+    const currentFilter = current ? current.values[0] : null;
+    if (column.filterValue && column.filterValue.length > 1 && column.filterValue !== currentFilter) {
+        debouncedFilterReplace(dispatch, column.id, [column.filterValue]);
+    } else if (!column.filterValue && currentFilter) {
+        dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
+    }
+    return (
+        <input
+            value={column.filterValue}
+            onChange={e => {
+                column.setFilter(e.target.value || undefined);
+            }}
+            placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+        />
+    );
+}
+
+
+function tableSettingsReducer<T extends object>(
+    newState: TableState<T>,
+    action: TableSettingsAction<T>,
+    prevState: TableState<T>
+) {
     console.log(action);
     const changedState = produce(newState, draft => {
         switch (action.type) {
@@ -448,6 +665,7 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index === -1) {
                     draft.filterBy.push({ id: action.id, values: [action.value] });
+                    draft.filterBy.sort(); // keep list sorted to keep URL's stable.
                 } else {
                     draft.filterBy[index].values.push(action.value);
                     draft.filterBy[index].values.sort();
@@ -459,7 +677,11 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
                 if (index > -1) {
                     let valueIdx = draft.filterBy[index].values.findIndex((value: string) => value === action.value);
                     if (valueIdx > -1) {
-                        draft.filterBy[index].values.splice(valueIdx);
+                        if (draft.filterBy[index].values.length > 1) {
+                            draft.filterBy[index].values.splice(valueIdx);
+                        } else {
+                            draft.filterBy.splice(index);
+                        }
                     }
                 }
                 break;
@@ -467,9 +689,9 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
             case ActionType.FILTER_REPLACE: {
                 let index = draft.filterBy.findIndex(entry => entry.id === action.id);
                 if (index === -1) {
-                    draft.filterBy.push({ id: action.id, values: [action.value] });
+                    draft.filterBy.push({ id: action.id, values: action.values });
                 } else {
-                    draft.filterBy[index].values = [action.value];
+                    draft.filterBy[index].values = action.values;
                 }
                 break;
             }
@@ -513,19 +735,24 @@ const tableSettingsReducer = (newState: TableState, action: TableSettingsAction,
                 draft.minimized = false;
                 draft.refresh = true;
                 break;
+            case ActionType.UPDATE_DATA:
+                draft.data = action.data as [];
+                draft.pageCount = action.pageCount;
+                draft.loading = false;
+                break;
             default:
                 console.log(action);
         }
     });
     console.log(newState);
     return changedState;
-};
-
-interface ProcessesTableProps {
-    initialTableSettings: TableSettings;
 }
 
-export function initialProcessesFilterAndSort(showTasks: boolean, statuses: ProcessStatus[]) {
+interface ProcessesTableProps {
+    initialTableSettings: TableSettings<ProcessV2>;
+}
+
+export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
         { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
         { id: "status", values: statuses }
@@ -538,8 +765,8 @@ export function initialProcessTableSettings(
     name: string,
     filterAndSort: FilterAndSort,
     hiddenColumns: string[],
-    optional?: Partial<TableSettings>
-): TableSettings {
+    optional?: Partial<TableSettings<ProcessV2>>
+): TableSettings<ProcessV2> {
     const defaults = {
         showSettings: true,
         showPaginator: true,
@@ -561,40 +788,38 @@ export function initialProcessTableSettings(
 export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
-    const [highlightQ, setHighlightQ] = useQueryParam("highlight", StringParam);
-    const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", StringParam);
-    const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", StringParam);
-    const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", StringParam);
+    const highlightQ = useQueryParam("highlight", StringParam)[0]; // only use the getter
+    const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
+    const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
+    const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
+    const { organisations, products, assignees, processStatuses, redirect } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
-            function(current: TableSettings): TableState {
+            function(current: TableSettings<ProcessV2>): TableState<ProcessV2> {
                 // First get LocalState from LocalStorage
-                const settingsFromLocalStorage: LocalTableSettings | {} = JSON.parse(
+                const settingsFromLocalStorage: LocalTableSettings<ProcessV2> | {} = JSON.parse(
                     localStorage.getItem(`table-settings:${current.name}`) || "{}"
                 );
                 // Then get settings from SessionStorage
                 const settingsFromSessionStorage: SessionTableSettings | {} = JSON.parse(
                     sessionStorage.getItem(`table-settings:${current.name}`) || "{}"
                 );
-                // TODO: Then get settings from URL
+                // Then get settings from URL
                 let pageIndex: number | null = null;
                 let pageSize: number | null = null;
                 let sortBy: { id: string; desc: boolean }[] | null = null;
                 let filterBy: { id: string; values: string[] }[] | null = null;
-                if (pageQ) {
-                    let args = pageQ.split("s").map(toInteger);
-                    if (args.length == 2) {
-                        pageIndex = args[0];
-                        pageSize = args[1];
-                    }
-                }
                 try {
+                    if (pageQ) {
+                        pageIndex = pageQ[0];
+                        pageSize = pageQ[1];
+                    }
                     if (sortQ) {
-                        sortBy = chunk(sortQ.split(","), 2).map(([id, desc]) => ({ id, desc: desc === "d" }));
+                        sortBy = chunk(sortQ, 2).map(([id, desc]) => ({ id, desc: desc === "desc" }));
                     }
                     if (filterQ) {
-                        filterBy = chunk(filterQ.split(","), 2).map(([id, values]) => ({
+                        filterBy = chunk(filterQ, 2).map(([id, values]) => ({
                             id: id,
                             values: values.split("-")
                         }));
@@ -606,239 +831,210 @@ export function ProcessesTable({ initialTableSettings }: ProcessesTableProps) {
                     { pageIndex: pageIndex, pageSize: pageSize, sortBy: sortBy, filterBy: filterBy },
                     isNull
                 );
-                // merge everything and return as new controlled table state. Each object from left to right can override keys from the previous object.
+                // merge everything and return as new table state. Each object from left to right can override keys from the previous object.
                 return Object.assign(
-                    { loading: true, pageCount: 0 },
+                    { loading: true, pageCount: 0, data: [] },
                     current,
                     settingsFromLocalStorage,
                     settingsFromSessionStorage,
                     settingsFromURL
                 );
             },
-        []
+        [filterQ, pageQ, sortQ]
     );
 
-    const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings]);
-    const { organisations, redirect } = useContext(ApplicationContext);
-    const columns = React.useMemo(
+    const extraRowPropGetter: RowPropGetter<ProcessV2> = useCallback((props, { row }) => {
+        const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
+        return {
+            ...props,
+            onClick: () => {
+                redirect(`/process/${row.values.pid}`);
+            },
+            className: `${row.values.status}${highlighted}`
+        };
+    }, [highlightQ, redirect]
+    )
+
+    const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
+        return (
+            <div className={"expanded-failure"}>
+                <h2>
+                    {I18n.t("table.failure_step", { step: row.values.step })}
+                    <span
+                        style={{ float: "right" }}
+                        onClick={e => {
+                            e.stopPropagation();
+                            row.toggleRowExpanded();
+                        }}
+                    >
+                        <i className={"fa fa-window-close"} />
+                    </span>
+                </h2>
+                <pre>{row.values.failure}</pre>
+            </div>
+        );
+    }, []
+    )
+
+    const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings, initialize]);
+    const columns: Column<ProcessV2>[] = useMemo(
         () => [
+            {
+                Header: <i className={"fa fa-info"} />,
+                accessor: "failure",
+                disableSortBy: true,
+                disableFilters: true,
+                Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
+                    const caret =
+                        row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : <span> </span>;
+                    if (cell.value) {
+                        return (
+                            <div
+                                {...row.getToggleRowExpandedProps()}
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    row.toggleRowExpanded();
+                                }}
+                            >
+                                {caret}
+                                <i className={"fa fa-exclamation-triangle"} />
+                            </div>
+                        );
+                    } else {
+                        return caret;
+                    }
+                }
+            },
             {
                 Header: "pid",
                 accessor: "pid",
                 disableSortBy: true,
-                Cell: renderPidCell,
-                HyperLinkedRow: ({ cell, row }: { cell: Cell; row: Row }) => {
-                    let highlighted = row.values.pid === highlightQ ? " highlighted" : "";
-                    return (
-                        <tr
-                            onClick={() => {
-                                redirect(`/process/${cell.value}`);
-                            }}
-                            {...row.getRowProps([{ className: `${row.values.status}${highlighted}` }])}
-                        >
-                            {row.cells.map(cell => {
-                                return (
-                                    <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                        {cell.render("Cell")}
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    );
-                }
+                disableFilters: true,
+                Cell: renderPidCell
             },
             {
                 Header: "Assignee",
-                accessor: "assignee"
+                accessor: "assignee",
+                Filter: renderMultiSelectFilter.bind(null, assignees)
             },
             {
                 Header: "Last step",
                 accessor: "step",
-                disableSortBy: true
+                disableSortBy: true,
+                disableFilters: true
             },
             {
                 Header: "Status",
-                accessor: "status"
+                accessor: "status",
+                Filter: renderMultiSelectFilter.bind(null, processStatuses)
             },
             {
                 Header: "Workflow",
-                accessor: "workflow"
+                accessor: "workflow",
+                Filter: renderILikeFilter
             },
             {
                 Header: "Customer",
                 id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, false)
+                Cell: renderCustomersCell(organisations, false),
+                Filter: renderCustomersFilter
             },
             {
                 Header: "Abbr.",
                 id: "abbrev",
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, true)
+                Cell: renderCustomersCell(organisations, true),
+                Filter: renderCustomersFilter
             },
             {
                 Header: "Product(s)",
-                id: "products",
+                id: "product",
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderProductsCell
+                Cell: renderProductsCell,
+                Filter: renderILikeFilter
             },
             {
                 Header: "Tag(s)",
-                id: "tags",
+                id: "tag",
                 accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderProductTag
+                Cell: renderProductTag,
+		Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map((p) => p.tag).sort()))
             },
             {
                 Header: "Subscription(s)",
                 accessor: "subscriptions",
                 disableSortBy: true,
+                disableFilters: true,
                 Cell: renderSubscriptionsCell
             },
             {
                 Header: "Created by",
-                accessor: "creator"
+                accessor: "creator",
+                Filter: renderILikeFilter
             },
             {
                 Header: "Started",
                 accessor: "started",
-                Cell: renderTimestampCell
+                Cell: renderTimestampCell,
+                disableFilters: true
             },
             {
                 Header: "Modified",
                 accessor: "modified",
-                Cell: renderTimestampCell
-            },
-            {
-                Header: <i className={"fa fa-bug"} />,
-                accessor: "failure",
-                disableSortBy: true,
-                Cell: ({ row, cell }: { row: Row; cell: Cell }) => (
-                    <span {...row.getExpandedToggleProps()}>
-                        {cell.value ? (
-                            row.isExpanded ? (
-                                <i className={"fa fa-exclamation-triangle"} />
-                            ) : (
-                                <i className={"fa fa-window-close"} />
-                            )
-                        ) : (
-                            ""
-                        )}
-                    </span>
-                )
+                Cell: renderTimestampCell,
+                disableFilters: true
             }
         ],
-        [organisations, highlightQ]
+        [organisations, highlightQ, assignees, processStatuses, products]
     );
 
-    const saveState = useCallback(state => {
-        const local: LocalTableSettings = pick(state, [
-            "showSettings",
-            "showPaginator",
-            "hiddenColumns",
-            "delay",
-            "filterBy",
-            "sortBy"
-        ]);
-        localStorage.setItem(`table-settings:${state.name}`, JSON.stringify(local));
-        const session: SessionTableSettings = pick(state, [
-            "pageIndex",
-            "pageSize",
-            "refresh",
-            "filterBy",
-            "sortBy",
-            "minimized"
-        ]);
-        sessionStorage.setItem(`table-settings:${state.name}`, JSON.stringify(session));
-        setPageQ(`${session.pageIndex}s${session.pageSize}`);
-        setSortQ(
-            session.sortBy
-                .map(({ id, desc }) => [id, desc ? "d" : "a"])
-                .flat()
-                .join(",")
-        );
-        setFilterQ(
-            session.filterBy
-                .map(({ id, values }) => [id, values.join("-")])
-                .flat()
-                .join(",")
-        );
-    }, []);
+    const persistSettings = useCallback((settings: LocalTableSettings<ProcessV2> | SessionTableSettings) => {
+	console.log("persistSettings called");
+        if (isLocalTableSettings(settings)) {
+            localStorage.setItem(`table-settings:${name}`, JSON.stringify(settings));
+        } else {
+            sessionStorage.setItem(`table-settings:${name}`, JSON.stringify(settings));
+            setPageQ([settings.pageIndex, settings.pageSize]);
+            setSortQ(settings.sortBy.map(({ id, desc }) => [id, desc ? "desc" : "asc"]).flat());
+            setFilterQ(settings.filterBy.map(({ id, values }) => [id, values.join("-")]).flat());
+        }
+    }, [name, setFilterQ, setPageQ, setSortQ]);
 
     return (
         <div className={"card"}>
-            <section className={"nwa-table"}>
+            <section className={"nwa-table"} id={name} key={name}>
                 <NwaTable<ProcessV2>
                     columns={columns}
-                    initialState={initialState}
-                    onChange={saveState}
-                    endpoint={"/v2/processes"}
+                    initialState={initialState as TableState<ProcessV2>}
+                    persistSettings={persistSettings}
+                    endpoint={"processes"}
                     initialTableSettings={initialTableSettings}
+                    extraRowPropGetter={extraRowPropGetter}
+                    renderSubComponent={renderSubComponent}
                 />
             </section>
         </div>
     );
 }
 
-//const selectedOrganisation = tableSettings.filterBy.reduce((org: string, elem: FilterArgument) => {
-//return elem.id === "organisation" ? elem.values[0] : org;
-//}, "");
-
-//const filterAttributesStatus = () => {
-//const statesInFilter = tableSettings.filterBy.reduce((states: ProcessStatus[], elem: FilterArgument) => {
-//return elem.id === "status" ? (elem.values as ProcessStatus[]) : states;
-//}, []);
-//return [
-//{ name: "created", selected: statesInFilter.includes("created"), count: 0 },
-//{ name: "failed", selected: statesInFilter.includes("failed"), count: 0 },
-//{ name: "running", selected: statesInFilter.includes("running"), count: 0 },
-//{ name: "suspended", selected: statesInFilter.includes("suspended"), count: 0 },
-//{ name: "aborted", selected: statesInFilter.includes("aborted"), count: 0 },
-//{ name: "completed", selected: statesInFilter.includes("completed"), count: 0 }
-//];
-//};
-
-//const setStatusFilter = (attr: { name: string; selected: boolean; count: number }) => {
-//if (attr.selected) {
-//tableSettingsDispatch({ type: "filter/remove", id: "status", value: attr.name });
-//} else {
-//tableSettingsDispatch({ type: "filter/add", id: "status", value: attr.name });
-//}
-//};
-//const setOrgFilter = (option: any) => {
-//if (option && option.value) {
-//console.log(option.value);
-//tableSettingsDispatch({ type: "filter/replace", id: "organisation", value: option.value });
-//} else {
-//tableSettingsDispatch({ type: "filter/clear", id: "organisation" });
-//}
-//};
-//function OrganisationFilter(props) {
-
-//<OrganisationSelect
-//id={"organisations-filter"}
-//onChange={setOrgFilter}
-//organisations={organisations}
-//organisation={selectedOrganisation}
-///>
-//}
-
-//function ProcessStatusFilter(props) {
-
-//<FilterDropDown items={filterAttributesStatus()} filterBy={setStatusFilter} label={"Status"} />
-//}
-
-interface ITablePreferencesProps {
-    dispatch: Dispatch<TableSettingsAction>;
-    flatColumns: ColumnInstance[];
-    initialTableSettings: TableSettings;
-    state: TableState;
+interface ITablePreferencesProps<T extends object> {
+    dispatch: Dispatch<TableSettingsAction<T>>;
+    allColumns: ColumnInstance<T>[];
+    initialTableSettings: TableSettings<T>;
+    state: TableState<T>;
 }
 
-function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }: ITablePreferencesProps) {
+function TablePreferences<T extends object>({
+    allColumns,
+    state,
+    dispatch,
+    initialTableSettings
+}: ITablePreferencesProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
     return (
         <>
@@ -918,7 +1114,7 @@ function TablePreferences({ flatColumns, state, dispatch, initialTableSettings }
                         strict={true}
                     />
                     <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
-                    {flatColumns.map(column => {
+                    {allColumns.map(column => {
                         return (
                             <label key={column.id}>
                                 <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}

@@ -14,38 +14,54 @@
  */
 
 import React from "react";
-import Select, { ValueType } from "react-select";
+import PropTypes from "prop-types";
+import Select, { ValueType, ActionMeta } from "react-select";
 import { Organization, Option } from "../utils/types";
+import ApplicationContext from "../utils/ApplicationContext";
 
-interface IProps {
+interface IOrganisationSelectProps {
     id: string;
-    onChange: (option: Option) => void;
+    onChange: (value: ValueType<Option>, action: ActionMeta) => void;
     organisation: string;
-    organisations: Organization[];
-    disabled: boolean;
+    disabled?: boolean;
+    placeholder?: string;
+    abbreviate?: boolean;
 }
 
-export default class OrganisationSelect extends React.PureComponent<IProps> {
+export default class OrganisationSelect extends React.PureComponent<IOrganisationSelectProps> {
+    static propTypes: {};
     render() {
-        const { id, onChange, organisation, organisations, disabled } = this.props;
+        const { id, onChange, organisation, disabled, abbreviate, placeholder } = this.props;
+        const { organisations }: { organisations: Organization[] } = this.context;
 
         const options = organisations.map((org: Organization) => ({
             value: org.uuid,
-            label: org.name
+            label: abbreviate ? org.abbr : org.name
         }));
         const value = options.find((option: Option) => option.value === organisation);
 
         return (
             <Select
                 id={id}
-                onChange={onChange as (value: ValueType<Option>) => void}
+                onChange={onChange}
                 options={options}
                 value={value}
                 isSearchable={true}
                 isClearable={true}
-                placeholder="Search and select a customer..."
+                placeholder={placeholder || "Search and select a customer..."}
                 isDisabled={disabled || organisations.length === 0}
             />
         );
     }
 }
+
+OrganisationSelect.propTypes = {
+    id: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    organisation: PropTypes.string,
+    disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
+    abbreviate: PropTypes.bool
+};
+
+OrganisationSelect.contextType = ApplicationContext;

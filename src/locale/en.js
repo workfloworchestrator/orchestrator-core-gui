@@ -1336,6 +1336,18 @@ I18n.translations.en = {
         processes: {
             active: "Active Processes",
             completed: "Completed Processes"
+        },
+        failure_step: "Process failed on step '{{step}}' with the following output.",
+        no_results: "No results found.",
+        filter_placeholder: {
+            assignee: "assignee...",
+            status: "status...",
+            customer: "customer name...",
+            abbrev: "customer abbreviation...",
+            product: "product name...",
+            tag: "product tag...",
+            creator: "creator..",
+            workflow: "workflow name..."
         }
     }
 };
