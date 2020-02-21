@@ -420,8 +420,7 @@ export default class UserInputForm extends React.Component {
             case "downgrade_redundant_lp_choice":
                 return (
                     <DowngradeRedundantLPChoice
-                        products={products}
-                        organisations={organisations}
+                        key={userInput.subscription_id}
                         onChange={this.changeStringInput(name)}
                         subscriptionId={userInput.subscription_id}
                         value={value}

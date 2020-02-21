@@ -17,20 +17,14 @@ import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
 import { isEmpty } from "../utils/Utils";
-import { getResourceTypeInfo, subscriptionsDetail, portByImsServiceId } from "../api/index";
+import { subscriptionsDetail, portByImsServiceId, serviceByImsServiceId } from "../api/index";
 import { enrichSubscription, productById } from "../utils/Lookups";
 import { port_subscription_id, subscriptionInstanceValues } from "../validations/Subscriptions";
 
 import "./DowngradeRedundantLPChoice.scss";
 import CheckBox from "./CheckBox";
-import {
-    Product,
-    Organization,
-    SubscriptionWithDetails,
-    FixedInput,
-    IMSService,
-    ServicePortSubscription
-} from "../utils/types";
+import { Product, Organization, SubscriptionWithDetails, ServicePortSubscription } from "../utils/types";
+import ApplicationContext from "../utils/ApplicationContext";
 
 interface LRSubscription extends SubscriptionWithDetails, ServicePortSubscription {
     // Added by `enrichPrimarySubscription`
@@ -58,28 +52,28 @@ function enrichPrimarySubscription(
 ): LRSubscription {
     subscription = enrichSubscription(subscription, organisations, products);
     const product = productById(subscription.product_id!, products);
-    const fi_domain = product.fixed_inputs.find((fi: FixedInput) => fi.name === "domain");
+    const fi_domain = product.fixed_inputs.find(fi => fi.name === "domain")!;
 
-    const si_primary = subscription.instances!.find(si => si.label === "Primary");
-    const si_secondary = subscription.instances!.find(si => si.label === "Secondary");
+    const si_primary = subscription.instances!.find(si => si.label === "Primary")!;
+    const si_secondary = subscription.instances!.find(si => si.label === "Secondary")!;
 
     let fi_service_speed;
-    if (fi_domain!.value === "SURFNET8") {
-        fi_service_speed = si_primary!.values.find(v => v.resource_type.resource_type === "service_speed");
+    if (fi_domain.value === "SURFNET8") {
+        fi_service_speed = si_primary.values.find(v => v.resource_type.resource_type === "service_speed");
 
-        subscription.nso_service_id_p = si_primary!.values.find(
+        subscription.nso_service_id_p = si_primary.values.find(
             v => v.resource_type.resource_type === "nso_service_id"
         )!.value;
-        subscription.nso_service_id_s = si_secondary!.values.find(
+        subscription.nso_service_id_s = si_secondary.values.find(
             v => v.resource_type.resource_type === "nso_service_id"
         )!.value;
     } else {
-        fi_service_speed = product.fixed_inputs.find((fi: FixedInput) => fi.name === "service_speed");
+        fi_service_speed = product.fixed_inputs.find(fi => fi.name === "service_speed");
 
-        subscription.nms_service_id_p = si_primary!.values.find(
+        subscription.nms_service_id_p = si_primary.values.find(
             v => v.resource_type.resource_type === "nms_service_id"
         )!.value;
-        subscription.nms_service_id_s = si_secondary!.values.find(
+        subscription.nms_service_id_s = si_secondary.values.find(
             v => v.resource_type.resource_type === "nms_service_id"
         )!.value;
     }
@@ -103,98 +97,91 @@ function enrichPortSubscription(
     subscription.vlan = parentSubscription.instances
         .find(i => i.label === subscription.label)!
         .values.find(v => v.resource_type.resource_type === "vlanrange")!.value;
-    const vc_label_part = subscription.label!.split("-")[0];
-    const prim_sec_part = subscription.label!.split("-")[1] === "left" ? 0 : 1;
+    const [vc_label_part, left_right_part] = subscription.label.split("-");
+    const left_right_index = left_right_part === "left" ? 0 : 1;
     const si = parentSubscription.instances.find(i => i.label === vc_label_part);
     const imsCircuitId = si!.values.find(v => v.resource_type.resource_type === "ims_circuit_id")!.value;
-    const imsServicePromise = getResourceTypeInfo("ims_circuit_id", imsCircuitId);
-    return new Promise((resolve, reject) => {
-        imsServicePromise.then((result: any) => {
-            let json = result.json as IMSService;
-            portByImsServiceId(json.endpoints[prim_sec_part].id).then(imsPort => {
-                subscription.ims_circuit_name = imsPort.line_name;
-                subscription.ims_node = imsPort.node;
-                subscription.ims_port = imsPort.port;
-                subscription.ims_iface_type = imsPort.iface_type;
-                subscription.ims_patch_position = imsPort.patchposition;
-                resolve(subscription as PortSubscription);
-            });
-        });
-    });
+    return serviceByImsServiceId(parseInt(imsCircuitId)).then(
+        imsService =>
+            serviceByImsServiceId(imsService.endpoints[left_right_index].id).then(imsChildService => {
+                subscription.ims_circuit_name = imsChildService.name;
+
+                if (imsChildService.product !== "SVLAN") {
+                    return portByImsServiceId(imsService.endpoints[left_right_index].id).then(imsPort => {
+                        subscription.ims_node = imsPort.node;
+                        subscription.ims_port = imsPort.port;
+                        subscription.ims_iface_type = imsPort.iface_type;
+                        subscription.ims_patch_position = imsPort.patchposition;
+                        return subscription as PortSubscription;
+                    });
+                }
+                return subscription as PortSubscription;
+            }),
+        () => subscription as PortSubscription
+    );
 }
 
 interface IProps {
     subscriptionId: string;
-    organisations: Organization[];
-    products: Product[];
-    value: string;
+    value?: "Primary" | "Secondary";
     readOnly: boolean;
     onChange: (arg0: { target: { value: string } }) => {};
 }
 
 interface IState {
     subscription?: LRSubscription;
-    childSubscriptions: SubscriptionWithDetails[];
     spPL?: PortSubscription;
     spPR?: PortSubscription;
     spSL?: PortSubscription;
     spSR?: PortSubscription;
-    primarySelected: boolean;
 }
 
 export default class DowngradeRedundantLPChoice extends React.PureComponent<IProps, IState> {
     static propTypes: {};
+    state: IState = {};
 
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            childSubscriptions: [],
-            primarySelected: true
-        };
-    }
+    componentDidMount() {
+        const { value, onChange } = this.props;
 
-    componentWillMount() {
-        const { subscriptionId, organisations, products } = this.props;
+        // Make sure default is set
+        if (!value) {
+            setTimeout(() => onChange({ target: { value: "Primary" } }), 0);
+        }
+
+        const { subscriptionId } = this.props;
+        const { organisations, products } = this.context;
+
         subscriptionsDetail(subscriptionId).then(subscription => {
             const lrSubscription = enrichPrimarySubscription(subscription, organisations, products);
-            this.setState({ subscription: lrSubscription });
             const values = subscriptionInstanceValues(lrSubscription);
             const portSubscriptionResourceTypes = values.filter(
                 val => val.resource_type.resource_type === port_subscription_id
             );
-            const promises = portSubscriptionResourceTypes.map(rt =>
-                getResourceTypeInfo(port_subscription_id, rt.value)
+
+            const findDataForLabel = (label: string) =>
+                subscriptionsDetail(
+                    portSubscriptionResourceTypes.find(rt => rt.instance_label.toLowerCase() === label)!.value
+                )
+                    .then(subscription => enrichSubscription(subscription, organisations, products))
+                    .then(subscription => enrichPortSubscription(lrSubscription, subscription));
+
+            const promises = [
+                findDataForLabel("primary-left"),
+                findDataForLabel("primary-right"),
+                findDataForLabel("secondary-left"),
+                findDataForLabel("secondary-right")
+            ];
+            Promise.all(promises).then(children =>
+                this.setState({
+                    subscription: lrSubscription,
+                    spPL: children[0],
+                    spPR: children[1],
+                    spSL: children[2],
+                    spSR: children[3]
+                })
             );
-            Promise.all(promises).then(results => {
-                const children: SubscriptionWithDetails[] = results.map((obj: any) => obj.json);
-                children.forEach(sub => enrichSubscription(sub, organisations, products));
-                const portPromises = children.map(sub => enrichPortSubscription(lrSubscription, sub));
-                Promise.all(portPromises).then((results: PortSubscription[]) => {
-                    this.setState({
-                        spPL: results.find(r => r.label.toLowerCase() === "primary-left"),
-                        spPR: results.find(r => r.label.toLowerCase() === "primary-right"),
-                        spSL: results.find(r => r.label.toLowerCase() === "secondary-left"),
-                        spSR: results.find(r => r.label.toLowerCase() === "secondary-right")
-                    });
-                });
-                this.setState({ childSubscriptions: children });
-            });
         });
     }
-
-    renderChild = (subscription: SubscriptionWithDetails, children: SubscriptionWithDetails[], label: string) => {
-        const instance = subscription.instances.find(instance => instance.label.toLowerCase() === label);
-        const child = children.find(child => instance!.values.find(value => value.value === child.subscription_id));
-        return (
-            <section className="subscription_child">
-                <p className="child">{label}</p>
-                <label className="title">{I18n.t("subscriptions.customer_name")}</label>
-                <input type="text" readOnly={true} value={child!.customer_name} />
-                <label className="title">{I18n.t("subscriptions.description")}</label>
-                <input type="text" readOnly={true} value={child!.description} />
-            </section>
-        );
-    };
 
     renderServicePort = (title: string, servicePort: PortSubscription) => {
         return (
@@ -202,7 +189,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                 <tr className="label">
                     <td colSpan={2}>{title}</td>
                 </tr>
-                {servicePort && this.renderValue("klant", servicePort.customer_name, 1)}
+                {servicePort && this.renderValue("customer", servicePort.customer_name, 1)}
                 {servicePort && servicePort.crm_port_id && this.renderValue("CRM port ID", servicePort.crm_port_id, 1)}
                 {servicePort && servicePort.port_mode && this.renderValue("Port Mode", servicePort.port_mode, 1)}
                 {servicePort && this.renderValue("IMS circuit name", servicePort.ims_circuit_name, 1)}
@@ -236,11 +223,14 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
         );
     };
 
-    renderSubscription = (subscription: LRSubscription, children: SubscriptionWithDetails[]) => {
-        if (isEmpty(children)) {
+    renderSubscription = () => {
+        const { subscription } = this.state;
+
+        if (!subscription) {
             return null;
         }
-        const { spPL, spPR, spSL, spSR, primarySelected } = this.state;
+        const { spPL, spPR, spSL, spSR } = this.state;
+        const { value } = this.props;
         return (
             <section className="lightpaths">
                 <div key={subscription.subscription_id} className={`form-container`}>
@@ -280,7 +270,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                                     </tr>
                                     <tr>
                                         <td colSpan={2} className="border-off">
-                                            <table className={primarySelected ? "highlight-on" : "highlight-off"}>
+                                            <table className={value === "Primary" ? "highlight-on" : "highlight-off"}>
                                                 <thead>
                                                     <tr>
                                                         <td>
@@ -295,7 +285,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
                                         </td>
                                         <td className="spacer" />
                                         <td colSpan={2}>
-                                            <table className={primarySelected ? "highlight-off" : "highlight-on"}>
+                                            <table className={value === "Secondary" ? "highlight-on" : "highlight-off"}>
                                                 <thead>
                                                     <tr>
                                                         <td>
@@ -322,9 +312,8 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
         const target = e.target as HTMLInputElement;
         const checked = target.checked;
         const isPrimary = target.name === "primary";
-        this.setState({ primarySelected: isPrimary });
-        const result = isPrimary ? (checked ? "Primary" : "Secondary") : checked ? "Secondary" : "Primary";
-        this.props.onChange({ target: { value: result } });
+        const primarySelected = isPrimary ? checked : !checked;
+        this.props.onChange({ target: { value: primarySelected ? "Primary" : "Secondary" } });
     };
 
     renderChoice = () => {
@@ -352,14 +341,9 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
     };
 
     render() {
-        const { childSubscriptions, subscription } = this.state;
-        if (!subscription) {
-            return null;
-        }
-
         return (
             <div className="mod-downgrade-redundant-lp">
-                {this.renderSubscription(subscription, childSubscriptions)}
+                {this.renderSubscription()}
                 {this.renderChoice()}
             </div>
         );
@@ -367,10 +351,10 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
 }
 
 DowngradeRedundantLPChoice.propTypes = {
-    organisations: PropTypes.array.isRequired,
-    products: PropTypes.array.isRequired,
     subscriptionId: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,
     readOnly: PropTypes.bool
 };
+
+DowngradeRedundantLPChoice.contextType = ApplicationContext;
