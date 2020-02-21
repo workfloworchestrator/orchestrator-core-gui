@@ -77,7 +77,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s ./public",
     "build-storybook": "build-storybook -s ./public",
-    "prettier": "prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'"
+    "prettier": "prettier -c '{**/*.{js,jsx,scss,md},public/**/*.html}'",
+    "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md},public/**/*.html}'"
   },
   "eslintConfig": {
     "extends": "react-app"
