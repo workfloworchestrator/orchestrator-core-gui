@@ -240,9 +240,9 @@ I18n.translations.en = {
             "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
         vlan_range: "VLAN Range",
         vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
-        vlan_retagging: "Enable VLAN retagging? When Checked; only one VLAN ID per SAP is allowed",
+        vlan_retagging: "Enable VLAN retagging? When Checked; only one VLAN ID per SAP is allowed.",
         bum_filter:
-            "Enable BUM Filter? When checked; broadcast, unlearnt unicast and multicast traffic will be limited to 10% of the the port speed",
+            "Enable BUM Filter? When checked; broadcast, unlearnt unicast and multicast traffic will be limited to 10% of the the port speed.",
         service_port: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
