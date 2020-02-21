@@ -132,8 +132,9 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     runAllTasks = () => {
         this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
             this.state.tasks
-                .filter((task: ProcessWithDetails) =>
-                    ["failed", "api_unavailable", "data_invalid"].indexOf(task.status)
+                .filter(
+                    (task: ProcessWithDetails) =>
+                        ["failed", "api_unavailable", "inconsistent_data"].indexOf(task.status) >= 0
                 )
                 .map(task => task.id)
                 .forEach(retryProcess);
