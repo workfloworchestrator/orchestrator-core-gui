@@ -13,7 +13,7 @@
  *
  */
 
-import escape from "lodash.escape";
+import escape from "lodash/escape";
 import { isDate } from "date-fns";
 
 export function stop(e: React.SyntheticEvent) {
