@@ -14,14 +14,21 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
-import Select from "react-select";
-import { isEmpty } from "../utils/Utils";
+import Select, { ValueType } from "react-select";
+import { Option } from "../utils/types";
 
-export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled }) {
-    if (!isEmpty(locationCode) && !locationCodes.includes(locationCode)) {
+interface IProps {
+    id: string;
+    onChange: (option: Option) => void;
+    locationCode: string;
+    locationCodes: string[];
+    disabled?: boolean;
+}
+
+export default function LocationCodeSelect({ id, onChange, locationCode, locationCodes, disabled = false }: IProps) {
+    if (locationCode && !locationCodes.includes(locationCode)) {
         const toUpperCase = locationCode.toUpperCase();
-        locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase);
+        locationCode = locationCodes.find(lc => lc.toUpperCase() === toUpperCase)!;
     }
 
     const options = locationCodes.map(aLocationCode => {
@@ -34,7 +41,7 @@ export default function LocationCodeSelect({ id, onChange, locationCode, locatio
         <Select
             id={id}
             className="select-locationcode"
-            onChange={onChange}
+            onChange={onChange as (value: ValueType<Option>) => void}
             options={options}
             value={value}
             isSearchable={true}
@@ -42,11 +49,3 @@ export default function LocationCodeSelect({ id, onChange, locationCode, locatio
         />
     );
 }
-
-LocationCodeSelect.propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    locationCodes: PropTypes.array.isRequired,
-    locationCode: PropTypes.string,
-    disabled: PropTypes.bool
-};

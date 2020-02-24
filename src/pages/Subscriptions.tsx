@@ -14,7 +14,6 @@
  */
 
 import React, { RefObject } from "react";
-import PropTypes from "prop-types";
 import { withQueryParams, NumberParam, SetQuery, DecodedValueMap } from "use-query-params";
 import ReactTable, { Filter, SortingRule } from "react-table";
 import Modal from "react-modal";
@@ -64,7 +63,8 @@ interface IState {
 }
 
 class Subscriptions extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
+
     private filtering: boolean = false; // This state is intentionally left outside the proper state since changing it should not trigger a render
     private refReactTable: RefObject<ReactTable<Subscription>> = React.createRef();
 
@@ -368,11 +368,6 @@ class Subscriptions extends React.PureComponent<IProps, IState> {
         );
     }
 }
-
-Subscriptions.propTypes = {
-    query: PropTypes.object,
-    setQuery: PropTypes.func
-};
 
 Subscriptions.contextType = ApplicationContext;
 

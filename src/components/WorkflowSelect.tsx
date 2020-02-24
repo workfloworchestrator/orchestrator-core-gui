@@ -15,10 +15,21 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
+import { Option } from "../utils/types";
 
-export default class WorkflowSelect extends React.PureComponent {
+interface Workflow {
+    name: string;
+}
+
+interface IProps {
+    onChange: (option: Option) => void;
+    workflows: Workflow[];
+    workflow?: string;
+    disabled?: boolean;
+}
+
+export default class WorkflowSelect extends React.PureComponent<IProps> {
     render() {
         const { onChange, workflows, workflow, disabled } = this.props;
 
@@ -32,19 +43,15 @@ export default class WorkflowSelect extends React.PureComponent {
         return (
             <Select
                 className="select-workflow"
-                onChange={onChange}
+                onChange={onChange as (value: ValueType<Option>) => void}
                 options={options}
                 value={value}
                 isSearchable={true}
-                placeholder={I18n.t("process.workflowsPlaceholder")}
+                placeholder={
+                    workflows ? I18n.t("process.workflowsEmptyPlaceholder") : I18n.t("process.workflowsPlaceholder")
+                }
                 isDisabled={disabled || workflows.length === 0}
             />
         );
     }
 }
-WorkflowSelect.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    workflows: PropTypes.array.isRequired,
-    workflow: PropTypes.string,
-    disabled: PropTypes.bool
-};

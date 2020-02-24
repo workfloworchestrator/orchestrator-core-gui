@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { isEmpty } from "../utils/Utils";
 import { subscriptionsDetail, portByImsServiceId, serviceByImsServiceId } from "../api/index";
 import { enrichSubscription, productById } from "../utils/Lookups";
@@ -47,7 +46,7 @@ interface PortSubscription extends LRSubscription {
 
 function enrichPrimarySubscription(
     subscription: Partial<LRSubscription>,
-    organisations: Organization[],
+    organisations: Organization[] | undefined,
     products: Product[]
 ): LRSubscription {
     subscription = enrichSubscription(subscription, organisations, products);
@@ -125,7 +124,7 @@ interface IProps {
     subscriptionId: string;
     value?: "Primary" | "Secondary";
     readOnly: boolean;
-    onChange: (arg0: { target: { value: string } }) => {};
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface IState {
@@ -137,7 +136,7 @@ interface IState {
 }
 
 export default class DowngradeRedundantLPChoice extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {};
 
     componentDidMount() {
@@ -145,6 +144,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
 
         // Make sure default is set
         if (!value) {
+            // @ts-ignore
             setTimeout(() => onChange({ target: { value: "Primary" } }), 0);
         }
 
@@ -313,6 +313,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
         const checked = target.checked;
         const isPrimary = target.name === "primary";
         const primarySelected = isPrimary ? checked : !checked;
+        // @ts-ignore
         this.props.onChange({ target: { value: primarySelected ? "Primary" : "Secondary" } });
     };
 
@@ -349,12 +350,5 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
         );
     }
 }
-
-DowngradeRedundantLPChoice.propTypes = {
-    subscriptionId: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.string,
-    readOnly: PropTypes.bool
-};
 
 DowngradeRedundantLPChoice.contextType = ApplicationContext;

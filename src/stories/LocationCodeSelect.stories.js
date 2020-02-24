@@ -36,7 +36,7 @@ export const __Default = () => (
     <LocationCodeSelect
         id="location-code-select"
         locationCode={store.state.locationCode}
-        locationCodes={array("Values", LOCATION_CODES)}
+        locationCodes={LOCATION_CODES}
         onChange={e => {
             action("onChange")(e);
             store.set({ locationCode: e.value });

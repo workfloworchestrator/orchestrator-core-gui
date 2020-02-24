@@ -303,6 +303,4 @@ export default class ProductBlocks extends React.Component {
     }
 }
 
-ProductBlocks.propTypes = {};
-
 ProductBlocks.contextType = ApplicationContext;

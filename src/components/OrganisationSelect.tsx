@@ -14,23 +14,31 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
+import { Organization, Option } from "../utils/types";
 
-export default class OrganisationSelect extends React.PureComponent {
+interface IProps {
+    id: string;
+    onChange: (option: Option) => void;
+    organisation: string;
+    organisations: Organization[];
+    disabled: boolean;
+}
+
+export default class OrganisationSelect extends React.PureComponent<IProps> {
     render() {
         const { id, onChange, organisation, organisations, disabled } = this.props;
 
-        const options = organisations.map(org => ({
+        const options = organisations.map((org: Organization) => ({
             value: org.uuid,
             label: org.name
         }));
-        const value = options.find(option => option.value === organisation);
+        const value = options.find((option: Option) => option.value === organisation);
 
         return (
             <Select
                 id={id}
-                onChange={onChange}
+                onChange={onChange as (value: ValueType<Option>) => void}
                 options={options}
                 value={value}
                 isSearchable={true}
@@ -40,11 +48,3 @@ export default class OrganisationSelect extends React.PureComponent {
         );
     }
 }
-
-OrganisationSelect.propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    organisations: PropTypes.array.isRequired,
-    organisation: PropTypes.string,
-    disabled: PropTypes.bool
-};

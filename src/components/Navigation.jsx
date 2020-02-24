@@ -84,5 +84,3 @@ export default class Navigation extends React.PureComponent {
         );
     }
 }
-
-Navigation.propTypes = {};

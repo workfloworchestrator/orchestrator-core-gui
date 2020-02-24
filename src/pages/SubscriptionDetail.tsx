@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import {
     dienstafnameBySubscription,
@@ -39,16 +38,16 @@ import ApplicationContext from "../utils/ApplicationContext";
 
 import "./SubscriptionDetail.scss";
 import {
-    Product,
     Subscription,
     SubscriptionInstance,
     InstanceValue,
     SubscriptionProcesses,
     SubscriptionWithDetails,
     prop,
-    ProductWithDetails,
+    Product,
     IMSService,
-    IMSEndpoint
+    IMSEndpoint,
+    WorkflowReasons
 } from "../utils/types";
 import { RouteComponentProps } from "react-router";
 
@@ -62,7 +61,7 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>> {
 
 interface IState {
     subscription?: SubscriptionWithDetails;
-    product?: ProductWithDetails;
+    product?: Product;
     subscriptionProcesses: SubscriptionProcesses[];
     imsServices: IMSService[];
     imsEndpoints: IMSEndpoint[];
@@ -129,44 +128,29 @@ interface IPAMPrefix {
     addresses: IPAMAddress[];
 }
 
-interface WorkflowReason {
-    name: string;
-    reason: string;
-}
-
-interface WorkflowReasons {
-    modify: WorkflowReason[];
-    terminate: WorkflowReason[];
-    reason?: string;
-}
-
 export default class SubscriptionDetail extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
-    static defaultProps: {};
+    context!: React.ContextType<typeof ApplicationContext>;
 
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            subscriptionProcesses: [],
-            imsServices: [],
-            imsEndpoints: [],
-            ipamPrefixes: [],
-            ipamAddresses: [],
-            subscriptions: [],
-            childSubscriptions: [],
-            parentSubscriptions: [],
-            notFound: false,
-            loaded: false,
-            loadedAllRelatedObjects: false,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
-            notFoundRelatedObjects: [],
-            collapsedObjects: [],
-            workflows: { terminate: [], modify: [] }
-        };
-    }
+    state: IState = {
+        subscriptionProcesses: [],
+        imsServices: [],
+        imsEndpoints: [],
+        ipamPrefixes: [],
+        ipamAddresses: [],
+        subscriptions: [],
+        childSubscriptions: [],
+        parentSubscriptions: [],
+        notFound: false,
+        loaded: false,
+        loadedAllRelatedObjects: false,
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: "",
+        notFoundRelatedObjects: [],
+        collapsedObjects: [],
+        workflows: { terminate: [], modify: [] }
+    };
 
     componentWillMount = () => {
         const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
@@ -808,8 +792,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    workflowByTarget = (product: ProductWithDetails, target: string) =>
-        product.workflows!.find(wf => wf.target === target);
+    workflowByTarget = (product: Product, target: string) => product.workflows.find(wf => wf.target === target);
 
     renderActions = (
         subscription: SubscriptionWithDetails,
@@ -959,7 +942,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    renderFixedInputs = (product?: ProductWithDetails) => {
+    renderFixedInputs = (product?: Product) => {
         if (!product) {
             return null;
         }
@@ -1241,10 +1224,4 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     }
 }
 
-SubscriptionDetail.propTypes = {
-    subscriptionId: PropTypes.string
-};
-SubscriptionDetail.defaultProps = {
-    subscriptionId: undefined
-};
 SubscriptionDetail.contextType = ApplicationContext;

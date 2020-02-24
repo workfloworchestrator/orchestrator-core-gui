@@ -12,18 +12,17 @@
  * limitations under the License.
  *
  */
-
 import { isEmpty } from "./Utils";
 import { Organization, SubscriptionWithDetails, Product } from "./types";
 
-export function organisationNameByUuid(uuid: string, organisations: Organization[]) {
-    const organisation = organisations.find(org => org.uuid === uuid);
+export function organisationNameByUuid(uuid: string, organisations?: Organization[]) {
+    const organisation = organisations && organisations.find(org => org.uuid === uuid);
     return organisation ? organisation.name : uuid;
 }
 
 export function enrichSubscription(
     subscription: Partial<SubscriptionWithDetails>,
-    organisations: Organization[],
+    organisations: Organization[] | undefined,
     products: Product[]
 ): SubscriptionWithDetails {
     subscription.customer_name = organisationNameByUuid(subscription.customer_id!, organisations);

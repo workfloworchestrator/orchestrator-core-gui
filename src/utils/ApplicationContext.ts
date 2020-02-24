@@ -14,13 +14,13 @@
  */
 
 import React from "react";
-import { Organization, Product, AppConfig, User } from "./types";
+import { Organization, AppConfig, User, Product } from "./types";
 
 export interface ApplicationContextInterface {
     currentUser?: User;
     configuration?: AppConfig;
-    organisations: Organization[];
-    locationCodes: string[];
+    organisations?: Organization[];
+    locationCodes?: string[];
     products: Product[];
     redirect: (_url: string) => void;
 }

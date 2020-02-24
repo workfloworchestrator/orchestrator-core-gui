@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { startProcess, catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -34,7 +33,7 @@ interface IState {
 }
 
 export default class ModifySubscription extends React.Component<IProps, IState> {
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {};
 
     componentDidMount = () => {
@@ -42,9 +41,15 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
 
         let promise = startProcess(workflowName, [{ subscription_id: subscriptionId }]).then(res => {
             this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+            setFlash(
+                I18n.t("process.flash.create_modify", {
+                    name: I18n.t(`workflow.${workflowName}`),
+                    subscriptionId: subscriptionId,
+                    pid: res.id
+                })
+            );
         });
-        catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
+        catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
             this.setState({ stepUserInput: json.form });
         });
     };
@@ -58,7 +63,13 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
 
         return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then(res => {
             this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+            setFlash(
+                I18n.t("process.flash.create_modify", {
+                    name: I18n.t(`workflow.${workflowName}`),
+                    subscriptionId: subscriptionId,
+                    pid: res.id
+                })
+            );
         });
     };
 
@@ -85,10 +96,5 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
         );
     }
 }
-
-ModifySubscription.propTypes = {
-    subscriptionId: PropTypes.string.isRequired,
-    workflowName: PropTypes.string.isRequired
-};
 
 ModifySubscription.contextType = ApplicationContext;
