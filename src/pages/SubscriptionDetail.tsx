@@ -574,7 +574,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                           {I18n.t(`subscription.ims_port.${attr}`)}
                                       </td>
                                       <td id={`${applyIdNamingConvention(attr)}-v`}>
-                                          {prop(endpoint, attr as (keyof IMSEndpoint))}
+                                          {prop(endpoint, attr as keyof IMSEndpoint)}
                                       </td>
                                   </tr>
                               ))
@@ -584,7 +584,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                           {I18n.t(`subscription.ims_service.${attr}`)}
                                       </td>
                                       <td id={`${applyIdNamingConvention(attr)}-v`}>
-                                          {prop(endpoint, attr as (keyof IMSEndpoint))}
+                                          {prop(endpoint, attr as keyof IMSEndpoint)}
                                       </td>
                                   </tr>
                               ))}
@@ -990,7 +990,6 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     ) => {
         switch (type) {
             case "ims_corelink_trunk_id":
-                return <div>Todo: implement fetch</div>;
             case "ims_circuit_id":
                 const imsService = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
                 return this.renderImsServiceDetail(imsService!, 0, imsEndpoints, "related-subscription");
