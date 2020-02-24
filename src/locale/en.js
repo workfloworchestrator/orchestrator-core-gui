@@ -1128,7 +1128,9 @@ I18n.translations.en = {
         flash: {
             delete: "Task {{name}} is deleted",
             abort: "Task {{name}} is aborted",
-            retry: "Task {{name}} has been retried"
+            retry: "Task {{name}} has been retried",
+	    runall: "All failed tasks retried",
+	    runallfailed: "Not all failed tasks could be retried"
         },
         refresh: "Refresh automatically every 3 seconds?",
         runall: "Rerun all"
@@ -1337,7 +1339,18 @@ I18n.translations.en = {
             active: "Active Processes",
             completed: "Completed Processes"
         },
-        failure_step: "Process failed on step '{{step}}' with the following output.",
+        tasks: "Tasks",
+        expanded_row: {
+            running: "Currently processing step '{{step}}'.",
+            suspended: "Suspended and waiting for input at step '{{step}}'.",
+            waiting: "Waiting on resolution for step '{{step}}'.",
+            aborted: "Aborted on step '{{step'}}.",
+            failed: "Process failed on step '{{step}}' with the following output.",
+            api_unavailable: "The following failure could be caused by an unavailable API at step '{{step}}'.",
+            inconsistent_data:
+                "The following failure was caused by inconsistent data between the orchestrator and another system. This happened at step '{{step}}'. Manual intervention is required.",
+            completed: "Completed"
+        },
         no_results: "No results found.",
         filter_placeholder: {
             assignee: "assignee...",
@@ -1347,8 +1360,26 @@ I18n.translations.en = {
             product: "product name...",
             tag: "product tag...",
             creator: "creator..",
-            workflow: "workflow name..."
+            workflow: "workflow name...",
+	    subscriptions: "description...",
         }
+    },
+    process_statuses: {
+        running: "Running",
+        suspended: "Suspended",
+        waiting: "Waiting",
+        aborted: "Aborted",
+        failed: "Failed",
+        api_unavailable: "API unavailable",
+        inconsistent_data: "Inconsistent data",
+        completed: "Completed"
+    },
+    assignees: {
+        CHANGES: "Changes",
+        NOC: "NOC",
+        KLANT_SUPPORT: "Klant Support",
+        KLANTSUPPORT: "Klant Support",
+        SYSTEM: "System"
     }
 };
 

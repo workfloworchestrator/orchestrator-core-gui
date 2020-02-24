@@ -1,0 +1,35 @@
+@import "../stylesheets/vars.scss";
+
+.dropdown-container {
+    button {
+        border-radius: 6px;
+        text-align: center;
+        border-color: $light-grey;
+        background-color: white;
+        min-width: 4em;
+        box-shadow: 0px 2px 2px 2px;
+
+        i.fa {
+            float: none;
+            text-align: justify;
+            margin: 2px;
+            padding: 0px;
+            font-size: 14px;
+            &.filtering {
+                color: $blue;
+            }
+        }
+    }
+    .dropdown {
+        display: none;
+        position: absolute;
+        background-color: white;
+        width: auto;
+        min-width: 22em;
+        box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        &.open {
+            display: block;
+        }
+    }
+}

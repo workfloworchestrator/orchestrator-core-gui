@@ -37,7 +37,7 @@ import {
 } from "../utils/types";
 import { setFlash } from "../utils/Flash";
 
-// const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
+//const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
 let configuration: AppConfig | null = null;

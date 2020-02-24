@@ -54,7 +54,7 @@ import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
 import ProductPage from "../components/Product";
 import Cache from "./Cache";
-import Tasks from "./Tasks";
+import Tasks from "./TasksV2";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";

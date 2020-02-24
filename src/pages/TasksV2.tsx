@@ -2,7 +2,7 @@
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the Licene
+ * You may obtain a copy of the License at
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,25 +15,25 @@
 
 import React from "react";
 import I18n from "i18n-js";
+import ScrollUpButton from "react-scroll-up-button";
+
+import { abortProcess, deleteProcess, retryProcess } from "api";
+import { filterableEndpoint } from "api/filterable";
+import { stop } from "utils/Utils";
+import ConfirmationDialog from "components/ConfirmationDialog";
+import DropDownActions from "components/DropDownActions";
+import { setFlash } from "utils/Flash";
+import { actionOptions } from "validations/Processes";
+import ApplicationContext from "utils/ApplicationContext";
+import { ShowActions, ProcessV2 } from "utils/types";
 import {
     initialProcessesFilterAndSort,
     initialProcessTableSettings,
     ProcessesTable
 } from "components/tables/Processes";
-import { abortProcess, retryProcess } from "../api";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import ApplicationContext from "../utils/ApplicationContext";
-import ScrollUpButton from "react-scroll-up-button";
-import DropDownActions from "../components/DropDownActions";
-import { ShowActions, ProcessV2 } from "../utils/types";
-import { stop } from "../utils/Utils";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid } from "../utils/Lookups";
-import { actionOptions } from "../validations/Processes";
+import { organisationNameByUuid } from "utils/Lookups";
 
-import "./Processes.scss";
-
-interface IProps {}
+import "./Tasks.scss";
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -42,19 +42,48 @@ interface IState {
     confirmationDialogQuestion: string;
 }
 
-export default class Processes extends React.PureComponent<IProps, IState> {
-    constructor(props: IProps) {
+export default class Tasks extends React.PureComponent<{}, IState> {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
             confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
+            confirmationDialogAction: () => {},
+            confirm: () => {},
             confirmationDialogQuestion: ""
         };
     }
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
+
+    showTask = (task: ProcessV2) => () => {
+        this.context.redirect("/task/" + task.pid);
+    };
+
+    newTask = () => {
+        this.context.redirect("/new-task");
+    };
+
+    runAllTasks = () => {
+        this.confirmation(I18n.t("tasks.runallConfirmation"), () => {
+            filterableEndpoint<ProcessV2>(
+                "processes",
+                null,
+                null,
+                null,
+                [{ id: "status", values: ["failed", "api_unavailable", "inconsistend_data"] }],
+                null
+            )
+                .then(([tasks]) => {
+                    if (tasks && tasks.length > 0) {
+                        return Promise.all(tasks.map(task => retryProcess(task.pid)));
+                    } else {
+                        return Promise.reject();
+                    }
+                })
+		.then(() => setFlash(I18n.t("tasks.flash.runall")), () => setFlash(I18n.t("tasks.flash.runallfailed")));
+        });
+    };
 
     confirmation = (question: string, action: (e: React.MouseEvent) => void) =>
         this.setState({
@@ -117,33 +146,38 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     };
 
     render() {
-        const completedSettings = initialProcessTableSettings(
-            "table.processes.completed",
-            initialProcessesFilterAndSort(false, ["completed"]),
-            ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
-            { showPaginator: false, pageSize: 5, refresh: true }
-        );
-        const activeSettings = initialProcessTableSettings(
-            "table.processes.active",
-            initialProcessesFilterAndSort(false, ["running", "suspended", "failed"]),
-            ["pid", "step", "tags", "customer"],
+        const { confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion } = this.state;
+
+        const tasksSettings = initialProcessTableSettings(
+            "table.tasks",
+            initialProcessesFilterAndSort(true, ["running", "failed", "api_unavailable", "inconsistent_data"]),
+            ["abbrev", "customer", "pid", "product", "step", "started", "tags"],
             { refresh: true }
         );
-
         return (
-            <div className="mod-processes">
+            <div className="mod-tasks">
                 <ConfirmationDialog
-                    isOpen={this.state.confirmationDialogOpen}
+                    isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}
-                    confirm={this.state.confirmationDialogAction}
-                    question={this.state.confirmationDialogQuestion}
+                    confirm={confirmationDialogAction}
+                    question={confirmationDialogQuestion}
                 />
-                <ProcessesTable initialTableSettings={activeSettings} renderActions={this.renderActions} />
-                <ProcessesTable initialTableSettings={completedSettings} renderActions={this.renderActions} />
+                <div className="card">
+                    <div className="options">
+                        <button className="button blue" onClick={this.runAllTasks}>
+                            {I18n.t("tasks.runall")}
+                            <i className="fa fa-refresh" />
+                        </button>
+                        <button className="new button green" onClick={this.newTask}>
+                            {I18n.t("tasks.new")} <i className="fa fa-plus" />
+                        </button>
+                    </div>
+                </div>
+                <ProcessesTable initialTableSettings={tasksSettings} renderActions={this.renderActions} />
                 <ScrollUpButton />
             </div>
         );
     }
 }
 
-Processes.contextType = ApplicationContext;
+Tasks.contextType = ApplicationContext;

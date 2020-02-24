@@ -1,8 +1,8 @@
 import axios from "axios";
-import { FilterArgument } from "../utils/types";
-import { CommaSeparatedStringArrayParam } from "../utils/QueryParameters.js";
+import { FilterArgument } from "utils/types";
+import { CommaSeparatedStringArrayParam } from "utils/QueryParameters.js";
 import { SortingRule } from "react-table";
-import { setFlash } from "../utils/Flash";
+import { setFlash } from "utils/Flash";
 
 var axiosInstance = axios.create({ baseURL: "/api/v2/" });
 
@@ -15,37 +15,45 @@ function getHeaders(eTag?: string | null) {
     return { ...authHeader, ...ifNoneMatchHeader };
 }
 
-export function filterableEndpoint(
+interface Params {
+    range?: string;
+    sort?: string;
+    filter?: string;
+}
+
+export function filterableEndpoint<T>(
     path: string,
-    startRow: number,
-    endRow: number,
-    sortBy: SortingRule<string>[],
+    startRow: number | null,
+    endRow: number | null,
+    sortBy: SortingRule<string>[] | null,
     filterBy: FilterArgument[],
     eTag?: string | null
 ) {
     const requestHeaders = getHeaders(eTag);
-    const range = CommaSeparatedStringArrayParam.encode([startRow, endRow]);
-    const sort = CommaSeparatedStringArrayParam.encode(
-        sortBy.map(({ id, desc }) => (desc ? [id, "desc"] : [id, "asc"])).flat()
-    );
-    const filter = CommaSeparatedStringArrayParam.encode(
-        filterBy.map(({ id, values }) => [id, values.join("-")]).flat()
-    );
+    let params: Params = {};
+    if (startRow && endRow) {
+        params["range"] = CommaSeparatedStringArrayParam.encode([startRow, endRow]);
+    }
+    if (sortBy) {
+        params["sort"] = CommaSeparatedStringArrayParam.encode(
+            sortBy.map(({ id, desc }) => (desc ? [id, "desc"] : [id, "asc"])).flat()
+        );
+    }
+    if (filterBy) {
+        params["filter"] = CommaSeparatedStringArrayParam.encode(
+            filterBy.map(({ id, values }) => [id, values.join("-")]).flat()
+        );
+    }
     const extractResponseHeaders = (headers: any) => {
         const etag: string | undefined = headers["etag"];
         const contentRange: string | undefined = headers["content-range"];
         const total = contentRange ? parseInt(contentRange.split("/")[1], 10) : 99;
         return [total, etag];
     };
-
     return axiosInstance
         .get(path, {
             headers: requestHeaders,
-            params: {
-                range: range,
-                sort: sort,
-                filter: filter
-            },
+            params,
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
             cancelToken: cancel.token
         })
@@ -53,9 +61,9 @@ export function filterableEndpoint(
             response => {
                 switch (response.status) {
                     case 200:
-                        return [response.data, ...extractResponseHeaders(response.headers)];
+                        return [response.data, ...extractResponseHeaders(response.headers)] as [T[], number, string | null];
                     case 304:
-                        return [null, ...extractResponseHeaders(response.headers)];
+                        return [null, ...extractResponseHeaders(response.headers)] as [null, number, string | null];
                     default:
                         return Promise.reject(response);
                 }
@@ -66,9 +74,7 @@ export function filterableEndpoint(
                     // don't set a message to flash, we are canceled.
                 } else if (error.response) {
                     setFlash(
-                        `${error.config.baseURL}${path} returned with HTTP status ${error.response.status}: ${
-                            error.response.statusText
-                        }`,
+                        `${error.config.baseURL}${path} returned with HTTP status ${error.response.status}: ${error.response.statusText}`,
                         "error"
                     );
                 } else if (error.request) {

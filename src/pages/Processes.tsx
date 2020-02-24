@@ -18,17 +18,17 @@ import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import ScrollUpButton from "react-scroll-up-button";
 
-import { abortProcess, deleteProcess, processes, retryProcess } from "../api";
-import { isEmpty, stop } from "../utils/Utils";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import FilterDropDown from "../components/FilterDropDown";
-import DropDownActions from "../components/DropDownActions";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid, productNameById, renderDateTime } from "../utils/Lookups";
-import CheckBox from "../components/CheckBox";
-import { actionOptions } from "../validations/Processes";
-import ApplicationContext from "../utils/ApplicationContext";
-import { FilterAttribute, ShowActions, SortSettings, ProcessWithDetails, prop, optionalProp } from "../utils/types";
+import { abortProcess, deleteProcess, processes, retryProcess } from "api";
+import { isEmpty, stop } from "utils/Utils";
+import ConfirmationDialog from "components/ConfirmationDialog";
+import FilterDropDown from "components/FilterDropDown";
+import DropDownActions from "components/DropDownActions";
+import { setFlash } from "utils/Flash";
+import { organisationNameByUuid, productNameById, renderDateTime } from "utils/Lookups";
+import CheckBox from "components/CheckBox";
+import { actionOptions } from "validations/Processes";
+import ApplicationContext from "utils/ApplicationContext";
+import { FilterAttribute, ShowActions, SortSettings, ProcessWithDetails, prop, optionalProp } from "utils/types";
 
 import "./Processes.scss";
 
@@ -299,7 +299,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             return null;
         }
         let options = actionOptions(
-            process,
+            process.status,
             this.showProcess(process),
             this.handleRetryProcess(process),
             this.handleDeleteProcess(process),

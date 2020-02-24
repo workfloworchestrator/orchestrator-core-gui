@@ -13,8 +13,6 @@
  *
  */
 
-import { prop, ProcessWithDetails } from "../utils/types";
-
 interface Action {
     icon: string;
     label: string;
@@ -23,7 +21,7 @@ interface Action {
 }
 
 export function actionOptions(
-    process: ProcessWithDetails,
+    status: string,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
@@ -58,7 +56,6 @@ export function actionOptions(
         danger: true
     };
     let options = [];
-    const status = prop(process, "status");
     switch (status) {
         case "failed":
             options = [details, retry, abort, _delete];

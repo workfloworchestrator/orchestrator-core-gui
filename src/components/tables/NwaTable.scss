@@ -13,8 +13,8 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@import "../../stylesheets/mixins.scss";
+@import "../../stylesheets/media_queries.scss";
 
 .table-preferences-icon-bar {
     padding: 6px;
@@ -142,6 +142,9 @@ table.nwa-table {
                         padding: 0 0 0 60px;
                     }
                 }
+            }
+            pre {
+                white-space: pre-wrap;
             }
         }
         td.assignee {

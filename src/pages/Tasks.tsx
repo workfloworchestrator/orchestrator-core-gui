@@ -235,7 +235,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             return null;
         }
         const options = actionOptions(
-            task,
+            task.status,
             this.showTask(task),
             this.handleRetryTask(task),
             this.handleDeleteTask(task),

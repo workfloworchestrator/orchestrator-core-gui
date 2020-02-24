@@ -1,4 +1,4 @@
-FROM node:12.15.0 AS builder
+FROM node:12.16.1 AS builder
 COPY . /app
 WORKDIR /app
 ENV CI=true
