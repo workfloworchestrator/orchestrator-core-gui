@@ -1284,6 +1284,7 @@ I18n.translations.en = {
         modify_sn8_ip_bgp: "Modify SN8 SURFinternet BGP",
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
+        modify_sn8_l2vpn: "Modify SN8 L2VPN",
         modify_sn8_light_path: "Modify SN8 LightPath",
         modify_sn8_light_path_redundant: "Modify SN8 LightPath Redundant",
         modify_sn8_light_path_upgrade_to_redundant: "Modify SN8 LightPath: Upgrade to Redundant",
