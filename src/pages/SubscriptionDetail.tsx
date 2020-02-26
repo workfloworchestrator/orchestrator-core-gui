@@ -440,7 +440,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.dienstafname")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-service">
                     <table className={"detail-block"}>
                         <thead />
                         <tbody>
@@ -493,7 +493,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         product: subscription.description
                     })}
                 </h3>
-                <div className="form-container-parent">
+                <div className="subscription-parent-subscriptions">
                     <table className="subscriptions">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
@@ -745,7 +745,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.product_title")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-product-information">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -809,7 +809,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.actions")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-actions">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -906,7 +906,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.process_link")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-processes">
                     <table className="processes">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
@@ -949,7 +949,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.fixedInputs")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-fixed-inputs">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -1116,7 +1116,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.productBlocks")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-product-blocks">
                     {subscription.instances
                         .sort((a: SubscriptionInstance, b: SubscriptionInstance) =>
                             a.product_block.tag !== b.product_block.tag
@@ -1157,7 +1157,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     renderDetails = (subscription: SubscriptionWithDetails, subscriptionProcesses: SubscriptionProcesses[]) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
-            <div className="form-container-parent">
+            <div className="subscription-details">
                 {this.renderSubscriptionDetail(subscription, 0, "", subscriptionProcesses)}
             </div>
         </section>
