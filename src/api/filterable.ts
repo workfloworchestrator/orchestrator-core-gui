@@ -31,15 +31,15 @@ export function filterableEndpoint<T>(
 ) {
     const requestHeaders = getHeaders(eTag);
     let params: Params = {};
-    if (startRow && endRow) {
+    if (startRow !== null && endRow !== null) {
         params["range"] = CommaSeparatedStringArrayParam.encode([startRow, endRow]);
     }
-    if (sortBy) {
+    if (sortBy !== null) {
         params["sort"] = CommaSeparatedStringArrayParam.encode(
             sortBy.map(({ id, desc }) => (desc ? [id, "desc"] : [id, "asc"])).flat()
         );
     }
-    if (filterBy) {
+    if (filterBy !== null) {
         params["filter"] = CommaSeparatedStringArrayParam.encode(
             filterBy.map(({ id, values }) => [id, values.join("-")]).flat()
         );

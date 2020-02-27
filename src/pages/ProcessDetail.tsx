@@ -266,7 +266,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
     renderActions = (process: CustomProcessWithDetails) => {
         let options = actionOptions(
-            process.status,
+            process,
             () => false,
             this.handleRetryProcess(process),
             this.handleDeleteProcess(process),

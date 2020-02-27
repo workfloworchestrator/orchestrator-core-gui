@@ -299,7 +299,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             return null;
         }
         let options = actionOptions(
-            process.status,
+            process,
             this.showProcess(process),
             this.handleRetryProcess(process),
             this.handleDeleteProcess(process),

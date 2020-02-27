@@ -20,8 +20,12 @@ interface Action {
     danger?: boolean;
 }
 
-export function actionOptions(
-    status: string,
+interface WithStatus {
+    status: string;
+}
+
+export function actionOptions<T extends WithStatus>(
+    process: T,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
@@ -56,7 +60,7 @@ export function actionOptions(
         danger: true
     };
     let options = [];
-    switch (status) {
+    switch (process.status) {
         case "failed":
             options = [details, retry, abort, _delete];
             break;
@@ -85,7 +89,7 @@ export function actionOptions(
             options = [retry, abort, _delete];
             break;
         default:
-            throw new Error(`Unknown status: ${status}`);
+            throw new Error(`Unknown status: ${process.status}`);
     }
     return options;
 }

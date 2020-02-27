@@ -1,20 +1,20 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 
 /*
  * Inspired by https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  */
 function useInterval(callback: () => void, delay: number) {
-    const savedCallback = useRef<() => void>(() => {
+    const savedCallback = React.useRef<() => void>(() => {
         return;
     }); // To satisfy typescript the initial value should be a noop callback.
 
     // Remember the latest function.
-    useEffect(() => {
+    React.useEffect(() => {
         savedCallback.current = callback;
     }, [callback]);
 
     // Set up the interval.
-    useEffect(() => {
+    React.useEffect(() => {
         function tick() {
             savedCallback.current();
         }

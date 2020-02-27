@@ -25,7 +25,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 import ScrollUpButton from "react-scroll-up-button";
 import DropDownActions from "../components/DropDownActions";
-import { ShowActions, ProcessV2 } from "../utils/types";
+import { ProcessV2 } from "../utils/types";
 import { stop } from "../utils/Utils";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid } from "../utils/Lookups";
@@ -103,9 +103,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     };
 
     renderActions = (process: ProcessV2) => {
-        const actionId = process.pid;
         let options = actionOptions(
-            process.status,
+            process,
             this.showProcess(process),
             this.handleRetryProcess(process),
             e => {

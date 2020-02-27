@@ -312,7 +312,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 disableSortBy: true
             }
         ],
-        [organisations, highlightQ, assignees, processStatuses, products]
+        [organisations, highlightQ, assignees, processStatuses, products, renderActions]
     );
 
     const persistSettings = useCallback(

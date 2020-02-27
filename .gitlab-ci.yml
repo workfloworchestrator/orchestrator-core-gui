@@ -21,7 +21,7 @@ include:
   - template: Jobs/Build.gitlab-ci.yml
 
 unit test:
-  image: node:12.13.1
+  image: node:12.16.1
   stage: test
   variables:
     TZ: Europe/Amsterdam

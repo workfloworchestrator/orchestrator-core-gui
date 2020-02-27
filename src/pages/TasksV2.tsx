@@ -25,7 +25,7 @@ import DropDownActions from "components/DropDownActions";
 import { setFlash } from "utils/Flash";
 import { actionOptions } from "validations/Processes";
 import ApplicationContext from "utils/ApplicationContext";
-import { ShowActions, ProcessV2 } from "utils/types";
+import { ProcessV2 } from "utils/types";
 import {
     initialProcessesFilterAndSort,
     initialProcessTableSettings,
@@ -71,7 +71,10 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 null,
                 null,
                 null,
-                [{ id: "status", values: ["failed", "api_unavailable", "inconsistend_data"] }],
+                [
+                    { id: "isTask", values: ["true"] },
+                    { id: "status", values: ["failed", "api_unavailable", "inconsistend_data"] }
+                ],
                 null
             )
                 .then(([tasks]) => {
@@ -114,6 +117,16 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         );
     };
 
+    handleDeleteProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
+        stop(e);
+        const workflow_name = process.workflow;
+        this.confirmation(I18n.t("tasks.deleteConfirmation", { name: workflow_name }), () =>
+            deleteProcess(process.pid).then(() => {
+                setFlash(I18n.t("tasks.flash.delete", { name: workflow_name }));
+            })
+        );
+    };
+
     handleRetryProcess = (process: ProcessV2) => (e: React.MouseEvent) => {
         stop(e);
         const product_name = process.subscriptions[0].product.name;
@@ -135,14 +148,11 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     renderActions = (process: ProcessV2) => {
-        const actionId = process.pid;
         let options = actionOptions(
-            process.status,
+            process,
             this.showProcess(process),
             this.handleRetryProcess(process),
-            e => {
-                console.log("What the hell? You want to delete me???");
-            },
+            this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
         );
         return <DropDownActions options={options} i18nPrefix="processes" />;
