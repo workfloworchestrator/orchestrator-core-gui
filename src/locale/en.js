@@ -1337,7 +1337,11 @@ I18n.translations.en = {
         },
         processes: {
             active: "Active Processes",
-            completed: "Completed Processes"
+            completed: "Completed Processes",
+            caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
+            with_status: " with status ",
+            filtered_on: " and filtered on ",
+            sorted_by: " and sorted by "
         },
         tasks: "Tasks",
         expanded_row: {

@@ -7,17 +7,18 @@ import React, { useEffect } from "react";
 import {
     Column,
     ColumnInstance,
-    Row,
-    useTable,
-    useFilters,
-    useSortBy,
-    usePagination,
-    useExpanded,
-    TableState,
-    TableSettings,
     LocalTableSettings,
+    Row,
+    RowPropGetter,
     SessionTableSettings,
-    RowPropGetter
+    SortingRule,
+    TableSettings,
+    TableState,
+    useExpanded,
+    useFilters,
+    usePagination,
+    useSortBy,
+    useTable
 } from "react-table";
 import "./NwaTable.scss";
 import "stylesheets/buttons.scss";
@@ -27,6 +28,7 @@ import Paginator from "./Paginator";
 import Preferences from "./Preferences";
 import useInterval from "./useInterval";
 import useFilterableDataFetcher from "./useFilterableDataFetcher";
+import { FilterArgument } from "utils/types";
 
 export enum ActionType {
     OVERRIDE = "override",
@@ -174,6 +176,7 @@ interface INwaTableProps<T extends object> {
     initialTableSettings: TableSettings<T>;
     extraRowPropGetter: RowPropGetter<T>;
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
+    renderCaption: (filterBy: FilterArgument[], sortBy: SortingRule<string>[]) => JSX.Element;
 }
 
 export function NwaTable<T extends object>({
@@ -183,7 +186,8 @@ export function NwaTable<T extends object>({
     endpoint,
     initialTableSettings,
     extraRowPropGetter,
-    renderSubComponent
+    renderSubComponent,
+    renderCaption
 }: INwaTableProps<T>) {
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
@@ -258,14 +262,12 @@ export function NwaTable<T extends object>({
         setPageSize
     };
 
-    /*
-     * Update localStorage, sessionStorage and URL.
-     */
-
+    // Update localStorage
     useEffect(() => {
         persistSettings({ showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy });
     }, [persistSettings, showSettings, showPaginator, hiddenColumns, delay, filterBy, sortBy]);
 
+    // Update session storage and URL
     useEffect(() => {
         persistSettings({ pageSize, pageIndex, filterBy, sortBy, refresh, minimized });
     }, [persistSettings, pageSize, pageIndex, filterBy, sortBy, refresh, minimized]);
@@ -305,18 +307,7 @@ export function NwaTable<T extends object>({
             {!minimized && (
                 <>
                     <table className="nwa-table" {...getTableProps()}>
-                        <caption>
-                            {filterBy.find(({ id }) => id === "isTask").values[0] === "true" ? "Tasks" : "Processes"}
-                            {" with status "}
-                            {filterBy.find(({ id }) => id === "status").values.join(", ")}
-                            {" filtered on "}
-                            {filterBy
-                                .filter(({ id }) => id !== "status" && id !== "isTask")
-                                .map(({ id, values }) => `${id}~=${values.join("-")}`)
-                                .join(", ")}
-                            {" and sorted by "}
-                            {sortBy.map(({ id, desc }) => `${id} ${desc ? "descending" : "ascending"}`).join(", ")}
-                        </caption>
+                        {renderCaption(filterBy, sortBy)}
                         <thead>
                             {headerGroups.map(headerGroup => (
                                 <>

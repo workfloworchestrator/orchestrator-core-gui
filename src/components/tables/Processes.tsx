@@ -17,13 +17,14 @@ import ApplicationContext from "utils/ApplicationContext";
 import {
     Cell,
     Column,
-    Row,
-    TableState,
     FilterAndSort,
-    TableSettings,
     LocalTableSettings,
+    Row,
+    RowPropGetter,
     SessionTableSettings,
-    RowPropGetter
+    SortingRule,
+    TableSettings,
+    TableState
 } from "react-table";
 import { useQueryParam, StringParam } from "use-query-params";
 import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters.js";
@@ -45,6 +46,7 @@ import {
 } from "components/tables/cellRenderers";
 import DropDownContainer from "components/DropDownContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
+import { FilterArgument } from "utils/types";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
@@ -150,6 +152,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 onClick: () => {
                     redirect(`/process/${row.values.pid}`);
                 },
+                id: row.values.pid,
                 className: `${row.values.status}${highlighted}`
             };
         },
@@ -330,6 +333,63 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
         [name, setFilterQ, setPageQ, setSortQ]
     );
 
+    const renderCaption = useCallback((filterBy: FilterArgument[], sortBy: SortingRule<string>[]) => {
+        const taskOrProcess = filterBy.find(({ id }) => id === "isTask")?.values[0] === "true" ? "Tasks" : "Processes";
+        const filterstatuses = filterBy.find(({ id }) => id === "status")?.values || [];
+        let statuses = I18n.t("table.processes.with_status");
+        switch (filterstatuses.length) {
+            case 0:
+                statuses = "";
+                break;
+            case 1:
+                statuses = statuses + I18n.t(`process_statuses.${filterstatuses[0]}`);
+                break;
+            case 2:
+                statuses = statuses + filterstatuses[0] + ", or " + filterstatuses[1];
+                break;
+            default:
+                statuses =
+                    statuses +
+                    filterstatuses.slice(0, filterstatuses.length - 1).join(", ") +
+                    ", or " +
+                    last(filterstatuses);
+        }
+
+        const otherFilters = filterBy
+            .filter(({ id }) => id !== "status" && id !== "isTask")
+            .map(({ id, values }) => `${id}~=${values.join("-")}`);
+        let filters = I18n.t("table.processes.filtered_on");
+        switch (otherFilters.length) {
+            case 0:
+                filters = "";
+                break;
+            case 1:
+                filters = filters + otherFilters[0];
+                break;
+            case 2:
+                filters = filters + otherFilters[0] + " or " + otherFilters[1];
+                break;
+            default:
+                filters =
+                    filters + otherFilters.slice(0, otherFilters.length - 1).join(",") + ", and " + last(otherFilters);
+        }
+        let sorted = I18n.t("table.processes.sorted_by");
+        switch (sortBy.length) {
+            case 0:
+                sorted = "";
+                break;
+            case 1:
+                let { id, desc } = sortBy[0];
+                sorted = sorted + `${id} ${desc ? "descending" : "ascending"}`;
+                break;
+            default:
+                sorted =
+                    sorted + sortBy.map(({ id, desc }) => `${id} ${desc ? "descending" : "ascending"}`).join(" and ");
+        }
+
+        return <caption>{I18n.t("table.processes.caption", { taskOrProcess, statuses, filters, sorted })}</caption>;
+    }, []);
+
     return (
         <div className={"card"}>
             <section className={"nwa-table"} id={name} key={name}>
@@ -341,6 +401,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
+                    renderCaption={renderCaption}
                 />
             </section>
         </div>
