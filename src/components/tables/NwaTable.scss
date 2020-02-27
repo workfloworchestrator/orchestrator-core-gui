@@ -64,11 +64,17 @@ table.nwa-table {
             background-color: $light-green;
         }
         &.failed {
-            background-color: lighten($red, 20%);
+            background-color: $orange;
             td,
             td.assignee {
                 color: white;
             }
+        }
+        &.api_unavailable {
+            background-color: $light-blue;
+        }
+        &.inconsistent_data {
+            background-color: $light-red;
         }
         &.highlighted {
             border-top: 3px double $medium-grey;
@@ -112,7 +118,13 @@ table.nwa-table {
                 }
                 &.failed {
                     color: black;
-                    background-color: lighten($red, 40%);
+                    background-color: $light-orange;
+                }
+                &.api_unavailable {
+                    background-color: darken($light-blue, 10%);
+                }
+                &.inconsistent_data {
+                    background-color: darken($light-red, 10%);
                 }
                 td.actions i.fa-ellipsis-h {
                     color: $blue;
@@ -172,9 +184,8 @@ table.nwa-table {
 }
 .pagination {
     margin: 20px;
-    input[type="number"] {
+    input[type="text"] {
         width: 4em;
-        display: inline-block;
     }
 }
 

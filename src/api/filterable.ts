@@ -61,7 +61,11 @@ export function filterableEndpoint<T>(
             response => {
                 switch (response.status) {
                     case 200:
-                        return [response.data, ...extractResponseHeaders(response.headers)] as [T[], number, string | null];
+                        return [response.data, ...extractResponseHeaders(response.headers)] as [
+                            T[],
+                            number,
+                            string | null
+                        ];
                     case 304:
                         return [null, ...extractResponseHeaders(response.headers)] as [null, number, string | null];
                     default:

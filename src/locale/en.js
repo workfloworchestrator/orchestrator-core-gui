@@ -1129,8 +1129,8 @@ I18n.translations.en = {
             delete: "Task {{name}} is deleted",
             abort: "Task {{name}} is aborted",
             retry: "Task {{name}} has been retried",
-	    runall: "All failed tasks retried",
-	    runallfailed: "Not all failed tasks could be retried"
+            runall: "All failed tasks retried",
+            runallfailed: "Not all failed tasks could be retried"
         },
         refresh: "Refresh automatically every 3 seconds?",
         runall: "Rerun all"
@@ -1361,7 +1361,7 @@ I18n.translations.en = {
             tag: "product tag...",
             creator: "creator..",
             workflow: "workflow name...",
-	    subscriptions: "description...",
+            subscriptions: "description..."
         }
     },
     process_statuses: {

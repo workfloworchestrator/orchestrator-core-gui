@@ -81,7 +81,10 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                         return Promise.reject();
                     }
                 })
-		.then(() => setFlash(I18n.t("tasks.flash.runall")), () => setFlash(I18n.t("tasks.flash.runallfailed")));
+                .then(
+                    () => setFlash(I18n.t("tasks.flash.runall")),
+                    () => setFlash(I18n.t("tasks.flash.runallfailed"))
+                );
         });
     };
 
