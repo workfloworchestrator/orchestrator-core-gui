@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FilterArgument } from "utils/types";
-import { CommaSeparatedStringArrayParam } from "utils/QueryParameters.js";
+import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 
@@ -32,17 +32,17 @@ export function filterableEndpoint<T>(
     const requestHeaders = getHeaders(eTag);
     let params: Params = {};
     if (startRow !== null && endRow !== null) {
-        params["range"] = CommaSeparatedStringArrayParam.encode([startRow, endRow]);
+        params["range"] = CommaSeparatedNumericArrayParam.encode([startRow, endRow]) as string;
     }
     if (sortBy !== null) {
         params["sort"] = CommaSeparatedStringArrayParam.encode(
             sortBy.map(({ id, desc }) => (desc ? [id, "desc"] : [id, "asc"])).flat()
-        );
+        ) as string;
     }
     if (filterBy !== null) {
         params["filter"] = CommaSeparatedStringArrayParam.encode(
             filterBy.map(({ id, values }) => [id, values.join("-")]).flat()
-        );
+        ) as string;
     }
     const extractResponseHeaders = (headers: any) => {
         const etag: string | undefined = headers["etag"];

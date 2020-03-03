@@ -1,6 +1,18 @@
 /*
- * Functional components to use as filter input fields in tables.
+ * Copyright 2019 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
+
 import I18n from "i18n-js";
 import React, { Dispatch } from "react";
 import { ColumnInstance, TableState } from "react-table";
@@ -12,6 +24,7 @@ import debounce from "lodash/debounce";
 import Select from "react-select";
 
 /*
+ * Functional components to use as filter input fields in tables.
  * Note that none of the renderers are valid standalone react components as they expect the complete table state and dispatch.
  */
 
@@ -61,7 +74,7 @@ export function renderCustomersFilter({
                             dispatch({
                                 type: ActionType.FILTER_REPLACE,
                                 id: "organisation",
-                                values: (selected as { value: string; label: string }).value.split("-")
+                                values: selected.value.split("-")
                             });
                         } else if (action.action === "clear") {
                             dispatch({ type: ActionType.FILTER_CLEAR, id: "organisation" });

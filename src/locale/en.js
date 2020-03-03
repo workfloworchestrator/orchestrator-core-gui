@@ -1384,7 +1384,9 @@ I18n.translations.en = {
         KLANT_SUPPORT: "Klant Support",
         KLANTSUPPORT: "Klant Support",
         SYSTEM: "System"
-    }
+    },
+    unavailable: "Unavailable",
+    unavailable_abbreviated: "N/A"
 };
 
 export default I18n.translations.en;

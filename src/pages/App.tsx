@@ -187,33 +187,44 @@ class App extends React.PureComponent<{}, IState> {
                             locationCodes(),
                             assignees(),
                             processStatuses()
-                        ]).then((result: [Organization[], Product[], string[], string[], string[]]) => {
-                            const [
-                                allOrganisations,
-                                allProducts,
-                                allLocationCodes,
-                                allAssignees,
-                                allProcessStatuses
-                            ] = result;
-                            this.setState({
-                                loading: false,
-                                applicationContext: {
-                                    currentUser: currentUser,
-                                    configuration: configuration!,
-                                    organisations: allOrganisations,
-                                    locationCodes: allLocationCodes,
-                                    assignees: allAssignees,
-                                    processStatuses: allProcessStatuses,
-                                    products: allProducts!.sort((a: Product, b: Product) =>
-                                        a.name.localeCompare(b.name)
-                                    ),
-                                    redirect: url => history.push(url)
+                        ]).then(
+                            (
+                                result: [
+                                    Organization[] | undefined,
+                                    Product[] | undefined,
+                                    string[] | undefined,
+                                    string[] | undefined,
+                                    string[] | undefined
+                                ]
+                            ) => {
+                                const [
+                                    allOrganisations,
+                                    allProducts,
+                                    allLocationCodes,
+                                    allAssignees,
+                                    allProcessStatuses
+                                ] = result;
+                                const products = allProducts
+                                    ? allProducts!.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
+                                    : [];
+                                this.setState({
+                                    loading: false,
+                                    applicationContext: {
+                                        currentUser: currentUser,
+                                        configuration: configuration!,
+                                        organisations: allOrganisations,
+                                        locationCodes: allLocationCodes,
+                                        assignees: allAssignees || [],
+                                        processStatuses: allProcessStatuses || [],
+                                        products: products || [],
+                                        redirect: url => history.push(url)
+                                    }
+                                });
+                                if (log) {
+                                    logUserInfo(currentUser.email, "logged in");
                                 }
-                            });
-                            if (log) {
-                                logUserInfo(currentUser.email, "logged in");
                             }
-                        });
+                        );
                     } else {
                         this.handleBackendDown();
                     }

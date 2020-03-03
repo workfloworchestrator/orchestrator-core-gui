@@ -1,5 +1,4 @@
-/*
- * Copyright 2019 SURF.
+/* Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +26,7 @@ import {
     TableState
 } from "react-table";
 import { useQueryParam, StringParam } from "use-query-params";
-import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters.js";
+import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { ProcessV2 } from "utils/types";
 import I18n from "i18n-js";
 import chunk from "lodash/chunk";

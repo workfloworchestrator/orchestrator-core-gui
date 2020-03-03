@@ -21,7 +21,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 
 interface IOrganisationSelectProps {
     id: string;
-    onChange: (value: ValueType<Option>, action: ActionMeta) => void;
+    onChange: (selected: Option | null, action: ActionMeta) => void;
     organisation: string;
     disabled?: boolean;
     placeholder?: string;
@@ -34,24 +34,43 @@ export default class OrganisationSelect extends React.PureComponent<IOrganisatio
         const { id, onChange, organisation, disabled, abbreviate, placeholder } = this.props;
         const { organisations }: { organisations: Organization[] } = this.context;
 
-        const options = organisations.map((org: Organization) => ({
-            value: org.uuid,
-            label: abbreviate ? org.abbr : org.name
-        }));
+        const options: Option[] = organisations
+            ? organisations.map((org: Organization) => ({
+                  value: org.uuid,
+                  label: abbreviate ? org.abbr : org.name
+              }))
+            : [];
         const value = options.find((option: Option) => option.value === organisation);
 
-        return (
-            <Select
-                id={id}
-                onChange={onChange}
-                options={options}
-                value={value}
-                isSearchable={true}
-                isClearable={true}
-                placeholder={placeholder || "Search and select a customer..."}
-                isDisabled={disabled || organisations.length === 0}
-            />
-        );
+        if (organisations) {
+            return (
+                <Select
+                    id={id}
+                    onChange={(selected: ValueType<Option>, action: ActionMeta) => {
+                        if (selected === null) {
+                            onChange(null, action);
+                        } else if (Array.isArray(selected)) {
+                            // This code should only be reached when this multi-select is used, we are not.
+                            return;
+                        } else {
+                            onChange(selected as Option, action);
+                        }
+                    }}
+                    options={options}
+                    value={value}
+                    isSearchable={true}
+                    isClearable={true}
+                    placeholder={placeholder || "Search and select a customer..."}
+                    isDisabled={disabled || organisations.length === 0}
+                />
+            );
+        } else {
+            return (
+                <div>
+                    <p>CRM unavailable</p>
+                </div>
+            );
+        }
     }
 }
 

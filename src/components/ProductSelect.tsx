@@ -50,12 +50,3 @@ export default function ProductSelect({ id, onChange, product, products, disable
         />
     );
 }
-
-ProductSelect.propTypes = {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
-    product: PropTypes.string,
-    disabled: PropTypes.bool,
-    placeholder: PropTypes.string
-};

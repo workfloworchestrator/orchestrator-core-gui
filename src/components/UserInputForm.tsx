@@ -240,7 +240,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         this.changeUserInput(name, value);
     };
 
-    changeSelectInput = (name: string) => (option: Option) => {
+    changeSelectInput = (name: string) => (option: Option | null) => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
     };
@@ -342,7 +342,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
 
     chooseInput = (userInput: InputField, validationError: ValidationError[]) => {
         const { nodeSubscriptions } = this.state;
-        const { products, organisations, locationCodes } = this.context;
+        const { products, locationCodes } = this.context;
         const name = userInput.name;
         const value = userInput.value;
         const stepUserInput = this.state.stepUserInput;
@@ -396,7 +396,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     <OrganisationSelect
                         id="organisation-select"
                         key={name}
-                        organisations={organisations || []}
                         onChange={this.changeSelectInput(name)}
                         organisation={value}
                         disabled={userInput.readonly}
