@@ -173,7 +173,7 @@
                     "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
                     "subscription_instance_id": "808d7792-6c83-4abe-8dd1-cbb0dc40a401",
                     "subscription_instance_value_id": "9770ed07-6e05-4797-a6ca-86526e32cadf",
-                    "value": "6"
+                    "value": "4"
                 },
                 {
                     "resource_type": {
@@ -290,7 +290,7 @@
                     "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
                     "subscription_instance_id": "deffb96c-56ba-49ef-93e4-e79449d44ecd",
                     "subscription_instance_value_id": "c8a449f9-1b21-4ec2-9335-68b07ed61d7b",
-                    "value": "5"
+                    "value": "4"
                 }
             ]
         },
@@ -329,7 +329,7 @@
                     "resource_type_id": "12b9890a-d018-457b-a624-be26b401e408",
                     "subscription_instance_id": "e8ce4ac8-9ce2-47c6-9bcc-20414629713f",
                     "subscription_instance_value_id": "8e3e9923-4c89-4af5-ad73-88c0bb9b658b",
-                    "value": "7"
+                    "value": "4"
                 }
             ]
         }

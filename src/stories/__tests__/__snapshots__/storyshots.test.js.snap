@@ -218,7 +218,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            025a376f-0d11-e511-80d0-005056956c1a
                           </td>
                         </tr>
                         <tr>
@@ -231,7 +231,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            untagged
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -323,11 +323,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                              6b5218b9-be87-4f5c-963d-90540b4ab189
                             </a>
                           </td>
                         </tr>
@@ -352,7 +352,279 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            9c294844-0d11-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              2c815189-5381-4c94-8598-ad1ce0dbcdcd
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td
+                    className="spacer"
+                  />
+                  <td
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-off"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Secondary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            7c41e5e3-0911-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A-JNX-02
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            0/1/1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            10GBASE-SR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              88e4c0ee-4405-40ee-9bef-1f6f3f997d9f
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            025a376f-0d11-e511-80d0-005056956c1a
                           </td>
                         </tr>
                         <tr>
@@ -417,7 +689,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            5
+                            4
                           </td>
                         </tr>
                         <tr>
@@ -457,279 +729,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/85c379b7-fa57-4d36-a033-617c890592ba"
+                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              85c379b7-fa57-4d36-a033-617c890592ba
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <td
-                    className="spacer"
-                  />
-                  <td
-                    colSpan={2}
-                  >
-                    <table
-                      className="highlight-off"
-                    >
-                      <thead>
-                        <tr>
-                          <td>
-                            <h3>
-                              Secondary LP
-                            </h3>
-                          </td>
-                          <td />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          className="label"
-                        >
-                          <td
-                            colSpan={2}
-                          >
-                            A2
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            customer
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            Design Academy Eindhoven
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS circuit name
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS node
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A-JNX-HANS81-VTB
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS port
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            AE20
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            VLAN ID
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            6
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            interface type
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            patch position
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            port subscription
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            <a
-                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              8a600d14-3901-43e0-89e2-9961294821e4
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody>
-                        <tr
-                          className="label"
-                        >
-                          <td
-                            colSpan={2}
-                          >
-                            B2
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            customer
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            Design Academy Eindhoven
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            Port Mode
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            untagged
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS circuit name
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS node
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A-JNX-HANS81-VTB
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS port
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            AE20
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            VLAN ID
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            7
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            interface type
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            patch position
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            port subscription
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            <a
-                              href="/subscription/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              46fd5ba3-0a1c-433d-8bc9-ff324a5b4550
+                              bb1be651-0fb6-4da7-9816-7fc3a9bf8896
                             </a>
                           </td>
                         </tr>
@@ -965,7 +969,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            025a376f-0d11-e511-80d0-005056956c1a
                           </td>
                         </tr>
                         <tr>
@@ -978,7 +982,413 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            untagged
+                            tagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A-JNX-02
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            0/1/1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            10GBASE-SR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              6b5218b9-be87-4f5c-963d-90540b4ab189
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            9c294844-0d11-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            GN001A-JNX-HANS81-VTB
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            AE20
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          />
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              2c815189-5381-4c94-8598-ad1ce0dbcdcd
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td
+                    className="spacer"
+                  />
+                  <td
+                    colSpan={2}
+                  >
+                    <table
+                      className="highlight-off"
+                    >
+                      <thead>
+                        <tr>
+                          <td>
+                            <h3>
+                              Secondary LP
+                            </h3>
+                          </td>
+                          <td />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            A2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            7c41e5e3-0911-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS circuit name
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS node
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A-JNX-02
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            IMS port
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            0/1/1
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            VLAN ID
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            interface type
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            10GBASE-SR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            patch position
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            port subscription
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            <a
+                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              88e4c0ee-4405-40ee-9bef-1f6f3f997d9f
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          className="label"
+                        >
+                          <td
+                            colSpan={2}
+                          >
+                            B2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            customer
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            025a376f-0d11-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -1062,405 +1472,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody>
-                        <tr
-                          className="label"
-                        >
-                          <td
-                            colSpan={2}
-                          >
-                            B1
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            customer
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            Design Academy Eindhoven
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            Port Mode
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            tagged
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS circuit name
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A_MSCNL_TAGGED_HVA_9BD8664F
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS node
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS port
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            VLAN ID
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            5
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            interface type
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            patch position
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            port subscription
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            <a
-                              href="/subscription/85c379b7-fa57-4d36-a033-617c890592ba"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              85c379b7-fa57-4d36-a033-617c890592ba
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <td
-                    className="spacer"
-                  />
-                  <td
-                    colSpan={2}
-                  >
-                    <table
-                      className="highlight-off"
-                    >
-                      <thead>
-                        <tr>
-                          <td>
-                            <h3>
-                              Secondary LP
-                            </h3>
-                          </td>
-                          <td />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          className="label"
-                        >
-                          <td
-                            colSpan={2}
-                          >
-                            A2
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            customer
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            Design Academy Eindhoven
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS circuit name
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS node
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A-JNX-HANS81-VTB
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS port
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            AE20
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            VLAN ID
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            6
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            interface type
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            patch position
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            port subscription
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            <a
-                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              8a600d14-3901-43e0-89e2-9961294821e4
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody>
-                        <tr
-                          className="label"
-                        >
-                          <td
-                            colSpan={2}
-                          >
-                            B2
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            customer
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            Design Academy Eindhoven
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            Port Mode
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            untagged
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS circuit name
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS node
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            GN001A-JNX-HANS81-VTB
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            IMS port
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            AE20
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            VLAN ID
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            7
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            interface type
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            patch position
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          />
-                        </tr>
-                        <tr>
-                          <td
-                            className="label"
-                          >
-                            port subscription
-                          </td>
-                          <td
-                            className="value"
-                            colSpan={1}
-                          >
-                            <a
-                              href="/subscription/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              46fd5ba3-0a1c-433d-8bc9-ff324a5b4550
+                              bb1be651-0fb6-4da7-9816-7fc3a9bf8896
                             </a>
                           </td>
                         </tr>
@@ -1696,7 +1712,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            9c294844-0d11-e511-80d0-005056956c1a
                           </td>
                         </tr>
                         <tr>
@@ -1709,7 +1725,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            untagged
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -1797,11 +1813,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                              2c815189-5381-4c94-8598-ad1ce0dbcdcd
                             </a>
                           </td>
                         </tr>
@@ -1826,7 +1842,20 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            025a376f-0d11-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -1839,7 +1868,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
                           </td>
                         </tr>
                         <tr>
@@ -1852,7 +1881,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            GN001A-JNX-HANS81-VTB
+                            DTC001A-JNX-02
                           </td>
                         </tr>
                         <tr>
@@ -1865,7 +1894,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            AE20
+                            0/1/1
                           </td>
                         </tr>
                         <tr>
@@ -1878,7 +1907,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            6
+                            5
                           </td>
                         </tr>
                         <tr>
@@ -1890,7 +1919,9 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                           <td
                             className="value"
                             colSpan={1}
-                          />
+                          >
+                            10GBASE-SR
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -1901,7 +1932,9 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                           <td
                             className="value"
                             colSpan={1}
-                          />
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -1914,11 +1947,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              8a600d14-3901-43e0-89e2-9961294821e4
+                              6b5218b9-be87-4f5c-963d-90540b4ab189
                             </a>
                           </td>
                         </tr>
@@ -1964,7 +1997,20 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            025a376f-0d11-e511-80d0-005056956c1a
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="label"
+                          >
+                            Port Mode
+                          </td>
+                          <td
+                            className="value"
+                            colSpan={1}
+                          >
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -1977,7 +2023,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            GN001A_AGGSP_TAGGED_ESNET_2C815189
+                            DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45
                           </td>
                         </tr>
                         <tr>
@@ -1990,7 +2036,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            GN001A-JNX-HANS81-VTB
+                            DTC001A-JNX-02
                           </td>
                         </tr>
                         <tr>
@@ -2003,7 +2049,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            AE20
+                            0/1/1
                           </td>
                         </tr>
                         <tr>
@@ -2028,7 +2074,9 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                           <td
                             className="value"
                             colSpan={1}
-                          />
+                          >
+                            10GBASE-SR
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -2039,7 +2087,9 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                           <td
                             className="value"
                             colSpan={1}
-                          />
+                          >
+                            DTC001A_ODF01/02 ()
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -2052,11 +2102,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/8a600d14-3901-43e0-89e2-9961294821e4"
+                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              8a600d14-3901-43e0-89e2-9961294821e4
+                              6b5218b9-be87-4f5c-963d-90540b4ab189
                             </a>
                           </td>
                         </tr>
@@ -2081,7 +2131,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            Design Academy Eindhoven
+                            9c294844-0d11-e511-80d0-005056956c1a
                           </td>
                         </tr>
                         <tr>
@@ -2094,7 +2144,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            untagged
+                            tagged
                           </td>
                         </tr>
                         <tr>
@@ -2146,7 +2196,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             className="value"
                             colSpan={1}
                           >
-                            4
+                            7
                           </td>
                         </tr>
                         <tr>
@@ -2182,11 +2232,11 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b"
+                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
-                              6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b
+                              2c815189-5381-4c94-8598-ad1ce0dbcdcd
                             </a>
                           </td>
                         </tr>

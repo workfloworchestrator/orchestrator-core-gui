@@ -1,0 +1,78 @@
+{
+    "crm_port_id": null,
+    "customer_descriptions": [],
+    "customer_id": "7c41e5e3-0911-e511-80d0-005056956c1a",
+    "description": "ASTRON MSC AH001A",
+    "end_date": null,
+    "instances": [
+        {
+            "label": null,
+            "product_block": {
+                "created_at": 1570538350.651749,
+                "description": "Service Port for Multi Service Carrier for SN8",
+                "end_date": null,
+                "name": "Service Port Multi Service Carrier SN8",
+                "product_block_id": "4d741c9e-3fa7-48ac-90cf-0685d8192b2d",
+                "status": "active",
+                "tag": "MSC"
+            },
+            "product_block_id": "4d741c9e-3fa7-48ac-90cf-0685d8192b2d",
+            "subscription_id": "88e4c0ee-4405-40ee-9bef-1f6f3f997d9f",
+            "subscription_instance_id": "085e11bf-5e71-46c3-ba5c-9a7997c94f56",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "The service VLAN tag for this MSC",
+                        "resource_type": "service_tag",
+                        "resource_type_id": "115d7b18-981a-4de6-b13a-90d31586d1a5"
+                    },
+                    "resource_type_id": "115d7b18-981a-4de6-b13a-90d31586d1a5",
+                    "subscription_instance_id": "085e11bf-5e71-46c3-ba5c-9a7997c94f56",
+                    "subscription_instance_value_id": "366c6945-b361-48c4-bb43-ddc179b316ec",
+                    "value": "42"
+                },
+                {
+                    "resource_type": {
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type": "ims_circuit_id",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83",
+                    "subscription_instance_id": "085e11bf-5e71-46c3-ba5c-9a7997c94f56",
+                    "subscription_instance_value_id": "59d365b8-cd7a-4d5d-bf37-66acdd1356a3",
+                    "value": "45310"
+                },
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "085e11bf-5e71-46c3-ba5c-9a7997c94f56",
+                    "subscription_instance_value_id": "54033601-d6e6-47ff-8b95-f5131b937c4f",
+                    "value": "48333bc8-3a48-4bc0-8be2-69a7d54795cd"
+                }
+            ]
+        }
+    ],
+    "insync": true,
+    "name": "SN8 MSC",
+    "note": null,
+    "port_mode": null,
+    "product": {
+        "created_at": 1570538350.651749,
+        "description": "SURFnet8 Multi Service Carrier",
+        "end_date": null,
+        "name": "SN8 MSC",
+        "product_id": "b359852b-52fd-4009-a728-d18bdda32490",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "MSC"
+    },
+    "product_id": "b359852b-52fd-4009-a728-d18bdda32490",
+    "start_date": 1578478533.928329,
+    "status": "active",
+    "subscription_id": "88e4c0ee-4405-40ee-9bef-1f6f3f997d9f",
+    "tag": "MSC"
+}
