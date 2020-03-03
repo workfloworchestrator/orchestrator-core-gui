@@ -1,0 +1,78 @@
+{
+    "crm_port_id": null,
+    "customer_descriptions": [],
+    "customer_id": "025a376f-0d11-e511-80d0-005056956c1a",
+    "description": "AMPATH SP AH001A 10 Gbit/s",
+    "end_date": null,
+    "instances": [
+        {
+            "label": null,
+            "product_block": {
+                "created_at": 1543930543.144142,
+                "description": "This is the model of Service Port on the Surfnet8 network",
+                "end_date": null,
+                "name": "SN8 Service Port",
+                "product_block_id": "c2f1f52c-5e35-4fc0-ba69-44b04d58a1be",
+                "status": "active",
+                "tag": "SP"
+            },
+            "product_block_id": "c2f1f52c-5e35-4fc0-ba69-44b04d58a1be",
+            "subscription_id": "bb1be651-0fb6-4da7-9816-7fc3a9bf8896",
+            "subscription_instance_id": "190f68cf-a219-487f-bb85-a1d125188375",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "The UUID of a NSO service",
+                        "resource_type": "nso_service_id",
+                        "resource_type_id": "9b9babd4-da78-49cc-b893-abdfd6832c39"
+                    },
+                    "resource_type_id": "9b9babd4-da78-49cc-b893-abdfd6832c39",
+                    "subscription_instance_id": "190f68cf-a219-487f-bb85-a1d125188375",
+                    "subscription_instance_value_id": "bafa0af7-0433-4f42-be17-0d6b0d1c8b3d",
+                    "value": "31c5f1cf-7d53-4261-b61d-60102c550f88"
+                },
+                {
+                    "resource_type": {
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type": "ims_circuit_id",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83",
+                    "subscription_instance_id": "190f68cf-a219-487f-bb85-a1d125188375",
+                    "subscription_instance_value_id": "a5049b7b-e182-405f-8d82-46286d019d85",
+                    "value": "67745"
+                },
+                {
+                    "resource_type": {
+                        "description": "untagged, tagged or link_member",
+                        "resource_type": "port_mode",
+                        "resource_type_id": "4a53e424-c1cf-4e69-80e5-049f32520ed9"
+                    },
+                    "resource_type_id": "4a53e424-c1cf-4e69-80e5-049f32520ed9",
+                    "subscription_instance_id": "190f68cf-a219-487f-bb85-a1d125188375",
+                    "subscription_instance_value_id": "7a16c199-78f1-4048-8495-6ac86abf75f6",
+                    "value": "tagged"
+                }
+            ]
+        }
+    ],
+    "insync": false,
+    "name": "SN8 Service Port 10G",
+    "note": null,
+    "port_mode": "tagged",
+    "product": {
+        "created_at": 1543930543.144142,
+        "description": "Service Port 10G",
+        "end_date": null,
+        "name": "SN8 Service Port 10G",
+        "product_id": "53d2d3bf-23bb-4e05-8805-3dc5651affe6",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "SP"
+    },
+    "product_id": "53d2d3bf-23bb-4e05-8805-3dc5651affe6",
+    "start_date": 1582123102.450024,
+    "status": "active",
+    "subscription_id": "bb1be651-0fb6-4da7-9816-7fc3a9bf8896",
+    "tag": "SP"
+}

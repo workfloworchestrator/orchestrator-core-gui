@@ -18,7 +18,7 @@ import I18n from "i18n-js";
 import { isEmpty } from "../utils/Utils";
 import { subscriptionsDetail, portByImsServiceId, serviceByImsServiceId } from "../api/index";
 import { enrichSubscription, productById } from "../utils/Lookups";
-import { port_subscription_id, subscriptionInstanceValues } from "../validations/Subscriptions";
+import { subscriptionInstanceValues } from "../validations/Subscriptions";
 
 import "./DowngradeRedundantLPChoice.scss";
 import CheckBox from "./CheckBox";
@@ -40,7 +40,6 @@ interface PortSubscription extends LRSubscription {
     ims_port: string;
     ims_iface_type: string;
     ims_patch_position: string;
-    label: string;
     vlan: string;
 }
 
@@ -81,41 +80,25 @@ function enrichPrimarySubscription(
     return subscription as LRSubscription;
 }
 
-function enrichPortSubscription(
-    parentSubscription: SubscriptionWithDetails,
-    subscription: Partial<PortSubscription>
-): Promise<PortSubscription> {
-    // fetch the label by subscription_id
-    subscription.label = parentSubscription.instances.find(
-        i =>
-            (i.product_block.name === "Service Attach Point" ||
-                i.product_block.name === "SN8 Light Path Service Attach Point") &&
-            i.values.find(rt => rt.resource_type.resource_type === "port_subscription_id")!.value ===
-                subscription.subscription_id
-    )!.label;
-    subscription.vlan = parentSubscription.instances
-        .find(i => i.label === subscription.label)!
-        .values.find(v => v.resource_type.resource_type === "vlanrange")!.value;
-    const [vc_label_part, left_right_part] = subscription.label.split("-");
-    const left_right_index = left_right_part === "left" ? 0 : 1;
-    const si = parentSubscription.instances.find(i => i.label === vc_label_part);
-    const imsCircuitId = si!.values.find(v => v.resource_type.resource_type === "ims_circuit_id")!.value;
-    return serviceByImsServiceId(parseInt(imsCircuitId)).then(
-        imsService =>
-            serviceByImsServiceId(imsService.endpoints[left_right_index].id).then(imsChildService => {
-                subscription.ims_circuit_name = imsChildService.name;
+function enrichPortSubscription(vlan: string, subscription: Partial<PortSubscription>): Promise<PortSubscription> {
+    subscription.vlan = vlan;
+    const si = subscription.instances![0];
+    const imsCircuitId = parseInt(si!.values.find(v => v.resource_type.resource_type === "ims_circuit_id")!.value);
+    return serviceByImsServiceId(imsCircuitId).then(
+        imsService => {
+            subscription.ims_circuit_name = imsService.name;
 
-                if (imsChildService.product !== "SVLAN") {
-                    return portByImsServiceId(imsService.endpoints[left_right_index].id).then(imsPort => {
-                        subscription.ims_node = imsPort.node;
-                        subscription.ims_port = imsPort.port;
-                        subscription.ims_iface_type = imsPort.iface_type;
-                        subscription.ims_patch_position = imsPort.patchposition;
-                        return subscription as PortSubscription;
-                    });
-                }
-                return subscription as PortSubscription;
-            }),
+            if (imsService.product !== "SVLAN") {
+                return portByImsServiceId(imsCircuitId).then(imsPort => {
+                    subscription.ims_node = imsPort.node;
+                    subscription.ims_port = imsPort.port;
+                    subscription.ims_iface_type = imsPort.iface_type;
+                    subscription.ims_patch_position = imsPort.patchposition;
+                    return subscription as PortSubscription;
+                });
+            }
+            return subscription as PortSubscription;
+        },
         () => subscription as PortSubscription
     );
 }
@@ -155,15 +138,21 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
             const lrSubscription = enrichPrimarySubscription(subscription, organisations, products);
             const values = subscriptionInstanceValues(lrSubscription);
             const portSubscriptionResourceTypes = values.filter(
-                val => val.resource_type.resource_type === port_subscription_id
+                val => val.resource_type.resource_type === "port_subscription_id"
             );
+            const vlanResourceTypes = values.filter(val => val.resource_type.resource_type === "vlanrange");
 
             const findDataForLabel = (label: string) =>
                 subscriptionsDetail(
                     portSubscriptionResourceTypes.find(rt => rt.instance_label.toLowerCase() === label)!.value
                 )
                     .then(subscription => enrichSubscription(subscription, organisations, products))
-                    .then(subscription => enrichPortSubscription(lrSubscription, subscription));
+                    .then(subscription =>
+                        enrichPortSubscription(
+                            vlanResourceTypes.find(rt => rt.instance_label.toLowerCase() === label)!.value,
+                            subscription
+                        )
+                    );
 
             const promises = [
                 findDataForLabel("primary-left"),

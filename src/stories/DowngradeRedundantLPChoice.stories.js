@@ -22,44 +22,12 @@ import { Store } from "@sambego/storybook-state";
 
 import DowngradeRedundantLPChoice from "../components/DowngradeRedundantLPChoice";
 
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
-import LR_SUBSCRIPTION from "./data/subscription-lr.json";
-import LR_SUBSCRIPTION_SAME_PORTS from "./data/subscription-lr-same-ports.json";
-
-const imsServicePrimary = {
-    aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
-    customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
-    domain: "SURFNET8",
-    endpoints: [
-        { id: 12345, type: "service", vlanranges: [{ end: 4, start: 4, sub_circuit_id: null }] },
-        { id: 12346, type: "internet", vlanranges: [{ end: 5, start: 5, sub_circuit_id: null }] }
-    ],
-    extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
-    id: 41097,
-    location: null,
-    name: "DTC001A_DTC001A_IP_BGP_GRAAFSCHAP_9C8C13D5",
-    order_id: "SN8 PROCESS 4953FFE3-A2DB-4E90-BCAB-5DD22CD564FD",
-    product: "IP",
-    speed: "SERVICE",
-    status: "3"
-};
-const imsServiceSecondary = {
-    aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
-    customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
-    domain: "SURFNET8",
-    endpoints: [
-        { id: 12347, type: "service", vlanranges: [{ end: 6, start: 6, sub_circuit_id: null }] },
-        { id: 12348, type: "service", vlanranges: [{ end: 7, start: 7, sub_circuit_id: null }] }
-    ],
-    extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
-    id: 41096,
-    location: null,
-    name: "DTC001A_DTC001A_IP_BGP_GRAAFSCHAP_9C8C13D5",
-    order_id: "SN8 PROCESS 4953FFE3-A2DB-4E90-BCAB-5DD22CD564FD",
-    product: "IP",
-    speed: "SERVICE",
-    status: "3"
-};
+import LR_SUBSCRIPTION from "./data/subscriptions/subscription-lr-d61e7664.json";
+import LR_SUBSCRIPTION_SAME_PORTS from "./data/subscriptions/subscription-lr-same-ports-d61e7664.json";
+import SP_SUBSCRIPTION_1 from "./data/subscriptions/subscription-sp-6b5218b9.json";
+import SP_SUBSCRIPTION_2 from "./data/subscriptions/subscription-sp-bb1be651.json";
+import AGGSP_SUBSCRIPTION from "./data/subscriptions/subscription-aggsp-2c815189.json";
+import MSC_SUBSCRIPTION from "./data/subscriptions/subscription-msc-88e4c0ee.json";
 
 const imsPortServiceSp = { name: "DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45", product: "SP" };
 
@@ -113,22 +81,19 @@ export default {
 export const DifferentPorts = () => {
     fetchMock.restore();
     fetchMock.get("/api/subscriptions/subscription_id", LR_SUBSCRIPTION);
-    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", SN8PortSubscriptions[0]);
-    fetchMock.get("/api/subscriptions/85c379b7-fa57-4d36-a033-617c890592ba", SN8PortSubscriptions[2]);
-    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", SN8PortSubscriptions[3]);
-    fetchMock.get("/api/subscriptions/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550", SN8PortSubscriptions[4]);
+    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", MSC_SUBSCRIPTION);
+    fetchMock.get("/api/subscriptions/85c379b7-fa57-4d36-a033-617c890592ba", AGGSP_SUBSCRIPTION);
+    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", SP_SUBSCRIPTION_1);
+    fetchMock.get("/api/subscriptions/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550", SP_SUBSCRIPTION_2);
 
-    fetchMock.get("/api/ims/service_by_ims_service_id/41097", imsServicePrimary);
-    fetchMock.get("/api/ims/service_by_ims_service_id/41096", imsServiceSecondary);
-
-    fetchMock.get("/api/ims/service_by_ims_service_id/12345", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12345", imsPortSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12346", imsPortServiceAggSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12346", imsPortAggSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12347", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12347", imsPortSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12348", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12348", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/67746", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/67746", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/44892", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/44892", imsPortAggSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/45310", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/45310", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/67745", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/67745", imsPortSp);
 
     return (
         <DowngradeRedundantLPChoice
@@ -147,21 +112,18 @@ export const DifferentPorts = () => {
 export const MscPort = () => {
     fetchMock.restore();
     fetchMock.get("/api/subscriptions/subscription_id", LR_SUBSCRIPTION);
-    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", SN8PortSubscriptions[0]);
-    fetchMock.get("/api/subscriptions/85c379b7-fa57-4d36-a033-617c890592ba", SN8PortSubscriptions[2]);
-    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", SN8PortSubscriptions[3]);
-    fetchMock.get("/api/subscriptions/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550", SN8PortSubscriptions[4]);
+    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", MSC_SUBSCRIPTION);
+    fetchMock.get("/api/subscriptions/85c379b7-fa57-4d36-a033-617c890592ba", AGGSP_SUBSCRIPTION);
+    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", SP_SUBSCRIPTION_1);
+    fetchMock.get("/api/subscriptions/46fd5ba3-0a1c-433d-8bc9-ff324a5b4550", SP_SUBSCRIPTION_2);
 
-    fetchMock.get("/api/ims/service_by_ims_service_id/41097", imsServicePrimary);
-    fetchMock.get("/api/ims/service_by_ims_service_id/41096", imsServiceSecondary);
-
-    fetchMock.get("/api/ims/service_by_ims_service_id/12345", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12345", imsPortSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12346", imsPortServiceAggSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12346", imsPortAggSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12347", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12347", imsPortSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12348", imsPortServiceMsc);
+    fetchMock.get("/api/ims/service_by_ims_service_id/67746", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/67746", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/44892", imsPortServiceAggSp);
+    fetchMock.get("/api/ims/port_by_ims_service/44892", imsPortAggSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/45310", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/45310", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/67745", imsPortServiceMsc);
 
     return (
         <DowngradeRedundantLPChoice
@@ -180,49 +142,12 @@ export const MscPort = () => {
 export const SamePorts = () => {
     fetchMock.restore();
     fetchMock.get("/api/subscriptions/subscription_id", LR_SUBSCRIPTION_SAME_PORTS);
-    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", SN8PortSubscriptions[0]);
-    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", SN8PortSubscriptions[3]);
-
-    fetchMock.get("/api/ims/service_by_ims_service_id/41097", {
-        aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
-        customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
-        domain: "SURFNET8",
-        endpoints: [
-            { id: 12345, type: "service", vlanranges: [{ end: 4, start: 4, sub_circuit_id: null }] },
-            { id: 12346, type: "internet", vlanranges: [{ end: 5, start: 5, sub_circuit_id: null }] }
-        ],
-        extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
-        id: 41097,
-        location: null,
-        name: "DTC001A_DTC001A_IP_BGP_GRAAFSCHAP_9C8C13D5",
-        order_id: "SN8 PROCESS 4953FFE3-A2DB-4E90-BCAB-5DD22CD564FD",
-        product: "IP",
-        speed: "SERVICE",
-        status: "3"
-    });
-
-    fetchMock.get("/api/ims/service_by_ims_service_id/41096", {
-        aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
-        customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
-        domain: "SURFNET8",
-        endpoints: [
-            { id: 12345, type: "service", vlanranges: [{ end: 6, start: 6, sub_circuit_id: null }] },
-            { id: 12346, type: "service", vlanranges: [{ end: 7, start: 7, sub_circuit_id: null }] }
-        ],
-        extra_info: "10 Gbit/s SN8 SURFinternet BGP in DOETINCHEM van Graafschap College",
-        id: 41096,
-        location: null,
-        name: "DTC001A_DTC001A_IP_BGP_GRAAFSCHAP_9C8C13D5",
-        order_id: "SN8 PROCESS 4953FFE3-A2DB-4E90-BCAB-5DD22CD564FD",
-        product: "IP",
-        speed: "SERVICE",
-        status: "3"
-    });
-
-    fetchMock.get("/api/ims/service_by_ims_service_id/12345", imsPortServiceSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12345", imsPortSp);
-    fetchMock.get("/api/ims/service_by_ims_service_id/12346", imsPortServiceAggSp);
-    fetchMock.get("/api/ims/port_by_ims_service/12346", imsPortAggSp);
+    fetchMock.get("/api/subscriptions/8a600d14-3901-43e0-89e2-9961294821e4", SP_SUBSCRIPTION_1);
+    fetchMock.get("/api/subscriptions/6c9b7b56-7c35-4f18-a8b3-da2b7fa9835b", AGGSP_SUBSCRIPTION);
+    fetchMock.get("/api/ims/service_by_ims_service_id/67746", imsPortServiceSp);
+    fetchMock.get("/api/ims/port_by_ims_service/67746", imsPortSp);
+    fetchMock.get("/api/ims/service_by_ims_service_id/44892", imsPortServiceAggSp);
+    fetchMock.get("/api/ims/port_by_ims_service/44892", imsPortAggSp);
 
     return (
         <DowngradeRedundantLPChoice
