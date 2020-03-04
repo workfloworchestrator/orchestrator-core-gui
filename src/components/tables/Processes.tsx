@@ -21,7 +21,6 @@ import {
     Row,
     RowPropGetter,
     SessionTableSettings,
-    SortingRule,
     TableSettings,
     TableState
 } from "react-table";
@@ -45,7 +44,6 @@ import {
 } from "components/tables/cellRenderers";
 import DropDownContainer from "components/DropDownContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
-import { FilterArgument } from "utils/types";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
@@ -173,14 +171,15 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
         () => [
             {
                 Header: <i className={"fa fa-info"} />,
-                accessor: "failure",
+                id: "info",
+                accessor: "failed_reason",
                 disableSortBy: true,
                 Filter: ({ toggleAllRowsExpanded }) => (
                     <i className="fa fa-arrows-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
-                    const decal = cell.value ? (
+                    const button = cell.value ? (
                         <i className={"fa fa-exclamation-triangle"} />
                     ) : row.isExpanded ? (
                         <i className={"fa fa-minus-circle"} />
@@ -195,8 +194,8 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                                 row.toggleRowExpanded();
                             }}
                         >
-                            {caret && caret}
-                            {decal}
+                            {caret}
+                            {button}
                         </div>
                     );
                 }
@@ -215,13 +214,15 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Last step",
-                accessor: "step",
+                id: "step",
+                accessor: "last_step",
                 disableSortBy: true,
                 disableFilters: true
             },
             {
                 Header: "Status",
-                accessor: "status",
+                id: "status",
+                accessor: "last_status",
                 Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
                 Cell: ({ cell }: { cell: Cell }) => {
                     return I18n.t(`process_statuses.${cell.value}`);
@@ -231,6 +232,13 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 Header: "Workflow",
                 accessor: "workflow",
                 Filter: renderILikeFilter
+            },
+            {
+                Header: "Target",
+                id: "target",
+                accessor: "workflow_target",
+                disableSortBy: true,
+                Filter: renderMultiSelectFilter.bind(null, ["CREATE", "MODIFY", "TERMINATE", "SYSTEM"], null)
             },
             {
                 Header: "Customer",
@@ -273,18 +281,21 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             },
             {
                 Header: "Created by",
-                accessor: "creator",
+                id: "creator",
+                accessor: "created_by",
                 Filter: renderILikeFilter
             },
             {
                 Header: "Started",
-                accessor: "started",
+                id: "started",
+                accessor: "started_at",
                 Cell: renderTimestampCell,
                 disableFilters: true
             },
             {
                 Header: "Modified",
-                accessor: "modified",
+                id: "modified",
+                accessor: "last_modified_at",
                 Cell: renderTimestampCell,
                 disableFilters: true
             },

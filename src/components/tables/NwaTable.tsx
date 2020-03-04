@@ -21,7 +21,6 @@ import {
     Row,
     RowPropGetter,
     SessionTableSettings,
-    SortingRule,
     TableSettings,
     TableState,
     useExpanded,
@@ -38,7 +37,6 @@ import Paginator from "./Paginator";
 import Preferences from "./Preferences";
 import useInterval from "./useInterval";
 import useFilterableDataFetcher from "./useFilterableDataFetcher";
-import { FilterArgument } from "utils/types";
 
 /*
  * Reusable NWA table implementation using react-table 7.

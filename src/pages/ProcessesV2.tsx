@@ -107,9 +107,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             process,
             this.showProcess(process),
             this.handleRetryProcess(process),
-            e => {
-                console.log("What the hell? You want to delete me???");
-            },
+            () => null,
             this.handleAbortProcess(process)
         );
         return <DropDownActions options={options} i18nPrefix="processes" />;

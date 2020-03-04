@@ -305,8 +305,6 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
         );
-        // hotfix to remove delete button
-        options = options.filter(option => option.label !== "delete");
         return <DropDownActions options={options} i18nPrefix="processes" />;
     };
 

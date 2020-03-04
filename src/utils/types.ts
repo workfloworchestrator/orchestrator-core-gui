@@ -170,15 +170,17 @@ export interface ProcessSubscription {
 
 export interface ProcessV2 {
     assignee: string;
-    creator: string;
-    failure: string;
-    modified: string;
+    created_by: string;
+    failed_reason: string;
+    last_modified_at: string;
     pid: string;
-    started: string;
-    status: string;
-    step: string;
+    started_at: string;
+    last_status: string;
+    last_step: string;
     subscriptions: Array<Subscription>;
     workflow: string;
+    workflow_target: string;
+    is_task: boolean;
 }
 
 export interface InputField {

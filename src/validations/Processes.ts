@@ -12,6 +12,7 @@
  * limitations under the License.
  *
  */
+import { Process, ProcessV2 } from "utils/types";
 
 interface Action {
     icon: string;
@@ -20,12 +21,10 @@ interface Action {
     danger?: boolean;
 }
 
-interface WithStatus {
-    status: string;
-}
+type ProcessWithStatus = Process | ProcessV2;
 
-export function actionOptions<T extends WithStatus>(
-    process: T,
+export function actionOptions(
+    process: ProcessWithStatus,
     showAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     retryAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
     deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void,
@@ -60,36 +59,57 @@ export function actionOptions<T extends WithStatus>(
         danger: true
     };
     let options = [];
-    switch (process.status) {
+    const status = process.last_status;
+
+    switch (status) {
         case "failed":
-            options = [details, retry, abort, _delete];
+            options = [details, retry, abort];
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         case "api_unavailable":
-            options = [details, retry, abort, _delete];
+            options = [details, retry, abort];
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         case "inconsistent_data":
-            options = [details, retry, abort, _delete];
+            options = [details, retry, abort];
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         case "waiting":
-            options = [details, retry, abort, _delete];
+            options = [details, retry, abort];
             break;
         case "aborted":
-            options = [details, _delete];
+            options = [details];
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         case "running": //??
-            options = [abort, _delete];
+            options = [details, abort];
             break;
         case "completed":
-            options = [details, _delete];
+            options = [details];
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         case "suspended":
-            options = [userInput, abort, _delete];
+            options = [userInput, abort];
             break;
         case "created":
-            options = [retry, abort, _delete];
+            options = [retry, abort];
+
+            if (process.is_task) {
+                options.push(_delete);
+            }
             break;
         default:
-            throw new Error(`Unknown status: ${process.status}`);
+            throw new Error(`Unknown status: ${status}`);
     }
     return options;
 }

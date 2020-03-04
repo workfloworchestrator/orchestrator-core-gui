@@ -1365,7 +1365,8 @@ I18n.translations.en = {
             tag: "product tag...",
             creator: "creator..",
             workflow: "workflow name...",
-            subscriptions: "description..."
+            subscriptions: "description...",
+            target: "workflow target..."
         },
         filter_button: {
             on: "on",
