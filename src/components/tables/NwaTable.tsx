@@ -191,7 +191,6 @@ interface INwaTableProps<T extends object> {
     initialTableSettings: TableSettings<T>;
     extraRowPropGetter: RowPropGetter<T>;
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
-    renderCaption: (filterBy: FilterArgument[], sortBy: SortingRule<string>[]) => JSX.Element;
 }
 
 export function NwaTable<T extends object>({
@@ -201,8 +200,7 @@ export function NwaTable<T extends object>({
     endpoint,
     initialTableSettings,
     extraRowPropGetter,
-    renderSubComponent,
-    renderCaption
+    renderSubComponent
 }: INwaTableProps<T>) {
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
@@ -322,11 +320,10 @@ export function NwaTable<T extends object>({
             {!minimized && (
                 <>
                     <table className="nwa-table" {...getTableProps()}>
-                        {renderCaption(filterBy, sortBy)}
                         <thead>
                             {headerGroups.map(headerGroup => (
                                 <>
-                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                    <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
                                         {headerGroup.headers.map(column => (
                                             <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                                 {column.render("Header")}
@@ -334,7 +331,7 @@ export function NwaTable<T extends object>({
                                             </th>
                                         ))}
                                     </tr>
-                                    <tr>
+                                    <tr className={"filters"} {...headerGroup.getHeaderGroupProps()}>
                                         {headerGroup.headers.map(column => (
                                             <th>{column.canFilter && column.render("Filter")}</th>
                                         ))}

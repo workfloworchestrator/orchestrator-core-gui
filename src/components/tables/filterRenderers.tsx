@@ -36,7 +36,12 @@ const renderFilterIcon = (filtering: boolean) => (active: boolean, hover: boolea
             return out;
         }
     }, "");
-    return <i className={"fa fa-filter" + classes} />;
+    return (
+        <>
+            <i className={"fa fa-filter" + classes} />
+            {filtering ? <i className={"fa fa-check-square-o"} /> : <i className={"fa fa-minus-square-o"} />}
+        </>
+    );
 };
 
 export function renderCustomersFilter({

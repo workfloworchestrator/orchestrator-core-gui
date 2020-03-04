@@ -1366,6 +1366,10 @@ I18n.translations.en = {
             creator: "creator..",
             workflow: "workflow name...",
             subscriptions: "description..."
+        },
+        filter_button: {
+            on: "on",
+            off: "off"
         }
     },
     process_statuses: {

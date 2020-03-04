@@ -120,13 +120,13 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             "table.processes.active",
             initialProcessesFilterAndSort(false, ["running", "suspended", "failed"]),
             ["pid", "step", "tags", "customer"],
-            { refresh: true }
+            { showSettings: false, refresh: true }
         );
         const completedSettings = initialProcessTableSettings(
             "table.processes.completed",
             initialProcessesFilterAndSort(false, ["completed"]),
             ["pid", "step", "status", "assignee", "creator", "started", "abbrev"],
-            { showPaginator: false, pageSize: 5, refresh: true }
+            { showSettings: false, showPaginator: false, pageSize: 5, refresh: true }
         );
 
         return (
