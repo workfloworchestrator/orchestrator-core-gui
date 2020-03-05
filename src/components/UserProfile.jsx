@@ -32,5 +32,3 @@ export default function UserProfile() {
         </ApplicationContext.Consumer>
     );
 }
-
-UserProfile.propTypes = {};

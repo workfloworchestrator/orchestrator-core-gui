@@ -393,6 +393,4 @@ export default class Products extends React.Component {
     }
 }
 
-Products.propTypes = {};
-
 Products.contextType = ApplicationContext;

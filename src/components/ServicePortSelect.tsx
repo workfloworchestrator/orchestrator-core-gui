@@ -14,30 +14,24 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import Select from "react-select";
 import { ValueType } from "react-select/src/types";
-import { ServicePortSubscription, Organization } from "../utils/types";
-
-interface OptionType {
-    value: string;
-    label: string;
-}
+import { ServicePortSubscription, Organization, Option } from "../utils/types";
+import ApplicationContext from "../utils/ApplicationContext";
 
 interface IProps {
     servicePort: string | null;
     servicePorts: ServicePortSubscription[];
-    organisations: Organization[];
     disabled: boolean;
-    onChange: (value: OptionType) => void;
+    onChange: (value: Option) => void;
 }
 
 export default class ServicePortSelect extends React.PureComponent<IProps> {
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
 
-    label = (servicePort: ServicePortSubscription, organisations: Organization[]) => {
-        const organisation = organisations.find(org => org.uuid === servicePort.customer_id);
-        const organisationName = organisation ? organisation.name : "";
+    label = (servicePort: ServicePortSubscription, organisations?: Organization[]) => {
+        const organisation = organisations && organisations.find(org => org.uuid === servicePort.customer_id);
+        const organisationName = organisation ? organisation.name : servicePort.customer_id.substring(0, 8);
         const description = servicePort.description || "<No description>";
         const subscription_substring = servicePort.subscription_id.substring(0, 8);
         if (["MSP", "MSPNL", "SSP"].includes(servicePort.product.tag)) {
@@ -50,7 +44,8 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
     };
 
     render() {
-        const { onChange, servicePort, servicePorts, organisations, disabled } = this.props;
+        const { onChange, servicePort, servicePorts, disabled } = this.props;
+        const { organisations } = this.context;
 
         const options = servicePorts
             .map(aServicePort => ({
@@ -63,7 +58,7 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
         return (
             <Select
                 id="port-choice"
-                onChange={onChange as (value: ValueType<OptionType>) => void}
+                onChange={onChange as (value: ValueType<Option>) => void}
                 options={options}
                 value={value}
                 isSearchable={true}
@@ -73,10 +68,4 @@ export default class ServicePortSelect extends React.PureComponent<IProps> {
     }
 }
 
-ServicePortSelect.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    servicePorts: PropTypes.array.isRequired,
-    servicePort: PropTypes.string,
-    organisations: PropTypes.array.isRequired,
-    disabled: PropTypes.bool
-};
+ServicePortSelect.contextType = ApplicationContext;

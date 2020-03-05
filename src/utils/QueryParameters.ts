@@ -2,8 +2,11 @@ import {
     encodeDelimitedNumericArray,
     decodeDelimitedNumericArray,
     encodeDelimitedArray,
-    decodeDelimitedArray
+    decodeDelimitedArray,
+    QueryParamConfig
 } from "use-query-params";
+
+import { Search } from "history";
 
 /*
  * Copyright 2019 SURF.
@@ -20,11 +23,19 @@ import {
  *
  */
 
+export interface LocationSearchHash {
+    [index: string]: string[];
+}
+
+export interface LocationSearchSquashedHash {
+    [index: string]: string[] | string;
+}
+
 const QueryParameter = {
     //shameless refactor of https://gist.githubusercontent.com/pduey/2764606/raw/e8b9d6099f1e4161f7dd9f81d71c2c7a1fecbd5b/querystring.js
 
-    searchToHash: function(windowLocationSearch) {
-        const h = {};
+    searchToHash: function(windowLocationSearch: Search): LocationSearchHash {
+        const h: LocationSearchHash = {};
         if (windowLocationSearch === undefined || windowLocationSearch.length < 1) {
             return h;
         }
@@ -42,7 +53,7 @@ const QueryParameter = {
         return h;
     },
 
-    hashToSearch: function(newSearchHash) {
+    hashToSearch: function(newSearchHash: LocationSearchHash) {
         let search = "?";
         for (const key in newSearchHash) {
             if (newSearchHash.hasOwnProperty(key)) {
@@ -56,19 +67,19 @@ const QueryParameter = {
     }
 };
 
-export function getParameterByName(name, windowLocationSearch) {
+export function getParameterByName(name: string, windowLocationSearch: Search) {
     const replacedName = name.replace(/[[]/, "[").replace(/[\]]/, "\\]");
     const regex = new RegExp("[\\?&]" + replacedName + "=([^&#]*)"),
         results = regex.exec(windowLocationSearch);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-export function getQueryParameters(windowLocationSearch) {
+export function getQueryParameters(windowLocationSearch: Search): LocationSearchSquashedHash {
     const params = QueryParameter.searchToHash(windowLocationSearch);
-    var squashed = {};
+    var squashed: LocationSearchSquashedHash = {};
     for (const [key, val] of Object.entries(params)) {
         if (val.length === 1) {
-            squashed[key] = val.pop();
+            squashed[key] = val.pop()!;
         } else {
             squashed[key] = val;
         }
@@ -76,12 +87,12 @@ export function getQueryParameters(windowLocationSearch) {
     return squashed;
 }
 
-export const CommaSeparatedNumericArrayParam = {
-    encode: value => encodeDelimitedNumericArray(value, ","),
-    decode: strValue => decodeDelimitedNumericArray(strValue, ",")
+export const CommaSeparatedNumericArrayParam: QueryParamConfig<number[] | undefined> = {
+    encode: (value?: number[]) => encodeDelimitedNumericArray(value, ","),
+    decode: (strValue: string | string[]) => decodeDelimitedNumericArray(strValue, ",")
 };
 
-export const CommaSeparatedStringArrayParam = {
-    encode: value => encodeDelimitedArray(value, ","),
-    decode: strValue => decodeDelimitedArray(strValue, ",")
+export const CommaSeparatedStringArrayParam: QueryParamConfig<string[] | undefined> = {
+    encode: (value?: string[]) => encodeDelimitedArray(value, ","),
+    decode: (strValue: string | string[]) => decodeDelimitedArray(strValue, ",")
 };

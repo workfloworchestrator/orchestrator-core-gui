@@ -13,12 +13,18 @@
  *
  */
 
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import React, { ReactNode } from "react";
+import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import PropTypes from "prop-types";
 import ApplicationContext from "../utils/ApplicationContext";
 
-export default function ProtectedRoute({ path, render }) {
+export default function ProtectedRoute({
+    path,
+    render
+}: {
+    path: string;
+    render: (props: RouteComponentProps) => ReactNode;
+}) {
     /**
      * This provides the hook to restrict access based on memberships of the logged in user. For
      * now we will allow everyone access
@@ -27,7 +33,7 @@ export default function ProtectedRoute({ path, render }) {
     return (
         <ApplicationContext.Consumer>
             {({ currentUser, configuration }) => {
-                if (currentUser || configuration.oauthEnabled) {
+                if (currentUser || (configuration && configuration.oauthEnabled)) {
                     return <Route path={path} render={render} />;
                 }
                 return <Redirect to={"/not-allowed"} />;

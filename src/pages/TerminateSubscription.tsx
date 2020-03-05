@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import { startProcess, subscriptionsDetail, productById, catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
@@ -23,19 +22,20 @@ import UserInputFormWizard from "../components/UserInputFormWizard";
 
 import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
-import { ProductWithDetails, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
+import { Product, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
 
 interface IProps {
     subscriptionId: string;
 }
 
 interface IState {
-    product?: ProductWithDetails;
+    product?: Product;
     stepUserInput?: InputField[];
 }
 
 export default class TerminateSubscription extends React.Component<IProps, IState> {
-    static propTypes: {};
+    context!: React.ContextType<typeof ApplicationContext>;
+
     state: IState = {};
 
     componentDidMount = () => {
@@ -43,12 +43,18 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
 
         subscriptionsDetail(subscriptionId).then(sub =>
             productById(sub.product.product_id).then(product => {
-                const terminate_workflow = product.workflows!.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
+                const terminate_workflow = product.workflows.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
                 let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
                     this.context.redirect(`/processes?highlight=${res.id}`);
-                    setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+                    setFlash(
+                        I18n.t("process.flash.create_modify", {
+                            name: I18n.t(`workflow.${terminate_workflow.name}`),
+                            subscriptionId: subscriptionId,
+                            pid: res.id
+                        })
+                    );
                 });
-                catchErrorStatus(promise, 510, (json: FormNotCompleteResponse) => {
+                catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
                     this.setState({ stepUserInput: json.form, product: product });
                 });
             })
@@ -62,12 +68,18 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     submit = (processInput: {}[]) => {
         const { subscriptionId } = this.props;
         const { product } = this.state;
-        const terminate_workflow = product!.workflows!.find(wf => wf.target === TARGET_TERMINATE)!;
+        const terminate_workflow = product!.workflows.find(wf => wf.target === TARGET_TERMINATE)!;
 
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
             res => {
                 this.context.redirect(`/processes?highlight=${res.id}`);
-                setFlash(I18n.t("process.flash.create", { name: subscriptionId, pid: res.id }));
+                setFlash(
+                    I18n.t("process.flash.create_modify", {
+                        name: I18n.t(`workflow.${terminate_workflow.name}`),
+                        subscriptionId: subscriptionId,
+                        pid: res.id
+                    })
+                );
             }
         );
     };
@@ -95,9 +107,5 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
         );
     }
 }
-
-TerminateSubscription.propTypes = {
-    subscriptionId: PropTypes.string.isRequired
-};
 
 TerminateSubscription.contextType = ApplicationContext;

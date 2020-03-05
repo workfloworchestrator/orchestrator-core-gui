@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import {
     dienstafnameBySubscription,
@@ -39,16 +38,16 @@ import ApplicationContext from "../utils/ApplicationContext";
 
 import "./SubscriptionDetail.scss";
 import {
-    Product,
     Subscription,
     SubscriptionInstance,
     InstanceValue,
     SubscriptionProcesses,
     SubscriptionWithDetails,
     prop,
-    ProductWithDetails,
+    Product,
     IMSService,
-    IMSEndpoint
+    IMSEndpoint,
+    WorkflowReasons
 } from "../utils/types";
 import { RouteComponentProps } from "react-router";
 
@@ -62,7 +61,7 @@ interface IProps extends Partial<RouteComponentProps<MatchParams>> {
 
 interface IState {
     subscription?: SubscriptionWithDetails;
-    product?: ProductWithDetails;
+    product?: Product;
     subscriptionProcesses: SubscriptionProcesses[];
     imsServices: IMSService[];
     imsEndpoints: IMSEndpoint[];
@@ -129,44 +128,29 @@ interface IPAMPrefix {
     addresses: IPAMAddress[];
 }
 
-interface WorkflowReason {
-    name: string;
-    reason: string;
-}
-
-interface WorkflowReasons {
-    modify: WorkflowReason[];
-    terminate: WorkflowReason[];
-    reason?: string;
-}
-
 export default class SubscriptionDetail extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
-    static defaultProps: {};
+    context!: React.ContextType<typeof ApplicationContext>;
 
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            subscriptionProcesses: [],
-            imsServices: [],
-            imsEndpoints: [],
-            ipamPrefixes: [],
-            ipamAddresses: [],
-            subscriptions: [],
-            childSubscriptions: [],
-            parentSubscriptions: [],
-            notFound: false,
-            loaded: false,
-            loadedAllRelatedObjects: false,
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
-            notFoundRelatedObjects: [],
-            collapsedObjects: [],
-            workflows: { terminate: [], modify: [] }
-        };
-    }
+    state: IState = {
+        subscriptionProcesses: [],
+        imsServices: [],
+        imsEndpoints: [],
+        ipamPrefixes: [],
+        ipamAddresses: [],
+        subscriptions: [],
+        childSubscriptions: [],
+        parentSubscriptions: [],
+        notFound: false,
+        loaded: false,
+        loadedAllRelatedObjects: false,
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: "",
+        notFoundRelatedObjects: [],
+        collapsedObjects: [],
+        workflows: { terminate: [], modify: [] }
+    };
 
     componentWillMount = () => {
         const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
@@ -456,7 +440,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.dienstafname")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-service">
                     <table className={"detail-block"}>
                         <thead />
                         <tbody>
@@ -509,7 +493,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         product: subscription.description
                     })}
                 </h3>
-                <div className="form-container-parent">
+                <div className="subscription-parent-subscriptions">
                     <table className="subscriptions">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
@@ -590,7 +574,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                           {I18n.t(`subscription.ims_port.${attr}`)}
                                       </td>
                                       <td id={`${applyIdNamingConvention(attr)}-v`}>
-                                          {prop(endpoint, attr as (keyof IMSEndpoint))}
+                                          {prop(endpoint, attr as keyof IMSEndpoint)}
                                       </td>
                                   </tr>
                               ))
@@ -600,7 +584,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                           {I18n.t(`subscription.ims_service.${attr}`)}
                                       </td>
                                       <td id={`${applyIdNamingConvention(attr)}-v`}>
-                                          {prop(endpoint, attr as (keyof IMSEndpoint))}
+                                          {prop(endpoint, attr as keyof IMSEndpoint)}
                                       </td>
                                   </tr>
                               ))}
@@ -761,7 +745,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.product_title")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-product-information">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -808,8 +792,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    workflowByTarget = (product: ProductWithDetails, target: string) =>
-        product.workflows!.find(wf => wf.target === target);
+    workflowByTarget = (product: Product, target: string) => product.workflows.find(wf => wf.target === target);
 
     renderActions = (
         subscription: SubscriptionWithDetails,
@@ -826,7 +809,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.actions")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-actions">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -923,7 +906,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscription.process_link")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-processes">
                     <table className="processes">
                         <thead>
                             <tr>{columns.map((column, index) => th(index))}</tr>
@@ -959,14 +942,14 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    renderFixedInputs = (product?: ProductWithDetails) => {
+    renderFixedInputs = (product?: Product) => {
         if (!product) {
             return null;
         }
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.fixedInputs")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-fixed-inputs">
                     <table className="detail-block">
                         <thead />
                         <tbody>
@@ -1007,7 +990,6 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     ) => {
         switch (type) {
             case "ims_corelink_trunk_id":
-                return <div>Todo: implement fetch</div>;
             case "ims_circuit_id":
                 const imsService = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
                 return this.renderImsServiceDetail(imsService!, 0, imsEndpoints, "related-subscription");
@@ -1134,7 +1116,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         return (
             <section className="details">
                 <h3>{I18n.t("subscriptions.productBlocks")}</h3>
-                <div className="form-container-parent">
+                <div className="subscription-product-blocks">
                     {subscription.instances
                         .sort((a: SubscriptionInstance, b: SubscriptionInstance) =>
                             a.product_block.tag !== b.product_block.tag
@@ -1175,7 +1157,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     renderDetails = (subscription: SubscriptionWithDetails, subscriptionProcesses: SubscriptionProcesses[]) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
-            <div className="form-container-parent">
+            <div className="subscription-details">
                 {this.renderSubscriptionDetail(subscription, 0, "", subscriptionProcesses)}
             </div>
         </section>
@@ -1241,10 +1223,4 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     }
 }
 
-SubscriptionDetail.propTypes = {
-    subscriptionId: PropTypes.string
-};
-SubscriptionDetail.defaultProps = {
-    subscriptionId: undefined
-};
 SubscriptionDetail.contextType = ApplicationContext;

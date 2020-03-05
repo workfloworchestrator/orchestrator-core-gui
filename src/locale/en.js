@@ -240,9 +240,9 @@ I18n.translations.en = {
             "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
         vlan_range: "VLAN Range",
         vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
-        vlan_retagging: "Enable VLAN retagging? When Checked; only one VLAN ID per SAP is allowed.",
+        vlan_retagging: "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed.",
         bum_filter:
-            "Enable BUM Filter? When checked; broadcast, unlearned unicast and multicast traffic will be limited to 10% of the the port speed.",
+            "Enable BUM Filter. When selected broadcast, unknown-unicast and multicast traffic will be limited to 10% of the port speed.",
         service_port: {
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
@@ -356,7 +356,8 @@ I18n.translations.en = {
         cleanup_ready: "Cleanup ready",
         product_validation: "Product / Workflow validation",
         flash: {
-            create: "Created process for workflow {{name}} with pid {{pid}}",
+            create_create: "Created create process for product {{name}} with pid {{pid}}",
+            create_modify: "Created {{name}} process for subscription {{subscriptionId}} with pid {{pid}}",
             update: "Resumed process for workflow {{name}}",
             wizard_next_step: "Navigated to next step in form wizard"
         },
@@ -1147,7 +1148,7 @@ I18n.translations.en = {
         },
         new_task: "New task",
         flash: {
-            create: "Created task for workflow {{name}}",
+            create: "Created task for workflow {{name}} with pid {{pid}}",
             update: "Resumed task for workflow {{name}}"
         }
     },
@@ -1283,6 +1284,7 @@ I18n.translations.en = {
         modify_sn8_ip_bgp: "Modify SN8 SURFinternet BGP",
         modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
+        modify_sn8_l2vpn: "Modify SN8 L2VPN",
         modify_sn8_light_path: "Modify SN8 LightPath",
         modify_sn8_light_path_redundant: "Modify SN8 LightPath Redundant",
         modify_sn8_light_path_upgrade_to_redundant: "Modify SN8 LightPath: Upgrade to Redundant",
@@ -1310,9 +1312,16 @@ I18n.translations.en = {
         validate_sn8_ip_static: "Validate SN8 IP Static",
         validate_sn8_ip_bgp: "Validate SN8 IP BGP",
         validate_sn8_light_path: "Validate SN8 Light Path",
+        validate_sn8_light_path_redundant: "Validate SN8 Redundant Light Path",
+        validate_sn8_l2vpn: "Validate SN8 L2VPN",
         validate_sn8_service_port: "Validate SN8 Service Port",
         validate_sn8_msc: "Validate SN8 MSC",
         validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
+    },
+    external: {
+        errors: {
+            crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!"
+        }
     }
 };
 

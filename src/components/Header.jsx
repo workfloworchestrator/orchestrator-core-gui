@@ -111,6 +111,4 @@ export default class Header extends React.PureComponent {
     }
 }
 
-Header.propTypes = {};
-
 Header.contextType = ApplicationContext;

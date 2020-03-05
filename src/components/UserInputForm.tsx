@@ -15,7 +15,6 @@
 
 import React from "react";
 import I18n from "i18n-js";
-import PropTypes from "prop-types";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
@@ -53,6 +52,7 @@ import { nodeSubscriptions, catchErrorStatus } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
 import { applyIdNamingConvention } from "../utils/Utils";
 import GenericMultiSelect from "./GenericMultiSelect";
+import { InputField, Subscription, ValidationError, Option } from "../utils/types";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 const inputTypesWithDelegatedValidation = [
@@ -64,8 +64,43 @@ const inputTypesWithDelegatedValidation = [
     "subscriptions"
 ];
 
-export default class UserInputForm extends React.Component {
-    constructor(props) {
+interface IProps {
+    stepUserInput: InputField[];
+    validSubmit: (userInput: { [index: string]: any }) => Promise<void>;
+    cancel: () => void;
+    previous: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    hasNext?: boolean;
+    hasPrev?: boolean;
+}
+
+interface IState {
+    confirmationDialogOpen: boolean;
+    confirmationDialogAction: () => void;
+    leavePage: boolean;
+    validationErrors: ValidationError[];
+    uniqueErrors: { [index: string]: boolean };
+    uniqueSelectInputs: {
+        [index: string]: { names: { [index: string]: string }; values: { [index: string]: number } };
+    };
+    isNew: boolean;
+    stepUserInput: InputField[];
+    product: {};
+    processing: boolean;
+    randomCrm: string;
+    nodeSubscriptions?: Subscription[];
+    process?: {};
+}
+
+export default class UserInputForm extends React.Component<IProps, IState> {
+    context!: React.ContextType<typeof ApplicationContext>;
+
+    public static defaultProps = {
+        previous: () => {},
+        hasPrev: false,
+        hasNext: false
+    };
+
+    constructor(props: IProps) {
         super(props);
         this.state = {
             confirmationDialogOpen: false,
@@ -78,27 +113,25 @@ export default class UserInputForm extends React.Component {
             stepUserInput: [...props.stepUserInput],
             product: {},
             processing: false,
-            randomCrm: randomCrmIdentifier(),
-            nodeSubscriptionsLoaded: false,
-            nodeSubscriptions: []
+            randomCrm: randomCrmIdentifier()
         };
     }
 
     loadNodeSubscriptions = () => {
         nodeSubscriptions(["active", "provisioning"]).then(result => {
-            this.setState({ nodeSubscriptions: result, nodeSubscriptionsLoaded: true });
+            this.setState({ nodeSubscriptions: result });
         });
     };
 
     componentDidMount = () => {
-        const { nodeSubscriptionsLoaded, stepUserInput } = this.state;
+        const { stepUserInput, nodeSubscriptions } = this.state;
 
-        if (!nodeSubscriptionsLoaded && stepUserInput.find(input => input.type.startsWith("corelink")) !== undefined) {
+        if (!nodeSubscriptions && stepUserInput.find(input => input.type.startsWith("corelink")) !== undefined) {
             this.loadNodeSubscriptions();
         }
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: IProps) {
         if (!isEqual(nextProps.stepUserInput, this.state.stepUserInput)) {
             this.setState({ stepUserInput: [...nextProps.stepUserInput] });
 
@@ -106,12 +139,12 @@ export default class UserInputForm extends React.Component {
         }
     }
 
-    cancel = e => {
+    cancel = (e: React.FormEvent) => {
         stop(e);
         this.setState({ confirmationDialogOpen: true });
     };
 
-    updateValidationErrors = validationErrors => {
+    updateValidationErrors = (validationErrors: { validation_errors: ValidationError[] }) => {
         const { stepUserInput } = this.state;
         let newValidationErrors = validationErrors.validation_errors;
 
@@ -128,14 +161,14 @@ export default class UserInputForm extends React.Component {
         this.setState({ validationErrors: newValidationErrors, processing: false });
     };
 
-    submit = e => {
+    submit = (e: React.FormEvent<HTMLFormElement>) => {
         stop(e);
         const { stepUserInput, processing } = this.state;
 
         if (!processing) {
             this.setState({ processing: true });
 
-            const processInput = stepUserInput.reduce((acc, input) => {
+            const processInput: { [index: string]: any } = stepUserInput.reduce((acc, input) => {
                 acc[input.name] = input.value;
 
                 // Add missing defaults
@@ -146,7 +179,7 @@ export default class UserInputForm extends React.Component {
             }, {});
 
             let promise = this.props.validSubmit(processInput);
-            catchErrorStatus(promise, 400, json => {
+            catchErrorStatus<{ validation_errors: ValidationError[] }>(promise, 400, json => {
                 this.updateValidationErrors(json);
             }).then(() => {
                 this.setState({ processing: false });
@@ -187,34 +220,40 @@ export default class UserInputForm extends React.Component {
         );
     };
 
-    changeUserInput = (name, value) => {
+    changeUserInput = (name: string, value: any) => {
         const userInput = [...this.state.stepUserInput];
-        userInput.find(input => input.name === name).value = value;
+        userInput.find(input => input.name === name)!.value = value;
         this.setState({
             process: { ...this.state.process, user_input: userInput }
         });
     };
 
-    changeStringInput = name => e => {
-        const value = e.target.value;
+    changeStringInput = (name: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const target = e.target as HTMLInputElement;
+        const value = target.value;
         this.changeUserInput(name, value);
     };
 
-    changeBooleanInput = name => e => {
-        const value = e.target.checked;
+    changeBooleanInput = (name: string) => (e: React.FormEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+        const value = target.checked;
         this.changeUserInput(name, value);
     };
 
-    changeSelectInput = name => option => {
+    changeSelectInput = (name: string) => (option: Option) => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
     };
 
-    changeNumericInput = name => (valueAsNumber, valueAsString, inputElement) => {
+    changeNumericInput = (name: string) => (
+        valueAsNumber: number | null,
+        _valueAsString: string,
+        inputElement: HTMLInputElement
+    ) => {
         this.changeUserInput(name, valueAsNumber);
     };
 
-    enforceSelectInputUniqueness = (hash, name, value) => {
+    enforceSelectInputUniqueness = (hash: string, name: string, value: string) => {
         // Block multiple select drop-downs sharing a base list identified by 'hash' to select the same value more than once
         const uniqueSelectInputs = { ...this.state.uniqueSelectInputs };
         const uniqueErrors = { ...this.state.uniqueErrors };
@@ -238,26 +277,22 @@ export default class UserInputForm extends React.Component {
         });
     };
 
-    changeUniqueSelectInput = (name, hash) => option => {
+    changeUniqueSelectInput = (name: string, hash: string) => (option: Option) => {
         const value = option ? option.value : null;
         this.changeUserInput(name, value);
-        this.enforceSelectInputUniqueness(hash, name, value);
+        this.enforceSelectInputUniqueness(hash, name, value!);
     };
 
-    changeNestedInput = name => newValue => {
+    changeNestedInput = (name: string) => (newValue: any) => {
         this.changeUserInput(name, newValue);
     };
 
-    changeAcceptOrSkip = name => (newValue, from_skip) => {
-        this.changeUserInput(name, newValue);
-    };
-
-    changeArrayInput = name => arr => {
+    changeArrayInput = (name: string) => (arr: string[]) => {
         const value = (arr || []).join(",");
         this.changeUserInput(name, value);
     };
 
-    renderInput = userInput => {
+    renderInput = (userInput: InputField) => {
         if (userInput.type === "hidden") {
             return;
         }
@@ -288,16 +323,16 @@ export default class UserInputForm extends React.Component {
         );
     };
 
-    i18nContext = (i18nName, userInput) => {
+    i18nContext = (i18nName: string, userInput: InputField) => {
         if (i18nName.endsWith("_info")) {
             return <em>{I18n.t(i18nName, userInput.i18n_state)}</em>;
         }
         return <label htmlFor={I18n.t(i18nName, userInput.i18n_state)}>{I18n.t(i18nName, userInput.i18n_state)}</label>;
     };
 
-    renderInputLabel = userInput => this.i18nContext(`process.${userInput.name}`, userInput);
+    renderInputLabel = (userInput: InputField) => this.i18nContext(`process.${userInput.name}`, userInput);
 
-    renderInputInfoLabel = userInput => {
+    renderInputInfoLabel = (userInput: InputField) => {
         const name = userInput.name;
         if (name.indexOf("crm_port_id") > -1) {
             return <em>{I18n.t(`process.${name}_info`, { example: this.state.randomCrm })}</em>;
@@ -305,7 +340,7 @@ export default class UserInputForm extends React.Component {
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
-    chooseInput = (userInput, validationError) => {
+    chooseInput = (userInput: InputField, validationError: ValidationError[]) => {
         const { nodeSubscriptions } = this.state;
         const { products, organisations, locationCodes } = this.context;
         const name = userInput.name;
@@ -352,7 +387,7 @@ export default class UserInputForm extends React.Component {
                     <BandwidthSelect
                         name={name}
                         onChange={this.changeStringInput(name)}
-                        value={value || ""}
+                        value={value}
                         disabled={userInput.readonly}
                     />
                 );
@@ -361,7 +396,7 @@ export default class UserInputForm extends React.Component {
                     <OrganisationSelect
                         id="organisation-select"
                         key={name}
-                        organisations={organisations}
+                        organisations={organisations || []}
                         onChange={this.changeSelectInput(name)}
                         organisation={value}
                         disabled={userInput.readonly}
@@ -438,10 +473,7 @@ export default class UserInputForm extends React.Component {
                         />
                         <section className="form-divider" />
                         <DowngradeRedundantLPConfirmation
-                            products={products}
-                            organisations={organisations}
                             subscriptionId={userInput.subscription_id}
-                            className="indent"
                             primary={userInput.primary}
                             secondary={userInput.secondary}
                             choice={userInput.choice}
@@ -451,7 +483,7 @@ export default class UserInputForm extends React.Component {
             case "accept":
                 return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "accept_or_skip":
-                return <GenericNOCConfirm name={name} onChange={this.changeAcceptOrSkip(name)} data={userInput.data} />;
+                return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "boolean":
                 return (
                     <CheckBox
@@ -466,7 +498,7 @@ export default class UserInputForm extends React.Component {
                     <LocationCodeSelect
                         id="location-code-select"
                         onChange={this.changeSelectInput(name)}
-                        locationCodes={locationCodes}
+                        locationCodes={locationCodes || []}
                         locationCode={value}
                     />
                 );
@@ -485,7 +517,6 @@ export default class UserInputForm extends React.Component {
                         servicePorts={value}
                         sn8={userInput.type === "service_ports_sn8"}
                         productTags={userInput.tags}
-                        organisations={organisations}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}
                         minimum={userInput.minimum}
@@ -497,7 +528,6 @@ export default class UserInputForm extends React.Component {
                         mspOnly={userInput.mspOnly}
                         visiblePortMode={userInput.visiblePortMode}
                         bandwidth={bandwidth}
-                        nodeId={userInput.node}
                         errors={validationError}
                     />
                 );
@@ -546,7 +576,7 @@ export default class UserInputForm extends React.Component {
                     <NodePortSelect
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
                         interfaceType={userInput.interface_speed}
-                        nodes={nodeSubscriptions}
+                        nodes={nodeSubscriptions || []}
                         port={value}
                     />
                 );
@@ -556,7 +586,7 @@ export default class UserInputForm extends React.Component {
                         onChange={this.changeUniqueSelectInput(name, "corelink")}
                         interfaceType={userInput.interface_speed}
                         nodes={
-                            userInput.node
+                            userInput.node && nodeSubscriptions
                                 ? nodeSubscriptions.filter(
                                       subscription => subscription.subscription_id === userInput.node
                                   )
@@ -619,7 +649,7 @@ export default class UserInputForm extends React.Component {
         }
     };
 
-    commaSeparatedArray = input => (input ? input.split(",") : []);
+    commaSeparatedArray = (input: string) => (input ? input.split(",") : []);
 
     render() {
         const {
@@ -658,20 +688,5 @@ export default class UserInputForm extends React.Component {
         );
     }
 }
-
-UserInputForm.propTypes = {
-    stepUserInput: PropTypes.array.isRequired,
-    validSubmit: PropTypes.func.isRequired,
-    cancel: PropTypes.func.isRequired,
-    previous: PropTypes.func,
-    hasNext: PropTypes.bool,
-    hasPrev: PropTypes.bool
-};
-
-UserInputForm.defaultProps = {
-    previous: () => {},
-    hasPrev: false,
-    hasNext: false
-};
 
 UserInputForm.contextType = ApplicationContext;

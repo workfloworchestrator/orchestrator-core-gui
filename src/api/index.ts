@@ -12,18 +12,12 @@
  * limitations under the License.
  *
  */
+import I18n from "i18n-js";
 
 import mySpinner from "../lib/Spin";
 import { isEmpty } from "../utils/Utils";
+import { absent, child_subscriptions, ims_port_id, port_subscription_id } from "../validations/Subscriptions";
 import {
-    absent,
-    child_subscriptions,
-    ims_circuit_id,
-    ims_port_id,
-    port_subscription_id
-} from "../validations/Subscriptions";
-import {
-    Product,
     ProductBlock,
     ResourceType,
     AppConfig,
@@ -37,8 +31,11 @@ import {
     Process,
     ProcessSubscription,
     ProcessWithDetails,
-    ProductWithDetails
+    Product,
+    WorkflowReasons,
+    ProductValidation
 } from "../utils/types";
+import { setFlash } from "../utils/Flash";
 
 // const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
@@ -107,10 +104,10 @@ function validFetch(path: string, options: {}, headers = {}, showErrorDialog = t
     return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog));
 }
 
-export function catchErrorStatus(promise: Promise<any>, status: number, callback: (json: any) => void) {
+export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
     return promise.catch(err => {
         if (err.response && err.response.status === status) {
-            err.response.json().then((json: {}) => {
+            err.response.json().then((json: T) => {
                 callback(json);
             });
         } else {
@@ -160,7 +157,7 @@ export function productStatuses() {
     return fetchJson("products/statuses/all");
 }
 
-export function productById(productId: string): Promise<ProductWithDetails> {
+export function productById(productId: string): Promise<Product> {
     return fetchJson(`products/${productId}`);
 }
 
@@ -217,7 +214,7 @@ export function deleteResourceType(id: string) {
 }
 
 //API
-export function allSubscriptions() {
+export function allSubscriptions(): Promise<Subscription[]> {
     return fetchJson(`v2/subscriptions/all`);
 }
 
@@ -239,7 +236,7 @@ export function subscriptionsByTags(tagList: string[], statusList: string[] = []
     );
 }
 
-export function nodeSubscriptions(statusList = []) {
+export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
     const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
     return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
 }
@@ -261,7 +258,7 @@ export function subscriptionsByProductType(type: string) {
     return fetchJson(`subscriptions/product_type/${type}`);
 }
 
-export function subscriptionWorkflows(subscription_id: string) {
+export function subscriptionWorkflows(subscription_id: string): Promise<WorkflowReasons> {
     return fetchJson(`v2/subscriptions/workflows/${subscription_id}`);
 }
 
@@ -269,8 +266,19 @@ export function subscriptionsByProductId(productId: string) {
     return fetchJson(`subscriptions/product/${productId}`);
 }
 
-export function organisations(): Promise<Organization[]> {
-    return fetchJson("crm/organisations");
+export function organisations(): Promise<Organization[] | undefined> {
+    //@ts-ignore
+    return fetchJson("crm/organisations", {}, {}, false).catch(() => {
+        setTimeout(() => {
+            setFlash(
+                I18n.t("external.errors.crm_unavailable", {
+                    type: "Organisations"
+                }),
+                "error"
+            );
+        });
+        return undefined;
+    });
 }
 
 export function ieeeInterfaceTypesForProductId(id: string) {
@@ -342,7 +350,8 @@ export function getResourceTypeInfo(type: string, identifier: string) {
         case ims_port_id:
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_port/${identifier}`);
             break;
-        case ims_circuit_id:
+        case "ims_circuit_id":
+        case "ims_corelink_trunk_id":
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
         case "ip_prefix_subscription_id":
@@ -391,8 +400,19 @@ export function processSubscriptionsByProcessId(processId: string): Promise<Proc
     ).catch(err => []);
 }
 
-export function locationCodes(): Promise<string[]> {
-    return fetchJson("crm/location_codes");
+export function locationCodes(): Promise<string[] | undefined> {
+    // @ts-ignore
+    return fetchJson("crm/location_codes", {}, {}, false).catch(() => {
+        setTimeout(() => {
+            setFlash(
+                I18n.t("external.errors.crm_unavailable", {
+                    type: "Locations"
+                }),
+                "error"
+            );
+        });
+        return undefined;
+    });
 }
 
 export function allWorkflows() {
@@ -501,7 +521,7 @@ export function fixedInputValidations() {
     return fetchJson("fixed_inputs/validations");
 }
 
-export function validation(productId: string) {
+export function validation(productId: string): Promise<ProductValidation> {
     return fetchJson(`products/${productId}/validate`);
 }
 

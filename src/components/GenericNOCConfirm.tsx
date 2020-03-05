@@ -14,7 +14,6 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import I18n from "i18n-js";
 import CheckBox from "./CheckBox";
 import "./GenericNOCConfirm.scss";
@@ -31,7 +30,6 @@ interface IState {
 }
 
 export default class GenericNOCConfirm extends React.PureComponent<IProps, IState> {
-    static propTypes: {};
     readonly state: IState = { checks: {}, skip_workflow: false };
 
     onChangeSkip = (e: React.FormEvent<HTMLInputElement>) => {
@@ -39,9 +37,8 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
         let skip_workflow = target.checked;
         this.props.onChange(!skip_workflow, skip_workflow);
         //after (un)skip always uncheck all checkboxes
-        this.setState({skip_workflow:  skip_workflow, checks: {}});
-    }
-
+        this.setState({ skip_workflow: skip_workflow, checks: {} });
+    };
 
     onChangeInternal = (index: number) => {
         return (e: React.FormEvent<HTMLInputElement>) => {
@@ -59,9 +56,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
             // We intentionally skip optional checkboxes here
             const allValid = data
                 .map((entry: string[], index: number) => [entry, checks[index] || false])
-                .filter((entry: (boolean | string[])[]) =>
-                    (entry[0] as string[])[1].endsWith("checkbox")
-                )
+                .filter((entry: (boolean | string[])[]) => (entry[0] as string[])[1].endsWith("checkbox"))
                 .map((entry: (boolean | string[])[]) => entry[1] as boolean)
                 .every((check: boolean) => check);
             this.props.onChange(allValid, allValid);
@@ -107,7 +102,6 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                     <CheckBox
                         key={index}
                         name={name} // Index needed to allow checkboxes with same name
-
                         onChange={this.onChangeSkip}
                         value={skip_workflow}
                         info={label}
@@ -150,17 +144,9 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
         } else {
             return (
                 <section>
-                    {data.map((entry: any[], index: number) =>
-                        this.renderCheck(index, entry[0], entry[1], entry[2])
-                    )}
+                    {data.map((entry: any[], index: number) => this.renderCheck(index, entry[0], entry[1], entry[2]))}
                 </section>
             );
         }
     }
 }
-
-GenericNOCConfirm.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    data: PropTypes.array
-};

@@ -14,7 +14,6 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
 import ApplicationContext from "../utils/ApplicationContext";
 import UserInputForm from "./UserInputForm";
 import { stop } from "../utils/Utils";
@@ -22,6 +21,7 @@ import isEqual from "lodash/isEqual";
 import { catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
 import I18n from "i18n-js";
+import { FormNotCompleteResponse } from "../utils/types";
 
 interface Form {
     form: any[];
@@ -30,7 +30,7 @@ interface Form {
 
 interface IProps {
     stepUserInput: any[];
-    validSubmit: (form: {}[]) => Promise<any>;
+    validSubmit: (form: {}[]) => Promise<void>;
     cancel: () => void;
     hasNext: boolean;
 }
@@ -41,8 +41,11 @@ interface IState {
 }
 
 export default class UserInputFormWizard extends React.Component<IProps, IState> {
-    static propTypes: {};
-    static defaultProps: {};
+    public static defaultProps = {
+        hasNext: false
+    };
+
+    context!: React.ContextType<typeof ApplicationContext>;
 
     constructor(props: IProps) {
         super(props);
@@ -56,7 +59,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         }
     }
 
-    previous = (e: React.FormEvent<HTMLInputElement>) => {
+    previous = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         let { forms } = this.state;
 
@@ -71,7 +74,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         newUserInputs.push(currentFormData);
 
         let result = this.props.validSubmit(newUserInputs);
-        return catchErrorStatus(result, 510, (json: any) => {
+        return catchErrorStatus<FormNotCompleteResponse>(result, 510, json => {
             // Scroll to top when navigating to next screen of wizard
             window.scrollTo(0, 0);
             setFlash(I18n.t("process.flash.wizard_next_step"));
@@ -103,15 +106,5 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         );
     }
 }
-
-UserInputFormWizard.propTypes = {
-    stepUserInput: PropTypes.array.isRequired,
-    validSubmit: PropTypes.func.isRequired,
-    hasNext: PropTypes.bool
-};
-
-UserInputFormWizard.defaultProps = {
-    hasNext: false
-};
 
 UserInputFormWizard.contextType = ApplicationContext;

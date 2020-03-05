@@ -1,0 +1,100 @@
+{
+    "crm_port_id": null,
+    "customer_descriptions": [],
+    "customer_id": "9c294844-0d11-e511-80d0-005056956c1a",
+    "description": "ESNET AGGSP GN001A-GN001A 20G",
+    "end_date": null,
+    "instances": [
+        {
+            "label": null,
+            "product_block": {
+                "created_at": 1569420213.849482,
+                "description": "Aggregated Service Port for SURFnet8",
+                "end_date": null,
+                "name": "SN8 Aggregated Service Port",
+                "product_block_id": "7586647c-5dd4-48bc-98f7-6b40c76c0f88",
+                "status": "active",
+                "tag": "AGGSP"
+            },
+            "product_block_id": "7586647c-5dd4-48bc-98f7-6b40c76c0f88",
+            "subscription_id": "2c815189-5381-4c94-8598-ad1ce0dbcdcd",
+            "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+            "values": [
+                {
+                    "resource_type": {
+                        "description": "This is the IMS circuit ID of the (SSP|MSP) object in IMS. It returns an IMS circuit object",
+                        "resource_type": "ims_circuit_id",
+                        "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83"
+                    },
+                    "resource_type_id": "43ab122c-950a-4ea0-8630-f1980bdd5a83",
+                    "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+                    "subscription_instance_value_id": "c302a3f1-0e2a-47c0-b469-5395c807b6fd",
+                    "value": "44892"
+                },
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+                    "subscription_instance_value_id": "d4b4ff69-52cc-4e36-a50b-730cb664ede5",
+                    "value": "7f694e3a-eac1-442b-a35b-b7e92898308f"
+                },
+                {
+                    "resource_type": {
+                        "description": "The UUID of a NSO service",
+                        "resource_type": "nso_service_id",
+                        "resource_type_id": "9b9babd4-da78-49cc-b893-abdfd6832c39"
+                    },
+                    "resource_type_id": "9b9babd4-da78-49cc-b893-abdfd6832c39",
+                    "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+                    "subscription_instance_value_id": "3426c3c9-374e-41b8-bb99-49ba9affa7df",
+                    "value": "d928a1d8-cfe3-4bb8-a2ce-f9190cad8ac5"
+                },
+                {
+                    "resource_type": {
+                        "description": "Subscription id van opgeleverde Port",
+                        "resource_type": "port_subscription_id",
+                        "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e"
+                    },
+                    "resource_type_id": "2d977b4b-a5b4-4fef-90d6-5b2f1c28cf0e",
+                    "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+                    "subscription_instance_value_id": "8c7b7de7-4916-4623-9ccc-70b28693f842",
+                    "value": "eec67887-8d5d-446b-98e7-297937eac3d2"
+                },
+                {
+                    "resource_type": {
+                        "description": "untagged, tagged or link_member",
+                        "resource_type": "port_mode",
+                        "resource_type_id": "4a53e424-c1cf-4e69-80e5-049f32520ed9"
+                    },
+                    "resource_type_id": "4a53e424-c1cf-4e69-80e5-049f32520ed9",
+                    "subscription_instance_id": "2863f60d-f78a-4d9c-ac76-350fdf8f4bb3",
+                    "subscription_instance_value_id": "33e4a093-3920-4b3e-97aa-4227050872f4",
+                    "value": "tagged"
+                }
+            ]
+        }
+    ],
+    "insync": true,
+    "name": "SN8 Aggregated Service Port",
+    "note": null,
+    "port_mode": "tagged",
+    "product": {
+        "created_at": 1569420213.849482,
+        "description": "Aggregated Service Port on SURFnet8",
+        "end_date": null,
+        "name": "SN8 Aggregated Service Port",
+        "product_id": "f5c6d0bf-db1a-4c3b-8f39-188d51f32461",
+        "product_type": "Port",
+        "status": "active",
+        "tag": "AGGSP"
+    },
+    "product_id": "f5c6d0bf-db1a-4c3b-8f39-188d51f32461",
+    "start_date": 1578323644.803844,
+    "status": "active",
+    "subscription_id": "2c815189-5381-4c94-8598-ad1ce0dbcdcd",
+    "tag": "AGGSP"
+}

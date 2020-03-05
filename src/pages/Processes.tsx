@@ -73,38 +73,36 @@ interface IState {
 }
 
 export default class Processes extends React.PureComponent<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
+    context!: React.ContextType<typeof ApplicationContext>;
 
-        this.state = {
-            processes: [],
-            filteredProcesses: [],
-            query: "",
-            actions: { show: false, id: "" },
-            sorted: { name: "last_modified", descending: true },
-            filterAttributesAssignee: [
-                { name: "CHANGES", selected: true, count: 0 },
-                { name: "KLANT_SUPPORT", selected: true, count: 0 },
-                { name: "NOC", selected: true, count: 0 },
-                { name: "SYSTEM", selected: true, count: 0 }
-            ],
-            filterAttributesStatus: [
-                { name: "created", selected: true, count: 0 },
-                { name: "failed", selected: true, count: 0 },
-                { name: "api_unavailable", selected: true, count: 0 },
-                { name: "inconsistent_data", selected: true, count: 0 },
-                { name: "aborted", selected: false, count: 0 },
-                { name: "completed", selected: false, count: 0 },
-                { name: "running", selected: true, count: 0 },
-                { name: "suspended", selected: true, count: 0 }
-            ],
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: "",
-            refresh: false
-        };
-    }
+    state: IState = {
+        processes: [],
+        filteredProcesses: [],
+        query: "",
+        actions: { show: false, id: "" },
+        sorted: { name: "last_modified", descending: true },
+        filterAttributesAssignee: [
+            { name: "CHANGES", selected: true, count: 0 },
+            { name: "KLANT_SUPPORT", selected: true, count: 0 },
+            { name: "NOC", selected: true, count: 0 },
+            { name: "SYSTEM", selected: true, count: 0 }
+        ],
+        filterAttributesStatus: [
+            { name: "created", selected: true, count: 0 },
+            { name: "failed", selected: true, count: 0 },
+            { name: "api_unavailable", selected: true, count: 0 },
+            { name: "inconsistent_data", selected: true, count: 0 },
+            { name: "aborted", selected: false, count: 0 },
+            { name: "completed", selected: false, count: 0 },
+            { name: "running", selected: true, count: 0 },
+            { name: "suspended", selected: true, count: 0 }
+        ],
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: "",
+        refresh: false
+    };
 
     componentDidMount = () => {
         this.refresh();

@@ -19,21 +19,29 @@ import I18n from "i18n-js";
 import "./Cache.scss";
 import { stop } from "../utils/Utils";
 import { clearCache, ping } from "../api";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
 import { setFlash } from "../utils/Flash";
+import { Option } from "../utils/types";
 
-export default class Cache extends React.Component {
-    constructor(props) {
+interface IProps {}
+
+interface IState {
+    cache: string;
+}
+
+const CACHES: string[] = ["ims", "crm", "api", "all"];
+
+export default class Cache extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
         this.state = {
-            caches: ["ims", "crm", "api", "all"],
             cache: "ims"
         };
     }
 
     componentDidMount = () => ping();
 
-    clearCache = e => {
+    clearCache = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         clearCache(this.state.cache).then(res =>
             setFlash(
@@ -44,9 +52,11 @@ export default class Cache extends React.Component {
         );
     };
 
+    changeCache = (option: Option) => this.setState({ cache: option.value });
+
     render() {
-        const { caches, cache } = this.state;
-        const options = caches.map(val => ({
+        const { cache } = this.state;
+        const options: Option[] = CACHES.map(val => ({
             value: val,
             label: I18n.t(`cache.name.${val}`)
         }));
@@ -61,7 +71,7 @@ export default class Cache extends React.Component {
                             <em>{I18n.t("cache.remove_info")}</em>
                             <section className="cache-select-section">
                                 <Select
-                                    onChange={option => this.setState({ cache: option.value })}
+                                    onChange={this.changeCache as (option: ValueType<Option>) => void}
                                     options={options}
                                     isSearchable={false}
                                     value={value}
@@ -80,5 +90,3 @@ export default class Cache extends React.Component {
         );
     }
 }
-
-Cache.propTypes = {};

@@ -23,7 +23,7 @@ import BandwidthSelect from "../components/BandwidthSelect";
 import fetchMock from "fetch-mock";
 
 const store = new Store({
-    value: "1000"
+    value: 1000
 });
 
 export default {

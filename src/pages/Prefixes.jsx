@@ -397,6 +397,4 @@ export default class Prefixes extends React.PureComponent {
     }
 }
 
-Prefixes.propTypes = {};
-
 Prefixes.contextType = ApplicationContext;

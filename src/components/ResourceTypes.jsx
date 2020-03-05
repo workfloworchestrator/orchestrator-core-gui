@@ -177,6 +177,4 @@ export default class ResourceTypes extends React.Component {
     }
 }
 
-ResourceTypes.propTypes = {};
-
 ResourceTypes.contextType = ApplicationContext;
