@@ -1312,6 +1312,8 @@ I18n.translations.en = {
         validate_sn8_ip_static: "Validate SN8 IP Static",
         validate_sn8_ip_bgp: "Validate SN8 IP BGP",
         validate_sn8_light_path: "Validate SN8 Light Path",
+        validate_sn8_light_path_redundant: "Validate SN8 Redundant Light Path",
+        validate_sn8_l2vpn: "Validate SN8 L2VPN",
         validate_sn8_service_port: "Validate SN8 Service Port",
         validate_sn8_msc: "Validate SN8 MSC",
         validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
