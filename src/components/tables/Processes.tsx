@@ -330,7 +330,6 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
 
     const persistSettings = useCallback(
         (settings: LocalTableSettings<ProcessV2> | SessionTableSettings) => {
-            console.log("persistSettings called");
             if (isLocalTableSettings(settings)) {
                 localStorage.setItem(`table-settings:${name}`, JSON.stringify(settings));
             } else {

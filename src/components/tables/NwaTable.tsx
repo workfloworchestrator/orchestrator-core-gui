@@ -93,7 +93,8 @@ export function tableSettingsReducer<T extends object>(
     action: TableSettingsAction<T>,
     prevState: TableState<T>
 ) {
-    console.log(action);
+    // Uncomment to see all the actions in the console.
+    // console.log(action);
     const changedState = produce(newState, draft => {
         switch (action.type) {
             case ActionType.OVERRIDE:
@@ -177,7 +178,8 @@ export function tableSettingsReducer<T extends object>(
                 console.log(action);
         }
     });
-    console.log(newState);
+    //uncomment to compare the states in the console.
+    //console.log(newState, changedState);
     return changedState;
 }
 
