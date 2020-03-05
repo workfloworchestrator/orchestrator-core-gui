@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import { Process, ProcessV2 } from "utils/types";
+import { Process, ProcessWithDetails, ProcessV2 } from "utils/types";
 
 interface Action {
     icon: string;
@@ -21,7 +21,10 @@ interface Action {
     danger?: boolean;
 }
 
-type ProcessWithStatus = Process | ProcessV2;
+type ProcessWithStatus = Process | ProcessWithDetails | ProcessV2;
+
+const isProcessWithDetails = (process: any): process is ProcessWithDetails =>
+    (process as ProcessWithDetails).status !== undefined;
 
 export function actionOptions(
     process: ProcessWithStatus,
@@ -59,7 +62,12 @@ export function actionOptions(
         danger: true
     };
     let options = [];
-    const status = process.last_status;
+    let status = "";
+    if (isProcessWithDetails(process)) {
+        status = process.status;
+    } else {
+        status = process.last_status;
+    }
 
     switch (status) {
         case "failed":

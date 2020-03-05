@@ -1374,6 +1374,7 @@ I18n.translations.en = {
         }
     },
     process_statuses: {
+        created: "Created",
         running: "Running",
         suspended: "Suspended",
         waiting: "Waiting",

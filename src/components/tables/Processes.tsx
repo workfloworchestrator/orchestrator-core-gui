@@ -157,11 +157,11 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
-        const { status, step, failure } = row.values;
+        const { status, step, info } = row.values;
         return (
             <div className={"expanded-row"}>
                 <h2>{I18n.t(`table.expanded_row.${status}`, { step: step })}</h2>
-                <pre>{failure}</pre>
+                <pre>{info}</pre>
             </div>
         );
     }, []);
