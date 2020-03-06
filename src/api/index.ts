@@ -37,7 +37,7 @@ import {
 } from "../utils/types";
 import { setFlash } from "../utils/Flash";
 
-// const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
+//const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
 let configuration: AppConfig | null = null;
@@ -413,6 +413,14 @@ export function locationCodes(): Promise<string[] | undefined> {
         });
         return undefined;
     });
+}
+
+export function assignees(): Promise<string[]> {
+    return fetchJson("v2/processes/assignees");
+}
+
+export function processStatuses(): Promise<string[]> {
+    return fetchJson("v2/processes/statuses");
 }
 
 export function allWorkflows() {

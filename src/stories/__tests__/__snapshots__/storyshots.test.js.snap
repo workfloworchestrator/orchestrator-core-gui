@@ -6904,13 +6904,6 @@ exports[`Storyshots ProcessDetail Task 1`] = `
           Abort
         </button>
         <button
-          className="button  red"
-          id="delete"
-          onClick={[Function]}
-        >
-          Delete
-        </button>
-        <button
           className="button"
           onClick={[Function]}
         >

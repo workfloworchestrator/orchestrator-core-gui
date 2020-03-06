@@ -1,0 +1,211 @@
+/*!
+ * Copyright 2019 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+@import "../../stylesheets/mixins.scss";
+@import "../../stylesheets/media_queries.scss";
+
+.table-preferences-icon-bar {
+    padding: 6px;
+    margin-left: 12px;
+    font-size: larger;
+    &.minimized {
+        background-color: $light-grey;
+    }
+    .icon-right {
+        float: right;
+    }
+    .table-name {
+        font-weight: bold;
+        font-variant: small-caps;
+        font-size: larger;
+    }
+}
+
+.preferences {
+    label {
+        display: inline-block;
+        margin: 10px;
+    }
+}
+
+table.nwa-table {
+    margin: 20px;
+    padding: 8px;
+    width: 98%;
+    word-break: break-all;
+
+    caption {
+        font-weight: bold;
+        font-variant: small-caps;
+        font-size: larger;
+    }
+    td,
+    th {
+        text-align: left;
+        vertical-align: middle;
+    }
+    tr {
+        border-bottom: 1px solid $light-grey;
+        &.suspended {
+            background-color: $light-gold;
+        }
+        &.running {
+            background-color: $light-green;
+        }
+        &.failed {
+            background-color: white;
+        }
+        &.api_unavailable {
+            background-color: $light-blue;
+        }
+        &.inconsistent_data {
+            background-color: $light-red;
+        }
+        &.highlighted {
+            border-top: 3px double $medium-grey;
+            border-bottom: 3px double $medium-grey;
+            box-shadow: 2px 4px 4px 4px black;
+        }
+    }
+    thead {
+        tr.column-ids {
+            th {
+                cursor: pointer;
+                padding: 5px 5px 10px 5px;
+                background-color: $blue;
+                color: white;
+            }
+        }
+        span {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: larger;
+            color: $medium-grey;
+            padding: 7px 2px 7px 0;
+        }
+        input {
+            font-size: 14px;
+        }
+        tr.filters {
+            background-color: white;
+            th {
+                color: $blue;
+                input {
+                    width: 100%;
+                }
+                button.dropdown-button {
+                    border-radius: $br;
+                    i.fa {
+                        color: $blue;
+                        float: left;
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            cursor: pointer;
+            &:hover {
+                background-color: $hover;
+                &.suspended {
+                    background-color: darken($light-gold, 10%);
+                }
+                &.running {
+                    background-color: darken($light-green, 10%);
+                }
+                &.failed {
+                    background-color: darken($light-blue, 10%);
+                }
+                &.api_unavailable {
+                    background-color: darken($light-blue, 10%);
+                }
+                &.inconsistent_data {
+                    background-color: darken($light-red, 10%);
+                }
+                td.actions i.fa-ellipsis-h {
+                    color: $blue;
+                }
+            }
+        }
+        td {
+            i.fa-info-circle {
+                @include info-icon;
+            }
+            word-break: break-word;
+            word-wrap: break-word;
+            padding: 15px 5px;
+
+            div.tool-tip {
+                @include tool-tip;
+                span {
+                    text-transform: none;
+                    &.label {
+                        font-weight: bold;
+                        display: block;
+                        padding: 3px 0;
+                    }
+                    &.value {
+                        font-weight: normal;
+                        float: right;
+                        padding: 0 0 0 60px;
+                    }
+                }
+            }
+            pre {
+                white-space: pre-wrap;
+            }
+        }
+        td.assignee {
+            color: $blue;
+            font-weight: bold;
+            padding-right: 15px;
+        }
+        td.highlight i.fa-caret-right {
+            font-size: x-large;
+        }
+        td.actions {
+            cursor: pointer;
+            text-align: right;
+            font-size: 18px;
+            position: relative;
+        }
+    }
+}
+
+.no-results {
+    font-weight: bold;
+    font-variant: small-caps;
+    margin: 0em 0em 0em 2em;
+    font-size: large;
+}
+.pagination {
+    margin: 20px;
+    input[type="text"] {
+        width: 4em;
+    }
+}
+
+span.pulse {
+    color: $green;
+}
+span.rest {
+    color: $green;
+}
+
+span.dead {
+    color: $red;
+}

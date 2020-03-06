@@ -1128,7 +1128,9 @@ I18n.translations.en = {
         flash: {
             delete: "Task {{name}} is deleted",
             abort: "Task {{name}} is aborted",
-            retry: "Task {{name}} has been retried"
+            retry: "Task {{name}} has been retried",
+            runall: "All failed tasks retried",
+            runallfailed: "Not all failed tasks could be retried"
         },
         refresh: "Refresh automatically every 3 seconds?",
         runall: "Rerun all"
@@ -1322,7 +1324,77 @@ I18n.translations.en = {
         errors: {
             crm_unavailable: "CRM is unresponsive... {{type}} unavailable!!"
         }
-    }
+    },
+    table: {
+        is_minimized: " (minimized)",
+        preferences: {
+            edit: "Edit table preferences",
+            reset: "Reset table preferences to defaults",
+            autorefresh: "Set autorefresh delay in milliseconds",
+            norefresh: "Autorefresh disabled",
+            refresh: "Autorefresh for {{delay}}ms",
+            hidden_columns: "Show/Hide columns:",
+            show_paginator: "Show Paginator",
+            hide_paginator: "Hide Paginator"
+        },
+        processes: {
+            active: "Active Processes",
+            completed: "Completed Processes",
+            caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
+            with_status: " with status ",
+            filtered_on: " and filtered on ",
+            sorted_by: " and sorted by "
+        },
+        tasks: "Tasks",
+        expanded_row: {
+            running: "Currently processing step '{{step}}'.",
+            suspended: "Suspended and waiting for input at step '{{step}}'.",
+            waiting: "Waiting on resolution for step '{{step}}'.",
+            aborted: "Aborted on step '{{step'}}.",
+            failed: "Process failed on step '{{step}}' with the following output.",
+            api_unavailable: "The following failure could be caused by an unavailable API at step '{{step}}'.",
+            inconsistent_data:
+                "The following failure was caused by inconsistent data between the orchestrator and another system. This happened at step '{{step}}'. Manual intervention is required.",
+            completed: "Completed"
+        },
+        no_results: "No results found.",
+        filter_placeholder: {
+            assignee: "assignee...",
+            status: "status...",
+            customer: "customer name...",
+            abbrev: "customer abbreviation...",
+            product: "product name...",
+            tag: "product tag...",
+            creator: "creator..",
+            workflow: "workflow name...",
+            subscriptions: "description...",
+            target: "workflow target..."
+        },
+        filter_button: {
+            on: "on",
+            off: "off"
+        }
+    },
+    process_statuses: {
+        created: "Created",
+        running: "Running",
+        suspended: "Suspended",
+        waiting: "Waiting",
+        aborted: "Aborted",
+        failed: "Failed",
+        api_unavailable: "API unavailable",
+        inconsistent_data: "Inconsistent data",
+        completed: "Completed"
+    },
+    assignees: {
+        CHANGES: "Changes",
+        NOC: "NOC",
+        KLANT_SUPPORT: "Klant Support",
+        KLANTSUPPORT: "Klant Support",
+        SYSTEM: "System"
+    },
+    unavailable: "Unavailable",
+    unavailable_abbreviated: "N/A"
 };
 
 export default I18n.translations.en;

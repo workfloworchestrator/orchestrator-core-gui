@@ -25,11 +25,12 @@ interface IProps {
     onChange: (option: Option) => void;
     products: Product[];
     product?: string;
-    disabled: boolean;
+    disabled?: boolean;
+    placeholder?: string;
 }
 
-export default function ProductSelect({ id, onChange, products, product, disabled }: IProps) {
-    const options: Option[] = products.map((aProduct: Product) => ({
+export default function ProductSelect({ id, onChange, product, products, disabled, placeholder }: IProps) {
+    const options = products.map(aProduct => ({
         value: aProduct.product_id,
         label: aProduct.name
     }));
@@ -44,7 +45,7 @@ export default function ProductSelect({ id, onChange, products, product, disable
             options={options}
             value={value}
             isSearchable={true}
-            placeholder="Search and select a product..."
+            placeholder={placeholder || "Search and select a product..."}
             isDisabled={disabled || products.length === 0}
         />
     );

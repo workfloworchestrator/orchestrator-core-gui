@@ -13,6 +13,11 @@
  *
  */
 
+export interface FilterArgument {
+    id: string;
+    values: string[];
+}
+
 export interface Product {
     name: string;
     tag: string;
@@ -101,6 +106,7 @@ export interface ServicePort {
 export interface Organization {
     uuid: string;
     name: string;
+    abbr: string;
 }
 
 export interface ValidationError {
@@ -160,6 +166,21 @@ export interface ProcessSubscription {
     subscription_id: string;
     created_at: number;
     workflow_target: string;
+}
+
+export interface ProcessV2 {
+    assignee: string;
+    created_by: string;
+    failed_reason: string;
+    last_modified_at: string;
+    pid: string;
+    started_at: string;
+    last_status: string;
+    last_step: string;
+    subscriptions: Array<Subscription>;
+    workflow: string;
+    workflow_target: string;
+    is_task: boolean;
 }
 
 export interface InputField {

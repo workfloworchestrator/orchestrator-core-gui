@@ -20,7 +20,7 @@ import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
 import { ServicePortSubscription, ServicePort, Product, ValidationError, setProp } from "../utils/types";
 import { filterProductsByBandwidth } from "../validations/Products";
-import { range } from "lodash";
+import range from "lodash/range";
 
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";

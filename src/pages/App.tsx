@@ -23,7 +23,7 @@ import Flash from "../components/Flash";
 import ProtectedRoute from "../components/ProtectedRoute";
 import NotFound from "./NotFound";
 import Help from "./Help";
-import Processes from "./Processes";
+import Processes from "./ProcessesV2";
 import Subscriptions from "./Subscriptions";
 import Validations from "./Validations";
 import NewProcess from "./NewProcess";
@@ -40,6 +40,8 @@ import {
     me,
     organisations,
     products,
+    assignees,
+    processStatuses,
     redirectToAuthorizationServer,
     reportError
 } from "../api";
@@ -52,7 +54,7 @@ import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
 import ProductPage from "../components/Product";
 import Cache from "./Cache";
-import Tasks from "./Tasks";
+import Tasks from "./TasksV2";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
@@ -81,6 +83,8 @@ class App extends React.PureComponent<{}, IState> {
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
+                assignees: [],
+                processStatuses: [],
                 products: [],
                 redirect: url => history.push(url)
             },
@@ -177,9 +181,32 @@ class App extends React.PureComponent<{}, IState> {
             me()
                 .then(currentUser => {
                     if (currentUser && (currentUser.sub || currentUser.user_name)) {
-                        Promise.all([organisations(), products(), locationCodes()]).then(
-                            (result: [Organization[] | undefined, Product[] | undefined, string[] | undefined]) => {
-                                const [allOrganisations, allProducts, allLocationCodes] = result;
+                        Promise.all([
+                            organisations(),
+                            products(),
+                            locationCodes(),
+                            assignees(),
+                            processStatuses()
+                        ]).then(
+                            (
+                                result: [
+                                    Organization[] | undefined,
+                                    Product[] | undefined,
+                                    string[] | undefined,
+                                    string[] | undefined,
+                                    string[] | undefined
+                                ]
+                            ) => {
+                                const [
+                                    allOrganisations,
+                                    allProducts,
+                                    allLocationCodes,
+                                    allAssignees,
+                                    allProcessStatuses
+                                ] = result;
+                                const products = allProducts
+                                    ? allProducts!.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
+                                    : [];
                                 this.setState({
                                     loading: false,
                                     applicationContext: {
@@ -187,9 +214,9 @@ class App extends React.PureComponent<{}, IState> {
                                         configuration: configuration!,
                                         organisations: allOrganisations,
                                         locationCodes: allLocationCodes,
-                                        products: allProducts!.sort((a: Product, b: Product) =>
-                                            a.name.localeCompare(b.name)
-                                        ),
+                                        assignees: allAssignees || [],
+                                        processStatuses: allProcessStatuses || [],
+                                        products: products || [],
                                         redirect: url => history.push(url)
                                     }
                                 });
@@ -234,12 +261,7 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
-                                <ProtectedRoute
-                                    path="/processes"
-                                    render={props => (
-                                        <Processes highlight={getParameterByName("highlight", props.location.search)} />
-                                    )}
-                                />
+                                <ProtectedRoute path="/processes" render={props => <Processes />} />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}
