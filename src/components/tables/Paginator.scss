@@ -1,4 +1,3 @@
-
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,27 +17,27 @@
 @import "../../stylesheets/media_queries.scss";
 
 .pagination {
-	display: flex;
-	flex: row nowrap;
-	margin-right: 1em;
-     button {
-	     color: white;
-	     background-color: $blue;
-	     font-size: 20px;
-	     border: none;
-     }
-	.paginator-left {
-		display: inline-block;
-	}
+    display: flex;
+    flex: row nowrap;
+    margin-right: 1em;
+    button {
+        color: white;
+        background-color: $blue;
+        font-size: 20px;
+        border: none;
+    }
+    .paginator-left {
+        display: inline-block;
+    }
 
-	.paginator-center {
-		display: inline-block;
-	    margin: auto;
-	    input[type="text"] {
-		width: 4em;
-	    }
-	}
-	.paginator-right {
-		display: inline-block;
-	}
+    .paginator-center {
+        display: inline-block;
+        margin: auto;
+        input[type="text"] {
+            width: 4em;
+        }
+    }
+    .paginator-right {
+        display: inline-block;
+    }
 }

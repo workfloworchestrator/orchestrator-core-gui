@@ -101,14 +101,14 @@ table.nwa-table {
         tr.filters {
             background-color: white;
             th {
-		color: $blue;
-		input {
-			width: 100%;
-		}
+                color: $blue;
+                input {
+                    width: 100%;
+                }
                 button.dropdown-button {
                     border-radius: $br;
                     i.fa {
-			color:$blue;
+                        color: $blue;
                         float: left;
                         font-size: 15px;
                     }
