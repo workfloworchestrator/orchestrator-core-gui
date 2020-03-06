@@ -135,8 +135,16 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
-                <ProcessesTable initialTableSettings={activeSettings} renderActions={this.renderActions} />
-                <ProcessesTable initialTableSettings={completedSettings} renderActions={this.renderActions} />
+                <ProcessesTable
+                    key={"active"}
+                    initialTableSettings={activeSettings}
+                    renderActions={this.renderActions}
+                />
+                <ProcessesTable
+                    key={"completed"}
+                    initialTableSettings={completedSettings}
+                    renderActions={this.renderActions}
+                />
                 <ScrollUpButton />
             </div>
         );

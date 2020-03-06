@@ -244,6 +244,7 @@ export function NwaTable<T extends object>({
         usePagination
     );
     const {
+        name,
         sortBy,
         filterBy,
         showSettings,
@@ -315,58 +316,58 @@ export function NwaTable<T extends object>({
     };
 
     return (
-        <>
+        <div id={name}>
             <Preferences<T> {...preferencesProps} />
             {!minimized && (
-                <>
-                    <table className="nwa-table" {...getTableProps()}>
-                        <thead>
-                            {headerGroups.map(headerGroup => (
-                                <>
-                                    <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
-                                        {headerGroup.headers.map(column => (
-                                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                                {column.render("Header")}
-                                                {sortIcon(column)}
-                                            </th>
-                                        ))}
+                <table className="nwa-table" {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <React.Fragment key={`header_fragment_${headerGroup.id}`}>
+                                <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("Header")}
+                                            {sortIcon(column)}
+                                        </th>
+                                    ))}
+                                </tr>
+                                <tr className={"filters"}>
+                                    {headerGroup.headers.map(column => (
+                                        <th id={`filter_headers_${column.id}`} key={column.id}>
+                                            {column.canFilter && column.render("Filter")}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </React.Fragment>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row: Row<T>, i) => {
+                            prepareRow(row);
+                            return (
+                                <React.Fragment key={`row_fragment_${row.id}`}>
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            return (
+                                                <td {...cell.getCellProps([{ className: cell.column.id }])}>
+                                                    {cell.render("Cell")}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
-                                    <tr className={"filters"} {...headerGroup.getHeaderGroupProps()}>
-                                        {headerGroup.headers.map(column => (
-                                            <th>{column.canFilter && column.render("Filter")}</th>
-                                        ))}
-                                    </tr>
-                                </>
-                            ))}
-                        </thead>
-                        <tbody {...getTableBodyProps()}>
-                            {page.map((row: Row<T>, i) => {
-                                prepareRow(row);
-                                return (
-                                    <>
-                                        <tr {...row.getRowProps()}>
-                                            {row.cells.map(cell => {
-                                                return (
-                                                    <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                                        {cell.render("Cell")}
-                                                    </td>
-                                                );
-                                            })}
+                                    {row.isExpanded && (
+                                        <tr>
+                                            <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
                                         </tr>
-                                        {row.isExpanded && (
-                                            <tr>
-                                                <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
-                                            </tr>
-                                        )}
-                                    </>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    {data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
-                    {showPaginator && <Paginator {...paginatorProps} />}
-                </>
+                                    )}
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </table>
             )}
-        </>
+            {!minimized && data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
+            {!minimized && showPaginator && <Paginator {...paginatorProps} />}
+        </div>
     );
 }

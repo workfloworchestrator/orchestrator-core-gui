@@ -29,7 +29,7 @@ interface IProps<T extends object> {
 function Preferences<T extends object>({ allColumns, state, dispatch, initialTableSettings }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
     return (
-        <>
+        <React.Fragment key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span
                     title={I18n.t("table.preferences.edit")}
@@ -115,7 +115,7 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                     })}
                 </div>
             )}
-        </>
+        </React.Fragment>
     );
 }
 
