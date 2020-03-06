@@ -343,8 +343,8 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     );
 
     return (
-        <div className={"card"} key={name}>
-            <section className={"nwa-table"} id={name}>
+        <div key={name}>
+            <section className="nwa-table" id={name}>
                 <NwaTable<ProcessV2>
                     columns={columns}
                     initialState={initialState as TableState<ProcessV2>}

@@ -128,7 +128,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         );
 
         return (
-            <div className="mod-processes">
+            <div className="processes-container">
                 <ConfirmationDialog
                     isOpen={this.state.confirmationDialogOpen}
                     cancel={this.cancelConfirmation}

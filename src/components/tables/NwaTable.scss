@@ -17,8 +17,8 @@
 @import "../../stylesheets/media_queries.scss";
 
 .table-preferences-icon-bar {
-    padding: 6px;
-    margin-left: 12px;
+    //padding: 6px;
+    //margin-left: 12px;
     font-size: larger;
     &.minimized {
         background-color: $light-grey;
@@ -36,14 +36,14 @@
 .preferences {
     label {
         display: inline-block;
-        margin: 10px;
+        //margin: 10px;
     }
 }
 
 table.nwa-table {
-    margin: 20px;
-    padding: 8px;
-    width: 98%;
+    //margin: 20px;
+    //padding: 8px;
+    width: 100%;
     word-break: break-all;
 
     caption {
@@ -193,10 +193,7 @@ table.nwa-table {
     font-size: large;
 }
 .pagination {
-    margin: 20px;
-    input[type="text"] {
-        width: 4em;
-    }
+    //margin: 20px;
 }
 
 span.pulse {

@@ -231,3 +231,12 @@
         }
     }
 }
+// V2 Stuff
+.tasks-container {
+    @include page;
+    background-color: red;
+}
+.actions {
+    margin: 10px 10px 10px 10px;
+    text-align: right;
+}

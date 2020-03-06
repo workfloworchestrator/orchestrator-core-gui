@@ -18,11 +18,13 @@
 
 .mod-processes {
     @include page;
+    @include card;
 
-    .card {
-        @include card;
-        padding: 15px 15px 0 15px;
-    }
+
+    //.card {
+    //    @include card;
+    //    padding: 15px 15px 0 15px;
+    //}
     .options {
         display: flex;
         padding-top: 25px;
@@ -82,7 +84,7 @@
     }
 
     table.processes {
-        width: 100%;
+        width: 30%;
         td,
         th {
             text-align: left;
@@ -240,3 +242,12 @@
         }
     }
 }
+
+// V2 Stuff
+.processes-container {
+    // Removed next include to use full width
+    @include page;
+    background-color: white;
+}
+
+
