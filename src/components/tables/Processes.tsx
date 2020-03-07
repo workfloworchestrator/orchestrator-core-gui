@@ -61,7 +61,7 @@ export function initialProcessTableSettings(
     optional?: Partial<TableSettings<ProcessV2>>
 ): TableSettings<ProcessV2> {
     const defaults = {
-        showSettings: true,
+        showSettings: false,
         showPaginator: true,
         refresh: false,
         delay: 3000,
@@ -170,7 +170,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     const columns: Column<ProcessV2>[] = useMemo(
         () => [
             {
-                Header: <i className={"fa fa-info"} />,
+                Header: "",
                 id: "info",
                 accessor: "failed_reason",
                 disableSortBy: true,

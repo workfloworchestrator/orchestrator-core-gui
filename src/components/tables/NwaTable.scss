@@ -17,32 +17,33 @@
 @import "../../stylesheets/media_queries.scss";
 
 .table-preferences-icon-bar {
-    //padding: 6px;
-    //margin-left: 12px;
+    padding: 20px 0 5px 0;
+    margin: 0 0 5px 0;
     font-size: larger;
     &.minimized {
-        background-color: $light-grey;
+        background-color: white;
     }
     .icon-right {
         float: right;
     }
     .table-name {
         font-weight: bold;
-        font-variant: small-caps;
+        color: $blue;
         font-size: larger;
+    }
+    span {
+        margin: 10px 5px 10px 0;
     }
 }
 
 .preferences {
     label {
         display: inline-block;
-        //margin: 10px;
+        margin: 10px 5px 10px 0;
     }
 }
 
 table.nwa-table {
-    //margin: 20px;
-    //padding: 8px;
     width: 100%;
     word-break: break-all;
 
@@ -51,10 +52,24 @@ table.nwa-table {
         font-variant: small-caps;
         font-size: larger;
     }
-    td,
+    td {
+        text-align: left;
+        vertical-align: middle;
+
+    }
     th {
         text-align: left;
         vertical-align: middle;
+        border-left:solid $light-blue 1px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+
+    }
+    th:first-child{
+        border-radius:10px 0 0 0;
+    }
+    th:last-child{
+        border-radius:0 10px 0 0;
+        border-right: none;
     }
     tr {
         border-bottom: 1px solid $light-grey;
@@ -86,10 +101,10 @@ table.nwa-table {
                 padding: 5px 5px 10px 5px;
                 background-color: $blue;
                 color: white;
+
             }
         }
         span {
-            text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
             color: $medium-grey;
@@ -101,6 +116,9 @@ table.nwa-table {
         tr.filters {
             background-color: white;
             th {
+                border-right: none;
+                border-left: none;
+
                 color: $blue;
                 input {
                     width: 100%;
@@ -189,11 +207,11 @@ table.nwa-table {
 .no-results {
     font-weight: bold;
     font-variant: small-caps;
-    margin: 0em 0em 0em 2em;
+    margin: 0 0 0 2em;
     font-size: large;
 }
 .pagination {
-    //margin: 20px;
+    margin: 15px 0 10px 0;
 }
 
 span.pulse {
