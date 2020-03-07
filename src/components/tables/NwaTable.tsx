@@ -326,8 +326,7 @@ export function NwaTable<T extends object>({
                                 <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map(column => (
                                         <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                            {column.render("Header")}
-                                            {sortIcon(column)}
+                                            {column.render("Header")} {sortIcon(column)}
                                         </th>
                                     ))}
                                 </tr>
