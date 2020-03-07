@@ -108,13 +108,15 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                         strict={true}
                     />
                     <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
-                    {allColumns.filter(column => !excludedFilterColumns.includes(column.id)).map(column => {
-                        return (
-                            <label key={column.id}>
-                                <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                            </label>
-                        );
-                    })}
+                    {allColumns
+                        .filter(column => !excludedFilterColumns.includes(column.id))
+                        .map(column => {
+                            return (
+                                <label key={column.id}>
+                                    <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
+                                </label>
+                            );
+                        })}
                 </div>
             )}
         </React.Fragment>

@@ -55,20 +55,18 @@ table.nwa-table {
     td {
         text-align: left;
         vertical-align: middle;
-
     }
     th {
         text-align: left;
         vertical-align: middle;
-        border-left:solid $light-blue 1px;
+        border-left: solid $light-blue 1px;
         border-right: 1px solid rgba(0, 0, 0, 0.05);
-
     }
-    th:first-child{
-        border-radius:10px 0 0 0;
+    th:first-child {
+        border-radius: 10px 0 0 0;
     }
-    th:last-child{
-        border-radius:0 10px 0 0;
+    th:last-child {
+        border-radius: 0 10px 0 0;
         border-right: none;
     }
     tr {
@@ -101,7 +99,6 @@ table.nwa-table {
                 padding: 5px 5px 10px 5px;
                 background-color: $blue;
                 color: white;
-
             }
         }
         span {
