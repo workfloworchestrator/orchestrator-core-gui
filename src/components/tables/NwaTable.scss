@@ -78,20 +78,18 @@ table.nwa-table {
     }
     tr {
         border-bottom: 1px solid $light-grey;
+        background-color: white;
         &.suspended {
-            background-color: $light-gold;
+            background-color: $lightest-gold;
         }
         &.running {
-            background-color: $light-green;
-        }
-        &.failed {
-            background-color: white;
+            background-color: $lightest-green;
         }
         &.api_unavailable {
-            background-color: $light-blue;
+            background-color: $lightest-blue;
         }
         &.inconsistent_data {
-            background-color: $light-red;
+            background-color: $lightest-red;
         }
         &.highlighted {
             border-top: 3px double $medium-grey;
@@ -144,19 +142,16 @@ table.nwa-table {
             &:hover {
                 background-color: $hover;
                 &.suspended {
-                    background-color: darken($light-gold, 10%);
+                    background-color: darken($lightest-gold, 3%);
                 }
                 &.running {
-                    background-color: darken($light-green, 10%);
-                }
-                &.failed {
-                    background-color: darken($light-blue, 10%);
+                    background-color: darken($lightest-green, 3%);
                 }
                 &.api_unavailable {
-                    background-color: darken($light-blue, 10%);
+                    background-color: darken($lightest-blue, 3%);
                 }
                 &.inconsistent_data {
-                    background-color: darken($light-red, 10%);
+                    background-color: darken($lightest-red, 3%);
                 }
                 td.actions i.fa-ellipsis-h {
                     color: $blue;

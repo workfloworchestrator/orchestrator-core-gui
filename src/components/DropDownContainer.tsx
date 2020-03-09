@@ -13,12 +13,6 @@ function DropDownContainer({
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
 
-    const handleMouseLeave = () => {
-        setTimeout(() => {
-            setHover(false);
-        }, 500);
-    };
-
     return (
         <div className={"dropdown-container"}>
             <button
@@ -33,7 +27,7 @@ function DropDownContainer({
                     }
                 }}
                 onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => handleMouseLeave()}
+                onMouseLeave={() => setHover(false)}
             >
                 {renderButtonContent(active, hover)}
             </button>
