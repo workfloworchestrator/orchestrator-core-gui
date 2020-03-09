@@ -37,9 +37,16 @@
 }
 
 .preferences {
+    h1,
+    h2 {
+        margin-top: 10px;
+    }
     label {
         display: inline-block;
-        margin: 10px 5px 10px 0;
+        margin: 5px 10px 10px 0;
+    }
+    input {
+        margin-top: -4px;
     }
 }
 

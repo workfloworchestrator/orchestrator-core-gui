@@ -73,7 +73,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 null,
                 [
                     { id: "isTask", values: ["true"] },
-                    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] }
+                    { id: "status", values: ["running", "failed", "waiting", "api_unavailable", "inconsistent_data"] }
                 ],
                 null
             )
