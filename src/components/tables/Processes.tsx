@@ -308,10 +308,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                     <ActionContainer
                         title={"Actions"}
                         renderButtonContent={active => {
-                            const classes = [
-                                "dropdown-button-content",
-                                active ? "active" : "",
-                            ].join(" ");
+                            const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
                             return (
                                 <span className={classes}>
                                     <i className={"fa fa-bars"} />

@@ -15,10 +15,9 @@ function DropDownContainer({
 
     const handleMouseLeave = () => {
         setTimeout(() => {
-            setHover(false)
-        }, 500)
-    }
-
+            setHover(false);
+        }, 500);
+    };
 
     return (
         <div className={"dropdown-container"}>
