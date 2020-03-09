@@ -44,6 +44,7 @@ import {
 } from "components/tables/cellRenderers";
 import DropDownContainer from "components/DropDownContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
+import ActionContainer from "../ActionContainer";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
@@ -304,13 +305,12 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 accessor: (originalRow: ProcessV2, index: number) => originalRow,
                 id: "actions",
                 Cell: ({ cell }: { cell: Cell }) => (
-                    <DropDownContainer
+                    <ActionContainer
                         title={"Actions"}
-                        renderButtonContent={(active, hover) => {
+                        renderButtonContent={active => {
                             const classes = [
                                 "dropdown-button-content",
                                 active ? "active" : "",
-                                hover ? "hover" : ""
                             ].join(" ");
                             return (
                                 <span className={classes}>
