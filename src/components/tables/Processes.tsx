@@ -42,7 +42,6 @@ import {
     renderProductTagCell,
     renderCustomersCell
 } from "components/tables/cellRenderers";
-import DropDownContainer from "components/DropDownContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 import ActionContainer from "../ActionContainer";
 
@@ -180,12 +179,10 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
-                    const button = cell.value ? (
-                        <i className={"fa fa-exclamation-triangle"} />
-                    ) : row.isExpanded ? (
-                        <i className={"fa fa-minus-circle"} />
+                    const button = row.isExpanded ? (
+                        <i className={`fa fa-minus-circle ${row.values.status}`} />
                     ) : (
-                        <i className={"fa fa-plus-circle"} />
+                        <i className={`fa fa-plus-circle ${row.values.status}`} />
                     );
                     return (
                         <div

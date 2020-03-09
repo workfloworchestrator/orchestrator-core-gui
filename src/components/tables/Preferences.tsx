@@ -42,7 +42,7 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                     title={I18n.t("table.preferences.edit")}
                     onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
                 >
-                    <i className={"fa fa-cog"} />
+                    <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
                 </span>
                 {"   "}
                 <span

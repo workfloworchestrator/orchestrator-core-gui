@@ -34,6 +34,11 @@
     span {
         margin: 10px 5px 10px 0;
     }
+    i.fa-cog {
+        &.active {
+            color: $blue;
+        }
+    }
 }
 
 .preferences {
@@ -47,6 +52,11 @@
     }
     input {
         margin-top: -4px;
+    }
+    b {
+        // styles the arrows of numeric input
+        margin-top: 4px;
+        margin-left: 1px;
     }
 }
 
@@ -92,9 +102,7 @@ table.nwa-table {
             background-color: $lightest-red;
         }
         &.highlighted {
-            border-top: 3px double $medium-grey;
-            border-bottom: 3px double $medium-grey;
-            box-shadow: 2px 4px 4px 4px black;
+            border: 2px solid $blue;
         }
     }
     thead {
@@ -162,6 +170,30 @@ table.nwa-table {
             i.fa-info-circle {
                 @include info-icon;
             }
+            i.fa-plus-circle,
+            i.fa-minus-circle {
+                &.suspended {
+                    color: $gold;
+                }
+                &.running {
+                    color: $green;
+                }
+                &.completed {
+                    color: $green;
+                }
+                &.api_unavailable {
+                    color: $blue;
+                }
+                &.inconsistent_data {
+                    color: $red;
+                }
+                &.waiting {
+                    color: $orange;
+                }
+                &.failed {
+                    color: $red;
+                }
+            }
             word-break: break-word;
             word-wrap: break-word;
             padding: 15px 5px;
@@ -201,6 +233,11 @@ table.nwa-table {
             position: relative;
         }
     }
+    .info i.fa-caret-right {
+        color: $blue;
+        margin-left: -12px;
+        padding-right: 6px;
+    }
 }
 
 .no-results {
@@ -210,12 +247,13 @@ table.nwa-table {
     font-size: large;
 }
 .pagination {
-    margin: 15px 0 10px 0;
+    margin: 8px 0 10px 0;
 }
 
 span.pulse {
     color: $green;
 }
+
 span.rest {
     color: $green;
 }
