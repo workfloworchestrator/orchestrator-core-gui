@@ -38,8 +38,12 @@ const renderFilterIcon = (filtering: boolean) => (active: boolean, hover: boolea
     }, "");
     return (
         <>
-            <i className={"fa fa-filter" + classes} />
-            {filtering ? <i className={"fa fa-check-square-o"} /> : <i className={"fa fa-minus-square-o"} />}
+            {filtering ? (
+                <i className={`fa fa-check-square${active ? " active" : ""}`} />
+            ) : (
+                <i className={`fa fa-square-o${active ? " active" : ""}`} />
+            )}
+            <i className={active ? "fa fa-caret-down active" : "fa fa-caret-right"} />
         </>
     );
 };

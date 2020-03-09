@@ -132,13 +132,20 @@ table.nwa-table {
                 color: $blue;
                 input {
                     width: 100%;
+                    height: 30px;
+                    border: 0;
                 }
                 button.dropdown-button {
-                    border-radius: $br;
+                    border: 0;
+                    background: transparent;
                     i.fa {
+                        margin-top: 6px;
                         color: $blue;
                         float: left;
-                        font-size: 15px;
+                        font-size: 18px;
+                        &.active {
+                            color: $dark-grey;
+                        }
                     }
                 }
             }
