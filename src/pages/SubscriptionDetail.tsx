@@ -91,11 +91,11 @@ interface Dienstafname {
 
 interface RelatedObject {
     type:
+        | "node_subscription_id"
         | "port_subscription_id"
         | "ip_prefix_subscription_id"
         | "internetpinnen_prefix_subscription_id"
         | "parent_ip_prefix_subscription_id"
-        | "node_subscription_id"
         | "ims_circuit_id"
         | "ims_corelink_trunk_id"
         | "ims_port_id"
@@ -103,7 +103,9 @@ interface RelatedObject {
         | "ptp_ipv6_ipam_id"
         | "ipam_prefix_id"
         | "node_ipv4_ipam_id"
-        | "node_ipv6_ipam_id";
+        | "node_ipv6_ipam_id"
+        | "corelink_ipv4_ipam_id"
+        | "corelink_ipv6_ipam_id";
     json: any;
 }
 
@@ -189,11 +191,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         let childSubscriptions = relatedObjects
                             .filter(
                                 obj =>
+                                    obj.type === "node_subscription_id" ||
                                     obj.type === "port_subscription_id" ||
                                     obj.type === "ip_prefix_subscription_id" ||
                                     obj.type === "internetpinnen_prefix_subscription_id" ||
-                                    obj.type === "parent_ip_prefix_subscription_id" ||
-                                    obj.type === "node_subscription_id"
+                                    obj.type === "parent_ip_prefix_subscription_id"
                             )
                             .map(obj => obj.json);
 
@@ -224,7 +226,13 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             .map(obj => obj.json);
 
                         const ipamAddresses = relatedObjects
-                            .filter(obj => obj.type === "node_ipv4_ipam_id" || obj.type === "node_ipv6_ipam_id")
+                            .filter(
+                                obj =>
+                                    obj.type === "node_ipv4_ipam_id" ||
+                                    obj.type === "node_ipv6_ipam_id" ||
+                                    obj.type === "corelink_ipv4_ipam_id" ||
+                                    obj.type === "corelink_ipv6_ipam_id"
+                            )
                             .map(obj => obj.json);
 
                         this.setState({
@@ -993,6 +1001,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             case "ims_circuit_id":
                 const imsService = imsServices.find(circuit => circuit.id === parseInt(identifier, 10));
                 return this.renderImsServiceDetail(imsService!, 0, imsEndpoints, "related-subscription");
+            case "node_subscription_id":
             case "port_subscription_id":
             case "ip_prefix_subscription_id":
             case "internetpinnen_prefix_subscription_id":
