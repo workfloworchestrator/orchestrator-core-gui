@@ -29,13 +29,6 @@ import Select from "react-select";
  */
 
 const renderFilterIcon = (filtering: boolean) => (active: boolean, hover: boolean) => {
-    const classes = ["active", "hover", "filtering"].reduce((out, cls, idx) => {
-        if ([active, hover, filtering][idx]) {
-            return out + " " + cls;
-        } else {
-            return out;
-        }
-    }, "");
     return (
         <>
             {filtering ? (
