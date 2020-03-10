@@ -1300,6 +1300,8 @@ I18n.translations.en = {
         task_validate_customer_ip_prefix_records: "Validate all customer ip prefixes against subscriptions",
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
 
+        terminate_sn8_service_port: "Terminate SN8 Service Port",
+
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
         validate_core_link: "Validate Core Link",
