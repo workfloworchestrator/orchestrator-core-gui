@@ -168,6 +168,8 @@ I18n.translations.en = {
             user_input: "User input",
             process: "Process"
         },
+        trunk_to_remove: "Remove trunk",
+        trunk_to_remove_info: "Select a trunk to remove",
         port_id: "Port",
         port_id_info: "Select a port",
         port_id_1: "Port",
