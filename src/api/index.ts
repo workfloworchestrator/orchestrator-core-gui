@@ -16,7 +16,7 @@ import I18n from "i18n-js";
 
 import mySpinner from "../lib/Spin";
 import { isEmpty } from "../utils/Utils";
-import { absent, child_subscriptions, ims_port_id, port_subscription_id } from "../validations/Subscriptions";
+import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
 import {
     ProductBlock,
     ResourceType,
@@ -354,10 +354,11 @@ export function getResourceTypeInfo(type: string, identifier: string) {
         case "ims_corelink_trunk_id":
             promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
             break;
+        case "node_subscription_id":
+        case "port_subscription_id":
         case "ip_prefix_subscription_id":
         case "internetpinnen_prefix_subscription_id":
         case "parent_ip_prefix_subscription_id":
-        case port_subscription_id:
             promise = subscriptionsDetail(identifier);
             break;
         case "ptp_ipv4_ipam_id":
