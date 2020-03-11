@@ -117,9 +117,9 @@ export function tableSettingsReducer<T extends object>(
                     let valueIdx = draft.filterBy[index].values.findIndex((value: string) => value === action.value);
                     if (valueIdx > -1) {
                         if (draft.filterBy[index].values.length > 1) {
-                            draft.filterBy[index].values.splice(valueIdx);
+                            draft.filterBy[index].values.splice(valueIdx, 1);
                         } else {
-                            draft.filterBy.splice(index);
+                            draft.filterBy.splice(index, 1);
                         }
                     }
                 }
