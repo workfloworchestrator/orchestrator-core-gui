@@ -248,7 +248,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
             .join(",");
 
         return (
-            <section className="service-port" key={index}>
+            <section className={`service-port row${index}`} key={index}>
                 <div className="wrapper service-port-select">
                     {index === 0 && <label>{I18n.t("service_ports.servicePort")}</label>}
                     <ServicePortSelect
