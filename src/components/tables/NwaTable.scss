@@ -108,7 +108,6 @@ table.nwa-table {
     thead {
         tr.column-ids {
             th {
-                cursor: pointer;
                 padding: 5px 5px 10px 5px;
                 background-color: $blue;
                 color: white;
@@ -136,8 +135,11 @@ table.nwa-table {
                     border: 0;
                 }
                 button.dropdown-button {
+                    cursor: pointer;
                     border: 0;
                     background: transparent;
+                    outline: none;
+
                     i.fa {
                         margin-top: 6px;
                         color: $blue;
@@ -153,7 +155,6 @@ table.nwa-table {
     }
     tbody {
         tr {
-            cursor: pointer;
             &:hover {
                 background-color: $hover;
                 &.suspended {
@@ -255,6 +256,10 @@ table.nwa-table {
 }
 .pagination {
     margin: 8px 0 10px 0;
+}
+
+#filter_headers_info {
+    cursor: pointer;
 }
 
 span.pulse {
