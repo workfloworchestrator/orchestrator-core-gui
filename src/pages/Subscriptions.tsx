@@ -15,9 +15,9 @@
 
 import React, { RefObject } from "react";
 import { withQueryParams, NumberParam, SetQuery, DecodedValueMap } from "use-query-params";
-import ReactTable, { Filter, SortingRule } from "react-table";
+import ReactTable, { Filter, SortingRule } from "react-table-6";
 import Modal from "react-modal";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import I18n from "i18n-js";
 
 import { renderDate } from "../utils/Lookups";

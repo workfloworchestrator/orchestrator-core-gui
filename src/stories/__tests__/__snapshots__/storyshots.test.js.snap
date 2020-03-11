@@ -3872,7 +3872,6 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
         </label>
         <div
           className=" css-2b097c-container"
-          id="port-choice"
           onKeyDown={[Function]}
         >
           <div
@@ -4042,7 +4041,6 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
         </label>
         <div
           className=" css-2b097c-container"
-          id="port-choice"
           onKeyDown={[Function]}
         >
           <div
@@ -6902,13 +6900,6 @@ exports[`Storyshots ProcessDetail Task 1`] = `
           onClick={[Function]}
         >
           Abort
-        </button>
-        <button
-          className="button  red"
-          id="delete"
-          onClick={[Function]}
-        >
-          Delete
         </button>
         <button
           className="button"

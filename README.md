@@ -105,7 +105,10 @@ new-process?product=58695551-e386-437a-a999-41c1296f84b8&organisation=ad93daef-0
 We are using Prettier as a code formatter. You can run prettier like this:
 
 ```shell
-    yarn prettier -c --write '**/*.{js,jsx,scss,md}'
+    # Only check formatting
+    yarn prettier
+    # Apply prettier rules to project
+    yarn prettier-fix
 ```
 
 Similarly you can run other packages that can be found in the package.json

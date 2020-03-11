@@ -26,11 +26,11 @@ section.drop-down-actions {
     border-radius: $br;
     z-index: 5;
     font-size: 14px;
-    right: -16px;
-    top: 50px;
     text-align: left;
     margin-bottom: 200px;
     font-weight: bold;
+    left: -82px;
+    top: 22px;
 
     &:after {
         content: "";

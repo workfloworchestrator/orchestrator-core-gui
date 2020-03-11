@@ -231,3 +231,11 @@
         }
     }
 }
+// V2 Stuff
+.tasks-container {
+    @include page;
+}
+.actions {
+    margin: 10px 0px -40px 10px;
+    text-align: right;
+}

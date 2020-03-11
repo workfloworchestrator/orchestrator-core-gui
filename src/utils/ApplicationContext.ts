@@ -22,6 +22,8 @@ export interface ApplicationContextInterface {
     organisations?: Organization[];
     locationCodes?: string[];
     products: Product[];
+    assignees: string[];
+    processStatuses: string[];
     redirect: (_url: string) => void;
 }
 
@@ -30,6 +32,8 @@ let ApplicationContext = React.createContext<ApplicationContextInterface>({
     organisations: [],
     locationCodes: [],
     products: [],
+    assignees: [],
+    processStatuses: [],
     redirect: (_url: string) => {}
 });
 
