@@ -73,7 +73,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 null,
                 [
                     { id: "isTask", values: ["true"] },
-                    { id: "status", values: ["failed", "api_unavailable", "inconsistent_data"] }
+                    { id: "status", values: ["running", "failed", "waiting", "api_unavailable", "inconsistent_data"] }
                 ],
                 null
             )
@@ -168,14 +168,14 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             { refresh: true }
         );
         return (
-            <div className="mod-tasks">
+            <div className="tasks-container">
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}
                     confirm={confirmationDialogAction}
                     question={confirmationDialogQuestion}
                 />
-                <div className="card">
+                <div className="actions">
                     <div className="options">
                         <button className="button blue" onClick={this.runAllTasks}>
                             {I18n.t("tasks.runall")}

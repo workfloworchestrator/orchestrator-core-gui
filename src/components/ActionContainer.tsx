@@ -1,40 +1,33 @@
 import React, { useState } from "react";
-import "./DropDownContainer.scss";
+import "./ActionContainer.scss";
 
-function DropDownContainer({
+function ActionContainer({
     title,
     renderButtonContent,
     renderContent
 }: {
     title: string;
-    renderButtonContent: (active: boolean, hover: boolean) => React.ReactNode;
+    renderButtonContent: (active: boolean) => React.ReactNode;
     renderContent: (disabled: boolean) => React.ReactNode;
 }) {
     const [active, setActive] = useState(false);
-    const [hover, setHover] = useState(false);
-
     return (
-        <div className={"dropdown-container"}>
+        <div className={"action-container"}>
             <button
-                className={"dropdown-button"}
+                className={"action-button"}
                 onClick={e => {
                     e.stopPropagation();
                     if (active) {
                         setActive(false);
-                        setHover(false);
                     } else {
                         setActive(true);
                     }
                 }}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
             >
-                {renderButtonContent(active, hover)}
+                {renderButtonContent(active)}
             </button>
             <div
-                className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
+                className={active ? "action-dialog open" : "action-dialog"}
                 onClick={e => {
                     e.stopPropagation();
                     if (!active) {
@@ -42,10 +35,10 @@ function DropDownContainer({
                     }
                 }}
             >
-                {(active || hover) && renderContent(!active)}
+                {active && renderContent(!active)}
             </div>
         </div>
     );
 }
 
-export default DropDownContainer;
+export default ActionContainer;

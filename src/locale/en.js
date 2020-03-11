@@ -1359,7 +1359,8 @@ I18n.translations.en = {
             api_unavailable: "The following failure could be caused by an unavailable API at step '{{step}}'.",
             inconsistent_data:
                 "The following failure was caused by inconsistent data between the orchestrator and another system. This happened at step '{{step}}'. Manual intervention is required.",
-            completed: "Completed"
+            completed: "Completed",
+            created: "Created"
         },
         no_results: "No results found.",
         filter_placeholder: {

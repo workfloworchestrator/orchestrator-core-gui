@@ -42,8 +42,8 @@ import {
     renderProductTagCell,
     renderCustomersCell
 } from "components/tables/cellRenderers";
-import DropDownContainer from "components/DropDownContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
+import ActionContainer from "../ActionContainer";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [
@@ -61,7 +61,7 @@ export function initialProcessTableSettings(
     optional?: Partial<TableSettings<ProcessV2>>
 ): TableSettings<ProcessV2> {
     const defaults = {
-        showSettings: true,
+        showSettings: false,
         showPaginator: true,
         refresh: false,
         delay: 3000,
@@ -170,7 +170,7 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     const columns: Column<ProcessV2>[] = useMemo(
         () => [
             {
-                Header: <i className={"fa fa-info"} />,
+                Header: "",
                 id: "info",
                 accessor: "failed_reason",
                 disableSortBy: true,
@@ -179,12 +179,10 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
-                    const button = cell.value ? (
-                        <i className={"fa fa-exclamation-triangle"} />
-                    ) : row.isExpanded ? (
-                        <i className={"fa fa-minus-circle"} />
+                    const button = row.isExpanded ? (
+                        <i className={`fa fa-minus-circle ${row.values.status}`} />
                     ) : (
-                        <i className={"fa fa-plus-circle"} />
+                        <i className={`fa fa-plus-circle ${row.values.status}`} />
                     );
                     return (
                         <div
@@ -304,14 +302,10 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
                 accessor: (originalRow: ProcessV2, index: number) => originalRow,
                 id: "actions",
                 Cell: ({ cell }: { cell: Cell }) => (
-                    <DropDownContainer
+                    <ActionContainer
                         title={"Actions"}
-                        renderButtonContent={(active, hover) => {
-                            const classes = [
-                                "dropdown-button-content",
-                                active ? "active" : "",
-                                hover ? "hover" : ""
-                            ].join(" ");
+                        renderButtonContent={active => {
+                            const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
                             return (
                                 <span className={classes}>
                                     <i className={"fa fa-bars"} />
@@ -343,8 +337,8 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
     );
 
     return (
-        <div className={"card"} key={name}>
-            <section className={"nwa-table"} id={name}>
+        <div key={name}>
+            <section className="nwa-table" id={name}>
                 <NwaTable<ProcessV2>
                     columns={columns}
                     initialState={initialState as TableState<ProcessV2>}

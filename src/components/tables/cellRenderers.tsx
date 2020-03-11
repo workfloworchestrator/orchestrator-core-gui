@@ -17,14 +17,19 @@ import { Organization, Subscription } from "../../utils/types";
 import uniq from "lodash/uniq";
 import { Cell } from "react-table";
 import I18n from "i18n-js";
+import { Link } from "react-router-dom";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
     return subscriptions.map((subscription: Subscription) => {
         return (
-            <p key={subscription.subscription_id}>
-                <a href={`/subscription/${subscription.subscription_id}`}>{subscription.description}</a>
-            </p>
+            <Link
+                key={subscription.subscription_id}
+                onClick={e => e.stopPropagation()}
+                to={`/subscription/${subscription.subscription_id}`}
+            >
+                {subscription.description}
+            </Link>
         );
     });
 }
@@ -70,9 +75,9 @@ export function renderTimestampCell({ cell }: { cell: Cell }) {
 export function renderPidCell({ cell }: { cell: Cell }) {
     const pid: string = cell.value;
     return (
-        <a href={`/process/${pid}`} title={pid}>
+        <Link key={pid} onClick={e => e.stopPropagation()} to={`/process/${pid}`} title={pid}>
             {pid.slice(0, 8)}
-        </a>
+        </Link>
     );
 }
 

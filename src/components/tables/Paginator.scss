@@ -19,12 +19,14 @@
 .pagination {
     display: flex;
     flex: row nowrap;
-    margin-right: 1em;
     button {
         color: white;
         background-color: $blue;
-        font-size: 20px;
+        padding: 0 0 0 0;
+        font-size: 28px;
+        font-weight: bold;
         border: none;
+        margin-top: 7px;
     }
     .paginator-left {
         display: inline-block;
@@ -35,6 +37,18 @@
         margin: auto;
         input[type="text"] {
             width: 4em;
+            height: 30px;
+        }
+        select {
+            margin-top: -2px;
+            font-size: 1em;
+            background: transparent;
+            height: 30px;
+        }
+        b {
+            // styles the arrows of numeric input
+            margin-top: 4px;
+            margin-left: 1px;
         }
     }
     .paginator-right {

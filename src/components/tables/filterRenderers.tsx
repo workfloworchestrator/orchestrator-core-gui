@@ -29,17 +29,14 @@ import Select from "react-select";
  */
 
 const renderFilterIcon = (filtering: boolean) => (active: boolean, hover: boolean) => {
-    const classes = ["active", "hover", "filtering"].reduce((out, cls, idx) => {
-        if ([active, hover, filtering][idx]) {
-            return out + " " + cls;
-        } else {
-            return out;
-        }
-    }, "");
     return (
         <>
-            <i className={"fa fa-filter" + classes} />
-            {filtering ? <i className={"fa fa-check-square-o"} /> : <i className={"fa fa-minus-square-o"} />}
+            {filtering ? (
+                <i className={`fa fa-check-square${active ? " active" : ""}`} />
+            ) : (
+                <i className={`fa fa-square-o${active ? " active" : ""}`} />
+            )}
+            <i className={active ? "fa fa-caret-down active" : "fa fa-caret-right"} />
         </>
     );
 };

@@ -116,9 +116,9 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     render() {
         const activeSettings = initialProcessTableSettings(
             "table.processes.active",
-            initialProcessesFilterAndSort(false, ["running", "suspended", "failed"]),
-            ["pid", "step", "tags", "customer"],
-            { showSettings: false, refresh: true }
+            initialProcessesFilterAndSort(false, ["running", "suspended", "failed", "created", "waiting"]),
+            ["pid", "step", "tag", "creator", "customer", "product"],
+            { showSettings: false, refresh: true, pageSize: 10 }
         );
         const completedSettings = initialProcessTableSettings(
             "table.processes.completed",
@@ -128,7 +128,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         );
 
         return (
-            <div className="mod-processes">
+            <div className="processes-container">
                 <ConfirmationDialog
                     isOpen={this.state.confirmationDialogOpen}
                     cancel={this.cancelConfirmation}

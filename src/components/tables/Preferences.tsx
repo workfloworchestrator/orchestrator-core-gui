@@ -28,14 +28,21 @@ interface IProps<T extends object> {
 
 function Preferences<T extends object>({ allColumns, state, dispatch, initialTableSettings }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
+
+    const excludedFilterColumns = ["info", "workflow"];
+
     return (
         <React.Fragment key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
+                <span className="table-name">
+                    {I18n.t(name)}
+                    {minimized && I18n.t("table.is_minimized")}
+                </span>
                 <span
                     title={I18n.t("table.preferences.edit")}
                     onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
                 >
-                    <i className={"fa fa-edit"} />
+                    <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
                 </span>
                 {"   "}
                 <span
@@ -58,25 +65,20 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                     )}
                 </span>
                 {"   "}
-                <span className={"table-name"}>
-                    {I18n.t(name)}
-                    {minimized && I18n.t("table.is_minimized")}
-                </span>
+
                 {minimized ? (
                     <span
-                        className={"icon-right"}
                         title={I18n.t("table.preferences.maximize")}
                         onClick={() => dispatch({ type: ActionType.MAXIMIZE })}
                     >
-                        <i className={"fa fa-window-maximize"} />
+                        <i className={"fa fa-caret-up"} />
                     </span>
                 ) : (
                     <span
-                        className={"icon-right"}
                         title={I18n.t("table.preferences.minimize")}
                         onClick={() => dispatch({ type: ActionType.MINIMIZE })}
                     >
-                        <i className={"fa fa-window-minimize"} />
+                        <i className={"fa fa-caret-down"} />
                     </span>
                 )}
             </div>
@@ -106,13 +108,15 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                         strict={true}
                     />
                     <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
-                    {allColumns.map(column => {
-                        return (
-                            <label key={column.id}>
-                                <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                            </label>
-                        );
-                    })}
+                    {allColumns
+                        .filter(column => !excludedFilterColumns.includes(column.id))
+                        .map(column => {
+                            return (
+                                <label key={column.id}>
+                                    <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
+                                </label>
+                            );
+                        })}
                 </div>
             )}
         </React.Fragment>

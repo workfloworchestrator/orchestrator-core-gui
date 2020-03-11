@@ -17,33 +17,51 @@
 @import "../../stylesheets/media_queries.scss";
 
 .table-preferences-icon-bar {
-    padding: 6px;
-    margin-left: 12px;
+    padding: 20px 0 5px 0;
+    margin: 0 0 5px 0;
     font-size: larger;
     &.minimized {
-        background-color: $light-grey;
+        background-color: white;
     }
     .icon-right {
         float: right;
     }
     .table-name {
         font-weight: bold;
-        font-variant: small-caps;
+        color: $blue;
         font-size: larger;
+    }
+    span {
+        margin: 10px 5px 10px 0;
+    }
+    i.fa-cog {
+        &.active {
+            color: $blue;
+        }
     }
 }
 
 .preferences {
+    h1,
+    h2 {
+        margin-top: 10px;
+    }
     label {
         display: inline-block;
-        margin: 10px;
+        margin: 5px 10px 10px 0;
+    }
+    input {
+        margin-top: -4px;
+    }
+    b {
+        // styles the arrows of numeric input
+        margin-top: 4px;
+        margin-left: 1px;
     }
 }
 
 table.nwa-table {
-    margin: 20px;
-    padding: 8px;
-    width: 98%;
+    width: 100%;
     word-break: break-all;
 
     caption {
@@ -51,32 +69,40 @@ table.nwa-table {
         font-variant: small-caps;
         font-size: larger;
     }
-    td,
-    th {
+    td {
         text-align: left;
         vertical-align: middle;
     }
+    th {
+        text-align: left;
+        vertical-align: middle;
+        border-left: solid $light-blue 1px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    th:first-child {
+        border-radius: 10px 0 0 0;
+    }
+    th:last-child {
+        border-radius: 0 10px 0 0;
+        border-right: none;
+    }
     tr {
         border-bottom: 1px solid $light-grey;
+        background-color: white;
         &.suspended {
-            background-color: $light-gold;
+            background-color: $lightest-gold;
         }
         &.running {
-            background-color: $light-green;
-        }
-        &.failed {
-            background-color: white;
+            background-color: $lightest-green;
         }
         &.api_unavailable {
-            background-color: $light-blue;
+            background-color: $lightest-blue;
         }
         &.inconsistent_data {
-            background-color: $light-red;
+            background-color: $lightest-red;
         }
         &.highlighted {
-            border-top: 3px double $medium-grey;
-            border-bottom: 3px double $medium-grey;
-            box-shadow: 2px 4px 4px 4px black;
+            border: 2px solid $blue;
         }
     }
     thead {
@@ -89,7 +115,6 @@ table.nwa-table {
             }
         }
         span {
-            text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
             color: $medium-grey;
@@ -101,16 +126,26 @@ table.nwa-table {
         tr.filters {
             background-color: white;
             th {
+                border-right: none;
+                border-left: none;
+
                 color: $blue;
                 input {
                     width: 100%;
+                    height: 30px;
+                    border: 0;
                 }
                 button.dropdown-button {
-                    border-radius: $br;
+                    border: 0;
+                    background: transparent;
                     i.fa {
+                        margin-top: 6px;
                         color: $blue;
                         float: left;
-                        font-size: 15px;
+                        font-size: 18px;
+                        &.active {
+                            color: $dark-grey;
+                        }
                     }
                 }
             }
@@ -122,19 +157,16 @@ table.nwa-table {
             &:hover {
                 background-color: $hover;
                 &.suspended {
-                    background-color: darken($light-gold, 10%);
+                    background-color: darken($lightest-gold, 3%);
                 }
                 &.running {
-                    background-color: darken($light-green, 10%);
-                }
-                &.failed {
-                    background-color: darken($light-blue, 10%);
+                    background-color: darken($lightest-green, 3%);
                 }
                 &.api_unavailable {
-                    background-color: darken($light-blue, 10%);
+                    background-color: darken($lightest-blue, 3%);
                 }
                 &.inconsistent_data {
-                    background-color: darken($light-red, 10%);
+                    background-color: darken($lightest-red, 3%);
                 }
                 td.actions i.fa-ellipsis-h {
                     color: $blue;
@@ -144,6 +176,30 @@ table.nwa-table {
         td {
             i.fa-info-circle {
                 @include info-icon;
+            }
+            i.fa-plus-circle,
+            i.fa-minus-circle {
+                &.suspended {
+                    color: $gold;
+                }
+                &.running {
+                    color: $green;
+                }
+                &.completed {
+                    color: $green;
+                }
+                &.api_unavailable {
+                    color: $blue;
+                }
+                &.inconsistent_data {
+                    color: $red;
+                }
+                &.waiting {
+                    color: $orange;
+                }
+                &.failed {
+                    color: $red;
+                }
             }
             word-break: break-word;
             word-wrap: break-word;
@@ -184,24 +240,27 @@ table.nwa-table {
             position: relative;
         }
     }
+    .info i.fa-caret-right {
+        color: $blue;
+        margin-left: -12px;
+        padding-right: 6px;
+    }
 }
 
 .no-results {
     font-weight: bold;
     font-variant: small-caps;
-    margin: 0em 0em 0em 2em;
+    margin: 0 0 0 2em;
     font-size: large;
 }
 .pagination {
-    margin: 20px;
-    input[type="text"] {
-        width: 4em;
-    }
+    margin: 8px 0 10px 0;
 }
 
 span.pulse {
     color: $green;
 }
+
 span.rest {
     color: $green;
 }
