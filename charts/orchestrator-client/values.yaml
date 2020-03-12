@@ -7,8 +7,8 @@ replicaCount: 1
 image:
   repository: git.ia.surfsara.nl:5050/automation/projects/orchestrator-client/dev
   tag: latest
-  pullPolicy: IfNotPresent
-  secrets: "gitlab-registry"
+  secrets:
+    - name: gitlab-registry-orchestrator-client
 
 configMapName: "orchestrator-client-configuration"
 
