@@ -32,8 +32,8 @@ export default class FilterDropDown extends React.PureComponent {
         const name = noTrans ? item.name : I18n.t(`filter.${item.name.replace(/ /g, "_")}`);
         if (singleSelectFilter) {
             return (
-                <li key={item.name}>
-                    <CheckBox name={item.name} value={item.selected} onClick={() => filterBy(item)} />
+                <li key={item.name} onClick={() => filterBy(item)}>
+                    <CheckBox name={item.name} value={item.selected} onChange={() => filterBy(item)} />
                     <label htmlFor={item.name}>{`${name} (${item.count})`}</label>
                     <i className="fa fa-filter" onClick={e => singleSelectFilter(e, item)} />
                 </li>
