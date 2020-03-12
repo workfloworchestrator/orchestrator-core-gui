@@ -115,7 +115,7 @@ export default class SubscriptionsSelect extends React.PureComponent {
 
                         return (
                             <div className="wrapper" key={index}>
-                                <div className="select-box" key={index}>
+                                <div className={`select-box row${index}`} key={index}>
                                     <Select
                                         onChange={this.onChangeInternal(index)}
                                         key={index}

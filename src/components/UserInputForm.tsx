@@ -303,7 +303,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         const validationError = this.state.validationErrors.filter(item => item.loc[0] === name);
 
         return (
-            <section key={name} className={`form-divider ${name}`}>
+            <section key={name} id={`input-${name}`} className={`form-divider ${name}`}>
                 {!ignoreLabel && this.renderInputLabel(userInput)}
                 {!ignoreLabel && this.renderInputInfoLabel(userInput)}
                 {this.chooseInput(userInput, validationError)}
@@ -327,7 +327,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         if (i18nName.endsWith("_info")) {
             return <em>{I18n.t(i18nName, userInput.i18n_state)}</em>;
         }
-        return <label htmlFor={I18n.t(i18nName, userInput.i18n_state)}>{I18n.t(i18nName, userInput.i18n_state)}</label>;
+        return <label>{I18n.t(i18nName, userInput.i18n_state)}</label>;
     };
 
     renderInputLabel = (userInput: InputField) => this.i18nContext(`process.${userInput.name}`, userInput);
@@ -426,7 +426,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 organisationId = userInput.organisation || findValueFromInputStep(organisation_key, stepUserInput);
                 return (
                     <ContactPersons
-                        id="contact-persons"
                         persons={isEmpty(value) ? [{ email: "", name: "", phone: "" }] : value}
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}

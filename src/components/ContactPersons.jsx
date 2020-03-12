@@ -136,18 +136,17 @@ export default class ContactPersons extends React.PureComponent {
         setTimeout(() => this.setState({ displayAutocomplete: {} }), 350);
     };
 
-    renderPerson = (id, total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
+    renderPerson = (total, person, index, errors, displayAutocomplete, filteredSuggestions, selectedItem) => {
         const displayAutocompleteInstance = displayAutocomplete[index];
 
         let fieldError = errors.filter(error => error.loc[1] === index && error.loc.length === 3);
         fieldError = fieldError.length > 0 ? capitalizeFirstLetter(fieldError[0].msg) : undefined;
 
         return (
-            <section className="person" key={index}>
-                <div className="wrapper autocomplete-container" tabIndex="1" onBlur={this.onBlurAutoComplete}>
-                    {index === 0 && <label htmlFor={`${id}-name-${index}`}>{I18n.t("contact_persons.name")}</label>}
+            <section className={`person row${index}`} key={index}>
+                <div className="wrapper autocomplete-container name" tabIndex="1" onBlur={this.onBlurAutoComplete}>
+                    {index === 0 && <label>{I18n.t("contact_persons.name")}</label>}
                     <input
-                        id={`${id}-name-${index}`}
                         ref={ref => {
                             if (displayAutocompleteInstance) {
                                 this.personInput = ref;
@@ -173,25 +172,15 @@ export default class ContactPersons extends React.PureComponent {
                         />
                     )}
                 </div>
-                <div className="wrapper">
-                    {index === 0 && <label htmlFor={`${id}-email-${index}`}>{I18n.t("contact_persons.email")}</label>}
-                    <input
-                        id={`${id}-email-${index}`}
-                        type="email"
-                        onChange={this.onChangeInternal("email", index)}
-                        value={person.email || ""}
-                    />
+                <div className="wrapper email">
+                    {index === 0 && <label>{I18n.t("contact_persons.email")}</label>}
+                    <input type="email" onChange={this.onChangeInternal("email", index)} value={person.email || ""} />
                     {fieldError && <em className="error backend-validation">{fieldError}</em>}
                 </div>
-                <div className="wrapper">
-                    {index === 0 && <label htmlFor={`${id}-phone-${index}`}>{I18n.t("contact_persons.phone")}</label>}
+                <div className="wrapper phone">
+                    {index === 0 && <label>{I18n.t("contact_persons.phone")}</label>}
                     <div className="tel">
-                        <input
-                            id={`${id}-phone-${index}`}
-                            type="tel"
-                            onChange={this.onChangeInternal("phone", index)}
-                            value={person.phone || ""}
-                        />
+                        <input type="tel" onChange={this.onChangeInternal("phone", index)} value={person.phone || ""} />
                         <i
                             className={`fa fa-minus ${index === 0 ? "disabled" : ""}`}
                             onClick={this.removePerson(index)}
@@ -203,7 +192,7 @@ export default class ContactPersons extends React.PureComponent {
     };
 
     render() {
-        const { persons, id, errors } = this.props;
+        const { persons, errors } = this.props;
         const { displayAutocomplete, selectedItem, filteredSuggestions } = this.state;
         const rootFieldErrors = errors.filter(error => error.loc.length === 1);
 
@@ -211,7 +200,6 @@ export default class ContactPersons extends React.PureComponent {
             <section className="contact-persons">
                 {persons.map((person, index) =>
                     this.renderPerson(
-                        id,
                         persons.length,
                         person,
                         index,
@@ -242,7 +230,6 @@ ContactPersons.defaultProps = {
 };
 
 ContactPersons.propTypes = {
-    id: PropTypes.string.isRequired,
     persons: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     organisationId: PropTypes.string,
