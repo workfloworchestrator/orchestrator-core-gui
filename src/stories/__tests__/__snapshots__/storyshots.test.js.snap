@@ -2333,7 +2333,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row0"
         >
           <div
             className=" css-2b097c-container"
@@ -2473,7 +2473,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row0"
         >
           <div
             className=" css-14jk2my-container"
@@ -2591,7 +2591,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row1"
         >
           <div
             className=" css-2b097c-container"
@@ -2735,7 +2735,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row0"
         >
           <div
             className=" css-2b097c-container"
@@ -2853,7 +2853,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row1"
         >
           <div
             className=" css-2b097c-container"
@@ -2997,7 +2997,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
         className="wrapper"
       >
         <div
-          className="select-box"
+          className="select-box row0"
         >
           <div
             className=" css-2b097c-container"
@@ -3305,6 +3305,7 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
               >
                 <section
                   className="form-divider confirm_migrate_sap"
+                  id="input-confirm_migrate_sap"
                 >
                   <section>
                     <div>
@@ -3556,6 +3557,7 @@ exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
               >
                 <section
                   className="form-divider noc_remove_static_ip_confirmation"
+                  id="input-noc_remove_static_ip_confirmation"
                 >
                   <label>
                     Confirm removal
@@ -3862,7 +3864,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
       />
     </div>
     <section
-      className="service-port"
+      className="service-port row0"
     >
       <div
         className="wrapper service-port-select"
@@ -4031,7 +4033,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
       />
     </div>
     <section
-      className="service-port"
+      className="service-port row0"
     >
       <div
         className="wrapper service-port-select"
@@ -4462,10 +4464,9 @@ exports[`Storyshots NewProcess Preselected 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -6635,6 +6636,7 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
             >
               <section
                 className="form-divider ip_static_service_port"
+                id="input-ip_static_service_port"
               >
                 <p
                   className="label ip_static_service_port"
@@ -6775,6 +6777,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
             >
               <section
                 className="form-divider ip_static_service_port"
+                id="input-ip_static_service_port"
               >
                 <p
                   className="label ip_static_service_port"
@@ -10297,10 +10300,9 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -10416,10 +10418,9 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 </section>
                 <section
                   className="form-divider contact_persons"
+                  id="input-contact_persons"
                 >
-                  <label
-                    htmlFor="Customer contact persons"
-                  >
+                  <label>
                     Customer contact persons
                   </label>
                   <em>
@@ -10429,20 +10430,17 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                     className="contact-persons"
                   >
                     <section
-                      className="person"
+                      className="person row0"
                     >
                       <div
-                        className="wrapper autocomplete-container"
+                        className="wrapper autocomplete-container name"
                         onBlur={[Function]}
                         tabIndex="1"
                       >
-                        <label
-                          htmlFor="contact-persons-name-0"
-                        >
+                        <label>
                           Name
                         </label>
                         <input
-                          id="contact-persons-name-0"
                           onChange={[Function]}
                           onKeyDown={[Function]}
                           placeholder="Search and add contact persons..."
@@ -10451,33 +10449,27 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         />
                       </div>
                       <div
-                        className="wrapper"
+                        className="wrapper email"
                       >
-                        <label
-                          htmlFor="contact-persons-email-0"
-                        >
+                        <label>
                           Email
                         </label>
                         <input
-                          id="contact-persons-email-0"
                           onChange={[Function]}
                           type="email"
                           value=""
                         />
                       </div>
                       <div
-                        className="wrapper"
+                        className="wrapper phone"
                       >
-                        <label
-                          htmlFor="contact-persons-phone-0"
-                        >
+                        <label>
                           Phone number
                         </label>
                         <div
                           className="tel"
                         >
                           <input
-                            id="contact-persons-phone-0"
                             onChange={[Function]}
                             type="tel"
                             value=""
@@ -10562,10 +10554,9 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
               >
                 <section
                   className="form-divider ims_port_id_1"
+                  id="input-ims_port_id_1"
                 >
-                  <label
-                    htmlFor="First node and port"
-                  >
+                  <label>
                     First node and port
                   </label>
                   <em>
@@ -10801,10 +10792,9 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                 </section>
                 <section
                   className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
                 >
-                  <label
-                    htmlFor="Second node and port"
-                  >
+                  <label>
                     Second node and port
                   </label>
                   <em>
@@ -11098,10 +11088,9 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
               >
                 <section
                   className="form-divider ims_port_id_1"
+                  id="input-ims_port_id_1"
                 >
-                  <label
-                    htmlFor="First node and port"
-                  >
+                  <label>
                     First node and port
                   </label>
                   <em>
@@ -11337,10 +11326,9 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                 </section>
                 <section
                   className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
                 >
-                  <label
-                    htmlFor="Second node and port"
-                  >
+                  <label>
                     Second node and port
                   </label>
                   <em>
@@ -11634,10 +11622,9 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
               >
                 <section
                   className="form-divider ims_node_id"
+                  id="input-ims_node_id"
                 >
-                  <label
-                    htmlFor="Choose a node from IMS"
-                  >
+                  <label>
                     Choose a node from IMS
                   </label>
                   <em>
@@ -11814,10 +11801,9 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -11933,10 +11919,9 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -11957,10 +11942,9 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -12050,10 +12034,9 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -12169,10 +12152,9 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -12193,10 +12175,9 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -12286,10 +12267,9 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
               >
                 <section
                   className="form-divider service_ports"
+                  id="input-service_ports"
                 >
-                  <label
-                    htmlFor="Service Ports"
-                  >
+                  <label>
                     Service Ports
                   </label>
                   <em>
@@ -12321,10 +12301,9 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 </section>
                 <section
                   className="form-divider current_bandwidth"
+                  id="input-current_bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -12346,10 +12325,9 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 </section>
                 <section
                   className="form-divider new_bandwidth"
+                  id="input-new_bandwidth"
                 >
-                  <label
-                    htmlFor="New bandwidth"
-                  >
+                  <label>
                     New bandwidth
                   </label>
                   <em>
@@ -12427,10 +12405,9 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -12546,10 +12523,9 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -12570,10 +12546,9 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -12663,10 +12638,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -12782,10 +12756,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -12806,10 +12779,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -12899,10 +12871,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -13018,10 +12989,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -13042,10 +13012,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -13135,10 +13104,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -13254,10 +13222,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -13278,10 +13245,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -13371,10 +13337,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
               >
                 <section
                   className="form-divider organisation"
+                  id="input-organisation"
                 >
-                  <label
-                    htmlFor="Customer"
-                  >
+                  <label>
                     Customer
                   </label>
                   <em>
@@ -13490,10 +13455,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 </section>
                 <section
                   className="form-divider bandwidth"
+                  id="input-bandwidth"
                 >
-                  <label
-                    htmlFor="Bandwidth"
-                  >
+                  <label>
                     Bandwidth
                   </label>
                   <em>
@@ -13514,10 +13478,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 </section>
                 <section
                   className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
                 >
-                  <label
-                    htmlFor="IP Service Ports"
-                  >
+                  <label>
                     IP Service Ports
                   </label>
                   <em>
@@ -13595,10 +13558,9 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
         >
           <section
             className="form-divider ims_port_id_1"
+            id="input-ims_port_id_1"
           >
-            <label
-              htmlFor="First node and port"
-            >
+            <label>
               First node and port
             </label>
             <em>
