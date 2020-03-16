@@ -365,8 +365,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     renderFailedTask = (subscriptionProcesses: SubscriptionProcesses[]) => {
         let failed_tasks = subscriptionProcesses
             .map(sp => sp.process)
-            .filter(process => process.is_task)
-            .filter(process => process.last_status === "failed");
+            .filter(process => process.last_status !== "completed");
 
         if (failed_tasks.length)
             return (

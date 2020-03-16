@@ -826,7 +826,7 @@ I18n.translations.en = {
         relatedSubscriptionsLP: "The ports used in the {{description}} subscription:",
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
         terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
-        failed_task: "See task {{pid}}"
+        failed_task: "See {{pid}}"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
