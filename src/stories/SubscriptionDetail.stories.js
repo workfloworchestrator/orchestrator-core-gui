@@ -63,11 +63,13 @@ export const Subscription = () => {
     );
 
     fetchMock.get("/api/v2/subscriptions/workflows/9c8c13d5-6954-461a-a931-32894c193aa0", {
+        create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
             { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" }
         ],
-        terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }]
+        terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
+        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
     });
 
     fetchMock.get("/api/subscriptions/parent_subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0", []);

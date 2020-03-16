@@ -891,11 +891,11 @@ I18n.translations.en = {
         terminateConfirmation: "Are you sure you want to terminate {{name}} subscription for {{customer}}?",
         no_modify_parent_subscription:
             "This subscription can not be {{action}} as it is used in other subscriptions: {{unterminated_parents}}",
-        no_termination_workflow:
-            "This subscription can not be terminated as the product has no termination workflow-key.",
+        no_termination_workflow: "This subscription can not be terminated as the product has no termination workflows.",
         modifyConfirmation:
             "Are you sure you want to {{change}} of {{name}} subscription for {{customer}}? This will start a new modify process immediately!",
-        no_modify_workflow: "This subscription can not be modified as the product has no modify workflow-key.",
+        no_modify_workflow: "This subscription can not be modified as the product has no modify workflows.",
+        no_validate_workflow: "This subscription can not be validated as the product has no validate workflows.",
         no_modify_invalid_status:
             "This subscription can not be modified because of the status: {{status}}. Only subscriptions with status {{usable_when}} can be {{action}}.",
         no_modify_deleted_related_objects:

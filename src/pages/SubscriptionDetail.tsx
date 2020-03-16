@@ -151,7 +151,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         confirmationDialogQuestion: "",
         notFoundRelatedObjects: [],
         collapsedObjects: [],
-        workflows: { terminate: [], modify: [] }
+        workflows: { terminate: [], modify: [], system: [], create: [] }
     };
 
     componentWillMount = () => {
@@ -885,7 +885,32 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             {isEmpty(workflows.modify) && (
                                 <tr>
                                     <td>
-                                        <em className="error">{I18n.t("subworkflow_workflow")}</em>
+                                        <em className="error">{I18n.t("subscription.no_modify_workflow")}</em>
+                                    </td>
+                                </tr>
+                            )}
+                            {workflows.system.map((wf, index: number) => (
+                                <tr key={index}>
+                                    <td>
+                                        {!wf.reason && (
+                                            <a
+                                                id={`validate-link-${wf.name.replace(/_/g, "-")}`}
+                                                href="/modify"
+                                                key={wf.name}
+                                                onClick={this.modify(subscription, wf.name)}
+                                            >
+                                                {I18n.t(`workflow.${wf.name}`)}
+                                            </a>
+                                        )}
+                                        {wf.reason && <span>{I18n.t(`workflow.${wf.name}`)}</span>}
+                                    </td>
+                                    <td>{wf.reason && <em className="error">{I18n.t(wf.reason, wf)}</em>}</td>
+                                </tr>
+                            ))}
+                            {isEmpty(workflows.system) && (
+                                <tr>
+                                    <td>
+                                        <em className="error">{I18n.t("subscription.no_validate_workflow")}</em>
                                     </td>
                                 </tr>
                             )}
