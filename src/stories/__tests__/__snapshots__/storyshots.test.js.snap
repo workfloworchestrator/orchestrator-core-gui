@@ -9518,6 +9518,18 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 </td>
                 <td />
               </tr>
+              <tr>
+                <td>
+                  <a
+                    href="/modify"
+                    id="validate-link-validate-sn8-ip-bgp"
+                    onClick={[Function]}
+                  >
+                    Validate SN8 IP BGP
+                  </a>
+                </td>
+                <td />
+              </tr>
             </tbody>
           </table>
         </div>
