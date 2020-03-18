@@ -547,7 +547,15 @@ export function reportError(error: {}) {
 }
 
 export function clearCache(name: string) {
-    return postPutJson("user/clearCache", { name: name }, "put", true, false);
+    return postPutJson(`v2/settings/cache/${name}`, {}, "delete", false);
+}
+
+export function getGlobalStatus() {
+    return fetchJson("v2/settings/status")
+}
+
+export function setGlobalStatus(new_status: string) {
+    return postPutJson("v2/settings/status", {global_status: new_status}, "put")
 }
 
 export function logUserInfo(username: string, message: string) {

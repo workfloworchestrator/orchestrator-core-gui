@@ -16,7 +16,7 @@
 import React from "react";
 import I18n from "i18n-js";
 
-import "./Cache.scss";
+import "./Settings.scss";
 import { stop } from "../utils/Utils";
 import { clearCache, ping } from "../api";
 import Select, { ValueType } from "react-select";
@@ -31,7 +31,7 @@ interface IState {
 
 const CACHES: string[] = ["ims", "crm", "api", "all"];
 
-export default class Cache extends React.Component<IProps, IState> {
+export default class Settings extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {

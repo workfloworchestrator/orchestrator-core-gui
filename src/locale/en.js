@@ -45,7 +45,7 @@ I18n.translations.en = {
         metadata: "Metadata",
         tasks: "Tasks",
         prefixes: "LIR Prefixes",
-        cache: "Cache",
+        settings: "Settings",
         new_process: "New Process +"
     },
     prefixes: {
@@ -1171,10 +1171,10 @@ I18n.translations.en = {
             api: "Workflow endpoints (combined caches)",
             all: "All caches"
         },
-        remove: "Flush Cache",
-        remove_info: "Select a Cache to flush",
+        remove: "Flush Settings",
+        remove_info: "Select a Settings to flush",
         clear: "Flush",
-        flushed: "Cache {{name}} was flushed"
+        flushed: "Settings {{name}} was flushed"
     },
     error_dialog: {
         title: "Unexpected error",

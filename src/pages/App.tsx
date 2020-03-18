@@ -53,7 +53,7 @@ import TerminateSubscription from "./TerminateSubscription";
 import MetaData from "./MetaData";
 import ProductBlock from "../components/ProductBlock";
 import ProductPage from "../components/Product";
-import Cache from "./Cache";
+import Settings from "./Settings";
 import Tasks from "./TasksV2";
 import NewTask from "./NewTask";
 import Prefixes from "./Prefixes";
@@ -307,7 +307,7 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/product-block/:id"
                                     render={props => <ProductBlock match={props.match} />}
                                 />
-                                <ProtectedRoute path="/cache" render={() => <Cache />} />
+                                <ProtectedRoute path="/settings" render={() => <Settings />} />
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />
