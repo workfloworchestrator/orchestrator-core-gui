@@ -313,6 +313,8 @@ export interface WorkflowReason {
 export interface WorkflowReasons {
     modify: WorkflowReason[];
     terminate: WorkflowReason[];
+    system: WorkflowReason[];
+    create: WorkflowReason[];
     reason?: string;
 }
 
