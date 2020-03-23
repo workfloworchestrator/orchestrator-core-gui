@@ -13,10 +13,11 @@
  *
  */
 
-import React from "react";
+import "./DropDownActions.scss";
+
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import "./DropDownActions.scss";
+import React from "react";
 
 export default class DropDownActions extends React.PureComponent {
     render() {

@@ -13,12 +13,12 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import Modal from "react-modal";
-import I18n from "i18n-js";
-
 import "./ConfirmationDialog.scss";
+
+import I18n from "i18n-js";
+import PropTypes from "prop-types";
+import React from "react";
+import Modal from "react-modal";
 
 export default function ConfirmationDialog({
     isOpen = false,

@@ -13,11 +13,12 @@
  *
  */
 
-import React from "react";
+import "./Autocomplete.scss";
+
 import PropTypes from "prop-types";
+import React from "react";
 import scrollIntoView from "scroll-into-view";
 
-import "./Autocomplete.scss";
 import { isEmpty } from "../utils/Utils";
 
 export default class Autocomplete extends React.PureComponent {

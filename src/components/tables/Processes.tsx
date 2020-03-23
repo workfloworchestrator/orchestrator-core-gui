@@ -1,3 +1,18 @@
+import {
+    renderCustomersCell,
+    renderPidCell,
+    renderProductTagCell,
+    renderProductsCell,
+    renderSubscriptionsCell,
+    renderTimestampCell
+} from "components/tables/cellRenderers";
+import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
+import I18n from "i18n-js";
+import chunk from "lodash/chunk";
+import isNull from "lodash/isNull";
+import last from "lodash/last";
+import omitBy from "lodash/omitBy";
+import sortedUniq from "lodash/sortedUniq";
 /* Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +26,7 @@
  * limitations under the License.
  *
  */
-import React, { useCallback, useMemo, useContext } from "react";
-import ApplicationContext from "utils/ApplicationContext";
+import React, { useCallback, useContext, useMemo } from "react";
 import {
     Cell,
     Column,
@@ -24,26 +38,13 @@ import {
     TableSettings,
     TableState
 } from "react-table";
-import { useQueryParam, StringParam } from "use-query-params";
-import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
+import { StringParam, useQueryParam } from "use-query-params";
+import ApplicationContext from "utils/ApplicationContext";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { ProcessV2 } from "utils/types";
-import I18n from "i18n-js";
-import chunk from "lodash/chunk";
-import omitBy from "lodash/omitBy";
-import isNull from "lodash/isNull";
-import last from "lodash/last";
-import sortedUniq from "lodash/sortedUniq";
-import { renderILikeFilter, renderMultiSelectFilter, renderCustomersFilter } from "components/tables/filterRenderers";
-import {
-    renderSubscriptionsCell,
-    renderPidCell,
-    renderTimestampCell,
-    renderProductsCell,
-    renderProductTagCell,
-    renderCustomersCell
-} from "components/tables/cellRenderers";
-import { NwaTable, isLocalTableSettings } from "./NwaTable";
+
 import ActionContainer from "../ActionContainer";
+import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [

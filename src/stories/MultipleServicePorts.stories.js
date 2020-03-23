@@ -13,18 +13,16 @@
  *
  */
 
-import React from "react";
-
+import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { boolean, number, select } from "@storybook/addon-knobs";
-import { Store } from "@sambego/storybook-state";
 import fetchMock from "fetch-mock";
-import { loadVlanMocks } from "./utils";
+import React from "react";
 
 import MultipleServicePorts from "../components/MultipleServicePorts";
-
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
+import { loadVlanMocks } from "./utils";
 
 const store = new Store({
     servicePorts: [{ subscription_id: null, vlan: "" }]

@@ -13,8 +13,9 @@
  *
  */
 
+import { Filter, SortingRule } from "react-table-6";
+
 import { paginatedSubscriptions } from "../api";
-import { SortingRule, Filter } from "react-table-6";
 import { Subscription } from "./types";
 
 const encodeValue = (string: string) => {

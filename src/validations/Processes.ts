@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import { Process, ProcessWithDetails, ProcessV2 } from "utils/types";
+import { Process, ProcessV2, ProcessWithDetails } from "utils/types";
 
 interface Action {
     icon: string;

@@ -13,21 +13,21 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
+import "./NewProcess.scss";
 
-import { startProcess, validation, catchErrorStatus } from "../api";
-import { isEmpty } from "../utils/Utils";
-import { setFlash } from "../utils/Flash";
+import I18n from "i18n-js";
+import React from "react";
+
+import { catchErrorStatus, startProcess, validation } from "../api";
 import ProductSelect from "../components/ProductSelect";
 import ProductValidationComponent from "../components/ProductValidation";
 import UserInputFormWizard from "../components/UserInputFormWizard";
-import { TARGET_CREATE } from "../validations/Products";
 import ApplicationContext from "../utils/ApplicationContext";
-import { FormNotCompleteResponse, InputField, ProductValidation, Option } from "../utils/types";
+import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
-
-import "./NewProcess.scss";
+import { FormNotCompleteResponse, InputField, Option, ProductValidation } from "../utils/types";
+import { isEmpty } from "../utils/Utils";
+import { TARGET_CREATE } from "../validations/Products";
 
 interface PreselectedInput {
     product?: string;
