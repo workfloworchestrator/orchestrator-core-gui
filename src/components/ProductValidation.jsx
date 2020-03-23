@@ -13,12 +13,11 @@
  *
  */
 
-import "./ProductValidation.scss";
-
-import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import I18n from "i18n-js";
 
+import "./ProductValidation.scss";
 import { capitalize } from "../utils/Lookups";
 import { isEmpty } from "../utils/Utils";
 

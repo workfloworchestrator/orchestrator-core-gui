@@ -1,11 +1,12 @@
-import { Search } from "history";
 import {
-    QueryParamConfig,
-    decodeDelimitedArray,
+    encodeDelimitedNumericArray,
     decodeDelimitedNumericArray,
     encodeDelimitedArray,
-    encodeDelimitedNumericArray
+    decodeDelimitedArray,
+    QueryParamConfig
 } from "use-query-params";
+
+import { Search } from "history";
 
 /*
  * Copyright 2019 SURF.

@@ -13,11 +13,11 @@
  *
  */
 
-import "react-datepicker/dist/react-datepicker.css";
-
-import { State, Store } from "@sambego/storybook-state";
-import { action } from "@storybook/addon-actions";
 import React from "react";
+
+import { action } from "@storybook/addon-actions";
+import { State, Store } from "@sambego/storybook-state";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { formDate } from "../forms/Builder";
 

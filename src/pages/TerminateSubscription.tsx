@@ -13,17 +13,16 @@
  *
  */
 
-import "./TerminateSubscription.scss";
-
-import I18n from "i18n-js";
 import React from "react";
-
-import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "../api/index";
-import UserInputFormWizard from "../components/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
+import I18n from "i18n-js";
+import { startProcess, subscriptionsDetail, productById, catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField, Product, Workflow } from "../utils/types";
+import ApplicationContext from "../utils/ApplicationContext";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+
+import "./TerminateSubscription.scss";
 import { TARGET_TERMINATE } from "../validations/Products";
+import { Product, InputField, FormNotCompleteResponse, Workflow } from "../utils/types";
 
 interface IProps {
     subscriptionId: string;

@@ -1,7 +1,7 @@
-import "./Explain.scss";
-
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+
+import "./Explain.scss";
 
 export default class Explain extends React.PureComponent {
     componentWillReceiveProps(nextProps) {

@@ -13,12 +13,11 @@
  *
  */
 
-import PropTypes from "prop-types";
 import React from "react";
-import Select, { ActionMeta, ValueType } from "react-select";
-
+import PropTypes from "prop-types";
+import Select, { ValueType, ActionMeta } from "react-select";
+import { Organization, Option } from "../utils/types";
 import ApplicationContext from "../utils/ApplicationContext";
-import { Option, Organization } from "../utils/types";
 
 interface IOrganisationSelectProps {
     id: string;

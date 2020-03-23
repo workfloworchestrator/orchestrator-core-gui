@@ -13,15 +13,14 @@
  *
  */
 
-import "./SubscriptionsSelect.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import React from "react";
 import Select from "react-select";
 
-import { allSubscriptions, subscriptionsByProductId } from "../api";
+import { subscriptionsByProductId, allSubscriptions } from "../api";
 import { capitalizeFirstLetter, isEmpty } from "../utils/Utils";
+import "./SubscriptionsSelect.scss";
 
 export default class SubscriptionsSelect extends React.PureComponent {
     constructor(props) {

@@ -13,10 +13,9 @@
  *
  */
 
-import "highlight.js/styles/atom-one-light.css";
-
-import hljs from "highlight.js";
 import React from "react";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-light.css";
 
 export class HighlightCode extends React.PureComponent {
     render() {

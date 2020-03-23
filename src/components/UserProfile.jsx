@@ -14,7 +14,6 @@
  */
 
 import React from "react";
-
 import ApplicationContext from "../utils/ApplicationContext";
 
 export default function UserProfile() {

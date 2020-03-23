@@ -13,24 +13,24 @@
  *
  */
 
-import "./Tasks.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
-import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
-import { abortProcess, deleteProcess, processes, retryProcess } from "../api";
-import CheckBox from "../components/CheckBox";
+import { abortProcess, deleteProcess, retryProcess, processes } from "../api";
+import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "../components/ConfirmationDialog";
-import DropDownActions from "../components/DropDownActions";
 import FilterDropDown from "../components/FilterDropDown";
-import ApplicationContext from "../utils/ApplicationContext";
+import DropDownActions from "../components/DropDownActions";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
-import { FilterAttribute, ProcessWithDetails, ShowActions, SortSettings, prop } from "../utils/types";
-import { isEmpty, stop } from "../utils/Utils";
+import CheckBox from "../components/CheckBox";
 import { actionOptions } from "../validations/Processes";
+import ApplicationContext from "../utils/ApplicationContext";
+import { FilterAttribute, ShowActions, SortSettings, ProcessWithDetails, prop } from "../utils/types";
+
+import "./Tasks.scss";
 
 interface IState {
     tasks: ProcessWithDetails[];

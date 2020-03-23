@@ -13,16 +13,15 @@
  *
  */
 
-import "./ModifySubscription.scss";
-
-import I18n from "i18n-js";
 import React from "react";
-
-import { catchErrorStatus, startProcess } from "../api/index";
-import UserInputFormWizard from "../components/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
+import I18n from "i18n-js";
+import { startProcess, catchErrorStatus } from "../api/index";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField } from "../utils/types";
+import ApplicationContext from "../utils/ApplicationContext";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+
+import "./ModifySubscription.scss";
+import { InputField, FormNotCompleteResponse } from "../utils/types";
 
 interface IProps {
     subscriptionId: string;

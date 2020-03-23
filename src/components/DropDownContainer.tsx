@@ -1,6 +1,5 @@
-import "./DropDownContainer.scss";
-
 import React, { useState } from "react";
+import "./DropDownContainer.scss";
 
 function DropDownContainer({
     title,

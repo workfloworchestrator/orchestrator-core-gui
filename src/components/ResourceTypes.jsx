@@ -13,15 +13,14 @@
  *
  */
 
-import "./ResourceTypes.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
-import React from "react";
+import { isEmpty, stop } from "../utils/Utils";
 
+import "./ResourceTypes.scss";
 import { resourceTypes } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
-import { isEmpty, stop } from "../utils/Utils";
 
 export default class ResourceTypes extends React.Component {
     constructor(props) {

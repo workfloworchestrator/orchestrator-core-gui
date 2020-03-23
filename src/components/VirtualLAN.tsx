@@ -13,9 +13,8 @@
  *
  */
 
-import I18n from "i18n-js";
 import React from "react";
-
+import I18n from "i18n-js";
 import { usedVlans } from "../api";
 import { isEmpty } from "../utils/Utils";
 import { inValidVlan } from "../validations/UserInput";

@@ -13,12 +13,12 @@
  *
  */
 
-import "./ProductSelect.scss";
-
 import React from "react";
 import Select, { ValueType } from "react-select";
 
-import { Option, Product } from "../utils/types";
+import { Product, Option } from "../utils/types";
+
+import "./ProductSelect.scss";
 
 interface IProps {
     id: string;

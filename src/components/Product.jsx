@@ -13,24 +13,23 @@
  *
  */
 
-import "react-datepicker/dist/react-datepicker.css";
-
-import "./Product.scss";
-
-import { isDate } from "date-fns";
-import I18n from "i18n-js";
 import React from "react";
-import Select from "react-select";
+import I18n from "i18n-js";
+import { isDate } from "date-fns";
 
-import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
-import { allWorkflows, productBlocks, productById, products, saveProduct } from "../api/index";
-import { formDate, formInput, formSelect } from "../forms/Builder";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { getParameterByName } from "../utils/QueryParameters";
-import { isEmpty, stop } from "../utils/Utils";
-import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
 import ConfirmationDialog from "./ConfirmationDialog";
+
+import { isEmpty, stop } from "../utils/Utils";
+import { getParameterByName } from "../utils/QueryParameters";
+import { allWorkflows, productBlocks, productById, products, saveProduct } from "../api/index";
+import { setFlash } from "../utils/Flash";
+import Select from "react-select";
+import "react-datepicker/dist/react-datepicker.css";
+import { formDate, formInput, formSelect } from "../forms/Builder";
+import "./Product.scss";
+import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
+import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
+import ApplicationContext from "../utils/ApplicationContext";
 
 const TAG_LIGHTPATH = "LightPath";
 

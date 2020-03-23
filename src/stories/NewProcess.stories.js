@@ -13,9 +13,10 @@
  *
  */
 
-import fetchMock from "fetch-mock";
 import React from "react";
+
 import StoryRouter from "storybook-react-router";
+import fetchMock from "fetch-mock";
 
 import NewProcess from "../pages/NewProcess";
 

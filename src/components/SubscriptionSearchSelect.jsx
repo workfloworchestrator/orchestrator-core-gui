@@ -13,9 +13,9 @@
  *
  */
 
+import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import React from "react";
 import Select from "react-select";
 
 export default function SubscriptionSearchSelect({

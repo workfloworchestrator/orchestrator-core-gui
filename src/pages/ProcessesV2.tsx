@@ -13,26 +13,25 @@
  *
  */
 
-import "./Processes.scss";
-
-import {
-    ProcessesTable,
-    initialProcessTableSettings,
-    initialProcessesFilterAndSort
-} from "components/tables/Processes";
-import I18n from "i18n-js";
 import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
-
+import I18n from "i18n-js";
+import {
+    initialProcessesFilterAndSort,
+    initialProcessTableSettings,
+    ProcessesTable
+} from "components/tables/Processes";
 import { abortProcess, retryProcess } from "../api";
 import ConfirmationDialog from "../components/ConfirmationDialog";
-import DropDownActions from "../components/DropDownActions";
 import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid } from "../utils/Lookups";
+import ScrollUpButton from "react-scroll-up-button";
+import DropDownActions from "../components/DropDownActions";
 import { ProcessV2 } from "../utils/types";
 import { stop } from "../utils/Utils";
+import { setFlash } from "../utils/Flash";
+import { organisationNameByUuid } from "../utils/Lookups";
 import { actionOptions } from "../validations/Processes";
+
+import "./Processes.scss";
 
 interface IProps {}
 

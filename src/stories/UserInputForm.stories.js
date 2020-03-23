@@ -13,21 +13,22 @@
  *
  */
 
-import { number } from "@storybook/addon-knobs";
-import fetchMock from "fetch-mock";
 import React from "react";
 
-import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
+import { number } from "@storybook/addon-knobs";
+import UserInputContainer from "./UserInputContainer";
 import {
     allNodeSubscriptions,
     contactPersons,
     corelinkPorts10G,
-    freeCorelinkPorts,
-    imsNodes
+    imsNodes,
+    freeCorelinkPorts
 } from "./data/UserInputForm.data";
-import UserInputContainer from "./UserInputContainer";
+import fetchMock from "fetch-mock";
 import { loadVlanMocks } from "./utils";
+
+import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
+import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
 export default {
     title: "UserInputForm"

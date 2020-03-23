@@ -1,4 +1,3 @@
-import { Organization, Product, SubscriptionWithDetails } from "./types";
 /*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +13,7 @@ import { Organization, Product, SubscriptionWithDetails } from "./types";
  *
  */
 import { isEmpty } from "./Utils";
+import { Organization, SubscriptionWithDetails, Product } from "./types";
 
 export function organisationNameByUuid(uuid: string, organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === uuid);

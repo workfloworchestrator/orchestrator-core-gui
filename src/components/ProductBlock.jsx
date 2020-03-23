@@ -13,23 +13,22 @@
  *
  */
 
-import "react-datepicker/dist/react-datepicker.css";
-
-import "./ProductBlock.scss";
-
-import { isDate } from "date-fns";
-import I18n from "i18n-js";
 import React from "react";
-import Select from "react-select";
+import I18n from "i18n-js";
+import { isDate } from "date-fns";
 
-import { deleteProductBlock } from "../api";
-import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "../api/index";
-import { formDate, formInput, formSelect } from "../forms/Builder";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { getParameterByName } from "../utils/QueryParameters";
-import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "./ConfirmationDialog";
+
+import { isEmpty, stop } from "../utils/Utils";
+import { getParameterByName } from "../utils/QueryParameters";
+import "./ProductBlock.scss";
+import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "../api/index";
+import { setFlash } from "../utils/Flash";
+import Select from "react-select";
+import "react-datepicker/dist/react-datepicker.css";
+import { formDate, formInput, formSelect } from "../forms/Builder";
+import { deleteProductBlock } from "../api";
+import ApplicationContext from "../utils/ApplicationContext";
 
 export default class ProductBlock extends React.Component {
     constructor(props) {

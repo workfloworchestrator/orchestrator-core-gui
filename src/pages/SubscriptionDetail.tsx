@@ -13,43 +13,43 @@
  *
  */
 
-import "./SubscriptionDetail.scss";
-
-import I18n from "i18n-js";
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import I18n from "i18n-js";
 
 import {
     dienstafnameBySubscription,
     getResourceTypeInfo,
-    internalPortByImsPortId,
     parentSubscriptions,
     portByImsPortId,
     portByImsServiceId,
     processSubscriptionsBySubscriptionId,
     productById,
-    serviceByImsServiceId,
     subscriptionWorkflows,
-    subscriptionsDetail
+    serviceByImsServiceId,
+    subscriptionsDetail,
+    internalPortByImsPortId
 } from "../api";
-import CheckBox from "../components/CheckBox";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import ApplicationContext from "../utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
-import {
-    IMSEndpoint,
-    IMSService,
-    InstanceValue,
-    Product,
-    Subscription,
-    SubscriptionInstance,
-    SubscriptionProcesses,
-    SubscriptionWithDetails,
-    WorkflowReasons,
-    prop
-} from "../utils/types";
+import CheckBox from "../components/CheckBox";
 import { applyIdNamingConvention, isEmpty, stop } from "../utils/Utils";
 import { subscriptionInstanceValues } from "../validations/Subscriptions";
+import ConfirmationDialog from "../components/ConfirmationDialog";
+import ApplicationContext from "../utils/ApplicationContext";
+
+import "./SubscriptionDetail.scss";
+import {
+    Subscription,
+    SubscriptionInstance,
+    InstanceValue,
+    SubscriptionProcesses,
+    SubscriptionWithDetails,
+    prop,
+    Product,
+    IMSService,
+    IMSEndpoint,
+    WorkflowReasons
+} from "../utils/types";
+import { RouteComponentProps } from "react-router";
 
 interface MatchParams {
     id: string;

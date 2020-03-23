@@ -13,13 +13,12 @@
  *
  */
 
-import "./GenericMultiSelect.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import React from "react";
 import Select from "react-select";
 
+import "./GenericMultiSelect.scss";
 import { capitalizeFirstLetter } from "../utils/Utils";
 
 export default class GenericMultiSelect extends React.PureComponent {

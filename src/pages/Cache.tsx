@@ -13,16 +13,15 @@
  *
  */
 
-import "./Cache.scss";
-
-import I18n from "i18n-js";
 import React from "react";
-import Select, { ValueType } from "react-select";
+import I18n from "i18n-js";
 
+import "./Cache.scss";
+import { stop } from "../utils/Utils";
 import { clearCache, ping } from "../api";
+import Select, { ValueType } from "react-select";
 import { setFlash } from "../utils/Flash";
 import { Option } from "../utils/types";
-import { stop } from "../utils/Utils";
 
 interface IProps {}
 

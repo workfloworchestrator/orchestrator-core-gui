@@ -13,16 +13,16 @@
  *
  */
 
-import "./IPPrefix.scss";
-
-import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import React from "react";
 import Select from "react-select";
+import PropTypes from "prop-types";
 
 import { ip_blocks, prefix_filters } from "../api";
-import { ipamStates } from "../utils/Lookups";
+
+import "./IPPrefix.scss";
+import I18n from "i18n-js";
 import { stop } from "../utils/Utils";
+import { ipamStates } from "../utils/Lookups";
 import SplitPrefix from "./SplitPrefix";
 
 export default class IPPrefix extends React.PureComponent {

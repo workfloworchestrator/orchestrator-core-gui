@@ -13,18 +13,17 @@
  *
  */
 
-import "./MetaData.scss";
-
-import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
+import PropTypes from "prop-types";
+import I18n from "i18n-js";
 
-import FixedInputConfiguration from "../components/FixedInputConfiguration";
+import "./MetaData.scss";
 import ProductBlocks from "../components/ProductBlocks";
-import Products from "../components/Products";
 import ResourceTypes from "../components/ResourceTypes";
+import Products from "../components/Products";
+import FixedInputConfiguration from "../components/FixedInputConfiguration";
 import WorkFlows from "../components/WorkFlows";
+import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "../utils/ApplicationContext";
 import { applyIdNamingConvention } from "../utils/Utils";
 

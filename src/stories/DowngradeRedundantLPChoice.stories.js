@@ -13,19 +13,21 @@
  *
  */
 
-import { Store } from "@sambego/storybook-state";
-import { action } from "@storybook/addon-actions";
-import { boolean } from "@storybook/addon-knobs";
-import fetchMock from "fetch-mock";
 import React from "react";
 
+import fetchMock from "fetch-mock";
+import { action } from "@storybook/addon-actions";
+import { boolean } from "@storybook/addon-knobs";
+import { Store } from "@sambego/storybook-state";
+
 import DowngradeRedundantLPChoice from "../components/DowngradeRedundantLPChoice";
-import AGGSP_SUBSCRIPTION from "./data/subscriptions/subscription-aggsp-2c815189.json";
+
 import LR_SUBSCRIPTION from "./data/subscriptions/subscription-lr-d61e7664.json";
 import LR_SUBSCRIPTION_SAME_PORTS from "./data/subscriptions/subscription-lr-same-ports-d61e7664.json";
-import MSC_SUBSCRIPTION from "./data/subscriptions/subscription-msc-88e4c0ee.json";
 import SP_SUBSCRIPTION_1 from "./data/subscriptions/subscription-sp-6b5218b9.json";
 import SP_SUBSCRIPTION_2 from "./data/subscriptions/subscription-sp-bb1be651.json";
+import AGGSP_SUBSCRIPTION from "./data/subscriptions/subscription-aggsp-2c815189.json";
+import MSC_SUBSCRIPTION from "./data/subscriptions/subscription-msc-88e4c0ee.json";
 
 const imsPortServiceSp = { name: "DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45", product: "SP" };
 

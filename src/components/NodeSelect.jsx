@@ -13,12 +13,11 @@
  *
  */
 
-import I18n from "i18n-js";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
-
 import { getNodesByLocationAndStatus } from "../api";
+import I18n from "i18n-js";
 
 export default class NodeSelect extends React.PureComponent {
     constructor(props) {

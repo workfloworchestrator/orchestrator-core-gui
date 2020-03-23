@@ -13,12 +13,10 @@
  *
  */
 
-import "./GenericNOCConfirm.scss";
-
-import I18n from "i18n-js";
 import React from "react";
-
+import I18n from "i18n-js";
 import CheckBox from "./CheckBox";
+import "./GenericNOCConfirm.scss";
 
 interface IProps {
     name: string;

@@ -1,4 +1,4 @@
-import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "../utils/types";
+import { SubscriptionWithDetails, InstanceValue, SubscriptionInstance } from "../utils/types";
 
 /*
  * Copyright 2019 SURF.

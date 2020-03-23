@@ -13,11 +13,13 @@
  *
  */
 
-import { action } from "@storybook/addon-actions";
-import fetchMock from "fetch-mock";
 import React from "react";
 
+import { action } from "@storybook/addon-actions";
 import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSelect";
+
+import fetchMock from "fetch-mock";
+
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 
 export default {

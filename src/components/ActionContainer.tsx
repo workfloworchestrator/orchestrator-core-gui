@@ -1,6 +1,5 @@
-import "./ActionContainer.scss";
-
 import React, { useState } from "react";
+import "./ActionContainer.scss";
 
 function ActionContainer({
     title,

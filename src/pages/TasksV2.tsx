@@ -13,26 +13,27 @@
  *
  */
 
-import "./Tasks.scss";
+import React from "react";
+import I18n from "i18n-js";
+import ScrollUpButton from "react-scroll-up-button";
 
 import { abortProcess, deleteProcess, retryProcess } from "api";
 import { filterableEndpoint } from "api/filterable";
+import { stop } from "utils/Utils";
 import ConfirmationDialog from "components/ConfirmationDialog";
 import DropDownActions from "components/DropDownActions";
-import {
-    ProcessesTable,
-    initialProcessTableSettings,
-    initialProcessesFilterAndSort
-} from "components/tables/Processes";
-import I18n from "i18n-js";
-import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
-import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
-import { organisationNameByUuid } from "utils/Lookups";
-import { ProcessV2 } from "utils/types";
-import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+import ApplicationContext from "utils/ApplicationContext";
+import { ProcessV2 } from "utils/types";
+import {
+    initialProcessesFilterAndSort,
+    initialProcessTableSettings,
+    ProcessesTable
+} from "components/tables/Processes";
+import { organisationNameByUuid } from "utils/Lookups";
+
+import "./Tasks.scss";
 
 interface IState {
     confirmationDialogOpen: boolean;

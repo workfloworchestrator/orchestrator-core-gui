@@ -13,11 +13,10 @@
  *
  */
 
-import I18n from "i18n-js";
 import React, { Dispatch } from "react";
+import I18n from "i18n-js";
+import { ColumnInstance, TableState, TableSettings } from "react-table";
 import NumericInput from "react-numeric-input";
-import { ColumnInstance, TableSettings, TableState } from "react-table";
-
 import { ActionType, TableSettingsAction } from "./NwaTable";
 
 interface IProps<T extends object> {

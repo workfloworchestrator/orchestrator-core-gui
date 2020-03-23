@@ -13,17 +13,16 @@
  *
  */
 
-import "./ReadOnlySubscriptionView.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import React from "react";
-
-import { getResourceTypeInfo, productById, subscriptionsDetail } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
-import { enrichSubscription } from "../utils/Lookups";
 import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
+import { getResourceTypeInfo, productById, subscriptionsDetail } from "../api/index";
+import { enrichSubscription } from "../utils/Lookups";
 import { port_subscription_id, subscriptionInstanceValues } from "../validations/Subscriptions";
+import ApplicationContext from "../utils/ApplicationContext";
+
+import "./ReadOnlySubscriptionView.scss";
 
 export default class ReadOnlySubscriptionView extends React.PureComponent {
     constructor(props) {

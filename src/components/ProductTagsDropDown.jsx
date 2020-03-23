@@ -13,14 +13,14 @@
  *
  */
 
-import "./FilterDropDown.scss";
-
+import React from "react";
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import React from "react";
 
-import { productTags } from "../api";
 import CheckBox from "./CheckBox";
+
+import "./FilterDropDown.scss";
+import { productTags } from "../api";
 
 export default class ProductTagsDropDown extends React.PureComponent {
     constructor(props) {

@@ -13,17 +13,17 @@
  *
  */
 
-import "./NewTask.scss";
-
-import I18n from "i18n-js";
 import React from "react";
+import I18n from "i18n-js";
 
-import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
-import UserInputFormWizard from "../components/UserInputFormWizard";
-import WorkflowSelect from "../components/WorkflowSelect";
-import ApplicationContext from "../utils/ApplicationContext";
+import { startProcess, workflowsByTarget, catchErrorStatus } from "../api";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField, Option, Workflow } from "../utils/types";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+import ApplicationContext from "../utils/ApplicationContext";
+import WorkflowSelect from "../components/WorkflowSelect";
+import { Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/types";
+
+import "./NewTask.scss";
 
 interface IState {
     workflows?: Workflow[];

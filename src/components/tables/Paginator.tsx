@@ -13,11 +13,10 @@
  *
  */
 
-import "./Paginator.scss";
-
-import I18n from "i18n-js";
 import React from "react";
 import NumericInput from "react-numeric-input";
+import I18n from "i18n-js";
+import "./Paginator.scss";
 
 interface IPaginatorProps {
     canNextPage: boolean;
