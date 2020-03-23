@@ -13,11 +13,12 @@
  *
  */
 
+import "./Flash.scss";
+
 import React from "react";
 
 import { clearFlash, emitter, getFlash } from "../utils/Flash";
 import { isEmpty } from "../utils/Utils";
-import "./Flash.scss";
 
 export default class Flash extends React.PureComponent {
     constructor() {

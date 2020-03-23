@@ -13,9 +13,10 @@
  *
  */
 
+import PropTypes from "prop-types";
 import React, { ReactNode } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import ApplicationContext from "../utils/ApplicationContext";
 
 export default function ProtectedRoute({

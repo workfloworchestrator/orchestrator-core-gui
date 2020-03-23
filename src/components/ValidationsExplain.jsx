@@ -13,11 +13,12 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import HighlightCode from "./HighlightCode";
-
 import "./ValidationsExplain.scss";
+
+import PropTypes from "prop-types";
+import React from "react";
+
+import HighlightCode from "./HighlightCode";
 
 export default class ValidationsExplain extends React.PureComponent {
     componentWillReceiveProps(nextProps) {

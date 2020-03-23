@@ -13,15 +13,14 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-
-import { Spinner } from "spin.js";
-import mySpinner from "../lib/Spin";
-
-import { NavLink } from "react-router-dom";
-
 import "./Navigation.scss";
+
+import I18n from "i18n-js";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Spinner } from "spin.js";
+
+import mySpinner from "../lib/Spin";
 
 export default class Navigation extends React.PureComponent {
     constructor() {

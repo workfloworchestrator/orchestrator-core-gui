@@ -13,6 +13,12 @@
  *
  */
 
+import "stylesheets/buttons.scss";
+
+import "./NwaTable.scss";
+
+import I18n from "i18n-js";
+import produce from "immer";
 import React, { useEffect } from "react";
 import {
     Column,
@@ -29,14 +35,11 @@ import {
     useSortBy,
     useTable
 } from "react-table";
-import "./NwaTable.scss";
-import "stylesheets/buttons.scss";
-import produce from "immer";
-import I18n from "i18n-js";
+
 import Paginator from "./Paginator";
 import Preferences from "./Preferences";
-import useInterval from "./useInterval";
 import useFilterableDataFetcher from "./useFilterableDataFetcher";
+import useInterval from "./useInterval";
 
 /*
  * Reusable NWA table implementation using react-table 7.

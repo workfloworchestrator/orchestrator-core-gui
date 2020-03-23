@@ -13,14 +13,15 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
+import "./ContactPersons.scss";
+
 import I18n from "i18n-js";
+import PropTypes from "prop-types";
+import React from "react";
+
+import { contacts } from "../api";
 import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import Autocomplete from "./Autocomplete";
-
-import "./ContactPersons.scss";
-import { contacts } from "../api";
 
 export default class ContactPersons extends React.PureComponent {
     constructor(props, context) {

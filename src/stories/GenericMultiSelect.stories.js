@@ -13,11 +13,10 @@
  *
  */
 
-import React from "react";
-
+import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { array, boolean } from "@storybook/addon-knobs";
-import { Store } from "@sambego/storybook-state";
+import React from "react";
 
 import GenericMultiSelect from "../components/GenericMultiSelect";
 

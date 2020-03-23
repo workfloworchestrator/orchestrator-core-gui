@@ -13,10 +13,12 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { capitalize, renderDateTime } from "../utils/Lookups";
 import "./Step.scss";
+
+import PropTypes from "prop-types";
+import React from "react";
+
+import { capitalize, renderDateTime } from "../utils/Lookups";
 
 export default class Step extends React.PureComponent {
     render() {

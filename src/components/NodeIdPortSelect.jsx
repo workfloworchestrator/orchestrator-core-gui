@@ -13,13 +13,14 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import Select from "react-select";
 import "./NodePortSelect.scss";
 
-import { getNodesByLocationAndStatus, getFreePortsByNodeIdAndInterfaceType } from "../api";
 import I18n from "i18n-js";
+import PropTypes from "prop-types";
+import React from "react";
+import Select from "react-select";
+
+import { getFreePortsByNodeIdAndInterfaceType, getNodesByLocationAndStatus } from "../api";
 
 export default class NodeIdPortSelect extends React.PureComponent {
     constructor(props) {
