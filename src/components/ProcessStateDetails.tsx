@@ -13,21 +13,22 @@
  *
  */
 
-import React from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
+import "./ProcessStateDetails.scss";
+
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
-import ReactTooltip from "react-tooltip";
-import CheckBox from "./CheckBox";
-import StepDetails from "./Step";
-import { capitalize, renderDateTime } from "../utils/Lookups";
-import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
+import React from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { NavLink } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 
-import "./ProcessStateDetails.scss";
-import HighlightCode from "./HighlightCode";
-import { Step, State, ProcessSubscription, prop, ProcessWithDetails } from "../utils/types";
 import { CustomProcessWithDetails } from "../pages/ProcessDetail";
+import { capitalize, renderDateTime } from "../utils/Lookups";
+import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "../utils/types";
+import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
+import CheckBox from "./CheckBox";
+import HighlightCode from "./HighlightCode";
+import StepDetails from "./Step";
 
 interface IProps {
     process: CustomProcessWithDetails;

@@ -13,15 +13,16 @@
  *
  */
 
-import React from "react";
+import "./Workflows.scss";
+
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
-import { isEmpty, stop } from "../utils/Utils";
+import React from "react";
 
-import "./Workflows.scss";
-import { renderDateTime } from "../utils/Lookups";
-import FilterDropDown from "./FilterDropDown";
 import { allWorkflowsWithProductTags } from "../api";
+import { renderDateTime } from "../utils/Lookups";
+import { isEmpty, stop } from "../utils/Utils";
+import FilterDropDown from "./FilterDropDown";
 
 export default class WorkFlows extends React.Component {
     constructor(props) {

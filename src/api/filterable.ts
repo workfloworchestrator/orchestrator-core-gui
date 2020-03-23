@@ -1,8 +1,8 @@
 import axios from "axios";
-import { FilterArgument } from "utils/types";
-import { CommaSeparatedStringArrayParam, CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
+import { FilterArgument } from "utils/types";
 
 var axiosInstance = axios.create({ baseURL: "/api/v2/" });
 

@@ -13,11 +13,12 @@
  *
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
+
 import UserProfile from "../../components/UserProfile";
-import start from "../base";
 import ApplicationContext from "../../utils/ApplicationContext";
+import start from "../base";
 
 start();
 

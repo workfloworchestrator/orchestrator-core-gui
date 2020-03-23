@@ -15,6 +15,7 @@
 
 import React from "react";
 import Select, { ValueType } from "react-select";
+
 import { Option } from "../utils/types";
 
 interface IProps {

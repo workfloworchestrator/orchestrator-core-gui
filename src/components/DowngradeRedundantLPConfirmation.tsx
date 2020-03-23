@@ -13,16 +13,17 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-import { subscriptionsDetail } from "../api/index";
-import { enrichSubscription } from "../utils/Lookups";
-
 import "./DowngradeRedundantLPConfirmation.scss";
-import CheckBox from "./CheckBox";
-import { SubscriptionWithDetails } from "../utils/types";
-import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
+
+import I18n from "i18n-js";
+import React from "react";
+
+import { subscriptionsDetail } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
+import { enrichSubscription } from "../utils/Lookups";
+import { SubscriptionWithDetails } from "../utils/types";
+import CheckBox from "./CheckBox";
+import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 
 interface IMSPortData {
     location: string;

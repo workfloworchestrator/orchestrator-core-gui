@@ -72,9 +72,12 @@
     "eslint-plugin-react-hooks": "^2.4.0",
     "fetch-mock": "^8.3.2",
     "http-proxy-middleware": "^0.21.0",
+    "import-sort-style-module": "^6.0.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
+    "pre-commit": "^1.2.2",
     "prettier": "1.19.1",
+    "prettier-plugin-import-sort": "^0.0.3",
     "react-router": "^5.1.2",
     "react-test-renderer": "^16.9.0",
     "source-map-explorer": "^2.2.2",
@@ -92,6 +95,14 @@
     "build-storybook": "build-storybook -s ./public",
     "prettier": "prettier -c '{**/*.{js,jsx,scss,md,ts,tsx},public/**/*.html}'",
     "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md,ts,tsx},public/**/*.html}'"
+  },
+  "pre-commit": [
+    "prettier-fix"
+  ],
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

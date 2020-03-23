@@ -13,54 +13,54 @@
  *
  */
 
-import React from "react";
-import { Redirect, Route, Switch, Router } from "react-router-dom";
+import "../locale/en";
+import "../locale/nl";
+import "./App.scss";
+
 import { createBrowserHistory } from "history";
+import React from "react";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 
-import ErrorDialog from "../components/ErrorDialog";
-import Flash from "../components/Flash";
-import ProtectedRoute from "../components/ProtectedRoute";
-import NotFound from "./NotFound";
-import Help from "./Help";
-import Processes from "./ProcessesV2";
-import Subscriptions from "./Subscriptions";
-import Validations from "./Validations";
-import NewProcess from "./NewProcess";
-import ProcessDetail from "./ProcessDetail";
-import SubscriptionDetail from "./SubscriptionDetail";
-import ServerError from "./ServerError";
-import NotAllowed from "./NotAllowed";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
 import {
+    assignees,
     config,
     locationCodes,
     logUserInfo,
     me,
     organisations,
-    products,
-    assignees,
     processStatuses,
+    products,
     redirectToAuthorizationServer,
     reportError
 } from "../api";
-import "../locale/en";
-import "../locale/nl";
-import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
-import ModifySubscription from "./ModifySubscription";
-import TerminateSubscription from "./TerminateSubscription";
-import MetaData from "./MetaData";
-import ProductBlock from "../components/ProductBlock";
+import ErrorDialog from "../components/ErrorDialog";
+import Flash from "../components/Flash";
+import Header from "../components/Header";
+import Navigation from "../components/Navigation";
 import ProductPage from "../components/Product";
-import Cache from "./Cache";
-import Tasks from "./TasksV2";
-import NewTask from "./NewTask";
-import Prefixes from "./Prefixes";
+import ProductBlock from "../components/ProductBlock";
+import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
+import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import { AppError, Organization, Product } from "../utils/types";
-
-import "./App.scss";
+import Cache from "./Cache";
+import Help from "./Help";
+import MetaData from "./MetaData";
+import ModifySubscription from "./ModifySubscription";
+import NewProcess from "./NewProcess";
+import NewTask from "./NewTask";
+import NotAllowed from "./NotAllowed";
+import NotFound from "./NotFound";
+import Prefixes from "./Prefixes";
+import ProcessDetail from "./ProcessDetail";
+import Processes from "./ProcessesV2";
+import ServerError from "./ServerError";
+import SubscriptionDetail from "./SubscriptionDetail";
+import Subscriptions from "./Subscriptions";
+import Tasks from "./TasksV2";
+import TerminateSubscription from "./TerminateSubscription";
+import Validations from "./Validations";
 
 const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 

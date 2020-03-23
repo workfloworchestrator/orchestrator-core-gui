@@ -13,24 +13,23 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-import debounce from "lodash/debounce";
-import ScrollUpButton from "react-scroll-up-button";
+import "./Processes.scss";
 
 import { abortProcess, deleteProcess, processes, retryProcess } from "api";
-import { isEmpty, stop } from "utils/Utils";
+import CheckBox from "components/CheckBox";
 import ConfirmationDialog from "components/ConfirmationDialog";
-import FilterDropDown from "components/FilterDropDown";
 import DropDownActions from "components/DropDownActions";
+import FilterDropDown from "components/FilterDropDown";
+import I18n from "i18n-js";
+import debounce from "lodash/debounce";
+import React from "react";
+import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "utils/ApplicationContext";
 import { setFlash } from "utils/Flash";
 import { organisationNameByUuid, productNameById, renderDateTime } from "utils/Lookups";
-import CheckBox from "components/CheckBox";
+import { FilterAttribute, ProcessWithDetails, ShowActions, SortSettings, optionalProp, prop } from "utils/types";
+import { isEmpty, stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
-import ApplicationContext from "utils/ApplicationContext";
-import { FilterAttribute, ShowActions, SortSettings, ProcessWithDetails, prop, optionalProp } from "utils/types";
-
-import "./Processes.scss";
 
 interface CustomProcessWithDetails extends ProcessWithDetails {
     product_name: string;

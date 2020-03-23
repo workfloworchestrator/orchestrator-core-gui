@@ -13,13 +13,12 @@
  *
  */
 
+import { action } from "@storybook/addon-actions";
+import fetchMock from "fetch-mock";
 import React from "react";
 
-import { action } from "@storybook/addon-actions";
-import UserInputContainer from "./UserInputContainer";
-
-import fetchMock from "fetch-mock";
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
+import UserInputContainer from "./UserInputContainer";
 
 export default {
     title: "GenericNOCConfirm"

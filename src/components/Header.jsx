@@ -13,15 +13,17 @@
  *
  */
 
-import React from "react";
+import "./Header.scss";
+
 import I18n from "i18n-js";
+import React from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { Link } from "react-router-dom";
-import logo from "../images/network-automation.png";
-import "./Header.scss";
-import UserProfile from "./UserProfile";
-import ApplicationContext from "../utils/ApplicationContext";
+
 import { logUserInfo } from "../api";
+import logo from "../images/network-automation.png";
+import ApplicationContext from "../utils/ApplicationContext";
+import UserProfile from "./UserProfile";
 
 export default class Header extends React.PureComponent {
     constructor() {

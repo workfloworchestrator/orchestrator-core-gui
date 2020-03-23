@@ -13,14 +13,13 @@
  *
  */
 
-import React from "react";
-
+import { State, Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { boolean, select } from "@storybook/addon-knobs";
-import { State, Store } from "@sambego/storybook-state";
-import BandwidthSelect from "../components/BandwidthSelect";
-
 import fetchMock from "fetch-mock";
+import React from "react";
+
+import BandwidthSelect from "../components/BandwidthSelect";
 
 const store = new Store({
     value: 1000
