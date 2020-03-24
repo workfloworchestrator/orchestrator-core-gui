@@ -96,8 +96,6 @@ export interface ServicePortSubscription extends Subscription {
 export interface ServicePort {
     subscription_id: string;
     vlan: string;
-    tag?: string;
-    port_mode: string;
     bandwidth?: number;
     nonremovable?: boolean;
     modifiable?: boolean;

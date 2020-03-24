@@ -72,7 +72,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     componentDidMount = () => {
         const extra = Math.max(0, this.props.minimum - this.props.servicePorts.length);
         const servicePorts = [...this.props.servicePorts];
-        range(extra).forEach(() => servicePorts.push({ subscription_id: "", vlan: "", port_mode: "tagged" }));
+        range(extra).forEach(() => servicePorts.push({ subscription_id: "", vlan: "" }));
         this.props.onChange(servicePorts);
 
         const { availableServicePorts } = this.state;
@@ -87,15 +87,17 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 
         portSubscriptions(tags, ["active"]).then((result: ServicePortSubscription[]) => {
             this.setState({
-                availableServicePorts: result.map(sp => {
-                    // Todo: delegate this to backend: it should provide a valid port mode for MSC
-                    if (sp.product.tag === "MSC" || sp.product.tag === "MSCNL") {
-                        sp.port_mode = "tagged";
-                    }
-                    return sp;
-                })
+                availableServicePorts: result
             });
         });
+    };
+
+    getPortMode = (subscription_id: string) => {
+        const port = this.state.availableServicePorts.find(x => x.subscription_id === subscription_id);
+
+        return (
+            port?.port_mode || (["MSP", "MSPNL", "MSC", "MSCNL"].includes(port?.product.tag!) ? "tagged" : "untagged")
+        );
     };
 
     onChangeSubscription = (index: number) => (e: { value: string }) => {
@@ -108,16 +110,10 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
             if (port) {
                 servicePorts[index].subscription_id = value;
 
-                // TODO: Leave these out, they are properties of the subscription
-                servicePorts[index].port_mode =
-                    port.port_mode ||
-                    (["MSP", "MSPNL", "MSC", "MSCNL"].includes(port.product.tag) ? "tagged" : "untagged");
-                servicePorts[index].tag = port.product.tag;
+                let port_mode = this.getPortMode(value);
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
-                servicePorts[index].vlan = ["untagged", "link_member"].includes(servicePorts[index].port_mode)
-                    ? "0"
-                    : "";
+                servicePorts[index].vlan = ["untagged", "link_member"].includes(port_mode) ? "0" : "";
             }
         }
 
@@ -144,7 +140,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
         //todo: we might need to add tag and port_mode
-        servicePorts.push({ subscription_id: "", vlan: "", port_mode: "tagged" });
+        servicePorts.push({ subscription_id: "", vlan: "" });
         this.props.onChange(servicePorts);
     };
 
@@ -280,7 +276,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         disabled={vlanDisabled}
                         reportError={this.reportVlanError(index)}
                         vlansExtraInUse={vlansJustChosen}
-                        portMode={servicePort.port_mode}
+                        portMode={this.getPortMode(servicePort.subscription_id)}
                     />
 
                     {vlanErrors && (
