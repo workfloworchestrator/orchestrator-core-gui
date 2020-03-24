@@ -63,22 +63,18 @@ export default class Settings extends React.Component<IProps, IState> {
 
     setNewEngineStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
-        setGlobalStatus(this.state.lockSettings).then( res =>
-            setFlash(
-                I18n.t(`settings.status.engine.${this.state.lockSettings}`)
-            )
+        setGlobalStatus(this.state.lockSettings).then(res =>
+            setFlash(I18n.t(`settings.status.engine.${this.state.lockSettings}`))
         );
     };
 
     getEngineStatus = () => {
-        getGlobalStatus().then(res =>
-            this.setState({engineStatus: res})
-        )
+        getGlobalStatus().then(res => this.setState({ engineStatus: res }));
     };
 
     changeCache = (option: Option) => this.setState({ cache: option.value });
 
-    changeEngineStatus = (option: OptionBool) => this.setState({lockSettings: option.value});
+    changeEngineStatus = (option: OptionBool) => this.setState({ lockSettings: option.value });
 
     render() {
         const { cache, lockSettings, engineStatus } = this.state;
@@ -88,73 +84,71 @@ export default class Settings extends React.Component<IProps, IState> {
         }));
         const cacheValue = cacheOptions.find(option => option.value === cache);
 
-        const engineStatusOptions: OptionBool[] =LOCKSETTINGS.map(val => ({
+        const engineStatusOptions: OptionBool[] = LOCKSETTINGS.map(val => ({
             value: val,
             label: I18n.t(`settings.status.options.${val}`)
         }));
 
-        const engineStatusValue = engineStatusOptions.find( option => option.value === lockSettings);
+        const engineStatusValue = engineStatusOptions.find(option => option.value === lockSettings);
 
-        return (
-            [
-                <div className="mod-cache">
-                    <section className="card">
-                        <section className="form-step">
-                            <section className="form-divider">
-                                <label>{I18n.t("settings.cache.remove")}</label>
-                                <em>{I18n.t("settings.cache.remove_info")}</em>
-                                <section className="cache-select-section">
-                                    <Select
-                                        onChange={this.changeCache as (option: ValueType<Option>) => void}
-                                        options={cacheOptions}
-                                        isSearchable={false}
-                                        value={cacheValue}
-                                        isClearable={false}
-                                        isDisabled={false}
-                                    />
-                                    <button className="new button orange" onClick={this.clearCache}>
-                                        {I18n.t("settings.cache.clear")}
-                                        <i className="fa fa-eraser" />
-                                    </button>
-                                </section>
+        return [
+            <div className="mod-cache">
+                <section className="card">
+                    <section className="form-step">
+                        <section className="form-divider">
+                            <label>{I18n.t("settings.cache.remove")}</label>
+                            <em>{I18n.t("settings.cache.remove_info")}</em>
+                            <section className="cache-select-section">
+                                <Select
+                                    onChange={this.changeCache as (option: ValueType<Option>) => void}
+                                    options={cacheOptions}
+                                    isSearchable={false}
+                                    value={cacheValue}
+                                    isClearable={false}
+                                    isDisabled={false}
+                                />
+                                <button className="new button orange" onClick={this.clearCache}>
+                                    {I18n.t("settings.cache.clear")}
+                                    <i className="fa fa-eraser" />
+                                </button>
                             </section>
                         </section>
                     </section>
-                </div>,
-                <div className="mod-cache">
-                    <section className="card">
-                        <section className="form-step">
-                            <section className="form-divider">
-                                <label>{I18n.t("settings.status.info")}</label>
-                                <em>{I18n.t("settings.status.info_detail")}</em>
-                                <section className="engine-select-section">
-                                    <Select
-                                        onChange={this.changeEngineStatus as (option: ValueType<OptionBool>) => void}
-                                        options={engineStatusOptions}
-                                        isSearchable={false}
-                                        value={engineStatusValue}
-                                        isClearable={false}
-                                        isDisabled={false}
-                                    />
-                                    <button className="new button orange" onClick={this.setNewEngineStatus}>
-                                        {I18n.t("settings.status.submit")}
-                                    </button>
-                                </section>
-                                <section className="engine-select-section">
-                                    <ul className="status">
-                                        <li>
-                                            <b>{I18n.t("settings.status.processes")} </b>   {engineStatus?.running_processes}
-                                        </li>
-                                        <li>
-                                            <b>{I18n.t("settings.status.status")}</b>   {engineStatus?.global_status}
-                                        </li>
-                                    </ul>
-                                </section>
+                </section>
+            </div>,
+            <div className="mod-cache">
+                <section className="card">
+                    <section className="form-step">
+                        <section className="form-divider">
+                            <label>{I18n.t("settings.status.info")}</label>
+                            <em>{I18n.t("settings.status.info_detail")}</em>
+                            <section className="engine-select-section">
+                                <Select
+                                    onChange={this.changeEngineStatus as (option: ValueType<OptionBool>) => void}
+                                    options={engineStatusOptions}
+                                    isSearchable={false}
+                                    value={engineStatusValue}
+                                    isClearable={false}
+                                    isDisabled={false}
+                                />
+                                <button className="new button orange" onClick={this.setNewEngineStatus}>
+                                    {I18n.t("settings.status.submit")}
+                                </button>
+                            </section>
+                            <section className="engine-select-section">
+                                <ul className="status">
+                                    <li>
+                                        <b>{I18n.t("settings.status.processes")} </b> {engineStatus?.running_processes}
+                                    </li>
+                                    <li>
+                                        <b>{I18n.t("settings.status.status")}</b> {engineStatus?.global_status}
+                                    </li>
+                                </ul>
                             </section>
                         </section>
                     </section>
-                </div>
-            ]
-        );
+                </section>
+            </div>
+        ];
     }
 }

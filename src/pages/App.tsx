@@ -75,7 +75,6 @@ interface IState {
     errorDialogAction: () => void;
 }
 
-
 class App extends React.PureComponent<{}, IState> {
     constructor(props: {}, context: ApplicationContextInterface) {
         super(props, context);
@@ -241,9 +240,8 @@ class App extends React.PureComponent<{}, IState> {
         });
     }
 
-
     render() {
-        const { loading, errorDialogAction, errorDialogOpen, applicationContext, redirectState} = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext, redirectState } = this.state;
 
         if (loading) {
             return null; // render null when app is not ready yet for static mySpinner

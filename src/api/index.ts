@@ -556,11 +556,11 @@ export function clearCache(name: string) {
 }
 
 export function getGlobalStatus(): Promise<EngineStatus> {
-    return fetchJson("v2/settings/status")
+    return fetchJson("v2/settings/status");
 }
 
 export function setGlobalStatus(new_global_lock: boolean) {
-    return postPutJson("v2/settings/status", {global_lock: new_global_lock}, "put")
+    return postPutJson("v2/settings/status", { global_lock: new_global_lock }, "put");
 }
 
 export function logUserInfo(username: string, message: string) {

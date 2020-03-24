@@ -26,8 +26,8 @@ import statusPausing from "../images/status-pausing.png";
 import statusUnlocked from "../images/status-unlocked.png";
 
 import "./Header.scss";
-import {logUserInfo, getGlobalStatus} from "../api";
-import {setFlash} from "../utils/Flash";
+import { logUserInfo, getGlobalStatus } from "../api";
+import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
 import UserProfile from "./UserProfile";
 
@@ -93,34 +93,40 @@ export default class Header extends React.PureComponent {
         environment === "production" ? null : <li className="environment">{environment}</li>;
 
     refeshStatus = () => {
-        getGlobalStatus().then( globalStatus => {
-            const {globalLock} = this.state;
+        getGlobalStatus().then(globalStatus => {
+            const { globalLock } = this.state;
             if (!globalStatus.global_lock && globalLock) {
-                this.setState({globalLock: globalStatus.global_lock});
-                setFlash(I18n.t("settings.status.engine.false"))
+                this.setState({ globalLock: globalStatus.global_lock });
+                setFlash(I18n.t("settings.status.engine.false"));
             }
-            this.setState({globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status})
+            this.setState({ globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status });
         });
     };
 
-     generateStatusElements(globalLock, engineStatus)  {
-         if (globalLock && engineStatus === "PAUSED") {
-            return ([
+    generateStatusElements(globalLock, engineStatus) {
+        if (globalLock && engineStatus === "PAUSED") {
+            return [
                 <li className="status-text">{I18n.t("settings.status.engine.true")}</li>,
-                <li className="status"><img className="status-logo" src={statusLocked} alt="" /></li>
-            ])
-         } else if (globalLock && engineStatus === "PAUSING"){
-             return ([
+                <li className="status">
+                    <img className="status-logo" src={statusLocked} alt="" />
+                </li>
+            ];
+        } else if (globalLock && engineStatus === "PAUSING") {
+            return [
                 <li className="status-text">{I18n.t("settings.status.engine.pausing")}</li>,
-                <li className="status"><img className="status-logo" src={statusPausing} alt="" /></li>
-            ])
-         } else if (!globalLock)  {
-            return ([
+                <li className="status">
+                    <img className="status-logo" src={statusPausing} alt="" />
+                </li>
+            ];
+        } else if (!globalLock) {
+            return [
                 <li className="status-text">{I18n.t("settings.status.engine.running")}</li>,
-                <li className="status"><img className="status-logo" src={statusUnlocked} alt="" /></li>
-            ])
+                <li className="status">
+                    <img className="status-logo" src={statusUnlocked} alt="" />
+                </li>
+            ];
         }
-     }
+    }
 
     componentWillMount() {
         window.setInterval(this.refeshStatus, 3000);
@@ -128,7 +134,7 @@ export default class Header extends React.PureComponent {
 
     render() {
         const { currentUser } = this.context;
-        const { environment , globalLock, engineStatus} = this.state;
+        const { environment, globalLock, engineStatus } = this.state;
         return (
             <div className="header-container">
                 <div className="header">

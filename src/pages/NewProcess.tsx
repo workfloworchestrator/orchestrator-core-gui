@@ -23,7 +23,7 @@ import ProductSelect from "../components/ProductSelect";
 import ProductValidationComponent from "../components/ProductValidation";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
-import { FormNotCompleteResponse, InputField, ProductValidation, Option, EngineStatus} from "../utils/types";
+import { FormNotCompleteResponse, InputField, ProductValidation, Option, EngineStatus } from "../utils/types";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
 import { isEmpty } from "../utils/Utils";
@@ -73,7 +73,7 @@ export default class NewProcess extends React.Component<IProps, IState> {
         return startProcess(workflow, [{ product: productId }, ...processInput]).then(process => {
             this.context.redirect(`/processes?highlight=${process.id}`);
             setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
-        })
+        });
     };
 
     changeProduct = (option: Option) => {
@@ -92,8 +92,8 @@ export default class NewProcess extends React.Component<IProps, IState> {
                 let promise = startProcess(createWorkflow, [{ product: option.value }]);
 
                 let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
-                        setFlash(I18n.t("engine.locked"), "error");
-                        this.context.redirect("/processes");
+                    setFlash(I18n.t("engine.locked"), "error");
+                    this.context.redirect("/processes");
                 });
 
                 Promise.all([

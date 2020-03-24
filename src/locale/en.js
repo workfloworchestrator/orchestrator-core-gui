@@ -1164,7 +1164,7 @@ I18n.translations.en = {
         placeholder_selected_product: "Select a subscription for the selected product",
         placeholder: "Select a subscription for this product tag"
     },
-    settings:{
+    settings: {
         cache: {
             name: {
                 ims: "IMS locations",
@@ -1178,7 +1178,7 @@ I18n.translations.en = {
             flushed: "Settings {{name}} was flushed"
         },
         status: {
-            info : "Modify the engine settings",
+            info: "Modify the engine settings",
             info_detail: "Stop or start workflows through this menu",
             options: {
                 true: "Pause the engine",
