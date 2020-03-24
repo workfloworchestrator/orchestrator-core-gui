@@ -13,10 +13,11 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-
 import "./TableSummary.scss";
+
+import PropTypes from "prop-types";
+import React from "react";
+
 import { isEmpty } from "../utils/Utils";
 
 export default class TableSummary extends React.PureComponent {

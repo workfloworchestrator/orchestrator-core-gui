@@ -13,11 +13,12 @@
  *
  */
 
-import React from "react";
+import "./FixedInputProductValidation.scss";
+
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
+import React from "react";
 
-import "./FixedInputProductValidation.scss";
 import ApplicationContext from "../utils/ApplicationContext";
 
 export default class FixedInputProductValidation extends React.Component {

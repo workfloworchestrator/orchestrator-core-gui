@@ -13,18 +13,20 @@
  *
  */
 
-import React from "react";
+import "./ProductBlocks.scss";
+
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
-import { isEmpty, stop } from "../utils/Utils";
-import ConfirmationDialog from "../components/ConfirmationDialog";
+import React from "react";
 
-import "./ProductBlocks.scss";
+import { deleteProductBlock, productBlocks } from "../api/index";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 import DropDownActions from "../components/DropDownActions";
+import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
-import { deleteProductBlock, productBlocks } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
+import { isEmpty, stop } from "../utils/Utils";
+
 export default class ProductBlocks extends React.Component {
     constructor(props) {
         super(props);

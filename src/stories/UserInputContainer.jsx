@@ -13,9 +13,10 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
 import { action } from "@storybook/addon-actions";
+import PropTypes from "prop-types";
+import React from "react";
+
 import UserInputForm from "../components/UserInputForm";
 
 export default class UserInputContainer extends React.Component {

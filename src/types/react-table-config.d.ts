@@ -1,6 +1,6 @@
 import {
-    IdType,
     FilterArgument,
+    IdType,
     SortingRule,
     UseColumnOrderInstanceProps,
     UseColumnOrderState,

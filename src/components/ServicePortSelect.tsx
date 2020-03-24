@@ -16,8 +16,9 @@
 import React from "react";
 import Select from "react-select";
 import { ValueType } from "react-select/src/types";
-import { ServicePortSubscription, Organization, Option } from "../utils/types";
+
 import ApplicationContext from "../utils/ApplicationContext";
+import { Option, Organization, ServicePortSubscription } from "../utils/types";
 
 interface IProps {
     servicePort: string | null;

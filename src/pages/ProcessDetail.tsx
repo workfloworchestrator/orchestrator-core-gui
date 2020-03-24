@@ -13,26 +13,26 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-
-import { RouteComponentProps } from "react-router-dom";
-import { process, resumeProcess } from "../api";
-import { stop } from "../utils/Utils";
-import { setFlash } from "../utils/Flash";
-import UserInputFormWizard from "../components/UserInputFormWizard";
-import ProcessStateDetails from "../components/ProcessStateDetails";
-import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
-import { abortProcess, deleteProcess, retryProcess, processSubscriptionsByProcessId } from "../api/index";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import { actionOptions } from "../validations/Processes";
-import ScrollUpButton from "react-scroll-up-button";
-import ApplicationContext from "../utils/ApplicationContext";
-import { ProcessWithDetails, Step, ProcessSubscription, InputField, Process, Product, prop } from "../utils/types";
-import { withQueryParams, NumberParam, DecodedValueMap, SetQuery, QueryParamConfigMap } from "use-query-params";
-import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-
 import "./ProcessDetail.scss";
+
+import I18n from "i18n-js";
+import React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import ScrollUpButton from "react-scroll-up-button";
+import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
+
+import { process, resumeProcess } from "../api";
+import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "../api/index";
+import ConfirmationDialog from "../components/ConfirmationDialog";
+import ProcessStateDetails from "../components/ProcessStateDetails";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
+import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
+import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
+import { InputField, Process, ProcessSubscription, ProcessWithDetails, Product, Step, prop } from "../utils/types";
+import { stop } from "../utils/Utils";
+import { actionOptions } from "../validations/Processes";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 

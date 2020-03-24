@@ -13,8 +13,12 @@
  *
  */
 
-import React from "react";
+import "./Validations.scss";
+
 import I18n from "i18n-js";
+import React from "react";
+import ScrollUpButton from "react-scroll-up-button";
+
 import {
     allWorkflowCodeImplementations,
     allWorkflows,
@@ -24,17 +28,14 @@ import {
     products,
     validations
 } from "../api";
-
-import "./Validations.scss";
-import ValidationsExplain from "../components/ValidationsExplain";
 import CheckBox from "../components/CheckBox";
-import ProductValidation from "../components/ProductValidation";
-import { isEmpty, stop } from "../utils/Utils";
-import SubscriptionValidation from "../components/SubscriptionValidation";
 import FixedInputProductValidation from "../components/FixedInputProductValidation";
+import ProductValidation from "../components/ProductValidation";
 import ProductWorkflowsValidation from "../components/ProductWorkflowsValidation";
-import ScrollUpButton from "react-scroll-up-button";
+import SubscriptionValidation from "../components/SubscriptionValidation";
+import ValidationsExplain from "../components/ValidationsExplain";
 import ApplicationContext from "../utils/ApplicationContext";
+import { isEmpty, stop } from "../utils/Utils";
 import { applyIdNamingConvention } from "../utils/Utils";
 
 export default class Validations extends React.Component {

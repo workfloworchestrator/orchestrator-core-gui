@@ -13,13 +13,13 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
 import I18n from "i18n-js";
-
+import PropTypes from "prop-types";
+import React from "react";
 import NumericInput from "react-numeric-input";
-import CheckBox from "./CheckBox";
+
 import { capitalizeFirstLetter } from "../utils/Utils";
+import CheckBox from "./CheckBox";
 
 export default class BfdSettings extends React.PureComponent {
     changeMultiplier = (valueAsNumber, valueAsString, inputElement) => {
