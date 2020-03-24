@@ -33,7 +33,8 @@ import {
     ProcessWithDetails,
     Product,
     WorkflowReasons,
-    ProductValidation
+    ProductValidation,
+    EngineStatus
 } from "../utils/types";
 import { setFlash } from "../utils/Flash";
 
@@ -73,6 +74,10 @@ function validateResponse(showErrorDialog: boolean) {
                 return res;
             }
             const error = new ResponseError(res);
+
+            if (error.response.status === 401) {
+                redirectToAuthorizationServer();
+            }
 
             if (showErrorDialog) {
                 setTimeout(() => {
@@ -550,12 +555,12 @@ export function clearCache(name: string) {
     return postPutJson(`v2/settings/cache/${name}`, {}, "delete", false);
 }
 
-export function getGlobalStatus() {
+export function getGlobalStatus(): Promise<EngineStatus> {
     return fetchJson("v2/settings/status")
 }
 
-export function setGlobalStatus(new_status: string) {
-    return postPutJson("v2/settings/status", {global_status: new_status}, "put")
+export function setGlobalStatus(new_global_lock: boolean) {
+    return postPutJson("v2/settings/status", {global_lock: new_global_lock}, "put")
 }
 
 export function logUserInfo(username: string, message: string) {

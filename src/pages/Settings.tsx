@@ -18,75 +18,143 @@ import I18n from "i18n-js";
 
 import "./Settings.scss";
 import { stop } from "../utils/Utils";
-import { clearCache, ping } from "../api";
+import { clearCache, setGlobalStatus, getGlobalStatus } from "../api";
 import Select, { ValueType } from "react-select";
 import { setFlash } from "../utils/Flash";
-import { Option } from "../utils/types";
+import { Option, OptionBool, EngineStatus } from "../utils/types";
 
 interface IProps {}
 
 interface IState {
     cache: string;
+    lockSettings: boolean;
+    engineStatus?: EngineStatus;
 }
 
 const CACHES: string[] = ["ims", "crm", "api", "all"];
+
+const LOCKSETTINGS: boolean[] = [true, false];
 
 export default class Settings extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            cache: "ims"
+            cache: "ims",
+            lockSettings: false,
+            engineStatus: undefined
         };
     }
 
-    componentDidMount = () => ping();
+    componentDidMount = () => {
+        window.setInterval(this.getEngineStatus, 3000);
+        this.getEngineStatus();
+    };
 
     clearCache = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
         clearCache(this.state.cache).then(res =>
             setFlash(
-                I18n.t("cache.flushed", {
-                    name: I18n.t(`cache.name.${this.state.cache}`)
+                I18n.t("settings.cache.flushed", {
+                    name: I18n.t(`settings.cache.name.${this.state.cache}`)
                 })
             )
         );
     };
 
+    setNewEngineStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
+        stop(e);
+        setGlobalStatus(this.state.lockSettings).then( res =>
+            setFlash(
+                I18n.t(`settings.status.engine.${this.state.lockSettings}`)
+            )
+        );
+    };
+
+    getEngineStatus = () => {
+        getGlobalStatus().then(res =>
+            this.setState({engineStatus: res})
+        )
+    };
+
     changeCache = (option: Option) => this.setState({ cache: option.value });
 
+    changeEngineStatus = (option: OptionBool) => this.setState({lockSettings: option.value});
+
     render() {
-        const { cache } = this.state;
-        const options: Option[] = CACHES.map(val => ({
+        const { cache, lockSettings, engineStatus } = this.state;
+        const cacheOptions: Option[] = CACHES.map(val => ({
             value: val,
-            label: I18n.t(`cache.name.${val}`)
+            label: I18n.t(`settings.cache.name.${val}`)
         }));
-        const value = options.find(option => option.value === cache);
+        const cacheValue = cacheOptions.find(option => option.value === cache);
+
+        const engineStatusOptions: OptionBool[] =LOCKSETTINGS.map(val => ({
+            value: val,
+            label: I18n.t(`settings.status.options.${val}`)
+        }));
+
+        const engineStatusValue = engineStatusOptions.find( option => option.value === lockSettings);
 
         return (
-            <div className="mod-cache">
-                <section className="card">
-                    <section className="form-step">
-                        <section className="form-divider">
-                            <label>{I18n.t("cache.remove")}</label>
-                            <em>{I18n.t("cache.remove_info")}</em>
-                            <section className="cache-select-section">
-                                <Select
-                                    onChange={this.changeCache as (option: ValueType<Option>) => void}
-                                    options={options}
-                                    isSearchable={false}
-                                    value={value}
-                                    isClearable={false}
-                                    isDisabled={false}
-                                />
-                                <button className="new button orange" onClick={this.clearCache}>
-                                    {I18n.t("cache.clear")}
-                                    <i className="fa fa-eraser" />
-                                </button>
+            [
+                <div className="mod-cache">
+                    <section className="card">
+                        <section className="form-step">
+                            <section className="form-divider">
+                                <label>{I18n.t("settings.cache.remove")}</label>
+                                <em>{I18n.t("settings.cache.remove_info")}</em>
+                                <section className="cache-select-section">
+                                    <Select
+                                        onChange={this.changeCache as (option: ValueType<Option>) => void}
+                                        options={cacheOptions}
+                                        isSearchable={false}
+                                        value={cacheValue}
+                                        isClearable={false}
+                                        isDisabled={false}
+                                    />
+                                    <button className="new button orange" onClick={this.clearCache}>
+                                        {I18n.t("settings.cache.clear")}
+                                        <i className="fa fa-eraser" />
+                                    </button>
+                                </section>
                             </section>
                         </section>
                     </section>
-                </section>
-            </div>
+                </div>,
+                <div className="mod-cache">
+                    <section className="card">
+                        <section className="form-step">
+                            <section className="form-divider">
+                                <label>{I18n.t("settings.status.info")}</label>
+                                <em>{I18n.t("settings.status.info_detail")}</em>
+                                <section className="engine-select-section">
+                                    <Select
+                                        onChange={this.changeEngineStatus as (option: ValueType<OptionBool>) => void}
+                                        options={engineStatusOptions}
+                                        isSearchable={false}
+                                        value={engineStatusValue}
+                                        isClearable={false}
+                                        isDisabled={false}
+                                    />
+                                    <button className="new button orange" onClick={this.setNewEngineStatus}>
+                                        {I18n.t("settings.status.submit")}
+                                    </button>
+                                </section>
+                                <section className="engine-select-section">
+                                    <ul className="status">
+                                        <li>
+                                            <b>{I18n.t("settings.status.processes")} </b>   {engineStatus?.running_processes}
+                                        </li>
+                                        <li>
+                                            <b>{I18n.t("settings.status.status")}</b>   {engineStatus?.global_status}
+                                        </li>
+                                    </ul>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+            ]
         );
     }
 }

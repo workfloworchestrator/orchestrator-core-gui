@@ -1164,17 +1164,36 @@ I18n.translations.en = {
         placeholder_selected_product: "Select a subscription for the selected product",
         placeholder: "Select a subscription for this product tag"
     },
-    cache: {
-        name: {
-            ims: "IMS locations",
-            crm: "CRM organisations, contacts and locations",
-            api: "Workflow endpoints (combined caches)",
-            all: "All caches"
+    settings:{
+        cache: {
+            name: {
+                ims: "IMS locations",
+                crm: "CRM organisations, contacts and locations",
+                api: "Workflow endpoints (combined caches)",
+                all: "All caches"
+            },
+            remove: "Flush Settings",
+            remove_info: "Select a Settings to flush",
+            clear: "Flush",
+            flushed: "Settings {{name}} was flushed"
         },
-        remove: "Flush Settings",
-        remove_info: "Select a Settings to flush",
-        clear: "Flush",
-        flushed: "Settings {{name}} was flushed"
+        status: {
+            info : "Modify the engine settings",
+            info_detail: "Stop or start workflows through this menu",
+            options: {
+                true: "Pause the engine",
+                false: "Start the engine"
+            },
+            submit: "Submit",
+            processes: "Running processes:",
+            status: "Engine status:",
+            engine: {
+                running: "Engine is Running",
+                pausing: "Engine is Pausing, unable to submit workflows",
+                true: "Engine is Paused, unable to submit workflows",
+                false: "The engine has been restarted"
+            }
+        }
     },
     error_dialog: {
         title: "Unexpected error",

@@ -24,7 +24,7 @@ import ProductValidationComponent from "../components/ProductValidation";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import { TARGET_CREATE } from "../validations/Products";
 import ApplicationContext from "../utils/ApplicationContext";
-import { FormNotCompleteResponse, InputField, ProductValidation, Option } from "../utils/types";
+import { FormNotCompleteResponse, InputField, ProductValidation, Option, EngineStatus} from "../utils/types";
 import { productById } from "../utils/Lookups";
 
 import "./NewProcess.scss";
@@ -72,9 +72,8 @@ export default class NewProcess extends React.Component<IProps, IState> {
         const product = productById(productId, products);
         return startProcess(workflow, [{ product: productId }, ...processInput]).then(process => {
             this.context.redirect(`/processes?highlight=${process.id}`);
-
             setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
-        });
+        })
     };
 
     changeProduct = (option: Option) => {
@@ -91,13 +90,20 @@ export default class NewProcess extends React.Component<IProps, IState> {
             },
             () => {
                 let promise = startProcess(createWorkflow, [{ product: option.value }]);
+
+                let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
+                        setFlash(I18n.t("engine.locked"), "error");
+                        this.context.redirect("/processes");
+                });
+
                 Promise.all([
                     validation(option.value).then(productValidation =>
                         this.setState({
                             productValidation: productValidation
                         })
                     ),
-                    catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
+
+                    catchErrorStatus<FormNotCompleteResponse>(promise2, 510, json => {
                         let stepUserInput = json.form;
 
                         const { preselectedInput } = this.props;

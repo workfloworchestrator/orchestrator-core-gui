@@ -221,6 +221,11 @@ export interface Option {
     label: string;
 }
 
+export interface OptionBool {
+    value: boolean;
+    label: string;
+}
+
 export interface Workflow {
     name: string;
     target: string;
@@ -323,4 +328,10 @@ export interface ProductValidation {
     mapping: {};
     product: { description: string; name: string; workflow: string };
     valid: boolean;
+}
+
+export interface EngineStatus {
+    global_lock: boolean;
+    running_processes: number;
+    global_status: string;
 }
