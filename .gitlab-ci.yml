@@ -89,9 +89,11 @@ run system tests on dev:
   trigger:
     project: automation/projects/system-tests
     branch: dev
+  allow_failure: true
   only:
     refs:
       - dev
+
 
 deploy dev:
   variables:
@@ -120,6 +122,7 @@ run system tests on staging:
   trigger:
     project: automation/projects/system-tests
     branch: master
+  allow_failure: true
   only:
     refs:
       - master

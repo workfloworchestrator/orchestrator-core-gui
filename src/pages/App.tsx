@@ -40,7 +40,6 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import ProductPage from "../components/Product";
 import Settings from "./Settings";
-import Tasks from "./TasksV2";
 import ProductBlock from "../components/ProductBlock";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
@@ -59,6 +58,7 @@ import Processes from "./ProcessesV2";
 import ServerError from "./ServerError";
 import SubscriptionDetail from "./SubscriptionDetail";
 import Subscriptions from "./Subscriptions";
+import Tasks from "./TasksV2";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
 
