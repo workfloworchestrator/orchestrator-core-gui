@@ -92,7 +92,7 @@ export default class NewProcess extends React.Component<IProps, IState> {
                 let promise = startProcess(createWorkflow, [{ product: option.value }]);
 
                 let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
-                    setFlash(I18n.t("engine.locked"), "error");
+                    setFlash(I18n.t("settings.status.engine.true"), "error");
                     this.context.redirect("/processes");
                 });
 
