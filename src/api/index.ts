@@ -18,6 +18,7 @@ import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 import {
     AppConfig,
+    EngineStatus,
     IMSPort,
     IMSService,
     Organization,
@@ -25,7 +26,6 @@ import {
     ProcessSubscription,
     ProcessWithDetails,
     Product,
-    EngineStatus,
     ProductBlock,
     ProductValidation,
     ResourceType,
@@ -552,7 +552,7 @@ export function reportError(error: {}) {
 }
 
 export function clearCache(name: string) {
-    return postPutJson(`v2/settings/cache/${name}`, {}, "delete", false);
+    return postPutJson(`v2/settings/cache/${name}`, {}, "delete", true, false);
 }
 
 export function getGlobalStatus(): Promise<EngineStatus> {

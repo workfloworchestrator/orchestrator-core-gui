@@ -13,14 +13,13 @@
  *
  */
 
+import { redirectToAuthorizationServer } from "api";
 import { cancel, filterableEndpoint } from "api/filterable";
 import axios from "axios";
 import { Dispatch, useCallback, useRef, useState } from "react";
 import { SortingRule } from "react-table";
 
 import { FilterArgument } from "../../utils/types";
-import { redirectToAuthorizationServer } from "api";
-
 import { ActionType, TableSettingsAction } from "./NwaTable";
 
 interface IFetchData<T extends object> {

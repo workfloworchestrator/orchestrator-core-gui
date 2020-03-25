@@ -23,9 +23,9 @@ import ProductSelect from "../components/ProductSelect";
 import ProductValidationComponent from "../components/ProductValidation";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
-import { FormNotCompleteResponse, InputField, ProductValidation, Option, EngineStatus } from "../utils/types";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
+import { EngineStatus, FormNotCompleteResponse, InputField, Option, ProductValidation } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { TARGET_CREATE } from "../validations/Products";
 

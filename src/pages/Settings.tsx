@@ -13,15 +13,16 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-
 import "./Settings.scss";
-import { stop } from "../utils/Utils";
-import { clearCache, setGlobalStatus, getGlobalStatus } from "../api";
+
+import I18n from "i18n-js";
+import React from "react";
 import Select, { ValueType } from "react-select";
+
+import { clearCache, getGlobalStatus, setGlobalStatus } from "../api";
 import { setFlash } from "../utils/Flash";
-import { Option, OptionBool, EngineStatus } from "../utils/types";
+import { EngineStatus, Option, OptionBool } from "../utils/types";
+import { stop } from "../utils/Utils";
 
 interface IProps {}
 
@@ -46,7 +47,7 @@ export default class Settings extends React.Component<IProps, IState> {
     }
 
     componentDidMount = () => {
-        window.setInterval(this.getEngineStatus, 3000);
+        window.setInterval(this.getEngineStatus, 1500);
         this.getEngineStatus();
     };
 

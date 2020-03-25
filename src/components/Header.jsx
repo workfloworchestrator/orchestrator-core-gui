@@ -20,15 +20,13 @@ import React from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { Link } from "react-router-dom";
 
+import { getGlobalStatus, logUserInfo } from "../api";
 import logo from "../images/network-automation.png";
 import statusLocked from "../images/status-locked.png";
 import statusPausing from "../images/status-pausing.png";
 import statusUnlocked from "../images/status-unlocked.png";
-
-import "./Header.scss";
-import { logUserInfo, getGlobalStatus } from "../api";
-import { setFlash } from "../utils/Flash";
 import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
 import UserProfile from "./UserProfile";
 
 export default class Header extends React.PureComponent {
@@ -129,7 +127,7 @@ export default class Header extends React.PureComponent {
     }
 
     componentWillMount() {
-        window.setInterval(this.refeshStatus, 3000);
+        window.setInterval(this.refeshStatus, 1500);
     }
 
     render() {
