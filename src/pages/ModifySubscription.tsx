@@ -17,38 +17,31 @@ import "./ModifySubscription.scss";
 
 import I18n from "i18n-js";
 import React from "react";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 import { catchErrorStatus, startProcess } from "../api/index";
 import UserInputFormWizard from "../components/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { FormNotCompleteResponse, InputField } from "../utils/types";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
     subscriptionId: string;
     workflowName: string;
 }
 
 interface IState {
     stepUserInput?: InputField[];
+    pid?: string;
 }
 
-export default class ModifySubscription extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
+class ModifySubscription extends React.Component<IProps, IState> {
     state: IState = {};
 
     componentDidMount = () => {
         const { subscriptionId, workflowName } = this.props;
 
         let promise = startProcess(workflowName, [{ subscription_id: subscriptionId }]).then(res => {
-            this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(
-                I18n.t("process.flash.create_modify", {
-                    name: I18n.t(`workflow.${workflowName}`),
-                    subscriptionId: subscriptionId,
-                    pid: res.id
-                })
-            );
+            this.setState({ pid: res.id });
         });
         catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
             this.setState({ stepUserInput: json.form });
@@ -56,27 +49,31 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
     };
 
     cancel = () => {
-        this.context.redirect("/subscription/" + this.props.subscriptionId);
+        this.props.history.push("/subscription/" + this.props.subscriptionId);
     };
 
     submit = (processInput: {}[]) => {
         const { subscriptionId, workflowName } = this.props;
 
         return startProcess(workflowName, [{ subscription_id: subscriptionId }, ...processInput]).then(res => {
-            this.context.redirect(`/processes?highlight=${res.id}`);
-            setFlash(
-                I18n.t("process.flash.create_modify", {
-                    name: I18n.t(`workflow.${workflowName}`),
-                    subscriptionId: subscriptionId,
-                    pid: res.id
-                })
-            );
+            this.setState({ pid: res.id });
         });
     };
 
     render() {
-        const { stepUserInput } = this.state;
-        const { workflowName } = this.props;
+        const { stepUserInput, pid } = this.state;
+        const { subscriptionId, workflowName } = this.props;
+
+        if (pid) {
+            setFlash(
+                I18n.t("process.flash.create_modify", {
+                    name: I18n.t(`workflow.${workflowName}`),
+                    subscriptionId: subscriptionId,
+                    pid: pid
+                })
+            );
+            return <Redirect to={`/processes?highlight=${pid}`} />;
+        }
 
         if (!stepUserInput) {
             return null;
@@ -98,4 +95,4 @@ export default class ModifySubscription extends React.Component<IProps, IState> 
     }
 }
 
-ModifySubscription.contextType = ApplicationContext;
+export default withRouter(ModifySubscription);

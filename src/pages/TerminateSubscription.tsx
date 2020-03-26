@@ -17,26 +17,29 @@ import "./TerminateSubscription.scss";
 
 import I18n from "i18n-js";
 import React from "react";
+import { Redirect, RouteComponentProps, withRouter } from "react-router";
 
 import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "../api/index";
 import UserInputFormWizard from "../components/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField, Product, Workflow } from "../utils/types";
+import { FormNotCompleteResponse, InputField, Product } from "../utils/types";
 import { TARGET_TERMINATE } from "../validations/Products";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
     subscriptionId: string;
 }
 
 interface IState {
     product?: Product;
     stepUserInput?: InputField[];
+    pid?: string;
 }
 
-export default class TerminateSubscription extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
+function getTerminateWorkflow(product: Product) {
+    return product.workflows.find(wf => wf.target === TARGET_TERMINATE)!;
+}
 
+class TerminateSubscription extends React.Component<IProps, IState> {
     state: IState = {};
 
     componentDidMount = () => {
@@ -44,16 +47,9 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
 
         subscriptionsDetail(subscriptionId).then(sub =>
             productById(sub.product.product_id).then(product => {
-                const terminate_workflow = product.workflows.find((wf: Workflow) => wf.target === TARGET_TERMINATE)!;
+                const terminate_workflow = getTerminateWorkflow(product);
                 let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
-                    this.context.redirect(`/processes?highlight=${res.id}`);
-                    setFlash(
-                        I18n.t("process.flash.create_modify", {
-                            name: I18n.t(`workflow.${terminate_workflow.name}`),
-                            subscriptionId: subscriptionId,
-                            pid: res.id
-                        })
-                    );
+                    this.setState({ pid: res.id, product: product });
                 });
                 catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
                     this.setState({ stepUserInput: json.form, product: product });
@@ -63,32 +59,43 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     };
 
     cancel = () => {
-        this.context.redirect("/subscription/" + this.props.subscriptionId);
+        this.props.history.push("/subscription/" + this.props.subscriptionId);
     };
 
     submit = (processInput: {}[]) => {
         const { subscriptionId } = this.props;
         const { product } = this.state;
-        const terminate_workflow = product!.workflows.find(wf => wf.target === TARGET_TERMINATE)!;
+        const terminate_workflow = getTerminateWorkflow(product!);
 
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
             res => {
-                this.context.redirect(`/processes?highlight=${res.id}`);
-                setFlash(
-                    I18n.t("process.flash.create_modify", {
-                        name: I18n.t(`workflow.${terminate_workflow.name}`),
-                        subscriptionId: subscriptionId,
-                        pid: res.id
-                    })
-                );
+                this.setState({ pid: res.id, product: product });
             }
         );
     };
 
     render() {
-        const { stepUserInput, product } = this.state;
+        const { subscriptionId } = this.props;
+        const { stepUserInput, product, pid } = this.state;
 
-        if (!stepUserInput || !product) {
+        if (!product) {
+            return null;
+        }
+
+        const terminate_workflow = getTerminateWorkflow(product);
+
+        if (pid) {
+            setFlash(
+                I18n.t("process.flash.create_modify", {
+                    name: I18n.t(`workflow.${terminate_workflow.name}`),
+                    subscriptionId: subscriptionId,
+                    pid: pid
+                })
+            );
+            return <Redirect to={`/processes?highlight=${pid}`} />;
+        }
+
+        if (!stepUserInput) {
             return null;
         }
 
@@ -109,4 +116,4 @@ export default class TerminateSubscription extends React.Component<IProps, IStat
     }
 }
 
-TerminateSubscription.contextType = ApplicationContext;
+export default withRouter(TerminateSubscription);
