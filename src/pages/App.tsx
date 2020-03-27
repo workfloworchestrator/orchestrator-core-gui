@@ -44,7 +44,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import { AppError, Organization, Product } from "../utils/types";
-import Cache from "./Cache";
 import Help from "./Help";
 import MetaData from "./MetaData";
 import ModifySubscription from "./ModifySubscription";
@@ -56,6 +55,7 @@ import Prefixes from "./Prefixes";
 import ProcessDetail from "./ProcessDetail";
 import Processes from "./ProcessesV2";
 import ServerError from "./ServerError";
+import Settings from "./Settings";
 import SubscriptionDetail from "./SubscriptionDetail";
 import Subscriptions from "./Subscriptions";
 import Tasks from "./TasksV2";
@@ -307,7 +307,7 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/product-block/:id"
                                     render={props => <ProductBlock match={props.match} />}
                                 />
-                                <ProtectedRoute path="/cache" render={() => <Cache />} />
+                                <ProtectedRoute path="/settings" render={() => <Settings />} />
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />

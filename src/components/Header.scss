@@ -116,9 +116,24 @@
                 }
 
                 &.profile {
-                    margin-left: auto;
+                    //margin-left: auto;
                     @include phone {
                         display: none;
+                    }
+                }
+
+                &.status-text {
+                    margin-left: auto;
+                    alignment: right;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    color: $blue;
+                }
+
+                &.status {
+                    .status-logo {
+                        height: 25px;
                     }
                 }
 

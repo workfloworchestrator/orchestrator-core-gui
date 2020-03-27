@@ -51,5 +51,29 @@
                 padding-bottom: 4px;
             }
         }
+
+        section.engine-select-section {
+            margin-top: 25px;
+            display: flex;
+            & > div {
+                width: 100%;
+            }
+            a.button {
+                padding-left: 60px;
+            }
+            div.Select-control {
+                padding-bottom: 4px;
+            }
+            ul.status {
+                align-items: center;
+                list-style: none;
+                cursor: pointer;
+                li {
+                    color: $dark-grey;
+                    opacity: 2;
+                    padding-top: 4px;
+                }
+            }
+        }
     }
 }
