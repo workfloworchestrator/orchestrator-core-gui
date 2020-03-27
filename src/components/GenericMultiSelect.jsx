@@ -119,7 +119,7 @@ export default class GenericMultiSelect extends React.PureComponent {
                                     <em className="error">
                                         {fieldErrors.map((e, index) => (
                                             <div key={index} className="backend-validation">
-                                                {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}.
+                                                {capitalizeFirstLetter(e.loc[2])}: {capitalizeFirstLetter(e.msg)}
                                             </div>
                                         ))}
                                     </em>
@@ -141,7 +141,7 @@ export default class GenericMultiSelect extends React.PureComponent {
                         <em className="error root-error">
                             {rootFieldErrors.map((e, index) => (
                                 <div key={index} className="backend-validation">
-                                    {capitalizeFirstLetter(e.msg)}.
+                                    {capitalizeFirstLetter(e.msg)}
                                 </div>
                             ))}
                         </em>
