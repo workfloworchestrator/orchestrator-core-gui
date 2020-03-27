@@ -127,7 +127,7 @@ export default class Header extends React.PureComponent {
     }
 
     componentWillMount() {
-        window.setInterval(this.refeshStatus, 1500);
+        window.setInterval(this.refeshStatus, 3000);
     }
 
     render() {

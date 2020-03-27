@@ -47,7 +47,7 @@ export default class Settings extends React.Component<IProps, IState> {
     }
 
     componentDidMount = () => {
-        window.setInterval(this.getEngineStatus, 1500);
+        window.setInterval(this.getEngineStatus, 3000);
         this.getEngineStatus();
     };
 
