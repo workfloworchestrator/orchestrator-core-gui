@@ -21,11 +21,19 @@ import React from "react";
 
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { Product, ServicePort, ServicePortSubscription, ValidationError, setProp } from "../utils/types";
+import { Product, ServicePortSubscription, ValidationError, setProp } from "../utils/types";
 import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import { filterProductsByBandwidth } from "../validations/Products";
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
+
+interface ServicePort {
+    subscription_id?: string;
+    vlan?: string;
+    bandwidth?: number;
+    nonremovable?: boolean;
+    modifiable?: boolean;
+}
 
 interface IProps {
     servicePorts: ServicePort[];
@@ -72,7 +80,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     componentDidMount = () => {
         const extra = Math.max(0, this.props.minimum - this.props.servicePorts.length);
         const servicePorts = [...this.props.servicePorts];
-        range(extra).forEach(() => servicePorts.push({ subscription_id: "", vlan: "" }));
+        range(extra).forEach(() => servicePorts.push({}));
         this.props.onChange(servicePorts);
 
         const { availableServicePorts } = this.state;
@@ -113,7 +121,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                 let port_mode = this.getPortMode(value);
 
                 // Reset vlan since we cannot change it for untagged and link_member and it can't be 0 for tagged
-                servicePorts[index].vlan = ["untagged", "link_member"].includes(port_mode) ? "0" : "";
+                servicePorts[index].vlan = ["untagged", "link_member"].includes(port_mode) ? "0" : undefined;
             }
         }
 
@@ -125,7 +133,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     onChangeInternal = (name: keyof ServicePort, index: number) => (e: React.FormEvent<HTMLInputElement>) => {
         const servicePorts = [...this.props.servicePorts];
         const target = e.target as HTMLInputElement;
-        let value = e.target ? target.value : "";
+        let value = e.target ? target.value : undefined;
         setProp(servicePorts[index], name, value);
 
         this.clearErrors(index);
@@ -140,7 +148,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
         //todo: we might need to add tag and port_mode
-        servicePorts.push({ subscription_id: "", vlan: "" });
+        servicePorts.push({});
         this.props.onChange(servicePorts);
     };
 
@@ -176,7 +184,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         const bandwidth = target.value;
         if (bandwidth) {
             const servicePort = this.props.servicePorts[index];
-            fetchPortSpeedBySubscription(servicePort.subscription_id).then(res => {
+            fetchPortSpeedBySubscription(servicePort.subscription_id!).then(res => {
                 let { bandwidthErrors } = this.state;
                 bandwidthErrors[index] = parseInt(bandwidth, 10) > parseInt(res, 10);
                 this.setState({ bandwidthErrors: bandwidthErrors });
@@ -202,12 +210,18 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
         const { products } = this.context;
         const portErrors = errors.filter(
             error =>
-                error.loc[1] === index && error.loc.length === 3 && error.loc[2] !== "tag" && error.loc[2] !== "vlan"
+                error.loc[1] === index &&
+                error.loc.length === 3 &&
+                error.loc[2] !== "vlan" &&
+                error.loc[2] !== "bandwidth"
         );
         const vlanErrors = errors.filter(
-            error =>
-                error.loc[1] === index && error.loc.length === 3 && (error.loc[2] === "tag" || error.loc[2] === "vlan")
+            error => error.loc[1] === index && error.loc.length === 3 && error.loc[2] === "vlan"
         );
+        const bandwidthErrorsBackend = errors.filter(
+            error => error.loc[1] === index && error.loc.length === 3 && error.loc[2] === "bandwidth"
+        );
+
         let inSelect = availableServicePorts;
 
         const productIds = filterProductsByBandwidth(products, bandwidth).map((product: Product) => product.product_id);
@@ -258,10 +272,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                     {portErrors && (
                         <em className="error backend-validation">
                             {portErrors.map((e, index) => (
-                                <div key={index}>
-                                    {capitalizeFirstLetter(((e.loc as unknown) as string)[2])}:{" "}
-                                    {capitalizeFirstLetter(e.msg)}
-                                </div>
+                                <div>{capitalizeFirstLetter(e.msg)}</div>
                             ))}
                         </em>
                     )}
@@ -269,22 +280,20 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                 <div className="wrapper vlan">
                     {index === 0 && <label>{I18n.t("service_ports.vlan")}</label>}
                     <VirtualLAN
-                        key={servicePort.subscription_id || undefined}
-                        vlan={servicePort.vlan}
+                        key={servicePort.subscription_id}
+                        vlan={servicePort.vlan || ""}
                         onChange={this.onChangeInternal("vlan", index)}
                         subscriptionId={servicePort.subscription_id}
                         disabled={vlanDisabled}
                         reportError={this.reportVlanError(index)}
                         vlansExtraInUse={vlansJustChosen}
-                        portMode={this.getPortMode(servicePort.subscription_id)}
+                        portMode={servicePort.subscription_id && this.getPortMode(servicePort.subscription_id)}
                     />
 
                     {vlanErrors && (
                         <em className="error">
                             {vlanErrors.map((e, index) => (
-                                <div key={index} className="backend-validation">
-                                    {capitalizeFirstLetter(e.msg)}
-                                </div>
+                                <div className="backend-validation">{capitalizeFirstLetter(e.msg)}</div>
                             ))}
                         </em>
                     )}
@@ -306,6 +315,14 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         />
                         {bandwidthErrors[index] && (
                             <em className="error">{I18n.t("service_ports.invalid_bandwidth", { max: 1000 })}</em>
+                        )}
+
+                        {bandwidthErrorsBackend && (
+                            <em className="error">
+                                {bandwidthErrorsBackend.map((e, index) => (
+                                    <div className="backend-validation">{capitalizeFirstLetter(e.msg)}.</div>
+                                ))}
+                            </em>
                         )}
                     </div>
                 )}
