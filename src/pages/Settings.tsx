@@ -30,6 +30,7 @@ interface IState {
     cache: string;
     lockSettings: boolean;
     engineStatus?: EngineStatus;
+    interval?: number;
 }
 
 const CACHES: string[] = ["ims", "crm", "api", "all"];
@@ -47,9 +48,14 @@ export default class Settings extends React.Component<IProps, IState> {
     }
 
     componentDidMount = () => {
-        window.setInterval(this.getEngineStatus, 3000);
+        const interval = window.setInterval(this.getEngineStatus, 3000);
         this.getEngineStatus();
+        this.setState({ interval: interval });
     };
+
+    componentWillUnmount(): void {
+        clearInterval(this.state.interval);
+    }
 
     clearCache = (e: React.MouseEvent<HTMLButtonElement>) => {
         stop(e);
