@@ -264,7 +264,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                             {portErrors.map((e, index) => (
                                 <div key={index}>
                                     {capitalizeFirstLetter(((e.loc as unknown) as string)[2])}:{" "}
-                                    {capitalizeFirstLetter(e.msg)}.
+                                    {capitalizeFirstLetter(e.msg)}
                                 </div>
                             ))}
                         </em>
@@ -287,7 +287,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                         <em className="error">
                             {vlanErrors.map((e, index) => (
                                 <div key={index} className="backend-validation">
-                                    {capitalizeFirstLetter(e.msg)}.
+                                    {capitalizeFirstLetter(e.msg)}
                                 </div>
                             ))}
                         </em>
@@ -339,7 +339,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
                     <em className="error">
                         {rootFieldErrors.map((e, index) => (
                             <div key={index} className="backend-validation">
-                                {capitalizeFirstLetter(e.msg)}.
+                                {capitalizeFirstLetter(e.msg)}
                             </div>
                         ))}
                     </em>

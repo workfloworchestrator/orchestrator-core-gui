@@ -214,7 +214,7 @@ export default class ContactPersons extends React.PureComponent {
                     <em className="error root-error">
                         {rootFieldErrors.map((e, index) => (
                             <div key={index} className="backend-validation">
-                                {capitalizeFirstLetter(e.msg)}.
+                                {capitalizeFirstLetter(e.msg)}
                             </div>
                         ))}
                     </em>
