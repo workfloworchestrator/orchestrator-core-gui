@@ -1,3 +1,5 @@
+import I18n from "i18n-js";
+import uniq from "lodash/uniq";
 /*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +15,10 @@
  *
  */
 import React from "react";
-import { Organization, Subscription } from "../../utils/types";
-import uniq from "lodash/uniq";
-import { Cell } from "react-table";
-import I18n from "i18n-js";
 import { Link } from "react-router-dom";
+import { Cell } from "react-table";
+
+import { Organization, Subscription } from "../../utils/types";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;

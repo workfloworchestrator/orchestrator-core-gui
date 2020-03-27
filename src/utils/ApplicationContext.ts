@@ -14,7 +14,8 @@
  */
 
 import React from "react";
-import { Organization, AppConfig, User, Product } from "./types";
+
+import { AppConfig, Organization, Product, User } from "./types";
 
 export interface ApplicationContextInterface {
     currentUser?: User;

@@ -15,27 +15,28 @@
 import I18n from "i18n-js";
 
 import mySpinner from "../lib/Spin";
-import { isEmpty } from "../utils/Utils";
-import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
+import { setFlash } from "../utils/Flash";
 import {
-    ProductBlock,
-    ResourceType,
     AppConfig,
-    IMSService,
+    EngineStatus,
     IMSPort,
-    Subscription,
-    ServicePortSubscription,
+    IMSService,
     Organization,
-    User,
-    Workflow,
     Process,
     ProcessSubscription,
     ProcessWithDetails,
     Product,
-    WorkflowReasons,
-    ProductValidation
+    ProductBlock,
+    ProductValidation,
+    ResourceType,
+    ServicePortSubscription,
+    Subscription,
+    User,
+    Workflow,
+    WorkflowReasons
 } from "../utils/types";
-import { setFlash } from "../utils/Flash";
+import { isEmpty } from "../utils/Utils";
+import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
 
 //const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
@@ -73,6 +74,10 @@ function validateResponse(showErrorDialog: boolean) {
                 return res;
             }
             const error = new ResponseError(res);
+
+            if (error.response.status === 401) {
+                redirectToAuthorizationServer();
+            }
 
             if (showErrorDialog) {
                 setTimeout(() => {
@@ -547,7 +552,15 @@ export function reportError(error: {}) {
 }
 
 export function clearCache(name: string) {
-    return postPutJson("user/clearCache", { name: name }, "put", true, false);
+    return postPutJson(`v2/settings/cache/${name}`, {}, "delete", true, false);
+}
+
+export function getGlobalStatus(): Promise<EngineStatus> {
+    return fetchJson("v2/settings/status");
+}
+
+export function setGlobalStatus(new_global_lock: boolean) {
+    return postPutJson("v2/settings/status", { global_lock: new_global_lock }, "put");
 }
 
 export function logUserInfo(username: string, message: string) {

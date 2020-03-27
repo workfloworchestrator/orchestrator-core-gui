@@ -13,16 +13,14 @@
  *
  */
 
-import React from "react";
-
-import StoryRouter from "storybook-react-router";
 import fetchMock from "fetch-mock";
+import React from "react";
+import StoryRouter from "storybook-react-router";
 
 import SubscriptionDetail from "../pages/SubscriptionDetail";
-
 import PRODUCTS from "./data/products.json";
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
+import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
 export default {
     title: "SubscriptionDetail",

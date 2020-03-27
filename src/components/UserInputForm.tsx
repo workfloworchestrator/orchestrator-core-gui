@@ -13,46 +13,45 @@
  *
  */
 
-import React from "react";
+import "./UserInputForm.scss";
+
 import I18n from "i18n-js";
+import isEqual from "lodash/isEqual";
+import React from "react";
+import NumericInput from "react-numeric-input";
 
-import ConfirmationDialog from "./ConfirmationDialog";
-
+import { catchErrorStatus, nodeSubscriptions } from "../api";
+import { randomCrmIdentifier } from "../locale/en";
+import ApplicationContext from "../utils/ApplicationContext";
+import { findValueFromInputStep } from "../utils/NestedState";
+import { InputField, Option, Subscription, ValidationError } from "../utils/types";
 import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
+import { applyIdNamingConvention } from "../utils/Utils";
+import BandwidthSelect from "./BandwidthSelect";
+import BfdSettings from "./BfdSettings";
+import CheckBox from "./CheckBox";
+import ConfirmationDialog from "./ConfirmationDialog";
+import ContactPersons from "./ContactPersons";
+import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
+import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
+import GenericMultiSelect from "./GenericMultiSelect";
+import GenericNOCConfirm from "./GenericNOCConfirm";
+import GenericSelect from "./GenericSelect";
+import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
+import IPPrefix from "./IPPrefix";
+import LocationCodeSelect from "./LocationCodeSelect";
+import MultipleServicePorts from "./MultipleServicePorts";
+import NodeIdPortSelect from "./NodeIdPortSelect";
+import NodePortSelect from "./NodePortSelect";
+import NodeSelect from "./NodeSelect";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
-import isEqual from "lodash/isEqual";
-import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
-import LocationCodeSelect from "./LocationCodeSelect";
-import CheckBox from "./CheckBox";
-import ContactPersons from "./ContactPersons";
-import StateValue from "./StateValue";
-import NodeIdPortSelect from "./NodeIdPortSelect";
-
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import MultipleServicePorts from "./MultipleServicePorts";
-import GenericNOCConfirm from "./GenericNOCConfirm";
-import IPPrefix from "./IPPrefix";
-import { findValueFromInputStep } from "../utils/NestedState";
-import { randomCrmIdentifier } from "../locale/en";
-import SubscriptionsSelect from "./SubscriptionsSelect";
-import BandwidthSelect from "./BandwidthSelect";
-import GenericSelect from "./GenericSelect";
-import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
-import TransitionProductSelect from "./TransitionProductSelect";
-import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation";
-import NodeSelect from "./NodeSelect";
-import NodePortSelect from "./NodePortSelect";
-import "./UserInputForm.scss";
-import BfdSettings from "./BfdSettings";
-import NumericInput from "react-numeric-input";
+import StateValue from "./StateValue";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
+import SubscriptionsSelect from "./SubscriptionsSelect";
 import TableSummary from "./TableSummary";
-import { nodeSubscriptions, catchErrorStatus } from "../api";
-import ApplicationContext from "../utils/ApplicationContext";
-import { applyIdNamingConvention } from "../utils/Utils";
-import GenericMultiSelect from "./GenericMultiSelect";
-import { InputField, Subscription, ValidationError, Option } from "../utils/types";
+import TransitionProductSelect from "./TransitionProductSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 const inputTypesWithDelegatedValidation = [

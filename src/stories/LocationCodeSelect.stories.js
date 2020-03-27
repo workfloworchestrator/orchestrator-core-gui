@@ -13,14 +13,12 @@
  *
  */
 
-import React from "react";
-
+import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { array, boolean } from "@storybook/addon-knobs";
-import { Store } from "@sambego/storybook-state";
+import React from "react";
 
 import LocationCodeSelect from "../components/LocationCodeSelect";
-
 import LOCATION_CODES from "./data/location_codes.json";
 
 const store = new Store({

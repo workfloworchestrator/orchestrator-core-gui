@@ -13,11 +13,12 @@
  *
  */
 
-import React from "react";
 import I18n from "i18n-js";
-import Select from "react-select";
-import DatePickerCustom from "../components/DatePickerCustom";
+import React from "react";
 import DatePicker from "react-datepicker";
+import Select from "react-select";
+
+import DatePickerCustom from "../components/DatePickerCustom";
 import { isEmpty } from "../utils/Utils";
 
 export function formInput(

@@ -13,15 +13,14 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-
-import { Spinner } from "spin.js";
-import mySpinner from "../lib/Spin";
-
-import { NavLink } from "react-router-dom";
-
 import "./Navigation.scss";
+
+import I18n from "i18n-js";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Spinner } from "spin.js";
+
+import mySpinner from "../lib/Spin";
 
 export default class Navigation extends React.PureComponent {
     constructor() {
@@ -76,7 +75,7 @@ export default class Navigation extends React.PureComponent {
                     {this.renderItem("/validations/workflows", "validations")}
                     {this.renderItem("/tasks", "tasks")}
                     {this.renderItem("/prefixes", "prefixes")}
-                    {this.renderItem("/cache", "cache")}
+                    {this.renderItem("/settings", "settings")}
                     {this.renderItem("/new-process", "new_process", "new_process")}
                     {this.renderSpinner()}
                 </div>

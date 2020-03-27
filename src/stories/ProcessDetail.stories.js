@@ -13,12 +13,11 @@
  *
  */
 
-import React from "react";
-
-import StoryRouter from "storybook-react-router";
 import fetchMock from "fetch-mock";
-import ProcessDetail from "../pages/ProcessDetail";
+import React from "react";
+import StoryRouter from "storybook-react-router";
 
+import ProcessDetail from "../pages/ProcessDetail";
 import FAILED_PROCESS_JSON from "./data/process-failed.json";
 import SUSPENDED_PROCESS_JSON from "./data/process-suspended.json";
 

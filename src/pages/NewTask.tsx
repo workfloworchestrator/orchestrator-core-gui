@@ -13,17 +13,17 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-
-import { startProcess, workflowsByTarget, catchErrorStatus } from "../api";
-import { setFlash } from "../utils/Flash";
-import UserInputFormWizard from "../components/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
-import WorkflowSelect from "../components/WorkflowSelect";
-import { Workflow, Option, InputField, FormNotCompleteResponse } from "../utils/types";
-
 import "./NewTask.scss";
+
+import I18n from "i18n-js";
+import React from "react";
+
+import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
+import UserInputFormWizard from "../components/UserInputFormWizard";
+import WorkflowSelect from "../components/WorkflowSelect";
+import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
+import { EngineStatus, FormNotCompleteResponse, InputField, Option, Workflow } from "../utils/types";
 
 interface IState {
     workflows?: Workflow[];
@@ -56,7 +56,13 @@ export default class NewTask extends React.Component<{}, IState> {
         this.setState({ workflow: option.value });
         if (option) {
             let promise = startProcess(option.value, []);
-            catchErrorStatus<FormNotCompleteResponse>(promise, 510, json => {
+
+            let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
+                setFlash(I18n.t("settings.status.engine.true"), "error");
+                this.context.redirect("/processes");
+            });
+
+            catchErrorStatus<FormNotCompleteResponse>(promise2, 510, json => {
                 this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
             });
         }

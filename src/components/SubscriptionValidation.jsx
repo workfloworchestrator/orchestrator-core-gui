@@ -13,18 +13,19 @@
  *
  */
 
-import React from "react";
+import "./SubscriptionValidation.scss";
+
 import I18n from "i18n-js";
 import PropTypes from "prop-types";
-import { stop } from "../utils/Utils";
+import React from "react";
 
-import "./SubscriptionValidation.scss";
-import { enrichSubscription, renderDate } from "../utils/Lookups";
-import CheckBox from "../components/CheckBox";
-import { setFlash } from "../utils/Flash";
 import { deleteSubscription } from "../api/index";
-import ConfirmationDialog from "./ConfirmationDialog";
+import CheckBox from "../components/CheckBox";
 import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
+import { enrichSubscription, renderDate } from "../utils/Lookups";
+import { stop } from "../utils/Utils";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 export default class SubscriptionValidation extends React.Component {
     constructor(props, context) {

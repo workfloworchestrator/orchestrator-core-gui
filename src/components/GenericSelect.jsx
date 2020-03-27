@@ -13,8 +13,8 @@
  *
  */
 
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import Select from "react-select";
 
 export default function GenericSelect({ onChange, choices, selected, disabled }) {

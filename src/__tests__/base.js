@@ -13,10 +13,11 @@
  *
  */
 
-import I18n from "i18n-js";
-import en from "../locale/en";
-import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import I18n from "i18n-js";
+
+import en from "../locale/en";
 
 const start = () => {
     //we need to use them, otherwise the imports are deleted when organizing them

@@ -13,19 +13,19 @@
  *
  */
 
-import React from "react";
+import "./MultipleServicePorts.scss";
+
 import I18n from "i18n-js";
-import { stop, isEmpty, capitalizeFirstLetter } from "../utils/Utils";
+import range from "lodash/range";
+import React from "react";
+
 import { fetchPortSpeedBySubscription, portSubscriptions } from "../api";
 import ApplicationContext from "../utils/ApplicationContext";
-import { ServicePortSubscription, ServicePort, Product, ValidationError, setProp } from "../utils/types";
+import { Product, ServicePort, ServicePortSubscription, ValidationError, setProp } from "../utils/types";
+import { capitalizeFirstLetter, isEmpty, stop } from "../utils/Utils";
 import { filterProductsByBandwidth } from "../validations/Products";
-import range from "lodash/range";
-
 import ServicePortSelect from "./ServicePortSelect";
 import VirtualLAN from "./VirtualLAN";
-
-import "./MultipleServicePorts.scss";
 
 interface IProps {
     servicePorts: ServicePort[];

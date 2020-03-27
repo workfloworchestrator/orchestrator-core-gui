@@ -13,17 +13,18 @@
  *
  */
 
-import React from "react";
-import I18n from "i18n-js";
-import { isEmpty } from "../utils/Utils";
-import { subscriptionsDetail, portByImsServiceId, serviceByImsServiceId } from "../api/index";
-import { enrichSubscription, productById } from "../utils/Lookups";
-import { subscriptionInstanceValues } from "../validations/Subscriptions";
-
 import "./DowngradeRedundantLPChoice.scss";
-import CheckBox from "./CheckBox";
-import { Product, Organization, SubscriptionWithDetails, ServicePortSubscription } from "../utils/types";
+
+import I18n from "i18n-js";
+import React from "react";
+
+import { portByImsServiceId, serviceByImsServiceId, subscriptionsDetail } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
+import { enrichSubscription, productById } from "../utils/Lookups";
+import { Organization, Product, ServicePortSubscription, SubscriptionWithDetails } from "../utils/types";
+import { isEmpty } from "../utils/Utils";
+import { subscriptionInstanceValues } from "../validations/Subscriptions";
+import CheckBox from "./CheckBox";
 
 interface LRSubscription extends SubscriptionWithDetails, ServicePortSubscription {
     // Added by `enrichPrimarySubscription`

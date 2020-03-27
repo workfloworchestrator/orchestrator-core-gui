@@ -13,10 +13,11 @@
  *
  */
 
-import React from "react";
-import { ping } from "../api";
-
 import "./Help.scss";
+
+import React from "react";
+
+import { ping } from "../api";
 
 export default class Help extends React.PureComponent {
     componentDidMount() {
