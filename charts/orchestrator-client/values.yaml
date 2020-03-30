@@ -38,6 +38,13 @@ ingress:
   tls:
     secretName: tls-secret-orchestrator
 
+pod:
+  annotations:
+    co.elastic.logs/enabled: "true"
+    co.elastic.logs/fileset.stderr: error
+    co.elastic.logs/fileset.stdout: access
+    co.elastic.logs/module: nginx
+
 resources:
    limits:
      memory: 50Mi

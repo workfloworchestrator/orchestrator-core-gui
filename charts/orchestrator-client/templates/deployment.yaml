@@ -22,6 +22,9 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/config-map.yaml") . | sha256sum }}
         {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
         {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
+{{- if .Values.pod.annotations }}
+{{ toYaml .Values.pod.annotations | indent 8 }}
+{{ end }}
     spec:
       imagePullSecrets:
 {{ toYaml .Values.image.secrets | indent 10 }}
