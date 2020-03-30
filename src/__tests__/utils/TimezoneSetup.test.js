@@ -1,6 +1,6 @@
 describe("Timezones", () => {
     it("should always be Europe/Amsterdam", () => {
-        expect(new Date().getTimezoneOffset()).toBe(-60);
+        expect(new Date(300000000).getTimezoneOffset()).toBe(-60);
     });
 
     // This test is needed to ensure that your system uses the same locale setting as that of the CI.
