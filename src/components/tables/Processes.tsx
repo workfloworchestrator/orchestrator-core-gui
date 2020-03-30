@@ -82,9 +82,10 @@ export function initialProcessTableSettings(
 interface ProcessesTableProps {
     initialTableSettings: TableSettings<ProcessV2>;
     renderActions: (process: ProcessV2) => JSX.Element;
+    isProcess: boolean;
 }
 
-export function ProcessesTable({ initialTableSettings, renderActions }: ProcessesTableProps) {
+export function ProcessesTable({ initialTableSettings, renderActions, isProcess }: ProcessesTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
     const highlightQ = useQueryParam("highlight", StringParam)[0]; // only use the getter
@@ -148,7 +149,8 @@ export function ProcessesTable({ initialTableSettings, renderActions }: Processe
             return {
                 ...props,
                 onClick: () => {
-                    redirect(`/process/${row.values.pid}`);
+                    const url = isProcess ? `/process/${row.values.pid}` : `/task/${row.values.pid}`;
+                    redirect(url);
                 },
                 id: row.values.pid,
                 className: `${row.values.status}${highlighted}`

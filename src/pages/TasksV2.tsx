@@ -55,10 +55,6 @@ export default class Tasks extends React.PureComponent<{}, IState> {
 
     cancelConfirmation = () => this.setState({ confirmationDialogOpen: false });
 
-    showTask = (task: ProcessV2) => () => {
-        this.context.redirect("/task/" + task.pid);
-    };
-
     newTask = () => {
         this.context.redirect("/new-task");
     };
@@ -143,7 +139,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     showProcess = (process: ProcessV2) => () => {
-        this.context.redirect("/process/" + process.pid);
+        debugger;
+        this.context.redirect("/task/" + process.pid);
     };
 
     renderActions = (process: ProcessV2) => {
@@ -185,7 +182,11 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                         </button>
                     </div>
                 </div>
-                <ProcessesTable initialTableSettings={tasksSettings} renderActions={this.renderActions} />
+                <ProcessesTable
+                    initialTableSettings={tasksSettings}
+                    renderActions={this.renderActions}
+                    isProcess={false}
+                />
                 <ScrollUpButton />
             </div>
         );
