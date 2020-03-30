@@ -21,7 +21,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { Option, Organization, ServicePortSubscription } from "../utils/types";
 
 interface IProps {
-    servicePort: string | null;
+    servicePort?: string | null;
     servicePorts: ServicePortSubscription[];
     disabled: boolean;
     onChange: (value: Option) => void;

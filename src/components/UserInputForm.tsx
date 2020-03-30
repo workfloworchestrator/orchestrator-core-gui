@@ -51,7 +51,6 @@ import StateValue from "./StateValue";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import TableSummary from "./TableSummary";
-import TransitionProductSelect from "./TransitionProductSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 const inputTypesWithDelegatedValidation = [
@@ -412,12 +411,12 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 );
             case "transition_product":
                 return (
-                    <TransitionProductSelect
+                    <ProductSelect
+                        id="transition-product-select"
                         onChange={this.changeSelectInput(name)}
+                        products={userInput.products}
                         product={value}
-                        subscriptionId={userInput.subscription_id}
                         disabled={userInput.readonly}
-                        transitionType={userInput.transition_type}
                     />
                 );
             case "contact_persons":

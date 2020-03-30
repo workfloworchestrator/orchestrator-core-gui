@@ -79,7 +79,7 @@ function vlansInUse(vlanRange: string, usedVlans: number[][]) {
 }
 
 interface IProps {
-    subscriptionId: string | null;
+    subscriptionId?: string | null;
     vlan: string;
     vlansExtraInUse: string;
     servicePortTag?: string;
