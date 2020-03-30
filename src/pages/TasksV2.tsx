@@ -139,7 +139,6 @@ export default class Tasks extends React.PureComponent<{}, IState> {
     };
 
     showProcess = (process: ProcessV2) => () => {
-        debugger;
         this.context.redirect("/task/" + process.pid);
     };
 

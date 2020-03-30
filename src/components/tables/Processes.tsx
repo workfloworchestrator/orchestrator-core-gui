@@ -156,7 +156,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 className: `${row.values.status}${highlighted}`
             };
         },
-        [highlightQ, redirect]
+        [highlightQ, redirect, isProcess]
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
@@ -339,6 +339,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
         [name, setFilterQ, setPageQ, setSortQ]
     );
 
+    const excludeInFilter = ["info", "workflow"];
     return (
         <div key={name}>
             <section className="nwa-table" id={name}>
@@ -350,6 +351,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
+                    excludeInFilter={excludeInFilter}
                 />
             </section>
         </div>
