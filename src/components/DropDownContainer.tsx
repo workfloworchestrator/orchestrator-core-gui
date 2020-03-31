@@ -27,15 +27,11 @@ function DropDownContainer({
                         setActive(true);
                     }
                 }}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
             >
                 {renderButtonContent(active, hover)}
             </button>
             <div
                 className={active ? "dropdown open" : hover ? "dropdown open" : "dropdown"}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
                 onClick={e => {
                     e.stopPropagation();
                     if (!active) {

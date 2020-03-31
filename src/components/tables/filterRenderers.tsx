@@ -29,7 +29,7 @@ import { ActionType, TableSettingsAction } from "./NwaTable";
  * Note that none of the renderers are valid standalone react components as they expect the complete table state and dispatch.
  */
 
-const renderFilterIcon = (filtering: boolean) => (active: boolean, hover: boolean) => {
+const renderFilterIcon = (filtering: boolean) => (active: boolean) => {
     return (
         <>
             {filtering ? (

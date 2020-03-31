@@ -194,6 +194,7 @@ interface INwaTableProps<T extends object> {
     initialTableSettings: TableSettings<T>;
     extraRowPropGetter: RowPropGetter<T>;
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
+    excludeInFilter: string[];
 }
 
 export function NwaTable<T extends object>({
@@ -203,7 +204,8 @@ export function NwaTable<T extends object>({
     endpoint,
     initialTableSettings,
     extraRowPropGetter,
-    renderSubComponent
+    renderSubComponent,
+    excludeInFilter
 }: INwaTableProps<T>) {
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
@@ -264,7 +266,8 @@ export function NwaTable<T extends object>({
         state,
         allColumns,
         dispatch,
-        initialTableSettings
+        initialTableSettings,
+        excludeInFilter
     };
     const paginatorProps = {
         canNextPage,
