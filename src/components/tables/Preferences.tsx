@@ -25,12 +25,17 @@ interface IProps<T extends object> {
     allColumns: ColumnInstance<T>[];
     initialTableSettings: TableSettings<T>;
     state: TableState<T>;
+    excludeInFilter: string[];
 }
 
-function Preferences<T extends object>({ allColumns, state, dispatch, initialTableSettings }: IProps<T>) {
+function Preferences<T extends object>({
+    allColumns,
+    state,
+    dispatch,
+    initialTableSettings,
+    excludeInFilter
+}: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
-
-    const excludedFilterColumns = ["info", "workflow"];
 
     return (
         <React.Fragment key={`preferences_${name}`}>
@@ -110,7 +115,7 @@ function Preferences<T extends object>({ allColumns, state, dispatch, initialTab
                     />
                     <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
                     {allColumns
-                        .filter(column => !excludedFilterColumns.includes(column.id))
+                        .filter(column => !excludeInFilter.includes(column.id))
                         .map(column => {
                             return (
                                 <label key={column.id}>

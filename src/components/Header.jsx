@@ -146,8 +146,8 @@ export default class Header extends React.PureComponent {
                         {this.renderEnvironmentName(environment)}
                         {this.generateStatusElements(globalLock, engineStatus)}
                         <li className="profile" tabIndex="1" onBlur={() => this.setState({ dropDownActive: false })}>
-                            {this.renderProfileLink(currentUser)}
-                            {this.renderDropDown(currentUser)}
+                            {currentUser && this.renderProfileLink(currentUser)}
+                            {currentUser && this.renderDropDown(currentUser)}
                         </li>
                         <li>
                             <Link to="/help">{I18n.t("header.links.help")}</Link>

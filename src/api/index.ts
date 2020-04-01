@@ -539,10 +539,6 @@ export function validation(productId: string): Promise<ProductValidation> {
     return fetchJson(`products/${productId}/validate`);
 }
 
-export function transitions(subscriptionId: string, transitionType: string) {
-    return fetchJson(`products/transitions/${subscriptionId}/${transitionType}`);
-}
-
 export function contacts(organisationId: string) {
     return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true).catch(err => Promise.resolve([]));
 }

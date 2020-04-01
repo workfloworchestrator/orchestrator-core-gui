@@ -140,11 +140,13 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     key={"active"}
                     initialTableSettings={activeSettings}
                     renderActions={this.renderActions}
+                    isProcess={true}
                 />
                 <ProcessesTable
                     key={"completed"}
                     initialTableSettings={completedSettings}
                     renderActions={this.renderActions}
+                    isProcess={true}
                 />
                 <ScrollUpButton />
             </div>

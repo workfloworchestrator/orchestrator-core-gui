@@ -51,7 +51,6 @@ import StateValue from "./StateValue";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import TableSummary from "./TableSummary";
-import TransitionProductSelect from "./TransitionProductSelect";
 
 const inputTypesWithoutLabelInformation = ["boolean", "accept", "subscription_downgrade_confirmation", "label"];
 const inputTypesWithDelegatedValidation = [
@@ -311,7 +310,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         {validationError
                             ? validationError.map((e, index) => (
                                   <div className="backend-validation" key={index}>
-                                      {capitalizeFirstLetter(e.msg)}.
+                                      {capitalizeFirstLetter(e.msg)}
                                   </div>
                               ))
                             : I18n.t("process.format_error")}
@@ -412,12 +411,12 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 );
             case "transition_product":
                 return (
-                    <TransitionProductSelect
+                    <ProductSelect
+                        id="transition-product-select"
                         onChange={this.changeSelectInput(name)}
+                        products={userInput.products}
                         product={value}
-                        subscriptionId={userInput.subscription_id}
                         disabled={userInput.readonly}
-                        transitionType={userInput.transition_type}
                     />
                 );
             case "contact_persons":
@@ -674,7 +673,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error backend-validation-metadata">
-                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}.
+                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}
                                 </em>
                             </section>
                         )}

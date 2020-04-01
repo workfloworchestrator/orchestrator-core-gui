@@ -18,9 +18,6 @@ import React from "react";
 
 import UserProfile from "../../components/UserProfile";
 import ApplicationContext from "../../utils/ApplicationContext";
-import start from "../base";
-
-start();
 
 test("UserProfile with email", () => {
     const wrapper = mount(
