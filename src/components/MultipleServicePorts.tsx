@@ -147,7 +147,6 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 
     addServicePort = () => {
         const servicePorts = [...this.props.servicePorts];
-        //todo: we might need to add tag and port_mode
         servicePorts.push({});
         this.props.onChange(servicePorts);
     };
@@ -232,15 +231,17 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
 
         // Port mode filter
         if (visiblePortMode === "untagged") {
-            inSelect = inSelect.filter(port => port.port_mode === "untagged");
+            inSelect = inSelect.filter(port => this.getPortMode(port.subscription_id) === "untagged");
         } else if (visiblePortMode === "tagged" || isElan || mspOnly) {
-            inSelect = inSelect.filter(
-                port => port.port_mode === "tagged" || ["MSP", "MSPNL"].includes(port.product.tag)
-            );
+            inSelect = inSelect.filter(port => this.getPortMode(port.subscription_id) === "tagged");
         } else if (visiblePortMode === "normal") {
-            inSelect = inSelect.filter(port => port.port_mode === "tagged" || port.port_mode === "untagged");
+            inSelect = inSelect.filter(
+                port =>
+                    this.getPortMode(port.subscription_id) === "tagged" ||
+                    this.getPortMode(port.subscription_id) === "untagged"
+            );
         } else if (visiblePortMode === "link_member") {
-            inSelect = inSelect.filter(port => port.port_mode === "link_member");
+            inSelect = inSelect.filter(port => this.getPortMode(port.subscription_id) === "link_member");
         }
 
         // Customer filter toggle
