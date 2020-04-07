@@ -124,16 +124,23 @@
 
                 &.status-text {
                     margin-left: auto;
-                    alignment: right;
                     font-weight: bold;
                     text-transform: uppercase;
                     font-size: 14px;
                     color: $blue;
-                }
 
-                &.status {
-                    .status-logo {
-                        height: 25px;
+                    .status {
+                        font-size: 115%;
+                        margin-left: 5px;
+                        &.paused {
+                            color: #e61e19;
+                        }
+                        &.pausing {
+                            color: #fea501;
+                        }
+                        &.running {
+                            color: #33cd2e;
+                        }
                     }
                 }
 

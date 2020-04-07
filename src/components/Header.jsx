@@ -22,9 +22,6 @@ import { Link } from "react-router-dom";
 
 import { getGlobalStatus, logUserInfo } from "../api";
 import logo from "../images/network-automation.png";
-import statusLocked from "../images/status-locked.png";
-import statusPausing from "../images/status-pausing.png";
-import statusUnlocked from "../images/status-unlocked.png";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import UserProfile from "./UserProfile";
@@ -43,8 +40,8 @@ export default class Header extends React.PureComponent {
                     : hostname.indexOf("dev") > -1
                     ? "development"
                     : "production",
-            globalLock: undefined,
-            engineStatus: undefined
+            globalLock: false,
+            engineStatus: "RUNNING"
         };
     }
 
@@ -95,35 +92,20 @@ export default class Header extends React.PureComponent {
             const { globalLock } = this.state;
             if (!globalStatus.global_lock && globalLock) {
                 this.setState({ globalLock: globalStatus.global_lock });
-                setFlash(I18n.t("settings.status.engine.false"));
+                setFlash(I18n.t("settings.status.engine.restarted"));
             }
             this.setState({ globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status });
         });
     };
 
     generateStatusElements(globalLock, engineStatus) {
-        if (globalLock && engineStatus === "PAUSED") {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.true")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusLocked} alt="" />
-                </li>
-            ];
-        } else if (globalLock && engineStatus === "PAUSING") {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.pausing")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusPausing} alt="" />
-                </li>
-            ];
-        } else if (!globalLock) {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.running")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusUnlocked} alt="" />
-                </li>
-            ];
-        }
+        const message = I18n.t(`settings.status.engine.${engineStatus.toLowerCase()}`);
+
+        return (
+            <li className="status-text">
+                {message} <i className={`fa fa-circle status ${engineStatus.toLowerCase()}`}></i>
+            </li>
+        );
     }
 
     componentWillMount() {

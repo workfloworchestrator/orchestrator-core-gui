@@ -997,8 +997,8 @@ I18n.translations.en = {
             engine: {
                 running: "Engine is Running",
                 pausing: "Engine is Pausing, unable to submit workflows",
-                true: "Engine is Paused, unable to submit workflows",
-                false: "The engine has been restarted"
+                paused: "Engine is Paused, unable to submit workflows",
+                restarted: "The engine has been restarted"
             }
         }
     },
