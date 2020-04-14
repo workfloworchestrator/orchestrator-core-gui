@@ -13,11 +13,11 @@
  *
  */
 import I18n from "i18n-js";
+import { User } from "oidc-client";
 
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 import {
-    AppConfig,
     EngineStatus,
     IMSPort,
     IMSService,
@@ -31,7 +31,6 @@ import {
     ResourceType,
     ServicePortSubscription,
     Subscription,
-    User,
     Workflow,
     WorkflowReasons
 } from "../utils/types";
@@ -41,7 +40,7 @@ import { absent, child_subscriptions, ims_port_id } from "../validations/Subscri
 //const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
 const apiPath = "/api/";
 
-let configuration: AppConfig | null = null;
+let user: User | null;
 
 function apiUrl(path: string) {
     return apiPath + path;
@@ -75,10 +74,6 @@ function validateResponse(showErrorDialog: boolean) {
             }
             const error = new ResponseError(res);
 
-            if (error.response.status === 401) {
-                redirectToAuthorizationServer();
-            }
-
             if (showErrorDialog) {
                 setTimeout(() => {
                     throw error;
@@ -91,11 +86,10 @@ function validateResponse(showErrorDialog: boolean) {
 }
 
 function validFetch(path: string, options: {}, headers = {}, showErrorDialog = true) {
-    const access_token = localStorage.getItem("access_token");
     const contentHeaders = {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `bearer ${access_token}`,
+        Authorization: getAuthorizationHeaderValue(),
         ...headers
     };
     const fetchOptions = Object.assign({}, { headers: contentHeaders }, options, {
@@ -552,7 +546,7 @@ export function clearCache(name: string) {
 }
 
 export function getGlobalStatus(): Promise<EngineStatus> {
-    return fetchJson("v2/settings/status");
+    return fetchJson("v2/settings/status", {}, {}, false, true);
 }
 
 export function setGlobalStatus(new_global_lock: boolean) {
@@ -567,31 +561,18 @@ export function ping() {
     return fetchJson("user/ping");
 }
 
-export function me(): Promise<User> {
-    return fetchJson("user/me", {}, {}, false);
-}
-
-export function config(): Promise<AppConfig> {
-    return !configuration
-        ? fetchJson<AppConfig>("user/config").then((conf: AppConfig) => {
-              configuration = conf;
-              return conf;
-          })
-        : Promise.resolve(configuration);
-}
-
-export function redirectToAuthorizationServer() {
-    const re = /http[s]?:\/\/?[^/\s]+\/(.*)/;
-    const res = re.exec(window.location.href);
-    const state = res ? "/" + res[1] : "/";
-    config().then((conf: AppConfig) => {
-        window.location.replace(
-            `${conf.oauthAuthorizeUrl}?response_type=token&client_id=${conf.clientId}` +
-                `&scope=${conf.scope.join("+")}&redirect_uri=${conf.redirectUri}&state=${btoa(state)}`
-        );
-    });
-}
-
 export function dienstafnameBySubscription(subscriptionId: string) {
     return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
+}
+
+export function setUser(_user: User | null) {
+    user = _user;
+}
+
+export function getAuthorizationHeaderValue(): string {
+    if (!user) {
+        return "";
+    }
+
+    return `${user.token_type} ${user.access_token}`;
 }

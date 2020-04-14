@@ -14,16 +14,16 @@
  */
 
 import { mount } from "enzyme";
+import { AuthContext } from "oidc-react";
 import React from "react";
 
 import UserProfile from "../../components/UserProfile";
-import ApplicationContext from "../../utils/ApplicationContext";
 
 test("UserProfile with email", () => {
     const wrapper = mount(
-        <ApplicationContext.Provider value={{ currentUser: { email: "test@org.net", guest: true } }}>
+        <AuthContext.Provider value={{ userData: { profile: { email: "test@org.net", guest: true } } }}>
             <UserProfile />
-        </ApplicationContext.Provider>
+        </AuthContext.Provider>
     );
     expect(wrapper.contains(<span className="user-key">email</span>)).toBeTruthy();
 });

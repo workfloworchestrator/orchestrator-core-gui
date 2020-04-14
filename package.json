@@ -4,17 +4,20 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-polyfill": "^6.26.0",
     "date-fns": "^2.0.0-alpha.23",
     "events": "^3.0.0",
     "highlight.js": "^9.15.8",
     "i18n-js": "^3.3.0",
     "immer": "^5.3.4",
     "lodash": "^4.14.149",
+    "oidc-client": "^1.10.1",
+    "oidc-react": "^1.0.0-alpha.5",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
+    "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.1",
     "react-datepicker": "^2.7.0",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.13.1",
     "react-modal": "^3.8.1",
     "react-numeric-input": "^2.2.3",
     "react-pretty-json": "^2.0.2",
@@ -72,18 +75,18 @@
     "eslint-plugin-react-hooks": "^2.4.0",
     "fetch-mock": "^8.3.2",
     "http-proxy-middleware": "^0.21.0",
+    "import-sort-style-module": "^6.0.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
+    "pre-commit": "^1.2.2",
     "prettier": "1.19.1",
     "prettier-plugin-import-sort": "^0.0.3",
     "react-router": "^5.1.2",
-    "react-test-renderer": "^16.9.0",
+    "react-test-renderer": "^16.13.1",
     "source-map-explorer": "^2.2.2",
     "storybook-react-router": "^1.0.8",
     "typescript": "^3.7.5",
-    "use-trace-update": "^1.3.0",
-    "import-sort-style-module": "^6.0.0",
-    "pre-commit": "^1.2.2"
+    "use-trace-update": "^1.3.0"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
@@ -104,7 +107,6 @@
       "style": "module"
     }
   },
-
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -1,3 +1,4 @@
+import { getAuthorizationHeaderValue } from "api";
 import axios from "axios";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
@@ -9,10 +10,8 @@ var axiosInstance = axios.create({ baseURL: "/api/v2/" });
 export const cancel = axios.CancelToken.source();
 
 function getHeaders(eTag?: string | null) {
-    const token = localStorage.getItem("access_token");
-    const authHeader = token ? { Authorization: `bearer ${token}` } : {};
     const ifNoneMatchHeader = eTag ? { "If-None-Match": eTag } : {};
-    return { ...authHeader, ...ifNoneMatchHeader };
+    return { Authorization: getAuthorizationHeaderValue(), ...ifNoneMatchHeader };
 }
 
 interface Params {

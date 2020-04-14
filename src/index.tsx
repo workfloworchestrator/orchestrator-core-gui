@@ -1,0 +1,81 @@
+/*
+ * Copyright 2019 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+import { logUserInfo, setUser } from "api";
+import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
+import { AuthContext, AuthProvider } from "oidc-react";
+import React from "react";
+import ReactDOM from "react-dom";
+
+import App from "./pages/App";
+
+const REDIRECT_URL_KEY = "redirectUrl";
+
+// Enable to enable logging in oidc library
+Oidc.Log.logger = console;
+
+const oidcConfig: UserManagerSettings = {
+    authority: process.env.REACT_APP_OAUTH2_OPENID_CONNECT_URL || "",
+    client_id: process.env.REACT_APP_OAUTH2_CLIENT_ID || "",
+    redirect_uri: `${window.location.protocol}//${window.location.host}/authorize`,
+    response_type: "code",
+    scope: process.env.REACT_APP_OAUTH2_SCOPE || "openid",
+    loadUserInfo: true,
+    userStore: new WebStorageStateStore({ store: localStorage })
+};
+
+const userManager = new UserManager(oidcConfig);
+
+const appElement = document.getElementById("app");
+
+ReactDOM.render(
+    <AuthProvider
+        userManager={userManager}
+        onBeforeSignIn={() => {
+            localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
+        }}
+        onSignIn={user => {
+            if (user !== null) {
+                setUser(user);
+
+                if (user.profile.email) {
+                    logUserInfo(user.profile.email, "logged in");
+                }
+            }
+
+            userManager.clearStaleState();
+
+            const redirectUrl = localStorage.getItem(REDIRECT_URL_KEY) || "/";
+            localStorage.removeItem(REDIRECT_URL_KEY);
+            window.location.replace(redirectUrl);
+        }}
+        onSignOut={() => {
+            setUser(null);
+
+            window.location.assign("/");
+
+            userManager.signinRedirect({});
+        }}
+    >
+        <AuthContext.Consumer>
+            {props => {
+                setUser(props.userData || null);
+
+                return props.userData && !props.userData.expired && <App />;
+            }}
+        </AuthContext.Consumer>
+    </AuthProvider>,
+    appElement
+);

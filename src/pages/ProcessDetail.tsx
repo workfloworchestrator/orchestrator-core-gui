@@ -30,7 +30,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-import { InputField, Process, ProcessSubscription, ProcessWithDetails, Product, Step, prop } from "../utils/types";
+import { InputField, Process, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
 import { stop } from "../utils/Utils";
 import { actionOptions } from "../validations/Processes";
 
@@ -92,24 +92,16 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
              * Ensure correct user memberships and populate UserInput form with values
              */
 
-            const { configuration, currentUser, organisations, products } = this.context;
+            const { organisations, products } = this.context;
 
             let enrichedProcess = processInstance as CustomProcessWithDetails;
             enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
             enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
-            const requiredTeamMembership = prop(configuration!, enrichedProcess.assignee);
-            let userInputAllowed = true;
-            if (requiredTeamMembership && currentUser && currentUser.memberships) {
-                userInputAllowed = !!currentUser.memberships.find(membership => membership === requiredTeamMembership);
-            }
-            let stepUserInput: InputField[] | undefined = undefined;
-            if (userInputAllowed) {
-                const step = enrichedProcess.steps.find(
-                    step => step.name === enrichedProcess.step && step.status === "pending"
-                );
-                stepUserInput = step && step.form;
-            }
+            const step = enrichedProcess.steps.find(
+                step => step.name === enrichedProcess.step && step.status === "pending"
+            );
+            const stepUserInput: InputField[] | undefined = step && step.form;
             const tabs = stepUserInput ? this.state.tabs : ["process"];
             const selectedTab = stepUserInput ? "user_input" : "process";
 

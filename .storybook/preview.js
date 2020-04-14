@@ -28,8 +28,6 @@ function withContext(storyFn) {
                 organisations: ORGANISATIONS,
                 locationCodes: LOCATION_CODES,
                 products: PRODUCTS,
-                currentUser: {},
-                configuration: {},
                 redirect: action("Change url")
             }}
         >

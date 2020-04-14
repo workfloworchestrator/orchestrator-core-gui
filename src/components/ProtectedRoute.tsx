@@ -13,11 +13,10 @@
  *
  */
 
+import { useAuth } from "oidc-react";
 import PropTypes from "prop-types";
 import React, { ReactNode } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
-
-import ApplicationContext from "../utils/ApplicationContext";
 
 export default function ProtectedRoute({
     path,
@@ -31,16 +30,12 @@ export default function ProtectedRoute({
      * now we will allow everyone access
      */
 
-    return (
-        <ApplicationContext.Consumer>
-            {({ currentUser, configuration }) => {
-                if (currentUser || (configuration && configuration.oauthEnabled)) {
-                    return <Route path={path} render={render} />;
-                }
-                return <Redirect to={"/not-allowed"} />;
-            }}
-        </ApplicationContext.Consumer>
-    );
+    const auth = useAuth();
+
+    if (process.env.REACT_APP_OAUTH2_ENABLED && auth.userData && !auth.userData.expired) {
+        return <Route path={path} render={render} />;
+    }
+    return <Redirect to={"/not-allowed"} />;
 }
 
 ProtectedRoute.propTypes = {
