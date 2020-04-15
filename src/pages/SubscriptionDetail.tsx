@@ -197,7 +197,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                     obj.type === "internetpinnen_prefix_subscription_id" ||
                                     obj.type === "parent_ip_prefix_subscription_id"
                             )
-                            .map(obj => obj.json);
+                            .map(obj => enrichSubscription(obj.json, organisations, products));
 
                         // Enrich parent subscriptions
                         let parentSubscriptions = result[3].map((sub: Subscription) =>
