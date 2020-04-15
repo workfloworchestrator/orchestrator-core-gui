@@ -420,7 +420,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
                     <td id="subscriptions-insync-v">
                         <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
-                        {this.renderFailedTask(subscriptionProcesses)}
+                        {!subscription.insync && this.renderFailedTask(subscriptionProcesses)}
                     </td>
                 </tr>
                 <tr>
