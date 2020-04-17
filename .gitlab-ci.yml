@@ -84,6 +84,17 @@ deploy review base:
       - tags
       - schedules
 
+run system tests:
+  stage: development
+  trigger:
+    project: automation/projects/system-tests
+    branch: dev
+  only:
+    refs:
+      - branches
+    variables:
+      - $SYSTEM_TESTS == "True"
+
 run system tests on dev:
   stage: development
   trigger:
@@ -92,7 +103,6 @@ run system tests on dev:
   only:
     refs:
       - dev
-
 
 deploy dev:
   variables:
