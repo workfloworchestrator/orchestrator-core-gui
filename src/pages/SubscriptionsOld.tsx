@@ -13,7 +13,7 @@
  *
  */
 
-import "./Subscriptions.scss";
+import "./SubscriptionsOld.scss";
 import "./TableStyle.scss";
 
 import I18n from "i18n-js";
@@ -62,7 +62,7 @@ interface IState {
     filtered: Filter[];
 }
 
-class Subscriptions extends React.PureComponent<IProps, IState> {
+class SubscriptionsOld extends React.PureComponent<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
 
     private filtering: boolean = false; // This state is intentionally left outside the proper state since changing it should not trigger a render
@@ -369,6 +369,6 @@ class Subscriptions extends React.PureComponent<IProps, IState> {
     }
 }
 
-Subscriptions.contextType = ApplicationContext;
+SubscriptionsOld.contextType = ApplicationContext;
 
-export default withQueryParams(queryConfig, Subscriptions);
+export default withQueryParams(queryConfig, SubscriptionsOld);
