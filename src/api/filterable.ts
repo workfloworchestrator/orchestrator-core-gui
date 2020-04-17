@@ -1,11 +1,12 @@
 import { getAuthorizationHeaderValue } from "api";
 import axios from "axios";
+import { ENV } from "env";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { FilterArgument } from "utils/types";
 
-var axiosInstance = axios.create({ baseURL: "/api/v2/" });
+var axiosInstance = axios.create({ baseURL: ENV.BACKEND_URL + "/api/v2/" });
 
 export const cancel = axios.CancelToken.source();
 

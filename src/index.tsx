@@ -14,6 +14,7 @@
  */
 
 import { logUserInfo, setUser } from "api";
+import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
 import { AuthContext, AuthProvider } from "oidc-react";
 import React from "react";
@@ -27,11 +28,11 @@ const REDIRECT_URL_KEY = "redirectUrl";
 Oidc.Log.logger = console;
 
 const oidcConfig: UserManagerSettings = {
-    authority: process.env.REACT_APP_OAUTH2_OPENID_CONNECT_URL || "",
-    client_id: process.env.REACT_APP_OAUTH2_CLIENT_ID || "",
+    authority: ENV.OAUTH2_OPENID_CONNECT_URL || "",
+    client_id: ENV.OAUTH2_CLIENT_ID || "",
     redirect_uri: `${window.location.protocol}//${window.location.host}/authorize`,
     response_type: "code",
-    scope: process.env.REACT_APP_OAUTH2_SCOPE || "openid",
+    scope: ENV.OAUTH2_SCOPE || "openid",
     loadUserInfo: true,
     userStore: new WebStorageStateStore({ store: localStorage })
 };
@@ -73,7 +74,9 @@ ReactDOM.render(
             {props => {
                 setUser(props.userData || null);
 
-                return props.userData && !props.userData.expired && <App />;
+                if (!ENV.OAUTH2_ENABLED || (props.userData && !props.userData.expired)) {
+                    return <App />;
+                }
             }}
         </AuthContext.Consumer>
     </AuthProvider>,

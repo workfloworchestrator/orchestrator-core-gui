@@ -13,6 +13,7 @@
  *
  */
 
+import { ENV } from "env";
 import { useAuth } from "oidc-react";
 import PropTypes from "prop-types";
 import React, { ReactNode } from "react";
@@ -32,7 +33,7 @@ export default function ProtectedRoute({
 
     const auth = useAuth();
 
-    if (process.env.REACT_APP_OAUTH2_ENABLED && auth.userData && !auth.userData.expired) {
+    if (!ENV.OAUTH2_ENABLED || (auth.userData && !auth.userData.expired)) {
         return <Route path={path} render={render} />;
     }
     return <Redirect to={"/not-allowed"} />;

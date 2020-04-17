@@ -1,0 +1,6 @@
+env:
+    REACT_APP_BACKEND_URL: "https://orchestrator.automation.surf.net"
+    REACT_APP_OAUTH2_ENABLED: "true"
+    REACT_APP_OAUTH2_OPENID_CONNECT_URL: "https://oidc-proxy.automation.surf.net/api/v1/auth"
+    REACT_APP_OAUTH2_CLIENT_ID: "orchestrator-client.automation.surf.net"
+    REACT_APP_OAUTH2_SCOPE: "openid"

@@ -1,3 +1,4 @@
+import { ENV } from "env";
 /*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,8 +38,7 @@ import {
 import { isEmpty } from "../utils/Utils";
 import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
 
-//const apiPath = "https://orchestrator.dev.automation.surf.net/api/";
-const apiPath = "/api/";
+const apiPath = ENV.BACKEND_URL + "/api/";
 
 let user: User | null;
 

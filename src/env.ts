@@ -13,7 +13,9 @@ interface Window {
 // @ts-ignore
 export const ENV = window.__env__ || {
     BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
-    OAUTH2_ENABLED: process.env.REACT_APP_OAUTH2_ENABLED,
+    OAUTH2_ENABLED: ["true", "1", "yes", "on"].includes(
+        (process.env.REACT_APP_OAUTH2_ENABLED || "true").toLocaleLowerCase()
+    ),
     OAUTH2_OPENID_CONNECT_URL: process.env.REACT_APP_OAUTH2_OPENID_CONNECT_URL,
     OAUTH2_CLIENT_ID: process.env.REACT_APP_OAUTH2_CLIENT_ID,
     OAUTH2_SCOPE: process.env.REACT_APP_OAUTH2_SCOPE
