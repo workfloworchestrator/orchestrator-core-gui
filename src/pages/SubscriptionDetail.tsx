@@ -197,7 +197,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                     obj.type === "internetpinnen_prefix_subscription_id" ||
                                     obj.type === "parent_ip_prefix_subscription_id"
                             )
-                            .map(obj => obj.json);
+                            .map(obj => enrichSubscription(obj.json, organisations, products));
 
                         // Enrich parent subscriptions
                         let parentSubscriptions = result[3].map((sub: Subscription) =>
@@ -420,7 +420,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
                     <td id="subscriptions-insync-v">
                         <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
-                        {this.renderFailedTask(subscriptionProcesses)}
+                        {!subscription.insync && this.renderFailedTask(subscriptionProcesses)}
                     </td>
                 </tr>
                 <tr>
