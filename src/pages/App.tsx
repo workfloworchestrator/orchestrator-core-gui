@@ -46,8 +46,8 @@ import Processes from "./ProcessesV2";
 import ServerError from "./ServerError";
 import Settings from "./Settings";
 import SubscriptionDetail from "./SubscriptionDetail";
+import SubscriptionsPage from "./Subscriptions";
 import SubscriptionsOld from "./SubscriptionsOld";
-import Subscriptions from "./Subscriptions";
 import Tasks from "./TasksV2";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
@@ -203,7 +203,7 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/process/:id"
                                     render={props => <ProcessDetail {...props} isProcess={true} />}
                                 />
-                                {/*<Route path="/subscriptions" render={props => <Subscriptions {...props} />} />*/}
+                                <Route path="/subscriptions" render={props => <SubscriptionsPage {...props} />} />
                                 <Route path="/subscriptions-old" render={props => <SubscriptionsOld {...props} />} />
                                 <Route path="/subscription/:id" render={props => <SubscriptionDetail {...props} />} />
                                 <Route path="/subscription/:id" render={props => <SubscriptionDetail {...props} />} />
