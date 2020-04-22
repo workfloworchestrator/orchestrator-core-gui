@@ -13,12 +13,10 @@
  */
 
 import {
-    renderCustomersCell,
-    renderPidCell,
-    renderProductTagCell,
     renderProductsCell,
+    renderSubscriptionCustomersCell,
+    renderSubscriptionIdCell,
     renderSubscriptionTagCell,
-    renderSubscriptionsCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
@@ -40,7 +38,7 @@ import {
     TableSettings,
     TableState
 } from "react-table";
-import { StringParam, useQueryParam } from "use-query-params";
+import { useQueryParam } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { Subscription } from "utils/types";
@@ -87,11 +85,10 @@ interface SubscriptionsTableProps {
 export function SubscriptionsTable({ initialTableSettings, renderActions, isSubscription }: SubscriptionsTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
-    const highlightQ = useQueryParam("highlight", StringParam)[0]; // only use the getter
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, assignees, redirect } = useContext(ApplicationContext);
+    const { organisations, products, redirect } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
@@ -154,7 +151,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 className: `${row.values.status}`
             };
         },
-        [highlightQ, redirect, isSubscription]
+        [redirect, isSubscription]
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
@@ -202,7 +199,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 accessor: "subscription_id",
                 disableSortBy: true,
                 disableFilters: true,
-                Cell: renderPidCell
+                Cell: renderSubscriptionIdCell
             },
             {
                 Header: "Description",
@@ -217,10 +214,10 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             },
             {
                 Header: "Customer",
-                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
-                // accessor: "subscriptions",
+                id: "customer_id", // Normally the accessor is used as id, but when used twice this gives a name clash.
+                accessor: "customer_id",
                 disableSortBy: true,
-                // Cell: renderCustomersCell(organisations, false),
+                Cell: renderSubscriptionCustomersCell(organisations, false),
                 Filter: renderCustomersFilter
             },
             {
@@ -296,7 +293,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 disableSortBy: true
             }
         ],
-        [organisations, highlightQ, assignees, products, renderActions]
+        [organisations, products, renderActions]
     );
 
     const persistSettings = useCallback(

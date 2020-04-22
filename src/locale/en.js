@@ -1199,8 +1199,10 @@ I18n.translations.en = {
         no_results: "No results found.",
         filter_placeholder: {
             assignee: "assignee...",
+            description: "description...",
             status: "status...",
             customer: "customer name...",
+            customer_id: "customer name...",
             abbrev: "customer abbreviation...",
             product: "product name...",
             tag: "product tag...",
