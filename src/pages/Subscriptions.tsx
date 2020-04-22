@@ -20,17 +20,12 @@ import {
     initialSubscriptionTableSettings,
     initialSubscriptionsFilterAndSort
 } from "components/tables/Subscriptions";
-import I18n from "i18n-js";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
 import ConfirmationDialog from "../components/ConfirmationDialog";
-import DropDownActions from "../components/DropDownActions";
 import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid } from "../utils/Lookups";
 import { Subscription } from "../utils/types";
-import { stop } from "../utils/Utils";
 
 // TODO investigate dynamic actions : start, stop workflows
 // import { actionOptions } from "../validations/Subscriptions";
@@ -83,11 +78,17 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     };
 
     render() {
-        const activeSettings = initialSubscriptionTableSettings(
-            "table.subscriptions.active",
+        const completeSettings = initialSubscriptionTableSettings(
+            "table.subscriptions.complete",
             initialSubscriptionsFilterAndSort(false, ["active"]),
-            ["subscription_id", "description", "status", "customer", "product"],
+            ["product"],
             { showSettings: false, refresh: true, pageSize: 10 }
+        );
+        const provisioningSettings = initialSubscriptionTableSettings(
+            "table.subscriptions.provisioning",
+            initialSubscriptionsFilterAndSort(false, ["provisioning", "initial"]),
+            ["start_date", "end_date", "product"],
+            { showSettings: false, refresh: true, pageSize: 5 }
         );
 
         return (
@@ -99,17 +100,17 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                     question={this.state.confirmationDialogQuestion}
                 />
                 <SubscriptionsTable
-                    key={"active"}
-                    initialTableSettings={activeSettings}
+                    key={"complete"}
+                    initialTableSettings={completeSettings}
                     renderActions={this.renderActions}
                     isSubscription={true}
                 />
-                {/*<SubscriptionsTable*/}
-                {/*key={"active"}*/}
-                {/*initialTableSettings={activeSettings}*/}
-                {/*renderActions={this.renderActions}*/}
-                {/*isSubscription={true}*/}
-                {/*/>*/}
+                <SubscriptionsTable
+                    key={"provisioning"}
+                    initialTableSettings={provisioningSettings}
+                    renderActions={this.renderActions}
+                    isSubscription={true}
+                />
                 <ScrollUpButton />
             </div>
         );
