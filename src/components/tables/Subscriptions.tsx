@@ -1,3 +1,17 @@
+/* Copyright 2019 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import {
     renderCustomersCell,
     renderPidCell,
@@ -14,19 +28,6 @@ import isNull from "lodash/isNull";
 import last from "lodash/last";
 import omitBy from "lodash/omitBy";
 import sortedUniq from "lodash/sortedUniq";
-/* Copyright 2019 SURF.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 import React, { useCallback, useContext, useMemo } from "react";
 import {
     Cell,
@@ -143,7 +144,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
 
     const extraRowPropGetter: RowPropGetter<Subscription> = useCallback(
         (props, { row }) => {
-            const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
             return {
                 ...props,
                 onClick: () => {
@@ -151,7 +151,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                     redirect(url);
                 },
                 id: row.values.pid,
-                className: `${row.values.status}${highlighted}`
+                className: `${row.values.status}`
             };
         },
         [highlightQ, redirect, isSubscription]
@@ -179,7 +179,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                     <i className="fa fa-arrows-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
-                    const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
                     const button = row.isExpanded ? (
                         <i className={`fa fa-minus-circle ${row.values.status}`} />
                     ) : (
@@ -193,7 +192,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                                 row.toggleRowExpanded();
                             }}
                         >
-                            {caret}
                             {button}
                         </div>
                     );
