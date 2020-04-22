@@ -18,7 +18,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 
-import { Organization, Subscription } from "../../utils/types";
+import { Organization, Product, Subscription } from "../../utils/types";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
@@ -89,4 +89,25 @@ export function renderProductTagCell({ cell }: { cell: Cell }) {
             return subscription.product.tag;
         })
     ).join(", ");
+}
+
+export function renderSubscriptionTagCell({ cell }: { cell: Cell }) {
+    const product: Product = cell.value;
+    return product.tag;
+}
+
+export function renderCustomersCelliv2(organisations: Organization[] | null | undefined, abbreviate: boolean) {
+    function lookup(uuid: string) {
+        if (organisations === null || organisations === undefined) {
+            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+        }
+        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
+    }
+    return function doRenderCustomersCell({ cell }: { cell: Cell }) {
+        const subscriptions: Subscription[] = cell.value;
+        return uniq(subscriptions.map(subscription => subscription.customer_id))
+            .map(lookup)
+            .join(", ");
+    };
 }

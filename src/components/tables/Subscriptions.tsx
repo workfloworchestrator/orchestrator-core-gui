@@ -3,6 +3,7 @@ import {
     renderPidCell,
     renderProductTagCell,
     renderProductsCell,
+    renderSubscriptionTagCell,
     renderSubscriptionsCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
@@ -47,11 +48,8 @@ import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
-    const initialFilterBy = [
-        { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
-        { id: "status", values: statuses }
-    ];
-    const initialSortBy = [{ id: "modified", desc: true }];
+    const initialFilterBy = [{ id: "status", values: statuses }];
+    const initialSortBy = [{ id: "start_date", desc: true }];
     return { filterBy: initialFilterBy, sortBy: initialSortBy };
 }
 
@@ -222,17 +220,17 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             {
                 Header: "Customer",
                 id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
-                accessor: "subscriptions",
+                // accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, false),
+                // Cell: renderCustomersCell(organisations, false),
                 Filter: renderCustomersFilter
             },
             {
                 Header: "Abbr.",
                 id: "abbrev",
-                accessor: "subscriptions",
+                // accessor: "subscriptions",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, true),
+                // Cell: renderCustomersCell(organisations, true),
                 Filter: renderCustomersFilter
             },
             {
@@ -243,14 +241,14 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 Cell: renderProductsCell,
                 Filter: renderILikeFilter
             },
-            // {
-            //     Header: "Tag(s)",
-            //     id: "tag",
-            //     accessor: "subscriptions",
-            //     disableSortBy: true,
-            //     Cell: renderProductTagCell,
-            //     Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
-            // },
+            {
+                Header: "Tag(s)",
+                id: "tag",
+                accessor: "product",
+                disableSortBy: true,
+                Cell: renderSubscriptionTagCell,
+                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
+            },
             // {
             //     Header: "Subscription(s)",
             //     accessor: "subscriptions",

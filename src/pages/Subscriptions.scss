@@ -16,7 +16,7 @@
 @import "../stylesheets/mixins.scss";
 @import "../stylesheets/media_queries.scss";
 
-.mod-processes {
+.mod-subscriptions {
     @include page;
     @include card;
 
@@ -70,7 +70,7 @@
         }
     }
 
-    section.processes {
+    section.subscriptions {
         display: flex;
         background-color: white;
 
@@ -82,7 +82,7 @@
         }
     }
 
-    table.processes {
+    table.subscriptions {
         width: 30%;
         td,
         th {
@@ -243,7 +243,7 @@
 }
 
 // V2 Stuff
-.processes-container {
+.subscriptions-container {
     // Removed next include to use full width
     @include page;
     background-color: white;

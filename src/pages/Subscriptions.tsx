@@ -32,6 +32,7 @@ import { organisationNameByUuid } from "../utils/Lookups";
 import { Subscription } from "../utils/types";
 import { stop } from "../utils/Utils";
 
+// TODO investigate dynamic actions : start, stop workflows
 // import { actionOptions } from "../validations/Subscriptions";
 
 interface IProps {}
@@ -84,8 +85,8 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     render() {
         const activeSettings = initialSubscriptionTableSettings(
             "table.subscriptions.active",
-            initialSubscriptionsFilterAndSort(false, ["running", "suspended", "failed", "created", "waiting"]),
-            ["pid", "step", "tag", "creator", "customer", "product"],
+            initialSubscriptionsFilterAndSort(false, ["active"]),
+            ["subscription_id", "description", "status", "customer", "product"],
             { showSettings: false, refresh: true, pageSize: 10 }
         );
 
@@ -103,7 +104,12 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                     renderActions={this.renderActions}
                     isSubscription={true}
                 />
-
+                {/*<SubscriptionsTable*/}
+                {/*key={"active"}*/}
+                {/*initialTableSettings={activeSettings}*/}
+                {/*renderActions={this.renderActions}*/}
+                {/*isSubscription={true}*/}
+                {/*/>*/}
                 <ScrollUpButton />
             </div>
         );

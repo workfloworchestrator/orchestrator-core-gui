@@ -1175,6 +1175,14 @@ I18n.translations.en = {
             filtered_on: " and filtered on ",
             sorted_by: " and sorted by "
         },
+        subscriptions: {
+            active: "Subscriptions",
+            completed: "TODO: determine if we maybe need more than 1 subscription table",
+            caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
+            with_status: " with status ",
+            filtered_on: " and filtered on ",
+            sorted_by: " and sorted by "
+        },
         tasks: "Tasks",
         expanded_row: {
             running: "Currently processing step '{{step}}'.",
