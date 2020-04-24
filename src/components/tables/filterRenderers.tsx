@@ -128,6 +128,7 @@ export function renderMultiSelectFilter(
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={disabled => (
                 <Select
+                    inputId={`filter-${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
                     isDisabled={disabled}
                     isMulti
                     value={selected}
