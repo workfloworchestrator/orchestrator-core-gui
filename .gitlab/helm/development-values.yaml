@@ -1,0 +1,6 @@
+env:
+    REACT_APP_BACKEND_URL: "https://orchestrator.dev.automation.surf.net"
+    REACT_APP_OAUTH2_ENABLED: "false"
+    REACT_APP_OAUTH2_OPENID_CONNECT_URL: ""
+    REACT_APP_OAUTH2_CLIENT_ID: ""
+    REACT_APP_OAUTH2_SCOPE: "openid"

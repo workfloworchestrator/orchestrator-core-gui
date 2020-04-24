@@ -16,22 +16,28 @@
 import "./Header.scss";
 
 import I18n from "i18n-js";
+import { Profile } from "oidc-client";
+import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
-import { unmountComponentAtNode } from "react-dom";
 import { Link } from "react-router-dom";
 
 import { getGlobalStatus, logUserInfo } from "../api";
 import logo from "../images/network-automation.png";
-import statusLocked from "../images/status-locked.png";
-import statusPausing from "../images/status-pausing.png";
-import statusUnlocked from "../images/status-unlocked.png";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
+import { GlobalStatus } from "../utils/types";
 import UserProfile from "./UserProfile";
 
-export default class Header extends React.PureComponent {
-    constructor() {
-        super();
+interface IState {
+    dropDownActive: boolean;
+    environment: string;
+    globalLock: boolean;
+    engineStatus: GlobalStatus;
+}
+
+class Header extends React.PureComponent<AuthContextProps, IState> {
+    constructor(props: AuthContextProps) {
+        super(props);
         const hostname = window.location.hostname;
         this.state = {
             dropDownActive: false,
@@ -43,22 +49,20 @@ export default class Header extends React.PureComponent {
                     : hostname.indexOf("dev") > -1
                     ? "development"
                     : "production",
-            globalLock: undefined,
-            engineStatus: undefined
+            globalLock: false,
+            engineStatus: "RUNNING"
         };
     }
 
-    logout = () => {
-        const { currentUser } = this.context;
-        const node = document.getElementById("app");
-        unmountComponentAtNode(node);
-        logUserInfo(currentUser.email, "logged out");
-        localStorage.clear();
-        window.location.href = "/";
-    };
-
     handleToggle = () => {
         this.setState({ dropDownActive: !this.state.dropDownActive });
+    };
+
+    logout = () => {
+        if (this.props.userData && this.props.userData.profile.email) {
+            logUserInfo(this.props.userData.profile.email, "logged out");
+        }
+        this.props.signOut();
     };
 
     renderExitLogout = () => (
@@ -69,11 +73,11 @@ export default class Header extends React.PureComponent {
         </li>
     );
 
-    renderProfileLink(currentUser) {
+    renderProfileLink(currentUser: Profile) {
         return (
             <button onClick={this.handleToggle}>
                 <i className="fa fa-user-circle-o" />
-                {currentUser.display_name}
+                {currentUser.name}
                 {this.renderDropDownIndicator()}
             </button>
         );
@@ -83,11 +87,11 @@ export default class Header extends React.PureComponent {
         return this.state.dropDownActive ? <i className="fa fa-caret-up" /> : <i className="fa fa-caret-down" />;
     }
 
-    renderDropDown(currentUser) {
-        return this.state.dropDownActive ? <UserProfile currentUser={currentUser} /> : null;
+    renderDropDown() {
+        return this.state.dropDownActive ? <UserProfile /> : null;
     }
 
-    renderEnvironmentName = environment =>
+    renderEnvironmentName = (environment: string) =>
         environment === "production" ? null : <li className="environment">{environment}</li>;
 
     refeshStatus = () => {
@@ -95,35 +99,20 @@ export default class Header extends React.PureComponent {
             const { globalLock } = this.state;
             if (!globalStatus.global_lock && globalLock) {
                 this.setState({ globalLock: globalStatus.global_lock });
-                setFlash(I18n.t("settings.status.engine.false"));
+                setFlash(I18n.t("settings.status.engine.restarted"));
             }
             this.setState({ globalLock: globalStatus.global_lock, engineStatus: globalStatus.global_status });
         });
     };
 
-    generateStatusElements(globalLock, engineStatus) {
-        if (globalLock && engineStatus === "PAUSED") {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.true")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusLocked} alt="" />
-                </li>
-            ];
-        } else if (globalLock && engineStatus === "PAUSING") {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.pausing")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusPausing} alt="" />
-                </li>
-            ];
-        } else if (!globalLock) {
-            return [
-                <li className="status-text">{I18n.t("settings.status.engine.running")}</li>,
-                <li className="status">
-                    <img className="status-logo" src={statusUnlocked} alt="" />
-                </li>
-            ];
-        }
+    generateStatusElements(engineStatus: GlobalStatus) {
+        const message = I18n.t(`settings.status.engine.${engineStatus.toLowerCase()}`);
+
+        return (
+            <li className="status-text">
+                {message} <i className={`fa fa-circle status ${engineStatus.toLowerCase()}`}></i>
+            </li>
+        );
     }
 
     componentWillMount() {
@@ -131,8 +120,8 @@ export default class Header extends React.PureComponent {
     }
 
     render() {
-        const { currentUser } = this.context;
-        const { environment, globalLock, engineStatus } = this.state;
+        const currentUser = this.props.userData?.profile;
+        const { environment, engineStatus } = this.state;
         return (
             <div className="header-container">
                 <div className="header">
@@ -144,10 +133,10 @@ export default class Header extends React.PureComponent {
                             <span>{I18n.t("header.title")}</span>
                         </li>
                         {this.renderEnvironmentName(environment)}
-                        {this.generateStatusElements(globalLock, engineStatus)}
-                        <li className="profile" tabIndex="1" onBlur={() => this.setState({ dropDownActive: false })}>
+                        {this.generateStatusElements(engineStatus)}
+                        <li className="profile" tabIndex={1} onBlur={() => this.setState({ dropDownActive: false })}>
                             {currentUser && this.renderProfileLink(currentUser)}
-                            {currentUser && this.renderDropDown(currentUser)}
+                            {currentUser && this.renderDropDown()}
                         </li>
                         <li>
                             <Link to="/help">{I18n.t("header.links.help")}</Link>
@@ -161,3 +150,5 @@ export default class Header extends React.PureComponent {
 }
 
 Header.contextType = ApplicationContext;
+
+export default withAuth(Header);

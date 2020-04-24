@@ -22,18 +22,7 @@ import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 
-import {
-    assignees,
-    config,
-    locationCodes,
-    logUserInfo,
-    me,
-    organisations,
-    processStatuses,
-    products,
-    redirectToAuthorizationServer,
-    reportError
-} from "../api";
+import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
 import ErrorDialog from "../components/ErrorDialog";
 import Flash from "../components/Flash";
 import Header from "../components/Header";
@@ -43,7 +32,7 @@ import ProductBlock from "../components/ProductBlock";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
-import { AppError, Organization, Product } from "../utils/types";
+import { AppError } from "../utils/types";
 import Help from "./Help";
 import MetaData from "./MetaData";
 import ModifySubscription from "./ModifySubscription";
@@ -62,16 +51,14 @@ import Tasks from "./TasksV2";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
 
-const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-
 const history = createBrowserHistory();
 
 interface IState {
     loading: boolean;
+    loaded: boolean;
     applicationContext: ApplicationContextInterface;
     error: boolean;
     errorDialogOpen: boolean;
-    redirectState: string;
     errorDialogAction: () => void;
 }
 
@@ -80,6 +67,7 @@ class App extends React.PureComponent<{}, IState> {
         super(props, context);
         this.state = {
             loading: true,
+            loaded: false,
             applicationContext: {
                 organisations: [],
                 locationCodes: [],
@@ -90,17 +78,15 @@ class App extends React.PureComponent<{}, IState> {
             },
             error: false,
             errorDialogOpen: false,
-            redirectState: "/processes",
             errorDialogAction: () => {
                 this.setState({ errorDialogOpen: false });
             }
         };
         window.onerror = (msg, url, line, col, err?: AppError) => {
             if (err && err.response && (err.response.status === 401 || err.response.status === 403)) {
-                localStorage.removeItem("access_token");
-                this.componentDidMount();
                 return;
             }
+
             this.setState({ errorDialogOpen: true });
             const info: Partial<AppError> = err || {};
             const response: Partial<Response> = info.response || {};
@@ -117,131 +103,54 @@ class App extends React.PureComponent<{}, IState> {
             };
             reportError(error);
         };
+
+        history.listen(() => {
+            if (!this.state.loading) {
+                this.loadData();
+            }
+        });
     }
 
-    handleBackendDown = () => {
-        const location = window.location;
-        const alreadyRetried = location.href.indexOf("guid") > -1;
-        if (alreadyRetried) {
-            window.location.href = `${location.protocol}//${location.hostname}${
-                location.port ? ":" + location.port : ""
-            }/error`;
-        } else {
-            //302 redirects from Shib are cached by the browser. We force a one-time reload
-            const guid = (
-                S4() +
-                S4() +
-                "-" +
-                S4() +
-                "-4" +
-                S4().substr(0, 3) +
-                "-" +
-                S4() +
-                "-" +
-                S4() +
-                S4() +
-                S4()
-            ).toLowerCase();
-            window.location.href = `${location.href}?guid=${guid}`;
-        }
-    };
+    async componentDidMount() {
+        await this.loadData();
+    }
 
-    componentDidMount() {
-        const hash = window.location.hash;
-        const accessTokenMatch = hash.match(/access_token=(.*?)&/);
-        if (accessTokenMatch) {
-            localStorage.setItem("access_token", accessTokenMatch[1]);
-            const stateMatch = hash.match(/state=(.*?)&/);
-            if (stateMatch) {
-                this.setState({ redirectState: atob(stateMatch[1]) });
-            }
-            this.fetchUser(true);
-        } else if (window.location.href.indexOf("error") > -1) {
+    async loadData() {
+        if (window.location.pathname.endsWith("/error") || window.location.pathname.endsWith("/not-allowed")) {
             this.setState({ loading: false });
-        } else {
-            const accessToken = localStorage.getItem("access_token");
-            if (!accessToken) {
-                config().then(conf => {
-                    if (conf.oauthEnabled) {
-                        redirectToAuthorizationServer();
-                    } else {
-                        this.fetchUser();
-                    }
-                });
-                return;
-            }
-            this.fetchUser();
+            return;
         }
-    }
 
-    fetchUser(log = false) {
-        let promise = config();
-        promise.catch(err => this.handleBackendDown());
-        promise.then(configuration => {
-            me()
-                .then(currentUser => {
-                    if (currentUser && (currentUser.sub || currentUser.user_name)) {
-                        Promise.all([
-                            organisations(),
-                            products(),
-                            locationCodes(),
-                            assignees(),
-                            processStatuses()
-                        ]).then(
-                            (
-                                result: [
-                                    Organization[] | undefined,
-                                    Product[] | undefined,
-                                    string[] | undefined,
-                                    string[] | undefined,
-                                    string[] | undefined
-                                ]
-                            ) => {
-                                const [
-                                    allOrganisations,
-                                    allProducts,
-                                    allLocationCodes,
-                                    allAssignees,
-                                    allProcessStatuses
-                                ] = result;
-                                const products = allProducts
-                                    ? allProducts!.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
-                                    : [];
-                                this.setState({
-                                    loading: false,
-                                    applicationContext: {
-                                        currentUser: currentUser,
-                                        configuration: configuration!,
-                                        organisations: allOrganisations,
-                                        locationCodes: allLocationCodes,
-                                        assignees: allAssignees || [],
-                                        processStatuses: allProcessStatuses || [],
-                                        products: products || [],
-                                        redirect: url => history.push(url)
-                                    }
-                                });
-                                if (log) {
-                                    logUserInfo(currentUser.email, "logged in");
-                                }
-                            }
-                        );
-                    } else {
-                        this.handleBackendDown();
-                    }
-                })
-                .catch(err => {
-                    if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-                        localStorage.removeItem("access_token");
-                        this.componentDidMount();
-                    } else {
-                        throw err;
-                    }
-                });
+        if (this.state.loaded) {
+            return;
+        }
+
+        const [allOrganisations, allProducts, allLocationCodes, allAssignees, allProcessStatuses] = await Promise.all([
+            organisations(),
+            products(),
+            locationCodes(),
+            assignees(),
+            processStatuses()
+        ]);
+
+        const filterdProducts = (allProducts || []).sort((a, b) => a.name.localeCompare(b.name));
+
+        this.setState({
+            loading: false,
+            loaded: true,
+            applicationContext: {
+                organisations: allOrganisations || [],
+                locationCodes: allLocationCodes || [],
+                assignees: allAssignees || [],
+                processStatuses: allProcessStatuses || [],
+                products: filterdProducts || [],
+                redirect: url => history.push(url)
+            }
         });
     }
 
     render() {
-        const { loading, errorDialogAction, errorDialogOpen, applicationContext, redirectState } = this.state;
+        const { loading, errorDialogAction, errorDialogOpen, applicationContext } = this.state;
 
         if (loading) {
             return null; // render null when app is not ready yet for static mySpinner
@@ -259,7 +168,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <ErrorDialog isOpen={errorDialogOpen} close={errorDialogAction} />
                             </div>
                             <Switch>
-                                <Route exact path="/oauth2/callback" render={() => <Redirect to={redirectState} />} />
+                                <Route exact path="/authorize" render={() => <Redirect to="/" />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
                                 <ProtectedRoute path="/processes" render={props => <Processes />} />
                                 <ProtectedRoute
@@ -317,7 +226,7 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
-                                <Route path="/error" render={() => <ServerError />} />
+                                <Route path="/error" render={props => <ServerError {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

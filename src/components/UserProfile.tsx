@@ -13,23 +13,20 @@
  *
  */
 
+import { useAuth } from "oidc-react";
 import React from "react";
 
-import ApplicationContext from "../utils/ApplicationContext";
-
 export default function UserProfile() {
+    const auth = useAuth();
+
     return (
-        <ApplicationContext.Consumer>
-            {({ currentUser }) => (
-                <ul className="user-profile">
-                    {Object.keys(currentUser).map(key => (
-                        <li key={key} className="user-attribute">
-                            <span className="user-key">{key.toString()}</span>
-                            <span className="value">{currentUser[key]}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </ApplicationContext.Consumer>
+        <ul className="user-profile">
+            {Object.keys(auth.userData?.profile || []).map(key => (
+                <li key={key} className="user-attribute">
+                    <span className="user-key">{key.toString()}</span>
+                    <span className="value">{auth.userData?.profile[key]}</span>
+                </li>
+            ))}
+        </ul>
     );
 }
