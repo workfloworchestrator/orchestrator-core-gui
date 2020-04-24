@@ -28,8 +28,6 @@ function withContext(storyFn) {
                 organisations: ORGANISATIONS,
                 locationCodes: LOCATION_CODES,
                 products: PRODUCTS,
-                currentUser: {},
-                configuration: {},
                 redirect: action("Change url")
             }}
         >
@@ -42,3 +40,11 @@ addDecorator(withContext);
 addons.setConfig({
     surfnetTheme
 });
+
+// Set runtime config
+window.__env__ = {};
+window.__env__.BACKEND_URL = "";
+window.__env__.OAUTH2_ENABLED = false;
+window.__env__.OAUTH2_OPENID_CONNECT_URL = "";
+window.__env__.OAUTH2_CLIENT_ID = "";
+window.__env__.OAUTH2_SCOPE = "";

@@ -13,9 +13,7 @@
  *
  */
 
-import { redirectToAuthorizationServer } from "api";
 import { cancel, filterableEndpoint } from "api/filterable";
-import axios from "axios";
 import { Dispatch, useCallback, useRef, useState } from "react";
 import { SortingRule } from "react-table";
 
@@ -60,14 +58,9 @@ function useFilterableDataFetcher<T extends object>(endpoint: string): [T[], num
                     dispatch({ type: ActionType.LOADING_STOP });
                 })
                 .catch(error => {
-                    if (error.response.status === 401) {
-                        dispatch({ type: ActionType.LOADING_STOP });
-                        redirectToAuthorizationServer();
-                    } else if (!axios.isCancel(error)) {
-                        // don't call dispatch on cancellation, the hook was unmounted.
-                        dispatch({ type: ActionType.LOADING_STOP });
-                        dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests
-                    }
+                    // don't call dispatch on cancellation, the hook was unmounted.
+                    dispatch({ type: ActionType.LOADING_STOP });
+                    dispatch({ type: ActionType.REFRESH_DISABLE }); // disable autorefresh on errors to not swamp the logs with failed requests
                 });
             return () => {
                 fetchIdRef.current = 0;

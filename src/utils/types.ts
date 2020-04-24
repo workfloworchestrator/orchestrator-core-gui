@@ -246,7 +246,7 @@ export interface AppConfig {
 }
 
 export interface User {
-    user_name: string;
+    preferred_user_name: string;
     displayName: string;
     sub: string;
     email: string;
@@ -328,8 +328,10 @@ export interface ProductValidation {
     valid: boolean;
 }
 
+export type GlobalStatus = "RUNNING" | "PAUSED" | "PAUSING";
+
 export interface EngineStatus {
     global_lock: boolean;
     running_processes: number;
-    global_status: string;
+    global_status: GlobalStatus;
 }
