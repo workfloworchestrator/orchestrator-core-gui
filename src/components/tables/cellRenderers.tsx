@@ -42,6 +42,11 @@ export function renderProductsCell({ cell }: { cell: Cell }) {
     ).map((product_name, idx) => <p key={`product_${idx}`}>{product_name}</p>);
 }
 
+export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
+    const product: Product = cell.value;
+    return product.name;
+}
+
 export function renderCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {

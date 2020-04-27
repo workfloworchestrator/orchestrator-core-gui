@@ -1176,7 +1176,7 @@ I18n.translations.en = {
             sorted_by: " and sorted by "
         },
         subscriptions: {
-            complete: "Complete Subscriptions",
+            complete: "Subscriptions",
             provisioning: "Initial/Provisioning Subscriptions",
             caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
             with_status: " with status ",

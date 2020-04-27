@@ -16,6 +16,7 @@ import {
     renderProductsCell,
     renderSubscriptionCustomersCell,
     renderSubscriptionIdCell,
+    renderSubscriptionProductsCell,
     renderSubscriptionTagCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
@@ -144,10 +145,10 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             return {
                 ...props,
                 onClick: () => {
-                    const url = isSubscription ? `/subscription/${row.values.pid}` : `/task/${row.values.pid}`;
+                    const url = `/subscription/${row.values.subscription_id}`;
                     redirect(url);
                 },
-                id: row.values.pid,
+                id: row.values.subscription_id,
                 className: `${row.values.status}`
             };
         },
@@ -197,7 +198,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             {
                 Header: "id",
                 accessor: "subscription_id",
-                disableSortBy: true,
                 disableFilters: true,
                 Cell: renderSubscriptionIdCell
             },
@@ -209,8 +209,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             {
                 Header: "Status",
                 accessor: "status",
-                disableSortBy: true,
-                Filter: renderMultiSelectFilter.bind(null, ["ACTIVE", "TERMINATED", "PROVISIONING"], null)
+                Filter: renderMultiSelectFilter.bind(null, ["active", "terminated", "initial", "provisioning"], null)
             },
             {
                 Header: "Customer",
@@ -229,15 +228,15 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 Filter: renderCustomersFilter
             },
             {
-                Header: "Product(s)",
+                Header: "Product",
                 id: "product",
-                accessor: "subscriptions",
+                accessor: "product",
                 disableSortBy: true,
-                Cell: renderProductsCell,
-                Filter: renderILikeFilter
+                Cell: renderSubscriptionProductsCell,
+                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
             },
             {
-                Header: "Tag(s)",
+                Header: "Tag",
                 id: "tag",
                 accessor: "product",
                 disableSortBy: true,

@@ -80,15 +80,15 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     render() {
         const completeSettings = initialSubscriptionTableSettings(
             "table.subscriptions.complete",
-            initialSubscriptionsFilterAndSort(false, ["active"]),
+            initialSubscriptionsFilterAndSort(false, ["active", "terminated"]),
             ["product"],
-            { showSettings: false, refresh: true, pageSize: 10 }
+            { showSettings: false, refresh: false, pageSize: 10 }
         );
         const provisioningSettings = initialSubscriptionTableSettings(
             "table.subscriptions.provisioning",
             initialSubscriptionsFilterAndSort(false, ["provisioning", "initial"]),
-            ["start_date", "end_date", "product"],
-            { showSettings: false, refresh: true, pageSize: 5 }
+            ["start_date", "end_date"],
+            { showSettings: false, refresh: false, pageSize: 5 }
         );
 
         return (
