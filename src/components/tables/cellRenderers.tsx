@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 
 import { Organization, Product, Subscription } from "../../utils/types";
+import CheckBox from "../CheckBox";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
@@ -78,7 +79,11 @@ export function renderSubscriptionCustomersCell(organisations: Organization[] | 
 }
 
 export function renderTimestampCell({ cell }: { cell: Cell }) {
+    if (!cell.value) {
+        return null;
+    }
     const timestamp: number = cell.value;
+
     const datetime = new Date(timestamp * 1000);
     const today = new Date();
     if (
@@ -113,6 +118,12 @@ export function renderSubscriptionIdCell({ cell }: { cell: Cell }) {
             {subscriptionID.slice(0, 8)}
         </Link>
     );
+}
+
+export function renderInsyncCell({ cell }: { cell: Cell }) {
+    const insync: boolean = cell.value;
+    console.log(insync);
+    return <i className={`${insync ? "fa fa-check-square" : "fa fa-square-o"}`} />;
 }
 
 export function renderProductTagCell({ cell }: { cell: Cell }) {

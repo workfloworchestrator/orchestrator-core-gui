@@ -13,6 +13,7 @@
  */
 
 import {
+    renderInsyncCell,
     renderProductsCell,
     renderSubscriptionCustomersCell,
     renderSubscriptionIdCell,
@@ -212,6 +213,13 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 Filter: renderMultiSelectFilter.bind(null, ["active", "terminated", "initial", "provisioning"], null)
             },
             {
+                Header: "In Sync",
+                id: "insync",
+                accessor: "insync",
+                Cell: renderInsyncCell,
+                disableFilters: true
+            },
+            {
                 Header: "Customer",
                 id: "customer_id", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "customer_id",
@@ -222,9 +230,9 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
             {
                 Header: "Abbr.",
                 id: "abbrev",
-                // accessor: "subscriptions",
+                accessor: "customer_id",
                 disableSortBy: true,
-                // Cell: renderCustomersCell(organisations, true),
+                Cell: renderSubscriptionCustomersCell(organisations, true),
                 Filter: renderCustomersFilter
             },
             {

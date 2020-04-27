@@ -178,11 +178,12 @@ export function tableSettingsReducer<T extends object>(
                 draft.refresh = true;
                 break;
             default:
-                console.log(action);
+            // Uncomment to see unhandled actions in the console
+            // console.log(action);
         }
     });
-    //uncomment to compare the states in the console.
-    //console.log(newState, changedState);
+    // Uncomment to compare the states in the console.
+    // console.log(newState, changedState);
     return changedState;
 }
 
