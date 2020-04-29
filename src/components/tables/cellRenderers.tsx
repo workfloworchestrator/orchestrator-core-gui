@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 
 import { Organization, Product, Subscription } from "../../utils/types";
-import CheckBox from "../CheckBox";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;

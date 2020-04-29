@@ -21,7 +21,6 @@ import {
     renderTimestampCell
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
-import I18n from "i18n-js";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -44,9 +43,9 @@ import ApplicationContext from "utils/ApplicationContext";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { Subscription } from "utils/types";
 
+import SubscriptionDetail from "../../pages/SubscriptionDetail";
 import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
-import SubscriptionDetail from "../../pages/SubscriptionDetail";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [{ id: "status", values: statuses }];
@@ -153,7 +152,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 className: `${row.values.status}`
             };
         },
-        [redirect, isSubscription]
+        [redirect]
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
