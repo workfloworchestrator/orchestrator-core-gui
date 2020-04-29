@@ -353,6 +353,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
                     excludeInFilter={excludeInFilter}
+                    hideAdvancedSearch={true}
                 />
             </section>
         </div>
