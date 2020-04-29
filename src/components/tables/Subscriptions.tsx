@@ -14,7 +14,6 @@
 
 import {
     renderInsyncCell,
-    renderProductsCell,
     renderSubscriptionCustomersCell,
     renderSubscriptionIdCell,
     renderSubscriptionProductsCell,
@@ -47,6 +46,7 @@ import { Subscription } from "utils/types";
 
 import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
+import SubscriptionDetail from "../../pages/SubscriptionDetail";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [{ id: "status", values: statuses }];
@@ -157,11 +157,10 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
-        const { status, step, info } = row.values;
+        const { subscription_id } = row.values;
         return (
             <div className={"expanded-row"}>
-                <h2>{I18n.t(`table.expanded_row.${status}`, { step: step })}</h2>
-                <pre>{info}</pre>
+                <SubscriptionDetail subscriptionId={subscription_id}></SubscriptionDetail>
             </div>
         );
     }, []);
@@ -173,10 +172,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                 Header: "",
                 id: "info",
                 accessor: "failed_reason",
+                disableFilters: true,
                 disableSortBy: true,
-                Filter: ({ toggleAllRowsExpanded }) => (
-                    <i className="fa fa-arrows-v" onClick={() => toggleAllRowsExpanded()} />
-                ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const button = row.isExpanded ? (
                         <i className={`fa fa-minus-circle ${row.values.status}`} />
@@ -317,7 +314,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
         [name, setFilterQ, setPageQ, setSortQ]
     );
 
-    const excludeInFilter = ["info", "workflow"];
     return (
         <div key={name}>
             <section className="nwa-table" id={name}>
@@ -329,7 +325,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions, isSubs
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
-                    excludeInFilter={excludeInFilter}
+                    excludeInFilter={[]}
                 />
             </section>
         </div>
