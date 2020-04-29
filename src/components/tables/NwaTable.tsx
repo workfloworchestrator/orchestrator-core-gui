@@ -271,7 +271,7 @@ export function NwaTable<T extends object>({
         dispatch,
         initialTableSettings,
         excludeInFilter,
-        hideAdvancedSearch,
+        hideAdvancedSearch
     };
     const paginatorProps = {
         canNextPage,

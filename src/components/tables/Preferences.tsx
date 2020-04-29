@@ -35,7 +35,7 @@ function Preferences<T extends object>({
     dispatch,
     initialTableSettings,
     excludeInFilter,
-                                           hideAdvancedSearch
+    hideAdvancedSearch
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
