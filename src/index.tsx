@@ -22,63 +22,67 @@ import ReactDOM from "react-dom";
 
 import App from "./pages/App";
 
-const REDIRECT_URL_KEY = "redirectUrl";
-
-// Enable to enable logging in oidc library
-Oidc.Log.logger = console;
-
-const oidcConfig: UserManagerSettings = {
-    authority: ENV.OAUTH2_OPENID_CONNECT_URL || "",
-    client_id: ENV.OAUTH2_CLIENT_ID || "",
-    redirect_uri: `${window.location.protocol}//${window.location.host}/authorize`,
-    response_type: "code",
-    scope: ENV.OAUTH2_SCOPE || "openid",
-    loadUserInfo: true,
-    userStore: new WebStorageStateStore({ store: localStorage })
-};
-
-const userManager = new UserManager(oidcConfig);
-
 const appElement = document.getElementById("app");
 
-ReactDOM.render(
-    <AuthProvider
-        userManager={userManager}
-        onBeforeSignIn={() => {
-            localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
-        }}
-        onSignIn={user => {
-            if (user !== null) {
-                setUser(user);
+if (ENV.OAUTH2_ENABLED) {
+    const REDIRECT_URL_KEY = "redirectUrl";
 
-                if (user.profile.email) {
-                    logUserInfo(user.profile.email, "logged in");
-                }
-            }
+    // Enable to enable logging in oidc library
+    Oidc.Log.logger = console;
 
-            userManager.clearStaleState();
+    const oidcConfig: UserManagerSettings = {
+        authority: ENV.OAUTH2_OPENID_CONNECT_URL || "",
+        client_id: ENV.OAUTH2_CLIENT_ID || "",
+        redirect_uri: `${window.location.protocol}//${window.location.host}/authorize`,
+        response_type: "code",
+        scope: ENV.OAUTH2_SCOPE || "openid",
+        loadUserInfo: true,
+        userStore: new WebStorageStateStore({ store: localStorage })
+    };
 
-            const redirectUrl = localStorage.getItem(REDIRECT_URL_KEY) || "/";
-            localStorage.removeItem(REDIRECT_URL_KEY);
-            window.location.replace(redirectUrl);
-        }}
-        onSignOut={() => {
-            setUser(null);
+    const userManager = new UserManager(oidcConfig);
 
-            window.location.assign("/");
-
-            userManager.signinRedirect({});
-        }}
-    >
-        <AuthContext.Consumer>
-            {props => {
-                setUser(props.userData || null);
-
-                if (!ENV.OAUTH2_ENABLED || (props.userData && !props.userData.expired)) {
-                    return <App />;
-                }
+    ReactDOM.render(
+        <AuthProvider
+            userManager={userManager}
+            onBeforeSignIn={() => {
+                localStorage.setItem(REDIRECT_URL_KEY, window.location.href);
             }}
-        </AuthContext.Consumer>
-    </AuthProvider>,
-    appElement
-);
+            onSignIn={user => {
+                if (user !== null) {
+                    setUser(user);
+
+                    if (user.profile.email) {
+                        logUserInfo(user.profile.email, "logged in");
+                    }
+                }
+
+                userManager.clearStaleState();
+
+                const redirectUrl = localStorage.getItem(REDIRECT_URL_KEY) || "/";
+                localStorage.removeItem(REDIRECT_URL_KEY);
+                window.location.replace(redirectUrl);
+            }}
+            onSignOut={() => {
+                setUser(null);
+
+                window.location.assign("/");
+
+                userManager.signinRedirect({});
+            }}
+        >
+            <AuthContext.Consumer>
+                {props => {
+                    setUser(props.userData || null);
+
+                    if (props.userData && !props.userData.expired) {
+                        return <App />;
+                    }
+                }}
+            </AuthContext.Consumer>
+        </AuthProvider>,
+        appElement
+    );
+} else {
+    ReactDOM.render(<App />, appElement);
+}
