@@ -325,7 +325,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
                     excludeInFilter={[]}
-                    hideAdvancedSearch={false}
+                    hideAdvancedSearch={true}
                 />
             </section>
         </div>
