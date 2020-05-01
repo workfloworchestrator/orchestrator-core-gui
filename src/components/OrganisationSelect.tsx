@@ -47,6 +47,7 @@ export default class OrganisationSelect extends React.PureComponent<IOrganisatio
             return (
                 <Select
                     id={id}
+                    inputID={`input-${id}`}
                     onChange={(selected: ValueType<Option>, action: ActionMeta) => {
                         if (selected === null) {
                             onChange(null, action);

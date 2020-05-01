@@ -66,7 +66,7 @@ export function renderCustomersFilter({
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled: boolean) => (
                 <OrganisationSelect
-                    id={`${state.name}.filter.${column.id}`}
+                    id={`${state.name}.filter.${column.id}`}  // will set and inputId itself, based on the id
                     organisation={selectedOrganisation}
                     onChange={(selected, action) => {
                         // See https://github.com/JedWatson/react-select/issues/2902 why we need this.
@@ -128,7 +128,7 @@ export function renderMultiSelectFilter(
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={disabled => (
                 <Select
-                    inputId={`filter-${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
+                    inputId={`input-filter-${state.name}-${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
                     isDisabled={disabled}
                     isMulti
                     value={selected}
@@ -164,6 +164,7 @@ export function renderILikeFilter({
     }
     return (
         <input
+            id={`input-ilike-filter-${state.name}-${column.id}`}
             value={column.filterValue}
             onChange={e => {
                 column.setFilter(e.target.value || undefined);
