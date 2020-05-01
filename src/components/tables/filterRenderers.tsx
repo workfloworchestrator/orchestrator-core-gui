@@ -66,7 +66,7 @@ export function renderCustomersFilter({
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={(disabled: boolean) => (
                 <OrganisationSelect
-                    id={`${state.name}.filter.${column.id}`}  // will set and inputId itself, based on the id
+                    id={`${state.name}.filter.${column.id}`} // will set and inputId itself, based on the id
                     organisation={selectedOrganisation}
                     onChange={(selected, action) => {
                         // See https://github.com/JedWatson/react-select/issues/2902 why we need this.

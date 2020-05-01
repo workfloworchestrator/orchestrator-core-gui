@@ -83,7 +83,7 @@ interface SubscriptionsTableProps {
     isSubscription: boolean;
 }
 
-export function SubscriptionsTable({ initialTableSettings, renderActions}: SubscriptionsTableProps) {
+export function SubscriptionsTable({ initialTableSettings, renderActions }: SubscriptionsTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
