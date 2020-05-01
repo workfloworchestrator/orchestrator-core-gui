@@ -113,7 +113,6 @@ export function renderMultiSelectFilter(
     const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
     const filtering = selected.length > 0;
     const onChange = (selected: any, action: any) => {
-        console.log(action);
         if (action && action.action === "select-option") {
             dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option.value });
         } else if (action.action === "remove-value") {
@@ -128,7 +127,8 @@ export function renderMultiSelectFilter(
             renderButtonContent={renderFilterIcon(filtering)}
             renderContent={disabled => (
                 <Select
-                    inputId={`input-filter-${state.name}-${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
+                    id={`filter-${state.name}-${column.id}`}
+                    inputId={`input-filter-${state.name}.${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
                     isDisabled={disabled}
                     isMulti
                     value={selected}
@@ -164,7 +164,7 @@ export function renderILikeFilter({
     }
     return (
         <input
-            id={`input-ilike-filter-${state.name}-${column.id}`}
+            id={`input-filter-${state.name}.${column.id}`}
             value={column.filterValue}
             onChange={e => {
                 column.setFilter(e.target.value || undefined);
