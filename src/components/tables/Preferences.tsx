@@ -74,18 +74,6 @@ function Preferences<T extends object>({
                 </span>
                 {"   "}
 
-                {!hideAdvancedSearch && (
-                    <>
-                        <span
-                            title={I18n.t("table.preferences.advancedSearch")}
-                            onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
-                        >
-                            <i className={showSettings ? "fa fa-search active" : "fa fa-search"} />
-                        </span>
-                        {"   "}
-                    </>
-                )}
-
                 {minimized ? (
                     <span
                         title={I18n.t("table.preferences.maximize")}
@@ -138,6 +126,12 @@ function Preferences<T extends object>({
                             );
                         })}
                 </div>
+            )}
+            {!hideAdvancedSearch && (
+
+                            <input onChange={searchPhrase => {
+                                searchPhrase && dispatch({ type: ActionType.FILTER_REPLACE, id: "tsv", values:[searchPhrase.target.value]});
+                            }} />
             )}
         </React.Fragment>
     );

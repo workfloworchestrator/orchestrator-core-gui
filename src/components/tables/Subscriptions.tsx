@@ -60,6 +60,7 @@ export function initialSubscriptionTableSettings(
     optional?: Partial<TableSettings<Subscription>>
 ): TableSettings<Subscription> {
     const defaults = {
+        showAdvancedSearch: false,
         showSettings: false,
         showPaginator: true,
         refresh: false,
@@ -326,7 +327,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
                     excludeInFilter={[]}
-                    hideAdvancedSearch={true}
+                    hideAdvancedSearch={false}
                 />
             </section>
         </div>
