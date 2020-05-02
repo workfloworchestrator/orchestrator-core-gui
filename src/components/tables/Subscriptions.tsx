@@ -195,7 +195,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "id",
                 accessor: "subscription_id",
-                disableFilters: true,
+                Filter: renderILikeFilter,
+                disableFilters: false,
                 Cell: renderSubscriptionIdCell
             },
             {

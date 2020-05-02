@@ -1209,7 +1209,8 @@ I18n.translations.en = {
             creator: "creator..",
             workflow: "workflow name...",
             subscriptions: "description...",
-            target: "workflow target..."
+            target: "workflow target...",
+            subscription_id: "id"
         },
         filter_button: {
             on: "on",
