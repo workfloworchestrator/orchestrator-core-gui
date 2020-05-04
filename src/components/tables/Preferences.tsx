@@ -26,6 +26,7 @@ interface IProps<T extends object> {
     initialTableSettings: TableSettings<T>;
     state: TableState<T>;
     excludeInFilter: string[];
+    hideAdvancedSearch: boolean;
 }
 
 function Preferences<T extends object>({
@@ -33,7 +34,8 @@ function Preferences<T extends object>({
     state,
     dispatch,
     initialTableSettings,
-    excludeInFilter
+    excludeInFilter,
+    hideAdvancedSearch
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
@@ -71,6 +73,18 @@ function Preferences<T extends object>({
                     )}
                 </span>
                 {"   "}
+
+                {!hideAdvancedSearch && (
+                    <>
+                        <span
+                            title={I18n.t("table.preferences.advancedSearch")}
+                            onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
+                        >
+                            <i className={showSettings ? "fa fa-search active" : "fa fa-search"} />
+                        </span>
+                        {"   "}
+                    </>
+                )}
 
                 {minimized ? (
                     <span

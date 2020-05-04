@@ -18,7 +18,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
 
-import { Organization, Subscription } from "../../utils/types";
+import { Organization, Product, Subscription } from "../../utils/types";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
@@ -42,6 +42,11 @@ export function renderProductsCell({ cell }: { cell: Cell }) {
     ).map((product_name, idx) => <p key={`product_${idx}`}>{product_name}</p>);
 }
 
+export function renderSubscriptionProductsCell({ cell }: { cell: Cell }) {
+    const product: Product = cell.value;
+    return product.name;
+}
+
 export function renderCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
     function lookup(uuid: string) {
         if (organisations === null || organisations === undefined) {
@@ -58,8 +63,26 @@ export function renderCustomersCell(organisations: Organization[] | null | undef
     };
 }
 
+export function renderSubscriptionCustomersCell(organisations: Organization[] | null | undefined, abbreviate: boolean) {
+    function lookup(uuid: string) {
+        if (organisations === null || organisations === undefined) {
+            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+        }
+        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
+    }
+    return function doRenderCustomersCell({ cell }: { cell: Cell }) {
+        const customer_id: string = cell.value;
+        return lookup(customer_id);
+    };
+}
+
 export function renderTimestampCell({ cell }: { cell: Cell }) {
+    if (!cell.value) {
+        return null;
+    }
     const timestamp: number = cell.value;
+
     const datetime = new Date(timestamp * 1000);
     const today = new Date();
     if (
@@ -82,6 +105,26 @@ export function renderPidCell({ cell }: { cell: Cell }) {
     );
 }
 
+export function renderSubscriptionIdCell({ cell }: { cell: Cell }) {
+    const subscriptionID: string = cell.value;
+    return (
+        <Link
+            key={subscriptionID}
+            onClick={e => e.stopPropagation()}
+            to={`/subscription/${subscriptionID}`}
+            title={subscriptionID}
+        >
+            {subscriptionID.slice(0, 8)}
+        </Link>
+    );
+}
+
+export function renderInsyncCell({ cell }: { cell: Cell }) {
+    const insync: boolean = cell.value;
+    console.log(insync);
+    return <i className={`${insync ? "fa fa-check-square" : "fa fa-square-o"}`} />;
+}
+
 export function renderProductTagCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;
     return uniq(
@@ -89,4 +132,25 @@ export function renderProductTagCell({ cell }: { cell: Cell }) {
             return subscription.product.tag;
         })
     ).join(", ");
+}
+
+export function renderSubscriptionTagCell({ cell }: { cell: Cell }) {
+    const product: Product = cell.value;
+    return product.tag;
+}
+
+export function renderCustomersCelliv2(organisations: Organization[] | null | undefined, abbreviate: boolean) {
+    function lookup(uuid: string) {
+        if (organisations === null || organisations === undefined) {
+            return I18n.t(abbreviate ? "unavailable_abbreviated" : "unavailable");
+        }
+        const organisation: Organization | undefined = organisations.find(org => org.uuid === uuid);
+        return organisation ? (abbreviate ? organisation.abbr : organisation.name) : uuid;
+    }
+    return function doRenderCustomersCell({ cell }: { cell: Cell }) {
+        const subscriptions: Subscription[] = cell.value;
+        return uniq(subscriptions.map(subscription => subscription.customer_id))
+            .map(lookup)
+            .join(", ");
+    };
 }

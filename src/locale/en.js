@@ -1175,6 +1175,14 @@ I18n.translations.en = {
             filtered_on: " and filtered on ",
             sorted_by: " and sorted by "
         },
+        subscriptions: {
+            complete: "Subscriptions",
+            provisioning: "Initial/Provisioning Subscriptions",
+            caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
+            with_status: " with status ",
+            filtered_on: " and filtered on ",
+            sorted_by: " and sorted by "
+        },
         tasks: "Tasks",
         expanded_row: {
             running: "Currently processing step '{{step}}'.",
@@ -1191,15 +1199,18 @@ I18n.translations.en = {
         no_results: "No results found.",
         filter_placeholder: {
             assignee: "assignee...",
+            description: "description...",
             status: "status...",
             customer: "customer name...",
+            customer_id: "customer name...",
             abbrev: "customer abbreviation...",
             product: "product name...",
             tag: "product tag...",
             creator: "creator..",
             workflow: "workflow name...",
             subscriptions: "description...",
-            target: "workflow target..."
+            target: "workflow target...",
+            subscription_id: "id"
         },
         filter_button: {
             on: "on",

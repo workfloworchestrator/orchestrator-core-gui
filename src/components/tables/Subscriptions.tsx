@@ -13,15 +13,14 @@
  */
 
 import {
-    renderCustomersCell,
-    renderPidCell,
-    renderProductTagCell,
-    renderProductsCell,
-    renderSubscriptionsCell,
+    renderInsyncCell,
+    renderSubscriptionCustomersCell,
+    renderSubscriptionIdCell,
+    renderSubscriptionProductsCell,
+    renderSubscriptionTagCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
-import I18n from "i18n-js";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -39,29 +38,27 @@ import {
     TableSettings,
     TableState
 } from "react-table";
-import { StringParam, useQueryParam } from "use-query-params";
+import { useQueryParam } from "use-query-params";
 import ApplicationContext from "utils/ApplicationContext";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
-import { ProcessV2 } from "utils/types";
+import { Subscription } from "utils/types";
 
+import SubscriptionDetail from "../../pages/SubscriptionDetail";
 import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
-export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
-    const initialFilterBy = [
-        { id: "isTask", values: [`${showTasks ? "true" : "false"}`] },
-        { id: "status", values: statuses }
-    ];
-    const initialSortBy = [{ id: "modified", desc: true }];
+export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
+    const initialFilterBy = [{ id: "status", values: statuses }];
+    const initialSortBy = [{ id: "start_date", desc: true }];
     return { filterBy: initialFilterBy, sortBy: initialSortBy };
 }
 
-export function initialProcessTableSettings(
+export function initialSubscriptionTableSettings(
     name: string,
     filterAndSort: FilterAndSort,
     hiddenColumns: string[],
-    optional?: Partial<TableSettings<ProcessV2>>
-): TableSettings<ProcessV2> {
+    optional?: Partial<TableSettings<Subscription>>
+): TableSettings<Subscription> {
     const defaults = {
         showSettings: false,
         showPaginator: true,
@@ -80,26 +77,25 @@ export function initialProcessTableSettings(
     };
 }
 
-interface ProcessesTableProps {
-    initialTableSettings: TableSettings<ProcessV2>;
-    renderActions: (process: ProcessV2) => JSX.Element;
-    isProcess: boolean;
+interface SubscriptionsTableProps {
+    initialTableSettings: TableSettings<Subscription>;
+    renderActions: (subscription: Subscription) => JSX.Element;
+    isSubscription: boolean;
 }
 
-export function ProcessesTable({ initialTableSettings, renderActions, isProcess }: ProcessesTableProps) {
+export function SubscriptionsTable({ initialTableSettings, renderActions }: SubscriptionsTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
-    const highlightQ = useQueryParam("highlight", StringParam)[0]; // only use the getter
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, assignees, processStatuses, redirect } = useContext(ApplicationContext);
+    const { organisations, products, redirect } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
-            function(current: TableSettings<ProcessV2>): TableState<ProcessV2> {
+            function(current: TableSettings<Subscription>): TableState<Subscription> {
                 // First get LocalState from LocalStorage
-                const settingsFromLocalStorage: LocalTableSettings<ProcessV2> | {} = JSON.parse(
+                const settingsFromLocalStorage: LocalTableSettings<Subscription> | {} = JSON.parse(
                     localStorage.getItem(`table-settings:${current.name}`) || "{}"
                 );
                 // Then get settings from SessionStorage
@@ -144,45 +140,40 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
         [filterQ, pageQ, sortQ]
     );
 
-    const extraRowPropGetter: RowPropGetter<ProcessV2> = useCallback(
+    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback(
         (props, { row }) => {
-            const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
             return {
                 ...props,
                 onClick: () => {
-                    const url = isProcess ? `/process/${row.values.pid}` : `/task/${row.values.pid}`;
+                    const url = `/subscription/${row.values.subscription_id}`;
                     redirect(url);
                 },
-                id: row.values.pid,
-                className: `${row.values.status}${highlighted}`
+                id: row.values.subscription_id,
+                className: `${row.values.status}`
             };
         },
-        [highlightQ, redirect, isProcess]
+        [redirect]
     );
 
-    const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
-        const { status, step, info } = row.values;
+    const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
+        const { subscription_id } = row.values;
         return (
             <div className={"expanded-row"}>
-                <h2>{I18n.t(`table.expanded_row.${status}`, { step: step })}</h2>
-                <pre>{info}</pre>
+                <SubscriptionDetail subscriptionId={subscription_id}></SubscriptionDetail>
             </div>
         );
     }, []);
 
     const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings, initialize]);
-    const columns: Column<ProcessV2>[] = useMemo(
+    const columns: Column<Subscription>[] = useMemo(
         () => [
             {
                 Header: "",
                 id: "info",
                 accessor: "failed_reason",
+                disableFilters: true,
                 disableSortBy: true,
-                Filter: ({ toggleAllRowsExpanded }) => (
-                    <i className="fa fa-arrows-v" onClick={() => toggleAllRowsExpanded()} />
-                ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
-                    const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;
                     const button = row.isExpanded ? (
                         <i className={`fa fa-minus-circle ${row.values.status}`} />
                     ) : (
@@ -196,114 +187,97 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                                 row.toggleRowExpanded();
                             }}
                         >
-                            {caret}
                             {button}
                         </div>
                     );
                 }
             },
             {
-                Header: "pid",
-                accessor: "pid",
-                disableSortBy: true,
-                disableFilters: true,
-                Cell: renderPidCell
+                Header: "id",
+                accessor: "subscription_id",
+                Filter: renderILikeFilter,
+                disableFilters: false,
+                Cell: renderSubscriptionIdCell
             },
             {
-                Header: "Assignee",
-                accessor: "assignee",
-                Filter: renderMultiSelectFilter.bind(null, assignees, "assignees")
-            },
-            {
-                Header: "Last step",
-                id: "step",
-                accessor: "last_step",
-                disableSortBy: true,
-                disableFilters: true
-            },
-            {
-                Header: "Status",
-                id: "status",
-                accessor: "last_status",
-                Filter: renderMultiSelectFilter.bind(null, processStatuses, "process_statuses"),
-                Cell: ({ cell }: { cell: Cell }) => {
-                    return I18n.t(`process_statuses.${cell.value}`);
-                }
-            },
-            {
-                Header: "Workflow",
-                accessor: "workflow",
+                Header: "Description",
+                accessor: "description",
                 Filter: renderILikeFilter
             },
             {
-                Header: "Target",
-                id: "target",
-                accessor: "workflow_target",
-                disableSortBy: true,
-                Filter: renderMultiSelectFilter.bind(null, ["CREATE", "MODIFY", "TERMINATE", "SYSTEM"], null)
+                Header: "Status",
+                accessor: "status",
+                Filter: renderMultiSelectFilter.bind(null, ["active", "terminated", "initial", "provisioning"], null)
+            },
+            {
+                Header: "In Sync",
+                id: "insync",
+                accessor: "insync",
+                Cell: renderInsyncCell,
+                disableFilters: true
             },
             {
                 Header: "Customer",
-                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
-                accessor: "subscriptions",
+                id: "customer_id", // Normally the accessor is used as id, but when used twice this gives a name clash.
+                accessor: "customer_id",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, false),
+                Cell: renderSubscriptionCustomersCell(organisations, false),
                 Filter: renderCustomersFilter
             },
             {
                 Header: "Abbr.",
                 id: "abbrev",
-                accessor: "subscriptions",
+                accessor: "customer_id",
                 disableSortBy: true,
-                Cell: renderCustomersCell(organisations, true),
+                Cell: renderSubscriptionCustomersCell(organisations, true),
                 Filter: renderCustomersFilter
             },
             {
-                Header: "Product(s)",
+                Header: "Product",
                 id: "product",
-                accessor: "subscriptions",
+                accessor: "product",
                 disableSortBy: true,
-                Cell: renderProductsCell,
-                Filter: renderILikeFilter
+                Cell: renderSubscriptionProductsCell,
+                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
             },
             {
-                Header: "Tag(s)",
+                Header: "Tag",
                 id: "tag",
-                accessor: "subscriptions",
+                accessor: "product",
                 disableSortBy: true,
-                Cell: renderProductTagCell,
+                Cell: renderSubscriptionTagCell,
                 Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
             },
+            // {
+            //     Header: "Subscription(s)",
+            //     accessor: "subscriptions",
+            //     disableSortBy: true,
+            //     Filter: renderILikeFilter,
+            //     Cell: renderSubscriptionsCell
+            // },
+            // {
+            //     Header: "Created by",
+            //     id: "creator",
+            //     accessor: "created_by",
+            //     Filter: renderILikeFilter
+            // },
             {
-                Header: "Subscription(s)",
-                accessor: "subscriptions",
-                disableSortBy: true,
-                Filter: renderILikeFilter,
-                Cell: renderSubscriptionsCell
-            },
-            {
-                Header: "Created by",
-                id: "creator",
-                accessor: "created_by",
-                Filter: renderILikeFilter
-            },
-            {
-                Header: "Started",
-                id: "started",
-                accessor: "started_at",
+                Header: "Start date",
+                id: "start_date",
+                accessor: "start_date",
                 Cell: renderTimestampCell,
                 disableFilters: true
             },
             {
-                Header: "Modified",
-                id: "modified",
-                accessor: "last_modified_at",
+                Header: "End date",
+                id: "end_date",
+                accessor: "end_date",
                 Cell: renderTimestampCell,
                 disableFilters: true
             },
             {
                 Header: "",
-                accessor: (originalRow: ProcessV2, index: number) => originalRow,
+                accessor: (originalRow: Subscription, index: number) => originalRow,
                 id: "actions",
                 Cell: ({ cell }: { cell: Cell }) => (
                     <ActionContainer
@@ -323,11 +297,11 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 disableSortBy: true
             }
         ],
-        [organisations, highlightQ, assignees, processStatuses, products, renderActions]
+        [organisations, products, renderActions]
     );
 
     const persistSettings = useCallback(
-        (settings: LocalTableSettings<ProcessV2> | SessionTableSettings) => {
+        (settings: LocalTableSettings<Subscription> | SessionTableSettings) => {
             if (isLocalTableSettings(settings)) {
                 localStorage.setItem(`table-settings:${name}`, JSON.stringify(settings));
             } else {
@@ -340,19 +314,18 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
         [name, setFilterQ, setPageQ, setSortQ]
     );
 
-    const excludeInFilter = ["info", "workflow"];
     return (
         <div key={name}>
             <section className="nwa-table" id={name}>
-                <NwaTable<ProcessV2>
+                <NwaTable<Subscription>
                     columns={columns}
-                    initialState={initialState as TableState<ProcessV2>}
+                    initialState={initialState as TableState<Subscription>}
                     persistSettings={persistSettings}
-                    endpoint={"processes"}
+                    endpoint={"subscriptions"}
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
-                    excludeInFilter={excludeInFilter}
+                    excludeInFilter={[]}
                     hideAdvancedSearch={true}
                 />
             </section>
