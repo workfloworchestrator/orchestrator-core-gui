@@ -234,8 +234,24 @@
 // V2 Stuff
 .tasks-container {
     @include page;
+    background-color: white;
 }
+
 .actions {
     margin: 10px 0px -40px 10px;
     text-align: right;
+    //.explain {
+    //    cursor: pointer;
+    //    font-size: 22px;
+    //    i {
+    //        color: lighten($blue, 5);
+    //        font-size: 30px;
+    //        margin-top: 15px;
+    //    }
+    //
+    //    span {
+    //        color: $blue;
+    //        font-weight: bold;
+    //    }
+    //}
 }

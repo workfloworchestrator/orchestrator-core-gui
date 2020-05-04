@@ -141,7 +141,6 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
         return (
             <div className="processes-container">
-                <section className="header">{this.renderExplain()}</section>
                 <Explain
                     close={() => this.setState({ showExplanation: false })}
                     render={() => (
@@ -159,6 +158,9 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
+                <div className="actions">
+                    {this.renderExplain()}
+                </div>
                 <ProcessesTable
                     key={"active"}
                     initialTableSettings={activeSettings}

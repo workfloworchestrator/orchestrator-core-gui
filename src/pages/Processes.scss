@@ -20,10 +20,6 @@
     @include page;
     @include card;
 
-    //.card {
-    //    @include card;
-    //    padding: 15px 15px 0 15px;
-    //}
     .options {
         display: flex;
         padding-top: 25px;
@@ -244,13 +240,14 @@
 
 // V2 Stuff
 .processes-container {
-    // Removed next include to use full width
     @include page;
     background-color: white;
+}
 
+.actions {
+    margin: 10px 0px -40px 10px;
+    text-align: right;
     .explain {
-        display: flex;
-        align-items: center;
         cursor: pointer;
         font-size: 22px;
         i {

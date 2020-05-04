@@ -26,6 +26,7 @@ import ScrollUpButton from "react-scroll-up-button";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 import { Subscription } from "../utils/types";
+import Explain from "../components/Explain";
 
 // TODO investigate dynamic actions : start, stop workflows
 // import { actionOptions } from "../validations/Subscriptions";
@@ -37,6 +38,7 @@ interface IState {
     confirmationDialogAction: (e: React.MouseEvent) => void;
     confirm: () => void;
     confirmationDialogQuestion: string;
+    showExplanation: boolean;
 }
 
 export default class SubscriptionsPage extends React.PureComponent<IProps, IState> {
@@ -47,7 +49,8 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            showExplanation: false
         };
     }
 
@@ -77,6 +80,14 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         return <div>test</div>;
     };
 
+    renderExplain() {
+        return (
+            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
+                <i className="fa fa-question-circle" />
+            </section>
+        );
+    }
+
     render() {
         const completeSettings = initialSubscriptionTableSettings(
             "table.subscriptions.complete",
@@ -93,12 +104,72 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
 
         return (
             <div className="subscriptions-container">
+                <Explain
+                    close={() => this.setState({ showExplanation: false })}
+                    render={() => (
+                        <React.Fragment>
+                            <h1>Using the advanced search</h1>
+                            <p>
+                                The advanced search allows you to search on all resource types of product types. So if
+                                you know an IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, then you can find it by the use of the
+                                advanced search. The values in the search boxes above the columns, allow you to
+                                refine/narrow these search results. It's important to remember that the advanced search
+                                will only find complete words, but it will split words with "-", "," and "_".
+                            </p>
+                            <p>
+                                For example, to search for all subscriptions of a particular customer, the search phrase
+                                would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However, as the UUID
+                                is unique, simply searching for <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even
+                                <i>"d253130e"</i> would yield the same results.
+                            </p>
+                            <p>
+                                One can also use the keywords <i>and</i> and <i>or</i>. And one can use <i>-</i> to
+                                exclude a keyword. To make sure all words in the search are found in matching order use
+                                quotes <i>"</i> around the sentence. Example:{" "}
+                                <i>(star wars) or "luke skywalker" -scotty</i> searches for star and wars or luke but
+                                excluding scotty.
+                            </p>
+                            <p>
+                                The full text search can contain multiple search criteria that will AND-ed together. For
+                                example
+                                <i>
+                                    "customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"
+                                </i>{" "}
+                                would only return subscriptions matching the supplied <i>customer_id</i>, <i>status</i>{" "}
+                                and <i>tag</i>. Due to how full text search works that query could be simplified to:{" "}
+                                <i>"d253130e active ip_prefix"</i>.
+                            </p>
+                            <h1>Patterns</h1>
+                            <p>
+                                <b>by customer:</b> customer_id:uuid
+                                <br />
+                                <b>by ims_circuit_id:</b> ims_circuit_id:int
+                                <br />
+                                <b>by ipam_prefix_id:</b> ipam_prefix_id:int
+                                <br />
+                                <b>by nso_service_id:</b> nso_service_ud:int
+                                <br />
+                                <b>by service_speed:</b> nso_service_ud:int
+                                <br />
+                                <b>by asn:</b> asn:int
+                                <br />
+                                <b>by crm_port_id:</b> crm_port_id:int
+                                <br />
+                            </p>
+                        </React.Fragment>
+                    )}
+                    isVisible={this.state.showExplanation}
+                    title="Subscriptions Help"
+                />
                 <ConfirmationDialog
                     isOpen={this.state.confirmationDialogOpen}
                     cancel={this.cancelConfirmation}
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
+                <div className="actions">
+                    {this.renderExplain()}
+                </div>
                 <SubscriptionsTable
                     key={"complete"}
                     initialTableSettings={completeSettings}

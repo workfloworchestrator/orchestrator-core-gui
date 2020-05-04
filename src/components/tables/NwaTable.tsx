@@ -81,7 +81,7 @@ export type TableSettingsAction<T extends object> =
     | { type: ActionType.SHOW_PAGINATOR_TOGGLE }
     | { type: ActionType.MINIMIZE }
     | { type: ActionType.MAXIMIZE }
-    | { type: ActionType.ADVANCED_SEARCH; searchPhrase: string }
+    | { type: ActionType.ADVANCED_SEARCH; searchPhrase: string };
 
 /* this type guard makes it possible to differentiate between the settings meant for localStorage
  * vs. the session and URL. It only checks for hiddenColumns, but as all invocations of persistSettings are type safe
@@ -264,7 +264,7 @@ export function NwaTable<T extends object>({
         hiddenColumns,
         pageIndex,
         pageSize,
-        minimized,
+        minimized
     } = state;
 
     const preferencesProps = {

@@ -33,12 +33,14 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+import Explain from "../components/Explain";
 
 interface IState {
     confirmationDialogOpen: boolean;
     confirmationDialogAction: (e: React.MouseEvent) => void;
     confirm: () => void;
     confirmationDialogQuestion: string;
+    showExplanation: boolean
 }
 
 export default class Tasks extends React.PureComponent<{}, IState> {
@@ -49,7 +51,8 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => {},
             confirm: () => {},
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            showExplanation: false
         };
     }
 
@@ -153,6 +156,14 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         return <DropDownActions options={options} i18nPrefix="processes" />;
     };
 
+    renderExplain() {
+        return (
+            <span className="explain" onClick={() => this.setState({ showExplanation: true })}>
+                <i className="fa fa-question-circle" />
+            </span>
+        );
+    }
+
     render() {
         const { confirmationDialogOpen, confirmationDialogAction, confirmationDialogQuestion } = this.state;
 
@@ -164,6 +175,17 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         );
         return (
             <div className="tasks-container">
+                <Explain
+                    close={() => this.setState({ showExplanation: false })}
+                    render={() => (
+                        <React.Fragment>
+                            <h1>Tasks</h1>
+                            <p>This is the manual for the Tasks page</p>
+                        </React.Fragment>
+                    )}
+                    isVisible={this.state.showExplanation}
+                    title="Tasks Help"
+                />
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}
@@ -171,7 +193,6 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     question={confirmationDialogQuestion}
                 />
                 <div className="actions">
-                    <div className="options">
                         <button className="button blue" onClick={this.runAllTasks}>
                             {I18n.t("tasks.runall")}
                             <i className="fa fa-refresh" />
@@ -179,7 +200,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                         <button className="new button green" onClick={this.newTask}>
                             {I18n.t("tasks.new")} <i className="fa fa-plus" />
                         </button>
-                    </div>
+                    {this.renderExplain()}
                 </div>
                 <ProcessesTable
                     initialTableSettings={tasksSettings}
