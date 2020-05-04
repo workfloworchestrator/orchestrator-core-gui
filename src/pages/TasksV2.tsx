@@ -33,6 +33,7 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+
 import Explain from "../components/Explain";
 
 interface IState {
@@ -40,7 +41,7 @@ interface IState {
     confirmationDialogAction: (e: React.MouseEvent) => void;
     confirm: () => void;
     confirmationDialogQuestion: string;
-    showExplanation: boolean
+    showExplanation: boolean;
 }
 
 export default class Tasks extends React.PureComponent<{}, IState> {
@@ -193,13 +194,13 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                     question={confirmationDialogQuestion}
                 />
                 <div className="actions">
-                        <button className="button blue" onClick={this.runAllTasks}>
-                            {I18n.t("tasks.runall")}
-                            <i className="fa fa-refresh" />
-                        </button>
-                        <button className="new button green" onClick={this.newTask}>
-                            {I18n.t("tasks.new")} <i className="fa fa-plus" />
-                        </button>
+                    <button className="button blue" onClick={this.runAllTasks}>
+                        {I18n.t("tasks.runall")}
+                        <i className="fa fa-refresh" />
+                    </button>
+                    <button className="new button green" onClick={this.newTask}>
+                        {I18n.t("tasks.new")} <i className="fa fa-plus" />
+                    </button>
                     {this.renderExplain()}
                 </div>
                 <ProcessesTable

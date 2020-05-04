@@ -158,9 +158,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
-                <div className="actions">
-                    {this.renderExplain()}
-                </div>
+                <div className="actions">{this.renderExplain()}</div>
                 <ProcessesTable
                     key={"active"}
                     initialTableSettings={activeSettings}

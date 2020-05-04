@@ -39,7 +39,9 @@ function Preferences<T extends object>({
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
-    const searchPhrase = state.filterBy.find(column => column.id === "tsv") ? state.filterBy.find(column => column.id === "tsv").values[0] : ""
+    const searchPhrase = state.filterBy.find(column => column.id === "tsv")
+        ? state.filterBy.find(column => column.id === "tsv").values[0]
+        : "";
 
     return (
         <React.Fragment key={`preferences_${name}`}>
@@ -132,29 +134,28 @@ function Preferences<T extends object>({
             )}
             {!hideAdvancedSearch && (
                 <div className="advanced-search-container">
-                    <span><b>Advanced search</b></span>
-                    <span><input
-
+                    <span>
+                        <b>Advanced search</b>
+                    </span>
+                    <span>
+                        <input
                             placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
                             type="text"
                             onChange={searchPhrase => {
                                 searchPhrase &&
-                                dispatch({
-                                    type: ActionType.FILTER_REPLACE,
-                                    id: "tsv",
-                                    values: [searchPhrase.target.value]
-                                });
+                                    dispatch({
+                                        type: ActionType.FILTER_REPLACE,
+                                        id: "tsv",
+                                        values: [searchPhrase.target.value]
+                                    });
                             }}
                             value={searchPhrase}
-                    /></span>
-                    <span><i className="fa fa-search"></i></span>
+                        />
+                    </span>
+                    <span>
+                        <i className="fa fa-search"></i>
+                    </span>
                 </div>
-
-
-
-
-
-
             )}
         </React.Fragment>
     );

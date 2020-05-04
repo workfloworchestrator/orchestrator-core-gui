@@ -46,7 +46,7 @@ div.advanced-search-container {
     i.fa-search {
         color: $blue;
         margin-left: 0px;
-        font-size: 18px
+        font-size: 18px;
     }
     span {
         padding-right: 5px;
@@ -61,7 +61,7 @@ div.advanced-search-container {
         border-top-left-radius: $br;
         font-size: 14px;
         height: 100%;
-        width: 60%
+        width: 60%;
     }
 }
 
@@ -83,7 +83,6 @@ div.advanced-search-container {
         margin-left: 1px;
     }
 }
-
 
 table.nwa-table {
     width: 100%;
@@ -298,5 +297,3 @@ span.rest {
 span.dead {
     color: $red;
 }
-
-

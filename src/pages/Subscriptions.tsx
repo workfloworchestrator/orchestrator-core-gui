@@ -24,9 +24,9 @@ import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
 import ConfirmationDialog from "../components/ConfirmationDialog";
+import Explain from "../components/Explain";
 import ApplicationContext from "../utils/ApplicationContext";
 import { Subscription } from "../utils/types";
-import Explain from "../components/Explain";
 
 // TODO investigate dynamic actions : start, stop workflows
 // import { actionOptions } from "../validations/Subscriptions";
@@ -167,9 +167,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
-                <div className="actions">
-                    {this.renderExplain()}
-                </div>
+                <div className="actions">{this.renderExplain()}</div>
                 <SubscriptionsTable
                     key={"complete"}
                     initialTableSettings={completeSettings}
