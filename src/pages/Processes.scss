@@ -247,4 +247,21 @@
     // Removed next include to use full width
     @include page;
     background-color: white;
+
+    .explain {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 22px;
+        i {
+            color: lighten($blue, 5);
+            font-size: 30px;
+            margin-top: 15px;
+        }
+
+        span {
+            color: $blue;
+            font-weight: bold;
+        }
+    }
 }

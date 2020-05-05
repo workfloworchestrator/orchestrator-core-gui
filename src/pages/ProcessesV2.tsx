@@ -27,6 +27,7 @@ import ScrollUpButton from "react-scroll-up-button";
 import { abortProcess, retryProcess } from "../api";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import DropDownActions from "../components/DropDownActions";
+import Explain from "../components/Explain";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid } from "../utils/Lookups";
@@ -41,6 +42,7 @@ interface IState {
     confirmationDialogAction: (e: React.MouseEvent) => void;
     confirm: () => void;
     confirmationDialogQuestion: string;
+    showExplanation: boolean;
 }
 
 export default class Processes extends React.PureComponent<IProps, IState> {
@@ -51,7 +53,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
             confirmationDialogOpen: false,
             confirmationDialogAction: () => this,
             confirm: () => this,
-            confirmationDialogQuestion: ""
+            confirmationDialogQuestion: "",
+            showExplanation: false
         };
     }
 
@@ -114,6 +117,14 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         return <DropDownActions options={options} i18nPrefix="processes" />;
     };
 
+    renderExplain() {
+        return (
+            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
+                <i className="fa fa-question-circle" />
+            </section>
+        );
+    }
+
     render() {
         const activeSettings = initialProcessTableSettings(
             "table.processes.active",
@@ -130,6 +141,18 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
         return (
             <div className="processes-container">
+                <section className="header">{this.renderExplain()}</section>
+                <Explain
+                    close={() => this.setState({ showExplanation: false })}
+                    render={() => (
+                        <React.Fragment>
+                            <h1>Processes</h1>
+                            <p>This is the manual for the Processes page</p>
+                        </React.Fragment>
+                    )}
+                    isVisible={this.state.showExplanation}
+                    title="Processes Help"
+                />
                 <ConfirmationDialog
                     isOpen={this.state.confirmationDialogOpen}
                     cancel={this.cancelConfirmation}

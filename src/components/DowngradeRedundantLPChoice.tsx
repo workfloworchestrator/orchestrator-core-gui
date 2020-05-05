@@ -57,7 +57,7 @@ function enrichPrimarySubscription(
     const si_secondary = subscription.instances!.find(si => si.label === "Secondary")!;
 
     let fi_service_speed;
-    if (fi_domain.value === "SURFNET8") {
+    if (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8") {
         fi_service_speed = si_primary.values.find(v => v.resource_type.resource_type === "service_speed");
 
         subscription.nso_service_id_p = si_primary.values.find(
