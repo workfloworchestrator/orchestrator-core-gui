@@ -1201,6 +1201,7 @@ I18n.translations.en = {
         filter_placeholder: {
             assignee: "assignee...",
             description: "description...",
+            note: "notes...",
             status: "status...",
             customer: "customer name...",
             customer_id: "customer name...",

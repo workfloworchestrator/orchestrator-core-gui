@@ -277,26 +277,32 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 disableFilters: true
             },
             {
-                Header: "",
-                accessor: (originalRow: Subscription, index: number) => originalRow,
-                id: "actions",
-                Cell: ({ cell }: { cell: Cell }) => (
-                    <ActionContainer
-                        title={"Actions"}
-                        renderButtonContent={active => {
-                            const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
-                            return (
-                                <span className={classes}>
-                                    <i className={"fa fa-bars"} />
-                                </span>
-                            );
-                        }}
-                        renderContent={disabled => renderActions(cell.value)}
-                    />
-                ),
-                disableFilters: true,
-                disableSortBy: true
+                Header: "Notes",
+                id: "note",
+                accessor: "note",
+                Filter: renderILikeFilter
             }
+            // {
+            //     Header: "",
+            //     accessor: (originalRow: Subscription, index: number) => originalRow,
+            //     id: "actions",
+            //     Cell: ({ cell }: { cell: Cell }) => (
+            //         <ActionContainer
+            //             title={"Actions"}
+            //             renderButtonContent={active => {
+            //                 const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
+            //                 return (
+            //                     <span className={classes}>
+            //                         <i className={"fa fa-bars"} />
+            //                     </span>
+            //                 );
+            //             }}
+            //             renderContent={disabled => renderActions(cell.value)}
+            //         />
+            //     ),
+            //     disableFilters: true,
+            //     disableSortBy: true
+            // }
         ],
         [organisations, products, renderActions]
     );
