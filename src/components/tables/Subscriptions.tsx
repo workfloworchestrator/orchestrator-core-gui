@@ -44,7 +44,6 @@ import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from 
 import { Subscription } from "utils/types";
 
 import SubscriptionDetail from "../../pages/SubscriptionDetail";
-import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
@@ -219,7 +218,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             },
             {
                 Header: "Customer",
-                id: "customer_id", // Normally the accessor is used as id, but when used twice this gives a name clash.
+                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "customer_id",
                 disableSortBy: true,
                 Cell: renderSubscriptionCustomersCell(organisations, false),
@@ -249,19 +248,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 Cell: renderSubscriptionTagCell,
                 Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
             },
-            // {
-            //     Header: "Subscription(s)",
-            //     accessor: "subscriptions",
-            //     disableSortBy: true,
-            //     Filter: renderILikeFilter,
-            //     Cell: renderSubscriptionsCell
-            // },
-            // {
-            //     Header: "Created by",
-            //     id: "creator",
-            //     accessor: "created_by",
-            //     Filter: renderILikeFilter
-            // },
             {
                 Header: "Start date",
                 id: "start_date",
@@ -282,29 +268,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 accessor: "note",
                 Filter: renderILikeFilter
             }
-            // {
-            //     Header: "",
-            //     accessor: (originalRow: Subscription, index: number) => originalRow,
-            //     id: "actions",
-            //     Cell: ({ cell }: { cell: Cell }) => (
-            //         <ActionContainer
-            //             title={"Actions"}
-            //             renderButtonContent={active => {
-            //                 const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
-            //                 return (
-            //                     <span className={classes}>
-            //                         <i className={"fa fa-bars"} />
-            //                     </span>
-            //                 );
-            //             }}
-            //             renderContent={disabled => renderActions(cell.value)}
-            //         />
-            //     ),
-            //     disableFilters: true,
-            //     disableSortBy: true
-            // }
         ],
-        [organisations, products, renderActions]
+        [organisations, products]
     );
 
     const persistSettings = useCallback(

@@ -100,7 +100,7 @@
     "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md,ts,tsx},public/**/*.html}'"
   },
   "pre-commit": [
-    "prettier-fix"
+    "prettier"
   ],
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

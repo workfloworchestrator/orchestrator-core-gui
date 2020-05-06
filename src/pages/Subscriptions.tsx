@@ -91,13 +91,13 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
     render() {
         const completeSettings = initialSubscriptionTableSettings(
             "table.subscriptions.complete",
-            initialSubscriptionsFilterAndSort(false, ["active", "terminated"]),
+            initialSubscriptionsFilterAndSort(false, ["active"]),
             ["product", "customer_id", "note"],
             { showSettings: false, refresh: false, pageSize: 10 }
         );
         const provisioningSettings = initialSubscriptionTableSettings(
             "table.subscriptions.provisioning",
-            initialSubscriptionsFilterAndSort(false, ["provisioning", "initial"]),
+            initialSubscriptionsFilterAndSort(false, ["provisioning", "initial", "terminated"]),
             ["start_date", "customer_id", "end_date", "insync", "note"],
             { showSettings: false, refresh: false, pageSize: 5 }
         );
@@ -120,7 +120,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                                 For example, to search for all subscriptions of a particular customer, the search phrase
                                 would be <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a"</i>. However, as the UUID
                                 is unique, simply searching for <i>"d253130e-0a11-e511-80d0-005056956c1a"</i> or even
-                                <i>"d253130e"</i> would yield the same results.
+                                <i>"d253130e"</i> would probably yield the same results.
                             </p>
                             <p>
                                 One can also use the keywords <i>and</i> and <i>or</i>. And one can use <i>-</i> to
