@@ -1131,6 +1131,7 @@ I18n.translations.en = {
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
 
         terminate_sn8_service_port: "Terminate SN8 Service Port",
+        terminate_sn8_light_path: "Terminate SN8 Light Path",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
