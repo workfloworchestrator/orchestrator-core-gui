@@ -153,8 +153,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                             <h2>Settings storage</h2>
                             <p>
                                 The tables will store the setting for your filters and columns in the local storage of
-                                your browser. If you want to reset it to default setting you can click the gear icon and
-                                use the reset button.
+                                your browser. If you want to reset it to default settings you can click the gear icon
+                                and use the reset button.
                             </p>
                         </React.Fragment>
                     )}
