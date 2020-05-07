@@ -61,8 +61,7 @@ export enum ActionType {
     SHOW_SETTINGS_TOGGLE = "show-settings/toggle",
     SHOW_PAGINATOR_TOGGLE = "show-paginator/toggle",
     MINIMIZE = "table/minimize",
-    MAXIMIZE = "table/maximize",
-    ADVANCED_SEARCH = "advanced-search"
+    MAXIMIZE = "table/maximize"
 }
 
 export type TableSettingsAction<T extends object> =
@@ -80,8 +79,7 @@ export type TableSettingsAction<T extends object> =
     | { type: ActionType.SHOW_SETTINGS_TOGGLE }
     | { type: ActionType.SHOW_PAGINATOR_TOGGLE }
     | { type: ActionType.MINIMIZE }
-    | { type: ActionType.MAXIMIZE }
-    | { type: ActionType.ADVANCED_SEARCH; searchPhrase: string };
+    | { type: ActionType.MAXIMIZE };
 
 /* this type guard makes it possible to differentiate between the settings meant for localStorage
  * vs. the session and URL. It only checks for hiddenColumns, but as all invocations of persistSettings are type safe
@@ -99,7 +97,7 @@ export function tableSettingsReducer<T extends object>(
     prevState: TableState<T>
 ) {
     // Uncomment to see all the actions in the console.
-    console.log(action);
+    // console.log(action);
     const changedState = produce(newState, draft => {
         switch (action.type) {
             case ActionType.OVERRIDE:

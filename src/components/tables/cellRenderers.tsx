@@ -107,6 +107,17 @@ export function renderPidCell({ cell }: { cell: Cell }) {
 
 export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
     const name: string = cell.value;
+    const pid: string = cell.row.values.hasOwnProperty("pid") ? cell.row.values.pid : undefined;
+
+    return (
+        <Link key={pid} onClick={e => e.stopPropagation()} to={`/process/${pid}`} title={name}>
+            {name}
+        </Link>
+    );
+}
+
+export function renderSubscriptionDescriptionCell({ cell }: { cell: Cell }) {
+    const name: string = cell.value;
     const subscription_id: string = cell.row.values.hasOwnProperty("subscription_id")
         ? cell.row.values.subscription_id
         : undefined;
@@ -117,16 +128,6 @@ export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
             to={`/subscription/${subscription_id}`}
             title={name}
         >
-            {name}
-        </Link>
-    );
-}
-
-export function renderSubscriptionDescriptionCell({ cell }: { cell: Cell }) {
-    const name: string = cell.value;
-    const pid: string = cell.row.values.hasOwnProperty("pid") ? cell.row.values.pid : undefined;
-    return (
-        <Link key={pid} onClick={e => e.stopPropagation()} to={`/process/${pid}`} title={name}>
             {name}
         </Link>
     );

@@ -90,7 +90,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, redirect } = useContext(ApplicationContext);
+    const { organisations, products } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
@@ -141,20 +141,13 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         [filterQ, pageQ, sortQ]
     );
 
-    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback(
-        (props, { row }) => {
-            return {
-                ...props,
-                onClick: () => {
-                    const url = `/subscription/${row.values.subscription_id}`;
-                    redirect(url);
-                },
-                id: row.values.subscription_id,
-                className: `${row.values.status}`
-            };
-        },
-        [redirect]
-    );
+    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback((props, { row }) => {
+        return {
+            ...props,
+            id: row.values.subscription_id,
+            className: `${row.values.status}`
+        };
+    }, []);
 
     const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
         const { subscription_id } = row.values;
@@ -299,7 +292,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
-                    excludeInFilter={[]}
+                    excludeInFilter={["description"]}
                     hideAdvancedSearch={false}
                 />
             </section>
