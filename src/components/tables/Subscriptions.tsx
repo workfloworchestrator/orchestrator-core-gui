@@ -15,6 +15,7 @@
 import {
     renderInsyncCell,
     renderSubscriptionCustomersCell,
+    renderSubscriptionDescriptionCell,
     renderSubscriptionIdCell,
     renderSubscriptionProductsCell,
     renderSubscriptionTagCell,
@@ -202,7 +203,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "Description",
                 accessor: "description",
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
+                Cell: renderSubscriptionDescriptionCell
             },
             {
                 Header: "Status",

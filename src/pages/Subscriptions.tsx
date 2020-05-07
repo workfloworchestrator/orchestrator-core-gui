@@ -108,7 +108,19 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                     close={() => this.setState({ showExplanation: false })}
                     render={() => (
                         <React.Fragment>
-                            <h1>Using the advanced search</h1>
+                            <h1>Subscriptions</h1>
+                            <p>
+                                The processes are split into 2 different tables. The upper one will show all active
+                                subscriptions, whilst the lower one will show subscriptions that are initial,
+                                provisioning or terminated.
+                            </p>
+                            <h2>Settings storage</h2>
+                            <p>
+                                The tables will store the setting for your filters and columns in the local storage of
+                                your browser. If you want to reset it to default setting you can click the gear icon and
+                                use the reset button.
+                            </p>
+                            <h2>Using the advanced search</h2>
                             <p>
                                 The advanced search allows you to search on all resource types of product types. So if
                                 you know an IMS_CIRCUIT_ID or a IPAM_PREFIX_ID, then you can find it by the use of the

@@ -481,7 +481,6 @@ I18n.translations.en = {
         }
     },
     validations: {
-        help: "Explain",
         product: "Product",
         name: "Name",
         description: "Description",

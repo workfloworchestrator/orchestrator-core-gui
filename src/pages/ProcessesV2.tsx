@@ -146,7 +146,16 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     render={() => (
                         <React.Fragment>
                             <h1>Processes</h1>
-                            <p>This is the manual for the Processes page</p>
+                            <p>
+                                The processes are split into 2 different tables. The upper one will show all active
+                                processes, whilst the lower one will show workflows that are done/complete.
+                            </p>
+                            <h2>Settings storage</h2>
+                            <p>
+                                The tables will store the setting for your filters and columns in the local storage of
+                                your browser. If you want to reset it to default setting you can click the gear icon and
+                                use the reset button.
+                            </p>
                         </React.Fragment>
                     )}
                     isVisible={this.state.showExplanation}

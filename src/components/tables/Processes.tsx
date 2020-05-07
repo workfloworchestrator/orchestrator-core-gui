@@ -18,7 +18,8 @@ import {
     renderProductTagCell,
     renderProductsCell,
     renderSubscriptionsCell,
-    renderTimestampCell
+    renderTimestampCell,
+    renderWorkflowNameCell
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import I18n from "i18n-js";
@@ -233,7 +234,8 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
             {
                 Header: "Workflow",
                 accessor: "workflow",
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
+                Cell: renderWorkflowNameCell
             },
             {
                 Header: "Target",
