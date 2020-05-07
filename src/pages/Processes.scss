@@ -79,7 +79,6 @@
     }
 
     table.processes {
-        width: 30%;
         td,
         th {
             text-align: left;
@@ -105,34 +104,6 @@
                 cursor: pointer;
                 padding: 5px 5px 10px 5px;
             }
-            th.assignee {
-                width: 10%;
-            }
-            th.step {
-                width: 8%;
-            }
-            th.status {
-                width: 8%;
-            }
-            th.customer {
-                width: 15%;
-            }
-            th.product {
-                width: 15%;
-            }
-            th.workflow_name {
-                width: 15%;
-            }
-            th.started {
-                width: 10%;
-            }
-            th.last_modified {
-                width: 10%;
-            }
-            th.actions {
-                text-align: right;
-                width: 5%;
-            }
             span {
                 text-transform: uppercase;
                 font-weight: bold;
@@ -149,7 +120,6 @@
         }
         tbody {
             tr {
-                cursor: pointer;
                 &:hover {
                     background-color: $hover;
                     &.suspended {

@@ -128,7 +128,60 @@ export function renderMultiSelectFilter(
             renderContent={disabled => (
                 <Select
                     id={`filter-${state.name}.${column.id}`}
-                    inputId={`input-filter-${state.name}.${column.id}`} // Todo: find a way to make it unique (2 tables on page possible)
+                    inputId={`input-filter-${state.name}.${column.id}`}
+                    isDisabled={disabled}
+                    isMulti
+                    value={selected}
+                    name={"multi-select"}
+                    options={options}
+                    onChange={onChange}
+                    placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                />
+            )}
+        />
+    );
+}
+
+export function renderSingleSelectFilter(
+    allOptions: string[],
+    i18nPrefix: string | null,
+    {
+        state,
+        dispatch,
+        column
+    }: {
+        state: TableState<ProcessV2>;
+        dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
+        column: ColumnInstance;
+    }
+) {
+    const current = state.filterBy.find(filter => filter.id === column.id);
+    const currentFilter = current ? current.values : null;
+    const options = i18nPrefix
+        ? allOptions.map(val => ({ value: val, label: I18n.t(`${i18nPrefix}.${val}`) }))
+        : allOptions.map(val => ({ value: val, label: val }));
+    const selected = currentFilter ? options.filter(({ value }) => currentFilter.includes(value)) : [];
+    const filtering = selected.length > 0;
+    const onChange = (selected: any, action: any) => {
+        if (action && action.action === "select-option") {
+            if (filtering) {
+                dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
+            }
+            dispatch({ type: ActionType.FILTER_ADD, id: column.id, value: action.option.value });
+        } else if (action.action === "remove-value") {
+            dispatch({ type: ActionType.FILTER_REMOVE, id: column.id, value: action.removedValue.value });
+        } else if (action.action === "clear") {
+            dispatch({ type: ActionType.FILTER_CLEAR, id: column.id });
+        }
+    };
+    return (
+        <DropDownContainer
+            title={column.id}
+            renderButtonContent={renderFilterIcon(filtering)}
+            renderContent={disabled => (
+                <Select
+                    id={`filter-${state.name}.${column.id}`}
+                    inputId={`input-filter-${state.name}.${column.id}`}
                     isDisabled={disabled}
                     isMulti
                     value={selected}

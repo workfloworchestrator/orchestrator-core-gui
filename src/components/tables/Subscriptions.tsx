@@ -21,7 +21,12 @@ import {
     renderSubscriptionTagCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
-import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
+import {
+    renderCustomersFilter,
+    renderILikeFilter,
+    renderMultiSelectFilter,
+    renderSingleSelectFilter
+} from "components/tables/filterRenderers";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -164,7 +169,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "",
                 id: "info",
-                accessor: "failed_reason",
+                accessor: "info",
                 disableFilters: true,
                 disableSortBy: true,
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
@@ -209,7 +214,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 id: "insync",
                 accessor: "insync",
                 Cell: renderInsyncCell,
-                disableFilters: true
+                Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null)
             },
             {
                 Header: "Customer",

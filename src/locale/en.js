@@ -1211,7 +1211,8 @@ I18n.translations.en = {
             workflow: "workflow name...",
             subscriptions: "description...",
             target: "workflow target...",
-            subscription_id: "id"
+            subscription_id: "id",
+            insync: "yes or no"
         },
         filter_button: {
             on: "on",

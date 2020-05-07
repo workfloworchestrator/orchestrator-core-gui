@@ -20,10 +20,6 @@
     @include page;
     @include card;
 
-    //.card {
-    //    @include card;
-    //    padding: 15px 15px 0 15px;
-    //}
     .options {
         display: flex;
         padding-top: 25px;
@@ -83,7 +79,6 @@
     }
 
     table.subscriptions {
-        width: 30%;
         td,
         th {
             text-align: left;
@@ -91,18 +86,6 @@
         }
         tr {
             border-bottom: 1px solid $light-grey;
-            &.suspended {
-                background-color: $light-gold;
-            }
-            &.running {
-                background-color: $light-green;
-            }
-            &.api_unavailable {
-                background-color: $light-blue;
-            }
-            &.inconsistent_data {
-                background-color: $light-red;
-            }
         }
         thead {
             th {
@@ -125,24 +108,8 @@
         }
         tbody {
             tr {
-                cursor: pointer;
                 &:hover {
                     background-color: $hover;
-                    &.suspended {
-                        background-color: darken($light-gold, 10%);
-                    }
-                    &.running {
-                        background-color: darken($light-green, 10%);
-                    }
-                    &.api_unavailable {
-                        background-color: darken($light-blue, 10%);
-                    }
-                    &.inconsistent_data {
-                        background-color: darken($light-red, 10%);
-                    }
-                    td.actions i.fa-ellipsis-h {
-                        color: $blue;
-                    }
                 }
             }
             td {
@@ -169,20 +136,6 @@
                         }
                     }
                 }
-            }
-            td.assignee {
-                color: $blue;
-                font-weight: bold;
-                padding-right: 15px;
-            }
-            td.assignee i.fa-caret-right {
-                transform: translateX(-15px);
-            }
-            td.actions {
-                cursor: pointer;
-                text-align: right;
-                font-size: 18px;
-                position: relative;
             }
         }
 
