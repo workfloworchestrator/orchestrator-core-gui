@@ -110,31 +110,6 @@
                 cursor: pointer;
                 padding: 5px 5px 10px 5px;
             }
-            th.last_step {
-                width: 10%;
-            }
-            th.last_status {
-                width: 10%;
-            }
-            th.workflow {
-                width: 20%;
-            }
-            th.started_at {
-                width: 15%;
-            }
-            th.failed_reason {
-                width: 10%;
-            }
-            th.last_modified_at {
-                width: 15%;
-            }
-            th.created_by {
-                width: 15%;
-            }
-            th.actions {
-                text-align: right;
-                width: 5%;
-            }
             span {
                 text-transform: uppercase;
                 font-weight: bold;
@@ -240,18 +215,4 @@
 .actions {
     margin: 10px 0px -40px 10px;
     text-align: right;
-    //.explain {
-    //    cursor: pointer;
-    //    font-size: 22px;
-    //    i {
-    //        color: lighten($blue, 5);
-    //        font-size: 30px;
-    //        margin-top: 15px;
-    //    }
-    //
-    //    span {
-    //        color: $blue;
-    //        font-weight: bold;
-    //    }
-    //}
 }

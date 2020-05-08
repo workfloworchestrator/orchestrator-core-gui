@@ -147,14 +147,19 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                         <React.Fragment>
                             <h1>Processes</h1>
                             <p>
-                                The processes are split into 2 different tables. The upper one will show all active
-                                processes, whilst the lower one will show workflows that are done/complete.
+                                The processes are split into 2 different tables. The upper one shows all active
+                                processes and the lower one shows processes that are done/complete.
+                            </p>
+                            <p>
+                                The subscriptions are split into 2 different tables. The upper one shows all active
+                                subscriptions and the below one shows the subscriptions subscriptions that are initial,
+                                provisioning or terminated.
                             </p>
                             <h2>Settings storage</h2>
                             <p>
                                 The tables will store the setting for your filters and columns in the local storage of
-                                your browser. If you want to reset it to default settings you can click the gear icon
-                                and use the reset button.
+                                your browser. If you want to reset the settings to the default, click on the gear icon
+                                and then on the reset button.
                             </p>
                         </React.Fragment>
                     )}
