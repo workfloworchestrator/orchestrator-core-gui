@@ -103,7 +103,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     };
 
     showProcess = (process: ProcessV2) => () => {
-        this.context.redirect("/process/" + process.pid);
+        this.context.redirect("/processes/" + process.pid);
     };
 
     renderActions = (process: ProcessV2) => {

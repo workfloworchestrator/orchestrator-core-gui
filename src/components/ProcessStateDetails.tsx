@@ -174,7 +174,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             <section className="subscription-link">
                 {subscriptionProcesses.map((ps, index: number) => (
                     <div key={index}>
-                        <NavLink to={`/subscription/${ps.subscription_id}`} className="button green">
+                        <NavLink to={`/subscriptions/${ps.subscription_id}`} className="button green">
                             <i className="fa fa-link" />{" "}
                             {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
                                 target: ps.workflow_target

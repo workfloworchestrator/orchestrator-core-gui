@@ -27,7 +27,7 @@ export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
             <Link
                 key={subscription.subscription_id}
                 onClick={e => e.stopPropagation()}
-                to={`/subscription/${subscription.subscription_id}`}
+                to={`/subscriptions/${subscription.subscription_id}`}
             >
                 {subscription.description}
             </Link>
@@ -99,7 +99,7 @@ export function renderTimestampCell({ cell }: { cell: Cell }) {
 export function renderPidCell({ cell }: { cell: Cell }) {
     const pid: string = cell.value;
     return (
-        <Link key={pid} onClick={e => e.stopPropagation()} to={`/process/${pid}`} title={pid}>
+        <Link key={pid} onClick={e => e.stopPropagation()} to={`/processes/${pid}`} title={pid}>
             {pid.slice(0, 8)}
         </Link>
     );
@@ -114,7 +114,7 @@ export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
             id={`process-detail-${pid}`}
             key={pid}
             onClick={e => e.stopPropagation()}
-            to={`/process/${pid}`}
+            to={`/processes/${pid}`}
             title={name}
         >
             {name}
@@ -132,7 +132,7 @@ export function renderSubscriptionDescriptionCell({ cell }: { cell: Cell }) {
             id={`subscription-detail-${subscription_id}`}
             key={subscription_id}
             onClick={e => e.stopPropagation()}
-            to={`/subscription/${subscription_id}`}
+            to={`/subscriptions/${subscription_id}`}
             title={name}
         >
             {name}
@@ -146,7 +146,7 @@ export function renderSubscriptionIdCell({ cell }: { cell: Cell }) {
         <Link
             key={subscriptionID}
             onClick={e => e.stopPropagation()}
-            to={`/subscription/${subscriptionID}`}
+            to={`/subscriptions/${subscriptionID}`}
             title={subscriptionID}
         >
             {subscriptionID.slice(0, 8)}

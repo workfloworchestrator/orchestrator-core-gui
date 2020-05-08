@@ -146,7 +146,7 @@ export default class SubscriptionValidation extends React.Component {
                                 </td>
                                 <td data-label={I18n.t("subscriptions.description")} className="description">
                                     <a
-                                        href={`subscription/${subscription.subscription_id}`}
+                                        href={`subscriptions/${subscription.subscription_id}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

@@ -388,7 +388,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <td id="subscriptions-id-k">{I18n.t("subscriptions.id")}</td>
                     <td id="subscriptions-id-v">
                         <a
-                            href={`/subscription/${subscription.subscription_id}`}
+                            href={`/subscriptions/${subscription.subscription_id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -518,7 +518,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                         <a
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            href={`/subscription/${subscription.subscription_id}`}
+                                            href={`/subscriptions/${subscription.subscription_id}`}
                                         >
                                             {subscription.subscription_id.substring(0, 8)}
                                         </a>
@@ -949,7 +949,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                     <td>{ps.workflow_target}</td>
                                     <td>{ps.process.workflow}</td>
                                     <td>
-                                        <a target="_blank" rel="noopener noreferrer" href={`/process/${ps.pid}`}>
+                                        <a target="_blank" rel="noopener noreferrer" href={`/processes/${ps.pid}`}>
                                             {ps.pid}
                                         </a>
                                     </td>
@@ -1099,7 +1099,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                 <a
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    href={`/subscription/${subscriptionInstanceValue.value}`}
+                                    href={`/subscriptions/${subscriptionInstanceValue.value}`}
                                 >
                                     {subscriptionInstanceValue.value}
                                 </a>

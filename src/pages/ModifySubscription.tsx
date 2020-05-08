@@ -49,7 +49,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
     };
 
     cancel = () => {
-        this.props.history.push("/subscription/" + this.props.subscriptionId);
+        this.props.history.push("/subscriptions/" + this.props.subscriptionId);
     };
 
     submit = (processInput: {}[]) => {
