@@ -110,7 +110,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
                         <React.Fragment>
                             <h1>Subscriptions</h1>
                             <p>
-                                The processes are split into 2 different tables. The upper one will show all active
+                                The subscriptions are split into 2 different tables. The upper one will show all active
                                 subscriptions, whilst the lower one will show subscriptions that are initial,
                                 provisioning or terminated.
                             </p>

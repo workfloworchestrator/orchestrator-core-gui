@@ -110,7 +110,13 @@ export function renderWorkflowNameCell({ cell }: { cell: Cell }) {
     const pid: string = cell.row.values.hasOwnProperty("pid") ? cell.row.values.pid : undefined;
 
     return (
-        <Link key={pid} onClick={e => e.stopPropagation()} to={`/process/${pid}`} title={name}>
+        <Link
+            id={`process-detail-${pid}`}
+            key={pid}
+            onClick={e => e.stopPropagation()}
+            to={`/process/${pid}`}
+            title={name}
+        >
             {name}
         </Link>
     );
@@ -123,6 +129,7 @@ export function renderSubscriptionDescriptionCell({ cell }: { cell: Cell }) {
         : undefined;
     return (
         <Link
+            id={`subscription-detail-${subscription_id}`}
             key={subscription_id}
             onClick={e => e.stopPropagation()}
             to={`/subscription/${subscription_id}`}
