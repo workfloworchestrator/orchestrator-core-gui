@@ -1,9 +1,9 @@
-FROM node:12.16.1-alpine AS builder
+FROM node:14.2.0-slim AS builder
 WORKDIR /app
 ENV CI=true
 COPY package.json .
 COPY yarn.lock .
-RUN yarn --network-concurrency 1 
+RUN yarn --network-concurrency 1 --frozen-lockfile
 COPY . .
 RUN yarn build
 
