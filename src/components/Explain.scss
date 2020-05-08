@@ -3,7 +3,7 @@
 .explain-container {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background: white;
     width: 435px;
@@ -17,8 +17,8 @@
     }
 
     .container {
-        overflow-y: scroll;
-        height: 99%;
+        height: 100%;
+        overflow: auto;
     }
 
     p {

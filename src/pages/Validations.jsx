@@ -105,7 +105,6 @@ export default class Validations extends React.Component {
         return (
             <div className="subscriptions">
                 <section className="header">
-                    {this.renderExplain()}
                     <section className="options">
                         <CheckBox
                             name="hideValidSubscriptionTypes"
@@ -117,6 +116,7 @@ export default class Validations extends React.Component {
                                 })
                             }
                         />
+                        {this.renderExplain()}
                     </section>
                 </section>
                 <section className="validations">
@@ -157,7 +157,6 @@ export default class Validations extends React.Component {
     renderWorkflowValidations = (validations, hideValid, validationsToShow) => (
         <div className="workflows">
             <section className="header">
-                {this.renderExplain()}
                 <section className="options">
                     <CheckBox
                         name="hideValid"
@@ -165,6 +164,7 @@ export default class Validations extends React.Component {
                         info={I18n.t("validations.hide_valids")}
                         onChange={() => this.setState({ hideValid: !hideValid })}
                     />
+                    {this.renderExplain()}
                 </section>
             </section>
             <section className="validations">
@@ -192,7 +192,6 @@ export default class Validations extends React.Component {
         return (
             <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
                 <i className="fa fa-question-circle" />
-                <span>{I18n.t("validations.help")}</span>
             </section>
         );
     }

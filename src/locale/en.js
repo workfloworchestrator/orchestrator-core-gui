@@ -481,7 +481,6 @@ I18n.translations.en = {
         }
     },
     validations: {
-        help: "Explain",
         product: "Product",
         name: "Name",
         description: "Description",
@@ -1177,8 +1176,8 @@ I18n.translations.en = {
             sorted_by: " and sorted by "
         },
         subscriptions: {
-            complete: "Subscriptions",
-            provisioning: "Initial/Provisioning Subscriptions",
+            complete: "Active Subscriptions",
+            provisioning: "Initial, Provisioning and Terminated Subscriptions",
             caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
             with_status: " with status ",
             filtered_on: " and filtered on ",
@@ -1201,6 +1200,7 @@ I18n.translations.en = {
         filter_placeholder: {
             assignee: "assignee...",
             description: "description...",
+            note: "notes...",
             status: "status...",
             customer: "customer name...",
             customer_id: "customer name...",
@@ -1211,7 +1211,8 @@ I18n.translations.en = {
             workflow: "workflow name...",
             subscriptions: "description...",
             target: "workflow target...",
-            subscription_id: "id"
+            subscription_id: "id",
+            insync: "yes or no"
         },
         filter_button: {
             on: "on",

@@ -18,7 +18,8 @@ import {
     renderProductTagCell,
     renderProductsCell,
     renderSubscriptionsCell,
-    renderTimestampCell
+    renderTimestampCell,
+    renderWorkflowNameCell
 } from "components/tables/cellRenderers";
 import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import I18n from "i18n-js";
@@ -93,7 +94,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, assignees, processStatuses, redirect } = useContext(ApplicationContext);
+    const { organisations, products, assignees, processStatuses } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
@@ -149,15 +150,11 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
             const highlighted = row.values.pid === highlightQ ? " highlighted" : "";
             return {
                 ...props,
-                onClick: () => {
-                    const url = isProcess ? `/process/${row.values.pid}` : `/task/${row.values.pid}`;
-                    redirect(url);
-                },
                 id: row.values.pid,
                 className: `${row.values.status}${highlighted}`
             };
         },
-        [highlightQ, redirect, isProcess]
+        [highlightQ]
     );
 
     const renderSubComponent = useCallback(({ row }: { row: Row<ProcessV2> }) => {
@@ -233,7 +230,8 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
             {
                 Header: "Workflow",
                 accessor: "workflow",
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
+                Cell: renderWorkflowNameCell
             },
             {
                 Header: "Target",
