@@ -1131,6 +1131,7 @@ I18n.translations.en = {
 
         terminate_sn8_service_port: "Terminate SN8 Service Port",
         terminate_sn8_light_path: "Terminate SN8 Light Path",
+        terminate_ip_prefix: "Terminate an IP Prefix",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
