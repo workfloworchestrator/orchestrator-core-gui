@@ -39,18 +39,16 @@ function Preferences<T extends object>({
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
+    const searchPhrase = state.filterBy.find(column => column.id === "tsv")
+        ? state.filterBy.find(column => column.id === "tsv").values[0]
+        : "";
+
     return (
         <React.Fragment key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span className="table-name">
                     {I18n.t(name)}
                     {minimized && I18n.t("table.is_minimized")}
-                </span>
-                <span
-                    title={I18n.t("table.preferences.edit")}
-                    onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
-                >
-                    <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
                 </span>
                 {"   "}
                 <span
@@ -73,18 +71,13 @@ function Preferences<T extends object>({
                     )}
                 </span>
                 {"   "}
-
-                {!hideAdvancedSearch && (
-                    <>
-                        <span
-                            title={I18n.t("table.preferences.advancedSearch")}
-                            onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
-                        >
-                            <i className={showSettings ? "fa fa-search active" : "fa fa-search"} />
-                        </span>
-                        {"   "}
-                    </>
-                )}
+                <span
+                    title={I18n.t("table.preferences.edit")}
+                    onClick={() => dispatch({ type: ActionType.SHOW_SETTINGS_TOGGLE })}
+                >
+                    <i className={showSettings ? "fa fa-cog active" : "fa fa-cog"} />
+                </span>
+                {"   "}
 
                 {minimized ? (
                     <span
@@ -137,6 +130,31 @@ function Preferences<T extends object>({
                                 </label>
                             );
                         })}
+                </div>
+            )}
+            {!hideAdvancedSearch && (
+                <div className="advanced-search-container">
+                    <span>
+                        <b>Advanced search</b>
+                    </span>
+                    <span>
+                        <input
+                            placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
+                            type="text"
+                            onChange={searchPhrase => {
+                                searchPhrase &&
+                                    dispatch({
+                                        type: ActionType.FILTER_REPLACE,
+                                        id: "tsv",
+                                        values: [searchPhrase.target.value]
+                                    });
+                            }}
+                            value={searchPhrase}
+                        />
+                    </span>
+                    <span>
+                        <i className="fa fa-search"></i>
+                    </span>
                 </div>
             )}
         </React.Fragment>

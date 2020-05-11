@@ -141,13 +141,26 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
         return (
             <div className="processes-container">
-                <section className="header">{this.renderExplain()}</section>
                 <Explain
                     close={() => this.setState({ showExplanation: false })}
                     render={() => (
                         <React.Fragment>
                             <h1>Processes</h1>
-                            <p>This is the manual for the Processes page</p>
+                            <p>
+                                The processes are split into 2 different tables. The upper one shows all active
+                                processes and the lower one shows processes that are done/complete.
+                            </p>
+                            <p>
+                                The subscriptions are split into 2 different tables. The upper one shows all active
+                                subscriptions and the below one shows the subscriptions subscriptions that are initial,
+                                provisioning or terminated.
+                            </p>
+                            <h2>Settings storage</h2>
+                            <p>
+                                The tables will store the setting for your filters and columns in the local storage of
+                                your browser. If you want to reset the settings to the default, click on the gear icon
+                                and then on the reset button.
+                            </p>
                         </React.Fragment>
                     )}
                     isVisible={this.state.showExplanation}
@@ -159,6 +172,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                     confirm={this.state.confirmationDialogAction}
                     question={this.state.confirmationDialogQuestion}
                 />
+                <div className="actions">{this.renderExplain()}</div>
                 <ProcessesTable
                     key={"active"}
                     initialTableSettings={activeSettings}

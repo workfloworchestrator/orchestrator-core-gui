@@ -481,7 +481,6 @@ I18n.translations.en = {
         }
     },
     validations: {
-        help: "Explain",
         product: "Product",
         name: "Name",
         description: "Description",
@@ -1131,6 +1130,8 @@ I18n.translations.en = {
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
 
         terminate_sn8_service_port: "Terminate SN8 Service Port",
+        terminate_sn8_light_path: "Terminate SN8 Light Path",
+        terminate_ip_prefix: "Terminate an IP Prefix",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
@@ -1176,8 +1177,8 @@ I18n.translations.en = {
             sorted_by: " and sorted by "
         },
         subscriptions: {
-            complete: "Subscriptions",
-            provisioning: "Initial/Provisioning Subscriptions",
+            complete: "Active Subscriptions",
+            provisioning: "Initial, Provisioning and Terminated Subscriptions",
             caption: "{{taskOrProcess}}{{statuses}}{{filters}}{{sorted}}.",
             with_status: " with status ",
             filtered_on: " and filtered on ",
@@ -1200,6 +1201,7 @@ I18n.translations.en = {
         filter_placeholder: {
             assignee: "assignee...",
             description: "description...",
+            note: "notes...",
             status: "status...",
             customer: "customer name...",
             customer_id: "customer name...",
@@ -1210,7 +1212,8 @@ I18n.translations.en = {
             workflow: "workflow name...",
             subscriptions: "description...",
             target: "workflow target...",
-            subscription_id: "id"
+            subscription_id: "id",
+            insync: "yes or no"
         },
         filter_button: {
             on: "on",

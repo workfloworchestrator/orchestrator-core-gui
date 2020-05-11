@@ -31,6 +31,7 @@
         color: $blue;
         font-size: larger;
     }
+
     span {
         margin: 10px 5px 10px 0;
     }
@@ -38,6 +39,29 @@
         &.active {
             color: $blue;
         }
+    }
+}
+div.advanced-search-container {
+    padding: 0px 0px 10px 0px;
+    i.fa-search {
+        color: $blue;
+        margin-left: 0px;
+        font-size: 18px;
+    }
+    span {
+        padding-right: 5px;
+    }
+    input {
+        display: inline;
+        padding: 6px;
+        margin-left: auto;
+        margin-top: 0;
+        border: 1px solid $lighter-grey;
+        border-bottom-left-radius: $br;
+        border-top-left-radius: $br;
+        font-size: 14px;
+        height: 100%;
+        width: 60%;
     }
 }
 

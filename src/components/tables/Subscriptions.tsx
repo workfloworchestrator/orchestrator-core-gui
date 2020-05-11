@@ -15,12 +15,18 @@
 import {
     renderInsyncCell,
     renderSubscriptionCustomersCell,
+    renderSubscriptionDescriptionCell,
     renderSubscriptionIdCell,
     renderSubscriptionProductsCell,
     renderSubscriptionTagCell,
     renderTimestampCell
 } from "components/tables/cellRenderers";
-import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
+import {
+    renderCustomersFilter,
+    renderILikeFilter,
+    renderMultiSelectFilter,
+    renderSingleSelectFilter
+} from "components/tables/filterRenderers";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -44,7 +50,6 @@ import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from 
 import { Subscription } from "utils/types";
 
 import SubscriptionDetail from "../../pages/SubscriptionDetail";
-import ActionContainer from "../ActionContainer";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
@@ -60,6 +65,7 @@ export function initialSubscriptionTableSettings(
     optional?: Partial<TableSettings<Subscription>>
 ): TableSettings<Subscription> {
     const defaults = {
+        showAdvancedSearch: false,
         showSettings: false,
         showPaginator: true,
         refresh: false,
@@ -89,7 +95,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
     const [pageQ, setPageQ] = useQueryParam(queryNameSpace + "Page", CommaSeparatedNumericArrayParam);
     const [sortQ, setSortQ] = useQueryParam(queryNameSpace + "Sort", CommaSeparatedStringArrayParam);
     const [filterQ, setFilterQ] = useQueryParam(queryNameSpace + "Filter", CommaSeparatedStringArrayParam);
-    const { organisations, products, redirect } = useContext(ApplicationContext);
+    const { organisations, products } = useContext(ApplicationContext);
 
     const initialize = useMemo(
         () =>
@@ -140,20 +146,13 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         [filterQ, pageQ, sortQ]
     );
 
-    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback(
-        (props, { row }) => {
-            return {
-                ...props,
-                onClick: () => {
-                    const url = `/subscription/${row.values.subscription_id}`;
-                    redirect(url);
-                },
-                id: row.values.subscription_id,
-                className: `${row.values.status}`
-            };
-        },
-        [redirect]
-    );
+    const extraRowPropGetter: RowPropGetter<Subscription> = useCallback((props, { row }) => {
+        return {
+            ...props,
+            id: row.values.subscription_id,
+            className: `${row.values.status}`
+        };
+    }, []);
 
     const renderSubComponent = useCallback(({ row }: { row: Row<Subscription> }) => {
         const { subscription_id } = row.values;
@@ -170,7 +169,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "",
                 id: "info",
-                accessor: "failed_reason",
+                accessor: "info",
                 disableFilters: true,
                 disableSortBy: true,
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
@@ -202,7 +201,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "Description",
                 accessor: "description",
-                Filter: renderILikeFilter
+                Filter: renderILikeFilter,
+                Cell: renderSubscriptionDescriptionCell
             },
             {
                 Header: "Status",
@@ -214,11 +214,11 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 id: "insync",
                 accessor: "insync",
                 Cell: renderInsyncCell,
-                disableFilters: true
+                Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null)
             },
             {
                 Header: "Customer",
-                id: "customer_id", // Normally the accessor is used as id, but when used twice this gives a name clash.
+                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
                 accessor: "customer_id",
                 disableSortBy: true,
                 Cell: renderSubscriptionCustomersCell(organisations, false),
@@ -248,19 +248,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 Cell: renderSubscriptionTagCell,
                 Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
             },
-            // {
-            //     Header: "Subscription(s)",
-            //     accessor: "subscriptions",
-            //     disableSortBy: true,
-            //     Filter: renderILikeFilter,
-            //     Cell: renderSubscriptionsCell
-            // },
-            // {
-            //     Header: "Created by",
-            //     id: "creator",
-            //     accessor: "created_by",
-            //     Filter: renderILikeFilter
-            // },
             {
                 Header: "Start date",
                 id: "start_date",
@@ -276,28 +263,13 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                 disableFilters: true
             },
             {
-                Header: "",
-                accessor: (originalRow: Subscription, index: number) => originalRow,
-                id: "actions",
-                Cell: ({ cell }: { cell: Cell }) => (
-                    <ActionContainer
-                        title={"Actions"}
-                        renderButtonContent={active => {
-                            const classes = ["dropdown-button-content", active ? "active" : ""].join(" ");
-                            return (
-                                <span className={classes}>
-                                    <i className={"fa fa-bars"} />
-                                </span>
-                            );
-                        }}
-                        renderContent={disabled => renderActions(cell.value)}
-                    />
-                ),
-                disableFilters: true,
-                disableSortBy: true
+                Header: "Notes",
+                id: "note",
+                accessor: "note",
+                Filter: renderILikeFilter
             }
         ],
-        [organisations, products, renderActions]
+        [organisations, products]
     );
 
     const persistSettings = useCallback(
@@ -325,8 +297,8 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
-                    excludeInFilter={[]}
-                    hideAdvancedSearch={true}
+                    excludeInFilter={["description"]}
+                    hideAdvancedSearch={false}
                 />
             </section>
         </div>
