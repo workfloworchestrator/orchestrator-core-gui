@@ -27,7 +27,7 @@ export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locat
 
 filterDOMProps.register("locationCodes");
 
-function LocationCode({ inputComponent, locationCodes, ...props }: LocationCodeFieldProps) {
+function LocationCode({ inputComponent, name, locationCodes, ...props }: LocationCodeFieldProps) {
     const allLocationCodes = useContext(ApplicationContext).locationCodes || [];
 
     if (!locationCodes) {
@@ -35,6 +35,7 @@ function LocationCode({ inputComponent, locationCodes, ...props }: LocationCodeF
     }
 
     return createElement<any>(inputComponent, {
+        name: "",
         ...props,
         allowedValues: locationCodes,
         placeholder: I18n.t("forms.widgets.locationCode.placeholder")
@@ -45,4 +46,4 @@ LocationCode.defaultProps = {
     inputComponent: SelectField
 };
 
-export default connectField(LocationCode, { ensureValue: false, includeInChain: false });
+export default connectField(LocationCode);

@@ -1,21 +1,19 @@
-import React from "react";
-import { BaseField, filterDOMProps, nothing } from "uniforms";
+import React, { HTMLProps } from "react";
+import { filterDOMProps, useForm } from "uniforms";
 
-const ErrorsField = ({ children, ...props }: any, { uniforms: { error, schema } }: any) =>
-    !error && !children ? (
-        nothing
-    ) : (
+export type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
+
+export default function ErrorsField(props: ErrorsFieldProps) {
+    const { error, schema } = useForm();
+    return !error && !props.children ? null : (
         <div {...filterDOMProps(props)}>
-            {children}
+            {props.children}
 
             <ul>
-                {schema.getErrorMessages(error).map((message: string, index: number) => (
+                {schema.getErrorMessages(error).map((message, index) => (
                     <li key={index}>{message}</li>
                 ))}
             </ul>
         </div>
     );
-
-ErrorsField.contextTypes = BaseField.contextTypes;
-
-export default ErrorsField;
+}

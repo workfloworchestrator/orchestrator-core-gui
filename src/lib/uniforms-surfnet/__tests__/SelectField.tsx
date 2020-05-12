@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { SelectField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 describe.skip("<SelectField>", () => {
     test("<SelectField> - renders a select", () => {

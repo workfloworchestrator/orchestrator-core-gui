@@ -1,7 +1,5 @@
 import React, { HTMLProps, Ref } from "react";
-import { BaseField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, filterDOMProps, useForm } from "uniforms";
 
 export type SubmitFieldProps = Override<
     HTMLProps<HTMLInputElement>,
@@ -11,19 +9,17 @@ export type SubmitFieldProps = Override<
         value?: string;
     }
 >;
-const SubmitField = (
-    { disabled, inputRef, value, ...props }: SubmitFieldProps,
-    { uniforms: { error, state } }: any
-) => (
-    <input
-        disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
-        ref={inputRef}
-        type="submit"
-        {...(value ? { value } : {})}
-        {...filterDOMProps(props)}
-    />
-);
 
-SubmitField.contextTypes = BaseField.contextTypes;
+export default function SubmitField({ disabled, inputRef, value, ...props }: SubmitFieldProps) {
+    const { error, state } = useForm();
 
-export default SubmitField;
+    return (
+        <input
+            disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
+            ref={inputRef}
+            type="submit"
+            {...(value ? { value } : {})}
+            {...filterDOMProps(props)}
+        />
+    );
+}

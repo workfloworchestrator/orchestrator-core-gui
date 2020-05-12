@@ -29,7 +29,7 @@ export type ProductFieldProps = { inputComponent: typeof SelectField; productIds
 
 filterDOMProps.register("productIds");
 
-function Product({ inputComponent, productIds, ...props }: ProductFieldProps) {
+function Product({ inputComponent, name, productIds, ...props }: ProductFieldProps) {
     const all_products = useContext(ApplicationContext).products;
 
     const products = productIds ? productIds.map(id => productById(id, all_products)) : all_products;
@@ -41,6 +41,7 @@ function Product({ inputComponent, productIds, ...props }: ProductFieldProps) {
         }, {}) ?? {};
 
     return createElement<any>(inputComponent, {
+        name: "",
         ...props,
         allowedValues: Object.keys(productLabelLookup),
         transform: (uuid: string) => get(productLabelLookup, uuid, uuid),
@@ -52,4 +53,4 @@ Product.defaultProps = {
     inputComponent: SelectField
 };
 
-export default connectField(Product, { ensureValue: false, includeInChain: false });
+export default connectField(Product);

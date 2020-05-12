@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { LongTextField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<LongTextField> - renders a textarea", () => {
     const element = <LongTextField name="x" />;

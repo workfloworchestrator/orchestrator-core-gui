@@ -33,9 +33,9 @@
         "reactjs-popup": "^1.4.1",
         "scroll-into-view": "^1.9.7",
         "spin.js": "^4.0.0",
-        "uniforms": "^2.6.8",
-        "uniforms-bridge-json-schema": "^2.6.8",
-        "uniforms-unstyled": "^2.6.8",
+        "uniforms": "^3.0.0-alpha.4",
+        "uniforms-bridge-json-schema": "^3.0.0-alpha.4",
+        "uniforms-unstyled": "^3.0.0-alpha.4",
         "use-query-params": "^0.4.5"
     },
     "devDependencies": {
@@ -99,7 +99,7 @@
         "source-map-explorer": "^2.2.2",
         "storybook-react-router": "^1.0.8",
         "typescript": "^3.7.5",
-        "uniforms-bridge-simple-schema-2": "^2.6.8",
+        "uniforms-bridge-simple-schema-2": "^3.0.0-alpha.4",
         "use-trace-update": "^1.3.0"
     },
     "scripts": {

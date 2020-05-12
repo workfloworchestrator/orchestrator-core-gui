@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { BoolField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<BoolField> - renders an input", () => {
     const element = <BoolField name="x" />;

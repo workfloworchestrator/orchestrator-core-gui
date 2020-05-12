@@ -1,68 +1,61 @@
 import invariant from "invariant";
-import { createElement } from "react";
-import { BaseField } from "uniforms";
+import { ComponentType, createElement } from "react";
+import { Override, useField } from "uniforms";
 
 import BoolField from "./BoolField";
 import DateField from "./DateField";
-import HiddenField from "./HiddenField";
 import ListField from "./ListField";
-import LongTextField from "./LongTextField";
 import NestField from "./NestField";
 import NumField from "./NumField";
 import RadioField from "./RadioField";
 import SelectField from "./SelectField";
 import TextField from "./TextField";
 
-export default class AutoField extends BaseField {
-    static displayName = "AutoField";
-
-    getChildContextName() {
-        return this.context.uniforms.name;
+export type AutoFieldProps = Override<
+    Record<string, unknown>,
+    {
+        component?: ComponentType<any>;
+        name: string;
     }
+>;
 
-    render() {
-        const props = this.getFieldProps(undefined, { ensureValue: false });
-        let { component } = props;
+export default function AutoField(originalProps: AutoFieldProps) {
+    const props = useField(originalProps.name, originalProps)[0];
+    const { allowedValues, checkboxes, fieldType } = props;
+    let { component } = props;
 
-        if (component === undefined) {
-            if (props.allowedValues) {
-                if (props.checkboxes && props.fieldType !== Array) {
-                    component = RadioField;
-                } else {
-                    component = SelectField;
-                }
+    if (component === undefined) {
+        if (allowedValues) {
+            if (checkboxes && fieldType !== Array) {
+                component = RadioField;
             } else {
-                switch (props.fieldType) {
-                    case Date:
-                        component = DateField;
-                        break;
-                    case Array:
-                        component = ListField;
-                        break;
-                    case Number:
-                        component = NumField;
-                        break;
-                    case Object:
-                        component = NestField;
-                        break;
-                    case String:
-                        component = TextField;
-                        break;
-                    case Boolean:
-                        component = BoolField;
-                        break;
-                    case "Hidden":
-                        component = HiddenField;
-                        break;
-                    case "LongText":
-                        component = LongTextField;
-                        break;
-                }
-
-                invariant(component, "Unsupported field type: %s", props.fieldType.toString());
+                component = SelectField;
             }
-        }
+        } else {
+            switch (fieldType) {
+                case Array:
+                    component = ListField;
+                    break;
+                case Boolean:
+                    component = BoolField;
+                    break;
+                case Date:
+                    component = DateField;
+                    break;
+                case Number:
+                    component = NumField;
+                    break;
+                case Object:
+                    component = NestField;
+                    break;
+                case String:
+                    component = TextField;
+                    break;
+            }
 
-        return createElement(component, this.props);
+            invariant(component, "Unsupported field type: %s", fieldType);
+        }
     }
+
+    return createElement(component, originalProps);
 }

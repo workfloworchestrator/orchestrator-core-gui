@@ -1,9 +1,9 @@
-import { mount } from "enzyme";
 import fetchMock from "fetch-mock";
 import React from "react";
 
 import ImsPortIdField from "../src/ImsPortIdField";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 describe("<ImsPortIdField>", () => {
     test("<ImsPortIdField> - renders inputs", done => {

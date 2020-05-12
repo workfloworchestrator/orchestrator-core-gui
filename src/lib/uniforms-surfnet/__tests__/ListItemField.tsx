@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { AutoField, ListDelField, ListItemField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<ListItemField> - works", () => {
     const element = <ListItemField name="x.1" />;
@@ -16,7 +16,12 @@ test("<ListItemField> - renders ListDelField", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListDelField)).toHaveLength(1);
-    expect(wrapper.find(ListDelField).prop("name")).toBe("x.1");
+    expect(
+        wrapper
+            .find(ListDelField)
+            .childAt(0)
+            .prop("name")
+    ).toBe("x.1");
 });
 
 test("<ListItemField> - renders AutoField", () => {
@@ -27,7 +32,7 @@ test("<ListItemField> - renders AutoField", () => {
 });
 
 test("<ListItemField> - renders children if specified", () => {
-    const Child = jest.fn(() => null);
+    const Child: () => null = jest.fn(() => null);
 
     const element = (
         <ListItemField name="x.1">

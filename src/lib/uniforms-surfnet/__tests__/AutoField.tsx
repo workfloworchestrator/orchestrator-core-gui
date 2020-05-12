@@ -1,4 +1,3 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import {
@@ -13,6 +12,7 @@ import {
     TextField
 } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<AutoField> - works", () => {
     const element = <AutoField name="x" />;

@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { AutoFields } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<AutoFields> - works", () => {
     const element = <AutoFields />;

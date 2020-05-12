@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { DateField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<DateField> - renders an input", () => {
     const element = <DateField name="x" />;

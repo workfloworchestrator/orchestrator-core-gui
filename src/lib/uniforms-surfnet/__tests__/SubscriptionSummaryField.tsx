@@ -1,4 +1,3 @@
-import { mount } from "enzyme";
 import fetchMock from "fetch-mock";
 import React from "react";
 
@@ -6,6 +5,7 @@ import PRODUCTS from "../../../stories/data/products.json";
 import SUBSCRIPTION_JSON from "../../../stories/data/subscription.json";
 import SubscriptionSummaryField from "../src/SubscriptionSummaryField";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 describe("<SubscriptionSummaryField>", () => {
     test("<SubscriptionSummaryField> - renders inputs", done => {

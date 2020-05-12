@@ -2,12 +2,10 @@ import { usedVlans as getUsedVlans } from "api";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { HTMLProps, Ref, useEffect, useState } from "react";
-import { BaseField, connectField, filterDOMProps, joinName } from "uniforms";
+import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import { ServicePort } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { inValidVlan } from "validations/UserInput";
-
-import { Override, UniformContext } from "./utils";
 
 function getAllNumbersForVlanRange(vlanRange: string) {
     if (vlanRange !== "0" && inValidVlan(vlanRange)) {
@@ -85,25 +83,22 @@ export type VlanFieldProps = Override<
     }
 >;
 
-function Vlan(
-    {
-        disabled,
-        id,
-        inputRef,
-        label,
-        description,
-        name,
-        onChange,
-        type,
-        value,
-        error,
-        showInlineError,
-        errorMessage,
-        ...props
-    }: VlanFieldProps,
-    context: UniformContext
-) {
-    const { model } = context?.uniforms ?? { model: {} };
+function Vlan({
+    disabled,
+    id,
+    inputRef,
+    label,
+    description,
+    name,
+    onChange,
+    type,
+    value,
+    error,
+    showInlineError,
+    errorMessage,
+    ...props
+}: VlanFieldProps) {
+    const { model } = useForm();
     const subscriptionIdFieldName = joinName([...joinName(null, name).slice(0, -1), "subscription_id"]);
     const completeListFieldName = joinName(joinName(null, name).slice(0, -2));
     const subscriptionId = get(model, subscriptionIdFieldName);
@@ -218,7 +213,5 @@ function Vlan(
         </section>
     );
 }
-
-Vlan.contextTypes = BaseField.contextTypes;
 
 export default connectField(Vlan);

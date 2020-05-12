@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { RadioField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<RadioField> - renders a set of checkboxes", () => {
     const element = <RadioField name="x" />;

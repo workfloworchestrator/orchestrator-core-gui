@@ -1,10 +1,8 @@
 import React, { HTMLProps, Ref } from "react";
-import { connectField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 const DateConstructor = (typeof global === "object" ? global : window).Date;
-const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
+const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
 export type DateFieldProps = Override<
     HTMLProps<HTMLDivElement>,
@@ -56,7 +54,7 @@ function Date({
                 placeholder={placeholder}
                 ref={inputRef}
                 type="datetime-local"
-                value={dateFormat(value)}
+                value={dateFormat(value) ?? ""}
             />
         </div>
     );

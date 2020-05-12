@@ -1,7 +1,5 @@
 import React, { HTMLProps } from "react";
-import { connectField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 export type LabelFieldProps = Override<
     HTMLProps<HTMLDivElement>,
@@ -22,4 +20,4 @@ function Label({ id, name, label, ...props }: LabelFieldProps) {
     );
 }
 
-export default connectField(Label, { ensureValue: false, initialValue: false });
+export default connectField(Label);

@@ -87,6 +87,7 @@ export type SubscriptionFieldProps = {
 
 function Subscription({
     inputComponent,
+    name,
     productIds,
     excludedSubscriptionIds,
     organisationId,
@@ -148,6 +149,7 @@ function Subscription({
         }, {}) ?? {};
 
     return createElement<any>(inputComponent, {
+        name: "",
         ...props,
         allowedValues: Object.keys(subscriptionLabelLookup),
         transform: (uuid: string) => get(subscriptionLabelLookup, uuid, uuid),
@@ -159,4 +161,4 @@ Subscription.defaultProps = {
     inputComponent: SelectField
 };
 
-export default connectField(Subscription, { ensureValue: false, includeInChain: false });
+export default connectField(Subscription);

@@ -3,9 +3,7 @@ import "./AcceptField.scss";
 import CheckBox from "components/CheckBox";
 import I18n, { TranslateOptions } from "i18n-js";
 import React, { HTMLProps, useReducer } from "react";
-import { connectField } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField } from "uniforms";
 
 type AcceptItem = (string | TranslateOptions)[];
 type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";

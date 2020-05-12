@@ -1,22 +1,12 @@
 import I18n from "i18n-js";
+import xor from "lodash/xor";
 import React, { HTMLProps, Ref } from "react";
 import ReactSelect, { ValueType } from "react-select";
-import { connectField, filterDOMProps } from "uniforms";
+import { Override, connectField, filterDOMProps } from "uniforms";
 import { Option } from "utils/types";
-
-import { Override } from "./utils";
 
 const base64: typeof btoa = typeof btoa !== "undefined" ? btoa : x => Buffer.from(x).toString("base64");
 const escape = (x: string) => base64(x).replace(/=+$/, "");
-
-const xor = (item: any, array: any[]) => {
-    const index = array.indexOf(item);
-    if (index === -1) {
-        return array.concat([item]);
-    }
-
-    return array.slice(0, index).concat(array.slice(index + 1));
-};
 
 export type SelectFieldProps = Override<
     HTMLProps<HTMLDivElement>,
@@ -85,7 +75,9 @@ function Select({
                             disabled={disabled}
                             id={`${id}-${escape(item)}`}
                             name={name}
-                            onChange={() => onChange(fieldType === Array ? xor(item, value as string[]) : item)}
+                            onChange={() => {
+                                onChange(fieldType === Array ? xor([item], value) : item);
+                            }}
                             type="checkbox"
                         />
 

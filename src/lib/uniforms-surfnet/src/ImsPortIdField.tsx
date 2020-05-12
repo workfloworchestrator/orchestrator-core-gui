@@ -23,10 +23,9 @@ import {
 import I18n from "i18n-js";
 import React, { HTMLProps, Ref, useEffect, useState } from "react";
 import Select, { ValueType } from "react-select";
-import { connectField, filterDOMProps } from "uniforms";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 import { IMSNode, IMSPort, Option, Subscription } from "../../../utils/types";
-import { Override } from "./utils";
 
 export type ImsPortFieldProps = Override<
     HTMLProps<HTMLDivElement>,

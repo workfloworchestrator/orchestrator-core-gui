@@ -1,8 +1,6 @@
 import React, { HTMLProps, Ref } from "react";
 import NumericInput from "react-numeric-input";
-import { connectField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 export type NumFieldProps = Override<
     HTMLProps<HTMLDivElement>,

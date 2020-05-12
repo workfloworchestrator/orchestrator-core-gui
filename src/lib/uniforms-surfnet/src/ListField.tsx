@@ -1,34 +1,33 @@
 import "./ListField.scss";
 
 import range from "lodash/range";
-import React, { Children, HTMLProps, ReactNode, cloneElement } from "react";
-import { connectField, filterDOMProps, joinName } from "uniforms";
+import React, { Children, HTMLProps, ReactNode, cloneElement, isValidElement } from "react";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 import ListAddField from "./ListAddField";
 import ListItemField from "./ListItemField";
-import { Override } from "./utils";
 
 filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
 
-export type ListFieldProps<T> = Override<
-    HTMLProps<HTMLUListElement>,
+export type ListFieldProps = Override<
+    Omit<HTMLProps<HTMLUListElement>, "onChange">,
     {
-        children?: ReactNode;
-        initialCount: number;
+        children: ReactNode;
+        initialCount?: number;
         itemProps?: {};
-        label: string;
+        label?: string;
         description?: string;
         name: string;
-        value: T[];
+        value: unknown[];
         error?: boolean;
         showInlineError?: boolean;
         errorMessage?: string;
     }
 >;
 
-function List<T>({
+function List({
     children,
     initialCount = 1,
     itemProps,
@@ -40,21 +39,7 @@ function List<T>({
     showInlineError,
     errorMessage,
     ...props
-}: ListFieldProps<T>) {
-    const renderFunction = children
-        ? (index: number) => (
-              <React.Fragment>
-                  {Children.map(children as JSX.Element, child =>
-                      cloneElement(child, {
-                          key: index,
-                          label: null,
-                          name: joinName(name, child.props.name && child.props.name.replace("$", index))
-                      })
-                  )}
-              </React.Fragment>
-          )
-        : (index: number) => <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />;
-
+}: ListFieldProps) {
     return (
         <section>
             <ul {...filterDOMProps(props)} className="list-field">
@@ -65,9 +50,19 @@ function List<T>({
                     </label>
                 )}
 
-                {range(Math.max(value.length, initialCount)).map(renderFunction)}
+                {range(Math.max(value.length, initialCount || 0)).map(itemIndex =>
+                    Children.map(children, (child, childIndex) =>
+                        isValidElement(child)
+                            ? cloneElement(child, {
+                                  key: `${itemIndex}-${childIndex}`,
+                                  name: child.props.name?.replace("$", "" + itemIndex),
+                                  ...itemProps
+                              })
+                            : child
+                    )
+                )}
 
-                <ListAddField initialCount={initialCount} name={`${name}.$`} />
+                <ListAddField initialCount={initialCount} name="$" />
             </ul>
             {error && showInlineError && (
                 <em className="error">
@@ -78,7 +73,6 @@ function List<T>({
     );
 }
 
-export default connectField(List, {
-    ensureValue: false,
-    includeInChain: false
-});
+List.defaultProps = { children: <ListItemField name="$" /> };
+
+export default connectField(List);

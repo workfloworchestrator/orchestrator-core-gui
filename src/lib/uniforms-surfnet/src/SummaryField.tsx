@@ -1,10 +1,9 @@
 import "./SummaryField.scss";
 
 import React, { HTMLProps } from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 import { isEmpty } from "../../../utils/Utils";
-import { Override } from "./utils";
 
 export type SummaryFieldProps = Override<
     HTMLProps<HTMLDivElement>,
@@ -68,4 +67,4 @@ function Summary({ id, name, label, description, data, ...props }: SummaryFieldP
     );
 }
 
-export default connectField(Summary, { ensureValue: false, initialValue: false });
+export default connectField(Summary);

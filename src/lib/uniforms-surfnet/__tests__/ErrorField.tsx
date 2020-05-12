@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { ErrorField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 const error = {
     error: "validation-error",

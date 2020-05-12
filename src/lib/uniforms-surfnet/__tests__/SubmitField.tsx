@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { SubmitField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<SubmitField> - renders", () => {
     const element = <SubmitField />;

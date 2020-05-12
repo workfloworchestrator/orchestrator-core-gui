@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import AcceptField from "../src/AcceptField";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 const TEST_ACCEPT_DATA = [
     ["label", "label"],

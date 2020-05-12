@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { TextField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<TextField> - renders an input", () => {
     const element = <TextField name="x" />;

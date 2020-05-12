@@ -1,23 +1,29 @@
-import React from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import React, { HTMLProps } from "react";
+import { Override, connectField, filterDOMProps, joinName, useField } from "uniforms";
 
-const ListDel = ({ disabled, name, parent, ...props }: any) => {
-    const fieldIndex = +name.slice(1 + name.lastIndexOf("."));
-    const limitNotReached = !disabled && !(parent.minCount >= parent.value.length);
+export type ListDelFieldProps = Override<Omit<HTMLProps<HTMLSpanElement>, "onChange">, { name: string }>;
+
+function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+    const nameParts = joinName(null, name);
+    const nameIndex = +nameParts[nameParts.length - 1];
+    const parentName = joinName(nameParts.slice(0, -1));
+    const parent = useField<{ minCount?: number }, unknown[]>(parentName, {}, { absoluteName: true })[0];
+
+    const limitNotReached = !disabled && !(parent.minCount! >= parent.value!.length);
 
     return (
         <i
             className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`}
             {...filterDOMProps(props)}
-            onClick={() =>
-                limitNotReached &&
-                parent.onChange([].concat(parent.value.slice(0, fieldIndex)).concat(parent.value.slice(1 + fieldIndex)))
-            }
+            onClick={() => {
+                if (limitNotReached) {
+                    const value = parent.value!.slice();
+                    value.splice(nameIndex, 1);
+                    parent.onChange(value);
+                }
+            }}
         />
     );
-};
+}
 
-export default connectField(ListDel, {
-    includeParent: true,
-    initialValue: false
-});
+export default connectField(ListDel, { initialValue: false });

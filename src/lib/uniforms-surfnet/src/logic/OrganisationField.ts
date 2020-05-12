@@ -26,7 +26,7 @@ export type OrganisationFieldProps = { inputComponent: typeof SelectField } & Om
     "placeholder" | "transform" | "allowedValues"
 >;
 
-function Organisation({ inputComponent, ...props }: OrganisationFieldProps) {
+function Organisation({ inputComponent, name, ...props }: OrganisationFieldProps) {
     const { organisations } = useContext(ApplicationContext);
     const organisationLabelLookup =
         organisations?.reduce<{ [index: string]: string }>(function(mapping, org) {
@@ -35,6 +35,7 @@ function Organisation({ inputComponent, ...props }: OrganisationFieldProps) {
         }, {}) ?? {};
 
     return createElement<any>(inputComponent, {
+        name: "",
         ...props,
         allowedValues: Object.keys(organisationLabelLookup),
         transform: (uuid: string) => get(organisationLabelLookup, uuid, uuid),
@@ -46,4 +47,4 @@ Organisation.defaultProps = {
     inputComponent: SelectField
 };
 
-export default connectField(Organisation, { ensureValue: false, includeInChain: false });
+export default connectField(Organisation);

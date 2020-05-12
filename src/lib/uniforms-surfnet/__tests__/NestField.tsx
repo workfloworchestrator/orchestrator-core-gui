@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { AutoField, NestField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<NestField> - renders an <AutoField> for each field", () => {
     const element = <NestField name="x" />;
@@ -21,13 +21,13 @@ test("<NestField> - renders an <AutoField> for each field", () => {
             .find(AutoField)
             .at(0)
             .prop("name")
-    ).toBe("x.a");
+    ).toBe("a");
     expect(
         wrapper
             .find(AutoField)
             .at(1)
             .prop("name")
-    ).toBe("x.b");
+    ).toBe("b");
 });
 
 test("<NestField> - renders custom content if given", () => {

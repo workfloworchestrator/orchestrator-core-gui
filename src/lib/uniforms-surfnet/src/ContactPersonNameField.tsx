@@ -3,13 +3,10 @@ import Autocomplete from "components/Autocomplete";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { HTMLProps, RefObject, useEffect, useState } from "react";
-import { BaseField, connectField, filterDOMProps, joinName } from "uniforms";
+import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 
 import { isEmpty, stop } from "../../../utils/Utils";
-import { Override, UniformContext } from "./utils";
-
-filterDOMProps.register("organisationId", "organisationKey");
 
 export type ContactPersonNameFieldProps = Override<
     HTMLProps<HTMLDivElement>,
@@ -21,7 +18,7 @@ export type ContactPersonNameFieldProps = Override<
         description: string;
         name: string;
         onChange(value?: string): void;
-        value: string;
+        value?: string;
         error?: boolean;
         showInlineError?: boolean;
         errorMessage?: string;
@@ -30,27 +27,24 @@ export type ContactPersonNameFieldProps = Override<
     }
 >;
 
-function ContactPersonName(
-    {
-        disabled,
-        id,
-        inputRef = React.createRef(),
-        label,
-        description,
-        name,
-        onChange,
-        placeholder,
-        value,
-        error,
-        showInlineError,
-        errorMessage,
-        organisationId,
-        organisationKey,
-        ...props
-    }: ContactPersonNameFieldProps,
-    context: UniformContext
-) {
-    const { model, onChange: formOnChange } = context?.uniforms ?? { model: {}, onChange: (a, b) => {} };
+function ContactPersonName({
+    disabled,
+    id,
+    inputRef = React.createRef(),
+    label,
+    description,
+    name,
+    onChange,
+    placeholder,
+    value,
+    error,
+    showInlineError,
+    errorMessage,
+    organisationId,
+    organisationKey,
+    ...props
+}: ContactPersonNameFieldProps) {
+    const { model, onChange: formOnChange } = useForm();
 
     const organisationIdValue = organisationId || get(model, organisationKey || "organisation");
     const contactsPersonFieldNameArray = joinName(null, name).slice(0, -1);
@@ -151,13 +145,13 @@ function ContactPersonName(
                     placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
                     ref={inputRef}
                     type="text"
-                    value={value}
+                    value={value ?? ""}
                     onKeyDown={onAutocompleteKeyDown}
                     onBlur={onBlurAutoComplete}
                 ></input>
                 {displayAutocomplete && (
                     <Autocomplete
-                        query={value}
+                        query={value ?? ""}
                         itemSelected={itemSelected}
                         selectedItem={selectedIndex}
                         suggestions={suggestions}
@@ -173,7 +167,5 @@ function ContactPersonName(
         </section>
     );
 }
-
-ContactPersonName.contextTypes = BaseField.contextTypes;
 
 export default connectField(ContactPersonName);

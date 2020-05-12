@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { ListAddField, ListField, ListItemField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<ListField> - works", () => {
     const element = <ListField name="x" />;
@@ -16,7 +16,7 @@ test("<ListField> - renders ListAddField", () => {
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListAddField)).toHaveLength(1);
-    expect(wrapper.find(ListAddField).prop("name")).toBe("x.$");
+    expect(wrapper.find(ListAddField).prop("name")).toBe("$");
 });
 
 test("<ListField> - renders correct label (specified)", () => {
@@ -52,6 +52,7 @@ test("<ListField> - renders children (specified)", () => {
     const element = (
         <ListField name="x" initialCount={2}>
             <Child />
+            PlainText
         </ListField>
     );
     mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
@@ -74,13 +75,13 @@ test("<ListField> - renders children with correct name (children)", () => {
             .find(Child)
             .at(0)
             .prop("name")
-    ).toBe("x.0");
+    ).toBe("0");
     expect(
         wrapper
             .find(Child)
             .at(1)
             .prop("name")
-    ).toBe("x.1");
+    ).toBe("1");
 });
 
 test("<ListField> - renders children with correct name (value)", () => {
@@ -92,11 +93,11 @@ test("<ListField> - renders children with correct name (value)", () => {
             .find(ListItemField)
             .at(0)
             .prop("name")
-    ).toBe("x.0");
+    ).toBe("0");
     expect(
         wrapper
             .find(ListItemField)
             .at(1)
             .prop("name")
-    ).toBe("x.1");
+    ).toBe("1");
 });

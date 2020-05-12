@@ -30,7 +30,6 @@ import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import { AutoForm } from "uniforms-unstyled";
 
-import { catchErrorStatus } from "../api";
 import {
     AutoFields,
     ContactPersonNameField,
@@ -66,7 +65,7 @@ interface IProps {
 
 interface IState {
     confirmationDialogOpen: boolean;
-    validationErrors?: UniformsError;
+    nrOfValidationErrors: number;
     processing: boolean;
 }
 
@@ -233,6 +232,11 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
 
 export default class UserInputForm extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
+    state: IState = {
+        confirmationDialogOpen: false,
+        processing: false,
+        nrOfValidationErrors: 0
+    };
 
     public static defaultProps = {
         previous: () => {},
@@ -240,60 +244,42 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         hasNext: false
     };
 
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            confirmationDialogOpen: false,
-            processing: false
-        };
-    }
-
     cancel = (e: React.FormEvent) => {
         stop(e);
         this.setState({ confirmationDialogOpen: true });
     };
 
-    updateValidationErrors = (validationErrors: { validation_errors: ValidationError[] }) => {
-        let newValidationErrors = validationErrors.validation_errors;
-
-        if (newValidationErrors) {
-            let error: UniformsError = {
-                details: newValidationErrors.map((e: ValidationError) => ({
-                    message: e.msg,
-                    params: e.ctx || {},
-                    dataPath: "." + e.loc.join(".")
-                }))
-            };
-
-            this.setState({ validationErrors: error, processing: false });
-        } else {
-            this.setState({ validationErrors: undefined, processing: false });
-        }
-    };
-
-    submit = (userInput: {}) => {
+    submit = async (userInput: {}) => {
+        console.log("submit");
         const { processing } = this.state;
 
         if (!processing) {
             this.setState({ processing: true });
 
-            let promise = this.props.validSubmit(userInput);
-            catchErrorStatus<{ validation_errors: ValidationError[] }>(promise, 400, json => {
-                this.updateValidationErrors(json);
-            }).then(() => {
+            try {
+                await this.props.validSubmit(userInput);
                 this.setState({ processing: false });
-            });
-        }
-    };
+                return null;
+            } catch (error) {
+                this.setState({ processing: false });
 
-    onValidate = (model: {}, error: UniformsError, callback: (error: any) => void) => {
-        // We want to ignore the backend validation errors present and just continue
-        if (error === this.state.validationErrors) {
-            return callback(null);
-        }
+                if (error.response.status === 400) {
+                    let json = await error.response.json();
 
-        // Any frontend validation will continue to block
-        return callback(error);
+                    this.setState({ nrOfValidationErrors: json.validation_errors.length });
+
+                    // eslint-disable-next-line no-throw-literal
+                    throw {
+                        details: json.validation_errors.map((e: ValidationError) => ({
+                            message: e.msg,
+                            params: e.ctx || {},
+                            dataPath: "." + e.loc.join(".")
+                        }))
+                    };
+                }
+                throw error;
+            }
+        }
     };
 
     renderButtons = () => {
@@ -330,9 +316,8 @@ export default class UserInputForm extends React.Component<IProps, IState> {
     };
 
     render() {
-        const { confirmationDialogOpen, validationErrors } = this.state;
+        const { confirmationDialogOpen, nrOfValidationErrors } = this.state;
         const { cancel, stepUserInput } = this.props;
-        const numberOfValidationErrors = validationErrors ? validationErrors.details.length : 0;
 
         const schemaValidator = createValidator(stepUserInput);
         const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, schemaValidator);
@@ -346,21 +331,14 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     leavePage={true}
                 />
                 <section className="card">
-                    <AutoForm
-                        schema={bridge}
-                        onSubmit={this.submit}
-                        showInlineError={true}
-                        error={validationErrors}
-                        validate="onSubmit"
-                        onValidate={this.onValidate}
-                    >
+                    <AutoForm schema={bridge} onSubmit={this.submit} showInlineError={true} validate="onSubmit">
                         <AutoFields />
                         {/* Show top level validation info about backend validation */}
-                        {numberOfValidationErrors > 0 && (
+                        {nrOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error backend-validation-metadata">
                                     {I18n.t("process.input_fields_have_validation_errors", {
-                                        nrOfValidationErrors: numberOfValidationErrors
+                                        nrOfValidationErrors: nrOfValidationErrors
                                     })}
                                 </em>
                             </section>

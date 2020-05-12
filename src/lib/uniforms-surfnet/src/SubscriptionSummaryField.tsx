@@ -1,14 +1,12 @@
 import { getResourceTypeInfo, productById, subscriptionsDetail } from "api";
 import I18n from "i18n-js";
 import React, { HTMLProps, useContext, useEffect, useState } from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { Override, connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import { Product, Subscription, SubscriptionWithDetails } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 import { InstanceValueWithLabel, subscriptionInstanceValues } from "validations/Subscriptions";
-
-import { Override } from "./utils";
 
 export type SubscriptionSummaryFieldProps = Override<
     Omit<HTMLProps<HTMLDivElement>, "onChange">,
@@ -212,4 +210,4 @@ function SubscriptionSummary({ id, name, label, description, value, ...props }: 
     );
 }
 
-export default connectField(SubscriptionSummary, { ensureValue: false, initialValue: false });
+export default connectField(SubscriptionSummary);

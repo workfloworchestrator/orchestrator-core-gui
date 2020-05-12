@@ -1,7 +1,5 @@
 import React, { HTMLProps, Ref } from "react";
-import { connectField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 export type LongTextFieldProps = Override<
     HTMLProps<HTMLDivElement>,

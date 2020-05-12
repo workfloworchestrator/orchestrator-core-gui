@@ -1,8 +1,7 @@
 import React, { HTMLProps } from "react";
-import { connectField, filterDOMProps, injectName, joinName } from "uniforms";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 import AutoField from "./AutoField";
-import { Override } from "./utils";
 
 export type NestFieldProps = Override<
     Omit<HTMLProps<HTMLDivElement>, "onChange">,
@@ -26,11 +25,9 @@ function Nest({ children, fields, itemProps, label, description, name, className
                 </label>
             )}
 
-            {children
-                ? injectName(name, children as JSX.Element | JSX.Element[])
-                : fields?.map(field => <AutoField key={field} name={joinName(name, field)} {...itemProps} />)}
+            {children || fields?.map(field => <AutoField key={field} name={field} {...itemProps} />)}
         </section>
     );
 }
 
-export default connectField(Nest, { includeInChain: false });
+export default connectField(Nest);

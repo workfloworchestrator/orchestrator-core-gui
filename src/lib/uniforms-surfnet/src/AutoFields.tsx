@@ -1,32 +1,31 @@
-import PropTypes from "prop-types";
-import { createElement } from "react";
+import { ComponentType, createElement } from "react";
+import { useForm } from "uniforms";
 
 import AutoField from "./AutoField";
 
-const AutoFields = ({ autoField, element, fields, omitFields, ...props }: any, { uniforms: { schema } }: any) =>
-    createElement(
-        element,
+export type AutoFieldsProps = {
+    autoField?: ComponentType<{ name: string; className: string; id: string }>;
+    element?: ComponentType<{ className: string }> | string;
+    fields?: string[];
+    omitFields?: string[];
+};
+
+export default function AutoFields({ autoField, element, fields, omitFields, ...props }: AutoFieldsProps) {
+    const { schema } = useForm();
+
+    return createElement(
+        element!,
         { className: "form-step", ...props },
-        (fields || schema.getSubfields())
-            .filter((field: any) => omitFields.indexOf(field) === -1)
-            .map((field: any) =>
-                createElement(autoField, { key: field, name: field, className: field, id: `input-${field}` })
+        (fields ?? schema.getSubfields())
+            .filter(field => !omitFields!.includes(field))
+            .map(field =>
+                createElement(autoField!, { key: field, name: field, className: field, id: `input-${field}` })
             )
     );
-
-AutoFields.contextTypes = AutoField.contextTypes;
-AutoFields.propTypes = {
-    autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-
-    fields: PropTypes.arrayOf(PropTypes.string),
-    omitFields: PropTypes.arrayOf(PropTypes.string)
-};
+}
 
 AutoFields.defaultProps = {
     autoField: AutoField,
     element: "section",
     omitFields: []
 };
-
-export default AutoFields;

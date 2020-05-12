@@ -1,7 +1,5 @@
 import React, { HTMLProps } from "react";
-import { connectField, filterDOMProps } from "uniforms";
-
-import { Override } from "./utils";
+import { Override, connectField, filterDOMProps } from "uniforms";
 
 const base64 = typeof btoa !== "undefined" ? btoa : (x: string) => Buffer.from(x).toString("base64");
 const escape = (x: string) => base64(x).replace(/=+$/, "");
@@ -11,7 +9,7 @@ export type RadioFieldProps = Override<
     {
         allowedValues: string[];
         checkboxes?: boolean;
-        onChange(value?: string): void;
+        onChange(value: string): void;
         transform?(string?: string): string;
     }
 >;

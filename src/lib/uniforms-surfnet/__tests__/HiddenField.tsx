@@ -1,8 +1,8 @@
-import { mount } from "enzyme";
 import React from "react";
 
 import { HiddenField } from "../src";
 import createContext from "./_createContext";
+import mount from "./_mount";
 
 test("<HiddenField> - renders an input", () => {
     const element = <HiddenField name="x" />;

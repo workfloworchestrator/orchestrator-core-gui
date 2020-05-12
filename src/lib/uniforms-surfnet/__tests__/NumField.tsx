@@ -1,11 +1,8 @@
-import { mount } from "enzyme";
-import identity from "lodash/identity";
 import React from "react";
 
 import { NumField } from "../src";
 import createContext from "./_createContext";
-
-const expectedValueTransform = parseInt(React.version, 10) >= 16 ? identity : x => (x === undefined ? "" : "" + x);
+import mount from "./_mount";
 
 test("<NumField> - renders an input", () => {
     const element = <NumField name="x" />;
@@ -38,21 +35,21 @@ test("<NumField> - renders an input with correct id (specified)", () => {
     expect(wrapper.find("input").prop("id")).toBe("y");
 });
 
-// test("<NumField> - renders an input with correct max", () => {
-//     const element = <NumField name="x" max={10} />;
-//     const wrapper = mount(element, createContext({ x: { type: Number } }));
+test("<NumField> - renders an input with correct max", () => {
+    const element = <NumField name="x" max={10} />;
+    const wrapper = mount(element, createContext({ x: { type: Number } }));
 
-//     expect(wrapper.find("input")).toHaveLength(1);
-//     expect(wrapper.find("input").prop("max")).toBe(10);
-// });
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.childAt(0).prop("max")).toBe(10);
+});
 
-// test("<NumField> - renders an input with correct min", () => {
-//     const element = <NumField name="x" min={10} />;
-//     const wrapper = mount(element, createContext({ x: { type: Number } }));
+test("<NumField> - renders an input with correct min", () => {
+    const element = <NumField name="x" min={10} />;
+    const wrapper = mount(element, createContext({ x: { type: Number } }));
 
-//     expect(wrapper.find("input")).toHaveLength(1);
-//     expect(wrapper.find("input").prop("min")).toBe(10);
-// });
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.childAt(0).prop("min")).toBe(10);
+});
 
 test("<NumField> - renders an input with correct name", () => {
     const element = <NumField name="x" />;
@@ -107,12 +104,10 @@ test("<NumField> - renders an input with correct value (model)", () => {
         { value: 1, precision: 0 },
         { value: 1, precision: 0 }
     ].forEach(({ precision = 2, value }) => {
-        const valueInput = expectedValueTransform(value);
-
         wrapper.setProps({ precision });
 
         expect(wrapper.find("input").simulate("change", { target: { value: "" } })).toBeTruthy();
-        expect(wrapper.find("input").simulate("change", { target: { value: valueInput } })).toBeTruthy();
+        expect(wrapper.find("input").simulate("change", { target: { value } })).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", value);
 
         wrapper.setProps({ value: undefined });
