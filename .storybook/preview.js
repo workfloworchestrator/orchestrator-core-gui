@@ -4,15 +4,15 @@ import "./storybook.scss";
 import { withState } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
-import { addons } from "@storybook/addons";
 import { addDecorator } from "@storybook/react";
+import I18n from "i18n-js";
 import React from "react";
 
+import en from "../src/locale/en"; // We need to import this
 import LOCATION_CODES from "../src/stories/data/location_codes.json";
 import ORGANISATIONS from "../src/stories/data/organisations.json";
 import PRODUCTS from "../src/stories/data/products.json";
 import ApplicationContext from "../src/utils/ApplicationContext";
-import surfnetTheme from "./surfnetTheme";
 
 addDecorator(withKnobs);
 
@@ -37,9 +37,7 @@ function withContext(storyFn) {
 }
 addDecorator(withContext);
 
-addons.setConfig({
-    surfnetTheme
-});
+I18n.locale = "en";
 
 // Set runtime config
 window.__env__ = {};
