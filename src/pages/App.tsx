@@ -170,6 +170,11 @@ class App extends React.PureComponent<{}, IState> {
                             <Switch>
                                 <Route exact path="/authorize" render={() => <Redirect to="/" />} />
                                 <Route exact path="/" render={() => <Redirect to="/processes" />} />
+                                <Route
+                                    exact
+                                    path="/validations"
+                                    render={() => <Redirect to="/validations/workflows" />}
+                                />
                                 <ProtectedRoute
                                     path="/validations/:type"
                                     render={props => <Validations match={props.match} />}
@@ -212,6 +217,7 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <Route path="/subscriptions/:id" render={props => <SubscriptionDetail {...props} />} />
                                 <Route path="/subscriptions" render={props => <SubscriptionsPage {...props} />} />
+                                <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
                                 <ProtectedRoute
                                     path="/metadata/:type"
                                     render={props => <MetaData match={props.match} />}
