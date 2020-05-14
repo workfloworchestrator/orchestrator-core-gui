@@ -207,7 +207,11 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
             {
                 Header: "Status",
                 accessor: "status",
-                Filter: renderMultiSelectFilter.bind(null, ["active", "terminated", "initial", "provisioning"], null)
+                Filter: renderMultiSelectFilter.bind(
+                    null,
+                    ["active", "terminated", "initial", "provisioning", "migrating"],
+                    null
+                )
             },
             {
                 Header: "In Sync",
