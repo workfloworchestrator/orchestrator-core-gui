@@ -234,17 +234,6 @@ class App extends React.PureComponent<{}, IState> {
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
-                                {/*TODO: DETERMINE UNUSED? seems handled by new process detail page...*/}
-                                <Route
-                                    path="/task/:id"
-                                    render={props => <Redirect to={`/tasks/${props.match.params.id}`} />}
-                                />
-                                <Route
-                                    path="/tasks/:id"
-                                    render={props => <ProcessDetail {...props} isProcess={false} />}
-                                />
-                                {/*END UNUSED?*/}
-
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
                                 <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
