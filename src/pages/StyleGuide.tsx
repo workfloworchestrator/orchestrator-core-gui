@@ -15,7 +15,28 @@
 
 import "./Subscriptions.scss";
 
-import { EuiButton, EuiCard, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiText } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiButtonEmpty,
+    EuiCard,
+    EuiCodeBlock,
+    EuiFieldText,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiForm,
+    EuiFormRow,
+    EuiIcon,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiModalHeaderTitle,
+    EuiOverlayMask,
+    EuiRange,
+    EuiSpacer,
+    EuiSwitch,
+    EuiText
+} from "@elastic/eui";
 import React from "react";
 
 import Explain from "../components/Explain";
@@ -24,6 +45,8 @@ interface IProps {}
 
 interface IState {
     showExplanation: boolean;
+    isModalVisible: boolean;
+    isSwitchChecked: boolean;
 }
 
 export default class StyleGuide extends React.PureComponent<IProps, IState> {
@@ -31,9 +54,17 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
         super(props);
 
         this.state = {
-            showExplanation: false
+            showExplanation: false,
+            isModalVisible: false,
+            isSwitchChecked: false
         };
     }
+
+    onSwitchChange = () => this.setState({ isSwitchChecked: !this.state.isSwitchChecked });
+
+    closeModal = () => this.setState({ isModalVisible: false });
+
+    showModal = () => this.setState({ isModalVisible: true });
 
     renderExplain() {
         return (
@@ -74,6 +105,58 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                 </EuiFlexItem>
             );
         });
+
+        const formSample = (
+            <EuiForm>
+                <EuiFormRow>
+                    <EuiSwitch
+                        id="42"
+                        name="popswitch"
+                        label="Isn't this modal form cool?"
+                        checked={this.state.isSwitchChecked}
+                        onChange={this.onSwitchChange}
+                    />
+                </EuiFormRow>
+
+                <EuiFormRow label="A text field">
+                    <EuiFieldText name="popfirst" />
+                </EuiFormRow>
+
+                <EuiFormRow label="Range" helpText="Some help text for the range">
+                    <EuiRange min={0} max={100} name="poprange" value={12} />
+                </EuiFormRow>
+
+                <EuiSpacer />
+
+                <EuiCodeBlock language="html" paddingSize="s" isCopyable>
+                    {"<h1>Title</h1>"}
+                </EuiCodeBlock>
+            </EuiForm>
+        );
+
+        let modal;
+
+        if (this.state.isModalVisible) {
+            modal = (
+                <EuiOverlayMask>
+                    <EuiModal onClose={this.closeModal} initialFocus="[name=popfirst]">
+                        <EuiModalHeader>
+                            <EuiModalHeaderTitle>Modal title</EuiModalHeaderTitle>
+                        </EuiModalHeader>
+
+                        <EuiModalBody>{formSample}</EuiModalBody>
+
+                        <EuiModalFooter>
+                            <EuiButtonEmpty onClick={this.closeModal}>Cancel</EuiButtonEmpty>
+
+                            <EuiButton onClick={this.closeModal} fill>
+                                Save
+                            </EuiButton>
+                        </EuiModalFooter>
+                    </EuiModal>
+                </EuiOverlayMask>
+            );
+        }
 
         return (
             <div className="subscriptions-container">
@@ -239,6 +322,12 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                 <EuiFlexGroup gutterSize="l">{cardNodes}</EuiFlexGroup>
                 <EuiFlexGroup gutterSize="l">{horizontalCardNodes}</EuiFlexGroup>
 
+                <EuiText>
+                    <h2>Modal</h2>
+                </EuiText>
+                <EuiButton onClick={this.showModal}>Show modal</EuiButton>
+                {modal}
+
                 <EuiText grow={true}>
                     <h2>Typography: Heading two</h2>
                     <p>
@@ -252,7 +341,7 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                     <pre>
                         <code>const completelyUnexpected = &quot;the audacity!&quot;;</code>
                     </pre>
-                    0<p>That was close.</p>
+                    <p>That was close.</p>
                     <blockquote>
                         <p>
                             I&apos;ve seen things you people wouldn&apos;t believe. Attack ships on fire off the
