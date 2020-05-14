@@ -45,6 +45,7 @@ import ProcessDetail from "./ProcessDetail";
 import Processes from "./Processes";
 import ServerError from "./ServerError";
 import Settings from "./Settings";
+import StyleGuide from "./StyleGuide";
 import SubscriptionDetail from "./SubscriptionDetail";
 import SubscriptionsPage from "./Subscriptions";
 import Tasks from "./Tasks";
@@ -242,6 +243,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
+                                <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>
