@@ -15,6 +15,7 @@
 
 import { action } from "@storybook/addon-actions";
 import fetchMock from "fetch-mock";
+import { JSONSchema6 } from "json-schema";
 import React from "react";
 
 import GenericNOCConfirm from "../components/GenericNOCConfirm";
@@ -98,4 +99,37 @@ export const ComplexInForm = () => {
 
 ComplexInForm.story = {
     name: "Complex in form"
+};
+
+export const AcceptField = () => {
+    return (
+        <UserInputContainer
+            formName="NOC Confirm"
+            stepUserInput={{
+                title: "Validator",
+                type: "object",
+                properties: {
+                    confirm_migrate_sap: {
+                        title: "Accept",
+                        default: true,
+                        type: "string",
+                        format: "accept",
+                        uniforms: {
+                            data: [
+                                ["check_delete_sn7_service_config", "label"],
+                                ["check_port_patched_sn7_sn8", "label"],
+                                ["next_step_service_affecting", "warning"],
+                                ["confirm_migrate_sap", "checkbox"],
+                                ["skip_migrate_sap_workflow", "skip"]
+                            ]
+                        }
+                    } as JSONSchema6
+                }
+            }}
+        />
+    );
+};
+
+AcceptField.story = {
+    name: "Accept Field"
 };

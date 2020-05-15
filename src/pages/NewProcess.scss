@@ -33,7 +33,7 @@
             color: vars.$darker-blue;
         }
 
-        section.form-divider {
+        > section {
             border-bottom: 1px solid vars.$lightest-grey;
             padding-bottom: 10px;
             margin-bottom: 15px;

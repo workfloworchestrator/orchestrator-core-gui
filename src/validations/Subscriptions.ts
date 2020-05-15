@@ -15,7 +15,7 @@ import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "..
  *
  */
 
-interface InstanceValueWithLabel extends InstanceValue {
+export interface InstanceValueWithLabel extends InstanceValue {
     instance_label: string;
 }
 

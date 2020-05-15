@@ -26,6 +26,11 @@ label {
     font-weight: bold;
     color: vars.$medium-grey;
     display: block;
+    em {
+        text-transform: none;
+        font-weight: normal;
+        color: vars.$dark-grey;
+    }
 }
 
 em {

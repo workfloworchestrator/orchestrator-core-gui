@@ -1,0 +1,3439 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Organisation and contacts
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="organisation"
+                >
+                  <label
+                    htmlFor="input-organisation"
+                  >
+                    Customer
+                    <em>
+                      Search and select the customer for the product.
+                    </em>
+                  </label>
+                  <div
+                    className=" css-2b097c-container"
+                    id="input-organisation"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-135-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="organisation"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
+                </section>
+                <section>
+                  <ul
+                    className="list-field"
+                    id="input-contact_persons"
+                  >
+                    <label>
+                      Customer contact persons
+                      <em>
+                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                      </em>
+                    </label>
+                    <li>
+                      <section
+                        className=" nest-field"
+                        id="uniforms-0002-0005"
+                      >
+                        <section>
+                          <label
+                            htmlFor="uniforms-0002-0009"
+                          >
+                            Email
+                            
+                          </label>
+                          <input
+                            disabled={false}
+                            id="uniforms-0002-0009"
+                            name="contact_persons.0.email"
+                            onChange={[Function]}
+                            placeholder=""
+                            type="text"
+                            value=""
+                          />
+                        </section>
+                        <section>
+                          <label
+                            htmlFor="uniforms-0002-000b"
+                          >
+                            Name
+                            
+                          </label>
+                          <div
+                            className="autocomplete-container"
+                          >
+                            <input
+                              disabled={false}
+                              id="uniforms-0002-000b"
+                              name="contact_persons.0.name"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onKeyDown={[Function]}
+                              placeholder="Search and add contact persons..."
+                              type="text"
+                              value=""
+                            />
+                             
+                          </div>
+                        </section>
+                        <section>
+                          <label
+                            htmlFor="uniforms-0002-000d"
+                          >
+                            Phone number
+                            
+                          </label>
+                          <input
+                            disabled={false}
+                            id="uniforms-0002-000d"
+                            name="contact_persons.0.phone"
+                            onChange={[Function]}
+                            placeholder=""
+                            type="text"
+                            value=""
+                          />
+                        </section>
+                      </section>
+                      <i
+                        className="fa fa-minus disabled"
+                        id="uniforms-0002-000e"
+                        onClick={[Function]}
+                      />
+                    </li>
+                    <div
+                      className="add-item"
+                      id="uniforms-0002-000f"
+                    >
+                      <i
+                        className="fa fa-plus "
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </ul>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew Corelink 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Corelink form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider ims_port_id_1"
+                  id="input-ims_port_id_1"
+                >
+                  <label>
+                    First node and port
+                  </label>
+                  <em>
+                    Choose a node and port that you want to use to create the first corelink
+                  </em>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-136-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="port-select"
+                    >
+                      <label>
+                        Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              First select a node
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-137-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
+                >
+                  <label>
+                    Second node and port
+                  </label>
+                  <em>
+                    Choose a node and port that you want to use to create the second corelink
+                  </em>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-138-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="port-select"
+                    >
+                      <label>
+                        Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              First select a node
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-139-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <em
+                    className="error"
+                  />
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Corelink add link form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider ims_port_id_1"
+                  id="input-ims_port_id_1"
+                >
+                  <label>
+                    First node and port
+                  </label>
+                  <em>
+                    Choose a node and port that you want to use to create the first corelink
+                  </em>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-140-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="port-select"
+                    >
+                      <label>
+                        Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              First select a node
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-141-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
+                >
+                  <label>
+                    Second node and port
+                  </label>
+                  <em>
+                    Choose a node and port that you want to use to create the second corelink
+                  </em>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-142-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="port-select"
+                    >
+                      <label>
+                        Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-1hwfws3"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              First select a node
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-143-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <em
+                    className="error"
+                  />
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew Nodes 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Node form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider ims_node_id"
+                  id="input-ims_node_id"
+                >
+                  <label>
+                    Choose a node from IMS
+                  </label>
+                  <em>
+                    Choose a node that has state PLANNED or READY FOR SERVICE in IMS
+                  </em>
+                  <div
+                    className="node-select"
+                  >
+                    <div
+                      className="select-node css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className=" css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className=" css-1hwfws3"
+                        >
+                          <div
+                            className=" css-1wa3eu0-placeholder"
+                          >
+                            Select a node
+                          </div>
+                          <div
+                            className="css-b8ldur-Input"
+                          >
+                            <div
+                              className=""
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
+                              }
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={false}
+                                id="react-select-144-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className=" css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            className=" css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className=" css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="css-6q0nyr-Svg"
+                              focusable="false"
+                              height={20}
+                              viewBox="0 0 20 20"
+                              width={20}
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN7 Portselect MSP only 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-147-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN7 Portselect all organisations 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-145-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN7 Portselect bandwidth 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider service_ports"
+                  id="input-service_ports"
+                >
+                  <label>
+                    Service Ports
+                  </label>
+                  <em>
+                    Choose Service Ports
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+                <section
+                  className="form-divider current_bandwidth"
+                  id="input-current_bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Current bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={true}
+                      id="current_bandwidth"
+                      name="current_bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                      value={1000}
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider new_bandwidth"
+                  id="input-new_bandwidth"
+                >
+                  <label>
+                    New bandwidth
+                  </label>
+                  <em>
+                    New bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      id="new_bandwidth"
+                      name="new_bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN7 Portselect selected organisation 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN7 portselect, showing only ports for selected organisation
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-149-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN8 Portselect all organisations 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-152-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN8 Portselect selected organisation 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect, showing only ports for selected organisation
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-158-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="organisation"
+                >
+                  <label
+                    htmlFor="input-organisation"
+                  >
+                    Customer
+                    <em>
+                      Search and select the customer for the product.
+                    </em>
+                  </label>
+                  <div
+                    className=" css-2b097c-container"
+                    id="input-organisation"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-155-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="organisation"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
+                </section>
+                <div
+                  className="bandwidth"
+                >
+                  <label
+                    htmlFor="input-bandwidth"
+                  >
+                    Bandwidth
+                    <em>
+                      Desired bandwidth in Mbit/s
+                    </em>
+                  </label>
+                  <span
+                    className="react-numeric-input"
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <input
+                      disabled={false}
+                      id="input-bandwidth"
+                      name="bandwidth"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onInput={[Function]}
+                      onKeyDown={[Function]}
+                      onSelect={[Function]}
+                      placeholder=""
+                      style={
+                        Object {
+                          "WebkitAppearance": "none",
+                          "border": "1px solid #ccc",
+                          "borderRadius": 2,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "fontSize": "inherit",
+                          "lineHeight": "normal",
+                          "paddingLeft": 4,
+                          "paddingRight": "3ex",
+                        }
+                      }
+                      type="text"
+                      value=""
+                    />
+                    <b
+                      onMouseDown={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchStart={[Function]}
+                      style={
+                        Object {
+                          "background": "rgba(0,0,0,.1)",
+                          "borderColor": "rgba(0,0,0,.1)",
+                          "borderRadius": "2px 2px 0 0",
+                          "borderStyle": "solid",
+                          "borderWidth": "1px 1px 0 1px",
+                          "bottom": "50%",
+                          "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
+                          "cursor": "default",
+                          "position": "absolute",
+                          "right": 2,
+                          "textAlign": "center",
+                          "top": 2,
+                          "transition": "all 0.1s",
+                          "width": "2.26ex",
+                        }
+                      }
+                    >
+                      <i
+                        style={
+                          Object {
+                            "borderColor": "transparent transparent rgba(0, 0, 0, 0.7)",
+                            "borderStyle": "solid",
+                            "borderWidth": "0 0.6ex 0.6ex 0.6ex",
+                            "height": 0,
+                            "left": "50%",
+                            "margin": "-0.3ex 0 0 -0.56ex",
+                            "position": "absolute",
+                            "top": "50%",
+                            "width": 0,
+                          }
+                        }
+                      />
+                    </b>
+                    <b
+                      onMouseDown={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchStart={[Function]}
+                      style={
+                        Object {
+                          "background": "rgba(0,0,0,.1)",
+                          "borderColor": "rgba(0,0,0,.1)",
+                          "borderRadius": "0 0 2px 2px",
+                          "borderStyle": "solid",
+                          "borderWidth": "0 1px 1px 1px",
+                          "bottom": 2,
+                          "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
+                          "cursor": "default",
+                          "position": "absolute",
+                          "right": 2,
+                          "textAlign": "center",
+                          "top": "50%",
+                          "transition": "all 0.1s",
+                          "width": "2.26ex",
+                        }
+                      }
+                    >
+                      <i
+                        style={
+                          Object {
+                            "borderColor": "rgba(0, 0, 0, 0.7) transparent transparent",
+                            "borderStyle": "solid",
+                            "borderWidth": "0.6ex 0.6ex 0 0.6ex",
+                            "height": 0,
+                            "left": "50%",
+                            "margin": "-0.3ex 0 0 -0.56ex",
+                            "position": "absolute",
+                            "top": "50%",
+                            "width": 0,
+                          }
+                        }
+                      />
+                    </b>
+                  </span>
+                </div>
+                <section>
+                  <ul
+                    className="list-field"
+                    id="input-bgp_ip_service_ports"
+                  >
+                    <label>
+                      IP Service Ports
+                      <em>
+                        The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                      </em>
+                    </label>
+                    <li>
+                      <section
+                        className=" nest-field"
+                        id="uniforms-0003-0007"
+                      >
+                        <section>
+                          <label
+                            htmlFor="uniforms-0003-000b"
+                          >
+                            Service Port
+                            
+                          </label>
+                          <input
+                            disabled={false}
+                            id="uniforms-0003-000b"
+                            name="bgp_ip_service_ports.0.subscription_id"
+                            onChange={[Function]}
+                            placeholder=""
+                            type="text"
+                            value=""
+                          />
+                        </section>
+                        <section>
+                          <label
+                            htmlFor="uniforms-0003-000d"
+                          >
+                            Port Vlan
+                            
+                          </label>
+                          <input
+                            disabled={false}
+                            id="uniforms-0003-000d"
+                            name="bgp_ip_service_ports.0.vlan"
+                            onChange={[Function]}
+                            placeholder=""
+                            type="text"
+                            value=""
+                          />
+                        </section>
+                      </section>
+                      <i
+                        className="fa fa-minus disabled"
+                        id="uniforms-0003-000e"
+                        onClick={[Function]}
+                      />
+                    </li>
+                    <div
+                      className="add-item"
+                      id="uniforms-0003-000f"
+                    >
+                      <i
+                        className="fa fa-plus "
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </ul>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew SN8 Portselect untagged 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          SN8 portselect form, showing all ports
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="form-divider organisation"
+                  id="input-organisation"
+                >
+                  <label>
+                    Customer
+                  </label>
+                  <em>
+                    Search and select the customer for the product.
+                  </em>
+                  <div
+                    className=" css-2b097c-container"
+                    id="organisation-select"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className=" css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className=" css-1hwfws3"
+                      >
+                        <div
+                          className=" css-1wa3eu0-placeholder"
+                        >
+                          Search and select a customer...
+                        </div>
+                        <div
+                          className="css-b8ldur-Input"
+                        >
+                          <div
+                            className=""
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-156-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          className=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className=" css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="css-6q0nyr-Svg"
+                            focusable="false"
+                            height={20}
+                            viewBox="0 0 20 20"
+                            width={20}
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bandwidth"
+                  id="input-bandwidth"
+                >
+                  <label>
+                    Bandwidth
+                  </label>
+                  <em>
+                    Desired bandwidth in Mbit/s
+                  </em>
+                  <div>
+                    <input
+                      disabled={false}
+                      id="bandwidth"
+                      name="bandwidth"
+                      onChange={[Function]}
+                      type="number"
+                    />
+                  </div>
+                  <em
+                    className="error"
+                  />
+                </section>
+                <section
+                  className="form-divider bgp_ip_service_ports"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                  </label>
+                  <em>
+                    The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                  </em>
+                  <section
+                    className="service-port-container"
+                  >
+                    <div
+                      className="refresh-service-ports"
+                    >
+                      <i
+                        className="fa fa-sync"
+                        onClick={[Function]}
+                      />
+                    </div>
+                    <em
+                      className="error"
+                    />
+                    <div
+                      className="add-service-port"
+                    >
+                      <i
+                        className="fa fa-plus"
+                        onClick={[Function]}
+                      />
+                    </div>
+                  </section>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;

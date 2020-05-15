@@ -14,11 +14,16 @@
  */
 
 import { action } from "@storybook/addon-actions";
+import UserInputFormWizard from "components/UserInputFormWizard";
 import React from "react";
+import { InputForm } from "utils/types";
 
-import UserInputForm from "../components/UserInputForm";
+interface IProps {
+    stepUserInput: InputForm;
+    formName: string;
+}
 
-export default class UserInputContainer extends React.Component {
+export default class UserInputContainer extends React.Component<IProps> {
     render() {
         const { stepUserInput, formName } = this.props;
         return (
@@ -26,9 +31,12 @@ export default class UserInputContainer extends React.Component {
                 <section className="card">
                     <section className="form-step divider">
                         <h1>{formName}</h1>
-                        <UserInputForm
+                        <UserInputFormWizard
                             stepUserInput={stepUserInput}
-                            validSubmit={action("submit")}
+                            validSubmit={() => {
+                                action("submit");
+                                return Promise.resolve();
+                            }}
                             cancel={action("cancel")}
                         />
                     </section>

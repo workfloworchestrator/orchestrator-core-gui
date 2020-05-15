@@ -13,6 +13,8 @@
  *
  */
 
+import { JSONSchema6 } from "json-schema";
+
 export interface FilterArgument {
     id: string;
     values: string[];
@@ -282,11 +284,19 @@ export interface IMSService {
 }
 
 export interface IMSPort {
+    id: number;
     line_name: string;
     node: string;
     port: string;
     iface_type: string;
     patchposition: string;
+    status: string;
+}
+
+export interface IMSNode {
+    id: number;
+    name: string;
+    status: string;
 }
 
 export interface WorkflowReason {
@@ -317,7 +327,7 @@ export interface EngineStatus {
     global_status: GlobalStatus;
 }
 
-export type InputForm = InputField[];
+export type InputForm = InputField[] | JSONSchema6;
 
 export interface ContactPerson {
     name: string;

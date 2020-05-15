@@ -209,10 +209,19 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 if (!step.form) {
                     return null;
                 }
-                json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
-                    acc[field.name] = "";
-                    return acc;
-                }, {});
+                if (Array.isArray(step.form)) {
+                    json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
+                        acc[field.name] = "";
+                        return acc;
+                    }, {});
+                } else {
+                    Object.keys(step.form.properties as {})
+                        .sort()
+                        .reduce<{ [index: string]: any }>((acc, field) => {
+                            acc[field] = "";
+                            return acc;
+                        }, {});
+                }
                 break;
             case "failed":
             case "waiting":

@@ -280,7 +280,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
     };
 
     renderInput = (userInput: InputField) => {
-        if (userInput.type === "hidden") {
+        if (["hidden", "metadata"].includes(userInput.type)) {
             return;
         }
 
