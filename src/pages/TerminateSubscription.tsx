@@ -22,7 +22,7 @@ import { Redirect, RouteComponentProps, withRouter } from "react-router";
 import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "../api/index";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField, Product } from "../utils/types";
+import { FormNotCompleteResponse, InputForm, Product } from "../utils/types";
 import { TARGET_TERMINATE } from "../validations/Products";
 
 interface IProps extends RouteComponentProps {
@@ -31,7 +31,7 @@ interface IProps extends RouteComponentProps {
 
 interface IState {
     product?: Product;
-    stepUserInput?: InputField[];
+    stepUserInput?: InputForm;
     pid?: string;
 }
 

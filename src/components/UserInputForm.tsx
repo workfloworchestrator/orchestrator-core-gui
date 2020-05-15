@@ -160,7 +160,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         if (!processing) {
             this.setState({ processing: true });
 
-            const processInput: { [index: string]: any } = stepUserInput.reduce((acc, input) => {
+            const processInput = stepUserInput.reduce<{ [index: string]: any }>((acc, input) => {
                 acc[input.name] = input.value;
 
                 // Add missing defaults

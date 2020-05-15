@@ -208,7 +208,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 if (!step.form) {
                     return null;
                 }
-                json = step.form.reduce((acc, field) => {
+                json = step.form.reduce<{ [index: string]: any }>((acc, field) => {
                     acc[field.name] = "";
                     return acc;
                 }, {});

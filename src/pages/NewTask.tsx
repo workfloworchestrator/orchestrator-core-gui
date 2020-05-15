@@ -23,12 +23,12 @@ import UserInputFormWizard from "../components/UserInputFormWizard";
 import WorkflowSelect from "../components/WorkflowSelect";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
-import { EngineStatus, FormNotCompleteResponse, InputField, Option, Workflow } from "../utils/types";
+import { EngineStatus, FormNotCompleteResponse, InputForm, Option, Workflow } from "../utils/types";
 
 interface IState {
     workflows?: Workflow[];
     workflow?: string;
-    stepUserInput?: InputField[];
+    stepUserInput?: InputForm;
     hasNext?: boolean;
 }
 

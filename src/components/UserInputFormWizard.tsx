@@ -20,17 +20,17 @@ import React from "react";
 import { catchErrorStatus } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse } from "../utils/types";
+import { FormNotCompleteResponse, InputForm } from "../utils/types";
 import { stop } from "../utils/Utils";
 import UserInputForm from "./UserInputForm";
 
 interface Form {
-    form: any[];
+    form: InputForm;
     hasNext?: boolean;
 }
 
 interface IProps {
-    stepUserInput: any[];
+    stepUserInput: InputForm;
     validSubmit: (form: {}[]) => Promise<void>;
     cancel: () => void;
     hasNext: boolean;
