@@ -642,7 +642,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error backend-validation-metadata">
-                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}
+                                    {I18n.t("process.input_fields_have_validation_errors", {
+                                        nrOfValidationErrors: numberOfValidationErrors
+                                    })}
                                 </em>
                             </section>
                         )}
