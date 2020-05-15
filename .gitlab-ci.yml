@@ -87,7 +87,7 @@ deploy review base:
 run system tests:
   stage: review
   variables:
-    CI_COMMIT_REF_NAME_ORCHESTRATOR: $CI_COMMIT_REF_NAME
+    CI_COMMIT_REF_NAME_ORCHESTRATOR_CLIENT: $CI_COMMIT_REF_NAME
   trigger:
     project: automation/projects/system-tests
     branch: dev
