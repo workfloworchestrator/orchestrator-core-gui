@@ -1,0 +1,21 @@
+// This is the default theme.
+@import "src/themes/surfnet/surfnet_colors_light";
+
+// Global styling
+@import "node_modules/@elastic/eui/src/themes/eui-amsterdam/global_styling/index";
+
+// Components
+@import "node_modules/@elastic/eui/src/components/index";
+
+// Packages
+@import "node_modules/@elastic/eui/packages/index";
+
+// Component overrides
+// Comes after the component import and overrides via cascade
+@import "node_modules/@elastic/eui/src/themes/eui-amsterdam/overrides/index";
+
+.euiText h1,
+.euiText h2,
+.euiText h3 {
+    color: $euiColorPrimary;
+}

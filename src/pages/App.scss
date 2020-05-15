@@ -15,6 +15,7 @@
 @use "sass:meta";
 @use "../stylesheets/vars.scss";
 @use "../stylesheets/application.scss";
+@import "src/themes/surfnet/surfnet_light.scss";
 
 .App {
     text-align: center;
