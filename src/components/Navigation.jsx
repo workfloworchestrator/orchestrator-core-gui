@@ -15,6 +15,7 @@
 
 import "./Navigation.scss";
 
+import { EuiTabs } from "@elastic/eui";
 import React, { useEffect, useRef, useState } from "react";
 import { Spinner } from "spin.js";
 
@@ -52,14 +53,16 @@ function Navigation() {
     return (
         <div className="navigation-container">
             <div className="navigation">
-                <NavigationItem href="/processes" value="processes" />
-                <NavigationItem href="/subscriptions" value="subscriptions" />
-                <NavigationItem href="/metadata" value="metadata" />
-                <NavigationItem href="/validations" value="validations" />
-                <NavigationItem href="/tasks" value="tasks" />
-                <NavigationItem href="/prefixes" value="prefixes" />
-                <NavigationItem href="/settings" value="settings" />
-                <NavigationItem href="/new-process" value="new_process" className="new_process" />
+                <EuiTabs>
+                    <NavigationItem href="/processes" value="processes" />
+                    <NavigationItem href="/subscriptions" value="subscriptions" />
+                    <NavigationItem href="/metadata" value="metadata" />
+                    <NavigationItem href="/validations" value="validations" />
+                    <NavigationItem href="/tasks" value="tasks" />
+                    <NavigationItem href="/prefixes" value="prefixes" />
+                    <NavigationItem href="/settings" value="settings" />
+                    <NavigationItem href="/new-process" value="new_process" className="new_process" />
+                </EuiTabs>
                 {loading && <div className="spinner" ref={spinner => (spinnerTarget.current = spinner)} />}
             </div>
         </div>

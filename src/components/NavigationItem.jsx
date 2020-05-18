@@ -13,15 +13,18 @@
  *
  */
 
+import { EuiTab } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
 function NavigationItem({ href, value, className = "" }) {
+    const location = useLocation();
     return (
-        <NavLink className={className} activeClassName="active" to={href}>
-            {I18n.t("navigation." + value)}
-        </NavLink>
+        <EuiTab isSelected={location.pathname.startsWith(`/${value}`)}>
+            <Link to={href}>{I18n.t("navigation." + value)}</Link>
+        </EuiTab>
     );
 }
 export default NavigationItem;
