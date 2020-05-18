@@ -103,7 +103,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
     };
 
     showProcess = (process: ProcessV2) => () => {
-        this.context.redirect("/process/" + process.pid);
+        this.context.redirect("/processes/" + process.pid);
     };
 
     renderActions = (process: ProcessV2) => {
@@ -151,9 +151,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                                 processes and the lower one shows processes that are done/complete.
                             </p>
                             <p>
-                                The subscriptions are split into 2 different tables. The upper one shows all active
-                                subscriptions and the below one shows the subscriptions subscriptions that are initial,
-                                provisioning or terminated.
+                                Note: if you need pagination for completed processes you can toggle it from the table
+                                settings, via the gear icon.
                             </p>
                             <h2>Settings storage</h2>
                             <p>

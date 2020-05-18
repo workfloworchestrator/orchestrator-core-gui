@@ -1022,10 +1022,7 @@
             "state": {
                 "class": "ConnectionRefusedError",
                 "error": "[Errno 111] Connection refused",
-                "executed_at": [
-                    "2019-11-15 12:37:14.186858+01:00",
-                    "2019-11-15 12:37:15.775995+01:00"
-                ],
+                "executed_at": ["2019-11-15 12:37:14.186858+01:00", "2019-11-15 12:37:15.775995+01:00"],
                 "retries": 2
             },
             "status": "failed"

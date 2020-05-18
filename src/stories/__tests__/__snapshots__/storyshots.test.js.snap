@@ -166,7 +166,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -323,7 +323,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -453,7 +453,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -595,7 +595,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              href="/subscriptions/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -729,7 +729,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
+                              href="/subscriptions/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -917,7 +917,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -1074,7 +1074,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1204,7 +1204,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1346,7 +1346,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              href="/subscriptions/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1472,7 +1472,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
+                              href="/subscriptions/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1660,7 +1660,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -1813,7 +1813,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1947,7 +1947,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -2102,7 +2102,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -2232,7 +2232,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -8872,7 +8872,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   id="subscriptions-id-v"
                 >
                   <a
-                    href="/subscription/9c8c13d5-6954-461a-a931-32894c193aa0"
+                    href="/subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -9335,7 +9335,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                         onClick={[Function]}
                       />
                       <a
-                        href="/subscription/b7ed368f-f6d5-497e-9118-2daeb5d06653"
+                        href="/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -9710,7 +9710,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 </td>
                 <td>
                   <a
-                    href="/process/4953ffe3-a2db-4e90-bcab-5dd22cd564fd"
+                    href="/processes/4953ffe3-a2db-4e90-bcab-5dd22cd564fd"
                     rel="noopener noreferrer"
                     target="_blank"
                   >

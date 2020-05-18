@@ -15,30 +15,26 @@
 
 import "./Navigation.scss";
 
-import I18n from "i18n-js";
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { Spinner } from "spin.js";
 
 import mySpinner from "../lib/Spin";
+import NavigationItem from "./NavigationItem";
 
-export default class Navigation extends React.PureComponent {
-    constructor() {
-        super();
-        this.state = {
-            loading: false
-        };
-    }
+function Navigation() {
+    const [loading, setLoading] = useState(false);
+    const spinnerTarget = useRef();
+    const spinnerElement = useRef();
 
-    componentWillMount() {
-        mySpinner.onStart = () => this.setState({ loading: true });
-        mySpinner.onStop = () => this.setState({ loading: false });
-    }
+    useEffect(() => {
+        mySpinner.onStart = () => setLoading(true);
+        mySpinner.onStop = () => setLoading(false);
+    }, []);
 
-    componentDidUpdate() {
-        if (this.state.loading) {
-            if (!this.spinner) {
-                this.spinner = new Spinner({
+    useEffect(() => {
+        if (loading) {
+            if (!spinnerElement.current) {
+                spinnerElement.current = new Spinner({
                     lines: 25, // The number of lines to draw
                     length: 12, // The length of each line
                     width: 2, // The line thickness
@@ -46,40 +42,27 @@ export default class Navigation extends React.PureComponent {
                     color: "#4DB3CF", // #rgb or #rrggbb or array of colors
                     top: "25%",
                     position: "fixed"
-                }).spin(this.spinnerNode);
+                }).spin(spinnerTarget.current);
             }
         } else {
-            this.spinner = null;
+            spinnerElement.current = null;
         }
-    }
+    });
 
-    renderItem(href, value, className = "") {
-        return (
-            <NavLink className={className} activeClassName="active" to={href}>
-                {I18n.t("navigation." + value)}
-            </NavLink>
-        );
-    }
-
-    renderSpinner() {
-        return this.state.loading ? <div className="spinner" ref={spinner => (this.spinnerNode = spinner)} /> : null;
-    }
-
-    render() {
-        return (
-            <div className="navigation-container">
-                <div className="navigation">
-                    {this.renderItem("/processes", "processes")}
-                    {this.renderItem("/subscriptions", "subscriptions")}
-                    {this.renderItem("/metadata/products", "metadata")}
-                    {this.renderItem("/validations/workflows", "validations")}
-                    {this.renderItem("/tasks", "tasks")}
-                    {this.renderItem("/prefixes", "prefixes")}
-                    {this.renderItem("/settings", "settings")}
-                    {this.renderItem("/new-process", "new_process", "new_process")}
-                    {this.renderSpinner()}
-                </div>
+    return (
+        <div className="navigation-container">
+            <div className="navigation">
+                <NavigationItem href="/processes" value="processes" />
+                <NavigationItem href="/subscriptions" value="subscriptions" />
+                <NavigationItem href="/metadata" value="metadata" />
+                <NavigationItem href="/validations" value="validations" />
+                <NavigationItem href="/tasks" value="tasks" />
+                <NavigationItem href="/prefixes" value="prefixes" />
+                <NavigationItem href="/settings" value="settings" />
+                <NavigationItem href="/new-process" value="new_process" className="new_process" />
+                {loading && <div className="spinner" ref={spinner => (spinnerTarget.current = spinner)} />}
             </div>
-        );
-    }
+        </div>
+    );
 }
+export default Navigation;

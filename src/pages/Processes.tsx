@@ -161,7 +161,7 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
     showProcess = (process: ProcessWithDetails) => () => {
         clearInterval(this.state.interval);
-        this.context.redirect("/process/" + process.id);
+        this.context.redirect("/processes/" + process.id);
     };
 
     newProcess = () => {
