@@ -85,10 +85,13 @@ deploy review base:
       - schedules
 
 run system tests:
-  stage: development
+  stage: review
+  variables:
+    CI_COMMIT_REF_NAME_ORCHESTRATOR_CLIENT: $CI_COMMIT_REF_NAME
   trigger:
     project: automation/projects/system-tests
     branch: dev
+    strategy: depend
   only:
     refs:
       - branches
@@ -100,9 +103,12 @@ run system tests on dev:
   trigger:
     project: automation/projects/system-tests
     branch: dev
-  only:
+    strategy: depend
+  except:
     refs:
-      - dev
+      - master
+      - tags
+      - schedules
 
 deploy dev:
   variables:
@@ -131,6 +137,7 @@ run system tests on staging:
   trigger:
     project: automation/projects/system-tests
     branch: master
+    strategy: depend
   only:
     refs:
       - master
