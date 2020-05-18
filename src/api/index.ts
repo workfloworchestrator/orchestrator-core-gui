@@ -280,14 +280,6 @@ export function organisations(): Promise<Organization[] | undefined> {
     });
 }
 
-export function ieeeInterfaceTypesForProductId(id: string) {
-    return fetchJson(`products/ieee_interface_types/${id}`);
-}
-
-export function corelinkIEEEInterfaceTypes() {
-    return fetchJson("products/corelink_ieee_interface_types");
-}
-
 export function getNodesByLocationAndStatus(locationCode: string, status: string) {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
