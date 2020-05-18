@@ -4634,107 +4634,38 @@ exports[`Storyshots ProcessDetail Process 1`] = `
       <section
         className="process-actions"
       >
-        <div
-          className="euiFlexGroup euiFlexGroup--gutterSmall euiFlexGroup--alignItemsCenter euiFlexGroup--directionRow euiFlexGroup--responsive"
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
         >
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--secondary euiButton--fill"
-              id="retry"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  RETRY
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--danger euiButton--fill"
-              id="abort"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  ABORT
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  COLLAPSE
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  EXPAND
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  SCROLL TO LAST
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
       </section>
       <section
         className="process-state-detail"
@@ -6959,107 +6890,38 @@ exports[`Storyshots ProcessDetail Task 1`] = `
       <section
         className="process-actions"
       >
-        <div
-          className="euiFlexGroup euiFlexGroup--gutterSmall euiFlexGroup--alignItemsCenter euiFlexGroup--directionRow euiFlexGroup--responsive"
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
         >
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--secondary euiButton--fill"
-              id="retry"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  RETRY
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--danger euiButton--fill"
-              id="abort"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  ABORT
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  COLLAPSE
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  EXPAND
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <span
-                  className="euiButton__text"
-                >
-                  SCROLL TO LAST
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
       </section>
       <section
         className="process-state-detail"
