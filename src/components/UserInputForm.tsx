@@ -285,11 +285,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         this.changeUserInput(name, newValue);
     };
 
-    changeArrayInput = (name: string) => (arr: string[]) => {
-        const value = (arr || []).join(",");
-        this.changeUserInput(name, value);
-    };
-
     renderInput = (userInput: InputField) => {
         if (userInput.type === "hidden") {
             return;
@@ -531,9 +526,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 const productIdForSubscription = userInput.product_id;
                 return (
                     <SubscriptionsSelect
-                        onChange={this.changeArrayInput(name)}
+                        onChange={this.changeNestedInput(name)}
                         productId={productIdForSubscription}
-                        subscriptions={this.commaSeparatedArray(value)}
+                        subscriptions={value || []}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
                         errors={validationError}
@@ -644,8 +639,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
     };
-
-    commaSeparatedArray = (input: string) => (input ? input.split(",") : []);
 
     render() {
         const {
