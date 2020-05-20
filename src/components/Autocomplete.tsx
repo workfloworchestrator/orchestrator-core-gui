@@ -15,14 +15,31 @@
 
 import "./Autocomplete.scss";
 
-import PropTypes from "prop-types";
 import React from "react";
 import scrollIntoView from "scroll-into-view";
+import { ContactPerson } from "utils/types";
 
 import { isEmpty } from "../utils/Utils";
 
-export default class Autocomplete extends React.PureComponent {
-    componentDidUpdate(prevProps) {
+interface IProps {
+    query: string;
+    selectedItem: number;
+    personIndex: number;
+    itemSelected: (value: ContactPerson, index: number) => void;
+    className: string;
+    suggestions: ContactPerson[];
+}
+
+export default class Autocomplete extends React.PureComponent<IProps> {
+    // Intentionally not done with state since we don't need a rerender
+    // This is only to store a ref for the scroll into view part
+    selectedRow?: HTMLElement | null;
+
+    static defaultProps = {
+        className: ""
+    };
+
+    componentDidUpdate(prevProps: IProps) {
         if (
             this.selectedRow &&
             prevProps.selectedItem !== this.props.selectedItem &&
@@ -32,7 +49,7 @@ export default class Autocomplete extends React.PureComponent {
         }
     }
 
-    itemName = (item, query) => {
+    itemName = (item: ContactPerson, query: string) => {
         const name = item.name;
         const nameToLower = name.toLowerCase();
         const indexOf = nameToLower.indexOf(query.toLowerCase());
@@ -65,8 +82,6 @@ export default class Autocomplete extends React.PureComponent {
                                 ref={ref => {
                                     if (selectedItem === index) {
                                         this.selectedRow = ref;
-                                    } else if (suggestions.length - 1 === index) {
-                                        this.lastRow = ref;
                                     }
                                 }}
                             >
@@ -80,12 +95,3 @@ export default class Autocomplete extends React.PureComponent {
         );
     }
 }
-
-Autocomplete.propTypes = {
-    suggestions: PropTypes.array.isRequired,
-    query: PropTypes.string.isRequired,
-    selectedItem: PropTypes.number,
-    personIndex: PropTypes.number.isRequired,
-    itemSelected: PropTypes.func.isRequired,
-    className: PropTypes.string
-};

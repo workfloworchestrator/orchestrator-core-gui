@@ -318,3 +318,9 @@ export interface EngineStatus {
 }
 
 export type InputForm = InputField[];
+
+export interface ContactPerson {
+    name: string;
+    email: string;
+    phone: string;
+}

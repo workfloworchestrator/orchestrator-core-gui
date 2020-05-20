@@ -15,14 +15,14 @@
 
 @use "../stylesheets/vars.scss";
 
+.autocomplete-container {
+    position: relative;
+}
+
 section.autocomplete {
     position: absolute;
     z-index: 3;
-    top: 55px;
-    &.child {
-        top: 35px;
-    }
-    right: 0;
+    top: 100%;
     width: 100%;
     border-radius: vars.$br;
     background-color: white;
