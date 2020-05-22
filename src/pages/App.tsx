@@ -235,6 +235,10 @@ class App extends React.PureComponent<{}, IState> {
                                 <ProtectedRoute path="/new-task" render={() => <NewTask />} />
 
                                 <ProtectedRoute path="/tasks" render={() => <Tasks />} />
+                                <Route
+                                    path="/task/:id"
+                                    render={props => <ProcessDetail {...props} isProcess={false} />}
+                                />
                                 <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
