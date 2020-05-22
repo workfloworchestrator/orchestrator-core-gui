@@ -17,6 +17,42 @@
 @use "../stylesheets/application.scss";
 @import "src/themes/surfnet/surfnet_light.scss";
 
+body {
+    //font-family: "Roboto", Sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: $dark-grey;
+    -webkit-font-smoothing: antialiased;
+    background-color: $background;
+
+    &.ReactModal__Body--open {
+        overflow: hidden;
+    }
+}
+
+a {
+    cursor: pointer;
+    color: $blue;
+    font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+::-webkit-input-placeholder,
+div.Select-placeholder {
+    color: $blue;
+}
+
+::-moz-placeholder {
+    color: $blue;
+    opacity: 1;
+}
+
 .App {
     text-align: center;
 }
