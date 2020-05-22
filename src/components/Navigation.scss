@@ -23,7 +23,7 @@
     .navigation {
         max-width: vars.$medium;
         margin: 0 auto;
-        padding: 5px 15px 2px 15px;
+        padding: 2px 15px 2px 15px;
         display: flex;
     }
 
@@ -37,7 +37,7 @@
 
     .navigation-tab {
         color: white;
-        padding-top: 3px;
+        //padding-top: 50px;
         padding-bottom: 8px;
         a {
             color: white;

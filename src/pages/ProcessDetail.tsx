@@ -15,7 +15,7 @@
 
 import "./ProcessDetail.scss";
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -282,7 +282,8 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                 key={index}
                                 fill
                                 color={option.danger ? "danger" : "secondary"}
-                                iconType="retry"
+                                iconType={option.danger ? "cross" : "refresh"}
+                                iconSide="right"
                                 onClick={option.action}
                             >
                                 {I18n.t(`processes.${option.label}`)}
@@ -290,13 +291,23 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         </EuiFlexItem>
                     ))}
                     <EuiFlexItem grow={true}>
-                        <EuiButton onClick={this.handleCollapseAll}>COLLAPSE</EuiButton>
+                        <EuiButton iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
+                            COLLAPSE
+                        </EuiButton>
                     </EuiFlexItem>
                     <EuiFlexItem grow={true}>
-                        <EuiButton onClick={this.handleExpandAll}>EXPAND</EuiButton>
+                        <EuiButton iconType="expand" iconSide="right" onClick={this.handleExpandAll}>
+                            EXPAND
+                        </EuiButton>
                     </EuiFlexItem>
                     <EuiFlexItem grow={true}>
-                        <EuiButton onClick={() => this.handleScrollTo(lastStepIndex)}>SCROLL TO LAST</EuiButton>
+                        <EuiButton
+                            iconType="sortDown"
+                            iconSide="right"
+                            onClick={() => this.handleScrollTo(lastStepIndex)}
+                        >
+                            SCROLL TO LAST
+                        </EuiButton>
                     </EuiFlexItem>
                 </EuiFlexGroup>
             </section>
@@ -349,17 +360,17 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return (
                 <section className="card">
                     <section className="header-info">
-                        <h3>
-                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.workflow`, {
-                                name: process.workflow_name
-                            })}
-                        </h3>
-                        <h3>
-                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.userInput`, {
-                                name: step.name,
-                                product: productName || ""
-                            })}
-                        </h3>
+                        <EuiText>
+                            <h3>
+                                {I18n.t(`${this.props.isProcess ? "process" : "task"}.workflow`, {
+                                    name: process.workflow_name
+                                })}
+                                {I18n.t(`${this.props.isProcess ? "process" : "task"}.userInput`, {
+                                    name: step.name,
+                                    product: productName || ""
+                                })}
+                            </h3>
+                        </EuiText>
                     </section>
                     <UserInputFormWizard
                         stepUserInput={stepUserInput}

@@ -15,6 +15,7 @@
 
 import "./ProcessStateDetails.scss";
 
+import { EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import sortBy from "lodash/sortBy";
@@ -91,18 +92,20 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             <section className="header-information">
                 <ul>
                     <li className="process-wording">
-                        <h3>
-                            {this.props.isProcess &&
-                                I18n.t("process_state.wording_process", {
-                                    product: process.productName,
-                                    customer: process.customerName,
-                                    workflow: process.workflow_name
-                                })}
-                            {!this.props.isProcess &&
-                                I18n.t("process_state.wording_task", {
-                                    workflow: process.workflow_name
-                                })}
-                        </h3>
+                        <EuiText>
+                            <h3>
+                                {this.props.isProcess &&
+                                    I18n.t("process_state.wording_process", {
+                                        product: process.productName,
+                                        customer: process.customerName,
+                                        workflow: process.workflow_name
+                                    })}
+                                {!this.props.isProcess &&
+                                    I18n.t("process_state.wording_task", {
+                                        workflow: process.workflow_name
+                                    })}
+                            </h3>
+                        </EuiText>
                     </li>
                 </ul>
                 <ul>
