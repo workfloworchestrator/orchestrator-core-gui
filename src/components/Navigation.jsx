@@ -61,7 +61,7 @@ function Navigation() {
                     <NavigationItem href="/tasks" value="tasks" />
                     <NavigationItem href="/prefixes" value="prefixes" />
                     <NavigationItem href="/settings" value="settings" />
-                    <NavigationItem href="/new-process" value="new_process" className="new_process" />
+                    <NavigationItem href="/new-process" value="new_process" className="new-process" />
                 </EuiTabs>
                 {loading && <div className="spinner" ref={spinner => (spinnerTarget.current = spinner)} />}
             </div>

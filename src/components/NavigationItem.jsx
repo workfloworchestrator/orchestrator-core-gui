@@ -21,8 +21,9 @@ import { Link } from "react-router-dom";
 
 function NavigationItem({ href, value, className = "" }) {
     const location = useLocation();
+    const customClassName = className === "" ? "navigation-tab" : `navigation-tab ${className}`;
     return (
-        <EuiTab isSelected={location.pathname.startsWith(`/${value}`)} className="navigation-tab">
+        <EuiTab isSelected={location.pathname.startsWith(`/${value.replace("_", "-")}`)} className={customClassName}>
             <Link to={href}>{I18n.t("navigation." + value)}</Link>
         </EuiTab>
     );

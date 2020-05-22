@@ -282,6 +282,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                 key={index}
                                 fill
                                 color={option.danger ? "danger" : "secondary"}
+                                iconType="retry"
                                 onClick={option.action}
                             >
                                 {I18n.t(`processes.${option.label}`)}

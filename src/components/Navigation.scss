@@ -29,9 +29,14 @@
 
     .navigation-tabs {
         margin-left: -15px;
+        width: 100%;
+        &.euiTabs::before {
+            background-color: $darker-blue;
+        }
     }
 
     .navigation-tab {
+        color: white;
         padding-top: 3px;
         padding-bottom: 8px;
         a {
@@ -39,7 +44,6 @@
             font-size: 1.2em;
         }
         &.euiTab {
-            color: red;
             background-color: $darker-blue;
         }
         &.euiTab-isSelected {
@@ -50,6 +54,11 @@
         &.euiTab-isSelected::after {
             color: white;
             background-color: white;
+        }
+
+        &.new-process {
+            margin-left: auto;
+            background-color: $darker-blue;
         }
     }
 }

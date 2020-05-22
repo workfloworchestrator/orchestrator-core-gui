@@ -21,6 +21,7 @@
 .processes-container {
     @include mixins.page;
     background-color: white;
+    padding-bottom: 10px;
 }
 
 .actions {
