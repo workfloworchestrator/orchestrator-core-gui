@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 function NavigationItem({ href, value, className = "" }) {
     const location = useLocation();
     return (
-        <EuiTab isSelected={location.pathname.startsWith(`/${value}`)}>
+        <EuiTab isSelected={location.pathname.startsWith(`/${value}`)} className="navigation-tab">
             <Link to={href}>{I18n.t("navigation." + value)}</Link>
         </EuiTab>
     );

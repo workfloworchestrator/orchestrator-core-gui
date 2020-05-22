@@ -53,7 +53,7 @@ function Navigation() {
     return (
         <div className="navigation-container">
             <div className="navigation">
-                <EuiTabs>
+                <EuiTabs className="navigation-tabs">
                     <NavigationItem href="/processes" value="processes" />
                     <NavigationItem href="/subscriptions" value="subscriptions" />
                     <NavigationItem href="/metadata" value="metadata" />

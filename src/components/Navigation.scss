@@ -18,29 +18,38 @@
 @use "../stylesheets/vars";
 
 .navigation-container {
-    background-color: vars.$blue;
+    background-color: $darker-blue;
 
     .navigation {
         max-width: vars.$medium;
         margin: 0 auto;
-        padding: 25px 15px 0 15px;
-        font-size: 20px;
+        padding: 5px 15px 2px 15px;
         display: flex;
+    }
 
+    .navigation-tabs {
+        margin-left: -15px;
+    }
+
+    .navigation-tab {
+        padding-top: 3px;
+        padding-bottom: 8px;
         a {
-            color: color.adjust(vars.$light-blue, $lightness: 5);
-            margin-right: 50px;
-            padding-bottom: 12px;
-            @include mixins.no-text-decoration;
+            color: white;
+            font-size: 1.2em;
+        }
+        &.euiTab {
+            color: red;
+            background-color: $darker-blue;
+        }
+        &.euiTab-isSelected {
+            color: white;
+            background-color: transparent;
+        }
 
-        //&.active {
-        //    color: white;
-        //    font-weight: bold;
-        //    border-bottom: 6px solid white;
-        //}
-        //&.new_process {
-        //    margin-left: auto;
-        //}
-        //}
+        &.euiTab-isSelected::after {
+            color: white;
+            background-color: white;
+        }
     }
 }
