@@ -4634,162 +4634,38 @@ exports[`Storyshots ProcessDetail Process 1`] = `
       <section
         className="process-actions"
       >
-        <div
-          className="euiFlexGroup euiFlexGroup--gutterSmall euiFlexGroup--alignItemsCenter euiFlexGroup--directionRow euiFlexGroup--responsive"
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
         >
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--secondary euiButton--iconRight euiButton--fill"
-              id="retry"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiIcon-isLoading euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                />
-                <span
-                  className="euiButton__text"
-                >
-                  RETRY
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--danger euiButton--iconRight euiButton--fill"
-              id="abort"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiIcon-isLoading euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                />
-                <span
-                  className="euiButton__text"
-                >
-                  ABORT
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiIcon-isLoading euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                />
-                <span
-                  className="euiButton__text"
-                >
-                  COLLAPSE
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiIcon-isLoading euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                />
-                <span
-                  className="euiButton__text"
-                >
-                  EXPAND
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiIcon-isLoading euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                />
-                <span
-                  className="euiButton__text"
-                >
-                  SCROLL TO LAST
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
       </section>
       <section
         className="process-state-detail"
@@ -4801,13 +4677,9 @@ exports[`Storyshots ProcessDetail Process 1`] = `
             <li
               className="process-wording"
             >
-              <div
-                className="euiText euiText--medium"
-              >
-                <h3>
-                  Process SSP 10G of workflow create_sn8_service_port for 6a608b90-0c11-e511-80d0-005056956c1a
-                </h3>
-              </div>
+              <h3>
+                Process SSP 10G of workflow create_sn8_service_port for 6a608b90-0c11-e511-80d0-005056956c1a
+              </h3>
             </li>
           </ul>
           <ul>
@@ -5056,17 +4928,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-user"
                   />
                 </section>
                 <section
@@ -5257,17 +5120,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -5391,17 +5245,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -5505,17 +5350,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -5835,17 +5671,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-user"
                   />
                 </section>
                 <section
@@ -5949,17 +5776,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6040,17 +5858,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6118,17 +5927,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6215,17 +6015,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6469,17 +6260,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6547,17 +6329,8 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app euiIcon-isLoading step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={16}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 16 16"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+                  <i
+                    className="fa fa-cloud"
                   />
                 </section>
                 <section
@@ -6842,14 +6615,12 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
       <section
         className="header-info"
       >
-        <div
-          className="euiText euiText--medium"
-        >
-          <h3>
-            Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
-            User input for step Select new SAP to migrate to for product SSP 10G
-          </h3>
-        </div>
+        <h3>
+          Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
+        </h3>
+        <h3>
+          User input for step Select new SAP to migrate to for product SSP 10G
+        </h3>
       </section>
       <div
         className="mod-process-step"
@@ -6985,14 +6756,12 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
       <section
         className="header-info"
       >
-        <div
-          className="euiText euiText--medium"
-        >
-          <h3>
-            Workflow
-            User input for step Select new SAP to migrate to
-          </h3>
-        </div>
+        <h3>
+          Workflow
+        </h3>
+        <h3>
+          User input for step Select new SAP to migrate to
+        </h3>
       </section>
       <div
         className="mod-process-step"
@@ -7121,183 +6890,38 @@ exports[`Storyshots ProcessDetail Task 1`] = `
       <section
         className="process-actions"
       >
-        <div
-          className="euiFlexGroup euiFlexGroup--gutterSmall euiFlexGroup--alignItemsCenter euiFlexGroup--directionRow euiFlexGroup--responsive"
+        <button
+          className="button  blue"
+          id="retry"
+          onClick={[Function]}
         >
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--secondary euiButton--iconRight euiButton--fill"
-              id="retry"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
-                  />
-                </svg>
-                <span
-                  className="euiButton__text"
-                >
-                  RETRY
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--danger euiButton--iconRight euiButton--fill"
-              id="abort"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
-                  />
-                </svg>
-                <span
-                  className="euiButton__text"
-                >
-                  ABORT
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.146 14.146l4-4a.5.5 0 01.765.638l-.057.07-4 4a.5.5 0 01-.765-.638l.057-.07 4-4-4 4zM6.5 8A1.5 1.5 0 018 9.5v3a.5.5 0 11-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 010-1h3zm2-5a.5.5 0 01.5.5v3a.5.5 0 00.5.5h3a.5.5 0 110 1h-3A1.5 1.5 0 018 6.5v-3a.5.5 0 01.5-.5zm1.651 2.146l4-4a.5.5 0 01.765.638l-.057.07-4 4a.5.5 0 01-.765-.638l.057-.07 4-4-4 4z"
-                  />
-                </svg>
-                <span
-                  className="euiButton__text"
-                >
-                  COLLAPSE
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4.354 12.354l8-8a.5.5 0 00-.708-.708l-8 8a.5.5 0 00.708.708zM1 10.5a.5.5 0 111 0v3a.5.5 0 00.5.5h3a.5.5 0 110 1h-3A1.5 1.5 0 011 13.5v-3zm14-5a.5.5 0 11-1 0v-3a.5.5 0 00-.5-.5h-3a.5.5 0 110-1h3A1.5 1.5 0 0115 2.5v3z"
-                    fillRule="evenodd"
-                  />
-                </svg>
-                <span
-                  className="euiButton__text"
-                >
-                  EXPAND
-                </span>
-              </span>
-            </button>
-          </div>
-          <div
-            className="euiFlexItem"
-          >
-            <button
-              className="euiButton euiButton--primary euiButton--iconRight"
-              onClick={[Function]}
-              type="button"
-            >
-              <span
-                className="euiButton__content"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="euiIcon euiIcon--medium euiButton__icon"
-                  focusable="false"
-                  height={16}
-                  role="img"
-                  style={null}
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 11.692V3.556C7 3.249 7.224 3 7.5 3s.5.249.5.556v8.136l4.096-4.096a.5.5 0 01.707.707l-4.242 4.243a1.494 1.494 0 01-.925.433.454.454 0 01-.272 0 1.494 1.494 0 01-.925-.433L2.197 8.303a.5.5 0 11.707-.707L7 11.692z"
-                  />
-                </svg>
-                <span
-                  className="euiButton__text"
-                >
-                  SCROLL TO LAST
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
+          Retry
+        </button>
+        <button
+          className="button  red"
+          id="abort"
+          onClick={[Function]}
+        >
+          Abort
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Collapse
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Expand
+        </button>
+        <button
+          className="button"
+          onClick={[Function]}
+        >
+          Scroll to Last
+        </button>
       </section>
       <section
         className="process-state-detail"
@@ -7309,13 +6933,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
             <li
               className="process-wording"
             >
-              <div
-                className="euiText euiText--medium"
-              >
-                <h3>
-                  Task of workflow create_sn8_service_port
-                </h3>
-              </div>
+              <h3>
+                Task of workflow create_sn8_service_port
+              </h3>
             </li>
           </ul>
           <ul>
@@ -7564,29 +7184,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={18}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 18 18"
-                    width={18}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fillRule="evenodd"
-                    >
-                      <path
-                        d="M13.689 11.132c1.155 1.222 1.953 2.879 2.183 4.748a1.007 1.007 0 01-1 1.12H3.007a1.005 1.005 0 01-1-1.12c.23-1.87 1.028-3.526 2.183-4.748.247.228.505.442.782.633-1.038 1.069-1.765 2.55-1.972 4.237L14.872 16c-.204-1.686-.93-3.166-1.966-4.235a7.01 7.01 0 00.783-.633zM8.939 1c1.9 0 3 2 4.38 2.633a2.483 2.483 0 01-1.88.867c-.298 0-.579-.06-.844-.157A3.726 3.726 0 017.69 5.75c-1.395 0-3.75.25-3.245-1.903C5.94 3 6.952 1 8.94 1z"
-                      />
-                      <path
-                        d="M8.94 2c2.205 0 4 1.794 4 4s-1.795 4-4 4c-2.207 0-4-1.794-4-4s1.793-4 4-4m0 9A5 5 0 108.937.999 5 5 0 008.94 11"
-                      />
-                    </g>
-                  </svg>
+                  <i
+                    className="fa fa-user"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -7776,26 +7376,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -7918,26 +7501,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8040,26 +7606,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8378,29 +7927,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={18}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 18 18"
-                    width={18}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fillRule="evenodd"
-                    >
-                      <path
-                        d="M13.689 11.132c1.155 1.222 1.953 2.879 2.183 4.748a1.007 1.007 0 01-1 1.12H3.007a1.005 1.005 0 01-1-1.12c.23-1.87 1.028-3.526 2.183-4.748.247.228.505.442.782.633-1.038 1.069-1.765 2.55-1.972 4.237L14.872 16c-.204-1.686-.93-3.166-1.966-4.235a7.01 7.01 0 00.783-.633zM8.939 1c1.9 0 3 2 4.38 2.633a2.483 2.483 0 01-1.88.867c-.298 0-.579-.06-.844-.157A3.726 3.726 0 017.69 5.75c-1.395 0-3.75.25-3.245-1.903C5.94 3 6.952 1 8.94 1z"
-                      />
-                      <path
-                        d="M8.94 2c2.205 0 4 1.794 4 4s-1.795 4-4 4c-2.207 0-4-1.794-4-4s1.793-4 4-4m0 9A5 5 0 108.937.999 5 5 0 008.94 11"
-                      />
-                    </g>
-                  </svg>
+                  <i
+                    className="fa fa-user"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8503,26 +8032,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8602,26 +8114,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8688,26 +8183,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -8793,26 +8271,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -9055,26 +8516,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
@@ -9141,26 +8585,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <section
                   className="state-divider"
                 >
-                  <svg
-                    aria-hidden={true}
-                    className="euiIcon euiIcon--xxLarge euiIcon--primary euiIcon--app step-type"
-                    fill="dark"
-                    focusable="false"
-                    height={32}
-                    role="img"
-                    style={null}
-                    viewBox="0 0 32 32"
-                    width={32}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M29 12a3 3 0 00-3 3h-4a3 3 0 00-3-3h-6a3 3 0 00-3 3H6a3 3 0 00-3-3H0v14h3a3 3 0 003-3h4a3 3 0 003 3h6a3 3 0 003-3h4a3 3 0 003 3h3V12h-3zM3 24H2V14h1a1 1 0 011 1v8a1 1 0 01-1 1zm17-3v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2H6v-4h6v-2a1 1 0 011-1h6a1 1 0 011 1v2h6v4h-6zm10 3h-1a1 1 0 01-1-1v-8a1 1 0 011-1h1v10z"
-                    />
-                    <path
-                      className="euiIcon__fillSecondary"
-                      d="M22 6H10v2h5v2h2V8h5z"
-                    />
-                  </svg>
+                  <i
+                    className="fa fa-cloud"
+                  />
                 </section>
                 <section
                   className="state-delta"
