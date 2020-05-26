@@ -37,7 +37,6 @@ import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation
 import GenericMultiSelect from "./GenericMultiSelect";
 import GenericNOCConfirm from "./GenericNOCConfirm";
 import GenericSelect from "./GenericSelect";
-import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import IPPrefix from "./IPPrefix";
 import LocationCodeSelect from "./LocationCodeSelect";
 import MultipleServicePorts from "./MultipleServicePorts";
@@ -423,16 +422,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         organisationId={organisationId}
                         onChange={this.changeNestedInput(name)}
                         errors={validationError}
-                    />
-                );
-            case "ieee_interface_type":
-                const key = userInput.product_key || "product";
-                const productId = findValueFromInputStep(key, stepUserInput);
-                return (
-                    <IEEEInterfaceTypesForProductTagSelect
-                        onChange={this.changeSelectInput(name)}
-                        interfaceType={value}
-                        productId={productId}
                     />
                 );
             case "node_id_port_select":
