@@ -25,7 +25,6 @@ import {
     Organization,
     Process,
     ProcessSubscription,
-    ProcessWithDetails,
     Product,
     ProductBlock,
     ProductValidation,
@@ -433,10 +432,6 @@ export function workflowsByTarget(target: string): Promise<Workflow[]> {
 
 export function invalidSubscriptions(workflowKey: string) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
-}
-
-export function processes(showTasks = false): Promise<ProcessWithDetails[]> {
-    return fetchJson(`processes?showTasks=${showTasks}`);
 }
 
 export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
