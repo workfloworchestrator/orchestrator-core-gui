@@ -194,24 +194,8 @@ export interface Step {
     form?: InputField[];
 }
 
-export interface FilterAttribute {
-    name: string;
-    selected: boolean;
-    count: number;
-}
-
 export interface State {
     [index: string]: any;
-}
-
-export interface ShowActions {
-    show: boolean;
-    id: string;
-}
-
-export interface SortSettings {
-    name: string;
-    descending: boolean;
 }
 
 export interface Option {
@@ -259,11 +243,6 @@ export function typedKeys<T>(o: T): (keyof T)[] {
 }
 
 export function prop<T, K extends keyof T>(obj: T, key: K): T[K] {
-    return obj[key];
-}
-
-export function optionalProp<T>(obj: T, key: string): any | undefined {
-    // @ts-ignore
     return obj[key];
 }
 

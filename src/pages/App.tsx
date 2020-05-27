@@ -42,12 +42,12 @@ import NotAllowed from "./NotAllowed";
 import NotFound from "./NotFound";
 import Prefixes from "./Prefixes";
 import ProcessDetail from "./ProcessDetail";
-import Processes from "./ProcessesV2";
+import Processes from "./Processes";
 import ServerError from "./ServerError";
 import Settings from "./Settings";
 import SubscriptionDetail from "./SubscriptionDetail";
 import SubscriptionsPage from "./Subscriptions";
-import Tasks from "./TasksV2";
+import Tasks from "./Tasks";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
 
