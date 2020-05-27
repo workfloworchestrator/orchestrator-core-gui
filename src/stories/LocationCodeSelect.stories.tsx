@@ -15,7 +15,7 @@
 
 import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
-import { array, boolean } from "@storybook/addon-knobs";
+import { boolean } from "@storybook/addon-knobs";
 import React from "react";
 
 import LocationCodeSelect from "../components/LocationCodeSelect";
@@ -39,6 +39,6 @@ export const __Default = () => (
             action("onChange")(e);
             store.set({ locationCode: e.value });
         }}
-        disabled={boolean("Disabled")}
+        disabled={boolean("Disabled", false)}
     />
 );

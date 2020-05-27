@@ -43,9 +43,11 @@ export const Bandwidth = () => {
                         "servicePorts",
                         {
                             "Restricted by service port 1G": [
+                                // @ts-ignore
                                 { subscription_id: "48f28a55-7764-4c84-9848-964d14906a27", tag: "MSP", vlan: "2" }
                             ],
                             "Restricted by service port 10G": [
+                                // @ts-ignore
                                 { subscription_id: "55c96135-e308-4126-b53f-0a3cf23331f5", tag: "MSP", vlan: "2" }
                             ],
                             "Not restricted by service port": []
@@ -54,12 +56,12 @@ export const Bandwidth = () => {
                     )}
                     name="bandwidth"
                     reportError={action("reportError")}
-                    onChange={e => {
+                    onChange={(e: any) => {
                         store.set({ value: e.target.value });
                         action("onChange")(e);
                     }}
                     value={state.value}
-                    disabled={boolean("Read only")}
+                    disabled={boolean("Read only", false)}
                 />
             )}
         </State>

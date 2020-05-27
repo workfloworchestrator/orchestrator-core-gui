@@ -6,6 +6,7 @@ exports[`Storyshots Bandwidth Bandwidth 1`] = `
 >
   <div>
     <input
+      disabled={false}
       id="bandwidth"
       name="bandwidth"
       onChange={[Function]}

@@ -184,5 +184,6 @@ export const Subscription = () => {
         status: "_Opgezegd"
     });
 
+    //@ts-ignore
     return <SubscriptionDetail match={{ params: { id: "pid" } }} />;
 };

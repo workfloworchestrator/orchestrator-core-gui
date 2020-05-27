@@ -31,6 +31,7 @@ export const Process = () => {
     fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
     fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
 
+    //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
@@ -39,6 +40,7 @@ export const Task = () => {
     fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
     fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
 
+    //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
 };
 
@@ -47,6 +49,7 @@ export const SuspendedProcess = () => {
     fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
     fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
 
+    //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
@@ -55,5 +58,6 @@ export const SuspendedTask = () => {
     fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
     fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
 
+    //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
 };

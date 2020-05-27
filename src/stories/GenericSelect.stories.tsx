@@ -13,34 +13,30 @@
  *
  */
 
-import "react-datepicker/dist/react-datepicker.css";
-
-import { State, Store } from "@sambego/storybook-state";
+import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
+import { array, boolean } from "@storybook/addon-knobs";
 import React from "react";
 
-import { formDate } from "../forms/Builder";
+import GenericSelect from "../components/GenericSelect";
 
 const store = new Store({
-    date: new Date(1)
+    selected: ""
 });
 
 export default {
-    title: "DatePicker"
+    title: "GenericSelect",
+    parameters: { state: { store: store } }
 };
 
-export const _Definition = () => (
-    <State store={store}>
-        {state =>
-            formDate(
-                "metadata.productBlocks.created_at",
-                e => {
-                    action("onChange")(e);
-                    store.set({ date: e });
-                },
-                false,
-                state.date
-            )
-        }
-    </State>
+export const Default = () => (
+    <GenericSelect
+        selected={store.state.selected}
+        onChange={e => {
+            action("onChange")(e);
+            store.set({ selected: e.value });
+        }}
+        disabled={boolean("Disabled", false)}
+        choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
+    />
 );

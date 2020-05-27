@@ -14,7 +14,6 @@
  */
 
 import { action } from "@storybook/addon-actions";
-import PropTypes from "prop-types";
 import React from "react";
 
 import UserInputForm from "../components/UserInputForm";
@@ -38,10 +37,3 @@ export default class UserInputContainer extends React.Component {
         );
     }
 }
-
-UserInputContainer.propTypes = {
-    stepUserInput: PropTypes.array.isRequired,
-    formName: PropTypes.string.isRequired
-};
-
-UserInputContainer.defaultProps = {};
