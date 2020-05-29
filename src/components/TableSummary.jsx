@@ -23,19 +23,13 @@ import { isEmpty } from "../utils/Utils";
 export default class TableSummary extends React.PureComponent {
     render() {
         const { data } = this.props;
+        const { headers, labels, columns } = data;
 
-        const headers = data.find(item => item.hasOwnProperty("headers"));
-        // console.log(headers);
-        const labels = data.find(item => item.hasOwnProperty("labels"));
-        // console.log(labels);
-        const columns = data.find(item => item.hasOwnProperty("columns"));
-        // console.log(columns);
+        const extra_columns_data = columns.filter((item, index) => index !== 0);
 
-        const extra_columns_data = columns["columns"].filter((item, index) => index !== 0);
-
-        const rows = columns["columns"][0].map((row, index) => (
+        const rows = columns[0].map((row, index) => (
             <tr key={index}>
-                {labels && <td className="label">{labels["labels"][index]}</td>}
+                {labels && <td className="label">{labels[index]}</td>}
                 <td className="value">{row}</td>
                 {extra_columns_data &&
                     extra_columns_data.map((cell, idx) => (
@@ -51,7 +45,7 @@ export default class TableSummary extends React.PureComponent {
         ) : (
             <tr>
                 {labels && <th />}
-                {headers["headers"].map((header, idx) => (
+                {headers.map((header, idx) => (
                     <th key={idx}>{header}</th>
                 ))}
             </tr>
