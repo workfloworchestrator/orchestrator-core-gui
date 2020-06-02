@@ -46,7 +46,6 @@ import NodeSelect from "./NodeSelect";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import StateValue from "./StateValue";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import TableSummary from "./TableSummary";
@@ -57,7 +56,6 @@ const inputTypesWithDelegatedValidation = [
     "contact_persons",
     "generic_multi_select",
     "service_ports",
-    "service_ports_sn8",
     "subscriptions"
 ];
 
@@ -482,12 +480,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         locationCode={value}
                     />
                 );
-            case "label_with_state":
-                return <StateValue className={name} value={value} />;
             case "label":
                 return <p className={`label ${name}`}>{I18n.t(`process.${name}`, userInput.i18n_state)}</p>;
             case "service_ports":
-            case "service_ports_sn8":
                 organisationId =
                     userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
@@ -495,7 +490,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 return (
                     <MultipleServicePorts
                         servicePorts={value}
-                        sn8={userInput.type === "service_ports_sn8"}
                         productTags={userInput.tags}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}

@@ -37,7 +37,6 @@ interface ServicePort {
 
 interface IProps {
     servicePorts: ServicePort[];
-    sn8: boolean;
     productTags: string[];
     minimum: number;
     maximum: number;

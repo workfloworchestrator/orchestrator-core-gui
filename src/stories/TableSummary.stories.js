@@ -23,23 +23,21 @@ export default {
 
 export const Definition = () => (
     <TableSummary
-        data={[
-            { labels: ["Label1", "Label 2", "Label 3"] },
-            { columns: [["value1", "value2", "value3 with slightly longer text"]] }
-        ]}
+        data={{
+            labels: ["Label1", "Label 2", "Label 3"],
+            columns: [["value1", "value2", "value3 with slightly longer text"]]
+        }}
     />
 );
 export const SummaryWithHeaders = () => (
     <TableSummary
-        data={[
-            { headers: ["Old Values", "New Values"] },
-            {
-                columns: [
-                    ["value1", "value2", "value3"],
-                    ["new value1", "new value2", "new value3"]
-                ]
-            }
-        ]}
+        data={{
+            headers: ["Old Values", "New Values"],
+            columns: [
+                ["value1", "value2", "value3"],
+                ["new value1", "new value2", "new value3"]
+            ]
+        }}
     />
 );
 
@@ -49,16 +47,15 @@ SummaryWithHeaders.story = {
 
 export const SummaryWithDefinitionAndHeaders = () => (
     <TableSummary
-        data={[
-            { labels: ["Label1", "Label 2", "Label 3"] },
-            { headers: ["Old Values", "New Values"] },
-            {
-                columns: [
-                    ["value1", "value2", "value3"],
-                    ["new value1", "new value2", "new value3"]
-                ]
-            }
-        ]}
+        data={{
+            labels: ["Label1", "Label 2", "Label 3"],
+            headers: ["Old Values", "New Values"],
+
+            columns: [
+                ["value1", "value2", "value3"],
+                ["new value1", "new value2", "new value3"]
+            ]
+        }}
     />
 );
 
