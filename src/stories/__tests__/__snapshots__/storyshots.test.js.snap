@@ -166,7 +166,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -323,7 +323,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -453,7 +453,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -595,7 +595,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              href="/subscriptions/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -729,7 +729,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Different Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
+                              href="/subscriptions/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -917,7 +917,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -1074,7 +1074,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1204,7 +1204,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1346,7 +1346,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
+                              href="/subscriptions/88e4c0ee-4405-40ee-9bef-1f6f3f997d9f"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1472,7 +1472,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Msc Port 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
+                              href="/subscriptions/bb1be651-0fb6-4da7-9816-7fc3a9bf8896"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1660,7 +1660,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                     colSpan={4}
                   >
                     <a
-                      href="/subscription/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
+                      href="/subscriptions/d61e7664-73ac-4f14-ad29-d6a33c243d5d"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -1813,7 +1813,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -1947,7 +1947,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -2102,7 +2102,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/6b5218b9-be87-4f5c-963d-90540b4ab189"
+                              href="/subscriptions/6b5218b9-be87-4f5c-963d-90540b4ab189"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -2232,7 +2232,7 @@ exports[`Storyshots DowngradeRedundantLPChoice Same Ports 1`] = `
                             colSpan={1}
                           >
                             <a
-                              href="/subscription/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
+                              href="/subscriptions/2c815189-5381-4c94-8598-ad1ce0dbcdcd"
                               rel="noopener noreferrer"
                               target="_blank"
                             >
@@ -4866,7 +4866,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <td
                     className="value"
                   >
-                    11/15/2019, 12:36:33 PM CET
+                    15-11-2019 12:36:33 CET
                   </td>
                 </tr>
                 <tr>
@@ -4878,7 +4878,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <td
                     className="value"
                   >
-                    11/18/2019, 6:02:18 PM CET
+                    18-11-2019 18:02:18 CET
                   </td>
                 </tr>
               </tbody>
@@ -4911,7 +4911,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:33 PM CET
+                    15-11-2019 12:36:33 CET
                   </span>
                 </section>
                 <section
@@ -5103,7 +5103,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -5228,7 +5228,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -5297,7 +5297,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -5333,7 +5333,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:41 PM CET
+                    15-11-2019 12:36:41 CET
                   </span>
                 </section>
                 <section
@@ -5402,7 +5402,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:41 PM CET
+                    15-11-2019 12:36:41 CET
                   </span>
                 </section>
                 <section
@@ -5438,7 +5438,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:43 PM CET
+                    15-11-2019 12:36:43 CET
                   </span>
                 </section>
                 <section
@@ -5474,7 +5474,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:43 PM CET
+                    15-11-2019 12:36:43 CET
                   </span>
                 </section>
                 <section
@@ -5510,7 +5510,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:49 PM CET
+                    15-11-2019 12:36:49 CET
                   </span>
                 </section>
                 <section
@@ -5546,7 +5546,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:50 PM CET
+                    15-11-2019 12:36:50 CET
                   </span>
                 </section>
                 <section
@@ -5582,7 +5582,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:51 PM CET
+                    15-11-2019 12:36:51 CET
                   </span>
                 </section>
                 <section
@@ -5618,7 +5618,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:51 PM CET
+                    15-11-2019 12:36:51 CET
                   </span>
                 </section>
                 <section
@@ -5654,7 +5654,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:57 PM CET
+                    15-11-2019 12:36:57 CET
                   </span>
                 </section>
                 <section
@@ -5723,7 +5723,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:57 PM CET
+                    15-11-2019 12:36:57 CET
                   </span>
                 </section>
                 <section
@@ -5759,7 +5759,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:02 PM CET
+                    15-11-2019 12:37:02 CET
                   </span>
                 </section>
                 <section
@@ -5841,7 +5841,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:02 PM CET
+                    15-11-2019 12:37:02 CET
                   </span>
                 </section>
                 <section
@@ -5910,7 +5910,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:03 PM CET
+                    15-11-2019 12:37:03 CET
                   </span>
                 </section>
                 <section
@@ -5998,7 +5998,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:04 PM CET
+                    15-11-2019 12:37:04 CET
                   </span>
                 </section>
                 <section
@@ -6099,7 +6099,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -6135,7 +6135,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -6171,7 +6171,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -6207,7 +6207,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:08 PM CET
+                    15-11-2019 12:37:08 CET
                   </span>
                 </section>
                 <section
@@ -6243,7 +6243,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:13 PM CET
+                    15-11-2019 12:37:13 CET
                   </span>
                 </section>
                 <section
@@ -6312,7 +6312,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   <span
                     className="started"
                   >
-                    11/18/2019, 6:02:18 PM CET
+                    18-11-2019 18:02:18 CET
                   </span>
                 </section>
                 <section
@@ -7122,7 +7122,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <td
                     className="value"
                   >
-                    11/15/2019, 12:36:33 PM CET
+                    15-11-2019 12:36:33 CET
                   </td>
                 </tr>
                 <tr>
@@ -7134,7 +7134,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <td
                     className="value"
                   >
-                    11/18/2019, 6:02:18 PM CET
+                    18-11-2019 18:02:18 CET
                   </td>
                 </tr>
               </tbody>
@@ -7167,7 +7167,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:33 PM CET
+                    15-11-2019 12:36:33 CET
                   </span>
                 </section>
                 <section
@@ -7359,7 +7359,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -7484,7 +7484,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -7553,7 +7553,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:34 PM CET
+                    15-11-2019 12:36:34 CET
                   </span>
                 </section>
                 <section
@@ -7589,7 +7589,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:41 PM CET
+                    15-11-2019 12:36:41 CET
                   </span>
                 </section>
                 <section
@@ -7658,7 +7658,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:41 PM CET
+                    15-11-2019 12:36:41 CET
                   </span>
                 </section>
                 <section
@@ -7694,7 +7694,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:43 PM CET
+                    15-11-2019 12:36:43 CET
                   </span>
                 </section>
                 <section
@@ -7730,7 +7730,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:43 PM CET
+                    15-11-2019 12:36:43 CET
                   </span>
                 </section>
                 <section
@@ -7766,7 +7766,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:49 PM CET
+                    15-11-2019 12:36:49 CET
                   </span>
                 </section>
                 <section
@@ -7802,7 +7802,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:50 PM CET
+                    15-11-2019 12:36:50 CET
                   </span>
                 </section>
                 <section
@@ -7838,7 +7838,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:51 PM CET
+                    15-11-2019 12:36:51 CET
                   </span>
                 </section>
                 <section
@@ -7874,7 +7874,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:51 PM CET
+                    15-11-2019 12:36:51 CET
                   </span>
                 </section>
                 <section
@@ -7910,7 +7910,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:57 PM CET
+                    15-11-2019 12:36:57 CET
                   </span>
                 </section>
                 <section
@@ -7979,7 +7979,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:36:57 PM CET
+                    15-11-2019 12:36:57 CET
                   </span>
                 </section>
                 <section
@@ -8015,7 +8015,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:02 PM CET
+                    15-11-2019 12:37:02 CET
                   </span>
                 </section>
                 <section
@@ -8097,7 +8097,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:02 PM CET
+                    15-11-2019 12:37:02 CET
                   </span>
                 </section>
                 <section
@@ -8166,7 +8166,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:03 PM CET
+                    15-11-2019 12:37:03 CET
                   </span>
                 </section>
                 <section
@@ -8254,7 +8254,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:04 PM CET
+                    15-11-2019 12:37:04 CET
                   </span>
                 </section>
                 <section
@@ -8355,7 +8355,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -8391,7 +8391,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -8427,7 +8427,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:07 PM CET
+                    15-11-2019 12:37:07 CET
                   </span>
                 </section>
                 <section
@@ -8463,7 +8463,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:08 PM CET
+                    15-11-2019 12:37:08 CET
                   </span>
                 </section>
                 <section
@@ -8499,7 +8499,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/15/2019, 12:37:13 PM CET
+                    15-11-2019 12:37:13 CET
                   </span>
                 </section>
                 <section
@@ -8568,7 +8568,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <span
                     className="started"
                   >
-                    11/18/2019, 6:02:18 PM CET
+                    18-11-2019 18:02:18 CET
                   </span>
                 </section>
                 <section
@@ -8872,7 +8872,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   id="subscriptions-id-v"
                 >
                   <a
-                    href="/subscription/9c8c13d5-6954-461a-a931-32894c193aa0"
+                    href="/subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -8913,7 +8913,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 <td
                   id="subscriptions-startdate-v"
                 >
-                  11/26/2019 CET
+                  26-11-2019 CET
                 </td>
               </tr>
               <tr>
@@ -9335,7 +9335,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                         onClick={[Function]}
                       />
                       <a
-                        href="/subscription/b7ed368f-f6d5-497e-9118-2daeb5d06653"
+                        href="/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -9623,7 +9623,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 <td
                   id="created-v"
                 >
-                  3/28/2019, 1:47:05 PM CET
+                  28-3-2019 13:47:05 CET
                 </td>
               </tr>
               <tr>
@@ -9710,7 +9710,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 </td>
                 <td>
                   <a
-                    href="/process/4953ffe3-a2db-4e90-bcab-5dd22cd564fd"
+                    href="/processes/4953ffe3-a2db-4e90-bcab-5dd22cd564fd"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -9721,10 +9721,10 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   completed
                 </td>
                 <td>
-                  11/26/2019, 12:44:08 PM CET
+                  26-11-2019 12:44:08 CET
                 </td>
                 <td>
-                  11/26/2019, 12:44:12 PM CET
+                  26-11-2019 12:44:12 CET
                 </td>
               </tr>
             </tbody>

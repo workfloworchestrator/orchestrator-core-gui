@@ -21,7 +21,7 @@ include:
   - template: Jobs/Build.gitlab-ci.yml
 
 unit test:
-  image: node:12.16.1
+  image: node:14.2.0-slim
   stage: test
   variables:
     TZ: Europe/Amsterdam
@@ -85,10 +85,13 @@ deploy review base:
       - schedules
 
 run system tests:
-  stage: development
+  stage: review
+  variables:
+    CI_COMMIT_REF_NAME_ORCHESTRATOR_CLIENT: $CI_COMMIT_REF_NAME
   trigger:
     project: automation/projects/system-tests
     branch: dev
+    strategy: depend
   only:
     refs:
       - branches
@@ -100,9 +103,13 @@ run system tests on dev:
   trigger:
     project: automation/projects/system-tests
     branch: dev
-  only:
+    strategy: depend
+  except:
     refs:
-      - dev
+      - branches
+      - master
+      - tags
+      - schedules
 
 deploy dev:
   variables:
@@ -131,9 +138,13 @@ run system tests on staging:
   trigger:
     project: automation/projects/system-tests
     branch: master
+    strategy: depend
   only:
     refs:
       - master
+  except:
+    refs:
+      - branches
 
 deploy staging:
   variables:

@@ -37,7 +37,6 @@ import DowngradeRedundantLPConfirmation from "./DowngradeRedundantLPConfirmation
 import GenericMultiSelect from "./GenericMultiSelect";
 import GenericNOCConfirm from "./GenericNOCConfirm";
 import GenericSelect from "./GenericSelect";
-import IEEEInterfaceTypesForProductTagSelect from "./IEEEInterfaceTypesForProductTagSelect";
 import IPPrefix from "./IPPrefix";
 import LocationCodeSelect from "./LocationCodeSelect";
 import MultipleServicePorts from "./MultipleServicePorts";
@@ -47,7 +46,6 @@ import NodeSelect from "./NodeSelect";
 import OrganisationSelect from "./OrganisationSelect";
 import ProductSelect from "./ProductSelect";
 import ReadOnlySubscriptionView from "./ReadOnlySubscriptionView";
-import StateValue from "./StateValue";
 import SubscriptionProductTagSelect from "./SubscriptionProductTagSelect";
 import SubscriptionsSelect from "./SubscriptionsSelect";
 import TableSummary from "./TableSummary";
@@ -58,7 +56,6 @@ const inputTypesWithDelegatedValidation = [
     "contact_persons",
     "generic_multi_select",
     "service_ports",
-    "service_ports_sn8",
     "subscriptions"
 ];
 
@@ -285,11 +282,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         this.changeUserInput(name, newValue);
     };
 
-    changeArrayInput = (name: string) => (arr: string[]) => {
-        const value = (arr || []).join(",");
-        this.changeUserInput(name, value);
-    };
-
     renderInput = (userInput: InputField) => {
         if (userInput.type === "hidden") {
             return;
@@ -430,16 +422,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         errors={validationError}
                     />
                 );
-            case "ieee_interface_type":
-                const key = userInput.product_key || "product";
-                const productId = findValueFromInputStep(key, stepUserInput);
-                return (
-                    <IEEEInterfaceTypesForProductTagSelect
-                        onChange={this.changeSelectInput(name)}
-                        interfaceType={value}
-                        productId={productId}
-                    />
-                );
             case "node_id_port_select":
                 return (
                     <NodeIdPortSelect
@@ -498,12 +480,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         locationCode={value}
                     />
                 );
-            case "label_with_state":
-                return <StateValue className={name} value={value} />;
             case "label":
                 return <p className={`label ${name}`}>{I18n.t(`process.${name}`, userInput.i18n_state)}</p>;
             case "service_ports":
-            case "service_ports_sn8":
                 organisationId =
                     userInput.organisation || findValueFromInputStep(userInput.organisation_key, stepUserInput);
                 const bandwidthKey = userInput.bandwidth_key || "bandwidth";
@@ -511,7 +490,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 return (
                     <MultipleServicePorts
                         servicePorts={value}
-                        sn8={userInput.type === "service_ports_sn8"}
                         productTags={userInput.tags}
                         onChange={this.changeNestedInput(name)}
                         organisationId={organisationId}
@@ -531,9 +509,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 const productIdForSubscription = userInput.product_id;
                 return (
                     <SubscriptionsSelect
-                        onChange={this.changeArrayInput(name)}
+                        onChange={this.changeNestedInput(name)}
                         productId={productIdForSubscription}
-                        subscriptions={this.commaSeparatedArray(value)}
+                        subscriptions={value || []}
                         minimum={userInput.minimum}
                         maximum={userInput.maximum}
                         errors={validationError}
@@ -644,8 +622,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 throw new Error(`Invalid / unknown type ${userInput.type}`);
         }
     };
-
-    commaSeparatedArray = (input: string) => (input ? input.split(",") : []);
 
     render() {
         const {

@@ -22,9 +22,7 @@
             "ims_circuit_id": "43697",
             "insync": false,
             "internetpinnen": "True",
-            "internetpinnen_prefix_subscription_id": [
-                "333cbc26-3553-43fa-aa4c-262a5b062f36"
-            ],
+            "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
             "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
             "ip_routing_type": "Static",
             "is_elan": false,
@@ -45,9 +43,7 @@
             "ims_circuit_id": "43870",
             "ims_service_code": "IP",
             "internetpinnen": "True",
-            "internetpinnen_prefix_subscription_id": [
-                "333cbc26-3553-43fa-aa4c-262a5b062f36"
-            ],
+            "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
             "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
             "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
             "ip_routing_type": "Static",
@@ -78,9 +74,7 @@
                 "iface_type": "10GBASE-SR",
                 "ims_circuit_id": 36715,
                 "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                "ip_prefix_subscription_id": [
-                    "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                ],
+                "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                 "line_name": "ASD001A_MSP_HVA_98541",
                 "location": "ASD001A",
                 "node": "ASD001A_5410FAKE_HANS72",
@@ -344,9 +338,7 @@
                     "domain": "SURFNET7",
                     "ims_circuit_id": "43870",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -358,9 +350,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -415,9 +405,7 @@
                     "domain": "SURFNET7",
                     "ims_circuit_id": "43870",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -429,9 +417,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -473,9 +459,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -494,9 +478,7 @@
                     "domain": "SURFNET7",
                     "ims_circuit_id": "43870",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -508,9 +490,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -552,9 +532,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -573,9 +551,7 @@
                     "domain": "SURFNET7",
                     "ims_circuit_id": "43870",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -587,9 +563,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -631,9 +605,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -653,9 +625,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -676,9 +646,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -721,9 +689,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_routing_type": "Static",
                     "is_elan": false,
                     "multicast": "False",
@@ -743,9 +709,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -768,9 +732,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -813,9 +775,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -836,9 +796,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -861,9 +819,7 @@
                         "customer_ipv4_mtu": "1500",
                         "customer_ipv6_mtu": "1500",
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "port_subscription_id": "1d77dd3c-5aed-4aca-9f0b-8951b64d5ea7",
                         "ptp_ipv4_ipam_id": "5302",
                         "vlanrange": "2"
@@ -906,9 +862,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -929,9 +883,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -962,9 +914,7 @@
                         "iface_type": "10GBASE-SR",
                         "ims_circuit_id": 36715,
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "line_name": "ASD001A_MSP_HVA_98541",
                         "location": "ASD001A",
                         "node": "ASD001A_5410FAKE_HANS72",
@@ -1013,9 +963,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -1036,9 +984,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -1069,9 +1015,7 @@
                         "iface_type": "10GBASE-SR",
                         "ims_circuit_id": 36715,
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "line_name": "ASD001A_MSP_HVA_98541",
                         "location": "ASD001A",
                         "node": "ASD001A_5410FAKE_HANS72",
@@ -1120,9 +1064,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -1143,9 +1085,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -1176,9 +1116,7 @@
                         "iface_type": "10GBASE-SR",
                         "ims_circuit_id": 36715,
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "line_name": "ASD001A_MSP_HVA_98541",
                         "location": "ASD001A",
                         "node": "ASD001A_5410FAKE_HANS72",
@@ -1234,9 +1172,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -1257,9 +1193,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -1290,9 +1224,7 @@
                         "iface_type": "10GBASE-SR",
                         "ims_circuit_id": 36715,
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "line_name": "ASD001A_MSP_HVA_98541",
                         "location": "ASD001A",
                         "node": "ASD001A_5410FAKE_HANS72",
@@ -1348,9 +1280,7 @@
                     "ims_circuit_id": "43697",
                     "insync": false,
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
                     "is_elan": false,
@@ -1371,9 +1301,7 @@
                     "ims_circuit_id": "43870",
                     "ims_service_code": "IP",
                     "internetpinnen": "True",
-                    "internetpinnen_prefix_subscription_id": [
-                        "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                    ],
+                    "internetpinnen_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                     "internetpinnen_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_prefix_subscriptions": "333cbc26-3553-43fa-aa4c-262a5b062f36",
                     "ip_routing_type": "Static",
@@ -1404,9 +1332,7 @@
                         "iface_type": "10GBASE-SR",
                         "ims_circuit_id": 36715,
                         "instance_id": "ac737da9-bad6-4cba-87cf-ac588f471f00",
-                        "ip_prefix_subscription_id": [
-                            "333cbc26-3553-43fa-aa4c-262a5b062f36"
-                        ],
+                        "ip_prefix_subscription_id": ["333cbc26-3553-43fa-aa4c-262a5b062f36"],
                         "line_name": "ASD001A_MSP_HVA_98541",
                         "location": "ASD001A",
                         "node": "ASD001A_5410FAKE_HANS72",

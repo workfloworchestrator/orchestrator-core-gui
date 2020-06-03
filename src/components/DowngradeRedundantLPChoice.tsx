@@ -207,7 +207,7 @@ export default class DowngradeRedundantLPChoice extends React.PureComponent<IPro
 
     renderSubscriptionLink = (subscription_id: string) => {
         return (
-            <a href={"/subscription/" + subscription_id} target="_blank" rel="noopener noreferrer">
+            <a href={"/subscriptions/" + subscription_id} target="_blank" rel="noopener noreferrer">
                 {subscription_id}
             </a>
         );

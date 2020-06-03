@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,15 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+import I18n from "i18n-js";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-.state-value {
-    border: 1px solid $light-grey;
-    cursor: default;
-    padding: 5px;
-    width: 100%;
+function NavigationItem({ href, value, className = "" }) {
+    return (
+        <NavLink className={className} activeClassName="active" to={href}>
+            {I18n.t("navigation." + value)}
+        </NavLink>
+    );
 }
+export default NavigationItem;

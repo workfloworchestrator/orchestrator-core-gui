@@ -67,39 +67,21 @@ I18n.translations.en = {
         searchPlaceHolder: "Search for IP prefixes"
     },
     processes: {
-        changes: "Changes",
-        system: "System",
-        noc: "NOC Engineers",
-        customer_support: "Klant support",
-        searchPlaceHolder: "Search for processes...",
-        new: "New Process",
-        assignee: "Assignee",
-        step: "Step",
-        status: "Status",
-        customer: "Customer",
-        product: "product",
-        workflow_name: "Workflow",
-        started: "started",
-        last_modified: "Last modified",
-        actions: "",
-        none: "",
-        submit: "Submit",
-        cancel: "Cancel",
-        delete: "Delete",
-        details: "Details",
-        user_input: "User input",
-        abort: "Abort",
-        retry: "Retry",
+        actions: {
+            delete: "Delete",
+            details: "Details",
+            user_input: "User input",
+            abort: "Abort",
+            retry: "Retry"
+        },
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
         abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
         retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
-        no_found: "No processes",
         flash: {
             delete: "Process {{name}} is deleted",
             abort: "Process {{name}} is aborted",
             retry: "Process {{name}} has been retried"
-        },
-        refresh: "Refresh automatically every 3 seconds?"
+        }
     },
     process: {
         confirm_migrate_sap: "Confirm the migration of the SAP",
@@ -179,7 +161,8 @@ I18n.translations.en = {
         port_id_redundant: "Redundant port",
         port_id_redundant_info: "Select a port",
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
-        internetpinnen_prefix_subscriptions_info: "Please select an Internet pinnen prefix. Leave blank to disable.",
+        internetpinnen_prefix_subscriptions_info:
+            "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
         input_fields_have_validation_errors: "input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
@@ -910,29 +893,11 @@ I18n.translations.en = {
         results: "{{type}} found: {{count}}"
     },
     tasks: {
-        searchPlaceHolder: "Search for tasks...",
         new: "New Task",
-        step: "Current step",
-        status: "Status",
-        workflow_name: "Workflow",
-        started: "Started",
-        failed_reason: "Failed reason",
-        last_modified: "Last modified",
-        created_by: "Created by",
-        actions: "",
-        none: "",
-        submit: "Submit",
-        cancel: "Cancel",
-        delete: "Delete",
-        details: "Details",
-        user_input: "User input",
-        abort: "Abort",
-        retry: "Retry",
         deleteConfirmation: "Are you sure you want to delete {{name}} task?",
         abortConfirmation: "Are you sure you want to abort {{name}} task?",
         retryConfirmation: "Are you sure you want to retry {{name}} task?",
         runallConfirmation: "Are you sure you want to rerun all failed tasks?",
-        no_found: "No tasks",
         flash: {
             delete: "Task {{name}} is deleted",
             abort: "Task {{name}} is aborted",
@@ -940,7 +905,6 @@ I18n.translations.en = {
             runall: "All failed tasks retried",
             runallfailed: "Not all failed tasks could be retried"
         },
-        refresh: "Refresh automatically every 3 seconds?",
         runall: "Rerun all"
     },
     task: {

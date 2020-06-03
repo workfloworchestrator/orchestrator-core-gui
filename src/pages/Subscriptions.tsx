@@ -67,7 +67,7 @@ export default class SubscriptionsPage extends React.PureComponent<IProps, IStat
         });
 
     showSubscription = (subscription: Subscription) => () => {
-        this.context.redirect("/subscription/" + subscription.subscription_id);
+        this.context.redirect("/subscriptions/" + subscription.subscription_id);
     };
 
     renderActions = (subscription: Subscription) => {

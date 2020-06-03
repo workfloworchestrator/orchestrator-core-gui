@@ -45,7 +45,6 @@ export const Sn8MultipleServicePorts = () => {
     return (
         <MultipleServicePorts
             servicePorts={store.state.servicePorts}
-            sn8={true}
             onChange={value => {
                 action("onChange")(value);
                 store.set({ servicePorts: value });
@@ -89,7 +88,6 @@ export const Sn7MultipleServicePorts = () => {
     return (
         <MultipleServicePorts
             servicePorts={store.state.servicePorts}
-            sn8={false}
             onChange={value => {
                 action("onChange")(value);
                 store.set({ servicePorts: value });

@@ -25,7 +25,6 @@ import {
     Organization,
     Process,
     ProcessSubscription,
-    ProcessWithDetails,
     Product,
     ProductBlock,
     ProductValidation,
@@ -280,14 +279,6 @@ export function organisations(): Promise<Organization[] | undefined> {
     });
 }
 
-export function ieeeInterfaceTypesForProductId(id: string) {
-    return fetchJson(`products/ieee_interface_types/${id}`);
-}
-
-export function corelinkIEEEInterfaceTypes() {
-    return fetchJson("products/corelink_ieee_interface_types");
-}
-
 export function getNodesByLocationAndStatus(locationCode: string, status: string) {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
@@ -441,10 +432,6 @@ export function workflowsByTarget(target: string): Promise<Workflow[]> {
 
 export function invalidSubscriptions(workflowKey: string) {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
-}
-
-export function processes(showTasks = false): Promise<ProcessWithDetails[]> {
-    return fetchJson(`processes?showTasks=${showTasks}`);
 }
 
 export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {

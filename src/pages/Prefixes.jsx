@@ -291,7 +291,7 @@ export default class Prefixes extends React.PureComponent {
         const { subscription_id, prefix, prefixlen } = selection;
         const product_id = this.state.ipPrefixProductId;
         if (isValidUUIDv4(subscription_id)) {
-            this.context.redirect("/subscription/" + subscription_id);
+            this.context.redirect("/subscriptions/" + subscription_id);
         } else if (subscription_id === "N/A") {
             let network = prefix.split("/")[0];
             this.context.redirect(

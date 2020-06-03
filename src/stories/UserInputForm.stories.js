@@ -323,7 +323,7 @@ export const Sn8PortselectAllOrganisations = () => {
                     name: "bgp_ip_service_ports",
                     organisationPortsOnly: false,
                     organisation_key: "organisation",
-                    type: "service_ports_sn8",
+                    type: "service_ports",
                     visiblePortMode: "normal",
                     tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
                 }
@@ -364,7 +364,7 @@ export const Sn8PortselectTagged = () => {
                     name: "bgp_ip_service_ports",
                     organisationPortsOnly: false,
                     organisation_key: "organisation",
-                    type: "service_ports_sn8",
+                    type: "service_ports",
                     visiblePortMode: "tagged",
                     tags: ["SP", "SPNL"]
                 }
@@ -405,7 +405,7 @@ export const Sn8PortselectUntagged = () => {
                     name: "bgp_ip_service_ports",
                     organisationPortsOnly: false,
                     organisation_key: "organisation",
-                    type: "service_ports_sn8",
+                    type: "service_ports",
                     visiblePortMode: "untagged",
                     tags: ["SP", "SPNL"]
                 }
@@ -444,7 +444,7 @@ export const Sn8PortselectSelectedOrganisation = () => {
                     name: "bgp_ip_service_ports",
                     organisationPortsOnly: true,
                     organisation_key: "organisation",
-                    type: "service_ports_sn8",
+                    type: "service_ports",
                     visiblePortMode: "normal",
                     tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
                 }
