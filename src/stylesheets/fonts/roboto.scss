@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,21 +19,22 @@
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
-    src: local("Roboto"), local("Roboto-Regular"), url(#{$fa-font-path}/Roboto-Regular.ttf) format("truetype");
+    src: local("Roboto"), local("Roboto-Regular"), url(#{variables.$fa-font-path}/Roboto-Regular.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "Roboto";
     font-style: normal;
     font-weight: 700;
-    src: local("Roboto Bold"), local("Roboto-Bold"), url(#{$fa-font-path}/Roboto-Bold.ttf) format("truetype");
+    src: local("Roboto Bold"), local("Roboto-Bold"), url(#{variables.$fa-font-path}/Roboto-Bold.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "Roboto";
     font-style: italic;
     font-weight: 400;
-    src: local("Roboto Italic"), local("Roboto-Italic"), url(#{$fa-font-path}/Roboto-Italic.ttf) format("truetype");
+    src: local("Roboto Italic"), local("Roboto-Italic"),
+        url(#{variables.$fa-font-path}/Roboto-Italic.ttf) format("truetype");
 }
 
 @font-face {
@@ -39,7 +42,7 @@
     font-style: italic;
     font-weight: 700;
     src: local("Roboto Bold Italic"), local("Roboto-BoldItalic"),
-        url(#{$fa-font-path}/Roboto-BoldItalic.ttf) format("truetype");
+        url(#{variables.$fa-font-path}/Roboto-BoldItalic.ttf) format("truetype");
 }
 
 @font-face {
@@ -47,7 +50,7 @@
     font-style: normal;
     font-weight: 400;
     src: local("Roboto Mono"), local("RobotoMono-Regular"),
-        url(#{$fa-font-path}/RobotoMono-Regular.ttf) format("truetype");
+        url(#{variables.$fa-font-path}/RobotoMono-Regular.ttf) format("truetype");
 }
 
 @font-face {
@@ -55,5 +58,5 @@
     font-style: normal;
     font-weight: 300;
     src: local("Roboto Mono Light"), local("RobotoMono-Light"),
-        url(#{$fa-font-path}/RobotoMono-Light.ttf) format("truetype");
+        url(#{variables.$fa-font-path}/RobotoMono-Light.ttf) format("truetype");
 }

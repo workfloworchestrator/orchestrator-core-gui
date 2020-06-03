@@ -13,15 +13,16 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-process-detail {
-    @include page;
+    @include mixins.page;
 
     .card {
-        @include card;
+        @include mixins.card;
         padding-bottom: 15px;
     }
     section.not-found {
@@ -38,15 +39,15 @@
             text-align: center;
             cursor: pointer;
             padding: 15px 75px;
-            background-color: $light-grey;
-            color: $dark-grey;
+            background-color: vars.$light-grey;
+            color: vars.$dark-grey;
             text-transform: uppercase;
             border-right: 1px solid white;
 
             &.active {
                 background-color: white;
-                color: $darker-blue;
-                border-top: 2px solid $blue;
+                color: vars.$darker-blue;
+                border-top: 2px solid vars.$blue;
                 border-right: none;
             }
 
@@ -70,7 +71,7 @@
         h3 {
             font-size: larger;
             padding: 15px 0;
-            color: $darker-blue;
+            color: vars.$darker-blue;
             &:last-child {
                 margin-left: auto;
             }

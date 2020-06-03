@@ -13,13 +13,14 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/vars";
 
 div.date_picker_custom {
     width: 180px;
     display: flex;
-    border: 1px solid $lighter-grey;
-    border-radius: $br;
+    border: 1px solid vars.$lighter-grey;
+    border-radius: vars.$br;
     margin-top: 5px;
     cursor: pointer;
 
@@ -35,7 +36,7 @@ div.date_picker_custom {
         padding: 7px;
         color: inherit;
         flex-grow: 5;
-        @include no-text-decoration;
+        @include mixins.no-text-decoration;
     }
 
     span {
@@ -43,10 +44,10 @@ div.date_picker_custom {
         text-align: center;
         display: flex;
         align-items: center;
-        background-color: $light-grey;
+        background-color: vars.$light-grey;
         font-size: larger;
         &.clear {
-            border-right: 1px solid $lighter-grey;
+            border-right: 1px solid vars.$lighter-grey;
         }
     }
 }

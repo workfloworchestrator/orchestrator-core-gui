@@ -13,7 +13,7 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 section.contact-persons {
     display: flex;
@@ -34,12 +34,12 @@ section.contact-persons {
                 align-items: center;
                 i.fa-minus {
                     padding-left: 5px;
-                    color: $red;
+                    color: vars.$red;
                     font-size: 30px;
                     cursor: pointer;
                     &.disabled {
                         cursor: not-allowed;
-                        color: $light-grey;
+                        color: vars.$light-grey;
                     }
                 }
             }
@@ -50,7 +50,7 @@ section.contact-persons {
         i.fa-plus {
             margin-left: auto;
             padding: 10px 2px 0 0;
-            color: $green;
+            color: vars.$green;
             font-size: 30px;
             cursor: pointer;
         }

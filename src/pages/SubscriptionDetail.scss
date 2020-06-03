@@ -13,15 +13,16 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/vars";
 
 .card {
-    @include card;
+    @include mixins.card;
 }
 
 .mod-subscription-detail {
-    @include page;
+    @include mixins.page;
     padding-bottom: 15px;
     section.not-found {
         h1 {
@@ -32,13 +33,13 @@
     h3 {
         font-size: 20px;
         padding: 15px 0 0 15px;
-        color: $darker-blue;
+        color: vars.$darker-blue;
     }
     h2 {
         font-size: 16px;
         margin: 10px 0 0 0;
         padding: 10px 0 0 25px;
-        color: $blue;
+        color: vars.$blue;
     }
     em {
         margin-left: 15px;
@@ -58,7 +59,7 @@
         }
         p.no-termination-reason,
         p.no-modify-reason {
-            color: $orange;
+            color: vars.$orange;
             margin: 15px 0 0 25px;
         }
     }
@@ -70,7 +71,7 @@
             font-size: 16px;
         }
         i.fa {
-            color: $orange;
+            color: vars.$orange;
         }
     }
     section.details {
@@ -79,7 +80,7 @@
     section.not-found-related-objects {
         padding-bottom: 20px;
         h3 {
-            color: $red;
+            color: vars.$red;
         }
     }
     table {
@@ -104,14 +105,14 @@
         }
         tbody {
             tr {
-                border-bottom: 1px solid $light-grey;
-                border-left: 1px solid $blue;
+                border-bottom: 1px solid vars.$light-grey;
+                border-left: 1px solid vars.$blue;
 
                 &:nth-child(even) {
                     background: white;
                 }
                 &:nth-child(odd) {
-                    background: $table-odd-even;
+                    background: vars.$table-odd-even;
                 }
             }
             td {
@@ -149,7 +150,7 @@
                     cursor: pointer;
                     margin-right: 15px;
                     font-size: 22px;
-                    color: $blue;
+                    color: vars.$blue;
                 }
             }
         }
@@ -157,7 +158,7 @@
             tbody {
                 &:nth-child(even) {
                     tr {
-                        background: $table-odd-even;
+                        background: vars.$table-odd-even;
                     }
                 }
                 &:nth-child(odd) {
@@ -174,9 +175,9 @@
                             border-left: none;
                         }
                         &.related-subscription-values {
-                            background-color: $light-grey;
-                            border-bottom: 1px solid $light-grey;
-                            border-left: 5px solid $blue;
+                            background-color: vars.$light-grey;
+                            border-bottom: 1px solid vars.$light-grey;
+                            border-left: 5px solid vars.$blue;
                             margin: 0;
                             padding: 0;
                         }
@@ -195,13 +196,13 @@
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
-            border-left: 1px solid $blue;
+            border-bottom: 1px solid vars.$light-grey;
+            border-left: 1px solid vars.$blue;
             &:nth-child(even) {
                 background: white;
             }
             &:nth-child(odd) {
-                background: $table-odd-even;
+                background: vars.$table-odd-even;
             }
         }
         th,
@@ -239,7 +240,7 @@
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            color: $medium-grey;
+            color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         tbody {
@@ -261,13 +262,13 @@
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
-            border-left: 1px solid $blue;
+            border-bottom: 1px solid vars.$light-grey;
+            border-left: 1px solid vars.$blue;
             &:nth-child(even) {
                 background: white;
             }
             &:nth-child(odd) {
-                background: $table-odd-even;
+                background: vars.$table-odd-even;
             }
         }
         th,
@@ -299,7 +300,7 @@
             text-transform: uppercase;
             font-weight: bold;
             font-size: larger;
-            color: $medium-grey;
+            color: vars.$medium-grey;
             padding: 7px 2px 7px 0;
         }
         tbody {
@@ -312,7 +313,7 @@
         }
     }
     p.label {
-        color: $blue;
+        color: vars.$blue;
         margin-left: 25px;
         padding-top: 5px;
     }

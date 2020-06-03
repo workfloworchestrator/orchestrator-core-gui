@@ -1,4 +1,4 @@
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 .explain-container {
     position: fixed;
@@ -28,7 +28,7 @@
     h2,
     h3 {
         margin-top: 15px;
-        color: $blue;
+        color: vars.$blue;
     }
     h1 {
         font-size: 1.25em;
@@ -50,7 +50,7 @@
     .title {
         position: relative;
         padding: 20px 10px;
-        background-color: $blue;
+        background-color: vars.$blue;
         color: white;
         font-weight: bold;
         font-size: larger;

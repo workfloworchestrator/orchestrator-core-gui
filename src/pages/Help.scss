@@ -13,8 +13,8 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
+@use "../stylesheets/mixins.scss";
 
 section.help {
-    @include page;
+    @include mixins.page;
 }
