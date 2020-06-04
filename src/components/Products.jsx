@@ -193,7 +193,7 @@ export default class Products extends React.Component {
             action: this.editProduct(product, true, false)
         };
         const edit = {
-            icon: "fa fa-pencil-square-o",
+            icon: "fa fa-edit",
             label: "edit",
             action: this.editProduct(product, false, false)
         };

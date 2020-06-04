@@ -19,7 +19,6 @@
 @use "../stylesheets/vars";
 
 .subscriptions-container {
-    // Removed next include to use full width
     @include mixins.page;
     background-color: white;
 }

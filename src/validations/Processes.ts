@@ -40,7 +40,7 @@ export function actionOptions(
         action: showAction
     };
     const userInput = {
-        icon: "fa fa-pencil-square-o",
+        icon: "fa fa-edit",
         label: "user_input",
         action: showAction
     };

@@ -148,7 +148,7 @@ export default class ProductBlocks extends React.Component {
             action: this.editProductBlock(productBlock, true, false)
         };
         const edit = {
-            icon: "fa fa-pencil-square-o",
+            icon: "fa fa-edit",
             label: "edit",
             action: this.editProductBlock(productBlock, false, false)
         };

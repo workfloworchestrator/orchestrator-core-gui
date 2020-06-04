@@ -280,7 +280,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                         className={`button ${option.danger ? " red" : " blue"}`}
                         onClick={option.action}
                     >
-                        {I18n.t(`processes.actions.${option.label}`)}
+                        {I18n.t(`processes.${option.label}`)}
                     </button>
                 ))}
                 <button className="button" onClick={this.handleCollapseAll}>
