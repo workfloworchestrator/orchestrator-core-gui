@@ -459,7 +459,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     </div>
                 );
             case "accept":
-                return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "accept_or_skip":
                 return <GenericNOCConfirm name={name} onChange={this.changeNestedInput(name)} data={userInput.data} />;
             case "boolean":
