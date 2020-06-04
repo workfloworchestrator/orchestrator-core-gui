@@ -13,12 +13,12 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 label.warning {
-    color: $red;
+    color: vars.$red;
 }
 
 .skip {
-    color: $green;
+    color: vars.$green;
 }

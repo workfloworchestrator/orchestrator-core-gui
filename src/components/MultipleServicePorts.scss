@@ -13,7 +13,7 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 section.service-port-container {
     display: flex;
@@ -36,12 +36,12 @@ section.service-port-container {
         }
         i.fa-minus {
             padding-left: 5px;
-            color: $red;
+            color: vars.$red;
             font-size: 30px;
             cursor: pointer;
             &.disabled {
                 cursor: not-allowed;
-                color: $light-grey;
+                color: vars.$light-grey;
             }
         }
 
@@ -77,7 +77,7 @@ section.service-port-container {
         i.fa-plus {
             margin-left: auto;
             padding: 10px 2px 0 0;
-            color: $green;
+            color: vars.$green;
             font-size: 30px;
             cursor: pointer;
         }
@@ -87,7 +87,7 @@ section.service-port-container {
         i.fa-refresh {
             margin-left: auto;
             margin-top: 0px;
-            color: $blue;
+            color: vars.$blue;
             font-size: 30px;
             cursor: pointer;
         }

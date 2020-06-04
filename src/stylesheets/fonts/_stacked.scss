@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +18,7 @@
 // Stacked Icons
 // -------------------------
 
-.#{$fa-css-prefix}-stack {
+.#{variables.$fa-css-prefix}-stack {
     position: relative;
     display: inline-block;
     width: 2em;
@@ -24,19 +26,19 @@
     line-height: 2em;
     vertical-align: middle;
 }
-.#{$fa-css-prefix}-stack-1x,
-.#{$fa-css-prefix}-stack-2x {
+.#{variables.$fa-css-prefix}-stack-1x,
+.#{variables.$fa-css-prefix}-stack-2x {
     position: absolute;
     left: 0;
     width: 100%;
     text-align: center;
 }
-.#{$fa-css-prefix}-stack-1x {
+.#{variables.$fa-css-prefix}-stack-1x {
     line-height: inherit;
 }
-.#{$fa-css-prefix}-stack-2x {
+.#{variables.$fa-css-prefix}-stack-2x {
     font-size: 2em;
 }
-.#{$fa-css-prefix}-inverse {
-    color: $fa-inverse;
+.#{variables.$fa-css-prefix}-inverse {
+    color: variables.$fa-inverse;
 }

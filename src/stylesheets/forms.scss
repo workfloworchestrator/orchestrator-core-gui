@@ -13,8 +13,8 @@
  *
  */
 
-@import "../stylesheets/media_queries.scss";
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars.scss";
 
 h2 {
     margin: 35px 0 20px 0;
@@ -24,7 +24,7 @@ h2 {
 label {
     text-transform: uppercase;
     font-weight: bold;
-    color: $medium-grey;
+    color: vars.$medium-grey;
     display: block;
 }
 
@@ -33,7 +33,7 @@ em {
     font-size: smaller;
     font-style: italic;
     &.error {
-        color: $red;
+        color: vars.$red;
         &.with-checkbox {
             margin-bottom: 1px;
         }
@@ -50,14 +50,14 @@ input[type="number"],
 textarea {
     display: block;
     width: 100%;
-    border: 1px solid $lighter-grey;
+    border: 1px solid vars.$lighter-grey;
     padding: 6px;
-    border-radius: $br;
+    border-radius: vars.$br;
     font-size: 14px;
     margin-top: 4px;
     &[disabled],
     &:read-only {
-        background-color: $lightest-grey;
+        background-color: vars.$lightest-grey;
     }
 }
 
@@ -81,7 +81,7 @@ div.checkbox {
     }
 }
 
-@include phone {
+@include media_queries.phone {
     section.buttons {
         .button {
             min-width: inherit;

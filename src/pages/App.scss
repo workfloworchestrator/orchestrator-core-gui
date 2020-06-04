@@ -1,3 +1,4 @@
+@use "sass:meta";
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +13,16 @@
  * limitations under the License.
  *
  */
-
+@use "../stylesheets/vars.scss";
 @import-normalize; /* bring in normalize.css styles */
-@import "../stylesheets/application.scss";
+@include meta.load-css("../stylesheets/application.scss");
 
 .App {
     text-align: center;
 }
 
 .App-header {
-    background-color: $blue;
+    background-color: vars.$blue;
     height: 150px;
     padding: 20px;
     color: white;

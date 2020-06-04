@@ -13,17 +13,18 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "sass:color";
+@use "../stylesheets/vars.scss";
 
 section.drop-down-actions {
     position: absolute;
     display: flex;
     flex-direction: column;
-    box-shadow: 1px 2px 6px 2px $lighter-grey;
+    box-shadow: 1px 2px 6px 2px vars.$lighter-grey;
     width: 130px;
-    color: lighten($dark-grey, 10%);
+    color: color.adjust(vars.$dark-grey, $lightness: 10%);
     background-color: white;
-    border-radius: $br;
+    border-radius: vars.$br;
     z-index: 5;
     font-size: 14px;
     text-align: left;
@@ -45,18 +46,18 @@ section.drop-down-actions {
         border-color: white white transparent transparent;
         transform-origin: 0 0;
         transform: rotate(-45deg);
-        box-shadow: 2px -3px 3px 0 $light-grey;
+        box-shadow: 2px -3px 3px 0 vars.$light-grey;
     }
 
     span {
         cursor: pointer;
         padding: 10px 0 10px 20px;
-        color: $darker-blue;
+        color: vars.$darker-blue;
         &:hover {
-            background-color: $hover;
+            background-color: vars.$hover;
         }
         &.danger {
-            color: $red;
+            color: vars.$red;
         }
         i {
             margin-right: 20px;

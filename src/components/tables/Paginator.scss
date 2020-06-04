@@ -13,15 +13,16 @@
  *
  */
 
-@import "../../stylesheets/mixins.scss";
-@import "../../stylesheets/media_queries.scss";
+@use "../../stylesheets/mixins.scss";
+@use "../../stylesheets/media_queries.scss";
+@use "../../stylesheets/vars";
 
 .pagination {
     display: flex;
     flex: row nowrap;
     button {
         color: white;
-        background-color: $blue;
+        background-color: vars.$blue;
         padding: 0 0 0 0;
         font-size: 28px;
         font-weight: bold;

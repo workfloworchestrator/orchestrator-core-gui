@@ -13,23 +13,25 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
+@use "sass:color";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/vars";
 
 .navigation-container {
-    background-color: $blue;
+    background-color: vars.$blue;
 
     .navigation {
-        max-width: $medium;
+        max-width: vars.$medium;
         margin: 0 auto;
         padding: 25px 15px 0 15px;
         font-size: 20px;
         display: flex;
 
         a {
-            color: lighten($light-blue, 5);
+            color: color.adjust(vars.$light-blue, $lightness: 5);
             margin-right: 50px;
             padding-bottom: 12px;
-            @include no-text-decoration;
+            @include mixins.no-text-decoration;
 
             &.active {
                 color: white;

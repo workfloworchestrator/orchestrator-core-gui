@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,24 +18,24 @@
 // Bordered & Pulled
 // -------------------------
 
-.#{$fa-css-prefix}-border {
+.#{variables.$fa-css-prefix}-border {
     padding: 0.2em 0.25em 0.15em;
-    border: solid 0.08em $fa-border-color;
+    border: solid 0.08em variables.$fa-border-color;
     border-radius: 0.1em;
 }
 
-.#{$fa-css-prefix}-pull-left {
+.#{variables.$fa-css-prefix}-pull-left {
     float: left;
 }
-.#{$fa-css-prefix}-pull-right {
+.#{variables.$fa-css-prefix}-pull-right {
     float: right;
 }
 
-.#{$fa-css-prefix} {
-    &.#{$fa-css-prefix}-pull-left {
+.#{variables.$fa-css-prefix} {
+    &.#{variables.$fa-css-prefix}-pull-left {
         margin-right: 0.3em;
     }
-    &.#{$fa-css-prefix}-pull-right {
+    &.#{variables.$fa-css-prefix}-pull-right {
         margin-left: 0.3em;
     }
 }
@@ -46,7 +48,7 @@
     float: left;
 }
 
-.#{$fa-css-prefix} {
+.#{variables.$fa-css-prefix} {
     &.pull-left {
         margin-right: 0.3em;
     }

@@ -13,13 +13,13 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 section.filter-drop-down {
     position: relative;
 
-    border: 1px solid $lighter-grey;
-    border-radius: $br;
+    border: 1px solid vars.$lighter-grey;
+    border-radius: vars.$br;
     padding-top: 1px;
     margin-right: 25px;
     min-width: 215px;
@@ -33,11 +33,11 @@ section.filter-drop-down {
 
         .filter-label,
         .filter-label-divider {
-            color: $medium-grey;
+            color: vars.$medium-grey;
         }
 
         .filter-name {
-            color: $blue;
+            color: vars.$blue;
             margin: 0 15px;
         }
 
@@ -46,7 +46,7 @@ section.filter-drop-down {
         }
 
         i {
-            color: $blue;
+            color: vars.$blue;
             &.fa-undo {
                 padding-right: 8px;
             }
@@ -60,14 +60,14 @@ section.filter-drop-down {
         right: 0;
         padding: 10px;
         background-color: white;
-        box-shadow: 1px 2px 6px 1px $medium-grey;
+        box-shadow: 1px 2px 6px 1px vars.$medium-grey;
         min-width: 210px;
         display: inline-block;
-        border-radius: $br;
+        border-radius: vars.$br;
 
         li {
             display: flex;
-            color: $medium-grey;
+            color: vars.$medium-grey;
             align-items: center;
             cursor: pointer;
 
@@ -79,9 +79,9 @@ section.filter-drop-down {
 
             i {
                 &.fa-filter {
-                    color: $blue;
+                    color: vars.$blue;
                     &:hover {
-                        color: $darkest-blue;
+                        color: vars.$darkest-blue;
                     }
                 }
             }

@@ -13,8 +13,9 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
-@import "../stylesheets/mixins.scss";
+@use "sass:color";
+@use "../stylesheets/vars.scss";
+@use "../stylesheets/mixins.scss";
 
 .ipspace_popup {
     width: 100%;
@@ -30,32 +31,32 @@ section.ipblock-selector {
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
+            border-bottom: 1px solid vars.$light-grey;
         }
         tr.Allocated {
             cursor: pointer;
-            background-color: $light-blue;
+            background-color: vars.$light-blue;
             &:hover {
-                background-color: darken($light-blue, 10%);
+                background-color: color.adjust(vars.$light-blue, $lightness: -10%);
             }
         }
         tr.Planned {
             cursor: default;
-            background-color: $light-gold;
+            background-color: vars.$light-gold;
         }
         tr.Free {
             cursor: pointer;
-            background-color: $light-green;
+            background-color: vars.$light-green;
             &:hover {
-                background-color: darken($light-green, 10%);
+                background-color: color.adjust(vars.$light-green, $lightness: -10%);
             }
         }
         tr.Subnet {
-            background-color: darken($light-blue, 30%);
+            background-color: color.adjust(vars.$light-blue, $lightness: -30%);
             cursor: default;
         }
         tr.selected {
-            background-color: $dark-grey;
+            background-color: vars.$dark-grey;
             color: white;
             &:hover {
                 background-color: black;

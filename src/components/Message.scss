@@ -13,7 +13,7 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 section.message-box {
     margin-top: -15px;
@@ -24,11 +24,11 @@ section.message-box {
 
         .message-button {
             margin-left: 12px;
-            color: $medium-grey;
+            color: vars.$medium-grey;
             background-color: white;
             font-weight: bold;
             cursor: pointer;
-            border: 1px solid $blue;
+            border: 1px solid vars.$blue;
             border-radius: 3px;
             font-family: "Roboto", Sans-serif;
             font-size: 0.8em;
@@ -36,8 +36,8 @@ section.message-box {
         .message-button:hover,
         .message-button:visited {
             text-decoration: none;
-            border: 1px solid $lighter-grey;
-            color: $blue;
+            border: 1px solid vars.$lighter-grey;
+            color: vars.$blue;
         }
         .message-button:focus {
             outline: none;

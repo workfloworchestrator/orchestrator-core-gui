@@ -1,3 +1,5 @@
+@use "variables";
+
 /*!
  * Copyright 2019 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +17,7 @@
 
 // Fixed Width Icons
 // -------------------------
-.#{$fa-css-prefix}-fw {
+.#{variables.$fa-css-prefix}-fw {
     width: (18em / 14);
     text-align: center;
 }

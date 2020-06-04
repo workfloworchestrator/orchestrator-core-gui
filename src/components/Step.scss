@@ -13,7 +13,7 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 //step statuses
 section.step {
@@ -25,28 +25,28 @@ section.step {
     padding: 12px;
 
     &.failed {
-        background-color: $red;
+        background-color: vars.$red;
     }
     &.waiting {
-        background-color: $orange;
+        background-color: vars.$orange;
     }
     &.pending {
-        background-color: $dark-grey;
+        background-color: vars.$dark-grey;
     }
     &.success {
-        background-color: $dark-green;
+        background-color: vars.$dark-green;
     }
     &.skipped {
-        background-color: $lighter-grey;
+        background-color: vars.$lighter-grey;
     }
     &.complete {
-        background-color: $blue;
+        background-color: vars.$blue;
     }
     &.suspend {
-        background-color: $gold;
-        color: $dark-grey;
+        background-color: vars.$gold;
+        color: vars.$dark-grey;
     }
     &.abort {
-        background-color: $darkest-blue;
+        background-color: vars.$darkest-blue;
     }
 }

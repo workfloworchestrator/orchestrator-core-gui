@@ -13,7 +13,8 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "sass:color";
+@use "../stylesheets/vars.scss";
 
 div.flash {
     color: white;
@@ -32,17 +33,17 @@ div.flash {
     }
 
     &.info {
-        background-color: darken($green, 15%);
+        background-color: color.adjust(vars.$green, $lightness: -15%);
     }
     &.warning {
-        background-color: $orange;
+        background-color: vars.$orange;
     }
     &.error {
-        background-color: $red;
+        background-color: vars.$red;
     }
 
     .message-container {
-        max-width: $medium;
+        max-width: vars.$medium;
         margin: 0 auto;
         position: relative;
 
