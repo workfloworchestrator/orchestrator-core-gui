@@ -15,11 +15,11 @@ export type SelectFieldProps = Override<
         checkboxes?: boolean;
         disabled: boolean;
         fieldType: unknown;
-        id: string;
+        id?: string;
         inputRef?: Ref<HTMLSelectElement>;
         label: string;
         description?: string;
-        name: string;
+        name?: string;
         onChange(value?: string | string[]): void;
         placeholder: string;
         required?: boolean;

@@ -11,10 +11,10 @@ import { InstanceValueWithLabel, subscriptionInstanceValues } from "validations/
 export type SubscriptionSummaryFieldProps = Override<
     Omit<HTMLProps<HTMLDivElement>, "onChange">,
     {
-        id: string;
-        label: string;
-        name: string;
-        value: string;
+        id?: string;
+        label?: string;
+        name?: string;
+        value?: string;
         description?: string;
     }
 >;
@@ -26,6 +26,10 @@ function SubscriptionSummary({ id, name, label, description, value, ...props }: 
     const [childSubscriptions, setChildSubscriptions] = useState<SubscriptionWithDetails[] | undefined>(undefined);
 
     useEffect(() => {
+        if (!value) {
+            return;
+        }
+
         subscriptionsDetail(value).then(subscription => {
             const enrichedSubscription = enrichSubscription(subscription, organisations, products);
             setSubscription(enrichedSubscription);

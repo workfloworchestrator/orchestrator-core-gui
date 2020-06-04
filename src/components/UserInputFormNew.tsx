@@ -43,6 +43,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { ValidationError } from "../utils/types";
 import { stop } from "../utils/Utils";
 import ConfirmationDialog from "./ConfirmationDialog";
+import { SubscriptionsContextProvider } from "./subscriptionContext";
 
 interface FieldError {
     message: string;
@@ -331,20 +332,22 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     leavePage={true}
                 />
                 <section className="card">
-                    <AutoForm schema={bridge} onSubmit={this.submit} showInlineError={true} validate="onSubmit">
-                        <AutoFields />
-                        {/* Show top level validation info about backend validation */}
-                        {nrOfValidationErrors > 0 && (
-                            <section className="form-errors">
-                                <em className="error backend-validation-metadata">
-                                    {I18n.t("process.input_fields_have_validation_errors", {
-                                        nrOfValidationErrors: nrOfValidationErrors
-                                    })}
-                                </em>
-                            </section>
-                        )}
-                        {this.renderButtons()}
-                    </AutoForm>
+                    <SubscriptionsContextProvider>
+                        <AutoForm schema={bridge} onSubmit={this.submit} showInlineError={true} validate="onSubmit">
+                            <AutoFields />
+                            {/* Show top level validation info about backend validation */}
+                            {nrOfValidationErrors > 0 && (
+                                <section className="form-errors">
+                                    <em className="error backend-validation-metadata">
+                                        {I18n.t("process.input_fields_have_validation_errors", {
+                                            nrOfValidationErrors: nrOfValidationErrors
+                                        })}
+                                    </em>
+                                </section>
+                            )}
+                            {this.renderButtons()}
+                        </AutoForm>
+                    </SubscriptionsContextProvider>
                 </section>
             </div>
         );

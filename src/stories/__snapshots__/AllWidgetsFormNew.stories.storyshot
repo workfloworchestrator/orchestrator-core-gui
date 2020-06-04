@@ -897,10 +897,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section
                   className="corelink_add_link1"
+                  id="input-corelink_add_link1"
                 >
-                  <label
-                    htmlFor="input-corelink_add_link1"
-                  >
+                  <label>
                     [missing "en.forms.fields.corelink_add_link1" translation]
                     <em>
                       
@@ -1133,10 +1132,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section
                   className="corelink_add_link2"
+                  id="input-corelink_add_link2"
                 >
-                  <label
-                    htmlFor="input-corelink_add_link2"
-                  >
+                  <label>
                     [missing "en.forms.fields.corelink_add_link2" translation]
                     <em>
                       
@@ -1369,10 +1367,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section
                   className="corelink"
+                  id="input-corelink"
                 >
-                  <label
-                    htmlFor="input-corelink"
-                  >
+                  <label>
                     [missing "en.forms.fields.corelink" translation]
                     <em>
                       
@@ -2147,10 +2144,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section
                   className="node_id_port_select"
+                  id="input-node_id_port_select"
                 >
-                  <label
-                    htmlFor="input-node_id_port_select"
-                  >
+                  <label>
                     [missing "en.forms.fields.node_id_port_select" translation]
                     <em>
                       
@@ -2267,6 +2263,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             </div>
                           </div>
                         </div>
+                        <input
+                          name="node_id_port_select.node"
+                          type="hidden"
+                          value=""
+                        />
                       </div>
                     </div>
                     <div
@@ -3161,16 +3162,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-002h"
                             name="service_ports1.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
-                            Already used VLAN ranges for this service port: 3-5
+                            Already used VLAN ranges for this service port: 0,3-5
                           </em>
                         </section>
                       </section>
@@ -3313,16 +3314,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-002r"
                             name="service_ports1.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
-                            Already used VLAN ranges for this service port: 3-5
+                            Already used VLAN ranges for this service port: 0,3-5
                           </em>
                         </section>
                       </section>
@@ -3487,13 +3488,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-0035"
                             name="service_ports2.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -3639,13 +3640,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-003f"
                             name="service_ports2.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -3813,13 +3814,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-003t"
                             name="service_ports3.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -3987,13 +3988,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-0047"
                             name="service_ports4.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -4270,13 +4271,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-004j"
                             name="service_ports4.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -4575,13 +4576,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-004z"
                             name="service_ports5.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -4749,13 +4750,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-005d"
                             name="service_ports6.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -4923,13 +4924,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-005r"
                             name="service_ports7.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -5097,16 +5098,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-0065"
                             name="service_ports8.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
-                            Already used VLAN ranges for this service port: 3-5
+                            Already used VLAN ranges for this service port: 0,3-5
                           </em>
                         </section>
                       </section>
@@ -5249,13 +5250,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-006f"
                             name="service_ports8.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -5401,13 +5402,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-006p"
                             name="service_ports8.2.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -5553,13 +5554,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-006z"
                             name="service_ports8.3.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="1,2-3"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -5727,13 +5728,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-007d"
                             name="service_ports9.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -5901,13 +5902,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-007r"
                             name="service_ports10.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -6075,12 +6076,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-0085"
                             name="service_ports_sn81.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="First select a Service Port..."
+                            value={0}
                           />
                         </section>
                       </section>
@@ -6245,13 +6247,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-008j"
                             name="service_ports_sn82.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -6419,13 +6421,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-008x"
                             name="service_ports_sn83.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -6593,13 +6595,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-009b"
                             name="service_ports_sn84.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -6767,13 +6769,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-009p"
                             name="service_ports_sn85.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="2"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -6941,13 +6943,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-00a3"
                             name="service_ports_sn86.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="0"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5
@@ -7115,13 +7117,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             
                           </label>
                           <input
-                            disabled={false}
+                            disabled={true}
                             id="uniforms-0000-00ah"
                             name="service_ports_sn87.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
                             placeholder="Enter a valid VLAN range..."
-                            value="2"
+                            value={0}
                           />
                           <em>
                             Already used VLAN ranges for this service port: 3-5

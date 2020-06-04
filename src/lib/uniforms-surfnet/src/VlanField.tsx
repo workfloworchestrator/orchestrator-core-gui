@@ -1,11 +1,15 @@
 import { usedVlans as getUsedVlans } from "api";
+import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
-import React, { HTMLProps, Ref, useEffect, useState } from "react";
+import React, { HTMLProps, Ref, useContext, useEffect, useState } from "react";
 import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { inValidVlan } from "validations/UserInput";
+
+import { getPortMode } from "./logic/SubscriptionField";
 
 function getAllNumbersForVlanRange(vlanRange: string) {
     if (vlanRange !== "0" && inValidVlan(vlanRange)) {
@@ -99,16 +103,21 @@ function Vlan({
     ...props
 }: VlanFieldProps) {
     const { model } = useForm();
-    const subscriptionIdFieldName = joinName([...joinName(null, name).slice(0, -1), "subscription_id"]);
-    const completeListFieldName = joinName(joinName(null, name).slice(0, -2));
+    const { products } = useContext(ApplicationContext);
+    const { subscriptions } = useContext(SubscriptionsContext);
+    const nameArray = joinName(null, name);
+    const subscriptionIdFieldName = joinName(nameArray.slice(0, -1), "subscription_id");
+    const completeListFieldName = joinName(nameArray.slice(0, -2));
     const subscriptionId = get(model, subscriptionIdFieldName);
     const completeList: ServicePort[] = get(model, completeListFieldName) || [];
     const vlansExtraInUse = completeList
-        .filter(item => item.subscription_id === value)
+        .filter(item => item.subscription_id === subscriptionId)
+        .filter((_item, index) => index.toString() !== nameArray.slice(-2, -1)[0])
         .map(item => item.vlan)
         .join(",");
-    // console.log(vlansExtraInUse, completeList);
-    const portMode = "tagged";
+
+    const subscription = get(subscriptions, subscriptionId);
+    const portMode = subscription && getPortMode(subscription, products);
 
     let [usedVlansInIms, setUsedVlansInIms] = useState<number[][]>([]);
     let [missingInIms, setMissingInIms] = useState(false);

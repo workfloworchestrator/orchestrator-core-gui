@@ -8,7 +8,7 @@ export type NestFieldProps = Override<
     {
         fields?: any[];
         itemProps?: object;
-        name: string;
+        name?: string;
         description?: string;
     }
 >;

@@ -13,15 +13,15 @@
  *
  */
 
+import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
-import { createElement, useContext, useEffect, useState } from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { createElement, useContext, useEffect, useMemo, useState } from "react";
+import { connectField, filterDOMProps, useForm } from "uniforms";
+import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { filterProductsByBandwidth } from "validations/Products";
 
-import { allSubscriptions, portSubscriptions, subscriptionsByProductId } from "../../../../api";
-import ApplicationContext from "../../../../utils/ApplicationContext";
 import { Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "../../../../utils/types";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
@@ -56,7 +56,7 @@ function makeLabel(subscription: iSubscription, products: Product[], organisatio
     }
 }
 
-function getPortMode(subscription: ServicePortSubscription, products: Product[]) {
+export function getPortMode(subscription: ServicePortSubscription, products: Product[]) {
     const product = subscription.product || productById(subscription.product_id!, products);
 
     return subscription?.port_mode || (["MSP", "MSPNL", "MSC", "MSCNL"].includes(product.tag!) ? "tagged" : "untagged");
@@ -98,25 +98,28 @@ function Subscription({
     tags,
     ...props
 }: SubscriptionFieldProps) {
+    const { model } = useForm();
+
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
+    const { getSubscriptions } = useContext(SubscriptionsContext);
 
-    const filteredProducts: Product[] = filterProductsByBandwidth(allProducts, bandwidth).filter(
-        (item: Product) => productIds === undefined || productIds.includes(item.product_id)
+    const usedBandwith = bandwidth || get(model, bandwidthKey!);
+    const usedOrganisationId = organisationId || get(model, organisationKey!);
+
+    const filteredProductIds = useMemo(
+        () =>
+            filterProductsByBandwidth(allProducts, usedBandwith)
+                .filter(item => productIds === undefined || productIds.includes(item.product_id))
+                .map(product => product.product_id),
+        [allProducts, usedBandwith, productIds]
     );
 
     useEffect(() => {
-        if (filteredProducts && filteredProducts.length === 1) {
-            subscriptionsByProductId(filteredProducts[0].product_id).then(result => updateSubscriptions(result));
-        } else if (tags) {
-            portSubscriptions(tags, ["active"]).then(result => updateSubscriptions(result));
-        } else {
-            allSubscriptions().then(result => updateSubscriptions(result));
-        }
-    }, [allProducts, productIds, bandwidth, tags]); // eslint-disable-line react-hooks/exhaustive-deps
+        getSubscriptions(filteredProductIds, tags).then(result => updateSubscriptions(result));
+    }, [getSubscriptions, filteredProductIds, tags]);
 
     // Filter by product
-    const filteredProductIds = filteredProducts.map(product => product.product_id);
     subscriptions =
         filteredProductIds.length === allProducts.length || filteredProductIds.length === 1
             ? subscriptions
@@ -138,8 +141,8 @@ function Subscription({
     }
 
     // Customer filter toggle
-    if (organisationId) {
-        subscriptions = subscriptions.filter(item => item.customer_id === organisationId);
+    if (usedOrganisationId) {
+        subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
     }
 
     const subscriptionLabelLookup =
