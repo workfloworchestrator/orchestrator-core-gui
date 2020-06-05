@@ -23,7 +23,6 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { enrichSubscription } from "../utils/Lookups";
 import { SubscriptionWithDetails } from "../utils/types";
 import CheckBox from "./CheckBox";
-import DowngradeRedundantLPChoice from "./DowngradeRedundantLPChoice";
 
 interface IMSPortData {
     location: string;
@@ -181,4 +180,4 @@ export default class DowngradeRedundantLPConfirmation extends React.PureComponen
     }
 }
 
-DowngradeRedundantLPChoice.contextType = ApplicationContext;
+DowngradeRedundantLPConfirmation.contextType = ApplicationContext;
