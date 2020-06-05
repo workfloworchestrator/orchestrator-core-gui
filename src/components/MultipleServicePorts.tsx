@@ -344,7 +344,7 @@ export default class MultipleServicePorts extends React.PureComponent<IProps> {
             <section className="service-port-container">
                 {!disabled && (
                     <div className="refresh-service-ports">
-                        <i className="fa fa-refresh" onClick={this.loadServicePorts} />
+                        <i className="fa fa-sync" onClick={this.loadServicePorts} />
                     </div>
                 )}
                 {servicePorts.map((servicePort, index) => this.renderServicePort(servicePort, index))}

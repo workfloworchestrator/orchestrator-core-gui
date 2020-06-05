@@ -202,7 +202,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 <div className="actions">
                     <button className="button blue" onClick={this.runAllTasks}>
                         {I18n.t("tasks.runall")}
-                        <i className="fa fa-refresh" />
+                        <i className="fa fa-sync" />
                     </button>
                     <button className="new button green" onClick={this.newTask}>
                         {I18n.t("tasks.new")} <i className="fa fa-plus" />
