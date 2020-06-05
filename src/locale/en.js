@@ -67,11 +67,13 @@ I18n.translations.en = {
         searchPlaceHolder: "Search for IP prefixes"
     },
     processes: {
-        delete: "Delete",
-        details: "Details",
-        user_input: "User input",
-        abort: "Abort",
-        retry: "Retry",
+        actions: {
+            delete: "Delete",
+            details: "Details",
+            user_input: "User input",
+            abort: "Abort",
+            retry: "Retry"
+        },
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
         abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
         retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
