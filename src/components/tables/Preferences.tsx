@@ -67,7 +67,7 @@ function Preferences<T extends object>({
                             <i className={"fa fa-circle"} />
                         )
                     ) : (
-                        <i className={"fa fa-circle-o"} />
+                        <i className={"far fa-circle"} />
                     )}
                 </span>
                 {"   "}

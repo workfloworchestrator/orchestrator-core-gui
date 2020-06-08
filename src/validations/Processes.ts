@@ -45,7 +45,7 @@ export function actionOptions(
         action: showAction
     };
     const retry = {
-        icon: "fa fa-refresh",
+        icon: "fa fa-sync",
         label: "retry",
         action: retryAction
     };

@@ -48,14 +48,14 @@ exports[`Storyshots DatePicker Definition 1`] = `
             onClick={[Function]}
           >
             <i
-              className="fa fa-remove"
+              className="fas fa-times"
             />
           </span>
           <span
             onClick={[Function]}
           >
             <i
-              className="fa fa-calendar"
+              className="fas fa-calendar-alt"
             />
           </span>
         </div>

@@ -74,7 +74,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
                     <span className="copy-to-clipboard-container">
                         <button data-for="copy-to-clipboard" data-tip>
-                            <i className={`fa fa-clone ${copiedToClipBoardClassName}`} />
+                            <i className={`far fa-clone ${copiedToClipBoardClassName}`} />
                         </button>
                         <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
                     </span>

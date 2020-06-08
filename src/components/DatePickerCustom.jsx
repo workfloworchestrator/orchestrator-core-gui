@@ -29,11 +29,11 @@ export default class DatePickerCustom extends React.PureComponent {
                 <button onClick={onClick}>{value}</button>
                 {!isEmpty(this.props.value) && !disabled && (
                     <span className="clear" onClick={clear}>
-                        <i className="fa fa-times" />
+                        <i className="fas fa-times" />
                     </span>
                 )}
                 <span onClick={this.props.onClick}>
-                    <i className="fa fa-calendar" />
+                    <i className="fas fa-calendar-alt" />
                 </span>
             </div>
         );

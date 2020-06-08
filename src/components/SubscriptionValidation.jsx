@@ -75,7 +75,7 @@ export default class SubscriptionValidation extends React.Component {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"} />;
+            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
         }
         return <i />;
     };
@@ -171,7 +171,7 @@ export default class SubscriptionValidation extends React.Component {
                                 <td data-label={I18n.t("subscriptions.nope")} className="actions">
                                     <span>
                                         <i
-                                            className="fa fa-trash"
+                                            className="fas fa-trash-alt"
                                             onClick={this.handleDeleteSubscription(subscription)}
                                         />
                                     </span>

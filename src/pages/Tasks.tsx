@@ -154,7 +154,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
         );
-        return <DropDownActions options={options} i18nPrefix="processes" />;
+        return <DropDownActions options={options} i18nPrefix="processes.actions" />;
     };
 
     renderExplain() {
