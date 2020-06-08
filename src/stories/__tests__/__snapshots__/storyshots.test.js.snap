@@ -3159,13 +3159,13 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
     >
       <input
         disabled={false}
-        id="check_delete_sn7_service_config4"
-        name="check_delete_sn7_service_config4"
+        id="check_delete_sn7_service_config"
+        name="check_delete_sn7_service_config"
         onChange={[Function]}
         type="checkbox"
       />
       <label
-        htmlFor="check_delete_sn7_service_config4"
+        htmlFor="check_delete_sn7_service_config"
       >
         <span
           tabIndex="0"
@@ -3177,7 +3177,7 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
       </label>
       <label
         className="info"
-        htmlFor="check_delete_sn7_service_config4"
+        htmlFor="check_delete_sn7_service_config"
       >
         Delete the SURFnet7 IP service config from Alice and Bob.
       </label>
@@ -3192,13 +3192,13 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
     >
       <input
         disabled={false}
-        id="check_ims_circuit6"
-        name="check_ims_circuit6"
+        id="check_ims_circuit"
+        name="check_ims_circuit"
         onChange={[Function]}
         type="checkbox"
       />
       <label
-        htmlFor="check_ims_circuit6"
+        htmlFor="check_ims_circuit"
       >
         <span
           tabIndex="0"
@@ -3210,7 +3210,7 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
       </label>
       <label
         className="info"
-        htmlFor="check_ims_circuit6"
+        htmlFor="check_ims_circuit"
       >
         ims circuit 1
       </label>
@@ -3220,13 +3220,13 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
     >
       <input
         disabled={false}
-        id="check_ims_circuit7"
-        name="check_ims_circuit7"
+        id="check_ims_circuit"
+        name="check_ims_circuit"
         onChange={[Function]}
         type="checkbox"
       />
       <label
-        htmlFor="check_ims_circuit7"
+        htmlFor="check_ims_circuit"
       >
         <span
           tabIndex="0"
@@ -3238,7 +3238,7 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
       </label>
       <label
         className="info"
-        htmlFor="check_ims_circuit7"
+        htmlFor="check_ims_circuit"
       >
         ims circuit 2
       </label>
@@ -3248,13 +3248,13 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
     >
       <input
         disabled={false}
-        id="check_port_patched_sn7_sn88"
-        name="check_port_patched_sn7_sn88"
+        id="check_port_patched_sn7_sn8"
+        name="check_port_patched_sn7_sn8"
         onChange={[Function]}
         type="checkbox"
       />
       <label
-        htmlFor="check_port_patched_sn7_sn88"
+        htmlFor="check_port_patched_sn7_sn8"
       >
         <span
           tabIndex="0"
@@ -3266,7 +3266,7 @@ exports[`Storyshots GenericNOCConfirm Complex 1`] = `
       </label>
       <label
         className="info"
-        htmlFor="check_port_patched_sn7_sn88"
+        htmlFor="check_port_patched_sn7_sn8"
       >
         Physically patch the customer port from SN7 to SN8 HW.
       </label>
@@ -3339,13 +3339,13 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="check_delete_sn7_service_config4"
-                        name="check_delete_sn7_service_config4"
+                        id="check_delete_sn7_service_config"
+                        name="check_delete_sn7_service_config"
                         onChange={[Function]}
                         type="checkbox"
                       />
                       <label
-                        htmlFor="check_delete_sn7_service_config4"
+                        htmlFor="check_delete_sn7_service_config"
                       >
                         <span
                           tabIndex="0"
@@ -3357,7 +3357,7 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                       </label>
                       <label
                         className="info"
-                        htmlFor="check_delete_sn7_service_config4"
+                        htmlFor="check_delete_sn7_service_config"
                       >
                         Delete the SURFnet7 IP service config from Alice and Bob.
                       </label>
@@ -3372,13 +3372,13 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="check_ims_circuit6"
-                        name="check_ims_circuit6"
+                        id="check_ims_circuit"
+                        name="check_ims_circuit"
                         onChange={[Function]}
                         type="checkbox"
                       />
                       <label
-                        htmlFor="check_ims_circuit6"
+                        htmlFor="check_ims_circuit"
                       >
                         <span
                           tabIndex="0"
@@ -3390,7 +3390,7 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                       </label>
                       <label
                         className="info"
-                        htmlFor="check_ims_circuit6"
+                        htmlFor="check_ims_circuit"
                       >
                         ims circuit 1
                       </label>
@@ -3400,13 +3400,13 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="check_ims_circuit7"
-                        name="check_ims_circuit7"
+                        id="check_ims_circuit"
+                        name="check_ims_circuit"
                         onChange={[Function]}
                         type="checkbox"
                       />
                       <label
-                        htmlFor="check_ims_circuit7"
+                        htmlFor="check_ims_circuit"
                       >
                         <span
                           tabIndex="0"
@@ -3418,7 +3418,7 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                       </label>
                       <label
                         className="info"
-                        htmlFor="check_ims_circuit7"
+                        htmlFor="check_ims_circuit"
                       >
                         ims circuit 2
                       </label>
@@ -3428,13 +3428,13 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="check_port_patched_sn7_sn88"
-                        name="check_port_patched_sn7_sn88"
+                        id="check_port_patched_sn7_sn8"
+                        name="check_port_patched_sn7_sn8"
                         onChange={[Function]}
                         type="checkbox"
                       />
                       <label
-                        htmlFor="check_port_patched_sn7_sn88"
+                        htmlFor="check_port_patched_sn7_sn8"
                       >
                         <span
                           tabIndex="0"
@@ -3446,7 +3446,7 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                       </label>
                       <label
                         className="info"
-                        htmlFor="check_port_patched_sn7_sn88"
+                        htmlFor="check_port_patched_sn7_sn8"
                       >
                         Physically patch the customer port from SN7 to SN8 HW.
                       </label>
@@ -3506,13 +3506,13 @@ exports[`Storyshots GenericNOCConfirm Legacy 1`] = `
     >
       <input
         disabled={false}
-        id="noc_remove_static_ip_confirmation2"
-        name="noc_remove_static_ip_confirmation2"
+        id="noc_remove_static_ip_confirmation"
+        name="noc_remove_static_ip_confirmation"
         onChange={[Function]}
         type="checkbox"
       />
       <label
-        htmlFor="noc_remove_static_ip_confirmation2"
+        htmlFor="noc_remove_static_ip_confirmation"
       >
         <span
           tabIndex="0"
@@ -3524,7 +3524,7 @@ exports[`Storyshots GenericNOCConfirm Legacy 1`] = `
       </label>
       <label
         className="info"
-        htmlFor="noc_remove_static_ip_confirmation2"
+        htmlFor="noc_remove_static_ip_confirmation"
       >
         Confirm removal
       </label>
@@ -3581,13 +3581,13 @@ exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="noc_remove_static_ip_confirmation2"
-                        name="noc_remove_static_ip_confirmation2"
+                        id="noc_remove_static_ip_confirmation"
+                        name="noc_remove_static_ip_confirmation"
                         onChange={[Function]}
                         type="checkbox"
                       />
                       <label
-                        htmlFor="noc_remove_static_ip_confirmation2"
+                        htmlFor="noc_remove_static_ip_confirmation"
                       >
                         <span
                           tabIndex="0"
@@ -3599,7 +3599,7 @@ exports[`Storyshots GenericNOCConfirm Legacy in form 1`] = `
                       </label>
                       <label
                         className="info"
-                        htmlFor="noc_remove_static_ip_confirmation2"
+                        htmlFor="noc_remove_static_ip_confirmation"
                       >
                         Confirm removal
                       </label>
