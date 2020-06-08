@@ -51,7 +51,7 @@ export default class Flash extends React.PureComponent {
                 <div className="message-container">
                     <p>{flash.message}</p>
                     <button className="close" onClick={clearFlash}>
-                        <i className="fa fa-remove" />
+                        <i className="fa fa-times" />
                     </button>
                 </div>
             </div>
