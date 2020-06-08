@@ -148,12 +148,12 @@ export default class ProductBlocks extends React.Component {
             action: this.editProductBlock(productBlock, true, false)
         };
         const edit = {
-            icon: "fa fa-pencil-square-o",
+            icon: "fa fa-edit",
             label: "edit",
             action: this.editProductBlock(productBlock, false, false)
         };
         const _delete = {
-            icon: "fa fa-trash",
+            icon: "fas fa-trash-alt",
             label: "delete",
             action: this.handleDeleteProductBlock(productBlock),
             danger: true
@@ -190,7 +190,7 @@ export default class ProductBlocks extends React.Component {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"} />;
+            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
         }
         return <i />;
     };

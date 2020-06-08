@@ -13,9 +13,9 @@
  *
  */
 
-@use "fonts/font-awesome.scss" with ($fa-font-path: "../../fonts");
-@use "fonts/roboto.scss";
+@use "node_modules/@fortawesome/fontawesome-free/css/all.css";
 @use "reset.scss";
 @use "vars.scss";
 @use "base.scss";
 @use "loader.scss";
+@use "fonts/roboto.scss";

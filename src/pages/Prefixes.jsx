@@ -282,7 +282,7 @@ export default class Prefixes extends React.PureComponent {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"} />;
+            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
         }
         return <i />;
     };

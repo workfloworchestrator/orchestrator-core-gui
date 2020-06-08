@@ -842,7 +842,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                         <td>
                                             <section className="terminate-link-waiting">
                                                 <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                                <i className="fa fa-refresh fa-spin fa-2x fa-fw" />
+                                                <i className="fa fa-sync fa-spin fa-2x fa-fw" />
                                             </section>
                                         </td>
                                     )}
@@ -876,7 +876,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                         <td>
                                             <section className="terminate-link-waiting">
                                                 <em>{I18n.t("subscription.fetchingImsData")}</em>
-                                                <i className="fa fa-refresh fa-spin fa-2x fa-fw" />
+                                                <i className="fa fa-sync fa-spin fa-2x fa-fw" />
                                             </section>
                                         </td>
                                     )}

@@ -40,12 +40,12 @@ export function actionOptions(
         action: showAction
     };
     const userInput = {
-        icon: "fa fa-pencil-square-o",
+        icon: "fa fa-edit",
         label: "user_input",
         action: showAction
     };
     const retry = {
-        icon: "fa fa-refresh",
+        icon: "fa fa-sync",
         label: "retry",
         action: retryAction
     };

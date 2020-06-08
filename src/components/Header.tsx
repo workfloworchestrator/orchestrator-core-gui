@@ -76,7 +76,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     renderProfileLink(currentUser: Profile) {
         return (
             <button onClick={this.handleToggle}>
-                <i className="fa fa-user-circle-o" />
+                <i className="fa fa-user-circle" />
                 {currentUser.name}
                 {this.renderDropDownIndicator()}
             </button>
