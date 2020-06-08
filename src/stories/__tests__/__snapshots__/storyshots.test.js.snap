@@ -2345,7 +2345,7 @@ exports[`Storyshots GenericMultiSelect Default 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1wa3eu0-placeholder"
@@ -2485,7 +2485,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-107lb6w-singleValue"
@@ -2603,7 +2603,7 @@ exports[`Storyshots GenericMultiSelect Non modifiable selection 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1uccc91-singleValue"
@@ -2747,7 +2747,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1uccc91-singleValue"
@@ -2865,7 +2865,7 @@ exports[`Storyshots GenericMultiSelect Non removable selection 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1uccc91-singleValue"
@@ -3009,7 +3009,7 @@ exports[`Storyshots GenericMultiSelect With selections 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1uccc91-singleValue"
@@ -3641,7 +3641,7 @@ exports[`Storyshots GenericSelect Default 1`] = `
       onTouchEnd={[Function]}
     >
       <div
-        className=" css-1hwfws3"
+        className=" css-g1d714-ValueContainer"
       >
         <div
           className=" css-1wa3eu0-placeholder"
@@ -3752,7 +3752,7 @@ exports[`Storyshots LocationCodeSelect Default 1`] = `
       onTouchEnd={[Function]}
     >
       <div
-        className=" css-1hwfws3"
+        className=" css-g1d714-ValueContainer"
       >
         <div
           className=" css-1wa3eu0-placeholder"
@@ -3882,7 +3882,7 @@ exports[`Storyshots MultipleServicePorts SN7 MultipleServicePorts 1`] = `
             onTouchEnd={[Function]}
           >
             <div
-              className=" css-1hwfws3"
+              className=" css-g1d714-ValueContainer"
             >
               <div
                 className=" css-1wa3eu0-placeholder"
@@ -4051,7 +4051,7 @@ exports[`Storyshots MultipleServicePorts SN8 MultipleServicePorts 1`] = `
             onTouchEnd={[Function]}
           >
             <div
-              className=" css-1hwfws3"
+              className=" css-g1d714-ValueContainer"
             >
               <div
                 className=" css-1wa3eu0-placeholder"
@@ -4221,7 +4221,7 @@ exports[`Storyshots NewProcess Default 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1wa3eu0-placeholder"
@@ -4356,7 +4356,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-107lb6w-singleValue"
@@ -4483,7 +4483,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-107lb6w-singleValue"
@@ -4663,7 +4663,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  RETRY
+                  [MISSING "EN.PROCESSES.RETRY" TRANSLATION]
                 </span>
               </span>
             </button>
@@ -4694,7 +4694,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  ABORT
+                  [MISSING "EN.PROCESSES.ABORT" TRANSLATION]
                 </span>
               </span>
             </button>
@@ -7154,7 +7154,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  RETRY
+                  [MISSING "EN.PROCESSES.RETRY" TRANSLATION]
                 </span>
               </span>
             </button>
@@ -7189,7 +7189,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  ABORT
+                  [MISSING "EN.PROCESSES.ABORT" TRANSLATION]
                 </span>
               </span>
             </button>
@@ -10329,7 +10329,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"
@@ -10447,7 +10447,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"
@@ -10565,7 +10565,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"
@@ -10904,7 +10904,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -11166,7 +11166,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11276,7 +11276,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11404,7 +11404,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11514,7 +11514,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11700,7 +11700,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11810,7 +11810,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -11938,7 +11938,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -12048,7 +12048,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -12228,7 +12228,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                         onTouchEnd={[Function]}
                       >
                         <div
-                          className=" css-1hwfws3"
+                          className=" css-g1d714-ValueContainer"
                         >
                           <div
                             className=" css-1wa3eu0-placeholder"
@@ -12405,7 +12405,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -12638,7 +12638,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -13009,7 +13009,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -13242,7 +13242,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -13475,7 +13475,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -13708,7 +13708,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -13941,7 +13941,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -14161,7 +14161,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                 onTouchEnd={[Function]}
               >
                 <div
-                  className=" css-1hwfws3"
+                  className=" css-g1d714-ValueContainer"
                 >
                   <div
                     className=" css-1wa3eu0-placeholder"

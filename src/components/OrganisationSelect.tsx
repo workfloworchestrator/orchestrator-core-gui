@@ -22,7 +22,7 @@ import { Option, Organization } from "../utils/types";
 
 interface IOrganisationSelectProps {
     id: string;
-    onChange: (selected: Option | null, action: ActionMeta) => void;
+    onChange: (selected: Option | null, action: ActionMeta<Option>) => void;
     organisation: string;
     disabled?: boolean;
     placeholder?: string;
@@ -48,7 +48,7 @@ export default class OrganisationSelect extends React.PureComponent<IOrganisatio
                 <Select
                     id={id}
                     inputID={`input-${id}`}
-                    onChange={(selected: ValueType<Option>, action: ActionMeta) => {
+                    onChange={(selected: ValueType<Option>, action: ActionMeta<Option>) => {
                         if (selected === null) {
                             onChange(null, action);
                         } else if (Array.isArray(selected)) {

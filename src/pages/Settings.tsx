@@ -15,6 +15,7 @@
 
 import "./Settings.scss";
 
+import { EuiButton } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import Select, { ValueType } from "react-select";
@@ -100,6 +101,7 @@ export default class Settings extends React.Component<IProps, IState> {
 
         return [
             <div className="mod-cache">
+                <EuiButton onClick={() => window.alert("Button clicked")}>Primary</EuiButton>
                 <section className="card">
                     <section className="form-step">
                         <section className="form-divider">

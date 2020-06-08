@@ -1,0 +1,21 @@
+// This is our custom theme for Elastic UI
+// Docs: https://elastic.github.io/eui
+
+// Set custom color variables
+@import "./theme_colors_light";
+
+// Below are imports from Elastic UI,
+// They are required to make the kit work, customization is possible.
+
+// Global styling
+@import "~@elastic/eui/src/themes/eui-amsterdam/global_styling/index";
+
+// Components
+@import "~@elastic/eui/src/components/index";
+
+// Packages
+@import "~@elastic/eui/packages/index";
+
+// Component overrides
+// Comes after the component import and overrides via cascade
+@import "~@elastic/eui/src/themes/eui-amsterdam/overrides/index";

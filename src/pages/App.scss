@@ -12,10 +12,10 @@
  * limitations under the License.
  *
  */
-@use "sass:meta";
+
+@use "../stylesheets/themes/theme_light.scss";
 @use "../stylesheets/vars.scss";
 @use "../stylesheets/application.scss";
-@import "src/themes/surfnet/surfnet_light.scss";
 
 body {
     font-family: "Roboto", Sans-serif;

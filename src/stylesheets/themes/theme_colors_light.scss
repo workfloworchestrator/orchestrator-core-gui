@@ -1,14 +1,10 @@
 // This extra import allows any variables that are created via functions to work when loaded into JS
-@import "node_modules/@elastic/eui/src/global_styling/variables/colors";
+@import "~@elastic/eui/src/global_styling/variables/colors";
 
-$euiColorPrimary: #4db2cf;
-$euiColorSecondary: #274b72;
-$euiColorAccent: #276b1e;
-$euiColorSuccess: #33cd2e;
-$euiColorDanger: #b62222;
-$euiColorWarning: #da6903;
+$euiColorPrimary: #61dafb;
+$euiColorSecondary: #00bfb3;
+$euiColorAccent: #fc358e;
 
-// Rene: Copied from A'dam theme in EUI package, including the "weirdly"
 $euiLinkColor: $euiColorPrimary; // Weirdly this one wasn't updating with new primary color
 
 // Contrasty text variants

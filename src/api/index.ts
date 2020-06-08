@@ -93,9 +93,9 @@ function validFetch(path: string, options: {}, headers = {}, showErrorDialog = t
         Authorization: getAuthorizationHeaderValue(),
         ...headers
     };
-    const fetchOptions = Object.assign({}, { headers: contentHeaders }, options, {
-        credentials: "same-origin",
-        redirect: "manual"
+    const fetchOptions: RequestInit = Object.assign({}, { headers: contentHeaders }, options, {
+        credentials: "same-origin" as "include" | "omit" | "same-origin",
+        redirect: "manual" as "manual" | "error" | "follow"
     });
     mySpinner.start();
     ++started;
