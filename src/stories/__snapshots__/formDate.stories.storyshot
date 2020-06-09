@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots DatePicker Definition 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="form-divider"
+  >
+    <label>
+      Created
+    </label>
+    <em>
+      The date this Product Block was created
+    </em>
+    <div
+      className="react-datepicker-wrapper"
+    >
+      <div
+        className="react-datepicker__input-container"
+      >
+        <div
+          className="date_picker_custom"
+        >
+          <button
+            onClick={[Function]}
+          >
+            01/01/1970
+          </button>
+          <span
+            className="clear"
+            onClick={[Function]}
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            onClick={[Function]}
+          >
+            <i
+              className="fas fa-calendar-alt"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+`;

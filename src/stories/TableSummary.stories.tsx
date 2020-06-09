@@ -18,7 +18,11 @@ import React from "react";
 import TableSummary from "../components/TableSummary";
 
 export default {
-    title: "TableSummary"
+    title: "TableSummary",
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Definition = () => (

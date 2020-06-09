@@ -21,7 +21,11 @@ import SubscriptionProductTagSelect from "../components/SubscriptionProductTagSe
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 
 export default {
-    title: "SubscriptionProductTagSelect"
+    title: "SubscriptionProductTagSelect",
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const OnlyTags = () => {

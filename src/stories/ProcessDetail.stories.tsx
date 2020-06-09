@@ -23,7 +23,11 @@ import SUSPENDED_PROCESS_JSON from "./data/process-suspended.json";
 
 export default {
     title: "ProcessDetail",
-    decorators: [StoryRouter()]
+    decorators: [StoryRouter()],
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Process = () => {

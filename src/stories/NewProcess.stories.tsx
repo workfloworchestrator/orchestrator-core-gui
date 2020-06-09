@@ -21,7 +21,11 @@ import NewProcess from "../pages/NewProcess";
 
 export default {
     title: "NewProcess",
-    decorators: [StoryRouter()]
+    decorators: [StoryRouter()],
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Default = () => {

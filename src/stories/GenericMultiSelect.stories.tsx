@@ -30,7 +30,11 @@ const store = new Store({
 
 export default {
     title: "GenericMultiSelect",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const Default = () => (

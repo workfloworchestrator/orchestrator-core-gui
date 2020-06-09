@@ -24,7 +24,11 @@ import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
 export default {
     title: "SubscriptionDetail",
-    decorators: [StoryRouter()]
+    decorators: [StoryRouter()],
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Subscription = () => {
