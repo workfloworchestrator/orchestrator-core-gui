@@ -226,7 +226,7 @@ I18n.translations.en = {
         vlan_range: "VLAN Range",
         vlan_range_info: "VLAN Range for the Tagged SP in this subscription",
         vlan_retagging:
-            "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance windows for active L2VPN services!!",
+            "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance window for active L2VPN services!!",
         bum_filter:
             "Enable BUM Filter. When selected broadcast, unknown-unicast and multicast traffic will be limited to 10% of the port speed.",
         location_code: "Location code",
