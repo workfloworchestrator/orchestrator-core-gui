@@ -20,8 +20,6 @@
 // Provide the values as: I18n.t("key", {name: "John Doe"})
 import I18n from "i18n-js";
 
-export const randomCrmIdentifier = () => ("0000" + Math.floor(Math.random() * 99999) + 1).slice(-5);
-
 I18n.translations.en = {
     code: "EN",
     name: "English",
@@ -163,7 +161,7 @@ I18n.translations.en = {
         internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
         internetpinnen_prefix_subscriptions_info:
             "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
-        input_fields_have_validation_errors: "input field(s) have validation errors",
+        input_fields_have_validation_errors: "{{nrOfValidationErrors}} input field(s) have validation errors",
         product: "Product",
         product_info: "Search and select the product",
         organisation: "Customer",
@@ -232,13 +230,13 @@ I18n.translations.en = {
         location_code: "Location code",
         location_code_info: "Provide a valid location code",
         crm_port_id: "The CRM identifier for a port",
-        crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
+        crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example 03602",
         ieee_interface_type: "IEEE interface type",
         ieee_interface_type_info: "Choose an IEEE interface type",
         device_port_name: "Device port name",
         device_port_name_info: "Port name to configure on the physical device",
         crm_port_id_2: "Second MSP the CRM identifier for a port",
-        crm_port_id_2_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example {{example}}",
+        crm_port_id_2_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example 03602",
         ims_id: "IMS identifier",
         ims_id_info: "The IMS identifier stored in the IMS database",
         ieee_interface_type_select: "First select a product type...",

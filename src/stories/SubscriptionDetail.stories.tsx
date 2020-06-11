@@ -24,7 +24,11 @@ import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
 export default {
     title: "SubscriptionDetail",
-    decorators: [StoryRouter()]
+    decorators: [StoryRouter()],
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Subscription = () => {
@@ -184,5 +188,6 @@ export const Subscription = () => {
         status: "_Opgezegd"
     });
 
+    //@ts-ignore
     return <SubscriptionDetail match={{ params: { id: "pid" } }} />;
 };

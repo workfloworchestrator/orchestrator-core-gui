@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Bandwidth Bandwidth 1`] = `
+<section
+  className="storybook-container"
+>
+  <div>
+    <input
+      disabled={false}
+      id="bandwidth"
+      name="bandwidth"
+      onChange={[Function]}
+      type="number"
+      value={1000}
+    />
+  </div>
+</section>
+`;

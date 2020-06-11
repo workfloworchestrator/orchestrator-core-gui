@@ -20,54 +20,50 @@ import React from "react";
 
 import GenericMultiSelect from "../components/GenericMultiSelect";
 
+function transform(values: string[]) {
+    return values.map(str => ({ value: parseInt(str.slice(-1)), label: str }));
+}
+
 const store = new Store({
     selected: ""
 });
 
 export default {
     title: "GenericMultiSelect",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const Default = () => (
     <GenericMultiSelect
         selected={store.state.selected}
-        onChange={e => {
+        onChange={(e: any) => {
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
         selections={[]}
         minimum={1}
         maximum={10}
-        disabled={boolean("Disabled")}
-        choices={array("Values", [
-            { value: "1", label: "SAP 1" },
-            { value: "2", label: "SAP 2" },
-            { value: "3", label: "SAP 3" },
-            { value: "4", label: "SAP 4" },
-            { value: "5", label: "SAP 5" }
-        ])}
+        disabled={boolean("Disabled", false)}
+        choices={transform(array("Values", ["SAP 1", "SAP 2", "SAP 3", "SAP 4", "SAP 5"]))}
     />
 );
 
 export const WithSelections = () => (
     <GenericMultiSelect
         selected={store.state.selected}
-        onChange={e => {
+        onChange={(e: any) => {
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
         selections={[{ value: "1", label: "SAP 1" }]}
         minimum={1}
         maximum={10}
-        disabled={boolean("Disabled")}
-        choices={array("Values", [
-            { value: "1", label: "SAP 1" },
-            { value: "2", label: "SAP 2" },
-            { value: "3", label: "SAP 3" },
-            { value: "4", label: "SAP 4" },
-            { value: "5", label: "SAP 5" }
-        ])}
+        disabled={boolean("Disabled", false)}
+        choices={transform(array("Values", ["SAP 1", "SAP 2", "SAP 3", "SAP 4", "SAP 5"]))}
     />
 );
 
@@ -78,7 +74,7 @@ WithSelections.story = {
 export const NonModifiableSelection = () => (
     <GenericMultiSelect
         selected={store.state.selected}
-        onChange={e => {
+        onChange={(e: any) => {
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
@@ -88,14 +84,8 @@ export const NonModifiableSelection = () => (
         ]}
         minimum={1}
         maximum={10}
-        disabled={boolean("Disabled")}
-        choices={array("Values", [
-            { value: "1", label: "SAP 1" },
-            { value: "2", label: "SAP 2" },
-            { value: "3", label: "SAP 3" },
-            { value: "4", label: "SAP 4" },
-            { value: "5", label: "SAP 5" }
-        ])}
+        disabled={boolean("Disabled", false)}
+        choices={transform(array("Values", ["SAP 1", "SAP 2", "SAP 3", "SAP 4", "SAP 5"]))}
     />
 );
 
@@ -106,7 +96,7 @@ NonModifiableSelection.story = {
 export const NonRemovableSelection = () => (
     <GenericMultiSelect
         selected={store.state.selected}
-        onChange={e => {
+        onChange={(e: any) => {
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
@@ -116,14 +106,8 @@ export const NonRemovableSelection = () => (
         ]}
         minimum={1}
         maximum={10}
-        disabled={boolean("Disabled")}
-        choices={array("Values", [
-            { value: "1", label: "SAP 1" },
-            { value: "2", label: "SAP 2" },
-            { value: "3", label: "SAP 3" },
-            { value: "4", label: "SAP 4" },
-            { value: "5", label: "SAP 5" }
-        ])}
+        disabled={boolean("Disabled", false)}
+        choices={transform(array("Values", ["SAP 1", "SAP 2", "SAP 3", "SAP 4", "SAP 5"]))}
     />
 );
 

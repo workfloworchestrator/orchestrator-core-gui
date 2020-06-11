@@ -120,7 +120,7 @@ export interface ValidationErrorContext {
 }
 
 export interface FormNotCompleteResponse {
-    form: InputField[];
+    form: InputForm;
     hasNext?: boolean;
 }
 
@@ -182,6 +182,8 @@ export interface ProcessV2 {
 }
 
 export interface InputField {
+    name: string;
+    type: string;
     [index: string]: any;
 }
 
@@ -191,7 +193,7 @@ export interface Step {
     status: string;
     state: State;
     commit_hash: string;
-    form?: InputField[];
+    form?: InputForm;
 }
 
 export interface State {
@@ -313,4 +315,12 @@ export interface EngineStatus {
     global_lock: boolean;
     running_processes: number;
     global_status: GlobalStatus;
+}
+
+export type InputForm = InputField[];
+
+export interface ContactPerson {
+    name: string;
+    email: string;
+    phone: string;
 }

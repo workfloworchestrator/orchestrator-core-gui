@@ -25,7 +25,7 @@ import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse, InputField, Option, ProductValidation } from "../utils/types";
+import { EngineStatus, FormNotCompleteResponse, InputForm, Option, ProductValidation } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { TARGET_CREATE } from "../validations/Products";
 
@@ -44,7 +44,7 @@ interface IProps {
 interface IState {
     productId?: string;
     workflow?: string;
-    stepUserInput?: InputField[];
+    stepUserInput?: InputForm;
     hasNext?: boolean;
     productValidation?: ProductValidation;
 }

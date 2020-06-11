@@ -21,7 +21,6 @@ import React from "react";
 import NumericInput from "react-numeric-input";
 
 import { catchErrorStatus, nodeSubscriptions } from "../api";
-import { randomCrmIdentifier } from "../locale/en";
 import ApplicationContext from "../utils/ApplicationContext";
 import { findValueFromInputStep } from "../utils/NestedState";
 import { InputField, Option, Subscription, ValidationError } from "../utils/types";
@@ -81,7 +80,6 @@ interface IState {
     stepUserInput: InputField[];
     product: {};
     processing: boolean;
-    randomCrm: string;
     nodeSubscriptions?: Subscription[];
     process?: {};
 }
@@ -107,8 +105,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
             isNew: true,
             stepUserInput: [...props.stepUserInput],
             product: {},
-            processing: false,
-            randomCrm: randomCrmIdentifier()
+            processing: false
         };
     }
 
@@ -163,7 +160,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         if (!processing) {
             this.setState({ processing: true });
 
-            const processInput: { [index: string]: any } = stepUserInput.reduce((acc, input) => {
+            const processInput = stepUserInput.reduce<{ [index: string]: any }>((acc, input) => {
                 acc[input.name] = input.value;
 
                 // Add missing defaults
@@ -324,9 +321,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
 
     renderInputInfoLabel = (userInput: InputField) => {
         const name = userInput.name;
-        if (name.indexOf("crm_port_id") > -1) {
-            return <em>{I18n.t(`process.${name}_info`, { example: this.state.randomCrm })}</em>;
-        }
         return this.i18nContext(`process.${name}_info`, userInput);
     };
 
@@ -648,7 +642,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         {numberOfValidationErrors > 0 && (
                             <section className="form-errors">
                                 <em className="error backend-validation-metadata">
-                                    {numberOfValidationErrors} {I18n.t("process.input_fields_have_validation_errors")}
+                                    {I18n.t("process.input_fields_have_validation_errors", {
+                                        nrOfValidationErrors: numberOfValidationErrors
+                                    })}
                                 </em>
                             </section>
                         )}

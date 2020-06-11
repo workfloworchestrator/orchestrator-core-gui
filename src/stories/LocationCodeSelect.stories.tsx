@@ -15,7 +15,7 @@
 
 import { Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
-import { array, boolean } from "@storybook/addon-knobs";
+import { boolean } from "@storybook/addon-knobs";
 import React from "react";
 
 import LocationCodeSelect from "../components/LocationCodeSelect";
@@ -27,7 +27,11 @@ const store = new Store({
 
 export default {
     title: "LocationCodeSelect",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const __Default = () => (
@@ -39,6 +43,6 @@ export const __Default = () => (
             action("onChange")(e);
             store.set({ locationCode: e.value });
         }}
-        disabled={boolean("Disabled")}
+        disabled={boolean("Disabled", false)}
     />
 );

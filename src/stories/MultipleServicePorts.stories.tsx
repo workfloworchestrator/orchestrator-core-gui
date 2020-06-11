@@ -24,13 +24,17 @@ import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 import { loadVlanMocks } from "./utils";
 
-const store = new Store({
-    servicePorts: [{ subscription_id: null, vlan: "" }]
+const store = new Store<{ servicePorts: { subscription_id?: string; vlan?: string }[] }>({
+    servicePorts: [{}]
 });
 
 export default {
     title: "MultipleServicePorts",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const Sn8MultipleServicePorts = () => {
@@ -60,13 +64,12 @@ export const Sn8MultipleServicePorts = () => {
             )}
             minimum={number("Minimum nr of ports", 1)}
             maximum={number("Maximum nr of ports", 6)}
-            disabled={boolean("Read only?")}
-            isElan={boolean("Is ELAN")}
-            organisationPortsOnly={boolean("Organization ports only")}
+            disabled={boolean("Read only?", false)}
+            isElan={boolean("Is ELAN", false)}
+            organisationPortsOnly={boolean("Organization ports only", false)}
             visiblePortMode={select("visiblePortMode", ["all", "normal", "tagged", "untagged", "link_member"], "all")}
-            disabledPorts={boolean("Disabled ports")}
-            reportError={action("reportError")}
-            bandwidth={number("Minimum bandwith")}
+            disabledPorts={boolean("Disabled ports", false)}
+            bandwidth={number("Minimum bandwith", 0)}
             productTags={["SP", "SPNL", "AGGSP", "MSC", "MSCNL"]}
         />
     );
@@ -103,13 +106,12 @@ export const Sn7MultipleServicePorts = () => {
             )}
             minimum={number("Minimum nr of ports", 1)}
             maximum={number("Maximum nr of ports", 6)}
-            disabled={boolean("Read only?")}
-            isElan={boolean("Is ELAN")}
-            organisationPortsOnly={boolean("Organization ports only")}
-            mspOnly={boolean("MSP only")}
-            disabledPorts={boolean("Disabled ports")}
-            reportError={action("reportError")}
-            bandwidth={number("Minimum bandwith")}
+            disabled={boolean("Read only?", false)}
+            isElan={boolean("Is ELAN", false)}
+            organisationPortsOnly={boolean("Organization ports only", false)}
+            mspOnly={boolean("MSP only", false)}
+            disabledPorts={boolean("Disabled ports", false)}
+            bandwidth={number("Minimum bandwith", 0)}
             productTags={["MSP", "SSP", "MSPNL"]}
         />
     );

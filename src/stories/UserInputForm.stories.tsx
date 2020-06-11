@@ -30,7 +30,11 @@ import UserInputContainer from "./UserInputContainer";
 import { loadVlanMocks } from "./utils";
 
 export default {
-    title: "UserInputForm"
+    title: "UserInputForm",
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Contactpersons = () => {

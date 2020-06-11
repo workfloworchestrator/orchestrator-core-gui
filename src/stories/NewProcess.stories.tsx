@@ -21,7 +21,11 @@ import NewProcess from "../pages/NewProcess";
 
 export default {
     title: "NewProcess",
-    decorators: [StoryRouter()]
+    decorators: [StoryRouter()],
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Default = () => {
@@ -52,7 +56,7 @@ export const Preselected = () => {
                 organisation: "9865c1cb-0911-e511-80d0-005056956c1a",
                 prefix: "10.0.0.0",
                 prefixlen: "10",
-                min_prefix: "29"
+                prefix_min: "29"
             }}
         />
     );

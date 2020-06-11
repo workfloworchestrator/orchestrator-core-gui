@@ -67,13 +67,17 @@ const imsPortAggSp = {
     port: "AE20"
 };
 
-const store = new Store({
+const store = new Store<{ value?: "Primary" | "Secondary" }>({
     value: undefined
 });
 
 export default {
     title: "DowngradeRedundantLPChoice",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const DifferentPorts = () => {
@@ -98,9 +102,9 @@ export const DifferentPorts = () => {
             key="subscription_id"
             subscriptionId="subscription_id"
             value={store.state.value}
-            readOnly={boolean("readOnly")}
+            readOnly={boolean("readOnly", false)}
             onChange={e => {
-                store.set({ value: e.target.value });
+                store.set({ value: e.target.value as "Primary" | "Secondary" });
                 action("On Change")(e);
             }}
         />
@@ -128,9 +132,9 @@ export const MscPort = () => {
             key="subscription_id"
             subscriptionId="subscription_id"
             value={store.state.value}
-            readOnly={boolean("readOnly")}
+            readOnly={boolean("readOnly", false)}
             onChange={e => {
-                store.set({ value: e.target.value });
+                store.set({ value: e.target.value as "Primary" | "Secondary" });
                 action("On Change")(e);
             }}
         />
@@ -152,9 +156,9 @@ export const SamePorts = () => {
             key="subscription_id"
             subscriptionId="subscription_id"
             value={store.state.value}
-            readOnly={boolean("readOnly")}
+            readOnly={boolean("readOnly", false)}
             onChange={e => {
-                store.set({ value: e.target.value });
+                store.set({ value: e.target.value as "Primary" | "Secondary" });
                 action("On Change")(e);
             }}
         />

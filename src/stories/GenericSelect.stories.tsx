@@ -26,7 +26,11 @@ const store = new Store({
 
 export default {
     title: "GenericSelect",
-    parameters: { state: { store: store } }
+    parameters: {
+        state: { store: store },
+        // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+        fileName: __filename
+    }
 };
 
 export const Default = () => (
@@ -36,7 +40,7 @@ export const Default = () => (
             action("onChange")(e);
             store.set({ selected: e.value });
         }}
-        disabled={boolean("Disabled")}
+        disabled={boolean("Disabled", false)}
         choices={array("Values", ["SAP 1", "SAP 2", "SAP 3"])}
     />
 );

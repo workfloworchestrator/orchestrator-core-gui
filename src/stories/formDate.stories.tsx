@@ -26,7 +26,11 @@ const store = new Store({
 });
 
 export default {
-    title: "DatePicker"
+    title: "DatePicker",
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const _Definition = () => (
@@ -34,7 +38,7 @@ export const _Definition = () => (
         {state =>
             formDate(
                 "metadata.productBlocks.created_at",
-                e => {
+                (e: any) => {
                     action("onChange")(e);
                     store.set({ date: e });
                 },

@@ -21,7 +21,11 @@ import GenericNOCConfirm from "../components/GenericNOCConfirm";
 import UserInputContainer from "./UserInputContainer";
 
 export default {
-    title: "GenericNOCConfirm"
+    title: "GenericNOCConfirm",
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    parameters: {
+        fileName: __filename
+    }
 };
 
 export const Legacy = () => (

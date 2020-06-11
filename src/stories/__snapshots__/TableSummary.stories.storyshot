@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots TableSummary Definition 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="label"
+          >
+            Label1
+          </td>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 2
+          </td>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 3
+          </td>
+          <td
+            className="value"
+          >
+            value3 with slightly longer text
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;
+
+exports[`Storyshots TableSummary Summary with definition and headers 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Old Values
+          </th>
+          <th>
+            New Values
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="label"
+          >
+            Label1
+          </td>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+          <td
+            className="value"
+          >
+            new value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 2
+          </td>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+          <td
+            className="value"
+          >
+            new value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="label"
+          >
+            Label 3
+          </td>
+          <td
+            className="value"
+          >
+            value3
+          </td>
+          <td
+            className="value"
+          >
+            new value3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;
+
+exports[`Storyshots TableSummary Summary with headers 1`] = `
+<section
+  className="storybook-container"
+>
+  <section
+    className="table-summary"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Old Values
+          </th>
+          <th>
+            New Values
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            className="value"
+          >
+            value1
+          </td>
+          <td
+            className="value"
+          >
+            new value1
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="value"
+          >
+            value2
+          </td>
+          <td
+            className="value"
+          >
+            new value2
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="value"
+          >
+            value3
+          </td>
+          <td
+            className="value"
+          >
+            new value3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+`;

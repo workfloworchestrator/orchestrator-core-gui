@@ -30,7 +30,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-import { InputField, Process, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
+import { InputForm, Process, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
 import { stop } from "../utils/Utils";
 import { actionOptions } from "../validations/Processes";
 
@@ -53,7 +53,7 @@ interface IState {
     selectedTab: string;
     subscriptionProcesses: ProcessSubscription[];
     loaded: boolean;
-    stepUserInput?: InputField[];
+    stepUserInput?: InputForm;
     confirmationDialogOpen: boolean;
     confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
     confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -101,7 +101,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             const step = enrichedProcess.steps.find(
                 step => step.name === enrichedProcess.step && step.status === "pending"
             );
-            const stepUserInput: InputField[] | undefined = step && step.form;
+            const stepUserInput: InputForm | undefined = step && step.form;
             const tabs = stepUserInput ? this.state.tabs : ["process"];
             const selectedTab = stepUserInput ? "user_input" : "process";
 
@@ -319,7 +319,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         selectedTab: string,
         process: CustomProcessWithDetails,
         step: Step | undefined,
-        stepUserInput: InputField[] | undefined,
+        stepUserInput: InputForm | undefined,
         subscriptionProcesses: ProcessSubscription[]
     ) => {
         const { products } = this.context;

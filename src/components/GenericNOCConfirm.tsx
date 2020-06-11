@@ -22,7 +22,7 @@ import CheckBox from "./CheckBox";
 
 interface IProps {
     name: string;
-    data: any[][];
+    data?: any[][];
     onChange: (value: string) => any;
 }
 
