@@ -26,7 +26,7 @@ import UserInputContainer from "./UserInputContainer";
 
 export default {
     title: "Complete Input widgets form",
-    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
+    // Needed to match snapshot file to story, should be done with injectFileNames but that does not work
     parameters: {
         fileName: __filename
     }
