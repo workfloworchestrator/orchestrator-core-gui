@@ -15,149 +15,146 @@
 
 import "./Settings.scss";
 
-import { EuiButton } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiCard,
+    EuiDescriptionList,
+    EuiHorizontalRule,
+    EuiIcon,
+    EuiPage,
+    EuiPageBody,
+    EuiSelect,
+    EuiSpacer
+} from "@elastic/eui";
 import I18n from "i18n-js";
-import React from "react";
-import Select, { ValueType } from "react-select";
+import React, { SFC, useEffect, useState } from "react";
 
 import { clearCache, getGlobalStatus, setGlobalStatus } from "../api";
 import { setFlash } from "../utils/Flash";
-import { EngineStatus, Option, OptionBool } from "../utils/types";
-import { stop } from "../utils/Utils";
+import { EngineStatus } from "../utils/types";
+
+enum Cache {
+    ims = "ims",
+    crm = "crm",
+    api = "api",
+    all = "all"
+}
 
 interface IProps {}
 
-interface IState {
-    cache: string;
-    lockSettings: boolean;
-    engineStatus?: EngineStatus;
-    interval?: number;
-}
+export const Settings: SFC = (props: IProps) => {
+    const [cache, setCache] = useState<Cache>(Cache.ims);
+    const [engineStatus, setEngineStatus] = useState<EngineStatus>();
 
-const CACHES: string[] = ["ims", "crm", "api", "all"];
+    useEffect(() => {
+        getEngineStatus();
+        const interval = window.setInterval(getEngineStatus, 3000);
 
-const LOCKSETTINGS: boolean[] = [true, false];
-
-export default class Settings extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            cache: "ims",
-            lockSettings: false,
-            engineStatus: undefined
+        return () => {
+            clearInterval(interval);
         };
-    }
+    }, []);
 
-    componentDidMount = () => {
-        const interval = window.setInterval(this.getEngineStatus, 3000);
-        this.getEngineStatus();
-        this.setState({ interval: interval });
+    const getEngineStatus = () => {
+        getGlobalStatus().then(newEngineStatus => {
+            setEngineStatus(newEngineStatus);
+        });
     };
 
-    componentWillUnmount(): void {
-        clearInterval(this.state.interval);
-    }
+    const lockEngine = (isLocked: boolean) => {
+        setGlobalStatus(isLocked).then(() => {
+            setFlash(I18n.t(`settings.status.engine.${isLocked}`));
+        });
+    };
 
-    clearCache = (e: React.MouseEvent<HTMLButtonElement>) => {
-        stop(e);
-        clearCache(this.state.cache).then(res =>
+    const engineDescription = [
+        {
+            title: I18n.t("settings.status.processes"),
+            description: engineStatus?.running_processes.toString() || ""
+        },
+        {
+            title: I18n.t("settings.status.status"),
+            description: engineStatus ? (
+                <>
+                    <EuiIcon type="dot" color={engineStatus?.global_status === "RUNNING" ? "#33cd2e" : "#da6903"} />
+                    <span>{engineStatus?.global_status.toString() || ""}</span>
+                </>
+            ) : (
+                ""
+            )
+        }
+    ];
+
+    const flushCache = () => {
+        clearCache(cache).then(() => {
             setFlash(
                 I18n.t("settings.cache.flushed", {
-                    name: I18n.t(`settings.cache.name.${this.state.cache}`)
+                    name: I18n.t(`settings.cache.name.${cache}`)
                 })
-            )
-        );
+            );
+        });
     };
 
-    setNewEngineStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
-        stop(e);
-        setGlobalStatus(this.state.lockSettings).then(res =>
-            setFlash(I18n.t(`settings.status.engine.${this.state.lockSettings}`))
-        );
+    const handleCacheChange = (newCache: Cache) => {
+        setCache(newCache);
     };
 
-    getEngineStatus = () => {
-        getGlobalStatus().then(res => this.setState({ engineStatus: res }));
+    const getCacheOptions = () => {
+        const cacheOptions = [];
+
+        for (const cacheOption in Cache) {
+            if (isNaN(Number(cacheOption))) {
+                cacheOptions.push({
+                    value: cacheOption,
+                    text: I18n.t(`settings.cache.name.${cacheOption}`)
+                });
+            }
+        }
+
+        return cacheOptions;
     };
 
-    changeCache = (option: Option) => this.setState({ cache: option.value });
+    const cacheOptions = getCacheOptions();
 
-    changeEngineStatus = (option: OptionBool) => this.setState({ lockSettings: option.value });
+    return (
+        <EuiPage>
+            <EuiPageBody component="div">
+                <EuiCard
+                    textAlign="left"
+                    title={I18n.t("settings.cache.remove")}
+                    description={<span>{I18n.t("settings.cache.remove_info")}</span>}
+                >
+                    <EuiSelect
+                        id="selectCache"
+                        options={cacheOptions}
+                        value={cache}
+                        onChange={e => handleCacheChange(e.target.value as Cache)}
+                        aria-label="Select cache to clear"
+                    />
+                    <EuiSpacer />
+                    <EuiButton fill iconSide="right" iconType="refresh" onClick={flushCache}>
+                        {I18n.t("settings.cache.clear")}
+                    </EuiButton>
+                </EuiCard>
+                <EuiSpacer />
+                <EuiCard
+                    textAlign="left"
+                    title={I18n.t("settings.status.info")}
+                    description={<span>{I18n.t("settings.status.info_detail")}</span>}
+                >
+                    <EuiButton iconType="play" fill onClick={() => lockEngine(false)}>
+                        {I18n.t("settings.status.options.false")}
+                    </EuiButton>
+                    &nbsp;
+                    <EuiButton iconType="pause" fill color="warning" onClick={() => lockEngine(true)}>
+                        {I18n.t("settings.status.options.true")}
+                    </EuiButton>
+                    <EuiHorizontalRule margin="l" />
+                    <EuiDescriptionList type="column" listItems={engineDescription} style={{ maxWidth: "400px" }} />
+                </EuiCard>
+            </EuiPageBody>
+        </EuiPage>
+    );
+};
 
-    render() {
-        const { cache, lockSettings, engineStatus } = this.state;
-        const cacheOptions: Option[] = CACHES.map(val => ({
-            value: val,
-            label: I18n.t(`settings.cache.name.${val}`)
-        }));
-        const cacheValue = cacheOptions.find(option => option.value === cache);
-
-        const engineStatusOptions: OptionBool[] = LOCKSETTINGS.map(val => ({
-            value: val,
-            label: I18n.t(`settings.status.options.${val}`)
-        }));
-
-        const engineStatusValue = engineStatusOptions.find(option => option.value === lockSettings);
-
-        return [
-            <div className="mod-cache">
-                <EuiButton onClick={() => window.alert("Button clicked")}>Primary</EuiButton>
-                <section className="card">
-                    <section className="form-step">
-                        <section className="form-divider">
-                            <label>{I18n.t("settings.cache.remove")}</label>
-                            <em>{I18n.t("settings.cache.remove_info")}</em>
-                            <section className="cache-select-section">
-                                <Select
-                                    onChange={this.changeCache as (option: ValueType<Option>) => void}
-                                    options={cacheOptions}
-                                    isSearchable={false}
-                                    value={cacheValue}
-                                    isClearable={false}
-                                    isDisabled={false}
-                                />
-                                <button className="new button orange" onClick={this.clearCache}>
-                                    {I18n.t("settings.cache.clear")}
-                                    <i className="fa fa-eraser" />
-                                </button>
-                            </section>
-                        </section>
-                    </section>
-                </section>
-            </div>,
-            <div className="mod-cache">
-                <section className="card">
-                    <section className="form-step">
-                        <section className="form-divider">
-                            <label>{I18n.t("settings.status.info")}</label>
-                            <em>{I18n.t("settings.status.info_detail")}</em>
-                            <section className="engine-select-section">
-                                <Select
-                                    onChange={this.changeEngineStatus as (option: ValueType<OptionBool>) => void}
-                                    options={engineStatusOptions}
-                                    isSearchable={false}
-                                    value={engineStatusValue}
-                                    isClearable={false}
-                                    isDisabled={false}
-                                />
-                                <button className="new button orange" onClick={this.setNewEngineStatus}>
-                                    {I18n.t("settings.status.submit")}
-                                </button>
-                            </section>
-                            <section className="engine-select-section">
-                                <ul className="status">
-                                    <li>
-                                        <b>{I18n.t("settings.status.processes")} </b> {engineStatus?.running_processes}
-                                    </li>
-                                    <li>
-                                        <b>{I18n.t("settings.status.status")}</b> {engineStatus?.global_status}
-                                    </li>
-                                </ul>
-                            </section>
-                        </section>
-                    </section>
-                </section>
-            </div>
-        ];
-    }
-}
+export default Settings;

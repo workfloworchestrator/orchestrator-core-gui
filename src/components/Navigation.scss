@@ -17,48 +17,57 @@
 @use "../stylesheets/mixins.scss";
 @use "../stylesheets/vars";
 
-.navigation-container {
-    background-color: $darker-blue;
-
-    .navigation {
-        max-width: vars.$medium;
-        margin: 0 auto;
-        padding: 2px 15px 2px 15px;
+.sync {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+    width: auto;
+    z-index: map-get(vars.$z-index, sync);
+    &__label {
+        font-size: 0.875em;
+        margin: 0 0 0 8px !important;
+        display: inline-block;
+    }
+    .euiToastBody {
         display: flex;
+        align-items: center;
     }
-
-    .navigation-tabs {
-        margin-left: -15px;
-        width: 100%;
-        &.euiTabs::before {
-            background-color: $darker-blue;
-        }
+    .euiToastHeader {
+        display: none;
     }
+}
 
-    .navigation-tab {
-        color: white;
-        //padding-top: 50px;
-        padding-bottom: 8px;
+.euiControlBar {
+    &__controls {
+        background: vars.$darker-blue;
+    }
+    &__text {
+    }
+}
+
+.navigation {
+    &__item {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid transparent;
+        transition: 0.2s all ease;
         a {
             color: white;
-            font-size: 1.2em;
         }
-        &.euiTab {
-            background-color: $darker-blue;
+        &:hover {
+            border-bottom: 2px solid white;
         }
-        &.euiTab-isSelected {
+    }
+    &__active {
+        border-bottom: 2px solid white;
+    }
+    &__cta {
+        overflow: visible !important;
+        button {
+            font-weight: bold;
+            border: 1px solid white;
             color: white;
-            background-color: transparent;
-        }
-
-        &.euiTab-isSelected::after {
-            color: white;
-            background-color: white;
-        }
-
-        &.new-process {
-            margin-left: auto;
-            background-color: $darker-blue;
         }
     }
 }

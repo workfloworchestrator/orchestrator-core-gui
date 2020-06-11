@@ -17,6 +17,7 @@ import "../locale/en";
 import "../locale/nl";
 import "./App.scss";
 
+import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import { createBrowserHistory } from "history";
 import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
@@ -161,6 +162,12 @@ class App extends React.PureComponent<{}, IState> {
             <Router history={history}>
                 <QueryParamProvider ReactRouterRoute={Route}>
                     <ApplicationContext.Provider value={applicationContext}>
+                        {loading && (
+                            <EuiToast className="sync" color="primary">
+                                <EuiLoadingSpinner size="m" />
+                                <h6 className="sync__label">Syncing</h6>
+                            </EuiToast>
+                        )}
                         <div>
                             <div>
                                 <Flash />

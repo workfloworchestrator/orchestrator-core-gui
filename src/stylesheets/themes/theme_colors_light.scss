@@ -1,9 +1,12 @@
 // This extra import allows any variables that are created via functions to work when loaded into JS
 @import "~@elastic/eui/src/global_styling/variables/colors";
 
-$euiColorPrimary: #61dafb;
-$euiColorSecondary: #00bfb3;
-$euiColorAccent: #fc358e;
+$euiColorPrimary: #4db2cf;
+$euiColorSecondary: #274b72;
+$euiColorAccent: #276b1e;
+$euiColorSuccess: #33cd2e;
+$euiColorDanger: #b62222;
+$euiColorWarning: #da6903;
 
 $euiLinkColor: $euiColorPrimary; // Weirdly this one wasn't updating with new primary color
 

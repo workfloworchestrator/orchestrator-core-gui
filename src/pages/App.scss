@@ -22,9 +22,9 @@ body {
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
-    color: $dark-grey;
+    color: vars.$dark-grey;
     -webkit-font-smoothing: antialiased;
-    background-color: $background;
+    background-color: vars.$background;
 
     &.ReactModal__Body--open {
         overflow: hidden;
@@ -33,7 +33,7 @@ body {
 
 a {
     cursor: pointer;
-    color: $blue;
+    color: vars.$blue;
     font-weight: bold;
 }
 
@@ -45,11 +45,11 @@ a {
 
 ::-webkit-input-placeholder,
 div.Select-placeholder {
-    color: $blue;
+    color: vars.$blue;
 }
 
 ::-moz-placeholder {
-    color: $blue;
+    color: vars.$blue;
     opacity: 1;
 }
 
