@@ -27,7 +27,7 @@ const store = new Store({
 
 export default {
     title: "Bandwidth",
-    // Needed to match snapshot file to story, should be done with injectFileNames but that does not work
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
         fileName: __filename
     }

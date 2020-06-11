@@ -20,7 +20,7 @@ import UserInputFormWizard from "../components/UserInputFormWizard";
 
 export default {
     title: "UserInputFormWizard",
-    // Needed to match snapshot file to story, should be done with injectFileNames but that does not work
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
         fileName: __filename
     }

@@ -22,7 +22,7 @@ import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
 
 export default {
     title: "SubscriptionProductTagSelect",
-    // Needed to match snapshot file to story, should be done with injectFileNames but that does not work
+    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
         fileName: __filename
     }
