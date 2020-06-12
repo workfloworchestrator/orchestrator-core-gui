@@ -20,7 +20,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product 1`] = `
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"
@@ -138,7 +138,7 @@ exports[`Storyshots SubscriptionProductTagSelect Filtered on Product with exclud
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"
@@ -256,7 +256,7 @@ exports[`Storyshots SubscriptionProductTagSelect Only tags 1`] = `
           onTouchEnd={[Function]}
         >
           <div
-            className=" css-1hwfws3"
+            className=" css-g1d714-ValueContainer"
           >
             <div
               className=" css-1wa3eu0-placeholder"

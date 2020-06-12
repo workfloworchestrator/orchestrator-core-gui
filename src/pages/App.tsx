@@ -34,7 +34,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import { AppError } from "../utils/types";
-import Help from "./Help";
 import MetaData from "./MetaData";
 import ModifySubscription from "./ModifySubscription";
 import NewProcess from "./NewProcess";
@@ -247,7 +246,6 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/task/:id"
                                     render={props => <ProcessDetail {...props} isProcess={false} />}
                                 />
-                                <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={props => <StyleGuide {...props} />} />

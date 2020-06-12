@@ -57,7 +57,7 @@ const Navigation = () => {
     const getControls = () => {
         const controls = [];
 
-        navItems.map(navItem => {
+        navItems.forEach(navItem => {
             controls.push({
                 controlType: "text",
                 id: `controls_${navItem}`,

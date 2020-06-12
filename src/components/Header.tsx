@@ -15,6 +15,18 @@
 
 import "./Header.scss";
 
+import {
+    EuiHeader,
+    EuiHeaderLink,
+    EuiHeaderLinks,
+    EuiHeaderLogo,
+    EuiHeaderSectionItem,
+    EuiHeaderSections,
+    EuiSpacer,
+    EuiSwitch,
+    EuiText,
+    EuiTextColor
+} from "@elastic/eui";
 import I18n from "i18n-js";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
@@ -65,14 +77,6 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
         this.props.signOut();
     };
 
-    renderExitLogout = () => (
-        <li className="border-left">
-            <button id="logout" onClick={this.logout}>
-                {I18n.t("header.links.logout")}
-            </button>
-        </li>
-    );
-
     renderProfileLink(currentUser: Profile) {
         return (
             <button onClick={this.handleToggle}>
@@ -90,9 +94,6 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     renderDropDown() {
         return this.state.dropDownActive ? <UserProfile /> : null;
     }
-
-    renderEnvironmentName = (environment: string) =>
-        environment === "production" ? null : <li className="environment">{environment}</li>;
 
     refeshStatus = () => {
         getGlobalStatus().then(globalStatus => {
@@ -122,29 +123,64 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     render() {
         const currentUser = this.props.userData?.profile;
         const { environment, engineStatus } = this.state;
-        return (
-            <div className="header-container">
-                <div className="header">
+
+        const sections = [
+            {
+                items: [
                     <Link to="/" className="logo">
-                        <img src={logo} alt="" />
+                        <img className="header__logo" src={logo} alt="logo" />
                     </Link>
-                    <ul className="links">
-                        <li className={`title ${environment}`}>
-                            <span>{I18n.t("header.title")}</span>
-                        </li>
-                        {this.renderEnvironmentName(environment)}
-                        {this.generateStatusElements(engineStatus)}
-                        <li className="profile" tabIndex={1} onBlur={() => this.setState({ dropDownActive: false })}>
-                            {currentUser && this.renderProfileLink(currentUser)}
-                            {currentUser && this.renderDropDown()}
-                        </li>
-                        <li>
-                            <Link to="/help">{I18n.t("header.links.help")}</Link>
-                        </li>
-                        {this.renderExitLogout()}
-                    </ul>
-                </div>
-            </div>
+                ],
+                borders: "right"
+            }
+        ] as EuiHeaderSections[];
+
+        return (
+            <EuiHeader>
+                <EuiHeaderSectionItem border="right">
+                    <Link to="/" className="header__logo">
+                        <img className="header__logo-img" src={logo} alt="logo" />
+                    </Link>
+                    <EuiHeaderSectionItem border="right">
+                        <EuiText grow={false}>
+                            <h2 className={`header__app-title ${environment}`}>
+                                {I18n.t("header.title")}
+                                {environment !== "production" && ` ${environment}`}
+                            </h2>
+                        </EuiText>
+                    </EuiHeaderSectionItem>
+                </EuiHeaderSectionItem>
+
+                <EuiHeaderSectionItem>
+                    <EuiHeaderLinks aria-label="App navigation links example">
+                        <EuiHeaderLink href="#">
+                            {I18n.t(`settings.status.engine.${engineStatus.toLowerCase()}`)}{" "}
+                            <i className={`fa fa-circle header__status ${engineStatus.toLowerCase()}`}></i>
+                        </EuiHeaderLink>
+
+                        <EuiHeaderLink
+                            iconType="popout"
+                            href="https://wiki.surfnet.nl/display/SNM/SURFnet+Netwerk+Management+Home"
+                            target="_blank"
+                        >
+                            {I18n.t("header.links.help")}
+                        </EuiHeaderLink>
+
+                        <EuiHeaderLink onClick={this.logout}>{I18n.t("header.links.logout")}</EuiHeaderLink>
+
+                        {currentUser && (
+                            <EuiHeaderLink
+                                className="profile"
+                                tabIndex={1}
+                                onBlur={() => this.setState({ dropDownActive: false })}
+                            >
+                                {currentUser && this.renderProfileLink(currentUser)}
+                                {currentUser && this.renderDropDown()}
+                            </EuiHeaderLink>
+                        )}
+                    </EuiHeaderLinks>
+                </EuiHeaderSectionItem>
+            </EuiHeader>
         );
     }
 }
