@@ -1,6 +1,5 @@
-@use "sass:meta";
 /*!
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,6 +12,7 @@
  * limitations under the License.
  *
  */
+@use "sass:meta";
 @use "../stylesheets/vars.scss";
 @import-normalize; /* bring in normalize.css styles */
 @include meta.load-css("../stylesheets/application.scss");

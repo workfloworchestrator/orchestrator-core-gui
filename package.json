@@ -89,6 +89,7 @@
         "http-proxy-middleware": "^0.21.0",
         "husky": "^4.2.5",
         "import-sort-style-module": "^6.0.0",
+        "license-check-and-add": "^3.0.4",
         "node-fetch": "^2.6.0",
         "prettier": "1.19.1",
         "prettier-plugin-import-sort": "^0.0.3",
