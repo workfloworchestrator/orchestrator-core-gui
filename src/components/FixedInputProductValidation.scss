@@ -13,25 +13,26 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 section.fixed-input-validation {
     background-color: white;
     padding: 15px 0 0 0;
     margin-top: 20px;
-    box-shadow: 2px 3px 3px 0 $light-grey;
+    box-shadow: 2px 3px 3px 0 vars.$light-grey;
 
     h3 {
         margin-left: 20px;
         margin-bottom: 15px;
-        color: $blue;
+        color: vars.$blue;
         font-size: 18px;
         cursor: pointer;
     }
 
     table {
-        background-color: $border-light;
+        background-color: vars.$border-light;
         width: 100%;
         word-break: break-all;
         td,
@@ -40,7 +41,7 @@ section.fixed-input-validation {
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
+            border-bottom: 1px solid vars.$light-grey;
         }
         th.name {
             width: 25%;

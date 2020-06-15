@@ -22,7 +22,7 @@ import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { catchErrorStatus, startProcess } from "../api/index";
 import UserInputFormWizard from "../components/UserInputFormWizard";
 import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputField } from "../utils/types";
+import { FormNotCompleteResponse, InputForm } from "../utils/types";
 
 interface IProps extends RouteComponentProps {
     subscriptionId: string;
@@ -30,7 +30,7 @@ interface IProps extends RouteComponentProps {
 }
 
 interface IState {
-    stepUserInput?: InputField[];
+    stepUserInput?: InputForm;
     pid?: string;
 }
 

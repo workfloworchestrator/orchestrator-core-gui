@@ -156,7 +156,7 @@ export function renderSubscriptionIdCell({ cell }: { cell: Cell }) {
 
 export function renderInsyncCell({ cell }: { cell: Cell }) {
     const insync: boolean = cell.value;
-    return <i className={`${insync ? "fa fa-check-square" : "fa fa-square-o"}`} />;
+    return <i className={`${insync ? "fa fa-check-square" : "far fa-square"}`} />;
 }
 
 export function renderProductTagCell({ cell }: { cell: Cell }) {

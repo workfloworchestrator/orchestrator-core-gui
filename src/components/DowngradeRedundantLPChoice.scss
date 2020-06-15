@@ -13,17 +13,18 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-downgrade-redundant-lp {
     h3 {
         font-size: larger;
-        color: $blue;
+        color: vars.$blue;
     }
     div.form-container {
         display: flex;
-        border-bottom: 3px solid $lightest-grey;
+        border-bottom: 3px solid vars.$lightest-grey;
         padding-bottom: 20px;
         margin-bottom: 20px;
         section.part {
@@ -38,7 +39,7 @@
     p.child {
         margin-top: 10px;
         font-style: italic;
-        color: $blue;
+        color: vars.$blue;
         text-transform: uppercase;
     }
 
@@ -53,7 +54,7 @@
 
     .rlp_heading thead,
     .rlp_heading .label {
-        background-color: $light-grey;
+        background-color: vars.$light-grey;
         padding-right: 10px;
     }
 

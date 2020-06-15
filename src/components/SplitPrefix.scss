@@ -13,8 +13,8 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
-@import "../stylesheets/mixins.scss";
+@use "../stylesheets/vars.scss";
+@use "../stylesheets/mixins.scss";
 
 section.split-prefix {
     display: flex;

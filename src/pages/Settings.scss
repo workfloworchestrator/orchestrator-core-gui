@@ -13,15 +13,16 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-cache {
-    @include page;
+    @include mixins.page;
 
     .card {
-        @include card;
+        @include mixins.card;
         padding-bottom: 15px;
     }
     section.form-step {
@@ -29,11 +30,11 @@
         h3 {
             font-size: larger;
             margin-bottom: 15px;
-            color: $darker-blue;
+            color: vars.$darker-blue;
         }
 
         section.form-divider {
-            border-bottom: 1px solid $lightest-grey;
+            border-bottom: 1px solid vars.$lightest-grey;
             padding-bottom: 10px;
             margin-bottom: 15px;
         }
@@ -69,7 +70,7 @@
                 list-style: none;
                 cursor: pointer;
                 li {
-                    color: $dark-grey;
+                    color: vars.$dark-grey;
                     opacity: 2;
                     padding-top: 4px;
                 }

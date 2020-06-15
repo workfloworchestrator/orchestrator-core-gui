@@ -193,18 +193,18 @@ export default class Products extends React.Component {
             action: this.editProduct(product, true, false)
         };
         const edit = {
-            icon: "fa fa-pencil-square-o",
+            icon: "fa fa-edit",
             label: "edit",
             action: this.editProduct(product, false, false)
         };
         const _delete = {
-            icon: "fa fa-trash",
+            icon: "fas fa-trash-alt",
             label: "delete",
             action: this.handleDeleteProduct(product),
             danger: true
         };
         const clone = {
-            icon: "fa fa-clone",
+            icon: "far fa-clone",
             label: "clone",
             action: this.editProduct(product, false, true, true)
         };
@@ -264,7 +264,7 @@ export default class Products extends React.Component {
 
     sortColumnIcon = (name, sorted) => {
         if (sorted.name === name) {
-            return <i className={sorted.descending ? "fa fa-sort-desc" : "fa fa-sort-asc"} />;
+            return <i className={sorted.descending ? "fas fa-sort-down" : "fas fa-sort-up"} />;
         }
         return <i />;
     };

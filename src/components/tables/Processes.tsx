@@ -176,7 +176,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 accessor: "failed_reason",
                 disableSortBy: true,
                 Filter: ({ toggleAllRowsExpanded }) => (
-                    <i className="fa fa-arrows-v" onClick={() => toggleAllRowsExpanded()} />
+                    <i className="fas fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;

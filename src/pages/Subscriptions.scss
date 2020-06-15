@@ -13,12 +13,13 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "sass:color";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 .subscriptions-container {
-    // Removed next include to use full width
-    @include page;
+    @include mixins.page;
     background-color: white;
 }
 .actions {
@@ -28,13 +29,13 @@
         cursor: pointer;
         font-size: 22px;
         i {
-            color: lighten($blue, 5);
+            color: color.adjust(vars.$blue, $lightness: 5);
             font-size: 30px;
             margin-top: 15px;
         }
 
         span {
-            color: $blue;
+            color: vars.$blue;
             font-weight: bold;
         }
     }

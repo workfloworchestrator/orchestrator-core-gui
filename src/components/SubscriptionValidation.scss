@@ -13,19 +13,20 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 section.subscription-validation {
     background-color: white;
     padding: 20px;
     margin: 20px 0;
-    box-shadow: 2px 3px 3px 0 $light-grey;
+    box-shadow: 2px 3px 3px 0 vars.$light-grey;
 
     h3 {
         margin-left: 20px;
         margin-bottom: 15px;
-        color: $blue;
+        color: vars.$blue;
         font-size: 18px;
     }
 
@@ -43,7 +44,7 @@ section.subscription-validation {
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
+            border-bottom: 1px solid vars.$light-grey;
         }
         thead {
             th {
@@ -76,13 +77,13 @@ section.subscription-validation {
                 text-transform: uppercase;
                 font-weight: bold;
                 font-size: larger;
-                color: $medium-grey;
+                color: vars.$medium-grey;
                 padding: 7px 2px 7px 0;
             }
             i.fa {
                 float: right;
                 margin-right: 15px;
-                color: $medium-grey;
+                color: vars.$medium-grey;
                 font-size: 18px;
             }
         }
@@ -90,7 +91,7 @@ section.subscription-validation {
             tr {
                 cursor: pointer;
                 &:hover {
-                    background-color: $hover;
+                    background-color: vars.$hover;
                 }
             }
             td {
@@ -102,8 +103,8 @@ section.subscription-validation {
                     justify-content: center;
                 }
                 &.actions {
-                    i.fa-trash {
-                        color: $red;
+                    i.fa-trash-alt {
+                        color: vars.$red;
                         font-size: 22px;
                         padding: 20px;
                     }
@@ -111,19 +112,19 @@ section.subscription-validation {
             }
         }
 
-        @include phone {
+        @include media_queries.phone {
             thead {
                 display: none;
             }
             tr {
                 margin-bottom: 10px;
                 display: block;
-                border-bottom: 2px solid $lighter-grey;
+                border-bottom: 2px solid vars.$lighter-grey;
             }
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted $light-blue;
+                border-bottom: 1px dotted vars.$light-blue;
                 padding: 8px 0;
 
                 &:before {
@@ -132,7 +133,7 @@ section.subscription-validation {
                     text-transform: uppercase;
                     font-weight: bold;
                     font-size: 14px;
-                    color: $medium-grey;
+                    color: vars.$medium-grey;
                 }
             }
         }

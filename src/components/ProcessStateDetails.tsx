@@ -17,6 +17,7 @@ import "./ProcessStateDetails.scss";
 
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
+import sortBy from "lodash/sortBy";
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { NavLink } from "react-router-dom";
@@ -74,7 +75,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
                     <span className="copy-to-clipboard-container">
                         <button data-for="copy-to-clipboard" data-tip>
-                            <i className={`fa fa-clone ${copiedToClipBoardClassName}`} />
+                            <i className={`far fa-clone ${copiedToClipBoardClassName}`} />
                         </button>
                         <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
                     </span>
@@ -155,7 +156,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         const prevKeys = Object.keys(prev);
         const currKeys = Object.keys(curr);
         const newKeys = currKeys.filter(key => prevKeys.indexOf(key) === -1 || !isEqual(prev[key], curr[key]));
-        const newState = newKeys.reduce((acc: State, key) => {
+        const newState = newKeys.sort().reduce((acc: State, key) => {
             if (curr[key] === Object(curr[key]) && !Array.isArray(curr[key]) && prev[key]) {
                 acc[key] = this.stateDelta(prev[key], curr[key]);
             } else {
@@ -208,18 +209,18 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 if (!step.form) {
                     return null;
                 }
-                json = step.form.reduce((acc, field) => {
+                json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
                     acc[field.name] = "";
                     return acc;
                 }, {});
                 break;
             case "failed":
-                json = step.state;
-                break;
             case "waiting":
                 json = step.state;
                 break;
             case "success":
+                let prevState = {};
+
                 if (index > 0) {
                     let prev_index = index - 1;
                     while (
@@ -228,11 +229,10 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                     ) {
                         prev_index--;
                     }
-
-                    json = this.stateDelta(steps[prev_index].state, step.state);
-                } else {
-                    json = step.state;
+                    prevState = steps[prev_index].state;
                 }
+
+                json = this.stateDelta(prevState, step.state);
                 break;
             default:
         }

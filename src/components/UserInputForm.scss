@@ -13,13 +13,14 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-process-step {
     .card {
-        @include card;
+        @include mixins.card;
         padding-bottom: 15px;
     }
 
@@ -27,7 +28,7 @@
         padding: 20px 0;
 
         section.form-divider {
-            border-bottom: 1px solid $lightest-grey;
+            border-bottom: 1px solid vars.$lightest-grey;
             padding-bottom: 1px;
             margin-bottom: 1px;
 
@@ -39,7 +40,7 @@
             p.label {
                 text-transform: uppercase;
                 font-weight: bold;
-                color: $blue;
+                color: vars.$blue;
             }
             &.downgrade_redundant_lp_choice,
             &.service_ports_primary,

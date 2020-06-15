@@ -13,16 +13,16 @@
  *
  */
 
-@import "vars.scss";
+@use "vars.scss";
 
 .button {
     display: inline-block;
     padding: 10px 15px;
     text-transform: uppercase;
     background-color: white;
-    color: $blue;
-    border: 1px solid $lighter-grey;
-    border-radius: $br;
+    color: vars.$blue;
+    border: 1px solid vars.$lighter-grey;
+    border-radius: vars.$br;
     font-size: larger;
     font-weight: bold;
     text-align: center;
@@ -44,22 +44,22 @@
 
     i {
         margin-left: 10px;
-        color: $medium-grey;
+        color: vars.$medium-grey;
     }
 
     &.blue {
-        background-color: $blue;
+        background-color: vars.$blue;
         color: white;
         border: none;
         &.error {
-            background-color: $red;
+            background-color: vars.$red;
         }
         i {
             color: white;
         }
     }
     &.grey {
-        background-color: $lighter-grey;
+        background-color: vars.$lighter-grey;
         color: white;
         border: none;
         i {
@@ -67,12 +67,12 @@
         }
     }
     &.red {
-        background-color: $red;
+        background-color: vars.$red;
         color: white;
         border: none;
     }
     &.orange {
-        background-color: $orange;
+        background-color: vars.$orange;
         color: white;
         border: none;
         i {
@@ -80,7 +80,7 @@
         }
     }
     &.green {
-        background-color: $green;
+        background-color: vars.$green;
         color: white;
         border: none;
         border-top-left-radius: 0;

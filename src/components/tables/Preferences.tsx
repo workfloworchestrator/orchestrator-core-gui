@@ -67,7 +67,7 @@ function Preferences<T extends object>({
                             <i className={"fa fa-circle"} />
                         )
                     ) : (
-                        <i className={"fa fa-circle-o"} />
+                        <i className={"far fa-circle"} />
                     )}
                 </span>
                 {"   "}
@@ -102,7 +102,7 @@ function Preferences<T extends object>({
                         onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
                     >
                         {I18n.t("table.preferences.reset")}
-                        <i className={"fa fa-refresh"} />
+                        <i className={"fa fa-sync"} />
                     </button>
                     <button className={"button"} onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}>
                         {showPaginator

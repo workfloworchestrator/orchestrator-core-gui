@@ -13,8 +13,10 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "sass:color";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 .mod-products {
     .options {
@@ -32,16 +34,16 @@
             padding: 12px;
             margin-left: auto;
             margin-top: 0;
-            border: 1px solid $lighter-grey;
-            border-bottom-left-radius: $br;
-            border-top-left-radius: $br;
+            border: 1px solid vars.$lighter-grey;
+            border-bottom-left-radius: vars.$br;
+            border-top-left-radius: vars.$br;
             font-size: 14px;
             width: 100%;
             height: 100%;
         }
 
         i.fa-search {
-            color: lighten($blue, 5);
+            color: color.adjust(vars.$blue, $lightness: 5);
             position: absolute;
             right: 14px;
             top: 8px;
@@ -70,7 +72,7 @@
             text-align: left;
         }
         tr {
-            border-bottom: 1px solid $light-grey;
+            border-bottom: 1px solid vars.$light-grey;
         }
         thead {
             th {
@@ -106,13 +108,13 @@
                 text-transform: uppercase;
                 font-weight: bold;
                 font-size: larger;
-                color: $medium-grey;
+                color: vars.$medium-grey;
                 padding: 7px 2px 7px 0;
             }
-            i.fa {
+            i.fas {
                 float: right;
                 margin-right: 15px;
-                color: $medium-grey;
+                color: vars.$medium-grey;
                 font-size: 18px;
             }
         }
@@ -120,9 +122,9 @@
             tr {
                 cursor: pointer;
                 &:hover {
-                    background-color: $hover;
+                    background-color: vars.$hover;
                     td.actions i.fa-ellipsis-h {
-                        color: $blue;
+                        color: vars.$blue;
                     }
                 }
             }
@@ -132,7 +134,7 @@
                 padding: 15px 5px;
                 &.metadata-results {
                     font-style: italic;
-                    color: $darker-blue;
+                    color: vars.$darker-blue;
                     font-size: larger;
                     cursor: default;
                 }
@@ -145,19 +147,19 @@
             }
         }
 
-        @include phone {
+        @include media_queries.phone {
             thead {
                 display: none;
             }
             tr {
                 margin-bottom: 10px;
                 display: block;
-                border-bottom: 2px solid $lighter-grey;
+                border-bottom: 2px solid vars.$lighter-grey;
             }
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted $light-blue;
+                border-bottom: 1px dotted vars.$light-blue;
                 padding: 8px 0;
 
                 &:before {
@@ -166,7 +168,7 @@
                     text-transform: uppercase;
                     font-weight: bold;
                     font-size: 14px;
-                    color: $medium-grey;
+                    color: vars.$medium-grey;
                 }
             }
         }

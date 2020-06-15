@@ -154,7 +154,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             this.handleDeleteProcess(process),
             this.handleAbortProcess(process)
         );
-        return <DropDownActions options={options} i18nPrefix="processes" />;
+        return <DropDownActions options={options} i18nPrefix="processes.actions" />;
     };
 
     renderExplain() {
@@ -202,7 +202,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                 <div className="actions">
                     <button className="button blue" onClick={this.runAllTasks}>
                         {I18n.t("tasks.runall")}
-                        <i className="fa fa-refresh" />
+                        <i className="fa fa-sync" />
                     </button>
                     <button className="new button green" onClick={this.newTask}>
                         {I18n.t("tasks.new")} <i className="fa fa-plus" />

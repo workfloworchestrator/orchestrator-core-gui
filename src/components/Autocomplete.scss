@@ -13,20 +13,20 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
+
+.autocomplete-container {
+    position: relative;
+}
 
 section.autocomplete {
     position: absolute;
     z-index: 3;
-    top: 55px;
-    &.child {
-        top: 35px;
-    }
-    right: 0;
+    top: 100%;
     width: 100%;
-    border-radius: $br;
+    border-radius: vars.$br;
     background-color: white;
-    box-shadow: 1px 4px 12px 1px $medium-grey;
+    box-shadow: 1px 4px 12px 1px vars.$medium-grey;
     margin-bottom: 25px;
 
     div.no-results {
@@ -39,12 +39,12 @@ section.autocomplete {
         word-break: break-all;
 
         tbody tr {
-            border-top: 1px solid $light-grey;
+            border-top: 1px solid vars.$light-grey;
             cursor: pointer;
 
             &.active,
             &:hover {
-                background-color: $light-grey;
+                background-color: vars.$light-grey;
             }
             td {
                 padding: 10px;

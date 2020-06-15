@@ -13,14 +13,16 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "sass:color";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 section.validation-container {
     background-color: white;
     padding: 20px;
     margin: 20px 0;
-    box-shadow: 2px 3px 3px 0 $light-grey;
+    box-shadow: 2px 3px 3px 0 vars.$light-grey;
 
     section.validation {
         display: flex;
@@ -31,10 +33,10 @@ section.validation-container {
             i {
                 font-size: 36px;
                 &.fa-check {
-                    color: $green;
+                    color: vars.$green;
                 }
                 &.fa-exclamation-triangle {
-                    color: $red;
+                    color: vars.$red;
                 }
             }
         }
@@ -43,7 +45,7 @@ section.validation-container {
             &.product-info {
                 width: 40%;
                 tbody {
-                    border-top: 1px solid $light-blue;
+                    border-top: 1px solid vars.$light-blue;
                     tr:first-child {
                         td.title {
                             padding-top: 15px;
@@ -58,8 +60,8 @@ section.validation-container {
                 width: 100%;
                 font-size: 15px;
                 tbody.product-block {
-                    border-top: 1px solid $light-blue;
-                    border-bottom: 1px solid $light-blue;
+                    border-top: 1px solid vars.$light-blue;
+                    border-bottom: 1px solid vars.$light-blue;
                     tr:last-child {
                         td {
                             padding-bottom: 15px;
@@ -69,8 +71,8 @@ section.validation-container {
                 th {
                     text-align: left;
                     text-transform: uppercase;
-                    color: $blue;
-                    background-color: $lightest-grey;
+                    color: vars.$blue;
+                    background-color: vars.$lightest-grey;
                     padding: 4px 0;
                     &.validations-mapping-title {
                         i.fa {
@@ -82,12 +84,12 @@ section.validation-container {
                     &.title {
                         text-transform: uppercase;
                         font-weight: bold;
-                        color: $medium-grey;
+                        color: vars.$medium-grey;
                         padding: 3px 0;
                         width: 35%;
                     }
                     &.resource-type-sub {
-                        color: $dark-grey;
+                        color: vars.$dark-grey;
                         font-style: italic;
                     }
                     &.product-block-name {
@@ -97,12 +99,12 @@ section.validation-container {
                     &.resource-type {
                         i.fa-arrow-right {
                             margin: 4px 15px;
-                            color: $medium-grey;
+                            color: vars.$medium-grey;
                         }
                     }
                     &.no-mapping {
                         font-style: italic;
-                        color: $orange;
+                        color: vars.$orange;
                         padding: 20px 80px 0 0;
                     }
                 }
@@ -117,19 +119,19 @@ section.validation-container {
             th {
                 text-align: left;
                 text-transform: uppercase;
-                color: $red;
-                background-color: $lightest-grey;
+                color: vars.$red;
+                background-color: vars.$lightest-grey;
                 padding: 4px 0;
             }
             td {
                 &.name {
                     text-transform: uppercase;
                     font-weight: bold;
-                    color: $medium-grey;
+                    color: vars.$medium-grey;
                     padding: 2px 40px 2px 0;
                 }
                 &.description {
-                    color: darken($orange, 25%);
+                    color: color.adjust(vars.$orange, $lightness: -25%);
                 }
                 span {
                     font-style: italic;

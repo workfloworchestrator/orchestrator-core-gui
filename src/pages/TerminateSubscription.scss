@@ -13,25 +13,37 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
-@import "../stylesheets/forms.scss";
-@import "../stylesheets/media_queries.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 .mod-terminate-subscription {
-    @include page;
+    @include mixins.page;
 
     .card {
-        @include card;
+        @include mixins.card;
         padding-bottom: 15px;
         h1 {
             font-size: 22px;
-            color: $darker-blue;
+            color: vars.$darker-blue;
             padding-top: 15px;
             padding-bottom: 15px;
         }
     }
     section.form-step {
         padding: 20px 0;
+        h3 {
+            font-size: larger;
+            margin-bottom: 15px;
+            color: vars.$darker-blue;
+        }
+
+        > section {
+            border-bottom: 1px solid vars.$lightest-grey;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
     }
 }

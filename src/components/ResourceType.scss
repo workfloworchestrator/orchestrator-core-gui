@@ -13,18 +13,19 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/buttons.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-resource-type {
     .card {
-        @include card;
+        @include mixins.card;
         padding: 20px 40px;
     }
 
     section.form-divider {
-        border-bottom: 1px solid $lightest-grey;
+        border-bottom: 1px solid vars.$lightest-grey;
         padding-bottom: 10px;
         margin-bottom: 15px;
 

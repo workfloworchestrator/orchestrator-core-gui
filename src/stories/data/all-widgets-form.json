@@ -1,0 +1,531 @@
+[
+    {
+        "name": "product",
+        "type": "product",
+        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
+    },
+    {
+        "name": "product2",
+        "type": "product",
+        "readonly": true,
+        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
+    },
+    {
+        "name": "accept1",
+        "type": "accept",
+        "value": true
+    },
+    {
+        "name": "bandwidth1",
+        "type": "bandwidth",
+        "value": 1
+    },
+    {
+        "name": "bfd",
+        "type": "bfd",
+        "value": {
+            "enabled": false,
+            "minimum_interval": null,
+            "multiplier": null
+        }
+    },
+    {
+        "name": "boolean1",
+        "type": "boolean",
+        "value": false
+    },
+    {
+        "name": "boolean2",
+        "type": "boolean",
+        "required": false,
+        "value": false
+    },
+    {
+        "name": "contact_persons",
+        "type": "contact_persons",
+        "organisation_key": "organisation",
+        "value": [
+            {
+                "name": "a",
+                "email": "a@b.nl",
+                "phone": ""
+            }
+        ]
+    },
+    {
+        "name": "corelink_add_link1",
+        "type": "corelink_add_link",
+        "node": "1234",
+        "interface_speed": 1000,
+        "value": 1
+    },
+    {
+        "name": "corelink_add_link2",
+        "type": "corelink_add_link",
+        "node": "1234",
+        "interface_speed": 1000,
+        "value": 2
+    },
+    {
+        "name": "corelink",
+        "type": "corelink",
+        "interface_speed": 1000,
+        "value": 3
+    },
+    {
+        "name": "crm_port_id",
+        "type": "crm_port_id",
+        "value": "12345"
+    },
+    {
+        "name": "generic_select",
+        "type": "generic_select",
+        "choices": ["default", "none", "special"],
+        "value": "none"
+    },
+    {
+        "name": "ip_prefix",
+        "type": "ip_prefix",
+        "value": "10.0.0.0/24"
+    },
+    {
+        "name": "isalias",
+        "type": "isalias",
+        "value": "urn:ogf:network:bla"
+    },
+    {
+        "name": "jira_ticket",
+        "type": "jira_ticket",
+        "value": "SNNP-123456"
+    },
+    {
+        "name": "label",
+        "type": "label"
+    },
+    {
+        "name": "location_code",
+        "type": "location_code",
+        "value": "ASD001A"
+    },
+    {
+        "name": "migration_summary1",
+        "type": "migration_summary",
+        "data": {
+            "labels": ["Row1", "Row2"],
+            "headers": ["Column1", "Column2"],
+            "columns": [
+                ["1", 2],
+                [true, "A very long long long long long long long long string"]
+            ]
+        }
+    },
+    {
+        "name": "migration_summary2",
+        "type": "migration_summary",
+        "data": {
+            "labels": ["Row1", "Row2"],
+            "columns": [
+                ["1", 2],
+                [true, "A very long long long long long long long long string"]
+            ]
+        }
+    },
+    {
+        "name": "migration_summary3",
+        "type": "migration_summary",
+        "data": {
+            "headers": ["Column1", "Column2"],
+            "columns": [
+                ["1", 2],
+                [true, "A very long long long long long long long long string"]
+            ]
+        }
+    },
+    {
+        "name": "nms_service_id",
+        "type": "nms_service_id",
+        "value": "1234"
+    },
+    {
+        "name": "node_id_port_select",
+        "type": "node_id_port_select",
+        "location_code": "Asd001a",
+        "value": 12345
+    },
+    {
+        "name": "nodes_for_location_code_and_status",
+        "type": "nodes_for_location_code_and_status",
+        "location_code": "Asd001a",
+        "value": 12345
+    },
+    {
+        "name": "numeric1",
+        "type": "numeric",
+        "value": 1234
+    },
+    {
+        "name": "numeric2",
+        "type": "numeric",
+        "maximum": 1500,
+        "value": 1234
+    },
+    {
+        "name": "organisation1",
+        "type": "organisation",
+        "value": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1"
+    },
+    {
+        "name": "organisation2",
+        "type": "organisation",
+        "readonly": true,
+        "value": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1"
+    },
+    {
+        "name": "service_ports1",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "maximum": 2,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            },
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports2",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "maximum": 2,
+        "tags": ["MSP", "MSPNL"],
+        "value": [
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3"
+            },
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3"
+            }
+        ]
+    },
+    {
+        "name": "service_ports3",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "maximum": 2,
+        "readonly": true,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports4",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "maximum": 99,
+        "elan": true,
+        "tags": ["MSP", "MSPNL"],
+        "value": [
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3",
+                "bandwidth": 1000
+            },
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3",
+                "bandwidth": 1000
+            }
+        ]
+    },
+    {
+        "name": "service_ports5",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "organisationPortsOnly": false,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports6",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "organisationPortsOnly": true,
+        "readonly": true,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports7",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "readonly": true,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports8",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 6,
+        "organisationPortsOnly": false,
+        "tags": ["MSP", "MSPNL", "SSP"],
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            },
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3"
+            },
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            },
+            {
+                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                "vlan": "1,2-3"
+            }
+        ]
+    },
+    {
+        "name": "service_ports9",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "readonly": true,
+        "bandwidth_key": "bandwidth1",
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ],
+        "tags": ["MSP", "MSPNL", "SSP"]
+    },
+    {
+        "name": "service_ports10",
+        "type": "service_ports",
+        "readonly": true,
+        "value": [
+            {
+                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                "vlan": "0"
+            }
+        ],
+        "tags": ["MSP", "MSPNL", "SSP"]
+    },
+    {
+        "name": "service_ports_sn81",
+        "type": "service_ports",
+        "disabledPorts": true,
+        "value": [],
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+    },
+    {
+        "name": "service_ports_sn82",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "organisationPortsOnly": false,
+        "visiblePortMode": "normal",
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
+        "value": [
+            {
+                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports_sn83",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "organisationPortsOnly": true,
+        "visiblePortMode": "tagged",
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
+        "value": [
+            {
+                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports_sn84",
+        "type": "service_ports",
+        "organisation": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1",
+        "minimum": 1,
+        "maximum": 1,
+        "organisationPortsOnly": true,
+        "visiblePortMode": "untagged",
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
+        "value": [
+            {
+                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports_sn85",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 1,
+        "readonly": true,
+        "value": [
+            {
+                "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                "vlan": "2"
+            }
+        ],
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+    },
+    {
+        "name": "service_ports_sn86",
+        "type": "service_ports",
+        "organisation_key": "organisation",
+        "minimum": 1,
+        "maximum": 6,
+        "organisationPortsOnly": false,
+        "visiblePortMode": "normal",
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
+        "value": [
+            {
+                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                "vlan": "0"
+            }
+        ]
+    },
+    {
+        "name": "service_ports_sn87",
+        "type": "service_ports",
+        "readonly": true,
+        "value": [
+            {
+                "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                "vlan": "2"
+            }
+        ],
+        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+    },
+    {
+        "name": "stp",
+        "type": "stp",
+        "value": "urn:ogf:network:vlan=1:fu:bar"
+    },
+    {
+        "name": "string1",
+        "type": "string",
+        "value": "something"
+    },
+    {
+        "name": "string2",
+        "type": "string",
+        "readonly": true,
+        "value": "1000"
+    },
+    {
+        "name": "string3",
+        "type": "string",
+        "required": false,
+        "value": ""
+    },
+    {
+        "name": "subscription_id",
+        "type": "subscription_id",
+        "value": "e89776be-16c3-4bee-af98-8e73bf6492a7"
+    },
+    {
+        "name": "subscription_product_tag1",
+        "type": "subscription_product_tag",
+        "tags": ["IPBGP"],
+        "product_key": "new_product_id",
+        "value": "123776be-16c3-4bee-af98-8e73bf6492a7"
+    },
+    {
+        "name": "subscription_product_tag2",
+        "type": "subscription_product_tag",
+        "tags": ["IPS"],
+        "product_key": "new_product_id",
+        "excluded_subscriptions": [],
+        "value": "abc776be-16c3-4bee-af98-8e73bf6492a7"
+    },
+    {
+        "name": "subscriptions1",
+        "type": "subscriptions",
+        "product_id": "2b2125f2-a074-4e44-8d4b-edc677381d46",
+        "minimum": 1,
+        "maximum": 99,
+        "value": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"]
+    },
+    {
+        "name": "subscriptions2",
+        "type": "subscriptions",
+        "product_id": "2b2125f2-a074-4e44-8d4b-edc677381d46",
+        "minimum": 1,
+        "maximum": 99,
+        "required": false,
+        "value": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"]
+    },
+    {
+        "name": "transition_product1",
+        "type": "transition_product",
+        "products": ["2b2125f2-a074-4e44-8d4b-edc677381d46"],
+        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
+    },
+    {
+        "name": "uuid",
+        "type": "uuid",
+        "value": "e89776be-16c3-4bee-af98-8e73bf6492a7"
+    },
+    {
+        "name": "bandwidth2",
+        "type": "bandwidth",
+        "ports_key": "service_ports1",
+        "value": 2
+    },
+    {
+        "name": "bandwidth3",
+        "type": "bandwidth",
+        "ports_key": "service_ports1",
+        "readonly": true,
+        "value": "1000"
+    }
+]

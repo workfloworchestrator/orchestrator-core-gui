@@ -13,8 +13,9 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/forms.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
 
 .mod-read-only-subscription-view {
     &.indent {
@@ -22,11 +23,11 @@
     }
     h3 {
         font-size: larger;
-        color: $blue;
+        color: vars.$blue;
     }
     div.form-container {
         display: flex;
-        border-bottom: 3px solid $lightest-grey;
+        border-bottom: 3px solid vars.$lightest-grey;
         padding-bottom: 20px;
         margin-bottom: 20px;
         &.child {

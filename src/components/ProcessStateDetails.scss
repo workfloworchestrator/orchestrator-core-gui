@@ -13,7 +13,8 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/vars";
 
 section.process-state-detail {
     padding: 15px 0 10px 0;
@@ -22,7 +23,7 @@ section.process-state-detail {
     }
 
     span.copy-to-clipboard-container {
-        color: $blue;
+        color: vars.$blue;
         display: inline-block;
         margin-bottom: 10px;
 
@@ -34,7 +35,7 @@ section.process-state-detail {
         }
     }
 
-    @include copy-icon-pulse;
+    @include mixins.copy-icon-pulse;
 
     section.header-information {
         display: flex;
@@ -46,7 +47,7 @@ section.process-state-detail {
             h3 {
                 font-size: larger;
                 padding: 15px 0;
-                color: $darker-blue;
+                color: vars.$darker-blue;
             }
             li {
                 display: inline-block;
@@ -63,14 +64,14 @@ section.process-state-detail {
 
     section.traceback-container {
         padding: 5px;
-        background-color: $light-grey;
+        background-color: vars.$light-grey;
     }
 
     section.process-summary {
         margin: 0 0 20px 0;
         padding: 25px 0;
-        border-top: 1px solid $light-grey;
-        border-bottom: 1px solid $light-grey;
+        border-top: 1px solid vars.$light-grey;
+        border-bottom: 1px solid vars.$light-grey;
         table {
             td {
                 font-size: larger;
@@ -78,7 +79,7 @@ section.process-state-detail {
                     padding: 3px 40px 3px 15px;
                     text-transform: uppercase;
                     font-weight: bold;
-                    color: $medium-grey;
+                    color: vars.$medium-grey;
                 }
             }
         }
@@ -104,7 +105,7 @@ section.process-state-detail {
                 i.fa {
                     font-size: 30px;
                     margin: 10px 0;
-                    color: $darker-blue;
+                    color: vars.$darker-blue;
                 }
             }
         }
@@ -112,16 +113,16 @@ section.process-state-detail {
             display: flex;
 
             section.state-delta {
-                @include card;
+                @include mixins.card;
                 box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
-                background-color: $lightest-grey;
+                background-color: vars.$lightest-grey;
                 margin-bottom: 25px;
                 table {
                     td {
                         &.key {
                             text-transform: uppercase;
                             font-weight: bold;
-                            color: $medium-grey;
+                            color: vars.$medium-grey;
                             padding: 5px;
                             width: 125px;
                         }
@@ -145,7 +146,7 @@ section.process-state-detail {
             i.fa {
                 font-size: 30px;
                 margin: 20px;
-                color: $darker-blue;
+                color: vars.$darker-blue;
                 &.fa-user {
                     margin-right: 30px;
                 }

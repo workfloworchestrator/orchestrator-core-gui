@@ -13,7 +13,7 @@
  *
  */
 
-@import "../stylesheets/vars.scss";
+@use "../stylesheets/vars.scss";
 
 .validation-explain {
     position: fixed;
@@ -50,7 +50,7 @@
     .title {
         position: relative;
         padding: 20px 10px;
-        background-color: $blue;
+        background-color: vars.$blue;
         color: white;
         font-weight: bold;
         font-size: larger;

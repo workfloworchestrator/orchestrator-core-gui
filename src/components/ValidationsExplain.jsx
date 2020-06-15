@@ -201,7 +201,7 @@ export default class ValidationsExplain extends React.PureComponent {
                     <section className="title">
                         <p>{title}</p>
                         <button className="close" onClick={close}>
-                            <i className="fa fa-remove" />
+                            <i className="fas fa-times" />
                         </button>
                     </section>
                     {isWorkFlows

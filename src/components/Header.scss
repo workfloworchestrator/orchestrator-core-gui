@@ -13,8 +13,9 @@
  *
  */
 
-@import "../stylesheets/mixins.scss";
-@import "../stylesheets/media_queries.scss";
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/media_queries.scss";
+@use "../stylesheets/vars";
 
 .flash.hide + div.header-container {
     .header {
@@ -27,31 +28,31 @@
     background-color: white;
 
     .header {
-        max-width: $medium;
+        max-width: vars.$medium;
         margin: 40px auto 0 auto;
         padding: 19px 15px 40px 15px;
         position: relative;
         transition: margin 150ms ease-in-out;
 
-        @include phone {
+        @include media_queries.phone {
             margin: 85px auto 0 auto;
         }
 
         a {
-            color: $blue;
+            color: vars.$blue;
             font-weight: bold;
-            @include no-text-decoration;
+            @include mixins.no-text-decoration;
         }
 
         button {
-            color: $blue;
+            color: vars.$blue;
             background-color: transparent;
             font-weight: bold;
             border: none;
             cursor: pointer;
             font-family: "Roboto", Sans-serif;
             font-size: 1em;
-            @include no-text-decoration;
+            @include mixins.no-text-decoration;
         }
 
         button:focus {
@@ -62,7 +63,7 @@
             position: absolute;
             top: 12px;
 
-            @include phone {
+            @include media_queries.phone {
                 position: initial;
             }
 
@@ -88,7 +89,7 @@
                         margin-left: 10px;
                         margin-right: 30px;
                     }
-                    &.fa-user-circle-o {
+                    &.fa-user-circle {
                         font-size: larger;
                         margin-right: 10px;
                     }
@@ -99,17 +100,17 @@
                     font-weight: bold;
                     text-transform: uppercase;
                     font-size: 21px;
-                    color: $blue;
+                    color: vars.$blue;
 
                     &.staging,
                     &.local,
                     &.development {
-                        color: $red;
+                        color: vars.$red;
                     }
                 }
 
                 &.environment {
-                    color: $red;
+                    color: vars.$red;
                     font-size: 20px;
                     font-weight: bold;
                     text-transform: uppercase;
@@ -117,7 +118,7 @@
 
                 &.profile {
                     //margin-left: auto;
-                    @include phone {
+                    @include media_queries.phone {
                         display: none;
                     }
                 }
@@ -127,7 +128,7 @@
                     font-weight: bold;
                     text-transform: uppercase;
                     font-size: 14px;
-                    color: $blue;
+                    color: vars.$blue;
 
                     .status {
                         font-size: 115%;
@@ -145,9 +146,9 @@
                 }
 
                 &.border-left {
-                    border-left: 1px solid $blue;
+                    border-left: 1px solid vars.$blue;
                     padding-left: 15px;
-                    @include phone {
+                    @include media_queries.phone {
                         display: none;
                     }
                 }
@@ -162,9 +163,9 @@
                 top: 50px;
                 right: 40px;
                 background: white;
-                border-radius: $br;
-                box-shadow: 1px 1px $br rgba(black, 0.3);
-                @include phone {
+                border-radius: vars.$br;
+                box-shadow: 1px 1px vars.$br rgba(black, 0.3);
+                @include media_queries.phone {
                     display: none;
                 }
 
