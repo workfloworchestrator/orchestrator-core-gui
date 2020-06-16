@@ -15,14 +15,7 @@
 
 import "./Header.scss";
 
-import {
-    EuiHeader,
-    EuiHeaderLink,
-    EuiHeaderLinks,
-    EuiHeaderSectionItem,
-    EuiHeaderSections,
-    EuiText,
-} from "@elastic/eui";
+import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
@@ -102,16 +95,6 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
         });
     };
 
-    generateStatusElements(engineStatus: GlobalStatus) {
-        const message = I18n.t(`settings.status.engine.${engineStatus.toLowerCase()}`);
-
-        return (
-            <li className="status-text">
-                {message} <i className={`fa fa-circle status ${engineStatus.toLowerCase()}`}></i>
-            </li>
-        );
-    }
-
     componentWillMount() {
         window.setInterval(this.refeshStatus, 3000);
     }
@@ -119,17 +102,6 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     render() {
         const currentUser = this.props.userData?.profile;
         const { environment, engineStatus } = this.state;
-
-        const sections = [
-            {
-                items: [
-                    <Link to="/" className="logo">
-                        <img className="header__logo" src={logo} alt="logo" />
-                    </Link>
-                ],
-                borders: "right"
-            }
-        ] as EuiHeaderSections[];
 
         return (
             <EuiHeader>
