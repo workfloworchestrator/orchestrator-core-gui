@@ -19,13 +19,9 @@ import {
     EuiHeader,
     EuiHeaderLink,
     EuiHeaderLinks,
-    EuiHeaderLogo,
     EuiHeaderSectionItem,
     EuiHeaderSections,
-    EuiSpacer,
-    EuiSwitch,
     EuiText,
-    EuiTextColor
 } from "@elastic/eui";
 import I18n from "i18n-js";
 import { Profile } from "oidc-client";
