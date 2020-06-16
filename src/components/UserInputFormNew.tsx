@@ -299,12 +299,12 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         const nextButton = hasNext ? (
             <button type="submit" id="button-next-form-submit" tabIndex={0} className={`button blue`}>
                 {I18n.t("process.next")}
-                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
+                {this.state.processing && <i className="fa fa-circle-notch fa-spin" />}
             </button>
         ) : (
             <button type="submit" id="button-submit-form-submit" tabIndex={0} className={`button blue`}>
                 {I18n.t("process.submit")}
-                {this.state.processing && <i className="fa fa-circle-o-notch fa-spin" />}
+                {this.state.processing && <i className="fa fa-circle-notch fa-spin" />}
             </button>
         );
 
