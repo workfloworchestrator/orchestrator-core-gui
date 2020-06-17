@@ -286,7 +286,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                                 iconSide="right"
                                 onClick={option.action}
                             >
-                                {I18n.t(`processes.${option.label}`)}
+                                {I18n.t(`processes.actions.${option.label}`).toUpperCase()}
                             </EuiButton>
                         </EuiFlexItem>
                     ))}

@@ -53,7 +53,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  [missing "en.processes.retry" translation]
+                  RETRY
                 </span>
               </span>
             </button>
@@ -84,7 +84,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  [missing "en.processes.abort" translation]
+                  ABORT
                 </span>
               </span>
             </button>
@@ -2544,7 +2544,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  [missing "en.processes.retry" translation]
+                  RETRY
                 </span>
               </span>
             </button>
@@ -2579,7 +2579,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 <span
                   className="euiButton__text"
                 >
-                  [missing "en.processes.abort" translation]
+                  ABORT
                 </span>
               </span>
             </button>
