@@ -115,6 +115,7 @@ export const Settings: SFC = (props: IProps) => {
     };
 
     const cacheOptions = getCacheOptions();
+    const isRunning = engineStatus?.global_status === "RUNNING";
 
     return (
         <EuiPage>
@@ -142,12 +143,13 @@ export const Settings: SFC = (props: IProps) => {
                     title={I18n.t("settings.status.info")}
                     description={<span>{I18n.t("settings.status.info_detail")}</span>}
                 >
-                    <EuiButton iconType="play" fill onClick={() => lockEngine(false)}>
-                        {I18n.t("settings.status.options.false")}
-                    </EuiButton>
-                    &nbsp;
-                    <EuiButton iconType="pause" fill color="warning" onClick={() => lockEngine(true)}>
-                        {I18n.t("settings.status.options.true")}
+                    <EuiButton
+                        iconType={isRunning ? "pause" : "play"}
+                        fill
+                        color={isRunning ? "warning" : "primary"}
+                        onClick={() => lockEngine(isRunning)}
+                    >
+                        {I18n.t(`settings.status.options.${isRunning}`)}
                     </EuiButton>
                     <EuiHorizontalRule margin="l" />
                     <EuiDescriptionList type="column" listItems={engineDescription} style={{ maxWidth: "400px" }} />
