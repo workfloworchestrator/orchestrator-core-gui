@@ -21,19 +21,25 @@ export type ListAddFieldProps = Override<
     { initialCount?: number; name: string; value: unknown }
 >;
 
-function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
-    const parent = useField<{ maxCount?: number }, unknown[]>(parentName, {}, { absoluteName: true })[0];
+    const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(
+        parentName,
+        {},
+        { absoluteName: true }
+    )[0];
 
     const limitNotReached = !disabled && !(parent.maxCount! <= parent.value!.length);
+    const count = 1 + Math.max((initialCount ?? 0) - parent.value!.length, 0);
 
     return (
         <div className="add-item" {...filterDOMProps(props)}>
             <i
                 className={`fa fa-plus ${!limitNotReached ? "disabled" : ""}`}
                 onClick={() => {
-                    if (limitNotReached) parent.onChange(parent.value!.concat([cloneDeep(value)]));
+                    const newRowsValue = Array(count).fill(cloneDeep(value));
+                    if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
                 }}
             />
         </div>
