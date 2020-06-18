@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -209,10 +209,19 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 if (!step.form) {
                     return null;
                 }
-                json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
-                    acc[field.name] = "";
-                    return acc;
-                }, {});
+                if (Array.isArray(step.form)) {
+                    json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
+                        acc[field.name] = "";
+                        return acc;
+                    }, {});
+                } else {
+                    Object.keys(step.form.properties as {})
+                        .sort()
+                        .reduce<{ [index: string]: any }>((acc, field) => {
+                            acc[field] = "";
+                            return acc;
+                        }, {});
+                }
                 break;
             case "failed":
             case "waiting":

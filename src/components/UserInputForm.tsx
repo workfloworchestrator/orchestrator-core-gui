@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -280,7 +280,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
     };
 
     renderInput = (userInput: InputField) => {
-        if (userInput.type === "hidden") {
+        if (["hidden", "metadata"].includes(userInput.type)) {
             return;
         }
 

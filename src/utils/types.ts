@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,6 +12,8 @@
  * limitations under the License.
  *
  */
+
+import { JSONSchema6 } from "json-schema";
 
 export interface FilterArgument {
     id: string;
@@ -282,11 +284,19 @@ export interface IMSService {
 }
 
 export interface IMSPort {
+    id: number;
     line_name: string;
     node: string;
     port: string;
     iface_type: string;
     patchposition: string;
+    status: string;
+}
+
+export interface IMSNode {
+    id: number;
+    name: string;
+    status: string;
 }
 
 export interface WorkflowReason {
@@ -317,7 +327,7 @@ export interface EngineStatus {
     global_status: GlobalStatus;
 }
 
-export type InputForm = InputField[];
+export type InputForm = InputField[] | JSONSchema6;
 
 export interface ContactPerson {
     name: string;

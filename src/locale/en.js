@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -79,6 +79,324 @@ I18n.translations.en = {
             delete: "Process {{name}} is deleted",
             abort: "Process {{name}} is aborted",
             retry: "Process {{name}} has been retried"
+        }
+    },
+    forms: {
+        widgets: {
+            nodePort: {
+                selectNodeFirst: "First select a node",
+                selectPort: "Select a port"
+            },
+            contactPersonName: {
+                placeholder: "Search and add contact persons..."
+            },
+            select: {
+                placeholder: "Search and select a value..."
+            },
+            locationCode: {
+                placeholder: "Search and select a location code..."
+            },
+            organisation: {
+                placeholder: "Search and select a customer..."
+            },
+            product: {
+                placeholder: "Search and select a product..."
+            },
+            subscription: {
+                placeholder: "Search and select a subscription...",
+                missingDescription: "<No description>",
+                missingCrmPortId: "<No CRM port ID>",
+                missingPortMode: "<No port_mode>"
+            },
+            subscriptionSummary: {
+                customerName: "Customer",
+                name: "Name",
+                status: "Status",
+                description: "Description",
+                subscriptionChildren: "Child subscriptions - ports used in {{product}}",
+                subscription: "Subscription",
+                resourceTypes: "Subscription Instance Values",
+                resourceTypesInfo: "The resource types of the associated product block(s) of this subscription",
+                productTitle: "Product",
+                product: {
+                    name: "Name",
+                    description: "Description",
+                    productType: "Product type",
+                    tag: "Tag"
+                }
+            },
+            vlan: {
+                vlansInUseError: "VLAN range {{vlans}} are already in use for the selected service port",
+                vlansInUse: "Already used VLAN ranges for this service port: {{vlans}}",
+                missingInIms: "This service port can not be found in IMS. It may be deleted or in an initial state.",
+                allPortsAvailable: "This service port has no VLANs in use (yet).",
+                placeholder: "Enter a valid VLAN range...",
+                placeholderNoServicePort: "First select a Service Port...",
+                invalidVlan:
+                    "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'",
+                untaggedPortInUse: "This service port is already in use and cannot be chosen",
+                taggedOnly:
+                    "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
+            }
+        },
+        fields: {
+            bgp_ip_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
+            contact_persons_fields: { email: "Email", name: "Name", phone: "Phone number" },
+            service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan", bandwidth: "Bandwidth" },
+            accept_accept: {
+                noc_modification_confirmation: "NOC confirms modification of service",
+                noc_modification_confirmation_info:
+                    "Confirm that the modifications are implemented in the network as specified.",
+                noc_modification_confirmation_template:
+                    "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}"
+            },
+            added_service_ports: "Add ports",
+            added_service_ports_info: "Select some ports to add them to this subscription",
+            asn: "Autonomous System Number",
+            asn_info: "Asn of the customer",
+            auto_negotiation: "Auto Negotiation",
+            auto_negotiation_info:
+                "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
+            bandwidth: "Bandwidth",
+            bandwidth_info: "Desired bandwidth in Mbit/s",
+            bfd: "BFD",
+            bfd_info: "Bidirectional Forwarding Detection",
+            bgp_export_policy: "BGP Export Policy",
+            bgp_export_policy_info: "Border Gateway Protocol routing table option.",
+            bgp_hash_algorithm: "BGP Hash Algorithm",
+            bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
+            bgp_ip_service_ports: "IP Service Ports",
+            bgp_ip_service_ports_info:
+                "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.",
+            bgp_password: "BGP Password",
+            bgp_password_info: "Password used to secure BGP session, leave empty for an auto generated password.",
+            bgp_session_priority: "BGP Session Priority",
+            bgp_session_priority_info: "Border Gateway Protocol local preference.",
+            bum_filter:
+                "Enable BUM Filter. When selected broadcast, unknown-unicast and multicast traffic will be limited to 10% of the port speed.",
+            chosen_service_port: "Selected Port",
+            chosen_service_port_info: "Settings will apply to the following port",
+            chosen_service_port_label: "Service Attach Point settings for selected port",
+            configuration_ready: "Configuration ready",
+            configuration_ready_info: "All of the work entailed is successfully configured",
+            confirm_corelink: "When you submit this from the Corelink will be deployed",
+            confirm_corelink_info:
+                "Please design the physical layer of the Corelink in IMS. When you are done, please submit the form.",
+            confirm_corelink_working: "Is the Corelink working?",
+            confirm_corelink_working_info: "Please confirm that the corelink is working correctly",
+            confirm_migrate_sap_accept: {
+                confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
+                check_delete_sn7_service_config: "Delete the SURFnet7 IP service config from Alice and Bob.",
+                check_port_patched_sn7_sn8: "Physically patch the customer port from SN7 to SN8 HW.",
+                next_step_service_affecting: "Watch out! The next step is service impacting for the customer service",
+                confirm_migrate_sap: "Confirm the migration of the SAP",
+                skip_migrate_sap_workflow:
+                    "do not continue with the migration and return to the original state, this will end the workflow without making any changes"
+            },
+            confirm_migrate_sap_cleanup_accept: {
+                check_sn7_port_terminated: "Terminate SN7 SSP/MSP",
+                check_removed_ism_config: "Remove ISM configuration (when applicable remove SN7 node)",
+                check_removed_sn7_service_and_tunnel: "Remove SN7 service & tunnel from ISM",
+                check_removed_sn7_node_config: "Remove SN7 service config Alice and Bob",
+                notify_run_remaining_sap_migrates:
+                    'If applicable, repeat the "Migrate one SAP" workflow for the other remaining SAPs',
+                check_terminate_sn7_subscription:
+                    "Do not forget to run a terminate workflow for the empty SN7 subscription"
+            },
+            confirm_migrate_sap_customer: "Confirm SAP is migrated ok",
+            confirm_migrate_sap_customer_info: "Customer has confirmed that the SAP is migrated and working",
+            confirm_port_removal: "Replacement confirmation",
+            confirm_port_removal_info:
+                "Please confirm that the old service has been replaced by a new service with one port replaced",
+            contact_persons: "Customer contact persons",
+            contact_persons_info:
+                "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.",
+            corelink_service_speed: "Please choose the corelink speed",
+            corelink_service_speed_info: "This will restrict the interface choices to the correct values",
+            crm_port_id: "The CRM identifier for a port",
+            crm_port_id_info: "Provide a valid, 5 digit, CRM Port ID (Surfnet7), for example 03602",
+            current_bandwidth: "Bandwidth",
+            current_bandwidth_info: "Current bandwidth in Mbit/s",
+            customer_aggregate: "CUSTOMER_AGGREGATE",
+            customer_ipv4_mtu: "IPv4 MTU",
+            customer_ipv4_mtu_info:
+                "Customer MTU for IPv4 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            customer_ipv6_mtu: "IPv6 MTU",
+            customer_ipv6_mtu_info:
+                "Customer MTU for IPv6 traffic (Must be 1500 or 9000 unless explicitly otherwise specified by customer)",
+            destination: "MSP right",
+            destination_info: "The right MSP in the lightpath",
+            device_port_name: "Device port name",
+            device_port_name_info: "Port name to configure on the physical device",
+            downgrade_redundant_lp_choice: "Redundant LP Subscription",
+            downgrade_redundant_lp_choice_info:
+                "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+            extra_information: "Extra information",
+            extra_information_info:
+                "Additional information to add to the subscription description and IPAM description",
+            first_lightpath: "Primary LP",
+            ieee_interface_type: "IEEE interface type",
+            ieee_interface_type_info: "Choose an IEEE interface type",
+            ims_node_id: "Choose a node from IMS",
+            ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
+            ims_port_id_1: "First node and port",
+            ims_port_id_1_info: "Choose a node and port that you want to use to create the first corelink",
+            ims_port_id_2: "Second node and port",
+            ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
+            internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
+            internetpinnen_prefix_subscriptions_info:
+                "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
+            ip_prefix: "Select a free subnet",
+            ip_prefix_info: "In the next step you can allocate any prefix under the subnet you select here",
+            ip_prefix_subscriptions: "IP Prefix subscriptions",
+            ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
+            ip_static_service_port: "IP Service Port",
+            ip_static_service_port_fields: {
+                subscription_id: "Subscription id",
+                vlan: "Vlan"
+            },
+            ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
+            ipv4_prefixlen: "IPv4 Prefix length",
+            ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
+            isis_metric: "IS-IS metric",
+            isis_metric_info: "Enter the desired IS-IS metric for this corelink",
+            link_member_port: "Link Member",
+            link_member_port_fields: {
+                subscription_id: "Subscription id",
+                vlan: "Vlan"
+            },
+            link_member_port_info:
+                "Choose a Service Port - only link_member ports for the selected organisation are shown",
+            location_code: "Location code",
+            location_code_info: "Provide a valid location code",
+            multicast: "Multicast",
+            network_changes_ready: "NMS changes ready",
+            network_changes_ready_info:
+                "All of the work entailed with regards to the changed LightPaths is successfully done in NMS. If IMS needs updating this will happen after this step",
+            new_bandwidth: "New bandwidth",
+            new_bandwidth_info: "New bandwidth in Mbit/s",
+            new_interface_type: "The new interface type of the port",
+            new_interface_type_info: "Please select the new interface type of the port",
+            new_service_port: "Select Service Port that needs to be replaced",
+            new_service_port_info: "Select replacement Service Port.",
+            new_subscription_id: "Subscription ID of the new subscription",
+            new_subscription_id_info:
+                "Enter the subscription ID of the SN8 (active or provisioning) subscription as a destination for the migration",
+            nms_service_id: "NMS service id",
+            nms_service_id_info: "The id of the service on the network (0000-9999)",
+            nms_service_updated: "NMS Service has been updated",
+            nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
+            noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
+            noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
+            noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
+            noc_downgrade_lichtpad_confirmation_info:
+                "Is the redundant LightPath downgraded to a non-redundant LightPath?",
+            noc_network_confirmation_accept: {
+                noc_network_confirmation: "Confirmation",
+                noc_network_confirmation_info: "Confirm implementation of changes in the network",
+                noc_upgrade_redundant_confirmation_intro:
+                    "Follow this link for all details on the new redundant LightPath: ",
+                noc_upgrade_redundant_confirmation_steps_intro: "Please execute the following steps:",
+                noc_upgrade_redundant_confirmation_LR2_built_info: "LR2 has been built in the network",
+                noc_upgrade_redundant_confirmation_LPE_renamed_info: "LPE has been renamed in the network"
+            },
+            noc_remove_bgp_confirmation: "Confirm removal",
+            noc_remove_bgp_confirmation_info: "Is this BGP IP service removed from the network?",
+            noc_remove_port_confirmation_accept: {
+                noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?"
+            },
+            noc_remove_static_ip_confirmation: "Confirm removal",
+            noc_remove_static_ip_confirmation_info: "Is this Static IP service removed from the network?",
+            noc_subtask_confirmation_accept: {
+                noc_subtask_confirmation: "Are all subtasks executed correctly?",
+                noc_subtask_confirmation_info: "Please check the requirements below:",
+                check_service_built: "The new service has been built on the network",
+                check_iface_no_errors: "The interface does not give any errors",
+                check_cfm_up: "The CFM is up",
+                check_ims_defined: "The new path for service has been put in IMS",
+                check_ims_circuit: "{{circuit_name}}",
+                check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
+            },
+            note: "Notes",
+            note_info: "Notes, reminders and feedback about this description.",
+            nsi_isalias: "NSI isAlias",
+            nsi_isalias_info: "",
+            old_service_port: "Service Port",
+            old_service_port_info: "Choose Service Ports to change",
+            old_subscription_label: "Old Subscription",
+            old_subscription_label_info: "The old subscription in this workflow",
+            organisation: "Customer",
+            organisation_info: "Search and select the customer for the product.",
+            plan_dont_allocate: "Set state to planned",
+            plan_dont_allocate_info: "Register this prefix as planned, but do not allocate yet",
+            port_id: "Port",
+            port_id_info: "Select a port",
+            port_mode: "Port Mode",
+            port_mode_info: "The port mode of the new service port",
+            primary_remote_port_shutdown: "Primary Remote port shutdown",
+            primary_service_ports: "Primary Service Ports",
+            primary_service_ports_info: "Choose Primary Service Ports",
+            primary_service_speed: "Primary Speed",
+            primary_service_speed_info:
+                "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+            primary_speed_policer: "Primary Speed policer",
+            product: "Product",
+            product_info: "Search and select the product",
+            remote_port_shutdown: "Remote port shutdown",
+            removed_service_ports: "Remove ports",
+            removed_service_ports_info: "Select some ports to remove them from this subscription",
+            sap_migration_summary: "Summary of SAP migration changes",
+            sap_migration_summary_info:
+                "Please check the summary for any inconsistencies in the port that will be removed",
+            sap_summary_sn7: "Summary of available SN7 SAP's",
+            sap_summary_sn7_info: "All available SN7 SAP's, of the subscription you're migrating, with port details",
+            second_lightpath: "Secondary LP",
+            secondary_remote_port_shutdown: "Secondary Remote port shutdown",
+            secondary_service_ports: "Secondary Service Ports",
+            secondary_service_ports_info: "Choose Secondary Service Ports",
+            secondary_service_speed: "Secondary Speed",
+            secondary_service_speed_info:
+                "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+            secondary_speed_policer: "Secondary Speed policer",
+            selected_sap: "Select a Service Attach Point",
+            selected_sap_info: "Choose the SAP you want to migrate",
+            service_ports: "Service Ports",
+            service_ports_info: "Choose Service Ports",
+            service_ports_primary: "Service Ports",
+            service_ports_primary_info: "The A1 and B1 side",
+            service_ports_secondary: "Service Ports",
+            service_ports_secondary_info: "The A2 and B2 side",
+            service_speed: "Speed",
+            service_speed_info:
+                "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+            source: "MSP left",
+            source_info: "The left MSP in the lightpath",
+            speed_policer: "Speed policer",
+            subscription_id: "Subscription",
+            subscription_id_info: "The subscription for this action",
+            surfcert_filter: "SURFcert filter",
+            surfcert_filter_info: "Type of the SURFcert filter.",
+            ticket_id: "Jira ticket ID",
+            ticket_id_info: "The JIRA ticket ID that will be used/mentioned in the confirmation mail",
+            to_internet: "TO_INTERNET",
+            transition_product: "Choose New Product for this Subscription",
+            transition_product_info:
+                "Choose a new product - scoped on the maximum capacity of the LP's using this port - with a new speed.",
+            transition_product_downgrade: "Choose New Product",
+            transition_product_downgrade_info:
+                "Choose the new Product for this subscription after the downgrade (scoped by the current product)",
+            transition_product_speed: "Choose New Product",
+            transition_product_speed_info:
+                "Choose a new product - scoped on the maximum capacity of the current ports - with a new speed.",
+            transition_product_upgrade: "Choose New Product",
+            transition_product_upgrade_info:
+                "Choose the new Product for this subscription after the upgrade (scoped by the current product)",
+            trunk_to_remove: "Remove trunk",
+            trunk_to_remove_info: "Select a trunk to remove",
+            vlan_retagging:
+                "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance window for active L2VPN services!!",
+            zone: "Zone",
+            zone_info: "DNS Zone to check"
         }
     },
     process: {

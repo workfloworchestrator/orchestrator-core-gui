@@ -1,6 +1,5 @@
-import { ENV } from "env";
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,13 +12,16 @@ import { ENV } from "env";
  * limitations under the License.
  *
  */
+import { ENV } from "env";
 import I18n from "i18n-js";
 import { User } from "oidc-client";
 
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 import {
+    ContactPerson,
     EngineStatus,
+    IMSNode,
     IMSPort,
     IMSService,
     Organization,
@@ -260,7 +262,7 @@ export function subscriptionWorkflows(subscription_id: string): Promise<Workflow
     return fetchJson(`v2/subscriptions/workflows/${subscription_id}`);
 }
 
-export function subscriptionsByProductId(productId: string) {
+export function subscriptionsByProductId(productId: string): Promise<Subscription[]> {
     return fetchJson(`subscriptions/product/${productId}`);
 }
 
@@ -279,7 +281,7 @@ export function organisations(): Promise<Organization[] | undefined> {
     });
 }
 
-export function getNodesByLocationAndStatus(locationCode: string, status: string) {
+export function getNodesByLocationAndStatus(locationCode: string, status: string): Promise<IMSNode[]> {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
 
@@ -288,7 +290,7 @@ export function getFreePortsByNodeIdAndInterfaceType(
     interfaceType: string,
     status: string,
     mode: string
-) {
+): Promise<IMSPort[]> {
     return fetchJson(`ims/free_ports/${nodeId}/${interfaceType}/${status}/${mode}`);
 }
 
@@ -296,7 +298,7 @@ export function freePortsForLocationCodeAndInterfaceType(locationCode: string, i
     return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`);
 }
 
-export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId: number, interfaceType: string) {
+export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId: string, interfaceType: number): Promise<IMSPort[]> {
     return fetchJson(`ims/free_corelink_ports/${nodeId}/${interfaceType}`);
 }
 
@@ -520,8 +522,10 @@ export function validation(productId: string): Promise<ProductValidation> {
     return fetchJson(`products/${productId}/validate`);
 }
 
-export function contacts(organisationId: string) {
-    return fetchJson(`crm/contacts/${organisationId}`, {}, {}, false, true).catch(err => Promise.resolve([]));
+export function contacts(organisationId: string): Promise<ContactPerson[]> {
+    return fetchJson<ContactPerson[]>(`crm/contacts/${organisationId}`, {}, {}, false, true).catch(err =>
+        Promise.resolve([])
+    );
 }
 
 export function reportError(error: {}) {

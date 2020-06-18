@@ -1,0 +1,86 @@
+/*!
+ * Copyright 2019-2020 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+@use "../../../stylesheets/vars.scss";
+
+ul.list-field {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    li {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5px;
+
+        > section {
+            display: flex;
+            flex-grow: 20;
+            flex-direction: column;
+            &.nest-field {
+                flex-direction: row;
+            }
+            & > * {
+                display: flex;
+                flex-direction: column;
+
+                width: 100%;
+
+                margin-left: 5px;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        i.fa-minus {
+            padding-left: 5px;
+            color: vars.$red;
+            font-size: 30px;
+
+            cursor: pointer;
+            &.disabled {
+                cursor: not-allowed;
+                color: vars.$light-grey;
+            }
+        }
+        // Hide all labels for sub fields
+        label {
+            display: none;
+        }
+
+        &:first-of-type {
+            //Except for the first row
+            label {
+                display: initial;
+            }
+            section.nest-field ~ i.fa-minus {
+                margin-top: 25px;
+            }
+        }
+    }
+    div.add-item {
+        display: flex;
+        i.fa-plus {
+            margin-left: auto;
+            padding: 10px 2px 0 0;
+            color: vars.$green;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -32,7 +32,7 @@ export default {
     }
 };
 
-export const AllWidgetsForm = () => {
+function prepare() {
     fetchMock.restore();
     fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
     fetchMock.get(
@@ -50,6 +50,14 @@ export const AllWidgetsForm = () => {
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
         )
+    );
+    fetchMock.get(
+        "/api/v2/subscriptions/ports?filter=tags,IPS&filter=statuses,active",
+        SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
+    );
+    fetchMock.get(
+        "/api/v2/subscriptions/ports?filter=tags,IPBGP&filter=statuses,active",
+        SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
     fetchMock.get(
         "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL&filter=statuses,active",
@@ -76,10 +84,9 @@ export const AllWidgetsForm = () => {
     fetchMock.get("/api/products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7", ["1000BASE-T"]);
     fetchMock.get("/api/products/a3bf8b26-50a6-4586-8e58-ad552cb39798", PRODUCTS[0]);
     fetchMock.get("glob:*/api/ims/vlans/*", [[3, 5]]);
+}
 
+export const AllWidgetsForm = () => {
+    prepare();
     return <UserInputContainer formName="Corelink form" stepUserInput={FORM} />;
-};
-
-AllWidgetsForm.story = {
-    name: "Old"
 };

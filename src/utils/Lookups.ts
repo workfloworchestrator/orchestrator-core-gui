@@ -1,6 +1,5 @@
-import { Organization, Product, SubscriptionWithDetails } from "./types";
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,6 +12,7 @@ import { Organization, Product, SubscriptionWithDetails } from "./types";
  * limitations under the License.
  *
  */
+import { Organization, Product, SubscriptionWithDetails } from "./types";
 import { isEmpty } from "./Utils";
 
 export function organisationNameByUuid(uuid: string, organisations?: Organization[]) {

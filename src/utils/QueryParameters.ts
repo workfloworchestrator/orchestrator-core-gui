@@ -1,14 +1,5 @@
-import { Search } from "history";
-import {
-    QueryParamConfig,
-    decodeDelimitedArray,
-    decodeDelimitedNumericArray,
-    encodeDelimitedArray,
-    encodeDelimitedNumericArray
-} from "use-query-params";
-
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,6 +12,14 @@ import {
  * limitations under the License.
  *
  */
+import { Search } from "history";
+import {
+    QueryParamConfig,
+    decodeDelimitedArray,
+    decodeDelimitedNumericArray,
+    encodeDelimitedArray,
+    encodeDelimitedNumericArray
+} from "use-query-params";
 
 export interface LocationSearchHash {
     [index: string]: string[];

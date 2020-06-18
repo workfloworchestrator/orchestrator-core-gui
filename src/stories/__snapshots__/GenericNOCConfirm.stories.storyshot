@@ -1,5 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots GenericNOCConfirm Accept Field 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          NOC Confirm
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="accept-field"
+                  id="input-confirm_migrate_sap"
+                >
+                  <div>
+                    <label>
+                      Delete the SURFnet7 IP service config from Alice and Bob.
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      Physically patch the customer port from SN7 to SN8 HW.
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      className="warning"
+                    >
+                      Watch out! The next step is service impacting for the customer service
+                    </label>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="confirm_migrate_sap"
+                      name="confirm_migrate_sap"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="confirm_migrate_sap"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="confirm_migrate_sap"
+                    >
+                      Confirm the migration of the SAP
+                    </label>
+                  </div>
+                  <div
+                    className="skip"
+                  >
+                    <input
+                      checked={false}
+                      disabled={false}
+                      id="skip_migrate_sap_workflow"
+                      name="skip_migrate_sap_workflow"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="skip_migrate_sap_workflow"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="skip_migrate_sap_workflow"
+                    >
+                      do not continue with the migration and return to the original state, this will end the workflow without making any changes
+                    </label>
+                  </div>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
 exports[`Storyshots GenericNOCConfirm Complex 1`] = `
 <section
   className="storybook-container"
