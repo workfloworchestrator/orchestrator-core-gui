@@ -21,6 +21,7 @@ export type LabelFieldProps = Override<
         id: string;
         label: string;
         name: string;
+        onChange: () => void;
     }
 >;
 
