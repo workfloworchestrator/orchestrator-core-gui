@@ -133,7 +133,7 @@ export const Settings: SFC = (props: IProps) => {
                         aria-label="Select cache to clear"
                     />
                     <EuiSpacer />
-                    <EuiButton fill iconSide="right" iconType="refresh" onClick={flushCache}>
+                    <EuiButton id="flush-cache" fill iconSide="right" iconType="refresh" onClick={flushCache}>
                         {I18n.t("settings.cache.clear")}
                     </EuiButton>
                 </EuiCard>
@@ -144,6 +144,7 @@ export const Settings: SFC = (props: IProps) => {
                     description={<span>{I18n.t("settings.status.info_detail")}</span>}
                 >
                     <EuiButton
+                        id="toggle-engine-status"
                         iconType={isRunning ? "pause" : "play"}
                         fill
                         color={isRunning ? "warning" : "primary"}
