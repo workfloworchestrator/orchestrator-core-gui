@@ -63,7 +63,7 @@ export const Settings: SFC = (props: IProps) => {
 
     const lockEngine = (isLocked: boolean) => {
         setGlobalStatus(isLocked).then(() => {
-            setFlash(I18n.t(`settings.status.engine.${isLocked}`));
+            setFlash(I18n.t(`settings.status.engine.${isLocked ? "pausing" : "restarted"}`));
         });
     };
 
