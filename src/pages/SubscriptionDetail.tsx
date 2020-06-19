@@ -380,64 +380,82 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         index: number,
         className: string = "",
         subscriptionProcesses: SubscriptionProcesses[] = []
-    ) => (
-        <table className={`detail-block ${className}`} key={index}>
-            <thead />
-            <tbody>
-                <tr>
-                    <td id="subscriptions-id-k">{I18n.t("subscriptions.id")}</td>
-                    <td id="subscriptions-id-v">
-                        <a
-                            href={`/subscriptions/${subscription.subscription_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {subscription.subscription_id}
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-name-k">{I18n.t("subscriptions.name")}</td>
-                    <td id="subscriptions-name-v">{subscription.product.name}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-description-k">{I18n.t("subscriptions.description")}</td>
-                    <td id="subscriptions-description-v">{subscription.description}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-startdate-k">{I18n.t("subscriptions.start_date_epoch")}</td>
-                    <td id="subscriptions-startdate-v">{renderDate(subscription.start_date)}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-enddate-k">{I18n.t("subscriptions.end_date_epoch")}</td>
-                    <td id="subscriptions-enddate-v">{renderDate(subscription.end_date)}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-status-k">{I18n.t("subscriptions.status")}</td>
-                    <td id="subscriptions-status-v">{subscription.status}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
-                    <td id="subscriptions-insync-v">
-                        <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
-                        {!subscription.insync && this.renderFailedTask(subscriptionProcesses)}
-                    </td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-customer-name-k">{I18n.t("subscriptions.customer_name")}</td>
-                    <td id="subscriptions-customer-name-v">{subscription.customer_name || ""}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-customer-id-k">{I18n.t("subscriptions.customer_id")}</td>
-                    <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
-                </tr>
-                <tr>
-                    <td id="subscriptions-note-k">{I18n.t("subscriptions.note")}</td>
-                    <td id="subscriptions-note-v">{subscription.note}</td>
-                </tr>
-            </tbody>
-        </table>
-    );
+    ) => {
+        const { organisations } = this.context;
+        return (
+            <table className={`detail-block ${className}`} key={index}>
+                <thead />
+                <tbody>
+                    <tr>
+                        <td id="subscriptions-id-k">{I18n.t("subscriptions.id")}</td>
+                        <td id="subscriptions-id-v">
+                            <a
+                                href={`/subscriptions/${subscription.subscription_id}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {subscription.subscription_id}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-name-k">{I18n.t("subscriptions.name")}</td>
+                        <td id="subscriptions-name-v">{subscription.product.name}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-description-k">{I18n.t("subscriptions.description")}</td>
+                        <td id="subscriptions-description-v">{subscription.description}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-startdate-k">{I18n.t("subscriptions.start_date_epoch")}</td>
+                        <td id="subscriptions-startdate-v">{renderDate(subscription.start_date)}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-enddate-k">{I18n.t("subscriptions.end_date_epoch")}</td>
+                        <td id="subscriptions-enddate-v">{renderDate(subscription.end_date)}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-status-k">{I18n.t("subscriptions.status")}</td>
+                        <td id="subscriptions-status-v">{subscription.status}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-insync-k">{I18n.t("subscriptions.insync")}</td>
+                        <td id="subscriptions-insync-v">
+                            <CheckBox value={subscription.insync || false} readOnly={true} name="isync" />
+                            {!subscription.insync && this.renderFailedTask(subscriptionProcesses)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-customer-name-k">{I18n.t("subscriptions.customer_name")}</td>
+                        <td id="subscriptions-customer-name-v">{subscription.customer_name || ""}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-customer-id-k">{I18n.t("subscriptions.customer_id")}</td>
+                        <td id="subscriptions-customer-id-v">{subscription.customer_id}</td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-customer-descriptions-k">
+                            {I18n.t("subscriptions.customer_descriptions")}
+                        </td>
+                        <td id="subscriptions-customer-descriptions-v">
+                            <dl>
+                                {subscription.customer_descriptions.map(description => (
+                                    <React.Fragment>
+                                        <dt>{organisationNameByUuid(description.customer_id, organisations)}</dt>
+                                        <dd>{description.description}</dd>
+                                    </React.Fragment>
+                                ))}
+                            </dl>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="subscriptions-note-k">{I18n.t("subscriptions.note")}</td>
+                        <td id="subscriptions-note-v">{subscription.note}</td>
+                    </tr>
+                </tbody>
+            </table>
+        );
+    };
 
     renderDienstafname = () => {
         if (!this.state.dienstafname) {
