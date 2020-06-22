@@ -134,7 +134,9 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                             {I18n.t("header.links.help")}
                         </EuiHeaderLink>
 
-                        <EuiHeaderLink onClick={this.logout}>{I18n.t("header.links.logout")}</EuiHeaderLink>
+                        <EuiHeaderLink id="logout" onClick={this.logout}>
+                            {I18n.t("header.links.logout")}
+                        </EuiHeaderLink>
 
                         {currentUser && (
                             <EuiHeaderLink
