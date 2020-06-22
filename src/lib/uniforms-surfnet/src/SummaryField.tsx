@@ -20,13 +20,15 @@ import { Override, connectField, filterDOMProps } from "uniforms";
 import { isEmpty } from "../../../utils/Utils";
 
 export type SummaryFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
+    HTMLProps<HTMLInputElement>,
     {
-        id: string;
-        label: string;
-        description: string;
-        name: string;
+        id?: string;
+        label?: string;
+        description?: string;
+        name?: string;
         data?: { headers: string[]; labels: string[]; columns: string[][] };
+        value?: string;
+        onChange: () => void;
     }
 >;
 

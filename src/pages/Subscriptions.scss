@@ -21,6 +21,7 @@
 .subscriptions-container {
     @include mixins.page;
     background-color: white;
+    padding-bottom: 10px;
 }
 .actions {
     margin: 10px 0px -40px 10px;

@@ -23,6 +23,7 @@ import React, { useEffect } from "react";
 import {
     Column,
     ColumnInstance,
+    Hooks,
     LocalTableSettings,
     Row,
     RowPropGetter,
@@ -240,10 +241,11 @@ export function NwaTable<T extends object>({
             autoResetSortBy: false,
             autoResetExpanded: false,
             debug: true,
+            // @ts-ignore Compiler expects id and value even on ActionTypes without them
             stateReducer: tableSettingsReducer,
             initialState: initialState
         },
-        hooks => {
+        (hooks: Hooks<T>) => {
             hooks.getRowProps.push(extraRowPropGetter);
         },
         useFilters,

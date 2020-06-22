@@ -15,12 +15,12 @@
 
 import "./ProcessStateDetails.scss";
 
+import { EuiButton, EuiIcon, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import sortBy from "lodash/sortBy";
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { NavLink } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 
 import { CustomProcessWithDetails } from "../pages/ProcessDetail";
@@ -91,18 +91,20 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             <section className="header-information">
                 <ul>
                     <li className="process-wording">
-                        <h3>
-                            {this.props.isProcess &&
-                                I18n.t("process_state.wording_process", {
-                                    product: process.productName,
-                                    customer: process.customerName,
-                                    workflow: process.workflow_name
-                                })}
-                            {!this.props.isProcess &&
-                                I18n.t("process_state.wording_task", {
-                                    workflow: process.workflow_name
-                                })}
-                        </h3>
+                        <EuiText>
+                            <h3>
+                                {this.props.isProcess &&
+                                    I18n.t("process_state.wording_process", {
+                                        product: process.productName,
+                                        customer: process.customerName,
+                                        workflow: process.workflow_name
+                                    })}
+                                {!this.props.isProcess &&
+                                    I18n.t("process_state.wording_task", {
+                                        workflow: process.workflow_name
+                                    })}
+                            </h3>
+                        </EuiText>
                     </li>
                 </ul>
                 <ul>
@@ -175,12 +177,17 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             <section className="subscription-link">
                 {subscriptionProcesses.map((ps, index: number) => (
                     <div key={index}>
-                        <NavLink to={`/subscriptions/${ps.subscription_id}`} className="button green">
-                            <i className="fa fa-link" />{" "}
+                        <EuiButton
+                            id="to-subscription"
+                            href={`/subscriptions/${ps.subscription_id}`}
+                            fill
+                            color="secondary"
+                            iconType="link"
+                        >
                             {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
                                 target: ps.workflow_target
                             })}
-                        </NavLink>
+                        </EuiButton>
                     </div>
                 ))}
             </section>
@@ -248,13 +255,13 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         if (isEmpty(json)) {
             return null;
         }
-        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "fa fa-user" : "fa fa-cloud";
+        const iconName = index === 0 || steps[index - 1].status === "suspend" ? "user" : "pipelineApp";
         const stepIsCollapsed = this.props.collapsed && this.props.collapsed.includes(index);
 
         return (
             <section className="state-changes">
                 <section className="state-divider">
-                    <i className={iconName} />
+                    <EuiIcon type={iconName} size="xxl" className="step-type" color="primary" fill="dark" />
                 </section>
 
                 <section className={stepIsCollapsed ? "state-delta collapsed" : "state-delta"}>
