@@ -105,7 +105,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                 return (
                     <CheckBox
                         key={index}
-                        name={name}
+                        name={name} // Index needed to allow checkboxes with same name
                         onChange={this.onChangeInternal(index, true)}
                         value={skip_workflow}
                         info={label}
@@ -116,7 +116,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                 return (
                     <CheckBox
                         key={index}
-                        name={name}
+                        name={name + index} // Index needed to allow checkboxes with same name
                         className={type.startsWith(">") ? "level_2" : undefined}
                         onChange={this.onChangeInternal(index)}
                         value={checks[index]}
