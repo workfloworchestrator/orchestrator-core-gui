@@ -201,6 +201,36 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         return typeof value === "object" ? <HighlightCode data={JSON.stringify(value, null, 3)} /> : value.toString();
     };
 
+    displayMailConfirmation = (value: any) => {
+        if (isEmpty(value)) {
+            return "";
+        }
+        return (
+            <EuiText size={"s"}>
+                <h4>To</h4>
+                <p>
+                    {value.to.map((v: { email: String; name: String }) => (
+                        <div>
+                            {v.name} &lt;<a href={`mailto: ${v.email}`}>{v.email}</a>&gt;
+                        </div>
+                    ))}
+                </p>
+                <h4>CC</h4>
+                <p>
+                    {value.cc.map((v: { email: String; name: String }) => (
+                        <div>
+                            {v.name} &lt;<a href={`mailto: ${v.email}`}>{v.email}</a>&gt;
+                        </div>
+                    ))}
+                </p>
+                <h4>Subject</h4>
+                <p>{value.subject}</p>
+                <h4>Message</h4>
+                <div dangerouslySetInnerHTML={{ __html: value.message }}></div>
+            </EuiText>
+        );
+    };
+
     renderStateChanges = (steps: Step[], index: number) => {
         const step = steps[index];
         const status = step.status;
@@ -273,7 +303,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                         {key}
                                     </td>
                                     <td id={`${index}-${applyIdNamingConvention(key)}-v`} className="value">
-                                        {this.displayStateValue(json[key])}
+                                        {key === "confirmation_mail"
+                                            ? this.displayMailConfirmation(json[key])
+                                            : this.displayStateValue(json[key])}
                                     </td>
                                 </tr>
                             ))}
