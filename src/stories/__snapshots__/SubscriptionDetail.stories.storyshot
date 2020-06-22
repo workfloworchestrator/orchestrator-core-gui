@@ -160,6 +160,37 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
               </tr>
               <tr>
                 <td
+                  id="subscriptions-customer-descriptions-k"
+                >
+                  Customer description(s)
+                </td>
+                <td
+                  id="subscriptions-customer-descriptions-v"
+                >
+                  <dl>
+                    <dt>
+                      5203e539-0a11-e511-80d0-005056956c1a
+                    </dt>
+                    <dd>
+                      Some description
+                    </dd>
+                    <dt>
+                      Workaround solutionsi B.V.
+                    </dt>
+                    <dd>
+                      Some description 2
+                    </dd>
+                    <dt>
+                      Portal Test Universiteit
+                    </dt>
+                    <dd>
+                      Some description 3, some verrrrrrrry long long long long long long description
+                    </dd>
+                  </dl>
+                </td>
+              </tr>
+              <tr>
+                <td
                   id="subscriptions-note-k"
                 >
                   Note
