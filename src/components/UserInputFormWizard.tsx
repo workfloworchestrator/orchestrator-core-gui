@@ -85,9 +85,10 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
     };
 
     render() {
-        const { forms } = this.state;
+        const { forms, userInputs } = this.state;
 
         const currentForm = forms[forms.length - 1];
+        const currentUserInput = userInputs[forms.length - 1];
 
         if (!currentForm) {
             return null;
@@ -111,13 +112,14 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
                 <UserInputFormNew
                     // Generate a key based on input widget names that results in a new
                     // instance of UserInputForm if the form changes
-                    key={Object.keys(currentForm.form).join()}
+                    key={Object.keys(currentForm.form.properties as {}).join()}
                     stepUserInput={currentForm.form}
                     validSubmit={this.submit}
                     previous={this.previous}
                     hasNext={currentForm.hasNext}
                     hasPrev={forms.length > 1}
                     cancel={this.props.cancel}
+                    userInput={currentUserInput}
                 />
             );
         }

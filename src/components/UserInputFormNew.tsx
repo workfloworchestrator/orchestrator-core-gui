@@ -62,6 +62,7 @@ interface IProps {
     previous: (e: React.MouseEvent<HTMLButtonElement>) => void;
     hasNext?: boolean;
     hasPrev?: boolean;
+    userInput: {};
 }
 
 interface IState {
@@ -318,7 +319,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
 
     render() {
         const { confirmationDialogOpen, nrOfValidationErrors } = this.state;
-        const { cancel, stepUserInput } = this.props;
+        const { cancel, stepUserInput, userInput } = this.props;
 
         const schemaValidator = createValidator(stepUserInput);
         const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, schemaValidator);
@@ -333,7 +334,13 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 />
                 <section className="card">
                     <SubscriptionsContextProvider>
-                        <AutoForm schema={bridge} onSubmit={this.submit} showInlineError={true} validate="onSubmit">
+                        <AutoForm
+                            schema={bridge}
+                            onSubmit={this.submit}
+                            showInlineError={true}
+                            validate="onSubmit"
+                            model={userInput}
+                        >
                             <AutoFields />
                             {/* Show top level validation info about backend validation */}
                             {nrOfValidationErrors > 0 && (
