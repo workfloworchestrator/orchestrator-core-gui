@@ -44,7 +44,7 @@ I18n.translations.en = {
         tasks: "Tasks",
         prefixes: "LIR Prefixes",
         settings: "Settings",
-        new_process: "New Process +"
+        new_process: "New Process"
     },
     prefixes: {
         customer: "Customer",
@@ -1260,7 +1260,7 @@ I18n.translations.en = {
                 all: "All caches"
             },
             remove: "Flush Settings",
-            remove_info: "Select a Settings to flush",
+            remove_info: "Select settings to flush",
             clear: "Flush",
             flushed: "Settings {{name}} was flushed"
         },
@@ -1271,7 +1271,6 @@ I18n.translations.en = {
                 true: "Pause the engine",
                 false: "Start the engine"
             },
-            submit: "Submit",
             processes: "Running processes:",
             status: "Engine status:",
             engine: {

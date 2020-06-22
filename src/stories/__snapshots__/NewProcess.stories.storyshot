@@ -35,7 +35,7 @@ exports[`Storyshots NewProcess Default 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-1wa3eu0-placeholder"
@@ -170,7 +170,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
               onTouchEnd={[Function]}
             >
               <div
-                className=" css-1hwfws3"
+                className=" css-g1d714-ValueContainer"
               >
                 <div
                   className=" css-107lb6w-singleValue"
@@ -297,7 +297,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-107lb6w-singleValue"

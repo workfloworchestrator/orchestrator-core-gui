@@ -166,114 +166,116 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
 
     const initialState = useMemo(() => initialize(initialTableSettings), [initialTableSettings, initialize]);
     const columns: Column<Subscription>[] = useMemo(
-        () => [
-            {
-                Header: "",
-                id: "info",
-                accessor: "info",
-                disableFilters: true,
-                disableSortBy: true,
-                Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
-                    const button = row.isExpanded ? (
-                        <i className={`fa fa-minus-circle ${row.values.status}`} />
-                    ) : (
-                        <i className={`fa fa-plus-circle ${row.values.status}`} />
-                    );
-                    return (
-                        <div
-                            {...row.getToggleRowExpandedProps()}
-                            onClick={e => {
-                                e.stopPropagation();
-                                row.toggleRowExpanded();
-                            }}
-                        >
-                            {button}
-                        </div>
-                    );
+        () =>
+            [
+                {
+                    Header: "",
+                    id: "info",
+                    accessor: "info",
+                    disableFilters: true,
+                    disableSortBy: true,
+                    Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
+                        const button = row.isExpanded ? (
+                            <i className={`fa fa-minus-circle ${row.values.status}`} />
+                        ) : (
+                            <i className={`fa fa-plus-circle ${row.values.status}`} />
+                        );
+                        return (
+                            <div
+                                {...row.getToggleRowExpandedProps()}
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    row.toggleRowExpanded();
+                                }}
+                            >
+                                {button}
+                            </div>
+                        );
+                    }
+                },
+                {
+                    Header: "id",
+                    accessor: "subscription_id",
+                    Filter: renderILikeFilter,
+                    disableFilters: false,
+                    Cell: renderSubscriptionIdCell
+                },
+                {
+                    Header: "Description",
+                    accessor: "description",
+                    Filter: renderILikeFilter,
+                    Cell: renderSubscriptionDescriptionCell
+                },
+                {
+                    Header: "Status",
+                    accessor: "status",
+                    Filter: renderMultiSelectFilter.bind(
+                        null,
+                        ["active", "terminated", "initial", "provisioning", "migrating"],
+                        null
+                    )
+                },
+                {
+                    Header: "In Sync",
+                    id: "insync",
+                    accessor: "insync",
+                    Cell: renderInsyncCell,
+                    Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null)
+                },
+                {
+                    Header: "Customer",
+                    id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
+                    accessor: "customer_id",
+                    disableSortBy: true,
+                    Cell: renderSubscriptionCustomersCell(organisations, false),
+                    Filter: renderCustomersFilter
+                },
+                {
+                    Header: "Abbr.",
+                    id: "abbrev",
+                    accessor: "customer_id",
+                    disableSortBy: true,
+                    Cell: renderSubscriptionCustomersCell(organisations, true),
+                    Filter: renderCustomersFilter
+                },
+                {
+                    Header: "Product",
+                    id: "product",
+                    accessor: "product",
+                    disableSortBy: true,
+                    Cell: renderSubscriptionProductsCell,
+                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
+                },
+                {
+                    Header: "Tag",
+                    id: "tag",
+                    accessor: "product",
+                    disableSortBy: true,
+                    Cell: renderSubscriptionTagCell,
+                    Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
+                },
+                {
+                    Header: "Start date",
+                    id: "start_date",
+                    accessor: "start_date",
+                    Cell: renderTimestampCell,
+                    disableFilters: true
+                },
+                {
+                    Header: "End date",
+                    id: "end_date",
+                    accessor: "end_date",
+                    Cell: renderTimestampCell,
+                    disableFilters: true
+                },
+                {
+                    Header: "Notes",
+                    id: "note",
+                    accessor: "note",
+                    // @ts-ignore Filter isn't recognized as valid property
+                    Filter: renderILikeFilter
                 }
-            },
-            {
-                Header: "id",
-                accessor: "subscription_id",
-                Filter: renderILikeFilter,
-                disableFilters: false,
-                Cell: renderSubscriptionIdCell
-            },
-            {
-                Header: "Description",
-                accessor: "description",
-                Filter: renderILikeFilter,
-                Cell: renderSubscriptionDescriptionCell
-            },
-            {
-                Header: "Status",
-                accessor: "status",
-                Filter: renderMultiSelectFilter.bind(
-                    null,
-                    ["active", "terminated", "initial", "provisioning", "migrating"],
-                    null
-                )
-            },
-            {
-                Header: "In Sync",
-                id: "insync",
-                accessor: "insync",
-                Cell: renderInsyncCell,
-                Filter: renderSingleSelectFilter.bind(null, ["yes", "no"], null)
-            },
-            {
-                Header: "Customer",
-                id: "customer", // Normally the accessor is used as id, but when used twice this gives a name clash.
-                accessor: "customer_id",
-                disableSortBy: true,
-                Cell: renderSubscriptionCustomersCell(organisations, false),
-                Filter: renderCustomersFilter
-            },
-            {
-                Header: "Abbr.",
-                id: "abbrev",
-                accessor: "customer_id",
-                disableSortBy: true,
-                Cell: renderSubscriptionCustomersCell(organisations, true),
-                Filter: renderCustomersFilter
-            },
-            {
-                Header: "Product",
-                id: "product",
-                accessor: "product",
-                disableSortBy: true,
-                Cell: renderSubscriptionProductsCell,
-                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
-            },
-            {
-                Header: "Tag",
-                id: "tag",
-                accessor: "product",
-                disableSortBy: true,
-                Cell: renderSubscriptionTagCell,
-                Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
-            },
-            {
-                Header: "Start date",
-                id: "start_date",
-                accessor: "start_date",
-                Cell: renderTimestampCell,
-                disableFilters: true
-            },
-            {
-                Header: "End date",
-                id: "end_date",
-                accessor: "end_date",
-                Cell: renderTimestampCell,
-                disableFilters: true
-            },
-            {
-                Header: "Notes",
-                id: "note",
-                accessor: "note",
-                Filter: renderILikeFilter
-            }
-        ],
+            ] as Column<Subscription>[],
         [organisations, products]
     );
 

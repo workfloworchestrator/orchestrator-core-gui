@@ -15,6 +15,7 @@
 
 import "./ProcessDetail.scss";
 
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -273,25 +274,42 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
 
         return (
             <section className="process-actions">
-                {options.map((option, index) => (
-                    <button
-                        id={option.label}
-                        key={index}
-                        className={`button ${option.danger ? " red" : " blue"}`}
-                        onClick={option.action}
-                    >
-                        {I18n.t(`processes.actions.${option.label}`)}
-                    </button>
-                ))}
-                <button className="button" onClick={this.handleCollapseAll}>
-                    Collapse
-                </button>
-                <button className="button" onClick={this.handleExpandAll}>
-                    Expand
-                </button>
-                <button className="button" onClick={() => this.handleScrollTo(lastStepIndex)}>
-                    Scroll to Last
-                </button>
+                <EuiFlexGroup gutterSize="s" alignItems="center">
+                    {options.map((option, index) => (
+                        <EuiFlexItem grow={true}>
+                            <EuiButton
+                                id={option.label}
+                                key={index}
+                                fill
+                                color={option.danger ? "danger" : "secondary"}
+                                iconType={option.danger ? "cross" : "refresh"}
+                                iconSide="right"
+                                onClick={option.action}
+                            >
+                                {I18n.t(`processes.actions.${option.label}`).toUpperCase()}
+                            </EuiButton>
+                        </EuiFlexItem>
+                    ))}
+                    <EuiFlexItem grow={true}>
+                        <EuiButton iconType="minimize" iconSide="right" onClick={this.handleCollapseAll}>
+                            COLLAPSE
+                        </EuiButton>
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={true}>
+                        <EuiButton iconType="expand" iconSide="right" onClick={this.handleExpandAll}>
+                            EXPAND
+                        </EuiButton>
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={true}>
+                        <EuiButton
+                            iconType="sortDown"
+                            iconSide="right"
+                            onClick={() => this.handleScrollTo(lastStepIndex)}
+                        >
+                            SCROLL TO LAST
+                        </EuiButton>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
             </section>
         );
     };
@@ -342,17 +360,17 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             return (
                 <section className="card">
                     <section className="header-info">
-                        <h3>
-                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.workflow`, {
-                                name: process.workflow_name
-                            })}
-                        </h3>
-                        <h3>
-                            {I18n.t(`${this.props.isProcess ? "process" : "task"}.userInput`, {
-                                name: step.name,
-                                product: productName || ""
-                            })}
-                        </h3>
+                        <EuiText>
+                            <h3>
+                                {I18n.t(`${this.props.isProcess ? "process" : "task"}.workflow`, {
+                                    name: process.workflow_name
+                                })}
+                                {I18n.t(`${this.props.isProcess ? "process" : "task"}.userInput`, {
+                                    name: step.name,
+                                    product: productName || ""
+                                })}
+                            </h3>
+                        </EuiText>
                     </section>
                     <UserInputFormWizard
                         stepUserInput={stepUserInput}

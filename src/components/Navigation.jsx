@@ -15,16 +15,21 @@
 
 import "./Navigation.scss";
 
+import { EuiButton, EuiControlBar, EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import I18n from "i18n-js";
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
 
 import mySpinner from "../lib/Spin";
-import NavigationItem from "./NavigationItem";
 
-function Navigation() {
+const Navigation = () => {
     const [loading, setLoading] = useState(false);
+    const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef();
+    const navItems = ["processes", "subscriptions", "metadata", "validations", "tasks", "prefixes", "settings"];
 
     useEffect(() => {
         mySpinner.onStart = () => setLoading(true);
@@ -49,20 +54,50 @@ function Navigation() {
         }
     });
 
+    const getControls = () => {
+        const controls = [];
+
+        navItems.forEach(navItem => {
+            controls.push({
+                controlType: "text",
+                id: `controls_${navItem}`,
+                text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
+                className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
+                    ? "navigation__active navigation__item"
+                    : "navigation__item"
+            });
+        });
+
+        return [
+            ...controls,
+            {
+                controlType: "spacer"
+            },
+            {
+                controlType: "text",
+                id: "controls_new_process",
+                text: (
+                    <Link to="/new-process">
+                        <EuiButton iconType="plusInCircle" size="s">
+                            {I18n.t(`navigation.new_process`)}
+                        </EuiButton>
+                    </Link>
+                ),
+                className: "navigation__cta"
+            }
+        ];
+    };
+
     return (
-        <div className="navigation-container">
-            <div className="navigation">
-                <NavigationItem href="/processes" value="processes" />
-                <NavigationItem href="/subscriptions" value="subscriptions" />
-                <NavigationItem href="/metadata" value="metadata" />
-                <NavigationItem href="/validations" value="validations" />
-                <NavigationItem href="/tasks" value="tasks" />
-                <NavigationItem href="/prefixes" value="prefixes" />
-                <NavigationItem href="/settings" value="settings" />
-                <NavigationItem href="/new-process" value="new_process" className="new_process" />
-                {loading && <div className="spinner" ref={spinner => (spinnerTarget.current = spinner)} />}
-            </div>
-        </div>
+        <>
+            <EuiControlBar controls={getControls()} position="relative" showOnMobile />
+            {loading && (
+                <EuiToast className="sync" color="primary">
+                    <EuiLoadingSpinner size="m" />
+                    <h6 className="sync__label">Syncing</h6>
+                </EuiToast>
+            )}
+        </>
     );
-}
+};
 export default Navigation;

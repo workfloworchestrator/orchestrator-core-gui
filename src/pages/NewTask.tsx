@@ -58,7 +58,7 @@ export default class NewTask extends React.Component<{}, IState> {
             let promise = startProcess(option.value, []);
 
             let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
-                setFlash(I18n.t("settings.status.engine.true"), "error");
+                setFlash(I18n.t("settings.status.engine.paused"), "error");
                 this.context.redirect("/processes");
             });
 

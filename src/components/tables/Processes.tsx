@@ -88,6 +88,10 @@ interface ProcessesTableProps {
     isProcess: boolean;
 }
 
+interface FilterParams {
+    toggleAllRowsExpanded: () => void;
+}
+
 export function ProcessesTable({ initialTableSettings, renderActions, isProcess }: ProcessesTableProps) {
     const { name } = initialTableSettings;
     const queryNameSpace = last(name.split("."));
@@ -176,8 +180,8 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                 id: "info",
                 accessor: "failed_reason",
                 disableSortBy: true,
-                Filter: ({ toggleAllRowsExpanded }) => (
-                    <i className="fas fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
+                Filter: ({ toggleAllRowsExpanded }: FilterParams) => (
+                    <i className="fa fa-arrows-alt-v" onClick={() => toggleAllRowsExpanded()} />
                 ),
                 Cell: ({ row, cell }: { row: Row; cell: Cell }) => {
                     const caret = row.values.pid === highlightQ ? <i className={"fa fa-caret-right"} /> : null;

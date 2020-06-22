@@ -56,3 +56,10 @@ $br: 3px;
 
 // Screen
 $medium: 1680px;
+
+// Z-index
+$z-index: (
+    "sync": 900,
+    "flash": 1020,
+    "explain": 1010
+);

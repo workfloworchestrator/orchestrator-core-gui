@@ -18,63 +18,9 @@
 @use "../stylesheets/forms.scss";
 @use "../stylesheets/vars";
 
-.mod-cache {
-    @include mixins.page;
-
-    .card {
-        @include mixins.card;
-        padding-bottom: 15px;
-    }
-    section.form-step {
-        padding: 20px 0;
-        h3 {
-            font-size: larger;
-            margin-bottom: 15px;
-            color: vars.$darker-blue;
-        }
-
-        section.form-divider {
-            border-bottom: 1px solid vars.$lightest-grey;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        section.cache-select-section {
-            margin-top: 25px;
-            display: flex;
-            & > div {
-                width: 100%;
-            }
-            a.button {
-                padding-left: 60px;
-            }
-            div.Select-control {
-                padding-bottom: 4px;
-            }
-        }
-
-        section.engine-select-section {
-            margin-top: 25px;
-            display: flex;
-            & > div {
-                width: 100%;
-            }
-            a.button {
-                padding-left: 60px;
-            }
-            div.Select-control {
-                padding-bottom: 4px;
-            }
-            ul.status {
-                align-items: center;
-                list-style: none;
-                cursor: pointer;
-                li {
-                    color: vars.$dark-grey;
-                    opacity: 2;
-                    padding-top: 4px;
-                }
-            }
-        }
+.euiDescriptionList {
+    &__description {
+        display: flex;
+        align-items: center;
     }
 }

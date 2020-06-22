@@ -49,7 +49,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -311,7 +311,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -421,7 +421,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -549,7 +549,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -659,7 +659,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -845,7 +845,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -955,7 +955,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -1083,7 +1083,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -1193,7 +1193,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                           onTouchEnd={[Function]}
                         >
                           <div
-                            className=" css-1hwfws3"
+                            className=" css-g1d714-ValueContainer"
                           >
                             <div
                               className=" css-1wa3eu0-placeholder"
@@ -1373,7 +1373,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                         onTouchEnd={[Function]}
                       >
                         <div
-                          className=" css-1hwfws3"
+                          className=" css-g1d714-ValueContainer"
                         >
                           <div
                             className=" css-1wa3eu0-placeholder"
@@ -1550,7 +1550,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -1783,7 +1783,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -2154,7 +2154,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -2387,7 +2387,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -2620,7 +2620,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -2853,7 +2853,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"
@@ -3086,7 +3086,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className=" css-1hwfws3"
+                        className=" css-g1d714-ValueContainer"
                       >
                         <div
                           className=" css-1wa3eu0-placeholder"

@@ -21,6 +21,7 @@ export type ErrorFieldProps = Override<
         children?: ReactNode;
         error?: any;
         errorMessage?: string;
+        onChange: () => void;
     }
 >;
 

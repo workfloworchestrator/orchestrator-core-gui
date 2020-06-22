@@ -17,6 +17,7 @@ import "../locale/en";
 import "../locale/nl";
 import "./App.scss";
 
+import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import { createBrowserHistory } from "history";
 import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
@@ -33,7 +34,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
 import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
 import { AppError } from "../utils/types";
-import Help from "./Help";
 import MetaData from "./MetaData";
 import ModifySubscription from "./ModifySubscription";
 import NewProcess from "./NewProcess";
@@ -45,6 +45,7 @@ import ProcessDetail from "./ProcessDetail";
 import Processes from "./Processes";
 import ServerError from "./ServerError";
 import Settings from "./Settings";
+import StyleGuide from "./StyleGuide";
 import SubscriptionDetail from "./SubscriptionDetail";
 import SubscriptionsPage from "./Subscriptions";
 import Tasks from "./Tasks";
@@ -160,6 +161,12 @@ class App extends React.PureComponent<{}, IState> {
             <Router history={history}>
                 <QueryParamProvider ReactRouterRoute={Route}>
                     <ApplicationContext.Provider value={applicationContext}>
+                        {loading && (
+                            <EuiToast className="sync" color="primary">
+                                <EuiLoadingSpinner size="m" />
+                                <h6 className="sync__label">Syncing</h6>
+                            </EuiToast>
+                        )}
                         <div>
                             <div>
                                 <Flash />
@@ -239,9 +246,9 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/task/:id"
                                     render={props => <ProcessDetail {...props} isProcess={false} />}
                                 />
-                                <Route path="/help" render={() => <Help />} />
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
+                                <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>
