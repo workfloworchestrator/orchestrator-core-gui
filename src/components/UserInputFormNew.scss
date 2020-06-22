@@ -1,0 +1,73 @@
+/*!
+ * Copyright 2019-2020 SURF.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+@use "../stylesheets/mixins.scss";
+@use "../stylesheets/buttons.scss";
+@use "../stylesheets/forms.scss";
+@use "../stylesheets/vars";
+
+.mod-process-step {
+    .card {
+        @include mixins.card;
+        padding-bottom: 15px;
+    }
+
+    section.form-step {
+        padding: 20px 0;
+
+        & > section {
+            border-bottom: 1px solid vars.$lightest-grey;
+            padding-bottom: 1px;
+            margin-bottom: 1px;
+
+            em {
+                margin-bottom: 1px;
+            }
+            &.first_lightpath,
+            &.second_lightpath,
+            p.label {
+                text-transform: uppercase;
+                font-weight: bold;
+                color: vars.$blue;
+            }
+            &.downgrade_redundant_lp_choice,
+            &.service_ports_primary,
+            &.service_ports_secondary {
+                margin-left: 40px;
+            }
+            b {
+                // styles the arrows of numeric input
+                margin-top: 4px;
+                margin-left: 1px;
+            }
+        }
+    }
+    section.form-errors {
+        padding-bottom: 20px;
+    }
+
+    .actions {
+        display: flex;
+        margin-top: 25px;
+        .notes {
+            display: flex;
+            align-items: center;
+            flex-grow: 2;
+        }
+        label {
+            margin-right: 10px;
+        }
+    }
+}

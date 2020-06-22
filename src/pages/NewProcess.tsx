@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,8 @@
 import "./NewProcess.scss";
 
 import I18n from "i18n-js";
+import { JSONSchema6 } from "json-schema";
+import { HiddenField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 import { catchErrorStatus, startProcess, validation } from "../api";
@@ -48,6 +50,8 @@ interface IState {
     hasNext?: boolean;
     productValidation?: ProductValidation;
 }
+
+type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any };
 
 export default class NewProcess extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
@@ -108,26 +112,57 @@ export default class NewProcess extends React.Component<IProps, IState> {
 
                         const { preselectedInput } = this.props;
 
-                        const productInput = stepUserInput.find(x => x.name === "product");
-                        if (productInput) {
-                            productInput.type = "hidden";
-                            productInput.value = option.value;
-                        }
-
-                        if (preselectedInput.organisation) {
-                            const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-                            if (organisatieInput) {
-                                organisatieInput.value = preselectedInput.organisation;
-                                organisatieInput.readonly = true;
+                        if (Array.isArray(stepUserInput)) {
+                            const productInput = stepUserInput.find(x => x.name === "product");
+                            if (productInput) {
+                                productInput.type = "hidden";
+                                productInput.value = option.value;
                             }
-                        }
 
-                        if (preselectedInput.prefix && preselectedInput.prefixlen) {
-                            const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
-                            if (prefixInput) {
-                                prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                                prefixInput.prefix_min = preselectedInput.prefix_min;
+                            if (preselectedInput.organisation) {
+                                const organisatieInput = stepUserInput.find(x => x.name === "organisation");
+                                if (organisatieInput) {
+                                    organisatieInput.value = preselectedInput.organisation;
+                                    organisatieInput.readonly = true;
+                                }
                             }
+
+                            if (preselectedInput.prefix && preselectedInput.prefixlen) {
+                                const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
+                                if (prefixInput) {
+                                    prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+                                    prefixInput.prefix_min = preselectedInput.prefix_min;
+                                }
+                            }
+                        } else if (stepUserInput && stepUserInput.properties) {
+                            if (stepUserInput.properties.product) {
+                                const productInput = stepUserInput.properties.product as JSONSchemaFormProperty;
+                                if (!productInput.uniforms) {
+                                    productInput.uniforms = {};
+                                }
+                                productInput.uniforms.component = HiddenField;
+                                productInput.uniforms.value = product;
+                            }
+
+                            if (preselectedInput.organisation) {
+                                if (stepUserInput && stepUserInput.properties.organisation) {
+                                    const organisatieInput = stepUserInput.properties
+                                        .organisation as JSONSchemaFormProperty;
+                                    if (!organisatieInput.uniforms) {
+                                        organisatieInput.uniforms = {};
+                                    }
+                                    organisatieInput.uniforms.disabled = true;
+                                    organisatieInput.uniforms.value = preselectedInput.organisation;
+                                }
+                            }
+
+                            // if (preselectedInput.prefix && preselectedInput.prefixlen) {
+                            //     const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
+                            //     if (prefixInput) {
+                            //         prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+                            //         prefixInput.prefix_min = preselectedInput.prefix_min;
+                            //     }
+                            // }
                         }
 
                         this.setState({ stepUserInput: json.form, hasNext: json.hasNext });

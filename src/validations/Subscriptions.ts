@@ -1,7 +1,5 @@
-import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "../utils/types";
-
 /*
- * Copyright 2019 SURF.
+ * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,8 +12,9 @@ import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "..
  * limitations under the License.
  *
  */
+import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "../utils/types";
 
-interface InstanceValueWithLabel extends InstanceValue {
+export interface InstanceValueWithLabel extends InstanceValue {
     instance_label: string;
 }
 

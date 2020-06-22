@@ -1,0 +1,29 @@
+{
+    "ignore": [".git", "charts", ".gitlab", "!(src)", ".storybook", "**.storyshot", "**.ttf", "**.md", "coverage"],
+    "license": "LICENSE_HEADER",
+    "trailingWhitespace": "TRIM",
+    "licenseFormats": {
+        "js|ts|jsx|tsx|template": {
+            "prepend": "/*",
+            "append": " *\n */",
+            "eachLine": {
+                "prepend": " * "
+            }
+        },
+        "scss": {
+            "prepend": "/*!",
+            "append": " *\n */",
+            "eachLine": {
+                "prepend": " * "
+            }
+        },
+        "html|xml|svg": {
+            "prepend": "<!--",
+            "append": "  ~\n  -->",
+            "eachLine": {
+                "prepend": "  ~ "
+            }
+        },
+        "txt": {}
+    }
+}
