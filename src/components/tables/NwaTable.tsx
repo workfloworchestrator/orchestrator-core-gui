@@ -136,6 +136,7 @@ export function tableSettingsReducer<T extends object>(
                 } else {
                     draft.filterBy[index].values = action.values;
                 }
+                draft.pageIndex = 0;
                 break;
             }
             case ActionType.FILTER_CLEAR: {
