@@ -83,11 +83,17 @@ export interface Subscription {
     note: string;
 }
 
+export interface CustomerDescription {
+    description: string;
+    customer_id: string;
+}
+
 export interface SubscriptionWithDetails extends Subscription {
     customer_name: string;
     instances: SubscriptionInstance[];
     end_date_epoch: number;
     start_date_epoch: number;
+    customer_descriptions: CustomerDescription[];
 }
 
 export interface ServicePortSubscription extends Subscription {

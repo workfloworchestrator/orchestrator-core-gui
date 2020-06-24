@@ -1,6 +1,28 @@
 {
     "crm_port_id": null,
-    "customer_descriptions": [],
+    "customer_descriptions": [
+        {
+            "subscription_id": "9c8c13d5-6954-461a-a931-32894c193aa0",
+            "created_at": 1592574387.824036,
+            "id": "1f387e47-eea6-4ec2-8793-6ec161b866b7",
+            "customer_id": "5203e539-0a11-e511-80d0-005056956c1a",
+            "description": "Some description"
+        },
+        {
+            "subscription_id": "9c8c13d5-6954-461a-a931-32894c193aa0",
+            "created_at": 1592574387.824036,
+            "id": "1f387e47-eea6-4ec2-8793-6ec161b866b7",
+            "customer_id": "872cee0f-c4e1-e811-810e-0050569555d1",
+            "description": "Some description 2"
+        },
+        {
+            "subscription_id": "9c8c13d5-6954-461a-a931-32894c193aa0",
+            "created_at": 1592574387.824036,
+            "id": "1f387e47-eea6-4ec2-8793-6ec161b866b7",
+            "customer_id": "772cee0f-c4e1-e811-810e-0050569555d1",
+            "description": "Some description 3, some verrrrrrrry long long long long long long description"
+        }
+    ],
     "customer_id": "5203e539-0a11-e511-80d0-005056956c1a",
     "description": "GRAAFSCHAP IP DTC001A-DTC001A",
     "end_date": null,

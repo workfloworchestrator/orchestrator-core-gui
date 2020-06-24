@@ -85,32 +85,32 @@ describe("<AcceptField>", () => {
             )
         );
 
-        expect(wrapper.find("input[name='checkbox1']")).toHaveLength(1);
-        expect(wrapper.find("input[name='sub_checkbox']")).toHaveLength(1);
-        expect(wrapper.find("input[name='sub_checkbox2']")).toHaveLength(1);
-        expect(wrapper.find("input[name='optional_checkbox']")).toHaveLength(1);
+        expect(wrapper.find("input[name='checkbox14']")).toHaveLength(1);
+        expect(wrapper.find("input[name='sub_checkbox6']")).toHaveLength(1);
+        expect(wrapper.find("input[name='sub_checkbox27']")).toHaveLength(1);
+        expect(wrapper.find("input[name='optional_checkbox8']")).toHaveLength(1);
         expect(wrapper.find("input[name='skip_checkbox']")).toHaveLength(1);
 
-        expect(wrapper.find("input[name='checkbox1']").simulate("change", { target: { checked: true } })).toBeTruthy();
+        expect(wrapper.find("input[name='checkbox14']").simulate("change", { target: { checked: true } })).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
 
         expect(
-            wrapper.find("input[name='sub_checkbox']").simulate("change", { target: { checked: true } })
+            wrapper.find("input[name='sub_checkbox6']").simulate("change", { target: { checked: true } })
         ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
 
         expect(
-            wrapper.find("input[name='optional_checkbox']").simulate("change", { target: { checked: true } })
+            wrapper.find("input[name='optional_checkbox8']").simulate("change", { target: { checked: true } })
         ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
 
         expect(
-            wrapper.find("input[name='sub_checkbox2']").simulate("change", { target: { checked: true } })
+            wrapper.find("input[name='sub_checkbox27']").simulate("change", { target: { checked: true } })
         ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "ACCEPTED");
 
         expect(
-            wrapper.find("input[name='optional_checkbox']").simulate("change", { target: { checked: false } })
+            wrapper.find("input[name='optional_checkbox8']").simulate("change", { target: { checked: false } })
         ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "ACCEPTED");
 
@@ -124,7 +124,9 @@ describe("<AcceptField>", () => {
         ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "ACCEPTED");
 
-        expect(wrapper.find("input[name='checkbox1']").simulate("change", { target: { checked: false } })).toBeTruthy();
+        expect(
+            wrapper.find("input[name='checkbox14']").simulate("change", { target: { checked: false } })
+        ).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
     });
 });
