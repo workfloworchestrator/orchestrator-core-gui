@@ -116,7 +116,7 @@ export default class GenericNOCConfirm extends React.PureComponent<IProps, IStat
                 return (
                     <CheckBox
                         key={index}
-                        name={name}
+                        name={name + (legacy ? "" : index)} // Index needed to allow checkboxes with same name (we can skip this in legacy mode)
                         className={type.startsWith(">") ? "level_2" : undefined}
                         onChange={this.onChangeInternal(index)}
                         value={checks[index]}

@@ -61,6 +61,7 @@ function Accept({
     data,
     ...props
 }: AcceptFieldProps) {
+    const legacy = !data;
     const i18nBaseKey = data ? `forms.fields.${name}_accept` : "forms.fields";
 
     data = data ?? [
@@ -141,7 +142,7 @@ function Accept({
                         return (
                             <CheckBox
                                 key={index}
-                                name={entry[0] as string}
+                                name={entry[0] + (legacy ? "" : index)} // Index needed to allow checkboxes with same name (we can skip this in legacy mode)
                                 className={entry[1].startsWith(">") ? "level_2" : undefined}
                                 onChange={(e: React.FormEvent<HTMLInputElement>) => {
                                     const target = e.target as HTMLInputElement;
