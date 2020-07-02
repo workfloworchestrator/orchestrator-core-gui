@@ -28,7 +28,7 @@ filterDOMProps.register("items");
 export type ListFieldProps = Override<
     Omit<HTMLProps<HTMLUListElement>, "onChange">,
     {
-        children: ReactNode;
+        children?: ReactNode;
         initialCount?: number;
         itemProps?: {};
         label?: string;
@@ -42,7 +42,7 @@ export type ListFieldProps = Override<
 >;
 
 function List({
-    children,
+    children = <ListItemField name="$" />,
     initialCount = 1,
     itemProps,
     label,
@@ -86,7 +86,5 @@ function List({
         </section>
     );
 }
-
-List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);

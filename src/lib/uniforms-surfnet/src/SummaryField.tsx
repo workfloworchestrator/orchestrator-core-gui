@@ -83,4 +83,4 @@ function Summary({ id, name, label, description, data, ...props }: SummaryFieldP
     );
 }
 
-export default connectField(Summary);
+export default connectField(Summary, { kind: "leaf" });

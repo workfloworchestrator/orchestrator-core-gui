@@ -46,4 +46,4 @@ function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddField
     );
 }
 
-export default connectField(ListAdd, { initialValue: false });
+export default connectField(ListAdd, { initialValue: false, kind: "leaf" });

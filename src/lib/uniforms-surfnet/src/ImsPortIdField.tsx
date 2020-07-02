@@ -187,4 +187,4 @@ function ImsPortId({
     );
 }
 
-export default connectField(ImsPortId);
+export default connectField(ImsPortId, { kind: "leaf" });

@@ -24,22 +24,20 @@ export type AutoFieldsProps = {
     omitFields?: string[];
 };
 
-export default function AutoFields({ autoField, element, fields, omitFields, ...props }: AutoFieldsProps) {
+export default function AutoFields({
+    autoField = AutoField,
+    element = "section",
+    fields,
+    omitFields = [],
+    ...props
+}: AutoFieldsProps) {
     const { schema } = useForm();
 
     return createElement(
-        element!,
+        element,
         { className: "form-step", ...props },
         (fields ?? schema.getSubfields())
-            .filter(field => !omitFields!.includes(field))
-            .map(field =>
-                createElement(autoField!, { key: field, name: field, className: field, id: `input-${field}` })
-            )
+            .filter(field => !omitFields.includes(field))
+            .map(field => createElement(autoField, { key: field, name: field, className: field, id: `input-${field}` }))
     );
 }
-
-AutoFields.defaultProps = {
-    autoField: AutoField,
-    element: "section",
-    omitFields: []
-};

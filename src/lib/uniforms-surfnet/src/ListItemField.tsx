@@ -19,13 +19,11 @@ import AutoField from "./AutoField";
 import ListDelField from "./ListDelField";
 
 export type ListItemFieldProps = {
-    children: ReactNode;
-    error?: boolean;
-    showInlineError?: boolean;
-    errorMessage?: string;
+    children?: ReactNode;
+    name: string;
 };
 
-function ListItem({ children, error, showInlineError, errorMessage }: ListItemFieldProps) {
+function ListItem({ children = <AutoField label={null} name="" /> }: ListItemFieldProps) {
     return (
         <li>
             {children}
@@ -33,7 +31,5 @@ function ListItem({ children, error, showInlineError, errorMessage }: ListItemFi
         </li>
     );
 }
-
-ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
 
 export default connectField(ListItem, { initialValue: false });

@@ -26,7 +26,7 @@ export type OrganisationFieldProps = { inputComponent: typeof SelectField } & Om
     "placeholder" | "transform" | "allowedValues"
 >;
 
-function Organisation({ inputComponent, name, ...props }: OrganisationFieldProps) {
+function Organisation({ inputComponent = SelectField, name, ...props }: OrganisationFieldProps) {
     const { organisations } = useContext(ApplicationContext);
     const organisationLabelLookup =
         organisations?.reduce<{ [index: string]: string }>(function(mapping, org) {
@@ -42,9 +42,5 @@ function Organisation({ inputComponent, name, ...props }: OrganisationFieldProps
         placeholder: I18n.t("forms.widgets.organisation.placeholder")
     });
 }
-
-Organisation.defaultProps = {
-    inputComponent: SelectField
-};
 
 export default connectField(Organisation);

@@ -76,4 +76,4 @@ function LongText({
     );
 }
 
-export default connectField(LongText);
+export default connectField(LongText, { kind: "leaf" });

@@ -237,4 +237,4 @@ function Vlan({
     );
 }
 
-export default connectField(Vlan);
+export default connectField(Vlan, { kind: "leaf" });

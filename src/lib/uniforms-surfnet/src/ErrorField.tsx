@@ -29,4 +29,4 @@ function Error({ children, error, errorMessage, ...props }: ErrorFieldProps) {
     return !error ? null : <div {...filterDOMProps(props)}>{children || errorMessage}</div>;
 }
 
-export default connectField(Error, { initialValue: false });
+export default connectField(Error, { initialValue: false, kind: "leaf" });

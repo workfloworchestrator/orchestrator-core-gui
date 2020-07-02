@@ -86,7 +86,7 @@ export type SubscriptionFieldProps = {
 } & Omit<SelectFieldProps, "placeholder" | "transform" | "allowedValues">;
 
 function Subscription({
-    inputComponent,
+    inputComponent = SelectField,
     name,
     productIds,
     excludedSubscriptionIds,
@@ -159,9 +159,5 @@ function Subscription({
         placeholder: I18n.t("forms.widgets.subscription.placeholder")
     });
 }
-
-Subscription.defaultProps = {
-    inputComponent: SelectField
-};
 
 export default connectField(Subscription);

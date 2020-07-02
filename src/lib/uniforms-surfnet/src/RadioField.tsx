@@ -21,10 +21,10 @@ const escape = (x: string) => base64(x).replace(/=+$/, "");
 export type RadioFieldProps = Override<
     HTMLProps<HTMLDivElement>,
     {
-        allowedValues: string[];
+        allowedValues?: string[];
         checkboxes?: boolean;
         onChange(value: string): void;
-        transform?(string?: string): string;
+        transform?(string: string): string;
     }
 >;
 
@@ -44,7 +44,7 @@ function Radio({
         <div {...filterDOMProps(props)}>
             {label && <label>{label}</label>}
 
-            {allowedValues.map(item => (
+            {allowedValues?.map(item => (
                 <div key={item}>
                     <input
                         checked={item === value}
@@ -62,4 +62,4 @@ function Radio({
     );
 }
 
-export default connectField(Radio);
+export default connectField(Radio, { kind: "leaf" });

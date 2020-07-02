@@ -228,4 +228,4 @@ function SubscriptionSummary({ id, name, label, description, value, ...props }: 
     );
 }
 
-export default connectField(SubscriptionSummary);
+export default connectField(SubscriptionSummary, { kind: "leaf" });

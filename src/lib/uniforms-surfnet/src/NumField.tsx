@@ -90,4 +90,4 @@ function Num({
     );
 }
 
-export default connectField(Num);
+export default connectField(Num, { kind: "leaf" });

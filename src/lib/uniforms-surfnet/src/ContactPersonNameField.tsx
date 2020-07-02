@@ -182,4 +182,4 @@ function ContactPersonName({
     );
 }
 
-export default connectField(ContactPersonName);
+export default connectField(ContactPersonName, { kind: "leaf" });

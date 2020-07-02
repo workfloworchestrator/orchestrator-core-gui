@@ -125,4 +125,4 @@ function Select({
     );
 }
 
-export default connectField(Select);
+export default connectField(Select, { kind: "leaf" });
