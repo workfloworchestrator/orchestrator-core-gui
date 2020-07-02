@@ -13,87 +13,76 @@
  *
  */
 import React from "react";
+import ReactSelect from "react-select";
 
 import { SelectField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 
-describe.skip("<SelectField>", () => {
-    test("<SelectField> - renders a select", () => {
+describe("<SelectField>", () => {
+    test("<SelectField> - renders an input", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
     });
 
     test("<SelectField> - renders a select with correct disabled state", () => {
         const element = <SelectField name="x" disabled />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("disabled")).toBe(true);
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("isDisabled")).toBe(true);
     });
 
     test("<SelectField> - renders a select with correct id (inherited)", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("id")).toBeTruthy();
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("id")).toBeTruthy();
     });
 
     test("<SelectField> - renders a select with correct id (specified)", () => {
         const element = <SelectField name="x" id="y" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("id")).toBe("y");
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("id")).toBe("y");
     });
 
     test("<SelectField> - renders a select with correct name", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("name")).toBe("x");
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("name")).toBe("x");
     });
 
     test("<SelectField> - renders a select with correct options", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("option")).toHaveLength(3);
-        [
-            ["", ""],
-            ["a", "a"],
-            ["b", "b"]
-        ].forEach(([value, text], index) => {
-            const option = wrapper.find("option").at(index);
-            expect(option.prop("value")).toBe(value);
-            expect(option.text()).toBe(text);
-        });
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
+            { label: "a", value: "a" },
+            { label: "b", value: "b" }
+        ]);
     });
 
     test("<SelectField> - renders a select with correct options (transform)", () => {
         const element = <SelectField name="x" transform={(x: string) => x.toUpperCase()} />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("option")).toHaveLength(3);
-        [
-            ["", ""],
-            ["a", "A"],
-            ["b", "B"]
-        ].forEach(([value, text], index) => {
-            const option = wrapper.find("option").at(index);
-            expect(option.prop("value")).toBe(value);
-            expect(option.text()).toBe(text);
-        });
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
+            { label: "A", value: "a" },
+            { label: "B", value: "b" }
+        ]);
     });
 
     test("<SelectField> - renders a select with correct placeholder (fallback)", () => {
-        const element = <SelectField name="x" label="y" placeholder="" />;
+        const element = <SelectField name="x" placeholder="" />;
         const wrapper = mount(
             element,
             createContext({
@@ -101,42 +90,32 @@ describe.skip("<SelectField>", () => {
             })
         );
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("option")).toHaveLength(3);
-        [
-            ["", "y"],
-            ["a", "a"],
-            ["b", "b"]
-        ].forEach(([value, text], index) => {
-            const option = wrapper.find("option").at(index);
-            expect(option.prop("value")).toBe(value);
-            expect(option.text()).toBe(text);
-        });
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
+            { label: "a", value: "a" },
+            { label: "b", value: "b" }
+        ]);
+        expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("Search and select a value...");
     });
 
     test("<SelectField> - renders a select with correct placeholder (implicit)", () => {
         const element = <SelectField name="x" placeholder="y" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("option")).toHaveLength(3);
-        [
-            ["", "y"],
-            ["a", "a"],
-            ["b", "b"]
-        ].forEach(([value, text], index) => {
-            const option = wrapper.find("option").at(index);
-            expect(option.prop("value")).toBe(value);
-            expect(option.text()).toBe(text);
-        });
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([
+            { label: "a", value: "a" },
+            { label: "b", value: "b" }
+        ]);
+        expect(wrapper.find(ReactSelect).prop("placeholder")).toBe("y");
     });
 
     test("<SelectField> - renders a select with correct value (default)", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("value")).toBe("");
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("value")).toBe(undefined);
     });
 
     test("<SelectField> - renders a select with correct value (model)", () => {
@@ -146,16 +125,16 @@ describe.skip("<SelectField>", () => {
             createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { model: { x: "b" } })
         );
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("value")).toBe("b");
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
     });
 
     test("<SelectField> - renders a select with correct value (specified)", () => {
         const element = <SelectField name="x" value="b" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").prop("value")).toBe("b");
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
     });
 
     test("<SelectField> - renders a select which correctly reacts on change", () => {
@@ -164,8 +143,9 @@ describe.skip("<SelectField>", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { onChange }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").simulate("change", { target: { value: "b" } })).toBeTruthy();
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        wrapper.find(ReactSelect).invoke("onChange")({ value: "b" });
+
         expect(onChange).toHaveBeenLastCalledWith("x", "b");
     });
 
@@ -175,8 +155,9 @@ describe.skip("<SelectField>", () => {
         const element = <SelectField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { onChange }));
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").simulate("change", { target: { value: "" } })).toBeTruthy();
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        wrapper.find(ReactSelect).invoke("onChange")(undefined);
+
         expect(onChange).toHaveBeenLastCalledWith("x", undefined);
     });
 
@@ -189,8 +170,9 @@ describe.skip("<SelectField>", () => {
             createContext({ x: { type: String, allowedValues: ["a", "b"] } }, { model: { x: "b" }, onChange })
         );
 
-        expect(wrapper.find("select")).toHaveLength(1);
-        expect(wrapper.find("select").simulate("change", { target: { value: "b" } })).toBeTruthy();
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        wrapper.find(ReactSelect).invoke("onChange")({ value: "b" });
+
         expect(onChange).toHaveBeenLastCalledWith("x", "b");
     });
 
@@ -199,8 +181,8 @@ describe.skip("<SelectField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
         expect(wrapper.find("label")).toHaveLength(1);
-        expect(wrapper.find("label").prop("children")).toBe("y");
-        expect(wrapper.find("label").prop("htmlFor")).toBe(wrapper.find("select").prop("id"));
+        expect(wrapper.find("label").prop("children")).toContain("y");
+        expect(wrapper.find("label").prop("htmlFor")).toBe(wrapper.find(ReactSelect).prop("id"));
     });
 
     test("<SelectField> - renders a wrapper with unknown props", () => {
@@ -209,19 +191,19 @@ describe.skip("<SelectField>", () => {
 
         expect(
             wrapper
-                .find("div")
+                .find("section")
                 .at(0)
                 .prop("data-x")
         ).toBe("x");
         expect(
             wrapper
-                .find("div")
+                .find("section")
                 .at(0)
                 .prop("data-y")
         ).toBe("y");
         expect(
             wrapper
-                .find("div")
+                .find("section")
                 .at(0)
                 .prop("data-z")
         ).toBe("z");
