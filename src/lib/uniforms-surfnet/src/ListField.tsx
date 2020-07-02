@@ -15,31 +15,18 @@
 import "./ListField.scss";
 
 import range from "lodash/range";
-import React, { Children, HTMLProps, ReactNode, cloneElement, isValidElement } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React, { Children, cloneElement, isValidElement } from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
 import ListAddField from "./ListAddField";
 import ListItemField from "./ListItemField";
+import { FieldProps } from "./types";
 
 filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
 
-export type ListFieldProps = Override<
-    Omit<HTMLProps<HTMLUListElement>, "onChange">,
-    {
-        children?: ReactNode;
-        initialCount?: number;
-        itemProps?: {};
-        label?: string;
-        description?: string;
-        name: string;
-        value: unknown[];
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
->;
+export type ListFieldProps = FieldProps<any[], { initialCount?: number; itemProps?: {} }, null, HTMLUListElement>;
 
 function List({
     children = <ListItemField name="$" />,
@@ -49,6 +36,7 @@ function List({
     description,
     name,
     value,
+    onChange, // Not used on purpose
     error,
     showInlineError,
     errorMessage,
@@ -64,7 +52,7 @@ function List({
                     </label>
                 )}
 
-                {range(Math.max(value.length, initialCount || 0)).map(itemIndex =>
+                {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
                     Children.map(children, (child, childIndex) =>
                         isValidElement(child)
                             ? cloneElement(child, {

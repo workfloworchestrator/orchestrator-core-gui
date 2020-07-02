@@ -21,30 +21,16 @@ import {
     nodeSubscriptions
 } from "api";
 import I18n from "i18n-js";
-import React, { HTMLProps, Ref, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select, { ValueType } from "react-select";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps } from "uniforms";
 
 import { IMSNode, IMSPort, Option, Subscription } from "../../../utils/types";
+import { FieldProps } from "./types";
 
-export type ImsPortFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description: string;
-        name: string;
-        onChange(value?: number): void;
-        value?: number;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-        locationCode?: string;
-        nodeSubscriptionId?: string;
-        interfaceType: number | string;
-    }
+export type ImsPortFieldProps = FieldProps<
+    number,
+    { locationCode?: string; nodeSubscriptionId?: string; interfaceType: number | string }
 >;
 
 function nodeToOptionPort(node: IMSNode): Option {

@@ -12,20 +12,15 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
-export type LabelFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        id: string;
-        label: string;
-        name: string;
-        onChange: () => void;
-    }
->;
+import { FieldProps } from "./types";
 
-function Label({ id, name, label, ...props }: LabelFieldProps) {
+export type LabelFieldProps = FieldProps<null, {}, null, HTMLDivElement>;
+
+// onChange not used on purpose
+function Label({ id, name, label, onChange, ...props }: LabelFieldProps) {
     return (
         <section {...filterDOMProps(props)}>
             <p id={id} className={`label ${name}`}>

@@ -14,25 +14,12 @@
  */
 import "./BoolField.scss";
 
-import React, { HTMLProps, Ref } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
-export type BoolFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description?: string;
-        name: string;
-        onChange(value?: boolean): void;
-        value?: boolean;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
->;
+import { FieldProps } from "./types";
+
+export type BoolFieldProps = FieldProps<boolean>;
 
 function Bool({
     disabled,

@@ -12,12 +12,15 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps, joinName, useField } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
-export type ListDelFieldProps = Override<Omit<HTMLProps<HTMLSpanElement>, "onChange">, { name: string }>;
+import { FieldProps } from "./types";
 
-function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {} }, null, HTMLSpanElement>;
+
+// onChange not used on purpose
+function ListDel({ disabled, name, onChange, ...props }: ListDelFieldProps) {
     const nameParts = joinName(null, name);
     const nameIndex = +nameParts[nameParts.length - 1];
     const parentName = joinName(nameParts.slice(0, -1));

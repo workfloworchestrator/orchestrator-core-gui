@@ -16,22 +16,23 @@ import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
-import React, { HTMLProps, Ref, useContext, useEffect, useState } from "react";
-import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import React, { useContext, useEffect, useState } from "react";
+import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { inValidVlan } from "validations/UserInput";
 
 import { getPortMode } from "./logic/SubscriptionField";
+import { FieldProps } from "./types";
 
-function getAllNumbersForVlanRange(vlanRange: string) {
-    if (vlanRange !== "0" && inValidVlan(vlanRange)) {
-        //semantically invalid so we don't validate against the already used ports
+function getAllNumbersForVlanRange(vlanRange?: string) {
+    if (!vlanRange) {
         return [];
     }
 
-    if (vlanRange === "") {
+    if (vlanRange !== "0" && inValidVlan(vlanRange)) {
+        //semantically invalid so we don't validate against the already used ports
         return [];
     }
 
@@ -76,30 +77,14 @@ function vlanRangeFromNumbers(list: number[]) {
         .join(",");
 }
 
-function getVlansInUse(vlanRange: string, usedVlans: number[][]) {
+function getVlansInUse(vlanRange: string | undefined, usedVlans: number[][]) {
     const numbers = getAllNumbersForVlanRange(vlanRange);
     return numbers.filter(num =>
         usedVlans.some(used => (used.length > 1 ? num >= used[0] && num <= used[1] : num === used[0]))
     );
 }
 
-export type VlanFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description?: string;
-        name: string;
-        onChange(value?: string): void;
-        type?: string;
-        value: string;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
->;
+export type VlanFieldProps = FieldProps<string>;
 
 function Vlan({
     disabled,
@@ -136,12 +121,12 @@ function Vlan({
     let [usedVlansInIms, setUsedVlansInIms] = useState<number[][]>([]);
     let [missingInIms, setMissingInIms] = useState(false);
 
-    let validFormat = (vlanRange: string) => {
+    let validFormat = (vlanRange?: string) => {
         // If disabled, untagged or empty we don't need syntax validation
         return disabled || value === "" || value === "0" ? vlanRange === value : !inValidVlan(vlanRange);
     };
 
-    let validateUsedVlans = (vlanRange: string) => {
+    let validateUsedVlans = (vlanRange?: string) => {
         // This gets called onBlur (so we don't validate during typing) or
         // on mount to check if an untagged port is not already used
         const allUsedVlans = groupedArrayFromNumbers(usedVlans.concat(getAllNumbersForVlanRange(vlansExtraInUse)));

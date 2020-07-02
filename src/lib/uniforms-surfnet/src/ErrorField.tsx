@@ -12,20 +12,15 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps, ReactNode } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
-export type ErrorFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        children?: ReactNode;
-        error?: any;
-        errorMessage?: string;
-        onChange: () => void;
-    }
->;
+import { FieldProps } from "./types";
 
-function Error({ children, error, errorMessage, ...props }: ErrorFieldProps) {
+export type ErrorFieldProps = FieldProps<null>;
+
+// onChange not used on purpose
+function Error({ children, onChange, error, errorMessage, ...props }: ErrorFieldProps) {
     return !error ? null : <div {...filterDOMProps(props)}>{children || errorMessage}</div>;
 }
 

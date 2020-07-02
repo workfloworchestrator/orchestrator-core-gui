@@ -14,25 +14,19 @@
  */
 import "./SummaryField.scss";
 
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
 import { isEmpty } from "../../../utils/Utils";
+import { FieldProps } from "./types";
 
-export type SummaryFieldProps = Override<
-    HTMLProps<HTMLInputElement>,
-    {
-        id?: string;
-        label?: string;
-        description?: string;
-        name?: string;
-        data?: { headers: string[]; labels: string[]; columns: string[][] };
-        value?: string;
-        onChange: () => void;
-    }
+export type SummaryFieldProps = FieldProps<
+    null,
+    { data?: { headers: string[]; labels: string[]; columns: string[][] } }
 >;
 
-function Summary({ id, name, label, description, data, ...props }: SummaryFieldProps) {
+// onChange not used on purpose
+function Summary({ id, name, label, description, onChange, data, ...props }: SummaryFieldProps) {
     if (!data) {
         return null;
     }

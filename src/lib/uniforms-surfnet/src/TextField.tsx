@@ -12,27 +12,12 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps, Ref } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
-export type TextFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description?: string;
-        name: string;
-        onChange(value?: string): void;
-        placeholder: string;
-        type?: string;
-        value?: string;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
->;
+import { FieldProps } from "./types";
+
+export type TextFieldProps = FieldProps<string>;
 
 function Text({
     disabled,

@@ -16,26 +16,15 @@ import "./AcceptField.scss";
 
 import CheckBox from "components/CheckBox";
 import I18n, { TranslateOptions } from "i18n-js";
-import React, { HTMLProps, useReducer } from "react";
-import { Override, connectField } from "uniforms";
+import React, { useReducer } from "react";
+import { connectField } from "uniforms";
+
+import { FieldProps } from "./types";
 
 type AcceptItem = (string | TranslateOptions)[];
 type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
-export type AcceptFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        name: string;
-        onChange(value?: AcceptValue): void;
-        value?: AcceptValue;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-        data?: AcceptItem[];
-    }
->;
+export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
 
 interface AcceptState {
     checks: { [index: number]: boolean };

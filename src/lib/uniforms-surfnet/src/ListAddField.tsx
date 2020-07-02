@@ -13,15 +13,15 @@
  *
  */
 import cloneDeep from "lodash/cloneDeep";
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps, joinName, useField } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
-export type ListAddFieldProps = Override<
-    Omit<HTMLProps<HTMLDivElement>, "onChange">,
-    { initialCount?: number; name: string; value: unknown }
->;
+import { FieldProps } from "./types";
 
-function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddFieldProps) {
+export type ListAddFieldProps = FieldProps<null, { initialCount?: number }>;
+
+// onChange not used on purpose
+function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
     const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(
