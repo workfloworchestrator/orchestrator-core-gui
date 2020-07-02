@@ -17,8 +17,10 @@ import { memoize } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";
 
+let subscriptions: { [index: string]: ServicePortSubscription } = {};
+
 let data: Omit<SubscriptionsContextType, "getSubscriptions"> & { getSubscriptions?: typeof getSubscriptionsHandler } = {
-    subscriptions: {},
+    subscriptions: subscriptions,
     clearSubscriptions: clearSubscriptions,
     getSubscription: getSubscription,
     getSubscriptions: undefined
@@ -39,8 +41,6 @@ function getSubscriptionsHandler(filteredProductIds?: string[], tags?: string[])
         return allSubscriptions().then(updateSubscriptions);
     }
 }
-
-let subscriptions: { [index: string]: ServicePortSubscription } = {};
 
 function getSubscription(subscriptionId: string): ServicePortSubscription {
     return subscriptions[subscriptionId];

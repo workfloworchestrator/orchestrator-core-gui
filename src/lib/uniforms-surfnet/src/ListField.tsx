@@ -29,7 +29,8 @@ filterDOMProps.register("items");
 export type ListFieldProps = FieldProps<any[], { initialCount?: number; itemProps?: {} }, null, HTMLUListElement>;
 
 function List({
-    children = <ListItemField name="$" />,
+    disabled,
+    children = <ListItemField name="$" disabled={disabled} />,
     initialCount = 1,
     itemProps,
     label,
@@ -64,7 +65,7 @@ function List({
                     )
                 )}
 
-                <ListAddField initialCount={initialCount} name="$" />
+                <ListAddField initialCount={initialCount} name="$" disabled={disabled} />
             </ul>
             {error && showInlineError && (
                 <em className="error">

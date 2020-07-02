@@ -175,6 +175,10 @@ I18n.translations.en = {
             bum_filter:
                 "Enable BUM Filter. When selected broadcast, unknown-unicast and multicast traffic will be limited to 10% of the port speed.",
             chosen_service_port: "Selected Port",
+            chosen_service_port_fields: {
+                subscription_id: "Subscription id",
+                vlan: "Vlan"
+            },
             chosen_service_port_info: "Settings will apply to the following port",
             chosen_service_port_label: "Service Attach Point settings for selected port",
             configuration_ready: "Configuration ready",

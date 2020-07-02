@@ -36,7 +36,7 @@ function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: Li
     return (
         <div className="add-item" {...filterDOMProps(props)}>
             <i
-                className={`fa fa-plus ${!limitNotReached ? "disabled" : ""}`}
+                className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`}
                 onClick={() => {
                     const newRowsValue = Array(count).fill(cloneDeep(value));
                     if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));

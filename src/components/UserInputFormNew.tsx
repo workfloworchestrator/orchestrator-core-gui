@@ -126,7 +126,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
         props.id = `input-${name}`;
 
-        // TODO: Report below props as bug to uniforms
+        // See https://github.com/vazco/uniforms/issues/748
         if (props.const) {
             props.disabled = true;
             props.default = props.const;
@@ -140,6 +140,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
 
         if (props.minItems !== undefined) {
             props.minCount = props.minItems;
+            props.initialCount = props.minItems;
             delete props["minItems"];
         }
 
@@ -173,7 +174,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         // use const if present
         if (defaultValue === undefined) defaultValue = constValue;
 
-        // TODO Report this if als bug to uniforms
+        // See https://github.com/vazco/uniforms/issues/749
         if (defaultValue === undefined) {
             const nameArray = joinName(null, name);
             const relativeName = nameArray.pop()!;
