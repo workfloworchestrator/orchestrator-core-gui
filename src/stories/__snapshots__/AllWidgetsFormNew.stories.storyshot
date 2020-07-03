@@ -29,9 +29,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
               <section
                 className="form-step"
               >
-                <section
-                  className="product"
-                >
+                <section>
                   <label
                     htmlFor="input-product"
                   >
@@ -150,9 +148,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="product2"
-                >
+                <section>
                   <label
                     htmlFor="input-product2"
                   >
@@ -309,9 +305,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </label>
                   </div>
                 </section>
-                <div
-                  className="bandwidth1"
-                >
+                <div>
                   <label
                     htmlFor="input-bandwidth1"
                   >
@@ -443,7 +437,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   </span>
                 </div>
                 <section
-                  className="bfd nest-field"
+                  className=" nest-field"
                   id="input-bfd"
                 >
                   <label>
@@ -458,13 +452,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <input
                       checked={false}
                       disabled={false}
-                      id="uniforms-0000-000d"
+                      id="input-bfd.enabled"
                       name="bfd.enabled"
                       onChange={[Function]}
                       type="checkbox"
                     />
                     <label
-                      htmlFor="uniforms-0000-000d"
+                      htmlFor="input-bfd.enabled"
                     >
                       <span
                         tabIndex={0}
@@ -476,14 +470,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </label>
                     <label
                       className="info"
-                      htmlFor="uniforms-0000-000d"
+                      htmlFor="input-bfd.enabled"
                     >
                       [missing "en.forms.fields.bfd.enabled" translation]
                     </label>
                   </section>
                   <div>
                     <label
-                      htmlFor="uniforms-0000-000f"
+                      htmlFor="input-bfd.multiplier"
                     >
                       [missing "en.forms.fields.bfd.multiplier" translation]
                       
@@ -501,7 +495,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="uniforms-0000-000f"
+                        id="input-bfd.multiplier"
                         name="bfd.multiplier"
                         onBlur={[Function]}
                         onChange={[Function]}
@@ -614,7 +608,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   </div>
                   <div>
                     <label
-                      htmlFor="uniforms-0000-000h"
+                      htmlFor="input-bfd.minimum_interval"
                     >
                       [missing "en.forms.fields.bfd.minimum_interval" translation]
                       
@@ -632,7 +626,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     >
                       <input
                         disabled={false}
-                        id="uniforms-0000-000h"
+                        id="input-bfd.minimum_interval"
                         name="bfd.minimum_interval"
                         onBlur={[Function]}
                         onChange={[Function]}
@@ -816,12 +810,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-000q"
+                        id="input-contact_persons.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-000s"
+                            htmlFor="input-contact_persons.0.name"
                           >
                             Name
                             
@@ -831,7 +825,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           >
                             <input
                               disabled={false}
-                              id="uniforms-0000-000s"
+                              id="input-contact_persons.0.name"
                               name="contact_persons.0.name"
                               onBlur={[Function]}
                               onChange={[Function]}
@@ -845,14 +839,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-000u"
+                            htmlFor="input-contact_persons.0.email"
                           >
                             Email
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0000-000u"
+                            id="input-contact_persons.0.email"
                             name="contact_persons.0.email"
                             onChange={[Function]}
                             placeholder=""
@@ -862,14 +856,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-000w"
+                            htmlFor="input-contact_persons.0.phone"
                           >
                             Phone number
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0000-000w"
+                            id="input-contact_persons.0.phone"
                             name="contact_persons.0.phone"
                             onChange={[Function]}
                             placeholder=""
@@ -880,13 +874,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-000x"
+                        id="input-contact_persons.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-000z"
+                      id="input-contact_persons.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -895,10 +889,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section
-                  className="corelink_add_link1"
-                  id="input-corelink_add_link1"
-                >
+                <section>
                   <label>
                     [missing "en.forms.fields.corelink_add_link1" translation]
                     <em>
@@ -916,6 +907,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink_add_link1.node"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1026,6 +1018,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink_add_link1"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1130,10 +1123,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </section>
                 </section>
-                <section
-                  className="corelink_add_link2"
-                  id="input-corelink_add_link2"
-                >
+                <section>
                   <label>
                     [missing "en.forms.fields.corelink_add_link2" translation]
                     <em>
@@ -1151,6 +1141,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink_add_link2.node"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1261,6 +1252,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink_add_link2"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1365,10 +1357,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </section>
                 </section>
-                <section
-                  className="corelink"
-                  id="input-corelink"
-                >
+                <section>
                   <label>
                     [missing "en.forms.fields.corelink" translation]
                     <em>
@@ -1386,6 +1375,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink.node"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1496,6 +1486,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-corelink"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1600,9 +1591,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </section>
                 </section>
-                <section
-                  className="crm_port_id"
-                >
+                <section>
                   <label
                     htmlFor="input-crm_port_id"
                   >
@@ -1621,9 +1610,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="12345"
                   />
                 </section>
-                <section
-                  className="generic_select"
-                >
+                <section>
                   <label
                     htmlFor="input-generic_select"
                   >
@@ -1761,9 +1748,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="ip_prefix"
-                >
+                <section>
                   <label
                     htmlFor="input-ip_prefix"
                   >
@@ -1782,9 +1767,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="10.0.0.0/24"
                   />
                 </section>
-                <section
-                  className="isalias"
-                >
+                <section>
                   <label
                     htmlFor="input-isalias"
                   >
@@ -1801,9 +1784,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="urn:ogf:network:bla"
                   />
                 </section>
-                <section
-                  className="jira_ticket"
-                >
+                <section>
                   <label
                     htmlFor="input-jira_ticket"
                   >
@@ -1820,9 +1801,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="SNNP-123456"
                   />
                 </section>
-                <section
-                  className="label"
-                >
+                <section>
                   <p
                     className="label label"
                     id="input-label"
@@ -1830,9 +1809,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     [missing "en.forms.fields.label" translation]
                   </p>
                 </section>
-                <section
-                  className="location_code"
-                >
+                <section>
                   <label
                     htmlFor="input-location_code"
                   >
@@ -1951,9 +1928,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="migration_summary1"
-                >
+                <section>
                   <label
                     htmlFor="input-migration_summary1"
                   >
@@ -2014,9 +1989,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </table>
                   </section>
                 </section>
-                <section
-                  className="migration_summary2"
-                >
+                <section>
                   <label
                     htmlFor="input-migration_summary2"
                   >
@@ -2069,9 +2042,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </table>
                   </section>
                 </section>
-                <section
-                  className="migration_summary3"
-                >
+                <section>
                   <label
                     htmlFor="input-migration_summary3"
                   >
@@ -2121,9 +2092,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </table>
                   </section>
                 </section>
-                <section
-                  className="nms_service_id"
-                >
+                <section>
                   <label
                     htmlFor="input-nms_service_id"
                   >
@@ -2142,10 +2111,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="1234"
                   />
                 </section>
-                <section
-                  className="node_id_port_select"
-                  id="input-node_id_port_select"
-                >
+                <section>
                   <label>
                     [missing "en.forms.fields.node_id_port_select" translation]
                     <em>
@@ -2163,6 +2129,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-2b097c-container"
+                        id="input-node_id_port_select.node"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -2278,6 +2245,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </label>
                       <div
                         className=" css-14jk2my-container"
+                        id="input-node_id_port_select"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -2382,9 +2350,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </section>
                 </section>
-                <div
-                  className="nodes_for_location_code_and_status"
-                >
+                <div>
                   <label
                     htmlFor="input-nodes_for_location_code_and_status"
                   >
@@ -2515,9 +2481,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </b>
                   </span>
                 </div>
-                <div
-                  className="numeric1"
-                >
+                <div>
                   <label
                     htmlFor="input-numeric1"
                   >
@@ -2648,9 +2612,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </b>
                   </span>
                 </div>
-                <div
-                  className="numeric2"
-                >
+                <div>
                   <label
                     htmlFor="input-numeric2"
                   >
@@ -2781,9 +2743,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </b>
                   </span>
                 </div>
-                <section
-                  className="organisation1"
-                >
+                <section>
                   <label
                     htmlFor="input-organisation1"
                   >
@@ -2902,9 +2862,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="organisation2"
-                >
+                <section>
                   <label
                     htmlFor="input-organisation2"
                   >
@@ -3032,12 +2990,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-002c"
+                        id="input-service_ports1.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-002e"
+                            htmlFor="input-service_ports1.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
                             <em>
@@ -3046,7 +3004,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-002e"
+                            id="input-service_ports1.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3156,14 +3114,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-002h"
+                            htmlFor="input-service_ports1.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports1_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-002h"
+                            id="input-service_ports1.0.vlan"
                             name="service_ports1.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3177,19 +3135,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-002i"
+                        id="input-service_ports1.0"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-002m"
+                        id="input-service_ports1.1"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-002o"
+                            htmlFor="input-service_ports1.1.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
                             <em>
@@ -3198,7 +3156,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-002o"
+                            id="input-service_ports1.1.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3308,14 +3266,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-002r"
+                            htmlFor="input-service_ports1.1.vlan"
                           >
                             [missing "en.forms.fields.service_ports1_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-002r"
+                            id="input-service_ports1.1.vlan"
                             name="service_ports1.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3329,13 +3287,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-002s"
+                        id="input-service_ports1.1"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-002u"
+                      id="input-service_ports1.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -3358,12 +3316,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0030"
+                        id="input-service_ports2.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0032"
+                            htmlFor="input-service_ports2.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
                             <em>
@@ -3372,7 +3330,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-0032"
+                            id="input-service_ports2.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3482,14 +3440,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0035"
+                            htmlFor="input-service_ports2.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports2_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-0035"
+                            id="input-service_ports2.0.vlan"
                             name="service_ports2.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3503,19 +3461,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-0036"
+                        id="input-service_ports2.0"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-003a"
+                        id="input-service_ports2.1"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-003c"
+                            htmlFor="input-service_ports2.1.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
                             <em>
@@ -3524,7 +3482,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-003c"
+                            id="input-service_ports2.1.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3634,14 +3592,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-003f"
+                            htmlFor="input-service_ports2.1.vlan"
                           >
                             [missing "en.forms.fields.service_ports2_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-003f"
+                            id="input-service_ports2.1.vlan"
                             name="service_ports2.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3655,13 +3613,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-003g"
+                        id="input-service_ports2.1"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-003i"
+                      id="input-service_ports2.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -3684,12 +3642,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-003o"
+                        id="input-service_ports3.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-003q"
+                            htmlFor="input-service_ports3.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports3_fields.subscription_id" translation]
                             <em>
@@ -3698,7 +3656,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-003q"
+                            id="input-service_ports3.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3808,14 +3766,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-003t"
+                            htmlFor="input-service_ports3.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports3_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-003t"
+                            id="input-service_ports3.0.vlan"
                             name="service_ports3.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3829,13 +3787,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-003u"
+                        id="input-service_ports3.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-003w"
+                      id="input-service_ports3.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -3858,12 +3816,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0042"
+                        id="input-service_ports4.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0044"
+                            htmlFor="input-service_ports4.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
                             <em>
@@ -3872,7 +3830,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-0044"
+                            id="input-service_ports4.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -3982,14 +3940,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0047"
+                            htmlFor="input-service_ports4.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports4_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-0047"
+                            id="input-service_ports4.0.vlan"
                             name="service_ports4.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4002,7 +3960,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <div>
                           <label
-                            htmlFor="uniforms-0000-0049"
+                            htmlFor="input-service_ports4.0.bandwidth"
                           >
                             [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
                             
@@ -4020,7 +3978,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           >
                             <input
                               disabled={false}
-                              id="uniforms-0000-0049"
+                              id="input-service_ports4.0.bandwidth"
                               name="service_ports4.0.bandwidth"
                               onBlur={[Function]}
                               onChange={[Function]}
@@ -4134,19 +4092,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-004a"
+                        id="input-service_ports4.0"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-004e"
+                        id="input-service_ports4.1"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-004g"
+                            htmlFor="input-service_ports4.1.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
                             <em>
@@ -4155,7 +4113,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-004g"
+                            id="input-service_ports4.1.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -4265,14 +4223,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-004j"
+                            htmlFor="input-service_ports4.1.vlan"
                           >
                             [missing "en.forms.fields.service_ports4_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-004j"
+                            id="input-service_ports4.1.vlan"
                             name="service_ports4.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4285,7 +4243,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <div>
                           <label
-                            htmlFor="uniforms-0000-004l"
+                            htmlFor="input-service_ports4.1.bandwidth"
                           >
                             [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
                             
@@ -4303,7 +4261,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           >
                             <input
                               disabled={false}
-                              id="uniforms-0000-004l"
+                              id="input-service_ports4.1.bandwidth"
                               name="service_ports4.1.bandwidth"
                               onBlur={[Function]}
                               onChange={[Function]}
@@ -4417,13 +4375,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-004m"
+                        id="input-service_ports4.1"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-004o"
+                      id="input-service_ports4.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -4446,12 +4404,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-004u"
+                        id="input-service_ports5.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-004w"
+                            htmlFor="input-service_ports5.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports5_fields.subscription_id" translation]
                             <em>
@@ -4460,7 +4418,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-004w"
+                            id="input-service_ports5.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -4570,14 +4528,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-004z"
+                            htmlFor="input-service_ports5.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports5_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-004z"
+                            id="input-service_ports5.0.vlan"
                             name="service_ports5.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4591,13 +4549,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-0050"
+                        id="input-service_ports5.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-0052"
+                      id="input-service_ports5.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -4620,12 +4578,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0058"
+                        id="input-service_ports6.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-005a"
+                            htmlFor="input-service_ports6.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports6_fields.subscription_id" translation]
                             <em>
@@ -4634,7 +4592,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-005a"
+                            id="input-service_ports6.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -4744,14 +4702,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-005d"
+                            htmlFor="input-service_ports6.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports6_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-005d"
+                            id="input-service_ports6.0.vlan"
                             name="service_ports6.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4765,13 +4723,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-005e"
+                        id="input-service_ports6.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-005g"
+                      id="input-service_ports6.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -4794,12 +4752,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-005m"
+                        id="input-service_ports7.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-005o"
+                            htmlFor="input-service_ports7.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports7_fields.subscription_id" translation]
                             <em>
@@ -4808,7 +4766,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-005o"
+                            id="input-service_ports7.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -4918,14 +4876,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-005r"
+                            htmlFor="input-service_ports7.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports7_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-005r"
+                            id="input-service_ports7.0.vlan"
                             name="service_ports7.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4939,13 +4897,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-005s"
+                        id="input-service_ports7.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-005u"
+                      id="input-service_ports7.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -4968,12 +4926,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0060"
+                        id="input-service_ports8.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0062"
+                            htmlFor="input-service_ports8.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
                             <em>
@@ -4982,7 +4940,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-0062"
+                            id="input-service_ports8.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5092,14 +5050,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0065"
+                            htmlFor="input-service_ports8.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports8_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-0065"
+                            id="input-service_ports8.0.vlan"
                             name="service_ports8.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5113,19 +5071,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-0066"
+                        id="input-service_ports8.0"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-006a"
+                        id="input-service_ports8.1"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006c"
+                            htmlFor="input-service_ports8.1.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
                             <em>
@@ -5134,7 +5092,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-006c"
+                            id="input-service_ports8.1.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5244,14 +5202,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006f"
+                            htmlFor="input-service_ports8.1.vlan"
                           >
                             [missing "en.forms.fields.service_ports8_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-006f"
+                            id="input-service_ports8.1.vlan"
                             name="service_ports8.1.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5265,19 +5223,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-006g"
+                        id="input-service_ports8.1"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-006k"
+                        id="input-service_ports8.2"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006m"
+                            htmlFor="input-service_ports8.2.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
                             <em>
@@ -5286,7 +5244,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-006m"
+                            id="input-service_ports8.2.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5396,14 +5354,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006p"
+                            htmlFor="input-service_ports8.2.vlan"
                           >
                             [missing "en.forms.fields.service_ports8_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-006p"
+                            id="input-service_ports8.2.vlan"
                             name="service_ports8.2.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5417,19 +5375,19 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-006q"
+                        id="input-service_ports8.2"
                         onClick={[Function]}
                       />
                     </li>
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-006u"
+                        id="input-service_ports8.3"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006w"
+                            htmlFor="input-service_ports8.3.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
                             <em>
@@ -5438,7 +5396,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-006w"
+                            id="input-service_ports8.3.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5548,14 +5506,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-006z"
+                            htmlFor="input-service_ports8.3.vlan"
                           >
                             [missing "en.forms.fields.service_ports8_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-006z"
+                            id="input-service_ports8.3.vlan"
                             name="service_ports8.3.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5569,13 +5527,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-0070"
+                        id="input-service_ports8.3"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-0072"
+                      id="input-service_ports8.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -5598,12 +5556,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0078"
+                        id="input-service_ports9.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-007a"
+                            htmlFor="input-service_ports9.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports9_fields.subscription_id" translation]
                             <em>
@@ -5612,7 +5570,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-007a"
+                            id="input-service_ports9.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5722,14 +5680,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-007d"
+                            htmlFor="input-service_ports9.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports9_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-007d"
+                            id="input-service_ports9.0.vlan"
                             name="service_ports9.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5743,13 +5701,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-007e"
+                        id="input-service_ports9.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-007g"
+                      id="input-service_ports9.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -5772,12 +5730,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-007m"
+                        id="input-service_ports10.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-007o"
+                            htmlFor="input-service_ports10.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports10_fields.subscription_id" translation]
                             <em>
@@ -5786,7 +5744,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-007o"
+                            id="input-service_ports10.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -5896,14 +5854,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-007r"
+                            htmlFor="input-service_ports10.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports10_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-007r"
+                            id="input-service_ports10.0.vlan"
                             name="service_ports10.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5917,13 +5875,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-007s"
+                        id="input-service_ports10.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-007u"
+                      id="input-service_ports10.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -5946,12 +5904,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0080"
+                        id="input-service_ports_sn81.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0082"
+                            htmlFor="input-service_ports_sn81.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn81_fields.subscription_id" translation]
                             <em>
@@ -5960,7 +5918,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-0082"
+                            id="input-service_ports_sn81.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6070,14 +6028,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0085"
+                            htmlFor="input-service_ports_sn81.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn81_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-0085"
+                            id="input-service_ports_sn81.0.vlan"
                             name="service_ports_sn81.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6088,13 +6046,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-0086"
+                        id="input-service_ports_sn81.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-0088"
+                      id="input-service_ports_sn81.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -6117,12 +6075,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-008e"
+                        id="input-service_ports_sn82.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-008g"
+                            htmlFor="input-service_ports_sn82.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn82_fields.subscription_id" translation]
                             <em>
@@ -6131,7 +6089,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-008g"
+                            id="input-service_ports_sn82.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6241,14 +6199,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-008j"
+                            htmlFor="input-service_ports_sn82.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn82_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-008j"
+                            id="input-service_ports_sn82.0.vlan"
                             name="service_ports_sn82.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6262,13 +6220,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-008k"
+                        id="input-service_ports_sn82.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-008m"
+                      id="input-service_ports_sn82.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -6291,12 +6249,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-008s"
+                        id="input-service_ports_sn83.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-008u"
+                            htmlFor="input-service_ports_sn83.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn83_fields.subscription_id" translation]
                             <em>
@@ -6305,7 +6263,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-008u"
+                            id="input-service_ports_sn83.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6415,14 +6373,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-008x"
+                            htmlFor="input-service_ports_sn83.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn83_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-008x"
+                            id="input-service_ports_sn83.0.vlan"
                             name="service_ports_sn83.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6436,13 +6394,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-008y"
+                        id="input-service_ports_sn83.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-0090"
+                      id="input-service_ports_sn83.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -6465,12 +6423,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-0096"
+                        id="input-service_ports_sn84.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-0098"
+                            htmlFor="input-service_ports_sn84.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn84_fields.subscription_id" translation]
                             <em>
@@ -6479,7 +6437,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-0098"
+                            id="input-service_ports_sn84.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6589,14 +6547,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-009b"
+                            htmlFor="input-service_ports_sn84.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn84_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-009b"
+                            id="input-service_ports_sn84.0.vlan"
                             name="service_ports_sn84.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6610,13 +6568,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-009c"
+                        id="input-service_ports_sn84.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-009e"
+                      id="input-service_ports_sn84.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -6639,12 +6597,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-009k"
+                        id="input-service_ports_sn85.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-009m"
+                            htmlFor="input-service_ports_sn85.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn85_fields.subscription_id" translation]
                             <em>
@@ -6653,7 +6611,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-009m"
+                            id="input-service_ports_sn85.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6763,14 +6721,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-009p"
+                            htmlFor="input-service_ports_sn85.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn85_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-009p"
+                            id="input-service_ports_sn85.0.vlan"
                             name="service_ports_sn85.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6784,13 +6742,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-009q"
+                        id="input-service_ports_sn85.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-009s"
+                      id="input-service_ports_sn85.$"
                     >
                       <i
                         className="fa fa-plus disabled"
@@ -6813,12 +6771,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-009y"
+                        id="input-service_ports_sn86.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-00a0"
+                            htmlFor="input-service_ports_sn86.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn86_fields.subscription_id" translation]
                             <em>
@@ -6827,7 +6785,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-00a0"
+                            id="input-service_ports_sn86.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -6937,14 +6895,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-00a3"
+                            htmlFor="input-service_ports_sn86.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn86_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-00a3"
+                            id="input-service_ports_sn86.0.vlan"
                             name="service_ports_sn86.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6958,13 +6916,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0000-00a4"
+                        id="input-service_ports_sn86.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-00a6"
+                      id="input-service_ports_sn86.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -6987,12 +6945,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0000-00ac"
+                        id="input-service_ports_sn87.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0000-00ae"
+                            htmlFor="input-service_ports_sn87.0.subscription_id"
                           >
                             [missing "en.forms.fields.service_ports_sn87_fields.subscription_id" translation]
                             <em>
@@ -7001,7 +6959,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </label>
                           <div
                             className=" css-2b097c-container"
-                            id="uniforms-0000-00ae"
+                            id="input-service_ports_sn87.0.subscription_id"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -7111,14 +7069,14 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0000-00ah"
+                            htmlFor="input-service_ports_sn87.0.vlan"
                           >
                             [missing "en.forms.fields.service_ports_sn87_fields.vlan" translation]
                             
                           </label>
                           <input
                             disabled={true}
-                            id="uniforms-0000-00ah"
+                            id="input-service_ports_sn87.0.vlan"
                             name="service_ports_sn87.0.vlan"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -7132,13 +7090,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-00ai"
+                        id="input-service_ports_sn87.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-00ak"
+                      id="input-service_ports_sn87.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -7147,9 +7105,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section
-                  className="stp"
-                >
+                <section>
                   <label
                     htmlFor="input-stp"
                   >
@@ -7166,9 +7122,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="urn:ogf:network:vlan=1:fu:bar"
                   />
                 </section>
-                <section
-                  className="string1"
-                >
+                <section>
                   <label
                     htmlFor="input-string1"
                   >
@@ -7185,9 +7139,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="something"
                   />
                 </section>
-                <section
-                  className="string2"
-                >
+                <section>
                   <label
                     htmlFor="input-string2"
                   >
@@ -7204,9 +7156,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="1000"
                   />
                 </section>
-                <section
-                  className="string3"
-                >
+                <section>
                   <label
                     htmlFor="input-string3"
                   >
@@ -7223,9 +7173,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value=""
                   />
                 </section>
-                <section
-                  className="subscription_id"
-                >
+                <section>
                   <label
                     htmlFor="input-subscription_id"
                   >
@@ -7635,9 +7583,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </section>
                   </div>
                 </section>
-                <section
-                  className="subscription_product_tag1"
-                >
+                <section>
                   <label
                     htmlFor="input-subscription_product_tag1"
                   >
@@ -7756,9 +7702,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="subscription_product_tag2"
-                >
+                <section>
                   <label
                     htmlFor="input-subscription_product_tag2"
                   >
@@ -7893,7 +7837,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         
                         <div
                           className=" css-2b097c-container"
-                          id="uniforms-0000-00b6"
+                          id="input-subscriptions1.0"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -8003,7 +7947,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-00b8"
+                        id="input-subscriptions1.0"
                         onClick={[Function]}
                       />
                     </li>
@@ -8012,7 +7956,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         
                         <div
                           className=" css-2b097c-container"
-                          id="uniforms-0000-00bc"
+                          id="input-subscriptions1.1"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -8122,13 +8066,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-00be"
+                        id="input-subscriptions1.1"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-00bg"
+                      id="input-subscriptions1.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -8153,7 +8097,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         
                         <div
                           className=" css-2b097c-container"
-                          id="uniforms-0000-00bm"
+                          id="input-subscriptions2.0"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -8263,7 +8207,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-00bo"
+                        id="input-subscriptions2.0"
                         onClick={[Function]}
                       />
                     </li>
@@ -8272,7 +8216,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         
                         <div
                           className=" css-2b097c-container"
-                          id="uniforms-0000-00bs"
+                          id="input-subscriptions2.1"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -8382,13 +8326,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="uniforms-0000-00bu"
+                        id="input-subscriptions2.1"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0000-00bw"
+                      id="input-subscriptions2.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -8397,9 +8341,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section
-                  className="transition_product1"
-                >
+                <section>
                   <label
                     htmlFor="input-transition_product1"
                   >
@@ -8537,9 +8479,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     />
                   </div>
                 </section>
-                <section
-                  className="uuid"
-                >
+                <section>
                   <label
                     htmlFor="input-uuid"
                   >
@@ -8556,9 +8496,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     value="e89776be-16c3-4bee-af98-8e73bf6492a7"
                   />
                 </section>
-                <div
-                  className="bandwidth2"
-                >
+                <div>
                   <label
                     htmlFor="input-bandwidth2"
                   >
@@ -8689,9 +8627,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </b>
                   </span>
                 </div>
-                <div
-                  className="bandwidth3"
-                >
+                <div>
                   <label
                     htmlFor="input-bandwidth3"
                   >

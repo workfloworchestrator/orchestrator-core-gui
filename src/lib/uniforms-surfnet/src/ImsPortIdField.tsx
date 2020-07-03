@@ -49,6 +49,7 @@ function nodeToOptionCorelink(node: Subscription): Option {
 filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceType");
 
 function ImsPortId({
+    id,
     name,
     label,
     description,
@@ -140,6 +141,7 @@ function ImsPortId({
                 <div className="node-select">
                     <label>Node</label>
                     <Select
+                        id={`${id}.node`}
                         name={`${name}.node`}
                         onChange={onChangeNodes}
                         options={node_options}
@@ -151,6 +153,7 @@ function ImsPortId({
                 <div className="port-select">
                     <label>Port</label>
                     <Select
+                        id={id}
                         name={name}
                         onChange={(selected: ValueType<Option>) => {
                             const stringValue = (selected as Option | null)?.value;

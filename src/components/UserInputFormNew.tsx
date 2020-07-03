@@ -124,6 +124,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         const translation_key = name.replace(/\.\d+/, "_fields");
         props.label = I18n.t(`forms.fields.${translation_key}`);
         props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
+        props.id = `input-${name}`;
 
         // TODO: Report below props as bug to uniforms
         if (props.const) {
