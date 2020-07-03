@@ -346,7 +346,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
     const excludeInFilter = ["info", "workflow"];
     return (
         <div key={name}>
-            <section className="nwa-table" id={name}>
+            <section className="nwa-table" id={`${name}-processes`}>
                 <NwaTable<ProcessV2>
                     columns={columns}
                     initialState={initialState as TableState<ProcessV2>}

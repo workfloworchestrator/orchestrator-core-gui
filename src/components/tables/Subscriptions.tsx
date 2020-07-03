@@ -295,7 +295,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
 
     return (
         <div key={name}>
-            <section className="nwa-table" id={name}>
+            <section className="nwa-table" id={`${name}-subscriptions`}>
                 <NwaTable<Subscription>
                     columns={columns}
                     initialState={initialState as TableState<Subscription>}
