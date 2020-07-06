@@ -15,6 +15,7 @@
 
 import initStoryshots, { Stories2SnapsConverter } from "@storybook/addon-storyshots";
 import { RenderTree } from "@storybook/addon-storyshots/dist/frameworks/Loader";
+import { act } from "react-test-renderer";
 
 const converter = new Stories2SnapsConverter();
 
@@ -36,25 +37,23 @@ function AsyncSnapshot({
     // mount the story
     const result = renderTree(story, context, {});
 
-    function match(tree: any) {
-        // wait until the mount is updated
-        const waitTime = 1;
-        setTimeout(() => {
+    async function match(tree: any) {
+        await act(async () => {
+            await new Promise(resolve => setTimeout(resolve, 250));
             tree.update(story.render());
-            const updated_tree = tree.toJSON();
+        });
+        const updated_tree = tree.toJSON();
 
-            if (snapshotFilename) {
-                expect(updated_tree).toMatchSpecificSnapshot(snapshotFilename);
-            } else {
-                expect(updated_tree).toMatchSnapshot();
-            }
+        if (snapshotFilename) {
+            expect(updated_tree).toMatchSpecificSnapshot(snapshotFilename);
+        } else {
+            expect(updated_tree).toMatchSnapshot();
+        }
 
-            if (typeof updated_tree.unmount === "function") {
-                tree.unmount();
-            }
-
-            done();
-        }, waitTime);
+        if (typeof updated_tree.unmount === "function") {
+            tree.unmount();
+        }
+        done();
     }
 
     if (typeof result.then === "function") {

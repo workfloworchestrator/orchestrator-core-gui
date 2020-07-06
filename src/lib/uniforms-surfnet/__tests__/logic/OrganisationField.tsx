@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import fetchMock from "fetch-mock";
+
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
@@ -25,7 +25,6 @@ describe("<OrganisationField>", () => {
     test("<OrganisationField> - calls selectField with all organisations", () => {
         const SelectField = jest.fn(() => <br />);
 
-        fetchMock.restore();
         const element = (
             <ApplicationContext.Provider value={{ organisations: ORGANISATIONS_JSON } as ApplicationContextInterface}>
                 <OrganisationField name="x" inputComponent={SelectField as React.FC<any>} />
