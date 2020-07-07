@@ -140,9 +140,6 @@ I18n.translations.en = {
             }
         },
         fields: {
-            bgp_ip_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
-            contact_persons_fields: { email: "Email", name: "Name", phone: "Phone number" },
-            service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan", bandwidth: "Bandwidth" },
             accept_accept: {
                 noc_modification_confirmation: "NOC confirms modification of service",
                 noc_modification_confirmation_info:
@@ -151,6 +148,7 @@ I18n.translations.en = {
                     "Confirm modification of service with NMS service id {{nms_service_id}} from {{human_service_speed}} to {{new_human_service_speed}}"
             },
             added_service_ports: "Add ports",
+            added_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             added_service_ports_info: "Select some ports to add them to this subscription",
             asn: "Autonomous System Number",
             asn_info: "Asn of the customer",
@@ -166,6 +164,7 @@ I18n.translations.en = {
             bgp_hash_algorithm: "BGP Hash Algorithm",
             bgp_hash_algorithm_info: "BGP hash encryption algorithm, select 'no' to disable this BGP security feature.",
             bgp_ip_service_ports: "IP Service Ports",
+            bgp_ip_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             bgp_ip_service_ports_info:
                 "The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.",
             bgp_password: "BGP Password",
@@ -175,10 +174,7 @@ I18n.translations.en = {
             bum_filter:
                 "Enable BUM Filter. When selected broadcast, unknown-unicast and multicast traffic will be limited to 10% of the port speed.",
             chosen_service_port: "Selected Port",
-            chosen_service_port_fields: {
-                subscription_id: "Subscription id",
-                vlan: "Vlan"
-            },
+            chosen_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             chosen_service_port_info: "Settings will apply to the following port",
             chosen_service_port_label: "Service Attach Point settings for selected port",
             configuration_ready: "Configuration ready",
@@ -213,6 +209,7 @@ I18n.translations.en = {
             confirm_port_removal_info:
                 "Please confirm that the old service has been replaced by a new service with one port replaced",
             contact_persons: "Customer contact persons",
+            contact_persons_fields: { email: "Email", name: "Name", phone: "Phone number" },
             contact_persons_info:
                 "The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.",
             corelink_service_speed: "Please choose the corelink speed",
@@ -255,20 +252,14 @@ I18n.translations.en = {
             ip_prefix_subscriptions: "IP Prefix subscriptions",
             ip_prefix_subscriptions_info: "Which IP prefix subscriptions should be announced at this port?",
             ip_static_service_port: "IP Service Port",
-            ip_static_service_port_fields: {
-                subscription_id: "Subscription id",
-                vlan: "Vlan"
-            },
+            ip_static_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             isis_metric: "IS-IS metric",
             isis_metric_info: "Enter the desired IS-IS metric for this corelink",
             link_member_port: "Link Member",
-            link_member_port_fields: {
-                subscription_id: "Subscription id",
-                vlan: "Vlan"
-            },
+            link_member_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             link_member_port_info:
                 "Choose a Service Port - only link_member ports for the selected organisation are shown",
             location_code: "Location code",
@@ -282,6 +273,7 @@ I18n.translations.en = {
             new_interface_type: "The new interface type of the port",
             new_interface_type_info: "Please select the new interface type of the port",
             new_service_port: "Select Service Port that needs to be replaced",
+            new_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             new_service_port_info: "Select replacement Service Port.",
             new_subscription_id: "Subscription ID of the new subscription",
             new_subscription_id_info:
@@ -339,6 +331,7 @@ I18n.translations.en = {
             port_mode_info: "The port mode of the new service port",
             primary_remote_port_shutdown: "Primary Remote port shutdown",
             primary_service_ports: "Primary Service Ports",
+            primary_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             primary_service_ports_info: "Choose Primary Service Ports",
             primary_service_speed: "Primary Speed",
             primary_service_speed_info:
@@ -348,6 +341,7 @@ I18n.translations.en = {
             product_info: "Search and select the product",
             remote_port_shutdown: "Remote port shutdown",
             removed_service_ports: "Remove ports",
+            removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             removed_service_ports_info: "Select some ports to remove them from this subscription",
             sap_migration_summary: "Summary of SAP migration changes",
             sap_migration_summary_info:
@@ -357,6 +351,7 @@ I18n.translations.en = {
             second_lightpath: "Secondary LP",
             secondary_remote_port_shutdown: "Secondary Remote port shutdown",
             secondary_service_ports: "Secondary Service Ports",
+            secondary_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             secondary_service_ports_info: "Choose Secondary Service Ports",
             secondary_service_speed: "Secondary Speed",
             secondary_service_speed_info:
@@ -365,14 +360,23 @@ I18n.translations.en = {
             selected_sap: "Select a Service Attach Point",
             selected_sap_info: "Choose the SAP you want to migrate",
             service_ports: "Service Ports",
+            service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan", bandwidth: "Bandwidth" },
             service_ports_info: "Choose Service Ports",
             service_ports_primary: "Service Ports",
+            service_ports_primary_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             service_ports_primary_info: "The A1 and B1 side",
             service_ports_secondary: "Service Ports",
+            service_ports_secondary_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             service_ports_secondary_info: "The A2 and B2 side",
             service_speed: "Speed",
             service_speed_info:
                 "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
+            sn7_migrating_service_port: "SURFnet7 SAP",
+            sn7_migrating_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
+            sn7_migrating_service_port_info: "SN7 service port to be migrated",
+            sn8_migrating_service_port: "SURFnet8 SAP",
+            sn8_migrating_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
+            sn8_migrating_service_port_info: "SN8 service port to be migrated to",
             source: "MSP left",
             source_info: "The left MSP in the lightpath",
             speed_policer: "Speed policer",
