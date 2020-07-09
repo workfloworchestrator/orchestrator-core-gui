@@ -105,6 +105,9 @@ run system tests on dev:
     project: automation/projects/system-tests
     branch: dev
     strategy: depend
+  only:
+    refs:
+      - dev
   except:
     refs:
       - branches
