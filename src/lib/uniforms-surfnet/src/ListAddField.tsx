@@ -19,10 +19,10 @@ import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 import { FieldProps } from "./types";
 
-export type ListAddFieldProps = FieldProps<null, { initialCount?: number; outerList: boolean }>;
+export type ListAddFieldProps = FieldProps<string, { initialCount?: number; outerList?: boolean }>;
 
 // onChange not used on purpose
-function ListAdd({ disabled, name, value, onChange, initialCount, outerList, ...props }: ListAddFieldProps) {
+function ListAdd({ disabled, name, value, onChange, initialCount, outerList = false, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
     const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(

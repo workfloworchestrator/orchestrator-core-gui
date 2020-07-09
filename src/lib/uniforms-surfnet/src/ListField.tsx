@@ -26,6 +26,7 @@ filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
 filterDOMProps.register("uniqueItems");
+filterDOMProps.register("outerList");
 
 export type ListFieldProps = FieldProps<
     any[],

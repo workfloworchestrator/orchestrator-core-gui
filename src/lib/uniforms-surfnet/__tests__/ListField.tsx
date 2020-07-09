@@ -37,8 +37,13 @@ test("<ListField> - renders correct label (specified)", () => {
     const element = <ListField name="x" label="ListFieldLabel" />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
-    expect(wrapper.find("label")).toHaveLength(1);
-    expect(wrapper.find("label").text()).toEqual(expect.stringContaining("ListFieldLabel"));
+    expect(wrapper.find("label")).toHaveLength(3);
+    expect(
+        wrapper
+            .find("label")
+            .at(0)
+            .text()
+    ).toEqual(expect.stringContaining("ListFieldLabel"));
 });
 
 test("<ListField> - renders correct numer of items with initialCount (specified)", () => {
@@ -114,4 +119,56 @@ test("<ListField> - renders children with correct name (value)", () => {
             .at(1)
             .prop("name")
     ).toBe("1");
+});
+
+test("<ListField> - renders correctly when child is list", () => {
+    const element = <ListField name="x" />;
+    const wrapper = mount(
+        element,
+        createContext(
+            { x: { type: Array }, "x.$": { type: Array }, "x.$.$": { type: String } },
+            { model: { x: [["test"]] } }
+        )
+    );
+
+    expect(wrapper.find(ListItemField)).toHaveLength(2);
+    expect(
+        wrapper
+            .find(ListItemField)
+            .at(0)
+            .prop("outerList")
+    ).toBe(true);
+    expect(
+        wrapper
+            .find(ListItemField)
+            .at(1)
+            .prop("outerList")
+    ).toBe(false);
+    expect(wrapper.find(ListAddField)).toHaveLength(2);
+    expect(
+        wrapper
+            .find(ListAddField)
+            .at(0)
+            .prop("outerList")
+    ).toBe(false);
+    expect(
+        wrapper
+            .find(ListAddField)
+            .at(1)
+            .prop("outerList")
+    ).toBe(true);
+
+    expect(wrapper.find("ul")).toHaveLength(2);
+    expect(
+        wrapper
+            .find("ul")
+            .at(0)
+            .prop("className")
+    ).toContain("outer-list");
+    expect(
+        wrapper
+            .find("ul")
+            .at(1)
+            .prop("className")
+    ).toBe("list-field");
 });

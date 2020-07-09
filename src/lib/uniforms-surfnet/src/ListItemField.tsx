@@ -21,10 +21,10 @@ import ListDelField from "./ListDelField";
 export type ListItemFieldProps = {
     children?: ReactNode;
     name: string;
-    outerList: boolean;
+    outerList?: boolean;
 };
 
-function ListItem({ children = <AutoField label={null} name="" />, outerList }: ListItemFieldProps) {
+function ListItem({ children = <AutoField label={null} name="" />, outerList = false }: ListItemFieldProps) {
     return (
         <li>
             {children}
