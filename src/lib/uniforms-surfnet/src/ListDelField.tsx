@@ -18,12 +18,7 @@ import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 import { FieldProps } from "./types";
 
-export type ListDelFieldProps = FieldProps<
-    null,
-    { initialCount?: number; itemProps?: {}; outerList?: boolean },
-    null,
-    HTMLSpanElement
->;
+export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {}; outerList?: boolean }>;
 
 // onChange not used on purpose
 function ListDel({ disabled, name, id, onChange, outerList = false, ...props }: ListDelFieldProps) {
@@ -35,19 +30,19 @@ function ListDel({ disabled, name, id, onChange, outerList = false, ...props }: 
     const limitNotReached = !disabled && !(parent.minCount! >= parent.value!.length);
 
     return (
-        <div className="del-item">
-            <i
-                id={`${id}.remove`}
-                className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`}
-                {...filterDOMProps(props)}
-                onClick={() => {
-                    if (limitNotReached) {
-                        const value = parent.value!.slice();
-                        value.splice(nameIndex, 1);
-                        parent.onChange(value);
-                    }
-                }}
-            />
+        <div
+            {...filterDOMProps(props)}
+            className="del-item"
+            id={`${id}.remove`}
+            onClick={() => {
+                if (limitNotReached) {
+                    const value = parent.value!.slice();
+                    value.splice(nameIndex, 1);
+                    parent.onChange(value);
+                }
+            }}
+        >
+            <i className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`} />
 
             <label>{outerList && I18n.t(`forms.fields.${parentName}_del`)}</label>
         </div>

@@ -47,16 +47,6 @@ ul.list-field {
             }
         }
 
-        i.fa-minus {
-            color: vars.$red;
-            font-size: 30px;
-
-            cursor: pointer;
-            &.disabled {
-                cursor: not-allowed;
-                color: vars.$light-grey;
-            }
-        }
         // Hide all labels for sub fields
         label {
             display: none;
@@ -72,35 +62,32 @@ ul.list-field {
             }
         }
     }
-    div.add-item {
-        display: flex;
-        align-self: flex-end;
-        margin: 5px;
-        i.fa-plus {
-            color: vars.$green;
-            font-size: 30px;
-            cursor: pointer;
-
-            &.disabled {
-                cursor: not-allowed;
-                color: vars.$light-grey;
-            }
-        }
-
-        label {
-            display: block;
-            margin-left: 5px;
-        }
-    }
-
+    div.add-item,
     div.del-item {
         display: flex;
         align-items: center;
+        align-self: flex-end;
         margin: 5px;
+        cursor: pointer;
+
+        i.fa-plus {
+            color: vars.$green;
+            font-size: 30px;
+        }
+
+        i.fa-minus {
+            color: vars.$red;
+            font-size: 30px;
+        }
 
         label {
             display: block;
             margin-left: 5px;
+            cursor: pointer;
+        }
+        &.disabled {
+            cursor: not-allowed;
+            color: vars.$light-grey;
         }
     }
 

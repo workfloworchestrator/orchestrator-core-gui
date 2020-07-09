@@ -35,14 +35,15 @@ function ListAdd({ disabled, name, value, onChange, initialCount, outerList = fa
     const count = 1 + Math.max((initialCount ?? 0) - parent.value!.length, 0);
 
     return (
-        <div className="add-item" {...filterDOMProps(props)}>
-            <i
-                className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`}
-                onClick={() => {
-                    const newRowsValue = Array(count).fill(cloneDeep(value));
-                    if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
-                }}
-            />
+        <div
+            className="add-item"
+            {...filterDOMProps(props)}
+            onClick={() => {
+                const newRowsValue = Array(count).fill(cloneDeep(value));
+                if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
+            }}
+        >
+            <i className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`} />
             <label>{outerList && I18n.t(`forms.fields.${parentName}_add`)}</label>
         </div>
     );
