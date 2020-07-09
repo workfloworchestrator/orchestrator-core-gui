@@ -16,6 +16,7 @@
 import "./Header.scss";
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import { ENV } from "env";
 import I18n from "i18n-js";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
@@ -96,7 +97,9 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
     };
 
     componentWillMount() {
-        window.setInterval(this.refeshStatus, 3000);
+        if (ENV.CHECK_STATUS_INTERVAL > 0) {
+            window.setInterval(this.refeshStatus, ENV.CHECK_STATUS_INTERVAL * 1000);
+        }
     }
 
     render() {

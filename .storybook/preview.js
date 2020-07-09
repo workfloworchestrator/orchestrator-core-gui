@@ -46,3 +46,4 @@ window.__env__.OAUTH2_ENABLED = false;
 window.__env__.OAUTH2_OPENID_CONNECT_URL = "";
 window.__env__.OAUTH2_CLIENT_ID = "";
 window.__env__.OAUTH2_SCOPE = "";
+window.__env__.CHECK_STATUS_INTERVAL = 0;
