@@ -244,7 +244,17 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         }))
                     };
                 }
-                throw error;
+
+                // Let the error escape so it can be caught by our own onerror handler instead of being silenced by uniforms
+                setTimeout(() => {
+                    throw error;
+                }, 0);
+
+                // The form will clear the errors so also remove the warning
+                this.setState({ nrOfValidationErrors: 0 });
+
+                // The error we got contains no validation errors so don't send it to uniforms
+                return null;
             }
         }
     };
