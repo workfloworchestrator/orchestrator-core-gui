@@ -237,6 +237,10 @@ I18n.translations.en = {
             downgrade_redundant_lp_choice: "Redundant LP Subscription",
             downgrade_redundant_lp_choice_info:
                 "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+            esi_service_ports: "ESI Service ports",
+            esi_service_ports_add: "Add Endpoint",
+            esi_service_ports_del: "Del Endpoint",
+            esi_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             extra_information: "Extra information",
             extra_information_info:
                 "Additional information to add to the subscription description and IPAM description",

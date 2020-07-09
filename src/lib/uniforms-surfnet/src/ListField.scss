@@ -48,7 +48,6 @@ ul.list-field {
         }
 
         i.fa-minus {
-            padding-left: 5px;
             color: vars.$red;
             font-size: 30px;
 
@@ -63,21 +62,21 @@ ul.list-field {
             display: none;
         }
 
-        &:first-of-type {
+        &:first-child {
             //Except for the first row
             label {
                 display: initial;
             }
-            section.nest-field ~ i.fa-minus {
+            section.nest-field ~ div.del-item {
                 margin-top: 25px;
             }
         }
     }
     div.add-item {
         display: flex;
+        align-self: flex-end;
+        margin: 5px;
         i.fa-plus {
-            margin-left: auto;
-            padding: 10px 2px 0 0;
             color: vars.$green;
             font-size: 30px;
             cursor: pointer;
@@ -86,6 +85,36 @@ ul.list-field {
                 cursor: not-allowed;
                 color: vars.$light-grey;
             }
+        }
+
+        label {
+            display: block;
+            margin-left: 5px;
+        }
+    }
+
+    div.del-item {
+        display: flex;
+        align-items: center;
+        margin: 5px;
+
+        label {
+            display: block;
+            margin-left: 5px;
+        }
+    }
+
+    &.outer-list {
+        > div.add-item {
+            align-self: flex-start;
+            padding: 0 2px 0 0;
+            align-items: center;
+        }
+        > li > div.del-item {
+            align-self: flex-start;
+        }
+        > li {
+            flex-direction: column;
         }
     }
 }

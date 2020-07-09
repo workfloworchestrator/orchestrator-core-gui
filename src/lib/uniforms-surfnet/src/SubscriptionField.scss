@@ -43,16 +43,16 @@
             }
         }
     }
+}
 
-    li .refresh-subscriptions {
-        flex-shrink: 0;
+li .refresh-subscriptions {
+    flex-shrink: 0;
 
-        i {
-            display: none;
-        }
+    i {
+        display: none;
     }
+}
 
-    li:first-of-type .refresh-subscriptions i {
-        display: block;
-    }
+li:first-child .refresh-subscriptions i {
+    display: block;
 }

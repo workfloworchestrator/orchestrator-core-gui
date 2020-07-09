@@ -1,3 +1,4 @@
+import I18n from "i18n-js";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,10 +19,10 @@ import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 import { FieldProps } from "./types";
 
-export type ListAddFieldProps = FieldProps<null, { initialCount?: number }>;
+export type ListAddFieldProps = FieldProps<null, { initialCount?: number; outerList: boolean }>;
 
 // onChange not used on purpose
-function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: ListAddFieldProps) {
+function ListAdd({ disabled, name, value, onChange, initialCount, outerList, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
     const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(
@@ -42,6 +43,7 @@ function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: Li
                     if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
                 }}
             />
+            <label>{outerList && I18n.t(`forms.fields.${parentName}_add`)}</label>
         </div>
     );
 }
