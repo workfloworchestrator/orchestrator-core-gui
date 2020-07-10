@@ -15,7 +15,6 @@
 
 import "./UserInputFormNew.scss";
 
-import Ajv from "ajv";
 import I18n from "i18n-js";
 import AcceptField from "lib/uniforms-surfnet/src/AcceptField";
 import ImsPortIdField from "lib/uniforms-surfnet/src/ImsPortIdField";
@@ -69,40 +68,6 @@ interface IState {
     confirmationDialogOpen: boolean;
     nrOfValidationErrors: number;
     processing: boolean;
-}
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-const VLAN_REGEX = /^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$/;
-const UUID_REGEX = /^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$/;
-const IP_NETWORK_REGEX = /^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(3[0-2]|[1-2][0-9]|[0-9]))|s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9])))$/;
-
-function createValidator(schema: {}) {
-    const validator = ajv
-        .addFormat("uuid4", UUID_REGEX)
-        .addFormat("subscriptionId", UUID_REGEX)
-        .addFormat("productId", UUID_REGEX)
-        .addFormat("organisationId", UUID_REGEX)
-        .addFormat("ipvanynetwork", IP_NETWORK_REGEX)
-        .addFormat("long", /.*/)
-        .addFormat("locationCode", /\w+\d+\w+/)
-        .addFormat("contactPersonName", /.*/)
-        .addFormat("imsPortId", /\d{0,6/)
-        .addFormat("label", /^$/)
-        .addFormat("summary", /^$/)
-        .addFormat("subscription", /^$/)
-        .addFormat("vlan", VLAN_REGEX)
-        .addFormat("accept", /^(ACCEPTED|SKIPPED|INCOMPLETE)$/)
-        .compile(schema);
-
-    return (model: {}) => {
-        //validator(model);
-
-        if (validator.errors && validator.errors.length) {
-            // eslint-disable-next-line no-throw-literal
-            throw { details: validator.errors };
-        }
-    };
 }
 
 filterDOMProps.register("description");
@@ -279,7 +244,17 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                         }))
                     };
                 }
-                throw error;
+
+                // Let the error escape so it can be caught by our own onerror handler instead of being silenced by uniforms
+                setTimeout(() => {
+                    throw error;
+                }, 0);
+
+                // The form will clear the errors so also remove the warning
+                this.setState({ nrOfValidationErrors: 0 });
+
+                // The error we got contains no validation errors so don't send it to uniforms
+                return null;
             }
         }
     };
@@ -321,8 +296,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         const { confirmationDialogOpen, nrOfValidationErrors } = this.state;
         const { cancel, stepUserInput, userInput } = this.props;
 
-        const schemaValidator = createValidator(stepUserInput);
-        const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, schemaValidator);
+        const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, () => {});
 
         return (
             <div className="mod-process-step">
