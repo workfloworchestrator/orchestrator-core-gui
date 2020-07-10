@@ -1349,11 +1349,18 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                 )
                             )}
                         </table>
-                        <h2>ESI Blocks</h2>
-                        {esi_blocks.map((esi_block: any, esi_block_number: number) => (
-                            <>
-                                <h3>{esi_block_number}</h3>
-                                {esi_block.saps.map((sap: any, sap_number: number) => (
+                    </section>
+                    <section className="product-block">
+                        <h3>ESI Blocks</h3>
+                    </section>
+
+                    {esi_blocks.map((esi_block: any, esi_block_number: number) => (
+                        <section className="product-block">
+                            <h3>ESI Block {esi_block_number + 1}</h3>
+                            <p className="label">{`Instance ID: ${esi_block.subscription_instance_id}`}</p>
+                            {esi_block.saps.map((sap: any, sap_number: number) => (
+                                <section className="sub-product-block">
+                                    <h4>SAP {sap_number + 1}</h4>
                                     <table className="detail-block multiple-tbody">
                                         <thead />
                                         {Object.keys(sap).map((key, i: number) =>
@@ -1370,10 +1377,10 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                                             )
                                         )}
                                     </table>
-                                ))}
-                            </>
-                        ))}
-                    </section>
+                                </section>
+                            ))}
+                        </section>
+                    ))}
                 </div>
             </section>
         );
