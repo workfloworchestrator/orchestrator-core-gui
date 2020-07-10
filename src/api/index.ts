@@ -35,6 +35,7 @@ import {
     ResourceType,
     ServicePortSubscription,
     Subscription,
+    SubscriptionModel,
     Workflow,
     WorkflowReasons
 } from "../utils/types";
@@ -230,6 +231,10 @@ export function paginatedSubscriptions(
 
 export function subscriptionsDetail(subscription_id: string): Promise<Subscription> {
     return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/${subscription_id}`);
+}
+
+export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
+    return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/domain-model/${subscription_id}`);
 }
 
 export function subscriptionsByTags(tagList: string[], statusList: string[] = []) {
