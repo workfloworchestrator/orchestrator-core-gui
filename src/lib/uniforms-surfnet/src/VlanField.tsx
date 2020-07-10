@@ -16,22 +16,22 @@ import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
-import React, { HTMLProps, Ref, useContext, useEffect, useState } from "react";
-import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import React, { useContext, useEffect, useState } from "react";
+import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
-import { isEmpty } from "utils/Utils";
 import { inValidVlan } from "validations/UserInput";
 
-import { getPortMode } from "./logic/SubscriptionField";
+import { getPortMode } from "./SubscriptionField";
+import { FieldProps } from "./types";
 
-function getAllNumbersForVlanRange(vlanRange: string) {
-    if (vlanRange !== "0" && inValidVlan(vlanRange)) {
-        //semantically invalid so we don't validate against the already used ports
+function getAllNumbersForVlanRange(vlanRange?: string) {
+    if (!vlanRange) {
         return [];
     }
 
-    if (vlanRange === "") {
+    if (vlanRange !== "0" && inValidVlan(vlanRange)) {
+        //semantically invalid so we don't validate against the already used ports
         return [];
     }
 
@@ -56,13 +56,20 @@ function groupedArrayFromNumbers(numbers: number[]) {
 
     // Group by properly incrementing numbers
     let grouped_numbers = numbers.reduce((r: number[][], n) => {
-        const lastSubArray: number[] = r[r.length - 1];
+        let lastSubArray: number[] = r[r.length - 1];
 
-        if (!lastSubArray || lastSubArray[lastSubArray.length - 1] !== n - 1) {
-            r.push([]);
+        // Skip duplicates
+        if (lastSubArray && lastSubArray[lastSubArray.length - 1] === n) {
+            return r;
         }
 
-        r[r.length - 1].push(n);
+        // If this is the first one or number is more than 1 difference make a new sub array
+        if (!lastSubArray || lastSubArray[lastSubArray.length - 1] !== n - 1) {
+            lastSubArray = [];
+            r.push(lastSubArray);
+        }
+
+        lastSubArray.push(n);
 
         return r;
     }, []);
@@ -76,30 +83,7 @@ function vlanRangeFromNumbers(list: number[]) {
         .join(",");
 }
 
-function getVlansInUse(vlanRange: string, usedVlans: number[][]) {
-    const numbers = getAllNumbersForVlanRange(vlanRange);
-    return numbers.filter(num =>
-        usedVlans.some(used => (used.length > 1 ? num >= used[0] && num <= used[1] : num === used[0]))
-    );
-}
-
-export type VlanFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description?: string;
-        name: string;
-        onChange(value?: string): void;
-        type?: string;
-        value: string;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
->;
+export type VlanFieldProps = FieldProps<string, { subscriptionFieldName?: string }>;
 
 function Vlan({
     disabled,
@@ -109,53 +93,41 @@ function Vlan({
     description,
     name,
     onChange,
-    type,
     value,
     error,
     showInlineError,
     errorMessage,
+    subscriptionFieldName = "subscription_id",
     ...props
 }: VlanFieldProps) {
-    const { model } = useForm();
+    const { model, schema } = useForm();
+    const initialValue = schema.getInitialValue(name, {});
     const { products } = useContext(ApplicationContext);
-    const { subscriptions } = useContext(SubscriptionsContext);
+    const { getSubscription } = useContext(SubscriptionsContext);
     const nameArray = joinName(null, name);
-    const subscriptionIdFieldName = joinName(nameArray.slice(0, -1), "subscription_id");
+    const selfName = nameArray.slice(-1);
+    const subscriptionIdFieldName = joinName(nameArray.slice(0, -1), subscriptionFieldName);
     const completeListFieldName = joinName(nameArray.slice(0, -2));
     const subscriptionId = get(model, subscriptionIdFieldName);
     const completeList: ServicePort[] = get(model, completeListFieldName) || [];
-    const vlansExtraInUse = completeList
-        .filter(item => item.subscription_id === subscriptionId)
+    const extraUsedVlans = completeList
         .filter((_item, index) => index.toString() !== nameArray.slice(-2, -1)[0])
-        .map(item => item.vlan)
+        .filter(item => get(item, subscriptionFieldName) === subscriptionId)
+        .map(item => get(item, selfName))
         .join(",");
 
-    const subscription = get(subscriptions, subscriptionId);
+    const subscription = getSubscription(subscriptionId);
     const portMode = subscription && getPortMode(subscription, products);
+    const isUntagged = ["untagged", "link_member"].includes(portMode);
 
-    let [usedVlansInIms, setUsedVlansInIms] = useState<number[][]>([]);
-    let [missingInIms, setMissingInIms] = useState(false);
+    if (subscriptionId && isUntagged && value !== "0") {
+        onChange("0");
+    } else if ((!subscriptionId && value !== "") || (subscriptionId && !isUntagged && value === "0")) {
+        onChange("");
+    }
 
-    let validFormat = (vlanRange: string) => {
-        // If disabled, untagged or empty we don't need syntax validation
-        return disabled || value === "" || value === "0" ? vlanRange === value : !inValidVlan(vlanRange);
-    };
-
-    let validateUsedVlans = (vlanRange: string) => {
-        // This gets called onBlur (so we don't validate during typing) or
-        // on mount to check if an untagged port is not already used
-        const allUsedVlans = groupedArrayFromNumbers(usedVlans.concat(getAllNumbersForVlanRange(vlansExtraInUse)));
-        const invalidFormat = !validFormat(vlanRange);
-
-        // Can't check if input is invalid
-        let inUse: number[] = [];
-
-        if (!invalidFormat) {
-            inUse = getVlansInUse(vlanRange, allUsedVlans);
-        }
-
-        return { vlansInUse: inUse, invalidFormat: invalidFormat };
-    };
+    const [usedVlansInIms, setUsedVlansInIms] = useState<number[][]>([]);
+    const [missingInIms, setMissingInIms] = useState(false);
 
     useEffect(() => {
         if (subscriptionId) {
@@ -170,40 +142,33 @@ function Vlan({
         }
     }, [subscriptionId]);
 
-    let usedVlans = numbersFromGroupedArray(usedVlansInIms);
-
     // Filter currently used vlans because they are probably from the current subscription
-    const currentVlans = getAllNumbersForVlanRange(value);
-    usedVlans = usedVlans.filter(n => !currentVlans.includes(n));
-
+    const currentVlans = getAllNumbersForVlanRange(initialValue);
+    const usedVlans = numbersFromGroupedArray(usedVlansInIms).filter(n => !currentVlans.includes(n));
+    const allUsedVlans = usedVlans.concat(getAllNumbersForVlanRange(extraUsedVlans)).sort();
+    const validFormat = !value || value === "0" || !inValidVlan(value);
     // Don't validate if disabled (untagged shows as disable but needs validation)
-    let vlansInUse: number[] = [];
-    let invalidFormat = false;
-    if (!disabled) {
-        const result = validateUsedVlans(value);
-        vlansInUse = result.vlansInUse;
-        invalidFormat = result.invalidFormat;
-    }
+    const vlansInUse =
+        validFormat && !disabled ? getAllNumbersForVlanRange(value).filter(num => allUsedVlans.includes(num)) : [];
 
-    const allUsedVlans = vlanRangeFromNumbers(usedVlans.concat(getAllNumbersForVlanRange(vlansExtraInUse)));
     const placeholder = subscriptionId
         ? I18n.t("forms.widgets.vlan.placeholder")
         : I18n.t("forms.widgets.vlan.placeholderNoServicePort");
 
     const errorMessageExtra = missingInIms
         ? I18n.t("forms.widgets.vlan.missingInIms")
-        : invalidFormat
+        : !validFormat
         ? I18n.t("forms.widgets.vlan.invalidVlan")
-        : !isEmpty(vlansInUse)
+        : vlansInUse.length
         ? vlansInUse.length >= 1 && vlansInUse[0] === 0
             ? I18n.t("forms.widgets.vlan.untaggedPortInUse")
-            : I18n.t("forms.widgets.vlan.vlansInUseError", { vlans: vlansInUse.join(", ") })
+            : I18n.t("forms.widgets.vlan.vlansInUseError", { vlans: vlanRangeFromNumbers(vlansInUse) })
         : undefined;
-    const message = isEmpty(allUsedVlans)
-        ? portMode === "tagged"
-            ? I18n.t("forms.widgets.vlan.allPortsAvailable")
-            : I18n.t("forms.widgets.vlan.taggedOnly")
-        : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: allUsedVlans });
+    const message = isUntagged
+        ? I18n.t("forms.widgets.vlan.taggedOnly")
+        : !allUsedVlans.length
+        ? I18n.t("forms.widgets.vlan.allPortsAvailable")
+        : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
     return (
         <section {...filterDOMProps(props)}>
@@ -214,21 +179,17 @@ function Vlan({
                 </label>
             )}
             <input
-                disabled={disabled || portMode !== "tagged"}
+                disabled={!subscriptionId || disabled || isUntagged}
                 id={id}
                 name={name}
                 onChange={event => onChange(event.target.value)}
                 placeholder={placeholder}
                 ref={inputRef}
-                type={type}
-                value={portMode !== "tagged" ? 0 : value}
-                onBlur={e => {
-                    const target = e.target as HTMLInputElement;
-                    validateUsedVlans(target.value);
-                }}
+                type="text"
+                value={value ?? ""}
             ></input>
-            {subscriptionId && !disabled && <em>{message}</em>}
-            {error && showInlineError && (
+            {subscriptionId && !disabled && <em className="info">{message}</em>}
+            {(error || errorMessageExtra) && showInlineError && (
                 <em className="error">
                     <div className="backend-validation">{errorMessage || errorMessageExtra}</div>
                 </em>
@@ -237,4 +198,4 @@ function Vlan({
     );
 }
 
-export default connectField(Vlan);
+export default connectField(Vlan, { kind: "leaf" });

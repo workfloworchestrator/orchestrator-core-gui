@@ -34,9 +34,9 @@ export { default as TextField } from "./TextField";
 
 export { default as ContactPersonNameField } from "./ContactPersonNameField";
 export { default as ImsPortIdField } from "./ImsPortIdField";
+export { default as SubscriptionField } from "./SubscriptionField";
 export { default as VlanField } from "./VlanField";
 
 export { default as LocationCodeField } from "./logic/LocationCodeField";
 export { default as OrganisationField } from "./logic/OrganisationField";
 export { default as ProductField } from "./logic/ProductField";
-export { default as SubscriptionField } from "./logic/SubscriptionField";

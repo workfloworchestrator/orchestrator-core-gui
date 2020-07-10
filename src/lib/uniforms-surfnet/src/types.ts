@@ -12,13 +12,14 @@
  * limitations under the License.
  *
  */
-import fetchMock from "fetch-mock";
-import React from "react";
 
-import SubscriptionField from "../../src/logic/SubscriptionField";
-import createContext from "../_createContext";
-import mount from "../_mount";
+import { HTMLProps, Ref } from "react";
+import { Override, GuaranteedProps as UniformsGuaranteedProps } from "uniforms";
 
-describe.skip("<SubscriptionField>", () => {
-    test.skip("", () => {});
-});
+export type FieldProps<Value, Extra = {}, InputElementType = HTMLInputElement, ElementType = HTMLDivElement> = Override<
+    HTMLProps<ElementType>,
+    UniformsGuaranteedProps<Value> & {
+        inputRef?: Ref<InputElementType>;
+        description?: string;
+    } & Extra
+>;

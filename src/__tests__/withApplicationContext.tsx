@@ -12,24 +12,20 @@
  * limitations under the License.
  *
  */
-import React, { ReactNode } from "react";
-import { connectField } from "uniforms";
 
-import AutoField from "./AutoField";
-import ListDelField from "./ListDelField";
+import React from "react";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
-export type ListItemFieldProps = {
-    children?: ReactNode;
-    name: string;
-};
+test("Test suite must contain at least one test", () => {});
 
-function ListItem({ children = <AutoField label={null} name="" /> }: ListItemFieldProps) {
+// See https://github.com/enzymejs/enzyme/issues/2073#issuecomment-565736674
+export default function withApplicationContext(
+    component: JSX.Element,
+    appContext: Partial<ApplicationContextInterface> = {}
+) {
     return (
-        <li>
-            {children}
-            <ListDelField name="" />
-        </li>
+        <ApplicationContext.Provider value={appContext as ApplicationContextInterface}>
+            {component}
+        </ApplicationContext.Provider>
     );
 }
-
-export default connectField(ListItem, { initialValue: false });

@@ -14,26 +14,27 @@
  */
 import { getResourceTypeInfo, productById, subscriptionsDetail } from "api";
 import I18n from "i18n-js";
-import React, { HTMLProps, useContext, useEffect, useState } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React, { useContext, useEffect, useState } from "react";
+import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { enrichSubscription } from "utils/Lookups";
 import { Product, Subscription, SubscriptionWithDetails } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 import { InstanceValueWithLabel, subscriptionInstanceValues } from "validations/Subscriptions";
 
-export type SubscriptionSummaryFieldProps = Override<
-    Omit<HTMLProps<HTMLDivElement>, "onChange">,
-    {
-        id?: string;
-        label?: string;
-        name?: string;
-        value?: string;
-        description?: string;
-    }
->;
+import { FieldProps } from "./types";
 
-function SubscriptionSummary({ id, name, label, description, value, ...props }: SubscriptionSummaryFieldProps) {
+export type SubscriptionSummaryFieldProps = FieldProps<null>;
+
+function SubscriptionSummary({
+    id,
+    name,
+    label,
+    description,
+    onChange, // Not used on purpose
+    value,
+    ...props
+}: SubscriptionSummaryFieldProps) {
     const { organisations, products } = useContext(ApplicationContext);
     const [subscription, setSubscription] = useState<SubscriptionWithDetails | undefined>(undefined);
     const [product, setProduct] = useState<Product | undefined>(undefined);
@@ -228,4 +229,4 @@ function SubscriptionSummary({ id, name, label, description, value, ...props }: 
     );
 }
 
-export default connectField(SubscriptionSummary);
+export default connectField(SubscriptionSummary, { kind: "leaf" });

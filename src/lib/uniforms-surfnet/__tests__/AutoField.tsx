@@ -35,7 +35,7 @@ test("<AutoField> - works", () => {
     expect(wrapper.find(AutoField)).toHaveLength(1);
 });
 
-test("<AutoField> - renders RadioField", () => {
+test("<AutoField> - detects RadioField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(
         element,
@@ -48,10 +48,10 @@ test("<AutoField> - renders RadioField", () => {
         })
     );
 
-    expect(wrapper.find(RadioField)).toHaveLength(1);
+    expect(wrapper.find(RadioField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders SelectField", () => {
+test("<AutoField> - detects SelectField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(
         element,
@@ -61,52 +61,52 @@ test("<AutoField> - renders SelectField", () => {
         })
     );
 
-    expect(wrapper.find(SelectField)).toHaveLength(1);
+    expect(wrapper.find(SelectField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders DateField", () => {
+test("<AutoField> - detects DateField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-    expect(wrapper.find(DateField)).toHaveLength(1);
+    expect(wrapper.find(DateField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders ListField", () => {
+test("<AutoField> - detects ListField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
     expect(wrapper.find(ListField)).toHaveLength(1);
 });
 
-test("<AutoField> - renders NumField", () => {
+test("<AutoField> - detects NumField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Number } }));
 
-    expect(wrapper.find(NumField)).toHaveLength(1);
+    expect(wrapper.find(NumField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders NestField", () => {
+test("<AutoField> - detects NestField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Object } }));
 
     expect(wrapper.find(NestField)).toHaveLength(1);
 });
 
-test("<AutoField> - renders TextField", () => {
+test("<AutoField> - detects TextField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
 
-    expect(wrapper.find(TextField)).toHaveLength(1);
+    expect(wrapper.find(TextField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders BoolField", () => {
+test("<AutoField> - detects BoolField", () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
-    expect(wrapper.find(BoolField)).toHaveLength(1);
+    expect(wrapper.find(BoolField.Component)).toHaveLength(1);
 });
 
-test("<AutoField> - renders Component (model)", () => {
+test("<AutoField> - uses Component (schema)", () => {
     const Component = jest.fn(() => null);
 
     const element = <AutoField name="x" />;
@@ -115,7 +115,7 @@ test("<AutoField> - renders Component (model)", () => {
     expect(Component).toHaveBeenCalledTimes(1);
 });
 
-test("<AutoField> - renders Component (specified)", () => {
+test("<AutoField> - uses Component (props)", () => {
     const Component = jest.fn(() => null);
 
     const element = <AutoField name="x" component={Component} />;

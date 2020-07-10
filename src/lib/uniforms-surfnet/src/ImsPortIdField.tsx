@@ -21,30 +21,16 @@ import {
     nodeSubscriptions
 } from "api";
 import I18n from "i18n-js";
-import React, { HTMLProps, Ref, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select, { ValueType } from "react-select";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps } from "uniforms";
 
 import { IMSNode, IMSPort, Option, Subscription } from "../../../utils/types";
+import { FieldProps } from "./types";
 
-export type ImsPortFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        description: string;
-        name: string;
-        onChange(value?: number): void;
-        value?: number;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-        locationCode?: string;
-        nodeSubscriptionId?: string;
-        interfaceType: number | string;
-    }
+export type ImsPortFieldProps = FieldProps<
+    number,
+    { locationCode?: string; nodeSubscriptionId?: string; interfaceType: number | string }
 >;
 
 function nodeToOptionPort(node: IMSNode): Option {
@@ -63,6 +49,7 @@ function nodeToOptionCorelink(node: Subscription): Option {
 filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceType");
 
 function ImsPortId({
+    id,
     name,
     label,
     description,
@@ -154,6 +141,7 @@ function ImsPortId({
                 <div className="node-select">
                     <label>Node</label>
                     <Select
+                        id={`${id}.node`}
                         name={`${name}.node`}
                         onChange={onChangeNodes}
                         options={node_options}
@@ -165,6 +153,7 @@ function ImsPortId({
                 <div className="port-select">
                     <label>Port</label>
                     <Select
+                        id={id}
                         name={name}
                         onChange={(selected: ValueType<Option>) => {
                             const stringValue = (selected as Option | null)?.value;
@@ -187,4 +176,4 @@ function ImsPortId({
     );
 }
 
-export default connectField(ImsPortId);
+export default connectField(ImsPortId, { kind: "leaf" });

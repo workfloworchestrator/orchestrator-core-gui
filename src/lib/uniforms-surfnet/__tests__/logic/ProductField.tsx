@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import fetchMock from "fetch-mock";
+
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
@@ -25,7 +25,6 @@ describe("<ProductField>", () => {
     test("<ProductField> - calls selectField with all products", () => {
         const SelectField = jest.fn(() => <br />) as React.FC<any>;
 
-        fetchMock.restore();
         const element = (
             <ApplicationContext.Provider
                 value={({ products: PRODUCTS_JSON } as unknown) as ApplicationContextInterface}
@@ -80,7 +79,6 @@ describe("<ProductField>", () => {
     test("<ProductField> - calls selectField with all products", () => {
         const SelectField = jest.fn(() => <br />) as React.FC<any>;
 
-        fetchMock.restore();
         const element = (
             <ApplicationContext.Provider
                 value={({ products: PRODUCTS_JSON } as unknown) as ApplicationContextInterface}

@@ -13,15 +13,15 @@
  *
  */
 import cloneDeep from "lodash/cloneDeep";
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps, joinName, useField } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
-export type ListAddFieldProps = Override<
-    Omit<HTMLProps<HTMLDivElement>, "onChange">,
-    { initialCount?: number; name: string; value: unknown }
->;
+import { FieldProps } from "./types";
 
-function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddFieldProps) {
+export type ListAddFieldProps = FieldProps<null, { initialCount?: number }>;
+
+// onChange not used on purpose
+function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
     const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(
@@ -36,7 +36,7 @@ function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddField
     return (
         <div className="add-item" {...filterDOMProps(props)}>
             <i
-                className={`fa fa-plus ${!limitNotReached ? "disabled" : ""}`}
+                className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`}
                 onClick={() => {
                     const newRowsValue = Array(count).fill(cloneDeep(value));
                     if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
@@ -46,4 +46,4 @@ function ListAdd({ disabled, name, value, initialCount, ...props }: ListAddField
     );
 }
 
-export default connectField(ListAdd, { initialValue: false });
+export default connectField(ListAdd, { initialValue: false, kind: "leaf" });

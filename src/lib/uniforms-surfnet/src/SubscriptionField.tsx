@@ -13,19 +13,28 @@
  *
  */
 
+import "./SubscriptionField.scss";
+
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
-import { createElement, useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { filterProductsByBandwidth } from "validations/Products";
 
-import { Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "../../../../utils/types";
-import SelectField, { SelectFieldProps } from "../SelectField";
+import {
+    Option,
+    Organization,
+    Product,
+    ServicePortSubscription,
+    Subscription as iSubscription
+} from "../../../utils/types";
+import { FieldProps } from "./types";
 
-function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
+export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);
     const organisationName = organisation ? organisation.name : subscription.customer_id.substring(0, 8);
     const product = subscription.product || productById(subscription.product_id!, products);
@@ -41,16 +50,9 @@ function makeLabel(subscription: iSubscription, products: Product[], organisatio
             I18n.t("forms.widgets.subscription.missingCrmPortId");
         return `${crm_port_id} - ${subscription_substring} ${description.trim()} ${organisationName}`;
     } else if (["SP", "SPNL", "AGGSP", "AGGSPNL", "MSC", "MSCNL"].includes(product.tag)) {
-        let portMode;
         let portSubscription = subscription as ServicePortSubscription;
-        if (["MSC", "MSCNL"].includes(product.tag)) {
-            portMode = "TAGGED";
-        } else {
-            portMode = portSubscription.port_mode
-                ? portSubscription.port_mode.toUpperCase()
-                : I18n.t("forms.widgets.subscription.missingPortMode");
-        }
-        return `${subscription_substring} ${portMode} ${description.trim()} ${organisationName}`;
+        const portMode = getPortMode(portSubscription, products);
+        return `${subscription_substring} ${portMode.toUpperCase()} ${description.trim()} ${organisationName}`;
     } else {
         return description.trim();
     }
@@ -73,26 +75,41 @@ filterDOMProps.register(
     "tags"
 );
 
-export type SubscriptionFieldProps = {
-    inputComponent: typeof SelectField;
-    productIds?: string[];
-    excludedSubscriptionIds?: string[];
-    organisationId?: string;
-    organisationKey?: string;
-    visiblePortMode?: string;
-    bandwidth?: number;
-    bandwidthKey?: string;
-    tags?: string[];
-} & Omit<SelectFieldProps, "placeholder" | "transform" | "allowedValues">;
+export type SubscriptionFieldProps = FieldProps<
+    string,
+    {
+        productIds?: string[];
+        excludedSubscriptionIds?: string[];
+        organisationId?: string;
+        organisationKey?: string;
+        visiblePortMode?: string;
+        bandwidth?: number;
+        bandwidthKey?: string;
+        tags?: string[];
+    }
+>;
 
 function Subscription({
-    inputComponent,
+    disabled,
+    id,
+    inputRef,
+    label,
+    description,
     name,
+    onChange,
+    placeholder,
+    required,
+    type,
+    value,
+    error,
+    showInlineError,
+    errorMessage,
+    className = "",
     productIds,
     excludedSubscriptionIds,
     organisationId,
     organisationKey,
-    visiblePortMode,
+    visiblePortMode = "all",
     bandwidth,
     bandwidthKey,
     tags,
@@ -101,19 +118,20 @@ function Subscription({
     const { model } = useForm();
 
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
+    let [loading, setLoading] = useState<boolean>(false);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
-    const { getSubscriptions } = useContext(SubscriptionsContext);
+    const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
     const usedBandwith = bandwidth || get(model, bandwidthKey!);
     const usedOrganisationId = organisationId || get(model, organisationKey!);
 
-    const filteredProductIds = useMemo(
-        () =>
-            filterProductsByBandwidth(allProducts, usedBandwith)
-                .filter(item => productIds === undefined || productIds.includes(item.product_id))
-                .map(product => product.product_id),
-        [allProducts, usedBandwith, productIds]
-    );
+    const filteredProductIds = useMemo(() => {
+        const bandwitdhFilterd = filterProductsByBandwidth(allProducts, usedBandwith).map(
+            product => product.product_id
+        );
+        // Also filter on productIds is applicable
+        return productIds?.length ? bandwitdhFilterd.filter(item => productIds.includes(item)) : bandwitdhFilterd;
+    }, [allProducts, usedBandwith, productIds]);
 
     useEffect(() => {
         getSubscriptions(filteredProductIds, tags).then(result => updateSubscriptions(result));
@@ -130,7 +148,7 @@ function Subscription({
     }
 
     // Port mode filter
-    if (visiblePortMode) {
+    if (visiblePortMode !== "all") {
         if (visiblePortMode === "normal") {
             subscriptions = subscriptions.filter(
                 item => getPortMode(item, allProducts) === "tagged" || getPortMode(item, allProducts) === "untagged"
@@ -145,23 +163,62 @@ function Subscription({
         subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
     }
 
-    const subscriptionLabelLookup =
-        subscriptions?.reduce<{ [index: string]: string }>(function(mapping, subscription) {
-            mapping[subscription.subscription_id] = makeLabel(subscription, allProducts, organisations);
-            return mapping;
-        }, {}) ?? {};
+    const options = subscriptions.map((subscription: iSubscription) => ({
+        label: makeLabel(subscription, allProducts, organisations),
+        value: subscription.subscription_id
+    }));
 
-    return createElement<any>(inputComponent, {
-        name: "",
-        ...props,
-        allowedValues: Object.keys(subscriptionLabelLookup),
-        transform: (uuid: string) => get(subscriptionLabelLookup, uuid, uuid),
-        placeholder: I18n.t("forms.widgets.subscription.placeholder")
-    });
+    const selectedValue = options.find((option: Option) => option.value === value);
+
+    return (
+        <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
+            {label && (
+                <label htmlFor={id}>
+                    {label}
+                    <em>{description}</em>
+                </label>
+            )}
+            <div>
+                {!disabled && (
+                    <div className="refresh-subscriptions">
+                        <i
+                            className={`fa fa-sync ${loading ? "loading" : ""}`}
+                            onClick={() => {
+                                setLoading(true);
+                                clearSubscriptions();
+                                getSubscriptions(filteredProductIds, tags).then(result => {
+                                    updateSubscriptions(result);
+                                    setLoading(false);
+                                });
+                            }}
+                        />
+                    </div>
+                )}
+                <ReactSelect
+                    id={id}
+                    name={name}
+                    onChange={(option: ValueType<Option>) => {
+                        onChange((option as Option | null)?.value);
+                    }}
+                    options={options}
+                    value={selectedValue}
+                    isSearchable={true}
+                    isClearable={false}
+                    placeholder={I18n.t("forms.widgets.subscription.placeholder")}
+                    isDisabled={disabled}
+                    required={required}
+                    inputRef={inputRef}
+                    className="subscription-field-select"
+                />
+            </div>
+
+            {error && showInlineError && (
+                <em className="error">
+                    <div className="backend-validation">{errorMessage}</div>
+                </em>
+            )}
+        </section>
+    );
 }
 
-Subscription.defaultProps = {
-    inputComponent: SelectField
-};
-
-export default connectField(Subscription);
+export default connectField(Subscription, { kind: "leaf" });
