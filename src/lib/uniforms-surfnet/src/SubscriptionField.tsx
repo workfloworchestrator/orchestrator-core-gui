@@ -126,7 +126,11 @@ function Subscription({
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
     const usedBandwith = bandwidth || get(model, bandwidthKey!);
-    const usedOrganisationId = organisationId || get(model, organisationKey!);
+
+    // Get value from org field if organisationKey is set.
+    const usedOrganisationId = organisationKey
+        ? get(model, organisationKey, "nonExistingOrgToFilterEverything")
+        : organisationId;
 
     const filteredProductIds = useMemo(() => {
         let products = allProducts;

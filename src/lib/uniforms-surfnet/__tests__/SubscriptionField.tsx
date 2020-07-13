@@ -196,6 +196,31 @@ describe("<SubscriptionField>", () => {
         expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([{ label: "d2", value: "b" }]);
     });
 
+    test("<SubscriptionField> - renders a select with correct options (organisationKey not filled in yet)", async () => {
+        const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" organisationKey="key" />);
+        getSubscriptions.mockReturnValue([
+            {
+                subscription_id: "a",
+                customer_id: "c1",
+                description: "d1",
+                product: { tag: "A" } as Product
+            },
+            {
+                subscription_id: "b",
+                customer_id: "c2",
+                description: "d2",
+                product: { tag: "A" } as Product
+            }
+        ]);
+
+        const wrapper = mount(element, createContext({ x: { type: String } }, { model: {} }));
+        await waitForComponentToPaint(wrapper);
+
+        expect(wrapper.find(ReactSelect)).toHaveLength(1);
+        expect(getSubscriptions).toHaveBeenCalledWith(undefined, undefined);
+        expect(wrapper.find(ReactSelect).prop("options")).toStrictEqual([]);
+    });
+
     test("<SubscriptionField> - renders a select with correct options (organisationKey)", async () => {
         const { element, getSubscriptions } = withSubscriptions(<SubscriptionField name="x" organisationKey="key" />);
         getSubscriptions.mockReturnValue([
