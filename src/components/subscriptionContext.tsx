@@ -12,43 +12,44 @@
  * limitations under the License.
  *
  */
-import { allSubscriptions, portSubscriptions, subscriptionsByProductId } from "api";
+import { portSubscriptions, subscriptions } from "api";
 import { memoize } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";
 
-let subscriptions: { [index: string]: ServicePortSubscription } = {};
+let subscriptionsCache: { [index: string]: ServicePortSubscription } = {};
 
 let data: Omit<SubscriptionsContextType, "getSubscriptions"> & { getSubscriptions?: typeof getSubscriptionsHandler } = {
-    subscriptions: subscriptions,
+    subscriptions: subscriptionsCache,
     clearSubscriptions: clearSubscriptions,
     getSubscription: getSubscription,
     getSubscriptions: undefined
 };
 
-function getSubscriptionsHandler(filteredProductIds?: string[], tags?: string[]): Promise<ServicePortSubscription[]> {
+function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"]): Promise<ServicePortSubscription[]> {
     function updateSubscriptions(subscriptions: ServicePortSubscription[]) {
         subscriptions.forEach(subscription => (data.subscriptions[subscription.subscription_id] = subscription));
 
         return subscriptions;
     }
 
-    if (filteredProductIds && filteredProductIds.length === 1) {
-        return subscriptionsByProductId(filteredProductIds[0]).then(updateSubscriptions);
-    } else if (tags) {
-        return portSubscriptions(tags, ["active"]).then(updateSubscriptions);
+    if (
+        tags?.filter(tag => ["SSP", "MSP", "MSPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL", "SP", "SPNL"].includes(tag))
+            .length
+    ) {
+        return portSubscriptions(tags, statuses).then(updateSubscriptions);
     } else {
-        return allSubscriptions().then(updateSubscriptions);
+        return subscriptions(tags, statuses).then(updateSubscriptions);
     }
 }
 
 function getSubscription(subscriptionId: string): ServicePortSubscription {
-    return subscriptions[subscriptionId];
+    return subscriptionsCache[subscriptionId];
 }
 
 const getSubscriptions = memoize(
     getSubscriptionsHandler,
-    (filteredProductIds?: string[], tags?: string[]) => (filteredProductIds || []).join() + tags?.join()
+    (tags?: string[], statuses?: string[]) => (tags || []).join() + statuses?.join()
 );
 
 function clearSubscriptions(): void {

@@ -23,7 +23,7 @@ import mount from "./_mount";
 
 describe("<ImsPortIdField>", () => {
     test("<ImsPortIdField> - renders inputs", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=tags,Node&filter=statuses,active-provisioning", "[]");
+        fetchMock.get("glob:*/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", "[]");
         const element = <ImsPortIdField name="x" interfaceType="1000BASE-LX" />;
 
         const wrapper = mount(element, createContext({ x: { type: Number } }));

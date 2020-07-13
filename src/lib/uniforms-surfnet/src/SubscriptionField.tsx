@@ -72,7 +72,8 @@ filterDOMProps.register(
     "visiblePortMode",
     "bandwidth",
     "bandwidthKey",
-    "tags"
+    "tags",
+    "statuses"
 );
 
 export type SubscriptionFieldProps = FieldProps<
@@ -85,7 +86,8 @@ export type SubscriptionFieldProps = FieldProps<
         visiblePortMode?: string;
         bandwidth?: number;
         bandwidthKey?: string;
-        tags?: string[];
+        tags?: string[]; // There is an assumption that using tags means you want port subscriptions
+        statuses?: string[];
     }
 >;
 
@@ -113,6 +115,7 @@ function Subscription({
     bandwidth,
     bandwidthKey,
     tags,
+    statuses,
     ...props
 }: SubscriptionFieldProps) {
     const { model } = useForm();
@@ -126,20 +129,29 @@ function Subscription({
     const usedOrganisationId = organisationId || get(model, organisationKey!);
 
     const filteredProductIds = useMemo(() => {
-        const bandwitdhFilterd = filterProductsByBandwidth(allProducts, usedBandwith).map(
-            product => product.product_id
-        );
-        // Also filter on productIds is applicable
-        return productIds?.length ? bandwitdhFilterd.filter(item => productIds.includes(item)) : bandwitdhFilterd;
-    }, [allProducts, usedBandwith, productIds]);
+        let products = allProducts;
+        if (tags?.length) {
+            products = allProducts.filter(product => tags?.includes(product.tag));
+        }
+
+        if (productIds?.length) {
+            products = allProducts.filter(product => productIds?.includes(product.product_id));
+        }
+
+        if (usedBandwith) {
+            products = filterProductsByBandwidth(products, usedBandwith);
+        }
+
+        return products.length !== allProducts.length ? products.map(product => product.product_id) : [];
+    }, [allProducts, usedBandwith, productIds, tags]);
 
     useEffect(() => {
-        getSubscriptions(filteredProductIds, tags).then(result => updateSubscriptions(result));
-    }, [getSubscriptions, filteredProductIds, tags]);
+        getSubscriptions(tags, statuses).then(result => updateSubscriptions(result));
+    }, [getSubscriptions, tags, statuses]);
 
-    // Filter by product
+    // Filter by product, needed because getSubscriptions might return more than we want
     subscriptions =
-        filteredProductIds.length === allProducts.length || filteredProductIds.length === 1
+        filteredProductIds.length === allProducts.length
             ? subscriptions
             : subscriptions.filter(sp => filteredProductIds.includes(sp.product.product_id));
 
@@ -186,7 +198,7 @@ function Subscription({
                             onClick={() => {
                                 setLoading(true);
                                 clearSubscriptions();
-                                getSubscriptions(filteredProductIds, tags).then(result => {
+                                getSubscriptions(tags, statuses).then(result => {
                                     updateSubscriptions(result);
                                     setLoading(false);
                                 });
