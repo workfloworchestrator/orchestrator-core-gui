@@ -448,6 +448,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             </dl>
                         </td>
                     </tr>
+                    {this.renderGrafanaLink(subscription, subscription.product)}
                     <tr>
                         <td id="subscriptions-note-k">{I18n.t("subscriptions.note")}</td>
                         <td id="subscriptions-note-v">{subscription.note}</td>
@@ -455,6 +456,28 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                 </tbody>
             </table>
         );
+    };
+
+    renderGrafanaLink = (subscription: Subscription, product?: Product) => {
+        const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain")!;
+        if (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8") {
+            return (
+                <tr>
+                    <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>
+                    <td id="subscriptions-stats_in_grafana-v">
+                        <a
+                            href={`https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=${subscription.subscription_id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {I18n.t("subscriptions.go_to_grafana")}
+                        </a>
+                    </td>
+                </tr>
+            );
+        } else {
+            return null;
+        }
     };
 
     renderDienstafname = () => {

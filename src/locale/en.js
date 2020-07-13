@@ -951,7 +951,9 @@ I18n.translations.en = {
         relatedSubscriptionsServicePort: "The light-paths using the {{description}} subscription:",
         terminatedWarning: "The info below may be outdated as the subscription they belong to is terminated!",
         failed_task: "See {{pid}}",
-        customer_descriptions: "Customer description(s)"
+        customer_descriptions: "Customer description(s)",
+        stats_in_grafana: "Stats (SN8/NL8 products only)",
+        go_to_grafana: "Go to Grafana"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
