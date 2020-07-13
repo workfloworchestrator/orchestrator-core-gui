@@ -191,6 +191,24 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
               </tr>
               <tr>
                 <td
+                  id="subscriptions-stats_in_grafana-k"
+                >
+                  Stats (SN8/NL8 products only)
+                </td>
+                <td
+                  id="subscriptions-stats_in_grafana-v"
+                >
+                  <a
+                    href="https://grafana.surf.net/d/v6yLvaQmk/surfnet8-subscription-id?orgId=1&refresh=30s&var-datasource=SURFnet-Subscriptions&var-measurement=NetworkMeasurements_bps_5min&var-subid=9c8c13d5-6954-461a-a931-32894c193aa0"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Go to Grafana
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td
                   id="subscriptions-note-k"
                 >
                   Note
