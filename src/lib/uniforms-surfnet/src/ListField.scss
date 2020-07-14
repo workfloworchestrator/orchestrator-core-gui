@@ -85,7 +85,7 @@ ul.list-field {
             margin-left: 5px;
             cursor: pointer;
         }
-        &.disabled {
+        i.disabled {
             cursor: not-allowed;
             color: vars.$light-grey;
         }
