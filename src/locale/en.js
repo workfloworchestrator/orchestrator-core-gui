@@ -239,7 +239,7 @@ I18n.translations.en = {
                 "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
             esi_service_ports: "ESI Service ports",
             esi_service_ports_add: "Add Endpoint",
-            esi_service_ports_del: "Del Endpoint",
+            esi_service_ports_del: "Delete Endpoint",
             esi_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             extra_information: "Extra information",
             extra_information_info:
