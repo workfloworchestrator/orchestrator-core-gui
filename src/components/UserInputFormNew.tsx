@@ -201,7 +201,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
 
         if (defaultValue !== undefined) return cloneDeep(defaultValue);
 
-        if (type === "array" && !props.lookUpParent) {
+        if (type === "array" && !props.lookUpParent && !name.endsWith("$")) {
             const item = this.getInitialValue(joinName(name, "0"));
             const items = props.initialCount || 0;
             return Array(items).fill(item);
