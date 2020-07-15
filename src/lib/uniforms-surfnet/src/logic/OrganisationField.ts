@@ -34,7 +34,7 @@ function Organisation({ inputComponent = SelectField, name, ...props }: Organisa
             return mapping;
         }, {}) ?? {};
 
-    return createElement<any>(inputComponent, {
+    return createElement(inputComponent, {
         name: "",
         ...props,
         allowedValues: Object.keys(organisationLabelLookup),

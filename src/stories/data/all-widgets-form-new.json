@@ -209,7 +209,11 @@
         "nodes_for_location_code_and_status": {
             "title": "Nodes For Location Code And Status",
             "default": 12345,
-            "type": "integer"
+            "type": "integer",
+            "format": "imsNodeId",
+            "uniforms": {
+                "locationCode": "Asd001a"
+            }
         },
         "numeric1": {
             "title": "Numeric1",

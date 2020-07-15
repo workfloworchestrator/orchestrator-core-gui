@@ -22,7 +22,7 @@ import { productById } from "utils/Lookups";
 import ApplicationContext from "../../../../utils/ApplicationContext";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
-export type ProductFieldProps = { inputComponent: typeof SelectField; productIds: string[] } & Omit<
+export type ProductFieldProps = { inputComponent: typeof SelectField; productIds?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "transform" | "allowedValues"
 >;
@@ -40,7 +40,7 @@ function Product({ inputComponent = SelectField, name, productIds, ...props }: P
             return mapping;
         }, {}) ?? {};
 
-    return createElement<any>(inputComponent, {
+    return createElement(inputComponent, {
         name: "",
         ...props,
         allowedValues: Object.keys(productLabelLookup),
