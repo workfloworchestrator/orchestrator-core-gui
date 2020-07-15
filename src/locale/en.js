@@ -157,8 +157,13 @@ I18n.translations.en = {
                 "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
             bandwidth: "Bandwidth",
             bandwidth_info: "Desired bandwidth in Mbit/s",
-            bfd: "BFD",
-            bfd_info: "Bidirectional Forwarding Detection",
+            bfd: {
+                title: "BFD",
+                info: "Bidirectional Forwarding Detection",
+                enabled: "Enable BFD",
+                minimum_interval: "Minimum Interval",
+                multiplier: "Multiplier"
+            },
             bgp_export_policy: "BGP Export Policy",
             bgp_export_policy_info: "Border Gateway Protocol routing table option.",
             bgp_hash_algorithm: "BGP Hash Algorithm",

@@ -32,6 +32,7 @@ import {
     LabelField,
     LocationCodeField,
     LongTextField,
+    OptGroupField,
     OrganisationField,
     ProductField,
     SubscriptionField,
@@ -82,9 +83,11 @@ filterDOMProps.register("allOf");
 class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getField(name: string) {
         const field = super.getField(name);
+        //@ts-ignore
+        const { type = field.type } = this._compiledSchema[name];
 
         if (!field.component) {
-            if (field.type === "string") {
+            if (type === "string") {
                 if (field.format === "subscriptionId") {
                     field.component = SubscriptionField;
                 } else if (field.format === "productId") {
@@ -110,11 +113,15 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                 } else if (field.format === "accept") {
                     field.component = AcceptField;
                 }
-            } else if (field.type === "integer") {
+            } else if (type === "integer") {
                 if (field.format === "imsPortId") {
                     field.component = ImsPortIdField;
                 } else if (field.format === "imsNodeId") {
                     field.component = ImsNodeIdField;
+                }
+            } else if (type === "object") {
+                if (field.format === "optGroup") {
+                    field.component = OptGroupField;
                 }
             }
         }
