@@ -17,25 +17,26 @@ import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 import PRODUCTS_JSON from "../../../../stories/data/products.json";
+import { SelectField } from "../../src";
 import ProductField from "../../src/logic/ProductField";
 import createContext from "../_createContext";
 import mount from "../_mount";
 
 describe("<ProductField>", () => {
     test("<ProductField> - calls selectField with all products", () => {
-        const SelectField = jest.fn(() => <br />) as React.FC<any>;
+        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
         const element = (
             <ApplicationContext.Provider
                 value={({ products: PRODUCTS_JSON } as unknown) as ApplicationContextInterface}
             >
-                <ProductField name="x" inputComponent={SelectField} />
+                <ProductField name="x" inputComponent={mockSelectField} />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(SelectField).toHaveBeenCalledTimes(1);
-        expect(SelectField).toHaveBeenCalledWith(
+        expect(mockSelectField).toHaveBeenCalledTimes(1);
+        expect(mockSelectField).toHaveBeenCalledWith(
             expect.objectContaining({
                 allowedValues: [
                     "e2620adb-d28c-4525-9110-ca14e7afca46",
@@ -68,16 +69,17 @@ describe("<ProductField>", () => {
                 errorMessage: "",
                 required: true,
                 showInlineError: false,
-                value: undefined
+                value: undefined,
+                placeholder: "Search and select a product..."
             }),
             {}
         );
         //@ts-ignore
-        expect(SelectField.mock.calls[0][0].transform("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");
+        expect(mockSelectField.mock.calls[0][0].transform("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");
     });
 
     test("<ProductField> - calls selectField with all products", () => {
-        const SelectField = jest.fn(() => <br />) as React.FC<any>;
+        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
         const element = (
             <ApplicationContext.Provider
@@ -85,7 +87,7 @@ describe("<ProductField>", () => {
             >
                 <ProductField
                     name="x"
-                    inputComponent={SelectField}
+                    inputComponent={mockSelectField}
                     productIds={[
                         "e2620adb-d28c-4525-9110-ca14e7afca46",
                         "78925941-83f7-4e96-925b-0d518db1b970",
@@ -96,8 +98,8 @@ describe("<ProductField>", () => {
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(SelectField).toHaveBeenCalledTimes(1);
-        expect(SelectField).toHaveBeenCalledWith(
+        expect(mockSelectField).toHaveBeenCalledTimes(1);
+        expect(mockSelectField).toHaveBeenCalledWith(
             expect.objectContaining({
                 allowedValues: [
                     "e2620adb-d28c-4525-9110-ca14e7afca46",
@@ -109,11 +111,12 @@ describe("<ProductField>", () => {
                 errorMessage: "",
                 required: true,
                 showInlineError: false,
-                value: undefined
+                value: undefined,
+                placeholder: "Search and select a product..."
             }),
             {}
         );
         //@ts-ignore
-        expect(SelectField.mock.calls[0][0].transform("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");
+        expect(mockSelectField.mock.calls[0][0].transform("e2620adb-d28c-4525-9110-ca14e7afca46")).toBe("SSP 40G");
     });
 });

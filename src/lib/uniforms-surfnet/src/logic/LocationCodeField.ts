@@ -20,7 +20,7 @@ import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "../../../../utils/ApplicationContext";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
-export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locationCodes: string[] } & Omit<
+export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locationCodes?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "allowedValues"
 >;
@@ -34,7 +34,7 @@ function LocationCode({ inputComponent = SelectField, name, locationCodes, ...pr
         locationCodes = allLocationCodes;
     }
 
-    return createElement<any>(inputComponent, {
+    return createElement(inputComponent, {
         name: "",
         ...props,
         allowedValues: locationCodes,

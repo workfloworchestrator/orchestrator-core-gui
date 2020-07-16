@@ -16,12 +16,6 @@
 import "./UserInputFormNew.scss";
 
 import I18n from "i18n-js";
-import AcceptField from "lib/uniforms-surfnet/src/AcceptField";
-import ImsPortIdField from "lib/uniforms-surfnet/src/ImsPortIdField";
-import LabelField from "lib/uniforms-surfnet/src/LabelField";
-import SubscriptionSummaryField from "lib/uniforms-surfnet/src/SubscriptionSummaryField";
-import SummaryField from "lib/uniforms-surfnet/src/SummaryField";
-import VlanField from "lib/uniforms-surfnet/src/VlanField";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
@@ -30,13 +24,20 @@ import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import { AutoForm } from "uniforms-unstyled";
 
 import {
+    AcceptField,
     AutoFields,
     ContactPersonNameField,
+    ImsNodeIdField,
+    ImsPortIdField,
+    LabelField,
     LocationCodeField,
     LongTextField,
     OrganisationField,
     ProductField,
-    SubscriptionField
+    SubscriptionField,
+    SubscriptionSummaryField,
+    SummaryField,
+    VlanField
 } from "../lib/uniforms-surfnet/src";
 import ApplicationContext from "../utils/ApplicationContext";
 import { ValidationError } from "../utils/types";
@@ -112,6 +113,8 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
             } else if (field.type === "integer") {
                 if (field.format === "imsPortId") {
                     field.component = ImsPortIdField;
+                } else if (field.format === "imsNodeId") {
+                    field.component = ImsNodeIdField;
                 }
             }
         }
