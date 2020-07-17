@@ -19,6 +19,7 @@ import StoryRouter from "storybook-react-router";
 
 import SubscriptionDetail from "../pages/SubscriptionDetail";
 import PRODUCTS from "./data/products.json";
+import SUBSCRIPTION_MODEL_JSON from "./data/subscription-model.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
 import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
@@ -35,6 +36,7 @@ export const Subscription = () => {
     fetchMock.restore();
 
     fetchMock.get("/api/subscriptions/pid", SUBSCRIPTION_JSON);
+    fetchMock.get("/api/subscriptions/domain-model/pid", SUBSCRIPTION_MODEL_JSON);
     fetchMock.get("/api/processes/process-subscriptions-by-subscription-id/9c8c13d5-6954-461a-a931-32894c193aa0", [
         {
             created_at: 1574768649,

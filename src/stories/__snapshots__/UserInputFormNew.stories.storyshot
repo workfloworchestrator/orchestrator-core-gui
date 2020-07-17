@@ -224,20 +224,26 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-contact_persons.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-contact_persons.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
@@ -3154,20 +3160,26 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-bgp_ip_service_ports.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-bgp_ip_service_ports.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
