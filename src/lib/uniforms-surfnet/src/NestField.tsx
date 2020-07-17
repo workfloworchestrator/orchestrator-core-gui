@@ -12,24 +12,27 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
 
 import AutoField from "./AutoField";
+import { FieldProps } from "./types";
 
-export type NestFieldProps = Override<
-    Omit<HTMLProps<HTMLDivElement>, "onChange">,
-    {
-        fields?: any[];
-        itemProps?: object;
-        name?: string;
-        description?: string;
-    }
->;
+export type NestFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
 filterDOMProps.register("properties");
 
-function Nest({ children, fields, itemProps, label, description, name, className, ...props }: NestFieldProps) {
+function Nest({
+    children,
+    fields,
+    itemProps,
+    label,
+    description,
+    name,
+    onChange, // Not used on purpose
+    className,
+    ...props
+}: NestFieldProps) {
     return (
         <section {...filterDOMProps(props)} className={`${className ?? ""} nest-field`}>
             {label && (

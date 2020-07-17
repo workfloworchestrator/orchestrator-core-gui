@@ -12,30 +12,16 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps, Ref } from "react";
+import React from "react";
 import NumericInput from "react-numeric-input";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps } from "uniforms";
 
-export type NumFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<NumericInput>;
-        label: string;
-        description: string;
-        max?: number;
-        min?: number;
-        precision?: number;
-        name: string;
-        onChange(value?: number): void;
-        placeholder: string;
-        step?: number;
-        value?: number;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
+import { FieldProps } from "./types";
+
+export type NumFieldProps = FieldProps<
+    number,
+    { max?: number; min?: number; precision?: number; step?: number },
+    NumericInput
 >;
 
 function Num({
@@ -90,4 +76,4 @@ function Num({
     );
 }
 
-export default connectField(Num);
+export default connectField(Num, { kind: "leaf" });

@@ -12,24 +12,17 @@
  * limitations under the License.
  *
  */
-import React, { ReactNode } from "react";
-import { connectField } from "uniforms";
 
-import AutoField from "./AutoField";
-import ListDelField from "./ListDelField";
+import { ReactWrapper } from "enzyme";
+import { act } from "react-dom/test-utils";
 
-export type ListItemFieldProps = {
-    children?: ReactNode;
-    name: string;
-};
+test("Test suite must contain at least one test", () => {});
 
-function ListItem({ children = <AutoField label={null} name="" /> }: ListItemFieldProps) {
-    return (
-        <li>
-            {children}
-            <ListDelField name="" />
-        </li>
-    );
+export default async function waitForComponentToPaint<P = {}>(wrapper: ReactWrapper<P>) {
+    await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 1));
+        wrapper.update();
+        await new Promise(resolve => setTimeout(resolve, 1));
+        wrapper.update();
+    });
 }
-
-export default connectField(ListItem, { initialValue: false });

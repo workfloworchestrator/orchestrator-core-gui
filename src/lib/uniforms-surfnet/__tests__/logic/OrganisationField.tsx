@@ -12,29 +12,29 @@
  * limitations under the License.
  *
  */
-import fetchMock from "fetch-mock";
+
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 import ORGANISATIONS_JSON from "../../../../stories/data/organisations.json";
+import { SelectField } from "../../src";
 import OrganisationField from "../../src/logic/OrganisationField";
 import createContext from "../_createContext";
 import mount from "../_mount";
 
 describe("<OrganisationField>", () => {
     test("<OrganisationField> - calls selectField with all organisations", () => {
-        const SelectField = jest.fn(() => <br />);
+        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
-        fetchMock.restore();
         const element = (
             <ApplicationContext.Provider value={{ organisations: ORGANISATIONS_JSON } as ApplicationContextInterface}>
-                <OrganisationField name="x" inputComponent={SelectField as React.FC<any>} />
+                <OrganisationField name="x" inputComponent={mockSelectField} />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(SelectField).toHaveBeenCalledTimes(1);
-        expect(SelectField).toHaveBeenCalledWith(
+        expect(mockSelectField).toHaveBeenCalledTimes(1);
+        expect(mockSelectField).toHaveBeenCalledWith(
             expect.objectContaining({
                 allowedValues: [
                     "2f47f65a-0911-e511-80d0-005056956c1a",
@@ -51,12 +51,13 @@ describe("<OrganisationField>", () => {
                 errorMessage: "",
                 required: true,
                 showInlineError: false,
-                value: undefined
+                value: undefined,
+                placeholder: "Search and select a customer..."
             }),
             {}
         );
         //@ts-ignore
-        expect(SelectField.mock.calls[0][0].transform("2f47f65a-0911-e511-80d0-005056956c1a")).toBe(
+        expect(mockSelectField.mock.calls[0][0].transform("2f47f65a-0911-e511-80d0-005056956c1a")).toBe(
             "Centrum Wiskunde & Informatica"
         );
     });

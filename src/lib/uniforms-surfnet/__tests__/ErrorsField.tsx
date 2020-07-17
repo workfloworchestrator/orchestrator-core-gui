@@ -30,14 +30,14 @@ const error = {
 };
 
 test("<ErrorsField> - works", () => {
-    const element = <ErrorsField name="x" />;
+    const element = <ErrorsField />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
 
     expect(wrapper.find(ErrorsField)).toHaveLength(1);
 });
 
 test("<ErrorsField> - renders list of correct error messages (context)", () => {
-    const element = <ErrorsField name="x" />;
+    const element = <ErrorsField />;
     const wrapper = mount(
         element,
         createContext({ x: { type: String }, y: { type: String }, z: { type: String } }, { error })
@@ -65,7 +65,7 @@ test("<ErrorsField> - renders list of correct error messages (context)", () => {
 });
 
 test("<ErrorsField> - renders children (specified)", () => {
-    const element = <ErrorsField name="x" children="Error message list" />;
+    const element = <ErrorsField children="Error message list" />;
     const wrapper = mount(
         element,
         createContext({ x: { type: String }, y: { type: String }, z: { type: String } }, { error })

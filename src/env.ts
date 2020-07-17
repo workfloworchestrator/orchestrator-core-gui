@@ -19,6 +19,7 @@ interface Window {
         OAUTH2_OPENID_CONNECT_URL: string;
         OAUTH2_CLIENT_ID: string;
         OAUTH2_SCOPE: string;
+        CHECK_STATUS_INTERVAL: number;
     };
 }
 
@@ -32,5 +33,6 @@ export const ENV = window.__env__ || {
     ),
     OAUTH2_OPENID_CONNECT_URL: process.env.REACT_APP_OAUTH2_OPENID_CONNECT_URL,
     OAUTH2_CLIENT_ID: process.env.REACT_APP_OAUTH2_CLIENT_ID,
-    OAUTH2_SCOPE: process.env.REACT_APP_OAUTH2_SCOPE
+    OAUTH2_SCOPE: process.env.REACT_APP_OAUTH2_SCOPE,
+    CHECK_STATUS_INTERVAL: parseInt(process.env.REACT_APP_CHECK_STATUS_INTERVAL ?? "0")
 };

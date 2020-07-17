@@ -15,36 +15,21 @@
 import { contacts } from "api";
 import Autocomplete from "components/Autocomplete";
 import I18n from "i18n-js";
+import { isFunction } from "lodash";
 import get from "lodash/get";
-import React, { HTMLProps, RefObject, useEffect, useState } from "react";
-import { Override, connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import React, { Ref, useEffect, useState } from "react";
+import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 
 import { isEmpty, stop } from "../../../utils/Utils";
+import { FieldProps } from "./types";
 
-export type ContactPersonNameFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef: RefObject<HTMLInputElement>;
-        label: string;
-        description: string;
-        name: string;
-        onChange(value?: string): void;
-        value?: string;
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-        organisationId?: string;
-        organisationKey?: string;
-    }
->;
+export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
 function ContactPersonName({
     disabled,
     id,
-    inputRef = React.createRef(),
+    inputRef = React.createRef() as Ref<HTMLInputElement>,
     label,
     description,
     name,
@@ -79,7 +64,9 @@ function ContactPersonName({
 
     useEffect(() => {
         // Set focus to the last name component to be created
-        inputRef.current?.focus();
+        if (!isFunction(inputRef)) {
+            inputRef!.current?.focus();
+        }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function onChangeInternal(e: React.FormEvent<HTMLInputElement>) {
@@ -182,4 +169,4 @@ function ContactPersonName({
     );
 }
 
-export default connectField(ContactPersonName);
+export default connectField(ContactPersonName, { kind: "leaf" });

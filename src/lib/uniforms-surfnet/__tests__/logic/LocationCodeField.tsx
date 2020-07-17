@@ -15,23 +15,24 @@
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
+import { SelectField } from "../../src";
 import LocationCodeField from "../../src/logic/LocationCodeField";
 import createContext from "../_createContext";
 import mount from "../_mount";
 
 describe("<LocationCodeField>", () => {
     test("<LocationCodeField> - calls selectField with all locationCodes", () => {
-        const SelectField = jest.fn(() => <br />) as React.FC<any>;
+        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
         const element = (
             <ApplicationContext.Provider value={{ locationCodes: ["aaa", "bbb"] } as ApplicationContextInterface}>
-                <LocationCodeField name="x" inputComponent={SelectField} />
+                <LocationCodeField name="x" inputComponent={mockSelectField} />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(SelectField).toHaveBeenCalledTimes(1);
-        expect(SelectField).toHaveBeenCalledWith(
+        expect(mockSelectField).toHaveBeenCalledTimes(1);
+        expect(mockSelectField).toHaveBeenCalledWith(
             expect.objectContaining({
                 allowedValues: ["aaa", "bbb"],
                 disabled: false,
@@ -39,24 +40,25 @@ describe("<LocationCodeField>", () => {
                 errorMessage: "",
                 required: true,
                 showInlineError: false,
-                value: undefined
+                value: undefined,
+                placeholder: "Search and select a location code..."
             }),
             {}
         );
     });
 
     test("<LocationCodeField> - calls selectField with specified locationCodes", () => {
-        const SelectField = jest.fn(() => <br />) as React.FC<any>;
+        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
         const element = (
             <ApplicationContext.Provider value={{ locationCodes: ["aaa", "bbb"] } as ApplicationContextInterface}>
-                <LocationCodeField name="x" inputComponent={SelectField} locationCodes={["ccc", "ddd"]} />
+                <LocationCodeField name="x" inputComponent={mockSelectField} locationCodes={["ccc", "ddd"]} />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(SelectField).toHaveBeenCalledTimes(1);
-        expect(SelectField).toHaveBeenCalledWith(
+        expect(mockSelectField).toHaveBeenCalledTimes(1);
+        expect(mockSelectField).toHaveBeenCalledWith(
             expect.objectContaining({
                 allowedValues: ["ccc", "ddd"],
                 disabled: false,
@@ -64,7 +66,8 @@ describe("<LocationCodeField>", () => {
                 errorMessage: "",
                 required: true,
                 showInlineError: false,
-                value: undefined
+                value: undefined,
+                placeholder: "Search and select a location code..."
             }),
             {}
         );

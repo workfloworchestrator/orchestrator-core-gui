@@ -12,19 +12,15 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps, Ref } from "react";
-import { Override, filterDOMProps, useForm } from "uniforms";
+import React from "react";
+import { filterDOMProps, useForm } from "uniforms";
 
-export type SubmitFieldProps = Override<
-    HTMLProps<HTMLInputElement>,
-    {
-        disabled?: boolean;
-        inputRef?: Ref<HTMLInputElement>;
-        value?: string;
-    }
->;
+import { FieldProps } from "./types";
 
-export default function SubmitField({ disabled, inputRef, value, ...props }: SubmitFieldProps) {
+export type SubmitFieldProps = FieldProps<null, {}, HTMLInputElement, HTMLInputElement>;
+
+// onChange not used on purpose
+export default function SubmitField({ disabled, inputRef, value, onChange, ...props }: SubmitFieldProps) {
     const { error, state } = useForm();
 
     return (

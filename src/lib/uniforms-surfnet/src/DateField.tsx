@@ -12,27 +12,15 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps, Ref } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
+
+import { FieldProps } from "./types";
 
 const DateConstructor = (typeof global === "object" ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
-export type DateFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        disabled: boolean;
-        id: string;
-        inputRef?: Ref<HTMLInputElement>;
-        label: string;
-        max?: Date;
-        min?: Date;
-        name: string;
-        onChange(value?: Date): void;
-        placeholder: string;
-        value?: Date;
-    }
->;
+export type DateFieldProps = FieldProps<Date, { max?: Date; min?: Date }>;
 
 function Date({
     disabled,
@@ -74,4 +62,4 @@ function Date({
     );
 }
 
-export default connectField(Date);
+export default connectField(Date, { kind: "leaf" });

@@ -16,6 +16,7 @@ import * as unstyled from "../src";
 
 it("exports everything", () => {
     expect(unstyled).toEqual({
+        AcceptField: expect.any(Function),
         AutoFields: expect.any(Function),
         AutoField: expect.any(Function),
         BoolField: expect.any(Function),
@@ -24,7 +25,9 @@ it("exports everything", () => {
         ErrorField: expect.any(Function),
         ErrorsField: expect.any(Function),
         HiddenField: expect.any(Function),
+        ImsNodeIdField: expect.any(Function),
         ImsPortIdField: expect.any(Function),
+        LabelField: expect.any(Function),
         ListAddField: expect.any(Function),
         ListDelField: expect.any(Function),
         ListField: expect.any(Function),
@@ -38,6 +41,8 @@ it("exports everything", () => {
         RadioField: expect.any(Function),
         SelectField: expect.any(Function),
         SubscriptionField: expect.any(Function),
+        SubscriptionSummaryField: expect.any(Function),
+        SummaryField: expect.any(Function),
         SubmitField: expect.any(Function),
         TextField: expect.any(Function),
         VlanField: expect.any(Function)

@@ -22,14 +22,14 @@ import { productById } from "utils/Lookups";
 import ApplicationContext from "../../../../utils/ApplicationContext";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
-export type ProductFieldProps = { inputComponent: typeof SelectField; productIds: string[] } & Omit<
+export type ProductFieldProps = { inputComponent: typeof SelectField; productIds?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "transform" | "allowedValues"
 >;
 
 filterDOMProps.register("productIds");
 
-function Product({ inputComponent, name, productIds, ...props }: ProductFieldProps) {
+function Product({ inputComponent = SelectField, name, productIds, ...props }: ProductFieldProps) {
     const all_products = useContext(ApplicationContext).products;
 
     const products = productIds ? productIds.map(id => productById(id, all_products)) : all_products;
@@ -40,7 +40,7 @@ function Product({ inputComponent, name, productIds, ...props }: ProductFieldPro
             return mapping;
         }, {}) ?? {};
 
-    return createElement<any>(inputComponent, {
+    return createElement(inputComponent, {
         name: "",
         ...props,
         allowedValues: Object.keys(productLabelLookup),
@@ -48,9 +48,5 @@ function Product({ inputComponent, name, productIds, ...props }: ProductFieldPro
         placeholder: I18n.t("forms.widgets.product.placeholder")
     });
 }
-
-Product.defaultProps = {
-    inputComponent: SelectField
-};
 
 export default connectField(Product);

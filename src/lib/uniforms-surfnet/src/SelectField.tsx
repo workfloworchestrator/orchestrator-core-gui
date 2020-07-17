@@ -14,35 +14,19 @@
  */
 import I18n from "i18n-js";
 import xor from "lodash/xor";
-import React, { HTMLProps, Ref } from "react";
+import React from "react";
 import ReactSelect, { ValueType } from "react-select";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps } from "uniforms";
 import { Option } from "utils/types";
+
+import { FieldProps } from "./types";
 
 const base64: typeof btoa = typeof btoa !== "undefined" ? btoa : x => Buffer.from(x).toString("base64");
 const escape = (x: string) => base64(x).replace(/=+$/, "");
 
-export type SelectFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        allowedValues?: string[];
-        checkboxes?: boolean;
-        disabled: boolean;
-        fieldType: unknown;
-        id?: string;
-        inputRef?: Ref<HTMLSelectElement>;
-        label: string;
-        description?: string;
-        name?: string;
-        onChange(value?: string | string[]): void;
-        placeholder: string;
-        required?: boolean;
-        transform?(value?: string): string;
-        value?: string | string[];
-        error?: boolean;
-        showInlineError?: boolean;
-        errorMessage?: string;
-    }
+export type SelectFieldProps = FieldProps<
+    string | string[],
+    { allowedValues?: string[]; checkboxes?: boolean; transform?(value: string): string }
 >;
 
 function Select({
@@ -125,4 +109,4 @@ function Select({
     );
 }
 
-export default connectField(Select);
+export default connectField(Select, { kind: "leaf" });

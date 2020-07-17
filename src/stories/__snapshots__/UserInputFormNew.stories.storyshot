@@ -29,9 +29,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
               <section
                 className="form-step"
               >
-                <section
-                  className="organisation"
-                >
+                <section>
                   <label
                     htmlFor="input-organisation"
                   >
@@ -75,7 +73,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-135-input"
+                              id="react-select-136-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -164,19 +162,19 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0002-0007"
+                        id="input-contact_persons.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0002-0009"
+                            htmlFor="input-contact_persons.0.email"
                           >
                             Email
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0002-0009"
+                            id="input-contact_persons.0.email"
                             name="contact_persons.0.email"
                             onChange={[Function]}
                             placeholder=""
@@ -186,7 +184,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0002-000b"
+                            htmlFor="input-contact_persons.0.name"
                           >
                             Name
                             
@@ -196,7 +194,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                           >
                             <input
                               disabled={false}
-                              id="uniforms-0002-000b"
+                              id="input-contact_persons.0.name"
                               name="contact_persons.0.name"
                               onBlur={[Function]}
                               onChange={[Function]}
@@ -210,14 +208,14 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0002-000d"
+                            htmlFor="input-contact_persons.0.phone"
                           >
                             Phone number
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0002-000d"
+                            id="input-contact_persons.0.phone"
                             name="contact_persons.0.phone"
                             onChange={[Function]}
                             placeholder=""
@@ -228,13 +226,13 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0002-000e"
+                        id="input-contact_persons.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0002-000g"
+                      id="input-contact_persons.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -354,7 +352,7 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-136-input"
+                                  id="react-select-137-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -464,7 +462,7 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-137-input"
+                                  id="react-select-138-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -592,7 +590,7 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-138-input"
+                                  id="react-select-139-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -702,7 +700,7 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-139-input"
+                                  id="react-select-140-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -888,7 +886,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-140-input"
+                                  id="react-select-141-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -998,7 +996,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-141-input"
+                                  id="react-select-142-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1126,7 +1124,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-142-input"
+                                  id="react-select-143-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1236,7 +1234,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-143-input"
+                                  id="react-select-144-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1416,7 +1414,7 @@ exports[`Storyshots UserInputFormNew Nodes 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={false}
-                                id="react-select-144-input"
+                                id="react-select-145-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -1593,7 +1591,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect MSP only 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-147-input"
+                              id="react-select-148-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -1826,7 +1824,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect all organisations 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-145-input"
+                              id="react-select-146-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2197,7 +2195,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect selected organisation 1`] = 
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-149-input"
+                              id="react-select-150-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2430,7 +2428,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect all organisations 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-152-input"
+                              id="react-select-153-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2663,7 +2661,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect selected organisation 1`] = 
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-158-input"
+                              id="react-select-159-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2852,9 +2850,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
               <section
                 className="form-step"
               >
-                <section
-                  className="organisation"
-                >
+                <section>
                   <label
                     htmlFor="input-organisation"
                   >
@@ -2898,7 +2894,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-155-input"
+                              id="react-select-156-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2973,9 +2969,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                     />
                   </div>
                 </section>
-                <div
-                  className="bandwidth"
-                >
+                <div>
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -3122,19 +3116,19 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                     <li>
                       <section
                         className=" nest-field"
-                        id="uniforms-0003-0009"
+                        id="input-bgp_ip_service_ports.0"
                       >
                         
                         <section>
                           <label
-                            htmlFor="uniforms-0003-000b"
+                            htmlFor="input-bgp_ip_service_ports.0.subscription_id"
                           >
                             Service Port
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0003-000b"
+                            id="input-bgp_ip_service_ports.0.subscription_id"
                             name="bgp_ip_service_ports.0.subscription_id"
                             onChange={[Function]}
                             placeholder=""
@@ -3144,14 +3138,14 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                         </section>
                         <section>
                           <label
-                            htmlFor="uniforms-0003-000d"
+                            htmlFor="input-bgp_ip_service_ports.0.vlan"
                           >
                             Port Vlan
                             
                           </label>
                           <input
                             disabled={false}
-                            id="uniforms-0003-000d"
+                            id="input-bgp_ip_service_ports.0.vlan"
                             name="bgp_ip_service_ports.0.vlan"
                             onChange={[Function]}
                             placeholder=""
@@ -3162,13 +3156,13 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="uniforms-0003-000e"
+                        id="input-bgp_ip_service_ports.0"
                         onClick={[Function]}
                       />
                     </li>
                     <div
                       className="add-item"
-                      id="uniforms-0003-000g"
+                      id="input-bgp_ip_service_ports.$"
                     >
                       <i
                         className="fa fa-plus "
@@ -3280,7 +3274,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect untagged 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-156-input"
+                              id="react-select-157-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}

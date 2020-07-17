@@ -20,30 +20,26 @@ import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "../../../../utils/ApplicationContext";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
-export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locationCodes: string[] } & Omit<
+export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locationCodes?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "allowedValues"
 >;
 
 filterDOMProps.register("locationCodes");
 
-function LocationCode({ inputComponent, name, locationCodes, ...props }: LocationCodeFieldProps) {
+function LocationCode({ inputComponent = SelectField, name, locationCodes, ...props }: LocationCodeFieldProps) {
     const allLocationCodes = useContext(ApplicationContext).locationCodes || [];
 
     if (!locationCodes) {
         locationCodes = allLocationCodes;
     }
 
-    return createElement<any>(inputComponent, {
+    return createElement(inputComponent, {
         name: "",
         ...props,
         allowedValues: locationCodes,
         placeholder: I18n.t("forms.widgets.locationCode.placeholder")
     });
 }
-
-LocationCode.defaultProps = {
-    inputComponent: SelectField
-};
 
 export default connectField(LocationCode);

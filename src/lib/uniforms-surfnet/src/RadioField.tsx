@@ -12,20 +12,17 @@
  * limitations under the License.
  *
  */
-import React, { HTMLProps } from "react";
-import { Override, connectField, filterDOMProps } from "uniforms";
+import React from "react";
+import { connectField, filterDOMProps } from "uniforms";
+
+import { FieldProps } from "./types";
 
 const base64 = typeof btoa !== "undefined" ? btoa : (x: string) => Buffer.from(x).toString("base64");
 const escape = (x: string) => base64(x).replace(/=+$/, "");
 
-export type RadioFieldProps = Override<
-    HTMLProps<HTMLDivElement>,
-    {
-        allowedValues: string[];
-        checkboxes?: boolean;
-        onChange(value: string): void;
-        transform?(string?: string): string;
-    }
+export type RadioFieldProps = FieldProps<
+    string,
+    { allowedValues?: string[]; checkboxes?: boolean; transform?(value: string): string }
 >;
 
 function Radio({
@@ -44,7 +41,7 @@ function Radio({
         <div {...filterDOMProps(props)}>
             {label && <label>{label}</label>}
 
-            {allowedValues.map(item => (
+            {allowedValues?.map(item => (
                 <div key={item}>
                     <input
                         checked={item === value}
@@ -62,4 +59,4 @@ function Radio({
     );
 }
 
-export default connectField(Radio);
+export default connectField(Radio, { kind: "leaf" });

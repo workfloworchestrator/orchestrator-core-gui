@@ -81,6 +81,11 @@ ul.list-field {
             color: vars.$green;
             font-size: 30px;
             cursor: pointer;
+
+            &.disabled {
+                cursor: not-allowed;
+                color: vars.$light-grey;
+            }
         }
     }
 }
