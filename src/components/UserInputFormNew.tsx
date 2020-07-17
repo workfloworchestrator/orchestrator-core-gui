@@ -27,6 +27,7 @@ import {
     AcceptField,
     AutoFields,
     ContactPersonNameField,
+    IPvAnyNetworkField,
     ImsNodeIdField,
     ImsPortIdField,
     LabelField,
@@ -113,6 +114,8 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
                     field.component = SubscriptionSummaryField;
                 } else if (field.format === "accept") {
                     field.component = AcceptField;
+                } else if (field.format === "ipvanynetwork") {
+                    field.component = IPvAnyNetworkField;
                 }
             } else if (type === "integer") {
                 if (field.format === "imsPortId") {

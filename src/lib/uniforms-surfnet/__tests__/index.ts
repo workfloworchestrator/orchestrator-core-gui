@@ -27,6 +27,7 @@ it("exports everything", () => {
         HiddenField: expect.any(Function),
         ImsNodeIdField: expect.any(Function),
         ImsPortIdField: expect.any(Function),
+        IPvAnyNetworkField: expect.any(Function),
         LabelField: expect.any(Function),
         ListAddField: expect.any(Function),
         ListDelField: expect.any(Function),
