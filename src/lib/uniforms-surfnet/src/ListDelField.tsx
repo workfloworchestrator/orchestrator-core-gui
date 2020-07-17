@@ -20,7 +20,7 @@ import { FieldProps } from "./types";
 export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {} }, null, HTMLSpanElement>;
 
 // onChange not used on purpose
-function ListDel({ disabled, name, onChange, ...props }: ListDelFieldProps) {
+function ListDel({ disabled, name, id, onChange, ...props }: ListDelFieldProps) {
     const nameParts = joinName(null, name);
     const nameIndex = +nameParts[nameParts.length - 1];
     const parentName = joinName(nameParts.slice(0, -1));
@@ -30,6 +30,7 @@ function ListDel({ disabled, name, onChange, ...props }: ListDelFieldProps) {
 
     return (
         <i
+            id={`${id}.remove`}
             className={`fa fa-minus ${!limitNotReached ? "disabled" : ""}`}
             {...filterDOMProps(props)}
             onClick={() => {

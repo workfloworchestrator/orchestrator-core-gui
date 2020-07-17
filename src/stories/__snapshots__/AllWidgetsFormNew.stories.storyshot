@@ -874,7 +874,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-contact_persons.0"
+                        id="input-contact_persons.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3137,7 +3137,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports1.0"
+                        id="input-service_ports1.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3303,7 +3303,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports1.1"
+                        id="input-service_ports1.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3500,7 +3500,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports2.0"
+                        id="input-service_ports2.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3675,7 +3675,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports2.1"
+                        id="input-service_ports2.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3845,7 +3845,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports3.0"
+                        id="input-service_ports3.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4173,7 +4173,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports4.0"
+                        id="input-service_ports4.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4479,7 +4479,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports4.1"
+                        id="input-service_ports4.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4667,7 +4667,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports5.0"
+                        id="input-service_ports5.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4837,7 +4837,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports6.0"
+                        id="input-service_ports6.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5007,7 +5007,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports7.0"
+                        id="input-service_ports7.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5195,7 +5195,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.0"
+                        id="input-service_ports8.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5370,7 +5370,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.1"
+                        id="input-service_ports8.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5536,7 +5536,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.2"
+                        id="input-service_ports8.2.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5711,7 +5711,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.3"
+                        id="input-service_ports8.3.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5881,7 +5881,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports9.0"
+                        id="input-service_ports9.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6051,7 +6051,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports10.0"
+                        id="input-service_ports10.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6234,7 +6234,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports_sn81.0"
+                        id="input-service_ports_sn81.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6422,7 +6422,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn82.0"
+                        id="input-service_ports_sn82.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6610,7 +6610,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn83.0"
+                        id="input-service_ports_sn83.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6798,7 +6798,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn84.0"
+                        id="input-service_ports_sn84.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6968,7 +6968,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn85.0"
+                        id="input-service_ports_sn85.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -7156,7 +7156,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn86.0"
+                        id="input-service_ports_sn86.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -7326,7 +7326,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn87.0"
+                        id="input-service_ports_sn87.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8219,7 +8219,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions1.0"
+                        id="input-subscriptions1.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8350,7 +8350,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions1.1"
+                        id="input-subscriptions1.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8503,7 +8503,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions2.0"
+                        id="input-subscriptions2.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8634,7 +8634,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions2.1"
+                        id="input-subscriptions2.1.remove"
                         onClick={[Function]}
                       />
                     </li>

@@ -226,7 +226,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-contact_persons.0"
+                        id="input-contact_persons.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3156,7 +3156,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-bgp_ip_service_ports.0"
+                        id="input-bgp_ip_service_ports.0.remove"
                         onClick={[Function]}
                       />
                     </li>
