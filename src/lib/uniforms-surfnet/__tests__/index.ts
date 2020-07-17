@@ -12,10 +12,10 @@
  * limitations under the License.
  *
  */
-import * as unstyled from "../src";
+import * as surfnet from "../src";
 
 it("exports everything", () => {
-    expect(unstyled).toEqual({
+    expect(surfnet).toEqual({
         AcceptField: expect.any(Function),
         AutoFields: expect.any(Function),
         AutoField: expect.any(Function),
@@ -36,6 +36,7 @@ it("exports everything", () => {
         LongTextField: expect.any(Function),
         NestField: expect.any(Function),
         NumField: expect.any(Function),
+        OptGroupField: expect.any(Function),
         OrganisationField: expect.any(Function),
         ProductField: expect.any(Function),
         RadioField: expect.any(Function),

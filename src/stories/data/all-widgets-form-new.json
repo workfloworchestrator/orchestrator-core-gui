@@ -37,10 +37,11 @@
         },
         "bfd": {
             "title": "Bfd",
+            "format": "optGroup",
             "default": {
                 "enabled": false,
-                "minimum_interval": null,
-                "multiplier": null
+                "minimum_interval": 900,
+                "multiplier": 3
             },
             "allOf": [
                 {
