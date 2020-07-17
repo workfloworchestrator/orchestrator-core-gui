@@ -459,8 +459,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
     };
 
     renderGrafanaLink = (subscription: Subscription, product?: Product) => {
-        const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain")!;
-        if (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8") {
+        const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain");
+        if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
             return (
                 <tr>
                     <td id="subscriptions-stats_in_grafana-k">{I18n.t("subscriptions.stats_in_grafana")}</td>

@@ -437,7 +437,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   </span>
                 </div>
                 <section
-                  className=" nest-field"
+                  className=" optgroup-field"
                   id="input-bfd"
                 >
                   <label>
@@ -472,271 +472,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       className="info"
                       htmlFor="input-bfd.enabled"
                     >
-                      [missing "en.forms.fields.bfd.enabled" translation]
+                      Enable BFD
                     </label>
                   </section>
-                  <div>
-                    <label
-                      htmlFor="input-bfd.multiplier"
-                    >
-                      [missing "en.forms.fields.bfd.multiplier" translation]
-                      
-                    </label>
-                    <span
-                      className="react-numeric-input"
-                      onMouseLeave={[Function]}
-                      onMouseUp={[Function]}
-                      style={
-                        Object {
-                          "display": "inline-block",
-                          "position": "relative",
-                        }
-                      }
-                    >
-                      <input
-                        disabled={false}
-                        id="input-bfd.multiplier"
-                        name="bfd.multiplier"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        onInput={[Function]}
-                        onKeyDown={[Function]}
-                        onSelect={[Function]}
-                        placeholder=""
-                        style={
-                          Object {
-                            "WebkitAppearance": "none",
-                            "border": "1px solid #ccc",
-                            "borderRadius": 2,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "fontSize": "inherit",
-                            "lineHeight": "normal",
-                            "paddingLeft": 4,
-                            "paddingRight": "3ex",
-                          }
-                        }
-                        type="text"
-                        value=""
-                      />
-                      <b
-                        onMouseDown={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        onMouseUp={[Function]}
-                        onTouchEnd={[Function]}
-                        onTouchStart={[Function]}
-                        style={
-                          Object {
-                            "background": "rgba(0,0,0,.1)",
-                            "borderColor": "rgba(0,0,0,.1)",
-                            "borderRadius": "2px 2px 0 0",
-                            "borderStyle": "solid",
-                            "borderWidth": "1px 1px 0 1px",
-                            "bottom": "50%",
-                            "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
-                            "cursor": "default",
-                            "position": "absolute",
-                            "right": 2,
-                            "textAlign": "center",
-                            "top": 2,
-                            "transition": "all 0.1s",
-                            "width": "2.26ex",
-                          }
-                        }
-                      >
-                        <i
-                          style={
-                            Object {
-                              "borderColor": "transparent transparent rgba(0, 0, 0, 0.7)",
-                              "borderStyle": "solid",
-                              "borderWidth": "0 0.6ex 0.6ex 0.6ex",
-                              "height": 0,
-                              "left": "50%",
-                              "margin": "-0.3ex 0 0 -0.56ex",
-                              "position": "absolute",
-                              "top": "50%",
-                              "width": 0,
-                            }
-                          }
-                        />
-                      </b>
-                      <b
-                        onMouseDown={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        onMouseUp={[Function]}
-                        onTouchEnd={[Function]}
-                        onTouchStart={[Function]}
-                        style={
-                          Object {
-                            "background": "rgba(0,0,0,.1)",
-                            "borderColor": "rgba(0,0,0,.1)",
-                            "borderRadius": "0 0 2px 2px",
-                            "borderStyle": "solid",
-                            "borderWidth": "0 1px 1px 1px",
-                            "bottom": 2,
-                            "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
-                            "cursor": "default",
-                            "position": "absolute",
-                            "right": 2,
-                            "textAlign": "center",
-                            "top": "50%",
-                            "transition": "all 0.1s",
-                            "width": "2.26ex",
-                          }
-                        }
-                      >
-                        <i
-                          style={
-                            Object {
-                              "borderColor": "rgba(0, 0, 0, 0.7) transparent transparent",
-                              "borderStyle": "solid",
-                              "borderWidth": "0.6ex 0.6ex 0 0.6ex",
-                              "height": 0,
-                              "left": "50%",
-                              "margin": "-0.3ex 0 0 -0.56ex",
-                              "position": "absolute",
-                              "top": "50%",
-                              "width": 0,
-                            }
-                          }
-                        />
-                      </b>
-                    </span>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="input-bfd.minimum_interval"
-                    >
-                      [missing "en.forms.fields.bfd.minimum_interval" translation]
-                      
-                    </label>
-                    <span
-                      className="react-numeric-input"
-                      onMouseLeave={[Function]}
-                      onMouseUp={[Function]}
-                      style={
-                        Object {
-                          "display": "inline-block",
-                          "position": "relative",
-                        }
-                      }
-                    >
-                      <input
-                        disabled={false}
-                        id="input-bfd.minimum_interval"
-                        name="bfd.minimum_interval"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        onInput={[Function]}
-                        onKeyDown={[Function]}
-                        onSelect={[Function]}
-                        placeholder=""
-                        style={
-                          Object {
-                            "WebkitAppearance": "none",
-                            "border": "1px solid #ccc",
-                            "borderRadius": 2,
-                            "boxSizing": "border-box",
-                            "display": "block",
-                            "fontSize": "inherit",
-                            "lineHeight": "normal",
-                            "paddingLeft": 4,
-                            "paddingRight": "3ex",
-                          }
-                        }
-                        type="text"
-                        value=""
-                      />
-                      <b
-                        onMouseDown={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        onMouseUp={[Function]}
-                        onTouchEnd={[Function]}
-                        onTouchStart={[Function]}
-                        style={
-                          Object {
-                            "background": "rgba(0,0,0,.1)",
-                            "borderColor": "rgba(0,0,0,.1)",
-                            "borderRadius": "2px 2px 0 0",
-                            "borderStyle": "solid",
-                            "borderWidth": "1px 1px 0 1px",
-                            "bottom": "50%",
-                            "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
-                            "cursor": "default",
-                            "position": "absolute",
-                            "right": 2,
-                            "textAlign": "center",
-                            "top": 2,
-                            "transition": "all 0.1s",
-                            "width": "2.26ex",
-                          }
-                        }
-                      >
-                        <i
-                          style={
-                            Object {
-                              "borderColor": "transparent transparent rgba(0, 0, 0, 0.7)",
-                              "borderStyle": "solid",
-                              "borderWidth": "0 0.6ex 0.6ex 0.6ex",
-                              "height": 0,
-                              "left": "50%",
-                              "margin": "-0.3ex 0 0 -0.56ex",
-                              "position": "absolute",
-                              "top": "50%",
-                              "width": 0,
-                            }
-                          }
-                        />
-                      </b>
-                      <b
-                        onMouseDown={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        onMouseUp={[Function]}
-                        onTouchEnd={[Function]}
-                        onTouchStart={[Function]}
-                        style={
-                          Object {
-                            "background": "rgba(0,0,0,.1)",
-                            "borderColor": "rgba(0,0,0,.1)",
-                            "borderRadius": "0 0 2px 2px",
-                            "borderStyle": "solid",
-                            "borderWidth": "0 1px 1px 1px",
-                            "bottom": 2,
-                            "boxShadow": "-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset",
-                            "cursor": "default",
-                            "position": "absolute",
-                            "right": 2,
-                            "textAlign": "center",
-                            "top": "50%",
-                            "transition": "all 0.1s",
-                            "width": "2.26ex",
-                          }
-                        }
-                      >
-                        <i
-                          style={
-                            Object {
-                              "borderColor": "rgba(0, 0, 0, 0.7) transparent transparent",
-                              "borderStyle": "solid",
-                              "borderWidth": "0.6ex 0.6ex 0 0.6ex",
-                              "height": 0,
-                              "left": "50%",
-                              "margin": "-0.3ex 0 0 -0.56ex",
-                              "position": "absolute",
-                              "top": "50%",
-                              "width": 0,
-                            }
-                          }
-                        />
-                      </b>
-                    </span>
-                  </div>
                 </section>
                 <section
                   className="bool-field"
@@ -874,7 +612,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-contact_persons.0"
+                        id="input-contact_persons.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3137,7 +2875,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports1.0"
+                        id="input-service_ports1.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3303,7 +3041,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports1.1"
+                        id="input-service_ports1.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3500,7 +3238,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports2.0"
+                        id="input-service_ports2.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3675,7 +3413,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports2.1"
+                        id="input-service_ports2.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -3845,7 +3583,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports3.0"
+                        id="input-service_ports3.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4173,7 +3911,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports4.0"
+                        id="input-service_ports4.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4479,7 +4217,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports4.1"
+                        id="input-service_ports4.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4667,7 +4405,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports5.0"
+                        id="input-service_ports5.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -4837,7 +4575,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports6.0"
+                        id="input-service_ports6.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5007,7 +4745,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports7.0"
+                        id="input-service_ports7.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5195,7 +4933,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.0"
+                        id="input-service_ports8.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5370,7 +5108,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.1"
+                        id="input-service_ports8.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5536,7 +5274,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.2"
+                        id="input-service_ports8.2.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5711,7 +5449,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports8.3"
+                        id="input-service_ports8.3.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -5881,7 +5619,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports9.0"
+                        id="input-service_ports9.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6051,7 +5789,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports10.0"
+                        id="input-service_ports10.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6234,7 +5972,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-service_ports_sn81.0"
+                        id="input-service_ports_sn81.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6422,7 +6160,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn82.0"
+                        id="input-service_ports_sn82.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6610,7 +6348,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn83.0"
+                        id="input-service_ports_sn83.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6798,7 +6536,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn84.0"
+                        id="input-service_ports_sn84.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -6968,7 +6706,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn85.0"
+                        id="input-service_ports_sn85.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -7156,7 +6894,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn86.0"
+                        id="input-service_ports_sn86.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -7326,7 +7064,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus disabled"
-                        id="input-service_ports_sn87.0"
+                        id="input-service_ports_sn87.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8219,7 +7957,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions1.0"
+                        id="input-subscriptions1.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8350,7 +8088,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions1.1"
+                        id="input-subscriptions1.1.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8503,7 +8241,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions2.0"
+                        id="input-subscriptions2.0.remove"
                         onClick={[Function]}
                       />
                     </li>
@@ -8634,7 +8372,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       </section>
                       <i
                         className="fa fa-minus "
-                        id="input-subscriptions2.1"
+                        id="input-subscriptions2.1.remove"
                         onClick={[Function]}
                       />
                     </li>

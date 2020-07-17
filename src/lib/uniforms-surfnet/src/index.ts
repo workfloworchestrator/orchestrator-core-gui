@@ -36,6 +36,7 @@ export { default as AcceptField } from "./AcceptField";
 export { default as ContactPersonNameField } from "./ContactPersonNameField";
 export { default as ImsPortIdField } from "./ImsPortIdField";
 export { default as LabelField } from "./LabelField";
+export { default as OptGroupField } from "./OptGroupField";
 export { default as SubscriptionField } from "./SubscriptionField";
 export { default as SubscriptionSummaryField } from "./SubscriptionSummaryField";
 export { default as SummaryField } from "./SummaryField";
