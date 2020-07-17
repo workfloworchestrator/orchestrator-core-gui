@@ -24,6 +24,8 @@ import {
     IMSNode,
     IMSPort,
     IMSService,
+    IpBlock,
+    IpPrefix,
     Organization,
     Process,
     ProcessSubscription,
@@ -475,12 +477,12 @@ export function deleteSubscription(subscriptionId: string) {
 }
 
 //IPAM IP Prefixes
-export function ip_blocks(parentPrefix: string) {
+export function ip_blocks(parentPrefix: number): Promise<IpBlock[]> {
     return fetchJson("ipam/ip_blocks/" + parentPrefix);
 }
 
 //IPAM the user-defined filters as configured in the database for the IP PREFIX product
-export function prefix_filters() {
+export function prefix_filters(): Promise<IpPrefix[]> {
     return fetchJson("ipam/prefix_filters");
 }
 
@@ -504,7 +506,7 @@ export function subnets(subnet: string, netmask: number, prefixlen: number) {
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
-export function free_subnets(subnet: string, netmask: number, prefixlen: number) {
+export function free_subnets(subnet: string, netmask: number, prefixlen: number): Promise<string[]> {
     return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 

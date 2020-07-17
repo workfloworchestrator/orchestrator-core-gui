@@ -1,0 +1,112 @@
+[
+    {
+        "id": 33003,
+        "prefix": "2001:614:4800:1700::/60",
+        "description": "KLM (System-tests allocate first free /60 subprefix)",
+        "state": 4,
+        "parent": 7,
+        "state_repr": "Gealloceerd subnet",
+        "index": 81,
+        "version": 6,
+        "is_subnet": true
+    },
+    {
+        "id": 33014,
+        "prefix": "2001:614:4800:1800::/56",
+        "description": "KLM (System-tests allocate first free /56 block to customer Air France - KLM)",
+        "state": 1,
+        "parent": 7,
+        "state_repr": "Gealloceerd",
+        "index": 82,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 33015,
+        "prefix": "2001:614:4800:1800::/60",
+        "description": "KLM (System-tests allocate first free /60 subprefix)",
+        "state": 4,
+        "parent": 7,
+        "state_repr": "Gealloceerd subnet",
+        "index": 83,
+        "version": 6,
+        "is_subnet": true
+    },
+    {
+        "id": 33018,
+        "prefix": "2001:614:4800:1900::/56",
+        "description": "KLM (System-tests allocate first free /56 block to customer Air France - KLM)",
+        "state": 1,
+        "parent": 7,
+        "state_repr": "Gealloceerd",
+        "index": 84,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 33019,
+        "prefix": "2001:614:4800:1900::/60",
+        "description": "KLM (System-tests allocate first free /60 subprefix)",
+        "state": 4,
+        "parent": 7,
+        "state_repr": "Gealloceerd subnet",
+        "index": 85,
+        "version": 6,
+        "is_subnet": true
+    },
+    {
+        "id": 25785,
+        "prefix": "2001:615::/32",
+        "description": "KLM (Eftychia Testing)",
+        "state": 3,
+        "parent": 7,
+        "state_repr": "Gepland",
+        "index": 86,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 25201,
+        "prefix": "2001:616::/31",
+        "description": "ESNET (IPv6 test Zaheer)",
+        "state": 1,
+        "parent": 7,
+        "state_repr": "Gealloceerd",
+        "index": 87,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 25228,
+        "prefix": "2001:618::/29",
+        "description": "ESNET (Bugfix IPv6 Zaheer)",
+        "state": 1,
+        "parent": 9,
+        "state_repr": "Gealloceerd",
+        "index": 88,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 100001,
+        "prefix": "2001:620::/29",
+        "description": "Vrije ruimte - gegenereerd",
+        "state": 0,
+        "parent": 9,
+        "state_repr": "Vrij",
+        "index": 89,
+        "version": 6,
+        "is_subnet": false
+    },
+    {
+        "id": 100000,
+        "prefix": "2001:628::/30",
+        "description": "Vrije ruimte - gegenereerd",
+        "state": 0,
+        "parent": 9,
+        "state_repr": "Vrij",
+        "index": 90,
+        "version": 6,
+        "is_subnet": false
+    }
+]

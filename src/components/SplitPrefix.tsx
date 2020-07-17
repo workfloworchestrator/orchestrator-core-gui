@@ -15,45 +15,55 @@
 
 import "./SplitPrefix.scss";
 
-import PropTypes from "prop-types";
+import { range } from "lodash";
 import React from "react";
-import Select from "react-select";
+import Select, { ValueType } from "react-select";
+import { Option } from "utils/types";
 
 import { free_subnets } from "../api";
 
-export default class SplitPrefix extends React.PureComponent {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            isValid: true,
-            subnets: [],
-            desired_prefixlen: 0,
-            selected_subnet: ""
-        };
-    }
+interface IProps {
+    subnet: string;
+    prefixlen: number;
+    prefix_min: number;
+    onChange: (value: string) => void;
+    selected_subnet?: string;
+}
+
+interface IState {
+    isValid: boolean;
+    subnets: [];
+    desired_prefixlen: number;
+}
+
+export default class SplitPrefix extends React.PureComponent<IProps> {
+    state: IState = {
+        isValid: true,
+        subnets: [],
+        desired_prefixlen: 0
+    };
 
     componentDidMount() {
-        const { subnet, netmask, prefixlen } = { ...this.props };
+        const { subnet, prefixlen } = { ...this.props };
         free_subnets(subnet, prefixlen, prefixlen).then(result => {
             let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === prefixlen);
             this.setState({
                 subnets: subnets,
-                desired_prefixlen: parseInt(netmask, 10),
-                selected_subnet: subnet + "/" + netmask,
+                desired_prefixlen: prefixlen,
                 loading: false
             });
         });
     }
 
-    changePrefixLength = e => {
-        const { subnet, netmask } = { ...this.props };
-        const prefixlen = e ? e.value : null;
-        if (prefixlen) {
-            free_subnets(subnet, netmask, prefixlen).then(result => {
-                let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === prefixlen);
+    changePrefixLength = (e: ValueType<Option<number>>) => {
+        const { subnet, prefixlen } = { ...this.props };
+        const desiredPrefixlen = e ? (e as Option<number>).value : null;
+        if (desiredPrefixlen) {
+            free_subnets(subnet, prefixlen, desiredPrefixlen).then(result => {
+                let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
                 this.setState({
                     subnets: subnets,
-                    desired_prefixlen: prefixlen,
+                    desired_prefixlen: desiredPrefixlen,
                     loading: false,
                     isValid: false
                 });
@@ -61,19 +71,18 @@ export default class SplitPrefix extends React.PureComponent {
         }
     };
 
-    selectSubnet = e => {
-        this.setState({ selected_subnet: e.value, isValid: true });
-        this.props.onChange(e.value);
+    selectSubnet = (e: ValueType<Option>) => {
+        this.props.onChange((e as Option).value);
     };
 
     render() {
-        const { subnet, netmask, prefix_min } = this.props;
+        const { subnet, prefixlen, prefix_min, selected_subnet } = this.props;
         const version = subnet.indexOf(":") === -1 ? 4 : 6;
         const max_for_version = version === 4 ? 32 : 64;
-        const { desired_prefixlen, selected_subnet } = this.state;
-        const prefixlengths = [...Array(max_for_version - prefix_min + 1).keys()].map(x => prefix_min + x);
-
-        const length_options = prefixlengths.map(pl => ({ value: pl, label: pl }));
+        const { desired_prefixlen } = this.state;
+        const prefixlengths = range(max_for_version - prefix_min + 1).map(x => prefix_min + x);
+        console.log(prefixlengths, max_for_version, prefix_min);
+        const length_options: Option<number>[] = prefixlengths.map(pl => ({ value: pl, label: pl.toString() }));
         const length_value = length_options.find(option => option.value === desired_prefixlen);
 
         const prefix_options = this.state.subnets.map(sn => ({ label: sn, value: sn }));
@@ -81,7 +90,7 @@ export default class SplitPrefix extends React.PureComponent {
         return (
             <section>
                 <h3>
-                    Selected prefix: {subnet}/{netmask}
+                    Selected prefix: {subnet}/{prefixlen}
                 </h3>
                 <div>Desired netmask of the new subnet:</div>
                 <Select
@@ -105,11 +114,3 @@ export default class SplitPrefix extends React.PureComponent {
         );
     }
 }
-
-SplitPrefix.propTypes = {
-    subnet: PropTypes.string,
-    netmask: PropTypes.string,
-    prefixlen: PropTypes.number,
-    prefix_min: PropTypes.number,
-    onChange: PropTypes.func.isRequired
-};

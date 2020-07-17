@@ -73,7 +73,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-136-input"
+                              id="react-select-138-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -352,244 +352,6 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-137-input"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  onFocus={[Function]}
-                                  spellCheck="false"
-                                  style={
-                                    Object {
-                                      "background": 0,
-                                      "border": 0,
-                                      "boxSizing": "content-box",
-                                      "color": "inherit",
-                                      "fontSize": "inherit",
-                                      "label": "input",
-                                      "opacity": 1,
-                                      "outline": 0,
-                                      "padding": 0,
-                                      "width": "1px",
-                                    }
-                                  }
-                                  tabIndex="0"
-                                  type="text"
-                                  value=""
-                                />
-                                <div
-                                  style={
-                                    Object {
-                                      "height": 0,
-                                      "left": 0,
-                                      "overflow": "scroll",
-                                      "position": "absolute",
-                                      "top": 0,
-                                      "visibility": "hidden",
-                                      "whiteSpace": "pre",
-                                    }
-                                  }
-                                >
-                                  
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className=" css-1hb7zxy-IndicatorsContainer"
-                          >
-                            <span
-                              className=" css-109onse-indicatorSeparator"
-                            />
-                            <div
-                              aria-hidden="true"
-                              className=" css-tlfecz-indicatorContainer"
-                              onMouseDown={[Function]}
-                              onTouchEnd={[Function]}
-                            >
-                              <svg
-                                aria-hidden="true"
-                                className="css-6q0nyr-Svg"
-                                focusable="false"
-                                height={20}
-                                viewBox="0 0 20 20"
-                                width={20}
-                              >
-                                <path
-                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="port-select"
-                    >
-                      <label>
-                        Port
-                      </label>
-                      <div
-                        className=" css-14jk2my-container"
-                        onKeyDown={[Function]}
-                      >
-                        <div
-                          className=" css-1fhf3k1-control"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <div
-                            className=" css-g1d714-ValueContainer"
-                          >
-                            <div
-                              className=" css-1wa3eu0-placeholder"
-                            >
-                              First select a node
-                            </div>
-                            <div
-                              className="css-b8ldur-Input"
-                            >
-                              <div
-                                className=""
-                                style={
-                                  Object {
-                                    "display": "inline-block",
-                                  }
-                                }
-                              >
-                                <input
-                                  aria-autocomplete="list"
-                                  autoCapitalize="none"
-                                  autoComplete="off"
-                                  autoCorrect="off"
-                                  disabled={true}
-                                  id="react-select-138-input"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  onFocus={[Function]}
-                                  spellCheck="false"
-                                  style={
-                                    Object {
-                                      "background": 0,
-                                      "border": 0,
-                                      "boxSizing": "content-box",
-                                      "color": "inherit",
-                                      "fontSize": "inherit",
-                                      "label": "input",
-                                      "opacity": 1,
-                                      "outline": 0,
-                                      "padding": 0,
-                                      "width": "1px",
-                                    }
-                                  }
-                                  tabIndex="0"
-                                  type="text"
-                                  value=""
-                                />
-                                <div
-                                  style={
-                                    Object {
-                                      "height": 0,
-                                      "left": 0,
-                                      "overflow": "scroll",
-                                      "position": "absolute",
-                                      "top": 0,
-                                      "visibility": "hidden",
-                                      "whiteSpace": "pre",
-                                    }
-                                  }
-                                >
-                                  
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className=" css-1hb7zxy-IndicatorsContainer"
-                          >
-                            <span
-                              className=" css-109onse-indicatorSeparator"
-                            />
-                            <div
-                              aria-hidden="true"
-                              className=" css-tlfecz-indicatorContainer"
-                              onMouseDown={[Function]}
-                              onTouchEnd={[Function]}
-                            >
-                              <svg
-                                aria-hidden="true"
-                                className="css-6q0nyr-Svg"
-                                focusable="false"
-                                height={20}
-                                viewBox="0 0 20 20"
-                                width={20}
-                              >
-                                <path
-                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                  <em
-                    className="error"
-                  />
-                </section>
-                <section
-                  className="form-divider ims_port_id_2"
-                  id="input-ims_port_id_2"
-                >
-                  <label>
-                    Second node and port
-                  </label>
-                  <em>
-                    Choose a node and port that you want to use to create the second corelink
-                  </em>
-                  <section
-                    className="node-port"
-                  >
-                    <div
-                      className="node-select"
-                    >
-                      <label>
-                        Node
-                      </label>
-                      <div
-                        className=" css-14jk2my-container"
-                        onKeyDown={[Function]}
-                      >
-                        <div
-                          className=" css-1fhf3k1-control"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <div
-                            className=" css-g1d714-ValueContainer"
-                          >
-                            <div
-                              className=" css-1wa3eu0-placeholder"
-                            >
-                              Select...
-                            </div>
-                            <div
-                              className="css-b8ldur-Input"
-                            >
-                              <div
-                                className=""
-                                style={
-                                  Object {
-                                    "display": "inline-block",
-                                  }
-                                }
-                              >
-                                <input
-                                  aria-autocomplete="list"
-                                  autoCapitalize="none"
-                                  autoComplete="off"
-                                  autoCorrect="off"
-                                  disabled={true}
                                   id="react-select-139-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -775,73 +537,15 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
                     className="error"
                   />
                 </section>
-              </section>
-              <section
-                className="buttons"
-              >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </section>
-            </form>
-          </section>
-        </div>
-      </section>
-    </section>
-  </div>
-</section>
-`;
-
-exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
-<section
-  className="storybook-container"
->
-  <div
-    className="mod-new-process"
-  >
-    <section
-      className="card"
-    >
-      <section
-        className="form-step divider"
-      >
-        <h1>
-          Corelink add link form
-        </h1>
-        <div
-          className="mod-process-step"
-        >
-          <section
-            className="card"
-          >
-            <form
-              onSubmit={[Function]}
-            >
-              <section
-                className="form-step"
-              >
                 <section
-                  className="form-divider ims_port_id_1"
-                  id="input-ims_port_id_1"
+                  className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
                 >
                   <label>
-                    First node and port
+                    Second node and port
                   </label>
                   <em>
-                    Choose a node and port that you want to use to create the first corelink
+                    Choose a node and port that you want to use to create the second corelink
                   </em>
                   <section
                     className="node-port"
@@ -1071,15 +775,73 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                     className="error"
                   />
                 </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          Corelink add link form
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
                 <section
-                  className="form-divider ims_port_id_2"
-                  id="input-ims_port_id_2"
+                  className="form-divider ims_port_id_1"
+                  id="input-ims_port_id_1"
                 >
                   <label>
-                    Second node and port
+                    First node and port
                   </label>
                   <em>
-                    Choose a node and port that you want to use to create the second corelink
+                    Choose a node and port that you want to use to create the first corelink
                   </em>
                   <section
                     className="node-port"
@@ -1309,6 +1071,244 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                     className="error"
                   />
                 </section>
+                <section
+                  className="form-divider ims_port_id_2"
+                  id="input-ims_port_id_2"
+                >
+                  <label>
+                    Second node and port
+                  </label>
+                  <em>
+                    Choose a node and port that you want to use to create the second corelink
+                  </em>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-g1d714-ValueContainer"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              Select...
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-145-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="port-select"
+                    >
+                      <label>
+                        Port
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-g1d714-ValueContainer"
+                          >
+                            <div
+                              className=" css-1wa3eu0-placeholder"
+                            >
+                              First select a node
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="react-select-146-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
+                              className=" css-109onse-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <em
+                    className="error"
+                  />
+                </section>
               </section>
               <section
                 className="buttons"
@@ -1414,7 +1414,7 @@ exports[`Storyshots UserInputFormNew Nodes 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={false}
-                                id="react-select-145-input"
+                                id="react-select-147-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -1591,7 +1591,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect MSP only 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-148-input"
+                              id="react-select-150-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -1824,7 +1824,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect all organisations 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-146-input"
+                              id="react-select-148-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2195,7 +2195,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect selected organisation 1`] = 
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-150-input"
+                              id="react-select-152-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2428,7 +2428,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect all organisations 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-153-input"
+                              id="react-select-155-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2661,7 +2661,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect selected organisation 1`] = 
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-159-input"
+                              id="react-select-161-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2894,7 +2894,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-156-input"
+                              id="react-select-158-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -3274,7 +3274,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect untagged 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-157-input"
+                              id="react-select-159-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
