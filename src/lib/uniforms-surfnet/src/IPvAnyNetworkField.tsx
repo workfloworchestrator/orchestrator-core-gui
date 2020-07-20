@@ -21,7 +21,7 @@ import SplitPrefix from "../../../components/SplitPrefix";
 import { IpBlock } from "../../../utils/types";
 import { FieldProps } from "./types";
 
-export type IPvAnyNetworkFieldProps = FieldProps<string, { preSelectedPrefix?: string; prefixMin?: number }>;
+export type IPvAnyNetworkFieldProps = FieldProps<string, { prefixMin?: number }>;
 
 function IPvAnyNetwork({
     disabled,
@@ -37,13 +37,12 @@ function IPvAnyNetwork({
     error,
     showInlineError,
     errorMessage,
-    preSelectedPrefix,
     prefixMin,
     ...props
 }: IPvAnyNetworkFieldProps) {
     const [selectedPrefix, setSelectedPrefix] = useState<IpBlock | undefined>(undefined);
 
-    const usePrefix = preSelectedPrefix ?? selectedPrefix?.prefix;
+    const usePrefix = selectedPrefix?.prefix ?? value;
     const [subnet, netmask] = usePrefix?.split("/") ?? ["", ""];
     const usedPrefixMin = prefixMin ?? parseInt(netmask, 10) + (selectedPrefix?.state === 0 ? 0 : 1);
 
@@ -76,7 +75,7 @@ function IPvAnyNetwork({
                             onChange={(prefix: string) => {
                                 onChange(prefix);
                             }}
-                            selectedSubnet={value ?? usePrefix}
+                            selectedSubnet={usePrefix}
                         />
                     )}
                 </div>
