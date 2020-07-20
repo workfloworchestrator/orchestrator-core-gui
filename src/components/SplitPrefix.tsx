@@ -25,49 +25,51 @@ import { free_subnets } from "../api";
 interface IProps {
     subnet: string;
     prefixlen: number;
-    prefix_min: number;
+    prefixMin: number;
     onChange: (value: string) => void;
-    selected_subnet?: string;
+    selectedSubnet?: string;
 }
 
 interface IState {
-    isValid: boolean;
     subnets: [];
-    desired_prefixlen: number;
+    desiredPrefixlen: number;
 }
 
 export default class SplitPrefix extends React.PureComponent<IProps> {
     state: IState = {
-        isValid: true,
         subnets: [],
-        desired_prefixlen: 0
+        desiredPrefixlen: 0
     };
 
-    componentDidMount() {
-        const { subnet, prefixlen } = { ...this.props };
-        free_subnets(subnet, prefixlen, prefixlen).then(result => {
-            let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === prefixlen);
+    fetchFreePrefixes(subnet: string, prefixlen: number, desiredPrefixlen: number) {
+        free_subnets(subnet, prefixlen, desiredPrefixlen).then(result => {
+            let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
             this.setState({
                 subnets: subnets,
-                desired_prefixlen: prefixlen,
+                desiredPrefixlen: desiredPrefixlen,
                 loading: false
             });
         });
     }
 
+    componentWillReceiveProps(props: IProps) {
+        if (this.props.subnet !== props.subnet || this.props.prefixlen !== props.prefixlen) {
+            this.fetchFreePrefixes(props.subnet, props.prefixlen, props.prefixlen);
+        }
+    }
+
+    componentDidMount() {
+        const { subnet, prefixlen } = { ...this.props };
+
+        this.fetchFreePrefixes(subnet, prefixlen, prefixlen);
+    }
+
     changePrefixLength = (e: ValueType<Option<number>>) => {
         const { subnet, prefixlen } = { ...this.props };
+
         const desiredPrefixlen = e ? (e as Option<number>).value : null;
         if (desiredPrefixlen) {
-            free_subnets(subnet, prefixlen, desiredPrefixlen).then(result => {
-                let subnets = result.filter(x => parseInt(x.split("/")[1], 10) === desiredPrefixlen);
-                this.setState({
-                    subnets: subnets,
-                    desired_prefixlen: desiredPrefixlen,
-                    loading: false,
-                    isValid: false
-                });
-            });
+            this.fetchFreePrefixes(subnet, prefixlen, desiredPrefixlen);
         }
     };
 
@@ -76,16 +78,16 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
     };
 
     render() {
-        const { subnet, prefixlen, prefix_min, selected_subnet } = this.props;
+        const { subnet, prefixlen, prefixMin, selectedSubnet } = this.props;
         const version = subnet.indexOf(":") === -1 ? 4 : 6;
         const max_for_version = version === 4 ? 32 : 64;
-        const { desired_prefixlen } = this.state;
-        const prefixlengths = range(max_for_version - prefix_min + 1).map(x => prefix_min + x);
+        const { desiredPrefixlen } = this.state;
+        const prefixlengths = range(max_for_version - prefixMin + 1).map(x => prefixMin + x);
         const length_options: Option<number>[] = prefixlengths.map(pl => ({ value: pl, label: pl.toString() }));
-        const length_value = length_options.find(option => option.value === desired_prefixlen);
+        const length_value = length_options.find(option => option.value === desiredPrefixlen);
 
         const prefix_options = this.state.subnets.map(sn => ({ label: sn, value: sn }));
-        const prefix_value = prefix_options.find(option => option.value === selected_subnet);
+        const prefix_value = prefix_options.find(option => option.value === selectedSubnet);
         return (
             <section>
                 <h3>

@@ -77,9 +77,9 @@ export default class IPPrefix extends React.PureComponent<IProps> {
                         <SplitPrefix
                             subnet={subnet}
                             prefixlen={parseInt(netmask, 10)}
-                            prefix_min={usedPrefix_min}
+                            prefixMin={usedPrefix_min}
                             onChange={this.selectIpam}
-                            selected_subnet={usePrefix}
+                            selectedSubnet={usePrefix}
                         />
                     )}
                 </div>

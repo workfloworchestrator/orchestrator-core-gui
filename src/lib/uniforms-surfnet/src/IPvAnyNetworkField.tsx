@@ -21,7 +21,7 @@ import SplitPrefix from "../../../components/SplitPrefix";
 import { IpBlock } from "../../../utils/types";
 import { FieldProps } from "./types";
 
-export type IPvAnyNetworkFieldProps = FieldProps<string, { prefixMin?: number }>;
+export type IPvAnyNetworkFieldProps = FieldProps<string, { preSelectedPrefix?: string; prefixMin?: number }>;
 
 function IPvAnyNetwork({
     disabled,
@@ -37,12 +37,13 @@ function IPvAnyNetwork({
     error,
     showInlineError,
     errorMessage,
+    preSelectedPrefix,
     prefixMin,
     ...props
 }: IPvAnyNetworkFieldProps) {
-    const [selectedPrefix, setSelectedPRefix] = useState<IpBlock | undefined>(undefined);
+    const [selectedPrefix, setSelectedPrefix] = useState<IpBlock | undefined>(undefined);
 
-    const usePrefix = value ?? selectedPrefix?.prefix;
+    const usePrefix = preSelectedPrefix ?? selectedPrefix?.prefix;
     const [subnet, netmask] = usePrefix?.split("/") ?? ["", ""];
     const usedPrefixMin = prefixMin ?? parseInt(netmask, 10) + (selectedPrefix?.state === 0 ? 0 : 1);
 
@@ -60,7 +61,7 @@ function IPvAnyNetwork({
                         <IPPrefixTable
                             onChange={(prefix: IpBlock) => {
                                 if (prefix.state === 0 || prefix.state === 1) {
-                                    setSelectedPRefix(prefix);
+                                    setSelectedPrefix(prefix);
                                 }
                                 onChange(prefix.prefix);
                             }}
@@ -71,11 +72,11 @@ function IPvAnyNetwork({
                         <SplitPrefix
                             subnet={subnet}
                             prefixlen={parseInt(netmask, 10)}
-                            prefix_min={usedPrefixMin}
+                            prefixMin={usedPrefixMin}
                             onChange={(prefix: string) => {
                                 onChange(prefix);
                             }}
-                            selected_subnet={usePrefix}
+                            selectedSubnet={value ?? usePrefix}
                         />
                     )}
                 </div>
