@@ -54,14 +54,14 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
 
     componentWillReceiveProps(props: IProps) {
         if (this.props.subnet !== props.subnet || this.props.prefixlen !== props.prefixlen) {
-            this.fetchFreePrefixes(props.subnet, props.prefixlen, props.prefixlen);
+            this.fetchFreePrefixes(props.subnet, props.prefixlen, props.prefixMin);
         }
     }
 
     componentDidMount() {
-        const { subnet, prefixlen } = { ...this.props };
+        const { subnet, prefixlen, prefixMin } = { ...this.props };
 
-        this.fetchFreePrefixes(subnet, prefixlen, prefixlen);
+        this.fetchFreePrefixes(subnet, prefixlen, prefixMin);
     }
 
     changePrefixLength = (e: ValueType<Option<number>>) => {

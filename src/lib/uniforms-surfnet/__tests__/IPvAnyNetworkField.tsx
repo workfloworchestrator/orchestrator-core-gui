@@ -46,24 +46,32 @@ test("<IPvAnyNetworkField> - does not render an table when preselected", () => {
 test("<IPvAnyNetworkField> - renders an table and split component", () => {
     fetchMock.get("glob:*/api/ipam/prefix_filters", []);
     fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
-    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/16", []);
+    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/17", []);
 
     const element = <IPvAnyNetworkField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "10.0.0.0/16" } }));
 
     expect(wrapper.find(IPPrefixTable)).toHaveLength(1);
     expect(wrapper.find(SplitPrefix)).toHaveLength(1);
+    expect(wrapper.find(SplitPrefix).prop("subnet")).toBe("10.0.0.0");
+    expect(wrapper.find(SplitPrefix).prop("prefixlen")).toBe(16);
+    expect(wrapper.find(SplitPrefix).prop("prefixMin")).toBe(17);
+    expect(wrapper.find(SplitPrefix).prop("selectedSubnet")).toBe("10.0.0.0/16");
 });
 
 test("<IPvAnyNetworkField> - renders a split component", () => {
     fetchMock.get("glob:*/api/ipam/prefix_filters", []);
     fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
-    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/16", []);
+    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/23", []);
     const element = <IPvAnyNetworkField name="x" prefixMin={23} />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "10.0.0.0/16" } }));
 
     expect(wrapper.find(IPPrefixTable)).toHaveLength(0);
     expect(wrapper.find(SplitPrefix)).toHaveLength(1);
+    expect(wrapper.find(SplitPrefix).prop("subnet")).toBe("10.0.0.0");
+    expect(wrapper.find(SplitPrefix).prop("prefixlen")).toBe(16);
+    expect(wrapper.find(SplitPrefix).prop("prefixMin")).toBe(23);
+    expect(wrapper.find(SplitPrefix).prop("selectedSubnet")).toBe("10.0.0.0/16");
 });
 
 test("<IPvAnyNetworkField> - renders a label", () => {

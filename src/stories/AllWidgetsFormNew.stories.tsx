@@ -18,6 +18,7 @@ import React from "react";
 import { InputForm } from "utils/types";
 
 import FORM_NEW from "./data/all-widgets-form-new.json";
+import IP_BLOCKS from "./data/ip_blocks.json";
 import PRODUCTS from "./data/products.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
@@ -35,9 +36,9 @@ export default {
 
 function prepare() {
     fetchMock.restore();
-    fetchMock.get("/api/ipam/prefix_filters", []);
-    fetchMock.get("/api/ipam/ip_blocks/1", []);
-    fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/24", ["0.0.0.0/24"]);
+    fetchMock.get("/api/ipam/prefix_filters", [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
+    fetchMock.get("/api/ipam/ip_blocks/1", IP_BLOCKS);
+    fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/25", ["10.0.0.0/25"]);
     fetchMock.get("/api/v2/subscriptions?filter=statuses%2Cactive", allNodeSubscriptions);
     fetchMock.get(
         "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",
