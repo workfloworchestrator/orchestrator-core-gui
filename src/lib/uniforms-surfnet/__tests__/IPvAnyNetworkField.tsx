@@ -14,7 +14,6 @@
  */
 import fetchMock from "fetch-mock-jest";
 import React from "react";
-import Select from "react-select";
 
 import IPPrefixTable from "../../../components/IpPrefixTable";
 import SplitPrefix from "../../../components/SplitPrefix";

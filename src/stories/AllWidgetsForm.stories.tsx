@@ -34,6 +34,9 @@ export default {
 
 function prepare() {
     fetchMock.restore();
+    fetchMock.get("/api/ipam/prefix_filters", []);
+    fetchMock.get("/api/ipam/ip_blocks/1", []);
+    fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/24", ["0.0.0.0/24"]);
     fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
     fetchMock.get(
         "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",

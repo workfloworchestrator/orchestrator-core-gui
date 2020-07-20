@@ -81,7 +81,6 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
         const max_for_version = version === 4 ? 32 : 64;
         const { desired_prefixlen } = this.state;
         const prefixlengths = range(max_for_version - prefix_min + 1).map(x => prefix_min + x);
-        console.log(prefixlengths, max_for_version, prefix_min);
         const length_options: Option<number>[] = prefixlengths.map(pl => ({ value: pl, label: pl.toString() }));
         const length_value = length_options.find(option => option.value === desired_prefixlen);
 

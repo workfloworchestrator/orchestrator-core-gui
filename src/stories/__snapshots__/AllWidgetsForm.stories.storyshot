@@ -1402,62 +1402,334 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                   <section
                     className="ipblock-selector"
                   >
-                    <div
-                      className="selected_value"
-                    />
                     <div>
                       <div>
+                        <div>
+                          <span>
+                            State:
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-allocated"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={1}
+                            />
+                            Permanent toegewezen
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-planned"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={3}
+                            />
+                            Gereserveerd
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-free"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={0}
+                            />
+                            Vrij
+                          </span>
+                        </div>
+                        <div>
+                          <span>
+                            Root filter
+                          </span>
+                          <span>
+                            <div
+                              className=" css-2b097c-container"
+                              id="root-filter"
+                              onKeyDown={[Function]}
+                            >
+                              <div
+                                className=" css-yk16xz-control"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <div
+                                  className=" css-g1d714-ValueContainer"
+                                >
+                                  <div
+                                    className=" css-1wa3eu0-placeholder"
+                                  >
+                                    Select...
+                                  </div>
+                                  <div
+                                    className="css-b8ldur-Input"
+                                  >
+                                    <div
+                                      className=""
+                                      style={
+                                        Object {
+                                          "display": "inline-block",
+                                        }
+                                      }
+                                    >
+                                      <input
+                                        aria-autocomplete="list"
+                                        autoCapitalize="none"
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        disabled={false}
+                                        id="react-select-11-input"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        spellCheck="false"
+                                        style={
+                                          Object {
+                                            "background": 0,
+                                            "border": 0,
+                                            "boxSizing": "content-box",
+                                            "color": "inherit",
+                                            "fontSize": "inherit",
+                                            "label": "input",
+                                            "opacity": 1,
+                                            "outline": 0,
+                                            "padding": 0,
+                                            "width": "1px",
+                                          }
+                                        }
+                                        tabIndex="0"
+                                        type="text"
+                                        value=""
+                                      />
+                                      <div
+                                        style={
+                                          Object {
+                                            "height": 0,
+                                            "left": 0,
+                                            "overflow": "scroll",
+                                            "position": "absolute",
+                                            "top": 0,
+                                            "visibility": "hidden",
+                                            "whiteSpace": "pre",
+                                          }
+                                        }
+                                      >
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  className=" css-1hb7zxy-IndicatorsContainer"
+                                >
+                                  <span
+                                    className=" css-1okebmr-indicatorSeparator"
+                                  />
+                                  <div
+                                    aria-hidden="true"
+                                    className=" css-tlfecz-indicatorContainer"
+                                    onMouseDown={[Function]}
+                                    onTouchEnd={[Function]}
+                                  >
+                                    <svg
+                                      aria-hidden="true"
+                                      className="css-6q0nyr-Svg"
+                                      focusable="false"
+                                      height={20}
+                                      viewBox="0 0 20 20"
+                                      width={20}
+                                    >
+                                      <path
+                                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                      />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                              <input
+                                name="root-filter"
+                                type="hidden"
+                                value=""
+                              />
+                            </div>
+                          </span>
+                        </div>
+                        <table
+                          className="ip-blocks"
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                className="id"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  id
+                                </span>
+                                 
+                                <i />
+                              </th>
+                              <th
+                                className="prefix"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  prefix
+                                </span>
+                                 
+                                <i
+                                  className="fas fa-sort-up"
+                                />
+                              </th>
+                              <th
+                                className="description"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  description
+                                </span>
+                                 
+                                <i />
+                              </th>
+                              <th
+                                className="state_repr"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  status
+                                </span>
+                                 
+                                <i />
+                              </th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                      <section>
                         <h3>
                           Selected prefix: 
-                          0/0
+                          10.0.0.0
+                          /
+                          24
                         </h3>
-                      </div>
-                      <div>
-                        <span>
-                          State:
-                        </span>
-                        <span>
-                          <input
-                            checked={true}
-                            id="checkbox-allocated"
-                            name="state"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={1}
-                          />
-                          Permanent toegewezen
-                        </span>
-                        <span>
-                          <input
-                            checked={true}
-                            id="checkbox-planned"
-                            name="state"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={3}
-                          />
-                          Gereserveerd
-                        </span>
-                        <span>
-                          <input
-                            checked={true}
-                            id="checkbox-free"
-                            name="state"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={0}
-                          />
-                          Vrij
-                        </span>
-                      </div>
-                      <div>
-                        <span>
-                          Root filter
-                        </span>
-                        <span>
+                        <div>
+                          Desired netmask of the new subnet:
+                        </div>
+                        <div
+                          className=" css-2b097c-container"
+                          id="desired-netmask"
+                          onKeyDown={[Function]}
+                        >
+                          <div
+                            className=" css-yk16xz-control"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <div
+                              className=" css-g1d714-ValueContainer"
+                            >
+                              <div
+                                className=" css-1wa3eu0-placeholder"
+                              >
+                                Select...
+                              </div>
+                              <div
+                                className="css-b8ldur-Input"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
+                                  }
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={false}
+                                    id="react-select-12-input"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className=" css-1hb7zxy-IndicatorsContainer"
+                            >
+                              <span
+                                className=" css-1okebmr-indicatorSeparator"
+                              />
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-6q0nyr-Svg"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div>
+                            Desired prefix:
+                          </div>
                           <div
                             className=" css-2b097c-container"
-                            id="root-filter"
+                            id="desired-prefix"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -1490,7 +1762,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-11-input"
+                                      id="react-select-13-input"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -1558,62 +1830,9 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                 </div>
                               </div>
                             </div>
-                            <input
-                              name="root-filter"
-                              type="hidden"
-                              value=""
-                            />
                           </div>
-                        </span>
-                      </div>
-                      <table
-                        className="ip-blocks"
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              className="id"
-                              onClick={[Function]}
-                            >
-                              <span>
-                                id
-                              </span>
-                               
-                              <i />
-                            </th>
-                            <th
-                              className="prefix"
-                              onClick={[Function]}
-                            >
-                              <span>
-                                prefix
-                              </span>
-                               
-                              <i />
-                            </th>
-                            <th
-                              className="description"
-                              onClick={[Function]}
-                            >
-                              <span>
-                                description
-                              </span>
-                               
-                              <i />
-                            </th>
-                            <th
-                              className="state_repr"
-                              onClick={[Function]}
-                            >
-                              <span>
-                                status
-                              </span>
-                               
-                              <i />
-                            </th>
-                          </tr>
-                        </thead>
-                      </table>
+                        </div>
+                      </section>
                     </div>
                   </section>
                   <em
@@ -1722,7 +1941,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-12-input"
+                              id="react-select-14-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2046,7 +2265,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={false}
-                                  id="react-select-13-input"
+                                  id="react-select-15-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -2156,7 +2375,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-14-input"
+                                  id="react-select-16-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -2278,7 +2497,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={false}
-                                id="react-select-15-input"
+                                id="react-select-17-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2665,7 +2884,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-16-input"
+                              id="react-select-18-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2783,7 +3002,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={true}
-                              id="react-select-17-input"
+                              id="react-select-19-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2920,7 +3139,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-18-input"
+                                    id="react-select-20-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3068,7 +3287,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-19-input"
+                                    id="react-select-21-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3242,7 +3461,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-20-input"
+                                    id="react-select-22-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3390,7 +3609,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-21-input"
+                                    id="react-select-23-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3556,7 +3775,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-22-input"
+                                    id="react-select-24-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3721,7 +3940,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-23-input"
+                                    id="react-select-25-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -3887,7 +4106,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-24-input"
+                                    id="react-select-26-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4084,7 +4303,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-25-input"
+                                    id="react-select-27-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4244,7 +4463,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-26-input"
+                                    id="react-select-28-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4401,7 +4620,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-27-input"
+                                    id="react-select-29-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4566,7 +4785,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-28-input"
+                                    id="react-select-30-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4714,7 +4933,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-29-input"
+                                    id="react-select-31-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -4859,7 +5078,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-30-input"
+                                    id="react-select-32-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5004,7 +5223,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-31-input"
+                                    id="react-select-33-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5178,7 +5397,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-32-input"
+                                    id="react-select-34-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5335,7 +5554,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-33-input"
+                                    id="react-select-35-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5500,7 +5719,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-47-input"
+                                    id="react-select-49-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5673,7 +5892,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-34-input"
+                                    id="react-select-36-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -5841,7 +6060,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-35-input"
+                                    id="react-select-37-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -6009,7 +6228,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-36-input"
+                                    id="react-select-38-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -6169,7 +6388,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-37-input"
+                                    id="react-select-39-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -6334,7 +6553,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-38-input"
+                                    id="react-select-40-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -6502,7 +6721,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={true}
-                                    id="react-select-39-input"
+                                    id="react-select-41-input"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -7223,7 +7442,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-40-input"
+                                  id="react-select-42-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -7348,7 +7567,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-41-input"
+                                  id="react-select-43-input"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -7432,272 +7651,6 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                   </label>
                   <em>
                     [missing "en.process.subscriptions1_info" translation]
-                  </em>
-                  <section
-                    className="multiple-subscriptions"
-                  >
-                    <section
-                      className="subscription-select"
-                    >
-                      <div
-                        className="wrapper"
-                      >
-                        <div
-                          className="select-box row0"
-                        >
-                          <div
-                            className=" css-2b097c-container"
-                            onKeyDown={[Function]}
-                          >
-                            <div
-                              className=" css-yk16xz-control"
-                              onMouseDown={[Function]}
-                              onTouchEnd={[Function]}
-                            >
-                              <div
-                                className=" css-g1d714-ValueContainer"
-                              >
-                                <div
-                                  className=" css-1wa3eu0-placeholder"
-                                >
-                                  Search and select a subscription
-                                </div>
-                                <div
-                                  className="css-b8ldur-Input"
-                                >
-                                  <div
-                                    className=""
-                                    style={
-                                      Object {
-                                        "display": "inline-block",
-                                      }
-                                    }
-                                  >
-                                    <input
-                                      aria-autocomplete="list"
-                                      autoCapitalize="none"
-                                      autoComplete="off"
-                                      autoCorrect="off"
-                                      disabled={false}
-                                      id="react-select-42-input"
-                                      onBlur={[Function]}
-                                      onChange={[Function]}
-                                      onFocus={[Function]}
-                                      spellCheck="false"
-                                      style={
-                                        Object {
-                                          "background": 0,
-                                          "border": 0,
-                                          "boxSizing": "content-box",
-                                          "color": "inherit",
-                                          "fontSize": "inherit",
-                                          "label": "input",
-                                          "opacity": 1,
-                                          "outline": 0,
-                                          "padding": 0,
-                                          "width": "1px",
-                                        }
-                                      }
-                                      tabIndex="0"
-                                      type="text"
-                                      value=""
-                                    />
-                                    <div
-                                      style={
-                                        Object {
-                                          "height": 0,
-                                          "left": 0,
-                                          "overflow": "scroll",
-                                          "position": "absolute",
-                                          "top": 0,
-                                          "visibility": "hidden",
-                                          "whiteSpace": "pre",
-                                        }
-                                      }
-                                    >
-                                      
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                className=" css-1hb7zxy-IndicatorsContainer"
-                              >
-                                <span
-                                  className=" css-1okebmr-indicatorSeparator"
-                                />
-                                <div
-                                  aria-hidden="true"
-                                  className=" css-tlfecz-indicatorContainer"
-                                  onMouseDown={[Function]}
-                                  onTouchEnd={[Function]}
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    className="css-6q0nyr-Svg"
-                                    focusable="false"
-                                    height={20}
-                                    viewBox="0 0 20 20"
-                                    width={20}
-                                  >
-                                    <path
-                                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error"
-                        />
-                        <i
-                          className="fa fa-minus disabled"
-                          onClick={[Function]}
-                        />
-                      </div>
-                      <div
-                        className="wrapper"
-                      >
-                        <div
-                          className="select-box row1"
-                        >
-                          <div
-                            className=" css-2b097c-container"
-                            onKeyDown={[Function]}
-                          >
-                            <div
-                              className=" css-yk16xz-control"
-                              onMouseDown={[Function]}
-                              onTouchEnd={[Function]}
-                            >
-                              <div
-                                className=" css-g1d714-ValueContainer"
-                              >
-                                <div
-                                  className=" css-1wa3eu0-placeholder"
-                                >
-                                  Search and select a subscription
-                                </div>
-                                <div
-                                  className="css-b8ldur-Input"
-                                >
-                                  <div
-                                    className=""
-                                    style={
-                                      Object {
-                                        "display": "inline-block",
-                                      }
-                                    }
-                                  >
-                                    <input
-                                      aria-autocomplete="list"
-                                      autoCapitalize="none"
-                                      autoComplete="off"
-                                      autoCorrect="off"
-                                      disabled={false}
-                                      id="react-select-43-input"
-                                      onBlur={[Function]}
-                                      onChange={[Function]}
-                                      onFocus={[Function]}
-                                      spellCheck="false"
-                                      style={
-                                        Object {
-                                          "background": 0,
-                                          "border": 0,
-                                          "boxSizing": "content-box",
-                                          "color": "inherit",
-                                          "fontSize": "inherit",
-                                          "label": "input",
-                                          "opacity": 1,
-                                          "outline": 0,
-                                          "padding": 0,
-                                          "width": "1px",
-                                        }
-                                      }
-                                      tabIndex="0"
-                                      type="text"
-                                      value=""
-                                    />
-                                    <div
-                                      style={
-                                        Object {
-                                          "height": 0,
-                                          "left": 0,
-                                          "overflow": "scroll",
-                                          "position": "absolute",
-                                          "top": 0,
-                                          "visibility": "hidden",
-                                          "whiteSpace": "pre",
-                                        }
-                                      }
-                                    >
-                                      
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                className=" css-1hb7zxy-IndicatorsContainer"
-                              >
-                                <span
-                                  className=" css-1okebmr-indicatorSeparator"
-                                />
-                                <div
-                                  aria-hidden="true"
-                                  className=" css-tlfecz-indicatorContainer"
-                                  onMouseDown={[Function]}
-                                  onTouchEnd={[Function]}
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    className="css-6q0nyr-Svg"
-                                    focusable="false"
-                                    height={20}
-                                    viewBox="0 0 20 20"
-                                    width={20}
-                                  >
-                                    <path
-                                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <em
-                          className="error"
-                        />
-                        <i
-                          className="fa fa-minus "
-                          onClick={[Function]}
-                        />
-                      </div>
-                      <em
-                        className="error root-error"
-                      />
-                      <div
-                        className="add-subscription"
-                      >
-                        <i
-                          className="fa fa-plus"
-                          onClick={[Function]}
-                        />
-                      </div>
-                    </section>
-                  </section>
-                </section>
-                <section
-                  className="form-divider subscriptions2"
-                  id="input-subscriptions2"
-                >
-                  <label>
-                    [missing "en.process.subscriptions2" translation]
-                  </label>
-                  <em>
-                    [missing "en.process.subscriptions2_info" translation]
                   </em>
                   <section
                     className="multiple-subscriptions"
@@ -7956,6 +7909,272 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                   </section>
                 </section>
                 <section
+                  className="form-divider subscriptions2"
+                  id="input-subscriptions2"
+                >
+                  <label>
+                    [missing "en.process.subscriptions2" translation]
+                  </label>
+                  <em>
+                    [missing "en.process.subscriptions2_info" translation]
+                  </em>
+                  <section
+                    className="multiple-subscriptions"
+                  >
+                    <section
+                      className="subscription-select"
+                    >
+                      <div
+                        className="wrapper"
+                      >
+                        <div
+                          className="select-box row0"
+                        >
+                          <div
+                            className=" css-2b097c-container"
+                            onKeyDown={[Function]}
+                          >
+                            <div
+                              className=" css-yk16xz-control"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <div
+                                className=" css-g1d714-ValueContainer"
+                              >
+                                <div
+                                  className=" css-1wa3eu0-placeholder"
+                                >
+                                  Search and select a subscription
+                                </div>
+                                <div
+                                  className="css-b8ldur-Input"
+                                >
+                                  <div
+                                    className=""
+                                    style={
+                                      Object {
+                                        "display": "inline-block",
+                                      }
+                                    }
+                                  >
+                                    <input
+                                      aria-autocomplete="list"
+                                      autoCapitalize="none"
+                                      autoComplete="off"
+                                      autoCorrect="off"
+                                      disabled={false}
+                                      id="react-select-46-input"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      spellCheck="false"
+                                      style={
+                                        Object {
+                                          "background": 0,
+                                          "border": 0,
+                                          "boxSizing": "content-box",
+                                          "color": "inherit",
+                                          "fontSize": "inherit",
+                                          "label": "input",
+                                          "opacity": 1,
+                                          "outline": 0,
+                                          "padding": 0,
+                                          "width": "1px",
+                                        }
+                                      }
+                                      tabIndex="0"
+                                      type="text"
+                                      value=""
+                                    />
+                                    <div
+                                      style={
+                                        Object {
+                                          "height": 0,
+                                          "left": 0,
+                                          "overflow": "scroll",
+                                          "position": "absolute",
+                                          "top": 0,
+                                          "visibility": "hidden",
+                                          "whiteSpace": "pre",
+                                        }
+                                      }
+                                    >
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                className=" css-1hb7zxy-IndicatorsContainer"
+                              >
+                                <span
+                                  className=" css-1okebmr-indicatorSeparator"
+                                />
+                                <div
+                                  aria-hidden="true"
+                                  className=" css-tlfecz-indicatorContainer"
+                                  onMouseDown={[Function]}
+                                  onTouchEnd={[Function]}
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    className="css-6q0nyr-Svg"
+                                    focusable="false"
+                                    height={20}
+                                    viewBox="0 0 20 20"
+                                    width={20}
+                                  >
+                                    <path
+                                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <em
+                          className="error"
+                        />
+                        <i
+                          className="fa fa-minus disabled"
+                          onClick={[Function]}
+                        />
+                      </div>
+                      <div
+                        className="wrapper"
+                      >
+                        <div
+                          className="select-box row1"
+                        >
+                          <div
+                            className=" css-2b097c-container"
+                            onKeyDown={[Function]}
+                          >
+                            <div
+                              className=" css-yk16xz-control"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <div
+                                className=" css-g1d714-ValueContainer"
+                              >
+                                <div
+                                  className=" css-1wa3eu0-placeholder"
+                                >
+                                  Search and select a subscription
+                                </div>
+                                <div
+                                  className="css-b8ldur-Input"
+                                >
+                                  <div
+                                    className=""
+                                    style={
+                                      Object {
+                                        "display": "inline-block",
+                                      }
+                                    }
+                                  >
+                                    <input
+                                      aria-autocomplete="list"
+                                      autoCapitalize="none"
+                                      autoComplete="off"
+                                      autoCorrect="off"
+                                      disabled={false}
+                                      id="react-select-47-input"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      spellCheck="false"
+                                      style={
+                                        Object {
+                                          "background": 0,
+                                          "border": 0,
+                                          "boxSizing": "content-box",
+                                          "color": "inherit",
+                                          "fontSize": "inherit",
+                                          "label": "input",
+                                          "opacity": 1,
+                                          "outline": 0,
+                                          "padding": 0,
+                                          "width": "1px",
+                                        }
+                                      }
+                                      tabIndex="0"
+                                      type="text"
+                                      value=""
+                                    />
+                                    <div
+                                      style={
+                                        Object {
+                                          "height": 0,
+                                          "left": 0,
+                                          "overflow": "scroll",
+                                          "position": "absolute",
+                                          "top": 0,
+                                          "visibility": "hidden",
+                                          "whiteSpace": "pre",
+                                        }
+                                      }
+                                    >
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                className=" css-1hb7zxy-IndicatorsContainer"
+                              >
+                                <span
+                                  className=" css-1okebmr-indicatorSeparator"
+                                />
+                                <div
+                                  aria-hidden="true"
+                                  className=" css-tlfecz-indicatorContainer"
+                                  onMouseDown={[Function]}
+                                  onTouchEnd={[Function]}
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    className="css-6q0nyr-Svg"
+                                    focusable="false"
+                                    height={20}
+                                    viewBox="0 0 20 20"
+                                    width={20}
+                                  >
+                                    <path
+                                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <em
+                          className="error"
+                        />
+                        <i
+                          className="fa fa-minus "
+                          onClick={[Function]}
+                        />
+                      </div>
+                      <em
+                        className="error root-error"
+                      />
+                      <div
+                        className="add-subscription"
+                      >
+                        <i
+                          className="fa fa-plus"
+                          onClick={[Function]}
+                        />
+                      </div>
+                    </section>
+                  </section>
+                </section>
+                <section
                   className="form-divider transition_product1"
                   id="input-transition_product1"
                 >
@@ -8000,7 +8219,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-46-input"
+                              id="react-select-48-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
