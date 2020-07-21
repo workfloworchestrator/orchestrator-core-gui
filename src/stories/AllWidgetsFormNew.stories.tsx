@@ -35,39 +35,39 @@ export default {
 
 function prepare() {
     fetchMock.restore();
-    fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
+    fetchMock.get("/api/v2/subscriptions?filter=statuses%2Cactive", allNodeSubscriptions);
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,MSP-MSPNL-SSP&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,MSP-MSPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions?filter=tags,Node&filter=statuses,active-provisioning",
+        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning",
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,IPS&filter=statuses,active",
+        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,IPBGP&filter=statuses,active",
+        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["SP", "SPNL"].includes(p.product.tag))
     );
     fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);

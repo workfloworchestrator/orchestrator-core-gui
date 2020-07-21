@@ -237,21 +237,47 @@ export function subscriptionsByTags(tagList: string[], statusList: string[] = []
 }
 
 export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
-    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
-    return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
+    return subscriptions(["Node"], statusList);
 }
 
 export function portSubscriptions(
-    tagList: string[],
+    tagList: string[] = [],
     statusList: string[] = [],
-    node = null
+    productList: string[] = []
 ): Promise<ServicePortSubscription[]> {
-    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
-    return fetchJson(
-        `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
-            statusList.length ? optionalStatusFilter : ""
-        }`
-    );
+    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
+    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
+    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
+
+    const params = new URLSearchParams();
+    const filters = [];
+    if (tagList.length) filters.push(tagsFilter);
+    if (statusList.length) filters.push(statusFilter);
+    if (productList.length) filters.push(productsFilter);
+
+    if (filters.length) params.set("filter", filters.join(","));
+
+    return fetchJson(`v2/subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
+}
+
+export function subscriptions(
+    tagList: string[] = [],
+    statusList: string[] = [],
+    productList: string[] = []
+): Promise<Subscription[]> {
+    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
+    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
+    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
+
+    const params = new URLSearchParams();
+    const filters = [];
+    if (tagList.length) filters.push(tagsFilter);
+    if (statusList.length) filters.push(statusFilter);
+    if (productList.length) filters.push(productsFilter);
+
+    if (filters.length) params.set("filter", filters.join(","));
+
+    return fetchJson(`v2/subscriptions${filters.length ? "?" : ""}${params.toString()}`);
 }
 
 export function subscriptionsByProductType(type: string) {
