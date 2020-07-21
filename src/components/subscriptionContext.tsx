@@ -13,7 +13,7 @@
  *
  */
 import { portSubscriptions, subscriptions } from "api";
-import { memoize } from "lodash";
+import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
 import { ServicePortSubscription } from "utils/types";
 
@@ -28,7 +28,14 @@ let data: Omit<SubscriptionsContextType, "getSubscriptions"> & { getSubscription
 
 function getSubscriptionsHandler(tags?: string[], statuses: string[] = ["active"]): Promise<ServicePortSubscription[]> {
     function updateSubscriptions(subscriptions: ServicePortSubscription[]) {
-        subscriptions.forEach(subscription => (data.subscriptions[subscription.subscription_id] = subscription));
+        subscriptions.forEach(subscription => {
+            // We merge instead of overwriting to preserve values like port_mode that might not be set in one call but are in
+            // a previous call
+            data.subscriptions[subscription.subscription_id] = merge(
+                data.subscriptions[subscription.subscription_id] ?? {},
+                subscription
+            );
+        });
 
         return subscriptions;
     }
