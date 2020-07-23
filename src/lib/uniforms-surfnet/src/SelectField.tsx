@@ -13,12 +13,14 @@
  *
  */
 import I18n from "i18n-js";
+import { get } from "lodash";
 import xor from "lodash/xor";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
-import { connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
 
+import { ListFieldProps } from "./ListField";
 import { FieldProps } from "./types";
 
 const base64: typeof btoa = typeof btoa !== "undefined" ? btoa : x => Buffer.from(x).toString("base64");
@@ -30,7 +32,7 @@ export type SelectFieldProps = FieldProps<
 >;
 
 function Select({
-    allowedValues,
+    allowedValues = [],
     checkboxes,
     disabled,
     fieldType,
@@ -49,7 +51,27 @@ function Select({
     errorMessage,
     ...props
 }: SelectFieldProps) {
-    const options = (allowedValues || []).map((value: any) => ({
+    const nameArray = joinName(null, name);
+    let parentName = joinName(nameArray.slice(0, -1));
+
+    // We cant call useField conditionally so we call it for ourselfs if there is no parent
+    if (parentName === "") {
+        parentName = name;
+    }
+    const parent = useField(parentName, {}, { absoluteName: true })[0];
+    const { model } = useForm();
+
+    if (parentName) {
+        if (parent.fieldType === Array && (parent as ListFieldProps).uniqueItems) {
+            const allValues: string[] = get(model, parentName, []);
+            const chosenValues = allValues.filter(
+                (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
+            );
+
+            allowedValues = allowedValues.filter(value => !chosenValues.includes(value));
+        }
+    }
+    const options = allowedValues.map((value: any) => ({
         label: transform ? transform(value) : value,
         value: value
     }));

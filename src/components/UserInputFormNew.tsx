@@ -229,7 +229,6 @@ export default class UserInputForm extends React.Component<IProps, IState> {
     };
 
     submit = async (userInput: {}) => {
-        console.log("submit");
         const { processing } = this.state;
 
         if (!processing) {

@@ -20,7 +20,7 @@ import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
-import { connectField, filterDOMProps, useForm } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { filterProductsByBandwidth } from "validations/Products";
@@ -32,6 +32,7 @@ import {
     ServicePortSubscription,
     Subscription as iSubscription
 } from "../../../utils/types";
+import { ListFieldProps } from "./ListField";
 import { FieldProps } from "./types";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
@@ -118,6 +119,13 @@ function Subscription({
     statuses,
     ...props
 }: SubscriptionFieldProps) {
+    const nameArray = joinName(null, name);
+    let parentName = joinName(nameArray.slice(0, -1));
+    // We cant call useField conditionally so we call it for ourselfs if there is no parent
+    if (parentName === "") {
+        parentName = name;
+    }
+    const parent = useField(parentName, {}, { absoluteName: true })[0];
     const { model } = useForm();
 
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
@@ -177,6 +185,17 @@ function Subscription({
     // Customer filter toggle
     if (usedOrganisationId) {
         subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
+    }
+
+    if (parentName) {
+        if (parent.fieldType === Array && (parent as ListFieldProps).uniqueItems) {
+            const allValues: string[] = get(model, parentName, []);
+            const chosenValues = allValues.filter(
+                (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
+            );
+
+            subscriptions = subscriptions.filter(subscription => !chosenValues.includes(subscription.subscription_id));
+        }
     }
 
     const options = subscriptions.map((subscription: iSubscription) => ({

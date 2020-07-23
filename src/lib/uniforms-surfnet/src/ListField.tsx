@@ -26,7 +26,12 @@ filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
 
-export type ListFieldProps = FieldProps<any[], { initialCount?: number; itemProps?: {} }, null, HTMLUListElement>;
+export type ListFieldProps = FieldProps<
+    any[],
+    { initialCount?: number; itemProps?: {}; uniqueItems?: boolean },
+    null,
+    HTMLUListElement
+>;
 
 function List({
     disabled,
@@ -41,6 +46,7 @@ function List({
     error,
     showInlineError,
     errorMessage,
+    uniqueItems, // Not used here but inspected by selectfields to determine unique values
     ...props
 }: ListFieldProps) {
     return (
