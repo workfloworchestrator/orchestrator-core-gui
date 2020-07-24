@@ -20,6 +20,7 @@ import { Product, ServicePortSubscription } from "utils/types";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
 import withApplicationContext from "../../../__tests__/withApplicationContext";
+import { ListField } from "../src";
 import SubscriptionField, { getPortMode, makeLabel } from "../src/SubscriptionField";
 import createContext from "./_createContext";
 import mount from "./_mount";
@@ -557,6 +558,50 @@ describe("<SubscriptionField>", () => {
                 .at(0)
                 .prop("data-z")
         ).toBe("z");
+    });
+
+    test("<SubscriptionField> - renders a select with correct value (as uniqueItem list child)", async () => {
+        const { element, getSubscriptions } = withSubscriptions(
+            <ListField name="x">
+                <SubscriptionField name="$" />
+            </ListField>
+        );
+        getSubscriptions.mockReturnValue([
+            { subscription_id: "a", customer_id: "abc1", description: "dec1", product: { tag: "" } as Product },
+            { subscription_id: "b", customer_id: "abc2", description: "dec2", product: { tag: "" } as Product }
+        ]);
+        const wrapper = mount(
+            element,
+            createContext(
+                {
+                    x: { type: Array, uniforms: { uniqueItems: true } },
+                    "x.$": { type: String }
+                },
+                { model: { x: ["a", undefined] } }
+            )
+        );
+
+        await waitForComponentToPaint(wrapper);
+
+        expect(wrapper.find(ReactSelect)).toHaveLength(2);
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(0)
+                .prop("value")
+        ).toStrictEqual({ label: "dec1", value: "a" });
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(1)
+                .prop("value")
+        ).toStrictEqual(undefined);
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(1)
+                .prop("options")
+        ).toStrictEqual([{ label: "dec2", value: "b" }]);
     });
 
     function makeSubscription(tag: string, port_mode?: string, crm_port_id?: string): ServicePortSubscription {
