@@ -25,6 +25,7 @@ import { FieldProps } from "./types";
 filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
+filterDOMProps.register("uniqueItems");
 
 export type ListFieldProps = FieldProps<
     any[],

@@ -22,9 +22,7 @@ import { Option } from "utils/types";
 
 import { ListFieldProps } from "./ListField";
 import { FieldProps } from "./types";
-
-const base64: typeof btoa = typeof btoa !== "undefined" ? btoa : x => Buffer.from(x).toString("base64");
-const escape = (x: string) => base64(x).replace(/=+$/, "");
+import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<
     string | string[],
@@ -61,7 +59,7 @@ function Select({
     const parent = useField(parentName, {}, { absoluteName: true })[0];
     const { model } = useForm();
 
-    if (parentName) {
+    if (parentName !== name) {
         if (parent.fieldType === Array && (parent as ListFieldProps).uniqueItems) {
             const allValues: string[] = get(model, parentName, []);
             const chosenValues = allValues.filter(
@@ -78,57 +76,72 @@ function Select({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
-    return (
-        <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
-            {/* TODO: Better handling of these props. */}
-            {checkboxes || fieldType === Array ? (
-                allowedValues!.map((item: any) => (
-                    <div key={item}>
-                        <input
-                            checked={fieldType === Array ? value!.includes(item) : value === item}
-                            disabled={disabled}
-                            id={`${id}-${escape(item)}`}
-                            name={name}
-                            onChange={() => {
-                                onChange(fieldType === Array ? xor([item], value) : item);
-                            }}
-                            type="checkbox"
-                        />
+    if (!checkboxes && fieldType === Array) {
+        return (
+            <ListField name={name}>
+                <ListItemField name="$">
+                    <SelectField name="" transform={transform} />
+                </ListItemField>
+            </ListField>
+        );
+    } else {
+        return (
+            <section {...filterDOMProps(props)}>
+                {label && (
+                    <label htmlFor={id}>
+                        {label}
+                        <em>{description}</em>
+                    </label>
+                )}
+                {checkboxes ? (
+                    allowedValues!.map((item: any, index: number) => (
+                        <div key={item} className="bool-field">
+                            <input
+                                checked={fieldType === Array ? value!.includes(item) : value === item}
+                                disabled={disabled}
+                                id={`${id}.${index}`}
+                                name={name}
+                                onChange={() => {
+                                    onChange(fieldType === Array ? xor([item], value) : item);
+                                }}
+                                type="checkbox"
+                            />
+                            <label htmlFor={`${id}.${index}`}>
+                                <span>
+                                    <i className="fa fa-check" />
+                                </span>
+                            </label>
+                            <label className="info" htmlFor={`${id}.${index}`}>
+                                {transform ? transform(item) : item}
+                            </label>
+                        </div>
+                    ))
+                ) : (
+                    <ReactSelect
+                        id={id}
+                        name={name}
+                        onChange={(option: ValueType<Option>) => {
+                            onChange((option as Option | null)?.value);
+                        }}
+                        options={options}
+                        value={selectedValue}
+                        isSearchable={true}
+                        isClearable={true}
+                        placeholder={placeholder || I18n.t("forms.widgets.select.placeholder")}
+                        isDisabled={disabled}
+                        required={required}
+                        inputRef={inputRef}
+                    />
+                )}
 
-                        <label htmlFor={`${id}-${escape(item)}`}>{transform ? transform(item) : item}</label>
-                    </div>
-                ))
-            ) : (
-                <ReactSelect
-                    id={id}
-                    name={name}
-                    onChange={(option: ValueType<Option>) => {
-                        onChange((option as Option | null)?.value);
-                    }}
-                    options={options}
-                    value={selectedValue}
-                    isSearchable={true}
-                    isClearable={true}
-                    placeholder={placeholder || I18n.t("forms.widgets.select.placeholder")}
-                    isDisabled={disabled}
-                    required={required}
-                    inputRef={inputRef}
-                />
-            )}
-
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
-        </section>
-    );
+                {error && showInlineError && (
+                    <em className="error">
+                        <div className="backend-validation">{errorMessage}</div>
+                    </em>
+                )}
+            </section>
+        );
+    }
 }
 
 export default connectField(Select, { kind: "leaf" });
