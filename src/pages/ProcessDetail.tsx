@@ -78,7 +78,6 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             selectedTab: "process",
             subscriptionProcesses: [],
             loaded: false,
-            stepUserInput: [],
             confirmationDialogOpen: false,
             confirmationDialogAction: (e: React.MouseEvent<HTMLButtonElement>) => {},
             confirm: (e: React.MouseEvent<HTMLButtonElement>) => {},

@@ -23,7 +23,6 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "../utils/types";
 import { stop } from "../utils/Utils";
-import UserInputForm from "./UserInputForm";
 import UserInputFormNew from "./UserInputFormNew";
 
 interface Form {
@@ -91,39 +90,24 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         const currentForm = forms[forms.length - 1];
         const currentUserInput = userInputs[forms.length - 1];
 
-        if (!currentForm) {
+        if (!currentForm || !currentForm.form.properties) {
             return null;
         }
-        if (Array.isArray(currentForm.form)) {
-            return (
-                <UserInputForm
-                    // Generate a key based on input widget names that results in a new
-                    // instance of UserInputForm if the form changes
-                    key={currentForm.form.map(item => item.name).join()}
-                    stepUserInput={currentForm.form}
-                    validSubmit={this.submit}
-                    previous={this.previous}
-                    hasNext={currentForm.hasNext}
-                    hasPrev={forms.length > 1}
-                    cancel={this.props.cancel}
-                />
-            );
-        } else {
-            return (
-                <UserInputFormNew
-                    // Generate a key based on input widget names that results in a new
-                    // instance of UserInputForm if the form changes
-                    key={hash.sha1(currentForm.form.properties)}
-                    stepUserInput={currentForm.form}
-                    validSubmit={this.submit}
-                    previous={this.previous}
-                    hasNext={currentForm.hasNext}
-                    hasPrev={forms.length > 1}
-                    cancel={this.props.cancel}
-                    userInput={currentUserInput}
-                />
-            );
-        }
+
+        return (
+            <UserInputFormNew
+                // Generate a key based on input widget names that results in a new
+                // instance of UserInputForm if the form changes
+                key={hash.sha1(currentForm.form.properties)}
+                stepUserInput={currentForm.form}
+                validSubmit={this.submit}
+                previous={this.previous}
+                hasNext={currentForm.hasNext}
+                hasPrev={forms.length > 1}
+                cancel={this.props.cancel}
+                userInput={currentUserInput}
+            />
+        );
     }
 }
 

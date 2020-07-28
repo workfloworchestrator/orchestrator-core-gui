@@ -112,29 +112,7 @@ export default class NewProcess extends React.Component<IProps, IState> {
 
                         const { preselectedInput } = this.props;
 
-                        if (Array.isArray(stepUserInput)) {
-                            const productInput = stepUserInput.find(x => x.name === "product");
-                            if (productInput) {
-                                productInput.type = "hidden";
-                                productInput.value = option.value;
-                            }
-
-                            if (preselectedInput.organisation) {
-                                const organisatieInput = stepUserInput.find(x => x.name === "organisation");
-                                if (organisatieInput) {
-                                    organisatieInput.value = preselectedInput.organisation;
-                                    organisatieInput.readonly = true;
-                                }
-                            }
-
-                            if (preselectedInput.prefix && preselectedInput.prefixlen) {
-                                const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
-                                if (prefixInput) {
-                                    prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                                    prefixInput.prefix_min = preselectedInput.prefix_min;
-                                }
-                            }
-                        } else if (stepUserInput && stepUserInput.properties) {
+                        if (stepUserInput && stepUserInput.properties) {
                             if (stepUserInput.properties.product) {
                                 const productInput = stepUserInput.properties.product as JSONSchemaFormProperty;
                                 if (!productInput.uniforms) {

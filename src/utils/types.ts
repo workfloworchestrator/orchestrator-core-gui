@@ -204,12 +204,6 @@ export interface ProcessV2 {
     is_task: boolean;
 }
 
-export interface InputField {
-    name: string;
-    type: string;
-    [index: string]: any;
-}
-
 export interface Step {
     name: string;
     executed: number;
@@ -348,7 +342,7 @@ export interface EngineStatus {
     global_status: GlobalStatus;
 }
 
-export type InputForm = InputField[] | JSONSchema6;
+export type InputForm = JSONSchema6;
 
 export interface ContactPerson {
     name: string;

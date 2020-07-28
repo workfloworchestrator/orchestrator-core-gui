@@ -54,10 +54,10 @@ function ImsNodeId({
 
     const placeholder =
         loading && locationCode
-            ? I18n.t("node_select.nodes_loading")
+            ? I18n.t("forms.widgets.node_select.nodes_loading")
             : nodes.length
-            ? I18n.t("node_select.select_node")
-            : I18n.t("node_select.no_nodes_placeholder");
+            ? I18n.t("forms.widgets.node_select.select_node")
+            : I18n.t("forms.widgets.node_select.no_nodes_placeholder");
 
     const imsNodeIdLabelLookup =
         nodes?.reduce<{ [index: string]: string }>(function(mapping, node) {
