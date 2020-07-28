@@ -761,12 +761,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-14jk2my-container"
+                        className=" css-2b097c-container"
                         id="input-corelink_add_link1"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-1fhf3k1-control"
+                          className=" css-yk16xz-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -776,7 +776,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -794,7 +794,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={true}
+                                  disabled={false}
                                   id="input-corelink_add_link1.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -840,7 +840,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-109onse-indicatorSeparator"
+                              className=" css-1okebmr-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -863,6 +863,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             </div>
                           </div>
                         </div>
+                        <input
+                          name="corelink_add_link1"
+                          type="hidden"
+                          value=""
+                        />
                       </div>
                     </div>
                   </section>
@@ -995,12 +1000,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-14jk2my-container"
+                        className=" css-2b097c-container"
                         id="input-corelink_add_link2"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-1fhf3k1-control"
+                          className=" css-yk16xz-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -1010,7 +1015,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1028,7 +1033,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={true}
+                                  disabled={false}
                                   id="input-corelink_add_link2.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -1074,7 +1079,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-109onse-indicatorSeparator"
+                              className=" css-1okebmr-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -1097,6 +1102,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             </div>
                           </div>
                         </div>
+                        <input
+                          name="corelink_add_link2"
+                          type="hidden"
+                          value=""
+                        />
                       </div>
                     </div>
                   </section>
@@ -1244,7 +1254,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"

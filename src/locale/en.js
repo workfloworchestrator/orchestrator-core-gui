@@ -85,7 +85,8 @@ I18n.translations.en = {
         widgets: {
             nodePort: {
                 selectNodeFirst: "First select a node",
-                selectPort: "Select a port"
+                selectPort: "Select a port",
+                loading: "Loading..."
             },
             contactPersonName: {
                 placeholder: "Search and add contact persons..."

@@ -860,12 +860,12 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                         Node
                       </label>
                       <div
-                        className=" css-2b097c-container"
+                        className=" css-14jk2my-container"
                         id="input-ims_port_id_1.node"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-yk16xz-control"
+                          className=" css-1fhf3k1-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -873,9 +873,9 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             className=" css-g1d714-ValueContainer"
                           >
                             <div
-                              className=" css-1wa3eu0-placeholder"
+                              className=" css-107lb6w-singleValue"
                             >
-                              Select...
+                              5e3341c2 Node Planned MT001A mt001a-jnx-acid81-vtb
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -893,7 +893,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={false}
+                                  disabled={true}
                                   id="input-ims_port_id_1.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -939,7 +939,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-1okebmr-indicatorSeparator"
+                              className=" css-109onse-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -962,11 +962,6 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             </div>
                           </div>
                         </div>
-                        <input
-                          name="ims_port_id_1.node"
-                          type="hidden"
-                          value=""
-                        />
                       </div>
                     </div>
                     <div
@@ -976,12 +971,12 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-14jk2my-container"
+                        className=" css-2b097c-container"
                         id="input-ims_port_id_1"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-1fhf3k1-control"
+                          className=" css-yk16xz-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -991,7 +986,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1009,7 +1004,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={true}
+                                  disabled={false}
                                   id="input-ims_port_id_1.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -1055,6 +1050,134 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
+                              className=" css-1okebmr-indicatorSeparator"
+                            />
+                            <div
+                              aria-hidden="true"
+                              className=" css-tlfecz-indicatorContainer"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <svg
+                                aria-hidden="true"
+                                className="css-6q0nyr-Svg"
+                                focusable="false"
+                                height={20}
+                                viewBox="0 0 20 20"
+                                width={20}
+                              >
+                                <path
+                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          name="ims_port_id_1"
+                          type="hidden"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </section>
+                </section>
+                <section>
+                  <label>
+                    Second node and port
+                    <em>
+                      Choose a node and port that you want to use to create the second corelink
+                    </em>
+                  </label>
+                  <section
+                    className="node-port"
+                  >
+                    <div
+                      className="node-select"
+                    >
+                      <label>
+                        Node
+                      </label>
+                      <div
+                        className=" css-14jk2my-container"
+                        id="input-ims_port_id_2.node"
+                        onKeyDown={[Function]}
+                      >
+                        <div
+                          className=" css-1fhf3k1-control"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className=" css-g1d714-ValueContainer"
+                          >
+                            <div
+                              className=" css-107lb6w-singleValue"
+                            >
+                              faf4766b Node Planned MT001A mt001a-jnx-acid82-vtb
+                            </div>
+                            <div
+                              className="css-b8ldur-Input"
+                            >
+                              <div
+                                className=""
+                                style={
+                                  Object {
+                                    "display": "inline-block",
+                                  }
+                                }
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  autoCapitalize="none"
+                                  autoComplete="off"
+                                  autoCorrect="off"
+                                  disabled={true}
+                                  id="input-ims_port_id_2.node.search"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  spellCheck="false"
+                                  style={
+                                    Object {
+                                      "background": 0,
+                                      "border": 0,
+                                      "boxSizing": "content-box",
+                                      "color": "inherit",
+                                      "fontSize": "inherit",
+                                      "label": "input",
+                                      "opacity": 1,
+                                      "outline": 0,
+                                      "padding": 0,
+                                      "width": "1px",
+                                    }
+                                  }
+                                  tabIndex="0"
+                                  type="text"
+                                  value=""
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "height": 0,
+                                      "left": 0,
+                                      "overflow": "scroll",
+                                      "position": "absolute",
+                                      "top": 0,
+                                      "visibility": "hidden",
+                                      "whiteSpace": "pre",
+                                    }
+                                  }
+                                >
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className=" css-1hb7zxy-IndicatorsContainer"
+                          >
+                            <span
                               className=" css-109onse-indicatorSeparator"
                             />
                             <div
@@ -1080,27 +1203,15 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                         </div>
                       </div>
                     </div>
-                  </section>
-                </section>
-                <section>
-                  <label>
-                    Second node and port
-                    <em>
-                      Choose a node and port that you want to use to create the second corelink
-                    </em>
-                  </label>
-                  <section
-                    className="node-port"
-                  >
                     <div
-                      className="node-select"
+                      className="port-select"
                     >
                       <label>
-                        Node
+                        Port
                       </label>
                       <div
                         className=" css-2b097c-container"
-                        id="input-ims_port_id_2.node"
+                        id="input-ims_port_id_2"
                         onKeyDown={[Function]}
                       >
                         <div
@@ -1114,7 +1225,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1133,7 +1244,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={false}
-                                  id="input-ims_port_id_2.node.search"
+                                  id="input-ims_port_id_2.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1202,121 +1313,10 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
                           </div>
                         </div>
                         <input
-                          name="ims_port_id_2.node"
+                          name="ims_port_id_2"
                           type="hidden"
                           value=""
                         />
-                      </div>
-                    </div>
-                    <div
-                      className="port-select"
-                    >
-                      <label>
-                        Port
-                      </label>
-                      <div
-                        className=" css-14jk2my-container"
-                        id="input-ims_port_id_2"
-                        onKeyDown={[Function]}
-                      >
-                        <div
-                          className=" css-1fhf3k1-control"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <div
-                            className=" css-g1d714-ValueContainer"
-                          >
-                            <div
-                              className=" css-1wa3eu0-placeholder"
-                            >
-                              First select a node
-                            </div>
-                            <div
-                              className="css-b8ldur-Input"
-                            >
-                              <div
-                                className=""
-                                style={
-                                  Object {
-                                    "display": "inline-block",
-                                  }
-                                }
-                              >
-                                <input
-                                  aria-autocomplete="list"
-                                  autoCapitalize="none"
-                                  autoComplete="off"
-                                  autoCorrect="off"
-                                  disabled={true}
-                                  id="input-ims_port_id_2.search"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  onFocus={[Function]}
-                                  spellCheck="false"
-                                  style={
-                                    Object {
-                                      "background": 0,
-                                      "border": 0,
-                                      "boxSizing": "content-box",
-                                      "color": "inherit",
-                                      "fontSize": "inherit",
-                                      "label": "input",
-                                      "opacity": 1,
-                                      "outline": 0,
-                                      "padding": 0,
-                                      "width": "1px",
-                                    }
-                                  }
-                                  tabIndex="0"
-                                  type="text"
-                                  value=""
-                                />
-                                <div
-                                  style={
-                                    Object {
-                                      "height": 0,
-                                      "left": 0,
-                                      "overflow": "scroll",
-                                      "position": "absolute",
-                                      "top": 0,
-                                      "visibility": "hidden",
-                                      "whiteSpace": "pre",
-                                    }
-                                  }
-                                >
-                                  
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className=" css-1hb7zxy-IndicatorsContainer"
-                          >
-                            <span
-                              className=" css-109onse-indicatorSeparator"
-                            />
-                            <div
-                              aria-hidden="true"
-                              className=" css-tlfecz-indicatorContainer"
-                              onMouseDown={[Function]}
-                              onTouchEnd={[Function]}
-                            >
-                              <svg
-                                aria-hidden="true"
-                                className="css-6q0nyr-Svg"
-                                focusable="false"
-                                height={20}
-                                viewBox="0 0 20 20"
-                                width={20}
-                              >
-                                <path
-                                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </section>
