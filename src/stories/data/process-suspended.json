@@ -1363,12 +1363,16 @@
             "status": "suspend"
         },
         {
-            "form": [
-                {
-                    "name": "ip_static_service_port",
-                    "type": "label"
+            "form": {
+                "title": "Validator",
+                "type": "object",
+                "properties": {
+                    "ip_static_service_port": {
+                        "type": "string",
+                        "format": "label"
+                    }
                 }
-            ],
+            },
             "name": "Select new SAP to migrate to",
             "status": "pending"
         },

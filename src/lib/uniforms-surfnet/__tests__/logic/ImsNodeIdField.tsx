@@ -23,7 +23,7 @@ import createContext from "../_createContext";
 import mount from "../_mount";
 
 describe("<ImsNodeIdField>", () => {
-    test("<ImsNodeIdField> - shows loading placeholder", () => {
+    test("<ImsNodeIdField> - shows loading placeholder", async () => {
         fetchMock.get("glob:*/api/ims/nodes/kb001a/PL", []);
 
         const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
@@ -39,6 +39,8 @@ describe("<ImsNodeIdField>", () => {
             }),
             {}
         );
+
+        await waitForComponentToPaint(wrapper);
     });
     test("<ImsNodeIdField> - calls selectField with all nodes", async () => {
         fetchMock.get("glob:*/api/ims/nodes/kb001a/PL", [{ id: 1, name: "Some Node" }]);

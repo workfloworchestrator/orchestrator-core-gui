@@ -133,7 +133,7 @@ function Subscription({
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
-    const usedBandwith = bandwidth || get(model, bandwidthKey!);
+    const usedBandwidth = bandwidth || get(model, bandwidthKey!);
 
     // Get value from org field if organisationKey is set.
     const usedOrganisationId = organisationKey
@@ -150,12 +150,12 @@ function Subscription({
             products = allProducts.filter(product => productIds?.includes(product.product_id));
         }
 
-        if (usedBandwith) {
-            products = filterProductsByBandwidth(products, usedBandwith);
+        if (usedBandwidth) {
+            products = filterProductsByBandwidth(products, usedBandwidth);
         }
 
         return products.length !== allProducts.length ? products.map(product => product.product_id) : [];
-    }, [allProducts, usedBandwith, productIds, tags]);
+    }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {
         getSubscriptions(tags, statuses).then(result => updateSubscriptions(result));

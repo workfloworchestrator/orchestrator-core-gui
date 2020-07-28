@@ -276,10 +276,9 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             <section className="process-actions">
                 <EuiFlexGroup gutterSize="s" alignItems="center">
                     {options.map((option, index) => (
-                        <EuiFlexItem grow={true}>
+                        <EuiFlexItem grow={true} key={index}>
                             <EuiButton
                                 id={option.label}
-                                key={index}
                                 fill
                                 color={option.danger ? "danger" : "secondary"}
                                 iconType={option.danger ? "cross" : "refresh"}

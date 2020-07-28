@@ -15,7 +15,6 @@
 
 import { number } from "@storybook/addon-knobs";
 import fetchMock from "fetch-mock";
-import { JSONSchema6 } from "json-schema";
 import React from "react";
 
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
@@ -28,81 +27,16 @@ import {
     imsNodes
 } from "./data/UserInputForm.data";
 import UserInputContainer from "./UserInputContainer";
-import { loadVlanMocks } from "./utils";
-
-function create_form(properties: {}, required: string[]): JSONSchema6 {
-    return {
-        properties: properties,
-        required: required,
-        title: "Validator",
-        type: "object"
-    };
-}
-
-const ContactPerson = {
-    items: {
-        properties: {
-            email: {
-                format: "email",
-                title: "Email",
-                type: "string"
-            },
-            name: {
-                title: "Name",
-                type: "string",
-                format: "contactPersonName"
-            },
-            phone: {
-                default: "",
-                title: "Phone",
-                type: "string"
-            }
-        },
-        required: ["email", "name"],
-        title: "ContactPerson",
-        type: "object"
-    },
-    minItems: 1,
-    title: "Contact Persons",
-    type: "array"
-};
-const Organisation = {
-    title: "Organisation",
-    type: "string",
-    format: "organisationId"
-};
-
-const Bandwith = {
-    maximum: 1000000,
-    minimum: 0,
-    title: "Service Speed",
-    type: "integer"
-};
-
-const Sn8ServicePorts = {
-    items: {
-        properties: {
-            subscription_id: {
-                format: "uuid",
-                title: "Subscription Id",
-                type: "string"
-            },
-            vlan: {
-                examples: ["345", "20-23,45,50-100"],
-                pattern: "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
-                title: "Vlan",
-                type: "string"
-            }
-        },
-        required: ["subscription_id", "vlan", "tag", "port_mode"],
-        title: "SN8ServicePortnormalXEbPlltQValue",
-        type: "object"
-    },
-    maxItems: 6,
-    minItems: 1,
-    title: "Bgp Ip Service Ports",
-    type: "array"
-};
+import {
+    Bandwidth,
+    ContactPerson,
+    ImsNodeId,
+    Organisation,
+    createForm,
+    imsPortIdProperty,
+    loadVlanMocks,
+    servicePortsProperty
+} from "./utils";
 
 export default {
     title: "UserInputFormNew",
@@ -119,68 +53,56 @@ export const Contactpersons = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
 
-    const form = create_form({ organisation: Organisation, contact_persons: ContactPerson }, [
-        "organisation",
-        "contact_persons"
-    ]);
+    const form = createForm({ organisation: Organisation, contact_persons: ContactPerson });
 
     return <UserInputContainer formName="Organisation and contacts" stepUserInput={form} />;
 };
 
+export const ServicePort = () => {
+    fetchMock.restore();
+    fetchMock.get("glob:*/api/ims/free_ports/*", corelinkPorts10G);
+    fetchMock.get("/api/ims/nodes/MT001A/IS", imsNodes);
+
+    const form = createForm({
+        ims_port_id_1: imsPortIdProperty({
+            locationCode: "MT001A",
+            interfaceType: "1000BASE-LX"
+        })
+    });
+
+    return <UserInputContainer formName="Service port form" stepUserInput={form} />;
+};
+
 export const Corelink = () => {
     fetchMock.restore();
-    fetchMock.get("/api/v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive", []);
-    fetchMock.get("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
-    fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", []);
-    fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
-    return (
-        <UserInputContainer
-            formName="Corelink form"
-            stepUserInput={[
-                {
-                    service_speed: "1000BASE-LX",
-                    name: "ims_port_id_1",
-                    type: "corelink",
-                    location_code: "MT001A"
-                },
-                {
-                    service_speed: "1000BASE-LX",
-                    name: "ims_port_id_2",
-                    type: "corelink",
-                    location_code: "MT001A"
-                }
-            ]}
-        />
-    );
+    fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", allNodeSubscriptions);
+    fetchMock.get("glob:*/api/ims/free_corelink_ports/*/10000", corelinkPorts10G);
+
+    const form = createForm({
+        ims_port_id_1: imsPortIdProperty({ interfaceType: 10000 }),
+        ims_port_id_2: imsPortIdProperty({ interfaceType: 10000 })
+    });
+
+    return <UserInputContainer formName="Corelink form" stepUserInput={form} />;
 };
 
 export const CorelinkAddLink = () => {
     fetchMock.restore();
-    fetchMock.get("/api/v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive", []);
-    fetchMock.get("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
-    fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", []);
-    fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
-    return (
-        <UserInputContainer
-            formName="Corelink add link form"
-            stepUserInput={[
-                {
-                    name: "ims_port_id_1",
-                    type: "corelink_add_link",
-                    node: "d38d8b25-d9f5-4a25-b1b0-d29057c47420",
-                    service_speed: "1000BASE-LX"
-                },
-                {
-                    name: "ims_port_id_2",
-                    type: "corelink_add_link",
-                    node: "5d2123e6-197d-4bb6-93c6-446d474d98fd",
-                    service_speed: "1000BASE-LX"
-                }
-            ]}
-        />
-    );
+    fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", allNodeSubscriptions);
+    fetchMock.get("glob:*/api/ims/free_corelink_ports/*/10000", freeCorelinkPorts);
+
+    const form = createForm({
+        ims_port_id_1: imsPortIdProperty({
+            nodeSubscriptionId: "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
+            interfaceType: 10000
+        }),
+        ims_port_id_2: imsPortIdProperty({
+            nodeSubscriptionId: "faf4766b-072c-4494-a8d7-8feaf60e2446",
+            interfaceType: 10000
+        })
+    });
+
+    return <UserInputContainer formName="Corelink add link form" stepUserInput={form} />;
 };
 
 CorelinkAddLink.story = {
@@ -193,18 +115,12 @@ export const Nodes = () => {
     fetchMock.get("/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive", []);
     fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
     fetchMock.get("/api/ims/nodes/MT001A/PL", imsNodes);
-    return (
-        <UserInputContainer
-            formName="Node form"
-            stepUserInput={[
-                {
-                    name: "ims_node_id",
-                    type: "nodes_for_location_code_and_status",
-                    location_code: "MT001A"
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        ims_node_id: ImsNodeId
+    });
+
+    return <UserInputContainer formName="Node form" stepUserInput={form} />;
 };
 
 export const Sn7PortselectAllOrganisations = () => {
@@ -217,30 +133,14 @@ export const Sn7PortselectAllOrganisations = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
-    return (
-        <UserInputContainer
-            formName="SN7 portselect form, showing all ports"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 6,
-                    minimum: 1,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: false,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    mspOnly: false,
-                    tags: ["MSP", "SSP", "MSPNL"]
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty({ tags: ["MSP", "SSP", "MSPNL"] }, 1, 6)
+    });
+
+    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn7PortselectAllOrganisations.story = {
@@ -257,30 +157,14 @@ export const Sn7PortselectMspOnly = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
-    return (
-        <UserInputContainer
-            formName="SN7 portselect form, showing all ports"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 6,
-                    minimum: 1,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: false,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    mspOnly: true,
-                    tags: ["MSP", "MSPNL"]
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty({ tags: ["MSP", "MSPNL"] }, 1, 6)
+    });
+
+    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn7PortselectMspOnly.story = {
@@ -297,28 +181,17 @@ export const Sn7PortselectSelectedOrganisation = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty({ organisationKey: "organisation", tags: ["MSP", "SSP", "MSPNL"] }, 1, 6)
+    });
+
     return (
         <UserInputContainer
             formName="SN7 portselect, showing only ports for selected organisation"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 6,
-                    minimum: 1,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: true,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    mspOnly: false,
-                    tags: ["MSP", "SSP", "MSPNL"]
-                }
-            ]}
+            stepUserInput={form}
         />
     );
 };
@@ -338,31 +211,25 @@ export const Sn7PortselectBandwidth = () => {
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
     loadVlanMocks();
-    return (
-        <UserInputContainer
-            formName="SN7 portselect form, showing all ports"
-            stepUserInput={[
-                {
-                    name: "service_ports",
-                    type: "service_ports",
-                    bandwidth_key: "current_bandwidth",
-                    minimum: 1,
-                    tags: ["MSP", "SSP", "MSPNL"]
-                },
-                {
-                    name: "current_bandwidth",
-                    type: "bandwidth",
-                    readonly: true,
-                    value: number("bandwidth", 1000)
-                },
-                {
-                    name: "new_bandwidth",
-                    type: "bandwidth",
-                    ports_key: "service_ports"
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        service_ports: servicePortsProperty({ bandwidthKey: "current_bandwidth", tags: ["MSP", "SSP", "MSPNL"] }, 1),
+        current_bandwidth: {
+            maximum: 1000000,
+            minimum: 0,
+            title: "Service Speed",
+            type: "integer",
+            value: number("bandwidth", 1000)
+        },
+        new_bandwidth: {
+            maximum: 1000000,
+            minimum: 0,
+            title: "Service Speed",
+            type: "integer"
+        }
+    });
+
+    return <UserInputContainer formName="SN7 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn7PortselectBandwidth.story = {
@@ -379,30 +246,18 @@ export const Sn8PortselectAllOrganisations = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
-    return (
-        <UserInputContainer
-            formName="SN8 portselect form, showing all ports"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 2,
-                    minimum: 2,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: false,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    visiblePortMode: "normal",
-                    tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty(
+            { visiblePortMode: "normal", tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"] },
+            2,
+            2
+        )
+    });
+
+    return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn8PortselectAllOrganisations.story = {
@@ -421,10 +276,11 @@ export const Sn8PortselectTagged = () => {
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
 
-    const form = create_form(
-        { organisation: Organisation, bandwidth: Bandwith, bgp_ip_service_ports: Sn8ServicePorts },
-        ["organisation", "bandwidth", "bgp_ip_service_ports"]
-    );
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty({ visiblePortMode: "tagged", tags: ["SP", "SPNL"] }, 2, 6)
+    });
 
     return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
@@ -444,30 +300,14 @@ export const Sn8PortselectUntagged = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
-    return (
-        <UserInputContainer
-            formName="SN8 portselect form, showing all ports"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 6,
-                    minimum: 1,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: false,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    visiblePortMode: "untagged",
-                    tags: ["SP", "SPNL"]
-                }
-            ]}
-        />
-    );
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty({ visiblePortMode: "untagged", tags: ["SP", "SPNL"] }, 1, 6)
+    });
+
+    return <UserInputContainer formName="SN8 portselect form, showing all ports" stepUserInput={form} />;
 };
 
 Sn8PortselectUntagged.story = {
@@ -483,28 +323,25 @@ export const Sn8PortselectSelectedOrganisation = () => {
     fetchMock.get("/api/v2/subscriptions/all", []);
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
     loadVlanMocks();
+
+    const form = createForm({
+        organisation: Organisation,
+        bandwidth: Bandwidth,
+        service_ports: servicePortsProperty(
+            {
+                organisationKey: "organisation",
+                visiblePortMode: "normal",
+                tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
+            },
+            1,
+            6
+        )
+    });
+
     return (
         <UserInputContainer
             formName="SN8 portselect, showing only ports for selected organisation"
-            stepUserInput={[
-                { name: "organisation", type: "organisation" },
-                {
-                    name: "bandwidth",
-                    ports_key: ["service_ports"],
-                    readonly: false,
-                    type: "bandwidth"
-                },
-                {
-                    maximum: 6,
-                    minimum: 1,
-                    name: "bgp_ip_service_ports",
-                    organisationPortsOnly: true,
-                    organisation_key: "organisation",
-                    type: "service_ports",
-                    visiblePortMode: "normal",
-                    tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"]
-                }
-            ]}
+            stepUserInput={form}
         />
     );
 };

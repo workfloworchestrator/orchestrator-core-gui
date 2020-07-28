@@ -63,6 +63,7 @@ function ImsPortId({
     locationCode,
     nodeSubscriptionId,
     interfaceType,
+
     ...props
 }: ImsPortFieldProps) {
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);

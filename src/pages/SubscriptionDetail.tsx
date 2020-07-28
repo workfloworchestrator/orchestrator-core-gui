@@ -451,8 +451,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         </td>
                         <td id="subscriptions-customer-descriptions-v">
                             <dl>
-                                {subscription.customer_descriptions.map(description => (
-                                    <React.Fragment>
+                                {subscription.customer_descriptions.map((description, index) => (
+                                    <React.Fragment key={index}>
                                         <dt>{organisationNameByUuid(description.customer_id, organisations)}</dt>
                                         <dd>{description.description}</dd>
                                     </React.Fragment>

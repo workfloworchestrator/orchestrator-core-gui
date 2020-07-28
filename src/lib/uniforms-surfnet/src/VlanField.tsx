@@ -120,11 +120,13 @@ function Vlan({
     const portMode = subscription && getPortMode(subscription, products);
     const isUntagged = ["untagged", "link_member"].includes(portMode);
 
-    if (subscriptionId && isUntagged && value !== "0") {
-        onChange("0");
-    } else if ((!subscriptionId && value !== "") || (subscriptionId && !isUntagged && value === "0")) {
-        onChange("");
-    }
+    useEffect(() => {
+        if (subscriptionId && isUntagged && value !== "0") {
+            onChange("0");
+        } else if ((!subscriptionId && value !== "") || (subscriptionId && !isUntagged && value === "0")) {
+            onChange("");
+        }
+    }, [onChange, subscriptionId, isUntagged, value]);
 
     const [usedVlansInIms, setUsedVlansInIms] = useState<number[][]>([]);
     const [missingInIms, setMissingInIms] = useState(false);
