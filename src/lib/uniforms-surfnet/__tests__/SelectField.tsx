@@ -303,13 +303,13 @@ describe("<SelectField checkboxes>", () => {
                 .find("input")
                 .at(0)
                 .prop("id")
-        ).toBe("y-YQ");
+        ).toBe("y.0");
         expect(
             wrapper
                 .find("input")
                 .at(1)
                 .prop("id")
-        ).toBe("y-Yg");
+        ).toBe("y.1");
     });
 
     test("<SelectField checkboxes> - renders a set of checkboxes with correct name", () => {
@@ -335,17 +335,17 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(2);
+        expect(wrapper.find("label")).toHaveLength(4);
         expect(
             wrapper
                 .find("label")
-                .at(0)
+                .at(1)
                 .text()
         ).toBe("a");
         expect(
             wrapper
                 .find("label")
-                .at(1)
+                .at(3)
                 .text()
         ).toBe("b");
     });
@@ -354,17 +354,17 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" transform={(x: string) => x.toUpperCase()} />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(2);
+        expect(wrapper.find("label")).toHaveLength(4);
         expect(
             wrapper
                 .find("label")
-                .at(0)
+                .at(1)
                 .text()
         ).toBe("A");
         expect(
             wrapper
                 .find("label")
-                .at(1)
+                .at(3)
                 .text()
         ).toBe("B");
     });
@@ -518,7 +518,7 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" label="y" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(3);
+        expect(wrapper.find("label")).toHaveLength(5);
         expect(
             wrapper
                 .find("label")
@@ -570,23 +570,23 @@ describe("<SelectField checkboxes>", () => {
 
         await waitForComponentToPaint(wrapper);
 
-        expect(wrapper.find("label")).toHaveLength(3);
-        expect(
-            wrapper
-                .find("label")
-                .at(0)
-                .text()
-        ).toBe("a");
+        expect(wrapper.find("label")).toHaveLength(6);
         expect(
             wrapper
                 .find("label")
                 .at(1)
                 .text()
+        ).toBe("a");
+        expect(
+            wrapper
+                .find("label")
+                .at(3)
+                .text()
         ).toBe("b");
         expect(
             wrapper
                 .find("label")
-                .at(2)
+                .at(5)
                 .text()
         ).toBe("b");
 

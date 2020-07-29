@@ -79,6 +79,7 @@ filterDOMProps.register("required");
 filterDOMProps.register("pattern");
 filterDOMProps.register("examples");
 filterDOMProps.register("allOf");
+filterDOMProps.register("options");
 
 class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     getField(name: string) {

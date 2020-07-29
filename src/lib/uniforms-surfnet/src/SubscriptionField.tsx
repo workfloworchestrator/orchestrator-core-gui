@@ -187,7 +187,7 @@ function Subscription({
         subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
     }
 
-    if (parentName) {
+    if (parentName !== name) {
         if (parent.fieldType === Array && (parent as ListFieldProps).uniqueItems) {
             const allValues: string[] = get(model, parentName, []);
             const chosenValues = allValues.filter(
