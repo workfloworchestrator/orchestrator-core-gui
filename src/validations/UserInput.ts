@@ -13,9 +13,17 @@
  *
  */
 
-const proxy = require("http-proxy-middleware");
+export function inValidVlan(vlan: string) {
+    const value = vlan || "0";
 
-//@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
-};
+    const stripped = value.toString().replace(/ /g, "");
+    return !/^\d{1,4}(?:-\d{1,4})?(?:,\d{1,4}(?:-\d{1,4})?)*$/.test(stripped) || stripped.split(",").some(inValidRange);
+}
+
+function inValidRange(range: string) {
+    if (range.indexOf("-") > -1) {
+        const ranges = range.split("-");
+        return ranges.some(inValidRange) || parseInt(ranges[0], 10) >= parseInt(ranges[1], 10);
+    }
+    return parseInt(range, 10) < 2 || parseInt(range, 10) > 4094;
+}

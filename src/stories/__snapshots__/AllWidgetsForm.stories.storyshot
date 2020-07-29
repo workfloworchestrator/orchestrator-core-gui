@@ -290,7 +290,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       htmlFor="accept"
                     >
                       <span
-                        tabIndex="0"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-check"

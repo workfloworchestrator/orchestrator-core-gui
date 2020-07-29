@@ -13,9 +13,16 @@
  *
  */
 
-const proxy = require("http-proxy-middleware");
+interface Spinner {
+    onStart?: () => void;
+    onStop?: () => void;
+    start: () => void;
+    stop: () => void;
+}
 
-//@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
+const mySpinner: Spinner = {
+    start: () => mySpinner.onStart && mySpinner.onStart(),
+    stop: () => mySpinner.onStop && mySpinner.onStop()
 };
+
+export default mySpinner;

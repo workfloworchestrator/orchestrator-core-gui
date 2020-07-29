@@ -13,9 +13,19 @@
  *
  */
 
-const proxy = require("http-proxy-middleware");
+import "highlight.js/styles/atom-one-light.css";
 
-//@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
-};
+import hljs from "highlight.js";
+import React from "react";
+
+interface IProps {
+    data: string;
+}
+
+export default function HighlightCode({ data }: IProps) {
+    return (
+        <pre>
+            <code dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(data).value }} />
+        </pre>
+    );
+}

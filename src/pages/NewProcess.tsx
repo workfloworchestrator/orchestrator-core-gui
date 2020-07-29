@@ -177,7 +177,7 @@ export default class NewProcess extends React.Component<IProps, IState> {
                                 disabled={!!preselectedInput.product}
                             />
                         </section>
-                        {showProductValidation && (
+                        {!!(showProductValidation && productValidation) && (
                             <section>
                                 <label htmlFor="none">{I18n.t("process.product_validation")}</label>
                                 <ProductValidationComponent validation={productValidation} />

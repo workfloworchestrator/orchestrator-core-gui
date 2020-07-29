@@ -13,9 +13,27 @@
  *
  */
 
-const proxy = require("http-proxy-middleware");
+import { EventEmitter } from "events";
 
-//@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
-};
+export const emitter = new EventEmitter();
+
+export interface FlashData {
+    type: string;
+    message: string;
+}
+
+//sneaky global...
+let flash: FlashData | null = null;
+
+export function getFlash(): FlashData | null {
+    return flash ? { ...flash } : null;
+}
+
+export function setFlash(message: string, type?: string) {
+    flash = { message, type: type || "info" };
+    emitter.emit("flash", flash);
+}
+
+export function clearFlash() {
+    emitter.emit("flash", {});
+}

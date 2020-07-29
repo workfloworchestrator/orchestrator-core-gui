@@ -12,10 +12,24 @@
  * limitations under the License.
  *
  */
-
-const proxy = require("http-proxy-middleware");
-
+import { configure } from "enzyme";
 //@ts-ignore
-module.exports = function(app) {
-    app.use(proxy("/api", { target: process.env.BACKEND_URL, changeOrigin: true }));
-};
+import Adapter from "enzyme-adapter-react-16";
+import fetchMock from "fetch-mock-jest";
+import I18n from "i18n-js";
+
+import en from "./locale/en";
+
+// Enable fetchMock as global fetch mock
+global.fetch = fetchMock.sandbox();
+
+beforeEach(() => {
+    fetchMock.restore();
+});
+
+// we need to use them, otherwise the imports are deleted when organizing them
+expect(I18n).toBeDefined();
+expect(en).toBeDefined();
+I18n.locale = "en";
+
+configure({ adapter: new Adapter() });

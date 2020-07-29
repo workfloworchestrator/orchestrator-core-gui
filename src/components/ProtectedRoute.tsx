@@ -15,7 +15,6 @@
 
 import { ENV } from "env";
 import { useAuth } from "oidc-react";
-import PropTypes from "prop-types";
 import React, { ReactNode } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 
@@ -24,7 +23,7 @@ export default function ProtectedRoute({
     render
 }: {
     path: string;
-    render: (props: RouteComponentProps) => ReactNode;
+    render: (props: RouteComponentProps<any>) => ReactNode;
 }) {
     /**
      * This provides the hook to restrict access based on memberships of the logged in user. For
@@ -38,8 +37,3 @@ export default function ProtectedRoute({
     }
     return <Redirect to={"/not-allowed"} />;
 }
-
-ProtectedRoute.propTypes = {
-    path: PropTypes.string.isRequired,
-    render: PropTypes.func.isRequired
-};

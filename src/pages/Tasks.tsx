@@ -178,21 +178,18 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             <div className="tasks-container">
                 <Explain
                     close={() => this.setState({ showExplanation: false })}
-                    render={() => (
-                        <React.Fragment>
-                            <h1>Task</h1>
-                            <p>The Tasks page will show running tasks and tasks with errors by default.</p>
-                            <h2>Settings storage</h2>
-                            <p>
-                                The tables will store the setting for your filters and columns in the local storage of
-                                your browser. If you want to reset the settings to the default, click on the gear icon
-                                and then on the reset button.
-                            </p>
-                        </React.Fragment>
-                    )}
                     isVisible={this.state.showExplanation}
                     title="Tasks Help"
-                />
+                >
+                    <h1>Task</h1>
+                    <p>The Tasks page will show running tasks and tasks with errors by default.</p>
+                    <h2>Settings storage</h2>
+                    <p>
+                        The tables will store the setting for your filters and columns in the local storage of your
+                        browser. If you want to reset the settings to the default, click on the gear icon and then on
+                        the reset button.
+                    </p>
+                </Explain>
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}

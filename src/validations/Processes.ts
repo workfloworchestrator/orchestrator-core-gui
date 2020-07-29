@@ -12,14 +12,7 @@
  * limitations under the License.
  *
  */
-import { Process, ProcessV2, ProcessWithDetails } from "utils/types";
-
-interface Action {
-    icon: string;
-    label: string;
-    action: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    danger?: boolean;
-}
+import { Action, Process, ProcessV2, ProcessWithDetails } from "utils/types";
 
 type ProcessWithStatus = Process | ProcessWithDetails | ProcessV2;
 
