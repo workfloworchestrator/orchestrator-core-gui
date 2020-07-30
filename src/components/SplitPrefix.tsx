@@ -23,6 +23,8 @@ import { Option } from "utils/types";
 import { free_subnets } from "../api";
 
 interface IProps {
+    id: string;
+    name: string;
     subnet: string;
     prefixlen: number;
     prefixMin: number;
@@ -78,7 +80,7 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
     };
 
     render() {
-        const { subnet, prefixlen, prefixMin, selectedSubnet } = this.props;
+        const { id, name, subnet, prefixlen, prefixMin, selectedSubnet } = this.props;
         const version = subnet.indexOf(":") === -1 ? 4 : 6;
         const max_for_version = version === 4 ? 32 : 64;
         const { desiredPrefixlen } = this.state;
@@ -95,7 +97,9 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
                 </h3>
                 <div>Desired netmask of the new subnet:</div>
                 <Select
-                    id="desired-netmask"
+                    id={`${id}.desired-netmask`}
+                    inputId={`${id}.desired-netmask.search`}
+                    name={`${name}.desired-netmask`}
                     onChange={this.changePrefixLength}
                     options={length_options}
                     value={length_value}
@@ -104,7 +108,9 @@ export default class SplitPrefix extends React.PureComponent<IProps> {
                     <div>
                         <div>Desired prefix:</div>
                         <Select
-                            id="desired-prefix"
+                            id={`${id}.desired-prefix`}
+                            inputId={`${id}.desired-prefix.search`}
+                            name={`${name}.desired-prefix`}
                             options={prefix_options}
                             onChange={this.selectSubnet}
                             value={prefix_value}

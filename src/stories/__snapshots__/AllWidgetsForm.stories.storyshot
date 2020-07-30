@@ -1449,7 +1449,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                           <span>
                             <div
                               className=" css-2b097c-container"
-                              id="root-filter"
+                              id="ip_prefix_table.root-filter"
                               onKeyDown={[Function]}
                             >
                               <div
@@ -1482,7 +1482,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-11-input"
+                                        id="ip_prefix_table.root-filter.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -1551,7 +1551,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                 </div>
                               </div>
                               <input
-                                name="root-filter"
+                                name="ip_prefix_table.root-filter"
                                 type="hidden"
                                 value="1"
                               />
@@ -2522,7 +2522,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                         </div>
                         <div
                           className=" css-2b097c-container"
-                          id="desired-netmask"
+                          id="split_prefix.desired-netmask"
                           onKeyDown={[Function]}
                         >
                           <div
@@ -2555,7 +2555,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                     autoComplete="off"
                                     autoCorrect="off"
                                     disabled={false}
-                                    id="react-select-12-input"
+                                    id="split_prefix.desired-netmask.search"
                                     onBlur={[Function]}
                                     onChange={[Function]}
                                     onFocus={[Function]}
@@ -2623,6 +2623,11 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                               </div>
                             </div>
                           </div>
+                          <input
+                            name="split_prefix.desired-netmask"
+                            type="hidden"
+                            value={25}
+                          />
                         </div>
                         <div>
                           <div>
@@ -2630,7 +2635,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                           </div>
                           <div
                             className=" css-2b097c-container"
-                            id="desired-prefix"
+                            id="split_prefix.desired-prefix"
                             onKeyDown={[Function]}
                           >
                             <div
@@ -2663,7 +2668,7 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-13-input"
+                                      id="split_prefix.desired-prefix.search"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -2731,6 +2736,11 @@ exports[`Storyshots Complete Input widgets form All Widgets Form 1`] = `
                                 </div>
                               </div>
                             </div>
+                            <input
+                              name="split_prefix.desired-prefix"
+                              type="hidden"
+                              value=""
+                            />
                           </div>
                         </div>
                       </section>

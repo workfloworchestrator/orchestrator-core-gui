@@ -71,10 +71,17 @@ export default class IPPrefix extends React.PureComponent<IProps> {
             <section className="ipblock-selector">
                 <div>
                     {!prefix_min && (
-                        <IpPrefixTable onChange={this.selectPrefix} selected_prefix_id={selected_prefix_id} />
+                        <IpPrefixTable
+                            id="ip_prefix_table"
+                            name="ip_prefix_table"
+                            onChange={this.selectPrefix}
+                            selected_prefix_id={selected_prefix_id}
+                        />
                     )}
                     {usePrefix && (
                         <SplitPrefix
+                            id="split_prefix"
+                            name="split_prefix"
                             subnet={subnet}
                             prefixlen={parseInt(netmask, 10)}
                             prefixMin={usedPrefix_min}

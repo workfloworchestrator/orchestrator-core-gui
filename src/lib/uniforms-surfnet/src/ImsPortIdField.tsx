@@ -142,6 +142,7 @@ function ImsPortId({
                     <label>Node</label>
                     <Select
                         id={`${id}.node`}
+                        inputId={`${id}.node.search`}
                         name={`${name}.node`}
                         onChange={onChangeNodes}
                         options={node_options}
@@ -154,6 +155,7 @@ function ImsPortId({
                     <label>Port</label>
                     <Select
                         id={id}
+                        inputId={`${id}.search`}
                         name={name}
                         onChange={(selected: ValueType<Option>) => {
                             const stringValue = (selected as Option | null)?.value;

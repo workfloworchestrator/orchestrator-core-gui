@@ -58,6 +58,8 @@ function IPvAnyNetwork({
                 <div id={id}>
                     {!prefixMin && (
                         <IPPrefixTable
+                            id={id}
+                            name={name}
                             onChange={(prefix: IpBlock) => {
                                 if (prefix.state === 0 || prefix.state === 1) {
                                     setSelectedPrefix(prefix);
@@ -69,6 +71,8 @@ function IPvAnyNetwork({
                     )}
                     {usePrefix && (
                         <SplitPrefix
+                            id={id}
+                            name={name}
                             subnet={subnet}
                             prefixlen={parseInt(netmask, 10)}
                             prefixMin={usedPrefixMin}
