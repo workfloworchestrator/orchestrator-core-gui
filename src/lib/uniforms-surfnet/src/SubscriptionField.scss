@@ -53,6 +53,6 @@ li .refresh-subscriptions {
     }
 }
 
-li:first-child .refresh-subscriptions i {
+li:first-child > * > * > * > .refresh-subscriptions i {
     display: block;
 }

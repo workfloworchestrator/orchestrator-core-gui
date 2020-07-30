@@ -55,15 +55,14 @@ function List({
     const hasListAsChild = child.fieldType === Array;
 
     return (
-        <section>
-            <ul {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
-                {label && (
-                    <label>
-                        {label}
-                        <em>{description}</em>
-                    </label>
-                )}
-
+        <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
+            {label && (
+                <label>
+                    {label}
+                    <em>{description}</em>
+                </label>
+            )}
+            <ul>
                 {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
                     Children.map(children, (child, childIndex) =>
                         isValidElement(child)

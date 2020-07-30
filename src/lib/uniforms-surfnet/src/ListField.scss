@@ -15,10 +15,12 @@
 
 @use "../../../stylesheets/vars.scss";
 
-ul.list-field {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+.list-field {
+    ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 
     li {
         list-style: none;
@@ -53,11 +55,11 @@ ul.list-field {
         }
 
         &:first-child {
-            //Except for the first row
-            label {
+            //Except for the first row with nested field
+            > * > * > label {
                 display: initial;
             }
-            section.nest-field ~ div.del-item {
+            > section.nest-field ~ div.del-item {
                 margin-top: 25px;
             }
         }
@@ -92,15 +94,18 @@ ul.list-field {
     }
 
     &.outer-list {
-        > div.add-item {
+        .list-field {
+            margin-left: 20px;
+        }
+        > ul > div.add-item {
             align-self: flex-start;
             padding: 0 2px 0 0;
             align-items: center;
         }
-        > li > div.del-item {
+        > ul > li > div.del-item {
             align-self: flex-start;
         }
-        > li {
+        > ul > li {
             flex-direction: column;
         }
     }

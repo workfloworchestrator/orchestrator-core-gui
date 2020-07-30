@@ -534,17 +534,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     [missing "en.forms.fields.boolean2" translation]
                   </label>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-contact_persons"
-                  >
-                    <label>
-                      Customer contact persons
-                      <em>
-                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-contact_persons"
+                >
+                  <label>
+                    Customer contact persons
+                    <em>
+                      The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4048,17 +4048,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </div>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports1"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports1" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports1"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports1" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4413,17 +4413,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports2"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports2" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports2"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports2" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4796,17 +4796,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports3"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports3" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports3"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports3" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4972,17 +4972,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports4"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports4" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports4"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports4" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5617,17 +5617,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports5"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports5" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports5"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports5" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5811,17 +5811,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports6"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports6" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports6"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports6" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5987,17 +5987,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports7"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports7" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports7"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports7" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6163,17 +6163,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports8"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports8" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports8"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports8" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6888,17 +6888,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports9"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports9" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports9"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports9" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -7064,17 +7064,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports10"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports10" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports10"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports10" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -7240,17 +7240,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn81"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn81" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn81"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn81" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -7429,17 +7429,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn82"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn82" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn82"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn82" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -7623,17 +7623,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn83"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn83" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn83"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn83" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -7817,17 +7817,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn84"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn84" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn84"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn84" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -8011,17 +8011,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn85"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn85" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn85"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn85" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -8187,17 +8187,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn86"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn86" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn86"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn86" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -8381,17 +8381,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn87"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn87" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn87"
+                >
+                  <label>
+                    [missing "en.forms.fields.service_ports_sn87" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -9297,17 +9297,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </div>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-subscriptions1"
-                  >
-                    <label>
-                      [missing "en.forms.fields.subscriptions1" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-subscriptions1"
+                >
+                  <label>
+                    [missing "en.forms.fields.subscriptions1" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" subscription-field"
@@ -9592,17 +9592,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-subscriptions2"
-                  >
-                    <label>
-                      [missing "en.forms.fields.subscriptions2" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-subscriptions2"
+                >
+                  <label>
+                    [missing "en.forms.fields.subscriptions2" translation]
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" subscription-field"

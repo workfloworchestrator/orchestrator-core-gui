@@ -158,16 +158,16 @@ test("<ListField> - renders correctly when child is list", () => {
             .prop("outerList")
     ).toBe(true);
 
-    expect(wrapper.find("ul")).toHaveLength(2);
+    expect(wrapper.find("section")).toHaveLength(3);
     expect(
         wrapper
-            .find("ul")
+            .find("section")
             .at(0)
             .prop("className")
-    ).toContain("outer-list");
+    ).toBe("list-field outer-list");
     expect(
         wrapper
-            .find("ul")
+            .find("section")
             .at(1)
             .prop("className")
     ).toBe("list-field");
