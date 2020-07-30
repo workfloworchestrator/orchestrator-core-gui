@@ -156,13 +156,19 @@ export default class NewProcess extends React.Component<IProps, IState> {
                                 }
                             }
 
-                            // if (preselectedInput.prefix && preselectedInput.prefixlen) {
-                            //     const prefixInput = stepUserInput.find(x => x.type === "ip_prefix");
-                            //     if (prefixInput) {
-                            //         prefixInput.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                            //         prefixInput.prefix_min = preselectedInput.prefix_min;
-                            //     }
-                            // }
+                            if (preselectedInput.prefix && preselectedInput.prefixlen) {
+                                if (stepUserInput && stepUserInput.properties.ip_prefix) {
+                                    const ipPrefixInput = stepUserInput.properties.ip_prefix as JSONSchemaFormProperty;
+                                    if (!ipPrefixInput.uniforms) {
+                                        ipPrefixInput.uniforms = {};
+                                    }
+                                    ipPrefixInput.uniforms.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
+                                    ipPrefixInput.uniforms.prefixMin = parseInt(
+                                        preselectedInput.prefix_min ?? preselectedInput.prefixlen,
+                                        10
+                                    );
+                                }
+                            }
                         }
 
                         this.setState({ stepUserInput: json.form, hasNext: json.hasNext });

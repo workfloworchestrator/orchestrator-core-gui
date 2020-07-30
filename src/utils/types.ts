@@ -208,8 +208,8 @@ export interface State {
     [index: string]: any;
 }
 
-export interface Option {
-    value: string;
+export interface Option<Value = string> {
+    value: Value;
     label: string;
 }
 
@@ -339,4 +339,28 @@ export interface ContactPerson {
     name: string;
     email: string;
     phone: string;
+}
+
+export interface IpPrefix {
+    id: number;
+    prefix: string;
+    version: number;
+}
+
+export interface IpBlock {
+    id: number;
+    prefix: string;
+    ip_network: string;
+    description: string;
+    state: number;
+    parent: number;
+    version: number;
+    parent_ipam_id: number;
+    is_subnet: boolean;
+    state_repr: string;
+}
+
+export interface SortOption<nameStrings = string> {
+    name: nameStrings;
+    descending: boolean;
 }
