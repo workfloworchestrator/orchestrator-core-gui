@@ -15,6 +15,7 @@
 
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
+import hash from "object-hash";
 import React from "react";
 
 import { catchErrorStatus } from "../api/index";
@@ -112,7 +113,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
                 <UserInputFormNew
                     // Generate a key based on input widget names that results in a new
                     // instance of UserInputForm if the form changes
-                    key={Object.keys(currentForm.form.properties as {}).join()}
+                    key={hash.sha1(currentForm.form.properties)}
                     stepUserInput={currentForm.form}
                     validSubmit={this.submit}
                     previous={this.previous}
