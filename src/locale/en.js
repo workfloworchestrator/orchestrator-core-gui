@@ -327,6 +327,11 @@ I18n.translations.en = {
                 check_ims_circuit: "{{circuit_name}}",
                 check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
             },
+            node_terminate_warning_accept: {
+                node_terminate_warning: "Node terminate warning",
+                node_terminate_warning_info:
+                    "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
+            },
             note: "Notes",
             note_info: "Notes, reminders and feedback about this description.",
             nsi_isalias: "NSI isAlias",
