@@ -119,6 +119,7 @@ function Select({
                 ) : (
                     <ReactSelect
                         id={id}
+                        inputId={`${id}.search`}
                         name={name}
                         onChange={(option: ValueType<Option>) => {
                             onChange((option as Option | null)?.value);

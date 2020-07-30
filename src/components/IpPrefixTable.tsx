@@ -27,6 +27,8 @@ import { stop } from "../utils/Utils";
 type SortKeys = "id" | "prefix" | "description" | "state_repr";
 
 interface IProps {
+    id: string;
+    name: string;
     onChange: (prefix: IpBlock) => void;
     selected_prefix_id?: number;
 }
@@ -166,7 +168,7 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
     render() {
         let ipBlocks = this.filterAndSortBlocks();
         const columns: SortKeys[] = ["id", "prefix", "description", "state_repr"];
-        const { selected_prefix_id } = this.props;
+        const { id, name, selected_prefix_id } = this.props;
         const { sorted, filter_prefixes } = this.state;
         const { state, prefix } = { ...this.state.filter };
         let parentPrefix = prefix?.id;
@@ -226,8 +228,9 @@ export default class IPPrefixTable extends React.PureComponent<IProps> {
                     <span>Root filter</span>
                     <span>
                         <Select
-                            id="root-filter"
-                            name="root-filter"
+                            id={`${id}.root-filter`}
+                            inputId={`${id}.root-filter.search`}
+                            name={`${name}.root-filter`}
                             options={options}
                             onChange={this.filterParentPrefix}
                             value={value}

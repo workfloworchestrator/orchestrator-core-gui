@@ -39,5 +39,12 @@ export const Definition = () => {
     fetchMock.get("glob:*/api/ipam/ip_blocks/1", IP_BLOCKS);
     fetchMock.get("glob:*/api/ipam/ip_blocks/2", IP_BLOCKS_V6);
 
-    return <IpPrefixTable onChange={action("onChange")} selected_prefix_id={number("Selected prefix id", 27710)} />;
+    return (
+        <IpPrefixTable
+            id="ip_prefix_table"
+            name="ip_prefix_table"
+            onChange={action("onChange")}
+            selected_prefix_id={number("Selected prefix id", 27710)}
+        />
+    );
 };
