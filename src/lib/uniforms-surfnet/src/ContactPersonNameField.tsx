@@ -21,7 +21,7 @@ import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 
-import { isEmpty, stop } from "../../../utils/Utils";
+import { stop } from "../../../utils/Utils";
 import { FieldProps } from "./types";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
@@ -50,15 +50,23 @@ function ContactPersonName({
     const emailFieldName = joinName(contactsPersonFieldNameArray, "email");
     const phoneFieldName = joinName(contactsPersonFieldNameArray, "phone");
     const contactsFieldName = joinName(contactsPersonFieldNameArray.slice(0, -1));
+    const chosenPersons: ContactPerson[] = get(model, contactsFieldName, []);
 
-    let [displayAutocomplete, setDisplayAutocomplete] = useState({});
+    let [displayAutocomplete, setDisplayAutocomplete] = useState(false);
     let [contactPersons, setContactPersons] = useState<ContactPerson[]>([]);
-    let [suggestions, setSuggestions] = useState<ContactPerson[]>([]);
     let [selectedIndex, setSelectedIndex] = useState(-1);
+
+    const suggestions = value
+        ? contactPersons
+              .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
+              .filter(item => !chosenPersons.some(person => person.email === item.email))
+        : [];
 
     useEffect(() => {
         if (organisationIdValue) {
-            contacts(organisationIdValue).then(setContactPersons);
+            contacts(organisationIdValue).then(contactPersons => {
+                setContactPersons(contactPersons);
+            });
         }
     }, [organisationIdValue]);
 
@@ -75,16 +83,7 @@ function ContactPersonName({
         const value = target.value;
 
         onChange(value);
-
-        const persons: ContactPerson[] = get(model, contactsFieldName);
-
-        const filteredSuggestions = !value
-            ? []
-            : contactPersons
-                  .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
-                  .filter(item => !persons.some(person => person.email === item.email));
-        setDisplayAutocomplete(!isEmpty(filteredSuggestions));
-        setSuggestions(filteredSuggestions);
+        setDisplayAutocomplete(true);
     }
 
     function itemSelected(item: ContactPerson, personIndex: number) {
@@ -150,7 +149,7 @@ function ContactPersonName({
                     onKeyDown={onAutocompleteKeyDown}
                     onBlur={onBlurAutoComplete}
                 ></input>
-                {displayAutocomplete && (
+                {displayAutocomplete && suggestions.length && (
                     <Autocomplete
                         query={value ?? ""}
                         itemSelected={itemSelected}
