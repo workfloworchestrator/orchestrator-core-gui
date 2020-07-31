@@ -96,6 +96,21 @@ export interface SubscriptionWithDetails extends Subscription {
     customer_descriptions: CustomerDescription[];
 }
 
+export interface SubscriptionModel {
+    name: string;
+    subscription_id: string;
+    description: string;
+    product: Product;
+    product_id: string;
+    status: string;
+    insync: boolean;
+    customer_id: string;
+    start_date: number;
+    end_date: number;
+    note: string;
+    vc?: any;
+}
+
 export interface ServicePortSubscription extends Subscription {
     port_mode?: string;
     crm_port_id?: string;

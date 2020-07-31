@@ -16,7 +16,7 @@ import "./ListField.scss";
 
 import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 import ListAddField from "./ListAddField";
 import ListItemField from "./ListItemField";
@@ -26,6 +26,7 @@ filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");
 filterDOMProps.register("uniqueItems");
+filterDOMProps.register("outerList");
 
 export type ListFieldProps = FieldProps<
     any[],
@@ -36,7 +37,7 @@ export type ListFieldProps = FieldProps<
 
 function List({
     disabled,
-    children = <ListItemField name="$" disabled={disabled} />,
+    children = <ListItemField name="$" disabled={disabled} outerList={false} />,
     initialCount = 1,
     itemProps,
     label,
@@ -50,29 +51,32 @@ function List({
     uniqueItems, // Not used here but inspected by selectfields to determine unique values
     ...props
 }: ListFieldProps) {
-    return (
-        <section>
-            <ul {...filterDOMProps(props)} className="list-field">
-                {label && (
-                    <label>
-                        {label}
-                        <em>{description}</em>
-                    </label>
-                )}
+    const child = useField(joinName(name, "$"), {}, { absoluteName: true })[0];
+    const hasListAsChild = child.fieldType === Array;
 
+    return (
+        <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
+            {label && (
+                <label>
+                    {label}
+                    <em>{description}</em>
+                </label>
+            )}
+            <ul>
                 {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
                     Children.map(children, (child, childIndex) =>
                         isValidElement(child)
                             ? cloneElement(child, {
                                   key: `${itemIndex}-${childIndex}`,
                                   name: child.props.name?.replace("$", "" + itemIndex),
+                                  outerList: hasListAsChild,
                                   ...itemProps
                               })
                             : child
                     )
                 )}
 
-                <ListAddField initialCount={initialCount} name="$" disabled={disabled} />
+                <ListAddField initialCount={initialCount} name="$" disabled={disabled} outerList={hasListAsChild} />
             </ul>
             {error && showInlineError && (
                 <em className="error">

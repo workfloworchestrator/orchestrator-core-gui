@@ -30,7 +30,8 @@ import {
     productById,
     serviceByImsServiceId,
     subscriptionWorkflows,
-    subscriptionsDetail
+    subscriptionsDetail,
+    subscriptionsDetailWithModel
 } from "../api";
 import CheckBox from "../components/CheckBox";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -43,6 +44,7 @@ import {
     Product,
     Subscription,
     SubscriptionInstance,
+    SubscriptionModel,
     SubscriptionProcesses,
     SubscriptionWithDetails,
     WorkflowReasons,
@@ -81,6 +83,8 @@ interface IState {
     childSubscriptions: SubscriptionWithDetails[];
     parentSubscriptions: SubscriptionWithDetails[];
     dienstafname?: Dienstafname;
+    useDomainModel: boolean;
+    subscriptionModel?: SubscriptionModel;
 }
 
 interface Dienstafname {
@@ -151,7 +155,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         confirmationDialogQuestion: "",
         notFoundRelatedObjects: [],
         collapsedObjects: [],
-        workflows: { terminate: [], modify: [], system: [], create: [] }
+        workflows: { terminate: [], modify: [], system: [], create: [] },
+        useDomainModel: false
     };
 
     componentWillMount = () => {
@@ -163,6 +168,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         const { organisations, products } = this.context;
         subscriptionsDetail(subscriptionId)
             .then((subscription: Subscription) => {
+                const useDomainModel = subscription.product.name === "SN8 L2VPN";
+                if (useDomainModel)
+                    subscriptionsDetailWithModel(subscriptionId).then((subscription: SubscriptionModel) => {
+                        this.setState({ useDomainModel: useDomainModel, subscriptionModel: subscription });
+                    });
                 const enrichedSubscription = enrichSubscription(subscription, organisations, products);
                 const values = subscriptionInstanceValues(enrichedSubscription);
                 this.setState({ subscription: enrichedSubscription, loaded: true });
@@ -180,6 +190,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             getResourceTypeInfo(val.resource_type.resource_type, val.value)
                         )
                     );
+
+                promises.push(subscriptionsDetailWithModel(subscriptionId));
                 Promise.all(promises).then(
                     // @ts-ignore
                     (result: [any, Product, WorkflowReasons, Subscription[], any, ...RelatedObject]) => {
@@ -1172,6 +1184,74 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
+    renderResourceTypeRowNew = (
+        label: string,
+        value: string,
+        loadedAllRelatedObjects: boolean,
+        notFoundRelatedObjects: AbsentRelatedObject[],
+        index: number,
+        imsServices: IMSService[],
+        collapsedObjects: string[],
+        subscriptions: SubscriptionWithDetails[],
+        imsEndpoints: IMSEndpoint[]
+    ) => {
+        const isDeleted =
+            label === "ims_circuit_id" &&
+            loadedAllRelatedObjects &&
+            notFoundRelatedObjects.some(obj => obj.requestedType === "ims_circuit_id" && obj.identifier === value);
+        const isSubscriptionValue = label.endsWith("subscription_id");
+        const externalLinks = [
+            "ims_circuit_id",
+            "ims_corelink_trunk_id",
+            "ptp_ipv4_ipam_id",
+            "ptp_ipv6_ipam_id",
+            "ipam_prefix_id",
+            "node_ipv4_ipam_id",
+            "node_ipv6_ipam_id",
+            "corelink_ipv4_ipam_id",
+            "corelink_ipv6_ipam_id"
+        ];
+        const isExternalLinkValue = isSubscriptionValue || externalLinks.includes(label);
+        let isCollapsed = collapsedObjects.includes(value);
+        const icon = isCollapsed ? "minus" : "plus";
+        return (
+            <tbody key={index}>
+                <tr>
+                    <td>{label.toUpperCase()}</td>
+                    <td colSpan={isDeleted ? 1 : 2}>
+                        <div className="resource-type">
+                            {isExternalLinkValue && !isDeleted && (
+                                <i
+                                    className={`fa fa-${icon}-circle`}
+                                    onClick={this.handleCollapseSubscription(value, collapsedObjects)}
+                                />
+                            )}
+                            {isSubscriptionValue && (
+                                <a target="_blank" rel="noopener noreferrer" href={`/subscriptions/${value}`}>
+                                    {value}
+                                </a>
+                            )}
+                            {!isSubscriptionValue && <span>{value}</span>}
+                        </div>
+                    </td>
+                    {isDeleted && (
+                        <td>
+                            <em className="error">{"This circuit ID has been removed from IMS"}</em>
+                        </td>
+                    )}
+                </tr>
+                {isExternalLinkValue && !isDeleted && isCollapsed && (
+                    <tr className="related-subscription">
+                        <td className="whitespace" />
+                        <td className="related-subscription-values" colSpan={2}>
+                            {this.renderRelatedObject(subscriptions, imsServices, label, value, imsEndpoints)}
+                        </td>
+                    </tr>
+                )}
+            </tbody>
+        );
+    };
+
     nullSafeComparision = (s1?: string, s2?: string) => {
         const s1safe = s1 || "";
         const s2safe = s2 || "";
@@ -1228,6 +1308,84 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
+    renderDomainModel = (
+        subscriptionModel: SubscriptionModel,
+        notFoundRelatedObjects: AbsentRelatedObject[],
+        loadedAllRelatedObjects: boolean,
+        imsServices: IMSService[],
+        collapsedObjects: string[],
+        subscriptions: SubscriptionWithDetails[],
+        imsEndpoints: IMSEndpoint[]
+    ) => {
+        const all_keys = Object.keys(subscriptionModel.vc);
+        let scalar_keys: any[] = [];
+        let list_keys: any[] = [];
+        for (let key of all_keys) {
+            Array.isArray(subscriptionModel.vc[key]) ? list_keys.push(key) : scalar_keys.push(key);
+        }
+
+        const esi_blocks = subscriptionModel.vc.esis.map((item: any, index: number) => item);
+
+        return (
+            <section className="details">
+                <h3>{I18n.t("subscriptions.productBlocks")}</h3>
+                <div className="subscription-product-blocks">
+                    {/*First render all scalars*/}
+                    <section className="product-block">
+                        <h2>VC</h2>
+                        <table className="detail-block multiple-tbody">
+                            <thead />
+                            {scalar_keys.map((key, i: number) =>
+                                this.renderResourceTypeRowNew(
+                                    key,
+                                    subscriptionModel.vc[key],
+                                    loadedAllRelatedObjects,
+                                    notFoundRelatedObjects,
+                                    i,
+                                    imsServices,
+                                    collapsedObjects,
+                                    subscriptions,
+                                    imsEndpoints
+                                )
+                            )}
+                        </table>
+                    </section>
+                    <section className="product-block">
+                        <h3>ESI Blocks</h3>
+                    </section>
+
+                    {esi_blocks.map((esi_block: any, esi_block_number: number) => (
+                        <section className="product-block">
+                            <h3>ESI Block {esi_block_number + 1}</h3>
+                            <p className="label">{`Instance ID: ${esi_block.subscription_instance_id}`}</p>
+                            {esi_block.saps.map((sap: any, sap_number: number) => (
+                                <section className="sub-product-block">
+                                    <h4>SAP {sap_number + 1}</h4>
+                                    <table className="detail-block multiple-tbody">
+                                        <thead />
+                                        {Object.keys(sap).map((key, i: number) =>
+                                            this.renderResourceTypeRowNew(
+                                                key,
+                                                sap[key],
+                                                loadedAllRelatedObjects,
+                                                notFoundRelatedObjects,
+                                                i,
+                                                imsServices,
+                                                collapsedObjects,
+                                                subscriptions,
+                                                imsEndpoints
+                                            )
+                                        )}
+                                    </table>
+                                </section>
+                            ))}
+                        </section>
+                    ))}
+                </div>
+            </section>
+        );
+    };
+
     renderDetails = (subscription: SubscriptionWithDetails, subscriptionProcesses: SubscriptionProcesses[]) => (
         <section className="details">
             <h3>{I18n.t("subscription.subscription")}</h3>
@@ -1254,7 +1412,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             notFoundRelatedObjects,
             loadedAllRelatedObjects,
             collapsedObjects,
-            workflows
+            workflows,
+            useDomainModel,
+            subscriptionModel
         } = this.state;
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
@@ -1272,15 +1432,27 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         {this.renderDetails(subscription!, subscriptionProcesses)}
                         {this.renderDienstafname()}
                         {this.renderFixedInputs(product)}
-                        {this.renderProductBlocks(
-                            subscription!,
-                            notFoundRelatedObjects,
-                            loadedAllRelatedObjects,
-                            imsServices,
-                            collapsedObjects,
-                            childSubscriptions,
-                            imsEndpoints
-                        )}
+                        {!useDomainModel &&
+                            this.renderProductBlocks(
+                                subscription!,
+                                notFoundRelatedObjects,
+                                loadedAllRelatedObjects,
+                                imsServices,
+                                collapsedObjects,
+                                childSubscriptions,
+                                imsEndpoints
+                            )}
+                        {useDomainModel &&
+                            this.renderDomainModel(
+                                subscriptionModel!,
+                                notFoundRelatedObjects,
+                                loadedAllRelatedObjects,
+                                imsServices,
+                                collapsedObjects,
+                                childSubscriptions,
+                                imsEndpoints
+                            )}
+
                         {this.renderActions(subscription!, loadedAllRelatedObjects, notFoundRelatedObjects, workflows)}
                         {this.renderProduct(product)}
                         {this.renderProcesses(subscriptionProcesses)}

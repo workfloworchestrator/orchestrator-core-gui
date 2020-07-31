@@ -1,3 +1,4 @@
+import I18n from "i18n-js";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,10 +19,10 @@ import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
 import { FieldProps } from "./types";
 
-export type ListAddFieldProps = FieldProps<null, { initialCount?: number }>;
+export type ListAddFieldProps = FieldProps<string, { initialCount?: number; outerList?: boolean }>;
 
 // onChange not used on purpose
-function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: ListAddFieldProps) {
+function ListAdd({ disabled, name, value, onChange, initialCount, outerList = false, ...props }: ListAddFieldProps) {
     const nameParts = joinName(null, name);
     const parentName = joinName(nameParts.slice(0, -1));
     const parent = useField<{ maxCount?: number; initialCount?: number }, unknown[]>(
@@ -34,14 +35,16 @@ function ListAdd({ disabled, name, value, onChange, initialCount, ...props }: Li
     const count = 1 + Math.max((initialCount ?? 0) - parent.value!.length, 0);
 
     return (
-        <div className="add-item" {...filterDOMProps(props)}>
-            <i
-                className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`}
-                onClick={() => {
-                    const newRowsValue = Array(count).fill(cloneDeep(value));
-                    if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
-                }}
-            />
+        <div
+            className="add-item"
+            {...filterDOMProps(props)}
+            onClick={() => {
+                const newRowsValue = Array(count).fill(cloneDeep(value));
+                if (limitNotReached) parent.onChange(parent.value!.concat(newRowsValue));
+            }}
+        >
+            <i className={`fa fa-plus ${!limitNotReached || disabled ? "disabled" : ""}`} />
+            <label>{outerList && I18n.t(`forms.fields.${parentName}_add`)}</label>
         </div>
     );
 }

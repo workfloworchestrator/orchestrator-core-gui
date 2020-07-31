@@ -34,6 +34,15 @@ test("<ListAddField> - works", () => {
     expect(wrapper.find(ListAddField)).toHaveLength(1);
 });
 
+test("<ListAddField> - renders label when outerList", () => {
+    const element = <ListAddField name="x.1" outerList={true} />;
+    const wrapper = mount(element, context());
+
+    expect(wrapper.find(ListAddField)).toHaveLength(1);
+    expect(wrapper.find("label")).toHaveLength(1);
+    expect(wrapper.find("label").text()).toBe('[missing "en.forms.fields.x_add" translation]');
+});
+
 test("<ListAddField> - prevents onClick when disabled", () => {
     const element = <ListAddField name="x.1" disabled />;
     const wrapper = mount(element, context());

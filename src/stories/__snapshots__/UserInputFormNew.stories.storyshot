@@ -148,17 +148,17 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                     />
                   </div>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-contact_persons"
-                  >
-                    <label>
-                      Customer contact persons
-                      <em>
-                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-contact_persons"
+                >
+                  <label>
+                    Customer contact persons
+                    <em>
+                      The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -224,20 +224,26 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-contact_persons.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-contact_persons.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
@@ -3102,17 +3108,17 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                     </b>
                   </span>
                 </div>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-bgp_ip_service_ports"
-                  >
-                    <label>
-                      IP Service Ports
-                      <em>
-                        The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-bgp_ip_service_ports"
+                >
+                  <label>
+                    IP Service Ports
+                    <em>
+                      The Service Port(s) used at customer side for IP service using BGP. The ports that remain on this page will be posted towards NSO.
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -3154,20 +3160,26 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-bgp_ip_service_ports.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-bgp_ip_service_ports.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>

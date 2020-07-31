@@ -570,7 +570,7 @@ describe("<SelectField checkboxes>", () => {
 
         await waitForComponentToPaint(wrapper);
 
-        expect(wrapper.find("label")).toHaveLength(6);
+        expect(wrapper.find("label")).toHaveLength(7);
         expect(
             wrapper
                 .find("label")

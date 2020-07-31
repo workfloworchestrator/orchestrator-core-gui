@@ -135,7 +135,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
 
     getProps(name: string) {
         let props = super.getProps(name);
-        const translation_key = name.replace(/\.\d+/, "_fields");
+        const translation_key = name.replace(/\.\d+(.\d+)*/, "_fields");
         props.label = I18n.t(`forms.fields.${translation_key}`);
         props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
         props.id = `input-${name}`;
@@ -201,7 +201,7 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
 
         if (defaultValue !== undefined) return cloneDeep(defaultValue);
 
-        if (type === "array" && !props.lookUpParent) {
+        if (type === "array" && !props.lookUpParent && !name.endsWith("$")) {
             const item = this.getInitialValue(joinName(name, "0"));
             const items = props.initialCount || 0;
             return Array(items).fill(item);
