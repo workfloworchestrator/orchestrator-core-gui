@@ -271,24 +271,24 @@ exports[`Storyshots NewProcess Preselected 1`] = `
             className="card"
           >
             <form
+              noValidate={true}
               onSubmit={[Function]}
             >
               <section
                 className="form-step"
               >
-                <section
-                  className="form-divider organisation"
-                  id="input-organisation"
-                >
-                  <label>
+                <section>
+                  <label
+                    htmlFor="input-organisation"
+                  >
                     Customer
+                    <em>
+                      Search and select the customer for the product.
+                    </em>
                   </label>
-                  <em>
-                    Search and select the customer for the product.
-                  </em>
                   <div
                     className=" css-14jk2my-container"
-                    id="organisation-select"
+                    id="input-organisation"
                     onKeyDown={[Function]}
                   >
                     <div
@@ -321,7 +321,7 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={true}
-                              id="react-select-159-input"
+                              id="input-organisation.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -390,9 +390,6 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       </div>
                     </div>
                   </div>
-                  <em
-                    className="error"
-                  />
                 </section>
               </section>
               <section

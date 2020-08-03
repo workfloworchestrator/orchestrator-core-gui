@@ -21,7 +21,7 @@ import {
     nodeSubscriptions
 } from "api";
 import I18n from "i18n-js";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Select, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -63,38 +63,28 @@ function ImsPortId({
     locationCode,
     nodeSubscriptionId,
     interfaceType,
+
     ...props
 }: ImsPortFieldProps) {
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);
-    const [nodeId, setNodeId] = useState<number | string>();
+    const [nodeId, setNodeId] = useState<number | string | undefined>(nodeSubscriptionId);
     const [ports, setPorts] = useState<IMSPort[]>([]);
 
     const isServicePortLegacyBehavior = !!locationCode;
 
-    useEffect(() => {
-        if (locationCode) {
-            getNodesByLocationAndStatus(locationCode, "IS").then(setNodes);
-        } else {
-            const nodesPromise = nodeSubscriptions(["active", "provisioning"]);
-            if (nodeSubscriptionId) {
-                nodesPromise.then(result =>
-                    setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId))
-                );
+    const onChangeNodes = useCallback(
+        (option: ValueType<Option>) => {
+            let value;
+            if (isServicePortLegacyBehavior) {
+                value = option ? parseInt((option as Option).value) : null;
             } else {
-                nodesPromise.then(setNodes);
+                value = option ? (option as Option).value : null;
             }
-        }
-    }, [isServicePortLegacyBehavior, locationCode, nodeSubscriptionId]);
 
-    const onChangeNodes = (option: ValueType<Option>) => {
-        let value;
-        if (isServicePortLegacyBehavior) {
-            value = option ? parseInt((option as Option).value) : null;
-        } else {
-            value = option ? (option as Option).value : null;
-        }
+            if (value === null) {
+                return;
+            }
 
-        if (value !== null) {
             setNodeId(value);
             setPorts([]);
             if (isServicePortLegacyBehavior) {
@@ -104,10 +94,29 @@ function ImsPortId({
             } else {
                 freeCorelinkPortsForNodeIdAndInterfaceType(value as string, interfaceType as number).then(setPorts);
             }
-        }
-    };
+        },
+        [interfaceType, isServicePortLegacyBehavior]
+    );
 
-    const portPlaceholder = nodeId
+    useEffect(() => {
+        if (isServicePortLegacyBehavior) {
+            getNodesByLocationAndStatus(locationCode!, "IS").then(setNodes);
+        } else {
+            const nodesPromise = nodeSubscriptions(["active", "provisioning"]);
+            if (nodeSubscriptionId) {
+                nodesPromise.then(result => {
+                    setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId));
+                    onChangeNodes({ value: nodeSubscriptionId } as Option);
+                });
+            } else {
+                nodesPromise.then(setNodes);
+            }
+        }
+    }, [onChangeNodes, isServicePortLegacyBehavior, locationCode, nodeSubscriptionId]);
+
+    const portPlaceholder = !nodes.length
+        ? I18n.t("forms.widgets.nodePort.loading")
+        : nodeId
         ? I18n.t("forms.widgets.nodePort.selectPort")
         : I18n.t("forms.widgets.nodePort.selectNodeFirst");
 
@@ -121,13 +130,13 @@ function ImsPortId({
     node_options.sort((x, y) => x.label.localeCompare(y.label));
     const node_value = node_options.find(option => option.value === nodeId?.toString());
 
-    const port_options: Option[] = ports
+    const port_options: Option<number>[] = ports
         .map(aPort => ({
-            value: aPort.id.toString(),
+            value: aPort.id,
             label: `${aPort.port} (${aPort.status}) (${aPort.iface_type})`
         }))
         .sort((x, y) => x.label.localeCompare(y.label));
-    const port_value = port_options.find(option => option.value === value?.toString());
+    const port_value = port_options.find(option => option.value === value);
 
     return (
         <section {...filterDOMProps(props)}>
@@ -148,7 +157,7 @@ function ImsPortId({
                         options={node_options}
                         value={node_value}
                         isSearchable={true}
-                        isDisabled={disabled || nodes.length === 0}
+                        isDisabled={disabled || !!nodeSubscriptionId || nodes.length === 0}
                     />
                 </div>
                 <div className="port-select">
@@ -157,9 +166,9 @@ function ImsPortId({
                         id={id}
                         inputId={`${id}.search`}
                         name={name}
-                        onChange={(selected: ValueType<Option>) => {
-                            const stringValue = (selected as Option | null)?.value;
-                            onChange(stringValue ? parseInt(stringValue, 10) : undefined);
+                        onChange={(selected: ValueType<Option<number>>) => {
+                            const value = (selected as Option<number> | null)?.value;
+                            onChange(value ? value : undefined);
                         }}
                         options={port_options}
                         placeholder={portPlaceholder}

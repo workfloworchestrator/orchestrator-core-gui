@@ -18,6 +18,7 @@ import React from "react";
 import StoryRouter from "storybook-react-router";
 
 import NewProcess from "../pages/NewProcess";
+import { Organisation, createForm } from "./utils";
 
 export default {
     title: "NewProcess",
@@ -34,7 +35,10 @@ export const Default = () => {
     fetchMock.get("glob:/api/products/*/validate", [1000]);
     fetchMock.post("glob:/api/processes/*", {
         status: 510,
-        body: { form: [{ name: "organisation", type: "organisation" }], hasNext: false }
+        body: {
+            form: createForm({ organisation: Organisation }),
+            hasNext: false
+        }
     });
 
     return <NewProcess preselectedInput={{}} />;
@@ -46,7 +50,7 @@ export const Preselected = () => {
     fetchMock.get("glob:/api/products/*/validate", [1000]);
     fetchMock.post("glob:/api/processes/*", {
         status: 510,
-        body: { form: [{ name: "organisation", type: "organisation" }], hasNext: false }
+        body: { form: createForm({ organisation: Organisation }), hasNext: false }
     });
 
     return (

@@ -29,6 +29,7 @@
         flex-wrap: wrap;
         margin-top: 5px;
 
+        // We use '>' because we don't want the outer list to influence the inner list
         > section {
             display: flex;
             flex-grow: 20;
@@ -36,6 +37,7 @@
             &.nest-field {
                 flex-direction: row;
             }
+            // We use '>' because we don't want the outer list to influence the inner list
             & > * {
                 display: flex;
                 flex-direction: column;
@@ -56,9 +58,11 @@
 
         &:first-child {
             //Except for the first row with nested field
+            // We use '>' because we don't want the outer list to influence the inner list
             > * > * > label {
                 display: initial;
             }
+            // We use '>' because we don't want the outer list to influence the inner list
             > section.nest-field ~ div.del-item {
                 margin-top: 25px;
             }
@@ -93,18 +97,23 @@
         }
     }
 
+    // Used for nested lists (L2VPN)
     &.outer-list {
         .list-field {
             margin-left: 20px;
         }
+
+        // We use '>' because we don't want the outer list to influence the inner list
         > ul > div.add-item {
             align-self: flex-start;
             padding: 0 2px 0 0;
             align-items: center;
         }
+        // We use '>' because we don't want the outer list to influence the inner list
         > ul > li > div.del-item {
             align-self: flex-start;
         }
+        // We use '>' because we don't want the outer list to influence the inner list
         > ul > li {
             flex-direction: column;
         }

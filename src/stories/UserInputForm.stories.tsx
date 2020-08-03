@@ -65,6 +65,7 @@ export const Corelink = () => {
     fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", []);
     fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
     fetchMock.get("glob:*/api/ims/free_corelink_ports/*", corelinkPorts10G);
+    fetchMock.get("/api/ims/nodes/MT001A/IS", imsNodes);
     return (
         <UserInputContainer
             formName="Corelink form"

@@ -14,6 +14,7 @@
  */
 
 import fetchMock from "fetch-mock";
+import { JSONSchema6 } from "json-schema";
 
 export function vlanData() {
     let vlans = [];
@@ -77,4 +78,99 @@ export function loadVlanMocks() {
     fetchMock.get("glob:*/api/ims/vlans/f*", vlanData(), {
         overwriteRoutes: false
     });
+}
+
+export function createForm(properties: {}, required?: string[]): JSONSchema6 {
+    return {
+        properties: properties,
+        required: required ?? Object.keys(properties),
+        title: "Validator",
+        type: "object"
+    };
+}
+
+export const ContactPerson = {
+    items: {
+        properties: {
+            email: {
+                format: "email",
+                title: "Email",
+                type: "string"
+            },
+            name: {
+                title: "Name",
+                type: "string",
+                format: "contactPersonName"
+            },
+            phone: {
+                default: "",
+                title: "Phone",
+                type: "string"
+            }
+        },
+        required: ["email", "name"],
+        title: "ContactPerson",
+        type: "object"
+    },
+    minItems: 1,
+    title: "Contact Persons",
+    type: "array"
+};
+export const Organisation = {
+    title: "Organisation",
+    type: "string",
+    format: "organisationId"
+};
+
+export const Bandwidth = {
+    maximum: 1000000,
+    minimum: 0,
+    title: "Service Speed",
+    type: "integer"
+};
+
+export const ImsNodeId = {
+    title: "ImsNodeId",
+    type: "integer",
+    format: "imsNodeId"
+};
+
+export function imsPortIdProperty(options: {}) {
+    return {
+        title: "ImsPortId",
+        type: "integer",
+        format: "imsPortId",
+        ...options
+    };
+}
+
+export function servicePortsProperty(portOptions: {}, minItems = 1, maxItems = 2) {
+    return {
+        items: {
+            properties: {
+                subscription_id: {
+                    title: "Subscription Id",
+                    type: "string",
+                    format: "subscriptionId",
+                    visiblePortMode: "normal",
+                    tags: ["SP", "SPNL", "MSC", "MSCNL", "AGGSP"],
+                    ...portOptions
+                },
+                vlan: {
+                    examples: ["345", "20-23,45,50-100"],
+                    pattern: "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    title: "Vlan",
+                    type: "string",
+                    format: "vlan"
+                }
+            },
+            required: ["subscription_id", "vlan", "tag", "port_mode"],
+            title: "ServicePort",
+            type: "object"
+        },
+        maxItems: minItems,
+        minItems: maxItems,
+        title: "Service Ports",
+        type: "array"
+    };
 }
