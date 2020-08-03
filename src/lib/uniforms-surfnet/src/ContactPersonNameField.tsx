@@ -18,13 +18,15 @@ import I18n from "i18n-js";
 import { isFunction } from "lodash";
 import get from "lodash/get";
 import React, { Ref, useEffect, useState } from "react";
-import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 
 import { stop } from "../../../utils/Utils";
 import { FieldProps } from "./types";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
+
+filterDOMProps.register("organisationId", "organisationKey");
 
 function ContactPersonName({
     disabled,
@@ -45,12 +47,20 @@ function ContactPersonName({
 }: ContactPersonNameFieldProps) {
     const { model, onChange: formOnChange } = useForm();
 
-    const organisationIdValue = organisationId || get(model, organisationKey || "organisation");
     const contactsPersonFieldNameArray = joinName(null, name).slice(0, -1);
     const emailFieldName = joinName(contactsPersonFieldNameArray, "email");
     const phoneFieldName = joinName(contactsPersonFieldNameArray, "phone");
     const contactsFieldName = joinName(contactsPersonFieldNameArray.slice(0, -1));
+
     const chosenPersons: ContactPerson[] = get(model, contactsFieldName, []);
+    // We cant call useField conditionally so if we don't have a parent we call it for ourself
+    const useFieldName = contactsPersonFieldNameArray.length ? contactsFieldName : name;
+    const contactsField = useField(useFieldName, {}, { absoluteName: true })[0];
+
+    const organisationIdValue =
+        organisationId ||
+        contactsField.field.organisationId ||
+        get(model, organisationKey || contactsField.field.organisationKey || "organisation");
 
     let [displayAutocomplete, setDisplayAutocomplete] = useState(false);
     let [contactPersons, setContactPersons] = useState<ContactPerson[]>([]);
@@ -157,7 +167,7 @@ function ContactPersonName({
                         suggestions={suggestions}
                         personIndex={0}
                     />
-                )}{" "}
+                )}
             </div>
             {error && showInlineError && (
                 <em className="error">
