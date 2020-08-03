@@ -1463,6 +1463,7 @@ I18n.translations.en = {
         terminate_sn8_ip_bgp: "Terminate an SN8 SURFinternet BGP",
         terminate_sn8_msc: "Terminate an SN8 Multi Service Carrier",
         terminate_sn8_aggregated_service_port: "Terminate an SN8 Aggregated Service Port",
+        terminate_sn8_l2vpn: "Terminate an SN8 L2VPN",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
