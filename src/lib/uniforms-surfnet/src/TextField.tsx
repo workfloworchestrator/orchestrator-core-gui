@@ -13,6 +13,7 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -36,27 +37,23 @@ function Text({
 }: TextFieldProps) {
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <input
-                disabled={disabled}
-                id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                type={type}
-                value={value ?? ""}
-            ></input>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+            >
+                <EuiFieldText
+                    disabled={disabled}
+                    id={id}
+                    name={name}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    // ref={inputRef}
+                    type={type}
+                    value={value ?? ""}
+                />
+            </EuiFormRow>
         </section>
     );
 }

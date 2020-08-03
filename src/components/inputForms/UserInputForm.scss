@@ -79,3 +79,8 @@
         width: fit-content;
     }
 }
+.euiFormRow {
+    max-width: 100%;
+    //width: 600px;
+    flex-wrap: nowrap;
+}

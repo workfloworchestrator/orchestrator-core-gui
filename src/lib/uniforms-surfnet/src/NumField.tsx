@@ -13,6 +13,7 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+import { EuiFieldNumber, EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
 import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
@@ -44,33 +45,29 @@ function Num({
 }: NumFieldProps) {
     return (
         <div {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <NumericInput
-                id={id}
-                name={name}
-                ref={inputRef}
-                placeholder={placeholder}
-                onChange={v => {
-                    onChange(v ?? undefined);
-                }}
-                min={min}
-                max={max}
-                step={step ?? 1}
-                precision={precision ?? 0}
-                value={value ?? ""}
-                strict={false}
-                disabled={disabled}
-            />
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+            >
+                <NumericInput
+                    id={id}
+                    name={name}
+                    ref={inputRef}
+                    placeholder={placeholder}
+                    onChange={v => {
+                        onChange(v ?? undefined);
+                    }}
+                    min={min}
+                    max={max}
+                    step={step ?? 1}
+                    precision={precision ?? 0}
+                    value={value ?? ""}
+                    strict={false}
+                    disabled={disabled}
+                />
+            </EuiFormRow>
         </div>
     );
 }
