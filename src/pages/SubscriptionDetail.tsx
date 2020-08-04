@@ -191,7 +191,6 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         )
                     );
 
-                promises.push(subscriptionsDetailWithModel(subscriptionId));
                 Promise.all(promises).then(
                     // @ts-ignore
                     (result: [any, Product, WorkflowReasons, Subscription[], any, ...RelatedObject]) => {
