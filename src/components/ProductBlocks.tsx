@@ -18,7 +18,6 @@ import "./ProductBlocks.scss";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-import { ProductBlock, SortOption } from "utils/types";
 
 import { deleteProductBlock, productBlocks } from "../api/index";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -26,6 +25,7 @@ import DropDownActions from "../components/DropDownActions";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
+import { ProductBlock, SortOption } from "../utils/types";
 import { isEmpty, stop } from "../utils/Utils";
 
 interface Action {

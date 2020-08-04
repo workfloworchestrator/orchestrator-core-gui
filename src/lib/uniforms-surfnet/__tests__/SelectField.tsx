@@ -1,4 +1,3 @@
-import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,11 @@ import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
  * limitations under the License.
  *
  */
+
 import React from "react";
 import ReactSelect from "react-select";
 
+import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
 import { ListField, SelectField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";

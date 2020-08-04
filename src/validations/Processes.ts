@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import { Action, Process, ProcessV2, ProcessWithDetails } from "utils/types";
+import { Action, Process, ProcessV2, ProcessWithDetails } from "../utils/types";
 
 type ProcessWithStatus = Process | ProcessWithDetails | ProcessV2;
 

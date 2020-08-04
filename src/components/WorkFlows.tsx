@@ -18,10 +18,10 @@ import "./Workflows.scss";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-import { Filter, SortOption, WorkflowWithProductTags } from "utils/types";
 
 import { allWorkflowsWithProductTags } from "../api";
 import { renderDateTime } from "../utils/Lookups";
+import { Filter, SortOption, WorkflowWithProductTags } from "../utils/types";
 import { isEmpty, stop } from "../utils/Utils";
 import FilterDropDown from "./FilterDropDown";
 

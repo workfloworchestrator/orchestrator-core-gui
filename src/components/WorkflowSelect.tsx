@@ -30,29 +30,25 @@ interface IProps {
     disabled?: boolean;
 }
 
-export default class WorkflowSelect extends React.PureComponent<IProps> {
-    render() {
-        const { onChange, workflows, workflow, disabled } = this.props;
+export default function WorkflowSelect({ onChange, workflows, workflow, disabled }: IProps) {
+    const options = workflows.map(wf => ({
+        label: I18n.t(`workflow.${wf.name}`),
+        value: wf.name
+    }));
 
-        const options = workflows.map(wf => ({
-            label: I18n.t(`workflow.${wf.name}`),
-            value: wf.name
-        }));
+    const value = options.find(option => option.value === workflow);
 
-        const value = options.find(option => option.value === workflow);
-
-        return (
-            <Select
-                className="select-workflow"
-                onChange={onChange as (value: ValueType<Option>) => void}
-                options={options}
-                value={value}
-                isSearchable={true}
-                placeholder={
-                    workflows ? I18n.t("process.workflowsEmptyPlaceholder") : I18n.t("process.workflowsPlaceholder")
-                }
-                isDisabled={disabled || workflows.length === 0}
-            />
-        );
-    }
+    return (
+        <Select
+            className="select-workflow"
+            onChange={onChange as (value: ValueType<Option>) => void}
+            options={options}
+            value={value}
+            isSearchable={true}
+            placeholder={
+                workflows ? I18n.t("process.workflowsEmptyPlaceholder") : I18n.t("process.workflowsPlaceholder")
+            }
+            isDisabled={disabled || workflows.length === 0}
+        />
+    );
 }

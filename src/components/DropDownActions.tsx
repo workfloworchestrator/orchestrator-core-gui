@@ -17,7 +17,8 @@ import "./DropDownActions.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-import { Action } from "utils/types";
+
+import { Action } from "../utils/types";
 
 interface IProps {
     options: Action[];

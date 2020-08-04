@@ -14,8 +14,8 @@
  */
 
 @use "sass:color";
-@use "../stylesheets/vars.scss";
-@use "../stylesheets/mixins.scss";
+@use "../../stylesheets/vars.scss";
+@use "../../stylesheets/mixins.scss";
 
 table.ip-blocks {
     word-break: break-all;

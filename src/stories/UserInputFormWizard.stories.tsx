@@ -16,7 +16,7 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 
-import UserInputFormWizard from "../components/UserInputFormWizard";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import { createForm } from "./utils";
 
 export default {

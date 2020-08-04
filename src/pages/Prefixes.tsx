@@ -21,12 +21,12 @@ import debounce from "lodash/debounce";
 import memoize from "lodash/memoize";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
-import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "utils/types";
 
 import { freeSubnets, prefixSubscriptionsByRootPrefix, prefix_filters } from "../api";
 import FilterDropDown from "../components/FilterDropDown";
 import ApplicationContext from "../utils/ApplicationContext";
 import { familyFullName, ipAddressToNumber, ipamStates, organisationNameByUuid, renderDate } from "../utils/Lookups";
+import { Filter, IpPrefix, IpPrefixSubscription, Product, SortOption } from "../utils/types";
 import { isEmpty, isValidUUIDv4, stop } from "../utils/Utils";
 
 interface ExtendedIpPrefixSubscription extends IpPrefixSubscription {

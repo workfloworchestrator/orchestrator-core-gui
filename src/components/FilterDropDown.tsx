@@ -17,8 +17,8 @@ import "./FilterDropDown.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-import { Filter } from "utils/types";
 
+import { Filter } from "../utils/types";
 import CheckBox from "./CheckBox";
 
 type filterCallback = (filter: Filter) => void;

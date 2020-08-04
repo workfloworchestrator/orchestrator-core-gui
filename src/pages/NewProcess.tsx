@@ -17,13 +17,13 @@ import "./NewProcess.scss";
 
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
-import { HiddenField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 import { catchErrorStatus, startProcess, validation } from "../api";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import ProductSelect from "../components/ProductSelect";
 import ProductValidationComponent from "../components/ProductValidation";
-import UserInputFormWizard from "../components/UserInputFormWizard";
+import { HiddenField } from "../lib/uniforms-surfnet/src";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";

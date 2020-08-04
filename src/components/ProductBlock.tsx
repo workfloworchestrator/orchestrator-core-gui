@@ -22,7 +22,6 @@ import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import Select, { ValueType } from "react-select";
-import { Option, ResourceType, ProductBlock as iProductBlock } from "utils/types";
 
 import { deleteProductBlock } from "../api";
 import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "../api/index";
@@ -30,6 +29,7 @@ import { formDate, formInput, formSelect } from "../forms/Builder";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { getParameterByName } from "../utils/QueryParameters";
+import { Option, ResourceType, ProductBlock as iProductBlock } from "../utils/types";
 import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "./ConfirmationDialog";
 

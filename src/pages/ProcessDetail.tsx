@@ -25,8 +25,8 @@ import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryP
 import { process, resumeProcess } from "../api";
 import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "../api/index";
 import ConfirmationDialog from "../components/ConfirmationDialog";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
-import UserInputFormWizard from "../components/UserInputFormWizard";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";

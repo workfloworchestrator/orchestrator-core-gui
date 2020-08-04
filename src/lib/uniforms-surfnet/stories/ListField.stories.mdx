@@ -1,9 +1,10 @@
 import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
 import { number } from "@storybook/addon-knobs";
 import fetchMock from "fetch-mock";
-import UserInputContainer from "stories/UserInputContainer";
+
+import UserInputContainer from "../../../stories/UserInputContainer";
 import { createForm } from "../../../stories/utils";
-import ListField from "../src/ListField";
+import { ListField } from "../src";
 
 <Meta title="Uniforms/ListField" component={ListField} />
 

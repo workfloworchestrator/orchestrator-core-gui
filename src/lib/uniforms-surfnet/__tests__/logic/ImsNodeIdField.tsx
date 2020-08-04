@@ -13,12 +13,11 @@
  *
  */
 
-import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 
-import { SelectField } from "../../src";
-import ImsNodeIdField from "../../src/logic/ImsNodeIdField";
+import waitForComponentToPaint from "../../../../__tests__/waitForComponentToPaint";
+import { ImsNodeIdField, SelectField } from "../../src";
 import createContext from "../_createContext";
 import mount from "../_mount";
 

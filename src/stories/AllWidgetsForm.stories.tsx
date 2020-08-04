@@ -15,8 +15,8 @@
 
 import fetchMock from "fetch-mock";
 import React from "react";
-import { InputForm } from "utils/types";
 
+import { InputForm } from "../utils/types";
 import FORM_NEW from "./data/all-widgets-form-new.json";
 import IP_BLOCKS from "./data/ip_blocks.json";
 import PRODUCTS from "./data/products.json";

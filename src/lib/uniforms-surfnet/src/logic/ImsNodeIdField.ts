@@ -13,13 +13,13 @@
  *
  */
 
-import { getNodesByLocationAndStatus } from "api";
 import I18n from "i18n-js";
 import { get } from "lodash";
 import { createElement, useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-import { IMSNode } from "utils/types";
 
+import { getNodesByLocationAndStatus } from "../../../../api";
+import { IMSNode } from "../../../../utils/types";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
 export type ImsNodeIdFieldProps = {

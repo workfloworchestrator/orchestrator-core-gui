@@ -1,11 +1,11 @@
 import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
 import fetchMock from "fetch-mock";
-import UserInputContainer from "stories/UserInputContainer";
 
 import IP_BLOCKS_V6 from "../../../stories/data/ip_blocks_v6.json";
 import IP_BLOCKS from "../../../stories/data/ip_blocks.json";
+import UserInputContainer from "../../../stories/UserInputContainer";
 import { createForm } from "../../../stories/utils";
-import IPvAnyNetworkField from "../src/IPvAnyNetworkField";
+import { IPvAnyNetworkField } from "../src";
 
 <Meta title="Uniforms/IPvAnyNetworkField" component={IPvAnyNetworkField} />
 

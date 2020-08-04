@@ -18,12 +18,12 @@ import "./Products.scss";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-import { Filter, SortOption, Product as iProduct } from "utils/types";
 
 import { deleteProduct, products } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
+import { Filter, SortOption, Product as iProduct } from "../utils/types";
 import { isEmpty, stop } from "../utils/Utils";
 import ConfirmationDialog from "./ConfirmationDialog";
 import DropDownActions from "./DropDownActions";

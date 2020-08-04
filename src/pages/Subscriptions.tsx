@@ -15,16 +15,16 @@
 
 import "./Subscriptions.scss";
 
-import {
-    SubscriptionsTable,
-    initialSubscriptionTableSettings,
-    initialSubscriptionsFilterAndSort
-} from "components/tables/Subscriptions";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import Explain from "../components/Explain";
+import {
+    SubscriptionsTable,
+    initialSubscriptionTableSettings,
+    initialSubscriptionsFilterAndSort
+} from "../components/tables/Subscriptions";
 import ApplicationContext from "../utils/ApplicationContext";
 import { Subscription } from "../utils/types";
 

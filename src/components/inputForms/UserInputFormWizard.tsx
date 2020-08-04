@@ -18,11 +18,11 @@ import isEqual from "lodash/isEqual";
 import hash from "object-hash";
 import React from "react";
 
-import { catchErrorStatus } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputForm } from "../utils/types";
-import { stop } from "../utils/Utils";
+import { catchErrorStatus } from "../../api/index";
+import ApplicationContext from "../../utils/ApplicationContext";
+import { setFlash } from "../../utils/Flash";
+import { FormNotCompleteResponse, InputForm } from "../../utils/types";
+import { stop } from "../../utils/Utils";
 import UserInputForm from "./UserInputForm";
 
 interface Form {

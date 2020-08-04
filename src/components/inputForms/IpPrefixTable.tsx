@@ -19,10 +19,10 @@ import I18n from "i18n-js";
 import React from "react";
 import Select, { ValueType } from "react-select";
 
-import { ip_blocks, prefix_filters } from "../api";
-import { ipamStates } from "../utils/Lookups";
-import { IpBlock, IpPrefix, Option, SortOption, prop } from "../utils/types";
-import { stop } from "../utils/Utils";
+import { ip_blocks, prefix_filters } from "../../api";
+import { ipamStates } from "../../utils/Lookups";
+import { IpBlock, IpPrefix, Option, SortOption, prop } from "../../utils/types";
+import { stop } from "../../utils/Utils";
 
 type SortKeys = "id" | "prefix" | "description" | "state_repr";
 

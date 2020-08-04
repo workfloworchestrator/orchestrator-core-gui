@@ -17,12 +17,12 @@ import "./SubscriptionValidation.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-import { SortOption, Subscription, SubscriptionWithDetails } from "utils/types";
 
 import { deleteSubscription } from "../api/index";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { enrichSubscription, renderDate } from "../utils/Lookups";
+import { SortOption, Subscription, SubscriptionWithDetails } from "../utils/types";
 import { stop } from "../utils/Utils";
 import CheckBox from "./CheckBox";
 import ConfirmationDialog from "./ConfirmationDialog";

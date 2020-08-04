@@ -12,13 +12,15 @@
  * limitations under the License.
  *
  */
-import { getAuthorizationHeaderValue } from "api";
+
 import axios from "axios";
 import { ENV } from "env";
 import { SortingRule } from "react-table";
-import { setFlash } from "utils/Flash";
-import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
-import { FilterArgument } from "utils/types";
+
+import { getAuthorizationHeaderValue } from "../api";
+import { setFlash } from "../utils/Flash";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../utils/QueryParameters";
+import { FilterArgument } from "../utils/types";
 
 var axiosInstance = axios.create({ baseURL: ENV.BACKEND_URL + "/api/v2/" });
 

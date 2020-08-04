@@ -40,12 +40,12 @@ import {
     SubscriptionSummaryField,
     SummaryField,
     VlanField
-} from "../lib/uniforms-surfnet/src";
-import ApplicationContext from "../utils/ApplicationContext";
-import { ValidationError } from "../utils/types";
-import { stop } from "../utils/Utils";
-import ConfirmationDialog from "./ConfirmationDialog";
-import { SubscriptionsContextProvider } from "./subscriptionContext";
+} from "../../lib/uniforms-surfnet/src";
+import ApplicationContext from "../../utils/ApplicationContext";
+import { ValidationError } from "../../utils/types";
+import { stop } from "../../utils/Utils";
+import ConfirmationDialog from "../ConfirmationDialog";
+import { SubscriptionsContextProvider } from "../subscriptionContext";
 
 interface FieldError {
     message: string;

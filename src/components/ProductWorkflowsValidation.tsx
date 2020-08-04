@@ -17,9 +17,9 @@ import "./ProductWorkflowsValidation.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-import { CodedWorkflow, Product, WorkflowWithProductTags } from "utils/types";
 
 import ApplicationContext from "../utils/ApplicationContext";
+import { CodedWorkflow, Product, WorkflowWithProductTags } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
 

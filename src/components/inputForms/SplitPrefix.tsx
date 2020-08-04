@@ -18,9 +18,9 @@ import "./SplitPrefix.scss";
 import { range } from "lodash";
 import React from "react";
 import Select, { ValueType } from "react-select";
-import { Option } from "utils/types";
 
-import { free_subnets } from "../api";
+import { free_subnets } from "../../api";
+import { Option } from "../../utils/types";
 
 interface IProps {
     id: string;

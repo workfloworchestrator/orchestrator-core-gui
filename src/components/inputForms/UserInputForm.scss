@@ -13,10 +13,10 @@
  *
  */
 
-@use "../stylesheets/mixins.scss";
-@use "../stylesheets/buttons.scss";
-@use "../stylesheets/forms.scss";
-@use "../stylesheets/vars";
+@use "../../stylesheets/mixins.scss";
+@use "../../stylesheets/buttons.scss";
+@use "../../stylesheets/forms.scss";
+@use "../../stylesheets/vars";
 
 .mod-process-step {
     .card {
