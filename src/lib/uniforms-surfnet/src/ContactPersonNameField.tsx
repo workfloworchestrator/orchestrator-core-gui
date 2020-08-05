@@ -45,7 +45,7 @@ function ContactPersonName({
     organisationKey,
     ...props
 }: ContactPersonNameFieldProps) {
-    const { model, onChange: formOnChange } = useForm();
+    const { model, onChange: formOnChange, schema } = useForm();
 
     const contactsPersonFieldNameArray = joinName(null, name).slice(0, -1);
     const emailFieldName = joinName(contactsPersonFieldNameArray, "email");
@@ -57,10 +57,19 @@ function ContactPersonName({
     const useFieldName = contactsPersonFieldNameArray.length ? contactsFieldName : name;
     const contactsField = useField(useFieldName, {}, { absoluteName: true })[0];
 
+    const organisationFieldName = organisationKey || contactsField.field.organisationKey || "organisation";
+
+    // Get initial value for org field if it exists (we cant really test)
+    let organisationInitialValue;
+    try {
+        organisationInitialValue = schema.getInitialValue(organisationFieldName, {});
+    } catch {
+        organisationInitialValue = "";
+    }
     const organisationIdValue =
         organisationId ||
         contactsField.field.organisationId ||
-        get(model, organisationKey || contactsField.field.organisationKey || "organisation");
+        get(model, organisationFieldName, organisationInitialValue);
 
     let [displayAutocomplete, setDisplayAutocomplete] = useState(false);
     let [contactPersons, setContactPersons] = useState<ContactPerson[]>([]);
@@ -159,7 +168,7 @@ function ContactPersonName({
                     onKeyDown={onAutocompleteKeyDown}
                     onBlur={onBlurAutoComplete}
                 ></input>
-                {displayAutocomplete && suggestions.length && (
+                {!!(displayAutocomplete && suggestions.length) && (
                     <Autocomplete
                         query={value ?? ""}
                         itemSelected={itemSelected}
