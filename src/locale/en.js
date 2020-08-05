@@ -1462,6 +1462,7 @@ I18n.translations.en = {
         terminate_sn8_light_path: "Terminate SN8 Light Path",
         terminate_ip_prefix: "Terminate an IP Prefix",
         terminate_sn8_ip_bgp: "Terminate an SN8 SURFinternet BGP",
+        terminate_sn8_ip_static: "Terminate an SN8 SURFinternet Static",
         terminate_sn8_msc: "Terminate an SN8 Multi Service Carrier",
         terminate_sn8_aggregated_service_port: "Terminate an SN8 Aggregated Service Port",
         terminate_sn8_l2vpn: "Terminate an SN8 L2VPN",
