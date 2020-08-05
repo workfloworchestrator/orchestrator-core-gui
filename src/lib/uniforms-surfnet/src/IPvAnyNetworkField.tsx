@@ -13,7 +13,7 @@
  *
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
 import IPPrefixTable from "../../../components/IpPrefixTable";
@@ -45,6 +45,14 @@ function IPvAnyNetwork({
     const usePrefix = selectedPrefix?.prefix ?? value;
     const [subnet, netmask] = usePrefix?.split("/") ?? ["", ""];
     const usedPrefixMin = prefixMin ?? parseInt(netmask, 10) + (selectedPrefix?.state === 0 ? 0 : 1);
+
+    useEffect(() => {
+        // We got a value from preselect but its not in the form model yet
+        if (prefixMin) {
+            onChange(value);
+        }
+        // This should only run once
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section {...filterDOMProps(props)}>
