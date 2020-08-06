@@ -72,6 +72,7 @@ I18n.translations.en = {
             abort: "Abort",
             retry: "Retry"
         },
+        delete: "Delete",
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
         abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
         retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
@@ -1457,6 +1458,8 @@ I18n.translations.en = {
         task_update_surf_net_txt_record: "Update the surf.net zone to check correct functionality",
         task_validate_customer_ip_prefix_records: "Validate all customer ip prefixes against subscriptions",
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
+
+        terminate_sn7_service_port: "Terminate SN7 Service Port",
 
         terminate_sn8_service_port: "Terminate SN8 Service Port",
         terminate_sn8_light_path: "Terminate SN8 Light Path",
