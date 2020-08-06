@@ -14,6 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/BoolField.scss";
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
@@ -37,36 +38,35 @@ function Bool({
 }: BoolFieldProps) {
     return (
         <section {...filterDOMProps(props)} className={`${className} bool-field`}>
-            <input
-                checked={value || false}
-                disabled={disabled}
-                id={id}
-                name={name}
-                onChange={
-                    disabled
-                        ? undefined
-                        : () => {
-                              onChange(!value);
-                          }
-                }
-                ref={inputRef}
-                type="checkbox"
-            />
-            <label htmlFor={id}>
-                <span tabIndex={0}>
-                    <i className="fa fa-check" />
-                </span>
-            </label>
-            {label && (
-                <label className="info" htmlFor={id}>
-                    {label}
-                </label>
-            )}
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+            >
+                <>
+                    <input
+                        checked={value || false}
+                        disabled={disabled}
+                        id={id}
+                        name={name}
+                        onChange={
+                            disabled
+                                ? undefined
+                                : () => {
+                                      onChange(!value);
+                                  }
+                        }
+                        ref={inputRef}
+                        type="checkbox"
+                    />
+                    <label htmlFor={id}>
+                        <span tabIndex={0}>
+                            <i className="fa fa-check" />
+                        </span>
+                    </label>
+                </>
+            </EuiFormRow>
         </section>
     );
 }

@@ -35,6 +35,8 @@ function Text({
     errorMessage,
     ...props
 }: TextFieldProps) {
+    console.log(label);
+    debugger;
     return (
         <section {...filterDOMProps(props)}>
             <EuiFormRow
@@ -43,16 +45,19 @@ function Text({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
             >
-                <EuiFieldText
-                    disabled={disabled}
-                    id={id}
-                    name={name}
-                    onChange={event => onChange(event.target.value)}
-                    placeholder={placeholder}
-                    // ref={inputRef}
-                    type={type}
-                    value={value ?? ""}
-                />
+                <>
+                    {/*<div>{label}</div>*/}
+                    <input
+                        disabled={disabled}
+                        id={id}
+                        name={name}
+                        onChange={event => onChange(event.target.value)}
+                        placeholder={placeholder}
+                        ref={inputRef}
+                        type={type}
+                        value={value ?? ""}
+                    ></input>
+                </>
             </EuiFormRow>
         </section>
     );
