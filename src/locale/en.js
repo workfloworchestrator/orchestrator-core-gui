@@ -365,6 +365,10 @@ I18n.translations.en = {
             primary_speed_policer: "Primary Speed policer",
             product: "Product",
             product_info: "Search and select the product",
+            insync_reason: "Reason",
+            insync_confirm_reason: "Please confirm or cancel",
+            insync_confirm_reason_info:
+                "Are you really sure you want to set this subscription InSync? This is potentially dangerous and may break all other workflows that are run after this. Please state the reason why you are not using workflows.",
             remote_port_shutdown: "Remote port shutdown",
             removed_service_ports: "Remove ports",
             removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
@@ -1427,6 +1431,7 @@ I18n.translations.en = {
         modify_node_in_service: "Set a planned node in service",
         modify_note: "Modify subscription note",
         modify_sn7_elan: "Modify ELAN",
+        modify_sn7_insync: "Force a SN7 subscription insync",
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
         modify_sn7_light_path_msp_only_speed: "Modify Service Speed",
