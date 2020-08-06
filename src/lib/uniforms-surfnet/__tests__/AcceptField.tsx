@@ -124,11 +124,9 @@ describe("<AcceptField>", () => {
         expect(
             wrapper.find("input[name='skip_checkbox']").simulate("change", { target: { checked: false } })
         ).toBeTruthy();
-        expect(onChange).toHaveBeenLastCalledWith("x", "ACCEPTED");
+        expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
 
-        expect(
-            wrapper.find("input[name='checkbox16']").simulate("change", { target: { checked: false } })
-        ).toBeTruthy();
+        expect(wrapper.find("input[name='checkbox16']").simulate("change", { target: { checked: true } })).toBeTruthy();
         expect(onChange).toHaveBeenLastCalledWith("x", "INCOMPLETE");
     });
 });

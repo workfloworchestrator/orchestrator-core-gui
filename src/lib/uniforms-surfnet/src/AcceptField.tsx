@@ -33,7 +33,7 @@ type AcceptItemType =
     | "skip"
     | "margin"
     | "value";
-type AcceptItem = [string, AcceptItemType, TranslateOptions];
+type AcceptItem = [string, AcceptItemType, TranslateOptions?];
 type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
 export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
@@ -75,6 +75,7 @@ function Accept({
         (state: AcceptState, action: Action) => {
             if (action.type === "skip") {
                 state.skip = action.value;
+                state.checks = {};
             } else {
                 state.checks[action.field] = action.value;
             }
@@ -162,7 +163,7 @@ function Accept({
                                 }}
                                 value={state.checks[index]}
                                 info={label}
-                                disabled={state.skip || disabled}
+                                readOnly={state.skip || disabled}
                             />
                         );
                 }

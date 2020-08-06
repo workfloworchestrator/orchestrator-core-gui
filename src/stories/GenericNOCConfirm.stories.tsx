@@ -89,7 +89,8 @@ export const ComplexInForm = () => {
                         ["check_ims_defined", "label"],
                         ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 1" }],
                         ["check_ims_circuit", ">checkbox", { circuit_name: "ims circuit 2" }],
-                        ["check_port_patched_sn7_sn8", "checkbox?"]
+                        ["check_port_patched_sn7_sn8", "checkbox?"],
+                        ["skip_migrate_sap_workflow", "skip"]
                     ]
                 }
             ]}
