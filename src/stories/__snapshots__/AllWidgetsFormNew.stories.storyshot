@@ -572,7 +572,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               type="text"
                               value="a"
                             />
-                             
                           </div>
                         </section>
                         <section>

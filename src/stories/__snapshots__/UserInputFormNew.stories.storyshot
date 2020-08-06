@@ -203,7 +203,6 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
                               type="text"
                               value=""
                             />
-                             
                           </div>
                         </section>
                         <section>
