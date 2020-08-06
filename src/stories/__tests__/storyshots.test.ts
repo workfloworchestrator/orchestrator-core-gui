@@ -39,7 +39,7 @@ function AsyncSnapshot({
 
     async function match(tree: any) {
         await act(async () => {
-            await new Promise(resolve => setTimeout(resolve, 250));
+            await new Promise(resolve => setTimeout(resolve, 500));
             tree.update(story.render());
         });
         const updated_tree = tree.toJSON();
