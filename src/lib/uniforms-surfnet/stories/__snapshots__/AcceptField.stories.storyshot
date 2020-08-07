@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Uniforms/AcceptField Complex 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          NOC Confirm
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="accept-field"
+                  id="input-noc_remove_static_ip_confirmation"
+                >
+                  <div>
+                    <label>
+                      confirm migrate_sap
+                    </label>
+                  </div>
+                  <div>
+                    <em>
+                      confirm migrate_sap_info
+                    </em>
+                  </div>
+                  <div>
+                    <label
+                      className="warning"
+                    >
+                      next step_service_affecting
+                    </label>
+                  </div>
+                  <br />
+                  <div>
+                    <input
+                      disabled={true}
+                      value="some value"
+                    />
+                  </div>
+                  <div>
+                    <a
+                      href="http://example.com"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      http://example.com
+                    </a>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="check_delete_sn7_service_config6"
+                      name="check_delete_sn7_service_config6"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="check_delete_sn7_service_config6"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="check_delete_sn7_service_config6"
+                    >
+                      check delete_sn7_service_config
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      check ims_defined
+                    </label>
+                  </div>
+                  <div
+                    className="level_2"
+                  >
+                    <input
+                      disabled={false}
+                      id="sub_checkbox_18"
+                      name="sub_checkbox_18"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="sub_checkbox_18"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="sub_checkbox_18"
+                    >
+                      sub checkbox_1
+                    </label>
+                  </div>
+                  <div
+                    className="level_2"
+                  >
+                    <input
+                      disabled={false}
+                      id="sub_checkbox_29"
+                      name="sub_checkbox_29"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="sub_checkbox_29"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="sub_checkbox_29"
+                    >
+                      sub checkbox_2
+                    </label>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="optional _checkbox10"
+                      name="optional _checkbox10"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="optional _checkbox10"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="optional _checkbox10"
+                    >
+                      optional  checkbox
+                    </label>
+                  </div>
+                  <div
+                    className="skip"
+                  >
+                    <input
+                      checked={false}
+                      disabled={false}
+                      id="skip"
+                      name="skip"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="skip"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="skip"
+                    >
+                      skip
+                    </label>
+                  </div>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;
+
+exports[`Storyshots Uniforms/AcceptField Legacy 1`] = `
+<section
+  className="storybook-container"
+>
+  <div
+    className="mod-new-process"
+  >
+    <section
+      className="card"
+    >
+      <section
+        className="form-step divider"
+      >
+        <h1>
+          NOC Confirm
+        </h1>
+        <div
+          className="mod-process-step"
+        >
+          <section
+            className="card"
+          >
+            <form
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <section
+                className="form-step"
+              >
+                <section
+                  className="accept-field"
+                  id="input-noc_remove_static_ip_confirmation"
+                >
+                  <div>
+                    <label>
+                      Confirm removal
+                    </label>
+                  </div>
+                  <div>
+                    <em>
+                      Is this Static IP service removed from the network?
+                    </em>
+                  </div>
+                  <div
+                    className="checkbox"
+                  >
+                    <input
+                      disabled={false}
+                      id="noc_remove_static_ip_confirmation"
+                      name="noc_remove_static_ip_confirmation"
+                      onChange={[Function]}
+                      type="checkbox"
+                    />
+                    <label
+                      htmlFor="noc_remove_static_ip_confirmation"
+                    >
+                      <span
+                        tabIndex="0"
+                      >
+                        <i
+                          className="fa fa-check"
+                        />
+                      </span>
+                    </label>
+                    <label
+                      className="info"
+                      htmlFor="noc_remove_static_ip_confirmation"
+                    >
+                      Confirm removal
+                    </label>
+                  </div>
+                </section>
+              </section>
+              <section
+                className="buttons"
+              >
+                <button
+                  className="button"
+                  id="button-cancel-form-submit"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button blue"
+                  id="button-submit-form-submit"
+                  tabIndex={0}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </form>
+          </section>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>
+`;

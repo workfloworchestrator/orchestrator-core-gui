@@ -38,6 +38,7 @@ function withContext(storyFn) {
 addDecorator(withContext);
 
 I18n.locale = "en";
+I18n.missingBehaviour = "guess";
 
 // Set runtime config
 window.__env__ = {};

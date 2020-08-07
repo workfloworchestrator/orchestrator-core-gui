@@ -152,7 +152,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-product2"
                   >
-                    [missing "en.forms.fields.product2" translation]
+                    product2
                     <em>
                       
                     </em>
@@ -268,12 +268,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 >
                   <div>
                     <label>
-                      [missing "en.forms.fields.accept" translation]
+                      accept
                     </label>
                   </div>
                   <div>
                     <em>
-                      [missing "en.forms.fields.accept_info" translation]
+                      accept info
                     </em>
                   </div>
                   <div
@@ -301,7 +301,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       className="info"
                       htmlFor="accept"
                     >
-                      [missing "en.forms.fields.accept" translation]
+                      accept
                     </label>
                   </div>
                 </section>
@@ -309,7 +309,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth1"
                   >
-                    [missing "en.forms.fields.bandwidth1" translation]
+                    bandwidth1
                     
                   </label>
                   <span
@@ -502,7 +502,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="info"
                     htmlFor="input-boolean1"
                   >
-                    [missing "en.forms.fields.boolean1" translation]
+                    boolean1
                   </label>
                 </section>
                 <section
@@ -531,7 +531,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="info"
                     htmlFor="input-boolean2"
                   >
-                    [missing "en.forms.fields.boolean2" translation]
+                    boolean2
                   </label>
                 </section>
                 <section
@@ -634,7 +634,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink_add_link1" translation]
+                    corelink add_link1
                     <em>
                       
                     </em>
@@ -873,7 +873,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink_add_link2" translation]
+                    corelink add_link2
                     <em>
                       
                     </em>
@@ -1112,7 +1112,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink" translation]
+                    corelink
                     <em>
                       
                     </em>
@@ -1367,7 +1367,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-generic_select"
                   >
-                    [missing "en.forms.fields.generic_select" translation]
+                    generic select
                     <em>
                       
                     </em>
@@ -2864,7 +2864,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-isalias"
                   >
-                    [missing "en.forms.fields.isalias" translation]
+                    isalias
                     
                   </label>
                   <input
@@ -2881,7 +2881,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-jira_ticket"
                   >
-                    [missing "en.forms.fields.jira_ticket" translation]
+                    jira ticket
                     
                   </label>
                   <input
@@ -2899,7 +2899,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="label label"
                     id="input-label"
                   >
-                    [missing "en.forms.fields.label" translation]
+                    label
                   </p>
                 </section>
                 <section>
@@ -3025,7 +3025,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary1"
                   >
-                    [missing "en.forms.fields.migration_summary1" translation]
+                    migration summary1
                     
                   </label>
                   <section
@@ -3086,7 +3086,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary2"
                   >
-                    [missing "en.forms.fields.migration_summary2" translation]
+                    migration summary2
                     
                   </label>
                   <section
@@ -3139,7 +3139,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary3"
                   >
-                    [missing "en.forms.fields.migration_summary3" translation]
+                    migration summary3
                     
                   </label>
                   <section
@@ -3206,7 +3206,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.node_id_port_select" translation]
+                    node id_port_select
                     <em>
                       
                     </em>
@@ -3447,7 +3447,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-nodes_for_location_code_and_status"
                   >
-                    [missing "en.forms.fields.nodes_for_location_code_and_status" translation]
+                    nodes for_location_code_and_status
                     <em>
                       
                     </em>
@@ -3566,7 +3566,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-numeric1"
                   >
-                    [missing "en.forms.fields.numeric1" translation]
+                    numeric1
                     
                   </label>
                   <span
@@ -3697,7 +3697,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-numeric2"
                   >
-                    [missing "en.forms.fields.numeric2" translation]
+                    numeric2
                     
                   </label>
                   <span
@@ -3828,7 +3828,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-organisation1"
                   >
-                    [missing "en.forms.fields.organisation1" translation]
+                    organisation1
                     <em>
                       
                     </em>
@@ -3947,7 +3947,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-organisation2"
                   >
-                    [missing "en.forms.fields.organisation2" translation]
+                    organisation2
                     <em>
                       
                     </em>
@@ -4062,7 +4062,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports1"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports1" translation]
+                    service ports1
                     <em>
                       
                     </em>
@@ -4080,7 +4080,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4209,7 +4209,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4251,7 +4251,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4380,7 +4380,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4427,7 +4427,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports2"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports2" translation]
+                    service ports2
                     <em>
                       
                     </em>
@@ -4445,7 +4445,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4574,7 +4574,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4625,7 +4625,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4754,7 +4754,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4810,7 +4810,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports3"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports3" translation]
+                    service ports3
                     <em>
                       
                     </em>
@@ -4828,7 +4828,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports3.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports3_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4944,7 +4944,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports3.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports3_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4986,7 +4986,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports4"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports4" translation]
+                    service ports4
                     <em>
                       
                     </em>
@@ -5004,7 +5004,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5133,7 +5133,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5164,7 +5164,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.bandwidth"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
+                            bandwidth
                             
                           </label>
                           <span
@@ -5315,7 +5315,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5444,7 +5444,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5475,7 +5475,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.bandwidth"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
+                            bandwidth
                             
                           </label>
                           <span
@@ -5631,7 +5631,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports5"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports5" translation]
+                    service ports5
                     <em>
                       
                     </em>
@@ -5649,7 +5649,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports5.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports5_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5778,7 +5778,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports5.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports5_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5825,7 +5825,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports6"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports6" translation]
+                    service ports6
                     <em>
                       
                     </em>
@@ -5843,7 +5843,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports6.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports6_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5959,7 +5959,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports6.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports6_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6001,7 +6001,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports7"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports7" translation]
+                    service ports7
                     <em>
                       
                     </em>
@@ -6019,7 +6019,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports7.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports7_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6135,7 +6135,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports7.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports7_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6177,7 +6177,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports8"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports8" translation]
+                    service ports8
                     <em>
                       
                     </em>
@@ -6195,7 +6195,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6324,7 +6324,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6366,7 +6366,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6495,7 +6495,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6546,7 +6546,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.2.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6675,7 +6675,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.2.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6717,7 +6717,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.3.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6846,7 +6846,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.3.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6902,7 +6902,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports9"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports9" translation]
+                    service ports9
                     <em>
                       
                     </em>
@@ -6920,7 +6920,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports9.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports9_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7036,7 +7036,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports9.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports9_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7078,7 +7078,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports10"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports10" translation]
+                    service ports10
                     <em>
                       
                     </em>
@@ -7096,7 +7096,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports10.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports10_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7212,7 +7212,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports10.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports10_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7254,7 +7254,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn81"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn81" translation]
+                    service ports_sn81
                     <em>
                       
                     </em>
@@ -7272,7 +7272,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn81.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn81_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7401,7 +7401,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn81.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn81_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7443,7 +7443,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn82"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn82" translation]
+                    service ports_sn82
                     <em>
                       
                     </em>
@@ -7461,7 +7461,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn82.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn82_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7590,7 +7590,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn82.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn82_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7637,7 +7637,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn83"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn83" translation]
+                    service ports_sn83
                     <em>
                       
                     </em>
@@ -7655,7 +7655,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn83.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn83_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7784,7 +7784,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn83.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn83_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7831,7 +7831,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn84"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn84" translation]
+                    service ports_sn84
                     <em>
                       
                     </em>
@@ -7849,7 +7849,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn84.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn84_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -7978,7 +7978,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn84.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn84_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -8025,7 +8025,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn85"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn85" translation]
+                    service ports_sn85
                     <em>
                       
                     </em>
@@ -8043,7 +8043,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn85.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn85_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -8159,7 +8159,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn85.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn85_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -8201,7 +8201,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn86"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn86" translation]
+                    service ports_sn86
                     <em>
                       
                     </em>
@@ -8219,7 +8219,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn86.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn86_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -8348,7 +8348,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn86.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn86_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -8395,7 +8395,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-service_ports_sn87"
                 >
                   <label>
-                    [missing "en.forms.fields.service_ports_sn87" translation]
+                    service ports_sn87
                     <em>
                       
                     </em>
@@ -8413,7 +8413,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn87.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn87_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -8529,7 +8529,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn87.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn87_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -8570,7 +8570,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-stp"
                   >
-                    [missing "en.forms.fields.stp" translation]
+                    stp
                     
                   </label>
                   <input
@@ -8587,7 +8587,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string1"
                   >
-                    [missing "en.forms.fields.string1" translation]
+                    string1
                     
                   </label>
                   <input
@@ -8604,7 +8604,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string2"
                   >
-                    [missing "en.forms.fields.string2" translation]
+                    string2
                     
                   </label>
                   <input
@@ -8621,7 +8621,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string3"
                   >
-                    [missing "en.forms.fields.string3" translation]
+                    string3
                     
                   </label>
                   <input
@@ -9050,7 +9050,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-subscription_product_tag1"
                   >
-                    [missing "en.forms.fields.subscription_product_tag1" translation]
+                    subscription product_tag1
                     <em>
                       
                     </em>
@@ -9181,7 +9181,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-subscription_product_tag2"
                   >
-                    [missing "en.forms.fields.subscription_product_tag2" translation]
+                    subscription product_tag2
                     <em>
                       
                     </em>
@@ -9311,7 +9311,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-subscriptions1"
                 >
                   <label>
-                    [missing "en.forms.fields.subscriptions1" translation]
+                    subscriptions1
                     <em>
                       
                     </em>
@@ -9606,7 +9606,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   id="input-subscriptions2"
                 >
                   <label>
-                    [missing "en.forms.fields.subscriptions2" translation]
+                    subscriptions2
                     <em>
                       
                     </em>
@@ -9900,7 +9900,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-transition_product1"
                   >
-                    [missing "en.forms.fields.transition_product1" translation]
+                    transition product1
                     <em>
                       
                     </em>
@@ -10038,7 +10038,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-uuid"
                   >
-                    [missing "en.forms.fields.uuid" translation]
+                    uuid
                     
                   </label>
                   <input
@@ -10055,7 +10055,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth2"
                   >
-                    [missing "en.forms.fields.bandwidth2" translation]
+                    bandwidth2
                     
                   </label>
                   <span
@@ -10186,7 +10186,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth3"
                   >
-                    [missing "en.forms.fields.bandwidth3" translation]
+                    bandwidth3
                     
                   </label>
                   <span
