@@ -316,6 +316,51 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                 <EuiFlexGroup gutterSize="l">{horizontalCardNodes}</EuiFlexGroup>
 
                 <EuiText>
+                    <h2>Forms</h2>
+                </EuiText>
+                <EuiText>
+                    <h3>With EUI components</h3>
+                </EuiText>
+                <EuiFlexGroup style={{ maxWidth: 600 }}>
+                    <EuiFlexItem>
+                        <EuiFormRow label="First name" helpText="I am helpful help text!">
+                            <EuiFieldText />
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiFormRow label="Last name">
+                            <EuiFieldText />
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={false}>
+                        <EuiFormRow hasEmptyLabelSpace>
+                            <EuiButton>Save</EuiButton>
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+
+                <EuiText>
+                    <h3>With default components</h3>
+                </EuiText>
+                <EuiFlexGroup style={{ maxWidth: 600 }}>
+                    <EuiFlexItem>
+                        <EuiFormRow label="First name" helpText="I am helpful help text!">
+                            <input type="text" />
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiFormRow label="Last name">
+                            <input type="text" />
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={false}>
+                        <EuiFormRow hasEmptyLabelSpace>
+                            <EuiButton>Save</EuiButton>
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+
+                <EuiText>
                     <h2>Modal</h2>
                 </EuiText>
                 <EuiButton onClick={this.showModal}>Show modal</EuiButton>

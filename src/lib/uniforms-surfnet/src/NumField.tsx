@@ -13,7 +13,7 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
-import { EuiFieldNumber, EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
+import { EuiFieldNumber, EuiFormRow, EuiText } from "@elastic/eui";
 import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
@@ -51,20 +51,16 @@ function Num({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
             >
-                <NumericInput
+                <EuiFieldNumber
                     id={id}
                     name={name}
-                    ref={inputRef}
+                    // ref={inputRef}
                     placeholder={placeholder}
-                    onChange={v => {
-                        onChange(v ?? undefined);
-                    }}
+                    onChange={event => onChange(parseInt(event.target.value))}
                     min={min}
                     max={max}
                     step={step ?? 1}
-                    precision={precision ?? 0}
                     value={value ?? ""}
-                    strict={false}
                     disabled={disabled}
                 />
             </EuiFormRow>

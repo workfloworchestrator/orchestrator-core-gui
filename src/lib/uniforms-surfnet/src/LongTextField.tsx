@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,8 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  */
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
+import { EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 export type LongTextFieldProps = FieldProps<string, {}, HTMLTextAreaElement>;
 
 function LongText({
@@ -35,27 +35,22 @@ function LongText({
 }: LongTextFieldProps) {
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <textarea
-                disabled={disabled}
-                id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                value={value ?? ""}
-                rows={5}
-            />
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={errorMessage}
+                isInvalid={error}
+            >
+                <EuiTextArea
+                    disabled={disabled}
+                    id={id}
+                    name={name}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    // ref={inputRef}
+                    value={value ?? ""}
+                />
+            </EuiFormRow>
         </section>
     );
 }

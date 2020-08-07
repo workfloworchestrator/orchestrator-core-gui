@@ -45,19 +45,16 @@ function Text({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
             >
-                <>
-                    {/*<div>{label}</div>*/}
-                    <input
-                        disabled={disabled}
-                        id={id}
-                        name={name}
-                        onChange={event => onChange(event.target.value)}
-                        placeholder={placeholder}
-                        ref={inputRef}
-                        type={type}
-                        value={value ?? ""}
-                    ></input>
-                </>
+                <EuiFieldText
+                    disabled={disabled}
+                    id={id}
+                    name={name}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    // ref={inputRef}
+                    type={type}
+                    value={value ?? ""}
+                />
             </EuiFormRow>
         </section>
     );

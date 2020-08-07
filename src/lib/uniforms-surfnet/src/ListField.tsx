@@ -17,6 +17,7 @@ import "lib/uniforms-surfnet/src/ListField.scss";
 import ListAddField from "lib/uniforms-surfnet/src/ListAddField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
@@ -56,12 +57,15 @@ function List({
 
     return (
         <section {...filterDOMProps(props)} className={`${className} list-field${hasListAsChild ? " outer-list" : ""}`}>
-            {label && (
-                <label>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+            >
+                <></>
+            </EuiFormRow>
+
             <ul>
                 {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
                     Children.map(children, (child, childIndex) =>
@@ -78,11 +82,6 @@ function List({
 
                 <ListAddField initialCount={initialCount} name="$" disabled={disabled} outerList={hasListAsChild} />
             </ul>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
         </section>
     );
 }
