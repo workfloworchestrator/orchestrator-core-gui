@@ -52,21 +52,21 @@
         }
 
         // Hide all labels for sub fields
-        label {
-            display: none;
-        }
+        //label {
+        //    display: none;
+        //}
 
-        &:first-child {
-            //Except for the first row with nested field
-            // We use '>' because we don't want the outer list to influence the inner list
-            > * > * > label {
-                display: initial;
-            }
-            // We use '>' because we don't want the outer list to influence the inner list
-            > section.nest-field ~ div.del-item {
-                margin-top: 25px;
-            }
-        }
+        //&:first-child {
+        //    //Except for the first row with nested field
+        //    // We use '>' because we don't want the outer list to influence the inner list
+        //    > * > * > label {
+        //        display: initial;
+        //    }
+        //    // We use '>' because we don't want the outer list to influence the inner list
+        //    > section.nest-field ~ div.del-item {
+        //        margin-top: 25px;
+        //    }
+        //}
     }
     div.add-item,
     div.del-item {
