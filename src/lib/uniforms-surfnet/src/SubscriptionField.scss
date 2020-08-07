@@ -29,26 +29,35 @@
             }
         }
     }
-}
 
-li .refresh-subscriptions {
-    flex-shrink: 0;
-}
+    .refresh-subscriptions i {
+        &.fa-sync {
+            margin-left: auto;
+            margin-top: 0px;
+            color: vars.$blue;
+            font-size: 30px;
+            cursor: pointer;
 
-li .refresh-subscriptions i {
-    display: none;
-    &.fa-sync {
-        margin-left: auto;
-        margin-top: 0px;
-        color: vars.$blue;
-        font-size: 30px;
-        cursor: pointer;
-
-        &.loading {
-            animation: load8 1.1s infinite linear;
+            &.loading {
+                animation: load8 1.1s infinite linear;
+            }
         }
     }
 }
-li:first-of-type .refresh-subscriptions i {
+
+// Fix things for ListField wrapped SubscriptionFields
+// We only want to display the first refresh button on each (inner) list
+li .refresh-subscriptions {
+    flex-shrink: 0;
+
+    i {
+        display: none;
+    }
+}
+
+// We use '>' because we don't want the outer list to influence the inner list
+// Needs to work for Lists with and without NestField in between
+li:first-child > * > * > * > .refresh-subscriptions i,
+li:first-child > * > * > .refresh-subscriptions i {
     display: block;
 }

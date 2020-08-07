@@ -72,6 +72,7 @@ I18n.translations.en = {
             abort: "Abort",
             retry: "Retry"
         },
+        delete: "Delete",
         deleteConfirmation: "Are you sure you want to delete {{name}} process for {{customer}}?",
         abortConfirmation: "Are you sure you want to abort {{name}} process for {{customer}}?",
         retryConfirmation: "Are you sure you want to retry {{name}} process for {{customer}}?",
@@ -85,7 +86,8 @@ I18n.translations.en = {
         widgets: {
             nodePort: {
                 selectNodeFirst: "First select a node",
-                selectPort: "Select a port"
+                selectPort: "Select a port",
+                loading: "Loading..."
             },
             contactPersonName: {
                 placeholder: "Search and add contact persons..."
@@ -237,6 +239,10 @@ I18n.translations.en = {
             downgrade_redundant_lp_choice: "Redundant LP Subscription",
             downgrade_redundant_lp_choice_info:
                 "Choose one of the Lightpaths of the redundant Lightpath to be de-activated",
+            esi_service_ports: "Endpoints (ESI)",
+            esi_service_ports_add: "Add Endpoint",
+            esi_service_ports_del: "Delete Endpoint",
+            esi_service_ports_fields: { subscription_id: "ESI Ports", vlan: "ESI Vlan" },
             extra_information: "Extra information",
             extra_information_info:
                 "Additional information to add to the subscription description and IPAM description",
@@ -289,9 +295,18 @@ I18n.translations.en = {
             nms_service_updated_info: "Confirmation that the NMS Service on the physical network has been updated",
             noc_customer_confirmation: "The customer has confirmed the successful delivery of the service",
             noc_customer_confirmation_info: "Has the customer confirmed that the service was successfully delivered?",
-            noc_downgrade_lichtpad_confirmation: "Confirmation of the downgrade of the redundant LightPath",
-            noc_downgrade_lichtpad_confirmation_info:
-                "Is the redundant LightPath downgraded to a non-redundant LightPath?",
+            noc_downgrade_lichtpad_confirmation_accept: {
+                label: "Confirmation of the downgrade of the redundant LightPath",
+                info: "Is the redundant LightPath downgraded to a non-redundant LightPath?",
+                checkbox: "Confirmed",
+                subscription: "Subscription",
+                new_name: "New product",
+                customer: "Customer",
+                status: "Status",
+                description: "Description",
+                choice_label: "The lightpath that should be removed from this redundant LP",
+                choice: "{{choice}}"
+            },
             noc_network_confirmation_accept: {
                 noc_network_confirmation: "Confirmation",
                 noc_network_confirmation_info: "Confirm implementation of changes in the network",
@@ -318,6 +333,11 @@ I18n.translations.en = {
                 check_ims_circuit: "{{circuit_name}}",
                 check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
             },
+            node_terminate_warning_accept: {
+                node_terminate_warning: "Node terminate warning",
+                node_terminate_warning_info:
+                    "When you terminate the subscription you have to manually set the node to PLANNED again in IMS before you can re-run the node create workflow"
+            },
             note: "Notes",
             note_info: "Notes, reminders and feedback about this description.",
             nsi_isalias: "NSI isAlias",
@@ -334,6 +354,8 @@ I18n.translations.en = {
             port_id_info: "Select a port",
             port_mode: "Port Mode",
             port_mode_info: "The port mode of the new service port",
+            ports_summary: "Redundant LP Subscription Ports",
+            ports_summary_info: "",
             primary_remote_port_shutdown: "Primary Remote port shutdown",
             primary_service_ports: "Primary Service Ports",
             primary_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
@@ -387,6 +409,8 @@ I18n.translations.en = {
             speed_policer: "Speed policer",
             subscription_id: "Subscription",
             subscription_id_info: "The subscription for this action",
+            subscription_summary: "Redundant LP Subscription",
+            subscription_summary_info: "",
             surfcert_filter: "SURFcert filter",
             surfcert_filter_info: "Type of the SURFcert filter.",
             ticket_id: "Jira ticket ID",
@@ -1435,12 +1459,16 @@ I18n.translations.en = {
         task_validate_customer_ip_prefix_records: "Validate all customer ip prefixes against subscriptions",
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
 
+        terminate_sn7_service_port: "Terminate SN7 Service Port",
+
         terminate_sn8_service_port: "Terminate SN8 Service Port",
         terminate_sn8_light_path: "Terminate SN8 Light Path",
         terminate_ip_prefix: "Terminate an IP Prefix",
         terminate_sn8_ip_bgp: "Terminate an SN8 SURFinternet BGP",
+        terminate_sn8_ip_static: "Terminate an SN8 SURFinternet Static",
         terminate_sn8_msc: "Terminate an SN8 Multi Service Carrier",
         terminate_sn8_aggregated_service_port: "Terminate an SN8 Aggregated Service Port",
+        terminate_sn8_l2vpn: "Terminate an SN8 L2VPN",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 

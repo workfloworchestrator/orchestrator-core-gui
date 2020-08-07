@@ -17,6 +17,7 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 
 import UserInputFormWizard from "../components/UserInputFormWizard";
+import { createForm } from "./utils";
 
 export default {
     title: "UserInputFormWizard",
@@ -37,13 +38,12 @@ export const Wizard = () => {
                             status: 510,
                             json: () =>
                                 Promise.resolve({
-                                    form: [
-                                        {
-                                            name: "ims_port_id_2",
-                                            type: "generic_select",
-                                            choices: ["1", "2", "3"]
+                                    form: createForm({
+                                        ims_port_id_2: {
+                                            type: "string",
+                                            enum: ["1", "2", "3"]
                                         }
-                                    ],
+                                    }),
                                     hasNext: false
                                 })
                         }
@@ -52,13 +52,12 @@ export const Wizard = () => {
                     return Promise.resolve();
                 }
             }}
-            stepUserInput={[
-                {
-                    name: "ims_port_id_1",
-                    type: "generic_select",
-                    choices: ["a", "b", "c"]
+            stepUserInput={createForm({
+                ims_port_id_1: {
+                    type: "string",
+                    enum: ["a", "b", "c"]
                 }
-            ]}
+            })}
             hasNext={true}
             cancel={action("cancel")}
         />

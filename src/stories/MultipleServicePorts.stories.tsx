@@ -41,7 +41,7 @@ export const Sn8MultipleServicePorts = () => {
     fetchMock.restore();
     fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-AGGSP-MSC-MSCNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL-AGGSP-MSC-MSCNL%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active")
     );
     loadVlanMocks();
@@ -83,7 +83,7 @@ export const Sn7MultipleServicePorts = () => {
     fetchMock.restore();
     fetchMock.get("glob:*/api/fixed_inputs/port_speed_by_subscription_id/*", [1000]);
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,MSP-SSP-MSPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CMSP-SSP-MSPNL%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active")
     );
     loadVlanMocks();

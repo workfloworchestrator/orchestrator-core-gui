@@ -34,8 +34,8 @@ export default function withSubscriptions(component: JSX.Element) {
                 value={
                     {
                         getSubscription,
-                        getSubscriptions: (filteredProductIds?: string[], tags?: string[]) =>
-                            Promise.resolve(getSubscriptions(filteredProductIds, tags)),
+                        getSubscriptions: (tags?: string[], statuses?: string[]) =>
+                            Promise.resolve(getSubscriptions(tags, statuses)),
                         clearSubscriptions,
                         subscriptions
                     } as any

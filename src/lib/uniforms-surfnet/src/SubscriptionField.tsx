@@ -20,7 +20,7 @@ import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
-import { connectField, filterDOMProps, useForm } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { filterProductsByBandwidth } from "validations/Products";
@@ -32,6 +32,7 @@ import {
     ServicePortSubscription,
     Subscription as iSubscription
 } from "../../../utils/types";
+import { ListFieldProps } from "./ListField";
 import { FieldProps } from "./types";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
@@ -72,7 +73,8 @@ filterDOMProps.register(
     "visiblePortMode",
     "bandwidth",
     "bandwidthKey",
-    "tags"
+    "tags",
+    "statuses"
 );
 
 export type SubscriptionFieldProps = FieldProps<
@@ -85,7 +87,8 @@ export type SubscriptionFieldProps = FieldProps<
         visiblePortMode?: string;
         bandwidth?: number;
         bandwidthKey?: string;
-        tags?: string[];
+        tags?: string[]; // There is an assumption that using tags means you want port subscriptions
+        statuses?: string[];
     }
 >;
 
@@ -113,8 +116,16 @@ function Subscription({
     bandwidth,
     bandwidthKey,
     tags,
+    statuses,
     ...props
 }: SubscriptionFieldProps) {
+    const nameArray = joinName(null, name);
+    let parentName = joinName(nameArray.slice(0, -1));
+    // We cant call useField conditionally so we call it for ourselfs if there is no parent
+    if (parentName === "") {
+        parentName = name;
+    }
+    const parent = useField(parentName, {}, { absoluteName: true })[0];
     const { model } = useForm();
 
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
@@ -122,24 +133,37 @@ function Subscription({
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
-    const usedBandwith = bandwidth || get(model, bandwidthKey!);
-    const usedOrganisationId = organisationId || get(model, organisationKey!);
+    const usedBandwidth = bandwidth || get(model, bandwidthKey!);
+
+    // Get value from org field if organisationKey is set.
+    const usedOrganisationId = organisationKey
+        ? get(model, organisationKey, "nonExistingOrgToFilterEverything")
+        : organisationId;
 
     const filteredProductIds = useMemo(() => {
-        const bandwitdhFilterd = filterProductsByBandwidth(allProducts, usedBandwith).map(
-            product => product.product_id
-        );
-        // Also filter on productIds is applicable
-        return productIds?.length ? bandwitdhFilterd.filter(item => productIds.includes(item)) : bandwitdhFilterd;
-    }, [allProducts, usedBandwith, productIds]);
+        let products = allProducts;
+        if (tags?.length) {
+            products = allProducts.filter(product => tags?.includes(product.tag));
+        }
+
+        if (productIds?.length) {
+            products = allProducts.filter(product => productIds?.includes(product.product_id));
+        }
+
+        if (usedBandwidth) {
+            products = filterProductsByBandwidth(products, usedBandwidth);
+        }
+
+        return products.length !== allProducts.length ? products.map(product => product.product_id) : [];
+    }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {
-        getSubscriptions(filteredProductIds, tags).then(result => updateSubscriptions(result));
-    }, [getSubscriptions, filteredProductIds, tags]);
+        getSubscriptions(tags, statuses).then(result => updateSubscriptions(result));
+    }, [getSubscriptions, tags, statuses]);
 
-    // Filter by product
+    // Filter by product, needed because getSubscriptions might return more than we want
     subscriptions =
-        filteredProductIds.length === allProducts.length || filteredProductIds.length === 1
+        filteredProductIds.length === allProducts.length
             ? subscriptions
             : subscriptions.filter(sp => filteredProductIds.includes(sp.product.product_id));
 
@@ -161,6 +185,17 @@ function Subscription({
     // Customer filter toggle
     if (usedOrganisationId) {
         subscriptions = subscriptions.filter(item => item.customer_id === usedOrganisationId);
+    }
+
+    if (parentName !== name) {
+        if (parent.fieldType === Array && (parent as ListFieldProps).uniqueItems) {
+            const allValues: string[] = get(model, parentName, []);
+            const chosenValues = allValues.filter(
+                (_item, index) => index.toString() !== nameArray[nameArray.length - 1]
+            );
+
+            subscriptions = subscriptions.filter(subscription => !chosenValues.includes(subscription.subscription_id));
+        }
     }
 
     const options = subscriptions.map((subscription: iSubscription) => ({
@@ -186,7 +221,7 @@ function Subscription({
                             onClick={() => {
                                 setLoading(true);
                                 clearSubscriptions();
-                                getSubscriptions(filteredProductIds, tags).then(result => {
+                                getSubscriptions(tags, statuses).then(result => {
                                     updateSubscriptions(result);
                                     setLoading(false);
                                 });
@@ -196,6 +231,7 @@ function Subscription({
                 )}
                 <ReactSelect
                     id={id}
+                    inputId={`${id}.search`}
                     name={name}
                     onChange={(option: ValueType<Option>) => {
                         onChange((option as Option | null)?.value);

@@ -1,0 +1,79 @@
+{
+    "product": {
+        "product_id": "a3bf8b26-50a6-4586-8e58-ad552cb39798",
+        "name": "SN8 SURFinternet BGP",
+        "description": "SN8 SURFinternet connection using BGP",
+        "product_type": "IP",
+        "tag": "IPBGP",
+        "status": "active"
+    },
+    "customer_id": "5203e539-0a11-e511-80d0-005056956c1a",
+    "description": "GRAAFSCHAP IP DTC001A-DTC001A",
+    "subscription_id": "9c8c13d5-6954-461a-a931-32894c193aa0",
+    "status": "active",
+    "insync": true,
+    "start_date": 1590764593.297472,
+    "end_date": null,
+    "domain": "SURFNET8",
+    "ip_routing_type": "BGP",
+    "vc": {
+        "subscription_instance_id": "5414e6f2-e9a2-47a6-94ef-20f426bf65a2",
+        "label": null,
+        "settings": {
+            "subscription_instance_id": "705a2c48-383a-419f-81b3-fcc49244dfb2",
+            "label": null,
+            "internetpinnen": false,
+            "asn": 2324,
+            "surfcert_filter": "default",
+            "multicast": true,
+            "internetpinnen_prefix_subscription_id": []
+        },
+        "saps": [
+            {
+                "subscription_instance_id": "4b6d3259-f97b-42ca-8465-c97a9f7cf448",
+                "label": null,
+                "ip_prefix_subscription_id": [
+                    "2d58c52e-db35-4bd9-882d-5b4deb7a697b",
+                    "6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                ],
+                "port_subscription_id": "07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d",
+                "vlanrange": "0",
+                "customer_ipv4_mtu": 1500,
+                "bfd": false,
+                "bgp_session_priority": "primary",
+                "bgp_hash_algorithm": "no",
+                "bgp_export_policy": "default",
+                "ptp_ipv4_ipam_id": 26208,
+                "customer_ipv6_mtu": 1500,
+                "ptp_ipv6_ipam_id": null,
+                "bgp_password": null,
+                "bfd_minimum_interval": null,
+                "bfd_multiplier": null
+            },
+            {
+                "subscription_instance_id": "2cf6cf3d-6aa6-4b8d-9f05-b676fdf40c59",
+                "label": null,
+                "ip_prefix_subscription_id": [
+                    "2d58c52e-db35-4bd9-882d-5b4deb7a697b",
+                    "6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                ],
+                "port_subscription_id": "2b0d8128-4dce-42da-a3a3-b97deddf9ae2",
+                "vlanrange": "0",
+                "customer_ipv4_mtu": 1500,
+                "bfd": false,
+                "bgp_session_priority": "primary",
+                "bgp_hash_algorithm": "no",
+                "bgp_export_policy": "default",
+                "ptp_ipv4_ipam_id": 26209,
+                "customer_ipv6_mtu": 1500,
+                "ptp_ipv6_ipam_id": null,
+                "bgp_password": null,
+                "bfd_minimum_interval": null,
+                "bfd_multiplier": null
+            }
+        ],
+        "service_speed": 1000,
+        "ims_circuit_id": 62409,
+        "nso_service_id": "436b4833-7593-4751-8158-a90adfc3dd2c"
+    }
+}

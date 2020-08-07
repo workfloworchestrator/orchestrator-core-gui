@@ -2363,23 +2363,19 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
           className="card"
         >
           <form
+            noValidate={true}
             onSubmit={[Function]}
           >
             <section
               className="form-step"
             >
-              <section
-                className="form-divider ip_static_service_port"
-                id="input-ip_static_service_port"
-              >
+              <section>
                 <p
                   className="label ip_static_service_port"
+                  id="input-ip_static_service_port"
                 >
                   IP Service Port
                 </p>
-                <em
-                  className="error"
-                />
               </section>
             </section>
             <section
@@ -2506,23 +2502,19 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
           className="card"
         >
           <form
+            noValidate={true}
             onSubmit={[Function]}
           >
             <section
               className="form-step"
             >
-              <section
-                className="form-divider ip_static_service_port"
-                id="input-ip_static_service_port"
-              >
+              <section>
                 <p
                   className="label ip_static_service_port"
+                  id="input-ip_static_service_port"
                 >
                   IP Service Port
                 </p>
-                <em
-                  className="error"
-                />
               </section>
             </section>
             <section

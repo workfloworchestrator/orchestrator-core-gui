@@ -73,7 +73,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-48-input"
+                              id="input-product.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -152,7 +152,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-product2"
                   >
-                    [missing "en.forms.fields.product2" translation]
+                    product2
                     <em>
                       
                     </em>
@@ -192,7 +192,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={true}
-                              id="react-select-49-input"
+                              id="input-product2.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -268,12 +268,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 >
                   <div>
                     <label>
-                      [missing "en.forms.fields.accept" translation]
+                      accept
                     </label>
                   </div>
                   <div>
                     <em>
-                      [missing "en.forms.fields.accept_info" translation]
+                      accept info
                     </em>
                   </div>
                   <div
@@ -301,7 +301,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       className="info"
                       htmlFor="accept"
                     >
-                      [missing "en.forms.fields.accept" translation]
+                      accept
                     </label>
                   </div>
                 </section>
@@ -309,7 +309,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth1"
                   >
-                    [missing "en.forms.fields.bandwidth1" translation]
+                    bandwidth1
                     
                   </label>
                   <span
@@ -502,7 +502,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="info"
                     htmlFor="input-boolean1"
                   >
-                    [missing "en.forms.fields.boolean1" translation]
+                    boolean1
                   </label>
                 </section>
                 <section
@@ -531,20 +531,20 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="info"
                     htmlFor="input-boolean2"
                   >
-                    [missing "en.forms.fields.boolean2" translation]
+                    boolean2
                   </label>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-contact_persons"
-                  >
-                    <label>
-                      Customer contact persons
-                      <em>
-                        The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-contact_persons"
+                >
+                  <label>
+                    Customer contact persons
+                    <em>
+                      The persons to notify when the process is finished. You can add multiple emails, names and phone numbers.
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -572,7 +572,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               type="text"
                               value="a"
                             />
-                             
                           </div>
                         </section>
                         <section>
@@ -610,26 +609,32 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-contact_persons.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-contact_persons.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink_add_link1" translation]
+                    corelink add_link1
                     <em>
                       
                     </em>
@@ -678,7 +683,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-50-input"
+                                  id="input-corelink_add_link1.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -755,12 +760,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-14jk2my-container"
+                        className=" css-2b097c-container"
                         id="input-corelink_add_link1"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-1fhf3k1-control"
+                          className=" css-yk16xz-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -770,7 +775,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -788,8 +793,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={true}
-                                  id="react-select-51-input"
+                                  disabled={false}
+                                  id="input-corelink_add_link1.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -834,7 +839,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-109onse-indicatorSeparator"
+                              className=" css-1okebmr-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -857,13 +862,18 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             </div>
                           </div>
                         </div>
+                        <input
+                          name="corelink_add_link1"
+                          type="hidden"
+                          value=""
+                        />
                       </div>
                     </div>
                   </section>
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink_add_link2" translation]
+                    corelink add_link2
                     <em>
                       
                     </em>
@@ -912,7 +922,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-52-input"
+                                  id="input-corelink_add_link2.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -989,12 +999,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-14jk2my-container"
+                        className=" css-2b097c-container"
                         id="input-corelink_add_link2"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-1fhf3k1-control"
+                          className=" css-yk16xz-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -1004,7 +1014,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1022,8 +1032,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={true}
-                                  id="react-select-53-input"
+                                  disabled={false}
+                                  id="input-corelink_add_link2.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1068,7 +1078,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-109onse-indicatorSeparator"
+                              className=" css-1okebmr-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -1091,13 +1101,18 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             </div>
                           </div>
                         </div>
+                        <input
+                          name="corelink_add_link2"
+                          type="hidden"
+                          value=""
+                        />
                       </div>
                     </div>
                   </section>
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.corelink" translation]
+                    corelink
                     <em>
                       
                     </em>
@@ -1146,7 +1161,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-54-input"
+                                  id="input-corelink.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1238,7 +1253,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              First select a node
+                              Loading...
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1257,7 +1272,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-55-input"
+                                  id="input-corelink.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1352,7 +1367,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-generic_select"
                   >
-                    [missing "en.forms.fields.generic_select" translation]
+                    generic select
                     <em>
                       
                     </em>
@@ -1392,7 +1407,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-56-input"
+                              id="input-generic_select.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -1495,21 +1510,1361 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                       In the next step you can allocate any prefix under the subnet you select here
                     </em>
                   </label>
-                  <input
-                    disabled={false}
-                    id="input-ip_prefix"
-                    name="ip_prefix"
-                    onChange={[Function]}
-                    placeholder=""
-                    type="text"
-                    value="10.0.0.0/24"
-                  />
+                  <section
+                    className="ipblock-selector"
+                  >
+                    <div
+                      id="input-ip_prefix"
+                    >
+                      <div>
+                        <div>
+                          <span>
+                            State:
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-allocated"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={1}
+                            />
+                            Permanent toegewezen
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-planned"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={3}
+                            />
+                            Gereserveerd
+                          </span>
+                          <span>
+                            <input
+                              checked={true}
+                              id="checkbox-free"
+                              name="state"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={0}
+                            />
+                            Vrij
+                          </span>
+                        </div>
+                        <div>
+                          <span>
+                            Root filter
+                          </span>
+                          <span>
+                            <div
+                              className=" css-2b097c-container"
+                              id="input-ip_prefix.root-filter"
+                              onKeyDown={[Function]}
+                            >
+                              <div
+                                className=" css-yk16xz-control"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <div
+                                  className=" css-g1d714-ValueContainer"
+                                >
+                                  <div
+                                    className=" css-1uccc91-singleValue"
+                                  >
+                                    10.0.0.0/8
+                                  </div>
+                                  <div
+                                    className="css-b8ldur-Input"
+                                  >
+                                    <div
+                                      className=""
+                                      style={
+                                        Object {
+                                          "display": "inline-block",
+                                        }
+                                      }
+                                    >
+                                      <input
+                                        aria-autocomplete="list"
+                                        autoCapitalize="none"
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        disabled={false}
+                                        id="input-ip_prefix.root-filter.search"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        spellCheck="false"
+                                        style={
+                                          Object {
+                                            "background": 0,
+                                            "border": 0,
+                                            "boxSizing": "content-box",
+                                            "color": "inherit",
+                                            "fontSize": "inherit",
+                                            "label": "input",
+                                            "opacity": 1,
+                                            "outline": 0,
+                                            "padding": 0,
+                                            "width": "1px",
+                                          }
+                                        }
+                                        tabIndex="0"
+                                        type="text"
+                                        value=""
+                                      />
+                                      <div
+                                        style={
+                                          Object {
+                                            "height": 0,
+                                            "left": 0,
+                                            "overflow": "scroll",
+                                            "position": "absolute",
+                                            "top": 0,
+                                            "visibility": "hidden",
+                                            "whiteSpace": "pre",
+                                          }
+                                        }
+                                      >
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  className=" css-1hb7zxy-IndicatorsContainer"
+                                >
+                                  <span
+                                    className=" css-1okebmr-indicatorSeparator"
+                                  />
+                                  <div
+                                    aria-hidden="true"
+                                    className=" css-tlfecz-indicatorContainer"
+                                    onMouseDown={[Function]}
+                                    onTouchEnd={[Function]}
+                                  >
+                                    <svg
+                                      aria-hidden="true"
+                                      className="css-6q0nyr-Svg"
+                                      focusable="false"
+                                      height={20}
+                                      viewBox="0 0 20 20"
+                                      width={20}
+                                    >
+                                      <path
+                                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                      />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                              <input
+                                name="ip_prefix.root-filter"
+                                type="hidden"
+                                value="1"
+                              />
+                            </div>
+                          </span>
+                        </div>
+                        <table
+                          className="ip-blocks"
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                className="id"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  id
+                                </span>
+                                 
+                                <i />
+                              </th>
+                              <th
+                                className="prefix"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  prefix
+                                </span>
+                                 
+                                <i
+                                  className="fas fa-sort-up"
+                                />
+                              </th>
+                              <th
+                                className="description"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  description
+                                </span>
+                                 
+                                <i />
+                              </th>
+                              <th
+                                className="state_repr"
+                                onClick={[Function]}
+                              >
+                                <span>
+                                  status
+                                </span>
+                                 
+                                <i />
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                21859
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.0.0/27
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                AARNETNOC
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                23148
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.0.128/25
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                21821
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.0.32/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                AARNETNOC
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                21971
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.0.48/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON (Eftychia Testing)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                22191
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.0.64/26
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                23640
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.1.0/24
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Test by Zaheer)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                28784
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.0/25
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Zaheer IP fix 20200619-2)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                29588
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.128/31
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON (Eftychia Testing)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Free"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                99999
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.130/31
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                Vrije ruimte - gegenereerd
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Vrij
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                32840
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.132/30
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                KLM
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                33027
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.136/29
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON (Eftychia - Testing)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                33028
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.144/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON (Eftychia - Testing)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Free"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                100001
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.160/27
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                Vrije ruimte - gegenereerd
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Vrij
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                29586
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.192/27
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Zaheer 20200623.01)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Free"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                100000
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.224/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                Vrije ruimte - gegenereerd
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Vrij
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                27710
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.16.240/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                SINET (internetpinnen)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                32453
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.17.0/24
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                KLM (robot tests)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Free"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                100014
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.18.0/23
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                Vrije ruimte - gegenereerd
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Vrij
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                24118
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.0/30
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (BugfixZaheer)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                24126
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.128/25
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (BugfixZaheer4)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                24125
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.16/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (BugfixZaheer3)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                25400
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.32/27
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Test Zaheer 2605-3)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Planned"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                23693
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.4/30
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ASTRON (Eftychia Testing)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gepland
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                26215
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.64/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                DESIGNACADEMY (Prefix van Rene voor test issue 717)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                24120
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.8/29
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (BugfixZaheer2)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                26216
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.80/28
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                DESIGNACADEMY (Prefix 2 van Rene voor test issue 717)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                27004
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.2.96/27
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Zaheer IP fix)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Free"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                100026
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.20.0/22
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                Vrije ruimte - gegenereerd
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Vrij
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                25725
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.3.0/24
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Test Zaheer 2705ipv4)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                27646
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.4.0/22
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (IP fix2)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                            <tr
+                              className="Allocated"
+                              onClick={[Function]}
+                            >
+                              <td
+                                className="id"
+                                data-label="id"
+                              >
+                                28077
+                              </td>
+                              <td
+                                className="prefix"
+                                data-label="prefix"
+                              >
+                                145.0.8.0/21
+                              </td>
+                              <td
+                                className="description"
+                                data-label="description"
+                              >
+                                ESNET (Zaheer IP fix 3)
+                              </td>
+                              <td
+                                className="state_repr"
+                                data-label="state_repr"
+                              >
+                                Gealloceerd
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <section>
+                        <h3>
+                          Selected prefix: 
+                          10.0.0.0
+                          /
+                          24
+                        </h3>
+                        <div>
+                          Desired netmask of the new subnet:
+                        </div>
+                        <div
+                          className=" css-2b097c-container"
+                          id="input-ip_prefix.desired-netmask"
+                          onKeyDown={[Function]}
+                        >
+                          <div
+                            className=" css-yk16xz-control"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <div
+                              className=" css-g1d714-ValueContainer"
+                            >
+                              <div
+                                className=" css-1uccc91-singleValue"
+                              >
+                                25
+                              </div>
+                              <div
+                                className="css-b8ldur-Input"
+                              >
+                                <div
+                                  className=""
+                                  style={
+                                    Object {
+                                      "display": "inline-block",
+                                    }
+                                  }
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    autoCapitalize="none"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    disabled={false}
+                                    id="input-ip_prefix.desired-netmask.search"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    spellCheck="false"
+                                    style={
+                                      Object {
+                                        "background": 0,
+                                        "border": 0,
+                                        "boxSizing": "content-box",
+                                        "color": "inherit",
+                                        "fontSize": "inherit",
+                                        "label": "input",
+                                        "opacity": 1,
+                                        "outline": 0,
+                                        "padding": 0,
+                                        "width": "1px",
+                                      }
+                                    }
+                                    tabIndex="0"
+                                    type="text"
+                                    value=""
+                                  />
+                                  <div
+                                    style={
+                                      Object {
+                                        "height": 0,
+                                        "left": 0,
+                                        "overflow": "scroll",
+                                        "position": "absolute",
+                                        "top": 0,
+                                        "visibility": "hidden",
+                                        "whiteSpace": "pre",
+                                      }
+                                    }
+                                  >
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className=" css-1hb7zxy-IndicatorsContainer"
+                            >
+                              <span
+                                className=" css-1okebmr-indicatorSeparator"
+                              />
+                              <div
+                                aria-hidden="true"
+                                className=" css-tlfecz-indicatorContainer"
+                                onMouseDown={[Function]}
+                                onTouchEnd={[Function]}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="css-6q0nyr-Svg"
+                                  focusable="false"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <path
+                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <input
+                            name="ip_prefix.desired-netmask"
+                            type="hidden"
+                            value={25}
+                          />
+                        </div>
+                        <div>
+                          <div>
+                            Desired prefix:
+                          </div>
+                          <div
+                            className=" css-2b097c-container"
+                            id="input-ip_prefix.desired-prefix"
+                            onKeyDown={[Function]}
+                          >
+                            <div
+                              className=" css-yk16xz-control"
+                              onMouseDown={[Function]}
+                              onTouchEnd={[Function]}
+                            >
+                              <div
+                                className=" css-g1d714-ValueContainer"
+                              >
+                                <div
+                                  className=" css-1wa3eu0-placeholder"
+                                >
+                                  Select...
+                                </div>
+                                <div
+                                  className="css-b8ldur-Input"
+                                >
+                                  <div
+                                    className=""
+                                    style={
+                                      Object {
+                                        "display": "inline-block",
+                                      }
+                                    }
+                                  >
+                                    <input
+                                      aria-autocomplete="list"
+                                      autoCapitalize="none"
+                                      autoComplete="off"
+                                      autoCorrect="off"
+                                      disabled={false}
+                                      id="input-ip_prefix.desired-prefix.search"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      spellCheck="false"
+                                      style={
+                                        Object {
+                                          "background": 0,
+                                          "border": 0,
+                                          "boxSizing": "content-box",
+                                          "color": "inherit",
+                                          "fontSize": "inherit",
+                                          "label": "input",
+                                          "opacity": 1,
+                                          "outline": 0,
+                                          "padding": 0,
+                                          "width": "1px",
+                                        }
+                                      }
+                                      tabIndex="0"
+                                      type="text"
+                                      value=""
+                                    />
+                                    <div
+                                      style={
+                                        Object {
+                                          "height": 0,
+                                          "left": 0,
+                                          "overflow": "scroll",
+                                          "position": "absolute",
+                                          "top": 0,
+                                          "visibility": "hidden",
+                                          "whiteSpace": "pre",
+                                        }
+                                      }
+                                    >
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                className=" css-1hb7zxy-IndicatorsContainer"
+                              >
+                                <span
+                                  className=" css-1okebmr-indicatorSeparator"
+                                />
+                                <div
+                                  aria-hidden="true"
+                                  className=" css-tlfecz-indicatorContainer"
+                                  onMouseDown={[Function]}
+                                  onTouchEnd={[Function]}
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    className="css-6q0nyr-Svg"
+                                    focusable="false"
+                                    height={20}
+                                    viewBox="0 0 20 20"
+                                    width={20}
+                                  >
+                                    <path
+                                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <input
+                              name="ip_prefix.desired-prefix"
+                              type="hidden"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </section>
                 </section>
                 <section>
                   <label
                     htmlFor="input-isalias"
                   >
-                    [missing "en.forms.fields.isalias" translation]
+                    isalias
                     
                   </label>
                   <input
@@ -1526,7 +2881,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-jira_ticket"
                   >
-                    [missing "en.forms.fields.jira_ticket" translation]
+                    jira ticket
                     
                   </label>
                   <input
@@ -1544,7 +2899,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     className="label label"
                     id="input-label"
                   >
-                    [missing "en.forms.fields.label" translation]
+                    label
                   </p>
                 </section>
                 <section>
@@ -1591,7 +2946,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-57-input"
+                              id="input-location_code.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -1670,7 +3025,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary1"
                   >
-                    [missing "en.forms.fields.migration_summary1" translation]
+                    migration summary1
                     
                   </label>
                   <section
@@ -1731,7 +3086,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary2"
                   >
-                    [missing "en.forms.fields.migration_summary2" translation]
+                    migration summary2
                     
                   </label>
                   <section
@@ -1784,7 +3139,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-migration_summary3"
                   >
-                    [missing "en.forms.fields.migration_summary3" translation]
+                    migration summary3
                     
                   </label>
                   <section
@@ -1851,7 +3206,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                 </section>
                 <section>
                   <label>
-                    [missing "en.forms.fields.node_id_port_select" translation]
+                    node id_port_select
                     <em>
                       
                     </em>
@@ -1900,7 +3255,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={false}
-                                  id="react-select-58-input"
+                                  id="input-node_id_port_select.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -2016,7 +3371,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                   autoComplete="off"
                                   autoCorrect="off"
                                   disabled={true}
-                                  id="react-select-59-input"
+                                  id="input-node_id_port_select.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -2092,7 +3447,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-nodes_for_location_code_and_status"
                   >
-                    [missing "en.forms.fields.nodes_for_location_code_and_status" translation]
+                    nodes for_location_code_and_status
                     <em>
                       
                     </em>
@@ -2132,7 +3487,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-60-input"
+                              id="input-nodes_for_location_code_and_status.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2211,7 +3566,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-numeric1"
                   >
-                    [missing "en.forms.fields.numeric1" translation]
+                    numeric1
                     
                   </label>
                   <span
@@ -2342,7 +3697,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-numeric2"
                   >
-                    [missing "en.forms.fields.numeric2" translation]
+                    numeric2
                     
                   </label>
                   <span
@@ -2473,7 +3828,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-organisation1"
                   >
-                    [missing "en.forms.fields.organisation1" translation]
+                    organisation1
                     <em>
                       
                     </em>
@@ -2513,7 +3868,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-61-input"
+                              id="input-organisation1.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2592,7 +3947,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-organisation2"
                   >
-                    [missing "en.forms.fields.organisation2" translation]
+                    organisation2
                     <em>
                       
                     </em>
@@ -2632,7 +3987,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={true}
-                              id="react-select-62-input"
+                              id="input-organisation2.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -2702,17 +4057,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </div>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports1"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports1" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports1"
+                >
+                  <label>
+                    service ports1
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -2725,7 +4080,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -2774,7 +4129,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-63-input"
+                                        id="input-service_ports1.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -2854,7 +4209,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -2873,11 +4228,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports1.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -2891,7 +4251,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -2940,7 +4300,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-64-input"
+                                        id="input-service_ports1.1.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -3020,7 +4380,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports1.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports1_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -3039,34 +4399,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports1.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports1.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports2"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports2" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports2"
+                >
+                  <label>
+                    service ports2
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -3079,7 +4445,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -3128,7 +4494,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-65-input"
+                                        id="input-service_ports2.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -3208,7 +4574,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -3236,11 +4602,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports2.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -3254,7 +4625,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -3303,7 +4674,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-66-input"
+                                        id="input-service_ports2.1.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -3383,7 +4754,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports2.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports2_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -3411,34 +4782,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports2.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports2.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports3"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports3" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports3"
+                >
+                  <label>
+                    service ports3
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -3451,7 +4828,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports3.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports3_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -3492,7 +4869,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-67-input"
+                                        id="input-service_ports3.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -3567,7 +4944,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports3.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports3_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -3581,34 +4958,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports3.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports3.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports4"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports4" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports4"
+                >
+                  <label>
+                    service ports4
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -3621,7 +5004,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -3670,7 +5053,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-68-input"
+                                        id="input-service_ports4.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -3750,7 +5133,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -3781,7 +5164,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.0.bandwidth"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
+                            bandwidth
                             
                           </label>
                           <span
@@ -3909,11 +5292,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </span>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports4.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -3927,7 +5315,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -3976,7 +5364,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-69-input"
+                                        id="input-service_ports4.1.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -4056,7 +5444,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4087,7 +5475,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports4.1.bandwidth"
                           >
-                            [missing "en.forms.fields.service_ports4_fields.bandwidth" translation]
+                            bandwidth
                             
                           </label>
                           <span
@@ -4215,34 +5603,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </span>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports4.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports4.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports5"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports5" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports5"
+                >
+                  <label>
+                    service ports5
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4255,7 +5649,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports5.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports5_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4304,7 +5698,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-70-input"
+                                        id="input-service_ports5.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -4384,7 +5778,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports5.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports5_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4403,34 +5797,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports5.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports5.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports6"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports6" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports6"
+                >
+                  <label>
+                    service ports6
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4443,7 +5843,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports6.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports6_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4484,7 +5884,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-71-input"
+                                        id="input-service_ports6.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -4559,7 +5959,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports6.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports6_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4573,34 +5973,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports6.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports6.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports7"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports7" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports7"
+                >
+                  <label>
+                    service ports7
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4613,7 +6019,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports7.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports7_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4654,7 +6060,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-72-input"
+                                        id="input-service_ports7.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -4729,7 +6135,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports7.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports7_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4743,34 +6149,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports7.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports7.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports8"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports8" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports8"
+                >
+                  <label>
+                    service ports8
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -4783,7 +6195,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4832,7 +6244,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-73-input"
+                                        id="input-service_ports8.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -4912,7 +6324,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -4931,11 +6343,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports8.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -4949,7 +6366,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.1.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -4998,7 +6415,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-74-input"
+                                        id="input-service_ports8.1.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5078,7 +6495,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.1.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5106,11 +6523,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports8.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -5124,7 +6546,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.2.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5173,7 +6595,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-75-input"
+                                        id="input-service_ports8.2.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5253,7 +6675,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.2.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5272,11 +6694,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports8.2.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -5290,7 +6717,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.3.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5339,7 +6766,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-76-input"
+                                        id="input-service_ports8.3.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5419,7 +6846,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports8.3.vlan"
                           >
-                            [missing "en.forms.fields.service_ports8_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5447,34 +6874,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports8.3.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports8.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports9"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports9" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports9"
+                >
+                  <label>
+                    service ports9
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5487,7 +6920,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports9.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports9_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5528,7 +6961,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-77-input"
+                                        id="input-service_ports9.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5603,7 +7036,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports9.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports9_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5617,34 +7050,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports9.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports9.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports10"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports10" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports10"
+                >
+                  <label>
+                    service ports10
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5657,7 +7096,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports10.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports10_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5698,7 +7137,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-78-input"
+                                        id="input-service_ports10.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5773,7 +7212,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports10.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports10_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5787,34 +7226,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports10.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports10.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn81"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn81" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn81"
+                >
+                  <label>
+                    service ports_sn81
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -5827,7 +7272,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn81.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn81_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -5876,7 +7321,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-79-input"
+                                        id="input-service_ports_sn81.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -5956,7 +7401,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn81.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn81_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -5970,34 +7415,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn81.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn81.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn82"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn82" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn82"
+                >
+                  <label>
+                    service ports_sn82
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6010,7 +7461,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn82.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn82_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6059,7 +7510,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-80-input"
+                                        id="input-service_ports_sn82.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -6139,7 +7590,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn82.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn82_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6158,34 +7609,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn82.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn82.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn83"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn83" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn83"
+                >
+                  <label>
+                    service ports_sn83
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6198,7 +7655,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn83.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn83_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6247,7 +7704,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-81-input"
+                                        id="input-service_ports_sn83.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -6327,7 +7784,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn83.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn83_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6346,34 +7803,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn83.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn83.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn84"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn84" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn84"
+                >
+                  <label>
+                    service ports_sn84
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6386,7 +7849,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn84.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn84_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6435,7 +7898,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-82-input"
+                                        id="input-service_ports_sn84.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -6515,7 +7978,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn84.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn84_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6534,34 +7997,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn84.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn84.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn85"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn85" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn85"
+                >
+                  <label>
+                    service ports_sn85
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6574,7 +8043,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn85.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn85_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6615,7 +8084,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-83-input"
+                                        id="input-service_ports_sn85.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -6690,7 +8159,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn85.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn85_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6704,34 +8173,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn85.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn85.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn86"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn86" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn86"
+                >
+                  <label>
+                    service ports_sn86
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6744,7 +8219,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn86.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn86_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6793,7 +8268,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={false}
-                                        id="react-select-84-input"
+                                        id="input-service_ports_sn86.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -6873,7 +8348,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn86.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn86_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -6892,34 +8367,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </em>
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn86.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn86.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-service_ports_sn87"
-                  >
-                    <label>
-                      [missing "en.forms.fields.service_ports_sn87" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-service_ports_sn87"
+                >
+                  <label>
+                    service ports_sn87
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" nest-field"
@@ -6932,7 +8413,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn87.0.subscription_id"
                           >
-                            [missing "en.forms.fields.service_ports_sn87_fields.subscription_id" translation]
+                            subscription id
                             <em>
                               
                             </em>
@@ -6973,7 +8454,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                         autoComplete="off"
                                         autoCorrect="off"
                                         disabled={true}
-                                        id="react-select-85-input"
+                                        id="input-service_ports_sn87.0.subscription_id.search"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
@@ -7048,7 +8529,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           <label
                             htmlFor="input-service_ports_sn87.0.vlan"
                           >
-                            [missing "en.forms.fields.service_ports_sn87_fields.vlan" translation]
+                            vlan
                             
                           </label>
                           <input
@@ -7062,20 +8543,26 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           />
                         </section>
                       </section>
-                      <i
-                        className="fa fa-minus disabled"
+                      <div
+                        className="del-item"
                         id="input-service_ports_sn87.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-service_ports_sn87.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus disabled"
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
@@ -7083,7 +8570,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-stp"
                   >
-                    [missing "en.forms.fields.stp" translation]
+                    stp
                     
                   </label>
                   <input
@@ -7100,7 +8587,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string1"
                   >
-                    [missing "en.forms.fields.string1" translation]
+                    string1
                     
                   </label>
                   <input
@@ -7117,7 +8604,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string2"
                   >
-                    [missing "en.forms.fields.string2" translation]
+                    string2
                     
                   </label>
                   <input
@@ -7134,7 +8621,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-string3"
                   >
-                    [missing "en.forms.fields.string3" translation]
+                    string3
                     
                   </label>
                   <input
@@ -7563,7 +9050,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-subscription_product_tag1"
                   >
-                    [missing "en.forms.fields.subscription_product_tag1" translation]
+                    subscription product_tag1
                     <em>
                       
                     </em>
@@ -7612,7 +9099,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={false}
-                                id="react-select-86-input"
+                                id="input-subscription_product_tag1.search"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -7694,7 +9181,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-subscription_product_tag2"
                   >
-                    [missing "en.forms.fields.subscription_product_tag2" translation]
+                    subscription product_tag2
                     <em>
                       
                     </em>
@@ -7743,7 +9230,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                 autoComplete="off"
                                 autoCorrect="off"
                                 disabled={false}
-                                id="react-select-87-input"
+                                id="input-subscription_product_tag2.search"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -7819,17 +9306,17 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                     </div>
                   </div>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-subscriptions1"
-                  >
-                    <label>
-                      [missing "en.forms.fields.subscriptions1" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-subscriptions1"
+                >
+                  <label>
+                    subscriptions1
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" subscription-field"
@@ -7879,7 +9366,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-88-input"
+                                      id="input-subscriptions1.0.search"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -7955,11 +9442,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </div>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-subscriptions1.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -8010,7 +9502,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-89-input"
+                                      id="input-subscriptions1.1.search"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -8086,34 +9578,40 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </div>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-subscriptions1.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-subscriptions1.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
-                <section>
-                  <ul
-                    className="list-field"
-                    id="input-subscriptions2"
-                  >
-                    <label>
-                      [missing "en.forms.fields.subscriptions2" translation]
-                      <em>
-                        
-                      </em>
-                    </label>
+                <section
+                  className="list-field"
+                  id="input-subscriptions2"
+                >
+                  <label>
+                    subscriptions2
+                    <em>
+                      
+                    </em>
+                  </label>
+                  <ul>
                     <li>
                       <section
                         className=" subscription-field"
@@ -8163,7 +9661,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-90-input"
+                                      id="input-subscriptions2.0.search"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -8239,11 +9737,16 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </div>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-subscriptions2.0.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <li>
                       <section
@@ -8294,7 +9797,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                                       autoComplete="off"
                                       autoCorrect="off"
                                       disabled={false}
-                                      id="react-select-91-input"
+                                      id="input-subscriptions2.1.search"
                                       onBlur={[Function]}
                                       onChange={[Function]}
                                       onFocus={[Function]}
@@ -8370,20 +9873,26 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                           </div>
                         </div>
                       </section>
-                      <i
-                        className="fa fa-minus "
+                      <div
+                        className="del-item"
                         id="input-subscriptions2.1.remove"
                         onClick={[Function]}
-                      />
+                      >
+                        <i
+                          className="fa fa-minus "
+                        />
+                        <label />
+                      </div>
                     </li>
                     <div
                       className="add-item"
                       id="input-subscriptions2.$"
+                      onClick={[Function]}
                     >
                       <i
                         className="fa fa-plus "
-                        onClick={[Function]}
                       />
+                      <label />
                     </div>
                   </ul>
                 </section>
@@ -8391,7 +9900,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-transition_product1"
                   >
-                    [missing "en.forms.fields.transition_product1" translation]
+                    transition product1
                     <em>
                       
                     </em>
@@ -8431,7 +9940,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-92-input"
+                              id="input-transition_product1.search"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -8529,7 +10038,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-uuid"
                   >
-                    [missing "en.forms.fields.uuid" translation]
+                    uuid
                     
                   </label>
                   <input
@@ -8546,7 +10055,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth2"
                   >
-                    [missing "en.forms.fields.bandwidth2" translation]
+                    bandwidth2
                     
                   </label>
                   <span
@@ -8677,7 +10186,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
                   <label
                     htmlFor="input-bandwidth3"
                   >
-                    [missing "en.forms.fields.bandwidth3" translation]
+                    bandwidth3
                     
                   </label>
                   <span

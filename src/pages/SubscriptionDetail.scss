@@ -55,6 +55,13 @@
         margin-left: auto;
         width: 66%;
     }
+    section.sub-product-block {
+        margin-left: 1em;
+        h4 {
+            font-weight: bold;
+            margin: 10px 0 -15px 1em;
+        }
+    }
 
     section.terminate-link,
     section.modify-link {

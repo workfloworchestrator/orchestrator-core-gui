@@ -38,6 +38,21 @@ test("<ListItemField> - renders ListDelField", () => {
     ).toBe("x.1");
 });
 
+test("<ListItemField> - renders ListDelField with label", () => {
+    const element = <ListItemField name="x.1" outerList={true} />;
+    const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
+
+    expect(wrapper.find(ListDelField)).toHaveLength(1);
+    expect(
+        wrapper
+            .find(ListDelField)
+            .childAt(0)
+            .prop("name")
+    ).toBe("x.1");
+    expect(wrapper.find(ListDelField)).toHaveLength(1);
+    expect(wrapper.find(ListDelField).prop("outerList")).toBe(true);
+});
+
 test("<ListItemField> - renders AutoField", () => {
     const element = <ListItemField name="x.1" />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));

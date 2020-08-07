@@ -466,6 +466,35 @@ exports[`Storyshots GenericNOCConfirm Complex in form 1`] = `
                         Physically patch the customer port from SN7 to SN8 HW.
                       </label>
                     </div>
+                    <div
+                      className="skip"
+                    >
+                      <input
+                        checked={false}
+                        disabled={false}
+                        id="skip_migrate_sap_workflow"
+                        name="skip_migrate_sap_workflow"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                      <label
+                        htmlFor="skip_migrate_sap_workflow"
+                      >
+                        <span
+                          tabIndex="0"
+                        >
+                          <i
+                            className="fa fa-check"
+                          />
+                        </span>
+                      </label>
+                      <label
+                        className="info"
+                        htmlFor="skip_migrate_sap_workflow"
+                      >
+                        do not continue with the migration and return to the original state, this will end the workflow without making any changes
+                      </label>
+                    </div>
                   </section>
                   <em
                     className="error"

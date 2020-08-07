@@ -61,7 +61,7 @@ test("<AutoField> - detects SelectField", () => {
         })
     );
 
-    expect(wrapper.find(SelectField.Component)).toHaveLength(1);
+    expect(wrapper.find(SelectField.Component)).toHaveLength(2);
 });
 
 test("<AutoField> - detects DateField", () => {

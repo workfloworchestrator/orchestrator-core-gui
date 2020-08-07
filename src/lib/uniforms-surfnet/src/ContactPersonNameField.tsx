@@ -18,13 +18,15 @@ import I18n from "i18n-js";
 import { isFunction } from "lodash";
 import get from "lodash/get";
 import React, { Ref, useEffect, useState } from "react";
-import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
+import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 
-import { isEmpty, stop } from "../../../utils/Utils";
+import { stop } from "../../../utils/Utils";
 import { FieldProps } from "./types";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
+
+filterDOMProps.register("organisationId", "organisationKey");
 
 function ContactPersonName({
     disabled,
@@ -43,22 +45,47 @@ function ContactPersonName({
     organisationKey,
     ...props
 }: ContactPersonNameFieldProps) {
-    const { model, onChange: formOnChange } = useForm();
+    const { model, onChange: formOnChange, schema } = useForm();
 
-    const organisationIdValue = organisationId || get(model, organisationKey || "organisation");
     const contactsPersonFieldNameArray = joinName(null, name).slice(0, -1);
     const emailFieldName = joinName(contactsPersonFieldNameArray, "email");
     const phoneFieldName = joinName(contactsPersonFieldNameArray, "phone");
     const contactsFieldName = joinName(contactsPersonFieldNameArray.slice(0, -1));
 
-    let [displayAutocomplete, setDisplayAutocomplete] = useState({});
+    const chosenPersons: ContactPerson[] = get(model, contactsFieldName, []);
+    // We cant call useField conditionally so if we don't have a parent we call it for ourself
+    const useFieldName = contactsPersonFieldNameArray.length ? contactsFieldName : name;
+    const contactsField = useField(useFieldName, {}, { absoluteName: true })[0];
+
+    const organisationFieldName = organisationKey || contactsField.field.organisationKey || "organisation";
+
+    // Get initial value for org field if it exists (we cant really test)
+    let organisationInitialValue;
+    try {
+        organisationInitialValue = schema.getInitialValue(organisationFieldName, {});
+    } catch {
+        organisationInitialValue = "";
+    }
+    const organisationIdValue =
+        organisationId ||
+        contactsField.field.organisationId ||
+        get(model, organisationFieldName, organisationInitialValue);
+
+    let [displayAutocomplete, setDisplayAutocomplete] = useState(false);
     let [contactPersons, setContactPersons] = useState<ContactPerson[]>([]);
-    let [suggestions, setSuggestions] = useState<ContactPerson[]>([]);
     let [selectedIndex, setSelectedIndex] = useState(-1);
+
+    const suggestions = value
+        ? contactPersons
+              .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
+              .filter(item => !chosenPersons.some(person => person.email === item.email))
+        : [];
 
     useEffect(() => {
         if (organisationIdValue) {
-            contacts(organisationIdValue).then(setContactPersons);
+            contacts(organisationIdValue).then(contactPersons => {
+                setContactPersons(contactPersons);
+            });
         }
     }, [organisationIdValue]);
 
@@ -75,16 +102,7 @@ function ContactPersonName({
         const value = target.value;
 
         onChange(value);
-
-        const persons: ContactPerson[] = get(model, contactsFieldName);
-
-        const filteredSuggestions = !value
-            ? []
-            : contactPersons
-                  .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
-                  .filter(item => !persons.some(person => person.email === item.email));
-        setDisplayAutocomplete(!isEmpty(filteredSuggestions));
-        setSuggestions(filteredSuggestions);
+        setDisplayAutocomplete(true);
     }
 
     function itemSelected(item: ContactPerson, personIndex: number) {
@@ -150,7 +168,7 @@ function ContactPersonName({
                     onKeyDown={onAutocompleteKeyDown}
                     onBlur={onBlurAutoComplete}
                 ></input>
-                {displayAutocomplete && (
+                {!!(displayAutocomplete && suggestions.length) && (
                     <Autocomplete
                         query={value ?? ""}
                         itemSelected={itemSelected}
@@ -158,7 +176,7 @@ function ContactPersonName({
                         suggestions={suggestions}
                         personIndex={0}
                     />
-                )}{" "}
+                )}
             </div>
             {error && showInlineError && (
                 <em className="error">

@@ -18,6 +18,7 @@ import React from "react";
 import { InputForm } from "utils/types";
 
 import FORM_NEW from "./data/all-widgets-form-new.json";
+import IP_BLOCKS from "./data/ip_blocks.json";
 import PRODUCTS from "./data/products.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
 import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
@@ -35,39 +36,42 @@ export default {
 
 function prepare() {
     fetchMock.restore();
-    fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
+    fetchMock.get("/api/ipam/prefix_filters", [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
+    fetchMock.get("/api/ipam/ip_blocks/1", IP_BLOCKS);
+    fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/25", ["10.0.0.0/25"]);
+    fetchMock.get("/api/v2/subscriptions?filter=statuses%2Cactive", allNodeSubscriptions);
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,MSP-MSPNL-SSP&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,MSP-MSPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions?filter=tags,Node&filter=statuses,active-provisioning",
+        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning",
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,IPS&filter=statuses,active",
+        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,IPBGP&filter=statuses,active",
+        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,SP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags,SP-SPNL&filter=statuses,active",
+        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["SP", "SPNL"].includes(p.product.tag))
     );
     fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);

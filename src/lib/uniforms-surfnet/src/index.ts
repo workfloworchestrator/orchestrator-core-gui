@@ -35,6 +35,7 @@ export { default as TextField } from "./TextField";
 export { default as AcceptField } from "./AcceptField";
 export { default as ContactPersonNameField } from "./ContactPersonNameField";
 export { default as ImsPortIdField } from "./ImsPortIdField";
+export { default as IPvAnyNetworkField } from "./IPvAnyNetworkField";
 export { default as LabelField } from "./LabelField";
 export { default as OptGroupField } from "./OptGroupField";
 export { default as SubscriptionField } from "./SubscriptionField";

@@ -524,9 +524,8 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                 return (
                     <IPPrefix
                         preselectedPrefix={value}
-                        prefix_min={parseInt(userInput.prefix_min)}
+                        prefix_min={userInput.prefix_min && parseInt(userInput.prefix_min)}
                         onChange={this.changeNestedInput(name)}
-                        errors={[]}
                     />
                 );
             case "nodes_for_location_code_and_status":

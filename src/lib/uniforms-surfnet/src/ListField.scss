@@ -15,10 +15,12 @@
 
 @use "../../../stylesheets/vars.scss";
 
-ul.list-field {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+.list-field {
+    ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 
     li {
         list-style: none;
@@ -27,6 +29,7 @@ ul.list-field {
         flex-wrap: wrap;
         margin-top: 5px;
 
+        // We use '>' because we don't want the outer list to influence the inner list
         > section {
             display: flex;
             flex-grow: 20;
@@ -34,6 +37,7 @@ ul.list-field {
             &.nest-field {
                 flex-direction: row;
             }
+            // We use '>' because we don't want the outer list to influence the inner list
             & > * {
                 display: flex;
                 flex-direction: column;
@@ -47,45 +51,71 @@ ul.list-field {
             }
         }
 
-        i.fa-minus {
-            padding-left: 5px;
-            color: vars.$red;
-            font-size: 30px;
-
-            cursor: pointer;
-            &.disabled {
-                cursor: not-allowed;
-                color: vars.$light-grey;
-            }
-        }
         // Hide all labels for sub fields
         label {
             display: none;
         }
 
-        &:first-of-type {
-            //Except for the first row
-            label {
+        &:first-child {
+            //Except for the first row with nested field
+            // We use '>' because we don't want the outer list to influence the inner list
+            > * > * > label {
                 display: initial;
             }
-            section.nest-field ~ i.fa-minus {
+            // We use '>' because we don't want the outer list to influence the inner list
+            > section.nest-field ~ div.del-item {
                 margin-top: 25px;
             }
         }
     }
-    div.add-item {
+    div.add-item,
+    div.del-item {
         display: flex;
+        align-items: center;
+        align-self: flex-end;
+        margin: 5px;
+        cursor: pointer;
+
         i.fa-plus {
-            margin-left: auto;
-            padding: 10px 2px 0 0;
             color: vars.$green;
             font-size: 30px;
-            cursor: pointer;
+        }
 
-            &.disabled {
-                cursor: not-allowed;
-                color: vars.$light-grey;
-            }
+        i.fa-minus {
+            color: vars.$red;
+            font-size: 30px;
+        }
+
+        label {
+            display: block;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        i.disabled {
+            cursor: not-allowed;
+            color: vars.$light-grey;
+        }
+    }
+
+    // Used for nested lists (L2VPN)
+    &.outer-list {
+        .list-field {
+            margin-left: 20px;
+        }
+
+        // We use '>' because we don't want the outer list to influence the inner list
+        > ul > div.add-item {
+            align-self: flex-start;
+            padding: 0 2px 0 0;
+            align-items: center;
+        }
+        // We use '>' because we don't want the outer list to influence the inner list
+        > ul > li > div.del-item {
+            align-self: flex-start;
+        }
+        // We use '>' because we don't want the outer list to influence the inner list
+        > ul > li {
+            flex-direction: column;
         }
     }
 }

@@ -24,6 +24,8 @@ import {
     IMSNode,
     IMSPort,
     IMSService,
+    IpBlock,
+    IpPrefix,
     Organization,
     Process,
     ProcessSubscription,
@@ -33,6 +35,7 @@ import {
     ResourceType,
     ServicePortSubscription,
     Subscription,
+    SubscriptionModel,
     Workflow,
     WorkflowReasons
 } from "../utils/types";
@@ -230,6 +233,10 @@ export function subscriptionsDetail(subscription_id: string): Promise<Subscripti
     return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/${subscription_id}`);
 }
 
+export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
+    return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/domain-model/${subscription_id}`);
+}
+
 export function subscriptionsByTags(tagList: string[], statusList: string[] = []) {
     return fetchJson(
         `subscriptions/tag/${encodeURIComponent(tagList.join(","))}/${encodeURIComponent(statusList.join(","))}`
@@ -237,21 +244,47 @@ export function subscriptionsByTags(tagList: string[], statusList: string[] = []
 }
 
 export function nodeSubscriptions(statusList: string[] = []): Promise<Subscription[]> {
-    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
-    return fetchJson(`v2/subscriptions?filter=tags,Node${statusList.length ? optionalStatusFilter : ""}`);
+    return subscriptions(["Node"], statusList);
 }
 
 export function portSubscriptions(
-    tagList: string[],
+    tagList: string[] = [],
     statusList: string[] = [],
-    node = null
+    productList: string[] = []
 ): Promise<ServicePortSubscription[]> {
-    const optionalStatusFilter = `&filter=statuses,${encodeURIComponent(statusList.join("-"))}`;
-    return fetchJson(
-        `v2/subscriptions/ports?filter=tags,${encodeURIComponent(tagList.join("-"))}${
-            statusList.length ? optionalStatusFilter : ""
-        }`
-    );
+    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
+    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
+    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
+
+    const params = new URLSearchParams();
+    const filters = [];
+    if (tagList.length) filters.push(tagsFilter);
+    if (statusList.length) filters.push(statusFilter);
+    if (productList.length) filters.push(productsFilter);
+
+    if (filters.length) params.set("filter", filters.join(","));
+
+    return fetchJson(`v2/subscriptions/ports${filters.length ? "?" : ""}${params.toString()}`);
+}
+
+export function subscriptions(
+    tagList: string[] = [],
+    statusList: string[] = [],
+    productList: string[] = []
+): Promise<Subscription[]> {
+    const statusFilter = `statuses,${encodeURIComponent(statusList.join("-"))}`;
+    const tagsFilter = `tags,${encodeURIComponent(tagList.join("-"))}`;
+    const productsFilter = `products,${encodeURIComponent(productList.join("-"))}`;
+
+    const params = new URLSearchParams();
+    const filters = [];
+    if (tagList.length) filters.push(tagsFilter);
+    if (statusList.length) filters.push(statusFilter);
+    if (productList.length) filters.push(productsFilter);
+
+    if (filters.length) params.set("filter", filters.join(","));
+
+    return fetchJson(`v2/subscriptions${filters.length ? "?" : ""}${params.toString()}`);
 }
 
 export function subscriptionsByProductType(type: string) {
@@ -449,12 +482,12 @@ export function deleteSubscription(subscriptionId: string) {
 }
 
 //IPAM IP Prefixes
-export function ip_blocks(parentPrefix: string) {
+export function ip_blocks(parentPrefix: number): Promise<IpBlock[]> {
     return fetchJson("ipam/ip_blocks/" + parentPrefix);
 }
 
 //IPAM the user-defined filters as configured in the database for the IP PREFIX product
-export function prefix_filters() {
+export function prefix_filters(): Promise<IpPrefix[]> {
     return fetchJson("ipam/prefix_filters");
 }
 
@@ -478,7 +511,7 @@ export function subnets(subnet: string, netmask: number, prefixlen: number) {
     return fetchJson("ipam/subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 
-export function free_subnets(subnet: string, netmask: number, prefixlen: number) {
+export function free_subnets(subnet: string, netmask: number, prefixlen: number): Promise<string[]> {
     return fetchJson("ipam/free_subnets/" + subnet + "/" + netmask + "/" + prefixlen);
 }
 

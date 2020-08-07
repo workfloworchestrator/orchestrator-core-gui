@@ -1,3 +1,4 @@
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +16,7 @@
 import React from "react";
 import ReactSelect from "react-select";
 
-import { SelectField } from "../src";
+import { ListField, SelectField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 
@@ -208,6 +209,42 @@ describe("<SelectField>", () => {
                 .prop("data-z")
         ).toBe("z");
     });
+
+    test("<SelectField> - renders a select with correct value (as uniqueItem list child)", async () => {
+        const element = <ListField name="x" />;
+        const wrapper = mount(
+            element,
+            createContext(
+                {
+                    x: { type: Array, uniforms: { uniqueItems: true } },
+                    "x.$": { type: String, allowedValues: ["a", "b"] }
+                },
+                { model: { x: ["a", undefined] } }
+            )
+        );
+
+        await waitForComponentToPaint(wrapper);
+
+        expect(wrapper.find(ReactSelect)).toHaveLength(2);
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(0)
+                .prop("value")
+        ).toStrictEqual({ label: "a", value: "a" });
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(1)
+                .prop("value")
+        ).toStrictEqual(undefined);
+        expect(
+            wrapper
+                .find(ReactSelect)
+                .at(1)
+                .prop("options")
+        ).toStrictEqual([{ label: "b", value: "b" }]);
+    });
 });
 
 describe("<SelectField checkboxes>", () => {
@@ -266,13 +303,13 @@ describe("<SelectField checkboxes>", () => {
                 .find("input")
                 .at(0)
                 .prop("id")
-        ).toBe("y-YQ");
+        ).toBe("y.0");
         expect(
             wrapper
                 .find("input")
                 .at(1)
                 .prop("id")
-        ).toBe("y-Yg");
+        ).toBe("y.1");
     });
 
     test("<SelectField checkboxes> - renders a set of checkboxes with correct name", () => {
@@ -298,17 +335,17 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(2);
+        expect(wrapper.find("label")).toHaveLength(4);
         expect(
             wrapper
                 .find("label")
-                .at(0)
+                .at(1)
                 .text()
         ).toBe("a");
         expect(
             wrapper
                 .find("label")
-                .at(1)
+                .at(3)
                 .text()
         ).toBe("b");
     });
@@ -317,17 +354,17 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" transform={(x: string) => x.toUpperCase()} />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(2);
+        expect(wrapper.find("label")).toHaveLength(4);
         expect(
             wrapper
                 .find("label")
-                .at(0)
+                .at(1)
                 .text()
         ).toBe("A");
         expect(
             wrapper
                 .find("label")
-                .at(1)
+                .at(3)
                 .text()
         ).toBe("B");
     });
@@ -481,7 +518,7 @@ describe("<SelectField checkboxes>", () => {
         const element = <SelectField checkboxes name="x" label="y" />;
         const wrapper = mount(element, createContext({ x: { type: String, allowedValues: ["a", "b"] } }));
 
-        expect(wrapper.find("label")).toHaveLength(3);
+        expect(wrapper.find("label")).toHaveLength(5);
         expect(
             wrapper
                 .find("label")
@@ -512,5 +549,65 @@ describe("<SelectField checkboxes>", () => {
                 .at(0)
                 .prop("data-z")
         ).toBe("z");
+    });
+
+    test("<SelectField checkboxes> - renders a set of checkboxes with correct value (as uniqueItem list child)", async () => {
+        const element = (
+            <ListField name="x">
+                <SelectField checkboxes name="$" />
+            </ListField>
+        );
+        const wrapper = mount(
+            element,
+            createContext(
+                {
+                    x: { type: Array, uniforms: { uniqueItems: true } },
+                    "x.$": { type: String, allowedValues: ["a", "b"] }
+                },
+                { model: { x: ["a", undefined] } }
+            )
+        );
+
+        await waitForComponentToPaint(wrapper);
+
+        expect(wrapper.find("label")).toHaveLength(7);
+        expect(
+            wrapper
+                .find("label")
+                .at(1)
+                .text()
+        ).toBe("a");
+        expect(
+            wrapper
+                .find("label")
+                .at(3)
+                .text()
+        ).toBe("b");
+        expect(
+            wrapper
+                .find("label")
+                .at(5)
+                .text()
+        ).toBe("b");
+
+        expect(wrapper.find("input")).toHaveLength(3);
+        expect(
+            wrapper
+                .find("input")
+                .at(0)
+                .prop("checked")
+        ).toBe(true);
+        expect(
+            wrapper
+                .find("input")
+                .at(1)
+                .prop("checked")
+        ).toBe(false);
+        expect(
+            wrapper
+                .find("input")
+                .at(2)
+                .prop("checked")
+        ).toBe(false);
     });
 });

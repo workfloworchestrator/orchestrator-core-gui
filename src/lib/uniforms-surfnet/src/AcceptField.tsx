@@ -21,7 +21,19 @@ import { connectField } from "uniforms";
 
 import { FieldProps } from "./types";
 
-type AcceptItem = (string | TranslateOptions)[];
+type AcceptItemType =
+    | "info"
+    | "label"
+    | "warning"
+    | "url"
+    | "checkbox"
+    | ">checkbox"
+    | "checkbox?"
+    | ">checkbox?"
+    | "skip"
+    | "margin"
+    | "value";
+type AcceptItem = [string, AcceptItemType, TranslateOptions?];
 type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
 export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
@@ -63,15 +75,18 @@ function Accept({
         (state: AcceptState, action: Action) => {
             if (action.type === "skip") {
                 state.skip = action.value;
+                state.checks = {};
             } else {
                 state.checks[action.field] = action.value;
             }
 
             // We intentionally skip optional checkboxes here
             state.allChecked = data!
-                .map((entry: AcceptItem, index: number) => [entry, state.checks[index] || false])
-                .filter((entry: (boolean | AcceptItem)[]) => (entry[0] as AcceptItem)[1].endsWith("checkbox"))
-                .map((entry: (boolean | AcceptItem)[]) => entry[1] as boolean)
+                .map(
+                    (entry: AcceptItem, index: number) => [entry, state.checks[index] || false] as [AcceptItem, boolean]
+                )
+                .filter((entry: [AcceptItem, boolean]) => entry[0][1].endsWith("checkbox"))
+                .map((entry: [AcceptItem, boolean]) => entry[1])
                 .every((check: boolean) => check);
 
             onChange(state.skip ? "SKIPPED" : state.allChecked ? "ACCEPTED" : "INCOMPLETE");
@@ -84,7 +99,7 @@ function Accept({
     return (
         <section id={id} className="accept-field">
             {data.map((entry: any[], index: number) => {
-                const label = I18n.t(`${i18nBaseKey}.${entry[0]}`, entry[2] as TranslateOptions);
+                const label = I18n.t(`${i18nBaseKey}.${entry[0]}`, entry[2]);
 
                 switch (entry[1]) {
                     case "label":
@@ -102,11 +117,19 @@ function Accept({
                     case "url":
                         return (
                             <div key={index}>
-                                <a href={entry[0] as string} target="_blank" rel="noopener noreferrer">
+                                <a href={entry[0]} target="_blank" rel="noopener noreferrer">
                                     {entry[0]}
                                 </a>
                             </div>
                         );
+                    case "value":
+                        return (
+                            <div key={index}>
+                                <input value={entry[0]} disabled={true} />
+                            </div>
+                        );
+                    case "margin":
+                        return <br />;
                     case "warning":
                         return (
                             <div key={index}>
@@ -140,7 +163,7 @@ function Accept({
                                 }}
                                 value={state.checks[index]}
                                 info={label}
-                                disabled={state.skip || disabled}
+                                readOnly={state.skip || disabled}
                             />
                         );
                 }

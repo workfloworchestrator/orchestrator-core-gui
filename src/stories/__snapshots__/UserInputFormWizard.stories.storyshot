@@ -11,23 +11,24 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
       className="card"
     >
       <form
+        noValidate={true}
         onSubmit={[Function]}
       >
         <section
           className="form-step"
         >
-          <section
-            className="form-divider ims_port_id_1"
-            id="input-ims_port_id_1"
-          >
-            <label>
+          <section>
+            <label
+              htmlFor="input-ims_port_id_1"
+            >
               First node and port
+              <em>
+                Choose a node and port that you want to use to create the first corelink
+              </em>
             </label>
-            <em>
-              Choose a node and port that you want to use to create the first corelink
-            </em>
             <div
-              className="generic-select css-2b097c-container"
+              className=" css-2b097c-container"
+              id="input-ims_port_id_1"
               onKeyDown={[Function]}
             >
               <div
@@ -41,7 +42,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                   <div
                     className=" css-1wa3eu0-placeholder"
                   >
-                    Search or select a value...
+                    Search and select a value...
                   </div>
                   <div
                     className="css-b8ldur-Input"
@@ -60,7 +61,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                         autoComplete="off"
                         autoCorrect="off"
                         disabled={false}
-                        id="react-select-161-input"
+                        id="input-ims_port_id_1.search"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -128,10 +129,12 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
                   </div>
                 </div>
               </div>
+              <input
+                name="ims_port_id_1"
+                type="hidden"
+                value=""
+              />
             </div>
-            <em
-              className="error"
-            />
           </section>
         </section>
         <section
