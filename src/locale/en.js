@@ -254,6 +254,13 @@ I18n.translations.en = {
             ims_port_id_1_info: "Choose a node and port that you want to use to create the first corelink",
             ims_port_id_2: "Second node and port",
             ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
+            insync_reason: "Reason",
+            insync_confirm_reason: "Please confirm or cancel",
+            insync_confirm_reason_info:
+                "Are you really sure you want to set this subscription 'in sync'? This should normally be done by " +
+                "running the validation workflow. Forcing a subscription to 'in sync' is potentially dangerous and " +
+                "may break all other workflows that are run after this. If this is the only possible option please " +
+                "state the reason.",
             internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
             internetpinnen_prefix_subscriptions_info:
                 "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
@@ -365,10 +372,6 @@ I18n.translations.en = {
             primary_speed_policer: "Primary Speed policer",
             product: "Product",
             product_info: "Search and select the product",
-            insync_reason: "Reason",
-            insync_confirm_reason: "Please confirm or cancel",
-            insync_confirm_reason_info:
-                "Are you really sure you want to set this subscription InSync? This is potentially dangerous and may break all other workflows that are run after this. Please state the reason why you are not using workflows.",
             remote_port_shutdown: "Remote port shutdown",
             removed_service_ports: "Remove ports",
             removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
@@ -1431,7 +1434,7 @@ I18n.translations.en = {
         modify_node_in_service: "Set a planned node in service",
         modify_note: "Modify subscription note",
         modify_sn7_elan: "Modify ELAN",
-        modify_sn7_insync: "Force a SN7 subscription insync",
+        modify_sn7_insync: "Force an SN7 subscription insync",
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
         modify_sn7_light_path_msp_only_speed: "Modify Service Speed",
