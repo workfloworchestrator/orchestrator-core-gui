@@ -129,7 +129,7 @@ function Accept({
                             </div>
                         );
                     case "margin":
-                        return <br />;
+                        return <br key={index} />;
                     case "warning":
                         return (
                             <div key={index}>

@@ -106,6 +106,7 @@ describe("<SubscriptionField>", () => {
             { label: "d1", value: "a" },
             { label: "d2", value: "b" }
         ]);
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<SubscriptionField> - renders a select with correct options (tags filtered)", async () => {
@@ -602,6 +603,7 @@ describe("<SubscriptionField>", () => {
                 .at(1)
                 .prop("options")
         ).toStrictEqual([{ label: "dec2", value: "b" }]);
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     function makeSubscription(tag: string, port_mode?: string, crm_port_id?: string): ServicePortSubscription {

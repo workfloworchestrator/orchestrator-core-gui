@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OptGroupField> - renders an the correct fields when disabled 1`] = `
+"<OptGroupField name=\\"x\\">
+  <OptGroup name=\\"x\\" id=\\"uniforms-0000-0000\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: false, label: 'X' }} fieldType={[Function: Object]} fields={[ 'enabled', 'b', 'c' ]} onChange={[Function]} value={{}} required={true}>
+    <section id=\\"uniforms-0000-0000\\" required={true} className=\\" optgroup-field\\">
+      <label>
+        [missing &quot;en.forms.fields.x.title&quot; translation]
+        <em>
+          [missing &quot;en.forms.fields.x.info&quot; translation]
+        </em>
+      </label>
+      <BoolField name=\\"enabled\\">
+        <Bool name=\\"x.enabled\\" id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Boolean], optional: false, label: 'Enabled' }} fieldType={[Function: Boolean]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
+          <section required={true} className=\\"bool-field\\">
+            <input checked={false} disabled={false} id=\\"uniforms-0000-0002\\" name=\\"x.enabled\\" onChange={[Function]} type=\\"checkbox\\" />
+            <label htmlFor=\\"uniforms-0000-0002\\">
+              <span tabIndex={0}>
+                <i className=\\"fa fa-check\\" />
+              </span>
+            </label>
+          </section>
+        </Bool>
+      </BoolField>
+    </section>
+  </OptGroup>
+</OptGroupField>"
+`;
+
+exports[`<OptGroupField> - renders an the correct fields when enabled 1`] = `
+"<OptGroupField name=\\"x\\">
+  <OptGroup name=\\"x\\" id=\\"uniforms-0000-0003\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: false, label: 'X' }} fieldType={[Function: Object]} fields={[ 'enabled', 'b', 'c' ]} onChange={[Function]} value={{ enabled: true }} required={true}>
+    <section id=\\"uniforms-0000-0003\\" required={true} className=\\" optgroup-field\\">
+      <label>
+        [missing &quot;en.forms.fields.x.title&quot; translation]
+        <em>
+          [missing &quot;en.forms.fields.x.info&quot; translation]
+        </em>
+      </label>
+      <BoolField name=\\"enabled\\">
+        <Bool name=\\"x.enabled\\" id=\\"uniforms-0000-0005\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Boolean], optional: false, label: 'Enabled' }} fieldType={[Function: Boolean]} fields={[]} onChange={[Function]} value={true} required={true}>
+          <section required={true} className=\\"bool-field\\">
+            <input checked={true} disabled={false} id=\\"uniforms-0000-0005\\" name=\\"x.enabled\\" onChange={[Function]} type=\\"checkbox\\" />
+            <label htmlFor=\\"uniforms-0000-0005\\">
+              <span tabIndex={0}>
+                <i className=\\"fa fa-check\\" />
+              </span>
+            </label>
+          </section>
+        </Bool>
+      </BoolField>
+      <AutoField name=\\"b\\">
+        <Num id=\\"uniforms-0000-0006\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'B' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true} name=\\"x.b\\">
+          <div required={true}>
+            <NumericInput id=\\"uniforms-0000-0006\\" name=\\"x.b\\" placeholder=\\"\\" onChange={[Function: onChange]} min={-9007199254740991} max={9007199254740991} step={1} precision={0} value=\\"\\" strict={false} disabled={false} parse={null} format={null} mobile=\\"auto\\" componentClass=\\"input\\" style={{}}>
+              <span style={{ position: 'relative', display: 'inline-block' }} className=\\"react-numeric-input\\" onMouseUp={[Function: bound stop]} onMouseLeave={[Function: bound stop]}>
+                <input type=\\"text\\" style={{ paddingRight: '3ex', boxSizing: 'border-box', fontSize: 'inherit', border: '1px solid #ccc', borderRadius: 2, paddingLeft: 4, display: 'block', WebkitAppearance: 'none', lineHeight: 'normal' }} id=\\"uniforms-0000-0006\\" name=\\"x.b\\" placeholder=\\"\\" onChange={[Function: onChange]} disabled={false} value=\\"\\" onKeyDown={[Function: bound _onKeyDown]} onInput={[Function: onInput]} onSelect={[Function: onSelect]} onFocus={[Function: onFocus]} onBlur={[Function: onBlur]} />
+                <b onMouseEnter={[Function: onMouseEnter]} onMouseDown={[Function: onMouseDown]} onMouseUp={[Function: onMouseUp]} onMouseLeave={[Function: onMouseLeave]} onTouchStart={[Function: bound onTouchStart]} onTouchEnd={[Function: bound onTouchEnd]} style={{ position: 'absolute', right: 2, width: '2.26ex', borderColor: 'rgba(0,0,0,.1)', borderStyle: 'solid', textAlign: 'center', cursor: 'default', transition: 'all 0.1s', background: 'rgba(0,0,0,.1)', boxShadow: '-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset', top: 2, bottom: '50%', borderRadius: '2px 2px 0 0', borderWidth: '1px 1px 0 1px' }}>
+                  <i style={{ position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, borderWidth: '0 0.6ex 0.6ex 0.6ex', borderColor: 'transparent transparent rgba(0, 0, 0, 0.7)', borderStyle: 'solid', margin: '-0.3ex 0 0 -0.56ex' }} />
+                </b>
+                <b onMouseEnter={[Function: onMouseEnter]} onMouseDown={[Function: onMouseDown]} onMouseUp={[Function: onMouseUp]} onMouseLeave={[Function: onMouseLeave]} onTouchStart={[Function: bound onTouchStart]} onTouchEnd={[Function: bound onTouchEnd]} style={{ position: 'absolute', right: 2, width: '2.26ex', borderColor: 'rgba(0,0,0,.1)', borderStyle: 'solid', textAlign: 'center', cursor: 'default', transition: 'all 0.1s', background: 'rgba(0,0,0,.1)', boxShadow: '-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset', top: '50%', bottom: 2, borderRadius: '0 0 2px 2px', borderWidth: '0 1px 1px 1px' }}>
+                  <i style={{ position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, borderWidth: '0.6ex 0.6ex 0 0.6ex', borderColor: 'rgba(0, 0, 0, 0.7) transparent transparent', borderStyle: 'solid', margin: '-0.3ex 0 0 -0.56ex' }} />
+                </b>
+              </span>
+            </NumericInput>
+          </div>
+        </Num>
+      </AutoField>
+      <AutoField name=\\"c\\">
+        <Num id=\\"uniforms-0000-0007\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'C' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true} name=\\"x.c\\">
+          <div required={true}>
+            <NumericInput id=\\"uniforms-0000-0007\\" name=\\"x.c\\" placeholder=\\"\\" onChange={[Function: onChange]} min={-9007199254740991} max={9007199254740991} step={1} precision={0} value=\\"\\" strict={false} disabled={false} parse={null} format={null} mobile=\\"auto\\" componentClass=\\"input\\" style={{}}>
+              <span style={{ position: 'relative', display: 'inline-block' }} className=\\"react-numeric-input\\" onMouseUp={[Function: bound stop]} onMouseLeave={[Function: bound stop]}>
+                <input type=\\"text\\" style={{ paddingRight: '3ex', boxSizing: 'border-box', fontSize: 'inherit', border: '1px solid #ccc', borderRadius: 2, paddingLeft: 4, display: 'block', WebkitAppearance: 'none', lineHeight: 'normal' }} id=\\"uniforms-0000-0007\\" name=\\"x.c\\" placeholder=\\"\\" onChange={[Function: onChange]} disabled={false} value=\\"\\" onKeyDown={[Function: bound _onKeyDown]} onInput={[Function: onInput]} onSelect={[Function: onSelect]} onFocus={[Function: onFocus]} onBlur={[Function: onBlur]} />
+                <b onMouseEnter={[Function: onMouseEnter]} onMouseDown={[Function: onMouseDown]} onMouseUp={[Function: onMouseUp]} onMouseLeave={[Function: onMouseLeave]} onTouchStart={[Function: bound onTouchStart]} onTouchEnd={[Function: bound onTouchEnd]} style={{ position: 'absolute', right: 2, width: '2.26ex', borderColor: 'rgba(0,0,0,.1)', borderStyle: 'solid', textAlign: 'center', cursor: 'default', transition: 'all 0.1s', background: 'rgba(0,0,0,.1)', boxShadow: '-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset', top: 2, bottom: '50%', borderRadius: '2px 2px 0 0', borderWidth: '1px 1px 0 1px' }}>
+                  <i style={{ position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, borderWidth: '0 0.6ex 0.6ex 0.6ex', borderColor: 'transparent transparent rgba(0, 0, 0, 0.7)', borderStyle: 'solid', margin: '-0.3ex 0 0 -0.56ex' }} />
+                </b>
+                <b onMouseEnter={[Function: onMouseEnter]} onMouseDown={[Function: onMouseDown]} onMouseUp={[Function: onMouseUp]} onMouseLeave={[Function: onMouseLeave]} onTouchStart={[Function: bound onTouchStart]} onTouchEnd={[Function: bound onTouchEnd]} style={{ position: 'absolute', right: 2, width: '2.26ex', borderColor: 'rgba(0,0,0,.1)', borderStyle: 'solid', textAlign: 'center', cursor: 'default', transition: 'all 0.1s', background: 'rgba(0,0,0,.1)', boxShadow: '-1px -1px 3px rgba(0,0,0,.1) inset,1px 1px 3px rgba(255,255,255,.7) inset', top: '50%', bottom: 2, borderRadius: '0 0 2px 2px', borderWidth: '0 1px 1px 1px' }}>
+                  <i style={{ position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, borderWidth: '0.6ex 0.6ex 0 0.6ex', borderColor: 'rgba(0, 0, 0, 0.7) transparent transparent', borderStyle: 'solid', margin: '-0.3ex 0 0 -0.56ex' }} />
+                </b>
+              </span>
+            </NumericInput>
+          </div>
+        </Num>
+      </AutoField>
+    </section>
+  </OptGroup>
+</OptGroupField>"
+`;

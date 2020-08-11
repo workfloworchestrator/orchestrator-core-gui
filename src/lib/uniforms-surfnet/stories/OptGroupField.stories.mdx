@@ -1,0 +1,34 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
+import fetchMock from "fetch-mock";
+import UserInputContainer from "stories/UserInputContainer";
+
+import { createForm } from "../../../stories/utils";
+import OptGroupField from "../src/OptGroupField";
+
+<Meta title="Uniforms/OptGroupField" component={OptGroupField} />
+
+## OptGroupField
+
+<Story name="OptGroupField">
+    <UserInputContainer
+        stepUserInput={createForm({
+            name: {
+                type: "object",
+                format: "optGroup",
+                properties: { enabled: { type: "boolean" }, a: { type: "string" } }
+            }
+        })}
+    />
+</Story>
+
+### JSON Schema form json
+
+```json
+{
+    "name": {
+        "type": "object",
+        "format": "optGroup",
+        "properties": { "enabled": { "type": "boolean" }, "a": { "type": "string" } }
+    }
+}
+```

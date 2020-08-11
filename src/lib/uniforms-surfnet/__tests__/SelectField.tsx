@@ -128,6 +128,7 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<SelectField> - renders a select with correct value (specified)", () => {
@@ -244,6 +245,7 @@ describe("<SelectField>", () => {
                 .at(1)
                 .prop("options")
         ).toStrictEqual([{ label: "b", value: "b" }]);
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 });
 
@@ -348,6 +350,7 @@ describe("<SelectField checkboxes>", () => {
                 .at(3)
                 .text()
         ).toBe("b");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)", () => {

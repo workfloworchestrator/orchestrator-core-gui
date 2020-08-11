@@ -154,7 +154,7 @@ function Subscription({
             products = filterProductsByBandwidth(products, usedBandwidth);
         }
 
-        return products.length !== allProducts.length ? products.map(product => product.product_id) : [];
+        return products.map(product => product.product_id);
     }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {
