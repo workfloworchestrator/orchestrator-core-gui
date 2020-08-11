@@ -37,6 +37,7 @@ test("<OptGroupField> - renders an the correct fields when disabled", () => {
             .at(0)
             .prop("name")
     ).toBe("x.enabled");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<OptGroupField> - renders an the correct fields when enabled", () => {
@@ -73,6 +74,7 @@ test("<OptGroupField> - renders an the correct fields when enabled", () => {
             .at(2)
             .prop("name")
     ).toBe("x.c");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<OptGroupField> - renders a label", () => {

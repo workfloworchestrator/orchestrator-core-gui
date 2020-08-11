@@ -49,6 +49,7 @@ describe("<ImsPortIdField>", () => {
                 .at(1)
                 .props()
         ).toMatchObject({ options: [], value: undefined, isDisabled: true, placeholder: "First select a node" });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<ImsPortIdField> - reacts on change inputs legacy", async () => {
@@ -117,6 +118,7 @@ describe("<ImsPortIdField>", () => {
                 .at(1)
                 .props()
         ).toMatchObject({ options: [], value: undefined, isDisabled: true, placeholder: "First select a node" });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<ImsPortIdField> - reacts on change inputs", async () => {
@@ -195,5 +197,6 @@ describe("<ImsPortIdField>", () => {
             isDisabled: false,
             placeholder: "Select a port"
         });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 });

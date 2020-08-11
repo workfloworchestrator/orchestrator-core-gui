@@ -1,0 +1,119 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
+import { boolean } from "@storybook/addon-knobs";
+import fetchMock from "fetch-mock";
+import UserInputContainer from "stories/UserInputContainer";
+
+import { createForm } from "../../../stories/utils";
+import ImsPortIdField from "../src/ImsPortIdField";
+
+<Meta title="Uniforms/ImsPortIdField" component={ImsPortIdField} />
+
+## ImsPortIdField Corelink
+
+With this version you can choose a port based on an node subscription. Optionally the node can be preselected.
+
+<Story name="ImsPortIdFieldCorelink">
+    {() => {
+        fetchMock.restore();
+        fetchMock.get("glob:/api/ims/nodes/*/IS", []);
+        fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", [
+            {
+                subscription_id: "83a0d757-695f-440e-9530-fae87be96e12",
+                name: "Node",
+                status: "active",
+                description: "Node subscription 1"
+            },
+            {
+                subscription_id: "4e59d6b6-55f3-4148-8527-84586afca1ce",
+                name: "Node",
+                status: "active",
+                description: "Node subscription 1"
+            }
+        ]);
+        fetchMock.get("glob:/api/ims/free_corelink_ports/*/1000", [
+            { id: 1, iface_type: "1000BASE-LX", port: "0/0/0", status: "IS" },
+            { id: 2, iface_type: "1000BASE-LX", port: "0/0/1", status: "IS" },
+            { id: 3, iface_type: "1000BASE-SX", port: "0/0/2", status: "IS" }
+        ]);
+        return (
+            <UserInputContainer
+                stepUserInput={createForm({
+                    name: {
+                        type: "integer",
+                        format: "imsPortId",
+                        interfaceType: "1000",
+                        nodeSubscriptionId: boolean("Filter on node subscription", false)
+                            ? "83a0d757-695f-440e-9530-fae87be96e12"
+                            : undefined
+                    }
+                })}
+            />
+        );
+    }}
+</Story>
+
+### JSON Schema form json
+
+```Json
+{
+    "name": {
+        "type": "integer",
+        "format": "imsPortId",
+        "nodeSubscriptionId": "<node subscription id>",
+        "interfaceType":"<speed in mbit>"
+    }
+}
+```
+
+## ImsPortIdField Legacy
+
+In this version you choose a port based on an ims node
+
+<Story name="ImsPortIdFieldLegacy">
+    {() => {
+        fetchMock.restore();
+        fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", []);
+        fetchMock.get("/api/ims/nodes/MT001A/IS", [
+            {
+                id: 1,
+                name: "MT001A-JNX-01",
+                status: "active"
+            },
+            {
+                id: 2,
+                name: "MT001A-JNX-02",
+                status: "active"
+            }
+        ]);
+        fetchMock.get("glob:/api/ims/free_ports/*", [
+            { id: 1, iface_type: "1000BASE-LX", port: "0/0/0", status: "IS" },
+            { id: 2, iface_type: "1000BASE-LX", port: "0/0/1", status: "IS" },
+            { id: 3, iface_type: "1000BASE-SX", port: "0/0/2", status: "IS" }
+        ]);
+        return (
+            <UserInputContainer
+                stepUserInput={createForm({
+                    name: {
+                        type: "integer",
+                        format: "imsPortId",
+                        locationCode: "MT001A",
+                        interfaceType: "1000BASE-LX"
+                    }
+                })}
+            />
+        );
+    }}
+</Story>
+
+### JSON Schema form json
+
+```Json
+{
+    "name": {
+        "type": "integer",
+        "format": "imsPortId",
+        "locationCode":"<location code>",
+        "interfaceType":"<interface ieee type>"
+    }
+}
+```

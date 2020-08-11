@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VlanField> <VlanField> - adds vlans taken in same list as used vlans 1`] = `
+"<ListField name=\\"x\\">
+  <List name=\\"x\\" id=\\"uniforms-0000-000j\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ { subscription_id: 'abc', y: '2,3' }, { subscription_id: 'abc', y: '3' }, { subscription_id: 'def', y: '3' } ]} required={true}>
+    <section id=\\"uniforms-0000-000j\\" required={true} className=\\"list-field\\">
+      <ul>
+        <NestField name=\\"0\\" outerList={false}>
+          <Nest name=\\"x.0\\" outerList={false} id=\\"uniforms-0000-000l\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: true, label: 'X' }} fieldType={[Function: Object]} fields={[ 'y' ]} onChange={[Function]} value={{ subscription_id: 'abc', y: '2,3' }} required={false}>
+            <div id=\\"uniforms-0000-000l\\" required={false}>
+              <VlanField name=\\"y\\">
+                <Vlan name=\\"x.0.y\\" id=\\"uniforms-0000-000m\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'Y' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"2,3\\" required={true}>
+                  <section required={true}>
+                    <input disabled={false} id=\\"uniforms-0000-000m\\" name=\\"x.0.y\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"2,3\\" />
+                    <em className=\\"info\\">
+                      Already used VLAN ranges for this service port: 3
+                    </em>
+                  </section>
+                </Vlan>
+              </VlanField>
+            </div>
+          </Nest>
+        </NestField>
+        <NestField name=\\"1\\" outerList={false}>
+          <Nest name=\\"x.1\\" outerList={false} id=\\"uniforms-0000-000n\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: true, label: 'X' }} fieldType={[Function: Object]} fields={[ 'y' ]} onChange={[Function]} value={{ subscription_id: 'abc', y: '3' }} required={false}>
+            <div id=\\"uniforms-0000-000n\\" required={false}>
+              <VlanField name=\\"y\\">
+                <Vlan name=\\"x.1.y\\" id=\\"uniforms-0000-000o\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'Y' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"3\\" required={true}>
+                  <section required={true}>
+                    <input disabled={false} id=\\"uniforms-0000-000o\\" name=\\"x.1.y\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"3\\" />
+                    <em className=\\"info\\">
+                      Already used VLAN ranges for this service port: 2-3
+                    </em>
+                  </section>
+                </Vlan>
+              </VlanField>
+            </div>
+          </Nest>
+        </NestField>
+        <NestField name=\\"2\\" outerList={false}>
+          <Nest name=\\"x.2\\" outerList={false} id=\\"uniforms-0000-000p\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: true, label: 'X' }} fieldType={[Function: Object]} fields={[ 'y' ]} onChange={[Function]} value={{ subscription_id: 'def', y: '3' }} required={false}>
+            <div id=\\"uniforms-0000-000p\\" required={false}>
+              <VlanField name=\\"y\\">
+                <Vlan name=\\"x.2.y\\" id=\\"uniforms-0000-000q\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'Y' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"3\\" required={true}>
+                  <section required={true}>
+                    <input disabled={false} id=\\"uniforms-0000-000q\\" name=\\"x.2.y\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"3\\" />
+                    <em className=\\"info\\">
+                      This service port has no VLANs in use (yet).
+                    </em>
+                  </section>
+                </Vlan>
+              </VlanField>
+            </div>
+          </Nest>
+        </NestField>
+        <ListAddField initialCount={1} name=\\"$\\" disabled={false} outerList={false}>
+          <ListAdd initialCount={1} name=\\"x.$\\" disabled={false} outerList={false} id=\\"uniforms-0000-000r\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Object], optional: true, label: 'X' }} fieldType={[Function: Object]} fields={[ 'y' ]} onChange={[Function]} value={{}} required={false}>
+            <div className=\\"add-item\\" id=\\"uniforms-0000-000r\\" required={false} onClick={[Function: onClick]}>
+              <i className=\\"fa fa-plus \\" />
+              <label />
+            </div>
+          </ListAdd>
+        </ListAddField>
+      </ul>
+    </section>
+  </List>
+</ListField>"
+`;
+
+exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged with used Vlans) 1`] = `
+"<VlanField name=\\"x\\">
+  <Vlan name=\\"x\\" id=\\"uniforms-0000-000i\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
+    <section required={true}>
+      <input disabled={false} id=\\"uniforms-0000-000i\\" name=\\"x\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"\\" />
+      <em className=\\"info\\">
+        Already used VLAN ranges for this service port: 3-6,10
+      </em>
+    </section>
+  </Vlan>
+</VlanField>"
+`;
+
+exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged) 1`] = `
+"<VlanField name=\\"x\\">
+  <Vlan name=\\"x\\" id=\\"uniforms-0000-000h\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
+    <section required={true}>
+      <input disabled={false} id=\\"uniforms-0000-000h\\" name=\\"x\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"\\" />
+      <em className=\\"info\\">
+        This service port has no VLANs in use (yet).
+      </em>
+    </section>
+  </Vlan>
+</VlanField>"
+`;
+
+exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/disabled based on portMode (untagged with used vlans) 1`] = `
+"<VlanField name=\\"x\\">
+  <Vlan name=\\"x\\" id=\\"uniforms-0000-000g\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"0\\" required={true}>
+    <section required={true}>
+      <input disabled={true} id=\\"uniforms-0000-000g\\" name=\\"x\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"0\\" />
+      <em className=\\"info\\">
+        VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.
+      </em>
+    </section>
+  </Vlan>
+</VlanField>"
+`;
+
+exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/disabled based on portMode (untagged) 1`] = `
+"<VlanField name=\\"x\\">
+  <Vlan name=\\"x\\" id=\\"uniforms-0000-000f\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"0\\" required={true}>
+    <section required={true}>
+      <input disabled={true} id=\\"uniforms-0000-000f\\" name=\\"x\\" onChange={[Function: onChange]} placeholder=\\"Enter a valid VLAN range...\\" type=\\"text\\" value=\\"0\\" />
+      <em className=\\"info\\">
+        VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.
+      </em>
+    </section>
+  </Vlan>
+</VlanField>"
+`;

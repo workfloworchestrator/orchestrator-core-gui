@@ -103,6 +103,37 @@ test("<ListField> - renders children with correct name (children)", () => {
     ).toBe("1");
 });
 
+test("<ListField> - renders children with correct values", () => {
+    const element = <ListField name="x" />;
+    const wrapper = mount(
+        element,
+        createContext({ x: { type: Array }, "x.$": { type: String } }, { model: { x: ["a", "b", "c"] } })
+    );
+
+    expect(wrapper.find(ListItemField)).toHaveLength(3);
+
+    expect(
+        wrapper
+            .find("input")
+            .at(0)
+            .prop("value")
+    ).toBe("a");
+    expect(
+        wrapper
+            .find("input")
+            .at(1)
+            .prop("value")
+    ).toBe("b");
+
+    expect(
+        wrapper
+            .find("input")
+            .at(2)
+            .prop("value")
+    ).toBe("c");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+});
+
 test("<ListField> - renders children with correct name (value)", () => {
     const element = <ListField name="x" initialCount={2} />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
@@ -119,6 +150,7 @@ test("<ListField> - renders children with correct name (value)", () => {
             .at(1)
             .prop("name")
     ).toBe("1");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<ListField> - renders correctly when child is list", () => {
@@ -171,4 +203,10 @@ test("<ListField> - renders correctly when child is list", () => {
             .at(1)
             .prop("className")
     ).toBe("list-field");
+    expect(
+        wrapper
+            .find(ListField)
+            .at(0)
+            .html()
+    ).toMatchSnapshot();
 });

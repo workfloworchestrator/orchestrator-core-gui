@@ -80,7 +80,7 @@ function Select({
         return (
             <ListField name={name}>
                 <ListItemField name="$">
-                    <SelectField name="" transform={transform} />
+                    <SelectField name="" transform={transform} allowedValues={allowedValues} />
                 </ListItemField>
             </ListField>
         );
