@@ -256,7 +256,7 @@ I18n.translations.en = {
             ims_port_id_2: "Second node and port",
             ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
             insync_reason: "Reason",
-            insync_confirm_reason: "Please confirm or cancel",
+            insync_confirm_reason: "Force subscription into sync",
             insync_confirm_reason_info:
                 "Are you really sure you want to set this subscription 'in sync'? This should normally be done by " +
                 "running the validation workflow. Forcing a subscription to 'in sync' is potentially dangerous and " +
