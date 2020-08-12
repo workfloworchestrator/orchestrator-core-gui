@@ -23,7 +23,7 @@ function DropDownContainer({
 }: {
     title: string;
     renderButtonContent: (active: boolean, hover: boolean) => React.ReactNode;
-    renderContent: (disabled: boolean) => React.ReactNode;
+    renderContent: (disabled: boolean, reset: () => void) => React.ReactNode;
 }) {
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
@@ -53,7 +53,7 @@ function DropDownContainer({
                     }
                 }}
             >
-                {(active || hover) && renderContent(!active)}
+                {(active || hover) && renderContent(!active, () => setActive(false))}
             </div>
         </div>
     );

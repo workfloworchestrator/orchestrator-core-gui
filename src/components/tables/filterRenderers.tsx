@@ -13,15 +13,15 @@
  *
  */
 
-import DropDownContainer from "components/DropDownContainer";
-import OrganisationSelect from "components/OrganisationSelect";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
-import React, { Dispatch } from "react";
-import Select from "react-select";
+import React, { Dispatch, useContext } from "react";
+import Select, { ActionMeta, ValueType } from "react-select";
 import { ColumnInstance, TableState } from "react-table";
-import { ProcessV2 } from "utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { Option, Organization, ProcessV2 } from "utils/types";
 
+import DropDownContainer from "./DropDownContainer";
 import { ActionType, TableSettingsAction } from "./NwaTable";
 
 /*
@@ -42,7 +42,7 @@ const renderFilterIcon = (filtering: boolean) => (active: boolean) => {
     );
 };
 
-export function renderCustomersFilter({
+function CustomersFilter({
     state,
     dispatch,
     column
@@ -60,15 +60,27 @@ export function renderCustomersFilter({
     const current = state.filterBy.find(filter => filter.id === "organisation");
     const selectedOrganisation = current ? current.values.join("-") : null;
     const filtering = selectedOrganisation !== null;
+
+    const { organisations } = useContext(ApplicationContext);
+
+    const options: Option[] = organisations
+        ? organisations.map((org: Organization) => ({
+              value: org.uuid,
+              label: column.id === "abbrev" ? org.abbr : org.name
+          }))
+        : [];
+    const value = options.find((option: Option) => option.value === selectedOrganisation);
+
     return (
         <DropDownContainer
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
-            renderContent={(disabled: boolean) => (
-                <OrganisationSelect
-                    id={`filter-${state.name}.${column.id}`} // will set and inputId itself, based on the id
-                    organisation={selectedOrganisation}
-                    onChange={(selected, action) => {
+            renderContent={(disabled: boolean, reset) => (
+                <Select
+                    ref={ref => ref?.focus()}
+                    id={`filter-${state.name}.${column.id}`}
+                    inputID={`input-filter-${state.name}.${column.id}`}
+                    onChange={(selected: ValueType<Option>, action: ActionMeta<Option>) => {
                         // See https://github.com/JedWatson/react-select/issues/2902 why we need this.
                         if (Array.isArray(selected)) {
                             throw new Error("Expected a single value from react-select");
@@ -77,19 +89,31 @@ export function renderCustomersFilter({
                             dispatch({
                                 type: ActionType.FILTER_REPLACE,
                                 id: "organisation",
-                                values: selected.value.split("-")
+                                values: (selected as Option).value.split("-")
                             });
                         } else if (action.action === "clear") {
                             dispatch({ type: ActionType.FILTER_CLEAR, id: "organisation" });
                         }
                     }}
+                    options={options}
+                    value={value}
+                    isSearchable={true}
+                    isClearable={true}
                     placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
-                    abbreviate={column.id === "abbrev"}
-                    disabled={disabled}
+                    isDisabled={disabled || organisations?.length === 0}
+                    onBlur={reset}
                 />
             )}
         />
     );
+}
+
+export function renderCustomersFilter(props: {
+    state: TableState<ProcessV2>;
+    dispatch: Dispatch<TableSettingsAction<ProcessV2>>;
+    column: ColumnInstance;
+}) {
+    return <CustomersFilter {...props} />;
 }
 
 export function renderMultiSelectFilter(
@@ -125,8 +149,9 @@ export function renderMultiSelectFilter(
         <DropDownContainer
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
-            renderContent={disabled => (
+            renderContent={(disabled, reset) => (
                 <Select
+                    ref={ref => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
                     isDisabled={disabled}
@@ -136,6 +161,7 @@ export function renderMultiSelectFilter(
                     options={options}
                     onChange={onChange}
                     placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    onBlur={reset}
                 />
             )}
         />
@@ -178,8 +204,9 @@ export function renderSingleSelectFilter(
         <DropDownContainer
             title={column.id}
             renderButtonContent={renderFilterIcon(filtering)}
-            renderContent={disabled => (
+            renderContent={(disabled, reset) => (
                 <Select
+                    ref={ref => ref?.focus()}
                     id={`filter-${state.name}.${column.id}`}
                     inputId={`input-filter-${state.name}.${column.id}`}
                     isDisabled={disabled}
@@ -189,6 +216,7 @@ export function renderSingleSelectFilter(
                     options={options}
                     onChange={onChange}
                     placeholder={I18n.t(`table.filter_placeholder.${column.id}`)}
+                    onBlur={reset}
                 />
             )}
         />
