@@ -39,7 +39,7 @@ import {
 } from "./utils";
 
 export default {
-    title: "UserInputFormNew",
+    title: "UserInputForm",
     // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
     parameters: {
         fileName: __filename

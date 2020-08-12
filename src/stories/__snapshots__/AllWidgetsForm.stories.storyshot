@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
+exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
 <section
   className="storybook-container"
 >
@@ -14,7 +14,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form New 1`] = `
         className="form-step divider"
       >
         <h1>
-          Corelink form
+          All widgets form
         </h1>
         <div
           className="mod-process-step"

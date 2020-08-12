@@ -13,7 +13,7 @@
  *
  */
 
-import "./UserInputFormNew.scss";
+import "./UserInputForm.scss";
 
 import I18n from "i18n-js";
 import cloneDeep from "lodash/cloneDeep";

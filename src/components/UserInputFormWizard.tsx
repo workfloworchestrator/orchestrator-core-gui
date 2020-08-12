@@ -23,7 +23,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "../utils/types";
 import { stop } from "../utils/Utils";
-import UserInputFormNew from "./UserInputFormNew";
+import UserInputForm from "./UserInputForm";
 
 interface Form {
     form: InputForm;
@@ -95,7 +95,7 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         }
 
         return (
-            <UserInputFormNew
+            <UserInputForm
                 // Generate a key based on input widget names that results in a new
                 // instance of UserInputForm if the form changes
                 key={hash.sha1(currentForm.form.properties)}

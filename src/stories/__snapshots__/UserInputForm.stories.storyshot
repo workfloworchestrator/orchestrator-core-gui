@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
+exports[`Storyshots UserInputForm Contactpersons 1`] = `
 <section
   className="storybook-container"
 >
@@ -276,7 +276,7 @@ exports[`Storyshots UserInputFormNew Contactpersons 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew Corelink 1`] = `
+exports[`Storyshots UserInputForm Corelink 1`] = `
 <section
   className="storybook-container"
 >
@@ -813,7 +813,7 @@ exports[`Storyshots UserInputFormNew Corelink 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
+exports[`Storyshots UserInputForm Corelink add link 1`] = `
 <section
   className="storybook-container"
 >
@@ -1350,7 +1350,7 @@ exports[`Storyshots UserInputFormNew Corelink add link 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew Nodes 1`] = `
+exports[`Storyshots UserInputForm Nodes 1`] = `
 <section
   className="storybook-container"
 >
@@ -1528,7 +1528,7 @@ exports[`Storyshots UserInputFormNew Nodes 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN7 Portselect MSP only 1`] = `
+exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
 <section
   className="storybook-container"
 >
@@ -2858,7 +2858,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect MSP only 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN7 Portselect all organisations 1`] = `
+exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
 <section
   className="storybook-container"
 >
@@ -4188,7 +4188,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect all organisations 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN7 Portselect bandwidth 1`] = `
+exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
 <section
   className="storybook-container"
 >
@@ -4868,7 +4868,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect bandwidth 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN7 Portselect selected organisation 1`] = `
+exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
 <section
   className="storybook-container"
 >
@@ -6198,7 +6198,7 @@ exports[`Storyshots UserInputFormNew SN7 Portselect selected organisation 1`] = 
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN8 Portselect all organisations 1`] = `
+exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
 <section
   className="storybook-container"
 >
@@ -6864,7 +6864,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect all organisations 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN8 Portselect selected organisation 1`] = `
+exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
 <section
   className="storybook-container"
 >
@@ -8194,7 +8194,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect selected organisation 1`] = 
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
+exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
 <section
   className="storybook-container"
 >
@@ -9524,7 +9524,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect tagged 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew SN8 Portselect untagged 1`] = `
+exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
 <section
   className="storybook-container"
 >
@@ -10854,7 +10854,7 @@ exports[`Storyshots UserInputFormNew SN8 Portselect untagged 1`] = `
 </section>
 `;
 
-exports[`Storyshots UserInputFormNew Service Port 1`] = `
+exports[`Storyshots UserInputForm Service Port 1`] = `
 <section
   className="storybook-container"
 >

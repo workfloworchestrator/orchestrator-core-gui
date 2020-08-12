@@ -91,8 +91,8 @@ function prepare() {
     fetchMock.get("glob:*/api/ims/vlans/*", [[3, 5]]);
 }
 
-export const AllWidgetsFormNew = () => {
+export const AllWidgetsForm = () => {
     prepare();
 
-    return <UserInputContainer formName="Corelink form" stepUserInput={FORM_NEW as InputForm} />;
+    return <UserInputContainer formName="All widgets form" stepUserInput={FORM_NEW as InputForm} />;
 };
