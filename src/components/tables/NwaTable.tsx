@@ -241,7 +241,7 @@ export function NwaTable<T extends object>({
             manualSortBy: true,
             autoResetFilters: false,
             autoResetSortBy: false,
-            autoResetExpanded: false,
+            autoResetExpanded: true,
             debug: true,
             // @ts-ignore Compiler expects id and value even on ActionTypes without them
             stateReducer: tableSettingsReducer,
