@@ -1,4 +1,4 @@
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -157,18 +157,18 @@ function ContactPersonName({
                 isInvalid={error}
             >
                 <div className="autocomplete-container">
-                    <input
+                    <EuiFieldText
                         disabled={disabled}
                         id={id}
                         name={name}
                         onChange={onChangeInternal}
                         placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
-                        ref={inputRef}
+                        // ref={inputRef}
                         type="text"
                         value={value ?? ""}
                         onKeyDown={onAutocompleteKeyDown}
                         onBlur={onBlurAutoComplete}
-                    ></input>
+                    ></EuiFieldText>
                     {!!(displayAutocomplete && suggestions.length) && (
                         <Autocomplete
                             query={value ?? ""}

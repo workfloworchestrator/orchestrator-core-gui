@@ -50,6 +50,7 @@ function Num({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                fullWidth
             >
                 <EuiFieldNumber
                     id={id}
@@ -62,6 +63,7 @@ function Num({
                     step={step ?? 1}
                     value={value ?? ""}
                     disabled={disabled}
+                    fullWidth
                 />
             </EuiFormRow>
         </div>

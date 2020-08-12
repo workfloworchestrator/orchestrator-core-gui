@@ -1,3 +1,4 @@
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -174,28 +175,27 @@ function Vlan({
 
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <input
-                disabled={!subscriptionId || disabled || isUntagged}
-                id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                type="text"
-                value={value ?? ""}
-            ></input>
-            {subscriptionId && !disabled && <em className="info">{message}</em>}
-            {(error || errorMessageExtra) && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage || errorMessageExtra}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                fullWidth
+            >
+                <>
+                    <EuiFieldText
+                        disabled={!subscriptionId || disabled || isUntagged}
+                        id={id}
+                        name={name}
+                        onChange={event => onChange(event.target.value)}
+                        placeholder={placeholder}
+                        // ref={inputRef}
+                        type="text"
+                        value={value ?? ""}
+                    />
+                    {subscriptionId && !disabled && <em className="info">{message}</em>}
+                </>
+            </EuiFormRow>
         </section>
     );
 }

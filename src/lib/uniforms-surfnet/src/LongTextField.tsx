@@ -40,6 +40,7 @@ function LongText({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={errorMessage}
                 isInvalid={error}
+                fullWidth
             >
                 <EuiTextArea
                     disabled={disabled}
@@ -49,6 +50,7 @@ function LongText({
                     placeholder={placeholder}
                     // ref={inputRef}
                     value={value ?? ""}
+                    fullWidth
                 />
             </EuiFormRow>
         </section>

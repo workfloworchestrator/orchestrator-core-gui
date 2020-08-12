@@ -44,6 +44,7 @@ function Text({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                fullWidth
             >
                 <EuiFieldText
                     disabled={disabled}
@@ -54,6 +55,7 @@ function Text({
                     // ref={inputRef}
                     type={type}
                     value={value ?? ""}
+                    fullWidth
                 />
             </EuiFormRow>
         </section>
