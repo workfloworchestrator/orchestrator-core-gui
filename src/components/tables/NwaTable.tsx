@@ -22,7 +22,6 @@ import produce from "immer";
 import React, { useEffect } from "react";
 import {
     Column,
-    ColumnInstance,
     Hooks,
     LocalTableSettings,
     Row,
@@ -37,8 +36,10 @@ import {
     useTable
 } from "react-table";
 
+import AdvancedSearch from "./AdvancedSearch";
 import Paginator from "./Paginator";
 import Preferences from "./Preferences";
+import { TableRenderer } from "./TableRenderer";
 import useFilterableDataFetcher from "./useFilterableDataFetcher";
 import useInterval from "./useInterval";
 
@@ -198,7 +199,7 @@ interface INwaTableProps<T extends object> {
     extraRowPropGetter: RowPropGetter<T>;
     renderSubComponent: ({ row }: { row: Row<T> }) => JSX.Element;
     excludeInFilter: string[];
-    hideAdvancedSearch: boolean;
+    advancedSearch: boolean;
 }
 
 export function NwaTable<T extends object>({
@@ -210,7 +211,7 @@ export function NwaTable<T extends object>({
     extraRowPropGetter,
     renderSubComponent,
     excludeInFilter,
-    hideAdvancedSearch
+    advancedSearch
 }: INwaTableProps<T>) {
     const [data, pageCount, fetchData] = useFilterableDataFetcher<T>(endpoint);
     const {
@@ -273,8 +274,20 @@ export function NwaTable<T extends object>({
         allColumns,
         dispatch,
         initialTableSettings,
-        excludeInFilter,
-        hideAdvancedSearch
+        excludeInFilter
+    };
+    const advancedSearchProps = {
+        state,
+        dispatch
+    };
+    const TableRendererProps = {
+        getTableProps,
+        getTableBodyProps,
+        prepareRow,
+        headerGroups,
+        page,
+        visibleColumns,
+        renderSubComponent
     };
     const paginatorProps = {
         canNextPage,
@@ -313,73 +326,11 @@ export function NwaTable<T extends object>({
         fetchData(dispatch, pageIndex, pageSize, sortBy, filterBy);
     }, autoRefreshDelay);
 
-    const sortIcon = (col: ColumnInstance<T>) => {
-        if (!col.canSort) {
-            return "";
-        }
-        if (col.isSorted) {
-            if (col.isSortedDesc) {
-                return <i className="fa fa-sort-down" />;
-            } else {
-                return <i className="fa fa-sort-up" />;
-            }
-        } else {
-            return <i className="fa fa-sort" />;
-        }
-    };
-
     return (
         <div id={name}>
             <Preferences<T> {...preferencesProps} />
-            {!minimized && (
-                <>
-                    <table className="nwa-table" {...getTableProps()}>
-                        <thead>
-                            {headerGroups.map(headerGroup => (
-                                <React.Fragment key={`header_fragment_${headerGroup.id}`}>
-                                    <tr className={"column-ids"} {...headerGroup.getHeaderGroupProps()}>
-                                        {headerGroup.headers.map(column => (
-                                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                                {column.render("Header")} {sortIcon(column)}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                    <tr className={"filters"}>
-                                        {headerGroup.headers.map(column => (
-                                            <th id={`filter_headers_${column.id}`} key={column.id}>
-                                                {column.canFilter && column.render("Filter")}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </React.Fragment>
-                            ))}
-                        </thead>
-                        <tbody {...getTableBodyProps()}>
-                            {page.map((row: Row<T>, i) => {
-                                prepareRow(row);
-                                return (
-                                    <React.Fragment key={`row_fragment_${row.id}`}>
-                                        <tr {...row.getRowProps()}>
-                                            {row.cells.map(cell => {
-                                                return (
-                                                    <td {...cell.getCellProps([{ className: cell.column.id }])}>
-                                                        {cell.render("Cell")}
-                                                    </td>
-                                                );
-                                            })}
-                                        </tr>
-                                        {row.isExpanded && (
-                                            <tr>
-                                                <td colSpan={visibleColumns.length}>{renderSubComponent({ row })}</td>
-                                            </tr>
-                                        )}
-                                    </React.Fragment>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </>
-            )}
+            {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
+            {!minimized && <TableRenderer {...TableRendererProps} />}
             {!minimized && data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}
         </div>
