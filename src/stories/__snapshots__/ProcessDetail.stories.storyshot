@@ -2362,6 +2362,9 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
         <section
           className="form-fieldset"
         >
+          <h3>
+            Validator
+          </h3>
           <form
             noValidate={true}
             onSubmit={[Function]}
@@ -2501,6 +2504,9 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
         <section
           className="form-fieldset"
         >
+          <h3>
+            Validator
+          </h3>
           <form
             noValidate={true}
             onSubmit={[Function]}

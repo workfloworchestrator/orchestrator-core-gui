@@ -454,6 +454,7 @@ I18n.translations.en = {
     },
     process: {
         cancel: "Cancel",
+        choose_product: "Choose Product",
         flash: {
             create_create: "Created create process for product {{name}} with pid {{pid}}",
             create_modify: "Created {{name}} process for subscription {{subscriptionId}} with pid {{pid}}",

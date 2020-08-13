@@ -20,9 +20,11 @@ import { JSONSchema6 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
 import { filterDOMProps, joinName } from "uniforms";
 import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
 import { AutoForm } from "uniforms-unstyled";
+import { getQueryParameters } from "utils/QueryParameters";
 
 import {
     AcceptField,
@@ -48,6 +50,8 @@ import { stop } from "../../utils/Utils";
 import ConfirmationDialog from "../ConfirmationDialog";
 import { SubscriptionsContextProvider } from "../subscriptionContext";
 
+type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
+
 interface FieldError {
     message: string;
     params: {};
@@ -58,7 +62,7 @@ interface UniformsError {
     details: FieldError[];
 }
 
-interface IProps {
+interface IProps extends RouteComponentProps {
     stepUserInput: JSONSchema6;
     validSubmit: (userInput: { [index: string]: any }) => Promise<void>;
     cancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -214,7 +218,40 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
     }
 }
 
-export default class UserInputForm extends React.Component<IProps, IState> {
+function fillPreselection(form: JSONSchema6, query: string) {
+    const queryParams = getQueryParameters(query);
+
+    if (form && form.properties) {
+        Object.keys(queryParams).forEach(param => {
+            if (form && form.properties && form.properties[param]) {
+                const organisatieInput = form.properties[param] as JSONSchemaFormProperty;
+                if (!organisatieInput.uniforms) {
+                    organisatieInput.uniforms = {};
+                }
+                organisatieInput.uniforms.disabled = true;
+                organisatieInput.default = queryParams[param];
+            }
+        });
+
+        // ipvany preselect
+        if (queryParams.prefix && queryParams.prefixlen) {
+            if (form && form.properties.ip_prefix) {
+                const ipPrefixInput = form.properties.ip_prefix as JSONSchemaFormProperty;
+                if (!ipPrefixInput.uniforms) {
+                    ipPrefixInput.uniforms = {};
+                }
+                ipPrefixInput.default = `${queryParams.prefix}/${queryParams.prefixlen}`;
+                ipPrefixInput.uniforms.prefixMin = parseInt(
+                    (queryParams.prefix_min as string) ?? (queryParams.prefixlen as string),
+                    10
+                );
+            }
+        }
+    }
+    return form;
+}
+
+class UserInputForm extends React.Component<IProps, IState> {
     context!: React.ContextType<typeof ApplicationContext>;
     state: IState = {
         confirmationDialogOpen: false,
@@ -310,9 +347,9 @@ export default class UserInputForm extends React.Component<IProps, IState> {
 
     render() {
         const { confirmationDialogOpen, nrOfValidationErrors } = this.state;
-        const { cancel, stepUserInput, userInput } = this.props;
-
-        const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, () => {});
+        const { cancel, stepUserInput, userInput, location } = this.props;
+        const prefilledForm = fillPreselection(stepUserInput, location.search);
+        const bridge = new CustomTitleJSONSchemaBridge(prefilledForm, () => {});
 
         return (
             <div className="user-input-form">
@@ -353,3 +390,5 @@ export default class UserInputForm extends React.Component<IProps, IState> {
 }
 
 UserInputForm.contextType = ApplicationContext;
+
+export default withRouter(UserInputForm);

@@ -10,6 +10,9 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
     <section
       className="form-fieldset"
     >
+      <h3>
+        Validator
+      </h3>
       <form
         noValidate={true}
         onSubmit={[Function]}

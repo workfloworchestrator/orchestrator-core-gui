@@ -22,6 +22,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
           <section
             className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
