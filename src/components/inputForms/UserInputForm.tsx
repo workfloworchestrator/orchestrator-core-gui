@@ -16,6 +16,7 @@
 import "./UserInputForm.scss";
 
 import I18n from "i18n-js";
+import { JSONSchema6 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import React from "react";
@@ -58,7 +59,7 @@ interface UniformsError {
 }
 
 interface IProps {
-    stepUserInput: {};
+    stepUserInput: JSONSchema6;
     validSubmit: (userInput: { [index: string]: any }) => Promise<void>;
     cancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
     previous: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -322,6 +323,7 @@ export default class UserInputForm extends React.Component<IProps, IState> {
                     leavePage={true}
                 />
                 <section className="form-fieldset">
+                    {stepUserInput.title && stepUserInput.title !== "unknown" && <h3>{stepUserInput.title}</h3>}
                     <SubscriptionsContextProvider>
                         <AutoForm
                             schema={bridge}
