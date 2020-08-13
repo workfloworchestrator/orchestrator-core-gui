@@ -3,7 +3,7 @@
 exports[`<AcceptField> <AcceptField> - legacy renders an input 1`] = `
 "<AcceptField name=\\"x\\">
   <Accept name=\\"x\\" id=\\"uniforms-0000-0000\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
-    <section id=\\"uniforms-0000-0000\\" className=\\"accept-field\\">
+    <section id=\\"uniforms-0000-0000\\" required={true} className=\\" accept-field\\">
       <div>
         <label>
           [missing &quot;en.forms.fields.x&quot; translation]
@@ -35,7 +35,7 @@ exports[`<AcceptField> <AcceptField> - legacy renders an input 1`] = `
 exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
 "<AcceptField name=\\"x\\">
   <Accept name=\\"x\\" id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ uniforms: { data: [ [ 'label', 'label' ], [ 'info', 'info' ], [ 'warning', 'warning' ], [ 'margin', 'margin' ], [ 'value', 'value' ], [ 'http://example.com', 'url' ], [ 'checkbox1', 'checkbox' ], [ 'label_with_context', 'label', { foo: 'bar' } ], [ 'sub_checkbox', '>checkbox' ], [ 'sub_checkbox2', '>checkbox' ], [ 'optional_checkbox', 'checkbox?' ], [ 'skip_checkbox', 'skip' ] ] }, type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true} data={[ [ 'label', 'label' ], [ 'info', 'info' ], [ 'warning', 'warning' ], [ 'margin', 'margin' ], [ 'value', 'value' ], [ 'http://example.com', 'url' ], [ 'checkbox1', 'checkbox' ], [ 'label_with_context', 'label', { foo: 'bar' } ], [ 'sub_checkbox', '>checkbox' ], [ 'sub_checkbox2', '>checkbox' ], [ 'optional_checkbox', 'checkbox?' ], [ 'skip_checkbox', 'skip' ] ]}>
-    <section id=\\"uniforms-0000-0002\\" className=\\"accept-field\\">
+    <section id=\\"uniforms-0000-0002\\" required={true} className=\\" accept-field\\">
       <div>
         <label>
           [missing &quot;en.forms.fields.x_accept.label&quot; translation]

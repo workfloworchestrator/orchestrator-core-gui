@@ -23,7 +23,6 @@
 
     .card {
         @include mixins.card;
-        padding-bottom: 15px;
     }
     section.not-found {
         h1 {

@@ -16,7 +16,7 @@ import "./AcceptField.scss";
 
 import I18n, { TranslateOptions } from "i18n-js";
 import React, { useReducer } from "react";
-import { connectField } from "uniforms";
+import { connectField, filterDOMProps } from "uniforms";
 
 import CheckBox from "../../../components/CheckBox";
 import { FieldProps } from "./types";
@@ -38,6 +38,8 @@ type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
 export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
 
+filterDOMProps.register("data");
+
 interface AcceptState {
     checks: { [index: number]: boolean };
     skip: boolean;
@@ -52,7 +54,7 @@ interface Action {
 
 function Accept({
     disabled,
-    id,
+    className = "",
     name,
     onChange,
     value,
@@ -97,7 +99,7 @@ function Accept({
     );
 
     return (
-        <section id={id} className="accept-field">
+        <section {...filterDOMProps(props)} className={`${className} accept-field`}>
             {data.map((entry: any[], index: number) => {
                 const label = I18n.t(`${i18nBaseKey}.${entry[0]}`, entry[2]);
 

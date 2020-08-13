@@ -28,13 +28,13 @@ function OptGroup({
     itemProps,
     name,
     onChange, // Not used on purpose
-    className,
+    className = "",
     ...props
 }: OptGroupFieldProps) {
     const enabled = useField("enabled", {})[0].value;
 
     return (
-        <section {...filterDOMProps(props)} className={`${className ?? ""} optgroup-field`}>
+        <section {...filterDOMProps(props)} className={`${className} optgroup-field`}>
             <label>
                 {I18n.t(`forms.fields.${name}.title`)}
                 <em>{I18n.t(`forms.fields.${name}.info`)}</em>

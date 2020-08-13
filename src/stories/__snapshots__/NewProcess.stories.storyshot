@@ -265,19 +265,19 @@ exports[`Storyshots NewProcess Preselected 1`] = `
           </div>
         </section>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >

@@ -314,14 +314,14 @@ export default class UserInputForm extends React.Component<IProps, IState> {
         const bridge = new CustomTitleJSONSchemaBridge(stepUserInput, () => {});
 
         return (
-            <div className="mod-process-step">
+            <div className="user-input-form">
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={cancel}
                     confirm={() => this.setState({ confirmationDialogOpen: false })}
                     leavePage={true}
                 />
-                <section className="card">
+                <section className="form-fieldset">
                     <SubscriptionsContextProvider>
                         <AutoForm
                             schema={bridge}
