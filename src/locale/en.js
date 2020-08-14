@@ -325,6 +325,9 @@ I18n.translations.en = {
             },
             noc_remove_bgp_confirmation: "Confirm removal",
             noc_remove_bgp_confirmation_info: "Is this BGP IP service removed from the network?",
+            noc_remove_lichtpad_confirmation_accept: {
+                noc_remove_lichtpad_confirmation: "Is the LightPath of this subscription removed?"
+            },
             noc_remove_port_confirmation_accept: {
                 noc_remove_port_confirmation: "Are the port(s) of the subscription removed from the live network?"
             },
@@ -1468,6 +1471,7 @@ I18n.translations.en = {
         task_validate_ism_ports: "Validate ISM ports to have associated subscription in Core DB",
 
         terminate_sn7_service_port: "Terminate SN7 Service Port",
+        terminate_sn7_light_path: "Terminate SN7 Light Path",
 
         terminate_sn8_service_port: "Terminate SN8 Service Port",
         terminate_sn8_light_path: "Terminate SN8 Light Path",
