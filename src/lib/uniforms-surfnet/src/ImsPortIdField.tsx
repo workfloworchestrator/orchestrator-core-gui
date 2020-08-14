@@ -20,8 +20,8 @@ import Select, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
 
 import {
-    freeCorelinkPortsForNodeIdAndInterfaceType,
-    getFreePortsByNodeIdAndInterfaceType,
+    getFreePortsByImsNodeIdAndInterfaceType,
+    getFreePortsByNodeSubscriptionIdAndSpeed,
     getNodesByLocationAndStatus,
     nodeSubscriptions
 } from "../../../api";
@@ -30,7 +30,13 @@ import { FieldProps } from "./types";
 
 export type ImsPortFieldProps = FieldProps<
     number,
-    { locationCode?: string; nodeSubscriptionId?: string; interfaceType: number | string }
+    {
+        locationCode?: string;
+        nodeSubscriptionId?: string;
+        interfaceSpeed: number | string;
+        imsPortMode?: "patched" | "unpatched" | "all";
+        nodeStatuses?: ("active" | "provisioning")[];
+    }
 >;
 
 function nodeToOptionPort(node: IMSNode): Option {
@@ -46,7 +52,7 @@ function nodeToOptionCorelink(node: Subscription): Option {
         label: `${node.subscription_id.substring(0, 8)} ${node.description.trim() || "<No description>"}`
     };
 }
-filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceType");
+filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceSpeed", "nodeStatuses");
 
 function ImsPortId({
     id,
@@ -62,8 +68,9 @@ function ImsPortId({
     errorMessage,
     locationCode,
     nodeSubscriptionId,
-    interfaceType,
-
+    interfaceSpeed,
+    imsPortMode = "all",
+    nodeStatuses,
     ...props
 }: ImsPortFieldProps) {
     const [nodes, setNodes] = useState<IMSNode[] | Subscription[]>([]);
@@ -88,21 +95,23 @@ function ImsPortId({
             setNodeId(value);
             setPorts([]);
             if (isServicePortLegacyBehavior) {
-                getFreePortsByNodeIdAndInterfaceType(value as number, interfaceType as string, "free", "patched").then(
+                getFreePortsByImsNodeIdAndInterfaceType(value as number, interfaceSpeed as string, "patched").then(
                     setPorts
                 );
             } else {
-                freeCorelinkPortsForNodeIdAndInterfaceType(value as string, interfaceType as number).then(setPorts);
+                getFreePortsByNodeSubscriptionIdAndSpeed(value as string, interfaceSpeed as number, imsPortMode).then(
+                    setPorts
+                );
             }
         },
-        [interfaceType, isServicePortLegacyBehavior]
+        [interfaceSpeed, isServicePortLegacyBehavior, imsPortMode]
     );
 
     useEffect(() => {
         if (isServicePortLegacyBehavior) {
             getNodesByLocationAndStatus(locationCode!, "IS").then(setNodes);
         } else {
-            const nodesPromise = nodeSubscriptions(["active", "provisioning"]);
+            const nodesPromise = nodeSubscriptions(nodeStatuses ?? ["active"]);
             if (nodeSubscriptionId) {
                 nodesPromise.then(result => {
                     setNodes(result.filter(subscription => subscription.subscription_id === nodeSubscriptionId));
@@ -112,7 +121,7 @@ function ImsPortId({
                 nodesPromise.then(setNodes);
             }
         }
-    }, [onChangeNodes, isServicePortLegacyBehavior, locationCode, nodeSubscriptionId]);
+    }, [onChangeNodes, isServicePortLegacyBehavior, nodeStatuses, locationCode, nodeSubscriptionId]);
 
     const portPlaceholder = !nodes.length
         ? I18n.t("forms.widgets.nodePort.loading")

@@ -66,7 +66,7 @@ export const ServicePort = () => {
     const form = createForm({
         ims_port_id_1: imsPortIdProperty({
             locationCode: "MT001A",
-            interfaceType: "1000BASE-LX"
+            interfaceSpeed: "1000BASE-LX"
         })
     });
 
@@ -76,11 +76,11 @@ export const ServicePort = () => {
 export const Corelink = () => {
     fetchMock.restore();
     fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", allNodeSubscriptions);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*/10000", corelinkPorts10G);
+    fetchMock.get("glob:*/api/ims/free_ports/*/10000/all", corelinkPorts10G);
 
     const form = createForm({
-        ims_port_id_1: imsPortIdProperty({ interfaceType: 10000 }),
-        ims_port_id_2: imsPortIdProperty({ interfaceType: 10000 })
+        ims_port_id_1: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] }),
+        ims_port_id_2: imsPortIdProperty({ interfaceSpeed: 10000, nodeStatuses: ["active", "provisioning"] })
     });
 
     return <UserInputContainer formName="Corelink form" stepUserInput={form} />;
@@ -89,16 +89,18 @@ export const Corelink = () => {
 export const CorelinkAddLink = () => {
     fetchMock.restore();
     fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", allNodeSubscriptions);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*/10000", freeCorelinkPorts);
+    fetchMock.get("glob:*/api/ims/free_ports/*/10000/all", freeCorelinkPorts);
 
     const form = createForm({
         ims_port_id_1: imsPortIdProperty({
             nodeSubscriptionId: "5e3341c2-0017-4d32-9005-56e9b2cbf86c",
-            interfaceType: 10000
+            interfaceSpeed: 10000,
+            nodeStatuses: ["active", "provisioning"]
         }),
         ims_port_id_2: imsPortIdProperty({
             nodeSubscriptionId: "faf4766b-072c-4494-a8d7-8feaf60e2446",
-            interfaceType: 10000
+            interfaceSpeed: 10000,
+            nodeStatuses: ["active", "provisioning"]
         })
     });
 

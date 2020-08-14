@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImsPortIdField> <ImsPortIdField> - renders inputs 1`] = `
-"<ImsPortIdField name=\\"x\\" interfaceType={1000}>
-  <ImsPortId name=\\"x\\" interfaceType={1000} id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
+"<ImsPortIdField name=\\"x\\" interfaceSpeed={1000} nodeStatuses={[ 'active', 'provisioning' ]}>
+  <ImsPortId name=\\"x\\" interfaceSpeed={1000} nodeStatuses={[ 'active', 'provisioning' ]} id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
     <section required={true}>
       <section className=\\"node-port\\">
         <div className=\\"node-select\\">
@@ -157,8 +157,8 @@ exports[`<ImsPortIdField> <ImsPortIdField> - renders inputs 1`] = `
 `;
 
 exports[`<ImsPortIdField> <ImsPortIdField> - renders inputs legacy 1`] = `
-"<ImsPortIdField name=\\"x\\" locationCode=\\"MT001A\\" interfaceType=\\"1000BASE-LX\\">
-  <ImsPortId name=\\"x\\" locationCode=\\"MT001A\\" interfaceType=\\"1000BASE-LX\\" id=\\"uniforms-0000-0000\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
+"<ImsPortIdField name=\\"x\\" locationCode=\\"MT001A\\" interfaceSpeed=\\"1000BASE-LX\\" nodeStatuses={[ 'active', 'provisioning' ]}>
+  <ImsPortId name=\\"x\\" locationCode=\\"MT001A\\" interfaceSpeed=\\"1000BASE-LX\\" nodeStatuses={[ 'active', 'provisioning' ]} id=\\"uniforms-0000-0000\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
     <section required={true}>
       <section className=\\"node-port\\">
         <div className=\\"node-select\\">
@@ -313,8 +313,8 @@ exports[`<ImsPortIdField> <ImsPortIdField> - renders inputs legacy 1`] = `
 `;
 
 exports[`<ImsPortIdField> <ImsPortIdField> - renders inputs node set 1`] = `
-"<ImsPortIdField name=\\"x\\" nodeSubscriptionId=\\"abcdefghij\\" interfaceType={1000}>
-  <ImsPortId name=\\"x\\" nodeSubscriptionId=\\"abcdefghij\\" interfaceType={1000} id=\\"uniforms-0000-0004\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
+"<ImsPortIdField name=\\"x\\" nodeSubscriptionId=\\"abcdefghij\\" interfaceSpeed={1000} nodeStatuses={[ 'active', 'provisioning' ]}>
+  <ImsPortId name=\\"x\\" nodeSubscriptionId=\\"abcdefghij\\" interfaceSpeed={1000} nodeStatuses={[ 'active', 'provisioning' ]} id=\\"uniforms-0000-0004\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Number], optional: false, label: 'X' }} fieldType={[Function: Number]} fields={[]} onChange={[Function]} value={[undefined]} required={true} decimal={true}>
     <section required={true}>
       <section className=\\"node-port\\">
         <div className=\\"node-select\\">

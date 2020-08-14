@@ -78,7 +78,7 @@
             "title": "Corelink Add Link1",
             "default": 1,
             "uniforms": {
-                "interfaceType": 1000,
+                "interfaceSpeed": 1000,
                 "nodeSubscriptionId": "1234"
             },
             "type": "integer",
@@ -88,7 +88,7 @@
             "title": "Corelink Add Link2",
             "default": 2,
             "uniforms": {
-                "interfaceType": 1000,
+                "interfaceSpeed": 1000,
                 "nodeSubscriptionId": "1234"
             },
             "type": "integer",
@@ -98,7 +98,7 @@
             "title": "Corelink",
             "default": 3,
             "uniforms": {
-                "interfaceType": 1000
+                "interfaceSpeed": 1000
             },
             "type": "integer",
             "format": "imsPortId"
@@ -201,8 +201,9 @@
             "title": "Node Id Port Select",
             "default": 12345,
             "uniforms": {
-                "locationCode": "Asd001a",
-                "interfaceType": null
+                "nodeSubscriptionId": "1234",
+                "interfaceSpeed": 1000,
+                "imsPortMode": "free"
             },
             "type": "integer",
             "format": "imsPortId"

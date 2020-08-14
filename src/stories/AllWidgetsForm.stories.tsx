@@ -51,6 +51,10 @@ function prepare() {
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
     fetchMock.get(
+        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive",
+        SN8PortSubscriptions.filter(p => ["active"].includes(p.status)).filter(p => ["Node"].includes(p.product.tag))
+    );
+    fetchMock.get(
         "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning",
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
@@ -77,7 +81,7 @@ function prepare() {
     fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
 
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
+    fetchMock.get("glob:*/api/ims/free_ports/*/1000/*", freeCorelinkPorts);
     fetchMock.get("/api/ims/nodes/MT001A/PL", imsNodes);
     fetchMock.get("/api/ims/nodes/Asd001a/IS", imsNodes);
     fetchMock.get("/api/ims/nodes/Asd001a/PL", imsNodes);

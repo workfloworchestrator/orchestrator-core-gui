@@ -323,21 +323,20 @@ export function getNodesByLocationAndStatus(locationCode: string, status: string
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }
 
-export function getFreePortsByNodeIdAndInterfaceType(
-    nodeId: number,
-    interfaceType: string,
-    status: string,
+export function getFreePortsByImsNodeIdAndInterfaceType(
+    imsNodeId: number,
+    ieeeInterfaceType: string,
     mode: string
 ): Promise<IMSPort[]> {
-    return fetchJson(`ims/free_ports/${nodeId}/${interfaceType}/${status}/${mode}`);
+    return fetchJson(`ims/free_ports_ims_node/${imsNodeId}/${ieeeInterfaceType}/${mode}`);
 }
 
-export function freePortsForLocationCodeAndInterfaceType(locationCode: string, interfaceType: string) {
-    return fetchJson(`ims/free_ports/${locationCode}/${interfaceType}`);
-}
-
-export function freeCorelinkPortsForNodeIdAndInterfaceType(nodeId: string, interfaceType: number): Promise<IMSPort[]> {
-    return fetchJson(`ims/free_corelink_ports/${nodeId}/${interfaceType}`);
+export function getFreePortsByNodeSubscriptionIdAndSpeed(
+    nodeSubscriptionId: string,
+    interfaceSpeed: number,
+    mode: string
+): Promise<IMSPort[]> {
+    return fetchJson(`ims/free_ports/${nodeSubscriptionId}/${interfaceSpeed}/${mode}`);
 }
 
 export function nodesForLocationCode(locationCode: string) {
