@@ -124,7 +124,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                       htmlFor="isync"
                     >
                       <span
-                        tabIndex="0"
+                        tabIndex={0}
                       >
                         <i
                           className="fa fa-check"

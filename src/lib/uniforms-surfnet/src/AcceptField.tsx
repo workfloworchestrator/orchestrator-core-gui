@@ -14,11 +14,11 @@
  */
 import "./AcceptField.scss";
 
-import CheckBox from "components/CheckBox";
 import I18n, { TranslateOptions } from "i18n-js";
 import React, { useReducer } from "react";
 import { connectField } from "uniforms";
 
+import CheckBox from "../../../components/CheckBox";
 import { FieldProps } from "./types";
 
 type AcceptItemType =

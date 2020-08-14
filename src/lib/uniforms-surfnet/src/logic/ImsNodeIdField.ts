@@ -13,13 +13,13 @@
  *
  */
 
-import { getNodesByLocationAndStatus } from "api";
 import I18n from "i18n-js";
 import { get } from "lodash";
 import { createElement, useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-import { IMSNode } from "utils/types";
 
+import { getNodesByLocationAndStatus } from "../../../../api";
+import { IMSNode } from "../../../../utils/types";
 import SelectField, { SelectFieldProps } from "../SelectField";
 
 export type ImsNodeIdFieldProps = {
@@ -54,10 +54,10 @@ function ImsNodeId({
 
     const placeholder =
         loading && locationCode
-            ? I18n.t("node_select.nodes_loading")
+            ? I18n.t("forms.widgets.node_select.nodes_loading")
             : nodes.length
-            ? I18n.t("node_select.select_node")
-            : I18n.t("node_select.no_nodes_placeholder");
+            ? I18n.t("forms.widgets.node_select.select_node")
+            : I18n.t("forms.widgets.node_select.no_nodes_placeholder");
 
     const imsNodeIdLabelLookup =
         nodes?.reduce<{ [index: string]: string }>(function(mapping, node) {

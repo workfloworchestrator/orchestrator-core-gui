@@ -16,12 +16,13 @@
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 import ReactSelect from "react-select";
-import { Product, ServicePortSubscription } from "utils/types";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
 import withApplicationContext from "../../../__tests__/withApplicationContext";
+import { Product, ServicePortSubscription } from "../../../utils/types";
 import { ListField } from "../src";
-import SubscriptionField, { getPortMode, makeLabel } from "../src/SubscriptionField";
+import { SubscriptionField } from "../src";
+import { getPortMode, makeLabel } from "../src/SubscriptionField";
 import createContext from "./_createContext";
 import mount from "./_mount";
 import withSubscriptions from "./_withSubscriptions";

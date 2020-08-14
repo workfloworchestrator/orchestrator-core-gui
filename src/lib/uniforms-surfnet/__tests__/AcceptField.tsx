@@ -14,7 +14,7 @@
  */
 import React from "react";
 
-import AcceptField from "../src/AcceptField";
+import { AcceptField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 

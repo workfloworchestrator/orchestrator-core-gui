@@ -13,13 +13,12 @@
  *
  */
 
-import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 import { NestField } from "uniforms-unstyled";
 
-import ListField from "../src/ListField";
-import VlanField from "../src/VlanField";
+import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
+import { ListField, VlanField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 import withSubscriptions from "./_withSubscriptions";

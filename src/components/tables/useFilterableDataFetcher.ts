@@ -13,10 +13,10 @@
  *
  */
 
-import { cancel, filterableEndpoint } from "api/filterable";
 import { Dispatch, useCallback, useRef, useState } from "react";
 import { SortingRule } from "react-table";
 
+import { cancel, filterableEndpoint } from "../../api/filterable";
 import { FilterArgument } from "../../utils/types";
 import { ActionType, TableSettingsAction } from "./NwaTable";
 

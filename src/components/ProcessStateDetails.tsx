@@ -18,7 +18,6 @@ import "./ProcessStateDetails.scss";
 import { EuiButton, EuiIcon, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
-import sortBy from "lodash/sortBy";
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import ReactTooltip from "react-tooltip";
@@ -246,19 +245,13 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 if (!step.form) {
                     return null;
                 }
-                if (Array.isArray(step.form)) {
-                    json = sortBy(step.form, ["name"]).reduce<{ [index: string]: any }>((acc, field) => {
-                        acc[field.name] = "";
+                Object.keys(step.form.properties as {})
+                    .sort()
+                    .reduce<{ [index: string]: any }>((acc, field) => {
+                        acc[field] = "";
                         return acc;
                     }, {});
-                } else {
-                    Object.keys(step.form.properties as {})
-                        .sort()
-                        .reduce<{ [index: string]: any }>((acc, field) => {
-                            acc[field] = "";
-                            return acc;
-                        }, {});
-                }
+
                 break;
             case "failed":
             case "waiting":

@@ -16,8 +16,8 @@
 import React, { useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
-import IPPrefixTable from "../../../components/IpPrefixTable";
-import SplitPrefix from "../../../components/SplitPrefix";
+import IPPrefixTable from "../../../components/inputForms/IpPrefixTable";
+import SplitPrefix from "../../../components/inputForms/SplitPrefix";
 import { IpBlock } from "../../../utils/types";
 import { FieldProps } from "./types";
 

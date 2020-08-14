@@ -32,11 +32,17 @@ export interface Product {
     fixed_inputs: FixedInput[];
     workflows: Workflow[];
     product_blocks: ProductBlock[];
+    create_subscription_workflow_key: string;
+    modify_subscription_workflow_key: string;
+    terminate_subscription_workflow_key: string;
 }
 
 export interface FixedInput {
     name: string;
     value: string;
+    created_at: number;
+    fixed_input_id: string;
+    product_id: string;
 }
 
 export interface SubscriptionProcesses {
@@ -61,12 +67,18 @@ export interface InstanceValue {
 export interface ResourceType {
     resource_type_id: string;
     resource_type: string;
+    description: string;
 }
 
 export interface ProductBlock {
     product_block_id: string;
     name: string;
     tag: string;
+    description: string;
+    status: string;
+    created_at: number;
+    end_date: number;
+    resource_types: ResourceType[];
 }
 
 export interface Subscription {
@@ -110,7 +122,17 @@ export interface SubscriptionModel {
     note: string;
     vc?: any;
 }
-
+export interface IpPrefixSubscription extends Subscription {
+    id: number;
+    prefix: string;
+    description: string;
+    state: number;
+    parent: string;
+    version: number;
+    prefixlen: number;
+    family: number;
+    network_address_as_int: number;
+}
 export interface ServicePortSubscription extends Subscription {
     port_mode?: string;
     crm_port_id?: string;
@@ -204,12 +226,6 @@ export interface ProcessV2 {
     is_task: boolean;
 }
 
-export interface InputField {
-    name: string;
-    type: string;
-    [index: string]: any;
-}
-
 export interface Step {
     name: string;
     executed: number;
@@ -235,6 +251,18 @@ export interface OptionBool {
 
 export interface Workflow {
     name: string;
+    description: string;
+    target: string;
+    created_at: number;
+    workflow_id: string;
+}
+
+export interface WorkflowWithProductTags extends Workflow {
+    product_tags: string[];
+}
+export interface CodedWorkflow {
+    name: string;
+    implementation: string;
     target: string;
 }
 
@@ -333,11 +361,27 @@ export interface WorkflowReasons {
     reason?: string;
 }
 
+export interface ProductValidationError {
+    error: string;
+    name: string;
+    block?: string;
+}
+
+export interface ProductValidationMapping {
+    [index: string]: { [index: string]: string }[];
+}
+
 export interface ProductValidation {
-    errors: string[];
-    mapping: {};
-    product: { description: string; name: string; workflow: string };
+    product: { name: string; workflow: string; description: string };
     valid: boolean;
+    mapping: ProductValidationMapping;
+    errors: ProductValidationError[];
+}
+
+export interface FixedInputValidation {
+    name: string;
+    id: string;
+    errors: { name: string; error: string; value: string }[];
 }
 
 export type GlobalStatus = "RUNNING" | "PAUSED" | "PAUSING";
@@ -348,7 +392,7 @@ export interface EngineStatus {
     global_status: GlobalStatus;
 }
 
-export type InputForm = InputField[] | JSONSchema6;
+export type InputForm = JSONSchema6;
 
 export interface ContactPerson {
     name: string;
@@ -378,4 +422,22 @@ export interface IpBlock {
 export interface SortOption<nameStrings = string> {
     name: nameStrings;
     descending: boolean;
+}
+
+export interface Action {
+    icon: string;
+    label: string;
+    action: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    danger?: boolean;
+}
+
+export interface Filter {
+    name: string;
+    count: number;
+    selected: boolean;
+}
+
+export interface FixedInputConfiguration {
+    by_tag: { [index: string]: { [index: string]: boolean }[] };
+    fixed_inputs: { name: string; description: string; values: string[] }[];
 }

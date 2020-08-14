@@ -20,7 +20,7 @@ import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 import { catchErrorStatus, startProcess } from "../api/index";
-import UserInputFormWizard from "../components/UserInputFormWizard";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import { setFlash } from "../utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "../utils/types";
 

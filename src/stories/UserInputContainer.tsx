@@ -14,9 +14,10 @@
  */
 
 import { action } from "@storybook/addon-actions";
-import UserInputFormWizard from "components/UserInputFormWizard";
 import React from "react";
-import { InputForm } from "utils/types";
+
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
+import { InputForm } from "../utils/types";
 
 interface IProps {
     stepUserInput: InputForm;

@@ -18,7 +18,7 @@ exports[`<AcceptField> <AcceptField> - legacy renders an input 1`] = `
         <div className=\\"checkbox\\">
           <input type=\\"checkbox\\" id=\\"x\\" name=\\"x\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"x\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>
@@ -64,7 +64,7 @@ exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
         <div className=\\"checkbox\\">
           <input type=\\"checkbox\\" id=\\"checkbox16\\" name=\\"checkbox16\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"checkbox16\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>
@@ -82,7 +82,7 @@ exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
         <div className=\\"level_2\\">
           <input type=\\"checkbox\\" id=\\"sub_checkbox8\\" name=\\"sub_checkbox8\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"sub_checkbox8\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>
@@ -95,7 +95,7 @@ exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
         <div className=\\"level_2\\">
           <input type=\\"checkbox\\" id=\\"sub_checkbox29\\" name=\\"sub_checkbox29\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"sub_checkbox29\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>
@@ -108,7 +108,7 @@ exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
         <div className=\\"checkbox\\">
           <input type=\\"checkbox\\" id=\\"optional_checkbox10\\" name=\\"optional_checkbox10\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"optional_checkbox10\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>
@@ -121,7 +121,7 @@ exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
         <div className=\\"skip\\">
           <input type=\\"checkbox\\" id=\\"skip_checkbox\\" name=\\"skip_checkbox\\" checked={false} onChange={[Function: onChange]} disabled={false} />
           <label htmlFor=\\"skip_checkbox\\">
-            <span tabIndex=\\"0\\">
+            <span tabIndex={0}>
               <i className=\\"fa fa-check\\" />
             </span>
           </label>

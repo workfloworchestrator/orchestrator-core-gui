@@ -14,11 +14,10 @@
  */
 
 import React from "react";
-import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 import PRODUCTS_JSON from "../../../../stories/data/products.json";
-import { SelectField } from "../../src";
-import ProductField from "../../src/logic/ProductField";
+import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
+import { ProductField, SelectField } from "../../src";
 import createContext from "../_createContext";
 import mount from "../_mount";
 

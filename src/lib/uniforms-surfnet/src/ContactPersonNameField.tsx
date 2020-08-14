@@ -12,15 +12,16 @@
  * limitations under the License.
  *
  */
-import { contacts } from "api";
-import Autocomplete from "components/Autocomplete";
+
 import I18n from "i18n-js";
 import { isFunction } from "lodash";
 import get from "lodash/get";
 import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
-import { ContactPerson } from "utils/types";
 
+import { contacts } from "../../../api";
+import Autocomplete from "../../../components/inputForms/Autocomplete";
+import { ContactPerson } from "../../../utils/types";
 import { stop } from "../../../utils/Utils";
 import { FieldProps } from "./types";
 

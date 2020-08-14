@@ -163,25 +163,19 @@ export default class StyleGuide extends React.PureComponent<IProps, IState> {
                 <div className="actions">{this.renderExplain()}</div>
                 <Explain
                     close={() => this.setState({ showExplanation: false })}
-                    render={() => (
-                        <React.Fragment>
-                            <h1>Help me</h1>
-                            <p>Demo for testing help typography</p>
-                            <p>
-                                The full text search can contain multiple search criteria that will AND-ed together. For
-                                example
-                                <i>
-                                    "customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"
-                                </i>{" "}
-                                would only return subscriptions matching the supplied <i>customer_id</i>, <i>status</i>{" "}
-                                and <i>tag</i>. Due to how full text search works that query could be simplified to:{" "}
-                                <i>"d253130e active ip_prefix"</i>.
-                            </p>
-                        </React.Fragment>
-                    )}
                     isVisible={this.state.showExplanation}
                     title="StyleGuide Help"
-                />
+                >
+                    <h1>Help me</h1>
+                    <p>Demo for testing help typography</p>
+                    <p>
+                        The full text search can contain multiple search criteria that will AND-ed together. For example
+                        <i>"customer_id:d253130e-0a11-e511-80d0-005056956c1a status:active tag:IP_PREFIX"</i> would only
+                        return subscriptions matching the supplied <i>customer_id</i>, <i>status</i> and <i>tag</i>. Due
+                        to how full text search works that query could be simplified to:{" "}
+                        <i>"d253130e active ip_prefix"</i>.
+                    </p>
+                </Explain>
                 <EuiText grow={true}>
                     <h1>Styleguide</h1>
                 </EuiText>

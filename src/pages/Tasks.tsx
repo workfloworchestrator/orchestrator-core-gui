@@ -15,26 +15,26 @@
 
 import "./Tasks.scss";
 
-import { abortProcess, deleteProcess, retryProcess } from "api";
-import { filterableEndpoint } from "api/filterable";
-import ConfirmationDialog from "components/ConfirmationDialog";
-import DropDownActions from "components/DropDownActions";
+import I18n from "i18n-js";
+import React from "react";
+import ScrollUpButton from "react-scroll-up-button";
+
+import { abortProcess, deleteProcess, retryProcess } from "../api";
+import { filterableEndpoint } from "../api/filterable";
+import ConfirmationDialog from "../components/ConfirmationDialog";
+import DropDownActions from "../components/DropDownActions";
+import Explain from "../components/Explain";
 import {
     ProcessesTable,
     initialProcessTableSettings,
     initialProcessesFilterAndSort
-} from "components/tables/Processes";
-import I18n from "i18n-js";
-import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
-import ApplicationContext from "utils/ApplicationContext";
-import { setFlash } from "utils/Flash";
-import { organisationNameByUuid } from "utils/Lookups";
-import { ProcessV2 } from "utils/types";
-import { stop } from "utils/Utils";
-import { actionOptions } from "validations/Processes";
-
-import Explain from "../components/Explain";
+} from "../components/tables/Processes";
+import ApplicationContext from "../utils/ApplicationContext";
+import { setFlash } from "../utils/Flash";
+import { organisationNameByUuid } from "../utils/Lookups";
+import { ProcessV2 } from "../utils/types";
+import { stop } from "../utils/Utils";
+import { actionOptions } from "../validations/Processes";
 
 interface IState {
     confirmationDialogOpen: boolean;
@@ -178,21 +178,18 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             <div className="tasks-container">
                 <Explain
                     close={() => this.setState({ showExplanation: false })}
-                    render={() => (
-                        <React.Fragment>
-                            <h1>Task</h1>
-                            <p>The Tasks page will show running tasks and tasks with errors by default.</p>
-                            <h2>Settings storage</h2>
-                            <p>
-                                The tables will store the setting for your filters and columns in the local storage of
-                                your browser. If you want to reset the settings to the default, click on the gear icon
-                                and then on the reset button.
-                            </p>
-                        </React.Fragment>
-                    )}
                     isVisible={this.state.showExplanation}
                     title="Tasks Help"
-                />
+                >
+                    <h1>Task</h1>
+                    <p>The Tasks page will show running tasks and tasks with errors by default.</p>
+                    <h2>Settings storage</h2>
+                    <p>
+                        The tables will store the setting for your filters and columns in the local storage of your
+                        browser. If you want to reset the settings to the default, click on the gear icon and then on
+                        the reset button.
+                    </p>
+                </Explain>
                 <ConfirmationDialog
                     isOpen={confirmationDialogOpen}
                     cancel={this.cancelConfirmation}

@@ -17,7 +17,7 @@ import fetchMock from "fetch-mock-jest";
 import React from "react";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import Autocomplete from "../../../components/Autocomplete";
+import Autocomplete from "../../../components/inputForms/Autocomplete";
 import { ContactPersonNameField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";

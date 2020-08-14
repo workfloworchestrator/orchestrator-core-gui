@@ -240,7 +240,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="details"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -273,7 +273,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="state-changes"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -304,7 +304,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="raw"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -335,7 +335,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="traceback"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2834,7 +2834,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="details"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2867,7 +2867,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="state-changes"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2898,7 +2898,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="raw"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2929,7 +2929,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="traceback"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"

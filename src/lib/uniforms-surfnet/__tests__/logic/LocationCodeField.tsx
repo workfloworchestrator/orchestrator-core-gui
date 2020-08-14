@@ -13,10 +13,9 @@
  *
  */
 import React from "react";
-import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
-import { SelectField } from "../../src";
-import LocationCodeField from "../../src/logic/LocationCodeField";
+import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
+import { LocationCodeField, SelectField } from "../../src";
 import createContext from "../_createContext";
 import mount from "../_mount";
 

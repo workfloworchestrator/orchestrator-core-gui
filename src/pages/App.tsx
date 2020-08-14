@@ -184,7 +184,7 @@ class App extends React.PureComponent<{}, IState> {
                                 />
                                 <ProtectedRoute
                                     path="/validations/:type"
-                                    render={props => <Validations match={props.match} />}
+                                    render={props => <Validations {...props} />}
                                 />
                                 <ProtectedRoute
                                     path="/new-process"
@@ -222,17 +222,11 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/subscriptions/:id" render={props => <SubscriptionDetail {...props} />} />
                                 <Route path="/subscriptions" render={props => <SubscriptionsPage {...props} />} />
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
-                                <ProtectedRoute
-                                    path="/metadata/:type"
-                                    render={props => <MetaData match={props.match} />}
-                                />
-                                <ProtectedRoute
-                                    path="/product/:id"
-                                    render={props => <ProductPage match={props.match} />}
-                                />
+                                <ProtectedRoute path="/metadata/:type" render={props => <MetaData {...props} />} />
+                                <ProtectedRoute path="/product/:id" render={props => <ProductPage {...props} />} />
                                 <ProtectedRoute
                                     path="/product-block/:id"
-                                    render={props => <ProductBlock match={props.match} />}
+                                    render={props => <ProductBlock {...props} />}
                                 />
                                 <ProtectedRoute path="/settings" render={() => <Settings />} />
                                 <ProtectedRoute path="/prefixes" render={() => <Prefixes />} />

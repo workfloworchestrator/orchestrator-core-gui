@@ -14,7 +14,6 @@
  */
 
 import { isDate } from "date-fns";
-import escape from "lodash/escape";
 
 export function stop(e: React.SyntheticEvent) {
     if (e !== undefined && e !== null) {
@@ -42,21 +41,6 @@ export function isEmpty(obj: any) {
     return false;
 }
 
-export function escapeDeep(obj: object) {
-    if (!isEmpty(obj)) {
-        Object.keys(obj).forEach(key => {
-            // @ts-ignore
-            const val = obj[key];
-            if (typeof val === "string") {
-                // @ts-ignore
-                obj[key] = escape(val);
-            } else if (typeof val === "object" || val instanceof Object) {
-                escapeDeep(val);
-            }
-        });
-    }
-}
-
 export function applyIdNamingConvention(value: string, prefix: string = "") {
     // Convert camel case to snake case with "-" and replace all "_" with "-"
     const result = value
@@ -73,8 +57,4 @@ export function applyIdNamingConvention(value: string, prefix: string = "") {
 const UUIDv4RegEx = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 export function isValidUUIDv4(id: string) {
     return UUIDv4RegEx.test(id);
-}
-
-export function capitalizeFirstLetter(string: string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
 }

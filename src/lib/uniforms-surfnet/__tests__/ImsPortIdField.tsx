@@ -16,10 +16,10 @@
 import fetchMock from "fetch-mock";
 import React from "react";
 import ReactSelect from "react-select";
-import { IMSPort, Subscription } from "utils/types";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import ImsPortIdField from "../src/ImsPortIdField";
+import { IMSPort, Subscription } from "../../../utils/types";
+import { ImsPortIdField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 

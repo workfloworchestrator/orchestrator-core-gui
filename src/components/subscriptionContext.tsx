@@ -12,10 +12,12 @@
  * limitations under the License.
  *
  */
-import { portSubscriptions, subscriptions } from "api";
+
 import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
-import { ServicePortSubscription } from "utils/types";
+
+import { portSubscriptions, subscriptions } from "../api";
+import { ServicePortSubscription } from "../utils/types";
 
 let subscriptionsCache: { [index: string]: ServicePortSubscription } = {};
 

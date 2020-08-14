@@ -19,7 +19,7 @@ import I18n from "i18n-js";
 import React from "react";
 
 import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
-import UserInputFormWizard from "../components/UserInputFormWizard";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import WorkflowSelect from "../components/WorkflowSelect";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";

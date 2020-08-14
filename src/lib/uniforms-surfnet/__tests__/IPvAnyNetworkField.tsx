@@ -15,8 +15,8 @@
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 
-import IPPrefixTable from "../../../components/IpPrefixTable";
-import SplitPrefix from "../../../components/SplitPrefix";
+import IPPrefixTable from "../../../components/inputForms/IpPrefixTable";
+import SplitPrefix from "../../../components/inputForms/SplitPrefix";
 import { IPvAnyNetworkField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
