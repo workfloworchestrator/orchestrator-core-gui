@@ -3332,12 +3332,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         Port
                       </label>
                       <div
-                        className=" css-2b097c-container"
+                        className=" css-14jk2my-container"
                         id="input-node_id_port_select"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-yk16xz-control"
+                          className=" css-1fhf3k1-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -3365,7 +3365,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={false}
+                                  disabled={true}
                                   id="input-node_id_port_select.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -3411,7 +3411,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-1okebmr-indicatorSeparator"
+                              className=" css-109onse-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -3434,16 +3434,13 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </div>
                           </div>
                         </div>
-                        <input
-                          name="node_id_port_select"
-                          type="hidden"
-                          value=""
-                        />
                       </div>
                     </div>
                   </section>
                 </section>
-                <section>
+                <section
+                  status={null}
+                >
                   <label
                     htmlFor="input-nodes_for_location_code_and_status"
                   >
