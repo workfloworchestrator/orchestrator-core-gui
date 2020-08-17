@@ -1,5 +1,3 @@
-import AutoField from "lib/uniforms-surfnet/src/AutoField";
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +14,10 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  */
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+
+import { EuiText } from "@elastic/eui";
+import AutoField from "lib/uniforms-surfnet/src/AutoField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 
 export type NestFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
@@ -35,10 +37,10 @@ function Nest({
     return (
         <section {...filterDOMProps(props)} className={`${className} nest-field`}>
             {label && (
-                <label>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
+                <>
+                    <label className="euiFormLabel euiFormRow__label">{label}</label>
+                    <EuiText size="m">{description}</EuiText>
+                </>
             )}
 
             {children || fields?.map(field => <AutoField key={field} name={field} {...itemProps} />)}

@@ -15,7 +15,7 @@
 
 import "lib/uniforms-surfnet/src/SubscriptionField.scss";
 
-import { EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
+import {EuiFormRow, EuiText, EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
 import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
@@ -219,74 +219,73 @@ function Subscription({
 
     return (
         <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
-            <div>
-                {!disabled && (
-                    <>
-                        <EuiButtonIcon
-                            id={`refresh-icon-${id}`}
-                            iconType="refresh"
-                            iconSize="l"
-                            onClick={() => {
-                                setLoading(true);
-                                clearSubscriptions();
-                                getSubscriptions(tags, statuses).then(result => {
-                                    updateSubscriptions(result);
-                                    setLoading(false);
-                                });
-                            }}
-                        />
-                        {tags?.includes("SP") && (
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+            >
+                <div>
+                    {!disabled && (
+                        <>
+
                             <EuiButtonIcon
-                                id={`filter-icon-${id}`}
-                                onClick={showModal}
-                                iconType="filter"
+                                id={`refresh-icon-${id}`}
+                                iconType="refresh"
                                 iconSize="l"
+                                onClick={() => {
+                                    setLoading(true);
+                                    clearSubscriptions();
+                                    getSubscriptions(tags, statuses).then(result => {
+                                        updateSubscriptions(result);
+                                        setLoading(false);
+                                    });
+                                }}
                             />
-                        )}
-                    </>
-                )}
+                            {tags?.includes("SP") && (
+                                <EuiButtonIcon
+                                    id={`filter-icon-${id}`}
+                                    onClick={showModal}
+                                    iconType="filter"
+                                    iconSize="l"
+                                />
+                            )}
+                        </>
 
-                {isModalVisible && (
-                    <EuiOverlayMask>
-                        <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
-                            <ServicePortSelectorModal
-                                selectedTabId="nodeFilter"
-                                handleSelect={selectSubscriptionFromModal}
-                                subscriptions={subscriptions}
-                            />
-                        </EuiModal>
-                    </EuiOverlayMask>
-                )}
-                <ReactSelect
-                    id={id}
-                    inputId={`${id}.search`}
-                    name={name}
-                    onChange={(option: ValueType<Option>) => {
-                        onChange((option as Option | null)?.value);
-                    }}
-                    options={options}
-                    value={selectedValue}
-                    isSearchable={true}
-                    isClearable={false}
-                    placeholder={I18n.t("forms.widgets.subscription.placeholder")}
-                    isDisabled={disabled}
-                    required={required}
-                    inputRef={inputRef}
-                    className="subscription-field-select"
-                />
-            </div>
+                    )}
 
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+                    {isModalVisible && (
+                        <EuiOverlayMask>
+                            <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
+                                <ServicePortSelectorModal
+                                    selectedTabId="nodeFilter"
+                                    handleSelect={selectSubscriptionFromModal}
+                                    subscriptions={subscriptions}
+                                />
+                            </EuiModal>
+                        </EuiOverlayMask>
+                    )}
+
+
+                    <ReactSelect
+                        id={id}
+                        inputId={`${id}.search`}
+                        name={name}
+                        onChange={(option: ValueType<Option>) => {
+                            onChange((option as Option | null)?.value);
+                        }}
+                        options={options}
+                        value={selectedValue}
+                        isSearchable={true}
+                        isClearable={false}
+                        placeholder={I18n.t("forms.widgets.subscription.placeholder")}
+                        isDisabled={disabled}
+                        required={required}
+                        inputRef={inputRef}
+                        className="subscription-field-select"
+                    />
+                </div>
+            </EuiFormRow>
         </section>
     );
 }
