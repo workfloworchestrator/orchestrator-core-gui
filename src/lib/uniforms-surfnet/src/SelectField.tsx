@@ -12,11 +12,12 @@
  * limitations under the License.
  *
  */
+
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
-import xor from "lodash/xor";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
@@ -85,38 +86,41 @@ function Select({
             </ListField>
         );
     } else {
+        // Todo: cleanup or remove the "checboxes" variant completely
         return (
             <section {...filterDOMProps(props)}>
-                {label && (
-                    <label htmlFor={id}>
-                        {label}
-                        <em>{description}</em>
-                    </label>
-                )}
-                {checkboxes ? (
-                    allowedValues!.map((item: any, index: number) => (
-                        <div key={item} className="bool-field">
-                            <input
-                                checked={fieldType === Array ? value!.includes(item) : value === item}
-                                disabled={disabled}
-                                id={`${id}.${index}`}
-                                name={name}
-                                onChange={() => {
-                                    onChange(fieldType === Array ? xor([item], value) : item);
-                                }}
-                                type="checkbox"
-                            />
-                            <label htmlFor={`${id}.${index}`}>
-                                <span>
-                                    <i className="fa fa-check" />
-                                </span>
-                            </label>
-                            <label className="info" htmlFor={`${id}.${index}`}>
-                                {transform ? transform(item) : item}
-                            </label>
-                        </div>
-                    ))
-                ) : (
+                {/*{label && (*/}
+                {/*    <label htmlFor={id}>*/}
+                {/*        {label}*/}
+                {/*        <em>{description}</em>*/}
+                {/*    </label>*/}
+                {/*)}*/}
+                {/*{checkboxes ? (*/}
+                {/*    allowedValues!.map((item: any, index: number) => (*/}
+                {/*        <div key={item} className="bool-field">*/}
+                {/*    <input*/}
+                {/*        checked={fieldType === Array ? value!.includes(item) : value === item}*/}
+                {/*        disabled={disabled}*/}
+                {/*        id={`${id}.${index}`}*/}
+                {/*        name={name}*/}
+                {/*        onChange={() => {*/}
+                {/*            onChange(fieldType === Array ? xor([item], value) : item);*/}
+                {/*        }}*/}
+                {/*        type="checkbox"*/}
+                {/*    />*/}
+                {/*            />*/}
+                {/*        </div>*/}
+                {/*    ))*/}
+                {/*) : (*/}
+
+                <EuiFormRow
+                    label={label}
+                    labelAppend={<EuiText size="m">{description}</EuiText>}
+                    error={showInlineError ? errorMessage : false}
+                    isInvalid={error}
+                    fullWidth
+                    id={id}
+                >
                     <ReactSelect
                         id={id}
                         inputId={`${id}.search`}
@@ -133,13 +137,14 @@ function Select({
                         required={required}
                         inputRef={inputRef}
                     />
-                )}
+                </EuiFormRow>
+                {/*)}*/}
 
-                {error && showInlineError && (
-                    <em className="error">
-                        <div className="backend-validation">{errorMessage}</div>
-                    </em>
-                )}
+                {/*{error && showInlineError && (*/}
+                {/*    <em className="error">*/}
+                {/*        <div className="backend-validation">{errorMessage}</div>*/}
+                {/*    </em>*/}
+                {/*)}*/}
             </section>
         );
     }

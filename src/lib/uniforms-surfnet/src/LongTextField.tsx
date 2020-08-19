@@ -40,11 +40,12 @@ function LongText({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={errorMessage}
                 isInvalid={error}
+                id={id}
                 fullWidth
             >
                 <EuiTextArea
                     disabled={disabled}
-                    id={id}
+                    // id={id}
                     name={name}
                     onChange={event => onChange(event.target.value)}
                     placeholder={placeholder}

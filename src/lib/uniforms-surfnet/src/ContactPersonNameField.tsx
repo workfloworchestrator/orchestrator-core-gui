@@ -1,4 +1,3 @@
-import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +13,7 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
  *
  */
 
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
 import I18n from "i18n-js";
@@ -155,31 +155,33 @@ function ContactPersonName({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                id={id}
             >
-                <div className="autocomplete-container">
-                    <EuiFieldText
-                        disabled={disabled}
-                        id={id}
-                        name={name}
-                        onChange={onChangeInternal}
-                        placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
-                        // ref={inputRef}
-                        type="text"
-                        value={value ?? ""}
-                        onKeyDown={onAutocompleteKeyDown}
-                        onBlur={onBlurAutoComplete}
-                    ></EuiFieldText>
-                    {!!(displayAutocomplete && suggestions.length) && (
-                        <Autocomplete
-                            query={value ?? ""}
-                            itemSelected={itemSelected}
-                            selectedItem={selectedIndex}
-                            suggestions={suggestions}
-                            personIndex={0}
-                        />
-                    )}
-                </div>
+                <EuiFieldText
+                    disabled={disabled}
+                    // id={id}
+                    name={name}
+                    onChange={onChangeInternal}
+                    placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
+                    // ref={inputRef}
+                    type="text"
+                    value={value ?? ""}
+                    onKeyDown={onAutocompleteKeyDown}
+                    onBlur={onBlurAutoComplete}
+                    autoComplete="off"
+                />
             </EuiFormRow>
+            <div className="autocomplete-container">
+                {!!(displayAutocomplete && suggestions.length) && (
+                    <Autocomplete
+                        query={value ?? ""}
+                        itemSelected={itemSelected}
+                        selectedItem={selectedIndex}
+                        suggestions={suggestions}
+                        personIndex={0}
+                    />
+                )}
+            </div>
         </section>
     );
 }

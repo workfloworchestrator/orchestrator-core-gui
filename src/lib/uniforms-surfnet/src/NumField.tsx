@@ -50,10 +50,11 @@ function Num({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                id={id}
                 fullWidth
             >
                 <EuiFieldNumber
-                    id={id}
+                    // id={id}
                     name={name}
                     // ref={inputRef}
                     placeholder={placeholder}

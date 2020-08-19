@@ -1,4 +1,3 @@
-import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +13,7 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
  *
  */
 
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
@@ -179,22 +179,26 @@ function Vlan({
                 label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
-                isInvalid={error}
+                isInvalid={error || errorMessageExtra}
+                helpText={message}
+                id={id}
                 fullWidth
             >
                 <>
-                    <EuiFieldText
-                        disabled={!subscriptionId || disabled || isUntagged}
-                        id={id}
-                        name={name}
-                        onChange={event => onChange(event.target.value)}
-                        placeholder={placeholder}
-                        // ref={inputRef}
-                        type="text"
-                        value={value ?? ""}
-                    />
-                    {subscriptionId && !disabled && <em className="info">{message}</em>}
-                </>
+                <EuiFieldText
+                    fullWidth
+                    disabled={!subscriptionId || disabled || isUntagged}
+                    // ID is deferred from parent
+                    // id={id}
+                    name={name}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    // ref={inputRef}
+                    type="text"
+                    value={value ?? ""}
+                />
+                {subscriptionId && !disabled && <em className="info">{message}</em>}
+            </>
             </EuiFormRow>
         </section>
     );

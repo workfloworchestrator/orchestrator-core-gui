@@ -44,11 +44,12 @@ function Text({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                id={id}
                 fullWidth
             >
                 <EuiFieldText
                     disabled={disabled}
-                    id={id}
+                    // id={id}
                     name={name}
                     onChange={event => onChange(event.target.value)}
                     placeholder={placeholder}

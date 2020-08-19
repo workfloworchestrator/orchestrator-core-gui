@@ -224,6 +224,7 @@ function Subscription({
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
+                id={id}
             >
                 <div>
                     {!disabled && (
