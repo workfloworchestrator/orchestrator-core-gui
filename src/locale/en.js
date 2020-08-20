@@ -1434,7 +1434,6 @@ I18n.translations.en = {
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",
         modify_note: "Modify subscription note",
-        modify_sn7_elan: "Modify ELAN",
         modify_sn7_insync: "Force an SN7 subscription insync",
         modify_sn7_light_path_downgrade_to_unprotected: "Downgrade to non-redundant LP",
         modify_sn7_light_path_speed: "Modify Service Speed",
