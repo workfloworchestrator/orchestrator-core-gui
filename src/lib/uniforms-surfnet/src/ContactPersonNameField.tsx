@@ -156,9 +156,11 @@ function ContactPersonName({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
+                fullWidth
             >
                 <EuiFieldText
                     disabled={disabled}
+                    fullWidth
                     // id={id}
                     name={name}
                     onChange={onChangeInternal}

@@ -1,3 +1,4 @@
+import { EuiFormRow, EuiText } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,12 +35,16 @@ function OptGroup({
 
     return (
         <section {...filterDOMProps(props)} className={`${className} optgroup-field`}>
-            <label>
-                {I18n.t(`forms.fields.${name}.title`)}
-                <em>{I18n.t(`forms.fields.${name}.info`)}</em>
-            </label>
-
-            <BoolField name="enabled" />
+            <EuiFormRow
+                label={I18n.t(`forms.fields.${name}.title`)}
+                labelAppend={<EuiText size="m">{I18n.t(`forms.fields.${name}.info`)}</EuiText>}
+                error={false}
+                isInvalid={false}
+                id={name} // Not sure if this is always unique...
+                fullWidth
+            >
+                <BoolField name="enabled" />
+            </EuiFormRow>
             {enabled &&
                 fields
                     ?.filter(field => field !== "enabled")

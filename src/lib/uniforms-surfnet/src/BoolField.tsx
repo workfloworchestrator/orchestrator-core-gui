@@ -14,8 +14,9 @@
  */
 import "lib/uniforms-surfnet/src/BoolField.scss";
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiCheckbox, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
+
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -46,28 +47,14 @@ function Bool({
                 id={id}
                 fullWidth
             >
-                <>
-                    <input
-                        checked={value || false}
-                        disabled={disabled}
-                        id={id}
-                        name={name}
-                        onChange={
-                            disabled
-                                ? undefined
-                                : () => {
-                                      onChange(!value);
-                                  }
-                        }
-                        ref={inputRef}
-                        type="checkbox"
-                    />
-                    <label htmlFor={id}>
-                        <span tabIndex={0}>
-                            <i className="fa fa-check" />
-                        </span>
-                    </label>
-                </>
+                <EuiCheckbox
+                    checked={value || false}
+                    disabled={disabled}
+                    id={id}
+                    name={name}
+                    label={name}
+                    onChange={event => onChange(event.target.checked)}
+                />
             </EuiFormRow>
         </section>
     );

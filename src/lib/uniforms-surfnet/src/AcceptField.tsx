@@ -14,6 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/AcceptField.scss";
 
+import { EuiCheckbox } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import I18n, { TranslateOptions } from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -139,21 +140,23 @@ function Accept({
                         );
                     case "skip":
                         return (
-                            <CheckBox
+                            <EuiCheckbox
+                                id={entry[0]}
                                 key={index}
                                 name={entry[0]}
                                 onChange={(e: React.FormEvent<HTMLInputElement>) => {
                                     const target = e.target as HTMLInputElement;
                                     dispatch({ field: index, type: "skip", value: target.checked });
                                 }}
-                                value={state.skip}
-                                info={label}
+                                checked={state.skip}
+                                label={label}
                                 className={"skip"}
                             />
                         );
                     default:
                         return (
-                            <CheckBox
+                            <EuiCheckbox
+                                id={entry[0] + (legacy ? "" : index)}
                                 key={index}
                                 name={entry[0] + (legacy ? "" : index)} // Index needed to allow checkboxes with same name (we can skip this in legacy mode)
                                 className={entry[1].startsWith(">") ? "level_2" : undefined}
@@ -162,8 +165,8 @@ function Accept({
 
                                     dispatch({ field: index, type: "check", value: target.checked });
                                 }}
-                                value={state.checks[index]}
-                                info={label}
+                                checked={state.checks[index]}
+                                label={label}
                                 readOnly={state.skip || disabled}
                             />
                         );

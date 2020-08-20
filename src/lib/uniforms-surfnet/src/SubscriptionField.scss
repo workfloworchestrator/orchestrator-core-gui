@@ -20,19 +20,19 @@
         display: flex;
         flex-direction: column !important;
         .subscription-field-select {
-            width: 100%;
+            width: 110%; // Weird stuff, something in the flex row is off...
             &:nth-child(2) {
-                margin-left: 35px;
+                margin-left: 40px;
+                margin-top: -30px;
             }
         }
     }
 }
-.refresh-subscriptions {
-}
+
 .refresh-subscriptions i {
     &.fa-sync {
         margin-left: auto;
-        margin-top: 0px;
+        margin-top: 3px;
         color: vars.$primary;
         font-size: 30px;
         cursor: pointer;
@@ -45,13 +45,13 @@
 
 // Fix things for ListField wrapped SubscriptionFields
 // We only want to display the first refresh button on each (inner) list
-li .refresh-subscriptions {
-    flex-shrink: 0;
-
-    //i {
-    //    display: none;
-    //}
-}
+//li .refresh-subscriptions {
+//    flex-shrink: 0;
+//
+//    i {
+//        display: none;
+//    }
+//}
 
 // We use '>' because we don't want the outer list to influence the inner list
 // Needs to work for Lists with and without NestField in between
