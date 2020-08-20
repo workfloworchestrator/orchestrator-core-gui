@@ -242,7 +242,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     Header: "Product",
                     id: "product",
                     accessor: "product",
-                    disableSortBy: true,
                     Cell: renderSubscriptionProductsCell,
                     Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.name).sort()), null)
                 },
@@ -250,7 +249,6 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     Header: "Tag",
                     id: "tag",
                     accessor: "product",
-                    disableSortBy: true,
                     Cell: renderSubscriptionTagCell,
                     Filter: renderMultiSelectFilter.bind(null, sortedUniq(products.map(p => p.tag).sort()), null)
                 },
