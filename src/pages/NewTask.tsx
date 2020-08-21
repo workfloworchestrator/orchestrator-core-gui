@@ -16,18 +16,16 @@
 import "./NewTask.scss";
 
 import I18n from "i18n-js";
+import { JSONSchema6 } from "json-schema";
 import React from "react";
 
 import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import WorkflowSelect from "../components/WorkflowSelect";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
-import { EngineStatus, FormNotCompleteResponse, InputForm, Option, Workflow } from "../utils/types";
+import { EngineStatus, InputForm } from "../utils/types";
 
 interface IState {
-    workflows?: Workflow[];
-    workflow?: string;
     stepUserInput?: InputForm;
     hasNext?: boolean;
 }
@@ -37,53 +35,49 @@ export default class NewTask extends React.Component<{}, IState> {
 
     state: IState = {};
 
-    componentDidMount = () =>
-        workflowsByTarget("SYSTEM").then((workflows: Workflow[]) => this.setState({ workflows: workflows }));
-
-    validSubmit = (taskInput: {}[]) => {
-        const { workflow } = this.state;
-        if (!workflow) {
-            return Promise.reject();
-        }
-
-        return startProcess(workflow, taskInput).then(process => {
-            this.context.redirect(`/tasks?highlight=${process.id}`);
-            setFlash(I18n.t("task.flash.create", { name: I18n.t(`workflow.${workflow}`), pid: process.id }));
+    componentDidMount = () => {
+        workflowsByTarget("SYSTEM").then(workflows => {
+            const options = workflows.reduce<{ [index: string]: string }>((acc, wf) => {
+                acc[wf.name] = wf.description;
+                return acc;
+            }, {});
+            this.setState({
+                stepUserInput: {
+                    type: "object",
+                    properties: {
+                        select_task: {
+                            type: "string",
+                            options: options
+                        }
+                    }
+                } as JSONSchema6,
+                hasNext: false
+            });
         });
     };
 
-    changeWorkflow = (option: Option) => {
-        this.setState({ workflow: option.value });
-        if (option) {
-            let promise = startProcess(option.value, []);
+    validSubmit = (taskInput: {}[]) => {
+        const { select_task } = taskInput[0] as { select_task: string };
 
-            let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
-                setFlash(I18n.t("settings.status.engine.paused"), "error");
-                this.context.redirect("/processes");
-            });
+        let promise = startProcess(select_task, taskInput.slice(1)).then(process => {
+            this.context.redirect(`/tasks?highlight=${process.id}`);
+            setFlash(I18n.t("task.flash.create", { name: I18n.t(`workflow.${select_task}`), pid: process.id }));
+        });
 
-            catchErrorStatus<FormNotCompleteResponse>(promise2, 510, json => {
-                this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
-            });
-        }
+        return catchErrorStatus<EngineStatus>(promise, 503, json => {
+            setFlash(I18n.t("settings.status.engine.paused"), "error");
+            this.context.redirect("/processes");
+        });
     };
 
     render() {
-        const { workflows, workflow, stepUserInput, hasNext } = this.state;
+        const { stepUserInput, hasNext } = this.state;
         return (
             <div className="mod-new-task">
                 <section className="card">
                     <section className="form-step">
-                        <h3>{I18n.t("task.new_task")}</h3>
-                        <section className="form-divider">
-                            <label>{I18n.t("task.workflow")}</label>
-                            <em>{I18n.t("task.workflow_info")}</em>
-                            <WorkflowSelect
-                                workflows={workflows || []}
-                                onChange={this.changeWorkflow}
-                                workflow={workflow}
-                            />
-                        </section>
+                        <h1>{I18n.t("task.new_task")}</h1>
+
                         {stepUserInput && (
                             <UserInputFormWizard
                                 stepUserInput={stepUserInput}

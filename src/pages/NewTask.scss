@@ -23,5 +23,12 @@
 
     .card {
         @include mixins.card;
+
+        h1 {
+            font-size: 22px;
+            color: vars.$darker-blue;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
 }
