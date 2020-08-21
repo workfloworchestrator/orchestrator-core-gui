@@ -664,7 +664,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -775,7 +775,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -903,7 +903,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1014,7 +1014,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1142,7 +1142,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1253,7 +1253,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              First select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -3236,7 +3236,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -3347,7 +3347,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              First select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"

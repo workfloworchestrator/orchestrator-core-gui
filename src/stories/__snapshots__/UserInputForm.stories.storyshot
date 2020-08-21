@@ -337,7 +337,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -576,7 +576,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -10915,7 +10915,7 @@ exports[`Storyshots UserInputForm Service Port 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
