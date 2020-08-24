@@ -19,13 +19,17 @@ import { User } from "oidc-client";
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 import {
+    CodedWorkflow,
     ContactPerson,
     EngineStatus,
+    FixedInputConfiguration,
+    FixedInputValidation,
     IMSNode,
     IMSPort,
     IMSService,
     IpBlock,
     IpPrefix,
+    IpPrefixSubscription,
     Organization,
     Process,
     ProcessSubscription,
@@ -37,7 +41,8 @@ import {
     Subscription,
     SubscriptionModel,
     Workflow,
-    WorkflowReasons
+    WorkflowReasons,
+    WorkflowWithProductTags
 } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
@@ -148,15 +153,15 @@ export function products(): Promise<Product[]> {
     return fetchJson("products");
 }
 
-export function productTags() {
+export function productTags(): Promise<string[]> {
     return fetchJson("products/tags/all");
 }
 
-export function productTypes() {
+export function productTypes(): Promise<string[]> {
     return fetchJson("products/types/all");
 }
 
-export function productStatuses() {
+export function productStatuses(): Promise<string[]> {
     return fetchJson("products/statuses/all");
 }
 
@@ -168,15 +173,15 @@ export function saveProduct(product: Product) {
     return postPutJson("products", product, isEmpty(product.product_id) ? "post" : "put", true, false);
 }
 
-export function deleteProduct(id: string) {
+export function deleteProduct(id: string): Promise<null> {
     return fetchJson(`products/${id}`, { method: "DELETE" }, {}, false, false);
 }
 
-export function productBlocks() {
+export function productBlocks(): Promise<ProductBlock[]> {
     return fetchJson("product_blocks");
 }
 
-export function productBlockById(id: string) {
+export function productBlockById(id: string): Promise<ProductBlock> {
     return fetchJson(`product_blocks/${id}`);
 }
 
@@ -194,7 +199,7 @@ export function deleteProductBlock(id: string) {
     return fetchJson(`product_blocks/${id}`, { method: "DELETE" }, {}, false, false);
 }
 
-export function resourceTypes() {
+export function resourceTypes(): Promise<ResourceType[]> {
     return fetchJson("resource_types");
 }
 
@@ -449,15 +454,15 @@ export function processStatuses(): Promise<string[]> {
     return fetchJson("v2/processes/statuses");
 }
 
-export function allWorkflows() {
+export function allWorkflows(): Promise<Workflow[]> {
     return fetchJson("workflows");
 }
 
-export function allWorkflowCodeImplementations() {
+export function allWorkflowCodeImplementations(): Promise<CodedWorkflow[]> {
     return fetchJson("workflows/coded_workflows");
 }
 
-export function allWorkflowsWithProductTags() {
+export function allWorkflowsWithProductTags(): Promise<WorkflowWithProductTags[]> {
     return fetchJson("workflows/with_product_tags");
 }
 
@@ -465,7 +470,7 @@ export function workflowsByTarget(target: string): Promise<Workflow[]> {
     return fetchJson(`workflows?target=${target}`);
 }
 
-export function invalidSubscriptions(workflowKey: string) {
+export function invalidSubscriptions(workflowKey: string): Promise<Subscription[]> {
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
 }
 
@@ -491,7 +496,7 @@ export function prefix_filters(): Promise<IpPrefix[]> {
     return fetchJson("ipam/prefix_filters");
 }
 
-export function prefixSubscriptionsByRootPrefix(parentId: string) {
+export function prefixSubscriptionsByRootPrefix(parentId: number): Promise<IpPrefixSubscription[]> {
     return fetchJson(`ipam/prefix_subscriptions/${parentId}`);
 }
 
@@ -503,7 +508,7 @@ export function prefixById(prefixId: number) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
 
-export function freeSubnets(supernet: string) {
+export function freeSubnets(supernet: string): Promise<string[]> {
     return fetchJson(`ipam/free_subnets/${supernet}`);
 }
 
@@ -539,15 +544,15 @@ export function retryProcess(processId: string) {
     return postPutJson(`processes/${processId}/resume`, {}, "put", true, false);
 }
 
-export function fixedInputConfiguration() {
+export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
     return fetchJson("fixed_inputs/configuration");
 }
 
-export function validations() {
+export function validations(): Promise<ProductValidation[]> {
     return fetchJson("products/validations");
 }
 
-export function fixedInputValidations() {
+export function fixedInputValidations(): Promise<FixedInputValidation[]> {
     return fetchJson("fixed_inputs/validations");
 }
 

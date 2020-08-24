@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AcceptField> <AcceptField> - legacy renders an input 1`] = `
+"<AcceptField name=\\"x\\">
+  <Accept name=\\"x\\" id=\\"uniforms-0000-0000\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
+    <section id=\\"uniforms-0000-0000\\" className=\\"accept-field\\">
+      <div>
+        <label>
+          [missing &quot;en.forms.fields.x&quot; translation]
+        </label>
+      </div>
+      <div>
+        <em>
+          [missing &quot;en.forms.fields.x_info&quot; translation]
+        </em>
+      </div>
+      <CheckBox name=\\"x\\" className={[undefined]} onChange={[Function: onChange]} value={[undefined]} info=\\"[missing \\"en.forms.fields.x\\" translation]\\" readOnly={false}>
+        <div className=\\"checkbox\\">
+          <input type=\\"checkbox\\" id=\\"x\\" name=\\"x\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"x\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"x\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+    </section>
+  </Accept>
+</AcceptField>"
+`;
+
+exports[`<AcceptField> <AcceptField> - renders inputs 1`] = `
+"<AcceptField name=\\"x\\">
+  <Accept name=\\"x\\" id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ uniforms: { data: [ [ 'label', 'label' ], [ 'info', 'info' ], [ 'warning', 'warning' ], [ 'margin', 'margin' ], [ 'value', 'value' ], [ 'http://example.com', 'url' ], [ 'checkbox1', 'checkbox' ], [ 'label_with_context', 'label', { foo: 'bar' } ], [ 'sub_checkbox', '>checkbox' ], [ 'sub_checkbox2', '>checkbox' ], [ 'optional_checkbox', 'checkbox?' ], [ 'skip_checkbox', 'skip' ] ] }, type: [Function: String], optional: false, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={true} data={[ [ 'label', 'label' ], [ 'info', 'info' ], [ 'warning', 'warning' ], [ 'margin', 'margin' ], [ 'value', 'value' ], [ 'http://example.com', 'url' ], [ 'checkbox1', 'checkbox' ], [ 'label_with_context', 'label', { foo: 'bar' } ], [ 'sub_checkbox', '>checkbox' ], [ 'sub_checkbox2', '>checkbox' ], [ 'optional_checkbox', 'checkbox?' ], [ 'skip_checkbox', 'skip' ] ]}>
+    <section id=\\"uniforms-0000-0002\\" className=\\"accept-field\\">
+      <div>
+        <label>
+          [missing &quot;en.forms.fields.x_accept.label&quot; translation]
+        </label>
+      </div>
+      <div>
+        <em>
+          [missing &quot;en.forms.fields.x_accept.info&quot; translation]
+        </em>
+      </div>
+      <div>
+        <label className=\\"warning\\">
+          [missing &quot;en.forms.fields.x_accept.warning&quot; translation]
+        </label>
+      </div>
+      <br />
+      <div>
+        <input value=\\"value\\" disabled={true} />
+      </div>
+      <div>
+        <a href=\\"http://example.com\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+          http://example.com
+        </a>
+      </div>
+      <CheckBox name=\\"checkbox16\\" className={[undefined]} onChange={[Function: onChange]} value={[undefined]} info=\\"[missing \\"en.forms.fields.x_accept.checkbox1\\" translation]\\" readOnly={false}>
+        <div className=\\"checkbox\\">
+          <input type=\\"checkbox\\" id=\\"checkbox16\\" name=\\"checkbox16\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"checkbox16\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"checkbox16\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x_accept.checkbox1&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+      <div>
+        <label>
+          [missing &quot;en.forms.fields.x_accept.label_with_context&quot; translation]
+        </label>
+      </div>
+      <CheckBox name=\\"sub_checkbox8\\" className=\\"level_2\\" onChange={[Function: onChange]} value={[undefined]} info=\\"[missing \\"en.forms.fields.x_accept.sub_checkbox\\" translation]\\" readOnly={false}>
+        <div className=\\"level_2\\">
+          <input type=\\"checkbox\\" id=\\"sub_checkbox8\\" name=\\"sub_checkbox8\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"sub_checkbox8\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"sub_checkbox8\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x_accept.sub_checkbox&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+      <CheckBox name=\\"sub_checkbox29\\" className=\\"level_2\\" onChange={[Function: onChange]} value={[undefined]} info=\\"[missing \\"en.forms.fields.x_accept.sub_checkbox2\\" translation]\\" readOnly={false}>
+        <div className=\\"level_2\\">
+          <input type=\\"checkbox\\" id=\\"sub_checkbox29\\" name=\\"sub_checkbox29\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"sub_checkbox29\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"sub_checkbox29\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x_accept.sub_checkbox2&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+      <CheckBox name=\\"optional_checkbox10\\" className={[undefined]} onChange={[Function: onChange]} value={[undefined]} info=\\"[missing \\"en.forms.fields.x_accept.optional_checkbox\\" translation]\\" readOnly={false}>
+        <div className=\\"checkbox\\">
+          <input type=\\"checkbox\\" id=\\"optional_checkbox10\\" name=\\"optional_checkbox10\\" checked={[undefined]} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"optional_checkbox10\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"optional_checkbox10\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x_accept.optional_checkbox&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+      <CheckBox name=\\"skip_checkbox\\" onChange={[Function: onChange]} value={false} info=\\"[missing \\"en.forms.fields.x_accept.skip_checkbox\\" translation]\\" className=\\"skip\\">
+        <div className=\\"skip\\">
+          <input type=\\"checkbox\\" id=\\"skip_checkbox\\" name=\\"skip_checkbox\\" checked={false} onChange={[Function: onChange]} disabled={false} />
+          <label htmlFor=\\"skip_checkbox\\">
+            <span tabIndex={0}>
+              <i className=\\"fa fa-check\\" />
+            </span>
+          </label>
+          <label htmlFor=\\"skip_checkbox\\" className=\\"info\\">
+            [missing &quot;en.forms.fields.x_accept.skip_checkbox&quot; translation]
+          </label>
+        </div>
+      </CheckBox>
+    </section>
+  </Accept>
+</AcceptField>"
+`;

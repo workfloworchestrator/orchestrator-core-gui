@@ -16,7 +16,8 @@
 import fetchMock from "fetch-mock";
 import React from "react";
 
-import FORM from "./data/all-widgets-form.json";
+import { InputForm } from "../utils/types";
+import FORM_NEW from "./data/all-widgets-form-new.json";
 import IP_BLOCKS from "./data/ip_blocks.json";
 import PRODUCTS from "./data/products.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
@@ -26,8 +27,8 @@ import { allNodeSubscriptions, contactPersons, freeCorelinkPorts, imsNodes } fro
 import UserInputContainer from "./UserInputContainer";
 
 export default {
-    title: "Complete Input widgets form",
-    // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
+    title: "Complete Input widgets form new",
+    // Needed to match snapshot file to story, should be done bij injectFileNames but that does not work
     parameters: {
         fileName: __filename
     }
@@ -38,7 +39,7 @@ function prepare() {
     fetchMock.get("/api/ipam/prefix_filters", [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
     fetchMock.get("/api/ipam/ip_blocks/1", IP_BLOCKS);
     fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/25", ["10.0.0.0/25"]);
-    fetchMock.get("/api/v2/subscriptions/all", allNodeSubscriptions);
+    fetchMock.get("/api/v2/subscriptions?filter=statuses%2Cactive", allNodeSubscriptions);
     fetchMock.get(
         "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
@@ -56,11 +57,11 @@ function prepare() {
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CIPS%2Cstatuses%2Cactive",
+        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CIPBGP%2Cstatuses%2Cactive",
+        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
     fetchMock.get(
@@ -92,5 +93,6 @@ function prepare() {
 
 export const AllWidgetsForm = () => {
     prepare();
-    return <UserInputContainer formName="Corelink form" stepUserInput={FORM} />;
+
+    return <UserInputContainer formName="All widgets form" stepUserInput={FORM_NEW as InputForm} />;
 };

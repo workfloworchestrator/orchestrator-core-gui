@@ -1,5 +1,17 @@
 {
-    "ignore": [".git", "charts", ".gitlab", "!(src)", ".storybook", "**.storyshot", "**.ttf", "**.md", "coverage"],
+    "ignore": [
+        ".git",
+        "charts",
+        ".gitlab",
+        "!(src)",
+        ".storybook",
+        "**.storyshot",
+        "**.snap",
+        "**.ttf",
+        "**.md",
+        "**.mdx",
+        "coverage"
+    ],
     "license": "LICENSE_HEADER",
     "trailingWhitespace": "TRIM",
     "licenseFormats": {

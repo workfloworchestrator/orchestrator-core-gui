@@ -13,16 +13,6 @@
  *
  */
 
-import {
-    renderCustomersCell,
-    renderPidCell,
-    renderProductTagCell,
-    renderProductsCell,
-    renderSubscriptionsCell,
-    renderTimestampCell,
-    renderWorkflowNameCell
-} from "components/tables/cellRenderers";
-import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "components/tables/filterRenderers";
 import I18n from "i18n-js";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
@@ -42,11 +32,21 @@ import {
     TableState
 } from "react-table";
 import { StringParam, useQueryParam } from "use-query-params";
-import ApplicationContext from "utils/ApplicationContext";
-import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
-import { ProcessV2 } from "utils/types";
 
+import ApplicationContext from "../../utils/ApplicationContext";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../../utils/QueryParameters";
+import { ProcessV2 } from "../../utils/types";
 import ActionContainer from "../ActionContainer";
+import {
+    renderCustomersCell,
+    renderPidCell,
+    renderProductTagCell,
+    renderProductsCell,
+    renderSubscriptionsCell,
+    renderTimestampCell,
+    renderWorkflowNameCell
+} from "./cellRenderers";
+import { renderCustomersFilter, renderILikeFilter, renderMultiSelectFilter } from "./filterRenderers";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialProcessesFilterAndSort(showTasks: boolean, statuses: string[]) {
@@ -356,7 +356,7 @@ export function ProcessesTable({ initialTableSettings, renderActions, isProcess 
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
                     excludeInFilter={excludeInFilter}
-                    hideAdvancedSearch={true}
+                    advancedSearch={false}
                 />
             </section>
         </div>

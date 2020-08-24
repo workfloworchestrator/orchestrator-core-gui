@@ -240,7 +240,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="details"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -273,7 +273,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="state-changes"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -304,7 +304,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="raw"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -335,7 +335,7 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   htmlFor="traceback"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2477,7 +2477,7 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
         id="process"
         onClick={[Function]}
       >
-        Task
+        Process
       </span>
     </section>
     <section
@@ -2490,8 +2490,8 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
           className="euiText euiText--medium"
         >
           <h3>
-            Workflow
-            User input for step Select new SAP to migrate to
+            Process instance of workflow migrate_sn7_ip_static_sap_to_sn8
+            User input for step Select new SAP to migrate to for product SSP 10G
           </h3>
         </div>
       </section>
@@ -2609,7 +2609,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
         id="process"
         onClick={[Function]}
       >
-        Task
+        Process
       </span>
     </section>
     <section
@@ -2810,7 +2810,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                 className="euiText euiText--medium"
               >
                 <h3>
-                  Task of workflow create_sn8_service_port
+                  Process SSP 10G of workflow create_sn8_service_port for 6a608b90-0c11-e511-80d0-005056956c1a
                 </h3>
               </div>
             </li>
@@ -2834,7 +2834,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="details"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2867,7 +2867,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="state-changes"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2898,7 +2898,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="raw"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2929,7 +2929,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   htmlFor="traceback"
                 >
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     <i
                       className="fa fa-check"
@@ -2970,7 +2970,7 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   <td
                     className="title"
                   >
-                    Created by
+                    Assignee
                   </td>
                   <td
                     className="value"

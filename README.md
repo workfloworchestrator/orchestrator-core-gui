@@ -34,19 +34,19 @@ The client is build with react and to get initially started:
 
 Using Brew:
 
-```
+```sh
 brew install yarn
 ```
 
 or using MacPorts:
 
-```
+```sh
 sudo port install yarn npm5
 ```
 
 and then:
 
-```
+```sh
 yarn install
 ```
 
@@ -60,7 +60,7 @@ Mac OS:
 
 This project currently only works with Node.js 12 (if you also want to be able to run the tests).
 
-```
+```sh
 npm install yarn -g
 npm install npm-run-all --save-dev -g
 ./build.sh
@@ -70,7 +70,7 @@ npm install npm-run-all --save-dev -g
 
 To run locally:
 
-```
+```sh
 yarn start
 ```
 
@@ -86,7 +86,7 @@ There is also a .env file checked in that points to a backend that runs locally 
 
 ### Add new dependencies
 
-```
+```sh
 yarn add 'package-name'
 ```
 
@@ -96,7 +96,7 @@ Deploys of GUI Workflows are in the form of a Docker image with nginx.
 
 ### CRM calling url
 
-```
+```sh
 new-process?product=58695551-e386-437a-a999-41c1296f84b8&organisation=ad93daef-0911-e511-80d0-005056956c1a
 ```
 

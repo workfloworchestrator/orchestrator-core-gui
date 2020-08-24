@@ -15,16 +15,15 @@
 
 import "./SubscriptionField.scss";
 
-import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
-import ApplicationContext from "utils/ApplicationContext";
-import { productById } from "utils/Lookups";
-import { filterProductsByBandwidth } from "validations/Products";
 
+import { SubscriptionsContext } from "../../../components/subscriptionContext";
+import ApplicationContext from "../../../utils/ApplicationContext";
+import { productById } from "../../../utils/Lookups";
 import {
     Option,
     Organization,
@@ -32,6 +31,7 @@ import {
     ServicePortSubscription,
     Subscription as iSubscription
 } from "../../../utils/types";
+import { filterProductsByBandwidth } from "../../../validations/Products";
 import { ListFieldProps } from "./ListField";
 import { FieldProps } from "./types";
 
@@ -154,7 +154,7 @@ function Subscription({
             products = filterProductsByBandwidth(products, usedBandwidth);
         }
 
-        return products.length !== allProducts.length ? products.map(product => product.product_id) : [];
+        return products.map(product => product.product_id);
     }, [allProducts, usedBandwidth, productIds, tags]);
 
     useEffect(() => {

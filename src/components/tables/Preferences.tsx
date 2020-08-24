@@ -26,7 +26,6 @@ interface IProps<T extends object> {
     initialTableSettings: TableSettings<T>;
     state: TableState<T>;
     excludeInFilter: string[];
-    hideAdvancedSearch: boolean;
 }
 
 function Preferences<T extends object>({
@@ -34,14 +33,9 @@ function Preferences<T extends object>({
     state,
     dispatch,
     initialTableSettings,
-    excludeInFilter,
-    hideAdvancedSearch
+    excludeInFilter
 }: IProps<T>) {
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
-
-    const searchPhrase = state.filterBy.find(column => column.id === "tsv")
-        ? state.filterBy.find(column => column.id === "tsv").values[0]
-        : "";
 
     return (
         <React.Fragment key={`preferences_${name}`}>
@@ -130,31 +124,6 @@ function Preferences<T extends object>({
                                 </label>
                             );
                         })}
-                </div>
-            )}
-            {!hideAdvancedSearch && (
-                <div className="advanced-search-container">
-                    <span>
-                        <b>Advanced search</b>
-                    </span>
-                    <span>
-                        <input
-                            placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
-                            type="text"
-                            onChange={searchPhrase => {
-                                searchPhrase &&
-                                    dispatch({
-                                        type: ActionType.FILTER_REPLACE,
-                                        id: "tsv",
-                                        values: [searchPhrase.target.value]
-                                    });
-                            }}
-                            value={searchPhrase}
-                        />
-                    </span>
-                    <span>
-                        <i className="fa fa-search"></i>
-                    </span>
                 </div>
             )}
         </React.Fragment>

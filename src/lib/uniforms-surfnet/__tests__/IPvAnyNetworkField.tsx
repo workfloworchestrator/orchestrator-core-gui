@@ -15,8 +15,8 @@
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 
-import IPPrefixTable from "../../../components/IpPrefixTable";
-import SplitPrefix from "../../../components/SplitPrefix";
+import IPPrefixTable from "../../../components/inputForms/IpPrefixTable";
+import SplitPrefix from "../../../components/inputForms/SplitPrefix";
 import { IPvAnyNetworkField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
@@ -30,6 +30,7 @@ test("<IPvAnyNetworkField> - renders an table", () => {
 
     expect(wrapper.find(IPPrefixTable)).toHaveLength(1);
     expect(wrapper.find(SplitPrefix)).toHaveLength(0);
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<IPvAnyNetworkField> - does not render an table when preselected", () => {
@@ -41,6 +42,7 @@ test("<IPvAnyNetworkField> - does not render an table when preselected", () => {
 
     expect(wrapper.find(IPPrefixTable)).toHaveLength(0);
     expect(wrapper.find(SplitPrefix)).toHaveLength(0);
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<IPvAnyNetworkField> - renders an table and split component", () => {
@@ -57,6 +59,7 @@ test("<IPvAnyNetworkField> - renders an table and split component", () => {
     expect(wrapper.find(SplitPrefix).prop("prefixlen")).toBe(16);
     expect(wrapper.find(SplitPrefix).prop("prefixMin")).toBe(17);
     expect(wrapper.find(SplitPrefix).prop("selectedSubnet")).toBe("10.0.0.0/16");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<IPvAnyNetworkField> - renders a split component", () => {
@@ -72,6 +75,7 @@ test("<IPvAnyNetworkField> - renders a split component", () => {
     expect(wrapper.find(SplitPrefix).prop("prefixlen")).toBe(16);
     expect(wrapper.find(SplitPrefix).prop("prefixMin")).toBe(23);
     expect(wrapper.find(SplitPrefix).prop("selectedSubnet")).toBe("10.0.0.0/16");
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 });
 
 test("<IPvAnyNetworkField> - renders a label", () => {

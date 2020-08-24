@@ -14,17 +14,17 @@
  */
 import "./ImsPortIdField.scss";
 
-import {
-    freeCorelinkPortsForNodeIdAndInterfaceType,
-    getFreePortsByNodeIdAndInterfaceType,
-    getNodesByLocationAndStatus,
-    nodeSubscriptions
-} from "api";
 import I18n from "i18n-js";
 import React, { useCallback, useEffect, useState } from "react";
 import Select, { ValueType } from "react-select";
 import { connectField, filterDOMProps } from "uniforms";
 
+import {
+    freeCorelinkPortsForNodeIdAndInterfaceType,
+    getFreePortsByNodeIdAndInterfaceType,
+    getNodesByLocationAndStatus,
+    nodeSubscriptions
+} from "../../../api";
 import { IMSNode, IMSPort, Option, Subscription } from "../../../utils/types";
 import { FieldProps } from "./types";
 

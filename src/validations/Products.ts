@@ -13,8 +13,7 @@
  *
  */
 
-import { Product } from "utils/types";
-
+import { Product } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 
 export function filterProductsByBandwidth(products: Product[], bandwidth?: string | number): Product[] {

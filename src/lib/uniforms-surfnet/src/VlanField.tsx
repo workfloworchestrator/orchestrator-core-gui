@@ -12,16 +12,17 @@
  * limitations under the License.
  *
  */
-import { usedVlans as getUsedVlans } from "api";
-import { SubscriptionsContext } from "components/subscriptionContext";
+
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
-import ApplicationContext from "utils/ApplicationContext";
-import { ServicePort } from "utils/types";
-import { inValidVlan } from "validations/UserInput";
 
+import { usedVlans as getUsedVlans } from "../../../api";
+import { SubscriptionsContext } from "../../../components/subscriptionContext";
+import ApplicationContext from "../../../utils/ApplicationContext";
+import { ServicePort } from "../../../utils/types";
+import { inValidVlan } from "../../../validations/UserInput";
 import { getPortMode } from "./SubscriptionField";
 import { FieldProps } from "./types";
 

@@ -13,13 +13,12 @@
  *
  */
 
-import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
 import React from "react";
 import { NestField } from "uniforms-unstyled";
 
-import ListField from "../src/ListField";
-import VlanField from "../src/VlanField";
+import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
+import { ListField, VlanField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 import withSubscriptions from "./_withSubscriptions";
@@ -200,6 +199,7 @@ describe("<VlanField>", () => {
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
         expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (untagged with used vlans)", async () => {
@@ -220,6 +220,7 @@ describe("<VlanField>", () => {
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
         expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged)", async () => {
@@ -235,6 +236,7 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input").prop("disabled")).toBe(false);
         expect(wrapper.find(".info").text()).toBe("This service port has no VLANs in use (yet).");
         expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged with used Vlans)", async () => {
@@ -253,6 +255,7 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input").prop("disabled")).toBe(false);
         expect(wrapper.find(".info").text()).toBe("Already used VLAN ranges for this service port: 3-6,10");
         expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - adds vlans taken in same list as used vlans", async () => {
@@ -307,6 +310,7 @@ describe("<VlanField>", () => {
 
         expect(fetchMock).toHaveFetchedTimes(2, "glob:*/api/ims/vlans/abc");
         expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/def");
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input which correctly reacts on change", async () => {

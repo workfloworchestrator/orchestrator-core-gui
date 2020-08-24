@@ -20,7 +20,7 @@ import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 import { catchErrorStatus, startProcess } from "../api/index";
-import UserInputFormWizard from "../components/UserInputFormWizard";
+import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import { setFlash } from "../utils/Flash";
 import { FormNotCompleteResponse, InputForm } from "../utils/types";
 
@@ -72,7 +72,7 @@ class ModifySubscription extends React.Component<IProps, IState> {
                     pid: pid
                 })
             );
-            return <Redirect to={`/processes?highlight=${pid}`} />;
+            return <Redirect to={workflowName.startsWith("validate") ? "/tasks" : `/processes?highlight=${pid}`} />;
         }
 
         if (!stepUserInput) {

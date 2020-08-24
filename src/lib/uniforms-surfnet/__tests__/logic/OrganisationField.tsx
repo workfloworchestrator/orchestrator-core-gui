@@ -14,11 +14,10 @@
  */
 
 import React from "react";
-import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 import ORGANISATIONS_JSON from "../../../../stories/data/organisations.json";
-import { SelectField } from "../../src";
-import OrganisationField from "../../src/logic/OrganisationField";
+import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
+import { OrganisationField, SelectField } from "../../src";
 import createContext from "../_createContext";
 import mount from "../_mount";
 

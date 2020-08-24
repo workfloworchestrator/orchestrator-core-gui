@@ -17,7 +17,7 @@ import fetchMock from "fetch-mock-jest";
 import React from "react";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import Autocomplete from "../../../components/Autocomplete";
+import Autocomplete from "../../../components/inputForms/Autocomplete";
 import { ContactPersonNameField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
@@ -217,6 +217,7 @@ test("<ContactPersonNameField> - selects item with keystrokes", async () => {
     await waitForComponentToPaint(wrapper);
 
     expect(wrapper.find(Autocomplete)).toHaveLength(1);
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
 
     expect(wrapper.find("input").simulate("keyDown", { keyCode: 40 })).toBeTruthy();
     expect(wrapper.find("input").simulate("keyDown", { keyCode: 13 })).toBeTruthy();
@@ -224,6 +225,8 @@ test("<ContactPersonNameField> - selects item with keystrokes", async () => {
     await waitForComponentToPaint(wrapper);
 
     expect(wrapper.find(Autocomplete)).toHaveLength(0);
+    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+
     expect(onChange).toHaveBeenNthCalledWith(1, "x", "n");
     expect(onChange).toHaveBeenNthCalledWith(2, "x", "name");
     expect(onChange).toHaveBeenNthCalledWith(3, "email", "a@b.nl");

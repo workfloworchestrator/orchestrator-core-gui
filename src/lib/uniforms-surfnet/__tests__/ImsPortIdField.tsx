@@ -16,10 +16,10 @@
 import fetchMock from "fetch-mock";
 import React from "react";
 import ReactSelect from "react-select";
-import { IMSPort, Subscription } from "utils/types";
 
 import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import ImsPortIdField from "../src/ImsPortIdField";
+import { IMSPort, Subscription } from "../../../utils/types";
+import { ImsPortIdField } from "../src";
 import createContext from "./_createContext";
 import mount from "./_mount";
 
@@ -49,6 +49,7 @@ describe("<ImsPortIdField>", () => {
                 .at(1)
                 .props()
         ).toMatchObject({ options: [], value: undefined, isDisabled: true, placeholder: "First select a node" });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<ImsPortIdField> - reacts on change inputs legacy", async () => {
@@ -117,6 +118,7 @@ describe("<ImsPortIdField>", () => {
                 .at(1)
                 .props()
         ).toMatchObject({ options: [], value: undefined, isDisabled: true, placeholder: "First select a node" });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<ImsPortIdField> - reacts on change inputs", async () => {
@@ -195,5 +197,6 @@ describe("<ImsPortIdField>", () => {
             isDisabled: false,
             placeholder: "Select a port"
         });
+        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 });

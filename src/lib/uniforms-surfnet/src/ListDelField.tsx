@@ -1,4 +1,3 @@
-import I18n from "i18n-js";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,8 @@ import I18n from "i18n-js";
  * limitations under the License.
  *
  */
+
+import I18n from "i18n-js";
 import React from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 

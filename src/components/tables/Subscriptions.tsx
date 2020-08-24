@@ -13,21 +13,6 @@
  *
  */
 
-import {
-    renderInsyncCell,
-    renderSubscriptionCustomersCell,
-    renderSubscriptionDescriptionCell,
-    renderSubscriptionIdCell,
-    renderSubscriptionProductsCell,
-    renderSubscriptionTagCell,
-    renderTimestampCell
-} from "components/tables/cellRenderers";
-import {
-    renderCustomersFilter,
-    renderILikeFilter,
-    renderMultiSelectFilter,
-    renderSingleSelectFilter
-} from "components/tables/filterRenderers";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
@@ -46,11 +31,26 @@ import {
     TableState
 } from "react-table";
 import { useQueryParam } from "use-query-params";
-import ApplicationContext from "utils/ApplicationContext";
-import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
-import { Subscription } from "utils/types";
 
 import SubscriptionDetail from "../../pages/SubscriptionDetail";
+import ApplicationContext from "../../utils/ApplicationContext";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../../utils/QueryParameters";
+import { Subscription } from "../../utils/types";
+import {
+    renderInsyncCell,
+    renderSubscriptionCustomersCell,
+    renderSubscriptionDescriptionCell,
+    renderSubscriptionIdCell,
+    renderSubscriptionProductsCell,
+    renderSubscriptionTagCell,
+    renderTimestampCell
+} from "./cellRenderers";
+import {
+    renderCustomersFilter,
+    renderILikeFilter,
+    renderMultiSelectFilter,
+    renderSingleSelectFilter
+} from "./filterRenderers";
 import { NwaTable, isLocalTableSettings } from "./NwaTable";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
@@ -305,7 +305,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}
                     excludeInFilter={["description"]}
-                    hideAdvancedSearch={false}
+                    advancedSearch={true}
                 />
             </section>
         </div>
