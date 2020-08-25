@@ -87,16 +87,19 @@ export default class NewProcess extends React.Component<IProps, IState> {
     };
 
     submit = (processInput: {}[]) => {
+        const { productValidation } = this.state;
         const { products } = this.context;
         const productId = (processInput as { product: string }[])[0].product;
         const product = productById(productId, products);
         const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
 
-        validation(productId).then(productValidation =>
-            this.setState({
-                productValidation: productValidation
-            })
-        );
+        if (!productValidation) {
+            validation(productId).then(productValidation =>
+                this.setState({
+                    productValidation: productValidation
+                })
+            );
+        }
 
         let promise = startProcess(workflow, processInput).then(
             process => {
