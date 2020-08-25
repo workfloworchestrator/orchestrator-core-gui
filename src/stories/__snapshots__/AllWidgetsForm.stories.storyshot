@@ -664,7 +664,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -775,7 +775,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -903,7 +903,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1014,7 +1014,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              Select a port
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1142,7 +1142,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -1253,7 +1253,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Loading...
+                              First select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -3221,12 +3221,12 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         Node
                       </label>
                       <div
-                        className=" css-2b097c-container"
+                        className=" css-14jk2my-container"
                         id="input-node_id_port_select.node"
                         onKeyDown={[Function]}
                       >
                         <div
-                          className=" css-yk16xz-control"
+                          className=" css-1fhf3k1-control"
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
@@ -3236,7 +3236,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             <div
                               className=" css-1wa3eu0-placeholder"
                             >
-                              Select...
+                              Select a node
                             </div>
                             <div
                               className="css-b8ldur-Input"
@@ -3254,7 +3254,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                   autoCapitalize="none"
                                   autoComplete="off"
                                   autoCorrect="off"
-                                  disabled={false}
+                                  disabled={true}
                                   id="input-node_id_port_select.node.search"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -3300,7 +3300,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className=" css-1hb7zxy-IndicatorsContainer"
                           >
                             <span
-                              className=" css-1okebmr-indicatorSeparator"
+                              className=" css-109onse-indicatorSeparator"
                             />
                             <div
                               aria-hidden="true"
@@ -3323,11 +3323,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </div>
                           </div>
                         </div>
-                        <input
-                          name="node_id_port_select.node"
-                          type="hidden"
-                          value=""
-                        />
                       </div>
                     </div>
                     <div
@@ -3443,7 +3438,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                     </div>
                   </section>
                 </section>
-                <section>
+                <section
+                  status={null}
+                >
                   <label
                     htmlFor="input-nodes_for_location_code_and_status"
                   >

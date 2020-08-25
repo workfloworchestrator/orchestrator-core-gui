@@ -85,6 +85,7 @@ I18n.translations.en = {
     forms: {
         widgets: {
             nodePort: {
+                selectNode: "Select a node",
                 selectNodeFirst: "First select a node",
                 selectPort: "Select a port",
                 loading: "Loading..."
