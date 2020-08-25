@@ -13,6 +13,8 @@
  *
  */
 
+import "./UserProfile.scss";
+
 import { useAuth } from "oidc-react";
 import React from "react";
 
