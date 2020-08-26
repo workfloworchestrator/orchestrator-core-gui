@@ -40,6 +40,7 @@ function List({
     children = <ListItemField name="$" disabled={disabled} outerList={false} />,
     initialCount = 1,
     itemProps,
+    className = "",
     label,
     description,
     name,
@@ -55,7 +56,7 @@ function List({
     const hasListAsChild = child.fieldType === Array;
 
     return (
-        <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
+        <section {...filterDOMProps(props)} className={`${className} list-field${hasListAsChild ? " outer-list" : ""}`}>
             {label && (
                 <label>
                     {label}

@@ -17,17 +17,15 @@ import "./NewProcess.scss";
 
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { catchErrorStatus, startProcess, validation } from "../api";
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ProductSelect from "../components/ProductSelect";
 import ProductValidationComponent from "../components/ProductValidation";
-import { HiddenField } from "../lib/uniforms-surfnet/src";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse, InputForm, Option, ProductValidation } from "../utils/types";
+import { EngineStatus, FormNotCompleteResponse, ProductValidation } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { TARGET_CREATE } from "../validations/Products";
 
@@ -43,159 +41,98 @@ interface IProps {
     preselectedInput: PreselectedInput;
 }
 
-interface IState {
-    productId?: string;
-    workflow?: string;
-    stepUserInput?: InputForm;
+interface Form {
+    stepUserInput?: JSONSchema6;
     hasNext?: boolean;
-    productValidation?: ProductValidation;
 }
 
-type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any };
+export default function NewProcess(props: IProps) {
+    const { preselectedInput } = props;
+    const { products, redirect } = useContext(ApplicationContext);
+    const [productValidation, setProductValidation] = useState<ProductValidation | undefined>(undefined);
+    const [form, setForm] = useState<Form>({});
+    const { stepUserInput, hasNext } = form;
 
-export default class NewProcess extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
-
-    state: IState = {};
-
-    componentDidMount = () => {
-        const { preselectedInput } = this.props;
-        if (preselectedInput.product) {
-            this.changeProduct({ label: "", value: preselectedInput.product });
-        }
-    };
-
-    validSubmit = (processInput: {}[]) => {
-        const { products } = this.context;
-        const { productId, workflow } = this.state;
-
-        if (!productId || !workflow) {
-            return Promise.reject();
-        }
-
-        const product = productById(productId, products);
-        return startProcess(workflow, [{ product: productId }, ...processInput]).then(process => {
-            this.context.redirect(`/processes?highlight=${process.id}`);
-            setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
-        });
-    };
-
-    changeProduct = (option: Option) => {
-        const { products } = this.context;
-        const product = productById(option.value, products);
-        const createWorkflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
-
-        this.setState(
-            {
-                stepUserInput: undefined,
-                productValidation: undefined,
-                productId: option.value,
-                workflow: createWorkflow
-            },
-            () => {
-                let promise = startProcess(createWorkflow, [{ product: option.value }]);
-
-                let promise2 = catchErrorStatus<EngineStatus>(promise, 503, json => {
-                    setFlash(I18n.t("settings.status.engine.paused"), "error");
-                    this.context.redirect("/processes");
-                });
-
-                Promise.all([
-                    validation(option.value).then(productValidation =>
-                        this.setState({
-                            productValidation: productValidation
-                        })
-                    ),
-
-                    catchErrorStatus<FormNotCompleteResponse>(promise2, 510, json => {
-                        let stepUserInput = json.form;
-
-                        const { preselectedInput } = this.props;
-
-                        if (stepUserInput && stepUserInput.properties) {
-                            if (stepUserInput.properties.product) {
-                                const productInput = stepUserInput.properties.product as JSONSchemaFormProperty;
-                                if (!productInput.uniforms) {
-                                    productInput.uniforms = {};
-                                }
-                                productInput.uniforms.component = HiddenField;
-                                productInput.uniforms.value = product;
-                            }
-
-                            if (preselectedInput.organisation) {
-                                if (stepUserInput && stepUserInput.properties.organisation) {
-                                    const organisatieInput = stepUserInput.properties
-                                        .organisation as JSONSchemaFormProperty;
-                                    if (!organisatieInput.uniforms) {
-                                        organisatieInput.uniforms = {};
-                                    }
-                                    organisatieInput.uniforms.disabled = true;
-                                    organisatieInput.uniforms.value = preselectedInput.organisation;
-                                }
-                            }
-
-                            if (preselectedInput.prefix && preselectedInput.prefixlen) {
-                                if (stepUserInput && stepUserInput.properties.ip_prefix) {
-                                    const ipPrefixInput = stepUserInput.properties.ip_prefix as JSONSchemaFormProperty;
-                                    if (!ipPrefixInput.uniforms) {
-                                        ipPrefixInput.uniforms = {};
-                                    }
-                                    ipPrefixInput.uniforms.value = `${preselectedInput.prefix}/${preselectedInput.prefixlen}`;
-                                    ipPrefixInput.uniforms.prefixMin = parseInt(
-                                        preselectedInput.prefix_min ?? preselectedInput.prefixlen,
-                                        10
-                                    );
-                                }
-                            }
-                        }
-
-                        this.setState({ stepUserInput: json.form, hasNext: json.hasNext });
-                    })
-                ]);
+    const submit = useCallback(
+        (processInput: {}[]) => {
+            if (preselectedInput.product) {
+                processInput = [{ product: preselectedInput.product }, ...processInput];
             }
-        );
-    };
 
-    render() {
-        const { productId, stepUserInput, hasNext, productValidation } = this.state;
-        const { preselectedInput } = this.props;
-        const showProductValidation = !!productValidation && !productValidation.valid && !!productValidation.product;
-        return (
-            <div className="mod-new-process">
-                <section className="card">
-                    <section className="form-step">
-                        <h3>{I18n.t("process.new_process")}</h3>
-                        <section className="form-divider">
-                            <label htmlFor="product">{I18n.t("process.product")}</label>
-                            <ProductSelect
-                                id="select-product"
-                                products={this.context.products
-                                    .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
-                                    .filter(prod => prod.status === "active")}
-                                onChange={this.changeProduct}
-                                product={productId}
-                                disabled={!!preselectedInput.product}
-                            />
-                        </section>
-                        {!!(showProductValidation && productValidation) && (
-                            <section>
-                                <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                                <ProductValidationComponent validation={productValidation} />
-                            </section>
-                        )}
-                        {stepUserInput && (
-                            <UserInputFormWizard
-                                stepUserInput={stepUserInput}
-                                validSubmit={this.validSubmit}
-                                hasNext={hasNext || false}
-                                cancel={() => this.context.redirect("/processes")}
-                            />
-                        )}
+            const productId = (processInput as { product: string }[])[0].product;
+            const product = productById(productId, products);
+            const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
+
+            if (!productValidation) {
+                validation(productId).then(productValidation => setProductValidation(productValidation));
+            }
+
+            let promise = startProcess(workflow, processInput).then(
+                process => {
+                    redirect(`/processes?highlight=${process.id}`);
+                    setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
+                },
+                e => {
+                    throw e;
+                }
+            );
+
+            return catchErrorStatus<EngineStatus>(promise, 503, json => {
+                setFlash(I18n.t(`settings.status.engine.${json.global_status.toLowerCase()}`), "error");
+                redirect("/processes");
+            });
+        },
+        [redirect, products, productValidation, preselectedInput]
+    );
+
+    useEffect(() => {
+        if (preselectedInput.product) {
+            catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, json => {
+                setForm({
+                    stepUserInput: json.form,
+                    hasNext: json.hasNext ?? false
+                });
+            });
+        } else {
+            setForm({
+                stepUserInput: {
+                    title: I18n.t("process.choose_product"),
+                    type: "object",
+                    properties: {
+                        product: {
+                            type: "string",
+                            format: "productId",
+                            productIds: products
+                                .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
+                                .filter(prod => prod.status === "active")
+                                .map(product => product.product_id)
+                        }
+                    }
+                } as JSONSchema6,
+                hasNext: true
+            });
+        }
+    }, [products, submit, preselectedInput]);
+
+    return (
+        <div className="mod-new-process">
+            <section className="card">
+                <h1>{I18n.t("process.new_process")}</h1>
+                {!!(productValidation?.valid === false && !!productValidation.product) && (
+                    <section>
+                        <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                        <ProductValidationComponent validation={productValidation} />
                     </section>
-                </section>
-            </div>
-        );
-    }
+                )}
+                {stepUserInput && (
+                    <UserInputFormWizard
+                        stepUserInput={stepUserInput}
+                        validSubmit={submit}
+                        cancel={() => redirect("/processes")}
+                        hasNext={hasNext}
+                    />
+                )}
+            </section>
+        </div>
+    );
 }
-
-NewProcess.contextType = ApplicationContext;

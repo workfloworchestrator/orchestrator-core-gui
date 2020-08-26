@@ -15,6 +15,7 @@
 
 import { action } from "@storybook/addon-actions";
 import React from "react";
+import { MemoryRouter } from "react-router";
 
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import { createForm } from "./utils";
@@ -29,37 +30,39 @@ export default {
 
 export const Wizard = () => {
     return (
-        <UserInputFormWizard
-            validSubmit={forms => {
-                action("submit")(forms);
-                if (forms.length === 1) {
-                    return Promise.reject({
-                        response: {
-                            status: 510,
-                            json: () =>
-                                Promise.resolve({
-                                    form: createForm({
-                                        ims_port_id_2: {
-                                            type: "string",
-                                            enum: ["1", "2", "3"]
-                                        }
-                                    }),
-                                    hasNext: false
-                                })
-                        }
-                    });
-                } else {
-                    return Promise.resolve();
-                }
-            }}
-            stepUserInput={createForm({
-                ims_port_id_1: {
-                    type: "string",
-                    enum: ["a", "b", "c"]
-                }
-            })}
-            hasNext={true}
-            cancel={action("cancel")}
-        />
+        <MemoryRouter>
+            <UserInputFormWizard
+                validSubmit={forms => {
+                    action("submit")(forms);
+                    if (forms.length === 1) {
+                        return Promise.reject({
+                            response: {
+                                status: 510,
+                                json: () =>
+                                    Promise.resolve({
+                                        form: createForm({
+                                            ims_port_id_2: {
+                                                type: "string",
+                                                enum: ["1", "2", "3"]
+                                            }
+                                        }),
+                                        hasNext: false
+                                    })
+                            }
+                        });
+                    } else {
+                        return Promise.resolve();
+                    }
+                }}
+                stepUserInput={createForm({
+                    ims_port_id_1: {
+                        type: "string",
+                        enum: ["a", "b", "c"]
+                    }
+                })}
+                hasNext={true}
+                cancel={action("cancel")}
+            />
+        </MemoryRouter>
     );
 };

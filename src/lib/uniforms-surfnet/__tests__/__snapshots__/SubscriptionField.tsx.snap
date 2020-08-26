@@ -85,7 +85,7 @@ exports[`<SubscriptionField> <SubscriptionField> - renders a select with correct
 exports[`<SubscriptionField> <SubscriptionField> - renders a select with correct value (as uniqueItem list child) 1`] = `
 "<ListField name=\\"x\\">
   <List name=\\"x\\" id=\\"uniforms-0000-001i\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ uniforms: { uniqueItems: true }, type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'a', undefined ]} required={true} uniqueItems={true}>
-    <section id=\\"uniforms-0000-001i\\" required={true} className=\\"list-field\\">
+    <section id=\\"uniforms-0000-001i\\" required={true} className=\\" list-field\\">
       <ul>
         <SubscriptionField name=\\"0\\" outerList={false}>
           <Subscription name=\\"x.0\\" outerList={false} id=\\"uniforms-0000-001k\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"a\\" required={false}>

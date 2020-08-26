@@ -17,19 +17,22 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
           Organisation and contacts
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -149,7 +152,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   </div>
                 </section>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-contact_persons"
                 >
                   <label>
@@ -293,19 +296,22 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
           Corelink form
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label>
                     First node and port
                     <em>
@@ -544,7 +550,9 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                     </div>
                   </section>
                 </section>
-                <section>
+                <section
+                  className="form-input"
+                >
                   <label>
                     Second node and port
                     <em>
@@ -830,19 +838,22 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
           Corelink add link form
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label>
                     First node and port
                     <em>
@@ -1081,7 +1092,9 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                     </div>
                   </section>
                 </section>
-                <section>
+                <section
+                  className="form-input"
+                >
                   <label>
                     Second node and port
                     <em>
@@ -1367,19 +1380,22 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
           Node form
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-ims_node_id"
                   >
@@ -1545,19 +1561,22 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
           SN7 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -1676,7 +1695,9 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -1810,7 +1831,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -2875,19 +2896,22 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
           SN7 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -3006,7 +3030,9 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -3140,7 +3166,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -4205,20 +4231,21 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
           SN7 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
+              <section>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -4572,7 +4599,9 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                     </div>
                   </ul>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-current_bandwidth"
                   >
@@ -4705,7 +4734,9 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                     </b>
                   </span>
                 </div>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-new_bandwidth"
                   >
@@ -4885,19 +4916,22 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
           SN7 portselect, showing only ports for selected organisation
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -5016,7 +5050,9 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -5150,7 +5186,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -6215,19 +6251,22 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
           SN8 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -6346,7 +6385,9 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -6480,7 +6521,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -6881,19 +6922,22 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
           SN8 portselect, showing only ports for selected organisation
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -7012,7 +7056,9 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -7146,7 +7192,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -8211,19 +8257,22 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
           SN8 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -8342,7 +8391,9 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -8476,7 +8527,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -9541,19 +9592,22 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
           SN8 portselect form, showing all ports
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-organisation"
                   >
@@ -9672,7 +9726,9 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                     />
                   </div>
                 </section>
-                <div>
+                <div
+                  className="form-input"
+                >
                   <label
                     htmlFor="input-bandwidth"
                   >
@@ -9806,7 +9862,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   </span>
                 </div>
                 <section
-                  className="list-field"
+                  className="form-input list-field"
                   id="input-service_ports"
                 >
                   <label>
@@ -10871,19 +10927,22 @@ exports[`Storyshots UserInputForm Service Port 1`] = `
           Service port form
         </h1>
         <div
-          className="mod-process-step"
+          className="user-input-form"
         >
           <section
-            className="card"
+            className="form-fieldset"
           >
+            <h3>
+              Validator
+            </h3>
             <form
               noValidate={true}
               onSubmit={[Function]}
             >
-              <section
-                className="form-step"
-              >
-                <section>
+              <section>
+                <section
+                  className="form-input"
+                >
                   <label>
                     First node and port
                     <em>

@@ -30,11 +30,11 @@ function Nest({
     description,
     name,
     onChange, // Not used on purpose
-    className,
+    className = "",
     ...props
 }: NestFieldProps) {
     return (
-        <section {...filterDOMProps(props)} className={`${className ?? ""} nest-field`}>
+        <section {...filterDOMProps(props)} className={`${className} nest-field`}>
             {label && (
                 <label>
                     {label}

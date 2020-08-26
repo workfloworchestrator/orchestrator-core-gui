@@ -196,17 +196,17 @@ test("<ListField> - renders correctly when child is list", () => {
             .find("section")
             .at(0)
             .prop("className")
-    ).toBe("list-field outer-list");
+    ).toBe(" list-field outer-list");
     expect(
         wrapper
             .find("section")
             .at(1)
             .prop("className")
-    ).toBe("list-field");
+    ).toBe(" list-field");
     expect(
         wrapper
             .find(ListField)
             .at(0)
-            .html()
+            .debug({ verbose: true })
     ).toMatchSnapshot();
 });

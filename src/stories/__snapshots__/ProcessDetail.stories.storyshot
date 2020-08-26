@@ -2357,19 +2357,22 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
         </div>
       </section>
       <div
-        className="mod-process-step"
+        className="user-input-form"
       >
         <section
-          className="card"
+          className="form-fieldset"
         >
+          <h3>
+            Validator
+          </h3>
           <form
             noValidate={true}
             onSubmit={[Function]}
           >
-            <section
-              className="form-step"
-            >
-              <section>
+            <section>
+              <section
+                className="form-input"
+              >
                 <p
                   className="label ip_static_service_port"
                   id="input-ip_static_service_port"
@@ -2496,19 +2499,22 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
         </div>
       </section>
       <div
-        className="mod-process-step"
+        className="user-input-form"
       >
         <section
-          className="card"
+          className="form-fieldset"
         >
+          <h3>
+            Validator
+          </h3>
           <form
             noValidate={true}
             onSubmit={[Function]}
           >
-            <section
-              className="form-step"
-            >
-              <section>
+            <section>
+              <section
+                className="form-input"
+              >
                 <p
                   className="label ip_static_service_port"
                   id="input-ip_static_service_port"

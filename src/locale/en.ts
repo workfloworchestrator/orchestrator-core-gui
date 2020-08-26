@@ -448,12 +448,14 @@ I18n.translations.en = {
             trunk_to_remove_info: "Select a trunk to remove",
             vlan_retagging:
                 "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance window for active L2VPN services!!",
+            select_task: "Select a task to start",
             zone: "Zone",
             zone_info: "DNS Zone to check"
         }
     },
     process: {
         cancel: "Cancel",
+        choose_product: "Choose Product",
         flash: {
             create_create: "Created create process for product {{name}} with pid {{pid}}",
             create_modify: "Created {{name}} process for subscription {{subscriptionId}} with pid {{pid}}",
