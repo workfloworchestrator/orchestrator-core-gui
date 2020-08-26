@@ -17,7 +17,7 @@ import "./NewProcess.scss";
 
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { catchErrorStatus, startProcess, validation } from "../api";
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
@@ -25,7 +25,7 @@ import ProductValidationComponent from "../components/ProductValidation";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { productById } from "../utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse, InputForm, ProductValidation } from "../utils/types";
+import { EngineStatus, FormNotCompleteResponse, ProductValidation } from "../utils/types";
 import { isEmpty } from "../utils/Utils";
 import { TARGET_CREATE } from "../validations/Products";
 
@@ -41,32 +41,56 @@ interface IProps {
     preselectedInput: PreselectedInput;
 }
 
-interface IState {
-    stepUserInput?: InputForm;
+interface Form {
+    stepUserInput?: JSONSchema6;
     hasNext?: boolean;
-    productValidation?: ProductValidation;
 }
 
-export default class NewProcess extends React.Component<IProps, IState> {
-    context!: React.ContextType<typeof ApplicationContext>;
+export default function NewProcess(props: IProps) {
+    const { preselectedInput } = props;
+    const { products, redirect } = useContext(ApplicationContext);
+    const [productValidation, setProductValidation] = useState<ProductValidation | undefined>(undefined);
+    const [form, setForm] = useState<Form>({});
+    const { stepUserInput, hasNext } = form;
 
-    state: IState = {};
+    const submit = useCallback(
+        (processInput: {}[]) => {
+            const productId = (processInput as { product: string }[])[0].product;
+            const product = productById(productId, products);
+            const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
 
-    componentDidMount = () => {
-        const { preselectedInput } = this.props;
-        if (preselectedInput.product) {
-            catchErrorStatus<FormNotCompleteResponse>(
-                this.submit([{ product: preselectedInput.product }]),
-                510,
-                json => {
-                    this.setState({
-                        stepUserInput: json.form,
-                        hasNext: json.hasNext ?? false
-                    });
+            if (!productValidation) {
+                validation(productId).then(productValidation => setProductValidation(productValidation));
+            }
+
+            let promise = startProcess(workflow, processInput).then(
+                process => {
+                    redirect(`/processes?highlight=${process.id}`);
+                    setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
+                },
+                e => {
+                    throw e;
                 }
             );
+
+            return catchErrorStatus<EngineStatus>(promise, 503, json => {
+                setFlash(I18n.t(`settings.status.engine.${json.global_status.toLowerCase()}`), "error");
+                redirect("/processes");
+            });
+        },
+        [redirect, products, productValidation]
+    );
+
+    useEffect(() => {
+        if (preselectedInput.product) {
+            catchErrorStatus<FormNotCompleteResponse>(submit([{ product: preselectedInput.product }]), 510, json => {
+                setForm({
+                    stepUserInput: json.form,
+                    hasNext: json.hasNext ?? false
+                });
+            });
         } else {
-            this.setState({
+            setForm({
                 stepUserInput: {
                     title: I18n.t("process.choose_product"),
                     type: "object",
@@ -74,7 +98,7 @@ export default class NewProcess extends React.Component<IProps, IState> {
                         product: {
                             type: "string",
                             format: "productId",
-                            productIds: this.context.products
+                            productIds: products
                                 .filter(prod => !isEmpty(prod.workflows.find(wf => wf.target === TARGET_CREATE)))
                                 .filter(prod => prod.status === "active")
                                 .map(product => product.product_id)
@@ -84,63 +108,27 @@ export default class NewProcess extends React.Component<IProps, IState> {
                 hasNext: true
             });
         }
-    };
+    }, [products, submit, preselectedInput]);
 
-    submit = (processInput: {}[]) => {
-        const { productValidation } = this.state;
-        const { products } = this.context;
-        const productId = (processInput as { product: string }[])[0].product;
-        const product = productById(productId, products);
-        const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
-
-        if (!productValidation) {
-            validation(productId).then(productValidation =>
-                this.setState({
-                    productValidation: productValidation
-                })
-            );
-        }
-
-        let promise = startProcess(workflow, processInput).then(
-            process => {
-                this.context.redirect(`/processes?highlight=${process.id}`);
-                setFlash(I18n.t("process.flash.create_create", { name: product.name, pid: process.id }));
-            },
-            e => {
-                throw e;
-            }
-        );
-
-        return catchErrorStatus<EngineStatus>(promise, 503, json => {
-            setFlash(I18n.t(`settings.status.engine.${json.global_status.toLowerCase()}`), "error");
-            this.context.redirect("/processes");
-        });
-    };
-
-    render() {
-        const { stepUserInput, productValidation, hasNext } = this.state;
-        return (
-            <div className="mod-new-process">
-                <section className="card">
-                    <h1>{I18n.t("process.new_process")}</h1>
-                    {!!(productValidation?.valid === false && !!productValidation.product) && (
-                        <section>
-                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                            <ProductValidationComponent validation={productValidation} />
-                        </section>
-                    )}
-                    {stepUserInput && (
-                        <UserInputFormWizard
-                            stepUserInput={stepUserInput}
-                            validSubmit={this.submit}
-                            cancel={() => this.context.redirect("/processes")}
-                            hasNext={hasNext}
-                        />
-                    )}
-                </section>
-            </div>
-        );
-    }
+    return (
+        <div className="mod-new-process">
+            <section className="card">
+                <h1>{I18n.t("process.new_process")}</h1>
+                {!!(productValidation?.valid === false && !!productValidation.product) && (
+                    <section>
+                        <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                        <ProductValidationComponent validation={productValidation} />
+                    </section>
+                )}
+                {stepUserInput && (
+                    <UserInputFormWizard
+                        stepUserInput={stepUserInput}
+                        validSubmit={submit}
+                        cancel={() => redirect("/processes")}
+                        hasNext={hasNext}
+                    />
+                )}
+            </section>
+        </div>
+    );
 }
-
-NewProcess.contextType = ApplicationContext;
