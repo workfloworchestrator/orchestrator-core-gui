@@ -55,6 +55,10 @@ export default function NewProcess(props: IProps) {
 
     const submit = useCallback(
         (processInput: {}[]) => {
+            if (preselectedInput.product) {
+                processInput = [{ product: preselectedInput.product }, ...processInput];
+            }
+
             const productId = (processInput as { product: string }[])[0].product;
             const product = productById(productId, products);
             const workflow = product.workflows.find(wf => wf.target === TARGET_CREATE)!.name;
@@ -78,12 +82,12 @@ export default function NewProcess(props: IProps) {
                 redirect("/processes");
             });
         },
-        [redirect, products, productValidation]
+        [redirect, products, productValidation, preselectedInput]
     );
 
     useEffect(() => {
         if (preselectedInput.product) {
-            catchErrorStatus<FormNotCompleteResponse>(submit([{ product: preselectedInput.product }]), 510, json => {
+            catchErrorStatus<FormNotCompleteResponse>(submit([]), 510, json => {
                 setForm({
                     stepUserInput: json.form,
                     hasNext: json.hasNext ?? false
