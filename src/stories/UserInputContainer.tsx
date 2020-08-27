@@ -15,6 +15,7 @@
 
 import { action } from "@storybook/addon-actions";
 import React from "react";
+import { MemoryRouter } from "react-router";
 
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import { InputForm } from "../utils/types";
@@ -28,21 +29,23 @@ export default class UserInputContainer extends React.Component<IProps> {
     render() {
         const { stepUserInput, formName } = this.props;
         return (
-            <div className="mod-new-process">
-                <section className="card">
-                    <section className="form-step divider">
-                        <h1>{formName}</h1>
-                        <UserInputFormWizard
-                            stepUserInput={stepUserInput}
-                            validSubmit={value => {
-                                action("submit")(value);
-                                return Promise.resolve();
-                            }}
-                            cancel={action("cancel")}
-                        />
+            <MemoryRouter>
+                <div className="mod-new-process">
+                    <section className="card">
+                        <section className="form-step divider">
+                            <h1>{formName}</h1>
+                            <UserInputFormWizard
+                                stepUserInput={stepUserInput}
+                                validSubmit={value => {
+                                    action("submit")(value);
+                                    return Promise.resolve();
+                                }}
+                                cancel={action("cancel")}
+                            />
+                        </section>
                     </section>
-                </section>
-            </div>
+                </div>
+            </MemoryRouter>
         );
     }
 }

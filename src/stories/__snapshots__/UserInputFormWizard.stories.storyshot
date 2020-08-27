@@ -5,19 +5,22 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
   className="storybook-container"
 >
   <div
-    className="mod-process-step"
+    className="user-input-form"
   >
     <section
-      className="card"
+      className="form-fieldset"
     >
+      <h3>
+        Validator
+      </h3>
       <form
         noValidate={true}
         onSubmit={[Function]}
       >
-        <section
-          className="form-step"
-        >
-          <section>
+        <section>
+          <section
+            className="form-input"
+          >
             <label
               htmlFor="input-ims_port_id_1"
             >

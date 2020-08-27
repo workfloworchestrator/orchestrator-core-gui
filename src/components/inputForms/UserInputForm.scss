@@ -18,42 +18,47 @@
 @use "../../stylesheets/forms.scss";
 @use "../../stylesheets/vars";
 
-.mod-process-step {
-    .card {
-        @include mixins.card;
-        padding-bottom: 15px;
-    }
-
-    section.form-step {
+.user-input-form {
+    h3 {
         padding: 20px 0;
 
-        & > section {
-            border-bottom: 1px solid vars.$lightest-grey;
-            padding-bottom: 1px;
-            margin-bottom: 1px;
+        font-size: larger;
+        margin-bottom: 15px;
+        color: vars.$darker-blue;
+    }
 
-            em {
-                margin-bottom: 1px;
-            }
-            &.first_lightpath,
-            &.second_lightpath,
-            p.label {
-                text-transform: uppercase;
-                font-weight: bold;
-                color: vars.$blue;
-            }
-            &.downgrade_redundant_lp_choice,
-            &.service_ports_primary,
-            &.service_ports_secondary {
-                margin-left: 40px;
-            }
-            b {
-                // styles the arrows of numeric input
-                margin-top: 4px;
-                margin-left: 1px;
-            }
+    .form-fieldset {
+        @include mixins.card;
+    }
+
+    .form-input {
+        margin: 20px 0;
+
+        border-bottom: 1px solid vars.$light-grey;
+        padding-bottom: 20px;
+
+        em {
+            margin-bottom: 1px;
+        }
+        &.first_lightpath,
+        &.second_lightpath,
+        p.label {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: vars.$blue;
+        }
+        &.downgrade_redundant_lp_choice,
+        &.service_ports_primary,
+        &.service_ports_secondary {
+            margin-left: 40px;
+        }
+        b {
+            // styles the arrows of numeric input
+            margin-top: 4px;
+            margin-left: 1px;
         }
     }
+
     section.form-errors {
         padding-bottom: 20px;
     }

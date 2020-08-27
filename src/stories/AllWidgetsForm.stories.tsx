@@ -17,7 +17,7 @@ import fetchMock from "fetch-mock";
 import React from "react";
 
 import { InputForm } from "../utils/types";
-import FORM_NEW from "./data/all-widgets-form-new.json";
+import FORM from "./data/all-widgets-form.json";
 import IP_BLOCKS from "./data/ip_blocks.json";
 import PRODUCTS from "./data/products.json";
 import SUBSCRIPTION_JSON from "./data/subscription.json";
@@ -46,9 +46,14 @@ function prepare() {
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
+    fetchMock.get("/api/v2/subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive", []);
     fetchMock.get(
         "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive",
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
+    );
+    fetchMock.get(
+        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive",
+        SN8PortSubscriptions.filter(p => ["active"].includes(p.status)).filter(p => ["Node"].includes(p.product.tag))
     );
     fetchMock.get(
         "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning",
@@ -57,11 +62,11 @@ function prepare() {
         )
     );
     fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive",
+        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
     fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive",
+        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning",
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
     fetchMock.get(
@@ -77,7 +82,7 @@ function prepare() {
     fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
 
     fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
-    fetchMock.get("glob:*/api/ims/free_corelink_ports/*", freeCorelinkPorts);
+    fetchMock.get("glob:*/api/ims/free_ports/*/1000/*", freeCorelinkPorts);
     fetchMock.get("/api/ims/nodes/MT001A/PL", imsNodes);
     fetchMock.get("/api/ims/nodes/Asd001a/IS", imsNodes);
     fetchMock.get("/api/ims/nodes/Asd001a/PL", imsNodes);
@@ -94,5 +99,5 @@ function prepare() {
 export const AllWidgetsForm = () => {
     prepare();
 
-    return <UserInputContainer formName="All widgets form" stepUserInput={FORM_NEW as InputForm} />;
+    return <UserInputContainer formName="All widgets form" stepUserInput={FORM as InputForm} />;
 };

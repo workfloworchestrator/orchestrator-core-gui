@@ -3,7 +3,7 @@
 exports[`<ListField> - renders children with correct name (value) 1`] = `
 "<ListField name=\\"x\\" initialCount={2}>
   <List name=\\"x\\" initialCount={2} id=\\"uniforms-0000-0028\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ undefined, undefined ]} required={true}>
-    <section id=\\"uniforms-0000-0028\\" required={true} className=\\"list-field\\">
+    <section id=\\"uniforms-0000-0028\\" required={true} className=\\" list-field\\">
       <ul>
         <ListItemField name=\\"0\\" disabled={false} outerList={false}>
           <ListItem name=\\"x.0\\" disabled={false} outerList={false} id=\\"uniforms-0000-002a\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={false}>
@@ -64,7 +64,7 @@ exports[`<ListField> - renders children with correct name (value) 1`] = `
 exports[`<ListField> - renders children with correct values 1`] = `
 "<ListField name=\\"x\\">
   <List name=\\"x\\" id=\\"uniforms-0000-001s\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'a', 'b', 'c' ]} required={true}>
-    <section id=\\"uniforms-0000-001s\\" required={true} className=\\"list-field\\">
+    <section id=\\"uniforms-0000-001s\\" required={true} className=\\" list-field\\">
       <ul>
         <ListItemField name=\\"0\\" disabled={false} outerList={false}>
           <ListItem name=\\"x.0\\" disabled={false} outerList={false} id=\\"uniforms-0000-001u\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"a\\" required={false}>
@@ -143,4 +143,78 @@ exports[`<ListField> - renders children with correct values 1`] = `
 </ListField>"
 `;
 
-exports[`<ListField> - renders correctly when child is list 1`] = `"<section id=\\"uniforms-0000-002k\\" required=\\"\\" class=\\"list-field outer-list\\"><ul><li><section id=\\"uniforms-0000-002o\\" class=\\"list-field\\"><ul><li><section><input id=\\"uniforms-0000-002r\\" name=\\"x.0.0\\" placeholder=\\"\\" type=\\"text\\" value=\\"test\\"></section><div class=\\"del-item\\" id=\\"uniforms-0000-002s.remove\\"><i class=\\"fa fa-minus \\"></i><label></label></div></li><div class=\\"add-item\\" id=\\"uniforms-0000-002u\\"><i class=\\"fa fa-plus \\"></i><label></label></div></ul></section><div class=\\"del-item\\" id=\\"uniforms-0000-002w.remove\\"><i class=\\"fa fa-minus \\"></i><label>[missing \\"en.forms.fields.x_del\\" translation]</label></div></li><div class=\\"add-item\\" id=\\"uniforms-0000-002y\\"><i class=\\"fa fa-plus \\"></i><label>[missing \\"en.forms.fields.x_add\\" translation]</label></div></ul></section>"`;
+exports[`<ListField> - renders correctly when child is list 1`] = `
+"<ListField name=\\"x\\">
+  <List name=\\"x\\" id=\\"uniforms-0000-002k\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ [ 'test' ] ]} required={true}>
+    <section id=\\"uniforms-0000-002k\\" required={true} className=\\" list-field outer-list\\">
+      <ul>
+        <ListItemField name=\\"0\\" disabled={false} outerList={true}>
+          <ListItem name=\\"x.0\\" disabled={false} outerList={true} id=\\"uniforms-0000-002m\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: true, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'test' ]} required={false}>
+            <li>
+              <AutoField label={null} name=\\"\\">
+                <ListField label={null} name=\\"\\">
+                  <List label=\\"\\" name=\\"x.0\\" id=\\"uniforms-0000-002o\\" disabled={false} placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: true, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'test' ]} required={false}>
+                    <section id=\\"uniforms-0000-002o\\" required={false} className=\\" list-field\\">
+                      <ul>
+                        <ListItemField name=\\"0\\" disabled={false} outerList={false}>
+                          <ListItem name=\\"x.0.0\\" disabled={false} outerList={false} id=\\"uniforms-0000-002q\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"test\\" required={false}>
+                            <li>
+                              <AutoField label={null} name=\\"\\">
+                                <Text id=\\"uniforms-0000-002r\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"test\\" required={false} name=\\"x.0.0\\" type=\\"text\\">
+                                  <section required={false}>
+                                    <input disabled={false} id=\\"uniforms-0000-002r\\" name=\\"x.0.0\\" onChange={[Function: onChange]} placeholder=\\"\\" type=\\"text\\" value=\\"test\\" />
+                                  </section>
+                                </Text>
+                              </AutoField>
+                              <ListDelField name=\\"\\" outerList={false}>
+                                <ListDel name=\\"x.0.0\\" outerList={false} id=\\"uniforms-0000-002s\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value=\\"test\\" required={false}>
+                                  <div required={false} className=\\"del-item\\" id=\\"uniforms-0000-002s.remove\\" onClick={[Function: onClick]}>
+                                    <i className=\\"fa fa-minus \\" />
+                                    <label />
+                                  </div>
+                                </ListDel>
+                              </ListDelField>
+                            </li>
+                          </ListItem>
+                        </ListItemField>
+                        <ListAddField initialCount={1} name=\\"$\\" disabled={false} outerList={false}>
+                          <ListAdd initialCount={1} name=\\"x.0.$\\" disabled={false} outerList={false} id=\\"uniforms-0000-002u\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: true, label: 'X' }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} required={false}>
+                            <div className=\\"add-item\\" id=\\"uniforms-0000-002u\\" required={false} onClick={[Function: onClick]}>
+                              <i className=\\"fa fa-plus \\" />
+                              <label />
+                            </div>
+                          </ListAdd>
+                        </ListAddField>
+                      </ul>
+                    </section>
+                  </List>
+                </ListField>
+              </AutoField>
+              <ListDelField name=\\"\\" outerList={true}>
+                <ListDel name=\\"x.0\\" outerList={true} id=\\"uniforms-0000-002w\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: true, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'test' ]} required={false}>
+                  <div required={false} className=\\"del-item\\" id=\\"uniforms-0000-002w.remove\\" onClick={[Function: onClick]}>
+                    <i className=\\"fa fa-minus \\" />
+                    <label>
+                      [missing &quot;en.forms.fields.x_del&quot; translation]
+                    </label>
+                  </div>
+                </ListDel>
+              </ListDelField>
+            </li>
+          </ListItem>
+        </ListItemField>
+        <ListAddField initialCount={1} name=\\"$\\" disabled={false} outerList={true}>
+          <ListAdd initialCount={1} name=\\"x.$\\" disabled={false} outerList={true} id=\\"uniforms-0000-002y\\" label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Array], optional: true, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ undefined ]} required={false}>
+            <div className=\\"add-item\\" id=\\"uniforms-0000-002y\\" required={false} onClick={[Function: onClick]}>
+              <i className=\\"fa fa-plus \\" />
+              <label>
+                [missing &quot;en.forms.fields.x_add&quot; translation]
+              </label>
+            </div>
+          </ListAdd>
+        </ListAddField>
+      </ul>
+    </section>
+  </List>
+</ListField>"
+`;

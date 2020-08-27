@@ -12,7 +12,7 @@ exports[`<OptGroupField> - renders an the correct fields when disabled 1`] = `
       </label>
       <BoolField name=\\"enabled\\">
         <Bool name=\\"x.enabled\\" id=\\"uniforms-0000-0002\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Boolean], optional: false, label: 'Enabled' }} fieldType={[Function: Boolean]} fields={[]} onChange={[Function]} value={[undefined]} required={true}>
-          <section required={true} className=\\"bool-field\\">
+          <section required={true} className=\\" bool-field\\">
             <input checked={false} disabled={false} id=\\"uniforms-0000-0002\\" name=\\"x.enabled\\" onChange={[Function]} type=\\"checkbox\\" />
             <label htmlFor=\\"uniforms-0000-0002\\">
               <span tabIndex={0}>
@@ -39,7 +39,7 @@ exports[`<OptGroupField> - renders an the correct fields when enabled 1`] = `
       </label>
       <BoolField name=\\"enabled\\">
         <Bool name=\\"x.enabled\\" id=\\"uniforms-0000-0005\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: Boolean], optional: false, label: 'Enabled' }} fieldType={[Function: Boolean]} fields={[]} onChange={[Function]} value={true} required={true}>
-          <section required={true} className=\\"bool-field\\">
+          <section required={true} className=\\" bool-field\\">
             <input checked={true} disabled={false} id=\\"uniforms-0000-0005\\" name=\\"x.enabled\\" onChange={[Function]} type=\\"checkbox\\" />
             <label htmlFor=\\"uniforms-0000-0005\\">
               <span tabIndex={0}>

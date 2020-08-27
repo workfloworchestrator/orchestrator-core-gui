@@ -1,531 +1,1155 @@
-[
-    {
-        "name": "product",
-        "type": "product",
-        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
-    },
-    {
-        "name": "product2",
-        "type": "product",
-        "readonly": true,
-        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
-    },
-    {
-        "name": "accept1",
-        "type": "accept",
-        "value": true
-    },
-    {
-        "name": "bandwidth1",
-        "type": "bandwidth",
-        "value": 1
-    },
-    {
-        "name": "bfd",
-        "type": "bfd",
-        "value": {
-            "enabled": false,
-            "minimum_interval": null,
-            "multiplier": null
-        }
-    },
-    {
-        "name": "boolean1",
-        "type": "boolean",
-        "value": false
-    },
-    {
-        "name": "boolean2",
-        "type": "boolean",
-        "required": false,
-        "value": false
-    },
-    {
-        "name": "contact_persons",
-        "type": "contact_persons",
-        "organisation_key": "organisation",
-        "value": [
-            {
-                "name": "a",
-                "email": "a@b.nl",
-                "phone": ""
-            }
-        ]
-    },
-    {
-        "name": "corelink_add_link1",
-        "type": "corelink_add_link",
-        "node": "1234",
-        "interface_speed": 1000,
-        "value": 1
-    },
-    {
-        "name": "corelink_add_link2",
-        "type": "corelink_add_link",
-        "node": "1234",
-        "interface_speed": 1000,
-        "value": 2
-    },
-    {
-        "name": "corelink",
-        "type": "corelink",
-        "interface_speed": 1000,
-        "value": 3
-    },
-    {
-        "name": "crm_port_id",
-        "type": "crm_port_id",
-        "value": "12345"
-    },
-    {
-        "name": "generic_select",
-        "type": "generic_select",
-        "choices": ["default", "none", "special"],
-        "value": "none"
-    },
-    {
-        "name": "ip_prefix",
-        "type": "ip_prefix",
-        "value": "10.0.0.0/24"
-    },
-    {
-        "name": "isalias",
-        "type": "isalias",
-        "value": "urn:ogf:network:bla"
-    },
-    {
-        "name": "jira_ticket",
-        "type": "jira_ticket",
-        "value": "SNNP-123456"
-    },
-    {
-        "name": "label",
-        "type": "label"
-    },
-    {
-        "name": "location_code",
-        "type": "location_code",
-        "value": "ASD001A"
-    },
-    {
-        "name": "migration_summary1",
-        "type": "migration_summary",
-        "data": {
-            "labels": ["Row1", "Row2"],
-            "headers": ["Column1", "Column2"],
-            "columns": [
-                ["1", 2],
-                [true, "A very long long long long long long long long string"]
+{
+    "title": "Validator",
+    "type": "object",
+    "properties": {
+        "product": {
+            "title": "Product",
+            "default": "2b2125f2-a074-4e44-8d4b-edc677381d46",
+            "type": "string",
+            "format": "productId"
+        },
+        "product2": {
+            "title": "Product2",
+            "const": "2b2125f2-a074-4e44-8d4b-edc677381d46",
+            "uniforms": {
+                "disabled": true,
+                "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
+            },
+            "type": "string",
+            "format": "productId"
+        },
+        "accept": {
+            "title": "Accept",
+            "default": true,
+            "uniforms": {
+                "data": null
+            },
+            "enum": ["ACCEPTED", "INCOMPLETE"],
+            "type": "string",
+            "format": "accept"
+        },
+        "bandwidth1": {
+            "title": "Bandwidth1",
+            "default": 1,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+        },
+        "bfd": {
+            "title": "Bfd",
+            "default": {
+                "enabled": false,
+                "minimum_interval": null,
+                "multiplier": null
+            },
+            "format": "optGroup",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BFD"
+                }
             ]
+        },
+        "boolean1": {
+            "title": "Boolean1",
+            "default": false,
+            "type": "boolean"
+        },
+        "boolean2": {
+            "title": "Boolean2",
+            "default": false,
+            "type": "boolean"
+        },
+        "contact_persons": {
+            "title": "Contact Persons",
+            "default": [
+                {
+                    "name": "a",
+                    "email": "a@b.nl",
+                    "phone": ""
+                }
+            ],
+            "organisationId": null,
+            "organisationKey": "organisation",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ContactPerson"
+            },
+            "minItems": 1
+        },
+        "corelink_add_link1": {
+            "title": "Corelink Add Link1",
+            "default": 1,
+            "uniforms": {
+                "interfaceSpeed": 1000,
+                "nodeSubscriptionId": "1234",
+                "imsPortMode": "all",
+                "nodeStatuses": ["active", "provisioning"]
+            },
+            "type": "integer",
+            "format": "imsPortId"
+        },
+        "corelink_add_link2": {
+            "title": "Corelink Add Link2",
+            "default": 2,
+            "uniforms": {
+                "interfaceSpeed": 1000,
+                "nodeSubscriptionId": "1234",
+                "imsPortMode": "all",
+                "nodeStatuses": ["active", "provisioning"]
+            },
+            "type": "integer",
+            "format": "imsPortId"
+        },
+        "corelink": {
+            "title": "Corelink",
+            "default": 3,
+            "uniforms": {
+                "interfaceSpeed": 1000,
+                "nodeSubscriptionId": null,
+                "imsPortMode": "all",
+                "nodeStatuses": ["active", "provisioning"]
+            },
+            "type": "integer",
+            "format": "imsPortId"
+        },
+        "crm_port_id": {
+            "title": "Crm Port Id",
+            "default": "12345",
+            "type": "string",
+            "pattern": "^[0-9]{5}$"
+        },
+        "generic_select": {
+            "title": "Generic Select",
+            "default": "none",
+            "enum": ["default", "none", "special"],
+            "type": "string"
+        },
+        "ip_prefix": {
+            "title": "Ip Prefix",
+            "default": "10.0.0.0/24",
+            "type": "string",
+            "format": "ipvanynetwork"
+        },
+        "isalias": {
+            "title": "Isalias",
+            "default": "urn:ogf:network:bla",
+            "type": "string",
+            "pattern": "^urn:ogf:network:.*$"
+        },
+        "jira_ticket": {
+            "title": "Jira Ticket",
+            "default": "SNNP-123456",
+            "type": "string",
+            "pattern": "(^SNNP-[0-9]{4,10}$)|(^.{0}$)"
+        },
+        "label": {
+            "title": "Label",
+            "const": "",
+            "format": "label",
+            "type": "string"
+        },
+        "location_code": {
+            "title": "Location Code",
+            "default": "ASD001A",
+            "type": "string",
+            "format": "locationCode"
+        },
+        "migration_summary1": {
+            "title": "Migration Summary1",
+            "const": "",
+            "format": "summary",
+            "uniforms": {
+                "data": {
+                    "labels": ["Row1", "Row2"],
+                    "headers": ["Column1", "Column2"],
+                    "columns": [
+                        ["1", 2],
+                        [true, "A very long long long long long long long long string"]
+                    ]
+                }
+            },
+            "type": "string"
+        },
+        "migration_summary2": {
+            "title": "Migration Summary2",
+            "const": "",
+            "format": "summary",
+            "uniforms": {
+                "data": {
+                    "labels": ["Row1", "Row2"],
+                    "columns": [
+                        ["1", 2],
+                        [true, "A very long long long long long long long long string"]
+                    ]
+                }
+            },
+            "type": "string"
+        },
+        "migration_summary3": {
+            "title": "Migration Summary3",
+            "const": "",
+            "format": "summary",
+            "uniforms": {
+                "data": {
+                    "headers": ["Column1", "Column2"],
+                    "columns": [
+                        ["1", 2],
+                        [true, "A very long long long long long long long long string"]
+                    ]
+                }
+            },
+            "type": "string"
+        },
+        "nms_service_id": {
+            "title": "Nms Service Id",
+            "default": "1234",
+            "type": "string",
+            "pattern": "^[0-9]{4}$"
+        },
+        "node_id_port_select": {
+            "title": "Node Id Port Select",
+            "default": 12345,
+            "uniforms": {
+                "interfaceSpeed": null,
+                "nodeSubscriptionId": null,
+                "imsPortMode": "all",
+                "nodeStatuses": ["active"]
+            },
+            "type": "integer",
+            "format": "imsPortId"
+        },
+        "nodes_for_location_code_and_status": {
+            "title": "Nodes For Location Code And Status",
+            "default": 12345,
+            "uniforms": {
+                "locationCode": "Asd001a",
+                "status": null
+            },
+            "type": "integer",
+            "format": "imsNodeId"
+        },
+        "numeric1": {
+            "title": "Numeric1",
+            "default": 1234,
+            "uniforms": {
+                "multipleOf": null
+            },
+            "type": "integer"
+        },
+        "numeric2": {
+            "title": "Numeric2",
+            "default": 1234,
+            "uniforms": {
+                "multipleOf": null
+            },
+            "type": "integer",
+            "maximum": 1500
+        },
+        "organisation1": {
+            "title": "Organisation1",
+            "default": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1",
+            "type": "string",
+            "format": "organisationId"
+        },
+        "organisation2": {
+            "title": "Organisation2",
+            "const": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1",
+            "uniforms": {
+                "disabled": true,
+                "value": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1"
+            },
+            "type": "string",
+            "format": "organisationId"
+        },
+        "service_ports1": {
+            "title": "Service Ports1",
+            "default": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                },
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortRsgUqrLdValue"
+            },
+            "maxItems": 2
+        },
+        "service_ports2": {
+            "title": "Service Ports2",
+            "default": [
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3"
+                },
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortlVf0yf3gValue"
+            },
+            "maxItems": 2
+        },
+        "service_ports3": {
+            "title": "Service Ports3",
+            "const": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                        "vlan": "0"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortiLrzkWEAValue"
+            },
+            "maxItems": 2
+        },
+        "service_ports4": {
+            "title": "Service Ports4",
+            "default": [
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3",
+                    "bandwidth": 1000
+                },
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3",
+                    "bandwidth": 1000
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ElanServicePortBWVJo3O5Value"
+            },
+            "maxItems": 99
+        },
+        "service_ports5": {
+            "title": "Service Ports5",
+            "default": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortqRDzu4RPValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports6": {
+            "title": "Service Ports6",
+            "const": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                        "vlan": "0"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortvtfs9mpOValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports7": {
+            "title": "Service Ports7",
+            "const": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                        "vlan": "0"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortugp2zIIWValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports8": {
+            "title": "Service Ports8",
+            "default": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                },
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3"
+                },
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                },
+                {
+                    "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
+                    "vlan": "1,2-3"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortxT4Zae4MValue"
+            },
+            "minItems": 1,
+            "maxItems": 6
+        },
+        "service_ports9": {
+            "title": "Service Ports9",
+            "const": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                        "vlan": "0"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortRPGAJetPValue"
+            }
+        },
+        "service_ports10": {
+            "title": "Service Ports10",
+            "const": [
+                {
+                    "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                    "vlan": "0"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
+                        "vlan": "0"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortN9kEW2gkValue"
+            }
+        },
+        "service_ports_sn81": {
+            "title": "Service Ports Sn81",
+            "default": [],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePort1L2PSeLZValue"
+            }
+        },
+        "service_ports_sn82": {
+            "title": "Service Ports Sn82",
+            "default": [
+                {
+                    "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortZsAYeJzWValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports_sn83": {
+            "title": "Service Ports Sn83",
+            "default": [
+                {
+                    "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortWFeSjFakValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports_sn84": {
+            "title": "Service Ports Sn84",
+            "default": [
+                {
+                    "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortDdX0HRwKValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports_sn85": {
+            "title": "Service Ports Sn85",
+            "const": [
+                {
+                    "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                    "vlan": "2"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                        "vlan": "2"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortqgRYuYMLValue"
+            },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "service_ports_sn86": {
+            "title": "Service Ports Sn86",
+            "default": [
+                {
+                    "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
+                    "vlan": "0"
+                }
+            ],
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortlbHKJ7hEValue"
+            },
+            "minItems": 1,
+            "maxItems": 6
+        },
+        "service_ports_sn87": {
+            "title": "Service Ports Sn87",
+            "const": [
+                {
+                    "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                    "vlan": "2"
+                }
+            ],
+            "uniforms": {
+                "disabled": true,
+                "value": [
+                    {
+                        "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
+                        "vlan": "2"
+                    }
+                ]
+            },
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePortLu7yaTpaValue"
+            }
+        },
+        "stp": {
+            "title": "Stp",
+            "default": "urn:ogf:network:vlan=1:fu:bar",
+            "type": "string",
+            "pattern": "^urn:ogf:network:.*$"
+        },
+        "string1": {
+            "title": "String1",
+            "default": "something",
+            "type": "string"
+        },
+        "string2": {
+            "title": "String2",
+            "const": "1000",
+            "uniforms": {
+                "disabled": true,
+                "value": "1000"
+            },
+            "type": "string"
+        },
+        "string3": {
+            "title": "String3",
+            "default": "",
+            "type": "string"
+        },
+        "subscription_id": {
+            "title": "Subscription Id",
+            "const": "e89776be-16c3-4bee-af98-8e73bf6492a7",
+            "format": "subscription",
+            "type": "string"
+        },
+        "subscription_product_tag1": {
+            "title": "Subscription Product Tag1",
+            "default": "123776be-16c3-4bee-af98-8e73bf6492a7",
+            "type": "string",
+            "format": "subscriptionId",
+            "uniforms": {
+                "tags": ["IPBGP"],
+                "statuses": ["active", "provisioning"]
+            }
+        },
+        "subscription_product_tag2": {
+            "title": "Subscription Product Tag2",
+            "default": "abc776be-16c3-4bee-af98-8e73bf6492a7",
+            "type": "string",
+            "format": "subscriptionId",
+            "uniforms": {
+                "tags": ["IPS"],
+                "statuses": ["active", "provisioning"]
+            }
+        },
+        "subscriptions1": {
+            "title": "Subscriptions1",
+            "default": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"],
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "subscriptionId",
+                "uniforms": {
+                    "tags": ["IP_PREFIX"]
+                }
+            },
+            "minItems": 1,
+            "maxItems": 99
+        },
+        "subscriptions2": {
+            "title": "Subscriptions2",
+            "default": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"],
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "subscriptionId",
+                "uniforms": {
+                    "tags": ["IP_PREFIX"]
+                }
+            },
+            "minItems": 0,
+            "maxItems": 99
+        },
+        "transition_product1": {
+            "title": "Transition Product1",
+            "default": "e2620adb-d28c-4525-9110-ca14e7afca46",
+            "uniforms": {
+                "productIds": ["e2620adb-d28c-4525-9110-ca14e7afca46"]
+            },
+            "format": "productId",
+            "enum": ["e2620adb-d28c-4525-9110-ca14e7afca46"],
+            "type": "string"
+        },
+        "uuid": {
+            "title": "Uuid",
+            "default": "e89776be-16c3-4bee-af98-8e73bf6492a7",
+            "type": "string",
+            "format": "uuid"
+        },
+        "bandwidth2": {
+            "title": "Bandwidth2",
+            "default": 2,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+        },
+        "bandwidth3": {
+            "title": "Bandwidth3",
+            "const": "1000",
+            "uniforms": {
+                "disabled": true,
+                "value": "1000"
+            },
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
         }
     },
-    {
-        "name": "migration_summary2",
-        "type": "migration_summary",
-        "data": {
-            "labels": ["Row1", "Row2"],
-            "columns": [
-                ["1", 2],
-                [true, "A very long long long long long long long long string"]
-            ]
+    "definitions": {
+        "BFD": {
+            "title": "BFD",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "title": "Enabled",
+                    "type": "boolean"
+                },
+                "minimum_interval": {
+                    "title": "Minimum Interval",
+                    "default": 900,
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 255000
+                },
+                "multiplier": {
+                    "title": "Multiplier",
+                    "default": 3,
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 255
+                }
+            },
+            "required": ["enabled"]
+        },
+        "ContactPerson": {
+            "title": "ContactPerson",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "format": "contactPersonName"
+                },
+                "email": {
+                    "title": "Email",
+                    "type": "string",
+                    "format": "email"
+                },
+                "phone": {
+                    "title": "Phone",
+                    "default": "",
+                    "type": "string"
+                }
+            },
+            "required": ["name", "email"]
+        },
+        "ServicePortRsgUqrLdValue": {
+            "title": "ServicePortRsgUqrLdValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortlVf0yf3gValue": {
+            "title": "ServicePortlVf0yf3gValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortiLrzkWEAValue": {
+            "title": "ServicePortiLrzkWEAValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ElanServicePortBWVJo3O5Value": {
+            "title": "ElanServicePortBWVJo3O5Value",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "tagged",
+                        "tags": ["MSP", "MSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                },
+                "bandwidth": {
+                    "title": "Bandwidth",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000000
+                }
+            },
+            "required": ["subscription_id", "vlan", "bandwidth"]
+        },
+        "ServicePortqRDzu4RPValue": {
+            "title": "ServicePortqRDzu4RPValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortvtfs9mpOValue": {
+            "title": "ServicePortvtfs9mpOValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "organisationKey": "organisation",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortugp2zIIWValue": {
+            "title": "ServicePortugp2zIIWValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortxT4Zae4MValue": {
+            "title": "ServicePortxT4Zae4MValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortRPGAJetPValue": {
+            "title": "ServicePortRPGAJetPValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"],
+                        "bandwidthKey": "bandwidth1"
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortN9kEW2gkValue": {
+            "title": "ServicePortN9kEW2gkValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["MSP", "MSPNL", "SSP"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePort1L2PSeLZValue": {
+            "title": "ServicePort1L2PSeLZValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortZsAYeJzWValue": {
+            "title": "ServicePortZsAYeJzWValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "normal",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortWFeSjFakValue": {
+            "title": "ServicePortWFeSjFakValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "tagged",
+                        "organisationKey": "organisation",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortDdX0HRwKValue": {
+            "title": "ServicePortDdX0HRwKValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "untagged",
+                        "organisationId": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortqgRYuYMLValue": {
+            "title": "ServicePortqgRYuYMLValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortlbHKJ7hEValue": {
+            "title": "ServicePortlbHKJ7hEValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "normal",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
+        },
+        "ServicePortLu7yaTpaValue": {
+            "title": "ServicePortLu7yaTpaValue",
+            "type": "object",
+            "properties": {
+                "subscription_id": {
+                    "title": "Subscription Id",
+                    "type": "string",
+                    "format": "subscriptionId",
+                    "uniforms": {
+                        "visiblePortMode": "all",
+                        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
+                    }
+                },
+                "vlan": {
+                    "title": "Vlan",
+                    "pattern": "^([1-4][0-9]{0,3}(-[1-4][0-9]{0,3})?,?)+$",
+                    "examples": ["345", "20-23,45,50-100"],
+                    "type": "string",
+                    "format": "vlan"
+                }
+            },
+            "required": ["subscription_id", "vlan"]
         }
-    },
-    {
-        "name": "migration_summary3",
-        "type": "migration_summary",
-        "data": {
-            "headers": ["Column1", "Column2"],
-            "columns": [
-                ["1", 2],
-                [true, "A very long long long long long long long long string"]
-            ]
-        }
-    },
-    {
-        "name": "nms_service_id",
-        "type": "nms_service_id",
-        "value": "1234"
-    },
-    {
-        "name": "node_id_port_select",
-        "type": "node_id_port_select",
-        "location_code": "Asd001a",
-        "value": 12345
-    },
-    {
-        "name": "nodes_for_location_code_and_status",
-        "type": "nodes_for_location_code_and_status",
-        "location_code": "Asd001a",
-        "value": 12345
-    },
-    {
-        "name": "numeric1",
-        "type": "numeric",
-        "value": 1234
-    },
-    {
-        "name": "numeric2",
-        "type": "numeric",
-        "maximum": 1500,
-        "value": 1234
-    },
-    {
-        "name": "organisation1",
-        "type": "organisation",
-        "value": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1"
-    },
-    {
-        "name": "organisation2",
-        "type": "organisation",
-        "readonly": true,
-        "value": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1"
-    },
-    {
-        "name": "service_ports1",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "maximum": 2,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            },
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports2",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "maximum": 2,
-        "tags": ["MSP", "MSPNL"],
-        "value": [
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3"
-            },
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3"
-            }
-        ]
-    },
-    {
-        "name": "service_ports3",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "maximum": 2,
-        "readonly": true,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports4",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "maximum": 99,
-        "elan": true,
-        "tags": ["MSP", "MSPNL"],
-        "value": [
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3",
-                "bandwidth": 1000
-            },
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3",
-                "bandwidth": 1000
-            }
-        ]
-    },
-    {
-        "name": "service_ports5",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "organisationPortsOnly": false,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports6",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "organisationPortsOnly": true,
-        "readonly": true,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports7",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "readonly": true,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports8",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 6,
-        "organisationPortsOnly": false,
-        "tags": ["MSP", "MSPNL", "SSP"],
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            },
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3"
-            },
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            },
-            {
-                "subscription_id": "119258b6-b346-4f4b-b03e-c953675c619b",
-                "vlan": "1,2-3"
-            }
-        ]
-    },
-    {
-        "name": "service_ports9",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "readonly": true,
-        "bandwidth_key": "bandwidth1",
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ],
-        "tags": ["MSP", "MSPNL", "SSP"]
-    },
-    {
-        "name": "service_ports10",
-        "type": "service_ports",
-        "readonly": true,
-        "value": [
-            {
-                "subscription_id": "6434383b-5080-46ac-a4e2-9fd6f92a573c",
-                "vlan": "0"
-            }
-        ],
-        "tags": ["MSP", "MSPNL", "SSP"]
-    },
-    {
-        "name": "service_ports_sn81",
-        "type": "service_ports",
-        "disabledPorts": true,
-        "value": [],
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
-    },
-    {
-        "name": "service_ports_sn82",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "organisationPortsOnly": false,
-        "visiblePortMode": "normal",
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
-        "value": [
-            {
-                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports_sn83",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "organisationPortsOnly": true,
-        "visiblePortMode": "tagged",
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
-        "value": [
-            {
-                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports_sn84",
-        "type": "service_ports",
-        "organisation": "1f2c4fae-77ab-4edf-b67a-f99ad3e49ad1",
-        "minimum": 1,
-        "maximum": 1,
-        "organisationPortsOnly": true,
-        "visiblePortMode": "untagged",
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
-        "value": [
-            {
-                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports_sn85",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 1,
-        "readonly": true,
-        "value": [
-            {
-                "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
-                "vlan": "2"
-            }
-        ],
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
-    },
-    {
-        "name": "service_ports_sn86",
-        "type": "service_ports",
-        "organisation_key": "organisation",
-        "minimum": 1,
-        "maximum": 6,
-        "organisationPortsOnly": false,
-        "visiblePortMode": "normal",
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"],
-        "value": [
-            {
-                "subscription_id": "de6bcd9a-e003-49b0-a5e0-0bf43f747d80",
-                "vlan": "0"
-            }
-        ]
-    },
-    {
-        "name": "service_ports_sn87",
-        "type": "service_ports",
-        "readonly": true,
-        "value": [
-            {
-                "subscription_id": "b2791099-86a3-4754-b70b-529bf1126246",
-                "vlan": "2"
-            }
-        ],
-        "tags": ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"]
-    },
-    {
-        "name": "stp",
-        "type": "stp",
-        "value": "urn:ogf:network:vlan=1:fu:bar"
-    },
-    {
-        "name": "string1",
-        "type": "string",
-        "value": "something"
-    },
-    {
-        "name": "string2",
-        "type": "string",
-        "readonly": true,
-        "value": "1000"
-    },
-    {
-        "name": "string3",
-        "type": "string",
-        "required": false,
-        "value": ""
-    },
-    {
-        "name": "subscription_id",
-        "type": "subscription_id",
-        "value": "e89776be-16c3-4bee-af98-8e73bf6492a7"
-    },
-    {
-        "name": "subscription_product_tag1",
-        "type": "subscription_product_tag",
-        "tags": ["IPBGP"],
-        "product_key": "new_product_id",
-        "value": "123776be-16c3-4bee-af98-8e73bf6492a7"
-    },
-    {
-        "name": "subscription_product_tag2",
-        "type": "subscription_product_tag",
-        "tags": ["IPS"],
-        "product_key": "new_product_id",
-        "excluded_subscriptions": [],
-        "value": "abc776be-16c3-4bee-af98-8e73bf6492a7"
-    },
-    {
-        "name": "subscriptions1",
-        "type": "subscriptions",
-        "product_id": "2b2125f2-a074-4e44-8d4b-edc677381d46",
-        "minimum": 1,
-        "maximum": 99,
-        "value": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"]
-    },
-    {
-        "name": "subscriptions2",
-        "type": "subscriptions",
-        "product_id": "2b2125f2-a074-4e44-8d4b-edc677381d46",
-        "minimum": 1,
-        "maximum": 99,
-        "required": false,
-        "value": ["e89776be-16c3-4bee-af98-8e73bf6492a7", "e89776be-16c3-4bee-af98-8e73bf6492a7"]
-    },
-    {
-        "name": "transition_product1",
-        "type": "transition_product",
-        "products": ["2b2125f2-a074-4e44-8d4b-edc677381d46"],
-        "value": "2b2125f2-a074-4e44-8d4b-edc677381d46"
-    },
-    {
-        "name": "uuid",
-        "type": "uuid",
-        "value": "e89776be-16c3-4bee-af98-8e73bf6492a7"
-    },
-    {
-        "name": "bandwidth2",
-        "type": "bandwidth",
-        "ports_key": "service_ports1",
-        "value": 2
-    },
-    {
-        "name": "bandwidth3",
-        "type": "bandwidth",
-        "ports_key": "service_ports1",
-        "readonly": true,
-        "value": "1000"
     }
-]
+}

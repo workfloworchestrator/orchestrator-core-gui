@@ -18,8 +18,8 @@ import { useForm } from "uniforms";
 import AutoField from "./AutoField";
 
 export type AutoFieldsProps = {
-    autoField?: ComponentType<{ name: string }>;
-    element?: ComponentType<{ className: string }> | string;
+    autoField?: ComponentType<{ className: string; name: string }>;
+    element?: ComponentType<{}> | string;
     fields?: string[];
     omitFields?: string[];
 };
@@ -35,9 +35,9 @@ export default function AutoFields({
 
     return createElement(
         element,
-        { className: "form-step", ...props },
+        { ...props },
         (fields ?? schema.getSubfields())
             .filter(field => !omitFields.includes(field))
-            .map(field => createElement(autoField, { key: field, name: field }))
+            .map(field => createElement(autoField, { key: field, name: field, className: "form-input" }))
     );
 }

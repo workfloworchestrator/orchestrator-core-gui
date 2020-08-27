@@ -23,7 +23,6 @@
 
     .card {
         @include mixins.card;
-        padding: 15px 15px 0 15px;
     }
     .options {
         display: flex;

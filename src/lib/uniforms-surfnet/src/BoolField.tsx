@@ -25,6 +25,7 @@ function Bool({
     disabled,
     id,
     inputRef,
+    className = "",
     label,
     description,
     name,
@@ -36,7 +37,7 @@ function Bool({
     ...props
 }: BoolFieldProps) {
     return (
-        <section {...filterDOMProps(props)} className="bool-field">
+        <section {...filterDOMProps(props)} className={`${className} bool-field`}>
             <input
                 checked={value || false}
                 disabled={disabled}
