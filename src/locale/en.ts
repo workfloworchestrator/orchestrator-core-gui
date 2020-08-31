@@ -349,6 +349,8 @@ I18n.translations.en = {
                 check_ims_circuit: "{{circuit_name}}",
                 check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
             },
+            node_subscription_id: "Choose Node",
+            node_subscription_id_info: "Choose a node for the Port",
             node_terminate_warning_accept: {
                 node_terminate_warning: "Node terminate warning",
                 node_terminate_warning_info:
