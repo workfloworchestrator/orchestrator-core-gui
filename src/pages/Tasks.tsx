@@ -171,7 +171,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
         const tasksSettings = initialProcessTableSettings(
             "table.tasks",
             initialProcessesFilterAndSort(true, ["running", "failed", "api_unavailable", "inconsistent_data"]),
-            ["abbrev", "customer", "pid", "product", "step", "started", "tags"],
+            ["abbrev", "customer", "pid", "product", "target", "tag"],
             { refresh: true }
         );
         return (
