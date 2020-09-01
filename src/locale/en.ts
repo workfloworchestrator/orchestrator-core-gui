@@ -581,6 +581,7 @@ I18n.translations.en = {
         Node: "Node",
         Corelink: "Corelink",
         IP: "IP",
+        IRBSP: "IRBSP",
         LP: "LP",
         LPNL: "LP NL",
         LR: "Redundant LP",
