@@ -349,6 +349,8 @@ I18n.translations.en = {
                 check_ims_circuit: "{{circuit_name}}",
                 check_client_confirmed: "The client has confirmed that the new LP is in use (not mandatory)"
             },
+            node_subscription_id: "Choose Node",
+            node_subscription_id_info: "Choose a node for the Port",
             node_terminate_warning_accept: {
                 node_terminate_warning: "Node terminate warning",
                 node_terminate_warning_info:
@@ -579,6 +581,7 @@ I18n.translations.en = {
         Node: "Node",
         Corelink: "Corelink",
         IP: "IP",
+        IRBSP: "IRBSP",
         LP: "LP",
         LPNL: "LP NL",
         LR: "Redundant LP",
@@ -1032,8 +1035,8 @@ I18n.translations.en = {
         modify_sn7_service_port_ssp_replace: "Replace SSP with another SSP",
         modify_sn7_service_port_ssp_speed: "Modify SSP Speed",
         modify_sn8_aggregated_service_port: "Modify aggregated service port",
-        modify_sn8_ip_bgp: "Modify SN8 SURFinternet BGP",
-        modify_sn8_ip_bgp_change_port: "Replace port of SN8 SURFinternet BGP",
+        modify_sn8_ip_bgp: "Modify BGP",
+        modify_sn8_ip_bgp_change_port: "Replace port",
         modify_sn8_ip_static: "Modify SN8 SURFinternet Static",
         modify_sn8_l2vpn: "Modify SN8 L2VPN",
         modify_sn8_light_path: "Modify SN8 LightPath",
@@ -1054,14 +1057,15 @@ I18n.translations.en = {
         terminate_sn7_service_port: "Terminate SN7 Service Port",
         terminate_sn7_light_path: "Terminate SN7 Light Path",
 
-        terminate_sn8_service_port: "Terminate SN8 Service Port",
-        terminate_sn8_light_path: "Terminate SN8 Light Path",
         terminate_ip_prefix: "Terminate an IP Prefix",
+        terminate_sn8_aggregated_service_port: "Terminate an SN8 Aggregated Service Port",
         terminate_sn8_ip_bgp: "Terminate an SN8 SURFinternet BGP",
         terminate_sn8_ip_static: "Terminate an SN8 SURFinternet Static",
-        terminate_sn8_msc: "Terminate an SN8 Multi Service Carrier",
-        terminate_sn8_aggregated_service_port: "Terminate an SN8 Aggregated Service Port",
+        terminate_sn8_irb_service_port: "Terminate SN8 IRB Service Port",
+        terminate_sn8_light_path: "Terminate SN8 Light Path",
         terminate_sn8_l2vpn: "Terminate an SN8 L2VPN",
+        terminate_sn8_msc: "Terminate an SN8 Multi Service Carrier",
+        terminate_sn8_service_port: "Terminate SN8 Service Port",
 
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
@@ -1077,6 +1081,7 @@ I18n.translations.en = {
         validate_sn8_light_path: "Validate SN8 Light Path",
         validate_sn8_light_path_redundant: "Validate SN8 Redundant Light Path",
         validate_sn8_l2vpn: "Validate SN8 L2VPN",
+        validate_sn8_irb_service_port: "Validate SN8 IRB Service Port",
         validate_sn8_service_port: "Validate SN8 Service Port",
         validate_sn8_msc: "Validate SN8 MSC",
         validate_sn8_aggregated_service_port: "Validate SN8 Aggregated Service Port"
