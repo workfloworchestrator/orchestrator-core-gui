@@ -31,8 +31,8 @@ import {
     IpPrefix,
     IpPrefixSubscription,
     Organization,
-    Process,
     ProcessSubscription,
+    ProcessWithDetails,
     Product,
     ProductBlock,
     ProductValidation,
@@ -527,7 +527,7 @@ export function abortProcess(processId: string) {
     return fetchJson(`processes/${processId}/abort`, { method: "PUT" }, {}, true, false);
 }
 
-export function process(processId: string): Promise<Process> {
+export function process(processId: string): Promise<ProcessWithDetails> {
     return fetchJsonWithCustomErrorHandling("processes/" + processId);
 }
 

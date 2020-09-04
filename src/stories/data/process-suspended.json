@@ -104,6 +104,16 @@
     },
     "customer": "7c41e5e3-0911-e511-80d0-005056956c1a",
     "failed_reason": null,
+    "form": {
+        "title": "Validator",
+        "type": "object",
+        "properties": {
+            "ip_static_service_port": {
+                "type": "string",
+                "format": "label"
+            }
+        }
+    },
     "id": "cdae2399-dd25-440b-81db-b8846c5fa3ce",
     "last_modified": 1573576181,
     "product": "99e527b2-7424-48eb-9015-6f46e8a40923",
@@ -1363,16 +1373,6 @@
             "status": "suspend"
         },
         {
-            "form": {
-                "title": "Validator",
-                "type": "object",
-                "properties": {
-                    "ip_static_service_port": {
-                        "type": "string",
-                        "format": "label"
-                    }
-                }
-            },
             "name": "Select new SAP to migrate to",
             "status": "pending"
         },
