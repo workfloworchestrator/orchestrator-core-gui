@@ -45,16 +45,6 @@ const tabs = [
         disabled: false
     },
     {
-        id: "favorites",
-        name: (
-            <span>
-                Favorites &nbsp;
-                <EuiIcon type="heart" />
-            </span>
-        ),
-        disabled: false
-    },
-    {
         id: "recentUsed",
         name: (
             <span>
@@ -262,9 +252,8 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
             <>
                 {renderTabs()}
                 <EuiSpacer size="l" />
-                {selectedTabId === "favorites" && this.renderFavorites()}
-                {selectedTabId === "recentUsed" && this.renderRecentUsed()}
                 {selectedTabId === "nodeFilter" && this.renderNodeFilter()}
+                {selectedTabId === "recentUsed" && this.renderRecentUsed()}
             </>
         );
     }
