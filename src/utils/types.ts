@@ -172,7 +172,7 @@ export interface FormNotCompleteResponse {
 export interface Process {
     pid: string;
     workflow: string;
-    assignee: string;
+    assignee: "NOC" | "CHANGES" | "SYSTEM" | "KLANT_SUPPORT";
     last_status: string;
     failed_reason: string;
     traceback: string;
@@ -197,10 +197,9 @@ export interface ProcessWithDetails {
     started: number;
     last_modified: number;
     is_task: boolean;
-}
-
-export interface ProcessWithDetails extends Process {
+    current_state: {};
     steps: Step[];
+    form?: InputForm;
 }
 
 export interface ProcessSubscription {
