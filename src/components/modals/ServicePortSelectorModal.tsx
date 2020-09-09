@@ -47,46 +47,23 @@ const tabs = [
 
 interface IProps {
     selectedTabId: string;
-    showAsLinkList: boolean;
-    autoSuggestNodes: boolean;
 }
 
 interface IState {
     selectedTabId: string;
-    showAsLinkList: boolean;
-    nodesLoaded: boolean;
-    nodesSaved: boolean;
-    selectedNode?: string;
-    selectedPort?: string;
-    selectedSubscription?: string;
-    autoSuggestNodes: boolean;
-    physicalPortsLoaded: boolean;
 }
 
 export default class ServicePortSelectorModal extends React.PureComponent<IProps, IState> {
     public static defaultProps = {
-        selectedTabId: "nodeFilter",
-        showAsLinkList: false,
-        autoSuggestNodes: false
+        selectedTabId: "nodeFilter"
     };
 
     constructor(props: IProps) {
         super(props);
 
         this.state = {
-            selectedTabId: this.props.selectedTabId,
-            showAsLinkList: this.props.showAsLinkList,
-            autoSuggestNodes: this.props.autoSuggestNodes,
-            nodesLoaded: false,
-            nodesSaved: false,
-            selectedNode: undefined,
-            selectedPort: undefined,
-            selectedSubscription: undefined,
-            physicalPortsLoaded: false
+            selectedTabId: this.props.selectedTabId
         };
-        setTimeout(() => {
-            this.setState({ nodesLoaded: true });
-        }, 1000);
     }
 
     // onSelectedTabChanged = () => this.setState({ isSwitchChecked: !this.state.isSwitchChecked });
