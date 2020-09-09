@@ -1,5 +1,15 @@
+import {
+    EuiButton,
+    EuiForm,
+    EuiFormRow,
+    EuiSpacer,
+    EuiSuggest,
+    EuiSuggestItemProps,
+    EuiSuperSelect,
+    EuiText
+} from "@elastic/eui";
 import React from "react";
-import { EuiButton, EuiForm, EuiFormRow, EuiSpacer, EuiSuggest, EuiSuperSelect, EuiText } from "@elastic/eui";
+
 import { subscriptions } from "../../../api";
 import { Subscription } from "../../../utils/types";
 
@@ -32,10 +42,15 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         };
     }
     componentDidMount() {
+        // Fetch Node subscriptions and prepare it for usage as EuiSuggestItems
         subscriptions(["Node"], ["provisioning", "active"]).then(result => {
-          console.log(result);
-            this.setState({ nodesLoaded: true, nodes:  result.map(node => ({ label: node.description });
-            });
+            const nodes = result.map((node, index) => ({
+                key: index,
+                label: node.description,
+                description: node.description,
+                type: { iconType: "kqlField", color: "tint1" }
+            }));
+            this.setState({ nodesLoaded: true, nodes: nodes });
         });
     }
 
@@ -50,7 +65,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         status={nodesLoaded ? "unchanged" : "loading"}
                         onInputChange={() => {}}
                         // onItemClick={this.onNodeClick}
-                        suggestions={nodes.map(node => node.description)}
+                        suggestions={nodes}
                     />
                 </EuiFormRow>
                 <EuiFormRow label="Port" helpText="Select a physical port." fullWidth>

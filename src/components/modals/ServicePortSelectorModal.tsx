@@ -13,20 +13,7 @@
  *
  */
 
-import {
-    EuiButton,
-    EuiButtonIcon,
-    EuiForm,
-    EuiFormRow,
-    EuiIcon,
-    EuiInMemoryTable,
-    EuiSelectable,
-    EuiSpacer,
-    EuiSuggest,
-    EuiSuperSelect,
-    EuiTab,
-    EuiText
-} from "@elastic/eui";
+import { EuiIcon, EuiSpacer, EuiTab } from "@elastic/eui";
 import React, { Fragment } from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
