@@ -51,6 +51,7 @@ import SubscriptionsPage from "./Subscriptions";
 import Tasks from "./Tasks";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
+import PortFilterMock from "./PortFilterMock";
 
 const history = createBrowserHistory();
 
@@ -237,6 +238,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
+                                <Route path="/mocks" render={props => <PortFilterMock {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

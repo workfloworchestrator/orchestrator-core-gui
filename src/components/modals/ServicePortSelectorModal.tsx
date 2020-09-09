@@ -30,6 +30,8 @@ import {
 import React, { Fragment } from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
+import RecentUsedPortSelector from "./components/RecentUsedPortSelector";
+import ServicePortSelector from "./components/ServicePortSelector";
 
 // import { favoritesData, nodesData, portsData, recentUsedData, subscriptionsData } from "../utils/filterMockData";
 
@@ -105,135 +107,6 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
         this.setState({ selectedTabId: id });
     };
 
-    onNodeClick = (item: any) => {
-        alert(`Node [${item.label}] was clicked`);
-        this.setState({ selectedNode: item.label });
-    };
-
-    onPortClick = (item: any) => {
-        alert(`Port [${item}] was clicked`);
-        this.setState({ selectedPort: item });
-    };
-
-    onSubscriptionClick = (item: any) => {
-        alert(`Subscription [${item}] was clicked`);
-        this.setState({ selectedSubscription: item });
-    };
-
-    renderFavorites = () => {
-        const columns = [
-            {
-                field: "description",
-                name: "Subscription description",
-                sortable: true,
-                truncateText: true
-            },
-            {
-                field: "name",
-                name: "Custom name",
-                truncateText: true,
-                sortable: true
-            },
-            {
-                field: "subscription_id",
-                name: "",
-                width: "40px",
-                render: (i: any) => <EuiButtonIcon iconType="popout" onClick={() => alert(`Clicked ${i}`)} />
-            }
-        ];
-        return <EuiInMemoryTable items={[]} columns={columns} pagination={true} sorting={true} search={true} />;
-    };
-
-    renderRecentUsed = () => {
-        const columns = [
-            {
-                field: "description",
-                name: "Subscription description",
-                sortable: true,
-                truncateText: true
-            },
-            {
-                field: "workflow",
-                name: "Workflow",
-                truncateText: true,
-                sortable: true
-            },
-            {
-                field: "subscription_id",
-                name: "",
-                width: "40px",
-                render: (i: any) => <EuiButtonIcon iconType="popout" onClick={() => alert(`Clicked ${i}`)} />
-            }
-        ];
-        return <EuiInMemoryTable items={[]} columns={columns} pagination={true} sorting={true} search={true} />;
-    };
-
-    renderNodeFilter = () => {
-        const { nodesLoaded, selectedNode, autoSuggestNodes, selectedPort, selectedSubscription } = this.state;
-
-        // const nodeLabels = nodesData.map(node => ({ label: node.label }));
-
-        return (
-            <EuiForm component="form">
-                {selectedNode && autoSuggestNodes && <EuiText>Selected node: {selectedNode}</EuiText>}
-                <EuiFormRow label="Node" helpText="Select a node." fullWidth>
-                    <>
-                        {autoSuggestNodes && (
-                            <EuiSuggest
-                                status={nodesLoaded ? "unchanged" : "loading"}
-                                onInputChange={() => {}}
-                                onItemClick={this.onNodeClick}
-                                suggestions={[]}
-                            />
-                        )}
-                        {/*{!autoSuggestNodes && (*/}
-                        {/*    <EuiSelectable*/}
-                        {/*        aria-label="Searchable example"*/}
-                        {/*        searchable*/}
-                        {/*        listProps={{ bordered: true }}*/}
-                        {/*        searchProps={{*/}
-                        {/*            "data-test-subj": "selectableSearchHere"*/}
-                        {/*        }}*/}
-                        {/*        options={nodeLabels}*/}
-                        {/*    >*/}
-                        {/*        {(list, search) => (*/}
-                        {/*            <Fragment>*/}
-                        {/*                {search}*/}
-                        {/*                {list}*/}
-                        {/*            </Fragment>*/}
-                        {/*        )}*/}
-                        {/*    </EuiSelectable>*/}
-                        {/*)}*/}
-                    </>
-                </EuiFormRow>
-                <EuiFormRow label="Port" helpText="Select a physical port." fullWidth>
-                    <EuiSuperSelect
-                        fullWidth
-                        options={[]}
-                        valueOfSelected={selectedPort}
-                        onChange={value => this.onPortClick(value)}
-                        itemLayoutAlign="top"
-                        hasDividers
-                    />
-                </EuiFormRow>
-                <EuiFormRow label="Service Port" helpText="Select a service port subscription." fullWidth>
-                    <EuiSuperSelect
-                        fullWidth
-                        options={[]}
-                        valueOfSelected={selectedSubscription}
-                        onChange={value => this.onSubscriptionClick(value)}
-                        itemLayoutAlign="top"
-                        hasDividers
-                    />
-                </EuiFormRow>
-                <EuiSpacer />
-                <EuiButton type="submit" fill style={{ marginLeft: "600px" }}>
-                    Select service port
-                </EuiButton>
-            </EuiForm>
-        );
-    };
-
     render() {
         const { selectedTabId } = this.state;
         const renderTabs = () => {
@@ -252,8 +125,8 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
             <>
                 {renderTabs()}
                 <EuiSpacer size="l" />
-                {selectedTabId === "nodeFilter" && this.renderNodeFilter()}
-                {selectedTabId === "recentUsed" && this.renderRecentUsed()}
+                {selectedTabId === "nodeFilter" && <ServicePortSelector subscriptions={[]} />}
+                {selectedTabId === "recentUsed" && <RecentUsedPortSelector subscriptions={[]} />}
             </>
         );
     }
