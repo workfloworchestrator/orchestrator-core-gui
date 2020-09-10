@@ -319,6 +319,10 @@ export function organisations(): Promise<Organization[] | undefined> {
     });
 }
 
+export function getPortServicesForNode(id: string): Promise<any[]> {
+    return fetchJson(`ims/port-services-by-node/${id}`);
+}
+
 export function getNodesByLocationAndStatus(locationCode: string, status: string): Promise<IMSNode[]> {
     return fetchJson(`ims/nodes/${locationCode}/${status}`);
 }

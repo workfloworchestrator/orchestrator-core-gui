@@ -1,7 +1,11 @@
 import {
     EuiButton,
+    EuiButtonIcon,
+    EuiFlexGroup,
+    EuiFlexItem,
     EuiForm,
     EuiFormRow,
+    EuiIcon,
     EuiSpacer,
     EuiSuggest,
     EuiSuggestItemProps,
@@ -10,7 +14,7 @@ import {
 } from "@elastic/eui";
 import React from "react";
 
-import { subscriptions } from "../../../api";
+import { getPortServicesForNode, subscriptions } from "../../../api";
 import { Subscription } from "../../../utils/types";
 
 interface IProps {
@@ -18,12 +22,16 @@ interface IProps {
 }
 
 interface IState {
-    nodesLoaded: boolean;
-    nodes: EuiSuggestItemProps[];
-    selectedNode?: string;
-    portsLoaded: boolean;
-    selectedPort?: string;
-    selectedSubscription?: string;
+    // nodes
+    nodesLoading: boolean;
+    nodes: Subscription[];
+    nodeSuggestions: EuiSuggestItemProps[];
+    nodeQuery: string;
+    selectedNode?: Subscription;
+    //ports
+    portsLoading: boolean;
+    ports: any[]; // Todo: fix backend call and set type
+    selectedPort?: any;
 }
 
 export default class ServicePortSelector extends React.PureComponent<IProps, IState> {
@@ -33,61 +41,140 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         super(props);
 
         this.state = {
-            nodesLoaded: false,
+            // nodes
+            nodesLoading: true,
             nodes: [],
-            portsLoaded: false,
+            nodeSuggestions: [],
+            nodeQuery: "",
             selectedNode: undefined,
-            selectedPort: undefined,
-            selectedSubscription: undefined
+            // ports
+            portsLoading: false,
+            ports: [],
+            selectedPort: undefined
         };
     }
+
     componentDidMount() {
         // Fetch Node subscriptions and prepare it for usage as EuiSuggestItems
         subscriptions(["Node"], ["provisioning", "active"]).then(result => {
-            const nodes = result.map((node, index) => ({
-                key: index,
-                label: node.description,
-                description: node.description,
-                type: { iconType: "kqlField", color: "tint1" }
-            }));
-            this.setState({ nodesLoaded: true, nodes: nodes });
+            //this.setState({ nodesLoading: false, nodes: result });
+            // Preselect first one and fetch Ports (debug stuff)
+            this.setState({ nodesLoading: false, nodes: result, selectedNode: result[0] });
+            this.fetchPortData(result[0]);
         });
     }
 
+    onNodeClick = (item: EuiSuggestItemProps) => {
+        const { nodes } = this.state;
+        const selectedNode = nodes.find(node => node.description === item.label);
+        this.setState({ selectedNode: selectedNode });
+        if (selectedNode) {
+            this.fetchPortData(selectedNode);
+        }
+    };
+
+    // Todo: find out why EventTarget doesn't have a value : fall back to : ANY for now =>
+    onNodeInputChange = (e: any) => {
+        const { nodes } = this.state;
+        let nodeQuery = e.value;
+        console.log(`Current nodeQuery: ${nodeQuery}`);
+
+        // update Suggestions
+        const nodeSuggestions = nodes
+            .filter(
+                node =>
+                    node.description.includes(nodeQuery) ||
+                    node.status.includes(nodeQuery) ||
+                    node.subscription_id.includes(nodeQuery)
+            )
+            .map((node, index) => ({
+                key: index,
+                label: node.description,
+                description: `Status: ${node.status}${
+                    node.status === "active" ? " Start date: " + node.start_date : ""
+                }`,
+                type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" }
+            }));
+
+        this.setState({ nodeSuggestions: nodeSuggestions, nodeQuery: nodeQuery });
+    };
+
+    fetchPortData = (selectedNode: Subscription) => {
+        this.setState({ portsLoading: true });
+        getPortServicesForNode(selectedNode.subscription_id).then(result => {
+            console.log(result);
+            const ports = result.map(port => ({
+                value: port.port_name,
+                inputDisplay: port.port_name,
+                dropdownDisplay: (
+                    <>
+                        <strong>{port.port_name}</strong>
+                        <EuiText size="s" color="subdued">
+                            <p className="euiTextColor--subdued">10GBase LR (unpatched)</p>
+                        </EuiText>
+                    </>
+                )
+            }));
+            this.setState({ portsLoading: false, ports: ports });
+        });
+    };
+
+    resetNodeState = () => {
+        this.setState({ nodeQuery: "", selectedNode: undefined });
+    };
+
     render() {
-        const { nodesLoaded, nodes, selectedNode, portsLoaded, selectedPort, selectedSubscription } = this.state;
+        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, selectedPort, ports } = this.state;
 
         return (
             <EuiForm component="form">
-                {/*{selectedNode && autoSuggestNodes && <EuiText>Selected node: {selectedNode}</EuiText>}*/}
-                <EuiFormRow label="Node" helpText="Select a node." fullWidth>
-                    <EuiSuggest
-                        status={nodesLoaded ? "unchanged" : "loading"}
-                        onInputChange={() => {}}
-                        // onItemClick={this.onNodeClick}
-                        suggestions={nodes}
-                    />
-                </EuiFormRow>
+                {selectedNode && (
+                    <EuiFormRow label="Node" fullWidth>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <EuiText>{selectedNode.description}</EuiText>
+                            </EuiFlexItem>
+                            <EuiFlexItem grow={false}>
+                                <EuiButtonIcon
+                                    iconType="crossInACircleFilled"
+                                    color="primary"
+                                    onClick={this.resetNodeState}
+                                />
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                    </EuiFormRow>
+                )}
+                {!selectedNode && (
+                    <EuiFormRow label="Node" helpText="Select a node." fullWidth>
+                        <EuiSuggest
+                            status={nodesLoading ? "unchanged" : "loading"}
+                            onInputChange={e => this.onNodeInputChange(e)}
+                            onItemClick={this.onNodeClick}
+                            suggestions={nodeSuggestions}
+                        />
+                    </EuiFormRow>
+                )}
                 <EuiFormRow label="Port" helpText="Select a physical port." fullWidth>
                     <EuiSuperSelect
+                        isLoading={portsLoading}
                         fullWidth
-                        options={[]}
-                        valueOfSelected={selectedPort}
+                        options={ports}
+                        valueOfSelected={selectedPort ? selectedPort.port_name : undefined}
                         // onChange={value => this.onPortClick(value)}
                         itemLayoutAlign="top"
                         hasDividers
                     />
                 </EuiFormRow>
-                <EuiFormRow label="Service Port" helpText="Select a service port subscription." fullWidth>
-                    <EuiSuperSelect
-                        fullWidth
-                        options={[]}
-                        valueOfSelected={selectedSubscription}
-                        // onChange={value => this.onSubscriptionClick(value)}
-                        itemLayoutAlign="top"
-                        hasDividers
-                    />
-                </EuiFormRow>
+                {/*<EuiFormRow label="Service Port" helpText="Select a service port subscription." fullWidth>*/}
+                {/*    <EuiSuperSelect*/}
+                {/*        fullWidth*/}
+                {/*        options={[]}*/}
+                {/*        valueOfSelected={selectedSubscription}*/}
+                {/*        // onChange={value => this.onSubscriptionClick(value)}*/}
+                {/*        itemLayoutAlign="top"*/}
+                {/*        hasDividers*/}
+                {/*    />*/}
+                {/*</EuiFormRow>*/}
                 <EuiSpacer />
                 <EuiButton type="submit" fill style={{ marginLeft: "600px" }}>
                     Select service port

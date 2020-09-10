@@ -14,16 +14,16 @@
  */
 
 import {
-  EuiFlexGrid,
-  EuiFlexItem,
-  EuiPage,
-  EuiPageBody,
-  EuiPageContent,
-  EuiPageContentBody,
-  EuiPageContentHeader,
-  EuiPageContentHeaderSection,
-  EuiPanel,
-  EuiTitle
+    EuiFlexGrid,
+    EuiFlexItem,
+    EuiPage,
+    EuiPageBody,
+    EuiPageContent,
+    EuiPageContentBody,
+    EuiPageContentHeader,
+    EuiPageContentHeaderSection,
+    EuiPanel,
+    EuiTitle
 } from "@elastic/eui";
 import React from "react";
 
@@ -35,38 +35,38 @@ interface IProps {}
 interface IState {}
 
 export default class PortFilterMock extends React.PureComponent<IProps, IState> {
-  render() {
-    const ITEM_STYLE = { width: "800px" };
-    return (
-      <EuiPage>
-        <EuiPageBody component="div">
-          <EuiPageContent>
-            <EuiPageContentHeader>
-              <EuiPageContentHeaderSection>
-                <EuiTitle>
-                  <h2>Filter mocks (and page template test)</h2>
-                </EuiTitle>
-              </EuiPageContentHeaderSection>
-            </EuiPageContentHeader>
-            <EuiPageContentBody>
-              <EuiFlexGrid>
-                <EuiFlexItem style={ITEM_STYLE}>
-                  <EuiPanel>
-                    <ServicePortSelectorModal selectedTabId="nodeFilter" />
-                  </EuiPanel>
-                </EuiFlexItem>
-                <EuiFlexItem style={ITEM_STYLE}>
-                  <EuiPanel>
-                    <ServicePortSelectorModal selectedTabId="favorites" />
-                  </EuiPanel>
-                </EuiFlexItem>
-              </EuiFlexGrid>
-            </EuiPageContentBody>
-          </EuiPageContent>
-        </EuiPageBody>
-      </EuiPage>
-    );
-  }
+    render() {
+        const ITEM_STYLE = { width: "800px" };
+        return (
+            <EuiPage>
+                <EuiPageBody component="div">
+                    <EuiPageContent>
+                        <EuiPageContentHeader>
+                            <EuiPageContentHeaderSection>
+                                <EuiTitle>
+                                    <h2>Filter mocks (and page template test)</h2>
+                                </EuiTitle>
+                            </EuiPageContentHeaderSection>
+                        </EuiPageContentHeader>
+                        <EuiPageContentBody>
+                            <EuiFlexGrid>
+                                <EuiFlexItem style={ITEM_STYLE}>
+                                    <EuiPanel>
+                                        <ServicePortSelectorModal selectedTabId="nodeFilter" />
+                                    </EuiPanel>
+                                </EuiFlexItem>
+                                <EuiFlexItem style={ITEM_STYLE}>
+                                    <EuiPanel>
+                                        <ServicePortSelectorModal selectedTabId="favorites" />
+                                    </EuiPanel>
+                                </EuiFlexItem>
+                            </EuiFlexGrid>
+                        </EuiPageContentBody>
+                    </EuiPageContent>
+                </EuiPageBody>
+            </EuiPage>
+        );
+    }
 }
 
 PortFilterMock.contextType = ApplicationContext;

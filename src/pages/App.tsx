@@ -40,6 +40,7 @@ import NewProcess from "./NewProcess";
 import NewTask from "./NewTask";
 import NotAllowed from "./NotAllowed";
 import NotFound from "./NotFound";
+import PortFilterMock from "./PortFilterMock";
 import Prefixes from "./Prefixes";
 import ProcessDetail from "./ProcessDetail";
 import Processes from "./Processes";
@@ -51,7 +52,6 @@ import SubscriptionsPage from "./Subscriptions";
 import Tasks from "./Tasks";
 import TerminateSubscription from "./TerminateSubscription";
 import Validations from "./Validations";
-import PortFilterMock from "./PortFilterMock";
 
 const history = createBrowserHistory();
 

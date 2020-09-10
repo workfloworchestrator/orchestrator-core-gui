@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiIcon, EuiSpacer, EuiTab } from "@elastic/eui";
+import { EuiIcon, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
 import React, { Fragment } from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
@@ -87,7 +87,7 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
         };
         return (
             <>
-                {renderTabs()}
+                <EuiTabs>{renderTabs()}</EuiTabs>
                 <EuiSpacer size="l" />
                 {selectedTabId === "nodeFilter" && <ServicePortSelector subscriptions={[]} />}
                 {selectedTabId === "recentUsed" && <RecentUsedPortSelector subscriptions={[]} />}
