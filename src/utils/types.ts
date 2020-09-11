@@ -146,6 +146,20 @@ export interface ServicePort {
     modifiable?: boolean;
 }
 
+export interface ServicePortFilterItem {
+    subscription_id: string;
+    port_name: string;
+    ims_circuit_id: number;
+    description: string;
+    nso_service_id: string;
+    port_speed: number;
+    port_mode: string;
+    start_date: number;
+    status: string;
+    product_name: string;
+    product_tag: string;
+}
+
 export interface Organization {
     uuid: string;
     name: string;

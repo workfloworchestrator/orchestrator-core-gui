@@ -1,4 +1,5 @@
 import {
+    EuiBadge,
     EuiButton,
     EuiButtonIcon,
     EuiFlexGroup,
@@ -14,8 +15,9 @@ import {
 } from "@elastic/eui";
 import React from "react";
 
-import { getPortServicesForNode, subscriptions } from "../../../api";
-import { Subscription } from "../../../utils/types";
+import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
+import { ServicePortFilterItem, Subscription } from "../../../utils/types";
+import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
 
 interface IProps {
     subscriptions: [];
@@ -30,7 +32,7 @@ interface IState {
     selectedNode?: Subscription;
     //ports
     portsLoading: boolean;
-    ports: any[]; // Todo: fix backend call and set type
+    ports: any[];
     selectedPort?: any;
 }
 
@@ -101,22 +103,38 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     fetchPortData = (selectedNode: Subscription) => {
         this.setState({ portsLoading: true });
-        getPortServicesForNode(selectedNode.subscription_id).then(result => {
+        getPortSubscriptionsForNode(selectedNode.subscription_id).then(result => {
             console.log(result);
             const ports = result.map(port => ({
                 value: port.port_name,
                 inputDisplay: port.port_name,
                 dropdownDisplay: (
                     <>
-                        <strong>{port.port_name}</strong>
+                        <strong>
+                            {port.port_name} - {port.subscription_id.slice(0, 8)} {port.description}
+                        </strong>
                         <EuiText size="s" color="subdued">
-                            <p className="euiTextColor--subdued">10GBase LR (unpatched)</p>
+                            <p className="euiTextColor--subdued">
+                                {port.product_name} <EuiBadge color="primary">{port.port_mode}</EuiBadge>
+                                <EuiBadge
+                                    iconType={port.status === "active" ? "check" : "questionInCircle"}
+                                    color={port.status === "active" ? "default" : "danger"}
+                                >
+                                    {capitalizeFirstLetter(port.status)}
+                                </EuiBadge>
+                                <br />
+                                Start date: <i>{timeStampToDate(port.start_date)}</i>
+                            </p>
                         </EuiText>
                     </>
                 )
             }));
             this.setState({ portsLoading: false, ports: ports });
         });
+    };
+
+    onPortClick = (value: any) => {
+        debugger;
     };
 
     resetNodeState = () => {
@@ -160,7 +178,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         fullWidth
                         options={ports}
                         valueOfSelected={selectedPort ? selectedPort.port_name : undefined}
-                        // onChange={value => this.onPortClick(value)}
+                        onChange={value => this.onPortClick(value)}
                         itemLayoutAlign="top"
                         hasDividers
                     />
