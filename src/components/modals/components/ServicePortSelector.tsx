@@ -93,7 +93,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 key: index,
                 label: node.description,
                 description: `Status: ${node.status}${
-                    node.status === "active" ? " Start date: " + node.start_date : ""
+                    node.status === "active" ? " Start date: " + timeStampToDate(node.start_date) : ""
                 }`,
                 type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" }
             }));
