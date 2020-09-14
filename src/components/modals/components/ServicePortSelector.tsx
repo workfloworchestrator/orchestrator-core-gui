@@ -21,6 +21,7 @@ import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
 
 interface IProps {
     subscriptions: [];
+    handleSelect: Function;
 }
 
 interface IState {
@@ -59,10 +60,10 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
     componentDidMount() {
         // Fetch Node subscriptions and prepare it for usage as EuiSuggestItems
         subscriptions(["Node"], ["provisioning", "active"]).then(result => {
-            //this.setState({ nodesLoading: false, nodes: result });
+            this.setState({ nodesLoading: false, nodes: result });
             // Preselect first one and fetch Ports (debug stuff)
-            this.setState({ nodesLoading: false, nodes: result, selectedNode: result[0] });
-            this.fetchPortData(result[0]);
+            // this.setState({ nodesLoading: false, nodes: result, selectedNode: result[0] });
+            // this.fetchPortData(result[0]);
         });
     }
 
@@ -134,6 +135,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
     };
 
     onPortClick = (value: any) => {
+        alert("Calling function from parent");
+        this.props.handleSelect("hoera");
         debugger;
     };
 
@@ -165,7 +168,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 {!selectedNode && (
                     <EuiFormRow label="Node" helpText="Select a node." fullWidth>
                         <EuiSuggest
-                            status={nodesLoading ? "unchanged" : "loading"}
+                            status={nodesLoading ? "loading" : "unchanged"}
                             onInputChange={e => this.onNodeInputChange(e)}
                             onItemClick={this.onNodeClick}
                             suggestions={nodeSuggestions}
@@ -194,7 +197,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 {/*    />*/}
                 {/*</EuiFormRow>*/}
                 <EuiSpacer />
-                <EuiButton type="submit" fill style={{ marginLeft: "600px" }}>
+                <EuiButton type="submit" fill style={{ marginLeft: "500px" }}>
                     Select service port
                 </EuiButton>
             </EuiForm>

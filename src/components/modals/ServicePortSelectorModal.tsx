@@ -13,14 +13,12 @@
  *
  */
 
-import { EuiIcon, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
+import { EuiIcon, EuiModal, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
 import React, { Fragment } from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
 import RecentUsedPortSelector from "./components/RecentUsedPortSelector";
 import ServicePortSelector from "./components/ServicePortSelector";
-
-// import { favoritesData, nodesData, portsData, recentUsedData, subscriptionsData } from "../utils/filterMockData";
 
 const tabs = [
     {
@@ -47,6 +45,7 @@ const tabs = [
 
 interface IProps {
     selectedTabId: string;
+    handleSelect: any;
 }
 
 interface IState {
@@ -86,12 +85,14 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
             ));
         };
         return (
-            <>
+            <EuiPanel>
                 <EuiTabs>{renderTabs()}</EuiTabs>
                 <EuiSpacer size="l" />
-                {selectedTabId === "nodeFilter" && <ServicePortSelector subscriptions={[]} />}
-                {selectedTabId === "recentUsed" && <RecentUsedPortSelector subscriptions={[]} />}
-            </>
+                {selectedTabId === "nodeFilter" && (
+                    <ServicePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
+                )}
+                {/*{selectedTabId === "recentUsed" && <RecentUsedPortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />}*/}
+            </EuiPanel>
         );
     }
 }

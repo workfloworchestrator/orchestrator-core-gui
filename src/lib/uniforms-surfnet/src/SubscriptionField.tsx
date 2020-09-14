@@ -15,12 +15,14 @@
 
 import "./SubscriptionField.scss";
 
+import { EuiButton, EuiButtonIcon, EuiFlexItem, EuiModal, EuiOverlayMask, EuiPanel } from "@elastic/eui";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 
+import ServicePortSelectorModal from "../../../components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "../../../components/subscriptionContext";
 import ApplicationContext from "../../../utils/ApplicationContext";
 import { productById } from "../../../utils/Lookups";
@@ -128,6 +130,10 @@ function Subscription({
     const parent = useField(parentName, {}, { absoluteName: true })[0];
     const { model, schema } = useForm();
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
+
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
     let [loading, setLoading] = useState<boolean>(false);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
@@ -209,6 +215,11 @@ function Subscription({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
+    const blaat = (s: any) => {
+        alert(s);
+        debugger;
+    };
+
     return (
         <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
             {label && (
@@ -219,19 +230,26 @@ function Subscription({
             )}
             <div>
                 {!disabled && (
-                    <div className="refresh-subscriptions">
-                        <i
-                            className={`fa fa-sync ${loading ? "loading" : ""}`}
-                            onClick={() => {
-                                setLoading(true);
-                                clearSubscriptions();
-                                getSubscriptions(tags, statuses).then(result => {
-                                    updateSubscriptions(result);
-                                    setLoading(false);
-                                });
-                            }}
-                        />
-                    </div>
+                    <EuiButtonIcon
+                        iconType="refresh"
+                        iconSize="l"
+                        onClick={() => {
+                            setLoading(true);
+                            clearSubscriptions();
+                            getSubscriptions(tags, statuses).then(result => {
+                                updateSubscriptions(result);
+                                setLoading(false);
+                            });
+                        }}
+                    />
+                )}
+                <EuiButtonIcon onClick={showModal} iconType="filter" iconSize="l" />
+                {isModalVisible && (
+                    <EuiOverlayMask>
+                        <EuiModal onClose={closeModal} initialFocus="[name=popswitch]">
+                            <ServicePortSelectorModal selectedTabId="nodeFilter" handleSelect={blaat} />
+                        </EuiModal>
+                    </EuiOverlayMask>
                 )}
                 <ReactSelect
                     id={id}

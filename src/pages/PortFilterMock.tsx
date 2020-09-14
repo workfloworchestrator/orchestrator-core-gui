@@ -35,6 +35,10 @@ interface IProps {}
 interface IState {}
 
 export default class PortFilterMock extends React.PureComponent<IProps, IState> {
+    handleSelected = (i: any) => {
+        alert("Yo");
+    };
+
     render() {
         const ITEM_STYLE = { width: "800px" };
         return (
@@ -51,14 +55,16 @@ export default class PortFilterMock extends React.PureComponent<IProps, IState> 
                         <EuiPageContentBody>
                             <EuiFlexGrid>
                                 <EuiFlexItem style={ITEM_STYLE}>
-                                    <EuiPanel>
-                                        <ServicePortSelectorModal selectedTabId="nodeFilter" />
-                                    </EuiPanel>
+                                    <ServicePortSelectorModal
+                                        selectedTabId="nodeFilter"
+                                        handleSelect={this.handleSelected}
+                                    />
                                 </EuiFlexItem>
                                 <EuiFlexItem style={ITEM_STYLE}>
-                                    <EuiPanel>
-                                        <ServicePortSelectorModal selectedTabId="favorites" />
-                                    </EuiPanel>
+                                    <ServicePortSelectorModal
+                                        selectedTabId="favorites"
+                                        handleSelect={this.handleSelected}
+                                    />
                                 </EuiFlexItem>
                             </EuiFlexGrid>
                         </EuiPageContentBody>
