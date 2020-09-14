@@ -91,7 +91,9 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
                 {selectedTabId === "nodeFilter" && (
                     <ServicePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
                 )}
-                {/*{selectedTabId === "recentUsed" && <RecentUsedPortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />}*/}
+                {selectedTabId === "recentUsed" && (
+                    <RecentUsedPortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
+                )}
             </EuiPanel>
         );
     }

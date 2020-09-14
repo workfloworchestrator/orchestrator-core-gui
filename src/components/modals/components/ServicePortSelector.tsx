@@ -34,7 +34,6 @@ interface IState {
     //ports
     portsLoading: boolean;
     ports: any[];
-    selectedPort?: any;
 }
 
 export default class ServicePortSelector extends React.PureComponent<IProps, IState> {
@@ -52,8 +51,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             selectedNode: undefined,
             // ports
             portsLoading: false,
-            ports: [],
-            selectedPort: undefined
+            ports: []
         };
     }
 
@@ -66,6 +64,38 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             // this.fetchPortData(result[0]);
         });
     }
+
+    fetchPortData = (selectedNode: Subscription) => {
+        this.setState({ portsLoading: true });
+        getPortSubscriptionsForNode(selectedNode.subscription_id).then(result => {
+            console.log(result);
+            const ports = result.map(port => ({
+                value: port.subscription_id,
+                inputDisplay: port.port_name,
+                dropdownDisplay: (
+                    <>
+                        <strong>
+                            {port.port_name} - {port.subscription_id.slice(0, 8)} {port.description}
+                        </strong>
+                        <EuiText size="s" color="subdued">
+                            <p className="euiTextColor--subdued">
+                                {port.product_name} <EuiBadge color="primary">{port.port_mode}</EuiBadge>
+                                <EuiBadge
+                                    iconType={port.status === "active" ? "check" : "questionInCircle"}
+                                    color={port.status === "active" ? "default" : "danger"}
+                                >
+                                    {capitalizeFirstLetter(port.status)}
+                                </EuiBadge>
+                                <br />
+                                Start date: <i>{timeStampToDate(port.start_date)}</i>
+                            </p>
+                        </EuiText>
+                    </>
+                )
+            }));
+            this.setState({ portsLoading: false, ports: ports });
+        });
+    };
 
     onNodeClick = (item: EuiSuggestItemProps) => {
         const { nodes } = this.state;
@@ -102,42 +132,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.setState({ nodeSuggestions: nodeSuggestions, nodeQuery: nodeQuery });
     };
 
-    fetchPortData = (selectedNode: Subscription) => {
-        this.setState({ portsLoading: true });
-        getPortSubscriptionsForNode(selectedNode.subscription_id).then(result => {
-            console.log(result);
-            const ports = result.map(port => ({
-                value: port.port_name,
-                inputDisplay: port.port_name,
-                dropdownDisplay: (
-                    <>
-                        <strong>
-                            {port.port_name} - {port.subscription_id.slice(0, 8)} {port.description}
-                        </strong>
-                        <EuiText size="s" color="subdued">
-                            <p className="euiTextColor--subdued">
-                                {port.product_name} <EuiBadge color="primary">{port.port_mode}</EuiBadge>
-                                <EuiBadge
-                                    iconType={port.status === "active" ? "check" : "questionInCircle"}
-                                    color={port.status === "active" ? "default" : "danger"}
-                                >
-                                    {capitalizeFirstLetter(port.status)}
-                                </EuiBadge>
-                                <br />
-                                Start date: <i>{timeStampToDate(port.start_date)}</i>
-                            </p>
-                        </EuiText>
-                    </>
-                )
-            }));
-            this.setState({ portsLoading: false, ports: ports });
-        });
-    };
-
     onPortClick = (value: any) => {
-        alert("Calling function from parent");
-        this.props.handleSelect("hoera");
-        debugger;
+        this.props.handleSelect(value);
     };
 
     resetNodeState = () => {
@@ -145,7 +141,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
     };
 
     render() {
-        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, selectedPort, ports } = this.state;
+        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, ports } = this.state;
 
         return (
             <EuiForm component="form">
@@ -180,7 +176,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         isLoading={portsLoading}
                         fullWidth
                         options={ports}
-                        valueOfSelected={selectedPort ? selectedPort.port_name : undefined}
+                        // valueOfSelected={selectedPort ? selectedPort.port_name : undefined}
                         onChange={value => this.onPortClick(value)}
                         itemLayoutAlign="top"
                         hasDividers

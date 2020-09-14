@@ -3,6 +3,7 @@ import React from "react";
 
 interface IProps {
     subscriptions: [];
+    handleSelect: any;
 }
 
 interface IState {

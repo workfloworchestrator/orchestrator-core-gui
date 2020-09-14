@@ -215,9 +215,11 @@ function Subscription({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
-    const blaat = (s: any) => {
-        alert(s);
-        debugger;
+    const selectSubscriptionFromModal = (s: any) => {
+        // alert(s);
+        // debugger;
+        onChange(s);
+        closeModal();
     };
 
     return (
@@ -247,7 +249,10 @@ function Subscription({
                 {isModalVisible && (
                     <EuiOverlayMask>
                         <EuiModal onClose={closeModal} initialFocus="[name=popswitch]">
-                            <ServicePortSelectorModal selectedTabId="nodeFilter" handleSelect={blaat} />
+                            <ServicePortSelectorModal
+                                selectedTabId="nodeFilter"
+                                handleSelect={selectSubscriptionFromModal}
+                            />
                         </EuiModal>
                     </EuiOverlayMask>
                 )}
