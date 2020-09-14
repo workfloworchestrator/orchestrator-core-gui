@@ -126,14 +126,18 @@ function Subscription({
         parentName = name;
     }
     const parent = useField(parentName, {}, { absoluteName: true })[0];
-    const { model } = useForm();
+    const { model, schema } = useForm();
 
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
     let [loading, setLoading] = useState<boolean>(false);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
-    const usedBandwidth = bandwidth || get(model, bandwidthKey!);
+    const bandwithFrommField = bandwidthKey
+        ? get(model, bandwidthKey!) || schema.getInitialValue(bandwidthKey, {})
+        : undefined;
+
+    const usedBandwidth = bandwidth || bandwithFrommField;
 
     // Get value from org field if organisationKey is set.
     const usedOrganisationId = organisationKey
