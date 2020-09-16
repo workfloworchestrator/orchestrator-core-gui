@@ -129,7 +129,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" }
             }));
 
-        this.setState({ nodeSuggestions: nodeSuggestions, nodeQuery: nodeQuery });
+        this.setState({ nodeSuggestions: nodeSuggestions.slice(0, 8), nodeQuery: nodeQuery });
     };
 
     onPortClick = (value: any) => {
