@@ -163,6 +163,7 @@ I18n.translations.en = {
             auto_negotiation: "Auto Negotiation",
             auto_negotiation_info:
                 "The Auto Negotiation setting for NSO is available only for 1G service ports in tagged/untagged mode",
+            availability_zone: "Availability zone for the Firewall",
             bandwidth: "Bandwidth",
             bandwidth_info: "Desired bandwidth in Mbit/s",
             bfd: {
