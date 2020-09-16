@@ -31,7 +31,7 @@ import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";
 import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
 import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-import { InputForm, Process, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
+import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
 import { stop } from "../utils/Utils";
 import { actionOptions } from "../validations/Processes";
 
@@ -86,7 +86,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
     }
 
     componentDidMount = () => {
-        process(this.props.match.params.id).then((processInstance: Process) => {
+        process(this.props.match.params.id).then((processInstance: ProcessWithDetails) => {
             /**
              * Ensure correct user memberships and populate UserInput form with values
              */
@@ -97,10 +97,7 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
             enrichedProcess.customerName = organisationNameByUuid(enrichedProcess.customer, organisations);
             enrichedProcess.productName = productNameById(enrichedProcess.product, products);
 
-            const step = enrichedProcess.steps.find(
-                step => step.name === enrichedProcess.step && step.status === "pending"
-            );
-            const stepUserInput: InputForm | undefined = step && step.form;
+            const stepUserInput: InputForm | undefined = enrichedProcess.form;
             const tabs = stepUserInput ? this.state.tabs : ["process"];
             const selectedTab = stepUserInput ? "user_input" : "process";
 

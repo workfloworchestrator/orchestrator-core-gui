@@ -64,10 +64,12 @@ function CustomersFilter({
     const { organisations } = useContext(ApplicationContext);
 
     const options: Option[] = organisations
-        ? organisations.map((org: Organization) => ({
-              value: org.uuid,
-              label: column.id === "abbrev" ? org.abbr : org.name
-          }))
+        ? organisations
+              .map((org: Organization) => ({
+                  value: org.uuid,
+                  label: column.id === "abbrev" ? org.abbr : org.name
+              }))
+              .sort((a, b) => a.label.localeCompare(b.label))
         : [];
     const value = options.find((option: Option) => option.value === selectedOrganisation);
 
