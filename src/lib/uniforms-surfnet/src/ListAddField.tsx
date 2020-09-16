@@ -32,7 +32,7 @@ function ListAdd({ disabled, name, value, onChange, initialCount, outerList = fa
         { absoluteName: true }
     )[0];
 
-    const limitNotReached = !disabled && !(parent.maxCount! <= parent.value!.length);
+    const limitNotReached = !disabled && !(parent.maxCount! <= Math.max(initialCount ?? 0, parent.value!.length));
     const count = 1 + Math.max((initialCount ?? 0) - parent.value!.length, 0);
 
     return (
