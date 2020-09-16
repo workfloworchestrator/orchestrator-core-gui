@@ -23,7 +23,7 @@ import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
@@ -63,7 +63,16 @@ export function getPortMode(subscription: ServicePortSubscription, products: Pro
         (["MSP", "MSPNL", "MSC", "MSCNL", "IRBSP"].includes(product.tag!) ? "tagged" : "untagged")
     );
 }
-
+declare module "uniforms" {
+    interface FilterDOMProps {
+        excludedSubscriptionIds: never;
+        visiblePortMode: never;
+        bandwidth: never;
+        bandwidthKey: never;
+        tags: never;
+        statuses: never;
+    }
+}
 filterDOMProps.register(
     "productIds",
     "excludedSubscriptionIds",
@@ -219,7 +228,7 @@ function Subscription({
     };
 
     const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: string = isRepeated ? "" : label;
+    const labelRender: ReactNode = isRepeated ? "" : label;
 
     return (
         <section

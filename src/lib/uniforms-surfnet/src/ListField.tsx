@@ -22,6 +22,13 @@ import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        items: never;
+        uniqueItems: never;
+        outerList: never;
+    }
+}
 filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");
 filterDOMProps.register("items");

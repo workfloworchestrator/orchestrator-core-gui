@@ -20,6 +20,11 @@ import { connectField, filterDOMProps } from "uniforms";
 
 export type NestFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        properties: never;
+    }
+}
 filterDOMProps.register("properties");
 
 function Nest({

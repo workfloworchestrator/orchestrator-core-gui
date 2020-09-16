@@ -78,6 +78,19 @@ interface IState {
     processing: boolean;
 }
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        customPropToFilter: never;
+        description: never;
+        const: never;
+        default: never;
+        required: never;
+        pattern: never;
+        examples: never;
+        allOf: never;
+        options: never;
+    }
+}
 filterDOMProps.register("description");
 filterDOMProps.register("const");
 filterDOMProps.register("default");
@@ -145,37 +158,14 @@ class CustomTitleJSONSchemaBridge extends JSONSchemaBridge {
         props.description = I18n.t(`forms.fields.${translation_key}_info`, { defaultValue: "" });
         props.id = `input-${name}`;
 
-        // See https://github.com/vazco/uniforms/issues/748
         if (props.const) {
             props.disabled = true;
             props.default = props.const;
             delete props["const"];
         }
 
-        if (props.maxItems !== undefined) {
-            props.maxCount = props.maxItems;
-            delete props["maxItems"];
-        }
-
-        if (props.minItems !== undefined) {
-            props.minCount = props.minItems;
-            props.initialCount = props.minItems;
-            delete props["minItems"];
-        }
-
-        if (props.maximum !== undefined) {
-            props.max = props.maximum;
-            delete props["maximum"];
-        }
-
-        if (props.minimum !== undefined) {
-            props.min = props.minimum;
-            delete props["minimum"];
-        }
-
-        if (props.multipleOf !== undefined) {
-            props.step = props.multipleOf;
-            delete props["multipleOf"];
+        if (props.initialCount === undefined) {
+            props.initialCount = props.minCount;
         }
 
         return props;

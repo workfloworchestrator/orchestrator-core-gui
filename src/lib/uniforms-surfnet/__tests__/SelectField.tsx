@@ -247,4 +247,8 @@ describe("<SelectField>", () => {
         ).toStrictEqual([{ label: "b", value: "b" }]);
         expect(wrapper.render()).toMatchSnapshot();
     });
+
+    test("<SelectField> - works with special characters", () => {
+        mount(<SelectField name="x" />, createContext({ x: { type: String, allowedValues: ["ă", "ș"] } }));
+    });
 });
