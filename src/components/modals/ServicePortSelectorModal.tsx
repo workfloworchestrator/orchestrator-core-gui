@@ -17,7 +17,7 @@ import { EuiIcon, EuiModal, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elasti
 import React, { Fragment } from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
-import RecentUsedPortSelector from "./components/RecentUsedPortSelector";
+import FavoritePortSelector from "./components/FavoritePortSelector";
 import ServicePortSelector from "./components/ServicePortSelector";
 
 const tabs = [
@@ -32,11 +32,11 @@ const tabs = [
         disabled: false
     },
     {
-        id: "recentUsed",
+        id: "favoritePorts",
         name: (
             <span>
-                Recently used &nbsp;
-                <EuiIcon type="recentlyViewedApp" />
+                Favorite ports &nbsp;
+                <EuiIcon type="heart" />
             </span>
         ),
         disabled: false
@@ -91,8 +91,8 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
                 {selectedTabId === "nodeFilter" && (
                     <ServicePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
                 )}
-                {selectedTabId === "recentUsed" && (
-                    <RecentUsedPortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
+                {selectedTabId === "favoritePorts" && (
+                    <FavoritePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
                 )}
             </EuiPanel>
         );

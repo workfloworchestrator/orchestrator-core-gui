@@ -62,7 +62,7 @@ export default class PortFilterMock extends React.PureComponent<IProps, IState> 
                                 </EuiFlexItem>
                                 <EuiFlexItem style={ITEM_STYLE}>
                                     <ServicePortSelectorModal
-                                        selectedTabId="favorites"
+                                        selectedTabId="favoritePorts"
                                         handleSelect={this.handleSelected}
                                     />
                                 </EuiFlexItem>

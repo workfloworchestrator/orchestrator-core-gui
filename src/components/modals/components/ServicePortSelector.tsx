@@ -33,7 +33,9 @@ interface IState {
     selectedNode?: Subscription;
     //ports
     portsLoading: boolean;
-    ports: any[];
+    ports: ServicePortFilterItem[];
+    portOptions: any[];
+    selectedPort?: ServicePortFilterItem;
 }
 
 export default class ServicePortSelector extends React.PureComponent<IProps, IState> {
@@ -51,7 +53,9 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             selectedNode: undefined,
             // ports
             portsLoading: false,
-            ports: []
+            ports: [],
+            portOptions: [],
+            selectedPort: undefined
         };
     }
 
@@ -69,7 +73,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.setState({ portsLoading: true });
         getPortSubscriptionsForNode(selectedNode.subscription_id).then(result => {
             console.log(result);
-            const ports = result.map(port => ({
+            // Todo: move to render
+            const portOptions = result.map(port => ({
                 value: port.subscription_id,
                 inputDisplay: port.port_name,
                 dropdownDisplay: (
@@ -93,7 +98,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     </>
                 )
             }));
-            this.setState({ portsLoading: false, ports: ports });
+            this.setState({ portsLoading: false, portOptions: portOptions, ports: result });
         });
     };
 
@@ -132,8 +137,26 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.setState({ nodeSuggestions: nodeSuggestions.slice(0, 8), nodeQuery: nodeQuery });
     };
 
-    onPortClick = (value: any) => {
-        this.props.handleSelect(value);
+    onPortClick = (subscription_id: String) => {
+        const { ports } = this.state;
+        const selectedPort = ports.find(port => port.subscription_id === subscription_id);
+        this.setState({ selectedPort: selectedPort });
+    };
+
+    onSubmitClick = () => {
+        if (this.state.selectedPort) {
+            this.props.handleSelect(this.state.selectedPort.subscription_id);
+        }
+    };
+
+    onAddFavoriteClick = () => {
+        const { selectedPort } = this.state;
+        if (selectedPort) {
+            const storageKey = "favoritePortsArray-v1";
+            let oldPorts: ServicePortFilterItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
+            oldPorts.push(selectedPort);
+            localStorage.setItem(storageKey, JSON.stringify(oldPorts));
+        }
     };
 
     resetNodeState = () => {
@@ -141,7 +164,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
     };
 
     render() {
-        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, ports } = this.state;
+        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, portOptions, selectedPort } = this.state;
 
         return (
             <EuiForm component="form">
@@ -175,27 +198,36 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     <EuiSuperSelect
                         isLoading={portsLoading}
                         fullWidth
-                        options={ports}
-                        // valueOfSelected={selectedPort ? selectedPort.port_name : undefined}
+                        options={portOptions}
+                        valueOfSelected={selectedPort ? selectedPort.subscription_id : undefined}
                         onChange={value => this.onPortClick(value)}
                         itemLayoutAlign="top"
                         hasDividers
                     />
                 </EuiFormRow>
-                {/*<EuiFormRow label="Service Port" helpText="Select a service port subscription." fullWidth>*/}
-                {/*    <EuiSuperSelect*/}
-                {/*        fullWidth*/}
-                {/*        options={[]}*/}
-                {/*        valueOfSelected={selectedSubscription}*/}
-                {/*        // onChange={value => this.onSubscriptionClick(value)}*/}
-                {/*        itemLayoutAlign="top"*/}
-                {/*        hasDividers*/}
-                {/*    />*/}
-                {/*</EuiFormRow>*/}
                 <EuiSpacer />
-                <EuiButton type="submit" fill style={{ marginLeft: "500px" }}>
-                    Select service port
-                </EuiButton>
+                <EuiFlexGroup style={{ marginLeft: "300px" }}>
+                    <EuiFlexItem>
+                        <EuiButton
+                            type="submit"
+                            fill
+                            disabled={!selectedNode && !selectedPort}
+                            onClick={this.onAddFavoriteClick}
+                        >
+                            Add to favorites
+                        </EuiButton>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiButton
+                            type="submit"
+                            fill
+                            disabled={!selectedNode && !selectedPort}
+                            onClick={this.onSubmitClick}
+                        >
+                            Select service port
+                        </EuiButton>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
             </EuiForm>
         );
     }
