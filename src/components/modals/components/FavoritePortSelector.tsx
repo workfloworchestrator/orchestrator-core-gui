@@ -39,6 +39,12 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         const { ports, portsLoaded } = this.state;
         const columns = [
             {
+                field: "port_name",
+                name: "Port name",
+                sortable: true,
+                truncateText: true
+            },
+            {
                 field: "description",
                 name: "Subscription description",
                 sortable: true,
