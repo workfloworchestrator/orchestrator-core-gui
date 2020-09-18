@@ -160,6 +160,11 @@ export interface ServicePortFilterItem {
     product_tag: string;
 }
 
+export interface ServicePortFavoriteItem extends ServicePortFilterItem {
+    node_name: string;
+    location: string;
+}
+
 export interface Organization {
     uuid: string;
     name: string;
