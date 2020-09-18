@@ -22,7 +22,6 @@ import {
     EuiPageContentBody,
     EuiPageContentHeader,
     EuiPageContentHeaderSection,
-    EuiPanel,
     EuiTitle
 } from "@elastic/eui";
 import React from "react";

@@ -15,7 +15,7 @@
 
 import "./SubscriptionField.scss";
 
-import { EuiButton, EuiButtonIcon, EuiFlexItem, EuiModal, EuiOverlayMask, EuiPanel } from "@elastic/eui";
+import { EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
@@ -135,6 +135,7 @@ function Subscription({
     const showModal = () => setIsModalVisible(true);
 
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [loading, setLoading] = useState<boolean>(false);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
@@ -216,8 +217,6 @@ function Subscription({
     const selectedValue = options.find((option: Option) => option.value === value);
 
     const selectSubscriptionFromModal = (s: any) => {
-        // alert(s);
-        // debugger;
         onChange(s);
         closeModal();
     };
@@ -233,6 +232,7 @@ function Subscription({
             <div>
                 {!disabled && (
                     <EuiButtonIcon
+                        id={`refresh-icon-${id}`}
                         iconType="refresh"
                         iconSize="l"
                         onClick={() => {
@@ -245,7 +245,7 @@ function Subscription({
                         }}
                     />
                 )}
-                <EuiButtonIcon onClick={showModal} iconType="filter" iconSize="l" />
+                <EuiButtonIcon id={`filter-icon-${id}`} onClick={showModal} iconType="filter" iconSize="l" />
                 {isModalVisible && (
                     <EuiOverlayMask>
                         <EuiModal onClose={closeModal} initialFocus="[name=popswitch]">

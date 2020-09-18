@@ -1,4 +1,4 @@
-import { EuiButtonIcon, EuiInMemoryTable } from "@elastic/eui";
+import { EuiInMemoryTable } from "@elastic/eui";
 import React from "react";
 
 import { ServicePortFilterItem } from "../../../utils/types";

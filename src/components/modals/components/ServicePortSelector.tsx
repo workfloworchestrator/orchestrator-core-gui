@@ -6,7 +6,6 @@ import {
     EuiFlexItem,
     EuiForm,
     EuiFormRow,
-    EuiIcon,
     EuiSpacer,
     EuiSuggest,
     EuiSuggestItemProps,

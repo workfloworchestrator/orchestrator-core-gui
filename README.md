@@ -95,10 +95,30 @@ We are using Prettier as a code formatter. You can run prettier like this:
 
 Similarly you can run other packages that can be found in the package.json
 
+### Running the tests
+
 To run the unit-tests, do: `yarn test`.
 
 If this fails, you might want to increase your inotify limit. For more information, see
 https://unix.stackexchange.com/questions/13751/kernel-inotify-watch-limit-reached
+
+Tests consist out of snapshots tests for storybook items and tests for the uniforms based form inputs
+
+Webstorm can run the tests from the IDE by default and are the easiest to start with, especially when you want to
+easily run separate tests.
+
+#### Tips
+
+**Updating snapshots:** when snapshot failed: inspect the output and update your snapshots when you are 100% sure that the changes are
+indedd expected. After the initial run you can press `-u` to update the snapshots.
+
+**_Debug rendered components:_** You can see what a render of a component delivered with:
+
+```javascript
+expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+```
+
+### Storybook
 
 To run the storybook, do: `yarn storybook`.
 Your browser should open to http://localhost:9009/?path=/story/welcome--to-storybook.

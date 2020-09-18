@@ -13,8 +13,8 @@
  *
  */
 
-import { EuiIcon, EuiModal, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
-import React, { Fragment } from "react";
+import { EuiIcon, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
+import React from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
 import FavoritePortSelector from "./components/FavoritePortSelector";

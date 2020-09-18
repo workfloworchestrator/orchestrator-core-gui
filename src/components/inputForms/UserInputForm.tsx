@@ -278,9 +278,6 @@ class UserInputForm extends React.Component<IProps, IState> {
 
             try {
                 await this.props.validSubmit(userInput);
-                const recentUsedServicePorts = userInput.hasOwnProperty("esi_service_ports")
-                    ? userInput.esi_service_ports[0][0]["subscription_id"]
-                    : [];
                 this.setState({ processing: false });
                 return null;
             } catch (error) {
