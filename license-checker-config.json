@@ -4,6 +4,7 @@
         "charts",
         ".gitlab",
         "!(src)",
+        "!(src/lib/themes/surfnet_light)",
         ".storybook",
         "**.storyshot",
         "**.snap",
