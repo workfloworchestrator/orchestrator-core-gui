@@ -17,6 +17,7 @@ import { EuiIcon, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
 import React from "react";
 
 import ApplicationContext from "../../utils/ApplicationContext";
+import { Subscription } from "../../utils/types";
 import FavoritePortSelector from "./components/FavoritePortSelector";
 import ServicePortSelector from "./components/ServicePortSelector";
 
@@ -46,6 +47,7 @@ const tabs = [
 interface IProps {
     selectedTabId: string;
     handleSelect: any;
+    subscriptions: Subscription[];
 }
 
 interface IState {
@@ -72,6 +74,7 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
 
     render() {
         const { selectedTabId } = this.state;
+        const { subscriptions } = this.props;
         const renderTabs = () => {
             return tabs.map((tab, index) => (
                 <EuiTab
@@ -89,10 +92,10 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
                 <EuiTabs>{renderTabs()}</EuiTabs>
                 <EuiSpacer size="l" />
                 {selectedTabId === "nodeFilter" && (
-                    <ServicePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
+                    <ServicePortSelector subscriptions={subscriptions} handleSelect={this.props.handleSelect} />
                 )}
                 {selectedTabId === "favoritePorts" && (
-                    <FavoritePortSelector subscriptions={[]} handleSelect={this.props.handleSelect} />
+                    <FavoritePortSelector subscriptions={subscriptions} handleSelect={this.props.handleSelect} />
                 )}
             </EuiPanel>
         );

@@ -161,8 +161,8 @@ export interface ServicePortFilterItem {
 }
 
 export interface ServicePortFavoriteItem extends ServicePortFilterItem {
-    node_name: string;
-    location: string;
+    node_name?: string;
+    // location: string;
 }
 
 export interface Organization {

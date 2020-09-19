@@ -10,16 +10,17 @@ import {
     EuiSuggest,
     EuiSuggestItemProps,
     EuiSuperSelect,
+    EuiSwitch,
     EuiText
 } from "@elastic/eui";
 import React from "react";
 
 import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
-import { ServicePortFilterItem, Subscription } from "../../../utils/types";
+import { ServicePortFavoriteItem, ServicePortFilterItem, Subscription } from "../../../utils/types";
 import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
 
 interface IProps {
-    subscriptions: [];
+    subscriptions: Subscription[];
     handleSelect: Function;
 }
 
@@ -31,6 +32,7 @@ interface IState {
     nodeQuery: string;
     selectedNode?: Subscription;
     //ports
+    subscriptionFilterEnabled: boolean;
     portsLoading: boolean;
     ports: ServicePortFilterItem[];
     portOptions: any[];
@@ -51,6 +53,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             nodeQuery: "",
             selectedNode: undefined,
             // ports
+            subscriptionFilterEnabled: !!props.subscriptions.length,
             portsLoading: false,
             ports: [],
             portOptions: [],
@@ -136,6 +139,11 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.setState({ nodeSuggestions: nodeSuggestions.slice(0, 8), nodeQuery: nodeQuery });
     };
 
+    onSubscriptionFilterChange = () => {
+        const { subscriptionFilterEnabled } = this.state;
+        this.setState({ subscriptionFilterEnabled: !subscriptionFilterEnabled });
+    };
+
     onPortClick = (subscription_id: String) => {
         const { ports } = this.state;
         const selectedPort = ports.find(port => port.subscription_id === subscription_id);
@@ -149,21 +157,32 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
     };
 
     onAddFavoriteClick = () => {
-        const { selectedPort } = this.state;
+        const { selectedPort, selectedNode } = this.state;
         if (selectedPort) {
-            const storageKey = "favoritePortsArray-v1";
-            let oldPorts: ServicePortFilterItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
-            oldPorts.push(selectedPort);
+            const storageKey = "favoritePortsArray-v2";
+            let oldPorts: ServicePortFavoriteItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
+            let newPort: ServicePortFavoriteItem = selectedPort;
+            newPort.node_name = selectedNode?.description;
+            oldPorts.push(newPort);
+            debugger;
             localStorage.setItem(storageKey, JSON.stringify(oldPorts));
         }
     };
 
     resetNodeState = () => {
-        this.setState({ nodeQuery: "", selectedNode: undefined });
+        this.setState({ nodeQuery: "", selectedNode: undefined, ports: [], selectedPort: undefined });
     };
 
     render() {
-        const { nodesLoading, nodeSuggestions, selectedNode, portsLoading, portOptions, selectedPort } = this.state;
+        const {
+            nodesLoading,
+            nodeSuggestions,
+            selectedNode,
+            portsLoading,
+            portOptions,
+            selectedPort,
+            subscriptionFilterEnabled
+        } = this.state;
 
         return (
             <EuiForm component="form">
@@ -184,7 +203,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     </EuiFormRow>
                 )}
                 {!selectedNode && (
-                    <EuiFormRow label="Node" helpText="Select a node." fullWidth>
+                    <EuiFormRow id="modalNodeSelector" label="Node" helpText="Start typing to select a node." fullWidth>
                         <EuiSuggest
                             status={nodesLoading ? "loading" : "unchanged"}
                             onInputChange={e => this.onNodeInputChange(e)}
@@ -193,6 +212,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         />
                     </EuiFormRow>
                 )}
+
                 <EuiFormRow label="Port" helpText="Select a physical port." fullWidth>
                     <EuiSuperSelect
                         isLoading={portsLoading}
@@ -204,6 +224,14 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         hasDividers
                     />
                 </EuiFormRow>
+                <EuiFormRow label="Settings" fullWidth>
+                    <EuiSwitch
+                        label="Filter port subscriptions on allowed speed"
+                        checked={subscriptionFilterEnabled}
+                        onChange={this.onSubscriptionFilterChange}
+                    />
+                </EuiFormRow>
+
                 <EuiSpacer />
                 <EuiFlexGroup style={{ marginLeft: "300px" }}>
                     <EuiFlexItem>

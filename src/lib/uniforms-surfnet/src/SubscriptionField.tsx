@@ -248,10 +248,11 @@ function Subscription({
                 <EuiButtonIcon id={`filter-icon-${id}`} onClick={showModal} iconType="filter" iconSize="l" />
                 {isModalVisible && (
                     <EuiOverlayMask>
-                        <EuiModal onClose={closeModal} initialFocus="[name=popswitch]">
+                        <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
                             <ServicePortSelectorModal
                                 selectedTabId="nodeFilter"
                                 handleSelect={selectSubscriptionFromModal}
+                                subscriptions={subscriptions}
                             />
                         </EuiModal>
                     </EuiOverlayMask>

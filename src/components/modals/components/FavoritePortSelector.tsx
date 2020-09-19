@@ -1,11 +1,11 @@
-import { EuiInMemoryTable } from "@elastic/eui";
+import { EuiBadge, EuiIcon, EuiInMemoryTable } from "@elastic/eui";
 import React from "react";
 
-import { ServicePortFilterItem } from "../../../utils/types";
+import { ServicePortFavoriteItem, ServicePortFilterItem, Subscription } from "../../../utils/types";
 
 interface IProps {
-    subscriptions: [];
     handleSelect: any;
+    subscriptions: Subscription[];
 }
 
 interface IState {
@@ -30,37 +30,59 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     }
 
     componentDidMount() {
-        const storageKey = "favoritePortsArray-v1";
-        const ports: ServicePortFilterItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
+        const storageKey = "favoritePortsArray-v2";
+        const ports: ServicePortFavoriteItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
         this.setState({ ports: ports, portsLoaded: true });
     }
 
     render() {
         const { ports, portsLoaded } = this.state;
+        // @ts-ignore
         const columns = [
             {
                 field: "port_name",
                 name: "Port name",
                 sortable: true,
-                truncateText: true
+                truncateText: true,
+                width: "60px"
+                // render: (subscription_id: any) => {
+                //     const item = ports ? ports.find(subscription_id => subscription_id === subscription_id) : undefined
+                //     if (!item) {
+                //         return null;
+                //     }
+                //     return (
+                //         <div>
+                //             {item.port_name}
+                //             <br/>
+                //             {item.port_mode}
+                //         </div>
+                //     );
+                // }
             },
             {
-                field: "description",
-                name: "Subscription description",
-                sortable: true,
-                truncateText: true
+                field: "node_name",
+                name: "Node name",
+                sortable: true
             },
             {
                 field: "port_mode",
                 name: "Port mode",
                 truncateText: true,
-                sortable: true
+                sortable: true,
+                width: "75px",
+                render: (port: any) => <EuiBadge color="primary">{port}</EuiBadge>
             },
             {
                 field: "port_speed",
                 name: "Speed",
-                width: "100px"
+                width: "60px"
                 // render: (i: any) => <EuiButtonIcon iconType="popout" onClick={() => alert(`Clicked ${i}`)} />
+            },
+            {
+                field: "subscription_id",
+                name: "",
+                width: "20px",
+                render: (link: any) => <EuiIcon type="pinFilled"></EuiIcon>
             }
         ];
         return (
