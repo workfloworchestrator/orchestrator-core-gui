@@ -5025,29 +5025,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports3.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports3.0.subscription_id"
@@ -6174,29 +6151,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports6.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports6.0.subscription_id"
@@ -6373,29 +6327,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports7.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports7.0.subscription_id"
@@ -7445,29 +7376,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports9.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports9.0.subscription_id"
@@ -7644,29 +7552,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports10.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports10.0.subscription_id"
@@ -8762,29 +8647,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports_sn85.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports_sn85.0.subscription_id"
@@ -9192,29 +9054,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </em>
                           </label>
                           <div>
-                            <button
-                              className="euiButtonIcon euiButtonIcon--primary"
-                              id="filter-icon-input-service_ports_sn87.0.subscription_id"
-                              onClick={[Function]}
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden={true}
-                                className="euiIcon euiIcon--large euiButtonIcon__icon"
-                                focusable="false"
-                                height={16}
-                                role="img"
-                                style={null}
-                                viewBox="0 0 16 16"
-                                width={16}
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </button>
                             <div
                               className="subscription-field-select css-14jk2my-container"
                               id="input-service_ports_sn87.0.subscription_id"
