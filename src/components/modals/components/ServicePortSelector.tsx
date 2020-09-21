@@ -16,7 +16,7 @@ import {
 import React, { MouseEvent } from "react";
 
 import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
-import { ServicePortFilterItem, Subscription } from "../../../utils/types";
+import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "../../../utils/types";
 import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
 
 interface IProps {
@@ -159,9 +159,12 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         event.preventDefault();
         const { selectedPort } = this.state;
         if (selectedPort) {
-            const storageKey = "favoritePortsArray-v3";
-            let oldPorts: string[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
-            let newPort: string = selectedPort.subscription_id;
+            const storageKey = "favoritePortsArray-v4";
+            let oldPorts: FavoriteSubscriptionStorage[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
+            let newPort: FavoriteSubscriptionStorage = {
+                subscription_id: selectedPort.subscription_id,
+                customName: ""
+            };
             oldPorts.push(newPort);
             localStorage.setItem(storageKey, JSON.stringify(oldPorts));
         }

@@ -2,7 +2,13 @@ import { EuiBadge, EuiIcon, EuiInMemoryTable } from "@elastic/eui";
 import React from "react";
 
 import { portSubscriptions, subscriptions, subscriptionsDetail } from "../../../api";
-import { Product, ServicePortFilterItem, Subscription, WorkflowReasons } from "../../../utils/types";
+import {
+    FavoriteSubscriptionStorage,
+    Product,
+    ServicePortFilterItem,
+    Subscription,
+    WorkflowReasons
+} from "../../../utils/types";
 
 interface IProps {
     handleSelect: any;
@@ -33,11 +39,11 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     }
 
     componentDidMount() {
-        const storageKey = "favoritePortsArray-v3";
+        const storageKey = "favoritePortsArray-v4";
         let ports: Subscription[] = [];
-        let portSubscriptionIds: string[];
+        let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(storageKey) as string) || [];
-        let promises = portSubscriptionIds.map(subscription => subscriptionsDetail(subscription));
+        let promises = portSubscriptionIds.map(subscription => subscriptionsDetail(subscription.subscription_id));
         Promise.all(promises).then((result: [...Subscription[]]) => {
             result.map(r => ports.push(r));
             this.setState({ ports: ports, portsLoaded: true });

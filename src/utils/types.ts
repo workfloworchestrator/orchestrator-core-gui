@@ -100,7 +100,11 @@ export interface CustomerDescription {
     customer_id: string;
 }
 
-export interface SubscriptionCustomName {
+export interface FavoriteSubscription extends Subscription {
+    customName: string;
+}
+
+export interface FavoriteSubscriptionStorage {
     subscription_id: string;
     customName: string;
 }
