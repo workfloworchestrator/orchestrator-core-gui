@@ -231,21 +231,24 @@ function Subscription({
             )}
             <div>
                 {!disabled && (
-                    <EuiButtonIcon
-                        id={`refresh-icon-${id}`}
-                        iconType="refresh"
-                        iconSize="l"
-                        onClick={() => {
-                            setLoading(true);
-                            clearSubscriptions();
-                            getSubscriptions(tags, statuses).then(result => {
-                                updateSubscriptions(result);
-                                setLoading(false);
-                            });
-                        }}
-                    />
+                    <>
+                        <EuiButtonIcon
+                            id={`refresh-icon-${id}`}
+                            iconType="refresh"
+                            iconSize="l"
+                            onClick={() => {
+                                setLoading(true);
+                                clearSubscriptions();
+                                getSubscriptions(tags, statuses).then(result => {
+                                    updateSubscriptions(result);
+                                    setLoading(false);
+                                });
+                            }}
+                        />
+                        <EuiButtonIcon id={`filter-icon-${id}`} onClick={showModal} iconType="filter" iconSize="l" />
+                    </>
                 )}
-                <EuiButtonIcon id={`filter-icon-${id}`} onClick={showModal} iconType="filter" iconSize="l" />
+
                 {isModalVisible && (
                     <EuiOverlayMask>
                         <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">

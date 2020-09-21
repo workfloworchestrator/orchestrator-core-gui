@@ -13,10 +13,10 @@ import {
     EuiSwitch,
     EuiText
 } from "@elastic/eui";
-import React from "react";
+import React, { MouseEvent } from "react";
 
 import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
-import { ServicePortFavoriteItem, ServicePortFilterItem, Subscription } from "../../../utils/types";
+import { ServicePortFilterItem, Subscription } from "../../../utils/types";
 import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
 
 interface IProps {
@@ -53,7 +53,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             nodeQuery: "",
             selectedNode: undefined,
             // ports
-            subscriptionFilterEnabled: !!props.subscriptions.length,
+            subscriptionFilterEnabled: true,
             portsLoading: false,
             ports: [],
             portOptions: [],
@@ -135,7 +135,6 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 }`,
                 type: { iconType: "tableDensityNormal", color: node.status === "active" ? "tint5" : "tint1" }
             }));
-
         this.setState({ nodeSuggestions: nodeSuggestions.slice(0, 8), nodeQuery: nodeQuery });
     };
 
@@ -156,15 +155,14 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         }
     };
 
-    onAddFavoriteClick = () => {
-        const { selectedPort, selectedNode } = this.state;
+    onAddFavoriteClick = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+        event.preventDefault();
+        const { selectedPort } = this.state;
         if (selectedPort) {
-            const storageKey = "favoritePortsArray-v2";
-            let oldPorts: ServicePortFavoriteItem[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
-            let newPort: ServicePortFavoriteItem = selectedPort;
-            newPort.node_name = selectedNode?.description;
+            const storageKey = "favoritePortsArray-v3";
+            let oldPorts: string[] = JSON.parse(localStorage.getItem(storageKey) as string) || [];
+            let newPort: string = selectedPort.subscription_id;
             oldPorts.push(newPort);
-            debugger;
             localStorage.setItem(storageKey, JSON.stringify(oldPorts));
         }
     };
@@ -183,6 +181,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             selectedPort,
             subscriptionFilterEnabled
         } = this.state;
+
+        const { subscriptions } = this.props;
 
         return (
             <EuiForm component="form">
@@ -217,7 +217,13 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     <EuiSuperSelect
                         isLoading={portsLoading}
                         fullWidth
-                        options={portOptions}
+                        options={
+                            subscriptionFilterEnabled
+                                ? portOptions.filter(item =>
+                                      subscriptions.find(subscription => subscription.subscription_id === item.value)
+                                  )
+                                : portOptions
+                        }
                         valueOfSelected={selectedPort ? selectedPort.subscription_id : undefined}
                         onChange={value => this.onPortClick(value)}
                         itemLayoutAlign="top"

@@ -100,6 +100,11 @@ export interface CustomerDescription {
     customer_id: string;
 }
 
+export interface SubscriptionCustomName {
+    subscription_id: string;
+    customName: string;
+}
+
 export interface SubscriptionWithDetails extends Subscription {
     customer_name: string;
     instances: SubscriptionInstance[];
@@ -158,11 +163,6 @@ export interface ServicePortFilterItem {
     status: string;
     product_name: string;
     product_tag: string;
-}
-
-export interface ServicePortFavoriteItem extends ServicePortFilterItem {
-    node_name?: string;
-    // location: string;
 }
 
 export interface Organization {
