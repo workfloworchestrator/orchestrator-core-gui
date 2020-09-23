@@ -16,6 +16,9 @@ exports[`Storyshots NewProcess Default 1`] = `
       <div
         className="user-input-form"
       >
+        <div
+          className="confirmation-dialog-overlay"
+        />
         <section
           className="form-fieldset"
         >
@@ -193,6 +196,9 @@ exports[`Storyshots NewProcess Preselected 1`] = `
       <div
         className="user-input-form"
       >
+        <div
+          className="confirmation-dialog-overlay"
+        />
         <section
           className="form-fieldset"
         >
