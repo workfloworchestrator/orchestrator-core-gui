@@ -76,7 +76,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   <td
                     id="subscriptions-startdate-v"
                   >
-                    11/26/2019 CET
+                    26-11-2019 CET
                   </td>
                 </tr>
                 <tr>
@@ -835,7 +835,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   <td
                     id="created-v"
                   >
-                    3/28/2019, 13:47:05 CET
+                    28-3-2019 13:47:05 CET
                   </td>
                 </tr>
                 <tr>
@@ -933,10 +933,10 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                     completed
                   </td>
                   <td>
-                    11/26/2019, 12:44:08 CET
+                    26-11-2019 12:44:08 CET
                   </td>
                   <td>
-                    11/26/2019, 12:44:12 CET
+                    26-11-2019 12:44:12 CET
                   </td>
                 </tr>
               </tbody>
