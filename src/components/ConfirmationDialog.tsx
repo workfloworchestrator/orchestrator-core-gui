@@ -15,13 +15,22 @@
 
 import "./ConfirmationDialog.scss";
 
+import {
+    EuiButton,
+    EuiButtonEmpty,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiModalHeaderTitle,
+    EuiOverlayMask
+} from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
-import Modal from "react-modal";
 
 interface IProps {
     isOpen?: boolean;
-    cancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    cancel: (e: any) => void;
     confirm: (e: React.MouseEvent<HTMLButtonElement>) => void;
     question?: string;
     leavePage?: boolean;
@@ -36,17 +45,8 @@ export default function ConfirmationDialog({
     leavePage = false,
     isError = false
 }: IProps) {
-    return (
-        <Modal
-            isOpen={isOpen}
-            onRequestClose={cancel}
-            contentLabel={I18n.t("confirmation_dialog.title")}
-            className="confirmation-dialog-content"
-            overlayClassName="confirmation-dialog-overlay"
-            closeTimeoutMS={250}
-            appElement={document.getElementById("app")!}
-        >
-            <section className="dialog-header">{I18n.t("confirmation_dialog.title")}</section>
+    const modalContent = (
+        <div>
             {leavePage ? (
                 <section className={`dialog-content ${isError ? " error" : ""}`}>
                     <h2>{I18n.t("confirmation_dialog.leavePage")}</h2>
@@ -57,14 +57,34 @@ export default function ConfirmationDialog({
                     <h2>{question}</h2>
                 </section>
             )}
-            <section className="dialog-buttons">
-                <button id="dialog-cancel" className="button" onClick={cancel}>
-                    {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
-                </button>
-                <button id="dialog-confirm" className="button blue" onClick={confirm}>
-                    {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
-                </button>
-            </section>
-        </Modal>
+        </div>
     );
+
+    let modal;
+
+    if (isOpen) {
+        modal = (
+            <EuiOverlayMask>
+                <EuiModal onClose={cancel} initialFocus="[name=popfirst]">
+                    <EuiModalHeader>
+                        <EuiModalHeaderTitle>{I18n.t("confirmation_dialog.title")}</EuiModalHeaderTitle>
+                    </EuiModalHeader>
+
+                    <EuiModalBody>{modalContent}</EuiModalBody>
+
+                    <EuiModalFooter>
+                        <EuiButtonEmpty onClick={cancel}>
+                            {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
+                        </EuiButtonEmpty>
+
+                        <EuiButton onClick={confirm} fill>
+                            {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
+                        </EuiButton>
+                    </EuiModalFooter>
+                </EuiModal>
+            </EuiOverlayMask>
+        );
+    }
+
+    return <div className="confirmation-dialog-overlay">{modal}</div>;
 }
