@@ -27,7 +27,6 @@
 }
 
 @mixin page {
-    max-width: vars.$medium;
     margin: 0 auto 15px auto;
     padding: 0 15px;
 }
