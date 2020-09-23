@@ -15,6 +15,7 @@
 
 import "./ModifySubscription.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
@@ -80,17 +81,19 @@ class ModifySubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mod-modify-subscription">
-                <section className="card">
-                    <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.submit}
-                        cancel={this.cancel}
-                        hasNext={false}
-                    />
-                </section>
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-modify-subscription">
+                    <section className="card">
+                        <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.submit}
+                            cancel={this.cancel}
+                            hasNext={false}
+                        />
+                    </section>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

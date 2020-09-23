@@ -15,6 +15,7 @@
 
 import "./TerminateSubscription.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
@@ -100,18 +101,20 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mod-terminate-subscription">
-                <section className="card">
-                    <h1>{I18n.t("subscription.terminate")}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-terminate-subscription">
+                    <section className="card">
+                        <h1>{I18n.t("subscription.terminate")}</h1>
 
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.submit}
-                        cancel={this.cancel}
-                        hasNext={false}
-                    />
-                </section>
-            </div>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.submit}
+                            cancel={this.cancel}
+                            hasNext={false}
+                        />
+                    </section>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

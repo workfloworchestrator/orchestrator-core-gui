@@ -18,8 +18,6 @@
 @use "../stylesheets/vars";
 
 .mod-metadata {
-    @include mixins.page;
-
     .card {
         @include mixins.card;
     }

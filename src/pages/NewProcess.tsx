@@ -15,6 +15,7 @@
 
 import "./NewProcess.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React, { useCallback, useContext, useEffect, useState } from "react";
@@ -115,24 +116,26 @@ export default function NewProcess(props: IProps) {
     }, [products, submit, preselectedInput]);
 
     return (
-        <div className="mod-new-process">
-            <section className="card">
-                <h1>{I18n.t("process.new_process")}</h1>
-                {!!(productValidation?.valid === false && !!productValidation.product) && (
-                    <section>
-                        <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                        <ProductValidationComponent validation={productValidation} />
-                    </section>
-                )}
-                {stepUserInput && (
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={submit}
-                        cancel={() => redirect("/processes")}
-                        hasNext={hasNext}
-                    />
-                )}
-            </section>
-        </div>
+        <EuiPage>
+            <EuiPageBody component="div" className="mod-new-process">
+                <section className="card">
+                    <h1>{I18n.t("process.new_process")}</h1>
+                    {!!(productValidation?.valid === false && !!productValidation.product) && (
+                        <section>
+                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                            <ProductValidationComponent validation={productValidation} />
+                        </section>
+                    )}
+                    {stepUserInput && (
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={submit}
+                            cancel={() => redirect("/processes")}
+                            hasNext={hasNext}
+                        />
+                    )}
+                </section>
+            </EuiPageBody>
+        </EuiPage>
     );
 }

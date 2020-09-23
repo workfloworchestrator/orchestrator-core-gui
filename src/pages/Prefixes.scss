@@ -19,8 +19,6 @@
 @use "../stylesheets/vars";
 
 .mod-prefixes {
-    @include mixins.page;
-
     .card {
         @include mixins.card;
     }

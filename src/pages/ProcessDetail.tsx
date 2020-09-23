@@ -15,6 +15,7 @@
 
 import "./ProcessDetail.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
@@ -402,23 +403,27 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <div className="mod-process-detail">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
-                <section className="tabs">{tabs.map(tab => this.renderTab(process.is_task, tab, selectedTab))}</section>
-                {renderContent &&
-                    this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
-                {renderNotFound && (
-                    <section className="not-found card">
-                        <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-process-detail">
+                    <ConfirmationDialog
+                        isOpen={confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={confirmationDialogAction}
+                        question={confirmationDialogQuestion}
+                    />
+                    <section className="tabs">
+                        {tabs.map(tab => this.renderTab(process.is_task, tab, selectedTab))}
                     </section>
-                )}
-                <ScrollUpButton />
-            </div>
+                    {renderContent &&
+                        this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
+                    {renderNotFound && (
+                        <section className="not-found card">
+                            <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+                        </section>
+                    )}
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

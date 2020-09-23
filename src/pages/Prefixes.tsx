@@ -15,6 +15,7 @@
 
 import "./Prefixes.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import I18n from "i18n-js";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
@@ -370,75 +371,77 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         const filteredPrefixes = isEmpty(query) ? this.filter(prefixes) : this.filter(searchResults);
         const sortedPrefixes = this.sort(filteredPrefixes);
         return (
-            <div className="mod-prefixes">
-                <div className="card">
-                    <div className="options">
-                        <FilterDropDown
-                            items={filterAttributes.state}
-                            filterBy={this.setFilter("state")}
-                            singleSelectFilter={this.singleSelectFilter("state")}
-                            selectAll={this.selectAll("state")}
-                            label={I18n.t("prefixes.filters.state")}
-                        />
-
-                        <section className="search">
-                            <input
-                                className="allowed"
-                                placeholder={I18n.t("prefixes.searchPlaceHolder")}
-                                type="text"
-                                onChange={this.search}
-                                value={query}
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-prefixes">
+                    <div className="card">
+                        <div className="options">
+                            <FilterDropDown
+                                items={filterAttributes.state}
+                                filterBy={this.setFilter("state")}
+                                singleSelectFilter={this.singleSelectFilter("state")}
+                                selectAll={this.selectAll("state")}
+                                label={I18n.t("prefixes.filters.state")}
                             />
-                            <i className="fa fa-search" />
-                        </section>
+
+                            <section className="search">
+                                <input
+                                    className="allowed"
+                                    placeholder={I18n.t("prefixes.searchPlaceHolder")}
+                                    type="text"
+                                    onChange={this.search}
+                                    value={query}
+                                />
+                                <i className="fa fa-search" />
+                            </section>
+                        </div>
                     </div>
-                </div>
-                <section className="prefixes">
-                    <table className="prefixes">
-                        <thead>
-                            <tr>{columns.map((column, index) => th(index))}</tr>
-                        </thead>
-                        <tbody>
-                            {sortedPrefixes.map(prefix => (
-                                <tr
-                                    key={prefix.id}
-                                    onClick={this.subscriptionLink(prefix)}
-                                    className={ipamStates[prefix.state] ?? ""}
-                                >
-                                    <td data-label={I18n.t("prefixes.customer")} className="customer">
-                                        {prefix.customer}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.subscription_id")} className="subscription">
-                                        {prefix.subscription_id.substring(0, 8)}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.description")} className="description">
-                                        {prefix.description}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.family")} className="family">
-                                        {familyFullName[prefix.family]}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.prefixlen")} className="prefixlen">
-                                        /{prefix.prefixlen}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.prefix")} className="prefix">
-                                        {prefix.prefix}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.parent")} className="parent">
-                                        {prefix.parent}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.state")} className="state">
-                                        {ipamStates[prefix.state]}
-                                    </td>
-                                    <td data-label={I18n.t("prefixes.start_date")} className="start_date">
-                                        {prefix.start_date_as_str}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </section>
-                <ScrollUpButton />
-            </div>
+                    <section className="prefixes">
+                        <table className="prefixes">
+                            <thead>
+                                <tr>{columns.map((column, index) => th(index))}</tr>
+                            </thead>
+                            <tbody>
+                                {sortedPrefixes.map(prefix => (
+                                    <tr
+                                        key={prefix.id}
+                                        onClick={this.subscriptionLink(prefix)}
+                                        className={ipamStates[prefix.state] ?? ""}
+                                    >
+                                        <td data-label={I18n.t("prefixes.customer")} className="customer">
+                                            {prefix.customer}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.subscription_id")} className="subscription">
+                                            {prefix.subscription_id.substring(0, 8)}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.description")} className="description">
+                                            {prefix.description}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.family")} className="family">
+                                            {familyFullName[prefix.family]}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.prefixlen")} className="prefixlen">
+                                            /{prefix.prefixlen}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.prefix")} className="prefix">
+                                            {prefix.prefix}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.parent")} className="parent">
+                                            {prefix.parent}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.state")} className="state">
+                                            {ipamStates[prefix.state]}
+                                        </td>
+                                        <td data-label={I18n.t("prefixes.start_date")} className="start_date">
+                                            {prefix.start_date_as_str}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }
