@@ -13,7 +13,7 @@
  *
  */
 
-import "./ConfirmationDialog.scss";
+import "components/ConfirmationDialog.scss";
 
 import I18n from "i18n-js";
 import React from "react";

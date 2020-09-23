@@ -13,20 +13,19 @@
  *
  */
 
-import "./MetaData.scss";
+import "pages/MetaData.scss";
 
+import FixedInputConfiguration from "components/FixedInputConfiguration";
+import ProductBlocks from "components/ProductBlocks";
+import Products from "components/Products";
+import ResourceTypes from "components/ResourceTypes";
+import WorkFlows from "components/WorkFlows";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ScrollUpButton from "react-scroll-up-button";
-
-import FixedInputConfiguration from "../components/FixedInputConfiguration";
-import ProductBlocks from "../components/ProductBlocks";
-import Products from "../components/Products";
-import ResourceTypes from "../components/ResourceTypes";
-import WorkFlows from "../components/WorkFlows";
-import ApplicationContext from "../utils/ApplicationContext";
-import { applyIdNamingConvention } from "../utils/Utils";
+import ApplicationContext from "utils/ApplicationContext";
+import { applyIdNamingConvention } from "utils/Utils";
 
 interface MatchParams {
     type: string;

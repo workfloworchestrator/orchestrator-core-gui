@@ -13,11 +13,10 @@
  *
  */
 import I18n from "i18n-js";
+import { AutoField, BoolField } from "lib/uniforms-surfnet/src";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps, useField } from "uniforms";
-
-import { AutoField, BoolField } from "./";
-import { FieldProps } from "./types";
 
 export type OptGroupFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 

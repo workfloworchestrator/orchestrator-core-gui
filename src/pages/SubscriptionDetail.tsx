@@ -13,11 +13,7 @@
  *
  */
 
-import "./SubscriptionDetail.scss";
-
-import I18n from "i18n-js";
-import React from "react";
-import { RouteComponentProps } from "react-router";
+import "pages/SubscriptionDetail.scss";
 
 import {
     dienstafnameBySubscription,
@@ -32,11 +28,14 @@ import {
     subscriptionWorkflows,
     subscriptionsDetail,
     subscriptionsDetailWithModel
-} from "../api";
-import CheckBox from "../components/CheckBox";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import ApplicationContext from "../utils/ApplicationContext";
-import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
+} from "api";
+import CheckBox from "components/CheckBox";
+import ConfirmationDialog from "components/ConfirmationDialog";
+import I18n from "i18n-js";
+import React from "react";
+import { RouteComponentProps } from "react-router";
+import ApplicationContext from "utils/ApplicationContext";
+import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
 import {
     IMSEndpoint,
     IMSService,
@@ -49,9 +48,9 @@ import {
     SubscriptionWithDetails,
     WorkflowReasons,
     prop
-} from "../utils/types";
-import { applyIdNamingConvention, isEmpty, stop } from "../utils/Utils";
-import { subscriptionInstanceValues } from "../validations/Subscriptions";
+} from "utils/types";
+import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
+import { subscriptionInstanceValues } from "validations/Subscriptions";
 
 interface MatchParams {
     id: string;

@@ -13,7 +13,7 @@
  *
  */
 
-import { inValidVlan } from "../../validations/UserInput";
+import { inValidVlan } from "validations/UserInput";
 
 const test_vlanrange = (value, expected = true) => {
     const result = inValidVlan(value);

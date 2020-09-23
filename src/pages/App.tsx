@@ -13,44 +13,43 @@
  *
  */
 
-import "../locale/en";
-import "../locale/nl";
-import "./App.scss";
+import "locale/en";
+import "locale/nl";
+import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "api";
+import ErrorDialog from "components/ErrorDialog";
+import Flash from "components/Flash";
+import Header from "components/Header";
+import Navigation from "components/Navigation";
+import ProductPage from "components/Product";
+import ProductBlock from "components/ProductBlock";
+import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
+import MetaData from "pages/MetaData";
+import ModifySubscription from "pages/ModifySubscription";
+import NewProcess from "pages/NewProcess";
+import NewTask from "pages/NewTask";
+import NotAllowed from "pages/NotAllowed";
+import NotFound from "pages/NotFound";
+import Prefixes from "pages/Prefixes";
+import ProcessDetail from "pages/ProcessDetail";
+import Processes from "pages/Processes";
+import ServerError from "pages/ServerError";
+import Settings from "pages/Settings";
+import StyleGuide from "pages/StyleGuide";
+import SubscriptionDetail from "pages/SubscriptionDetail";
+import SubscriptionsPage from "pages/Subscriptions";
+import Tasks from "pages/Tasks";
+import TerminateSubscription from "pages/TerminateSubscription";
+import Validations from "pages/Validations";
 import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
-
-import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
-import ErrorDialog from "../components/ErrorDialog";
-import Flash from "../components/Flash";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-import ProductPage from "../components/Product";
-import ProductBlock from "../components/ProductBlock";
-import ProtectedRoute from "../components/ProtectedRoute";
-import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
-import { getParameterByName, getQueryParameters } from "../utils/QueryParameters";
-import { AppError } from "../utils/types";
-import MetaData from "./MetaData";
-import ModifySubscription from "./ModifySubscription";
-import NewProcess from "./NewProcess";
-import NewTask from "./NewTask";
-import NotAllowed from "./NotAllowed";
-import NotFound from "./NotFound";
-import Prefixes from "./Prefixes";
-import ProcessDetail from "./ProcessDetail";
-import Processes from "./Processes";
-import ServerError from "./ServerError";
-import Settings from "./Settings";
-import StyleGuide from "./StyleGuide";
-import SubscriptionDetail from "./SubscriptionDetail";
-import SubscriptionsPage from "./Subscriptions";
-import Tasks from "./Tasks";
-import TerminateSubscription from "./TerminateSubscription";
-import Validations from "./Validations";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
+import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
+import { AppError } from "utils/types";
 
 const history = createBrowserHistory();
 

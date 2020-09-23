@@ -13,11 +13,28 @@
  *
  */
 
+import {
+    renderInsyncCell,
+    renderSubscriptionCustomersCell,
+    renderSubscriptionDescriptionCell,
+    renderSubscriptionIdCell,
+    renderSubscriptionProductsCell,
+    renderSubscriptionTagCell,
+    renderTimestampCell
+} from "components/tables/cellRenderers";
+import {
+    renderCustomersFilter,
+    renderILikeFilter,
+    renderMultiSelectFilter,
+    renderSingleSelectFilter
+} from "components/tables/filterRenderers";
+import { NwaTable, isLocalTableSettings } from "components/tables/NwaTable";
 import chunk from "lodash/chunk";
 import isNull from "lodash/isNull";
 import last from "lodash/last";
 import omitBy from "lodash/omitBy";
 import sortedUniq from "lodash/sortedUniq";
+import SubscriptionDetail from "pages/SubscriptionDetail";
 import React, { useCallback, useContext, useMemo } from "react";
 import {
     Cell,
@@ -31,27 +48,9 @@ import {
     TableState
 } from "react-table";
 import { useQueryParam } from "use-query-params";
-
-import SubscriptionDetail from "../../pages/SubscriptionDetail";
-import ApplicationContext from "../../utils/ApplicationContext";
-import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../../utils/QueryParameters";
-import { Subscription } from "../../utils/types";
-import {
-    renderInsyncCell,
-    renderSubscriptionCustomersCell,
-    renderSubscriptionDescriptionCell,
-    renderSubscriptionIdCell,
-    renderSubscriptionProductsCell,
-    renderSubscriptionTagCell,
-    renderTimestampCell
-} from "./cellRenderers";
-import {
-    renderCustomersFilter,
-    renderILikeFilter,
-    renderMultiSelectFilter,
-    renderSingleSelectFilter
-} from "./filterRenderers";
-import { NwaTable, isLocalTableSettings } from "./NwaTable";
+import ApplicationContext from "utils/ApplicationContext";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
+import { Subscription } from "utils/types";
 
 export function initialSubscriptionsFilterAndSort(showTasks: boolean, statuses: string[]) {
     const initialFilterBy = [{ id: "status", values: statuses }];

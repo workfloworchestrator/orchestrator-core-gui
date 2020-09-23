@@ -13,13 +13,12 @@
  *
  */
 
-import "./ConfirmationDialog.scss";
+import "components/ConfirmationDialog.scss";
 
 import I18n from "i18n-js";
 import React from "react";
 import Modal from "react-modal";
-
-import { stop } from "../utils/Utils";
+import { stop } from "utils/Utils";
 
 interface IProps {
     isOpen: boolean;

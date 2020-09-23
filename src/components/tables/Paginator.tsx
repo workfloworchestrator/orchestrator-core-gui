@@ -13,7 +13,7 @@
  *
  */
 
-import "./Paginator.scss";
+import "components/tables/Paginator.scss";
 
 import I18n from "i18n-js";
 import React from "react";

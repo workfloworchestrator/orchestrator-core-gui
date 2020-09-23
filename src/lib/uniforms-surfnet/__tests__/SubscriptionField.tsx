@@ -13,19 +13,18 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
+import withApplicationContext from "__tests__/withApplicationContext";
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
+import { ListField } from "lib/uniforms-surfnet/src";
+import { SubscriptionField } from "lib/uniforms-surfnet/src";
+import { getPortMode, makeLabel } from "lib/uniforms-surfnet/src/SubscriptionField";
 import React from "react";
 import ReactSelect from "react-select";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import withApplicationContext from "../../../__tests__/withApplicationContext";
-import { Product, ServicePortSubscription } from "../../../utils/types";
-import { ListField } from "../src";
-import { SubscriptionField } from "../src";
-import { getPortMode, makeLabel } from "../src/SubscriptionField";
-import createContext from "./_createContext";
-import mount from "./_mount";
-import withSubscriptions from "./_withSubscriptions";
+import { Product, ServicePortSubscription } from "utils/types";
 
 const APP_CONTEXT = {
     products: [

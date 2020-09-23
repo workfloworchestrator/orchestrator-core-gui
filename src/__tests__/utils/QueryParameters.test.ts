@@ -13,7 +13,7 @@
  *
  */
 
-import { getParameterByName, getQueryParameters } from "../../utils/QueryParameters";
+import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 
 test("Parameter by name", () => {
     expect(getParameterByName("name", "?name=value")).toBe("value");

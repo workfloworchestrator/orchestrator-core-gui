@@ -13,13 +13,12 @@
  *
  */
 
-import "./Autocomplete.scss";
+import "components/inputForms/Autocomplete.scss";
 
 import React from "react";
 import scrollIntoView from "scroll-into-view";
-
-import { ContactPerson } from "../../utils/types";
-import { isEmpty } from "../../utils/Utils";
+import { ContactPerson } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 interface IProps {
     query: string;

@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import * as surfnet from "../src";
+import * as surfnet from "lib/uniforms-surfnet/src";
 
 it("exports everything", () => {
     expect(surfnet).toEqual({

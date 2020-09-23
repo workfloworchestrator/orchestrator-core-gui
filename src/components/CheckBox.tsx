@@ -13,7 +13,7 @@
  *
  */
 
-import "./CheckBox.scss";
+import "components/CheckBox.scss";
 
 import React, { ChangeEvent } from "react";
 

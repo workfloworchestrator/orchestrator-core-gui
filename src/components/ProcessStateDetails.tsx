@@ -13,22 +13,21 @@
  *
  */
 
-import "./ProcessStateDetails.scss";
+import "components/ProcessStateDetails.scss";
 
 import { EuiButton, EuiIcon, EuiText } from "@elastic/eui";
+import CheckBox from "components/CheckBox";
+import HighlightCode from "components/HighlightCode";
+import StepDetails from "components/Step";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
+import { CustomProcessWithDetails } from "pages/ProcessDetail";
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import ReactTooltip from "react-tooltip";
-
-import { CustomProcessWithDetails } from "../pages/ProcessDetail";
-import { capitalize, renderDateTime } from "../utils/Lookups";
-import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "../utils/types";
-import { applyIdNamingConvention, isEmpty } from "../utils/Utils";
-import CheckBox from "./CheckBox";
-import HighlightCode from "./HighlightCode";
-import StepDetails from "./Step";
+import { capitalize, renderDateTime } from "utils/Lookups";
+import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
+import { applyIdNamingConvention, isEmpty } from "utils/Utils";
 
 interface IProps {
     process: CustomProcessWithDetails;

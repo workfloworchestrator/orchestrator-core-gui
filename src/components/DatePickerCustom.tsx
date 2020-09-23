@@ -13,7 +13,7 @@
  *
  */
 
-import "./DatePickerCustom.scss";
+import "components/DatePickerCustom.scss";
 
 import React from "react";
 

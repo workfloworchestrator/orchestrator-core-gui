@@ -13,15 +13,14 @@
  *
  */
 
-import "./ProductWorkflowsValidation.scss";
+import "components/ProductWorkflowsValidation.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-
-import ApplicationContext from "../utils/ApplicationContext";
-import { CodedWorkflow, Product, WorkflowWithProductTags } from "../utils/types";
-import { isEmpty } from "../utils/Utils";
-import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
+import ApplicationContext from "utils/ApplicationContext";
+import { CodedWorkflow, Product, WorkflowWithProductTags } from "utils/types";
+import { isEmpty } from "utils/Utils";
+import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "validations/Products";
 
 type Column = "name" | "target" | "product_tags_string" | "description";
 

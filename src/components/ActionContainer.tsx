@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import "./ActionContainer.scss";
+import "components/ActionContainer.scss";
 
 import React, { useState } from "react";
 

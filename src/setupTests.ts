@@ -17,8 +17,7 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import fetchMock from "fetch-mock-jest";
 import I18n from "i18n-js";
-
-import en from "./locale/en";
+import en from "locale/en";
 
 // Enable fetchMock as global fetch mock
 global.fetch = fetchMock.sandbox();

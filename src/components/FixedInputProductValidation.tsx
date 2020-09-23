@@ -13,13 +13,12 @@
  *
  */
 
-import "./FixedInputProductValidation.scss";
+import "components/FixedInputProductValidation.scss";
 
 import I18n from "i18n-js";
 import React, { useContext } from "react";
-
-import ApplicationContext from "../utils/ApplicationContext";
-import { FixedInputValidation } from "../utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { FixedInputValidation } from "utils/types";
 
 interface IProps {
     validation: FixedInputValidation;

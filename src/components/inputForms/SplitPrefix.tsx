@@ -13,14 +13,13 @@
  *
  */
 
-import "./SplitPrefix.scss";
+import "components/inputForms/SplitPrefix.scss";
 
+import { free_subnets } from "api";
 import { range } from "lodash";
 import React from "react";
 import Select, { ValueType } from "react-select";
-
-import { free_subnets } from "../../api";
-import { Option } from "../../utils/types";
+import { Option } from "utils/types";
 
 interface IProps {
     id: string;
