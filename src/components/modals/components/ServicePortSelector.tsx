@@ -29,6 +29,7 @@ interface IProps {
 interface IState {
     errors: boolean;
     message?: string;
+    messageHelp?: string;
     // nodes
     nodesLoading: boolean;
     nodes: Subscription[];
@@ -52,6 +53,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.state = {
             errors: true,
             message: undefined,
+            messageHelp: undefined,
             // nodes
             nodesLoading: true,
             nodes: [],
@@ -119,7 +121,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         }
     };
 
-    // Todo: find out why EventTarget doesn't have a value : fall back to : ANY for now =>
+    // Todo: find out why type EventTarget doesn't work: fall back to type ANY for now =>
     onNodeInputChange = (e: any) => {
         const { nodes } = this.state;
         let nodeQuery = e.value;
@@ -135,7 +137,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             )
             .map((node, index) => ({
                 key: index,
-                label: node.description.includes("Node Planned")
+                label: node.description.includes("Node Planned") // Make long node names readable
                     ? node.description.replace("Node Planned", "")
                     : node.description,
                 description: `Status: ${node.status}${
@@ -157,9 +159,21 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         this.setState({ selectedPort: selectedPort });
     };
 
-    onSubmitClick = () => {
-        if (this.state.selectedPort) {
-            this.props.handleSelect(this.state.selectedPort.subscription_id);
+    onSubmitClick = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+        event.preventDefault();
+        const { selectedPort } = this.state;
+        const { subscriptions } = this.props;
+        if (subscriptions.find(subscription => subscription.subscription_id === selectedPort?.subscription_id)) {
+            this.props.handleSelect(selectedPort?.subscription_id);
+        } else {
+            this.setState({
+                message: `The selected subscription is not in the allowed list.`,
+                messageHelp: `Check the bandwidth in the worfklow form or don't override the speed setting in this form.`,
+                errors: true
+            });
+            setTimeout(() => {
+                this.setState({ message: undefined, errors: false });
+            }, 3000);
         }
     };
 
@@ -175,7 +189,15 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     errors: true
                 });
                 setTimeout(() => {
-                    this.setState({ message: undefined, errors: false });
+                    this.setState({ message: undefined, messageHelp: undefined, errors: false });
+                }, 3000);
+            } else if (oldPorts.find(subscription => subscription.subscription_id === selectedPort.subscription_id)) {
+                this.setState({
+                    message: `This subscription is already in your favorites. Only unique subscriptions allowed.`,
+                    errors: true
+                });
+                setTimeout(() => {
+                    this.setState({ message: undefined, messageHelp: undefined, errors: false });
                 }, 3000);
             } else {
                 let newPort: FavoriteSubscriptionStorage = {
@@ -189,7 +211,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     errors: false
                 });
                 setTimeout(() => {
-                    this.setState({ message: undefined });
+                    this.setState({ message: undefined, messageHelp: undefined, errors: false });
                 }, 1500);
             }
         }
@@ -203,6 +225,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         const {
             errors,
             message,
+            messageHelp,
             nodesLoading,
             nodeSuggestions,
             selectedNode,
@@ -222,7 +245,9 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                             title={message}
                             color={errors ? "danger" : "primary"}
                             iconType={errors ? "alert" : "notebookApp"}
-                        />
+                        >
+                            {messageHelp && <p>{messageHelp}</p>}
+                        </EuiCallOut>
                         <EuiSpacer />
                     </>
                 )}

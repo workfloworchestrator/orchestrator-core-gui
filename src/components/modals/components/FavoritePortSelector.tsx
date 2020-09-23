@@ -1,6 +1,8 @@
 import {
+    EuiBadge,
     EuiButton,
     EuiButtonIcon,
+    EuiCallOut,
     EuiFieldText,
     EuiForm,
     EuiFormRow,
@@ -21,8 +23,13 @@ interface IProps {
 }
 
 interface IState {
+    errors: boolean;
+    message?: string;
+    messageHelp?: string;
+    // forms
     editMode: boolean;
     editName: string;
+    // ports
     portsLoaded: boolean;
     portSubscriptionsIds: string[];
     ports: Subscription[];
@@ -37,6 +44,9 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         super(props);
 
         this.state = {
+            errors: true,
+            message: undefined,
+            messageHelp: undefined,
             editMode: false,
             editName: "",
             portsLoaded: false,
@@ -68,8 +78,6 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
         const editName = portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? "";
-        console.log("---------");
-        console.log(editName);
         this.setState({ selectedSubscription: subscription_id, editMode: !editMode, editName: editName });
     };
 
@@ -103,11 +111,34 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     };
 
     onSubscriptionSelect = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>, subscription_id: string) => {
-        this.props.handleSelect(subscription_id);
+        event.preventDefault();
+        const { subscriptions } = this.props;
+
+        if (subscriptions.find(subscription => subscription.subscription_id === subscription_id)) {
+            this.props.handleSelect(subscription_id);
+        } else {
+            this.setState({
+                message: `The selected subscription is not in the allowed list.`,
+                messageHelp: `Check the bandwidth in the worfklow form.`,
+                errors: true
+            });
+            setTimeout(() => {
+                this.setState({ message: undefined, errors: false });
+            }, 3000);
+        }
     };
 
     render() {
-        const { editMode, editName, ports, portsLoaded, selectedSubscription } = this.state;
+        const {
+            errors,
+            message,
+            messageHelp,
+            editMode,
+            editName,
+            ports,
+            portsLoaded,
+            selectedSubscription
+        } = this.state;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
 
@@ -123,6 +154,13 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                 field: "description",
                 name: "Description",
                 sortable: true
+            },
+            {
+                field: "port_mode",
+                name: "Mode",
+                sortable: true,
+                render: (port_mode: any) => <EuiBadge color="primary">{port_mode}</EuiBadge>,
+                width: "80px"
             },
             {
                 field: "subscription_id",
@@ -168,6 +206,19 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
 
         return (
             <div>
+                {message && (
+                    <>
+                        <EuiCallOut
+                            title={message}
+                            color={errors ? "danger" : "primary"}
+                            iconType={errors ? "alert" : "notebookApp"}
+                        >
+                            {messageHelp && <p>{messageHelp}</p>}
+                        </EuiCallOut>
+                        <EuiSpacer />
+                    </>
+                )}
+
                 {!editMode && (
                     <EuiInMemoryTable
                         items={ports}

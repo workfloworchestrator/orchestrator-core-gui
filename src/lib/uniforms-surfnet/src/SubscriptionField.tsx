@@ -245,7 +245,7 @@ function Subscription({
                                 });
                             }}
                         />
-                        {!tags?.includes("IP_PREFIX") && (
+                        {tags?.includes("SP") && (
                             <EuiButtonIcon
                                 id={`filter-icon-${id}`}
                                 onClick={showModal}
