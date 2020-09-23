@@ -40,7 +40,6 @@ import NewProcess from "./NewProcess";
 import NewTask from "./NewTask";
 import NotAllowed from "./NotAllowed";
 import NotFound from "./NotFound";
-import PortFilterMock from "./PortFilterMock";
 import Prefixes from "./Prefixes";
 import ProcessDetail from "./ProcessDetail";
 import Processes from "./Processes";
@@ -238,7 +237,6 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
-                                <Route path="/mocks" render={props => <PortFilterMock {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

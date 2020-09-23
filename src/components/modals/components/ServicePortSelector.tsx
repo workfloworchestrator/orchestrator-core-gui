@@ -107,7 +107,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     onNodeClick = (item: EuiSuggestItemProps) => {
         const { nodes } = this.state;
-        const selectedNode = nodes.find(node => node.description === item.label);
+        const selectedNode = nodes.find(node => node.description.replace("Node Planned", "") === item.label);
         this.setState({ selectedNode: selectedNode });
         if (selectedNode) {
             this.fetchPortData(selectedNode);
@@ -130,7 +130,9 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
             )
             .map((node, index) => ({
                 key: index,
-                label: node.description,
+                label: node.description.includes("Node Planned")
+                    ? node.description.replace("Node Planned", "")
+                    : node.description,
                 description: `Status: ${node.status}${
                     node.status === "active" ? " Start date: " + timeStampToDate(node.start_date) : ""
                 }`,

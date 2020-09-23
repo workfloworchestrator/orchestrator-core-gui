@@ -67,7 +67,6 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
         };
     }
 
-    // onSelectedTabChanged = () => this.setState({ isSwitchChecked: !this.state.isSwitchChecked });
     onSelectedTabChanged = (id: string) => {
         this.setState({ selectedTabId: id });
     };
