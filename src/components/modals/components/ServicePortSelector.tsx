@@ -2,6 +2,7 @@ import {
     EuiBadge,
     EuiButton,
     EuiButtonIcon,
+    EuiCallOut,
     EuiFlexGroup,
     EuiFlexItem,
     EuiForm,
@@ -26,6 +27,8 @@ interface IProps {
 }
 
 interface IState {
+    errors: boolean;
+    message?: string;
     // nodes
     nodesLoading: boolean;
     nodes: Subscription[];
@@ -47,6 +50,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         super(props);
 
         this.state = {
+            errors: true,
+            message: undefined,
             // nodes
             nodesLoading: true,
             nodes: [],
@@ -164,12 +169,29 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
         if (selectedPort) {
             let oldPorts: FavoriteSubscriptionStorage[] =
                 JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
-            let newPort: FavoriteSubscriptionStorage = {
-                subscription_id: selectedPort.subscription_id,
-                customName: ""
-            };
-            oldPorts.push(newPort);
-            localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(oldPorts));
+            if (oldPorts.length === 10) {
+                this.setState({
+                    message: `Max 10 favorites allowed. Please delete some if you want to add this port.`,
+                    errors: true
+                });
+                setTimeout(() => {
+                    this.setState({ message: undefined, errors: false });
+                }, 3000);
+            } else {
+                let newPort: FavoriteSubscriptionStorage = {
+                    subscription_id: selectedPort.subscription_id,
+                    customName: ""
+                };
+                oldPorts.push(newPort);
+                localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(oldPorts));
+                this.setState({
+                    message: `Service port: ${selectedPort.description} added to Favorites`,
+                    errors: false
+                });
+                setTimeout(() => {
+                    this.setState({ message: undefined });
+                }, 1500);
+            }
         }
     };
 
@@ -179,6 +201,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
     render() {
         const {
+            errors,
+            message,
             nodesLoading,
             nodeSuggestions,
             selectedNode,
@@ -192,6 +216,17 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
         return (
             <EuiForm component="form">
+                {message && (
+                    <>
+                        <EuiCallOut
+                            title={message}
+                            color={errors ? "danger" : "primary"}
+                            iconType={errors ? "alert" : "notebookApp"}
+                        />
+                        <EuiSpacer />
+                    </>
+                )}
+
                 {selectedNode && (
                     <EuiFormRow label="Node" fullWidth>
                         <EuiFlexGroup>
@@ -243,8 +278,8 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                         onChange={this.onSubscriptionFilterChange}
                     />
                 </EuiFormRow>
-
                 <EuiSpacer />
+
                 <EuiFlexGroup style={{ marginLeft: "300px" }}>
                     <EuiFlexItem>
                         <EuiButton

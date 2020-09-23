@@ -65,7 +65,12 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     onChangeEditMode = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>, subscription_id: string) => {
         event.preventDefault();
         const { editMode } = this.state;
-        this.setState({ selectedSubscription: subscription_id, editMode: !editMode });
+        let portSubscriptionIds: FavoriteSubscriptionStorage[];
+        portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
+        const editName = portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? "";
+        console.log("---------");
+        console.log(editName);
+        this.setState({ selectedSubscription: subscription_id, editMode: !editMode, editName: editName });
     };
 
     onDelete = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>, subscription_id: string) => {
@@ -89,7 +94,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         let oldPorts: FavoriteSubscriptionStorage[] =
             JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
         const portIndex = oldPorts.findIndex(port => port.subscription_id === selectedSubscription);
-        debugger;
+
         oldPorts[portIndex].customName = editName;
         console.log(oldPorts);
         localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(oldPorts));
@@ -102,7 +107,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     };
 
     render() {
-        const { editMode, ports, portsLoaded, selectedSubscription } = this.state;
+        const { editMode, editName, ports, portsLoaded, selectedSubscription } = this.state;
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
 
@@ -129,7 +134,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
             {
                 field: "subscription_id",
                 name: "",
-                width: "75px",
+                width: "77px",
                 render: (subscription_id: any) => (
                     <>
                         <EuiButtonIcon
@@ -167,7 +172,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                     <EuiInMemoryTable
                         items={ports}
                         columns={columns}
-                        pagination={true}
+                        pagination={{ pageSizeOptions: [5, 10] }}
                         loading={!portsLoaded}
                         sorting={true}
                         search={true}
@@ -191,13 +196,13 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                                 label="Custom name"
                                 helpText="Enter a short personal name that can be used to find this subscription"
                             >
-                                <EuiFieldText onChange={this.onUpdateName} />
+                                <EuiFieldText onChange={this.onUpdateName} value={editName} />
                             </EuiFormRow>
                             <EuiButton
+                                id="favorite-modal-custom-name-submit"
                                 type="submit"
                                 fill
                                 onClick={this.onSaveName}
-                                id="favorite-modal-custom-name-submit"
                             >
                                 Save name
                             </EuiButton>
