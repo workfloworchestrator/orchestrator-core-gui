@@ -15,43 +15,52 @@
 
 import "./ConfirmationDialog.scss";
 
+import {
+    EuiButton,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiModalHeaderTitle,
+    EuiOverlayMask
+} from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
-import Modal from "react-modal";
 
 import { stop } from "../utils/Utils";
 
 interface IProps {
     isOpen: boolean;
-    close: (event: React.MouseEvent<Element> | React.KeyboardEvent<Element>) => void;
+    close: (event: any) => void;
 }
 
 export default function ErrorDialog({ isOpen = false, close }: IProps) {
-    return (
-        <Modal
-            isOpen={isOpen}
-            onRequestClose={close}
-            contentLabel={I18n.t("error_dialog.title")}
-            className="confirmation-dialog-content"
-            overlayClassName="confirmation-dialog-overlay"
-            closeTimeoutMS={250}
-            appElement={document.getElementById("app") ?? undefined}
-        >
-            <section className="dialog-header error">{I18n.t("error_dialog.title")}</section>
-            <section className="dialog-content">
-                <h2>{I18n.t("error_dialog.body")}</h2>
-            </section>
-            <section className="dialog-buttons">
-                <button
-                    className="button blue error"
-                    onClick={e => {
-                        stop(e);
-                        close(e);
-                    }}
-                >
-                    {I18n.t("error_dialog.ok")}
-                </button>
-            </section>
-        </Modal>
-    );
+    let modal;
+    if (isOpen) {
+        modal = (
+            <EuiOverlayMask>
+                <EuiModal onClose={close} initialFocus="[name=popfirst]">
+                    <EuiModalHeader>
+                        <EuiModalHeaderTitle>{I18n.t("error_dialog.title")}</EuiModalHeaderTitle>
+                    </EuiModalHeader>
+                    <EuiModalBody>
+                        <h2>{I18n.t("error_dialog.body")}</h2>
+                    </EuiModalBody>
+                    <EuiModalFooter>
+                        <EuiButton
+                            onClick={(e: React.SyntheticEvent<Element, Event>) => {
+                                stop(e);
+                                close(e);
+                            }}
+                            fill
+                        >
+                            {I18n.t("error_dialog.ok")}
+                        </EuiButton>
+                    </EuiModalFooter>
+                </EuiModal>
+            </EuiOverlayMask>
+        );
+    }
+
+    return <div className="confirmation-dialog-overlay">{modal}</div>;
 }
