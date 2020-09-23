@@ -124,13 +124,12 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                 name: "My name",
                 sortable: true,
                 render: (subscription_id: any) =>
-                    // @ts-ignore
-                    portSubscriptionIds.find(item => item.subscription_id === subscription_id).customName
+                    portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? ""
             },
             {
                 field: "subscription_id",
                 name: "",
-                width: "65px",
+                width: "75px",
                 render: (subscription_id: any) => (
                     <>
                         <EuiButtonIcon
@@ -158,8 +157,8 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
 
         let subscriptionDescription = "";
         if (editMode) {
-            // @ts-ignore
-            subscriptionDescription = ports.find(port => port.subscription_id === selectedSubscription).description;
+            subscriptionDescription =
+                ports.find(port => port.subscription_id === selectedSubscription)?.description ?? "";
         }
 
         return (

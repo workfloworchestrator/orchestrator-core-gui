@@ -140,11 +140,11 @@ function Subscription({
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
-    const bandwithFrommField = bandwidthKey
+    const bandwithFromField = bandwidthKey
         ? get(model, bandwidthKey!) || schema.getInitialValue(bandwidthKey, {})
         : undefined;
 
-    const usedBandwidth = bandwidth || bandwithFrommField;
+    const usedBandwidth = bandwidth || bandwithFromField;
 
     // Get value from org field if organisationKey is set.
     const usedOrganisationId = organisationKey
@@ -245,7 +245,14 @@ function Subscription({
                                 });
                             }}
                         />
-                        <EuiButtonIcon id={`filter-icon-${id}`} onClick={showModal} iconType="filter" iconSize="l" />
+                        {!tags?.includes("IP_PREFIX") && (
+                            <EuiButtonIcon
+                                id={`filter-icon-${id}`}
+                                onClick={showModal}
+                                iconType="filter"
+                                iconSize="l"
+                            />
+                        )}
                     </>
                 )}
 
