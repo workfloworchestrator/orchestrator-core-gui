@@ -269,7 +269,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         this.setState({ confirmationDialogOpen: true });
     };
 
-    submit = async (userInput: {}) => {
+    submit = async (userInput: any = {}) => {
         const { processing } = this.state;
 
         if (!processing) {

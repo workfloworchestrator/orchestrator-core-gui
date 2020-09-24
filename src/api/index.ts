@@ -36,6 +36,7 @@ import {
     ProductBlock,
     ProductValidation,
     ResourceType,
+    ServicePortFilterItem,
     ServicePortSubscription,
     Subscription,
     SubscriptionModel,
@@ -316,6 +317,10 @@ export function organisations(): Promise<Organization[] | undefined> {
         });
         return undefined;
     });
+}
+
+export function getPortSubscriptionsForNode(id: string): Promise<ServicePortFilterItem[]> {
+    return fetchJson(`subscriptions/port-services-by-node/${id}`);
 }
 
 export function getNodesByLocationAndStatus(locationCode: string, status: string): Promise<IMSNode[]> {
