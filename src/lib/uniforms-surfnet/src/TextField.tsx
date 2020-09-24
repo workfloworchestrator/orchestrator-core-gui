@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +15,10 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+
+import { isNestedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
+
 
 export type TextFieldProps = FieldProps<string>;
 
@@ -35,17 +38,18 @@ function Text({
     errorMessage,
     ...props
 }: TextFieldProps) {
-    console.log(label);
-    debugger;
+    const labelRender: string = isNestedField(name) ? "" : label;
+
     return (
         <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={label}
+                label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
+                hasEmptyLabelSpace
             >
                 <EuiFieldText
                     disabled={disabled}

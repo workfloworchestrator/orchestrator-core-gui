@@ -63,6 +63,7 @@ function List({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={`formrow-${name}`}
+                fullWidth
             >
                 <></>
             </EuiFormRow>

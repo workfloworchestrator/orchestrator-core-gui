@@ -29,6 +29,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
 import { filterProductsByBandwidth } from "validations/Products";
+import {isNestedField} from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);
@@ -217,31 +218,36 @@ function Subscription({
         closeModal();
     };
 
+    const labelRender: string = isNestedField(name) ? "" : label;
+
     return (
         <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
             <EuiFormRow
-                label={label}
+                label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
+                hasEmptyLabelSpace
             >
                 <div>
                     {!disabled && (
                         <>
-                            <EuiButtonIcon
-                                id={`refresh-icon-${id}`}
-                                iconType="refresh"
-                                iconSize="l"
-                                onClick={() => {
-                                    setLoading(true);
-                                    clearSubscriptions();
-                                    getSubscriptions(tags, statuses).then(result => {
-                                        updateSubscriptions(result);
-                                        setLoading(false);
-                                    });
-                                }}
-                            />
+                            {!isNestedField(name) && (
+                                <EuiButtonIcon
+                                    id={`refresh-icon-${id}`}
+                                    iconType="refresh"
+                                    iconSize="l"
+                                    onClick={() => {
+                                        setLoading(true);
+                                        clearSubscriptions();
+                                        getSubscriptions(tags, statuses).then(result => {
+                                            updateSubscriptions(result);
+                                            setLoading(false);
+                                        });
+                                    }}
+                                />
+                            )}
                             {tags?.includes("SP") && (
                                 <EuiButtonIcon
                                     id={`filter-icon-${id}`}

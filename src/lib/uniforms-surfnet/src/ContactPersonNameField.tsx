@@ -24,6 +24,7 @@ import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
+import {isNestedField} from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
@@ -81,6 +82,8 @@ function ContactPersonName({
               .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
               .filter(item => !chosenPersons.some(person => person.email === item.email))
         : [];
+
+    const labelRender: string = isNestedField(name) ? "" : label;
 
     useEffect(() => {
         if (organisationIdValue) {
@@ -151,12 +154,13 @@ function ContactPersonName({
     return (
         <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={label}
+                label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
+                hasEmptyLabelSpace
             >
                 <EuiFieldText
                     disabled={disabled}

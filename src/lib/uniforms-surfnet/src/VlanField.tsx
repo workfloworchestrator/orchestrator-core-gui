@@ -25,6 +25,7 @@ import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
 import { inValidVlan } from "validations/UserInput";
+import { isNestedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 function getAllNumbersForVlanRange(vlanRange?: string) {
     if (!vlanRange) {
@@ -120,6 +121,7 @@ function Vlan({
     const subscription = getSubscription(subscriptionId);
     const portMode = subscription && getPortMode(subscription, products);
     const isUntagged = ["untagged", "link_member"].includes(portMode);
+    const labelRender: string = isNestedField(name) ? "" : label;
 
     useEffect(() => {
         if (subscriptionId && isUntagged && value !== "0") {
@@ -176,13 +178,14 @@ function Vlan({
     return (
         <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={label}
+                label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error || errorMessageExtra}
                 helpText={message}
                 id={id}
                 fullWidth
+                hasEmptyLabelSpace
             >
                 <>
                 <EuiFieldText
