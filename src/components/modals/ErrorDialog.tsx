@@ -53,6 +53,7 @@ export default function ErrorDialog({ isOpen = false, close }: IProps) {
                                 close(e);
                             }}
                             fill
+                            id="dialog-confirm"
                         >
                             {I18n.t("error_dialog.ok")}
                         </EuiButton>

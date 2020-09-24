@@ -73,11 +73,11 @@ export default function ConfirmationDialog({
                     <EuiModalBody>{modalContent}</EuiModalBody>
 
                     <EuiModalFooter>
-                        <EuiButtonEmpty onClick={cancel}>
+                        <EuiButtonEmpty onClick={cancel} id="dialog-cancel">
                             {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
                         </EuiButtonEmpty>
 
-                        <EuiButton onClick={confirm} fill>
+                        <EuiButton onClick={confirm} fill id="dialog-confirm">
                             {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
                         </EuiButton>
                     </EuiModalFooter>
