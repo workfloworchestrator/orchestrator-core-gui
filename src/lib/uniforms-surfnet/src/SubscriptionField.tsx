@@ -229,7 +229,6 @@ function Subscription({
                 <div>
                     {!disabled && (
                         <>
-
                             <EuiButtonIcon
                                 id={`refresh-icon-${id}`}
                                 iconType="refresh"
@@ -252,7 +251,6 @@ function Subscription({
                                 />
                             )}
                         </>
-
                     )}
 
                     {isModalVisible && (
@@ -266,7 +264,6 @@ function Subscription({
                             </EuiModal>
                         </EuiOverlayMask>
                     )}
-
 
                     <ReactSelect
                         id={id}
