@@ -19,8 +19,10 @@
 @use "../stylesheets/vars";
 
 .actions {
-    margin: 10px 0px -40px 10px;
     text-align: right;
+    position: absolute;
+    right: 16px;
+    transform: translateY(-10px);
     .explain {
         cursor: pointer;
         font-size: 22px;

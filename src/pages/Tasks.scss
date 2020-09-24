@@ -23,4 +23,8 @@
 .actions {
     margin: 10px 0px -40px 10px;
     text-align: right;
+
+    .button {
+        transform: translateY(-8px);
+    }
 }

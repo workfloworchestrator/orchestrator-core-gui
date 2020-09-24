@@ -120,8 +120,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
     renderExplain() {
         return (
-            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
-                <i className="fa fa-question-circle" />
+            <section className="explain">
+                <i className="fa fa-question-circle" onClick={() => this.setState({ showExplanation: true })} />
             </section>
         );
     }
