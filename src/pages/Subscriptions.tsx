@@ -15,10 +15,10 @@
 
 import "./Subscriptions.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import Explain from "../components/Explain";
 import {
     SubscriptionsTable,

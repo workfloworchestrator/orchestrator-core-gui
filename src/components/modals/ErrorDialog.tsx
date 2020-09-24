@@ -13,7 +13,7 @@
  *
  */
 
-import "./ConfirmationDialog.scss";
+import "components/modals/ConfirmationDialog.scss";
 
 import {
     EuiButton,
@@ -27,7 +27,7 @@ import {
 import I18n from "i18n-js";
 import React from "react";
 
-import { stop } from "../utils/Utils";
+import { stop } from "../../utils/Utils";
 
 interface IProps {
     isOpen: boolean;
