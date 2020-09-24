@@ -1859,14 +1859,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -2025,14 +2039,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -2191,14 +2219,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -2357,14 +2399,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -2523,14 +2579,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -2689,14 +2759,28 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
@@ -3194,14 +3278,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -3360,14 +3458,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -3526,14 +3638,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -3692,14 +3818,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -3858,14 +3998,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -4024,14 +4178,28 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
@@ -4273,14 +4441,28 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -4439,14 +4621,28 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -5214,14 +5410,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -5380,14 +5590,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -5546,14 +5770,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -5712,14 +5950,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -5878,14 +6130,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -6044,14 +6310,28 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
@@ -6549,14 +6829,51 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -6715,14 +7032,51 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -7220,14 +7574,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -7386,14 +7777,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -7552,14 +7980,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -7718,14 +8183,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -7884,14 +8386,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -8050,14 +8589,51 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
@@ -8555,14 +9131,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -8721,14 +9334,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -8887,14 +9537,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -9053,14 +9740,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -9219,14 +9943,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -9385,14 +10146,51 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
@@ -9890,14 +10688,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.0.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.0.subscription_id"
@@ -10056,14 +10891,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.1.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.1.subscription_id"
@@ -10222,14 +11094,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.2.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.2.subscription_id"
@@ -10388,14 +11297,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.3.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.3.subscription_id"
@@ -10554,14 +11500,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.4.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.4.subscription_id"
@@ -10720,14 +11703,51 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             </em>
                           </label>
                           <div>
-                            <div
-                              className="refresh-subscriptions"
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="refresh-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
                             >
-                              <i
-                                className="fa fa-sync "
-                                onClick={[Function]}
-                              />
-                            </div>
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="euiButtonIcon euiButtonIcon--primary"
+                              id="filter-icon-input-service_ports.5.subscription_id"
+                              onClick={[Function]}
+                              type="button"
+                            >
+                              <svg
+                                aria-hidden={true}
+                                className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                focusable="false"
+                                height={16}
+                                role="img"
+                                style={null}
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                  fillRule="evenodd"
+                                />
+                              </svg>
+                            </button>
                             <div
                               className="subscription-field-select css-2b097c-container"
                               id="input-service_ports.5.subscription_id"
