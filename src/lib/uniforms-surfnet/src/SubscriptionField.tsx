@@ -15,12 +15,14 @@
 
 import "./SubscriptionField.scss";
 
+import { EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
 import I18n from "i18n-js";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 
+import ServicePortSelectorModal from "../../../components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "../../../components/subscriptionContext";
 import ApplicationContext from "../../../utils/ApplicationContext";
 import { productById } from "../../../utils/Lookups";
@@ -128,16 +130,21 @@ function Subscription({
     const parent = useField(parentName, {}, { absoluteName: true })[0];
     const { model, schema } = useForm();
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
+
     let [subscriptions, updateSubscriptions] = useState<iSubscription[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let [loading, setLoading] = useState<boolean>(false);
     const { organisations, products: allProducts } = useContext(ApplicationContext);
     const { getSubscriptions, clearSubscriptions } = useContext(SubscriptionsContext);
 
-    const bandwithFrommField = bandwidthKey
+    const bandwithFromField = bandwidthKey
         ? get(model, bandwidthKey!) || schema.getInitialValue(bandwidthKey, {})
         : undefined;
 
-    const usedBandwidth = bandwidth || bandwithFrommField;
+    const usedBandwidth = bandwidth || bandwithFromField;
 
     // Get value from org field if organisationKey is set.
     const usedOrganisationId = organisationKey
@@ -209,6 +216,11 @@ function Subscription({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
+    const selectSubscriptionFromModal = (s: any) => {
+        onChange(s);
+        closeModal();
+    };
+
     return (
         <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
             {label && (
@@ -219,9 +231,11 @@ function Subscription({
             )}
             <div>
                 {!disabled && (
-                    <div className="refresh-subscriptions">
-                        <i
-                            className={`fa fa-sync ${loading ? "loading" : ""}`}
+                    <>
+                        <EuiButtonIcon
+                            id={`refresh-icon-${id}`}
+                            iconType="refresh"
+                            iconSize="l"
                             onClick={() => {
                                 setLoading(true);
                                 clearSubscriptions();
@@ -231,7 +245,27 @@ function Subscription({
                                 });
                             }}
                         />
-                    </div>
+                        {tags?.includes("SP") && (
+                            <EuiButtonIcon
+                                id={`filter-icon-${id}`}
+                                onClick={showModal}
+                                iconType="filter"
+                                iconSize="l"
+                            />
+                        )}
+                    </>
+                )}
+
+                {isModalVisible && (
+                    <EuiOverlayMask>
+                        <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
+                            <ServicePortSelectorModal
+                                selectedTabId="nodeFilter"
+                                handleSelect={selectSubscriptionFromModal}
+                                subscriptions={subscriptions}
+                            />
+                        </EuiModal>
+                    </EuiOverlayMask>
                 )}
                 <ReactSelect
                     id={id}
