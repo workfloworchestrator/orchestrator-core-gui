@@ -110,7 +110,7 @@
         "analyze": "source-map-explorer build/static/js/main.*",
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test --testPathIgnorePatterns=src/lib/uniforms-surfnet",
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 9009 -s ./public",
         "build-storybook": "build-storybook -s ./public",
