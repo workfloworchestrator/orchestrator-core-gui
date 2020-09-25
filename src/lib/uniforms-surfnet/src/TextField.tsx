@@ -16,7 +16,7 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
-import { isNestedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 
 
@@ -38,10 +38,11 @@ function Text({
     errorMessage,
     ...props
 }: TextFieldProps) {
-    const labelRender: string = isNestedField(name) ? "" : label;
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
 
     return (
-        <section {...filterDOMProps(props)}>
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
             <EuiFormRow
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}

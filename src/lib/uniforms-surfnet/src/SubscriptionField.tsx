@@ -29,7 +29,7 @@ import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
 import { filterProductsByBandwidth } from "validations/Products";
-import {isNestedField} from "lib/uniforms-surfnet/src/logic/labelLogic";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);
@@ -218,10 +218,25 @@ function Subscription({
         closeModal();
     };
 
-    const labelRender: string = isNestedField(name) ? "" : label;
+    const customStyles = {
+        container: () => ({
+            width: window.screen.width / 2 - 480
+        })
+        //
+        // control: () => ({
+        //     // none of react-select's styles are passed to <Control />
+        //     width: 600,
+        // }),
+    };
+
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
 
     return (
-        <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
+        <section
+            {...filterDOMProps(props)}
+            className={`${className} ${isRepeated ? "repeated" : ""} subscription-field`}
+        >
             <EuiFormRow
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
@@ -233,9 +248,11 @@ function Subscription({
                 <div>
                     {!disabled && (
                         <>
-                            {!isNestedField(name) && (
+                            {!isRepeatedField(name) && (
                                 <EuiButtonIcon
+                                    className="reload-subscriptions-icon-button"
                                     id={`refresh-icon-${id}`}
+                                    aria-label={`reload-${label}`}
                                     iconType="refresh"
                                     iconSize="l"
                                     onClick={() => {
@@ -250,7 +267,9 @@ function Subscription({
                             )}
                             {tags?.includes("SP") && (
                                 <EuiButtonIcon
+                                    className="show-service-port-modal-icon-button"
                                     id={`filter-icon-${id}`}
+                                    aria-label={`service-port-modal-${name}`}
                                     onClick={showModal}
                                     iconType="filter"
                                     iconSize="l"
@@ -287,6 +306,7 @@ function Subscription({
                         required={required}
                         inputRef={inputRef}
                         className="subscription-field-select"
+                        styles={customStyles}
                     />
                 </div>
             </EuiFormRow>

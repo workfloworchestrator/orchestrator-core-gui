@@ -25,7 +25,7 @@ import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
 import { inValidVlan } from "validations/UserInput";
-import { isNestedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 function getAllNumbersForVlanRange(vlanRange?: string) {
     if (!vlanRange) {
@@ -121,7 +121,6 @@ function Vlan({
     const subscription = getSubscription(subscriptionId);
     const portMode = subscription && getPortMode(subscription, products);
     const isUntagged = ["untagged", "link_member"].includes(portMode);
-    const labelRender: string = isNestedField(name) ? "" : label;
 
     useEffect(() => {
         if (subscriptionId && isUntagged && value !== "0") {
@@ -175,8 +174,11 @@ function Vlan({
         ? I18n.t("forms.widgets.vlan.allPortsAvailable")
         : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)}>
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
             <EuiFormRow
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}

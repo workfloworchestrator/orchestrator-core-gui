@@ -18,29 +18,20 @@
 .subscription-field {
     > div {
         display: flex;
-        flex-direction: column !important;
+        //flex-direction: column !important;
         .subscription-field-select {
-            width: 110%; // Weird stuff, something in the flex row is off...
-            &:nth-child(2) {
-                margin-left: 40px;
-                margin-top: -30px;
-            }
+            margin-left: 35px;
+            margin-top: -33px;
         }
     }
 }
 
-.refresh-subscriptions i {
-    &.fa-sync {
-        margin-left: auto;
-        margin-top: 3px;
-        color: vars.$primary;
-        font-size: 30px;
-        cursor: pointer;
-
-        &.loading {
-            animation: load8 1.1s infinite linear;
-        }
-    }
+.reload-subscriptions-icon-button {
+    margin-left: -35px;
+    margin-top: 6px;
+}
+.show-service-port-modal-icon-button {
+    margin-top: 6px;
 }
 
 // Fix things for ListField wrapped SubscriptionFields

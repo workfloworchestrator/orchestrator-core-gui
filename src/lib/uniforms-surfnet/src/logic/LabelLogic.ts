@@ -12,15 +12,18 @@
  * limitations under the License.
  *
  */
-export function isNestedField(name: string) {
+export function isRepeatedField(name: string) {
     // Todo write a test
     let isNested: boolean = false;
+    console.log(name);
     if (name.includes(".")) {
         const splittedName: string[] = name.split(".");
-        if (splittedName.length === 3) {
-            // ["contact_persons", "0", "phone"] for first row
-            // ["contact_persons", "1", "phone"] for second row
+        if (splittedName.length > 1 && splittedName.length < 4) {
             if (parseInt(splittedName[1]) > 0) {
+                isNested = true;
+            }
+        } else if (splittedName.length === 4) {
+            if (parseInt(splittedName[2]) > 0) {
                 isNested = true;
             }
         }

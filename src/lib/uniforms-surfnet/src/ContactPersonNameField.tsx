@@ -24,7 +24,7 @@ import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
-import {isNestedField} from "lib/uniforms-surfnet/src/logic/labelLogic";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
@@ -82,8 +82,6 @@ function ContactPersonName({
               .filter(item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)
               .filter(item => !chosenPersons.some(person => person.email === item.email))
         : [];
-
-    const labelRender: string = isNestedField(name) ? "" : label;
 
     useEffect(() => {
         if (organisationIdValue) {
@@ -151,8 +149,11 @@ function ContactPersonName({
         setTimeout(() => setDisplayAutocomplete(false), 350);
     }
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)}>
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
             <EuiFormRow
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}

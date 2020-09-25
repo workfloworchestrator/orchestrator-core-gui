@@ -22,7 +22,7 @@ import React from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
-
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<
@@ -77,6 +77,9 @@ function Select({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     if (!checkboxes && fieldType === Array) {
         return (
             <ListField name={name}>
@@ -88,38 +91,15 @@ function Select({
     } else {
         // Todo: cleanup or remove the "checboxes" variant completely
         return (
-            <section {...filterDOMProps(props)}>
-                {/*{label && (*/}
-                {/*    <label htmlFor={id}>*/}
-                {/*        {label}*/}
-                {/*        <em>{description}</em>*/}
-                {/*    </label>*/}
-                {/*)}*/}
-                {/*{checkboxes ? (*/}
-                {/*    allowedValues!.map((item: any, index: number) => (*/}
-                {/*        <div key={item} className="bool-field">*/}
-                {/*    <input*/}
-                {/*        checked={fieldType === Array ? value!.includes(item) : value === item}*/}
-                {/*        disabled={disabled}*/}
-                {/*        id={`${id}.${index}`}*/}
-                {/*        name={name}*/}
-                {/*        onChange={() => {*/}
-                {/*            onChange(fieldType === Array ? xor([item], value) : item);*/}
-                {/*        }}*/}
-                {/*        type="checkbox"*/}
-                {/*    />*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*    ))*/}
-                {/*) : (*/}
-
+            <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
                 <EuiFormRow
-                    label={label}
+                    label={labelRender}
                     labelAppend={<EuiText size="m">{description}</EuiText>}
                     error={showInlineError ? errorMessage : false}
                     isInvalid={error}
-                    fullWidth
                     id={id}
+                    fullWidth
+                    hasEmptyLabelSpace
                 >
                     <ReactSelect
                         id={id}
@@ -138,13 +118,6 @@ function Select({
                         inputRef={inputRef}
                     />
                 </EuiFormRow>
-                {/*)}*/}
-
-                {/*{error && showInlineError && (*/}
-                {/*    <em className="error">*/}
-                {/*        <div className="backend-validation">{errorMessage}</div>*/}
-                {/*    </em>*/}
-                {/*)}*/}
             </section>
         );
     }
