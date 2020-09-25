@@ -38,7 +38,7 @@ export default class Flash extends React.PureComponent<{}, IState> {
         }
     };
 
-    componentWillMount() {
+    componentDidMount() {
         this.callback(getFlash());
         emitter.addListener("flash", this.callback);
     }
