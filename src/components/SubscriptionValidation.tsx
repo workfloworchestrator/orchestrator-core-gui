@@ -17,7 +17,7 @@ import "components/SubscriptionValidation.scss";
 
 import { deleteSubscription } from "api/index";
 import CheckBox from "components/CheckBox";
-import ConfirmationDialog from "components/ConfirmationDialog";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 import ApplicationContext from "utils/ApplicationContext";
@@ -65,12 +65,12 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         };
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
-        const { subscriptions } = nextProps;
-        if (subscriptions.length !== this.state.subscriptions.length) {
+    componentDidUpdate(prevProps: IProps) {
+        const { subscriptions } = this.props;
+        if (subscriptions && subscriptions.length !== prevProps.subscriptions.length) {
             const { organisations, products } = this.context;
             this.setState({
-                subscriptions: subscriptions.map(subscription =>
+                subscriptions: this.props.subscriptions.map(subscription =>
                     enrichSubscription(subscription, organisations, products)
                 )
             });

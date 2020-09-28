@@ -7,6 +7,9 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
   <div
     className="user-input-form"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <section
       className="form-fieldset"
     >

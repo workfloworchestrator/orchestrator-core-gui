@@ -19,6 +19,9 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
         <div
           className="user-input-form"
         >
+          <div
+            className="confirmation-dialog-overlay"
+          />
           <section
             className="form-fieldset"
           >

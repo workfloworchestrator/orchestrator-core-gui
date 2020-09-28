@@ -17,9 +17,9 @@ import "pages/Tasks.scss";
 
 import { abortProcess, deleteProcess, retryProcess } from "api";
 import { filterableEndpoint } from "api/filterable";
-import ConfirmationDialog from "components/ConfirmationDialog";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,

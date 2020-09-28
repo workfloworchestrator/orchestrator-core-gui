@@ -15,8 +15,8 @@
 
 import "pages/Subscriptions.scss";
 
-import ConfirmationDialog from "components/ConfirmationDialog";
 import Explain from "components/Explain";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     SubscriptionsTable,
     initialSubscriptionTableSettings,

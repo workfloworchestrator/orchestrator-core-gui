@@ -18,10 +18,9 @@ import "locale/nl";
 import "pages/App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
-import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "api";
-import ErrorDialog from "components/ErrorDialog";
 import Flash from "components/Flash";
 import Header from "components/Header";
+import ErrorDialog from "components/modals/ErrorDialog";
 import Navigation from "components/Navigation";
 import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
@@ -50,6 +49,8 @@ import { QueryParamProvider } from "use-query-params";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
+
+import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
 
 const history = createBrowserHistory();
 

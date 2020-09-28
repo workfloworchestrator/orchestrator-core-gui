@@ -16,9 +16,9 @@
 import "components/Products.scss";
 
 import { deleteProduct, products } from "api/index";
-import ConfirmationDialog from "components/ConfirmationDialog";
 import DropDownActions from "components/DropDownActions";
 import FilterDropDown from "components/FilterDropDown";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";

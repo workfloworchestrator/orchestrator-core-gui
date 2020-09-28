@@ -15,10 +15,9 @@
 
 import "pages/Processes.scss";
 
-import { abortProcess, retryProcess } from "api";
-import ConfirmationDialog from "components/ConfirmationDialog";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import {
     ProcessesTable,
     initialProcessTableSettings,
@@ -33,6 +32,8 @@ import { organisationNameByUuid } from "utils/Lookups";
 import { ProcessV2 } from "utils/types";
 import { stop } from "utils/Utils";
 import { actionOptions } from "validations/Processes";
+
+import { abortProcess, retryProcess } from "../api";
 
 interface IProps {}
 

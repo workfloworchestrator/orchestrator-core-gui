@@ -16,9 +16,11 @@
 import "react-datepicker/dist/react-datepicker.css";
 import "components/ProductBlock.scss";
 
+import "./ProductBlock.scss";
+
 import { deleteProductBlock } from "api";
 import { productBlockById, productBlocks, resourceTypes, saveProductBlock } from "api/index";
-import ConfirmationDialog from "components/ConfirmationDialog";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import { formDate, formInput, formSelect } from "forms/Builder";
 import I18n from "i18n-js";
