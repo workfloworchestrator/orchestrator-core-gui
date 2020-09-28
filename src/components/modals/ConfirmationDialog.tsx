@@ -65,7 +65,7 @@ export default function ConfirmationDialog({
     if (isOpen) {
         modal = (
             <EuiOverlayMask>
-                <EuiModal onClose={cancel} initialFocus="[name=popfirst]">
+                <EuiModal className="confirm-modal" onClose={cancel} initialFocus="[name=popfirst]">
                     <EuiModalHeader>
                         <EuiModalHeaderTitle>{I18n.t("confirmation_dialog.title")}</EuiModalHeaderTitle>
                     </EuiModalHeader>

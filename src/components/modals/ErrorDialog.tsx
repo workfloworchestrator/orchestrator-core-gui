@@ -39,7 +39,7 @@ export default function ErrorDialog({ isOpen = false, close }: IProps) {
     if (isOpen) {
         modal = (
             <EuiOverlayMask>
-                <EuiModal onClose={close} initialFocus="[name=popfirst]">
+                <EuiModal className="error-modal" onClose={close} initialFocus="[name=popfirst]">
                     <EuiModalHeader>
                         <EuiModalHeaderTitle>{I18n.t("error_dialog.title")}</EuiModalHeaderTitle>
                     </EuiModalHeader>
