@@ -149,7 +149,9 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                     })
                     .catch(err => {
                         if (err.response && err.response.status === 400) {
-                            err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
+                            if (err.response.data) {
+                                setFlash(err.response.data.error);
+                            }
                         } else {
                             throw err;
                         }
