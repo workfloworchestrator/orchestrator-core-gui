@@ -55,9 +55,9 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         this.state = { forms: [{ form: props.stepUserInput, hasNext: props.hasNext }], userInputs: [] };
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
-        if (!isEqual(nextProps, this.state.forms[0])) {
-            this.setState({ forms: [{ form: nextProps.stepUserInput, hasNext: nextProps.hasNext }] });
+    componentDidUpdate(prevProps: IProps) {
+        if (!isEqual(this.props, this.state.forms[0]) && !isEqual(prevProps, this.props)) {
+            this.setState({ forms: [{ form: this.props.stepUserInput, hasNext: this.props.hasNext }] });
         }
     }
 

@@ -103,7 +103,6 @@ class TerminateSubscription extends React.Component<IProps, IState> {
             <div className="mod-terminate-subscription">
                 <section className="card">
                     <h1>{I18n.t("subscription.terminate")}</h1>
-
                     <UserInputFormWizard
                         stepUserInput={stepUserInput}
                         validSubmit={this.submit}

@@ -66,12 +66,12 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         };
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
-        const { subscriptions } = nextProps;
-        if (subscriptions.length !== this.state.subscriptions.length) {
+    componentDidUpdate(prevProps: IProps) {
+        const { subscriptions } = this.props;
+        if (subscriptions && subscriptions.length !== prevProps.subscriptions.length) {
             const { organisations, products } = this.context;
             this.setState({
-                subscriptions: subscriptions.map(subscription =>
+                subscriptions: this.props.subscriptions.map(subscription =>
                     enrichSubscription(subscription, organisations, products)
                 )
             });
