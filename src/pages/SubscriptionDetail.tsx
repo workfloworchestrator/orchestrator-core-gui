@@ -15,6 +15,7 @@
 
 import "./SubscriptionDetail.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -34,7 +35,6 @@ import {
     subscriptionsDetailWithModel
 } from "../api";
 import CheckBox from "../components/CheckBox";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
 import {

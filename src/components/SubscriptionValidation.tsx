@@ -15,6 +15,7 @@
 
 import "./SubscriptionValidation.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 
@@ -25,7 +26,6 @@ import { enrichSubscription, renderDate } from "../utils/Lookups";
 import { SortOption, Subscription, SubscriptionWithDetails } from "../utils/types";
 import { stop } from "../utils/Utils";
 import CheckBox from "./CheckBox";
-import ConfirmationDialog from "./ConfirmationDialog";
 
 type Column =
     | "customer_name"

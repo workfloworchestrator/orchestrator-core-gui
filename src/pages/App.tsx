@@ -18,13 +18,13 @@ import "../locale/nl";
 import "./App.scss";
 
 import { EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import ErrorDialog from "components/modals/ErrorDialog";
 import { createBrowserHistory } from "history";
 import React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
 
 import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
-import ErrorDialog from "../components/ErrorDialog";
 import Flash from "../components/Flash";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";

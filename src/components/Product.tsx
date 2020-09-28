@@ -17,6 +17,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import "./Product.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { isDate } from "date-fns";
 import I18n from "i18n-js";
 import React from "react";
@@ -39,7 +40,6 @@ import {
 } from "../utils/types";
 import { isEmpty, stop } from "../utils/Utils";
 import { TARGET_CREATE, TARGET_MODIFY, TARGET_TERMINATE } from "../validations/Products";
-import ConfirmationDialog from "./ConfirmationDialog";
 
 const TAG_LIGHTPATH = "LightPath";
 
