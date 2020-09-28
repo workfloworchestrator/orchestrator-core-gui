@@ -13,13 +13,12 @@
  *
  */
 
+import DatePickerCustom from "components/DatePickerCustom";
 import I18n from "i18n-js";
 import React from "react";
 import DatePicker from "react-datepicker";
 import Select, { ValueType } from "react-select";
-
-import DatePickerCustom from "../components/DatePickerCustom";
-import { Option } from "../utils/types";
+import { Option } from "utils/types";
 
 export function formInput<T extends { [index: string]: any }>(
     i18nKey: string,

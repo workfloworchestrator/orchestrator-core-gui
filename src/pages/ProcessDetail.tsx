@@ -13,27 +13,26 @@
  *
  */
 
-import "./ProcessDetail.scss";
+import "pages/ProcessDetail.scss";
 
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import { process, resumeProcess } from "api";
+import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "api/index";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ProcessStateDetails from "components/ProcessStateDetails";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
-
-import { process, resumeProcess } from "../api";
-import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "../api/index";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ProcessStateDetails from "../components/ProcessStateDetails";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
-import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
-import { stop } from "../utils/Utils";
-import { actionOptions } from "../validations/Processes";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { organisationNameByUuid, productById, productNameById } from "utils/Lookups";
+import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
+import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
+import { stop } from "utils/Utils";
+import { actionOptions } from "validations/Processes";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 

@@ -14,11 +14,10 @@
  */
 
 import fetchMock from "fetch-mock";
+import NewProcess from "pages/NewProcess";
 import React from "react";
+import { Organisation, createForm } from "stories/utils";
 import StoryRouter from "storybook-react-router";
-
-import NewProcess from "../pages/NewProcess";
-import { Organisation, createForm } from "./utils";
 
 export default {
     title: "NewProcess",

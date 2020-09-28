@@ -13,11 +13,10 @@
  *
  */
 
+import { portSubscriptions, subscriptions } from "api";
 import { memoize, merge } from "lodash";
 import React, { HTMLProps } from "react";
-
-import { portSubscriptions, subscriptions } from "../api";
-import { ServicePortSubscription } from "../utils/types";
+import { ServicePortSubscription } from "utils/types";
 
 let subscriptionsCache: { [index: string]: ServicePortSubscription } = {};
 

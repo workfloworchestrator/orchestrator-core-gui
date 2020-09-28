@@ -13,17 +13,16 @@
  *
  */
 
+import { catchErrorStatus } from "api/index";
+import UserInputForm from "components/inputForms/UserInputForm";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import hash from "object-hash";
 import React from "react";
-
-import { catchErrorStatus } from "../../api/index";
-import ApplicationContext from "../../utils/ApplicationContext";
-import { setFlash } from "../../utils/Flash";
-import { FormNotCompleteResponse, InputForm } from "../../utils/types";
-import { stop } from "../../utils/Utils";
-import UserInputForm from "./UserInputForm";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { FormNotCompleteResponse, InputForm } from "utils/types";
+import { stop } from "utils/Utils";
 
 interface Form {
     form: InputForm;

@@ -13,17 +13,16 @@
  *
  */
 
-import "./NewTask.scss";
+import "pages/NewTask.scss";
 
+import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
-
-import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { EngineStatus, InputForm } from "../utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { EngineStatus, InputForm } from "utils/types";
 
 interface IState {
     stepUserInput?: InputForm;

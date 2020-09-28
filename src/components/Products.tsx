@@ -13,21 +13,20 @@
  *
  */
 
-import "./Products.scss";
+import "components/Products.scss";
 
+import { deleteProduct, products } from "api/index";
+import DropDownActions from "components/DropDownActions";
+import FilterDropDown from "components/FilterDropDown";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-
-import { deleteProduct, products } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { renderDateTime } from "../utils/Lookups";
-import { Filter, SortOption, Product as iProduct } from "../utils/types";
-import { isEmpty, stop } from "../utils/Utils";
-import DropDownActions from "./DropDownActions";
-import FilterDropDown from "./FilterDropDown";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { renderDateTime } from "utils/Lookups";
+import { Filter, SortOption, Product as iProduct } from "utils/types";
+import { isEmpty, stop } from "utils/Utils";
 
 type Column = "name" | "description" | "tag" | "product_type" | "status" | "product_blocks_string" | "created_at";
 

@@ -13,15 +13,14 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ImsPortIdField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ReactSelect from "react-select";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import { IMSPort, Subscription } from "../../../utils/types";
-import { ImsPortIdField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
+import { IMSPort, Subscription } from "utils/types";
 
 describe("<ImsPortIdField>", () => {
     test("<ImsPortIdField> - renders inputs legacy", async () => {

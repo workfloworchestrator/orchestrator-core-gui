@@ -1,3 +1,4 @@
+import createSchema from "lib/uniforms-surfnet/__tests__/_createSchema";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +14,6 @@
  *
  */
 import { Context, randomIds } from "uniforms";
-
-import createSchema from "./_createSchema";
 
 test("Test suite must contain at least one test", () => {});
 

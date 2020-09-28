@@ -13,13 +13,12 @@
  *
  */
 
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { OrganisationField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import ORGANISATIONS_JSON from "../../../../stories/data/organisations.json";
-import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
-import { OrganisationField, SelectField } from "../../src";
-import createContext from "../_createContext";
-import mount from "../_mount";
+import ORGANISATIONS_JSON from "stories/data/organisations.json";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 describe("<OrganisationField>", () => {
     test("<OrganisationField> - calls selectField with all organisations", () => {

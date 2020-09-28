@@ -13,18 +13,13 @@
  *
  */
 
-import "./ProductValidation.scss";
+import "components/ProductValidation.scss";
 
 import I18n from "i18n-js";
 import React from "react";
-
-import { capitalize } from "../utils/Lookups";
-import {
-    ProductValidationError,
-    ProductValidationMapping,
-    ProductValidation as iProductValidation
-} from "../utils/types";
-import { isEmpty } from "../utils/Utils";
+import { capitalize } from "utils/Lookups";
+import { ProductValidationError, ProductValidationMapping, ProductValidation as iProductValidation } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 interface ResourceTypeInfo {
     name: string;
