@@ -90,6 +90,8 @@ function axiosFetch<R = {}>(
     showErrorDialog = true,
     result = true
 ): Promise<R> {
+    // preset the config with the relative URL and a GET type.
+    // presets can be overridden with `options`.
     return axiosInstance({ url: path, method: "GET", ...options })
         .then(res => res.data)
         .catch(err => {
