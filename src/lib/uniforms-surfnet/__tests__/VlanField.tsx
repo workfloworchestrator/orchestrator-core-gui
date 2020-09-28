@@ -13,15 +13,14 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
+import { ListField, VlanField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import { NestField } from "uniforms-unstyled";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import { ListField, VlanField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
-import withSubscriptions from "./_withSubscriptions";
 
 describe("<VlanField>", () => {
     test("<VlanField> - renders an input", async () => {

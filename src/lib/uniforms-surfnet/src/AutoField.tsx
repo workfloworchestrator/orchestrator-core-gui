@@ -13,17 +13,16 @@
  *
  */
 import invariant from "invariant";
+import BoolField from "lib/uniforms-surfnet/src/BoolField";
+import DateField from "lib/uniforms-surfnet/src/DateField";
+import ListField from "lib/uniforms-surfnet/src/ListField";
+import NestField from "lib/uniforms-surfnet/src/NestField";
+import NumField from "lib/uniforms-surfnet/src/NumField";
+import RadioField from "lib/uniforms-surfnet/src/RadioField";
+import SelectField from "lib/uniforms-surfnet/src/SelectField";
+import TextField from "lib/uniforms-surfnet/src/TextField";
 import { ComponentType, createElement } from "react";
 import { Override, connectField, useField } from "uniforms";
-
-import BoolField from "./BoolField";
-import DateField from "./DateField";
-import ListField from "./ListField";
-import NestField from "./NestField";
-import NumField from "./NumField";
-import RadioField from "./RadioField";
-import SelectField from "./SelectField";
-import TextField from "./TextField";
 
 export type AutoFieldProps = Override<
     Record<string, unknown>,

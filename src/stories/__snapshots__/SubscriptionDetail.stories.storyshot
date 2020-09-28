@@ -7,6 +7,9 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
   <div
     className="mod-subscription-detail card"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <div>
       <section
         className="details"

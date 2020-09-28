@@ -14,14 +14,13 @@
  */
 
 import fetchMock from "fetch-mock";
+import SubscriptionDetail from "pages/SubscriptionDetail";
 import React from "react";
+import PRODUCTS from "stories/data/products.json";
+import SUBSCRIPTION_MODEL_JSON from "stories/data/subscription-model.json";
+import SUBSCRIPTION_JSON from "stories/data/subscription.json";
+import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
 import StoryRouter from "storybook-react-router";
-
-import SubscriptionDetail from "../pages/SubscriptionDetail";
-import PRODUCTS from "./data/products.json";
-import SUBSCRIPTION_MODEL_JSON from "./data/subscription-model.json";
-import SUBSCRIPTION_JSON from "./data/subscription.json";
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
 
 export default {
     title: "SubscriptionDetail",

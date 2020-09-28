@@ -17,8 +17,7 @@ import uniq from "lodash/uniq";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Cell } from "react-table";
-
-import { Organization, Product, Subscription } from "../../utils/types";
+import { Organization, Product, Subscription } from "utils/types";
 
 export function renderSubscriptionsCell({ cell }: { cell: Cell }) {
     const subscriptions: Subscription[] = cell.value;

@@ -12,14 +12,13 @@
  * limitations under the License.
  *
  */
-import "./AcceptField.scss";
+import "lib/uniforms-surfnet/src/AcceptField.scss";
 
+import CheckBox from "components/CheckBox";
 import I18n, { TranslateOptions } from "i18n-js";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useReducer } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import CheckBox from "../../../components/CheckBox";
-import { FieldProps } from "./types";
 
 type AcceptItemType =
     | "info"

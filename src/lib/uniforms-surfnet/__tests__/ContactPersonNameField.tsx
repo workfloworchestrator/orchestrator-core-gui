@@ -13,14 +13,13 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
+import Autocomplete from "components/inputForms/Autocomplete";
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ContactPersonNameField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import Autocomplete from "../../../components/inputForms/Autocomplete";
-import { ContactPersonNameField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
 
 test("<ContactPersonNameField> - renders an input", () => {
     const element = <ContactPersonNameField name="x" />;

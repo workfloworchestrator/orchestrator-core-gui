@@ -1,3 +1,6 @@
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { LocationCodeField, SelectField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +16,7 @@
  *
  */
 import React from "react";
-
-import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
-import { LocationCodeField, SelectField } from "../../src";
-import createContext from "../_createContext";
-import mount from "../_mount";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 describe("<LocationCodeField>", () => {
     test("<LocationCodeField> - calls selectField with all locationCodes", () => {

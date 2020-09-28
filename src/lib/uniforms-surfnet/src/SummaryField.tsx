@@ -12,13 +12,12 @@
  * limitations under the License.
  *
  */
-import "./SummaryField.scss";
+import "lib/uniforms-surfnet/src/SummaryField.scss";
 
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { isEmpty } from "../../../utils/Utils";
-import { FieldProps } from "./types";
+import { isEmpty } from "utils/Utils";
 
 export type SummaryFieldProps = FieldProps<
     null,

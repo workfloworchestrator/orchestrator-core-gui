@@ -16,17 +16,16 @@
 import { number } from "@storybook/addon-knobs";
 import fetchMock from "fetch-mock";
 import React from "react";
-
-import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
+import SN7PortSubscriptions from "stories/data/subscriptions-sn7-ports.json";
+import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
 import {
     allNodeSubscriptions,
     contactPersons,
     corelinkPorts10G,
     freeCorelinkPorts,
     imsNodes
-} from "./data/UserInputForm.data";
-import UserInputContainer from "./UserInputContainer";
+} from "stories/data/UserInputForm.data";
+import UserInputContainer from "stories/UserInputContainer";
 import {
     Bandwidth,
     ContactPerson,
@@ -36,7 +35,7 @@ import {
     imsPortIdProperty,
     loadVlanMocks,
     servicePortsProperty
-} from "./utils";
+} from "stories/utils";
 
 export default {
     title: "UserInputForm",

@@ -13,17 +13,16 @@
  *
  */
 
-import "./Navigation.scss";
+import "components/Navigation.scss";
 
 import { EuiButton, EuiControlBar, EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
+import mySpinner from "lib/Spin";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
-
-import mySpinner from "../lib/Spin";
 
 const Navigation = () => {
     const [loading, setLoading] = useState(false);

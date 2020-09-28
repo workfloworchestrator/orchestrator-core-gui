@@ -10,10 +10,9 @@ import {
     EuiSpacer,
     EuiText
 } from "@elastic/eui";
+import { subscriptionsDetail } from "api";
 import React, { MouseEvent } from "react";
-
-import { subscriptionsDetail } from "../../../api";
-import { FavoriteSubscriptionStorage, Subscription } from "../../../utils/types";
+import { FavoriteSubscriptionStorage, Subscription } from "utils/types";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 

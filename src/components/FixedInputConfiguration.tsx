@@ -13,14 +13,13 @@
  *
  */
 
-import "./FixedInputConfiguration.scss";
+import "components/FixedInputConfiguration.scss";
 
+import { fixedInputConfiguration } from "api";
+import CheckBox from "components/CheckBox";
 import I18n from "i18n-js";
 import React from "react";
-
-import { fixedInputConfiguration } from "../api";
-import { FixedInputConfiguration as iFixedInputConfiguration } from "../utils/types";
-import CheckBox from "./CheckBox";
+import { FixedInputConfiguration as iFixedInputConfiguration } from "utils/types";
 
 interface IState {
     configuration: iFixedInputConfiguration;

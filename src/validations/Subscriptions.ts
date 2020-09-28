@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "../utils/types";
+import { InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "utils/types";
 
 export interface InstanceValueWithLabel extends InstanceValue {
     instance_label: string;

@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import "./DropDownContainer.scss";
+import "components/tables/DropDownContainer.scss";
 
 import React, { useState } from "react";
 

@@ -13,13 +13,12 @@
  *
  */
 
-import "./FilterDropDown.scss";
+import "components/FilterDropDown.scss";
 
+import CheckBox from "components/CheckBox";
 import I18n from "i18n-js";
 import React from "react";
-
-import { Filter } from "../utils/types";
-import CheckBox from "./CheckBox";
+import { Filter } from "utils/types";
 
 type filterCallback = (filter: Filter) => void;
 

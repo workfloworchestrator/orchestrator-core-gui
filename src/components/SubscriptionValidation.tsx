@@ -13,19 +13,18 @@
  *
  */
 
-import "./SubscriptionValidation.scss";
+import "components/SubscriptionValidation.scss";
 
+import { deleteSubscription } from "api/index";
+import CheckBox from "components/CheckBox";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
-
-import { deleteSubscription } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { enrichSubscription, renderDate } from "../utils/Lookups";
-import { SortOption, Subscription, SubscriptionWithDetails } from "../utils/types";
-import { stop } from "../utils/Utils";
-import CheckBox from "./CheckBox";
-import ConfirmationDialog from "./ConfirmationDialog";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { enrichSubscription, renderDate } from "utils/Lookups";
+import { SortOption, Subscription, SubscriptionWithDetails } from "utils/types";
+import { stop } from "utils/Utils";
 
 type Column =
     | "customer_name"

@@ -14,12 +14,11 @@
  */
 
 import fetchMock from "fetch-mock";
+import ProcessDetail from "pages/ProcessDetail";
 import React from "react";
+import FAILED_PROCESS_JSON from "stories/data/process-failed.json";
+import SUSPENDED_PROCESS_JSON from "stories/data/process-suspended.json";
 import StoryRouter from "storybook-react-router";
-
-import ProcessDetail from "../pages/ProcessDetail";
-import FAILED_PROCESS_JSON from "./data/process-failed.json";
-import SUSPENDED_PROCESS_JSON from "./data/process-suspended.json";
 
 export default {
     title: "ProcessDetail",

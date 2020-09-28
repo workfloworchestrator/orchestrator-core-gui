@@ -15,16 +15,15 @@
 
 import fetchMock from "fetch-mock";
 import React from "react";
-
-import { InputForm } from "../utils/types";
-import FORM from "./data/all-widgets-form.json";
-import IP_BLOCKS from "./data/ip_blocks.json";
-import PRODUCTS from "./data/products.json";
-import SUBSCRIPTION_JSON from "./data/subscription.json";
-import SN7PortSubscriptions from "./data/subscriptions-sn7-ports.json";
-import SN8PortSubscriptions from "./data/subscriptions-sn8-ports.json";
-import { allNodeSubscriptions, contactPersons, freeCorelinkPorts, imsNodes } from "./data/UserInputForm.data";
-import UserInputContainer from "./UserInputContainer";
+import FORM from "stories/data/all-widgets-form.json";
+import IP_BLOCKS from "stories/data/ip_blocks.json";
+import PRODUCTS from "stories/data/products.json";
+import SUBSCRIPTION_JSON from "stories/data/subscription.json";
+import SN7PortSubscriptions from "stories/data/subscriptions-sn7-ports.json";
+import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
+import { allNodeSubscriptions, contactPersons, freeCorelinkPorts, imsNodes } from "stories/data/UserInputForm.data";
+import UserInputContainer from "stories/UserInputContainer";
+import { InputForm } from "utils/types";
 
 export default {
     title: "Complete Input widgets form new",

@@ -13,15 +13,15 @@
  *
  */
 import I18n from "i18n-js";
+import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import xor from "lodash/xor";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
+import { Option } from "utils/types";
 
-import { Option } from "../../../utils/types";
-import { ListFieldProps } from "./ListField";
-import { FieldProps } from "./types";
 import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<

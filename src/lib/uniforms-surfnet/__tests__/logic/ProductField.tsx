@@ -13,13 +13,12 @@
  *
  */
 
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ProductField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import PRODUCTS_JSON from "../../../../stories/data/products.json";
-import ApplicationContext, { ApplicationContextInterface } from "../../../../utils/ApplicationContext";
-import { ProductField, SelectField } from "../../src";
-import createContext from "../_createContext";
-import mount from "../_mount";
+import PRODUCTS_JSON from "stories/data/products.json";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 describe("<ProductField>", () => {
     test("<ProductField> - calls selectField with all products", () => {

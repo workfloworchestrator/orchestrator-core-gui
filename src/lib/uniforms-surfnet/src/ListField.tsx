@@ -12,15 +12,14 @@
  * limitations under the License.
  *
  */
-import "./ListField.scss";
+import "lib/uniforms-surfnet/src/ListField.scss";
 
+import ListAddField from "lib/uniforms-surfnet/src/ListAddField";
+import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
-
-import ListAddField from "./ListAddField";
-import ListItemField from "./ListItemField";
-import { FieldProps } from "./types";
 
 filterDOMProps.register("minCount");
 filterDOMProps.register("maxCount");

@@ -7,6 +7,9 @@ exports[`Storyshots ProcessDetail Process 1`] = `
   <div
     className="mod-process-detail"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <section
       className="tabs"
     >
@@ -2323,6 +2326,9 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
   <div
     className="mod-process-detail"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <section
       className="tabs"
     >
@@ -2359,6 +2365,9 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
       <div
         className="user-input-form"
       >
+        <div
+          className="confirmation-dialog-overlay"
+        />
         <section
           className="form-fieldset"
         >
@@ -2465,6 +2474,9 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
   <div
     className="mod-process-detail"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <section
       className="tabs"
     >
@@ -2501,6 +2513,9 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
       <div
         className="user-input-form"
       >
+        <div
+          className="confirmation-dialog-overlay"
+        />
         <section
           className="form-fieldset"
         >
@@ -2607,6 +2622,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
   <div
     className="mod-process-detail"
   >
+    <div
+      className="confirmation-dialog-overlay"
+    />
     <section
       className="tabs"
     >

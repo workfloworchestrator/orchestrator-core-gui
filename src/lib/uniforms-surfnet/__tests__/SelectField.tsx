@@ -13,13 +13,12 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ListField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ReactSelect from "react-select";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import { ListField, SelectField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
 
 describe("<SelectField>", () => {
     test("<SelectField> - renders an input", () => {
