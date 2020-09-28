@@ -15,12 +15,12 @@
 
 import "./ProductBlocks.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
 
 import { deleteProductBlock, productBlocks } from "../api/index";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import DropDownActions from "../components/DropDownActions";
 import ApplicationContext from "../utils/ApplicationContext";
 import { setFlash } from "../utils/Flash";

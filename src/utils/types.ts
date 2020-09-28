@@ -100,6 +100,15 @@ export interface CustomerDescription {
     customer_id: string;
 }
 
+export interface FavoriteSubscription extends Subscription {
+    customName: string;
+}
+
+export interface FavoriteSubscriptionStorage {
+    subscription_id: string;
+    customName: string;
+}
+
 export interface SubscriptionWithDetails extends Subscription {
     customer_name: string;
     instances: SubscriptionInstance[];
@@ -144,6 +153,20 @@ export interface ServicePort {
     bandwidth?: number;
     nonremovable?: boolean;
     modifiable?: boolean;
+}
+
+export interface ServicePortFilterItem {
+    subscription_id: string;
+    port_name: string;
+    ims_circuit_id: number;
+    description: string;
+    nso_service_id: string;
+    port_speed: number;
+    port_mode: string;
+    start_date: number;
+    status: string;
+    product_name: string;
+    product_tag: string;
 }
 
 export interface Organization {

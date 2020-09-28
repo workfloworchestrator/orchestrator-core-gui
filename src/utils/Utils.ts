@@ -58,3 +58,21 @@ const UUIDv4RegEx = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[
 export function isValidUUIDv4(id: string) {
     return UUIDv4RegEx.test(id);
 }
+
+export function timeStampToDate(timestamp: number) {
+    const datetime = new Date(timestamp * 1000);
+    const today = new Date();
+    if (
+        datetime.getFullYear() === today.getFullYear() &&
+        datetime.getMonth() === today.getMonth() &&
+        datetime.getDay() === today.getDay()
+    ) {
+        return datetime.toLocaleTimeString("nl-NL").substring(0, 5) + " CET";
+    } else {
+        return datetime.toLocaleDateString("nl-NL");
+    }
+}
+
+export function capitalizeFirstLetter(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}

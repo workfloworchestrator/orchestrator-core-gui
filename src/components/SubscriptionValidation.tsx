@@ -15,6 +15,7 @@
 
 import "./SubscriptionValidation.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 
@@ -25,7 +26,6 @@ import { enrichSubscription, renderDate } from "../utils/Lookups";
 import { SortOption, Subscription, SubscriptionWithDetails } from "../utils/types";
 import { stop } from "../utils/Utils";
 import CheckBox from "./CheckBox";
-import ConfirmationDialog from "./ConfirmationDialog";
 
 type Column =
     | "customer_name"
@@ -66,12 +66,12 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
         };
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
-        const { subscriptions } = nextProps;
-        if (subscriptions.length !== this.state.subscriptions.length) {
+    componentDidUpdate(prevProps: IProps) {
+        const { subscriptions } = this.props;
+        if (subscriptions && subscriptions.length !== prevProps.subscriptions.length) {
             const { organisations, products } = this.context;
             this.setState({
-                subscriptions: subscriptions.map(subscription =>
+                subscriptions: this.props.subscriptions.map(subscription =>
                     enrichSubscription(subscription, organisations, products)
                 )
             });

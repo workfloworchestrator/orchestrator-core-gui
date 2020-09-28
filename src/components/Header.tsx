@@ -96,7 +96,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
         });
     };
 
-    componentWillMount() {
+    componentDidMount() {
         if (ENV.CHECK_STATUS_INTERVAL > 0) {
             window.setInterval(this.refeshStatus, ENV.CHECK_STATUS_INTERVAL * 1000);
         }

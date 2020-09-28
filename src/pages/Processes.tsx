@@ -16,12 +16,12 @@
 import "./Processes.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 
 import { abortProcess, retryProcess } from "../api";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import DropDownActions from "../components/DropDownActions";
 import Explain from "../components/Explain";
 import {

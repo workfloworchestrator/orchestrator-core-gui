@@ -16,6 +16,7 @@
 import "./SubscriptionDetail.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -35,7 +36,6 @@ import {
     subscriptionsDetailWithModel
 } from "../api";
 import CheckBox from "../components/CheckBox";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import ApplicationContext from "../utils/ApplicationContext";
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
 import {
@@ -160,7 +160,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         useDomainModel: false
     };
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
         this.refreshSubscription(subscriptionId);
     };
@@ -326,11 +326,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             });
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
+    componentDidUpdate(prevProps: IProps) {
+        const prevId = prevProps.subscriptionId ? prevProps.subscriptionId : prevProps.match!.params.id;
         const id = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
-        const nextId = nextProps.subscriptionId ? nextProps.subscriptionId : nextProps.match!.params.id;
-        if (id !== nextId) {
-            this.refreshSubscription(nextId);
+        if (prevId !== id) {
+            this.refreshSubscription(id);
             window.scrollTo(0, 0);
         }
     }

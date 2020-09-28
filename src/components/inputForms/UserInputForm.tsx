@@ -15,6 +15,7 @@
 
 import "./UserInputForm.scss";
 
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
@@ -47,7 +48,6 @@ import {
 import ApplicationContext from "../../utils/ApplicationContext";
 import { ValidationError } from "../../utils/types";
 import { stop } from "../../utils/Utils";
-import ConfirmationDialog from "../ConfirmationDialog";
 import { SubscriptionsContextProvider } from "../subscriptionContext";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
@@ -270,7 +270,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         this.setState({ confirmationDialogOpen: true });
     };
 
-    submit = async (userInput: {}) => {
+    submit = async (userInput: any = {}) => {
         const { processing } = this.state;
 
         if (!processing) {

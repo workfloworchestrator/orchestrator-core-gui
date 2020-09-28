@@ -4,29 +4,11 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 This project contains the workflow GUI SURFnet Network Automation.
 
-It's based on create-react-app 2.3:
-
-Here’s a short summary of what’s new in this release:
-
-🎉 More styling options: you can use Sass and CSS Modules out of the box.
-🐠 We updated to Babel 7, including support for the React fragment syntax and many bugfixes.
-📦 We updated to webpack 4, which automatically splits JS bundles more intelligently.
-🃏 We updated to Jest 23, which includes an interactive mode for reviewing snapshots.
-💄 We added PostCSS so you can use new CSS features in old browsers.
-💎 You can use Apollo, Relay Modern, MDX, and other third-party Babel Macros transforms.
-🌠 You can now import an SVG as a React component, and use it in JSX.
-🐈 You can try the experimental Yarn Plug’n’Play mode that removes node_modules.
-🕸 You can now plug your own proxy implementation in development to match your backend API.
-🚀 You can now use packages written for latest Node versions without breaking the build.
-✂️ You can now optionally get a smaller CSS bundle if you only plan to target modern browsers.
-👷‍♀️ Service workers are now opt-in and are built using Google’s Workbox.
-
-## Client
-
 The client is a ReactJS user interface. This project was bootstrapped with
 [Create React App](https://github.com/facebookincubator/create-react-app).
 
-The client is build with react and to get initially started:
+When you need to work on the theming it's good to know that we split the theme into a separate
+package: located in `lib/themes/surfnet_light`. It has its own README.
 
 ### Installing
 
@@ -58,7 +40,7 @@ Mac OS:
 
 #### Linux
 
-This project currently only works with Node.js 12 (if you also want to be able to run the tests).
+This project currently only works with Node.js 14 (if you also want to be able to run the tests).
 
 ```sh
 npm install yarn -g
@@ -113,10 +95,30 @@ We are using Prettier as a code formatter. You can run prettier like this:
 
 Similarly you can run other packages that can be found in the package.json
 
+### Running the tests
+
 To run the unit-tests, do: `yarn test`.
 
 If this fails, you might want to increase your inotify limit. For more information, see
 https://unix.stackexchange.com/questions/13751/kernel-inotify-watch-limit-reached
+
+Tests consist out of snapshots tests for storybook items and tests for the uniforms based form inputs
+
+Webstorm can run the tests from the IDE by default and are the easiest to start with, especially when you want to
+easily run separate tests.
+
+#### Tips
+
+**Updating snapshots:** when snapshot failed: inspect the output and update your snapshots when you are 100% sure that the changes are
+indedd expected. After the initial run you can press `-u` to update the snapshots.
+
+**_Debug rendered components:_** You can see what a render of a component delivered with:
+
+```javascript
+expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+```
+
+### Storybook
 
 To run the storybook, do: `yarn storybook`.
 Your browser should open to http://localhost:9009/?path=/story/welcome--to-storybook.

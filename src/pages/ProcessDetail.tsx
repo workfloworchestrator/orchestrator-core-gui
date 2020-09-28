@@ -17,6 +17,7 @@ import "./ProcessDetail.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -25,7 +26,6 @@ import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryP
 
 import { process, resumeProcess } from "../api";
 import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "../api/index";
-import ConfirmationDialog from "../components/ConfirmationDialog";
 import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
 import ProcessStateDetails from "../components/ProcessStateDetails";
 import ApplicationContext from "../utils/ApplicationContext";

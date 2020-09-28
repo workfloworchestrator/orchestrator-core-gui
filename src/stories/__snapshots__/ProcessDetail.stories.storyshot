@@ -10,6 +10,9 @@ exports[`Storyshots ProcessDetail Process 1`] = `
     <div
       className="euiPageBody mod-process-detail"
     >
+      <div
+        className="confirmation-dialog-overlay"
+      />
       <section
         className="tabs"
       >
@@ -34,17 +37,17 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--secondary euiButton--iconRight euiButton--fill"
+                className="euiButton euiButton--secondary euiButton--fill"
                 id="retry"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -69,17 +72,17 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--danger euiButton--iconRight euiButton--fill"
+                className="euiButton euiButton--danger euiButton--fill"
                 id="abort"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButton__icon"
+                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -104,16 +107,16 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButton__icon"
+                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -138,16 +141,16 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButton__icon"
+                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -173,16 +176,16 @@ exports[`Storyshots ProcessDetail Process 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButton__icon"
+                    className="euiIcon euiIcon--medium euiIcon-isLoaded euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -2330,6 +2333,9 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
     <div
       className="euiPageBody mod-process-detail"
     >
+      <div
+        className="confirmation-dialog-overlay"
+      />
       <section
         className="tabs"
       >
@@ -2366,6 +2372,9 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
         <div
           className="user-input-form"
         >
+          <div
+            className="confirmation-dialog-overlay"
+          />
           <section
             className="form-fieldset"
           >
@@ -2476,6 +2485,9 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
     <div
       className="euiPageBody mod-process-detail"
     >
+      <div
+        className="confirmation-dialog-overlay"
+      />
       <section
         className="tabs"
       >
@@ -2512,6 +2524,9 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
         <div
           className="user-input-form"
         >
+          <div
+            className="confirmation-dialog-overlay"
+          />
           <section
             className="form-fieldset"
           >
@@ -2622,6 +2637,9 @@ exports[`Storyshots ProcessDetail Task 1`] = `
     <div
       className="euiPageBody mod-process-detail"
     >
+      <div
+        className="confirmation-dialog-overlay"
+      />
       <section
         className="tabs"
       >
@@ -2646,17 +2664,17 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--secondary euiButton--iconRight euiButton--fill"
+                className="euiButton euiButton--secondary euiButton--fill"
                 id="retry"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -2681,17 +2699,17 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--danger euiButton--iconRight euiButton--fill"
+                className="euiButton euiButton--danger euiButton--fill"
                 id="abort"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -2716,16 +2734,16 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -2750,16 +2768,16 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
@@ -2785,16 +2803,16 @@ exports[`Storyshots ProcessDetail Task 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--primary euiButton--iconRight"
+                className="euiButton euiButton--primary"
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  className="euiButton__content"
+                  className="euiButtonContent euiButtonContent--iconRight euiButton__content"
                 >
                   <svg
                     aria-hidden={true}
-                    className="euiIcon euiIcon--medium euiButton__icon"
+                    className="euiIcon euiIcon--medium euiButtonContent__icon"
                     focusable="false"
                     height={16}
                     role="img"
