@@ -84,7 +84,6 @@
         "eslint-config-react-app": "5.2.0",
         "eslint-plugin-flowtype": "^4.6.0",
         "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-simple-import-sort": "^5.0.3",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.18.3",
         "eslint-plugin-react-hooks": "^2.4.0",
@@ -116,9 +115,7 @@
         "storybook": "start-storybook -p 9009 -s ./public",
         "build-storybook": "build-storybook -s ./public",
         "prettier": "prettier -c '{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}'",
-        "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}'",
-        "eslint-fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
-        "eslint": "eslint"
+        "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}'"
     },
     "importSort": {
         ".js, .jsx, .ts, .tsx": {
