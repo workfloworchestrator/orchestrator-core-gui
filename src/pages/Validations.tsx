@@ -13,14 +13,9 @@
  *
  */
 
-import "./Validations.scss";
+import "pages/Validations.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import I18n from "i18n-js";
-import React from "react";
-import { RouteComponentProps } from "react-router";
-import ScrollUpButton from "react-scroll-up-button";
-
 import {
     allWorkflowCodeImplementations,
     allWorkflows,
@@ -28,14 +23,18 @@ import {
     fixedInputValidations,
     invalidSubscriptions,
     validations
-} from "../api";
-import CheckBox from "../components/CheckBox";
-import FixedInputProductValidation from "../components/FixedInputProductValidation";
-import ProductValidationComponent from "../components/ProductValidation";
-import ProductWorkflowsValidation from "../components/ProductWorkflowsValidation";
-import SubscriptionValidation from "../components/SubscriptionValidation";
-import ValidationsExplain from "../components/ValidationsExplain";
-import ApplicationContext from "../utils/ApplicationContext";
+} from "api";
+import CheckBox from "components/CheckBox";
+import FixedInputProductValidation from "components/FixedInputProductValidation";
+import ProductValidationComponent from "components/ProductValidation";
+import ProductWorkflowsValidation from "components/ProductWorkflowsValidation";
+import SubscriptionValidation from "components/SubscriptionValidation";
+import ValidationsExplain from "components/ValidationsExplain";
+import I18n from "i18n-js";
+import React from "react";
+import { RouteComponentProps } from "react-router";
+import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "utils/ApplicationContext";
 import {
     CodedWorkflow,
     FixedInputValidation,
@@ -43,8 +42,8 @@ import {
     Subscription,
     Workflow,
     WorkflowWithProductTags
-} from "../utils/types";
-import { applyIdNamingConvention, isEmpty, stop } from "../utils/Utils";
+} from "utils/types";
+import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
 
 type TabKey = "workflows" | "fixedInputs" | "subscriptions" | "productWorkflows";
 

@@ -13,17 +13,16 @@
  *
  */
 
+import { contacts } from "api";
+import Autocomplete from "components/inputForms/Autocomplete";
 import I18n from "i18n-js";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
 import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
-
-import { contacts } from "../../../api";
-import Autocomplete from "../../../components/inputForms/Autocomplete";
-import { ContactPerson } from "../../../utils/types";
-import { stop } from "../../../utils/Utils";
-import { FieldProps } from "./types";
+import { ContactPerson } from "utils/types";
+import { stop } from "utils/Utils";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 

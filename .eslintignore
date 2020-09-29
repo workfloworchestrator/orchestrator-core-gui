@@ -1,0 +1,6 @@
+/src/lib/themes
+node_modules
+storybook-static
+build
+.gitlab
+.storybook

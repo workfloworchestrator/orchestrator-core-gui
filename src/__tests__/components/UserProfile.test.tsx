@@ -13,11 +13,10 @@
  *
  */
 
+import UserProfile from "components/UserProfile";
 import { mount } from "enzyme";
 import { AuthContext } from "oidc-react";
 import React from "react";
-
-import UserProfile from "../../components/UserProfile";
 
 test("UserProfile with email", () => {
     const wrapper = mount(

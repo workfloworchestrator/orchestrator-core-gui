@@ -13,22 +13,21 @@
  *
  */
 
-import "./Header.scss";
+import "components/Header.scss";
 
 import { EuiHeader, EuiHeaderLink, EuiHeaderLinks, EuiHeaderSectionItem, EuiText } from "@elastic/eui";
+import { getGlobalStatus, logUserInfo } from "api";
+import UserProfile from "components/UserProfile";
 import { ENV } from "env";
 import I18n from "i18n-js";
+import logo from "images/network-automation.png";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";
 import { Link } from "react-router-dom";
-
-import { getGlobalStatus, logUserInfo } from "../api";
-import logo from "../images/network-automation.png";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { GlobalStatus } from "../utils/types";
-import UserProfile from "./UserProfile";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { GlobalStatus } from "utils/types";
 
 interface IState {
     dropDownActive: boolean;

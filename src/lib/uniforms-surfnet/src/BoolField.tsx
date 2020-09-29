@@ -12,12 +12,11 @@
  * limitations under the License.
  *
  */
-import "./BoolField.scss";
+import "lib/uniforms-surfnet/src/BoolField.scss";
 
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { FieldProps } from "./types";
 
 export type BoolFieldProps = FieldProps<boolean>;
 

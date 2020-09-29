@@ -1,3 +1,5 @@
+import IPPrefixTable from "components/inputForms/IpPrefixTable";
+import SplitPrefix from "components/inputForms/SplitPrefix";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +15,10 @@
  *
  */
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { IPvAnyNetworkField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import IPPrefixTable from "../../../components/inputForms/IpPrefixTable";
-import SplitPrefix from "../../../components/inputForms/SplitPrefix";
-import { IPvAnyNetworkField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
 
 test("<IPvAnyNetworkField> - renders an table", () => {
     fetchMock.get("glob:*/api/ipam/prefix_filters", []);

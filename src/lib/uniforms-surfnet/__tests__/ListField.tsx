@@ -1,3 +1,6 @@
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ListAddField, ListField, ListItemField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +16,6 @@
  *
  */
 import React from "react";
-
-import { ListAddField, ListField, ListItemField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
 
 test("<ListField> - works", () => {
     const element = <ListField name="x" />;

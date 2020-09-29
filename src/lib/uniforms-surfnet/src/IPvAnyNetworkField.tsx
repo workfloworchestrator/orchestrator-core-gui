@@ -13,13 +13,12 @@
  *
  */
 
+import IPPrefixTable from "components/inputForms/IpPrefixTable";
+import SplitPrefix from "components/inputForms/SplitPrefix";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import IPPrefixTable from "../../../components/inputForms/IpPrefixTable";
-import SplitPrefix from "../../../components/inputForms/SplitPrefix";
-import { IpBlock } from "../../../utils/types";
-import { FieldProps } from "./types";
+import { IpBlock } from "utils/types";
 
 export type IPvAnyNetworkFieldProps = FieldProps<string, { prefixMin?: number }>;
 

@@ -13,24 +13,23 @@
  *
  */
 
-import "./Subscriptions.scss";
+import "pages/Subscriptions.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
+import Explain from "components/Explain";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
-
-import Explain from "../components/Explain";
 import {
     SubscriptionsTable,
     initialSubscriptionTableSettings,
     initialSubscriptionsFilterAndSort
-} from "../components/tables/Subscriptions";
-import ApplicationContext from "../utils/ApplicationContext";
-import { Subscription } from "../utils/types";
+} from "components/tables/Subscriptions";
+import React from "react";
+import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "utils/ApplicationContext";
+import { Subscription } from "utils/types";
 
 // TODO investigate dynamic actions : start, stop workflows
-// import { actionOptions } from "../validations/Subscriptions";
+// import { actionOptions } from "validations/Subscriptions";
 
 interface IProps {}
 

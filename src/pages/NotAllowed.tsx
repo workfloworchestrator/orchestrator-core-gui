@@ -13,7 +13,7 @@
  *
  */
 
-import "./NotFound.scss";
+import "pages/NotFound.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
 import I18n from "i18n-js";

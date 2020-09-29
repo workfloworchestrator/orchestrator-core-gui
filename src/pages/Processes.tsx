@@ -13,28 +13,28 @@
  *
  */
 
-import "./Processes.scss";
+import "pages/Processes.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
+import DropDownActions from "components/DropDownActions";
+import Explain from "components/Explain";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
-import I18n from "i18n-js";
-import React from "react";
-import ScrollUpButton from "react-scroll-up-button";
-
-import { abortProcess, retryProcess } from "../api";
-import DropDownActions from "../components/DropDownActions";
-import Explain from "../components/Explain";
 import {
     ProcessesTable,
     initialProcessTableSettings,
     initialProcessesFilterAndSort
-} from "../components/tables/Processes";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid } from "../utils/Lookups";
-import { ProcessV2 } from "../utils/types";
-import { stop } from "../utils/Utils";
-import { actionOptions } from "../validations/Processes";
+} from "components/tables/Processes";
+import I18n from "i18n-js";
+import React from "react";
+import ScrollUpButton from "react-scroll-up-button";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { organisationNameByUuid } from "utils/Lookups";
+import { ProcessV2 } from "utils/types";
+import { stop } from "utils/Utils";
+import { actionOptions } from "validations/Processes";
+
+import { abortProcess, retryProcess } from "../api";
 
 interface IProps {}
 

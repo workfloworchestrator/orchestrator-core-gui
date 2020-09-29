@@ -13,7 +13,7 @@
  *
  */
 
-import "./Settings.scss";
+import "pages/Settings.scss";
 
 import {
     EuiButton,
@@ -26,12 +26,11 @@ import {
     EuiSelect,
     EuiSpacer
 } from "@elastic/eui";
+import { clearCache, getGlobalStatus, setGlobalStatus } from "api";
 import I18n from "i18n-js";
 import React, { SFC, useEffect, useState } from "react";
-
-import { clearCache, getGlobalStatus, setGlobalStatus } from "../api";
-import { setFlash } from "../utils/Flash";
-import { EngineStatus } from "../utils/types";
+import { setFlash } from "utils/Flash";
+import { EngineStatus } from "utils/types";
 
 enum Cache {
     ims = "ims",

@@ -14,12 +14,11 @@ import {
     EuiSwitch,
     EuiText
 } from "@elastic/eui";
+import { getPortSubscriptionsForNode, subscriptions } from "api";
+import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import React, { MouseEvent } from "react";
-
-import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
-import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "../../../utils/types";
-import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
-import { FAVORITE_STORAGE_KEY } from "./FavoritePortSelector";
+import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "utils/types";
+import { capitalizeFirstLetter, timeStampToDate } from "utils/Utils";
 
 interface IProps {
     subscriptions: Subscription[];

@@ -13,7 +13,7 @@
  *
  */
 
-import { applyIdNamingConvention } from "../../utils/Utils";
+import { applyIdNamingConvention } from "utils/Utils";
 
 test("Test with underscore", () => {
     expect(applyIdNamingConvention("subscription_id")).toBe("subscription-id");

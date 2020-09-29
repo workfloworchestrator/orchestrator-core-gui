@@ -13,10 +13,9 @@
  *
  */
 
+import { SubscriptionsContext } from "components/subscriptionContext";
 import React from "react";
-
-import { SubscriptionsContext } from "../../../components/subscriptionContext";
-import { ServicePortSubscription } from "../../../utils/types";
+import { ServicePortSubscription } from "utils/types";
 
 test("Test suite must contain at least one test", () => {});
 

@@ -13,29 +13,22 @@
  *
  */
 
-import "./SubscriptionField.scss";
+import "lib/uniforms-surfnet/src/SubscriptionField.scss";
 
 import { EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
+import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
+import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
+import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
-
-import ServicePortSelectorModal from "../../../components/modals/ServicePortSelectorModal";
-import { SubscriptionsContext } from "../../../components/subscriptionContext";
-import ApplicationContext from "../../../utils/ApplicationContext";
-import { productById } from "../../../utils/Lookups";
-import {
-    Option,
-    Organization,
-    Product,
-    ServicePortSubscription,
-    Subscription as iSubscription
-} from "../../../utils/types";
-import { filterProductsByBandwidth } from "../../../validations/Products";
-import { ListFieldProps } from "./ListField";
-import { FieldProps } from "./types";
+import ApplicationContext from "utils/ApplicationContext";
+import { productById } from "utils/Lookups";
+import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
+import { filterProductsByBandwidth } from "validations/Products";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);

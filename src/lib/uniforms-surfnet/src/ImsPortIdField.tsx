@@ -12,21 +12,20 @@
  * limitations under the License.
  *
  */
-import "./ImsPortIdField.scss";
-
-import I18n from "i18n-js";
-import React, { useCallback, useEffect, useState } from "react";
-import Select, { ValueType } from "react-select";
-import { connectField, filterDOMProps } from "uniforms";
+import "lib/uniforms-surfnet/src/ImsPortIdField.scss";
 
 import {
     getFreePortsByImsNodeIdAndInterfaceType,
     getFreePortsByNodeSubscriptionIdAndSpeed,
     getNodesByLocationAndStatus,
     nodeSubscriptions
-} from "../../../api";
-import { IMSNode, IMSPort, Option, Subscription } from "../../../utils/types";
-import { FieldProps } from "./types";
+} from "api";
+import I18n from "i18n-js";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
+import React, { useCallback, useEffect, useState } from "react";
+import Select, { ValueType } from "react-select";
+import { connectField, filterDOMProps } from "uniforms";
+import { IMSNode, IMSPort, Option, Subscription } from "utils/types";
 
 export type ImsPortFieldProps = FieldProps<
     number,

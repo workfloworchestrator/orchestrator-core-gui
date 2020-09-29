@@ -14,13 +14,12 @@
  */
 
 import I18n from "i18n-js";
+import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import get from "lodash/get";
 import { createElement, useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import ApplicationContext from "../../../../utils/ApplicationContext";
-import { productById } from "../../../../utils/Lookups";
-import SelectField, { SelectFieldProps } from "../SelectField";
+import ApplicationContext from "utils/ApplicationContext";
+import { productById } from "utils/Lookups";
 
 export type ProductFieldProps = { inputComponent: typeof SelectField; productIds?: string[] } & Omit<
     SelectFieldProps,

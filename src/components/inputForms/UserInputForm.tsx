@@ -13,20 +13,12 @@
  *
  */
 
-import "./UserInputForm.scss";
+import "components/inputForms/UserInputForm.scss";
 
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
-import cloneDeep from "lodash/cloneDeep";
-import get from "lodash/get";
-import React from "react";
-import { RouteComponentProps, withRouter } from "react-router";
-import { filterDOMProps, joinName } from "uniforms";
-import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
-import { AutoForm } from "uniforms-unstyled";
-import { getQueryParameters } from "utils/QueryParameters";
-
 import {
     AcceptField,
     AutoFields,
@@ -44,11 +36,18 @@ import {
     SubscriptionSummaryField,
     SummaryField,
     VlanField
-} from "../../lib/uniforms-surfnet/src";
-import ApplicationContext from "../../utils/ApplicationContext";
-import { ValidationError } from "../../utils/types";
-import { stop } from "../../utils/Utils";
-import { SubscriptionsContextProvider } from "../subscriptionContext";
+} from "lib/uniforms-surfnet/src";
+import cloneDeep from "lodash/cloneDeep";
+import get from "lodash/get";
+import React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
+import { filterDOMProps, joinName } from "uniforms";
+import { JSONSchemaBridge } from "uniforms-bridge-json-schema";
+import { AutoForm } from "uniforms-unstyled";
+import ApplicationContext from "utils/ApplicationContext";
+import { getQueryParameters } from "utils/QueryParameters";
+import { ValidationError } from "utils/types";
+import { stop } from "utils/Utils";
 
 type JSONSchemaFormProperty = JSONSchema6 & { uniforms: any; defaultValue: any };
 

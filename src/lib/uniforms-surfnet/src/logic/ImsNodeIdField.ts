@@ -13,14 +13,13 @@
  *
  */
 
+import { getNodesByLocationAndStatus } from "api";
 import I18n from "i18n-js";
+import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import { get } from "lodash";
 import { createElement, useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { getNodesByLocationAndStatus } from "../../../../api";
-import { IMSNode } from "../../../../utils/types";
-import SelectField, { SelectFieldProps } from "../SelectField";
+import { IMSNode } from "utils/types";
 
 export type ImsNodeIdFieldProps = {
     inputComponent: typeof SelectField;

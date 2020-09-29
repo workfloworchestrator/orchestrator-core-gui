@@ -15,12 +15,11 @@
 
 import { action } from "@storybook/addon-actions";
 import { number } from "@storybook/addon-knobs";
+import IpPrefixTable from "components/inputForms/IpPrefixTable";
 import fetchMock from "fetch-mock";
 import React from "react";
-
-import IpPrefixTable from "../components/inputForms/IpPrefixTable";
-import IP_BLOCKS_V6 from "./data/ip_blocks_v6.json";
-import IP_BLOCKS from "./data/ip_blocks.json";
+import IP_BLOCKS_V6 from "stories/data/ip_blocks_v6.json";
+import IP_BLOCKS from "stories/data/ip_blocks.json";
 
 export default {
     title: "IpPrefixTable",

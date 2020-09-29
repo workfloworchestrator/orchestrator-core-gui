@@ -13,13 +13,12 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { ImsNodeIdField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import waitForComponentToPaint from "../../../../__tests__/waitForComponentToPaint";
-import { ImsNodeIdField, SelectField } from "../../src";
-import createContext from "../_createContext";
-import mount from "../_mount";
 
 describe("<ImsNodeIdField>", () => {
     test("<ImsNodeIdField> - shows loading placeholder", async () => {

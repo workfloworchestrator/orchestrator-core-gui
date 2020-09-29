@@ -13,11 +13,10 @@
  *
  */
 
-import "./Step.scss";
+import "components/Step.scss";
 
 import React from "react";
-
-import { capitalize, renderDateTime } from "../utils/Lookups";
+import { capitalize, renderDateTime } from "utils/Lookups";
 
 interface IProps {
     step: { name: string; status: string; executed: number };

@@ -13,18 +13,17 @@
  *
  */
 
-import "./TerminateSubscription.scss";
+import "pages/TerminateSubscription.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "api/index";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
-
-import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "../api/index";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputForm, Product } from "../utils/types";
-import { TARGET_TERMINATE } from "../validations/Products";
+import { setFlash } from "utils/Flash";
+import { FormNotCompleteResponse, InputForm, Product } from "utils/types";
+import { TARGET_TERMINATE } from "validations/Products";
 
 interface IProps extends RouteComponentProps {
     subscriptionId: string;

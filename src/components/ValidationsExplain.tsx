@@ -13,11 +13,10 @@
  *
  */
 
-import "./ValidationsExplain.scss";
+import "components/ValidationsExplain.scss";
 
+import HighlightCode from "components/HighlightCode";
 import React from "react";
-
-import HighlightCode from "./HighlightCode";
 
 interface IProps {
     close: () => void;

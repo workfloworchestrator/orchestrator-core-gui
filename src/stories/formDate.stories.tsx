@@ -17,9 +17,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { State, Store } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
+import { formDate } from "forms/Builder";
 import React from "react";
-
-import { formDate } from "../forms/Builder";
 
 const store = new Store({
     date: new Date(1)

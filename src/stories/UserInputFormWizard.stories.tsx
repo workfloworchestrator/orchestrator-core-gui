@@ -14,11 +14,10 @@
  */
 
 import { action } from "@storybook/addon-actions";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import React from "react";
 import { MemoryRouter } from "react-router";
-
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import { createForm } from "./utils";
+import { createForm } from "stories/utils";
 
 export default {
     title: "UserInputFormWizard",

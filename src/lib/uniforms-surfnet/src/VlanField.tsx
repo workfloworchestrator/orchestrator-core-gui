@@ -13,18 +13,17 @@
  *
  */
 
+import { usedVlans as getUsedVlans } from "api";
+import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
+import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
 import React, { useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
-
-import { usedVlans as getUsedVlans } from "../../../api";
-import { SubscriptionsContext } from "../../../components/subscriptionContext";
-import ApplicationContext from "../../../utils/ApplicationContext";
-import { ServicePort } from "../../../utils/types";
-import { inValidVlan } from "../../../validations/UserInput";
-import { getPortMode } from "./SubscriptionField";
-import { FieldProps } from "./types";
+import ApplicationContext from "utils/ApplicationContext";
+import { ServicePort } from "utils/types";
+import { inValidVlan } from "validations/UserInput";
 
 function getAllNumbersForVlanRange(vlanRange?: string) {
     if (!vlanRange) {

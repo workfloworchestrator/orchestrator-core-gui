@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import "./Explain.scss";
+import "components/Explain.scss";
 
 import React from "react";
 
