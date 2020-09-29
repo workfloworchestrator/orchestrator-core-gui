@@ -243,6 +243,7 @@ function Subscription({
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
+                fullWidth
                 hasEmptyLabelSpace
             >
                 <div>
