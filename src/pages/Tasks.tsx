@@ -15,6 +15,7 @@
 
 import "pages/Tasks.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { abortProcess, deleteProcess, retryProcess } from "api";
 import { filterableEndpoint } from "api/filterable";
 import DropDownActions from "components/DropDownActions";
@@ -174,44 +175,46 @@ export default class Tasks extends React.PureComponent<{}, IState> {
             { refresh: true }
         );
         return (
-            <div className="tasks-container">
-                <Explain
-                    close={() => this.setState({ showExplanation: false })}
-                    isVisible={this.state.showExplanation}
-                    title="Tasks Help"
-                >
-                    <h1>Task</h1>
-                    <p>The Tasks page will show running tasks and tasks with errors by default.</p>
-                    <h2>Settings storage</h2>
-                    <p>
-                        The tables will store the setting for your filters and columns in the local storage of your
-                        browser. If you want to reset the settings to the default, click on the gear icon and then on
-                        the reset button.
-                    </p>
-                </Explain>
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
-                <div className="actions">
-                    <button className="button blue" onClick={this.runAllTasks}>
-                        {I18n.t("tasks.runall")}
-                        <i className="fa fa-sync" />
-                    </button>
-                    <button className="new button green" onClick={this.newTask}>
-                        {I18n.t("tasks.new")} <i className="fa fa-plus" />
-                    </button>
-                    {this.renderExplain()}
-                </div>
-                <ProcessesTable
-                    initialTableSettings={tasksSettings}
-                    renderActions={this.renderActions}
-                    isProcess={false}
-                />
-                <ScrollUpButton />
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="tasks-container">
+                    <Explain
+                        close={() => this.setState({ showExplanation: false })}
+                        isVisible={this.state.showExplanation}
+                        title="Tasks Help"
+                    >
+                        <h1>Task</h1>
+                        <p>The Tasks page will show running tasks and tasks with errors by default.</p>
+                        <h2>Settings storage</h2>
+                        <p>
+                            The tables will store the setting for your filters and columns in the local storage of your
+                            browser. If you want to reset the settings to the default, click on the gear icon and then
+                            on the reset button.
+                        </p>
+                    </Explain>
+                    <ConfirmationDialog
+                        isOpen={confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={confirmationDialogAction}
+                        question={confirmationDialogQuestion}
+                    />
+                    <div className="actions">
+                        <button className="button blue" onClick={this.runAllTasks}>
+                            {I18n.t("tasks.runall")}
+                            <i className="fa fa-sync" />
+                        </button>
+                        <button className="new button green" onClick={this.newTask}>
+                            {I18n.t("tasks.new")} <i className="fa fa-plus" />
+                        </button>
+                        {this.renderExplain()}
+                    </div>
+                    <ProcessesTable
+                        initialTableSettings={tasksSettings}
+                        renderActions={this.renderActions}
+                        isProcess={false}
+                    />
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

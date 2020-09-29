@@ -19,8 +19,6 @@
 .mod-not-found,
 .mod-server-error,
 .mod-not-allowed {
-    @include mixins.page;
-
     padding: 50px;
     text-align: center;
     margin: 50px 100px;

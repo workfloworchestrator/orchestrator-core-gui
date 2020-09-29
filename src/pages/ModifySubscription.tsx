@@ -15,6 +15,7 @@
 
 import "pages/ModifySubscription.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
@@ -79,17 +80,19 @@ class ModifySubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mod-modify-subscription">
-                <section className="card">
-                    <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.submit}
-                        cancel={this.cancel}
-                        hasNext={false}
-                    />
-                </section>
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-modify-subscription">
+                    <section className="card">
+                        <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.submit}
+                            cancel={this.cancel}
+                            hasNext={false}
+                        />
+                    </section>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

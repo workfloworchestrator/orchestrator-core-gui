@@ -15,6 +15,7 @@
 
 import "pages/NewTask.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
@@ -72,22 +73,24 @@ export default class NewTask extends React.Component<{}, IState> {
     render() {
         const { stepUserInput, hasNext } = this.state;
         return (
-            <div className="mod-new-task">
-                <section className="card">
-                    <section className="form-step">
-                        <h1>{I18n.t("task.new_task")}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-new-task">
+                    <section className="card">
+                        <section className="form-step">
+                            <h1>{I18n.t("task.new_task")}</h1>
 
-                        {stepUserInput && (
-                            <UserInputFormWizard
-                                stepUserInput={stepUserInput}
-                                validSubmit={this.validSubmit}
-                                hasNext={hasNext || false}
-                                cancel={() => this.context.redirect("/tasks")}
-                            />
-                        )}
+                            {stepUserInput && (
+                                <UserInputFormWizard
+                                    stepUserInput={stepUserInput}
+                                    validSubmit={this.validSubmit}
+                                    hasNext={hasNext || false}
+                                    cancel={() => this.context.redirect("/tasks")}
+                                />
+                            )}
+                        </section>
                     </section>
-                </section>
-            </div>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

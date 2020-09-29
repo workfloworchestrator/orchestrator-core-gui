@@ -26,12 +26,6 @@
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-@mixin page {
-    max-width: vars.$medium;
-    margin: 0 auto 15px auto;
-    padding: 0 15px;
-}
-
 @mixin tool-tip {
     box-shadow: 1px 2px 6px 1px vars.$lighter-grey;
     padding: 10px !important;

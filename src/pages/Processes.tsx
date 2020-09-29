@@ -15,6 +15,7 @@
 
 import "pages/Processes.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import DropDownActions from "components/DropDownActions";
 import Explain from "components/Explain";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -119,8 +120,8 @@ export default class Processes extends React.PureComponent<IProps, IState> {
 
     renderExplain() {
         return (
-            <section className="explain" onClick={() => this.setState({ showExplanation: true })}>
-                <i className="fa fa-question-circle" />
+            <section className="explain">
+                <i className="fa fa-question-circle" onClick={() => this.setState({ showExplanation: true })} />
             </section>
         );
     }
@@ -140,49 +141,51 @@ export default class Processes extends React.PureComponent<IProps, IState> {
         );
 
         return (
-            <div className="processes-container">
-                <Explain
-                    close={() => this.setState({ showExplanation: false })}
-                    isVisible={this.state.showExplanation}
-                    title="Processes Help"
-                >
-                    <h1>Processes</h1>
-                    <p>
-                        The processes are split into 2 different tables. The upper one shows all active processes and
-                        the lower one shows processes that are done/complete.
-                    </p>
-                    <p>
-                        Note: if you need pagination for completed processes you can toggle it from the table settings,
-                        via the gear icon.
-                    </p>
-                    <h2>Settings storage</h2>
-                    <p>
-                        The tables will store the setting for your filters and columns in the local storage of your
-                        browser. If you want to reset the settings to the default, click on the gear icon and then on
-                        the reset button.
-                    </p>
-                </Explain>
-                <ConfirmationDialog
-                    isOpen={this.state.confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={this.state.confirmationDialogAction}
-                    question={this.state.confirmationDialogQuestion}
-                />
-                <div className="actions">{this.renderExplain()}</div>
-                <ProcessesTable
-                    key={"active"}
-                    initialTableSettings={activeSettings}
-                    renderActions={this.renderActions}
-                    isProcess={true}
-                />
-                <ProcessesTable
-                    key={"completed"}
-                    initialTableSettings={completedSettings}
-                    renderActions={this.renderActions}
-                    isProcess={true}
-                />
-                <ScrollUpButton />
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="process-container">
+                    <Explain
+                        close={() => this.setState({ showExplanation: false })}
+                        isVisible={this.state.showExplanation}
+                        title="Processes Help"
+                    >
+                        <h1>Processes</h1>
+                        <p>
+                            The processes are split into 2 different tables. The upper one shows all active processes
+                            and the lower one shows processes that are done/complete.
+                        </p>
+                        <p>
+                            Note: if you need pagination for completed processes you can toggle it from the table
+                            settings, via the gear icon.
+                        </p>
+                        <h2>Settings storage</h2>
+                        <p>
+                            The tables will store the setting for your filters and columns in the local storage of your
+                            browser. If you want to reset the settings to the default, click on the gear icon and then
+                            on the reset button.
+                        </p>
+                    </Explain>
+                    <ConfirmationDialog
+                        isOpen={this.state.confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={this.state.confirmationDialogAction}
+                        question={this.state.confirmationDialogQuestion}
+                    />
+                    <div className="actions">{this.renderExplain()}</div>
+                    <ProcessesTable
+                        key={"active"}
+                        initialTableSettings={activeSettings}
+                        renderActions={this.renderActions}
+                        isProcess={true}
+                    />
+                    <ProcessesTable
+                        key={"completed"}
+                        initialTableSettings={completedSettings}
+                        renderActions={this.renderActions}
+                        isProcess={true}
+                    />
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

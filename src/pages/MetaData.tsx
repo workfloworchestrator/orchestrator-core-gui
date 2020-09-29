@@ -15,6 +15,7 @@
 
 import "pages/MetaData.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import FixedInputConfiguration from "components/FixedInputConfiguration";
 import ProductBlocks from "components/ProductBlocks";
 import Products from "components/Products";
@@ -79,11 +80,13 @@ export default class MetaData extends React.Component<IProps, IState> {
         const { tabs } = this.state;
         const selectedTab = this.props.match.params.type;
         return (
-            <div className="mod-metadata">
-                <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
-                {this.renderTabContent(selectedTab)}
-                <ScrollUpButton />
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-metadata">
+                    <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
+                    {this.renderTabContent(selectedTab)}
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }
