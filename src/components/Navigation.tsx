@@ -60,7 +60,7 @@ const Navigation = () => {
         navItems.forEach(navItem => {
             controls.push({
                 controlType: "text",
-                id: `controls_${navItem}`,
+                id: `main-navigation-${navItem}-tab`,
                 text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
@@ -75,10 +75,10 @@ const Navigation = () => {
             },
             {
                 controlType: "text",
-                id: "controls_new_process",
+                id: "main-navigation-new-process-tab",
                 text: (
                     <Link to="/new-process">
-                        <EuiButton iconType="plusInCircle" size="s">
+                        <EuiButton id="main-navigation-new-process-tab-button" iconType="plusInCircle" size="s">
                             {I18n.t(`navigation.new_process`)}
                         </EuiButton>
                     </Link>
