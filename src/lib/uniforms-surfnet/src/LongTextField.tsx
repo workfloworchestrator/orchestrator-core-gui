@@ -1,4 +1,4 @@
-import { EuiFieldText, EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
+import { EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
@@ -16,6 +16,7 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  */
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
+
 export type LongTextFieldProps = FieldProps<string, {}, HTMLTextAreaElement>;
 
 function LongText({

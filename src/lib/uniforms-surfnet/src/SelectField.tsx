@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";

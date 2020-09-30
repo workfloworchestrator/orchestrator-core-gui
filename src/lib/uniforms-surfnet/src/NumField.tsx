@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import { EuiFieldNumber, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFieldNumber, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import NumericInput from "react-numeric-input";

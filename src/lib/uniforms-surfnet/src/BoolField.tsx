@@ -14,7 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/BoolField.scss";
 
-import { EuiCheckbox, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiCheckbox, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
