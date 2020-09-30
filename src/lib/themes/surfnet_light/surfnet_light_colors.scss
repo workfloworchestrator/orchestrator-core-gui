@@ -28,3 +28,11 @@ $euiLinkColor: $euiColorPrimary; // Weirdly this one wasn't updating with new pr
 $euiColorPrimaryText: makeHighContrastColor($euiColorPrimary);
 $euiColorSecondaryText: makeHighContrastColor($euiColorSecondary);
 $euiColorAccentText: makeHighContrastColor($euiColorAccent);
+
+// Force button text color
+.euiButton--primary.euiButton--fill {
+    color: #fff !important;
+}
+.euiButton--warning.euiButton--fill {
+    color: #fff !important;
+}
