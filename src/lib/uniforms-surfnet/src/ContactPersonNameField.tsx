@@ -17,6 +17,7 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
 import I18n from "i18n-js";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
@@ -24,7 +25,6 @@ import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
@@ -166,11 +166,10 @@ function ContactPersonName({
                 <EuiFieldText
                     disabled={disabled}
                     fullWidth
-                    // id={id}
                     name={name}
+                    isInvalid={error}
                     onChange={onChangeInternal}
                     placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
-                    // ref={inputRef}
                     type="text"
                     value={value ?? ""}
                     onKeyDown={onAutocompleteKeyDown}

@@ -13,12 +13,10 @@
  *
  */
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
-
 
 export type TextFieldProps = FieldProps<string>;
 
@@ -54,11 +52,10 @@ function Text({
             >
                 <EuiFieldText
                     disabled={disabled}
-                    // id={id}
                     name={name}
+                    isInvalid={error}
                     onChange={event => onChange(event.target.value)}
                     placeholder={placeholder}
-                    // ref={inputRef}
                     type={type}
                     value={value ?? ""}
                     fullWidth

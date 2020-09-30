@@ -1,3 +1,5 @@
+import { EuiFieldText, EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +16,6 @@
  */
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
-import { EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 export type LongTextFieldProps = FieldProps<string, {}, HTMLTextAreaElement>;
 
 function LongText({
@@ -45,11 +45,10 @@ function LongText({
             >
                 <EuiTextArea
                     disabled={disabled}
-                    // id={id}
                     name={name}
+                    isInvalid={error}
                     onChange={event => onChange(event.target.value)}
                     placeholder={placeholder}
-                    // ref={inputRef}
                     value={value ?? ""}
                     fullWidth
                 />

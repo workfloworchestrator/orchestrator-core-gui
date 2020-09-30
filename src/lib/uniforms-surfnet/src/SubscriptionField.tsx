@@ -15,11 +15,12 @@
 
 import "lib/uniforms-surfnet/src/SubscriptionField.scss";
 
-import {EuiFormRow, EuiText, EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
+import { EuiButtonIcon, EuiFormRow, EuiModal, EuiOverlayMask, EuiText } from "@elastic/eui";
 import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
@@ -29,7 +30,6 @@ import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 import { Option, Organization, Product, ServicePortSubscription, Subscription as iSubscription } from "utils/types";
 import { filterProductsByBandwidth } from "validations/Products";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 export function makeLabel(subscription: iSubscription, products: Product[], organisations?: Organization[]) {
     const organisation = organisations && organisations.find(org => org.uuid === subscription.customer_id);
@@ -218,24 +218,13 @@ function Subscription({
         closeModal();
     };
 
-    const customStyles = {
-        container: () => ({
-            width: window.screen.width / 2 - 480
-        })
-        //
-        // control: () => ({
-        //     // none of react-select's styles are passed to <Control />
-        //     width: 600,
-        // }),
-    };
-
     const isRepeated: boolean = isRepeatedField(name);
     const labelRender: string = isRepeated ? "" : label;
 
     return (
         <section
             {...filterDOMProps(props)}
-            className={`${className} ${isRepeated ? "repeated" : ""} subscription-field`}
+            className={`${className} ${isRepeated ? "repeated" : ""} subscription-field${disabled ? "-disabled" : ""}`}
         >
             <EuiFormRow
                 label={labelRender}
@@ -307,7 +296,6 @@ function Subscription({
                         required={required}
                         inputRef={inputRef}
                         className="subscription-field-select"
-                        styles={customStyles}
                     />
                 </div>
             </EuiFormRow>

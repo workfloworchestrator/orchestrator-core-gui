@@ -13,16 +13,17 @@
  *
  */
 
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
+
 import { ListField, ListItemField, SelectField } from ".";
 
 export type SelectFieldProps = FieldProps<
@@ -53,7 +54,7 @@ function Select({
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
 
-    // We cant call useField conditionally so we call it for ourselfs if there is no parent
+    // We cant call useField conditionally so we call it for ourselves if there is no parent
     if (parentName === "") {
         parentName = name;
     }

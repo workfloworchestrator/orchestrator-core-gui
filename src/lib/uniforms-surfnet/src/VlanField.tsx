@@ -17,6 +17,7 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
@@ -25,7 +26,6 @@ import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
 import { inValidVlan } from "validations/UserInput";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/labelLogic";
 
 function getAllNumbersForVlanRange(vlanRange?: string) {
     if (!vlanRange) {
@@ -189,21 +189,16 @@ function Vlan({
                 fullWidth
                 hasEmptyLabelSpace
             >
-                <>
                 <EuiFieldText
                     fullWidth
                     disabled={!subscriptionId || disabled || isUntagged}
-                    // ID is deferred from parent
-                    // id={id}
                     name={name}
+                    isInvalid={error}
                     onChange={event => onChange(event.target.value)}
                     placeholder={placeholder}
-                    // ref={inputRef}
                     type="text"
                     value={value ?? ""}
                 />
-                {subscriptionId && !disabled && <em className="info">{message}</em>}
-            </>
             </EuiFormRow>
         </section>
     );

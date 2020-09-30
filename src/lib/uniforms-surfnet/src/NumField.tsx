@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +12,8 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
-import { EuiFieldNumber, EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiFieldNumber, EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
@@ -54,9 +54,8 @@ function Num({
                 fullWidth
             >
                 <EuiFieldNumber
-                    // id={id}
                     name={name}
-                    // ref={inputRef}
+                    isInvalid={error}
                     placeholder={placeholder}
                     onChange={event => onChange(parseInt(event.target.value))}
                     min={min}
@@ -64,7 +63,6 @@ function Num({
                     step={step ?? 1}
                     value={value ?? ""}
                     disabled={disabled}
-                    fullWidth
                 />
             </EuiFormRow>
         </div>

@@ -14,10 +14,10 @@
  */
 import "lib/uniforms-surfnet/src/ListField.scss";
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import ListAddField from "lib/uniforms-surfnet/src/ListAddField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import { EuiFormRow, EuiText } from "@elastic/eui";
 import range from "lodash/range";
 import React, { Children, cloneElement, isValidElement } from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";

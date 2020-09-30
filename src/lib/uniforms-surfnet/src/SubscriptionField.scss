@@ -18,11 +18,21 @@
 .subscription-field {
     > div {
         display: flex;
-        //flex-direction: column !important;
         .subscription-field-select {
             margin-left: 35px;
             margin-top: -33px;
             width: auto;
+        }
+    }
+}
+
+// Setup sensible margins for port selectors without a reload and port modal
+.subscription-field-disabled {
+    > div {
+        display: flex;
+        .subscription-field-select {
+            margin-left: 0px;
+            margin-top: 5px;
         }
     }
 }
