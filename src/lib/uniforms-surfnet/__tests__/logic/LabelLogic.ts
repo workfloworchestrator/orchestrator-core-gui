@@ -11,5 +11,5 @@ test("Test different names from uniform if they belong to repeated ListFields ",
     expect(isRepeatedField("esi_service_ports.0.0.subscription_id")).toBe(false);
     expect(isRepeatedField("esi_service_ports.0.1.subscription_id")).toBe(true);
     expect(isRepeatedField("esi_service_ports.1.0.subscription_id")).toBe(false);
-    expect(isRepeatedField("esi_service_ports.1.0.subscription_id")).toBe(true);
+    expect(isRepeatedField("esi_service_ports.1.1.subscription_id")).toBe(true);
 });

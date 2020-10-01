@@ -15,7 +15,6 @@
 export function isRepeatedField(name: string) {
     // Todo write a test
     let isNested: boolean = false;
-    console.log(name);
     if (name.includes(".")) {
         const splittedName: string[] = name.split(".");
         if (splittedName.length > 1 && splittedName.length < 4) {
