@@ -36,3 +36,7 @@ $euiColorAccentText: makeHighContrastColor($euiColorAccent);
 .euiButton--warning.euiButton--fill {
     color: #fff !important;
 }
+
+:root {
+    --eui-color-primary: #{$euiColorPrimary};
+}

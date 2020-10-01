@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
     mode: "production",
-    entry: "./surfnet_light.scss",
+    entry: "./main.scss",
     output: {
         path: path.resolve(__dirname)
     },
@@ -13,7 +13,7 @@ module.exports = {
                 use: [
                     {
                         loader: "file-loader",
-                        options: { outputPath: "./", name: "[name].css" }
+                        options: { outputPath: "./", name: "theme.css" }
                     },
                     // Compiles Sass to CSS
                     "sass-loader"
