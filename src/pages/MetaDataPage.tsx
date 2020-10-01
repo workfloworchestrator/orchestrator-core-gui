@@ -24,23 +24,7 @@ import {
 } from "@elastic/eui";
 import { Fragment, useState } from "react";
 import React from "react";
-
-interface IProps {
-    selectedTabId: string;
-    handleSelect: any;
-    loading: false;
-    incremental: false;
-    filters: false;
-    multiAction: false;
-}
-
-interface IState {
-    selectedTabId: string;
-    loading: false;
-    incremental: false;
-    filters: false;
-    multiAction: true;
-}
+import { RouteComponentProps } from "react-router";
 
 var date = new Date();
 
@@ -48,7 +32,7 @@ const data = [
     {
         name: "Deprecated MSP 100G",
         description: "Multi Service Port 100GE",
-        tag: "MSP",
+        tag: "MSPQ",
         type: "Port",
         status: "end of life",
         productBlocks: "Physical Termination Point",
@@ -66,7 +50,7 @@ const data = [
     {
         name: "Deprecated MSP 10G",
         description: "Multi Service Port 10GE",
-        tag: "MSP",
+        tag: "MSPR",
         type: "Port",
         status: "end of life",
         productBlocks: "Physical Termination Point",
@@ -79,6 +63,15 @@ const data = [
         type: "Port",
         status: "end of life",
         productBlocks: "Physical Termination Point (Redundant MSP)",
+        creationDate: date
+    },
+    {
+        name: "Dead one",
+        description: "Revive one",
+        tag: "Dead",
+        type: "Port",
+        status: "end of life",
+        productBlocks: "Revive one",
         creationDate: date
     }
 ];
@@ -125,55 +118,72 @@ const columns = [
         name: "CREATE DATE",
         sortable: true,
         truncateText: true
-    }
-    // {
-    //     name: 'Actions',
-    //     actions,
-    //  },
-];
-
-const search = {
-    box: {
-        incremental: false,
-        schema: true
-    }
-};
-
-const tabs = [
+    },
     {
-        id: "products-id",
-        name: "Products",
-        content: (
-            <Fragment>
-                <EuiSpacer />
-                <EuiPageContent>
-                    <EuiPageContentHeader>
-                        <EuiSpacer size="l" />
-                        <EuiInMemoryTable
-                            items={data}
-                            columns={columns}
-                            search={search}
-                            pagination={true}
-                            sorting={true}
-                        />
-                    </EuiPageContentHeader>
-                </EuiPageContent>
-            </Fragment>
-        )
+        field: "actions",
+        name: "ACTIONS"
     }
 ];
+
+interface IProps {
+    incremental: boolean;
+    filters: boolean;
+    multiAction: boolean;
+}
 
 export default class MetaDataPage extends React.Component {
-    constructor(props: IProps) {
-        super(props);
+    state: IProps = {
+        filters: false,
+        incremental: false,
+        multiAction: false
+    };
 
-        this.state = {
-            filters: false,
-            multiAction: true
-        };
-    }
+    // Data inladen met =
+    // componentDidMount = () => {
+    //     client.get(``)
+    //     .then((result) => {
+    //         const  = result.data.map(() => {
+    //             return ;
+    //         });
+    //         this.setState({});
+    //     });
+    // }
 
     render() {
+        const { multiAction, filters, incremental } = this.state;
+
+        const search = {
+            box: {
+                incremental: incremental,
+                schema: true
+            },
+            filters: !filters ? undefined : []
+        };
+
+        const tabs = [
+            {
+                id: "products-id",
+                name: "Products",
+                content: (
+                    <Fragment>
+                        <EuiSpacer />
+                        <EuiPageContent>
+                            <EuiPageContentHeader>
+                                <EuiSpacer size="l" />
+                                <EuiInMemoryTable
+                                    items={data}
+                                    columns={columns}
+                                    search={search}
+                                    pagination={true}
+                                    sorting={true}
+                                />
+                            </EuiPageContentHeader>
+                        </EuiPageContent>
+                    </Fragment>
+                )
+            }
+        ];
+
         return (
             <EuiPage>
                 <EuiPageBody component="div">
