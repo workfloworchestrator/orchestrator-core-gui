@@ -16,7 +16,7 @@
 import { action } from "@storybook/addon-actions";
 import { number } from "@storybook/addon-knobs";
 import IpPrefixTable from "components/inputForms/IpPrefixTable";
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import React from "react";
 import IP_BLOCKS_V6 from "stories/data/ip_blocks_v6.json";
 import IP_BLOCKS from "stories/data/ip_blocks.json";
@@ -30,13 +30,13 @@ export default {
 };
 
 export const Definition = () => {
-    fetchMock.restore();
-    fetchMock.get("glob:*/api/ipam/prefix_filters", [
+    mock.reset();
+    mock.onGet(/ipam\/prefix_filters/).reply(200, [
         { id: 1, prefix: "10.0.0.0/16", version: 4 },
         { id: 2, prefix: "2010::/32", version: 6 }
     ]);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", IP_BLOCKS);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/2", IP_BLOCKS_V6);
+    mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+    mock.onGet("ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
 
     return (
         <IpPrefixTable

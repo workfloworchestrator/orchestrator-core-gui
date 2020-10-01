@@ -61,9 +61,9 @@ axiosInstance.interceptors.response.use(
         }
         if (error.response) {
             if (error.response.status >= 400 && error.response.status < 500) {
-                setFlash(error.response.data.body, "warning");
+                setFlash(error.response.data?.body, "warning");
             } else if (error.response.status >= 500) {
-                setFlash(error.response.data.body, "error");
+                setFlash(error.response.data?.body, "error");
             }
         }
         return Promise.reject(error);

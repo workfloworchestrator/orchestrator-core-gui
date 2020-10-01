@@ -14,7 +14,7 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
-import fetchMock from "fetch-mock-jest";
+import mock from "axios-mock";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
@@ -77,7 +77,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - renders an input with correct placeholder (port chosen)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const element = <VlanField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }, { model: { subscription_id: "abc" } }));
@@ -136,7 +136,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - changes value based on portMode (untagged)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const onChange = jest.fn();
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" />);
@@ -153,7 +153,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - changes value based on portMode (tagged)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const onChange = jest.fn();
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" />);
@@ -181,7 +181,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (untagged)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" />);
         getSubscription.mockReturnValue({ port_mode: "untagged" });
@@ -197,12 +197,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".info").text()).toBe(
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (untagged with used vlans)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", [[0, 0]]);
+        mock.onGet("ims/vlans/abc").reply(200, [[0, 0]]);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" />);
         getSubscription.mockReturnValue({ port_mode: "untagged" });
@@ -218,12 +218,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".info").text()).toBe(
             "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
         );
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" />);
         getSubscription.mockReturnValue({ port_mode: "tagged" });
@@ -234,12 +234,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find("input").prop("disabled")).toBe(false);
         expect(wrapper.find(".info").text()).toBe("This service port has no VLANs in use (yet).");
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - renders an input that is correctly enabled/disabled based on portMode (tagged with used Vlans)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", [
+        mock.onGet("ims/vlans/abc").reply(200, [
             [3, 6],
             [10, 10]
         ]);
@@ -253,13 +253,13 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find("input").prop("disabled")).toBe(false);
         expect(wrapper.find(".info").text()).toBe("Already used VLAN ranges for this service port: 3-6,10");
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
     test("<VlanField> - adds vlans taken in same list as used vlans", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
-        fetchMock.get("glob:*/api/ims/vlans/def", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
+        mock.onGet("ims/vlans/def").reply(200, []);
 
         const { element, getSubscription } = withSubscriptions(
             <ListField name="x">
@@ -307,8 +307,8 @@ describe("<VlanField>", () => {
                 .text()
         ).toBe("This service port has no VLANs in use (yet).");
 
-        expect(fetchMock).toHaveFetchedTimes(2, "glob:*/api/ims/vlans/abc");
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/def");
+        // expect(fetchMock).toHaveFetchedTimes(2, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/def");
         expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
     });
 
@@ -349,7 +349,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - renders extra errors correctly (untagged and taken)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", [[0, 0]]);
+        mock.onGet("ims/vlans/abc").reply(200, [[0, 0]]);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" showInlineError={true} />);
         getSubscription.mockReturnValue({ port_mode: "untagged" });
@@ -362,11 +362,11 @@ describe("<VlanField>", () => {
 
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find(".error").text()).toBe("This service port is already in use and cannot be chosen");
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (invalid format)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", []);
+        mock.onGet("ims/vlans/abc").reply(200, []);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" showInlineError={true} />);
         getSubscription.mockReturnValue({ port_mode: "untagged" });
@@ -381,11 +381,11 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".error").text()).toBe(
             "Invalid VLAN - must be a range of valid [2-4094] VLAN integers, for example '2, 5-6, 1048-1052'"
         );
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (tagged and taken)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", [[2, 2]]);
+        mock.onGet("ims/vlans/abc").reply(200, [[2, 2]]);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" showInlineError={true} />);
         getSubscription.mockReturnValue({ port_mode: "tagged" });
@@ -398,11 +398,11 @@ describe("<VlanField>", () => {
 
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find(".error").text()).toBe("VLAN range 2 are already in use for the selected service port");
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
     });
 
     test("<VlanField> - renders extra errors correctly (ims error)", async () => {
-        fetchMock.get("glob:*/api/ims/vlans/abc", { body: [], status: 400 });
+        mock.onGet("ims/vlans/abc").reply(200, { body: [], status: 400 });
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" showInlineError={true} />);
         getSubscription.mockReturnValue({ port_mode: "tagged" });
@@ -417,7 +417,7 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".error").text()).toBe(
             "This service port can not be found in IMS. It may be deleted or in an initial state."
         );
-        expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
+        // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
     });
 
     test("<VlanField> - renders a label", async () => {

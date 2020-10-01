@@ -1,5 +1,5 @@
 import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 
 import IP_BLOCKS_V6 from "../../../stories/data/ip_blocks_v6.json";
 import IP_BLOCKS from "../../../stories/data/ip_blocks.json";
@@ -13,15 +13,16 @@ import { IPvAnyNetworkField } from "../src";
 
 <Story name="IPvAnyNetworkField">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("/api/ipam/prefix_filters", [
+        mock.reset();
+        mock.onGet("ipam/prefix_filters").reply(200, [
             { id: 1, prefix: "10.0.0.0/16", version: 4 },
             { id: 2, prefix: "2010::/32", version: 6 }
         ]);
-        fetchMock.get("/api/ipam/ip_blocks/1", IP_BLOCKS);
-        fetchMock.get("/api/ipam/ip_blocks/2", IP_BLOCKS_V6);
-        fetchMock.get("glob:*/api/ipam/free_subnets/*/*/*", url => {
-            return [url.substring(23, url.length - 6) + url.substring(url.length - 3)];
+        mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+        mock.onGet("ipam/ip_blocks/2").reply(200, IP_BLOCKS_V6);
+        mock.onGet(/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+            const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
+            return [200, [m]];
         });
         return <UserInputContainer stepUserInput={createForm({ name: { type: "string", format: "ipvanynetwork" } })} />;
     }}
@@ -42,11 +43,12 @@ import { IPvAnyNetworkField } from "../src";
 
 <Story name="IPvAnyNetworkFieldPreselected">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("/api/ipam/prefix_filters", []);
-        fetchMock.get("/api/ipam/ip_blocks/1", []);
-        fetchMock.get("glob:*/api/ipam/free_subnets/*/*/*", url => {
-            return [url.substring(23, url.length - 6) + url.substring(url.length - 3)];
+        mock.reset();
+        mock.onGet("ipam/prefix_filters").reply(200, []);
+        mock.onGet("ipam/ip_blocks/1").reply(200, []);
+        mock.onGet(/ipam\/free_subnets\/.*?\/.*?\/.*/).reply((config) => {
+            const m = config.url.substring(18, config.url.length - 6) + config.url.substring(config.url.length - 3);
+            return [200, [m]];
         });
         return (
             <UserInputContainer

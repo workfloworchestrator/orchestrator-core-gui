@@ -7,6 +7,7 @@
         "@elastic/eui": "^29.0.0",
         "@fortawesome/fontawesome-free": "^5.13.0",
         "axios": "^0.19.2",
+        "axios-mock-adapter": "^1.18.2",
         "babel-polyfill": "^6.26.0",
         "date-fns": "^2.0.0-alpha.23",
         "events": "^3.0.0",

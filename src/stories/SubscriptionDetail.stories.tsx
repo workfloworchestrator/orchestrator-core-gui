@@ -13,7 +13,7 @@
  *
  */
 
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import SubscriptionDetail from "pages/SubscriptionDetail";
 import React from "react";
 import PRODUCTS from "stories/data/products.json";
@@ -32,11 +32,10 @@ export default {
 };
 
 export const Subscription = () => {
-    fetchMock.restore();
-
-    fetchMock.get("/api/subscriptions/pid", SUBSCRIPTION_JSON);
-    fetchMock.get("/api/subscriptions/domain-model/pid", SUBSCRIPTION_MODEL_JSON);
-    fetchMock.get("/api/processes/process-subscriptions-by-subscription-id/9c8c13d5-6954-461a-a931-32894c193aa0", [
+    mock.reset();
+    mock.onGet("subscriptions/pid").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("subscriptions/domain-model/pid").reply(200, SUBSCRIPTION_MODEL_JSON);
+    mock.onGet("processes/process-subscriptions-by-subscription-id/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, [
         {
             created_at: 1574768649,
             id: "bfe5050d-0d1c-4149-baaf-834610d1d450",
@@ -60,12 +59,12 @@ export const Subscription = () => {
         }
     ]);
 
-    fetchMock.get(
-        "/api/products/a3bf8b26-50a6-4586-8e58-ad552cb39798",
+    mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(
+        200,
         PRODUCTS.filter(p => p.product_id === "a3bf8b26-50a6-4586-8e58-ad552cb39798")[0]
     );
 
-    fetchMock.get("/api/v2/subscriptions/workflows/9c8c13d5-6954-461a-a931-32894c193aa0", {
+    mock.onGet("v2/subscriptions/workflows/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
@@ -75,8 +74,8 @@ export const Subscription = () => {
         system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
     });
 
-    fetchMock.get("/api/subscriptions/parent_subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0", []);
-    fetchMock.get("/api/ims/service_by_ims_service_id/36261", {
+    mock.onGet("subscriptions/parent_subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, []);
+    mock.onGet("ims/service_by_ims_service_id/36261").reply(200, {
         aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: "SURFNET8",
@@ -93,7 +92,7 @@ export const Subscription = () => {
         speed: "SERVICE",
         status: "3"
     });
-    fetchMock.get("/api/ims/service_by_ims_service_id/36260", {
+    mock.onGet("ims/service_by_ims_service_id/36260").reply(200, {
         aliases: ["SUBSCRIPTION_ID=F9ACBF45-4BFD-45DB-892C-774EB967B033"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
         domain: null,
@@ -108,7 +107,7 @@ export const Subscription = () => {
         status: "3"
     });
 
-    fetchMock.get("/api/ims/service_by_ims_service_id/31420", {
+    mock.onGet("ims/service_by_ims_service_id/31420").reply(200, {
         aliases: [],
         customer_id: "C9B5E717-0B11-E511-80D0-005056956C1A",
         domain: null,
@@ -122,7 +121,7 @@ export const Subscription = () => {
         speed: "INTERNETWOLK",
         status: "3"
     });
-    fetchMock.get("/api/ims/port_by_ims_service/36260", {
+    mock.onGet("ims/port_by_ims_service/36260").reply(200, {
         connector_type: "LC/PC",
         fiber_type: "multi-mode",
         id: 683015,
@@ -134,8 +133,8 @@ export const Subscription = () => {
         port: "0/1/1",
         status: "3"
     });
-    fetchMock.get("/api/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653", SN8PortSubscriptions[0]);
-    fetchMock.get("/api/ipam/prefix_by_id/166", {
+    mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SN8PortSubscriptions[0]);
+    mock.onGet("ipam/prefix_by_id/166").reply(200, {
         addresses: [
             {
                 address: "145.145.4.26",
@@ -183,7 +182,7 @@ export const Subscription = () => {
         vrf: 1,
         vrf__label: "global"
     });
-    fetchMock.get("/api/v2/crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0", {
+    mock.onGet("v2/crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
         guid: "d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26",
         code: "MSP",
         status: "_Opgezegd"

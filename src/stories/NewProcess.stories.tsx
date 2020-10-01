@@ -13,7 +13,7 @@
  *
  */
 
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import NewProcess from "pages/NewProcess";
 import React from "react";
 import { Organisation, createForm } from "stories/utils";
@@ -29,27 +29,21 @@ export default {
 };
 
 export const Default = () => {
-    fetchMock.restore();
-
-    fetchMock.get("glob:/api/products/*/validate", [1000]);
-    fetchMock.post("glob:/api/processes/*", {
-        status: 510,
-        body: {
-            form: createForm({ organisation: Organisation }),
-            hasNext: false
-        }
+    mock.onGet(/products\/.*\/validate/).reply(200, [1000]);
+    mock.onPost(/processes\/.*/).reply(510, {
+        form: createForm({ organisation: Organisation }),
+        hasNext: false
     });
 
     return <NewProcess preselectedInput={{}} />;
 };
 
 export const Preselected = () => {
-    fetchMock.restore();
-
-    fetchMock.get("glob:/api/products/*/validate", [1000]);
-    fetchMock.post("glob:/api/processes/*", {
-        status: 510,
-        body: { form: createForm({ organisation: Organisation }), hasNext: false }
+    mock.reset();
+    mock.onGet(/products\/.*\/validate/).reply(200, [1000]);
+    mock.onPost(/processes\/.*/).reply(510, {
+        form: createForm({ organisation: Organisation }),
+        hasNext: false
     });
 
     return (

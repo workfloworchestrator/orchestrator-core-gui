@@ -14,7 +14,7 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
-import fetchMock from "fetch-mock-jest";
+import mock from "axios-mock";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { SubscriptionSummaryField } from "lib/uniforms-surfnet/src";
@@ -24,8 +24,8 @@ import SUBSCRIPTION_JSON from "stories/data/subscription.json";
 
 describe("<SubscriptionSummaryField>", () => {
     test("<SubscriptionSummaryField> - renders inputs", async () => {
-        fetchMock.get("glob:*/api/subscriptions/*", SUBSCRIPTION_JSON);
-        fetchMock.get("glob:*/api/products/a3bf8b26-50a6-4586-8e58-ad552cb39798", PRODUCTS[22]);
+        mock.onGet(/subscriptions\/.*/).reply(200, SUBSCRIPTION_JSON);
+        mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[22]);
 
         const element = <SubscriptionSummaryField name="x" />;
 
@@ -40,8 +40,8 @@ describe("<SubscriptionSummaryField>", () => {
 });
 
 test("<SubscriptionSummaryField> - renders subscription information", async () => {
-    fetchMock.get("glob:*/api/subscriptions/*", SUBSCRIPTION_JSON);
-    fetchMock.get("glob:*/api/products/a3bf8b26-50a6-4586-8e58-ad552cb39798", PRODUCTS[22]);
+    mock.onGet(/subscriptions\/.*/).reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[22]);
 
     const element = <SubscriptionSummaryField name="x" />;
 

@@ -10,6 +10,7 @@ variables:
 
 stages:
   - build
+  - test
   - review
   - development
   - staging
@@ -18,6 +19,17 @@ stages:
 
 include:
   - template: Jobs/Build.gitlab-ci.yml
+
+unit test:
+  image: node:14.2.0-slim
+  stage: test
+  variables:
+    TZ: Europe/Amsterdam
+  script:
+    - yarn install --frozen-lockfile
+    - yarn prettier
+    - yarn test --coverage
+    - yarn run license-check-and-add check
 
 .deploy_script: &deploy_script
   script:
