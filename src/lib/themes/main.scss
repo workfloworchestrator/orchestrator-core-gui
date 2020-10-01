@@ -15,8 +15,8 @@
 // This is our custom theme for Elastic UI
 // Docs: https://elastic.github.io/eui
 
-// Import custom theme
-@import "./surfnet_light/theme.scss";
+// Import Elastic UI theme colors
+@import "./colors.scss";
 
 // Below are imports from Elastic UI,
 // They are required to make the kit work, customization is possible.

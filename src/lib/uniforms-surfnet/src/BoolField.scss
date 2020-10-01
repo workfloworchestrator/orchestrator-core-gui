@@ -32,7 +32,7 @@
     input[type="checkbox"] + label span {
         font-size: 11px;
         background-color: white;
-        border: 1px solid vars.$blue;
+        border: 1px solid vars.$primary;
         border-radius: 3px;
         padding: 1px 2px;
         margin: 2px 0;
@@ -50,12 +50,12 @@
     }
 
     input[type="checkbox"]:checked + label span {
-        border: 2px solid vars.$blue;
+        border: 2px solid vars.$primary;
         border-radius: 2px;
         box-shadow: none;
         padding: 0;
         i {
-            background-color: vars.$blue;
+            background-color: vars.$primary;
             color: white;
             padding: 3px 2px;
         }

@@ -52,12 +52,12 @@ section.drop-down-actions {
     span {
         cursor: pointer;
         padding: 10px 0 10px 20px;
-        color: vars.$darker-blue;
+        color: vars.$darker-primary;
         &:hover {
             background-color: vars.$hover;
         }
         &.danger {
-            color: vars.$red;
+            color: vars.$danger;
         }
         i {
             margin-right: 20px;

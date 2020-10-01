@@ -43,8 +43,8 @@
 
             &.active {
                 background-color: white;
-                color: vars.$darker-blue;
-                border-top: 2px solid vars.$blue;
+                color: vars.$darker-primary;
+                border-top: 2px solid vars.$primary;
                 border-right: none;
             }
 
@@ -68,7 +68,7 @@
         h3 {
             font-size: larger;
             padding: 15px 0;
-            color: vars.$darker-blue;
+            color: vars.$darker-primary;
             &:last-child {
                 margin-left: auto;
             }

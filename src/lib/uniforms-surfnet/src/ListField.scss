@@ -77,12 +77,12 @@
         cursor: pointer;
 
         i.fa-plus {
-            color: vars.$green;
+            color: vars.$success;
             font-size: 30px;
         }
 
         i.fa-minus {
-            color: vars.$red;
+            color: vars.$danger;
             font-size: 30px;
         }
 

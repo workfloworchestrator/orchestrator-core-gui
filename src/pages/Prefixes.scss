@@ -53,7 +53,7 @@
         }
 
         i.fa-search {
-            color: color.adjust(vars.$blue, $lightness: 5);
+            color: color.adjust(vars.$primary, $lightness: 5);
             position: absolute;
             right: 14px;
             top: 8px;
@@ -93,9 +93,9 @@
             }
             tr.Allocated {
                 cursor: pointer;
-                background-color: vars.$light-blue;
+                background-color: vars.$light-primary;
                 &:hover {
-                    background-color: color.adjust(vars.$light-blue, $lightness: -10%);
+                    background-color: color.adjust(vars.$light-primary, $lightness: -10%);
                 }
             }
             tr.Planned {
@@ -104,9 +104,9 @@
             }
             tr.Free {
                 cursor: pointer;
-                background-color: vars.$light-green;
+                background-color: vars.$light-success;
                 &:hover {
-                    background-color: color.adjust(vars.$light-green, $lightness: -10%);
+                    background-color: color.adjust(vars.$light-success, $lightness: -10%);
                 }
             }
             tr.selected {
@@ -171,10 +171,10 @@
                             background-color: color.adjust(vars.$light-gold, $lightness: -10%);
                         }
                         &.Free {
-                            background-color: color.adjust(vars.$light-green, $lightness: -10%);
+                            background-color: color.adjust(vars.$light-success, $lightness: -10%);
                         }
                         &.Allocated {
-                            background-color: color.adjust(vars.$light-blue, $lightness: -10%);
+                            background-color: color.adjust(vars.$light-primary, $lightness: -10%);
                         }
                     }
                 }
@@ -204,7 +204,7 @@
                     }
                 }
                 td.assignee {
-                    color: vars.$blue;
+                    color: vars.$primary;
                     font-weight: bold;
                     padding-right: 15px;
                 }
@@ -228,7 +228,7 @@
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted vars.$light-blue;
+                border-bottom: 1px dotted vars.$light-primary;
                 padding: 8px 0;
 
                 &:before {

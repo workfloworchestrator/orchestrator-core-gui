@@ -30,7 +30,7 @@
     }
     .table-name {
         font-weight: bold;
-        color: vars.$blue;
+        color: vars.$primary;
         font-size: larger;
     }
 
@@ -39,14 +39,14 @@
     }
     i.fa-cog {
         &.active {
-            color: vars.$blue;
+            color: vars.$primary;
         }
     }
 }
 div.advanced-search-container {
     padding: 0px 0px 10px 0px;
     i.fa-search {
-        color: vars.$blue;
+        color: vars.$primary;
         margin-left: 0px;
         font-size: 18px;
     }
@@ -102,7 +102,7 @@ table.nwa-table {
     th {
         text-align: left;
         vertical-align: middle;
-        border-left: solid vars.$light-blue 1px;
+        border-left: solid vars.$light-primary 1px;
         border-right: 1px solid rgba(0, 0, 0, 0.05);
     }
     th:first-child {
@@ -119,23 +119,23 @@ table.nwa-table {
             background-color: vars.$lightest-gold;
         }
         &.running {
-            background-color: vars.$lightest-green;
+            background-color: vars.$lightest-success;
         }
         &.api_unavailable {
-            background-color: vars.$lightest-blue;
+            background-color: vars.$lightest-primary;
         }
         &.inconsistent_data {
-            background-color: vars.$lightest-red;
+            background-color: vars.$lightest-danger;
         }
         &.highlighted {
-            border: 2px solid vars.$blue;
+            border: 2px solid vars.$primary;
         }
     }
     thead {
         tr.column-ids {
             th {
                 padding: 5px 5px 10px 5px;
-                background-color: vars.$blue;
+                background-color: vars.$primary;
                 color: white;
             }
         }
@@ -154,7 +154,7 @@ table.nwa-table {
                 border-right: none;
                 border-left: none;
 
-                color: vars.$blue;
+                color: vars.$primary;
                 input {
                     width: 99%;
                     height: 30px;
@@ -168,7 +168,7 @@ table.nwa-table {
 
                     i.fa {
                         margin-top: 6px;
-                        color: vars.$blue;
+                        color: vars.$primary;
                         float: left;
                         font-size: 18px;
                         &.active {
@@ -187,16 +187,16 @@ table.nwa-table {
                     background-color: color.adjust(vars.$lightest-gold, $lightness: -3%);
                 }
                 &.running {
-                    background-color: color.adjust(vars.$lightest-green, $lightness: -3%);
+                    background-color: color.adjust(vars.$lightest-success, $lightness: -3%);
                 }
                 &.api_unavailable {
-                    background-color: color.adjust(vars.$lightest-blue, $lightness: -3%);
+                    background-color: color.adjust(vars.$lightest-primary, $lightness: -3%);
                 }
                 &.inconsistent_data {
-                    background-color: color.adjust(vars.$lightest-red, $lightness: -3%);
+                    background-color: color.adjust(vars.$lightest-danger, $lightness: -3%);
                 }
                 td.actions i.fa-ellipsis-h {
-                    color: vars.$blue;
+                    color: vars.$primary;
                 }
             }
         }
@@ -210,22 +210,22 @@ table.nwa-table {
                     color: vars.$gold;
                 }
                 &.running {
-                    color: vars.$green;
+                    color: vars.$success;
                 }
                 &.completed {
-                    color: vars.$green;
+                    color: vars.$success;
                 }
                 &.api_unavailable {
-                    color: vars.$blue;
+                    color: vars.$primary;
                 }
                 &.inconsistent_data {
-                    color: vars.$red;
+                    color: vars.$danger;
                 }
                 &.waiting {
-                    color: vars.$orange;
+                    color: vars.$warning;
                 }
                 &.failed {
-                    color: vars.$red;
+                    color: vars.$danger;
                 }
             }
             word-break: break-word;
@@ -253,7 +253,7 @@ table.nwa-table {
             }
         }
         td.assignee {
-            color: vars.$blue;
+            color: vars.$primary;
             font-weight: bold;
             padding-right: 15px;
         }
@@ -268,7 +268,7 @@ table.nwa-table {
         }
     }
     .info i.fa-caret-right {
-        color: vars.$blue;
+        color: vars.$primary;
         margin-left: -12px;
         padding-right: 6px;
     }
@@ -289,13 +289,13 @@ table.nwa-table {
 }
 
 span.pulse {
-    color: vars.$green;
+    color: vars.$success;
 }
 
 span.rest {
-    color: vars.$green;
+    color: vars.$success;
 }
 
 span.dead {
-    color: vars.$red;
+    color: vars.$danger;
 }

@@ -33,13 +33,13 @@ div.flash {
     }
 
     &.info {
-        background-color: color.adjust(vars.$green, $lightness: -15%);
+        background-color: color.adjust(vars.$success, $lightness: -15%);
     }
     &.warning {
-        background-color: vars.$orange;
+        background-color: vars.$warning;
     }
     &.error {
-        background-color: vars.$red;
+        background-color: vars.$danger;
     }
 
     .message-container {

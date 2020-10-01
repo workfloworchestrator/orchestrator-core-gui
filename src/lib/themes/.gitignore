@@ -135,4 +135,4 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn,sass
 
 # We want to commit this
-!surfnet_light.css
+!theme.css

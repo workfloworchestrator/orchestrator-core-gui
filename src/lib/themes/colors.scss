@@ -13,14 +13,15 @@
  *
  */
 // This extra import allows any variables that are created via functions to work when loaded into JS
+@use "./vars.scss";
 @import "~@elastic/eui/src/global_styling/variables/colors";
 
-$euiColorPrimary: #4db2cf;
-$euiColorSecondary: #274b72;
-$euiColorAccent: #276b1e;
-$euiColorSuccess: #33cd2e;
-$euiColorDanger: #b62222;
-$euiColorWarning: #da6903;
+$euiColorPrimary: vars.$primary;
+$euiColorSecondary: vars.$secondary;
+$euiColorAccent: vars.$accent;
+$euiColorSuccess: vars.$success;
+$euiColorDanger: vars.$danger;
+$euiColorWarning: vars.$warning;
 
 $euiLinkColor: $euiColorPrimary; // Weirdly this one wasn't updating with new primary color
 
@@ -28,14 +29,6 @@ $euiLinkColor: $euiColorPrimary; // Weirdly this one wasn't updating with new pr
 $euiColorPrimaryText: makeHighContrastColor($euiColorPrimary);
 $euiColorSecondaryText: makeHighContrastColor($euiColorSecondary);
 $euiColorAccentText: makeHighContrastColor($euiColorAccent);
-
-// Force button text color
-.euiButton--primary.euiButton--fill {
-    color: #fff !important;
-}
-.euiButton--warning.euiButton--fill {
-    color: #fff !important;
-}
 
 :root {
     --eui-color-primary: #{$euiColorPrimary};

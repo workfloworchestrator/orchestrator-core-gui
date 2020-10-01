@@ -31,7 +31,7 @@ body {
 
 a {
     cursor: pointer;
-    color: vars.$blue;
+    color: vars.$primary;
     font-weight: bold;
 }
 
@@ -43,10 +43,10 @@ a {
 
 ::-webkit-input-placeholder,
 div.Select-placeholder {
-    color: vars.$blue;
+    color: vars.$primary;
 }
 
 ::-moz-placeholder {
-    color: vars.$blue;
+    color: vars.$primary;
     opacity: 1;
 }

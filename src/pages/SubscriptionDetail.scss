@@ -31,13 +31,13 @@
     h3 {
         font-size: 20px;
         padding: 15px 0 0 15px;
-        color: vars.$darker-blue;
+        color: vars.$darker-primary;
     }
     h2 {
         font-size: 16px;
         margin: 10px 0 0 0;
         padding: 10px 0 0 25px;
-        color: vars.$blue;
+        color: vars.$primary;
     }
     em {
         margin-left: 15px;
@@ -76,7 +76,7 @@
         }
         p.no-termination-reason,
         p.no-modify-reason {
-            color: vars.$orange;
+            color: vars.$warning;
             margin: 15px 0 0 25px;
         }
     }
@@ -88,7 +88,7 @@
             font-size: 16px;
         }
         i.fa {
-            color: vars.$orange;
+            color: vars.$warning;
         }
     }
     section.details {
@@ -97,7 +97,7 @@
     section.not-found-related-objects {
         padding-bottom: 20px;
         h3 {
-            color: vars.$red;
+            color: vars.$danger;
         }
     }
     table {
@@ -123,7 +123,7 @@
         tbody {
             tr {
                 border-bottom: 1px solid vars.$light-grey;
-                border-left: 1px solid vars.$blue;
+                border-left: 1px solid vars.$primary;
 
                 &:nth-child(even) {
                     background: white;
@@ -167,7 +167,7 @@
                     cursor: pointer;
                     margin-right: 15px;
                     font-size: 22px;
-                    color: vars.$blue;
+                    color: vars.$primary;
                 }
             }
         }
@@ -194,7 +194,7 @@
                         &.related-subscription-values {
                             background-color: vars.$light-grey;
                             border-bottom: 1px solid vars.$light-grey;
-                            border-left: 5px solid vars.$blue;
+                            border-left: 5px solid vars.$primary;
                             margin: 0;
                             padding: 0;
                         }
@@ -214,7 +214,7 @@
         }
         tr {
             border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$blue;
+            border-left: 1px solid vars.$primary;
             &:nth-child(even) {
                 background: white;
             }
@@ -280,7 +280,7 @@
         }
         tr {
             border-bottom: 1px solid vars.$light-grey;
-            border-left: 1px solid vars.$blue;
+            border-left: 1px solid vars.$primary;
             &:nth-child(even) {
                 background: white;
             }
@@ -330,7 +330,7 @@
         }
     }
     p.label {
-        color: vars.$blue;
+        color: vars.$primary;
         margin-left: 25px;
         padding-top: 5px;
     }
