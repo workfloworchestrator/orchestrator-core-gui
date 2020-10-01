@@ -287,6 +287,8 @@ I18n.translations.en = {
             link_member_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             link_member_port_info:
                 "Choose a Service Port - only link_member ports for the selected organisation are shown",
+            lldp: "Enable LLDP",
+            lldp_info: "used for troubleshooting (neighbour/interface check) or other long term use",
             location_code: "Location code",
             location_code_info: "Provide a valid location code",
             multicast: "Multicast",
@@ -1047,7 +1049,7 @@ I18n.translations.en = {
         modify_sn8_service_port_port_mode: "Change the mode of the port (Untagged, Tagged, Linkmember)",
         modify_sn8_service_port_nl_port_mode: "Change the mode of the port (Tagged, Linkmember)",
         modify_sn8_sp_auto_negotiation: "Modify the auto_negotiation setting for a SN8 Service Port",
-
+        modify_sn8_service_port_lldp: "Modify the lldp setting for a SN8 Service Port",
         task_cache_warmer: "Refresh the cache of slow API calls",
         task_clean_up_tasks: "Clean up old tasks",
         task_resume_workflows: "Resume all workflows that are stuck on tasks with the status 'waiting'",
