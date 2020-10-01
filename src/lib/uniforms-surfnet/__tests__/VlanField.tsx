@@ -402,7 +402,7 @@ describe("<VlanField>", () => {
     });
 
     test("<VlanField> - renders extra errors correctly (ims error)", async () => {
-        mock.onGet("ims/vlans/abc").reply(200, { body: [], status: 400 });
+        mock.onGet("ims/vlans/abc").reply(400, []);
 
         const { element, getSubscription } = withSubscriptions(<VlanField name="x" showInlineError={true} />);
         getSubscription.mockReturnValue({ port_mode: "tagged" });
