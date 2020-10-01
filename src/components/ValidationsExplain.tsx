@@ -13,11 +13,10 @@
  *
  */
 
-import "./ValidationsExplain.scss";
+import "components/ValidationsExplain.scss";
 
+import HighlightCode from "components/HighlightCode";
 import React from "react";
-
-import HighlightCode from "./HighlightCode";
 
 interface IProps {
     close: () => void;
@@ -30,8 +29,8 @@ interface IProps {
 export default class ValidationsExplain extends React.PureComponent<IProps> {
     main: HTMLDivElement | null = null;
 
-    componentWillReceiveProps(nextProps: IProps) {
-        if (this.props.isVisible === false && nextProps.isVisible === true) {
+    componentDidUpdate(prevProps: IProps) {
+        if (prevProps.isVisible === false && this.props.isVisible === true) {
             setTimeout(() => this.main?.focus(), 50);
         }
     }

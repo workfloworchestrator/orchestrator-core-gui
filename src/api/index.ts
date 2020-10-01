@@ -14,10 +14,9 @@
  */
 import { ENV } from "env";
 import I18n from "i18n-js";
+import mySpinner from "lib/Spin";
 import { User } from "oidc-client";
-
-import mySpinner from "../lib/Spin";
-import { setFlash } from "../utils/Flash";
+import { setFlash } from "utils/Flash";
 import {
     CodedWorkflow,
     ContactPerson,
@@ -44,9 +43,9 @@ import {
     Workflow,
     WorkflowReasons,
     WorkflowWithProductTags
-} from "../utils/types";
-import { isEmpty } from "../utils/Utils";
-import { absent, child_subscriptions, ims_port_id } from "../validations/Subscriptions";
+} from "utils/types";
+import { isEmpty } from "utils/Utils";
+import { absent, child_subscriptions, ims_port_id } from "validations/Subscriptions";
 
 const apiPath = ENV.BACKEND_URL + "/api/";
 

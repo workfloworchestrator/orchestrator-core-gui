@@ -13,12 +13,9 @@
  *
  */
 
-import "./SubscriptionDetail.scss";
+import "pages/SubscriptionDetail.scss";
 
-import I18n from "i18n-js";
-import React from "react";
-import { RouteComponentProps } from "react-router";
-
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import {
     dienstafnameBySubscription,
     getResourceTypeInfo,
@@ -32,11 +29,14 @@ import {
     subscriptionWorkflows,
     subscriptionsDetail,
     subscriptionsDetailWithModel
-} from "../api";
-import CheckBox from "../components/CheckBox";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import ApplicationContext from "../utils/ApplicationContext";
-import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "../utils/Lookups";
+} from "api";
+import CheckBox from "components/CheckBox";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import I18n from "i18n-js";
+import React from "react";
+import { RouteComponentProps } from "react-router";
+import ApplicationContext from "utils/ApplicationContext";
+import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
 import {
     IMSEndpoint,
     IMSService,
@@ -49,9 +49,9 @@ import {
     SubscriptionWithDetails,
     WorkflowReasons,
     prop
-} from "../utils/types";
-import { applyIdNamingConvention, isEmpty, stop } from "../utils/Utils";
-import { subscriptionInstanceValues } from "../validations/Subscriptions";
+} from "utils/types";
+import { applyIdNamingConvention, isEmpty, stop } from "utils/Utils";
+import { subscriptionInstanceValues } from "validations/Subscriptions";
 
 interface MatchParams {
     id: string;
@@ -159,7 +159,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         useDomainModel: false
     };
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const subscriptionId = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
         this.refreshSubscription(subscriptionId);
     };
@@ -325,11 +325,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             });
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
+    componentDidUpdate(prevProps: IProps) {
+        const prevId = prevProps.subscriptionId ? prevProps.subscriptionId : prevProps.match!.params.id;
         const id = this.props.subscriptionId ? this.props.subscriptionId : this.props.match!.params.id;
-        const nextId = nextProps.subscriptionId ? nextProps.subscriptionId : nextProps.match!.params.id;
-        if (id !== nextId) {
-            this.refreshSubscription(nextId);
+        if (prevId !== id) {
+            this.refreshSubscription(id);
             window.scrollTo(0, 0);
         }
     }
@@ -1418,52 +1418,62 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <div className={this.props.subscriptionId ? "mod-subscription-detail" : "mod-subscription-detail card"}>
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
+            <EuiPage>
+                <EuiPageBody
+                    component="div"
+                    className={this.props.subscriptionId ? "mod-subscription-detail" : "mod-subscription-detail card"}
+                >
+                    <ConfirmationDialog
+                        isOpen={confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={confirmationDialogAction}
+                        question={confirmationDialogQuestion}
+                    />
 
-                {renderContent && (
-                    <div>
-                        {this.renderDetails(subscription!, subscriptionProcesses)}
-                        {this.renderDienstafname()}
-                        {this.renderFixedInputs(product)}
-                        {!useDomainModel &&
-                            this.renderProductBlocks(
+                    {renderContent && (
+                        <div>
+                            {this.renderDetails(subscription!, subscriptionProcesses)}
+                            {this.renderDienstafname()}
+                            {this.renderFixedInputs(product)}
+                            {!useDomainModel &&
+                                this.renderProductBlocks(
+                                    subscription!,
+                                    notFoundRelatedObjects,
+                                    loadedAllRelatedObjects,
+                                    imsServices,
+                                    collapsedObjects,
+                                    childSubscriptions,
+                                    imsEndpoints
+                                )}
+                            {useDomainModel &&
+                                this.renderDomainModel(
+                                    subscriptionModel!,
+                                    notFoundRelatedObjects,
+                                    loadedAllRelatedObjects,
+                                    imsServices,
+                                    collapsedObjects,
+                                    childSubscriptions,
+                                    imsEndpoints
+                                )}
+
+                            {this.renderActions(
                                 subscription!,
-                                notFoundRelatedObjects,
                                 loadedAllRelatedObjects,
-                                imsServices,
-                                collapsedObjects,
-                                childSubscriptions,
-                                imsEndpoints
-                            )}
-                        {useDomainModel &&
-                            this.renderDomainModel(
-                                subscriptionModel!,
                                 notFoundRelatedObjects,
-                                loadedAllRelatedObjects,
-                                imsServices,
-                                collapsedObjects,
-                                childSubscriptions,
-                                imsEndpoints
+                                workflows
                             )}
-
-                        {this.renderActions(subscription!, loadedAllRelatedObjects, notFoundRelatedObjects, workflows)}
-                        {this.renderProduct(product)}
-                        {this.renderProcesses(subscriptionProcesses)}
-                        {this.renderSubscriptions(parentSubscriptions, subscription!)}
-                    </div>
-                )}
-                {renderNotFound && (
-                    <section className="card not-found">
-                        <h1>{I18n.t("subscription.notFound")}</h1>
-                    </section>
-                )}
-            </div>
+                            {this.renderProduct(product)}
+                            {this.renderProcesses(subscriptionProcesses)}
+                            {this.renderSubscriptions(parentSubscriptions, subscription!)}
+                        </div>
+                    )}
+                    {renderNotFound && (
+                        <section className="card not-found">
+                            <h1>{I18n.t("subscription.notFound")}</h1>
+                        </section>
+                    )}
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

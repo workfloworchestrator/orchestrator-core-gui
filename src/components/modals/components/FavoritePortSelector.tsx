@@ -10,10 +10,9 @@ import {
     EuiSpacer,
     EuiText
 } from "@elastic/eui";
+import { subscriptionsDetail } from "api";
 import React, { MouseEvent } from "react";
-
-import { subscriptionsDetail } from "../../../api";
-import { FavoriteSubscriptionStorage, Subscription } from "../../../utils/types";
+import { FavoriteSubscriptionStorage, Subscription } from "utils/types";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 
@@ -176,18 +175,21 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                 render: (subscription_id: any) => (
                     <>
                         <EuiButtonIcon
+                            id={`favorite-port-selector-modal-${subscription_id}-edit`}
                             iconType="pencil"
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onChangeEditMode(event, subscription_id)}
                         />
                         <EuiButtonIcon
+                            id={`favorite-port-selector-modal-${subscription_id}-delete`}
                             iconType="trash"
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onDelete(event, subscription_id)}
                         />
                         <EuiButtonIcon
+                            id={`favorite-port-selector-modal-${subscription_id}-select`}
                             iconType="pinFilled"
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
@@ -221,6 +223,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
 
                 {!editMode && (
                     <EuiInMemoryTable
+                        id="favorite-port-modal-table"
                         items={ports}
                         columns={columns}
                         pagination={{ pageSizeOptions: [5, 10] }}
@@ -243,14 +246,14 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiSpacer />
                         <EuiForm>
                             <EuiFormRow
-                                id="favorite-modal-edit-custom-name"
+                                id="favorite-port-modal-custom-name-input"
                                 label="Custom name"
                                 helpText="Enter a short personal name that can be used to find this subscription"
                             >
                                 <EuiFieldText onChange={this.onUpdateName} value={editName} />
                             </EuiFormRow>
                             <EuiButton
-                                id="favorite-modal-custom-name-submit"
+                                id="favorite-port-modal-custom-name-submit"
                                 type="submit"
                                 fill
                                 onClick={this.onSaveName}

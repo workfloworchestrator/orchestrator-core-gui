@@ -13,20 +13,20 @@
  *
  */
 
-import "./MetaData.scss";
+import "pages/MetaData.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
+import FixedInputConfiguration from "components/FixedInputConfiguration";
+import ProductBlocks from "components/ProductBlocks";
+import Products from "components/Products";
+import ResourceTypes from "components/ResourceTypes";
+import WorkFlows from "components/WorkFlows";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ScrollUpButton from "react-scroll-up-button";
-
-import FixedInputConfiguration from "../components/FixedInputConfiguration";
-import ProductBlocks from "../components/ProductBlocks";
-import Products from "../components/Products";
-import ResourceTypes from "../components/ResourceTypes";
-import WorkFlows from "../components/WorkFlows";
-import ApplicationContext from "../utils/ApplicationContext";
-import { applyIdNamingConvention } from "../utils/Utils";
+import ApplicationContext from "utils/ApplicationContext";
+import { applyIdNamingConvention } from "utils/Utils";
 
 interface MatchParams {
     type: string;
@@ -80,11 +80,13 @@ export default class MetaData extends React.Component<IProps, IState> {
         const { tabs } = this.state;
         const selectedTab = this.props.match.params.type;
         return (
-            <div className="mod-metadata">
-                <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
-                {this.renderTabContent(selectedTab)}
-                <ScrollUpButton />
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-metadata">
+                    <section className="tabs">{tabs.map(tab => this.renderTab(tab, selectedTab))}</section>
+                    {this.renderTabContent(selectedTab)}
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

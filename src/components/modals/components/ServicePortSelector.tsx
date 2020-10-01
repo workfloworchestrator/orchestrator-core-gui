@@ -14,12 +14,11 @@ import {
     EuiSwitch,
     EuiText
 } from "@elastic/eui";
+import { getPortSubscriptionsForNode, subscriptions } from "api";
+import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import React, { MouseEvent } from "react";
-
-import { getPortSubscriptionsForNode, subscriptions } from "../../../api";
-import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "../../../utils/types";
-import { capitalizeFirstLetter, timeStampToDate } from "../../../utils/Utils";
-import { FAVORITE_STORAGE_KEY } from "./FavoritePortSelector";
+import { FavoriteSubscriptionStorage, ServicePortFilterItem, Subscription } from "utils/types";
+import { capitalizeFirstLetter, timeStampToDate } from "utils/Utils";
 
 interface IProps {
     subscriptions: Subscription[];
@@ -269,7 +268,12 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     </EuiFormRow>
                 )}
                 {!selectedNode && (
-                    <EuiFormRow id="modalNodeSelector" label="Node" helpText="Start typing to select a node." fullWidth>
+                    <EuiFormRow
+                        id="service-port-selector-modal-node-select"
+                        label="Node"
+                        helpText="Start typing to select a node."
+                        fullWidth
+                    >
                         <EuiSuggest
                             status={nodesLoading ? "loading" : "unchanged"}
                             onInputChange={e => this.onNodeInputChange(e)}
@@ -281,6 +285,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
 
                 <EuiFormRow label="Port" helpText="Select a physical port." fullWidth>
                     <EuiSuperSelect
+                        id="service-port-selector-modal-port-select"
                         isLoading={portsLoading}
                         fullWidth
                         options={
@@ -298,6 +303,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 </EuiFormRow>
                 <EuiFormRow label="Settings" fullWidth>
                     <EuiSwitch
+                        id="service-port-selector-modal-settings-switch"
                         label="Filter port subscriptions on allowed speed"
                         checked={subscriptionFilterEnabled}
                         onChange={this.onSubscriptionFilterChange}
@@ -308,6 +314,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                 <EuiFlexGroup style={{ marginLeft: "300px" }}>
                     <EuiFlexItem>
                         <EuiButton
+                            id="service-port-selector-modal-submit-button"
                             type="submit"
                             fill
                             disabled={!selectedNode && !selectedPort}
@@ -318,6 +325,7 @@ export default class ServicePortSelector extends React.PureComponent<IProps, ISt
                     </EuiFlexItem>
                     <EuiFlexItem>
                         <EuiButton
+                            id="service-port-selector-modal-add-favorite-button"
                             type="submit"
                             fill
                             disabled={!selectedNode && !selectedPort}

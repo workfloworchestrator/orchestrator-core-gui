@@ -13,12 +13,11 @@
  *
  */
 
-import "./Flash.scss";
+import "components/Flash.scss";
 
 import React from "react";
-
-import { FlashData, clearFlash, emitter, getFlash } from "../utils/Flash";
-import { isEmpty } from "../utils/Utils";
+import { FlashData, clearFlash, emitter, getFlash } from "utils/Flash";
+import { isEmpty } from "utils/Utils";
 
 interface IState {
     flash?: FlashData;
@@ -38,7 +37,7 @@ export default class Flash extends React.PureComponent<{}, IState> {
         }
     };
 
-    componentWillMount() {
+    componentDidMount() {
         this.callback(getFlash());
         emitter.addListener("flash", this.callback);
     }

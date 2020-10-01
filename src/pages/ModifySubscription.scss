@@ -20,8 +20,6 @@
 @use "../stylesheets/vars";
 
 .mod-modify-subscription {
-    @include mixins.page;
-
     .card {
         @include mixins.card;
         h1 {

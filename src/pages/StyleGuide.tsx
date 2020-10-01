@@ -13,7 +13,7 @@
  *
  */
 
-import "./Subscriptions.scss";
+import "pages/Subscriptions.scss";
 
 import {
     EuiButton,
@@ -37,9 +37,8 @@ import {
     EuiSwitch,
     EuiText
 } from "@elastic/eui";
+import Explain from "components/Explain";
 import React from "react";
-
-import Explain from "../components/Explain";
 
 interface IProps {}
 

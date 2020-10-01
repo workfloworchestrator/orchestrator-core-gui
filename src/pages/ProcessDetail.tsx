@@ -13,27 +13,27 @@
  *
  */
 
-import "./ProcessDetail.scss";
+import "pages/ProcessDetail.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
 import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import { process, resumeProcess } from "api";
+import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "api/index";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
+import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import ProcessStateDetails from "components/ProcessStateDetails";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ScrollUpButton from "react-scroll-up-button";
 import { DecodedValueMap, NumberParam, QueryParamConfigMap, SetQuery, withQueryParams } from "use-query-params";
-
-import { process, resumeProcess } from "../api";
-import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "../api/index";
-import ConfirmationDialog from "../components/ConfirmationDialog";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ProcessStateDetails from "../components/ProcessStateDetails";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { organisationNameByUuid, productById, productNameById } from "../utils/Lookups";
-import { CommaSeparatedNumericArrayParam } from "../utils/QueryParameters";
-import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "../utils/types";
-import { stop } from "../utils/Utils";
-import { actionOptions } from "../validations/Processes";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { organisationNameByUuid, productById, productNameById } from "utils/Lookups";
+import { CommaSeparatedNumericArrayParam } from "utils/QueryParameters";
+import { InputForm, ProcessSubscription, ProcessWithDetails, Product, Step } from "utils/types";
+import { stop } from "utils/Utils";
+import { actionOptions } from "validations/Processes";
 
 const queryConfig: QueryParamConfigMap = { collapsed: CommaSeparatedNumericArrayParam, scrollToStep: NumberParam };
 
@@ -402,23 +402,27 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const renderNotFound = loaded && notFound;
         const renderContent = loaded && !notFound;
         return (
-            <div className="mod-process-detail">
-                <ConfirmationDialog
-                    isOpen={confirmationDialogOpen}
-                    cancel={this.cancelConfirmation}
-                    confirm={confirmationDialogAction}
-                    question={confirmationDialogQuestion}
-                />
-                <section className="tabs">{tabs.map(tab => this.renderTab(process.is_task, tab, selectedTab))}</section>
-                {renderContent &&
-                    this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
-                {renderNotFound && (
-                    <section className="not-found card">
-                        <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-process-detail">
+                    <ConfirmationDialog
+                        isOpen={confirmationDialogOpen}
+                        cancel={this.cancelConfirmation}
+                        confirm={confirmationDialogAction}
+                        question={confirmationDialogQuestion}
+                    />
+                    <section className="tabs">
+                        {tabs.map(tab => this.renderTab(process.is_task, tab, selectedTab))}
                     </section>
-                )}
-                <ScrollUpButton />
-            </div>
+                    {renderContent &&
+                        this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
+                    {renderNotFound && (
+                        <section className="not-found card">
+                            <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+                        </section>
+                    )}
+                    <ScrollUpButton />
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

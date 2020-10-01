@@ -1,3 +1,4 @@
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +16,6 @@
 import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { FieldProps } from "./types";
 
 export type NumFieldProps = FieldProps<
     number,

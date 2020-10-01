@@ -13,6 +13,8 @@
  *
  */
 
+import DropDownContainer from "components/tables/DropDownContainer";
+import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React, { Dispatch, useContext } from "react";
@@ -20,9 +22,6 @@ import Select, { ActionMeta, ValueType } from "react-select";
 import { ColumnInstance, TableState } from "react-table";
 import ApplicationContext from "utils/ApplicationContext";
 import { Option, Organization, ProcessV2 } from "utils/types";
-
-import DropDownContainer from "./DropDownContainer";
-import { ActionType, TableSettingsAction } from "./NwaTable";
 
 /*
  * Functional components to use as filter input fields in tables.

@@ -13,17 +13,17 @@
  *
  */
 
-import "./TerminateSubscription.scss";
+import "pages/TerminateSubscription.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "api/index";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router";
-
-import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "../api/index";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputForm, Product } from "../utils/types";
-import { TARGET_TERMINATE } from "../validations/Products";
+import { setFlash } from "utils/Flash";
+import { FormNotCompleteResponse, InputForm, Product } from "utils/types";
+import { TARGET_TERMINATE } from "validations/Products";
 
 interface IProps extends RouteComponentProps {
     subscriptionId: string;
@@ -100,18 +100,20 @@ class TerminateSubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mod-terminate-subscription">
-                <section className="card">
-                    <h1>{I18n.t("subscription.terminate")}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-terminate-subscription">
+                    <section className="card">
+                        <h1>{I18n.t("subscription.terminate")}</h1>
 
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.submit}
-                        cancel={this.cancel}
-                        hasNext={false}
-                    />
-                </section>
-            </div>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.submit}
+                            cancel={this.cancel}
+                            hasNext={false}
+                        />
+                    </section>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

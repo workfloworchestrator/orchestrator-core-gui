@@ -1,3 +1,6 @@
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { AutoField, NestField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +16,6 @@
  *
  */
 import React from "react";
-
-import { AutoField, NestField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
 
 test("<NestField> - renders an <AutoField> for each field", () => {
     const element = <NestField name="x" />;

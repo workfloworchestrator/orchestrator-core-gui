@@ -13,16 +13,16 @@
  *
  */
 
-import "./ModifySubscription.scss";
+import "pages/ModifySubscription.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { catchErrorStatus, startProcess } from "api/index";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import React from "react";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
-
-import { catchErrorStatus, startProcess } from "../api/index";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import { setFlash } from "../utils/Flash";
-import { FormNotCompleteResponse, InputForm } from "../utils/types";
+import { setFlash } from "utils/Flash";
+import { FormNotCompleteResponse, InputForm } from "utils/types";
 
 interface IProps extends RouteComponentProps {
     subscriptionId: string;
@@ -80,17 +80,19 @@ class ModifySubscription extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mod-modify-subscription">
-                <section className="card">
-                    <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.submit}
-                        cancel={this.cancel}
-                        hasNext={false}
-                    />
-                </section>
-            </div>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-modify-subscription">
+                    <section className="card">
+                        <h1>{I18n.t(`workflow.${workflowName}`)}</h1>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.submit}
+                            cancel={this.cancel}
+                            hasNext={false}
+                        />
+                    </section>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

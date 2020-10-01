@@ -22,7 +22,6 @@
 }
 
 .mod-subscription-detail {
-    @include mixins.page;
     section.not-found {
         h1 {
             font-size: 24px;

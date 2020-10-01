@@ -14,10 +14,9 @@
  */
 
 import I18n from "i18n-js";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps, joinName, useField } from "uniforms";
-
-import { FieldProps } from "./types";
 
 export type ListDelFieldProps = FieldProps<null, { initialCount?: number; itemProps?: {}; outerList?: boolean }>;
 

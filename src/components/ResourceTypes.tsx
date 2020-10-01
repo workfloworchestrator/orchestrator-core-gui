@@ -13,16 +13,15 @@
  *
  */
 
-import "./ResourceTypes.scss";
+import "components/ResourceTypes.scss";
 
+import { resourceTypes } from "api/index";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-
-import { resourceTypes } from "../api/index";
-import ApplicationContext from "../utils/ApplicationContext";
-import { ResourceType, SortOption } from "../utils/types";
-import { isEmpty, stop } from "../utils/Utils";
+import ApplicationContext from "utils/ApplicationContext";
+import { ResourceType, SortOption } from "utils/types";
+import { isEmpty, stop } from "utils/Utils";
 
 type Column = "resource_type" | "description" | "resource_type_id";
 

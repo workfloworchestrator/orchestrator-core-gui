@@ -13,14 +13,13 @@
  *
  */
 
+import { getAuthorizationHeaderValue } from "api";
 import axios from "axios";
 import { ENV } from "env";
 import { SortingRule } from "react-table";
-
-import { getAuthorizationHeaderValue } from "../api";
-import { setFlash } from "../utils/Flash";
-import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "../utils/QueryParameters";
-import { FilterArgument } from "../utils/types";
+import { setFlash } from "utils/Flash";
+import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
+import { FilterArgument } from "utils/types";
 
 var axiosInstance = axios.create({ baseURL: ENV.BACKEND_URL + "/api/v2/" });
 
@@ -61,7 +60,12 @@ export function filterableEndpoint<T>(
         ) as string;
     }
     const extractResponseHeaders = (headers: any) => {
-        const etag: string | undefined = headers["etag"];
+        let etag: string | undefined = headers["etag"];
+
+        if (etag?.startsWith('W/"')) {
+            etag = etag.slice(3, -1);
+        }
+
         const contentRange: string | undefined = headers["content-range"];
         const total = contentRange ? parseInt(contentRange.split("/")[1], 10) : 99;
         return [total, etag];

@@ -13,17 +13,16 @@
  *
  */
 
+import { catchErrorStatus } from "api/index";
+import UserInputForm from "components/inputForms/UserInputForm";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import hash from "object-hash";
 import React from "react";
-
-import { catchErrorStatus } from "../../api/index";
-import ApplicationContext from "../../utils/ApplicationContext";
-import { setFlash } from "../../utils/Flash";
-import { FormNotCompleteResponse, InputForm } from "../../utils/types";
-import { stop } from "../../utils/Utils";
-import UserInputForm from "./UserInputForm";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { FormNotCompleteResponse, InputForm } from "utils/types";
+import { stop } from "utils/Utils";
 
 interface Form {
     form: InputForm;
@@ -55,9 +54,9 @@ export default class UserInputFormWizard extends React.Component<IProps, IState>
         this.state = { forms: [{ form: props.stepUserInput, hasNext: props.hasNext }], userInputs: [] };
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
-        if (!isEqual(nextProps, this.state.forms[0])) {
-            this.setState({ forms: [{ form: nextProps.stepUserInput, hasNext: nextProps.hasNext }] });
+    componentDidUpdate(prevProps: IProps) {
+        if (!isEqual(this.props, this.state.forms[0]) && !isEqual(prevProps, this.props)) {
+            this.setState({ forms: [{ form: this.props.stepUserInput, hasNext: this.props.hasNext }] });
         }
     }
 

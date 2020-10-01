@@ -14,8 +14,7 @@
  */
 
 import React from "react";
-
-import ApplicationContext, { ApplicationContextInterface } from "../utils/ApplicationContext";
+import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
 test("Test suite must contain at least one test", () => {});
 

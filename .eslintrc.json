@@ -1,3 +1,14 @@
 {
-    "extends": "react-app"
+    "env": { "es6": true },
+    "extends": ["react-app", "plugin:import/errors", "plugin:import/warnings", "plugin:import/typescript"],
+    "rules": {
+        "import/no-unresolved": "off",
+        "import/order": "off",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error"
+    },
+    "settings": {
+        "import/extensions": [".js", ".jsx", ".tsx", ".ts", ".scss"]
+    }
 }

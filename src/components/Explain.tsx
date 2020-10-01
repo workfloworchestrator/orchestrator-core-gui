@@ -12,7 +12,7 @@
  * limitations under the License.
  *
  */
-import "./Explain.scss";
+import "components/Explain.scss";
 
 import React from "react";
 
@@ -26,8 +26,8 @@ interface IProps {
 export default class Explain extends React.PureComponent<IProps> {
     private main: HTMLDivElement | null = null;
 
-    componentWillReceiveProps(nextProps: IProps) {
-        if (this.props.isVisible === false && nextProps.isVisible === true) {
+    componentDidUpdate(prevProps: IProps) {
+        if (this.props.isVisible === true && prevProps.isVisible === false) {
             setTimeout(() => this.main?.focus(), 50);
         }
     }

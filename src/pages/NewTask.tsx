@@ -13,17 +13,17 @@
  *
  */
 
-import "./NewTask.scss";
+import "pages/NewTask.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { catchErrorStatus, startProcess, workflowsByTarget } from "api";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React from "react";
-
-import { catchErrorStatus, startProcess, workflowsByTarget } from "../api";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { EngineStatus, InputForm } from "../utils/types";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { EngineStatus, InputForm } from "utils/types";
 
 interface IState {
     stepUserInput?: InputForm;
@@ -73,22 +73,24 @@ export default class NewTask extends React.Component<{}, IState> {
     render() {
         const { stepUserInput, hasNext } = this.state;
         return (
-            <div className="mod-new-task">
-                <section className="card">
-                    <section className="form-step">
-                        <h1>{I18n.t("task.new_task")}</h1>
+            <EuiPage>
+                <EuiPageBody component="div" className="mod-new-task">
+                    <section className="card">
+                        <section className="form-step">
+                            <h1>{I18n.t("task.new_task")}</h1>
 
-                        {stepUserInput && (
-                            <UserInputFormWizard
-                                stepUserInput={stepUserInput}
-                                validSubmit={this.validSubmit}
-                                hasNext={hasNext || false}
-                                cancel={() => this.context.redirect("/tasks")}
-                            />
-                        )}
+                            {stepUserInput && (
+                                <UserInputFormWizard
+                                    stepUserInput={stepUserInput}
+                                    validSubmit={this.validSubmit}
+                                    hasNext={hasNext || false}
+                                    cancel={() => this.context.redirect("/tasks")}
+                                />
+                            )}
+                        </section>
                     </section>
-                </section>
-            </div>
+                </EuiPageBody>
+            </EuiPage>
         );
     }
 }

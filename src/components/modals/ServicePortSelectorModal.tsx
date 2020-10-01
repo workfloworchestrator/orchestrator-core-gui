@@ -14,12 +14,11 @@
  */
 
 import { EuiIcon, EuiPanel, EuiSpacer, EuiTab, EuiTabs } from "@elastic/eui";
+import FavoritePortSelector from "components/modals/components/FavoritePortSelector";
+import ServicePortSelector from "components/modals/components/ServicePortSelector";
 import React from "react";
-
-import ApplicationContext from "../../utils/ApplicationContext";
-import { Subscription } from "../../utils/types";
-import FavoritePortSelector from "./components/FavoritePortSelector";
-import ServicePortSelector from "./components/ServicePortSelector";
+import ApplicationContext from "utils/ApplicationContext";
+import { Subscription } from "utils/types";
 
 const tabs = [
     {
@@ -77,6 +76,7 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
         const renderTabs = () => {
             return tabs.map((tab, index) => (
                 <EuiTab
+                    id={`service-port-selector-modal-${tab.id}-tab`}
                     onClick={() => this.onSelectedTabChanged(tab.id)}
                     isSelected={tab.id === selectedTabId}
                     disabled={tab.disabled}

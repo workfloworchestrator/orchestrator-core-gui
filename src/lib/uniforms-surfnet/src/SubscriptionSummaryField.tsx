@@ -13,17 +13,16 @@
  *
  */
 
+import { getResourceTypeInfo, productById, subscriptionsDetail } from "api";
 import I18n from "i18n-js";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
-
-import { getResourceTypeInfo, productById, subscriptionsDetail } from "../../../api";
-import ApplicationContext from "../../../utils/ApplicationContext";
-import { enrichSubscription } from "../../../utils/Lookups";
-import { Product, Subscription, SubscriptionWithDetails } from "../../../utils/types";
-import { applyIdNamingConvention, isEmpty } from "../../../utils/Utils";
-import { InstanceValueWithLabel, subscriptionInstanceValues } from "../../../validations/Subscriptions";
-import { FieldProps } from "./types";
+import ApplicationContext from "utils/ApplicationContext";
+import { enrichSubscription } from "utils/Lookups";
+import { Product, Subscription, SubscriptionWithDetails } from "utils/types";
+import { applyIdNamingConvention, isEmpty } from "utils/Utils";
+import { InstanceValueWithLabel, subscriptionInstanceValues } from "validations/Subscriptions";
 
 export type SubscriptionSummaryFieldProps = FieldProps<null>;
 

@@ -13,17 +13,16 @@
  *
  */
 
-import "./Workflows.scss";
+import "components/Workflows.scss";
 
+import { allWorkflowsWithProductTags } from "api";
+import FilterDropDown from "components/FilterDropDown";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
 import React from "react";
-
-import { allWorkflowsWithProductTags } from "../api";
-import { renderDateTime } from "../utils/Lookups";
-import { Filter, SortOption, WorkflowWithProductTags } from "../utils/types";
-import { isEmpty, stop } from "../utils/Utils";
-import FilterDropDown from "./FilterDropDown";
+import { renderDateTime } from "utils/Lookups";
+import { Filter, SortOption, WorkflowWithProductTags } from "utils/types";
+import { isEmpty, stop } from "utils/Utils";
 
 type SortKeys = "name" | "description" | "target" | "product_tags_string" | "created_at";
 

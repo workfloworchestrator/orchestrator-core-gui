@@ -13,17 +13,16 @@
  *
  */
 
-import "./Navigation.scss";
+import "components/Navigation.scss";
 
 import { EuiButton, EuiControlBar, EuiLoadingSpinner, EuiToast } from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
+import mySpinner from "lib/Spin";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
-
-import mySpinner from "../lib/Spin";
 
 const Navigation = () => {
     const [loading, setLoading] = useState(false);
@@ -61,7 +60,7 @@ const Navigation = () => {
         navItems.forEach(navItem => {
             controls.push({
                 controlType: "text",
-                id: `controls_${navItem}`,
+                id: `main-navigation-${navItem}-tab`,
                 text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
@@ -76,10 +75,10 @@ const Navigation = () => {
             },
             {
                 controlType: "text",
-                id: "controls_new_process",
+                id: "main-navigation-new-process-tab",
                 text: (
                     <Link to="/new-process">
-                        <EuiButton iconType="plusInCircle" size="s">
+                        <EuiButton id="main-navigation-new-process-tab-button" iconType="plusInCircle" size="s">
                             {I18n.t(`navigation.new_process`)}
                         </EuiButton>
                     </Link>

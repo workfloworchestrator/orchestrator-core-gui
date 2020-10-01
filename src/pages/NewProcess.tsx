@@ -13,21 +13,21 @@
  *
  */
 
-import "./NewProcess.scss";
+import "pages/NewProcess.scss";
 
+import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { catchErrorStatus, startProcess, validation } from "api";
+import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
+import ProductValidationComponent from "components/ProductValidation";
 import I18n from "i18n-js";
 import { JSONSchema6 } from "json-schema";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-
-import { catchErrorStatus, startProcess, validation } from "../api";
-import UserInputFormWizard from "../components/inputForms/UserInputFormWizard";
-import ProductValidationComponent from "../components/ProductValidation";
-import ApplicationContext from "../utils/ApplicationContext";
-import { setFlash } from "../utils/Flash";
-import { productById } from "../utils/Lookups";
-import { EngineStatus, FormNotCompleteResponse, ProductValidation } from "../utils/types";
-import { isEmpty } from "../utils/Utils";
-import { TARGET_CREATE } from "../validations/Products";
+import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
+import { productById } from "utils/Lookups";
+import { EngineStatus, FormNotCompleteResponse, ProductValidation } from "utils/types";
+import { isEmpty } from "utils/Utils";
+import { TARGET_CREATE } from "validations/Products";
 
 interface PreselectedInput {
     product?: string;
@@ -115,24 +115,26 @@ export default function NewProcess(props: IProps) {
     }, [products, submit, preselectedInput]);
 
     return (
-        <div className="mod-new-process">
-            <section className="card">
-                <h1>{I18n.t("process.new_process")}</h1>
-                {!!(productValidation?.valid === false && !!productValidation.product) && (
-                    <section>
-                        <label htmlFor="none">{I18n.t("process.product_validation")}</label>
-                        <ProductValidationComponent validation={productValidation} />
-                    </section>
-                )}
-                {stepUserInput && (
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={submit}
-                        cancel={() => redirect("/processes")}
-                        hasNext={hasNext}
-                    />
-                )}
-            </section>
-        </div>
+        <EuiPage>
+            <EuiPageBody component="div" className="mod-new-process">
+                <section className="card">
+                    <h1>{I18n.t("process.new_process")}</h1>
+                    {!!(productValidation?.valid === false && !!productValidation.product) && (
+                        <section>
+                            <label htmlFor="none">{I18n.t("process.product_validation")}</label>
+                            <ProductValidationComponent validation={productValidation} />
+                        </section>
+                    )}
+                    {stepUserInput && (
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={submit}
+                            cancel={() => redirect("/processes")}
+                            hasNext={hasNext}
+                        />
+                    )}
+                </section>
+            </EuiPageBody>
+        </EuiPage>
     );
 }

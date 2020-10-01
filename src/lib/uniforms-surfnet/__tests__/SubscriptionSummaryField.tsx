@@ -13,15 +13,14 @@
  *
  */
 
+import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import fetchMock from "fetch-mock-jest";
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { SubscriptionSummaryField } from "lib/uniforms-surfnet/src";
 import React from "react";
-
-import waitForComponentToPaint from "../../../__tests__/waitForComponentToPaint";
-import PRODUCTS from "../../../stories/data/products.json";
-import SUBSCRIPTION_JSON from "../../../stories/data/subscription.json";
-import { SubscriptionSummaryField } from "../src";
-import createContext from "./_createContext";
-import mount from "./_mount";
+import PRODUCTS from "stories/data/products.json";
+import SUBSCRIPTION_JSON from "stories/data/subscription.json";
 
 describe("<SubscriptionSummaryField>", () => {
     test("<SubscriptionSummaryField> - renders inputs", async () => {

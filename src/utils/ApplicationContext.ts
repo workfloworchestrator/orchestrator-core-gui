@@ -14,8 +14,7 @@
  */
 
 import React from "react";
-
-import { Organization, Product } from "./types";
+import { Organization, Product } from "utils/types";
 
 export interface ApplicationContextInterface {
     organisations?: Organization[];
