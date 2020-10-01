@@ -14,6 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/ImsPortIdField.scss";
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import {
     getFreePortsByImsNodeIdAndInterfaceType,
     getFreePortsByNodeSubscriptionIdAndSpeed,
@@ -168,50 +169,48 @@ function ImsPortId({
 
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
-            <section className="node-port">
-                <div className="node-select">
-                    <label>Node</label>
-                    <Select
-                        id={`${id}.node`}
-                        inputId={`${id}.node.search`}
-                        name={`${name}.node`}
-                        onChange={onChangeNodes}
-                        options={node_options}
-                        placeholder={nodesPlaceholder}
-                        value={node_value}
-                        isSearchable={true}
-                        isDisabled={disabled || !!nodeSubscriptionId || nodes.length === 0}
-                    />
-                </div>
-                <div className="port-select">
-                    <label>Port</label>
-                    <Select
-                        id={id}
-                        inputId={`${id}.search`}
-                        name={name}
-                        onChange={(selected: ValueType<Option<number>>) => {
-                            const value = (selected as Option<number> | null)?.value;
-                            onChange(value ? value : undefined);
-                        }}
-                        options={port_options}
-                        placeholder={portPlaceholder}
-                        value={port_value}
-                        isSearchable={true}
-                        isDisabled={disabled || ports.length === 0}
-                    />
-                </div>
-            </section>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                id={id}
+                fullWidth
+            >
+                <section className="node-port">
+                    <div className="node-select">
+                        <EuiFormRow label="Node" id={`${id}.node`} fullWidth>
+                            <Select
+                                inputId={`${id}.node.search`}
+                                name={`${name}.node`}
+                                onChange={onChangeNodes}
+                                options={node_options}
+                                placeholder={nodesPlaceholder}
+                                value={node_value}
+                                isSearchable={true}
+                                isDisabled={disabled || !!nodeSubscriptionId || nodes.length === 0}
+                            />
+                        </EuiFormRow>
+                    </div>
+                    <div className="port-select">
+                        <EuiFormRow label="Port" id={id} fullWidth>
+                            <Select
+                                inputId={`${id}.search`}
+                                name={name}
+                                onChange={(selected: ValueType<Option<number>>) => {
+                                    const value = (selected as Option<number> | null)?.value;
+                                    onChange(value ? value : undefined);
+                                }}
+                                options={port_options}
+                                placeholder={portPlaceholder}
+                                value={port_value}
+                                isSearchable={true}
+                                isDisabled={disabled || ports.length === 0}
+                            />
+                        </EuiFormRow>
+                    </div>
+                </section>
+            </EuiFormRow>
         </section>
     );
 }

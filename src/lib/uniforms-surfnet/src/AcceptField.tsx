@@ -14,7 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/AcceptField.scss";
 
-import { EuiCheckbox } from "@elastic/eui";
+import { EuiCheckbox, EuiText } from "@elastic/eui";
 import I18n, { TranslateOptions } from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React, { useReducer } from "react";
@@ -74,6 +74,7 @@ function Accept({
 
     let [state, dispatch] = useReducer(
         (state: AcceptState, action: Action) => {
+            debugger;
             if (action.type === "skip") {
                 state.skip = action.value;
                 state.checks = {};
@@ -101,19 +102,18 @@ function Accept({
         <section {...filterDOMProps(props)} className={`${className} accept-field`}>
             {data.map((entry: any[], index: number) => {
                 const label = I18n.t(`${i18nBaseKey}.${entry[0]}`, entry[2]);
-
                 switch (entry[1]) {
                     case "label":
                         return (
-                            <div key={index}>
-                                <label>{label}</label>
-                            </div>
+                            <label key={index} className="euiFormLabel euiFormRow__label">
+                                {label}
+                            </label>
                         );
                     case "info":
                         return (
-                            <div key={index}>
-                                <em>{label}</em>
-                            </div>
+                            <EuiText key={index} size="m">
+                                {label}
+                            </EuiText>
                         );
                     case "url":
                         return (
@@ -133,9 +133,9 @@ function Accept({
                         return <br key={index} />;
                     case "warning":
                         return (
-                            <div key={index}>
-                                <label className="warning">{label}</label>
-                            </div>
+                            <label key={index} className="euiFormLabel euiFormRow__label warning">
+                                {label}
+                            </label>
                         );
                     case "skip":
                         return (
