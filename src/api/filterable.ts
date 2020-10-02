@@ -13,21 +13,20 @@
  *
  */
 
-import { getAuthorizationHeaderValue } from "api";
 import axios from "axios";
 import { ENV } from "env";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { FilterArgument } from "utils/types";
+import axiosInstance from "./axios";
 
-var axiosInstance = axios.create({ baseURL: ENV.BACKEND_URL + "/api/v2/" });
 
 export const cancel = axios.CancelToken.source();
 
 function getHeaders(eTag?: string | null) {
     const ifNoneMatchHeader = eTag ? { "If-None-Match": eTag } : {};
-    return { Authorization: getAuthorizationHeaderValue(), ...ifNoneMatchHeader };
+    return { ...ifNoneMatchHeader };
 }
 
 interface Params {
@@ -73,6 +72,7 @@ export function filterableEndpoint<T>(
     return axiosInstance
         .get(path, {
             headers: requestHeaders,
+            baseURL: ENV.BACKEND_URL + "/api/v2/",
             params,
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
             cancelToken: cancel.token

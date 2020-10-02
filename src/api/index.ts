@@ -47,8 +47,6 @@ import { isEmpty } from "utils/Utils";
 import { absent, child_subscriptions, ims_port_id } from "validations/Subscriptions";
 import axiosInstance from "./axios";
 
-let user: User | null;
-
 export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
     return promise.catch(err => {
         if (err.response && err.response.status === status) {
@@ -551,17 +549,4 @@ export function ping() {
 
 export function dienstafnameBySubscription(subscriptionId: string) {
     return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
-}
-
-export function setUser(_user: User | null) {
-    user = _user;
-    axiosInstance.defaults.headers["Authorization"] = getAuthorizationHeaderValue();
-}
-
-export function getAuthorizationHeaderValue(): string {
-    if (!user) {
-        return "";
-    }
-
-    return `${user.token_type} ${user.access_token}`;
 }

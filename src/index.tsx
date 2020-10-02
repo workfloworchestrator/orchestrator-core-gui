@@ -13,13 +13,15 @@
  *
  */
 
-import { logUserInfo, setUser } from "api";
-import { ENV } from "env";
 import Oidc, { UserManager, UserManagerSettings, WebStorageStateStore } from "oidc-client";
 import { AuthContext, AuthProvider } from "oidc-react";
 import App from "pages/App";
 import React from "react";
 import ReactDOM from "react-dom";
+import { logUserInfo } from "api";
+import { setUser } from "api/axios";
+import { ENV } from "env";
+
 
 const appElement = document.getElementById("app");
 

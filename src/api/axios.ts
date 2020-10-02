@@ -15,11 +15,13 @@
 
 import axios from "axios";
 import { ENV } from "env";
+import { User } from "oidc-client";
 
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 
 let calls = 0;
+let user: User | null;
 
 const apiPath = ENV.BACKEND_URL + "/api/";
 // basic configuration for axios.
@@ -60,13 +62,24 @@ axiosInstance.interceptors.response.use(
             mySpinner.stop();
         }
         if (error.response) {
-            if (error.response.status >= 400 && error.response.status < 500) {
-                setFlash(error.response.data?.body, "warning");
-            } else if (error.response.status >= 500) {
-                setFlash(error.response.data?.body, "error");
+            if (error.response.status >= 500 && error.response.data?.body) {
+                setFlash(error.response.data.body, "error");
             }
         }
         return Promise.reject(error);
     }
 );
 export default axiosInstance;
+
+export function setUser(_user: User | null) {
+    user = _user;
+    axiosInstance.defaults.headers["Authorization"] = getAuthorizationHeaderValue();
+}
+
+export function getAuthorizationHeaderValue(): string {
+    if (!user) {
+        return "";
+    }
+
+    return `${user.token_type} ${user.access_token}`;
+}
