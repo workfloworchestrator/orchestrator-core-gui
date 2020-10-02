@@ -93,7 +93,8 @@ test("<OptGroupField> - renders a label", () => {
             .find("label")
             .at(0)
             .text()
-    ).toBe('[missing "en.forms.fields.x.title" translation][missing "en.forms.fields.x.info" translation]');
+    ).toBe('[missing "en.forms.fields.x.title" translation]');
+    expect(wrapper.contains('[missing "en.forms.fields.x.info" translation]')).toBe(true);
 });
 
 test("<OptGroupField> - renders a wrapper with unknown props", () => {
