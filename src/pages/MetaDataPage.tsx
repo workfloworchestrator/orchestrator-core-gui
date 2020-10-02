@@ -24,12 +24,16 @@ import {
 } from "@elastic/eui";
 import { Fragment, useState } from "react";
 import React from "react";
-import { RouteComponentProps } from "react-router";
+
+import { products } from "../api/index";
+
+const ProductsData = products;
 
 var date = new Date();
 
 const data = [
     {
+        id: "sgdfs",
         name: "Deprecated MSP 100G",
         description: "Multi Service Port 100GE",
         tag: "MSPQ",
@@ -39,6 +43,7 @@ const data = [
         creationDate: date
     },
     {
+        id: "dfgh",
         name: "Deprecated MSP 100G Redundant",
         description: "Multi Service Port 100GE Redundant",
         tag: "RMSP",
@@ -48,6 +53,7 @@ const data = [
         creationDate: date
     },
     {
+        id: "fgjxf",
         name: "Deprecated MSP 10G",
         description: "Multi Service Port 10GE",
         tag: "MSPR",
@@ -57,6 +63,7 @@ const data = [
         creationDate: date
     },
     {
+        id: "gfxcj",
         name: "Deprecated MSP 10G Redundant",
         description: "Multi Service Port 10GE Redundant",
         tag: "RMSP",
@@ -66,6 +73,7 @@ const data = [
         creationDate: date
     },
     {
+        id: "xdfjgf",
         name: "Dead one",
         description: "Revive one",
         tag: "Dead",
@@ -121,26 +129,36 @@ const columns = [
     },
     {
         field: "actions",
-        name: "ACTIONS"
+        name: ""
     }
 ];
+
+interface ProductWithExtra {
+    product_blocks_string: string;
+}
 
 interface IProps {
     incremental: boolean;
     filters: boolean;
     multiAction: boolean;
+    products: ProductWithExtra[];
+    error: null;
+    productsLoaded: boolean;
 }
 
 export default class MetaDataPage extends React.Component {
     state: IProps = {
+        products: [],
         filters: false,
         incremental: false,
-        multiAction: false
+        multiAction: false,
+        error: null,
+        productsLoaded: false
     };
 
     // Data inladen met =
     // componentDidMount = () => {
-    //     client.get(``)
+    //     client.get(`${apiUrl}/metadata`)
     //     .then((result) => {
     //         const  = result.data.map(() => {
     //             return ;
@@ -148,16 +166,41 @@ export default class MetaDataPage extends React.Component {
     //         this.setState({});
     //     });
     // }
+    componentDidMount() {
+        debugger;
+        fetch(`${ProductsData}`)
+            .then(res => res.json())
+            .then(
+                result => {
+                    this.setState({
+                        productsLoaded: true,
+                        products: result
+                    });
+                },
+                error => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            );
+
+        return ({ products: products, productsLoaded: productsLoaded } = this.state);
+    }
 
     render() {
-        const { multiAction, filters, incremental } = this.state;
+        const { products, productsLoaded, multiAction, filters, incremental } = this.state;
 
         const search = {
             box: {
                 incremental: incremental,
                 schema: true
-            },
-            filters: !filters ? undefined : []
+            }
+            // filters aanmaken =
+            // filters: !filters ? undefined :
+            // [
+
+            // ]
         };
 
         const tabs = [
@@ -171,11 +214,12 @@ export default class MetaDataPage extends React.Component {
                             <EuiPageContentHeader>
                                 <EuiSpacer size="l" />
                                 <EuiInMemoryTable
-                                    items={data}
+                                    items={products}
                                     columns={columns}
                                     search={search}
                                     pagination={true}
                                     sorting={true}
+                                    // loading={productsLoaded}
                                 />
                             </EuiPageContentHeader>
                         </EuiPageContent>
