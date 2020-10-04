@@ -27,62 +27,7 @@ import React from "react";
 
 import { products } from "../api/index";
 
-const ProductsData = products;
-
-var date = new Date();
-
-const data = [
-    {
-        id: "sgdfs",
-        name: "Deprecated MSP 100G",
-        description: "Multi Service Port 100GE",
-        tag: "MSPQ",
-        type: "Port",
-        status: "end of life",
-        productBlocks: "Physical Termination Point",
-        creationDate: date
-    },
-    {
-        id: "dfgh",
-        name: "Deprecated MSP 100G Redundant",
-        description: "Multi Service Port 100GE Redundant",
-        tag: "RMSP",
-        type: "Port",
-        status: "end of life",
-        productBlocks: "Physical Termination Point (Redundant MSP)",
-        creationDate: date
-    },
-    {
-        id: "fgjxf",
-        name: "Deprecated MSP 10G",
-        description: "Multi Service Port 10GE",
-        tag: "MSPR",
-        type: "Port",
-        status: "end of life",
-        productBlocks: "Physical Termination Point",
-        creationDate: date
-    },
-    {
-        id: "gfxcj",
-        name: "Deprecated MSP 10G Redundant",
-        description: "Multi Service Port 10GE Redundant",
-        tag: "RMSP",
-        type: "Port",
-        status: "end of life",
-        productBlocks: "Physical Termination Point (Redundant MSP)",
-        creationDate: date
-    },
-    {
-        id: "xdfjgf",
-        name: "Dead one",
-        description: "Revive one",
-        tag: "Dead",
-        type: "Port",
-        status: "end of life",
-        productBlocks: "Revive one",
-        creationDate: date
-    }
-];
+const data = products;
 
 const columns = [
     {
@@ -144,6 +89,7 @@ interface IProps {
     products: ProductWithExtra[];
     error: null;
     productsLoaded: boolean;
+    product: ProductWithExtra[];
 }
 
 export default class MetaDataPage extends React.Component {
@@ -153,7 +99,8 @@ export default class MetaDataPage extends React.Component {
         incremental: false,
         multiAction: false,
         error: null,
-        productsLoaded: false
+        productsLoaded: false,
+        product: []
     };
 
     // Data inladen met =
@@ -167,25 +114,15 @@ export default class MetaDataPage extends React.Component {
     //     });
     // }
     componentDidMount() {
-        debugger;
-        fetch(`${ProductsData}`)
+        fetch(`${data}`)
             .then(res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        productsLoaded: true,
-                        products: result
-                    });
-                },
-                error => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
-
-        return ({ products: products, productsLoaded: productsLoaded } = this.state);
+            .then(result => {
+                const products = result.data.map(product => {
+                    product = product;
+                    return product;
+                });
+                this.setState({ products: products, productsLoaded: true });
+            });
     }
 
     render() {
