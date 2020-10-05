@@ -36,10 +36,10 @@ test("<ListField> - renders correct label (specified)", () => {
     const element = <ListField name="x" label="ListFieldLabel" />;
     const wrapper = mount(element, createContext({ x: { type: Array }, "x.$": { type: String } }));
 
-    expect(wrapper.find("label")).toHaveLength(3);
+    expect(wrapper.find(".euiFormLabel")).toHaveLength(2);
     expect(
         wrapper
-            .find("label")
+            .find(".euiFormLabel")
             .at(0)
             .text()
     ).toEqual(expect.stringContaining("ListFieldLabel"));
@@ -195,13 +195,13 @@ test("<ListField> - renders correctly when child is list", () => {
             .find("section")
             .at(0)
             .prop("className")
-    ).toBe(" list-field outer-list");
+    ).toBe("list-field outer-list");
     expect(
         wrapper
             .find("section")
             .at(1)
             .prop("className")
-    ).toBe(" list-field");
+    ).toBe("list-field");
     expect(
         wrapper
             .find(ListField)

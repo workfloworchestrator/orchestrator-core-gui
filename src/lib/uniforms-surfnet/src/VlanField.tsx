@@ -183,7 +183,7 @@ function Vlan({
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
-                isInvalid={error || errorMessageExtra}
+                isInvalid={error || errorMessageExtra !== ""}
                 helpText={message}
                 id={id}
                 fullWidth

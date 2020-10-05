@@ -1,36 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SelectField checkboxes> <SelectField checkboxes> - renders a set of checkboxes with correct options 1`] = `
-"<SelectField checkboxes={true} name=\\"x\\">
-  <Select checkboxes={true} name=\\"x\\" id=\\"uniforms-0000-001m\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ type: [Function: String], optional: false, label: 'X', allowedValues: [ 'a', 'b' ] }} fieldType={[Function: String]} fields={[]} onChange={[Function]} value={[undefined]} allowedValues={[ 'a', 'b' ]} required={true}>
-    <section>
-      <div className=\\"bool-field\\">
-        <input checked={false} disabled={false} id=\\"uniforms-0000-001m.0\\" name=\\"x\\" onChange={[Function: onChange]} type=\\"checkbox\\" />
-        <label htmlFor=\\"uniforms-0000-001m.0\\">
-          <span>
-            <i className=\\"fa fa-check\\" />
-          </span>
-        </label>
-        <label className=\\"info\\" htmlFor=\\"uniforms-0000-001m.0\\">
-          a
-        </label>
-      </div>
-      <div className=\\"bool-field\\">
-        <input checked={false} disabled={false} id=\\"uniforms-0000-001m.1\\" name=\\"x\\" onChange={[Function: onChange]} type=\\"checkbox\\" />
-        <label htmlFor=\\"uniforms-0000-001m.1\\">
-          <span>
-            <i className=\\"fa fa-check\\" />
-          </span>
-        </label>
-        <label className=\\"info\\" htmlFor=\\"uniforms-0000-001m.1\\">
-          b
-        </label>
-      </div>
-    </section>
-  </Select>
-</SelectField>"
-`;
-
 exports[`<SelectField> <SelectField> - renders a select with correct value (as uniqueItem list child) 1`] = `
 "<ListField name=\\"x\\">
   <List name=\\"x\\" id=\\"uniforms-0000-000y\\" disabled={false} label=\\"\\" placeholder=\\"\\" showInlineError={false} changed={false} error={null} errorMessage=\\"\\" field={{ uniforms: { uniqueItems: true }, type: [Function: Array], optional: false, label: 'X' }} fieldType={[Function: Array]} fields={[]} onChange={[Function]} value={[ 'a', undefined ]} required={true} uniqueItems={true} allowedValues={[ 'a', 'b' ]}>
