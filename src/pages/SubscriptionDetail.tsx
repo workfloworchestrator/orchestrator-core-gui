@@ -32,6 +32,7 @@ import {
 } from "api";
 import CheckBox from "components/CheckBox";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
+import { ENV } from "env";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
@@ -460,6 +461,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                         </td>
                     </tr>
                     {this.renderGrafanaLink(subscription, subscription.product)}
+                    {this.renderNetworkDashboardLink(subscription, subscription.product)}
                     <tr>
                         <td id="subscriptions-note-k">{I18n.t("subscriptions.note")}</td>
                         <td id="subscriptions-note-v">{subscription.note}</td>
@@ -469,7 +471,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    renderGrafanaLink = (subscription: Subscription, product?: Product) => {
+    renderGrafanaLink = (subscription: Subscription, product: Product) => {
         const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain");
         if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
             return (
@@ -482,6 +484,32 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             rel="noopener noreferrer"
                         >
                             {I18n.t("subscriptions.go_to_grafana")}
+                        </a>
+                    </td>
+                </tr>
+            );
+        } else {
+            return null;
+        }
+    };
+
+    renderNetworkDashboardLink = (subscription: Subscription, product: Product) => {
+        if (
+            product.product_type === "Port" ||
+            product.product_type === "LightPath" ||
+            product.product_type === "IP" ||
+            product.product_type === "L2VPN"
+        ) {
+            return (
+                <tr>
+                    <td id="subscriptions-in_networkdashboard-k">{I18n.t("subscriptions.networkdashboard_url")}</td>
+                    <td id="subscriptions-in_networkdashboard-v">
+                        <a
+                            href={`${ENV.NETWORKDASHBOARD_URL}/subscription/${subscription.subscription_id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {I18n.t("subscriptions.go_to_networkdashboard_url")}
                         </a>
                     </td>
                 </tr>
