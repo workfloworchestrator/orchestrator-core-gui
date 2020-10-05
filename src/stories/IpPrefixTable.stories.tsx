@@ -15,8 +15,8 @@
 
 import { action } from "@storybook/addon-actions";
 import { number } from "@storybook/addon-knobs";
-import IpPrefixTable from "components/inputForms/IpPrefixTable";
 import mock from "axios-mock";
+import IpPrefixTable from "components/inputForms/IpPrefixTable";
 import React from "react";
 import IP_BLOCKS_V6 from "stories/data/ip_blocks_v6.json";
 import IP_BLOCKS from "stories/data/ip_blocks.json";

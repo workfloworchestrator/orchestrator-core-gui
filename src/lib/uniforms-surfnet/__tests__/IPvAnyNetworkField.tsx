@@ -1,5 +1,3 @@
-import IPPrefixTable from "components/inputForms/IpPrefixTable";
-import SplitPrefix from "components/inputForms/SplitPrefix";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +13,8 @@ import SplitPrefix from "components/inputForms/SplitPrefix";
  *
  */
 import mock from "axios-mock";
+import IPPrefixTable from "components/inputForms/IpPrefixTable";
+import SplitPrefix from "components/inputForms/SplitPrefix";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { IPvAnyNetworkField } from "lib/uniforms-surfnet/src";

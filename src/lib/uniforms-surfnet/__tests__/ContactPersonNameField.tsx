@@ -14,8 +14,8 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
-import Autocomplete from "components/inputForms/Autocomplete";
 import mock from "axios-mock";
+import Autocomplete from "components/inputForms/Autocomplete";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { ContactPersonNameField } from "lib/uniforms-surfnet/src";

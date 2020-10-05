@@ -19,8 +19,8 @@ import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";
 import { FilterArgument } from "utils/types";
-import axiosInstance from "./axios";
 
+import axiosInstance from "./axios";
 
 export const cancel = axios.CancelToken.source();
 
