@@ -25,9 +25,12 @@ import {
 import { Fragment, useState } from "react";
 import React from "react";
 
-import { products } from "../api/index";
+import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
+import { allWorkflows, productBlocks, productById, products, saveProduct } from "../api/index";
+import { getParameterByName } from "../utils/QueryParameters";
 
 const data = products;
+const TAG_LIGHTPATH = "LightPath";
 
 const columns = [
     {
@@ -61,13 +64,13 @@ const columns = [
         truncateText: true
     },
     {
-        field: "productBlocks",
+        field: "product_blocks",
         name: "PRODUCT BLOCKS",
         sortable: true,
         truncateText: true
     },
     {
-        field: "creationDate",
+        field: "creatie_Date",
         name: "CREATE DATE",
         sortable: true,
         truncateText: true
@@ -104,25 +107,37 @@ export default class MetaDataPage extends React.Component {
     };
 
     // Data inladen met =
-    // componentDidMount = () => {
-    //     client.get(`${apiUrl}/metadata`)
-    //     .then((result) => {
-    //         const  = result.data.map(() => {
-    //             return ;
+    // componentDidMount() {
+    //     const id = this.props.match?.params.id;
+    //     fetch(`${data}`)
+    //         .then(res => res.json())
+    //         .then(result => {
+    //             const products = result.data.map(product => {
+    //                 product = product;
+    //                 return product;
+    //             });
+    //             this.setState({ products: products, productsLoaded: true });
     //         });
-    //         this.setState({});
-    //     });
     // }
+
     componentDidMount() {
-        fetch(`${data}`)
-            .then(res => res.json())
-            .then(result => {
-                const products = result.data.map(product => {
-                    product = product;
-                    return product;
-                });
+        const id = this.props.match?.params.id;
+        const isExistingProduct = id !== "new";
+
+        if (isExistingProduct) {
+            const clone = id === "clone";
+            productById(clone ? getParameterByName("productId", window.location.search) : id!).then(product => {
+                if (clone) {
+                    products().then(res => {
+                        this.setState({ products: res, productsLoaded: true });
+                    });
+                }
                 this.setState({ products: products, productsLoaded: true });
+                this.fetchAllConstants(products);
             });
+        } else {
+            this.fetchAllConstants(TAG_LIGHTPATH);
+        }
     }
 
     render() {
@@ -170,7 +185,7 @@ export default class MetaDataPage extends React.Component {
                 <EuiPageBody component="div">
                     <EuiPageHeader>
                         <EuiPageHeaderSection>
-                            <EuiTabbedContent tabs={tabs} initialSelectedTab={tabs[1]} autoFocus="selected" />
+                            <EuiTabbedContent tabs={tabs} initialSelectedTab={tabs[0]} autoFocus="selected" />
                         </EuiPageHeaderSection>
                     </EuiPageHeader>
                 </EuiPageBody>
