@@ -13,8 +13,6 @@
  *
  */
 import I18n from "i18n-js";
-
-import { User } from "oidc-client";
 import { setFlash } from "utils/Flash";
 import {
     CodedWorkflow,
@@ -45,6 +43,7 @@ import {
 } from "utils/types";
 import { isEmpty } from "utils/Utils";
 import { absent, child_subscriptions, ims_port_id } from "validations/Subscriptions";
+
 import axiosInstance from "./axios";
 
 export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
