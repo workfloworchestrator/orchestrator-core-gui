@@ -471,7 +471,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
-    renderGrafanaLink = (subscription: Subscription, product?: Product) => {
+    renderGrafanaLink = (subscription: Subscription, product: Product) => {
         const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain");
         if (fi_domain && (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8")) {
             return (
@@ -493,11 +493,12 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         }
     };
 
-    renderNetworkDashboardLink = (subscription: Subscription, product?: Product) => {
-        const fi_domain = product?.fixed_inputs.find(fi => fi.name === "domain");
+    renderNetworkDashboardLink = (subscription: Subscription, product: Product) => {
         if (
-            fi_domain &&
-            (fi_domain.value === "SURFNET8" || fi_domain.value === "NETHERLIGHT8" || fi_domain.value === "SURFNET7")
+            product.product_type === "Port" ||
+            product.product_type === "LightPath" ||
+            product.product_type === "IP" ||
+            product.product_type === "L2VPN"
         ) {
             return (
                 <tr>
