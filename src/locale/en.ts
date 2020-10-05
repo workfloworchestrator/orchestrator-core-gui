@@ -665,7 +665,9 @@ I18n.translations.en = {
         failed_task: "See {{pid}}",
         customer_descriptions: "Customer description(s)",
         stats_in_grafana: "Stats (SN8/NL8 products only)",
-        go_to_grafana: "Go to Grafana"
+        go_to_grafana: "Go to Grafana",
+        networkdashboard_url: "Networkdashboard url (Customer subscriptions)",
+        go_to_networkdashboard_url: "Go to Networkdashboard"
     },
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",

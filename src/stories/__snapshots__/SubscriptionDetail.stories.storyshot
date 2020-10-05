@@ -215,6 +215,24 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 </tr>
                 <tr>
                   <td
+                    id="subscriptions-in_networkdashboard-k"
+                  >
+                    Networkdashboard url (Customer subscriptions)
+                  </td>
+                  <td
+                    id="subscriptions-in_networkdashboard-v"
+                  >
+                    <a
+                      href="undefined/subscription/9c8c13d5-6954-461a-a931-32894c193aa0"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Go to Networkdashboard
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td
                     id="subscriptions-note-k"
                   >
                     Note
