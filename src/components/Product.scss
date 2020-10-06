@@ -50,7 +50,7 @@
             }
         }
         i.fa-minus {
-            color: vars.$red;
+            color: vars.$danger;
             margin-left: 20px;
             font-size: 32px;
             cursor: pointer;
@@ -65,7 +65,7 @@
         align-items: center;
         i.fa-plus {
             padding: 10px 2px 0 0;
-            color: vars.$green;
+            color: vars.$success;
             font-size: 32px;
             cursor: pointer;
         }

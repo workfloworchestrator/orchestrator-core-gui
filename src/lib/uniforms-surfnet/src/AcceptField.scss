@@ -17,11 +17,11 @@
 
 .accept-field {
     label.warning {
-        color: vars.$red;
+        color: vars.$danger;
     }
 
     .skip {
-        color: vars.$green;
+        color: vars.$success;
         font-style: italic;
     }
 

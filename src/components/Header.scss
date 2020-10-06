@@ -25,12 +25,12 @@
         margin: 0;
         font-size: 1.3rem !important;
         font-weight: normal !important;
-        border-left: 1px solid vars.$blue;
+        border-left: 1px solid vars.$primary;
         padding-left: 0.5rem;
         &.staging,
         &.local,
         &.development {
-            color: vars.$red;
+            color: vars.$danger;
         }
     }
     &__container {

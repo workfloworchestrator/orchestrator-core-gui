@@ -24,7 +24,7 @@
 
         font-size: larger;
         margin-bottom: 15px;
-        color: vars.$darker-blue;
+        color: vars.$darker-primary;
     }
 
     .form-fieldset {
@@ -45,7 +45,7 @@
         p.label {
             text-transform: uppercase;
             font-weight: bold;
-            color: vars.$blue;
+            color: vars.$primary;
         }
         &.downgrade_redundant_lp_choice,
         &.service_ports_primary,

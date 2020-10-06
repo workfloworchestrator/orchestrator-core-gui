@@ -13,8 +13,8 @@
  *
  */
 
-@use "../lib/themes/surfnet_light/surfnet_light.css";
-@use "../stylesheets/vars.scss";
+@use "../lib/themes/theme.css";
+@use "../lib/themes/vars.scss";
 @use "../stylesheets/application.scss";
 
 body {
@@ -33,7 +33,7 @@ body {
 
 a {
     cursor: pointer;
-    color: vars.$blue;
+    color: vars.$primary;
     font-weight: bold;
 }
 
@@ -45,11 +45,11 @@ a {
 
 ::-webkit-input-placeholder,
 div.Select-placeholder {
-    color: vars.$blue;
+    color: vars.$primary;
 }
 
 ::-moz-placeholder {
-    color: vars.$blue;
+    color: vars.$primary;
     opacity: 1;
 }
 
@@ -58,7 +58,7 @@ div.Select-placeholder {
 }
 
 .App-header {
-    background-color: vars.$blue;
+    background-color: vars.$primary;
     height: 150px;
     padding: 20px;
     color: white;

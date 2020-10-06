@@ -38,7 +38,7 @@ em {
     font-size: smaller;
     font-style: italic;
     &.error {
-        color: vars.$red;
+        color: vars.$danger;
         &.with-checkbox {
             margin-bottom: 1px;
         }

@@ -28,8 +28,8 @@ section.table-summary {
 
     .label {
         font-weight: bold;
-        background-color: vars.$light-blue;
-        border-right: solid 2px vars.$blue;
+        background-color: vars.$light-primary;
+        border-right: solid 2px vars.$primary;
     }
     .value {
         background-color: vars.$lightest-grey;

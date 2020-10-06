@@ -43,7 +43,7 @@
         }
 
         i.fa-search {
-            color: color.adjust(vars.$blue, $lightness: 5);
+            color: color.adjust(vars.$primary, $lightness: 5);
             position: absolute;
             right: 14px;
             top: 8px;
@@ -112,7 +112,7 @@
                 &:hover {
                     background-color: vars.$hover;
                     td.actions i.fa-ellipsis-h {
-                        color: vars.$blue;
+                        color: vars.$primary;
                     }
                 }
             }
@@ -141,7 +141,7 @@
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted vars.$light-blue;
+                border-bottom: 1px dotted vars.$light-primary;
                 padding: 8px 0;
 
                 &:before {
