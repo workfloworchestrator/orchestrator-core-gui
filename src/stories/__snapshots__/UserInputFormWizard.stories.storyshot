@@ -29,7 +29,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
             >
               First node and port
               <em>
-                Choose a node and port that you want to use to create the first corelink
+                Choose the first node and port that you want to use
               </em>
             </label>
             <div

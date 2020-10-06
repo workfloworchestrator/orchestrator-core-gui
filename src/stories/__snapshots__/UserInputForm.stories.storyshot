@@ -349,7 +349,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   <label>
                     First node and port
                     <em>
-                      Choose a node and port that you want to use to create the first corelink
+                      Choose the first node and port that you want to use
                     </em>
                   </label>
                   <section
@@ -590,7 +590,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   <label>
                     Second node and port
                     <em>
-                      Choose a node and port that you want to use to create the second corelink
+                      Choose the second node and port that you want to use
                     </em>
                   </label>
                   <section
@@ -922,7 +922,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   <label>
                     First node and port
                     <em>
-                      Choose a node and port that you want to use to create the first corelink
+                      Choose the first node and port that you want to use
                     </em>
                   </label>
                   <section
@@ -1163,7 +1163,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   <label>
                     Second node and port
                     <em>
-                      Choose a node and port that you want to use to create the second corelink
+                      Choose the second node and port that you want to use
                     </em>
                   </label>
                   <section
@@ -12341,7 +12341,7 @@ exports[`Storyshots UserInputForm Service Port 1`] = `
                   <label>
                     First node and port
                     <em>
-                      Choose a node and port that you want to use to create the first corelink
+                      Choose the first node and port that you want to use
                     </em>
                   </label>
                   <section
