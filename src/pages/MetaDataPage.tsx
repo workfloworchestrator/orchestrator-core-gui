@@ -92,7 +92,6 @@ interface IProps {
     products: ProductWithExtra[];
     error: null;
     productsLoaded: boolean;
-    product: ProductWithExtra[];
 }
 
 export default class MetaDataPage extends React.Component {
@@ -102,42 +101,18 @@ export default class MetaDataPage extends React.Component {
         incremental: false,
         multiAction: false,
         error: null,
-        productsLoaded: false,
-        product: []
+        productsLoaded: false
     };
 
     // Data inladen met =
-    // componentDidMount() {
-    //     const id = this.props.match?.params.id;
-    //     fetch(`${data}`)
-    //         .then(res => res.json())
-    //         .then(result => {
-    //             const products = result.data.map(product => {
-    //                 product = product;
-    //                 return product;
-    //             });
-    //             this.setState({ products: products, productsLoaded: true });
-    //         });
-    // }
-
     componentDidMount() {
-        const id = this.props.match?.params.id;
-        const isExistingProduct = id !== "new";
-
-        if (isExistingProduct) {
-            const clone = id === "clone";
-            productById(clone ? getParameterByName("productId", window.location.search) : id!).then(product => {
-                if (clone) {
-                    products().then(res => {
-                        this.setState({ products: res, productsLoaded: true });
-                    });
-                }
-                this.setState({ products: products, productsLoaded: true });
-                this.fetchAllConstants(products);
+        data().then(res => {
+            const products = res.map((product: Partial<ProductWithExtra>) => {
+                product = product;
+                return product as ProductWithExtra;
             });
-        } else {
-            this.fetchAllConstants(TAG_LIGHTPATH);
-        }
+            this.setState({ products: products, productsLoaded: true });
+        });
     }
 
     render() {
