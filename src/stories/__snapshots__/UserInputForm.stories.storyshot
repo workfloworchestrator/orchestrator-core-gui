@@ -253,26 +253,54 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -798,26 +826,54 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                   </section>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -1343,26 +1399,54 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                   </section>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -1527,26 +1611,54 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                   </div>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -2949,26 +3061,54 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -4371,26 +4511,54 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -5087,26 +5255,54 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                   </span>
                 </div>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -6509,26 +6705,54 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -7257,26 +7481,54 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -8817,26 +9069,54 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -10377,26 +10657,54 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -11937,26 +12245,54 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                   </ul>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -12241,26 +12577,54 @@ exports[`Storyshots UserInputForm Service Port 1`] = `
                   </section>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>

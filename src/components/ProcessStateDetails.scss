@@ -23,7 +23,7 @@ section.process-state-detail {
     }
 
     span.copy-to-clipboard-container {
-        color: vars.$blue;
+        color: vars.$primary;
         display: inline-block;
         margin-bottom: 10px;
 
@@ -47,7 +47,7 @@ section.process-state-detail {
             h3 {
                 font-size: larger;
                 padding: 15px 0;
-                color: vars.$darker-blue;
+                color: vars.$darker-primary;
             }
             li {
                 display: inline-block;
@@ -110,7 +110,7 @@ section.process-state-detail {
                 i.fa {
                     font-size: 30px;
                     margin: 10px 0;
-                    color: vars.$darker-blue;
+                    color: vars.$darker-primary;
                 }
             }
         }
@@ -151,7 +151,7 @@ section.process-state-detail {
             i.fa {
                 font-size: 30px;
                 margin: 20px;
-                color: vars.$darker-blue;
+                color: vars.$darker-primary;
                 &.fa-user {
                     margin-right: 30px;
                 }

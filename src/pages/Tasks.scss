@@ -20,11 +20,11 @@
     background-color: white;
 }
 
-.actions {
-    margin: 10px 0px -40px 10px;
-    text-align: right;
+.actions-buttons {
+    justify-content: end;
+    transform: translateY(-20px);
 
-    .button {
-        transform: translateY(-8px);
+    .explain {
+        transform: translateY(-5px);
     }
 }

@@ -15,6 +15,7 @@
 
 import "components/ResourceTypes.scss";
 
+import { EuiFieldSearch } from "@elastic/eui";
 import { resourceTypes } from "api/index";
 import I18n from "i18n-js";
 import debounce from "lodash/debounce";
@@ -167,16 +168,13 @@ export default class ResourceTypes extends React.Component<{}, IState> {
         return (
             <div className="mod-resource-types">
                 <div className="options">
-                    <section className="search">
-                        <input
-                            className="allowed"
-                            placeholder={I18n.t("metadata.resourceTypes.searchPlaceHolder")}
-                            type="text"
-                            onChange={this.search}
-                            value={query}
-                        />
-                        <i className="fa fa-search" />
-                    </section>
+                    <EuiFieldSearch
+                        placeholder={I18n.t("metadata.resourceTypes.searchPlaceHolder")}
+                        value={query}
+                        onChange={this.search}
+                        isClearable={true}
+                        fullWidth
+                    />
                 </div>
                 <section className="resource-type">{this.renderResourceTypes(filteredResourceTypes, sorted)}</section>
             </div>

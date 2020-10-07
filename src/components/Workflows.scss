@@ -48,7 +48,7 @@
         }
 
         i.fa-search {
-            color: color.adjust(vars.$blue, $lightness: 5);
+            color: color.adjust(vars.$primary, $lightness: 5);
             position: absolute;
             right: 14px;
             top: 8px;
@@ -115,7 +115,7 @@
                 padding: 15px 5px;
                 &.metadata-results {
                     font-style: italic;
-                    color: vars.$darker-blue;
+                    color: vars.$darker-primary;
                     font-size: larger;
                     cursor: default;
                 }
@@ -134,7 +134,7 @@
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted vars.$light-blue;
+                border-bottom: 1px dotted vars.$light-primary;
                 padding: 8px 0;
 
                 &:before {

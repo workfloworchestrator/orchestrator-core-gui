@@ -37,7 +37,7 @@ section.filter-drop-down {
         }
 
         .filter-name {
-            color: vars.$blue;
+            color: vars.$primary;
             margin: 0 15px;
         }
 
@@ -46,7 +46,7 @@ section.filter-drop-down {
         }
 
         i {
-            color: vars.$blue;
+            color: vars.$primary;
             &.fa-undo {
                 padding-right: 8px;
             }
@@ -79,9 +79,9 @@ section.filter-drop-down {
 
             i {
                 &.fa-filter {
-                    color: vars.$blue;
+                    color: vars.$primary;
                     &:hover {
-                        color: vars.$darkest-blue;
+                        color: vars.$secondary;
                     }
                 }
             }

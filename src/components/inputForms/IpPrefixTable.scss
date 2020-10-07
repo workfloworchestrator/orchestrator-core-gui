@@ -31,9 +31,9 @@ table.ip-blocks {
     }
     tr.Allocated {
         cursor: pointer;
-        background-color: vars.$light-blue;
+        background-color: vars.$light-primary;
         &:hover {
-            background-color: color.adjust(vars.$light-blue, $lightness: -10%);
+            background-color: color.adjust(vars.$light-primary, $lightness: -10%);
         }
     }
     tr.Planned {
@@ -42,13 +42,13 @@ table.ip-blocks {
     }
     tr.Free {
         cursor: pointer;
-        background-color: vars.$light-green;
+        background-color: vars.$light-success;
         &:hover {
-            background-color: color.adjust(vars.$light-green, $lightness: -10%);
+            background-color: color.adjust(vars.$light-success, $lightness: -10%);
         }
     }
     tr.Subnet {
-        background-color: color.adjust(vars.$light-blue, $lightness: -30%);
+        background-color: color.adjust(vars.$light-primary, $lightness: -30%);
         cursor: default;
     }
     tr.selected {

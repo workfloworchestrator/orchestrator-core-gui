@@ -13,20 +13,5 @@
  *
  */
 
-@use "../stylesheets/mixins.scss";
-@use "../stylesheets/buttons.scss";
-@use "../stylesheets/forms.scss";
-@use "../stylesheets/media_queries.scss";
-@use "../stylesheets/vars";
-
-.mod-modify-subscription {
-    .card {
-        @include mixins.card;
-        h1 {
-            font-size: 22px;
-            color: vars.$darker-primary;
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
-    }
-}
+// Import custom variables from theme
+@import "./surfnet_light/vars.scss";

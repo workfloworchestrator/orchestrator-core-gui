@@ -13,40 +13,6 @@
  *
  */
 
-@use "../stylesheets/vars.scss";
-
-body {
-    font-family: "Roboto", Sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: vars.$dark-grey;
-    -webkit-font-smoothing: antialiased;
-    background-color: vars.$background;
-
-    &.ReactModal__Body--open {
-        overflow: hidden;
-    }
-}
-
-a {
-    cursor: pointer;
-    color: vars.$primary;
-    font-weight: bold;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-::-webkit-input-placeholder,
-div.Select-placeholder {
-    color: vars.$primary;
-}
-
-::-moz-placeholder {
-    color: vars.$primary;
-    opacity: 1;
+.buttons {
+    width: fit-content;
 }

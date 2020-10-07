@@ -15,7 +15,7 @@
 
 import "pages/Prefixes.scss";
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiFieldSearch, EuiPage, EuiPageBody } from "@elastic/eui";
 import { freeSubnets, prefixSubscriptionsByRootPrefix, prefix_filters } from "api";
 import FilterDropDown from "components/FilterDropDown";
 import I18n from "i18n-js";
@@ -382,16 +382,13 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                                 label={I18n.t("prefixes.filters.state")}
                             />
 
-                            <section className="search">
-                                <input
-                                    className="allowed"
-                                    placeholder={I18n.t("prefixes.searchPlaceHolder")}
-                                    type="text"
-                                    onChange={this.search}
-                                    value={query}
-                                />
-                                <i className="fa fa-search" />
-                            </section>
+                            <EuiFieldSearch
+                                placeholder={I18n.t("prefixes.searchPlaceHolder")}
+                                value={query}
+                                onChange={this.search}
+                                isClearable={true}
+                                fullWidth
+                            />
                         </div>
                     </div>
                     <section className="prefixes">

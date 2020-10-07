@@ -19,6 +19,8 @@
 @use "../stylesheets/vars";
 
 .mod-products {
+    margin-top: 12px;
+
     .options {
         display: flex;
         padding: 25px 20px;
@@ -26,39 +28,9 @@
         flex-direction: row;
         align-items: center;
     }
-    section.search {
-        position: relative;
-        flex-grow: 5;
-
-        input {
-            padding: 12px;
-            margin-left: auto;
-            margin-top: 0;
-            border: 1px solid vars.$lighter-grey;
-            border-bottom-left-radius: vars.$br;
-            border-top-left-radius: vars.$br;
-            font-size: 14px;
-            width: 100%;
-            height: 100%;
-        }
-
-        i.fa-search {
-            color: color.adjust(vars.$blue, $lightness: 5);
-            position: absolute;
-            right: 14px;
-            top: 8px;
-            font-size: 24px;
-        }
-    }
-    a.button {
-        i.fa-plus {
-            font-size: inherit;
-            margin-left: 10px;
-            margin-top: 4px;
-        }
-    }
 
     section.products {
+        margin-top: 12px;
         display: flex;
         padding: 0 20px 20px 20px;
         background-color: white;
@@ -124,7 +96,7 @@
                 &:hover {
                     background-color: vars.$hover;
                     td.actions i.fa-ellipsis-h {
-                        color: vars.$blue;
+                        color: vars.$primary;
                     }
                 }
             }
@@ -134,7 +106,7 @@
                 padding: 15px 5px;
                 &.metadata-results {
                     font-style: italic;
-                    color: vars.$darker-blue;
+                    color: vars.$darker-primary;
                     font-size: larger;
                     cursor: default;
                 }
@@ -159,7 +131,7 @@
             td {
                 display: block;
                 text-align: right;
-                border-bottom: 1px dotted vars.$light-blue;
+                border-bottom: 1px dotted vars.$light-primary;
                 padding: 8px 0;
 
                 &:before {

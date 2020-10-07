@@ -28,7 +28,7 @@ section.message-box {
             background-color: white;
             font-weight: bold;
             cursor: pointer;
-            border: 1px solid vars.$blue;
+            border: 1px solid vars.$primary;
             border-radius: 3px;
             font-family: "Roboto", Sans-serif;
             font-size: 0.8em;
@@ -37,7 +37,7 @@ section.message-box {
         .message-button:visited {
             text-decoration: none;
             border: 1px solid vars.$lighter-grey;
-            color: vars.$blue;
+            color: vars.$primary;
         }
         .message-button:focus {
             outline: none;

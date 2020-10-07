@@ -15,6 +15,7 @@
 
 import "components/Workflows.scss";
 
+import { EuiFieldSearch } from "@elastic/eui";
 import { allWorkflowsWithProductTags } from "api";
 import FilterDropDown from "components/FilterDropDown";
 import I18n from "i18n-js";
@@ -266,16 +267,13 @@ export default class WorkFlows extends React.Component<{}, IState> {
                         filterBy={this.filter("target")}
                         label={I18n.t("metadata.workflows.target")}
                     />
-                    <section className="search">
-                        <input
-                            className="allowed"
-                            placeholder={I18n.t("metadata.workflows.searchPlaceHolder")}
-                            type="text"
-                            onChange={this.search}
-                            value={query}
-                        />
-                        <i className="fa fa-search" />
-                    </section>
+                    <EuiFieldSearch
+                        placeholder={I18n.t("metadata.workflows.searchPlaceHolder")}
+                        value={query}
+                        onChange={this.search}
+                        isClearable={true}
+                        fullWidth
+                    />
                 </div>
                 <section className="explanation">
                     <p>{I18n.t("metadata.workflows.explanation")}</p>

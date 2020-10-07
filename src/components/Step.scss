@@ -25,28 +25,28 @@ section.step {
     padding: 12px;
 
     &.failed {
-        background-color: vars.$red;
+        background-color: vars.$danger;
     }
     &.waiting {
-        background-color: vars.$orange;
+        background-color: vars.$warning;
     }
     &.pending {
         background-color: vars.$dark-grey;
     }
     &.success {
-        background-color: vars.$dark-green;
+        background-color: vars.$accent;
     }
     &.skipped {
         background-color: vars.$lighter-grey;
     }
     &.complete {
-        background-color: vars.$blue;
+        background-color: vars.$primary;
     }
     &.suspend {
         background-color: vars.$gold;
         color: vars.$dark-grey;
     }
     &.abort {
-        background-color: vars.$darkest-blue;
+        background-color: vars.$secondary;
     }
 }

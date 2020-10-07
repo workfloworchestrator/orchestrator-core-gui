@@ -20,7 +20,7 @@
     padding: 10px 15px;
     text-transform: uppercase;
     background-color: white;
-    color: vars.$blue;
+    color: vars.$primary;
     border: 1px solid vars.$lighter-grey;
     border-radius: vars.$br;
     font-size: larger;
@@ -48,11 +48,11 @@
     }
 
     &.blue {
-        background-color: vars.$blue;
+        background-color: vars.$primary;
         color: white;
         border: none;
         &.error {
-            background-color: vars.$red;
+            background-color: vars.$danger;
         }
         i {
             color: white;
@@ -67,12 +67,12 @@
         }
     }
     &.red {
-        background-color: vars.$red;
+        background-color: vars.$danger;
         color: white;
         border: none;
     }
     &.orange {
-        background-color: vars.$orange;
+        background-color: vars.$warning;
         color: white;
         border: none;
         i {
@@ -80,7 +80,7 @@
         }
     }
     &.green {
-        background-color: vars.$green;
+        background-color: vars.$success;
         color: white;
         border: none;
         border-top-left-radius: 0;
