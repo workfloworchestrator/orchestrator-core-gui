@@ -13,6 +13,9 @@
  *
  */
 
+import "components/tables/Preferences.scss";
+
+import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import I18n from "i18n-js";
 import React, { Dispatch } from "react";
@@ -90,18 +93,29 @@ function Preferences<T extends object>({
             </div>
             {showSettings && (
                 <div className={"preferences"}>
-                    <button
-                        className={"button red"}
-                        onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
-                    >
-                        {I18n.t("table.preferences.reset")}
-                        <i className={"fa fa-sync"} />
-                    </button>
-                    <button className={"button"} onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}>
-                        {showPaginator
-                            ? I18n.t("table.preferences.hide_paginator")
-                            : I18n.t("table.preferences.show_paginator")}
-                    </button>
+                    <EuiFlexGroup className="buttons">
+                        <EuiFlexItem>
+                            <EuiButton
+                                onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
+                                color="warning"
+                                iconType="refresh"
+                                fill
+                            >
+                                {I18n.t("table.preferences.reset")}
+                            </EuiButton>
+                        </EuiFlexItem>
+                        <EuiFlexItem>
+                            <EuiButton
+                                onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}
+                                color="ghost"
+                                fill
+                            >
+                                {showPaginator
+                                    ? I18n.t("table.preferences.hide_paginator")
+                                    : I18n.t("table.preferences.show_paginator")}
+                            </EuiButton>
+                        </EuiFlexItem>
+                    </EuiFlexGroup>
                     <h1>{I18n.t("table.preferences.autorefresh")}</h1>
                     <NumericInput
                         onChange={valueAsNumber => {

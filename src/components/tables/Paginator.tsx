@@ -15,7 +15,7 @@
 
 import "components/tables/Paginator.scss";
 
-import I18n from "i18n-js";
+import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import React from "react";
 import NumericInput from "react-numeric-input";
 
@@ -43,72 +43,87 @@ function Paginator({
     setPageSize
 }: IPaginatorProps) {
     return (
-        <div className="pagination">
-            <div className="paginator-left">
-                <button
-                    onClick={() => gotoPage(0)}
-                    disabled={!canPreviousPage}
-                    title={I18n.t("Go to first page")}
-                    className={canPreviousPage ? "button blue" : "button grey"}
-                >
-                    <i className="fa fa-angle-double-left" />
-                </button>{" "}
-                <button
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                    className={canPreviousPage ? "button blue" : "button grey"}
-                >
-                    <i className="fa fa-angle-left" />
-                </button>
-            </div>
-            <div className="paginator-center">
-                <span className="page-info">
-                    Page{" "}
-                    <strong>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </strong>{" "}
-                </span>
-                <span>
-                    | Go to page:{" "}
-                    <NumericInput
-                        min={1}
-                        max={pageOptions.length}
-                        value={pageIndex + 1}
-                        onChange={valueAsNumber => {
-                            valueAsNumber && gotoPage(valueAsNumber - 1);
-                        }}
-                    />
-                </span>{" "}
-                <select
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value));
-                    }}
-                >
-                    {[5, 10, 25, 50, 100].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className="paginator-right">
-                <button
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                    className={canNextPage ? "button blue" : "button grey"}
-                >
-                    <i className="fa fa-angle-right" />
-                </button>{" "}
-                <button
-                    onClick={() => gotoPage(pageOptions.length - 1)}
-                    disabled={!canNextPage}
-                    className={canNextPage ? "button blue" : "button grey"}
-                >
-                    <i className="fa fa-angle-double-right" />
-                </button>{" "}
-            </div>
-        </div>
+        <EuiFlexGroup className="paginator">
+            <EuiFlexItem grow={1}>
+                <EuiFlexGroup>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={() => gotoPage(0)}
+                            color="primary"
+                            disabled={!canPreviousPage}
+                            fill
+                            iconType="sortLeft"
+                        />
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={() => previousPage()}
+                            color="primary"
+                            disabled={!canPreviousPage}
+                            fill
+                            iconType="arrowLeft"
+                        />
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+            </EuiFlexItem>
+            <EuiFlexItem grow={10} className="paginator-center">
+                <div className="pagination-center-wrapper">
+                    <div className="paginator-center">
+                        <span className="page-info">
+                            Page{" "}
+                            <strong>
+                                {pageIndex + 1} of {pageOptions.length}
+                            </strong>{" "}
+                        </span>
+                        <span>
+                            | Go to page:{" "}
+                            <NumericInput
+                                min={1}
+                                max={pageOptions.length}
+                                value={pageIndex + 1}
+                                onChange={valueAsNumber => {
+                                    valueAsNumber && gotoPage(valueAsNumber - 1);
+                                }}
+                            />
+                        </span>{" "}
+                        <select
+                            value={pageSize}
+                            onChange={e => {
+                                setPageSize(Number(e.target.value));
+                            }}
+                        >
+                            {[5, 10, 25, 50, 100].map(pageSize => (
+                                <option key={pageSize} value={pageSize}>
+                                    Show {pageSize}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+            </EuiFlexItem>
+            <EuiFlexItem grow={1}>
+                <EuiFlexGroup>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={() => nextPage()}
+                            color="primary"
+                            disabled={!canNextPage}
+                            fill
+                            iconType="arrowRight"
+                        />
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={() => gotoPage(pageOptions.length - 1)}
+                            color="primary"
+                            disabled={!canNextPage}
+                            fill
+                            iconType="sortRight"
+                        />
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+            </EuiFlexItem>
+        </EuiFlexGroup>
     );
 }
 

@@ -45,26 +45,6 @@
 }
 div.advanced-search-container {
     padding: 0px 0px 10px 0px;
-    i.fa-search {
-        color: vars.$primary;
-        margin-left: 0px;
-        font-size: 18px;
-    }
-    span {
-        padding-right: 5px;
-    }
-    input {
-        display: inline;
-        padding: 6px;
-        margin-left: auto;
-        margin-top: 0;
-        border: 1px solid vars.$lighter-grey;
-        border-bottom-left-radius: vars.$br;
-        border-top-left-radius: vars.$br;
-        font-size: 14px;
-        height: 100%;
-        width: 60%;
-    }
 }
 
 .preferences {

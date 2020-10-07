@@ -13,18 +13,6 @@
  *
  */
 
-@use "../stylesheets/mixins.scss";
-@use "../stylesheets/media_queries.scss";
-
-.tasks-container {
-    background-color: white;
-}
-
-.actions-buttons {
-    justify-content: end;
-    transform: translateY(-20px);
-
-    .explain {
-        transform: translateY(-5px);
-    }
+.buttons {
+    width: fit-content;
 }

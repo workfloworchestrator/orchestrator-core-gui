@@ -15,7 +15,7 @@
 
 import "pages/Tasks.scss";
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
 import { abortProcess, deleteProcess, retryProcess } from "api";
 import { filterableEndpoint } from "api/filterable";
 import DropDownActions from "components/DropDownActions";
@@ -197,7 +197,20 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                         confirm={confirmationDialogAction}
                         question={confirmationDialogQuestion}
                     />
-                    <div className="actions">
+                    <EuiFlexGroup className="actions actions-buttons">
+                        <EuiFlexItem>
+                            <EuiButton onClick={this.runAllTasks} fill color="primary" iconType="refresh">
+                                {I18n.t("tasks.runall")}
+                            </EuiButton>
+                        </EuiFlexItem>
+                        <EuiFlexItem>
+                            <EuiButton onClick={this.newTask} fill color="secondary" iconType="plusInCircle">
+                                {I18n.t("tasks.new")}
+                            </EuiButton>
+                        </EuiFlexItem>
+                        <EuiFlexItem className="explain">{this.renderExplain()}</EuiFlexItem>
+                    </EuiFlexGroup>
+                    {/* <div className="actions">
                         <button className="button blue" onClick={this.runAllTasks}>
                             {I18n.t("tasks.runall")}
                             <i className="fa fa-sync" />
@@ -206,7 +219,7 @@ export default class Tasks extends React.PureComponent<{}, IState> {
                             {I18n.t("tasks.new")} <i className="fa fa-plus" />
                         </button>
                         {this.renderExplain()}
-                    </div>
+                    </div> */}
                     <ProcessesTable
                         initialTableSettings={tasksSettings}
                         renderActions={this.renderActions}

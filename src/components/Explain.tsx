@@ -14,6 +14,7 @@
  */
 import "components/Explain.scss";
 
+import { EuiFlyout, EuiFlyoutBody, EuiFlyoutHeader, EuiText, EuiTitle } from "@elastic/eui";
 import React from "react";
 
 interface IProps {
@@ -34,20 +35,24 @@ export default class Explain extends React.PureComponent<IProps> {
 
     render() {
         const { close, isVisible, title, children } = this.props;
-        const className = isVisible ? "" : "hide";
 
-        return (
-            <div className={`explain-container ${className}`} onBlur={close} ref={ref => (this.main = ref)}>
-                <section className="container">
-                    <section className="title">
-                        <p>{title}</p>
-                        <button type="submit" id="close-explain-container" className="close" onClick={close}>
-                            <i className="fas fa-times" />
-                        </button>
-                    </section>
-                    <section className="details">{children}</section>
-                </section>
-            </div>
-        );
+        let flyout;
+
+        if (isVisible) {
+            flyout = (
+                <EuiFlyout onClose={() => close()} ownFocus size="s">
+                    <EuiFlyoutHeader hasBorder>
+                        <EuiTitle size="m">
+                            <h2 id="flyoutTitle">{title}</h2>
+                        </EuiTitle>
+                    </EuiFlyoutHeader>
+                    <EuiFlyoutBody>
+                        <EuiText>{children}</EuiText>
+                    </EuiFlyoutBody>
+                </EuiFlyout>
+            );
+        }
+
+        return <div>{flyout}</div>;
     }
 }

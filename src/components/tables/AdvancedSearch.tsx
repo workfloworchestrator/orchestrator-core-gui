@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import I18n from "i18n-js";
 import React, { Dispatch } from "react";
@@ -25,14 +26,14 @@ interface IProps<T extends object> {
 
 function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
     return (
-        <div className="advanced-search-container">
-            <span>
+        <EuiFlexGroup alignItems="center" className="advanced-search-container">
+            <EuiFlexItem>
                 <b>Advanced search</b>
-            </span>
-            <span>
-                <input
+            </EuiFlexItem>
+            <EuiFlexItem grow={10}>
+                <EuiFieldSearch
                     placeholder={I18n.t("subscriptions.advancedSearchPlaceHolder")}
-                    type="text"
+                    value={state.filterBy.find(column => column.id === "tsv")?.values[0] ?? ""}
                     onChange={searchPhrase => {
                         searchPhrase &&
                             dispatch({
@@ -41,13 +42,11 @@ function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
                                 values: [searchPhrase.target.value]
                             });
                     }}
-                    value={state.filterBy.find(column => column.id === "tsv")?.values[0] ?? ""}
+                    isClearable={true}
+                    fullWidth
                 />
-            </span>
-            <span>
-                <i className="fa fa-search"></i>
-            </span>
-        </div>
+            </EuiFlexItem>
+        </EuiFlexGroup>
     );
 }
 

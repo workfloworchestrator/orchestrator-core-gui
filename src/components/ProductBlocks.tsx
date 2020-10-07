@@ -15,6 +15,7 @@
 
 import "components/ProductBlocks.scss";
 
+import { EuiButton, EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { deleteProductBlock, productBlocks } from "api/index";
 import DropDownActions from "components/DropDownActions";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
@@ -312,21 +313,27 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                     confirm={confirmationDialogAction}
                     question={confirmationDialogQuestion}
                 />
-                <div className="options">
-                    <section className="search">
-                        <input
-                            className="allowed"
+                <EuiFlexGroup>
+                    <EuiFlexItem grow={6}>
+                        <EuiFieldSearch
                             placeholder={I18n.t("metadata.productBlocks.searchPlaceHolder")}
-                            type="text"
-                            onChange={this.search}
                             value={query}
+                            onChange={this.search}
+                            isClearable={true}
+                            fullWidth
                         />
-                        <i className="fa fa-search" />
-                    </section>
-                    <button className="new button green" onClick={this.editProductBlock(undefined, false, true)}>
-                        {I18n.t("metadata.productBlocks.new")} <i className="fa fa-plus" />
-                    </button>
-                </div>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={this.editProductBlock(undefined, false, true)}
+                            color="secondary"
+                            iconType="plusInCircle"
+                            fill
+                        >
+                            {I18n.t("metadata.productBlocks.new")}
+                        </EuiButton>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
                 <section className="product-block">
                     {this.renderProductBlocks(filteredProductBlocks, actions, sorted)}
                 </section>
