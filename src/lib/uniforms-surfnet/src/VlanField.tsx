@@ -182,8 +182,8 @@ function Vlan({
             <EuiFormRow
                 label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
-                error={showInlineError ? errorMessage : false}
-                isInvalid={error || errorMessageExtra !== ""}
+                error={(error || errorMessageExtra) && showInlineError ? errorMessage || errorMessageExtra : false}
+                isInvalid={error}
                 helpText={message}
                 id={id}
                 fullWidth
