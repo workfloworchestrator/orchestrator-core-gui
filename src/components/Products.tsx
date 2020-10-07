@@ -15,6 +15,7 @@
 
 import "components/Products.scss";
 
+import { EuiButton, EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { deleteProduct, products } from "api/index";
 import DropDownActions from "components/DropDownActions";
 import FilterDropDown from "components/FilterDropDown";
@@ -407,31 +408,41 @@ export default class Products extends React.Component<{}, IState> {
                     confirm={confirmationDialogAction}
                     question={confirmationDialogQuestion}
                 />
-                <div className="options">
-                    <FilterDropDown
-                        items={filterAttributesTag}
-                        filterBy={this.filter("tag")}
-                        label={I18n.t("metadata.products.tag")}
-                    />
-                    <FilterDropDown
-                        items={filterAttributesType}
-                        filterBy={this.filter("product_type")}
-                        label={I18n.t("metadata.products.product_type")}
-                    />
-                    <section className="search">
-                        <input
-                            className="allowed"
-                            placeholder={I18n.t("metadata.products.searchPlaceHolder")}
-                            type="text"
-                            onChange={this.search}
-                            value={query}
+                <EuiFlexGroup>
+                    <EuiFlexItem>
+                        <FilterDropDown
+                            items={filterAttributesTag}
+                            filterBy={this.filter("tag")}
+                            label={I18n.t("metadata.products.tag")}
                         />
-                        <i className="fa fa-search" />
-                    </section>
-                    <button className="new button green" onClick={this.editProduct({}, false, true)}>
-                        {I18n.t("metadata.products.new")} <i className="fa fa-plus" />
-                    </button>
-                </div>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <FilterDropDown
+                            items={filterAttributesType}
+                            filterBy={this.filter("product_type")}
+                            label={I18n.t("metadata.products.product_type")}
+                        />
+                    </EuiFlexItem>
+                    <EuiFlexItem grow={4}>
+                        <EuiFieldSearch
+                            placeholder={I18n.t("metadata.products.searchPlaceHolder")}
+                            value={query}
+                            onChange={this.search}
+                            isClearable={true}
+                            fullWidth
+                        />
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiButton
+                            onClick={this.editProduct({}, false, true)}
+                            color="secondary"
+                            iconType="plusInCircle"
+                            fill
+                        >
+                            {I18n.t("metadata.productBlocks.new")}
+                        </EuiButton>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
                 <section className="products">{this.renderProducts(filteredProducts, actions, sorted)}</section>
             </div>
         );

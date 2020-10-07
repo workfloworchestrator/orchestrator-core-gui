@@ -155,26 +155,54 @@ exports[`Storyshots NewProcess Default 1`] = `
                   </div>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-next-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Next
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-next-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Next
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>
@@ -339,26 +367,54 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                   </div>
                 </section>
               </section>
-              <section
-                className="buttons"
+              <div
+                className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive buttons"
               >
-                <button
-                  className="button"
-                  id="button-cancel-form-submit"
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="euiFlexItem"
                 >
-                  Cancel
-                </button>
-                <button
-                  className="button blue"
-                  id="button-submit-form-submit"
-                  tabIndex={0}
-                  type="submit"
+                  <div
+                    className="euiFlexItem"
+                  >
+                    <button
+                      className="euiButton euiButton--ghost euiButton--fill"
+                      id="button-cancel-form-submit"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <span
+                        className="euiButtonContent euiButton__content"
+                      >
+                        <span
+                          className="euiButton__text"
+                        >
+                          Cancel
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="euiFlexItem"
                 >
-                  Submit
-                </button>
-              </section>
+                  <button
+                    className="euiButton euiButton--primary euiButton--fill"
+                    id="button-submit-form-submit"
+                    tabIndex={0}
+                    type="submit"
+                  >
+                    <span
+                      className="euiButtonContent euiButton__content"
+                    >
+                      <span
+                        className="euiButton__text"
+                      >
+                        Submit
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </section>
         </div>

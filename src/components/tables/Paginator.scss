@@ -17,23 +17,15 @@
 @use "../../stylesheets/media_queries.scss";
 @use "../../stylesheets/vars";
 
-.pagination {
-    display: flex;
-    flex: row nowrap;
-    button {
-        color: white;
-        background-color: vars.$primary;
-        padding: 0 0 0 0;
-        font-size: 28px;
-        font-weight: bold;
-        border: none;
-        margin-top: 7px;
-    }
-    .paginator-left {
-        display: inline-block;
-    }
+.paginator {
+    margin: 14px 0px;
+}
 
+.pagination-center-wrapper {
+    width: 100%;
+    display: flex;
     .paginator-center {
+        width: fit-content;
         display: inline-block;
         margin: auto;
         input[type="text"] {
@@ -51,8 +43,5 @@
             margin-top: 4px;
             margin-left: 1px;
         }
-    }
-    .paginator-right {
-        display: inline-block;
     }
 }

@@ -15,6 +15,7 @@
 
 import "components/inputForms/UserInputForm.scss";
 
+import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { SubscriptionsContextProvider } from "components/subscriptionContext";
 import I18n from "i18n-js";
@@ -315,32 +316,46 @@ class UserInputForm extends React.Component<IProps, IState> {
         const { hasNext, hasPrev } = this.props;
 
         const prevButton = hasPrev ? (
-            <button type="button" className="button" id="button-prev-form-submit" onClick={this.props.previous}>
+            <EuiButton id="button-prev-form-submit" fill color="ghost" onClick={this.props.previous}>
                 {I18n.t("process.previous")}
-            </button>
+            </EuiButton>
         ) : (
-            <button type="button" className="button" id="button-cancel-form-submit" onClick={this.cancel}>
-                {I18n.t("process.cancel")}
-            </button>
+            <EuiFlexItem>
+                <EuiButton id="button-cancel-form-submit" fill color="ghost" onClick={this.cancel}>
+                    {I18n.t("process.cancel")}
+                </EuiButton>
+            </EuiFlexItem>
         );
 
         const nextButton = hasNext ? (
-            <button type="submit" id="button-next-form-submit" tabIndex={0} className={`button blue`}>
+            <EuiButton
+                id="button-next-form-submit"
+                tabIndex={0}
+                fill
+                color="primary"
+                isLoading={this.state.processing}
+                type="submit"
+            >
                 {I18n.t("process.next")}
-                {this.state.processing && <i className="fa fa-circle-notch fa-spin" />}
-            </button>
+            </EuiButton>
         ) : (
-            <button type="submit" id="button-submit-form-submit" tabIndex={0} className={`button blue`}>
+            <EuiButton
+                id="button-submit-form-submit"
+                tabIndex={0}
+                fill
+                color="primary"
+                isLoading={this.state.processing}
+                type="submit"
+            >
                 {I18n.t("process.submit")}
-                {this.state.processing && <i className="fa fa-circle-notch fa-spin" />}
-            </button>
+            </EuiButton>
         );
 
         return (
-            <section className="buttons">
-                {prevButton}
-                {nextButton}
-            </section>
+            <EuiFlexGroup className="buttons">
+                <EuiFlexItem>{prevButton}</EuiFlexItem>
+                <EuiFlexItem>{nextButton}</EuiFlexItem>
+            </EuiFlexGroup>
         );
     };
 
