@@ -130,7 +130,7 @@ test("<ListField> - renders children with correct values", () => {
             .at(2)
             .prop("value")
     ).toBe("c");
-    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<ListField> - renders children with correct name (value)", () => {
@@ -149,7 +149,7 @@ test("<ListField> - renders children with correct name (value)", () => {
             .at(1)
             .prop("name")
     ).toBe("1");
-    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<ListField> - renders correctly when child is list", () => {
@@ -206,6 +206,6 @@ test("<ListField> - renders correctly when child is list", () => {
         wrapper
             .find(ListField)
             .at(0)
-            .debug({ verbose: true })
+            .render()
     ).toMatchSnapshot();
 });

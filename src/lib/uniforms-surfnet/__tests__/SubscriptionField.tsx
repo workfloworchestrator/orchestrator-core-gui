@@ -105,7 +105,7 @@ describe("<SubscriptionField>", () => {
             { label: "d1", value: "a" },
             { label: "d2", value: "b" }
         ]);
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     test("<SubscriptionField> - renders a select with correct options (tags filtered)", async () => {
@@ -529,7 +529,7 @@ describe("<SubscriptionField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
-        // expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        // expect(wrapper.render()).toMatchSnapshot();
 
         // TODO: FIX TEST BEFORE MERGE
         // expect(wrapper.find("refresh-icon-uniforms-0000-0000")).toHaveLength(1);
@@ -605,7 +605,7 @@ describe("<SubscriptionField>", () => {
                 .at(1)
                 .prop("options")
         ).toStrictEqual([{ label: "dec2", value: "b" }]);
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     function makeSubscription(tag: string, port_mode?: string, crm_port_id?: string): ServicePortSubscription {

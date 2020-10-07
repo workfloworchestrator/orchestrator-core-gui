@@ -128,7 +128,7 @@ describe("<SelectField>", () => {
 
         expect(wrapper.find(ReactSelect)).toHaveLength(1);
         expect(wrapper.find(ReactSelect).prop("value")).toStrictEqual({ label: "b", value: "b" });
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     test("<SelectField> - renders a select with correct value (specified)", () => {
@@ -245,6 +245,6 @@ describe("<SelectField>", () => {
                 .at(1)
                 .prop("options")
         ).toStrictEqual([{ label: "b", value: "b" }]);
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 });
