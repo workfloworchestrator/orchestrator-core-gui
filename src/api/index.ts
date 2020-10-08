@@ -12,10 +12,7 @@
  * limitations under the License.
  *
  */
-import { ENV } from "env";
 import I18n from "i18n-js";
-import mySpinner from "lib/Spin";
-import { User } from "oidc-client";
 import { setFlash } from "utils/Flash";
 import {
     CodedWorkflow,
@@ -47,77 +44,12 @@ import {
 import { isEmpty } from "utils/Utils";
 import { absent, child_subscriptions, ims_port_id } from "validations/Subscriptions";
 
-const apiPath = ENV.BACKEND_URL + "/api/";
-
-let user: User | null;
-
-function apiUrl(path: string) {
-    return apiPath + path;
-}
-
-let started = 0;
-let ended = 0;
-
-class ResponseError extends Error {
-    response: Response;
-
-    constructor(response: Response) {
-        super(response.statusText);
-        this.response = response;
-    }
-}
-
-function validateResponse(showErrorDialog: boolean) {
-    return (res: Response) => {
-        ++ended;
-        if (started <= ended) {
-            mySpinner.stop();
-        }
-        if (!res.ok) {
-            started = ended = 0;
-            mySpinner.stop();
-
-            if (res.type === "opaqueredirect") {
-                setTimeout(() => window.location.reload(true), 100);
-                return res;
-            }
-            const error = new ResponseError(res);
-
-            if (showErrorDialog) {
-                setTimeout(() => {
-                    throw error;
-                }, 250);
-            }
-            throw error;
-        }
-        return res;
-    };
-}
-
-function validFetch(path: string, options: {}, headers = {}, showErrorDialog = true) {
-    const contentHeaders = {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: getAuthorizationHeaderValue(),
-        ...headers
-    };
-    const fetchOptions: RequestInit = Object.assign({}, { headers: contentHeaders }, options, {
-        credentials: "same-origin" as "include" | "omit" | "same-origin",
-        redirect: "manual" as "manual" | "error" | "follow"
-    });
-    mySpinner.start();
-    ++started;
-
-    const targetUrl = apiUrl(path);
-    return fetch(targetUrl, fetchOptions).then(validateResponse(showErrorDialog));
-}
+import axiosInstance from "./axios";
 
 export function catchErrorStatus<T>(promise: Promise<any>, status: number, callback: (json: T) => void) {
     return promise.catch(err => {
         if (err.response && err.response.status === status) {
-            err.response.json().then((json: T) => {
-                callback(json);
-            });
+            callback(err.response.data);
         } else {
             throw err;
         }
@@ -131,7 +63,7 @@ function fetchJson<R = {}>(
     showErrorDialog = true,
     result = true
 ): Promise<R> {
-    return validFetch(path, options, headers, showErrorDialog).then(res => (result ? res.json() : null));
+    return axiosFetch(path, options, headers, showErrorDialog, result);
 }
 
 function fetchJsonWithCustomErrorHandling<R = {}>(path: string): Promise<R> {
@@ -145,7 +77,28 @@ function postPutJson<R = {}>(
     showErrorDialog = true,
     result = true
 ): Promise<R> {
-    return fetchJson<R>(path, { method: method, body: JSON.stringify(body) }, {}, showErrorDialog, result);
+    return axiosFetch<R>(path, { method: method, data: body }, {}, showErrorDialog, result);
+}
+
+function axiosFetch<R = {}>(
+    path: string,
+    options = {},
+    headers = {},
+    showErrorDialog = true,
+    result = true
+): Promise<R> {
+    // preset the config with the relative URL and a GET type.
+    // presets can be overridden with `options`.
+    return axiosInstance({ url: path, method: "GET", ...options })
+        .then(res => res.data)
+        .catch(err => {
+            if (showErrorDialog) {
+                setTimeout(() => {
+                    throw err;
+                }, 250);
+            }
+            throw err;
+        });
 }
 
 //API metadata
@@ -454,7 +407,7 @@ export function assignees(): Promise<string[]> {
 }
 
 export function processStatuses(): Promise<string[]> {
-    return fetchJson("v2/processes/statuses");
+    return axiosFetch("v2/processes/statuses");
 }
 
 export function allWorkflows(): Promise<Workflow[]> {
@@ -595,16 +548,4 @@ export function ping() {
 
 export function dienstafnameBySubscription(subscriptionId: string) {
     return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
-}
-
-export function setUser(_user: User | null) {
-    user = _user;
-}
-
-export function getAuthorizationHeaderValue(): string {
-    if (!user) {
-        return "";
-    }
-
-    return `${user.token_type} ${user.access_token}`;
 }

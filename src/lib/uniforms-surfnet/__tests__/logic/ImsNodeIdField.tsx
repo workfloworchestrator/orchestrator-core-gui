@@ -14,7 +14,7 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
-import fetchMock from "fetch-mock-jest";
+import mock from "axios-mock";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { ImsNodeIdField, SelectField } from "lib/uniforms-surfnet/src";
@@ -22,7 +22,7 @@ import React from "react";
 
 describe("<ImsNodeIdField>", () => {
     test("<ImsNodeIdField> - shows loading placeholder", async () => {
-        fetchMock.get("glob:*/api/ims/nodes/kb001a/PL", []);
+        mock.onGet("ims/nodes/kb001a/PL").reply(200, []);
 
         const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
@@ -41,7 +41,7 @@ describe("<ImsNodeIdField>", () => {
         await waitForComponentToPaint(wrapper);
     });
     test("<ImsNodeIdField> - calls selectField with all nodes", async () => {
-        fetchMock.get("glob:*/api/ims/nodes/kb001a/PL", [{ id: 1, name: "Some Node" }]);
+        mock.onGet("ims/nodes/kb001a/PL").reply(200, [{ id: 1, name: "Some Node" }]);
 
         const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 
@@ -69,7 +69,7 @@ describe("<ImsNodeIdField>", () => {
     });
 
     test("<ImsNodeIdField> - calls api with right status", async () => {
-        fetchMock.get("glob:*/api/ims/nodes/kb001a/IS", [{ id: 1, name: "Some Node" }]);
+        mock.onGet("ims/nodes/kb001a/IS").reply(200, [{ id: 1, name: "Some Node" }]);
 
         const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
 

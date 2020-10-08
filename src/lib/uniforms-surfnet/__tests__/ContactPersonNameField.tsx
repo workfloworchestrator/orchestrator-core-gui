@@ -14,8 +14,8 @@
  */
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
+import mock from "axios-mock";
 import Autocomplete from "components/inputForms/Autocomplete";
-import fetchMock from "fetch-mock-jest";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { ContactPersonNameField } from "lib/uniforms-surfnet/src";
@@ -167,7 +167,7 @@ test("<ContactPersonNameField> - renders a wrapper with unknown props", () => {
 });
 
 test("<ContactPersonNameField> - renders autocomplete based on key", async () => {
-    fetchMock.get("glob:*/api/crm/contacts/abc", [{ name: "name", email: "a@b.nl", phone: "" }]);
+    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
 
     const element = <ContactPersonNameField name="x" organisationKey="key" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n", key: "abc" } }));
@@ -185,7 +185,7 @@ test("<ContactPersonNameField> - renders autocomplete based on key", async () =>
 });
 
 test("<ContactPersonNameField> - renders autocomplete based on id", async () => {
-    fetchMock.get("glob:*/api/crm/contacts/abc", [{ name: "name", email: "a@b.nl", phone: "" }]);
+    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "" }]);
 
     const element = <ContactPersonNameField name="x" organisationId="abc" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n" } }));
@@ -205,7 +205,7 @@ test("<ContactPersonNameField> - renders autocomplete based on id", async () => 
 test("<ContactPersonNameField> - selects item with keystrokes", async () => {
     const onChange = jest.fn();
 
-    fetchMock.get("glob:*/api/crm/contacts/abc", [{ name: "name", email: "a@b.nl", phone: "p" }]);
+    mock.onGet("crm/contacts/abc").reply(200, [{ name: "name", email: "a@b.nl", phone: "p" }]);
 
     const element = <ContactPersonNameField name="x" organisationId="abc" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "n" }, onChange }));

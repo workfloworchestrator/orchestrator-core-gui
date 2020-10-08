@@ -121,7 +121,9 @@ export default class ProductBlock extends React.Component<IProps, IState> {
                 .catch(err => {
                     if (err.response && err.response.status === 400) {
                         this.setState({ confirmationDialogOpen: false });
-                        err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
+                        if (err.response.data) {
+                            setFlash(err.response.data.error);
+                        }
                     } else {
                         throw err;
                     }

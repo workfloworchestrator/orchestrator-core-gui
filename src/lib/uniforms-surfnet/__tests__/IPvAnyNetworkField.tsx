@@ -1,5 +1,3 @@
-import IPPrefixTable from "components/inputForms/IpPrefixTable";
-import SplitPrefix from "components/inputForms/SplitPrefix";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +12,17 @@ import SplitPrefix from "components/inputForms/SplitPrefix";
  * limitations under the License.
  *
  */
-import fetchMock from "fetch-mock-jest";
+import mock from "axios-mock";
+import IPPrefixTable from "components/inputForms/IpPrefixTable";
+import SplitPrefix from "components/inputForms/SplitPrefix";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { IPvAnyNetworkField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<IPvAnyNetworkField> - renders an table", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
 
     const element = <IPvAnyNetworkField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -33,8 +33,8 @@ test("<IPvAnyNetworkField> - renders an table", () => {
 });
 
 test("<IPvAnyNetworkField> - does not render an table when preselected", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
 
     const element = <IPvAnyNetworkField name="x" prefixMin={23} />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -45,9 +45,9 @@ test("<IPvAnyNetworkField> - does not render an table when preselected", () => {
 });
 
 test("<IPvAnyNetworkField> - renders an table and split component", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
-    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/17", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
+    mock.onGet("ipam/free_subnets/10.0.0.0/16/17").reply(200, []);
 
     const element = <IPvAnyNetworkField name="x" />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "10.0.0.0/16" } }));
@@ -62,9 +62,9 @@ test("<IPvAnyNetworkField> - renders an table and split component", () => {
 });
 
 test("<IPvAnyNetworkField> - renders a split component", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
-    fetchMock.get("glob:*/api/ipam/free_subnets/10.0.0.0/16/23", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
+    mock.onGet("ipam/free_subnets/10.0.0.0/16/23").reply(200, []);
     const element = <IPvAnyNetworkField name="x" prefixMin={23} />;
     const wrapper = mount(element, createContext({ x: { type: String } }, { model: { x: "10.0.0.0/16" } }));
 
@@ -78,8 +78,8 @@ test("<IPvAnyNetworkField> - renders a split component", () => {
 });
 
 test("<IPvAnyNetworkField> - renders a label", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
 
     const element = <IPvAnyNetworkField name="x" label="y" />;
     const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -90,8 +90,8 @@ test("<IPvAnyNetworkField> - renders a label", () => {
 });
 
 test("<IPvAnyNetworkField> - renders a wrapper with unknown props", () => {
-    fetchMock.get("glob:*/api/ipam/prefix_filters", []);
-    fetchMock.get("glob:*/api/ipam/ip_blocks/1", []);
+    mock.onGet("ipam/prefix_filters").reply(200, []);
+    mock.onGet("ipam/ip_blocks/1").reply(200, []);
 
     const element = <IPvAnyNetworkField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({ x: { type: String } }));

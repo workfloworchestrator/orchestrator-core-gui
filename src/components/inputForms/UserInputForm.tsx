@@ -284,7 +284,7 @@ class UserInputForm extends React.Component<IProps, IState> {
                 this.setState({ processing: false });
 
                 if (error.response.status === 400) {
-                    let json = await error.response.json();
+                    let json = error.response.data;
 
                     this.setState({ nrOfValidationErrors: json.validation_errors.length });
 

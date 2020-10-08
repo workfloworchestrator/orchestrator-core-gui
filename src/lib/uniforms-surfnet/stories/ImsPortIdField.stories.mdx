@@ -1,6 +1,6 @@
 import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
 import { boolean } from "@storybook/addon-knobs";
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 
 import UserInputContainer from "../../../stories/UserInputContainer";
 import { createForm } from "../../../stories/utils";
@@ -14,9 +14,9 @@ With this version you can choose a port based on an node subscription. Optionall
 
 <Story name="ImsPortIdFieldCorelink">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("glob:/api/ims/nodes/*/IS", []);
-        fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", [
+        mock.reset();
+        mock.onGet(/ims\/nodes\/.*\/IS/).reply(200, []);
+        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(200, [
             {
                 subscription_id: "83a0d757-695f-440e-9530-fae87be96e12",
                 name: "Node",
@@ -30,7 +30,12 @@ With this version you can choose a port based on an node subscription. Optionall
                 description: "Node subscription 1"
             }
         ]);
-        fetchMock.get("glob:/api/ims/free_corelink_ports/*/1000", [
+        mock.onGet(/ims\/free_corelink_ports\/.*\/1000/).reply(200, [
+            { id: 1, iface_type: "1000BASE-LX", port: "0/0/0", status: "IS" },
+            { id: 2, iface_type: "1000BASE-LX", port: "0/0/1", status: "IS" },
+            { id: 3, iface_type: "1000BASE-SX", port: "0/0/2", status: "IS" }
+        ]);
+        mock.onGet(/ims\/free_ports\/.*/).reply(200, [
             { id: 1, iface_type: "1000BASE-LX", port: "0/0/0", status: "IS" },
             { id: 2, iface_type: "1000BASE-LX", port: "0/0/1", status: "IS" },
             { id: 3, iface_type: "1000BASE-SX", port: "0/0/2", status: "IS" }
@@ -71,9 +76,9 @@ In this version you choose a port based on an ims node
 
 <Story name="ImsPortIdFieldLegacy">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning", []);
-        fetchMock.get("/api/ims/nodes/MT001A/IS", [
+        mock.reset();
+        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, []);
+        mock.onGet("ims/nodes/MT001A/IS").reply(200, [
             {
                 id: 1,
                 name: "MT001A-JNX-01",
@@ -85,7 +90,7 @@ In this version you choose a port based on an ims node
                 status: "active"
             }
         ]);
-        fetchMock.get("glob:/api/ims/free_ports/*", [
+        mock.onGet(/ims\/free_ports\/.*/).reply(200, [
             { id: 1, iface_type: "1000BASE-LX", port: "0/0/0", status: "IS" },
             { id: 2, iface_type: "1000BASE-LX", port: "0/0/1", status: "IS" },
             { id: 3, iface_type: "1000BASE-SX", port: "0/0/2", status: "IS" }

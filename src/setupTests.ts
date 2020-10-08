@@ -15,16 +15,8 @@
 import { configure } from "enzyme";
 //@ts-ignore
 import Adapter from "enzyme-adapter-react-16";
-import fetchMock from "fetch-mock-jest";
 import I18n from "i18n-js";
 import en from "locale/en";
-
-// Enable fetchMock as global fetch mock
-global.fetch = fetchMock.sandbox();
-
-beforeEach(() => {
-    fetchMock.restore();
-});
 
 // we need to use them, otherwise the imports are deleted when organizing them
 expect(I18n).toBeDefined();

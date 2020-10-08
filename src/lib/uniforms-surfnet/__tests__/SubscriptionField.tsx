@@ -15,7 +15,7 @@
 
 import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
 import withApplicationContext from "__tests__/withApplicationContext";
-import fetchMock from "fetch-mock-jest";
+import mock from "axios-mock";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import withSubscriptions from "lib/uniforms-surfnet/__tests__/_withSubscriptions";
@@ -36,7 +36,7 @@ const APP_CONTEXT = {
 
 describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders an input", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -46,7 +46,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct disabled state", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" disabled />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -57,7 +57,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct id (inherited)", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -68,7 +68,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct id (specified)", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" id="y" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -79,7 +79,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct name", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -412,7 +412,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct placeholder", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" placeholder="" />;
 
@@ -429,7 +429,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct value (default)", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -466,7 +466,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -481,7 +481,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (empty)", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -496,7 +496,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (same value)", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -511,7 +511,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a label", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" label="y" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -523,7 +523,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a sync button", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -537,7 +537,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a wrapper with unknown props", async () => {
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", []);
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" data-x="x" data-y="y" data-z="z" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
