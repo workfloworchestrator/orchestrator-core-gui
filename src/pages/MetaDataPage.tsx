@@ -23,16 +23,19 @@ import {
     EuiText,
     EuiTitle
 } from "@elastic/eui";
-import { Fragment, useState } from "react";
+import I18n from "i18n-js";
+import { useState } from "react";
 import React from "react";
 
-import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
-import { products } from "../api/index";
+import { deleteProduct, products } from "../api/index";
+import DropDownActions from "../components/DropDownActions";
+import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
 import { getParameterByName } from "../utils/QueryParameters";
 
 const data = products;
-const TAG_LIGHTPATH = "LightPath";
+
+type Column = "name" | "description" | "tag" | "product_type" | "status" | "product_blocks_string" | "created_at";
 
 interface Workflow {
     product_string: string;
@@ -61,12 +64,24 @@ export interface Product {
     terminate_subscription_workflow_key: string;
 }
 
+interface Action {
+    show: boolean;
+    id: string;
+}
+
 interface IProps {
     incremental: boolean;
     filters: boolean;
     products: Product[];
     productsLoaded: boolean;
-    multiAction: boolean;
+    actions: Action;
+    // sorted: SortOption<Product>;
+
+    confirmationDialogOpen: boolean;
+    confirmationDialogAction: () => void;
+    cancelDialogAction: () => void;
+    confirmationDialogQuestion: string;
+    leavePage: boolean;
 }
 
 export default class MetaDataPage extends React.Component {
@@ -75,21 +90,113 @@ export default class MetaDataPage extends React.Component {
         filters: false,
         incremental: false,
         productsLoaded: true,
-        multiAction: false
+        actions: { show: false, id: "" },
+        // Sorteer the table automatisch op Alfabetisch name;
+        // sorted: { name: "name", descending: true },
+
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
+        cancelDialogAction: () => this.context.redirect("/metadata/products"),
+        confirmationDialogQuestion: "",
+        leavePage: true
     };
 
     // Data inladen met =
     componentDidMount() {
         data().then(res => {
             const products = res.map(product => {
+                product.name = product.name;
+                product.product_id = product.product_id;
                 return product;
             });
             this.setState({ products: products, productsLoaded: false });
         });
     }
 
+    // cancel = (e: React.MouseEvent<HTMLElement>) => {
+    //     stop(e);
+    //     this.setState({
+    //         confirmationDialogOpen: true,
+    //         leavePage: true,
+    //         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
+    //         cancelDialogAction: () => this.context.redirect("/metadatapage")
+    //     });
+    // };
+
+    editProduct = (
+        products: Partial<Product>,
+        readOnly: boolean = true,
+        newProduct: boolean = false,
+        clone: boolean = false
+    ) => () => {
+        const productId = clone ? "clone" : newProduct ? "new" : products.product_id;
+        const cloneId = clone ? `&productId=${products.product_id}` : "";
+        this.context.redirect(`/product/${productId}?readOnly=${readOnly}${cloneId}`);
+    };
+
+    // handleDeleteProduct = (products: Product) => (e: React.MouseEvent<HTMLElement>) => {
+    //     stop(e);
+    //     const { products } = this.state;
+
+    //     const question = I18n.t("metadata.deleteConfirmation", {
+    //         type: "Product",
+    //         name: products.name
+    //     });
+    //     const action = () =>
+    //         deleteProduct(products.product_id)
+    //             .then(() => {
+    //                 this.context.redirect("/metadata/products");
+    //                 setFlash(
+    //                     I18n.t("metadata.flash.delete", {
+    //                         name: products,
+    //                         type: "Product"
+    //                     })
+    //                 );
+    //             })
+    //             .catch(err => {
+    //                 if (err.response && err.response.status === 400) {
+    //                     this.setState({ confirmationDialogOpen: false });
+    //                     err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
+    //                 } else {
+    //                     throw err;
+    //                 }
+    //             });
+    //     this.setState({
+    //         confirmationDialogOpen: true,
+    //         confirmationDialogQuestion: question,
+    //         leavePage: false,
+    //         confirmationDialogAction: action,
+    //         cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
+    //     });
+    // };
+
+    renderActions = (products: Product, actions: Action) => {
+        const actionId = products.product_id;
+        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
+            return null;
+        }
+        const view = {
+            icon: "fa fa-search-plus",
+            label: "view",
+            action: this.editProduct(products, true, false)
+        };
+        const edit = {
+            icon: "fa fa-edit",
+            label: "edit",
+            action: this.editProduct(products, false, false)
+        };
+        // const _delete = {
+        //     icon: "fas fa-trash-alt",
+        //     label: "delete",
+        //     action: this.handleDeleteProduct(product),
+        //     danger: true
+        // };
+        const options = [view, edit];
+        return <DropDownActions options={options} i18nPrefix="metadata.products" />;
+    };
+
     render() {
-        const { products, productsLoaded, multiAction, filters, incremental } = this.state;
+        const { actions, products, productsLoaded, filters, incremental } = this.state;
 
         const search = {
             box: {
@@ -143,7 +250,7 @@ export default class MetaDataPage extends React.Component {
                 field: "product_blocks",
                 name: "PRODUCT BLOCKS",
                 sortable: true,
-                truncateText: true,
+                truncateText: false,
                 render: (product_blocks: any) => {
                     const renderPB = product_blocks.map((item: any) => (
                         <EuiBadge color="primary" isDisabled={false}>
@@ -152,7 +259,7 @@ export default class MetaDataPage extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "12.5%"
+                width: "17%"
             },
             {
                 field: "created_at",
@@ -168,7 +275,17 @@ export default class MetaDataPage extends React.Component {
             {
                 field: "actions",
                 name: "ACTIONS",
-                width: "7.5%"
+                width: "5.5%",
+                render: () => {
+                    const { products } = this.state;
+                    const renderAC = this.renderActions(products, actions);
+                    return (
+                        <div>
+                            <i className="fa fa-ellipsis-h" />
+                            {renderAC}
+                        </div>
+                    );
+                }
             }
         ];
 
@@ -177,22 +294,19 @@ export default class MetaDataPage extends React.Component {
                 id: "products-id",
                 name: "Products",
                 content: (
-                    <Fragment>
-                        <EuiSpacer />
-                        <EuiPageContent>
-                            <EuiPageContentHeader>
-                                <EuiSpacer size="l" />
-                                <EuiInMemoryTable
-                                    items={products}
-                                    columns={columns}
-                                    search={search}
-                                    pagination={true}
-                                    sorting={true}
-                                    loading={productsLoaded}
-                                />
-                            </EuiPageContentHeader>
-                        </EuiPageContent>
-                    </Fragment>
+                    <EuiPageContent>
+                        <EuiPageContentHeader>
+                            <EuiSpacer size="l" />
+                            <EuiInMemoryTable
+                                items={products}
+                                columns={columns}
+                                search={search}
+                                pagination={true}
+                                sorting={true}
+                                loading={productsLoaded}
+                            />
+                        </EuiPageContentHeader>
+                    </EuiPageContent>
                 )
             }
         ];
