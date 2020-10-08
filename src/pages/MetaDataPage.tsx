@@ -1,4 +1,5 @@
 import {
+    EuiBadge,
     EuiFlexGroup,
     EuiFlexItem,
     EuiIcon,
@@ -26,72 +27,46 @@ import { Fragment, useState } from "react";
 import React from "react";
 
 import { deleteProduct, fixedInputConfiguration, productStatuses, productTags, productTypes } from "../api";
-import { allWorkflows, productBlocks, productById, products, saveProduct } from "../api/index";
+import { products } from "../api/index";
+import { renderDateTime } from "../utils/Lookups";
 import { getParameterByName } from "../utils/QueryParameters";
 
 const data = products;
 const TAG_LIGHTPATH = "LightPath";
 
-const columns = [
-    {
-        field: "name",
-        name: "NAME",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "description",
-        name: "DESCRIPTION",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "tag",
-        name: "TAG",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "type",
-        name: "TYPE",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "status",
-        name: "STATUS",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "product_blocks",
-        name: "PRODUCT BLOCKS",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "creatie_Date",
-        name: "CREATE DATE",
-        sortable: true,
-        truncateText: true
-    },
-    {
-        field: "actions",
-        name: ""
-    }
-];
+interface Workflow {
+    product_string: string;
+}
+interface FixedInput {
+    product_string: string;
+}
+interface ProductBlock {
+    product_string: string;
+}
 
-interface ProductWithExtra {
-    product_blocks_string: string;
+export interface Product {
+    name: string;
+    tag: string;
+    description: string;
+    product_id: string;
+    created_at: number;
+    product_type: string;
+    end_date: number;
+    status: string;
+    fixed_inputs: FixedInput[];
+    workflows: Workflow[];
+    product_blocks: ProductBlock[];
+    create_subscription_workflow_key: string;
+    modify_subscription_workflow_key: string;
+    terminate_subscription_workflow_key: string;
 }
 
 interface IProps {
     incremental: boolean;
     filters: boolean;
-    multiAction: boolean;
-    products: ProductWithExtra[];
-    error: null;
+    products: Product[];
     productsLoaded: boolean;
+    multiAction: boolean;
 }
 
 export default class MetaDataPage extends React.Component {
@@ -99,19 +74,17 @@ export default class MetaDataPage extends React.Component {
         products: [],
         filters: false,
         incremental: false,
-        multiAction: false,
-        error: null,
-        productsLoaded: false
+        productsLoaded: true,
+        multiAction: false
     };
 
     // Data inladen met =
     componentDidMount() {
         data().then(res => {
-            const products = res.map((product: Partial<ProductWithExtra>) => {
-                product = product;
-                return product as ProductWithExtra;
+            const products = res.map(product => {
+                return product;
             });
-            this.setState({ products: products, productsLoaded: true });
+            this.setState({ products: products, productsLoaded: false });
         });
     }
 
@@ -130,6 +103,75 @@ export default class MetaDataPage extends React.Component {
             // ]
         };
 
+        const columns = [
+            {
+                field: "name",
+                name: "NAME",
+                sortable: true,
+                truncateText: false,
+                width: "12.5%"
+            },
+            {
+                field: "description",
+                name: "DESCRIPTION",
+                sortable: true,
+                truncateText: false,
+                width: "15%"
+            },
+            {
+                field: "tag",
+                name: "TAG",
+                sortable: true,
+                truncateText: false,
+                width: "7.5%"
+            },
+            {
+                field: "product_type",
+                name: "TYPE",
+                sortable: true,
+                truncateText: false,
+                width: "7.5%"
+            },
+            {
+                field: "status",
+                name: "STATUS",
+                sortable: true,
+                truncateText: false,
+                width: "7.5%"
+            },
+            {
+                field: "product_blocks",
+                name: "PRODUCT BLOCKS",
+                sortable: true,
+                truncateText: true,
+                render: (product_blocks: any) => {
+                    const renderPB = product_blocks.map((item: any) => (
+                        <EuiBadge color="primary" isDisabled={false}>
+                            {item.name}
+                        </EuiBadge>
+                    ));
+                    return <div>{renderPB}</div>;
+                },
+                width: "12.5%"
+            },
+            {
+                field: "created_at",
+                name: "CREATE DATE",
+                sortable: true,
+                truncateText: false,
+                render: (created_at: any) => {
+                    const renderCA = renderDateTime(created_at);
+                    return <div>{renderCA}</div>;
+                },
+                width: "15%"
+            },
+            {
+                field: "actions",
+                name: "ACTIONS",
+                width: "7.5%"
+            }
+        ];
+
         const tabs = [
             {
                 id: "products-id",
@@ -146,7 +188,7 @@ export default class MetaDataPage extends React.Component {
                                     search={search}
                                     pagination={true}
                                     sorting={true}
-                                    // loading={productsLoaded}
+                                    loading={productsLoaded}
                                 />
                             </EuiPageContentHeader>
                         </EuiPageContent>
