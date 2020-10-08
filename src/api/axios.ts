@@ -21,7 +21,6 @@ import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 
 let calls = 0;
-let user: User | null;
 
 const apiPath = ENV.BACKEND_URL + "/api/";
 // basic configuration for axios.
@@ -72,14 +71,5 @@ axiosInstance.interceptors.response.use(
 export default axiosInstance;
 
 export function setUser(_user: User | null) {
-    user = _user;
-    axiosInstance.defaults.headers["Authorization"] = getAuthorizationHeaderValue();
-}
-
-export function getAuthorizationHeaderValue(): string {
-    if (!user) {
-        return "";
-    }
-
-    return `${user.token_type} ${user.access_token}`;
+    axiosInstance.defaults.headers["Authorization"] = `${_user?.token_type} ${_user?.access_token}`;
 }
