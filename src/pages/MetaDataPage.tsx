@@ -1,7 +1,12 @@
 import "../components/Products.scss";
 
+import { stringify } from "querystring";
+
 import {
     EuiBadge,
+    EuiBasicTable,
+    EuiButton,
+    EuiButtonIcon,
     EuiFlexGroup,
     EuiFlexItem,
     EuiIcon,
@@ -48,6 +53,9 @@ interface FixedInput {
 interface ProductBlock {
     product_string: string;
 }
+interface Selected {
+    product_string: string;
+}
 
 export interface Product {
     name: string;
@@ -66,17 +74,13 @@ export interface Product {
     terminate_subscription_workflow_key: string;
 }
 
-interface Action {
-    show: boolean;
-    id: string;
-}
-
 interface IProps {
     incremental: boolean;
     filters: boolean;
     products: Product[];
     productsLoaded: boolean;
-    actions: Action;
+    multiAction: boolean;
+    selected: Selected[];
     // sorted: SortOption<Product>;
 
     confirmationDialogOpen: boolean;
@@ -92,7 +96,8 @@ export default class MetaDataPage extends React.Component {
         filters: false,
         incremental: false,
         productsLoaded: true,
-        actions: { show: false, id: "" },
+        multiAction: true,
+        selected: [],
         // Sorteer the table automatisch op Alfabetisch name;
         // sorted: { name: "name", descending: true },
 
@@ -115,14 +120,8 @@ export default class MetaDataPage extends React.Component {
         });
     }
 
-    cancel = (e: React.MouseEvent<HTMLElement>) => {
-        // stop(e);
-        this.setState({
-            confirmationDialogOpen: true,
-            leavePage: true,
-            confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-            cancelDialogAction: () => this.context.redirect("/metadatapage")
-        });
+    onSelectionChange = (selected: any) => {
+        this.setState({ selected: selected });
     };
 
     editProduct = (
@@ -145,7 +144,7 @@ export default class MetaDataPage extends React.Component {
         const action = () =>
             deleteProduct(products.product_id)
                 .then(() => {
-                    this.context.redirect("/metadata/products");
+                    this.context.redirect("/metadatapage");
                     setFlash(
                         I18n.t("metadata.flash.delete", {
                             name: products,
@@ -170,40 +169,52 @@ export default class MetaDataPage extends React.Component {
         });
     };
 
-    renderActions = (products: any, actions: Action) => {
-        const actionId = products.product_id;
-        if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
-            return null;
+    actions = null;
+    setMultiAction() {
+        const { multiAction } = this.state;
+        if (multiAction) {
+            const actions = [
+                {
+                    name: <span>Clone</span>,
+                    description: "Clone this user",
+                    icon: "copy",
+                    onClick: () => {},
+                    "data-test-subj": "action-clone"
+                },
+                {
+                    name: (products: any) => (products.product_id ? "Delete" : "Remove"),
+                    description: "Delete this user",
+                    icon: "trash",
+                    color: "danger",
+                    type: "icon",
+                    onClick: this.handleDeleteProduct,
+                    isPrimary: true,
+                    "data-test-subj": "action-delete"
+                },
+                {
+                    name: "Edit",
+                    isPrimary: true,
+                    description: "Edit this user",
+                    icon: "pencil",
+                    type: "icon",
+                    onClick: () => {},
+                    "data-test-subj": "action-edit"
+                }
+            ];
+            return actions;
         }
-        const view = {
-            icon: "fa fa-search-plus",
-            label: "view",
-            action: this.editProduct(products, true, false)
-        };
-        const edit = {
-            icon: "fa fa-edit",
-            label: "edit",
-            action: this.editProduct(products, false, false)
-        };
-        const _delete = {
-            icon: "fas fa-trash-alt",
-            label: "delete",
-            action: this.handleDeleteProduct(products),
-            danger: true
-        };
-        const options = [view, _delete, edit];
-        return <DropDownActions options={options} i18nPrefix="metadata.products" />;
-    };
+        this.setState({ multiAction: multiAction });
+    }
 
-    toggleActions = (products: any, actions: Action) => (e: React.MouseEvent<HTMLTableDataCellElement>) => {
-        //  stop(e);
+    // toggleActions = (products: any, actions: Action) => (e: React.MouseEvent<HTMLTableDataCellElement>) => {
+    //     //  stop(e);
 
-        const newShow = actions.id === products.product_id ? !actions.show : true;
-        this.setState({ actions: { show: newShow, id: products.product_id } });
-    };
+    //     const newShow = actions.id === products.product_id ? !actions.show : true;
+    //     this.setState({ actions: { show: newShow, id: products.product_id } });
+    // };
 
     render() {
-        const { actions, products, productsLoaded, filters, incremental } = this.state;
+        const { multiAction, products, productsLoaded, filters, incremental } = this.state;
 
         const search = {
             box: {
@@ -223,7 +234,7 @@ export default class MetaDataPage extends React.Component {
                 name: "NAME",
                 sortable: true,
                 truncateText: false,
-                width: "12.5%"
+                width: "20.5%"
             },
             {
                 field: "description",
@@ -251,7 +262,29 @@ export default class MetaDataPage extends React.Component {
                 name: "STATUS",
                 sortable: true,
                 truncateText: false,
-                width: "7.5%"
+                width: "7.5%",
+                render: (status: any) => {
+                    switch (status) {
+                        case "end of life":
+                            return (
+                                <EuiBadge color="danger" isDisabled={false}>
+                                    {status}
+                                </EuiBadge>
+                            );
+                        case "active":
+                            return (
+                                <EuiBadge color="secondary" isDisabled={false}>
+                                    {status}
+                                </EuiBadge>
+                            );
+                        default:
+                            return (
+                                <EuiBadge color="default" isDisabled={false}>
+                                    {status}
+                                </EuiBadge>
+                            );
+                    }
+                }
             },
             {
                 field: "product_blocks",
@@ -266,7 +299,7 @@ export default class MetaDataPage extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "17.5%"
+                width: "20%"
             },
             {
                 field: "created_at",
@@ -282,28 +315,19 @@ export default class MetaDataPage extends React.Component {
             {
                 field: "actions",
                 name: "",
-                width: "3%",
-                render: () => {
-                    const renderAC = this.renderActions(products, actions);
-                    return (
-                        <table className="products">
-                            <tbody>
-                                <tr>
-                                    <td
-                                        data-label={I18n.t("metadata.products.actions")}
-                                        className="actions"
-                                        onClick={this.toggleActions(products, actions)}
-                                        tabIndex={1}
-                                        onBlur={() => this.setState({ actions: { show: false, id: "" } })}
-                                    >
-                                        <i className="fa fa-ellipsis-h" />
-                                        {renderAC}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    );
-                }
+                width: "2.5%",
+                multiAction
+                // render: (multiAction:any) => {
+                //     const renderMA = multiAction;
+                //     return (
+                //     <EuiButtonIcon
+                //     size="s"
+                //     onClick={() => window.alert('Button clicked')}
+                //     iconType="gear">
+                //         {renderMA}
+                //   </EuiButtonIcon>
+                //     );
+                // },
             }
         ];
 
@@ -317,11 +341,16 @@ export default class MetaDataPage extends React.Component {
                             <EuiSpacer size="l" />
                             <EuiInMemoryTable
                                 items={products}
+                                itemId={(products: any) => {
+                                    const id = products.product_id;
+                                    return id;
+                                }}
                                 columns={columns}
                                 search={search}
                                 pagination={true}
                                 sorting={true}
                                 loading={productsLoaded}
+                                hasActions={true}
                             />
                         </EuiPageContentHeader>
                     </EuiPageContent>
