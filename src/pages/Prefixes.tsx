@@ -22,6 +22,7 @@ import I18n from "i18n-js";
 import constant from "lodash/constant";
 import debounce from "lodash/debounce";
 import memoize from "lodash/memoize";
+import pMap from "p-map";
 import React from "react";
 import ScrollUpButton from "react-scroll-up-button";
 import ApplicationContext from "utils/ApplicationContext";
@@ -109,10 +110,10 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
         }
     }
 
-    getPrefixSubscriptions = (roots: IpPrefix[]) => {
+    getPrefixSubscriptions = async (roots: IpPrefix[]) => {
         const { organisations } = this.context;
-        return roots.map(p =>
-            prefixSubscriptionsByRootPrefix(p.id)
+        const mapper = async (root: IpPrefix) => {
+            await prefixSubscriptionsByRootPrefix(root.id)
                 .then(result =>
                     result.map(prefix => {
                         const { customer_id, start_date, subscription_id } = prefix;
@@ -138,7 +139,11 @@ export default class Prefixes extends React.PureComponent<IProps, IState> {
                         return { prefixes: newPrefixes };
                     });
                 })
-        );
+                .catch(err => {
+                    console.log(`failed to load prefix ${root.id}`);
+                });
+        };
+        return await pMap(roots, mapper, { concurrency: 2, stopOnError: false });
     };
 
     getFreePrefixes = (roots: IpPrefix[]) => {
