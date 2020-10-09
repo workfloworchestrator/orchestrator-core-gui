@@ -59,9 +59,14 @@
     div.del-item {
         display: flex;
         align-items: center;
-        align-self: flex-end;
+        align-self: baseline;
         margin: 5px;
+        margin-bottom: 30px;
         cursor: pointer;
+
+        &[id$="0.remove"] {
+            margin-top: 55px;
+        }
 
         i.fa-plus {
             color: vars.$success;
@@ -82,6 +87,10 @@
             cursor: not-allowed;
             color: vars.$light-grey;
         }
+    }
+
+    div.add-item {
+        align-self: flex-end;
     }
 
     // Used for nested lists (L2VPN)
