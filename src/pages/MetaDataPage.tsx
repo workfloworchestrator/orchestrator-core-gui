@@ -1,3 +1,5 @@
+import "../components/Products.scss";
+
 import {
     EuiBadge,
     EuiFlexGroup,
@@ -113,15 +115,15 @@ export default class MetaDataPage extends React.Component {
         });
     }
 
-    // cancel = (e: React.MouseEvent<HTMLElement>) => {
-    //     stop(e);
-    //     this.setState({
-    //         confirmationDialogOpen: true,
-    //         leavePage: true,
-    //         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
-    //         cancelDialogAction: () => this.context.redirect("/metadatapage")
-    //     });
-    // };
+    cancel = (e: React.MouseEvent<HTMLElement>) => {
+        // stop(e);
+        this.setState({
+            confirmationDialogOpen: true,
+            leavePage: true,
+            confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
+            cancelDialogAction: () => this.context.redirect("/metadatapage")
+        });
+    };
 
     editProduct = (
         products: Partial<Product>,
@@ -134,43 +136,41 @@ export default class MetaDataPage extends React.Component {
         this.context.redirect(`/product/${productId}?readOnly=${readOnly}${cloneId}`);
     };
 
-    // handleDeleteProduct = (products: Product) => (e: React.MouseEvent<HTMLElement>) => {
-    //     stop(e);
-    //     const { products } = this.state;
+    handleDeleteProduct = (products: any) => (e: React.MouseEvent<HTMLElement>) => {
+        // stop(e);
+        const question = I18n.t("metadata.deleteConfirmation", {
+            type: "Product",
+            name: products.name
+        });
+        const action = () =>
+            deleteProduct(products.product_id)
+                .then(() => {
+                    this.context.redirect("/metadata/products");
+                    setFlash(
+                        I18n.t("metadata.flash.delete", {
+                            name: products,
+                            type: "Product"
+                        })
+                    );
+                })
+                .catch(err => {
+                    if (err.response && err.response.status === 400) {
+                        this.setState({ confirmationDialogOpen: false });
+                        err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
+                    } else {
+                        throw err;
+                    }
+                });
+        this.setState({
+            confirmationDialogOpen: true,
+            confirmationDialogQuestion: question,
+            leavePage: false,
+            confirmationDialogAction: action,
+            cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
+        });
+    };
 
-    //     const question = I18n.t("metadata.deleteConfirmation", {
-    //         type: "Product",
-    //         name: products.name
-    //     });
-    //     const action = () =>
-    //         deleteProduct(products.product_id)
-    //             .then(() => {
-    //                 this.context.redirect("/metadata/products");
-    //                 setFlash(
-    //                     I18n.t("metadata.flash.delete", {
-    //                         name: products,
-    //                         type: "Product"
-    //                     })
-    //                 );
-    //             })
-    //             .catch(err => {
-    //                 if (err.response && err.response.status === 400) {
-    //                     this.setState({ confirmationDialogOpen: false });
-    //                     err.response.json().then((json: { error: string }) => setFlash(json["error"], "error"));
-    //                 } else {
-    //                     throw err;
-    //                 }
-    //             });
-    //     this.setState({
-    //         confirmationDialogOpen: true,
-    //         confirmationDialogQuestion: question,
-    //         leavePage: false,
-    //         confirmationDialogAction: action,
-    //         cancelDialogAction: () => this.setState({ confirmationDialogOpen: false })
-    //     });
-    // };
-
-    renderActions = (products: Product, actions: Action) => {
+    renderActions = (products: any, actions: Action) => {
         const actionId = products.product_id;
         if (actions.id !== actionId || (actions.id === actionId && !actions.show)) {
             return null;
@@ -185,14 +185,21 @@ export default class MetaDataPage extends React.Component {
             label: "edit",
             action: this.editProduct(products, false, false)
         };
-        // const _delete = {
-        //     icon: "fas fa-trash-alt",
-        //     label: "delete",
-        //     action: this.handleDeleteProduct(product),
-        //     danger: true
-        // };
-        const options = [view, edit];
+        const _delete = {
+            icon: "fas fa-trash-alt",
+            label: "delete",
+            action: this.handleDeleteProduct(products),
+            danger: true
+        };
+        const options = [view, _delete, edit];
         return <DropDownActions options={options} i18nPrefix="metadata.products" />;
+    };
+
+    toggleActions = (products: any, actions: Action) => (e: React.MouseEvent<HTMLTableDataCellElement>) => {
+        //  stop(e);
+
+        const newShow = actions.id === products.product_id ? !actions.show : true;
+        this.setState({ actions: { show: newShow, id: products.product_id } });
     };
 
     render() {
@@ -223,7 +230,7 @@ export default class MetaDataPage extends React.Component {
                 name: "DESCRIPTION",
                 sortable: true,
                 truncateText: false,
-                width: "15%"
+                width: "17%"
             },
             {
                 field: "tag",
@@ -259,7 +266,7 @@ export default class MetaDataPage extends React.Component {
                     ));
                     return <div>{renderPB}</div>;
                 },
-                width: "17%"
+                width: "17.5%"
             },
             {
                 field: "created_at",
@@ -274,16 +281,27 @@ export default class MetaDataPage extends React.Component {
             },
             {
                 field: "actions",
-                name: "ACTIONS",
-                width: "5.5%",
+                name: "",
+                width: "3%",
                 render: () => {
-                    const { products } = this.state;
                     const renderAC = this.renderActions(products, actions);
                     return (
-                        <div>
-                            <i className="fa fa-ellipsis-h" />
-                            {renderAC}
-                        </div>
+                        <table className="products">
+                            <tbody>
+                                <tr>
+                                    <td
+                                        data-label={I18n.t("metadata.products.actions")}
+                                        className="actions"
+                                        onClick={this.toggleActions(products, actions)}
+                                        tabIndex={1}
+                                        onBlur={() => this.setState({ actions: { show: false, id: "" } })}
+                                    >
+                                        <i className="fa fa-ellipsis-h" />
+                                        {renderAC}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     );
                 }
             }
