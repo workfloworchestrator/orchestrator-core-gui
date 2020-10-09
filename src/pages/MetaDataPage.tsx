@@ -316,18 +316,15 @@ export default class MetaDataPage extends React.Component {
                 field: "actions",
                 name: "",
                 width: "2.5%",
-                multiAction
-                // render: (multiAction:any) => {
-                //     const renderMA = multiAction;
-                //     return (
-                //     <EuiButtonIcon
-                //     size="s"
-                //     onClick={() => window.alert('Button clicked')}
-                //     iconType="gear">
-                //         {renderMA}
-                //   </EuiButtonIcon>
-                //     );
-                // },
+                multiAction,
+                render: (multiAction: any) => {
+                    const renderMA = multiAction;
+                    return (
+                        <EuiButtonIcon size="s" onClick={() => window.alert("Button clicked")} iconType="gear">
+                            {renderMA}
+                        </EuiButtonIcon>
+                    );
+                }
             }
         ];
 
