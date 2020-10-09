@@ -18,6 +18,8 @@ import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
 
+import { isRepeatedField } from "./logic/LabelLogic";
+
 export type NumFieldProps = FieldProps<
     number,
     { max?: number; min?: number; precision?: number; step?: number },
@@ -43,15 +45,18 @@ function Num({
     errorMessage,
     ...props
 }: NumFieldProps) {
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
     return (
-        <div {...filterDOMProps(props)}>
+        <div {...filterDOMProps(props)} className={`${isRepeated ? " repeated" : ""}`}>
             <EuiFormRow
-                label={label}
+                label={labelRender}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
+                hasEmptyLabelSpace
             >
                 <EuiFieldNumber
                     name={name}

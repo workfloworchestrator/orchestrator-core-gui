@@ -4442,12 +4442,13 @@ initialize {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Object {
           "attribs": Object {
+            "class": "",
             "required": "",
           },
           "children": Array [
             Object {
               "attribs": Object {
-                "class": "euiFormRow euiFormRow--fullWidth",
+                "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
                 "id": "uniforms-0000-0006-row",
               },
               "children": Array [
@@ -4958,12 +4959,13 @@ initialize {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Object {
             "attribs": Object {
+              "class": "",
               "required": "",
             },
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "euiFormRow euiFormRow--fullWidth",
+                  "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
                   "id": "uniforms-0000-0007-row",
                 },
                 "children": Array [
@@ -5477,9 +5479,11 @@ initialize {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": Object {
+              "class": undefined,
               "required": undefined,
             },
             "x-attribsPrefix": Object {
+              "class": undefined,
               "required": undefined,
             },
           },
@@ -5487,9 +5491,11 @@ initialize {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": Object {
+            "class": undefined,
             "required": undefined,
           },
           "x-attribsPrefix": Object {
+            "class": undefined,
             "required": undefined,
           },
         },
@@ -5507,12 +5513,13 @@ initialize {
       },
       Object {
         "attribs": Object {
+          "class": "",
           "required": "",
         },
         "children": Array [
           Object {
             "attribs": Object {
-              "class": "euiFormRow euiFormRow--fullWidth",
+              "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
               "id": "uniforms-0000-0006-row",
             },
             "children": Array [
@@ -6023,12 +6030,13 @@ initialize {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Object {
           "attribs": Object {
+            "class": "",
             "required": "",
           },
           "children": Array [
             Object {
               "attribs": Object {
-                "class": "euiFormRow euiFormRow--fullWidth",
+                "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
                 "id": "uniforms-0000-0007-row",
               },
               "children": Array [
@@ -6542,9 +6550,11 @@ initialize {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": Object {
+            "class": undefined,
             "required": undefined,
           },
           "x-attribsPrefix": Object {
+            "class": undefined,
             "required": undefined,
           },
         },
@@ -8765,20 +8775,23 @@ initialize {
         },
         "type": "tag",
         "x-attribsNamespace": Object {
+          "class": undefined,
           "required": undefined,
         },
         "x-attribsPrefix": Object {
+          "class": undefined,
           "required": undefined,
         },
       },
       Object {
         "attribs": Object {
+          "class": "",
           "required": "",
         },
         "children": Array [
           Object {
             "attribs": Object {
-              "class": "euiFormRow euiFormRow--fullWidth",
+              "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
               "id": "uniforms-0000-0007-row",
             },
             "children": Array [
@@ -9291,12 +9304,13 @@ initialize {
         "parent": [Circular],
         "prev": Object {
           "attribs": Object {
+            "class": "",
             "required": "",
           },
           "children": Array [
             Object {
               "attribs": Object {
-                "class": "euiFormRow euiFormRow--fullWidth",
+                "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
                 "id": "uniforms-0000-0006-row",
               },
               "children": Array [
@@ -12023,17 +12037,21 @@ initialize {
           },
           "type": "tag",
           "x-attribsNamespace": Object {
+            "class": undefined,
             "required": undefined,
           },
           "x-attribsPrefix": Object {
+            "class": undefined,
             "required": undefined,
           },
         },
         "type": "tag",
         "x-attribsNamespace": Object {
+          "class": undefined,
           "required": undefined,
         },
         "x-attribsPrefix": Object {
+          "class": undefined,
           "required": undefined,
         },
       },

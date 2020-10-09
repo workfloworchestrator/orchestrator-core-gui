@@ -16,13 +16,22 @@
 @use "../../../stylesheets/vars.scss";
 
 .subscription-field {
+    // &.repeated {
+    //     padding-top: 22px;
+    // }
+
     > div {
         display: flex;
+
         .subscription-field-select {
-            margin-left: 35px;
-            margin-top: -33px;
-            width: auto;
+            width: 100%;
+            margin-left: 5px;
         }
+    }
+
+    .euiFormRow > .euiFormRow__fieldWrapper > div {
+        display: flex;
+        margin-top: 5px;
     }
 }
 
@@ -38,10 +47,10 @@
 }
 
 .reload-subscriptions-icon-button {
-    margin-left: -35px;
-    margin-top: 6px;
+    margin-left: -7px;
+    // margin-top: 6px;
 }
 
-.show-service-port-modal-icon-button {
-    margin-top: 6px;
-}
+// .show-service-port-modal-icon-button {
+//     margin-top: 6px;
+// }

@@ -345,10 +345,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </section>
                 <div
-                  className="form-input"
+                  className=""
                 >
                   <div
-                    className="euiFormRow euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                     id="input-bandwidth1-row"
                   >
                     <div
@@ -4247,10 +4247,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </section>
                 <div
-                  className="form-input"
+                  className=""
                 >
                   <div
-                    className="euiFormRow euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                     id="input-numeric1-row"
                   >
                     <div
@@ -4298,10 +4298,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </div>
                 <div
-                  className="form-input"
+                  className=""
                 >
                   <div
-                    className="euiFormRow euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                     id="input-numeric2-row"
                   >
                     <div
@@ -6150,9 +6150,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </div>
                           </div>
                         </section>
-                        <div>
+                        <div
+                          className=""
+                        >
                           <div
-                            className="euiFormRow euiFormRow--fullWidth"
+                            className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                             id="input-service_ports4.0.bandwidth-row"
                           >
                             <div
@@ -6421,9 +6423,11 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             </div>
                           </div>
                         </section>
-                        <div>
+                        <div
+                          className=" repeated"
+                        >
                           <div
-                            className="euiFormRow euiFormRow--fullWidth"
+                            className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                             id="input-service_ports4.1.bandwidth-row"
                           >
                             <div
@@ -6434,7 +6438,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                 className="euiFormLabel euiFormRow__label"
                                 htmlFor="input-service_ports4.1.bandwidth"
                               >
-                                bandwidth
+                                
                               </label>
                                
                               <div
@@ -12748,10 +12752,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </section>
                 <div
-                  className="form-input"
+                  className=""
                 >
                   <div
-                    className="euiFormRow euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                     id="input-bandwidth2-row"
                   >
                     <div
@@ -12801,10 +12805,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                   </div>
                 </div>
                 <div
-                  className="form-input"
+                  className=""
                 >
                   <div
-                    className="euiFormRow euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
                     id="input-bandwidth3-row"
                   >
                     <div
