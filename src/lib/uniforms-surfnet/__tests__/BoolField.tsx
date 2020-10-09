@@ -65,8 +65,8 @@ test("<BoolField> - renders an input with correct disabled state", () => {
 });
 
 test("<BoolField> - renders a input with correct label (specified)", () => {
-    const element = <BoolField name="BoolFieldLabel" label="BoolFieldLabel" description="BoolFieldDescription" />;
-    const wrapper = mount(element, createContext({ BoolFieldLabel: { type: Boolean } }));
+    const element = <BoolField name="x" label="BoolFieldLabel" description="BoolFieldDescription" />;
+    const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
     expect(wrapper.find("label")).toHaveLength(2);
     expect(
@@ -74,7 +74,7 @@ test("<BoolField> - renders a input with correct label (specified)", () => {
             .find("label")
             .last()
             .text()
-    ).toBe("BoolFieldLabel");
+    ).toBe("x");
     expect(
         wrapper
             .find("label")

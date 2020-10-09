@@ -119,7 +119,8 @@ that the changes are indeed expected. After the initial run you can press `-u` t
 **_Debug rendered components:_** You can see what a render of a component delivered with:
 
 ```javascript
-expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+console.log(wrapper.html());
+console.log(wrapper.render());
 ```
 
 ### Storybook

@@ -41,23 +41,7 @@
     margin-left: -35px;
     margin-top: 6px;
 }
+
 .show-service-port-modal-icon-button {
     margin-top: 6px;
 }
-
-// Fix things for ListField wrapped SubscriptionFields
-// We only want to display the first refresh button on each (inner) list
-//li .refresh-subscriptions {
-//    flex-shrink: 0;
-//
-//    i {
-//        display: none;
-//    }
-//}
-
-// We use '>' because we don't want the outer list to influence the inner list
-// Needs to work for Lists with and without NestField in between
-//li:first-child > * > * > * > .refresh-subscriptions i,
-//li:first-child > * > * > .refresh-subscriptions i {
-//    display: block;
-//}

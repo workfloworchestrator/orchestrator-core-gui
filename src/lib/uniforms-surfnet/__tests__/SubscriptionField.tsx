@@ -529,11 +529,11 @@ describe("<SubscriptionField>", () => {
         const wrapper = mount(element, createContext({ x: { type: String } }));
         await waitForComponentToPaint(wrapper);
 
-        // expect(wrapper.render()).toMatchSnapshot();
-
-        // TODO: FIX TEST BEFORE MERGE
-        // expect(wrapper.find("refresh-icon-uniforms-0000-0000")).toHaveLength(1);
-        // expect(wrapper.find("filter-icon-uniforms-0000-0000")).toHaveLength(1);
+        // EUIButtonIcon and the surrounding div will receive the class
+        expect(wrapper.find(".reload-subscriptions-icon-button")).toHaveLength(2);
+        // No service port should be visible
+        expect(wrapper.find(".show-service-port-modal-icon-button")).toHaveLength(0);
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     test("<SubscriptionField> - renders a wrapper with unknown props", async () => {

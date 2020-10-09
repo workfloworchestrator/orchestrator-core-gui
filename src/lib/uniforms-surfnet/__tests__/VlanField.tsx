@@ -222,9 +222,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormRow__text")).toHaveLength(2);
         // First form label is is used as label for the form element. Second one for error under input.
         // @ts-ignore
-        expect(wrapper.find(".euiFormRow__text").getNodesInternal()[1].props["children"]).toBe(
-            "VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports."
-        );
+        expect(
+            wrapper
+                .find(".euiFormRow__text")
+                .at(1)
+                .prop("children")
+        ).toBe("VLAN is only relevant for SN7 MSP or SN8 SP in tagged mode, not for link_member or untagged ports.");
         // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
@@ -243,9 +246,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find(".euiFormRow__text")).toHaveLength(2);
         // First form label is is used as label for the form element. Second one for error under input.
         // @ts-ignore
-        expect(wrapper.find(".euiFormRow__text").getNodesInternal()[1].props["children"]).toBe(
-            "This service port has no VLANs in use (yet)."
-        );
+        expect(
+            wrapper
+                .find(".euiFormRow__text")
+                .at(1)
+                .prop("children")
+        ).toBe("This service port has no VLANs in use (yet).");
         // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
@@ -265,9 +271,12 @@ describe("<VlanField>", () => {
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find("input").prop("disabled")).toBe(false);
         expect(wrapper.find(".euiFormRow__text")).toHaveLength(2);
-        expect(wrapper.find(".euiFormRow__text").getNodesInternal()[1].props["children"]).toBe(
-            "Already used VLAN ranges for this service port: 3-6,10"
-        );
+        expect(
+            wrapper
+                .find(".euiFormRow__text")
+                .at(1)
+                .prop("children")
+        ).toBe("Already used VLAN ranges for this service port: 3-6,10");
         // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
         expect(wrapper.render()).toMatchSnapshot();
     });
@@ -378,8 +387,13 @@ describe("<VlanField>", () => {
 
         expect(wrapper.find("input")).toHaveLength(1);
         expect(wrapper.find(".euiFormHelpText")).toHaveLength(1);
-        // Todo: fix next line
-        // expect(wrapper.find(".euiFormHelpText").getNodesInternal()[0].props["children"]).toBe("This service port is already in use and cannot be chosen");
+        // Not sure why we can't use "euiFormErrorText" here, not sure if the error is in the render...
+        expect(
+            wrapper
+                .at(0)
+                .children()
+                .getNodeInternal().rendered.props.children.props["error"]
+        ).toBe("This service port is already in use and cannot be chosen");
         // expect(fetchMock).toHaveFetchedTimes(1, "glob:*/api/ims/vlans/abc");
     });
 

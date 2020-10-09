@@ -1,6 +1,3 @@
-import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
-import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { NumField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +12,9 @@ import { NumField } from "lib/uniforms-surfnet/src";
  * limitations under the License.
  *
  */
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { NumField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
 test("<NumField> - renders an input", () => {
@@ -109,7 +109,6 @@ test("<NumField> - renders an input with correct value (model)", () => {
     const spy = jest.spyOn(global.console, "error").mockImplementation(() => {});
 
     [
-        { value: 0.1 },
         { value: 0 },
         { value: 0 },
         { value: 2 },
@@ -121,7 +120,7 @@ test("<NumField> - renders an input with correct value (model)", () => {
 
         expect(wrapper.find("input").simulate("change", { target: { value: "" } })).toBeTruthy();
         expect(wrapper.find("input").simulate("change", { target: { value } })).toBeTruthy();
-        // expect(onChange).toHaveBeenLastCalledWith("x", value);
+        expect(onChange).toHaveBeenLastCalledWith("x", value);
 
         wrapper.setProps({ value: undefined });
         wrapper.setProps({ value });
@@ -147,50 +146,6 @@ test("<NumField> - renders an input which correctly reacts on change", () => {
     expect(wrapper.find("input")).toHaveLength(1);
     expect(wrapper.find("input").simulate("change", { target: { value: "1" } })).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith("x", 1);
-});
-
-test("<NumField> - renders an input which correctly reacts on change (decimal on decimal)", () => {
-    const onChange = jest.fn();
-
-    const element = <NumField name="x" precision={1} />;
-    const wrapper = mount(element, createContext({ x: { type: Number } }, { onChange }));
-
-    expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change", { target: { value: 2 } })).toBeTruthy();
-    expect(onChange).toHaveBeenLastCalledWith("x", 2);
-});
-
-test("<NumField> - renders an input which correctly reacts on change (decimal on integer)", () => {
-    const onChange = jest.fn();
-
-    const element = <NumField name="x" precision={0} step={0} />;
-    const wrapper = mount(element, createContext({ x: { type: Number } }, { onChange }));
-
-    expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change", { target: { value: 2 } })).toBeTruthy();
-    expect(onChange).toHaveBeenLastCalledWith("x", 2);
-});
-
-test("<NumField> - renders an input which correctly reacts on change (empty)", () => {
-    const onChange = jest.fn();
-
-    const element = <NumField name="x" />;
-    const wrapper = mount(element, createContext({ x: { type: Number } }, { onChange }));
-
-    expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change", { target: { value: "" } })).toBeTruthy();
-    // expect(onChange).toBeCalledTimes(0);
-});
-
-test("<NumField> - renders an input which correctly reacts on change (same value)", () => {
-    const onChange = jest.fn();
-
-    const element = <NumField name="x" />;
-    const wrapper = mount(element, createContext({ x: { type: Number } }, { model: { x: 1 }, onChange }));
-
-    expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change", { target: { value: 1 } })).toBeTruthy();
-    // expect(onChange).toBeCalledTimes(0);
 });
 
 test("<NumField> - renders an input which correctly reacts on change (zero)", () => {
