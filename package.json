@@ -91,7 +91,7 @@
         "eslint-plugin-react-hooks": "^2.4.0",
         "git-format-staged": "^2.1.0",
         "http-proxy-middleware": "^0.21.0",
-        "husky": "^4.2.5",
+        "husky": "^4.3.0",
         "import-sort-style-module": "^6.0.0",
         "license-check-and-add": "^3.0.4",
         "node-fetch": "^2.6.0",
@@ -115,8 +115,8 @@
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 9009 -s ./public",
         "build-storybook": "build-storybook -s ./public",
-        "prettier": "prettier -c '{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}'",
-        "prettier-fix": "prettier --write '{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}'"
+        "prettier": "prettier -c \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\"",
+        "prettier-fix": "prettier --write \"{**/*.{js,jsx,scss,md,ts,tsx,json},public/**/*.html}\""
     },
     "importSort": {
         ".js, .jsx, .ts, .tsx": {
