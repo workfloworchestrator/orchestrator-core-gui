@@ -15,11 +15,12 @@
 
 import "lib/uniforms-surfnet/src/SubscriptionField.scss";
 
-import { EuiButtonIcon, EuiModal, EuiOverlayMask } from "@elastic/eui";
+import { EuiButtonIcon, EuiFormRow, EuiModal, EuiOverlayMask, EuiText } from "@elastic/eui";
 import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
 import React, { useContext, useEffect, useMemo, useState } from "react";
@@ -217,76 +218,87 @@ function Subscription({
         closeModal();
     };
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)} className={`${className} subscription-field`}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
-            <div>
-                {!disabled && (
-                    <>
-                        <EuiButtonIcon
-                            id={`refresh-icon-${id}`}
-                            iconType="refresh"
-                            iconSize="l"
-                            onClick={() => {
-                                setLoading(true);
-                                clearSubscriptions();
-                                getSubscriptions(tags, statuses).then(result => {
-                                    updateSubscriptions(result);
-                                    setLoading(false);
-                                });
-                            }}
-                        />
-                        {tags?.includes("SP") && (
-                            <EuiButtonIcon
-                                id={`filter-icon-${id}`}
-                                onClick={showModal}
-                                iconType="filter"
-                                iconSize="l"
-                            />
-                        )}
-                    </>
-                )}
+        <section
+            {...filterDOMProps(props)}
+            className={`${className} ${isRepeated ? "repeated" : ""} subscription-field${disabled ? "-disabled" : ""}`}
+        >
+            <EuiFormRow
+                label={labelRender}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                id={id}
+                fullWidth
+                hasEmptyLabelSpace
+            >
+                <div>
+                    {!disabled && (
+                        <>
+                            {!isRepeatedField(name) && (
+                                <EuiButtonIcon
+                                    className="reload-subscriptions-icon-button"
+                                    id={`refresh-icon-${id}`}
+                                    aria-label={`reload-${label}`}
+                                    iconType="refresh"
+                                    iconSize="l"
+                                    onClick={() => {
+                                        setLoading(true);
+                                        clearSubscriptions();
+                                        getSubscriptions(tags, statuses).then(result => {
+                                            updateSubscriptions(result);
+                                            setLoading(false);
+                                        });
+                                    }}
+                                />
+                            )}
+                            {tags?.includes("SP") && (
+                                <EuiButtonIcon
+                                    className="show-service-port-modal-icon-button"
+                                    id={`filter-icon-${id}`}
+                                    aria-label={`service-port-modal-${name}`}
+                                    onClick={showModal}
+                                    iconType="filter"
+                                    iconSize="l"
+                                />
+                            )}
+                        </>
+                    )}
 
-                {isModalVisible && (
-                    <EuiOverlayMask>
-                        <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
-                            <ServicePortSelectorModal
-                                selectedTabId="nodeFilter"
-                                handleSelect={selectSubscriptionFromModal}
-                                subscriptions={subscriptions}
-                            />
-                        </EuiModal>
-                    </EuiOverlayMask>
-                )}
-                <ReactSelect
-                    id={id}
-                    inputId={`${id}.search`}
-                    name={name}
-                    onChange={(option: ValueType<Option>) => {
-                        onChange((option as Option | null)?.value);
-                    }}
-                    options={options}
-                    value={selectedValue}
-                    isSearchable={true}
-                    isClearable={false}
-                    placeholder={I18n.t("forms.widgets.subscription.placeholder")}
-                    isDisabled={disabled}
-                    required={required}
-                    inputRef={inputRef}
-                    className="subscription-field-select"
-                />
-            </div>
+                    {isModalVisible && (
+                        <EuiOverlayMask>
+                            <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
+                                <ServicePortSelectorModal
+                                    selectedTabId="nodeFilter"
+                                    handleSelect={selectSubscriptionFromModal}
+                                    subscriptions={subscriptions}
+                                />
+                            </EuiModal>
+                        </EuiOverlayMask>
+                    )}
 
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+                    <ReactSelect
+                        id={id}
+                        inputId={`${id}.search`}
+                        name={name}
+                        onChange={(option: ValueType<Option>) => {
+                            onChange((option as Option | null)?.value);
+                        }}
+                        options={options}
+                        value={selectedValue}
+                        isSearchable={true}
+                        isClearable={false}
+                        placeholder={I18n.t("forms.widgets.subscription.placeholder")}
+                        isDisabled={disabled}
+                        required={required}
+                        inputRef={inputRef}
+                        className="subscription-field-select"
+                    />
+                </div>
+            </EuiFormRow>
         </section>
     );
 }

@@ -14,6 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/ListField.scss";
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import ListAddField from "lib/uniforms-surfnet/src/ListAddField";
 import ListItemField from "lib/uniforms-surfnet/src/ListItemField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -55,13 +56,18 @@ function List({
     const hasListAsChild = child.fieldType === Array;
 
     return (
-        <section {...filterDOMProps(props)} className={`${className} list-field${hasListAsChild ? " outer-list" : ""}`}>
-            {label && (
-                <label>
-                    {label}
-                    <em>{description}</em>
-                </label>
-            )}
+        <section {...filterDOMProps(props)} className={`list-field${hasListAsChild ? " outer-list" : ""}`}>
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                id={`formrow-${name}`}
+                fullWidth
+            >
+                <></>
+            </EuiFormRow>
+
             <ul>
                 {range(Math.max(value?.length ?? 0, initialCount ?? 0)).map(itemIndex =>
                     Children.map(children, (child, childIndex) =>
@@ -78,11 +84,6 @@ function List({
 
                 <ListAddField initialCount={initialCount} name="$" disabled={disabled} outerList={hasListAsChild} />
             </ul>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
         </section>
     );
 }

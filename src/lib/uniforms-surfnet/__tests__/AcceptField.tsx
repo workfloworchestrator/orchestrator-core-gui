@@ -37,7 +37,7 @@ describe("<AcceptField>", () => {
         const element = <AcceptField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.find("input")).toHaveLength(1);
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     test("<AcceptField> - legacy renders a input which correctly reacts on change", () => {
@@ -67,7 +67,7 @@ describe("<AcceptField>", () => {
             })
         );
         expect(wrapper.find("input")).toHaveLength(6);
-        expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
     test("<AcceptField> - renders a input which correctly reacts on change", () => {
         const onChange = jest.fn();

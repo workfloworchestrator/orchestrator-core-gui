@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import { getResourceTypeInfo, productById, subscriptionsDetail } from "api";
 import I18n from "i18n-js";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -212,19 +213,14 @@ function SubscriptionSummary({
 
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-
-            <div className={`mod-read-only-subscription-view indent`}>
-                {renderSubscriptionDetail(subscription)}
-                {renderSubscriptionResourceTypes(subscription)}
-                {renderProduct(product)}
-                {renderSubscriptionChilds(childSubscriptions, product)}
-            </div>
+            <EuiFormRow label={label} labelAppend={<EuiText size="m">{description}</EuiText>} id={id} fullWidth>
+                <div className={`mod-read-only-subscription-view indent`}>
+                    {renderSubscriptionDetail(subscription)}
+                    {renderSubscriptionResourceTypes(subscription)}
+                    {renderProduct(product)}
+                    {renderSubscriptionChilds(childSubscriptions, product)}
+                </div>
+            </EuiFormRow>
         </section>
     );
 }

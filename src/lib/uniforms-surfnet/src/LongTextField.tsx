@@ -1,3 +1,4 @@
+import { EuiFormRow, EuiText, EuiTextArea } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
@@ -35,27 +36,24 @@ function LongText({
 }: LongTextFieldProps) {
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <textarea
-                disabled={disabled}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={errorMessage}
+                isInvalid={error}
                 id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                value={value ?? ""}
-                rows={5}
-            />
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+                fullWidth
+            >
+                <EuiTextArea
+                    disabled={disabled}
+                    name={name}
+                    isInvalid={error}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    value={value ?? ""}
+                    fullWidth
+                />
+            </EuiFormRow>
         </section>
     );
 }

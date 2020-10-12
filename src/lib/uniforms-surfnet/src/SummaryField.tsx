@@ -14,6 +14,7 @@
  */
 import "lib/uniforms-surfnet/src/SummaryField.scss";
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
@@ -60,18 +61,14 @@ function Summary({ id, name, label, description, onChange, data, ...props }: Sum
 
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <section className="table-summary">
-                <table id={id}>
-                    <thead>{table_header}</thead>
-                    <tbody>{rows}</tbody>
-                </table>
-            </section>
+            <EuiFormRow label={label} labelAppend={<EuiText size="m">{description}</EuiText>} id={id} fullWidth>
+                <section className="table-summary">
+                    <table id={`${id}-table`}>
+                        <thead>{table_header}</thead>
+                        <tbody>{rows}</tbody>
+                    </table>
+                </section>
+            </EuiFormRow>
         </section>
     );
 }

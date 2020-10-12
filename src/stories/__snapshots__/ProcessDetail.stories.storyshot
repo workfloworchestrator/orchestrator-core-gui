@@ -2389,12 +2389,12 @@ exports[`Storyshots ProcessDetail Suspended Process 1`] = `
                 <section
                   className="form-input"
                 >
-                  <p
-                    className="label ip_static_service_port"
+                  <label
+                    className="euiFormLabel euiFormRow__label"
                     id="input-ip_static_service_port"
                   >
                     IP Service Port
-                  </p>
+                  </label>
                 </section>
               </section>
               <div
@@ -2569,12 +2569,12 @@ exports[`Storyshots ProcessDetail Suspended Task 1`] = `
                 <section
                   className="form-input"
                 >
-                  <p
-                    className="label ip_static_service_port"
+                  <label
+                    className="euiFormLabel euiFormRow__label"
                     id="input-ip_static_service_port"
                   >
                     IP Service Port
-                  </p>
+                  </label>
                 </section>
               </section>
               <div

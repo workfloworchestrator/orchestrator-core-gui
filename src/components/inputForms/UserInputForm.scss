@@ -79,3 +79,11 @@
         width: fit-content;
     }
 }
+
+/* EUI specific styling for the forms */
+.euiFormRow {
+    margin-bottom: 25px; // For service ports this add margin to the label??
+}
+.euiFormRow__labelWrapper {
+    flex-direction: column;
+}

@@ -13,9 +13,11 @@
  *
  */
 
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
@@ -172,30 +174,32 @@ function Vlan({
         ? I18n.t("forms.widgets.vlan.allPortsAvailable")
         : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <input
-                disabled={!subscriptionId || disabled || isUntagged}
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+            <EuiFormRow
+                label={labelRender}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={(error || errorMessageExtra) && showInlineError ? errorMessage || errorMessageExtra : false}
+                isInvalid={error}
+                helpText={message}
                 id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                type="text"
-                value={value ?? ""}
-            ></input>
-            {subscriptionId && !disabled && <em className="info">{message}</em>}
-            {(error || errorMessageExtra) && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage || errorMessageExtra}</div>
-                </em>
-            )}
+                fullWidth
+                hasEmptyLabelSpace
+            >
+                <EuiFieldText
+                    fullWidth
+                    disabled={!subscriptionId || disabled || isUntagged}
+                    name={name}
+                    isInvalid={error}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    type="text"
+                    value={value ?? ""}
+                />
+            </EuiFormRow>
         </section>
     );
 }

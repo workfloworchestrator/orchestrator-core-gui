@@ -22,9 +22,9 @@ export type LabelFieldProps = FieldProps<null, {}, null, HTMLDivElement>;
 function Label({ id, name, label, onChange, ...props }: LabelFieldProps) {
     return (
         <section {...filterDOMProps(props)}>
-            <p id={id} className={`label ${name}`}>
+            <label id={id} className="euiFormLabel euiFormRow__label">
                 {label}
-            </p>
+            </label>
         </section>
     );
 }
