@@ -1,37 +1,19 @@
 import "../components/Products.scss";
 
-import { stringify } from "querystring";
-
 import {
     EuiBadge,
-    EuiBasicTable,
-    EuiButton,
     EuiButtonIcon,
-    EuiFlexGroup,
-    EuiFlexItem,
-    EuiIcon,
     EuiInMemoryTable,
-    EuiLink,
     EuiPage,
     EuiPageBody,
     EuiPageContent,
-    EuiPageContentBody,
     EuiPageContentHeader,
-    EuiPageContentHeaderSection,
     EuiPageHeader,
     EuiPageHeaderSection,
-    EuiPanel,
     EuiSpacer,
-    EuiSwitch,
-    EuiTab,
-    EuiTabbedContent,
-    EuiTable,
-    EuiTabs,
-    EuiText,
-    EuiTitle
+    EuiTabbedContent
 } from "@elastic/eui";
 import I18n from "i18n-js";
-import { useState } from "react";
 import React from "react";
 
 import { deleteProduct, products } from "../api/index";
@@ -106,12 +88,7 @@ export default class MetaDataPage extends React.Component {
 
     // Data inladen met =
     componentDidMount() {
-        data().then(res => {
-            const products = res.map(product => {
-                product.name = product.name;
-                product.product_id = product.product_id;
-                return product;
-            });
+        data().then(products => {
             this.setState({ products: products, productsLoaded: false });
         });
     }
@@ -210,7 +187,7 @@ export default class MetaDataPage extends React.Component {
     // };
 
     render() {
-        const { multiAction, products, productsLoaded, filters, incremental } = this.state;
+        const { products, productsLoaded, incremental } = this.state;
 
         const search = {
             box: {
@@ -341,7 +318,6 @@ export default class MetaDataPage extends React.Component {
                                 columns={columns}
                                 search={search}
                                 pagination={true}
-                                pac
                                 sorting={true}
                                 loading={productsLoaded}
                                 hasActions={true}
