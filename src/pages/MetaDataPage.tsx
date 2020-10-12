@@ -341,6 +341,7 @@ export default class MetaDataPage extends React.Component {
                                 columns={columns}
                                 search={search}
                                 pagination={true}
+                                pac
                                 sorting={true}
                                 loading={productsLoaded}
                                 hasActions={true}
