@@ -1229,7 +1229,7 @@
   dependencies:
     tslib "^1.9.3"
 
-"@elastic/eui@^29.0.0":
+"@elastic/eui@^29.4.0":
   version "29.4.0"
   resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-29.4.0.tgz#ef9a792b2f50eb5bf8e97ecf1801c3c40c06cf91"
   integrity sha512-3BRVlF8cdm2zi9Pzl+92DmMwpf55bTFhOM17TrhKraf04H/KmbgafDZqarEJ0VkYX+VLi0t7AyMBniwZ9Zo4fQ==
