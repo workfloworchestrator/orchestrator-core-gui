@@ -114,8 +114,8 @@ test("<BoolField> - renders a input which correctly reacts on change", () => {
     const wrapper = mount(element, createContext({ x: { type: Boolean } }, { onChange }));
 
     expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change")).toBeTruthy();
-    // expect(onChange).toHaveBeenLastCalledWith("x", true);
+    expect(wrapper.find("input").simulate("change", { target: { checked: true } })).toBeTruthy();
+    expect(onChange).toHaveBeenLastCalledWith("x", true);
 });
 
 test("<BoolField> - renders a wrapper with unknown props", () => {
