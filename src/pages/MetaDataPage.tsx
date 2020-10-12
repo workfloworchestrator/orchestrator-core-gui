@@ -149,14 +149,14 @@ export default class MetaDataPage extends React.Component {
             const actions = [
                 {
                     name: <span>Clone</span>,
-                    description: "Clone this user",
+                    description: "Clone",
                     icon: "copy",
                     onClick: () => {},
                     "data-test-subj": "action-clone"
                 },
                 {
                     name: (products: any) => (products.product_id ? "Delete" : "Remove"),
-                    description: "Delete this user",
+                    description: "Delete",
                     icon: "trash",
                     color: "danger",
                     type: "icon",
@@ -167,7 +167,7 @@ export default class MetaDataPage extends React.Component {
                 {
                     name: "Edit",
                     isPrimary: true,
-                    description: "Edit this user",
+                    description: "Edit",
                     icon: "pencil",
                     type: "icon",
                     onClick: () => {},
