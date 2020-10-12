@@ -35,14 +35,10 @@ import { useState } from "react";
 import React from "react";
 
 import { deleteProduct, products } from "../api/index";
-import DropDownActions from "../components/DropDownActions";
 import { setFlash } from "../utils/Flash";
 import { renderDateTime } from "../utils/Lookups";
-import { getParameterByName } from "../utils/QueryParameters";
 
 const data = products;
-
-type Column = "name" | "description" | "tag" | "product_type" | "status" | "product_blocks_string" | "created_at";
 
 interface Workflow {
     product_string: string;
@@ -53,7 +49,7 @@ interface FixedInput {
 interface ProductBlock {
     product_string: string;
 }
-interface Selected {
+interface TheActions {
     product_string: string;
 }
 
@@ -80,7 +76,7 @@ interface IProps {
     products: Product[];
     productsLoaded: boolean;
     multiAction: boolean;
-    selected: Selected[];
+    theActions: TheActions[];
     // sorted: SortOption<Product>;
 
     confirmationDialogOpen: boolean;
@@ -97,9 +93,9 @@ export default class MetaDataPage extends React.Component {
         incremental: false,
         productsLoaded: true,
         multiAction: true,
-        selected: [],
+        theActions: [],
         // Sorteer the table automatisch op Alfabetisch name;
-        // sorted: { name: "name", descending: true },
+        // sorted: { name: "name", ascending: true },
 
         confirmationDialogOpen: false,
         confirmationDialogAction: () => this.setState({ confirmationDialogOpen: false }),
@@ -203,7 +199,7 @@ export default class MetaDataPage extends React.Component {
             ];
             return actions;
         }
-        this.setState({ multiAction: multiAction });
+        this.setState({ theActions: this.actions });
     }
 
     // toggleActions = (products: any, actions: Action) => (e: React.MouseEvent<HTMLTableDataCellElement>) => {
@@ -315,12 +311,12 @@ export default class MetaDataPage extends React.Component {
             {
                 field: "actions",
                 name: "",
-                width: "2.5%",
-                multiAction,
-                render: (multiAction: any) => {
-                    const renderMA = multiAction;
+                width: "10%",
+                theActions: this.actions,
+                render: (theActions: any) => {
+                    const renderMA = theActions;
                     return (
-                        <EuiButtonIcon size="s" onClick={() => window.alert("Button clicked")} iconType="gear">
+                        <EuiButtonIcon size="s" onClick={() => window.alert("Button clicked")} iconType="boxesVertical">
                             {renderMA}
                         </EuiButtonIcon>
                     );
