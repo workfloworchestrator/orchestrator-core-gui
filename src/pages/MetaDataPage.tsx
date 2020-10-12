@@ -288,7 +288,7 @@ export default class MetaDataPage extends React.Component {
             {
                 field: "actions",
                 name: "",
-                width: "10%",
+                width: "2.5%",
                 theActions: this.actions,
                 render: (theActions: any) => {
                     const renderMA = theActions;
