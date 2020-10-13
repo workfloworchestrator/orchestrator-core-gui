@@ -1,4 +1,4 @@
-import { EuiFormRow, EuiText } from "@elastic/eui";
+import { EuiDescribedFormGroup, EuiFlexItem, EuiFormRow } from "@elastic/eui";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,22 +34,30 @@ function OptGroup({
     const enabled = useField("enabled", {})[0].value;
 
     return (
-        <section {...filterDOMProps(props)} className={`${className} optgroup-field`}>
-            <EuiFormRow
-                label={I18n.t(`forms.fields.${name}.title`)}
-                labelAppend={<EuiText size="m">{I18n.t(`forms.fields.${name}.info`)}</EuiText>}
-                error={false}
-                isInvalid={false}
-                id={name} // Not sure if this is always unique...
-                fullWidth
-            >
-                <BoolField name="enabled" />
-            </EuiFormRow>
+        <EuiDescribedFormGroup
+            {...filterDOMProps(props)}
+            title={<span>{I18n.t(`forms.fields.${name}.title`)}</span>}
+            description={I18n.t(`forms.fields.${name}.info`)}
+            className={`${className} optgroup-field`}
+        >
+            <EuiFlexItem>
+                <EuiFormRow
+                    error={false}
+                    isInvalid={false}
+                    id={name} // Not sure if this is always unique...
+                >
+                    <BoolField name="enabled" />
+                </EuiFormRow>
+            </EuiFlexItem>
             {enabled &&
                 fields
                     ?.filter(field => field !== "enabled")
-                    .map(field => <AutoField key={field} name={field} {...itemProps} />)}
-        </section>
+                    .map(field => (
+                        <EuiFlexItem key={field}>
+                            <AutoField name={field} {...itemProps} />
+                        </EuiFlexItem>
+                    ))}
+        </EuiDescribedFormGroup>
     );
 }
 
