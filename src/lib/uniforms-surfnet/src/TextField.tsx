@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,9 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -34,29 +36,31 @@ function Text({
     errorMessage,
     ...props
 }: TextFieldProps) {
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <input
-                disabled={disabled}
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+            <EuiFormRow
+                label={labelRender}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
                 id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                type={type}
-                value={value ?? ""}
-            ></input>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+                fullWidth
+                hasEmptyLabelSpace
+            >
+                <EuiFieldText
+                    disabled={disabled}
+                    name={name}
+                    isInvalid={error}
+                    onChange={event => onChange(event.target.value)}
+                    placeholder={placeholder}
+                    type={type}
+                    value={value ?? ""}
+                    fullWidth
+                />
+            </EuiFormRow>
         </section>
     );
 }

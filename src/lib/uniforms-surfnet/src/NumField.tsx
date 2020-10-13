@@ -1,4 +1,3 @@
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,13 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+import { EuiFieldNumber, EuiFormRow, EuiText } from "@elastic/eui";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
+
+import { isRepeatedField } from "./logic/LabelLogic";
 
 export type NumFieldProps = FieldProps<
     number,
@@ -42,35 +45,31 @@ function Num({
     errorMessage,
     ...props
 }: NumFieldProps) {
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
     return (
-        <div {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <NumericInput
+        <div {...filterDOMProps(props)} className={`${isRepeated ? " repeated" : ""}`}>
+            <EuiFormRow
+                label={labelRender}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
                 id={id}
-                name={name}
-                ref={inputRef}
-                placeholder={placeholder}
-                onChange={v => {
-                    onChange(v ?? undefined);
-                }}
-                min={min}
-                max={max}
-                step={step ?? 1}
-                precision={precision ?? 0}
-                value={value ?? ""}
-                strict={false}
-                disabled={disabled}
-            />
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+                fullWidth
+                hasEmptyLabelSpace
+            >
+                <EuiFieldNumber
+                    name={name}
+                    isInvalid={error}
+                    placeholder={placeholder}
+                    onChange={event => onChange(parseInt(event.target.value))}
+                    min={min}
+                    max={max}
+                    step={step ?? 1}
+                    value={value ?? ""}
+                    disabled={disabled}
+                />
+            </EuiFormRow>
         </div>
     );
 }

@@ -13,9 +13,11 @@
  *
  */
 
+import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
 import I18n from "i18n-js";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
@@ -147,27 +149,35 @@ function ContactPersonName({
         setTimeout(() => setDisplayAutocomplete(false), 350);
     }
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     return (
-        <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <div className="autocomplete-container">
-                <input
+        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+            <EuiFormRow
+                label={labelRender}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                id={id}
+                fullWidth
+                hasEmptyLabelSpace
+            >
+                <EuiFieldText
                     disabled={disabled}
-                    id={id}
+                    fullWidth
                     name={name}
+                    isInvalid={error}
                     onChange={onChangeInternal}
                     placeholder={placeholder || I18n.t("forms.widgets.contactPersonName.placeholder")}
-                    ref={inputRef}
                     type="text"
                     value={value ?? ""}
                     onKeyDown={onAutocompleteKeyDown}
                     onBlur={onBlurAutoComplete}
-                ></input>
+                    autoComplete="off"
+                />
+            </EuiFormRow>
+            <div className="autocomplete-container">
                 {!!(displayAutocomplete && suggestions.length) && (
                     <Autocomplete
                         query={value ?? ""}
@@ -178,11 +188,6 @@ function ContactPersonName({
                     />
                 )}
             </div>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
         </section>
     );
 }

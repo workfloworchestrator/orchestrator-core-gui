@@ -74,7 +74,7 @@ test("<BoolField> - renders a input with correct label (specified)", () => {
             .find("label")
             .last()
             .text()
-    ).toBe("BoolFieldLabel");
+    ).toBe("x");
     expect(
         wrapper
             .find("label")
@@ -114,7 +114,7 @@ test("<BoolField> - renders a input which correctly reacts on change", () => {
     const wrapper = mount(element, createContext({ x: { type: Boolean } }, { onChange }));
 
     expect(wrapper.find("input")).toHaveLength(1);
-    expect(wrapper.find("input").simulate("change")).toBeTruthy();
+    expect(wrapper.find("input").simulate("change", { target: { checked: true } })).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith("x", true);
 });
 

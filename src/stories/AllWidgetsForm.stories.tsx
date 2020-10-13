@@ -13,7 +13,7 @@
  *
  */
 
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import React from "react";
 import FORM from "stories/data/all-widgets-form.json";
 import IP_BLOCKS from "stories/data/ip_blocks.json";
@@ -34,65 +34,65 @@ export default {
 };
 
 function prepare() {
-    fetchMock.restore();
-    fetchMock.get("/api/ipam/prefix_filters", [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
-    fetchMock.get("/api/ipam/ip_blocks/1", IP_BLOCKS);
-    fetchMock.get("/api/ipam/free_subnets/10.0.0.0/24/25", ["10.0.0.0/25"]);
-    fetchMock.get("/api/v2/subscriptions?filter=statuses%2Cactive", allNodeSubscriptions);
-    fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive",
+    mock.reset();
+    mock.onGet("ipam/prefix_filters").reply(200, [{ id: 1, prefix: "10.0.0.0/8", version: 4 }]);
+    mock.onGet("ipam/ip_blocks/1").reply(200, IP_BLOCKS);
+    mock.onGet("ipam/free_subnets/10.0.0.0/24/25").reply(200, ["10.0.0.0/25"]);
+    mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, { allNodeSubscriptions });
+    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-MSPNL-SSP%2Cstatuses%2Cactive").reply(
+        200,
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["MSP", "MSPNL", "SSP"].includes(p.product.tag)
         )
     );
-    fetchMock.get("/api/v2/subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive", []);
-    fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive",
+    mock.onGet("v2/subscriptions?filter=tags%2CIP_PREFIX%2Cstatuses%2Cactive").reply(200, []);
+    mock.onGet("v2/subscriptions/ports?filter=tags%2CMSP-MSPNL%2Cstatuses%2Cactive").reply(
+        200,
         SN7PortSubscriptions.filter(p => p.status === "active").filter(p => ["MSP", "MSPNL"].includes(p.product.tag))
     );
-    fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive",
+    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(
+        200,
         SN8PortSubscriptions.filter(p => ["active"].includes(p.status)).filter(p => ["Node"].includes(p.product.tag))
     );
-    fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning",
+    mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(
+        200,
         SN8PortSubscriptions.filter(p => ["active", "provisioning"].includes(p.status)).filter(p =>
             ["Node"].includes(p.product.tag)
         )
     );
-    fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning",
+    mock.onGet("v2/subscriptions?filter=tags%2CIPS%2Cstatuses%2Cactive-provisioning").reply(
+        200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPS"].includes(p.product.tag))
     );
-    fetchMock.get(
-        "/api/v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning",
+    mock.onGet("v2/subscriptions?filter=tags%2CIPBGP%2Cstatuses%2Cactive-provisioning").reply(
+        200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["IPBGP"].includes(p.product.tag))
     );
-    fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive",
+    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL-MSC-MSCNL-AGGSP-AGGSPNL%2Cstatuses%2Cactive").reply(
+        200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p =>
             ["SP", "SPNL", "MSC", "MSCNL", "AGGSP", "AGGSPNL"].includes(p.product.tag)
         )
     );
-    fetchMock.get(
-        "/api/v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive",
+    mock.onGet("v2/subscriptions/ports?filter=tags%2CSP-SPNL%2Cstatuses%2Cactive").reply(
+        200,
         SN8PortSubscriptions.filter(p => p.status === "active").filter(p => ["SP", "SPNL"].includes(p.product.tag))
     );
-    fetchMock.get("glob:*/api/crm/contacts/*", contactPersons);
+    mock.onGet(/crm\/contacts\/.*/).reply(200, contactPersons);
 
-    fetchMock.get("glob:*/api/subscriptions/parent_subscriptions/*", []);
-    fetchMock.get("glob:*/api/ims/free_ports/*/1000/*", freeCorelinkPorts);
-    fetchMock.get("/api/ims/nodes/MT001A/PL", imsNodes);
-    fetchMock.get("/api/ims/nodes/Asd001a/IS", imsNodes);
-    fetchMock.get("/api/ims/nodes/Asd001a/PL", imsNodes);
-    fetchMock.get("/api/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653", SUBSCRIPTION_JSON);
-    fetchMock.get("/api/subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7", SUBSCRIPTION_JSON);
-    fetchMock.get("/api/subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46", imsNodes);
-    fetchMock.get("/api/subscriptions/tag/IPS/", []);
-    fetchMock.get("/api/subscriptions/tag/IPBGP/", []);
-    fetchMock.get("/api/products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7", ["1000BASE-T"]);
-    fetchMock.get("/api/products/a3bf8b26-50a6-4586-8e58-ad552cb39798", PRODUCTS[0]);
-    fetchMock.get("glob:*/api/ims/vlans/*", [[3, 5]]);
+    mock.onGet(/subscriptions\/parent_subscriptions\/.*/).reply(200, []);
+    mock.onGet(/ims\/free_ports\/.*\/1000\/.*/).reply(200, freeCorelinkPorts);
+    mock.onGet("ims/nodes/MT001A/PL").reply(200, imsNodes);
+    mock.onGet("ims/nodes/Asd001a/IS").reply(200, imsNodes);
+    mock.onGet("ims/nodes/Asd001a/PL").reply(200, imsNodes);
+    mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46").reply(200, imsNodes);
+    mock.onGet("subscriptions/tag/IPS/").reply(200, []);
+    mock.onGet("subscriptions/tag/IPBGP/").reply(200, []);
+    mock.onGet("products/ieee_interface_types/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, ["1000BASE-T"]);
+    mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[0]);
+    mock.onGet(/ims\/vlans\/.*/).reply(200, [[3, 5]]);
 }
 
 export const AllWidgetsForm = () => {

@@ -104,18 +104,23 @@ https://unix.stackexchange.com/questions/13751/kernel-inotify-watch-limit-reache
 
 Tests consist out of snapshots tests for storybook items and tests for the uniforms based form inputs
 
-Webstorm can run the tests from the IDE by default and are the easiest to start with, especially when you want to
+Webstorm can run the tests from the IDE by default and is the easiest to start with, especially when you want to
 easily run separate tests.
+
+The uniforms component are covered by React component tests with enzyme. It contains a lot of tests and additionally
+uses snapshots in JSON format to check on the rendering as a whole and to assert more specific stuff like the
+existence of an expected div with className="x".
 
 #### Tips
 
-**Updating snapshots:** when snapshot failed: inspect the output and update your snapshots when you are 100% sure that the changes are
-indedd expected. After the initial run you can press `-u` to update the snapshots.
+**Updating snapshots:** when snapshot failed: inspect the output and update your snapshots when you are 100% sure
+that the changes are indeed expected. After the initial run you can press `-u` to update the snapshots.
 
 **_Debug rendered components:_** You can see what a render of a component delivered with:
 
 ```javascript
-expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+console.log(wrapper.html());
+console.log(wrapper.render());
 ```
 
 ### Storybook

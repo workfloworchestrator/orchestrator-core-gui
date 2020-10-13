@@ -36,7 +36,7 @@ test("<OptGroupField> - renders an the correct fields when disabled", () => {
             .at(0)
             .prop("name")
     ).toBe("x.enabled");
-    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<OptGroupField> - renders an the correct fields when enabled", () => {
@@ -73,7 +73,7 @@ test("<OptGroupField> - renders an the correct fields when enabled", () => {
             .at(2)
             .prop("name")
     ).toBe("x.c");
-    expect(wrapper.debug({ verbose: true })).toMatchSnapshot();
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<OptGroupField> - renders a label", () => {
@@ -93,7 +93,8 @@ test("<OptGroupField> - renders a label", () => {
             .find("label")
             .at(0)
             .text()
-    ).toBe('[missing "en.forms.fields.x.title" translation][missing "en.forms.fields.x.info" translation]');
+    ).toBe('[missing "en.forms.fields.x.title" translation]');
+    expect(wrapper.contains('[missing "en.forms.fields.x.info" translation]')).toBe(true);
 });
 
 test("<OptGroupField> - renders a wrapper with unknown props", () => {

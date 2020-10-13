@@ -13,7 +13,7 @@
  *
  */
 
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import { JSONSchema6 } from "json-schema";
 
 export function vlanData() {
@@ -32,50 +32,50 @@ export function vlanData() {
 }
 
 export function loadVlanMocks() {
-    fetchMock.get("glob:*/api/ims/vlans/0*", vlanData());
-    fetchMock.get("glob:*/api/ims/vlans/1*", vlanData(), {
+    mock.onGet(/ims\/vlans\/0.*/).reply(200, vlanData());
+    mock.onGet(/ims\/vlans\/1.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/2*", vlanData(), {
+    mock.onGet(/ims\/vlans\/2.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/3*", vlanData(), {
+    mock.onGet(/ims\/vlans\/3.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/4*", vlanData(), {
+    mock.onGet(/ims\/vlans\/4.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/5*", vlanData(), {
+    mock.onGet(/ims\/vlans\/5.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/6*", vlanData(), {
+    mock.onGet(/ims\/vlans\/6.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/7*", vlanData(), {
+    mock.onGet(/ims\/vlans\/7.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/8*", vlanData(), {
+    mock.onGet(/ims\/vlans\/8.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/9*", vlanData(), {
+    mock.onGet(/ims\/vlans\/9.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/a*", vlanData(), {
+    mock.onGet(/ims\/vlans\/a.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/b*", vlanData(), {
+    mock.onGet(/ims\/vlans\/b.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/c*", vlanData(), {
+    mock.onGet(/ims\/vlans\/c.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/d*", vlanData(), {
+    mock.onGet(/ims\/vlans\/d.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/e*", vlanData(), {
+    mock.onGet(/ims\/vlans\/e.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
-    fetchMock.get("glob:*/api/ims/vlans/f*", vlanData(), {
+    mock.onGet(/ims\/vlans\/f.*/).reply(200, vlanData(), {
         overwriteRoutes: false
     });
 }

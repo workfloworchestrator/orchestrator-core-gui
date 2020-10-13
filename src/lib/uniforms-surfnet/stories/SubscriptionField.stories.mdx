@@ -1,5 +1,5 @@
 import { Meta, Preview, Story } from "@storybook/addon-docs/blocks";
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 
 import UserInputContainer from "../../../stories/UserInputContainer";
 import { createForm } from "../../../stories/utils";
@@ -11,8 +11,8 @@ import { SubscriptionField } from "../src";
 
 <Story name="SubscriptionField">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", [
+        mock.reset();
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",
@@ -49,8 +49,8 @@ See Filters for extra filter that can be added
 
 <Story name="SubscriptionFieldInList">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", [
+        mock.reset();
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",
@@ -87,8 +87,8 @@ See Filters for extra filter that can be added
 
 <Story name="SubscriptionFieldInUniqueList">
     {() => {
-        fetchMock.restore();
-        fetchMock.get("glob:*/api/v2/subscriptions?filter=statuses%2Cactive", [
+        mock.reset();
+        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",

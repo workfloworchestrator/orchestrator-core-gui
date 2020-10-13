@@ -259,9 +259,21 @@ I18n.translations.en = {
             ims_node_id: "Choose a node from IMS",
             ims_node_id_info: "Choose a node that has state PLANNED or READY FOR SERVICE in IMS",
             ims_port_id_1: "First node and port",
-            ims_port_id_1_info: "Choose a node and port that you want to use to create the first corelink",
+            ims_port_id_1_info: "Choose the first node and port that you want to use",
             ims_port_id_2: "Second node and port",
-            ims_port_id_2_info: "Choose a node and port that you want to use to create the second corelink",
+            ims_port_id_2_info: "Choose the second node and port that you want to use",
+            ims_port_id_3: "Third node and port",
+            ims_port_id_3_info: "Choose the third node and port that you want to use",
+            ims_port_id_4: "Fourth node and port",
+            ims_port_id_4_info: "Choose the fourth node and port that you want to use",
+            ims_port_id_5: "Fifth node and port",
+            ims_port_id_5_info: "Choose the fifth node and port that you want to use",
+            ims_port_id_6: "Sixth node and port",
+            ims_port_id_6_info: "Choose the sixth node and port that you want to use",
+            ims_port_id_7: "Seventh node and port",
+            ims_port_id_7_info: "Choose the seventh node and port that you want to use",
+            ims_port_id_8: "Eighth node and port",
+            ims_port_id_8_info: "Choose the eighth node and port that you want to use",
             insync_reason: "Reason",
             insync_confirm_reason: "Force subscription into sync",
             insync_confirm_reason_info:
@@ -363,6 +375,7 @@ I18n.translations.en = {
             note_info: "Notes, reminders and feedback about this description.",
             nsi_isalias: "NSI isAlias",
             nsi_isalias_info: "",
+            nso_device_id: "Nodes",
             old_service_port: "Service Port",
             old_service_port_info: "Choose Service Ports to change",
             old_subscription_label: "Old Subscription",
@@ -422,6 +435,9 @@ I18n.translations.en = {
             sn7_migrating_service_port: "SURFnet7 SAP",
             sn7_migrating_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             sn7_migrating_service_port_info: "SN7 service port to be migrated",
+            sn8_ip_static_service_port: "SURFnet8 SAP",
+            sn8_ip_static_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
+            sn8_ip_static_service_port_info: "SN8 service port to be migrated to",
             sn8_migrating_service_port: "SURFnet8 SAP",
             sn8_migrating_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             sn8_migrating_service_port_info: "SN8 service port to be migrated to",
@@ -1024,6 +1040,7 @@ I18n.translations.en = {
         modify_core_link_add_link: "Add a link to an existing Corelink",
         modify_core_link_remove_link: "Remove a Link from an existing core link",
         modify_core_link_isis_metric: "Modify Corelink ISIS metric",
+        modify_core_link_modify_link: "Modify a link of an existing Corelink",
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",
         modify_note: "Modify subscription note",
@@ -1179,7 +1196,16 @@ I18n.translations.en = {
         SYSTEM: "System"
     },
     unavailable: "Unavailable",
-    unavailable_abbreviated: "N/A"
+    unavailable_abbreviated: "N/A",
+    favorites: {
+        manage: "Manage favorites",
+        edit: "Edit favorite",
+        trash: "Trash favorite",
+        select: "Select favorite",
+        add: "Add favorite",
+        remove: "Remove favorite",
+        toomany: "You can only have 10 favorites. Please remove one before adding a new one."
+    }
 };
 
 export default I18n.translations.en;

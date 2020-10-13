@@ -5,6 +5,7 @@ import { withState } from "@sambego/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import { addDecorator } from "@storybook/react";
+import mock from "axios-mock";
 import I18n from "i18n-js";
 import React from "react";
 

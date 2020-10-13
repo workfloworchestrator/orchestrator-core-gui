@@ -13,6 +13,7 @@
  *
  */
 
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import IPPrefixTable from "components/inputForms/IpPrefixTable";
 import SplitPrefix from "components/inputForms/SplitPrefix";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
@@ -47,47 +48,45 @@ function IPvAnyNetwork({
 
     return (
         <section {...filterDOMProps(props)}>
-            {label && (
-                <label htmlFor={id}>
-                    {label}
-                    {description && <em>{description}</em>}
-                </label>
-            )}
-            <section className="ipblock-selector">
-                <div id={id}>
-                    {!prefixMin && (
-                        <IPPrefixTable
-                            id={id}
-                            name={name}
-                            onChange={(prefix: IpBlock) => {
-                                if (prefix.state === 0 || prefix.state === 1) {
-                                    setSelectedPrefix(prefix);
-                                }
-                                onChange(prefix.prefix);
-                            }}
-                            selected_prefix_id={selectedPrefix?.id}
-                        />
-                    )}
-                    {usePrefix && (
-                        <SplitPrefix
-                            id={id}
-                            name={name}
-                            subnet={subnet}
-                            prefixlen={parseInt(netmask, 10)}
-                            prefixMin={usedPrefixMin}
-                            onChange={(prefix: string) => {
-                                onChange(prefix);
-                            }}
-                            selectedSubnet={usePrefix}
-                        />
-                    )}
-                </div>
-            </section>
-            {error && showInlineError && (
-                <em className="error">
-                    <div className="backend-validation">{errorMessage}</div>
-                </em>
-            )}
+            <EuiFormRow
+                label={label}
+                labelAppend={<EuiText size="m">{description}</EuiText>}
+                error={showInlineError ? errorMessage : false}
+                isInvalid={error}
+                id={id}
+                fullWidth
+            >
+                <section className="ipblock-selector">
+                    <div id={id}>
+                        {!prefixMin && (
+                            <IPPrefixTable
+                                id={id}
+                                name={name}
+                                onChange={(prefix: IpBlock) => {
+                                    if (prefix.state === 0 || prefix.state === 1) {
+                                        setSelectedPrefix(prefix);
+                                    }
+                                    onChange(prefix.prefix);
+                                }}
+                                selected_prefix_id={selectedPrefix?.id}
+                            />
+                        )}
+                        {usePrefix && (
+                            <SplitPrefix
+                                id={id}
+                                name={name}
+                                subnet={subnet}
+                                prefixlen={parseInt(netmask, 10)}
+                                prefixMin={usedPrefixMin}
+                                onChange={(prefix: string) => {
+                                    onChange(prefix);
+                                }}
+                                selectedSubnet={usePrefix}
+                            />
+                        )}
+                    </div>
+                </section>
+            </EuiFormRow>
         </section>
     );
 }

@@ -23,11 +23,12 @@
     }
 
     li {
+        margin-top: -15px;
         list-style: none;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        margin-top: 5px;
+        margin-left: 8px;
 
         // We use '>' because we don't want the outer list to influence the inner list
         > section {
@@ -41,9 +42,7 @@
             & > * {
                 display: flex;
                 flex-direction: column;
-
-                width: 100%;
-
+                width: 99%;
                 margin-left: 5px;
                 &:first-child {
                     margin-left: 0;
@@ -51,30 +50,23 @@
             }
         }
 
-        // Hide all labels for sub fields
-        label {
-            display: none;
-        }
-
-        &:first-child {
-            //Except for the first row with nested field
-            // We use '>' because we don't want the outer list to influence the inner list
-            > * > * > label {
-                display: initial;
-            }
-            // We use '>' because we don't want the outer list to influence the inner list
-            > section.nest-field ~ div.del-item {
-                margin-top: 25px;
-            }
+        // Move all repeated listFields up: as they don't contain labels
+        .repeated {
+            margin-top: -30px;
         }
     }
     div.add-item,
     div.del-item {
         display: flex;
         align-items: center;
-        align-self: flex-end;
+        align-self: baseline;
         margin: 5px;
+        margin-bottom: 30px;
         cursor: pointer;
+
+        &[id$="0.remove"] {
+            margin-top: 55px;
+        }
 
         i.fa-plus {
             color: vars.$success;
@@ -97,12 +89,12 @@
         }
     }
 
+    div.add-item {
+        align-self: flex-end;
+    }
+
     // Used for nested lists (L2VPN)
     &.outer-list {
-        .list-field {
-            margin-left: 20px;
-        }
-
         // We use '>' because we don't want the outer list to influence the inner list
         > ul > div.add-item {
             align-self: flex-start;

@@ -12,11 +12,13 @@
  * limitations under the License.
  *
  */
+
+import { EuiFormRow, EuiText } from "@elastic/eui";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
+import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
-import xor from "lodash/xor";
 import React from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
@@ -52,7 +54,7 @@ function Select({
     const nameArray = joinName(null, name);
     let parentName = joinName(nameArray.slice(0, -1));
 
-    // We cant call useField conditionally so we call it for ourselfs if there is no parent
+    // We cant call useField conditionally so we call it for ourselves if there is no parent
     if (parentName === "") {
         parentName = name;
     }
@@ -76,6 +78,9 @@ function Select({
 
     const selectedValue = options.find((option: Option) => option.value === value);
 
+    const isRepeated: boolean = isRepeatedField(name);
+    const labelRender: string = isRepeated ? "" : label;
+
     if (!checkboxes && fieldType === Array) {
         return (
             <ListField name={name}>
@@ -85,38 +90,18 @@ function Select({
             </ListField>
         );
     } else {
+        // Todo: cleanup or remove the "checboxes" variant completely
         return (
-            <section {...filterDOMProps(props)}>
-                {label && (
-                    <label htmlFor={id}>
-                        {label}
-                        <em>{description}</em>
-                    </label>
-                )}
-                {checkboxes ? (
-                    allowedValues!.map((item: any, index: number) => (
-                        <div key={item} className="bool-field">
-                            <input
-                                checked={fieldType === Array ? value!.includes(item) : value === item}
-                                disabled={disabled}
-                                id={`${id}.${index}`}
-                                name={name}
-                                onChange={() => {
-                                    onChange(fieldType === Array ? xor([item], value) : item);
-                                }}
-                                type="checkbox"
-                            />
-                            <label htmlFor={`${id}.${index}`}>
-                                <span>
-                                    <i className="fa fa-check" />
-                                </span>
-                            </label>
-                            <label className="info" htmlFor={`${id}.${index}`}>
-                                {transform ? transform(item) : item}
-                            </label>
-                        </div>
-                    ))
-                ) : (
+            <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+                <EuiFormRow
+                    label={labelRender}
+                    labelAppend={<EuiText size="m">{description}</EuiText>}
+                    error={showInlineError ? errorMessage : false}
+                    isInvalid={error}
+                    id={id}
+                    fullWidth
+                    hasEmptyLabelSpace
+                >
                     <ReactSelect
                         id={id}
                         inputId={`${id}.search`}
@@ -133,13 +118,7 @@ function Select({
                         required={required}
                         inputRef={inputRef}
                     />
-                )}
-
-                {error && showInlineError && (
-                    <em className="error">
-                        <div className="backend-validation">{errorMessage}</div>
-                    </em>
-                )}
+                </EuiFormRow>
             </section>
         );
     }

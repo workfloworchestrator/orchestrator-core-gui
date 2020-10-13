@@ -13,7 +13,7 @@
  *
  */
 
-import fetchMock from "fetch-mock";
+import mock from "axios-mock";
 import ProcessDetail from "pages/ProcessDetail";
 import React from "react";
 import FAILED_PROCESS_JSON from "stories/data/process-failed.json";
@@ -30,36 +30,36 @@ export default {
 };
 
 export const Process = () => {
-    fetchMock.restore();
-    fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
-    fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
+    mock.reset();
+    mock.onGet("processes/pid").reply(200, FAILED_PROCESS_JSON);
+    mock.onGet("processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08").reply(200, []);
 
     //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
 export const Task = () => {
-    fetchMock.restore();
-    fetchMock.get("/api/processes/pid", FAILED_PROCESS_JSON);
-    fetchMock.get("/api/processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08", []);
+    mock.reset();
+    mock.onGet("processes/pid").reply(200, FAILED_PROCESS_JSON);
+    mock.onGet("processes/process-subscriptions-by-pid/1a5686d9-eaa2-4d0b-96eb-1ec081c62a08").reply(200, []);
 
     //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
 };
 
 export const SuspendedProcess = () => {
-    fetchMock.restore();
-    fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
-    fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
+    mock.reset();
+    mock.onGet("processes/pid").reply(200, SUSPENDED_PROCESS_JSON);
+    mock.onGet("processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce").reply(200, []);
 
     //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={true} />;
 };
 
 export const SuspendedTask = () => {
-    fetchMock.restore();
-    fetchMock.get("/api/processes/pid", SUSPENDED_PROCESS_JSON);
-    fetchMock.get("/api/processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce", []);
+    mock.reset();
+    mock.onGet("processes/pid").reply(200, SUSPENDED_PROCESS_JSON);
+    mock.onGet("processes/process-subscriptions-by-pid/cdae2399-dd25-440b-81db-b8846c5fa3ce").reply(200, []);
 
     //@ts-ignore
     return <ProcessDetail match={{ params: { id: "pid" } }} isProcess={false} />;
