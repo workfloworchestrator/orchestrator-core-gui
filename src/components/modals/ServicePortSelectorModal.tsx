@@ -94,7 +94,11 @@ export default class ServicePortSelectorModal extends React.PureComponent<IProps
                     <ServicePortSelector subscriptions={subscriptions} handleSelect={this.props.handleSelect} />
                 )}
                 {selectedTabId === "favoritePorts" && (
-                    <FavoritePortSelector subscriptions={subscriptions} handleSelect={this.props.handleSelect} />
+                    <FavoritePortSelector
+                        subscriptions={subscriptions}
+                        handleSelect={this.props.handleSelect}
+                        managementOnly={false}
+                    />
                 )}
             </EuiPanel>
         );

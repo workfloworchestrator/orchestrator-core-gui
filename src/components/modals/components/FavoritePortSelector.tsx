@@ -11,6 +11,7 @@ import {
     EuiText
 } from "@elastic/eui";
 import { subscriptionsDetail } from "api";
+import I18n from "i18n-js";
 import React, { MouseEvent } from "react";
 import { FavoriteSubscriptionStorage, Subscription } from "utils/types";
 
@@ -19,6 +20,7 @@ export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 interface IProps {
     handleSelect: any;
     subscriptions: Subscription[];
+    managementOnly: boolean;
 }
 
 interface IState {
@@ -118,7 +120,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         } else {
             this.setState({
                 message: `The selected subscription is not in the allowed list.`,
-                messageHelp: `Check the bandwidth in the worfklow form.`,
+                messageHelp: `Check the bandwidth in the workflow form.`,
                 errors: true
             });
             setTimeout(() => {
@@ -177,6 +179,7 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-edit`}
                             iconType="pencil"
+                            aria-label={I18n.t(`favorites.edit`)}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onChangeEditMode(event, subscription_id)}
@@ -184,17 +187,24 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
                         <EuiButtonIcon
                             id={`favorite-port-selector-modal-${subscription_id}-delete`}
                             iconType="trash"
+                            aria-label={I18n.t(`favorites.trash`)}
                             onClick={(
                                 event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
                             ) => this.onDelete(event, subscription_id)}
                         />
-                        <EuiButtonIcon
-                            id={`favorite-port-selector-modal-${subscription_id}-select`}
-                            iconType="pinFilled"
-                            onClick={(
-                                event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, globalThis.MouseEvent>
-                            ) => this.onSubscriptionSelect(event, subscription_id)}
-                        />
+                        {!this.props.managementOnly && (
+                            <EuiButtonIcon
+                                id={`favorite-port-selector-modal-${subscription_id}-select`}
+                                iconType="pinFilled"
+                                aria-label={I18n.t(`favorites.select`)}
+                                onClick={(
+                                    event: React.MouseEvent<
+                                        HTMLButtonElement | HTMLAnchorElement,
+                                        globalThis.MouseEvent
+                                    >
+                                ) => this.onSubscriptionSelect(event, subscription_id)}
+                            />
+                        )}
                     </>
                 )
             }

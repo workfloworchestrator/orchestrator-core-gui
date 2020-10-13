@@ -15,7 +15,19 @@
 
 import "components/Navigation.scss";
 
-import { EuiButton, EuiControlBar, EuiLoadingSpinner, EuiToast } from "@elastic/eui";
+import {
+    EuiButton,
+    EuiControlBar,
+    EuiIcon,
+    EuiLink,
+    EuiLoadingSpinner,
+    EuiModal,
+    EuiModalBody,
+    EuiModalFooter,
+    EuiModalHeader,
+    EuiOverlayMask,
+    EuiToast
+} from "@elastic/eui";
 import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
 import mySpinner from "lib/Spin";
@@ -24,12 +36,17 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
 
+import FavoritesManagementModal from "./modals/FavoritesManagementModal";
+
 const Navigation = () => {
     const [loading, setLoading] = useState(false);
     const location = useLocation();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
     const navItems = ["processes", "subscriptions", "metadata", "validations", "tasks", "prefixes", "settings"];
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const closeModal = () => setIsModalVisible(false);
+    const showModal = () => setIsModalVisible(true);
 
     useEffect(() => {
         mySpinner.onStart = () => setLoading(true);
@@ -68,6 +85,24 @@ const Navigation = () => {
             });
         });
 
+        controls.push({
+            id: "main-navigation-filters-tab",
+            controlType: "text",
+            className: "navigation__item",
+            text: (
+                <EuiLink onClick={showModal} id="main-navigation-filters-link">
+                    <EuiIcon
+                        id="main-navigation-filters-icon"
+                        title="Manage favorites"
+                        type="filter"
+                        size="m"
+                        aria-label={I18n.t(`favorites.manage`)}
+                        color="ghost"
+                    ></EuiIcon>
+                </EuiLink>
+            )
+        });
+
         return [
             ...controls,
             {
@@ -96,6 +131,17 @@ const Navigation = () => {
                     <EuiLoadingSpinner size="m" />
                     <h6 className="sync__label">Syncing</h6>
                 </EuiToast>
+            )}
+            {isModalVisible && (
+                <EuiOverlayMask>
+                    <EuiModal onClose={closeModal} initialFocus="[id=modalNodeSelector]">
+                        <EuiModalHeader>{I18n.t(`favorites.manage`)}</EuiModalHeader>
+                        <EuiModalBody>
+                            <FavoritesManagementModal />
+                        </EuiModalBody>
+                        <EuiModalFooter></EuiModalFooter>
+                    </EuiModal>
+                </EuiOverlayMask>
             )}
         </>
     );

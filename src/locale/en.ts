@@ -1196,7 +1196,16 @@ I18n.translations.en = {
         SYSTEM: "System"
     },
     unavailable: "Unavailable",
-    unavailable_abbreviated: "N/A"
+    unavailable_abbreviated: "N/A",
+    favorites: {
+        manage: "Manage favorites",
+        edit: "Edit favorite",
+        trash: "Trash favorite",
+        select: "Select favorite",
+        add: "Add favorite",
+        remove: "Remove favorite",
+        toomany: "You can only have 10 favorites. Please remove one before adding a new one."
+    }
 };
 
 export default I18n.translations.en;

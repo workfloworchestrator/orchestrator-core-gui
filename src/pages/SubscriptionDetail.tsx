@@ -15,7 +15,7 @@
 
 import "pages/SubscriptionDetail.scss";
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody } from "@elastic/eui";
 import {
     dienstafnameBySubscription,
     getResourceTypeInfo,
@@ -31,14 +31,17 @@ import {
     subscriptionsDetailWithModel
 } from "api";
 import CheckBox from "components/CheckBox";
+import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import { ENV } from "env";
 import I18n from "i18n-js";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ApplicationContext from "utils/ApplicationContext";
+import { setFlash } from "utils/Flash";
 import { enrichSubscription, ipamStates, organisationNameByUuid, renderDate, renderDateTime } from "utils/Lookups";
 import {
+    FavoriteSubscriptionStorage,
     IMSEndpoint,
     IMSService,
     InstanceValue,
@@ -86,6 +89,8 @@ interface IState {
     dienstafname?: Dienstafname;
     useDomainModel: boolean;
     subscriptionModel?: SubscriptionModel;
+    isInFavorites?: boolean;
+    favoritesList: FavoriteSubscriptionStorage[];
 }
 
 interface Dienstafname {
@@ -157,7 +162,9 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         notFoundRelatedObjects: [],
         collapsedObjects: [],
         workflows: { terminate: [], modify: [], system: [], create: [] },
-        useDomainModel: false
+        useDomainModel: false,
+        isInFavorites: false,
+        favoritesList: []
     };
 
     componentDidMount = () => {
@@ -177,6 +184,11 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                 const enrichedSubscription = enrichSubscription(subscription, organisations, products);
                 const values = subscriptionInstanceValues(enrichedSubscription);
                 this.setState({ subscription: enrichedSubscription, loaded: true });
+
+                const favoritesList: FavoriteSubscriptionStorage[] =
+                    JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
+                this.setState({ favoritesList: favoritesList });
+
                 const promises = [
                     processSubscriptionsBySubscriptionId(subscription.subscription_id),
                     productById(subscription.product_id),
@@ -258,7 +270,8 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                             childSubscriptions: childSubscriptions,
                             parentSubscriptions: parentSubscriptions,
                             notFoundRelatedObjects: notFoundRelatedObjects,
-                            loadedAllRelatedObjects: true
+                            loadedAllRelatedObjects: true,
+                            isInFavorites: false
                         });
 
                         const uniquePortPromises = imsServices
@@ -387,6 +400,32 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
             );
     };
 
+    isCurrentlyFavorited = (subscription_id: string) => {
+        const v = this.state.favoritesList.find(s => s.subscription_id === subscription_id);
+        return v !== undefined;
+    };
+
+    addToFavorites = (subscription_id: string) => {
+        if (this.state.favoritesList.length > 9) {
+            setFlash(I18n.t(`favorites.toomany`), "error");
+            return false;
+        }
+
+        const favoritesList = [...this.state.favoritesList];
+        favoritesList.push({
+            subscription_id: subscription_id,
+            customName: ""
+        });
+        localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(favoritesList));
+        this.setState({ favoritesList: favoritesList });
+    };
+
+    removeFromFavorites = (subscription_id: string) => {
+        const favoritesList = this.state.favoritesList.filter(item => item.subscription_id !== subscription_id);
+        localStorage.setItem(FAVORITE_STORAGE_KEY, JSON.stringify(favoritesList));
+        this.setState({ favoritesList: favoritesList });
+    };
+
     renderSubscriptionDetail = (
         subscription: SubscriptionWithDetails,
         index: number,
@@ -401,13 +440,35 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     <tr>
                         <td id="subscriptions-id-k">{I18n.t("subscriptions.id")}</td>
                         <td id="subscriptions-id-v">
-                            <a
-                                href={`/subscriptions/${subscription.subscription_id}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {subscription.subscription_id}
-                            </a>
+                            <EuiFlexGroup>
+                                <EuiFlexItem grow={false}>
+                                    <a
+                                        href={`/subscriptions/${subscription.subscription_id}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {subscription.subscription_id}
+                                    </a>
+                                </EuiFlexItem>
+                                <EuiFlexItem grow={false}>
+                                    <EuiButton
+                                        id="subscriptions-favorite-toggle"
+                                        iconType="filter"
+                                        size="s"
+                                        onClick={() => {
+                                            if (this.isCurrentlyFavorited(subscription.subscription_id)) {
+                                                this.removeFromFavorites(subscription.subscription_id);
+                                            } else {
+                                                this.addToFavorites(subscription.subscription_id);
+                                            }
+                                        }}
+                                    >
+                                        {this.isCurrentlyFavorited(subscription.subscription_id)
+                                            ? I18n.t(`favorites.remove`)
+                                            : I18n.t(`favorites.add`)}
+                                    </EuiButton>
+                                </EuiFlexItem>
+                            </EuiFlexGroup>
                         </td>
                     </tr>
                     <tr>
