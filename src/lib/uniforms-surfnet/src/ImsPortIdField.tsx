@@ -52,6 +52,15 @@ function nodeToOptionCorelink(node: Subscription): Option {
         label: `${node.subscription_id.substring(0, 8)} ${node.description.trim() || "<No description>"}`
     };
 }
+
+declare module "uniforms" {
+    interface FilterDOMProps {
+        locationCode: never;
+        nodeSubscriptionId: never;
+        interfaceSpeed: never;
+        nodeStatuses: never;
+    }
+}
 filterDOMProps.register("locationCode", "nodeSubscriptionId", "interfaceSpeed", "nodeStatuses");
 
 function ImsPortId({

@@ -19,7 +19,7 @@ import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
 import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { get } from "lodash";
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { Option } from "utils/types";
@@ -79,7 +79,7 @@ function Select({
     const selectedValue = options.find((option: Option) => option.value === value);
 
     const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: string = isRepeated ? "" : label;
+    const labelRender: ReactNode = isRepeated ? "" : label;
 
     if (!checkboxes && fieldType === Array) {
         return (

@@ -19,7 +19,9 @@ import { context } from "uniforms";
 test("Test suite must contain at least one test", () => {});
 
 function mount(node: ReactElement, options: any) {
-    if (options === undefined) return enzyme(node);
+    if (options === undefined) {
+        return enzyme(node);
+    }
     return enzyme(node, {
         wrappingComponent: context.Provider,
         wrappingComponentProps: { value: options.context }

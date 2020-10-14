@@ -21,13 +21,19 @@ import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
-import React, { Ref, useEffect, useState } from "react";
+import React, { ReactNode, Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
 
 export type ContactPersonNameFieldProps = FieldProps<string, { organisationId?: string; organisationKey?: string }>;
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        organisationId: never;
+        organisationKey: never;
+    }
+}
 filterDOMProps.register("organisationId", "organisationKey");
 
 function ContactPersonName({
@@ -150,7 +156,7 @@ function ContactPersonName({
     }
 
     const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: string = isRepeated ? "" : label;
+    const labelRender: ReactNode = isRepeated ? "" : label;
 
     return (
         <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>

@@ -21,7 +21,7 @@ import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
-import React, { useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
@@ -175,7 +175,7 @@ function Vlan({
         : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
     const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: string = isRepeated ? "" : label;
+    const labelRender: ReactNode = isRepeated ? "" : label;
 
     return (
         <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
