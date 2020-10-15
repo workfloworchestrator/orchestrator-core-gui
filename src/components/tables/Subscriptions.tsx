@@ -123,7 +123,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     if (filterQ) {
                         filterBy = chunk(filterQ, 2).map(([id, values]) => ({
                             id: id,
-                            values: values !== undefined ? values.split("-") : []
+                            values: values ? values.split("-") : []
                         }));
                     }
                 } catch (err) {
