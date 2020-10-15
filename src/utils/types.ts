@@ -115,6 +115,7 @@ export interface SubscriptionWithDetails extends Subscription {
     end_date_epoch: number;
     start_date_epoch: number;
     customer_descriptions: CustomerDescription[];
+    tag: string;
 }
 export interface SubscriptionModel extends Subscription {
     customer_descriptions: CustomerDescription[];
