@@ -1,7 +1,14 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
-import { IMSEndpoint, IMSService, InstanceValue, SubscriptionInstance, SubscriptionWithDetails } from "utils/types";
+import {
+    IMSEndpoint,
+    IMSService,
+    InstanceValue,
+    SubscriptionInstance,
+    SubscriptionInstanceParentRelation,
+    SubscriptionWithDetails
+} from "utils/types";
 
 import { lineShapeMap, stylesMap } from "./DiagramStyles";
 
@@ -18,26 +25,19 @@ interface IState {
     isTableOn: boolean;
 }
 
-interface SubscriptionInstanceParentRelation {
-    child_id: string;
-    domain_model_attr: string;
-    order_id: number;
-    parent_id: string;
-}
-
-interface SubscriptionInstanceExtended extends SubscriptionInstance {
+export interface SubscriptionInstanceExtended extends SubscriptionInstance {
     subscription_id: string;
     parent_relations: SubscriptionInstanceParentRelation[];
     children_relations: SubscriptionInstanceParentRelation[];
 }
 
-interface IMSVlanRange {
+export interface IMSVlanRange {
     start: number;
     end: number;
     sub_circuit_id?: string;
 }
 
-interface IMSEndpointValues {
+export interface IMSEndpointValues {
     id: number;
     type: string;
     vlanranges: IMSVlanRange[];
