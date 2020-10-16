@@ -29,6 +29,11 @@ export type ImsNodeIdFieldProps = {
     status?: string;
 } & Omit<SelectFieldProps, "placeholder" | "transform" | "allowedValues" | "onChange" | "value">;
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        locationCodes: never;
+    }
+}
 filterDOMProps.register("locationCodes");
 
 function ImsNodeId({

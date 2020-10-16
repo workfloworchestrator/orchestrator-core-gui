@@ -37,6 +37,12 @@ type AcceptValue = "SKIPPED" | "ACCEPTED" | "INCOMPLETE";
 
 export type AcceptFieldProps = FieldProps<AcceptValue, { data?: AcceptItem[] }>;
 
+declare module "uniforms" {
+    interface FilterDOMProps {
+        data: never;
+    }
+}
+
 filterDOMProps.register("data");
 
 interface AcceptState {

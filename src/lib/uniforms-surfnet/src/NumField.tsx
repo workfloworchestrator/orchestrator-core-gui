@@ -14,7 +14,7 @@
  */
 import { EuiFieldNumber, EuiFormRow, EuiText } from "@elastic/eui";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import React from "react";
+import React, { ReactNode } from "react";
 import NumericInput from "react-numeric-input";
 import { connectField, filterDOMProps } from "uniforms";
 
@@ -46,7 +46,7 @@ function Num({
     ...props
 }: NumFieldProps) {
     const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: string = isRepeated ? "" : label;
+    const labelRender: ReactNode = isRepeated ? "" : label;
     return (
         <div {...filterDOMProps(props)} className={`${isRepeated ? " repeated" : ""}`}>
             <EuiFormRow

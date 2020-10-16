@@ -13,12 +13,18 @@
  *
  */
 
-import { HTMLProps, Ref } from "react";
-import { Override, GuaranteedProps as UniformsGuaranteedProps } from "uniforms";
+import { Ref } from "react";
+import { HTMLFieldProps } from "uniforms";
 
-export type FieldProps<Value, Extra = {}, InputElementType = HTMLInputElement, ElementType = HTMLDivElement> = Override<
-    HTMLProps<ElementType>,
-    UniformsGuaranteedProps<Value> & {
+export type FieldProps<
+    Value,
+    Extra = {},
+    InputElementType = HTMLInputElement,
+    ElementType = HTMLDivElement
+> = HTMLFieldProps<
+    Value,
+    ElementType,
+    {
         inputRef?: Ref<InputElementType>;
         description?: string;
     } & Extra

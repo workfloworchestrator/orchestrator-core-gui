@@ -269,3 +269,7 @@ test("<RadioField> - renders a wrapper with unknown props", () => {
             .prop("data-z")
     ).toBe("z");
 });
+
+test("<RadioField> - works with special characters", () => {
+    mount(<RadioField name="x" />, createContext({ x: { type: String, allowedValues: ["ă", "ș"] } }));
+});

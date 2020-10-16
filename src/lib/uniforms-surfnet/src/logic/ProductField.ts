@@ -25,7 +25,11 @@ export type ProductFieldProps = { inputComponent: typeof SelectField; productIds
     SelectFieldProps,
     "placeholder" | "transform" | "allowedValues"
 >;
-
+declare module "uniforms" {
+    interface FilterDOMProps {
+        productIds: never;
+    }
+}
 filterDOMProps.register("productIds");
 
 function Product({ inputComponent = SelectField, name, productIds, ...props }: ProductFieldProps) {
