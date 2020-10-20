@@ -1,3 +1,4 @@
+import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import {
     renderInsyncCell,
     renderSubscriptionCustomersCell,
@@ -19,7 +20,6 @@ import isNull from "lodash/isNull";
 import last from "lodash/last";
 import omitBy from "lodash/omitBy";
 import sortedUniq from "lodash/sortedUniq";
-import SubscriptionDetail from "pages/SubscriptionDetail";
 import React, { useCallback, useContext, useMemo } from "react";
 import {
     Cell,

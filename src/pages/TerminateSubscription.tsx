@@ -16,7 +16,7 @@
 import "pages/TerminateSubscription.scss";
 
 import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { catchErrorStatus, productById, startProcess, subscriptionsDetail } from "api/index";
+import { catchErrorStatus, productById, startProcess, subscriptionsDetailWithModel } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
 import I18n from "i18n-js";
 import React from "react";
@@ -45,7 +45,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
     componentDidMount = () => {
         const { subscriptionId } = this.props;
 
-        subscriptionsDetail(subscriptionId).then(sub =>
+        subscriptionsDetailWithModel(subscriptionId).then(sub =>
             productById(sub.product.product_id).then(product => {
                 const terminate_workflow = getTerminateWorkflow(product);
                 let promise = startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }]).then(res => {
@@ -69,7 +69,7 @@ class TerminateSubscription extends React.Component<IProps, IState> {
 
         return startProcess(terminate_workflow.name, [{ subscription_id: subscriptionId }, ...processInput]).then(
             res => {
-                this.setState({ pid: res.id, product: product });
+                this.setState({ pid: res.id });
             }
         );
     };

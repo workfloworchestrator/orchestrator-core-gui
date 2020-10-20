@@ -13,19 +13,17 @@
  *
  */
 
-import waitForComponentToPaint from "__tests__/waitForComponentToPaint";
-import mock from "axios-mock";
+import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { SubscriptionSummaryField } from "lib/uniforms-surfnet/src";
 import React from "react";
-import PRODUCTS from "stories/data/products.json";
-import SUBSCRIPTION_JSON from "stories/data/subscription.json";
 
 describe("<SubscriptionSummaryField>", () => {
-    test("<SubscriptionSummaryField> - renders inputs", async () => {
-        mock.onGet(/subscriptions\/.*/).reply(200, SUBSCRIPTION_JSON);
-        mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[22]);
+    test("<SubscriptionSummaryField> - renders inputs", () => {
+        jest.mock("components/subscriptionDetail/SubscriptionDetail", () => {
+            return { __esModule: true, default: jest.fn(() => <br />) };
+        });
 
         const element = <SubscriptionSummaryField name="x" />;
 
@@ -33,48 +31,8 @@ describe("<SubscriptionSummaryField>", () => {
             element,
             createContext({ x: { type: String, defaultValue: "48f28a55-7764-4c84-9848-964d14906a27" } })
         );
-        await waitForComponentToPaint(wrapper);
 
-        expect(wrapper.find("input")).toHaveLength(24);
+        expect(wrapper.find(SubscriptionDetail)).toHaveLength(1);
+        expect(wrapper.find(SubscriptionDetail).prop("subscriptionId")).toBe("48f28a55-7764-4c84-9848-964d14906a27");
     });
-});
-
-test("<SubscriptionSummaryField> - renders subscription information", async () => {
-    mock.onGet(/subscriptions\/.*/).reply(200, SUBSCRIPTION_JSON);
-    mock.onGet("products/a3bf8b26-50a6-4586-8e58-ad552cb39798").reply(200, PRODUCTS[22]);
-
-    const element = <SubscriptionSummaryField name="x" />;
-
-    const wrapper = mount(
-        element,
-        createContext({ x: { type: String, defaultValue: "48f28a55-7764-4c84-9848-964d14906a27" } })
-    );
-    await waitForComponentToPaint(wrapper);
-
-    expect(wrapper.find("input").map(node => node.prop("value"))).toStrictEqual([
-        "5203e539-0a11-e511-80d0-005056956c1a",
-        "SN8 SURFinternet BGP",
-        "active",
-        "GRAAFSCHAP IP DTC001A-DTC001A",
-        "36261",
-        "8beaeb1b-e4ff-4bae-a1f8-6a58d7f37b08",
-        "10000",
-        "b7ed368f-f6d5-497e-9118-2daeb5d06653",
-        "0",
-        "1500",
-        "166",
-        "False",
-        "secondary",
-        "MD5",
-        "default",
-        "zoSUWUv8",
-        "False",
-        "False",
-        "65380",
-        "default",
-        "SN8 SURFinternet BGP",
-        "SN8 SURFinternet connection using BGP",
-        "IP",
-        "IPBGP"
-    ]);
 });

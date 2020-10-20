@@ -688,9 +688,9 @@ I18n.translations.en = {
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
         notFound: "No Subscription found (e.g. 404)",
-        subscription: "Subscription",
+        subscription_title: "Subscription",
         child_subscriptions: "Child Subscriptions related to {{product}}",
-        parent_subscriptions: "Parent Subscriptions related to {{product}}",
+        parent_subscriptions: "Parent Subscriptions",
         resource_types: "Subscription Instance Values",
         resource_types_info: "The resource types of the associated product block(s) of this subscription",
         product_title: "Product",
@@ -719,7 +719,7 @@ I18n.translations.en = {
             modified_at: "Modified at"
         },
         ims_service: {
-            id: "IMS service ID ({{index}})",
+            id: "IMS service ID ({{id}})",
             identifier: "IMS service ID",
             customer: "Customer",
             extra_info: "Extra info",
@@ -729,19 +729,42 @@ I18n.translations.en = {
             status: "Status",
             order_id: "Order ID",
             aliases: "Aliases",
-            endpoints: "Endpoints"
+            endpoints: "Endpoints",
+            removed: "This circuit ID has been removed from IMS"
         },
         ims_port: {
             connector_type: "Connector type",
             fiber_type: "Fiber type",
-            id: "IMS Port ID {{id}}",
+            id: "IMS Port ID ({{id}})",
             iface_type: "Interface type",
             line_name: "Line name",
             location: "Location",
             node: "Node",
             patchposition: "Patch position",
             port: "Port",
-            status: "Status"
+            status: "Status",
+            removed: "This port ID has been removed from IMS"
+        },
+        ipam_address: {
+            id: "Assigned IP Address ID",
+            fqdn: "FQDN",
+            state: "State",
+            address: "IP Address",
+            tags: "Tags",
+            removed: "This address ID has been removed from IPAM"
+        },
+        ipam_prefix: {
+            description: "Description",
+            prefix: "IP Prefix",
+            afi: "IP Family",
+            asn: "Autonomous System Number",
+            state: "State",
+            address: "Address ({{id}})",
+            tags: "Tags",
+            removed: "This prefix ID has been removed from IPAM"
+        },
+        subscription: {
+            removed: "This subscription does not exist anymore"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
@@ -1021,16 +1044,7 @@ I18n.translations.en = {
         old_endpoint: "The old endpoint",
         new_endpoint: "The new endpoint"
     },
-    ipam: {
-        description: "Description",
-        prefix: "IP Prefix",
-        afi: "IP Family",
-        asn: "Autonomous System Number",
-        state: "State",
-        ipaddress: "IP Address",
-        fqdn: "FQDN",
-        assigned_address_id: "Assigned IP Address ID"
-    },
+
     workflow: {
         migrate_sn7_ip_bgp_ipss_to_sn8: "Migrate to SN8",
         migrate_sn7_ip_static_ipss_to_sn8: "Migrate to SN8",
