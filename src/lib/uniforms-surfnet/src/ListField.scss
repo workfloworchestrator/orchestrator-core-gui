@@ -35,9 +35,7 @@
             display: flex;
             flex-grow: 20;
             flex-direction: column;
-            &.nest-field {
-                flex-direction: row;
-            }
+
             // We use '>' because we don't want the outer list to influence the inner list
             & > * {
                 display: flex;
@@ -48,11 +46,6 @@
                     margin-left: 0;
                 }
             }
-        }
-
-        // Move all repeated listFields up: as they don't contain labels
-        .repeated {
-            margin-top: -30px;
         }
     }
     div.add-item,
@@ -65,7 +58,7 @@
         cursor: pointer;
 
         &[id$="0.remove"] {
-            margin-top: 55px;
+            margin-top: 15px;
         }
 
         i.fa-plus {
@@ -87,6 +80,13 @@
             cursor: not-allowed;
             color: vars.$light-grey;
         }
+    }
+    .nest-field + div.del-item[id$="0.remove"] {
+        margin-top: 33px;
+    }
+
+    div.del-item {
+        margin-top: 13px;
     }
 
     div.add-item {

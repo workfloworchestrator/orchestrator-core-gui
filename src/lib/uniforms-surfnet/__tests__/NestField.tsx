@@ -1,6 +1,6 @@
 import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
 import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { AutoField, NestField } from "lib/uniforms-surfnet/src";
+import { AutoField, ListField, NestField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,6 +41,7 @@ test("<NestField> - renders an <AutoField> for each field", () => {
             .at(1)
             .prop("name")
     ).toBe("b");
+    expect(wrapper.render()).toMatchSnapshot();
 });
 
 test("<NestField> - renders custom content if given", () => {
@@ -74,10 +75,10 @@ test("<NestField> - renders a label", () => {
         })
     );
 
-    expect(wrapper.find("label")).toHaveLength(3);
+    expect(wrapper.find("label")).toHaveLength(2);
     expect(
         wrapper
-            .find("label")
+            .find("span.euiTitle")
             .at(0)
             .text()
     ).toBe("y");
@@ -96,20 +97,35 @@ test("<NestField> - renders a wrapper with unknown props", () => {
 
     expect(
         wrapper
-            .find("section")
+            .find(".nest-field")
             .at(0)
             .prop("data-x")
     ).toBe("x");
     expect(
         wrapper
-            .find("section")
+            .find(".nest-field")
             .at(0)
             .prop("data-y")
     ).toBe("y");
     expect(
         wrapper
-            .find("section")
+            .find(".nest-field")
             .at(0)
             .prop("data-z")
     ).toBe("z");
+});
+
+test("<NestField> - renders correctly in list", () => {
+    const element = <ListField name="x" />;
+    const wrapper = mount(
+        element,
+        createContext({
+            x: { type: Array },
+            "x.$": { type: Object },
+            "x.$.a": { type: String },
+            "x.$.b": { type: Number }
+        })
+    );
+
+    expect(wrapper.render()).toMatchSnapshot();
 });

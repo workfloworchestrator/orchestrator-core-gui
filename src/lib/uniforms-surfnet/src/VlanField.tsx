@@ -17,11 +17,10 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { usedVlans as getUsedVlans } from "api";
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { getPortMode } from "lib/uniforms-surfnet/src/SubscriptionField";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { ServicePort } from "utils/types";
@@ -174,20 +173,16 @@ function Vlan({
         ? I18n.t("forms.widgets.vlan.allPortsAvailable")
         : I18n.t("forms.widgets.vlan.vlansInUse", { vlans: vlanRangeFromNumbers(allUsedVlans) });
 
-    const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: ReactNode = isRepeated ? "" : label;
-
     return (
-        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+        <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={labelRender}
+                label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={(error || errorMessageExtra) && showInlineError ? errorMessage || errorMessageExtra : false}
                 isInvalid={error}
                 helpText={message}
                 id={id}
                 fullWidth
-                hasEmptyLabelSpace
             >
                 <EuiFieldText
                     fullWidth

@@ -13,9 +13,8 @@
  *
  */
 import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
-import React, { ReactNode } from "react";
+import React from "react";
 import { connectField, filterDOMProps } from "uniforms";
 
 export type TextFieldProps = FieldProps<string>;
@@ -36,19 +35,15 @@ function Text({
     errorMessage,
     ...props
 }: TextFieldProps) {
-    const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: ReactNode = isRepeated ? "" : label;
-
     return (
-        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+        <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={labelRender}
+                label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
-                hasEmptyLabelSpace
             >
                 <EuiFieldText
                     disabled={disabled}

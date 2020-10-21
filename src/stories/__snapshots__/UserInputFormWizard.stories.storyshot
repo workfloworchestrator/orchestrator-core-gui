@@ -22,10 +22,10 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
       >
         <section>
           <section
-            className=""
+            className="form-input"
           >
             <div
-              className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
+              className="euiFormRow euiFormRow--fullWidth"
               id="input-ims_port_id_1-row"
             >
               <div

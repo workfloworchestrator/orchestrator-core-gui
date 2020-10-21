@@ -168,8 +168,8 @@ export function servicePortsProperty(portOptions: {}, minItems = 1, maxItems = 2
             title: "ServicePort",
             type: "object"
         },
-        maxItems: minItems,
-        minItems: maxItems,
+        maxItems: maxItems,
+        minItems: minItems,
         title: "Service Ports",
         type: "array"
     };

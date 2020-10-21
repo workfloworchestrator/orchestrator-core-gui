@@ -1,6 +1,3 @@
-import { EuiText } from "@elastic/eui";
-import AutoField from "lib/uniforms-surfnet/src/AutoField";
-import { FieldProps } from "lib/uniforms-surfnet/src/types";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +12,12 @@ import { FieldProps } from "lib/uniforms-surfnet/src/types";
  * limitations under the License.
  *
  */
+
+import { EuiDescribedFormGroup, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import AutoField from "lib/uniforms-surfnet/src/AutoField";
+import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import React from "react";
-import { connectField, filterDOMProps } from "uniforms";
+import { connectField, filterDOMProps, joinName } from "uniforms";
 
 export type NestFieldProps = FieldProps<null, { fields?: any[]; itemProps?: object }>;
 
@@ -35,21 +36,54 @@ function Nest({
     description,
     name,
     onChange, // Not used on purpose
+    wrap, // Not used on purpose
+    ref, // Not used on purpose
     className = "",
     ...props
 }: NestFieldProps) {
-    return (
-        <section {...filterDOMProps(props)} className={`${className} nest-field`}>
-            {label && (
-                <>
-                    <label className="euiFormLabel euiFormRow__label">{label}</label>
-                    <EuiText size="m">{description}</EuiText>
-                </>
-            )}
+    const nameArray = joinName(null, name);
+    const lastNamePart = nameArray[nameArray.length - 1];
+    const isInList = !isNaN(parseInt(lastNamePart));
+    const itemIndex = isInList ? parseInt(lastNamePart) : 0;
 
-            {children || fields?.map(field => <AutoField key={field} name={field} {...itemProps} />)}
-        </section>
-    );
+    if (isInList) {
+        return (
+            <EuiFlexGroup {...filterDOMProps(props)} className={`${className} nest-field`}>
+                {label && (
+                    <>
+                        <label className="euiFormLabel euiFormRow__label">{label}</label>
+                        <EuiText size="m">{description}</EuiText>
+                    </>
+                )}
+
+                {children ||
+                    fields?.map(field => (
+                        <EuiFlexItem key={field}>
+                            <AutoField name={field} {...itemProps} label={itemIndex === 0 ? undefined : false} />
+                        </EuiFlexItem>
+                    ))}
+            </EuiFlexGroup>
+        );
+    } else {
+        return (
+            <EuiDescribedFormGroup
+                {...filterDOMProps(props)}
+                title={<span>{label}</span>}
+                description={description}
+                className={`${className} nest-field`}
+            >
+                {children ||
+                    fields?.map(field => (
+                        <AutoField
+                            key={field}
+                            name={field}
+                            {...itemProps}
+                            label={itemIndex === 0 ? undefined : false}
+                        />
+                    ))}
+            </EuiDescribedFormGroup>
+        );
+    }
 }
 
 export default connectField(Nest);
