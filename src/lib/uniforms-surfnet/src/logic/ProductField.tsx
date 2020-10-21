@@ -16,12 +16,12 @@
 import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import get from "lodash/get";
-import { createElement, useContext } from "react";
+import React, { useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 import { productById } from "utils/Lookups";
 
-export type ProductFieldProps = { inputComponent: typeof SelectField; productIds?: string[] } & Omit<
+export type ProductFieldProps = { productIds?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "transform" | "allowedValues"
 >;
@@ -32,7 +32,7 @@ declare module "uniforms" {
 }
 filterDOMProps.register("productIds");
 
-function Product({ inputComponent = SelectField, name, productIds, ...props }: ProductFieldProps) {
+function Product({ name, productIds, ...props }: ProductFieldProps) {
     const all_products = useContext(ApplicationContext).products;
 
     const products = productIds ? productIds.map(id => productById(id, all_products)) : all_products;
@@ -43,13 +43,15 @@ function Product({ inputComponent = SelectField, name, productIds, ...props }: P
             return mapping;
         }, {}) ?? {};
 
-    return createElement(inputComponent, {
-        name: "",
-        ...props,
-        allowedValues: Object.keys(productLabelLookup),
-        transform: (uuid: string) => get(productLabelLookup, uuid, uuid),
-        placeholder: I18n.t("forms.widgets.product.placeholder")
-    });
+    return (
+        <SelectField
+            name=""
+            {...props}
+            allowedValues={Object.keys(productLabelLookup)}
+            transform={(uuid: string) => get(productLabelLookup, uuid, uuid)}
+            placeholder={I18n.t("forms.widgets.product.placeholder")}
+        />
+    );
 }
 
 export default connectField(Product);

@@ -20,42 +20,41 @@ import React from "react";
 import ORGANISATIONS_JSON from "stories/data/organisations.json";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
+jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
+    return { __esModule: true, default: jest.fn(() => <br />) };
+});
+
 describe("<OrganisationField>", () => {
     test("<OrganisationField> - calls selectField with all organisations", () => {
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
         const element = (
             <ApplicationContext.Provider value={{ organisations: ORGANISATIONS_JSON } as ApplicationContextInterface}>
-                <OrganisationField name="x" inputComponent={mockSelectField} />
+                <OrganisationField name="x" />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(1);
-        expect(mockSelectField).toHaveBeenCalledWith(
-            expect.objectContaining({
-                allowedValues: [
-                    "2f47f65a-0911-e511-80d0-005056956c1a",
-                    "88503161-0911-e511-80d0-005056956c1a",
-                    "bae56b42-0911-e511-80d0-005056956c1a",
-                    "c37bbc49-d7e2-e611-80e3-005056956c1a",
-                    "9865c1cb-0911-e511-80d0-005056956c1a",
-                    "772cee0f-c4e1-e811-810e-0050569555d1",
-                    "29865c1cb-0911-e511-80d0-005056956c1a",
-                    "872cee0f-c4e1-e811-810e-0050569555d1"
-                ],
-                disabled: false,
-                error: null,
-                errorMessage: "",
-                required: true,
-                showInlineError: false,
-                value: undefined,
-                placeholder: "Search and select a customer..."
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            allowedValues: [
+                "2f47f65a-0911-e511-80d0-005056956c1a",
+                "88503161-0911-e511-80d0-005056956c1a",
+                "bae56b42-0911-e511-80d0-005056956c1a",
+                "c37bbc49-d7e2-e611-80e3-005056956c1a",
+                "9865c1cb-0911-e511-80d0-005056956c1a",
+                "772cee0f-c4e1-e811-810e-0050569555d1",
+                "29865c1cb-0911-e511-80d0-005056956c1a",
+                "872cee0f-c4e1-e811-810e-0050569555d1"
+            ],
+            disabled: false,
+            error: null,
+            errorMessage: "",
+            required: true,
+            showInlineError: false,
+            value: undefined,
+            placeholder: "Search and select a customer..."
+        });
         //@ts-ignore
-        expect(mockSelectField.mock.calls[0][0].transform("2f47f65a-0911-e511-80d0-005056956c1a")).toBe(
+        expect(wrapper.find(SelectField).prop("transform")("2f47f65a-0911-e511-80d0-005056956c1a")).toBe(
             "Centrum Wiskunde & Informatica"
         );
     });

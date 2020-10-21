@@ -16,16 +16,13 @@
 import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import get from "lodash/get";
-import { createElement, useContext } from "react";
+import React, { useContext } from "react";
 import { connectField } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 
-export type OrganisationFieldProps = { inputComponent: typeof SelectField } & Omit<
-    SelectFieldProps,
-    "placeholder" | "transform" | "allowedValues"
->;
+export type OrganisationFieldProps = Omit<SelectFieldProps, "placeholder" | "transform" | "allowedValues">;
 
-function Organisation({ inputComponent = SelectField, name, ...props }: OrganisationFieldProps) {
+function Organisation({ name, ...props }: OrganisationFieldProps) {
     const { organisations } = useContext(ApplicationContext);
     const organisationLabelLookup =
         organisations?.reduce<{ [index: string]: string }>(function(mapping, org) {
@@ -33,13 +30,15 @@ function Organisation({ inputComponent = SelectField, name, ...props }: Organisa
             return mapping;
         }, {}) ?? {};
 
-    return createElement(inputComponent, {
-        name: "",
-        ...props,
-        allowedValues: Object.keys(organisationLabelLookup),
-        transform: (uuid: string) => get(organisationLabelLookup, uuid, uuid),
-        placeholder: I18n.t("forms.widgets.organisation.placeholder")
-    });
+    return (
+        <SelectField
+            name=""
+            {...props}
+            allowedValues={Object.keys(organisationLabelLookup)}
+            transform={(uuid: string) => get(organisationLabelLookup, uuid, uuid)}
+            placeholder={I18n.t("forms.widgets.organisation.placeholder")}
+        />
+    );
 }
 
 export default connectField(Organisation);

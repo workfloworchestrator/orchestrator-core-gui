@@ -20,79 +20,68 @@ import mount from "lib/uniforms-surfnet/__tests__/_mount";
 import { ImsNodeIdField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 
+jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
+    return { __esModule: true, default: jest.fn(() => <br />) };
+});
+
 describe("<ImsNodeIdField>", () => {
     test("<ImsNodeIdField> - shows loading placeholder", async () => {
         mock.onGet("ims/nodes/kb001a/PL").reply(200, []);
 
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
-        const element = <ImsNodeIdField name="x" inputComponent={mockSelectField} locationCode="kb001a" />;
+        const element = <ImsNodeIdField name="x" locationCode="kb001a" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));
 
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(1);
-        expect(mockSelectField).toHaveBeenCalledWith(
-            expect.objectContaining({
-                placeholder: "Loading nodes, please wait..."
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            placeholder: "Loading nodes, please wait..."
+        });
 
         await waitForComponentToPaint(wrapper);
     });
     test("<ImsNodeIdField> - calls selectField with all nodes", async () => {
         mock.onGet("ims/nodes/kb001a/PL").reply(200, [{ id: 1, name: "Some Node" }]);
 
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
-        const element = <ImsNodeIdField name="x" inputComponent={mockSelectField} locationCode="kb001a" />;
+        const element = <ImsNodeIdField name="x" locationCode="kb001a" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(3);
-        expect(mockSelectField).toHaveBeenLastCalledWith(
-            expect.objectContaining({
-                allowedValues: ["1"],
-                disabled: false,
-                error: null,
-                errorMessage: "",
-                required: true,
-                showInlineError: false,
-                value: undefined,
-                placeholder: "Select a node"
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            allowedValues: ["1"],
+            disabled: false,
+            error: null,
+            errorMessage: "",
+            required: true,
+            showInlineError: false,
+            value: undefined,
+            placeholder: "Select a node"
+        });
         //@ts-ignore
-        expect(mockSelectField.mock.calls[2][0].transform("1")).toBe("Some Node");
+        expect(wrapper.find(SelectField).prop("transform")("1")).toBe("Some Node");
     });
 
     test("<ImsNodeIdField> - calls api with right status", async () => {
         mock.onGet("ims/nodes/kb001a/IS").reply(200, [{ id: 1, name: "Some Node" }]);
 
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
-        const element = <ImsNodeIdField name="x" inputComponent={mockSelectField} locationCode="kb001a" status="IS" />;
+        const element = <ImsNodeIdField name="x" locationCode="kb001a" status="IS" />;
         const wrapper = mount(element, createContext({ x: { type: Number } }));
         await waitForComponentToPaint(wrapper);
 
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(3);
-        expect(mockSelectField).toHaveBeenLastCalledWith(
-            expect.objectContaining({
-                allowedValues: ["1"],
-                disabled: false,
-                error: null,
-                errorMessage: "",
-                required: true,
-                showInlineError: false,
-                value: undefined,
-                placeholder: "Select a node"
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            allowedValues: ["1"],
+            disabled: false,
+            error: null,
+            errorMessage: "",
+            required: true,
+            showInlineError: false,
+            value: undefined,
+            placeholder: "Select a node"
+        });
         //@ts-ignore
-        expect(mockSelectField.mock.calls[2][0].transform("1")).toBe("Some Node");
+        expect(wrapper.find(SelectField).prop("transform")("1")).toBe("Some Node");
     });
 });

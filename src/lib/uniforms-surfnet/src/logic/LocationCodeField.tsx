@@ -15,30 +15,32 @@
 
 import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
-import { createElement, useContext } from "react";
+import React, { useContext } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
 
-export type LocationCodeFieldProps = { inputComponent: typeof SelectField; locationCodes?: string[] } & Omit<
+export type LocationCodeFieldProps = { locationCodes?: string[] } & Omit<
     SelectFieldProps,
     "placeholder" | "allowedValues"
 >;
 
 filterDOMProps.register("locationCodes");
 
-function LocationCode({ inputComponent = SelectField, name, locationCodes, ...props }: LocationCodeFieldProps) {
+function LocationCode({ name, locationCodes, ...props }: LocationCodeFieldProps) {
     const allLocationCodes = useContext(ApplicationContext).locationCodes || [];
 
     if (!locationCodes) {
         locationCodes = allLocationCodes;
     }
 
-    return createElement(inputComponent, {
-        name: "",
-        ...props,
-        allowedValues: locationCodes,
-        placeholder: I18n.t("forms.widgets.locationCode.placeholder")
-    });
+    return (
+        <SelectField
+            name=""
+            {...props}
+            allowedValues={locationCodes}
+            placeholder={I18n.t("forms.widgets.locationCode.placeholder")}
+        />
+    );
 }
 
 export default connectField(LocationCode);

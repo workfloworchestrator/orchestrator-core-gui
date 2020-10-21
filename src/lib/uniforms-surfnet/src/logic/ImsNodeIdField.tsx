@@ -17,12 +17,11 @@ import { getNodesByLocationAndStatus } from "api";
 import I18n from "i18n-js";
 import SelectField, { SelectFieldProps } from "lib/uniforms-surfnet/src/SelectField";
 import { get } from "lodash";
-import { createElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connectField, filterDOMProps } from "uniforms";
 import { IMSNode } from "utils/types";
 
 export type ImsNodeIdFieldProps = {
-    inputComponent: typeof SelectField;
     onChange: (value?: number | undefined) => void;
     value?: number;
     locationCode: string;
@@ -36,15 +35,7 @@ declare module "uniforms" {
 }
 filterDOMProps.register("locationCodes");
 
-function ImsNodeId({
-    inputComponent = SelectField,
-    name,
-    value,
-    onChange,
-    locationCode,
-    status,
-    ...props
-}: ImsNodeIdFieldProps) {
+function ImsNodeId({ name, value, onChange, locationCode, status, ...props }: ImsNodeIdFieldProps) {
     const [loading, setLoading] = useState(true);
     const [nodes, setNodes] = useState<IMSNode[]>([]);
 
@@ -69,15 +60,17 @@ function ImsNodeId({
             return mapping;
         }, {}) ?? {};
 
-    return createElement(inputComponent, {
-        name: "",
-        ...props,
-        allowedValues: Object.keys(imsNodeIdLabelLookup),
-        value: value?.toString(),
-        transform: (id: string) => get(imsNodeIdLabelLookup, id, id),
-        onChange: (str: string) => onChange(parseInt(str, 10)),
-        placeholder: placeholder
-    });
+    return (
+        <SelectField
+            name=""
+            {...props}
+            allowedValues={Object.keys(imsNodeIdLabelLookup)}
+            value={value?.toString()}
+            transform={(id: string) => get(imsNodeIdLabelLookup, id, id)}
+            onChange={(str: string) => onChange(parseInt(str, 10))}
+            placeholder={placeholder}
+        />
+    );
 }
 
 export default connectField(ImsNodeId);
