@@ -254,7 +254,7 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
 
         return (
             <EuiFlexGroup>
-                <EuiFlexItem grow={4}>
+                <EuiFlexItem grow={7}>
                     {graphList.length > 0 &&
                         graphList.map((elem: Graph, index: number) => (
                             <ConcatenatedCircuit
@@ -272,9 +272,6 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                     {this.state.isTableOn && (
                         <EuiPanel betaBadgeLabel={"Details"}>{this.state._selectedCircuit.explanation}</EuiPanel>
                     )}
-                </EuiFlexItem>
-                <EuiFlexItem grow={3}>
-                    <div>&nbsp;</div>
                 </EuiFlexItem>
             </EuiFlexGroup>
         );
