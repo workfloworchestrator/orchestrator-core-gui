@@ -107,13 +107,15 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
     _makeConnectionExplanation = (endpoint: IMSEndpoint) => {
         return (
             <EuiCodeBlock>
-                <strong>interface :</strong> {endpoint.iface_type}
+                <strong>interface:</strong> {endpoint.iface_type}
                 <br />
                 <strong>physical port:</strong> {endpoint.port}
                 <br />
-                <strong>connector :</strong> {endpoint.connector_type}
+                <strong>connector:</strong> {endpoint.connector_type}
                 <br />
-                <strong>fiber type :</strong> {endpoint.fiber_type}
+                <strong>fiber type:</strong> {endpoint.fiber_type}
+                <br />
+                <strong>patch position:</strong> {endpoint.patchposition}
                 <br />
             </EuiCodeBlock>
         );
@@ -122,11 +124,13 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
     _makeCircuitExplanation = (values: InstanceValue[]) => {
         return (
             <EuiCodeBlock>
-                <strong>speed :</strong> {this._findValue(values, "service_speed")?.value || ""}
+                <strong>speed:</strong> {this._findValue(values, "service_speed")?.value || ""}
                 <br />
                 <strong>remote shutdown:</strong> {this._findValue(values, "remote_port_shutdown")?.value || ""}
                 <br />
-                <strong>speed policer :</strong> {this._findValue(values, "speed_policer")?.value || ""}
+                <strong>speed policer:</strong> {this._findValue(values, "speed_policer")?.value || ""}
+                <br />
+                <strong>NSO service ID:</strong> {this._findValue(values, "nso_service_id")?.value || ""}
             </EuiCodeBlock>
         );
     };
