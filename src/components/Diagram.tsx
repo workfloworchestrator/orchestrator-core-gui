@@ -238,8 +238,9 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 // Todo: Show the whole list of vlan ranges!
                 let vlanRange = `${_endpoint.vlanranges[0].start}-${_endpoint.vlanranges[0].end}`;
 
+                debugger;
                 const childSubscription = childSubscriptions?.length
-                    ? childSubscriptions[memberList.length]
+                    ? childSubscriptions[memberList.length ? 0 : 1]
                     : undefined;
                 // left-most connection
                 const connection = makeObject(
