@@ -1,6 +1,7 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
+import { Link } from "react-router-dom";
 import {
     IMSEndpoint,
     IMSService,
@@ -104,9 +105,18 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
         return this.props.imsEndpoints?.find(e => e.serviceId === id);
     };
 
-    _makeConnectionExplanation = (endpoint: IMSEndpoint) => {
+    _makeConnectionExplanation = (endpoint: IMSEndpoint, subscription?: SubscriptionWithDetails) => {
         return (
             <EuiCodeBlock>
+                {subscription && (
+                    <>
+                        <strong>subscription id:</strong>{" "}
+                        <Link to={`/subscriptions/${subscription.subscription_id}`}>
+                            {subscription.subscription_id}
+                        </Link>
+                        <br />
+                    </>
+                )}
                 <strong>interface:</strong> {endpoint.iface_type}
                 <br />
                 <strong>physical port:</strong> {endpoint.port}
@@ -117,11 +127,27 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 <br />
                 <strong>patch position:</strong> {endpoint.patchposition}
                 <br />
+                {subscription && (
+                    <>
+                        <strong>customer:</strong>
+                        {subscription.customer_name}
+                        <br />
+                    </>
+                )}
+                {subscription && subscription.customer_descriptions.length > 0 && (
+                    <>
+                        <strong>customer descriptions:</strong>
+                        {subscription.customer_descriptions.map(item => (
+                            <div>{item.description}</div>
+                        ))}
+                        <br />
+                    </>
+                )}
             </EuiCodeBlock>
         );
     };
 
-    _makeCircuitExplanation = (values: InstanceValue[]) => {
+    _makeCircuitExplanation = (values: InstanceValue[], subscription?: SubscriptionWithDetails) => {
         return (
             <EuiCodeBlock>
                 <strong>speed:</strong> {this._findValue(values, "service_speed")?.value || ""}
@@ -131,6 +157,23 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 <strong>speed policer:</strong> {this._findValue(values, "speed_policer")?.value || ""}
                 <br />
                 <strong>NSO service ID:</strong> {this._findValue(values, "nso_service_id")?.value || ""}
+                <br />
+                {subscription && (
+                    <>
+                        <strong>customer:</strong>
+                        {subscription.customer_name}
+                        <br />
+                    </>
+                )}
+                {subscription && subscription.customer_descriptions.length > 0 && (
+                    <>
+                        <strong>customer descriptions:</strong>
+                        {subscription.customer_descriptions.map(item => (
+                            <div>{item.description}</div>
+                        ))}
+                        <br />
+                    </>
+                )}
             </EuiCodeBlock>
         );
     };
@@ -183,6 +226,7 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 );
             });
             const graphTitle = circuitSubscription!.label !== null ? ` - ${circuitSubscription!.label}` : "";
+            let { childSubscriptions } = this.props;
             imsService.endpoints.forEach((_endpoint: IMSEndpointValues) => {
                 const endpoint = this._findImsEndpoint(_endpoint.id);
                 if (!endpoint || endpoint.endpointType === "trunk") {
@@ -190,17 +234,23 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 }
                 const serviceSpeed = this._findValue(circuitSubscription!.values, "service_speed");
                 let connectionAdded = false;
+
+                // Todo: Show the whole list of vlan ranges!
                 let vlanRange = `${_endpoint.vlanranges[0].start}-${_endpoint.vlanranges[0].end}`;
 
-                // left-most connection.
+                const childSubscription = childSubscriptions?.length
+                    ? childSubscriptions[memberList.length]
+                    : undefined;
+                // left-most connection
                 const connection = makeObject(
-                    this._makeConnectionExplanation(endpoint),
+                    this._makeConnectionExplanation(endpoint, childSubscription),
                     circuitTypeProperties.optical,
                     "",
                     memberList.length === 0 ? vlanRange : "",
                     `${serviceSpeed?.value} @ ${endpoint.port}`,
                     `${graphIndex},${memberList.length}`
                 );
+                console.log(childSubscriptions);
                 // only add this immediately if it's the first connection.
                 // otherwise, add the circuit first, and connection after that.
                 if (memberList.length === 0) {
@@ -221,7 +271,7 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                     if (connectionAdded) {
                         memberList.push(
                             makeObject(
-                                this._makeCircuitExplanation(circuitSubscription.values),
+                                this._makeCircuitExplanation(circuitSubscription.values, this.props.subscription),
                                 circuitTypeProperties.optical,
                                 "",
                                 "",
