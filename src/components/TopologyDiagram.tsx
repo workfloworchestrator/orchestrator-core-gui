@@ -182,9 +182,29 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         for (let sub of this.props.childSubscriptions!) {
             const nodeIdValue = this._findValueForKey(sub, "node_subscription_id");
             const f = this.state.nodes.find((node: Subscription) => node.subscription_id === nodeIdValue!.value);
-            if (!f) {
-                const node = await subscriptionsDetail(nodeIdValue!.value);
-                nodes.push(node);
+            if (!f && nodeIdValue) {
+                try {
+                    const node = await subscriptionsDetail(nodeIdValue!.value);
+                    nodes.push(node);
+                } catch (e) {
+                    console.error(e);
+                    // supply a node object that indicates
+                    // we couldn't load this particular
+                    // node.
+                    nodes.push({
+                        subscription_id: nodeIdValue!.value,
+                        description: "node did-not-load",
+                        product: sub.product,
+                        name: "",
+                        insync: false,
+                        product_id: sub.product.product_id,
+                        customer_id: "none",
+                        status: "IS",
+                        start_date: 0,
+                        end_date: 0,
+                        note: "dnf"
+                    });
+                }
             }
         }
         return Promise.resolve(nodes);
@@ -306,11 +326,15 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                         const nodeIdValue = this._findValueForKey(portSubscription!, "node_subscription_id");
                         const endpointValue = this._findValueForKey(portSubscription!, "ims_circuit_id");
                         const endpoint = this._findEndpoint(parseInt(endpointValue!.value));
-                        const imsNode = this._getNode(nodeIdValue!.value);
-                        const nodeName = imsNode!.description.substr(
-                            imsNode!.description.lastIndexOf(" ") + 1,
-                            imsNode!.description.length
-                        );
+
+                        let nodeName = `unknown_${index}`;
+                        if (nodeIdValue) {
+                            const imsNode = this._getNode(nodeIdValue!.value);
+                            nodeName = imsNode!.description.substr(
+                                imsNode!.description.lastIndexOf(" ") + 1,
+                                imsNode!.description.length
+                            );
+                        }
                         const label = `${nodeName}__${endpoint?.port.replaceAll("/", "_")}`;
                         const point = this._calculatePositionFor(radius, esiIndex, esiList.length);
                         if (childCount > 1) {
