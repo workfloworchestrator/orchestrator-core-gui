@@ -1055,6 +1055,7 @@ I18n.translations.en = {
         modify_core_link_remove_link: "Remove a Link from an existing core link",
         modify_core_link_isis_metric: "Modify Corelink ISIS metric",
         modify_core_link_modify_link: "Modify a link of an existing Corelink",
+        modify_firewall: "Modify Firewall",
         modify_firewall_speed: "Modify Firewall Speed",
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",
