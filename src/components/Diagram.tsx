@@ -235,8 +235,7 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                 const serviceSpeed = this._findValue(circuitSubscription!.values, "service_speed");
                 let connectionAdded = false;
 
-                // Todo: Show the whole list of vlan ranges!
-                let vlanRange = `${_endpoint.vlanranges[0].start}-${_endpoint.vlanranges[0].end}`;
+                let vlanRange = _endpoint.vlanranges.map(v => `${v.start}-${v.end}`).join(", ");
 
                 debugger;
                 const childSubscription = childSubscriptions?.length
@@ -251,7 +250,7 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                     `${serviceSpeed?.value} @ ${endpoint.port}`,
                     `${graphIndex},${memberList.length}`
                 );
-                console.log(childSubscriptions);
+
                 // only add this immediately if it's the first connection.
                 // otherwise, add the circuit first, and connection after that.
                 if (memberList.length === 0) {
