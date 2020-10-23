@@ -1,4 +1,4 @@
-import { EuiButton, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
+import { EuiButton, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
 import { prefixById, subscriptionsDetail } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
@@ -257,6 +257,14 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                 <br />
                 <strong>vlan :</strong> {vlanRange}
                 <br />
+                <EuiLink
+                    external
+                    target="_blank"
+                    href={`https://netwerkdashboard.surf.net/subscription/${sub.subscription_id}`}
+                    aria-label="Link to netwerkdashboard"
+                >
+                    Netwerkdashboard
+                </EuiLink>
             </EuiCodeBlock>
         );
     };
@@ -274,7 +282,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
 
         return (
             <div>
-                {this._makeConnectionExplanation(endpoint!, sub!)}
+                {endpoint && this._makeConnectionExplanation(endpoint!, sub!)}
                 <EuiCodeBlock>
                     <strong>asn :</strong> {prefix.asn__label}
                     <br />

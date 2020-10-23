@@ -1,4 +1,4 @@
-import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
+import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
@@ -142,6 +142,16 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                         ))}
                         <br />
                     </>
+                )}
+                {subscription && (
+                    <EuiLink
+                        external
+                        target="_blank"
+                        href={`https://netwerkdashboard.surf.net/subscription/${subscription.subscription_id}`}
+                        aria-label="Link to netwerkdashboard"
+                    >
+                        Netwerkdashboard
+                    </EuiLink>
                 )}
             </EuiCodeBlock>
         );
