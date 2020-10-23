@@ -1,5 +1,5 @@
 import { EuiButton, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiPanel } from "@elastic/eui";
-import { subscriptionsDetail } from "api";
+import { prefixById, subscriptionsDetail } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
 import {
@@ -28,6 +28,8 @@ interface IState {
     selectionType: string | null;
     selection: any;
     panelText: string | JSX.Element | null;
+    prefix?: any;
+    prefixesLoaded: string[];
 }
 
 // Mapping of node type to size of shape
@@ -64,6 +66,13 @@ const edgeColorMap = [
 
 let pathColorMap: any = {};
 const pathWidthMap: any = {};
+
+interface IpamPrefix {
+    prefix: string;
+    asn: number;
+    description: string;
+    tags: string[];
+}
 
 interface TopologyName {
     capacity: string;
@@ -127,8 +136,12 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         nodes: [],
         selectionType: null,
         selection: null,
-        panelText: null
+        panelText: null,
+        prefix: {},
+        prefixesLoaded: []
     };
+
+    prefixesLoaded: string[] = [];
 
     handleSelectionChanged(selectionType: string, selection: string) {
         this.setState({ selectionType, selection });
@@ -173,6 +186,18 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         return values.find(v => v.resource_type.resource_type === key);
     };
 
+    _findIpamId(inst: SubscriptionInstance) {
+        const test = this._findValue(inst.values, "ip_prefix_subscription_id");
+        if (!test) {
+            return;
+        }
+        const prefixService = this.props.childSubscriptions.find(s => s.subscription_id === test!.value);
+        if (!prefixService) {
+            return;
+        }
+        return this._findValue(prefixService.instances[0].values, "ipam_prefix_id");
+    }
+
     _getNode(id: string): Subscription | undefined {
         return this.state.nodes.find(node => node.subscription_id === id);
     }
@@ -210,7 +235,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         return Promise.resolve(nodes);
     }
 
-    _makeConnectionExplanation = (endpoint: IMSEndpoint, sub: SubscriptionWithDetails) => {
+    _makeConnectionExplanation = (endpoint: IMSEndpoint, sub: SubscriptionWithDetails): JSX.Element => {
         const portmode = this._findValueForKey(sub, "port_mode");
         const imsServiceEndpoint = this._findIMSServiceEndpoint(endpoint.serviceId);
         const vlanRange = `${imsServiceEndpoint?.vlanranges[0].start}-${imsServiceEndpoint?.vlanranges[0].end}`;
@@ -236,6 +261,34 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         );
     };
 
+    _makePrefixExplanation = (
+        endpoint: IMSEndpoint,
+        sub: SubscriptionWithDetails,
+        inst: SubscriptionInstance
+    ): JSX.Element => {
+        const ipamId = this._findIpamId(inst);
+        const prefix = this.state.prefix[ipamId!.value];
+        if (!ipamId || !this.prefixesLoaded.includes(ipamId.value) || !prefix) {
+            return <EuiCodeBlock></EuiCodeBlock>;
+        }
+
+        return (
+            <div>
+                {this._makeConnectionExplanation(endpoint!, sub!)}
+                <EuiCodeBlock>
+                    <strong>asn :</strong> {prefix.asn__label}
+                    <br />
+                    <strong>prefix :</strong> {prefix.prefix}
+                    <br />
+                    <strong>state :</strong> {prefix.state__label}
+                    <br />
+                    <strong>tags :</strong> {prefix.tags?.join(",")}
+                    <br />
+                </EuiCodeBlock>
+            </div>
+        );
+    };
+
     _calculatePositionFor(radius: number, index: number, n: number): Point {
         return {
             x: radius * Math.cos((index * 2 * Math.PI) / n),
@@ -249,6 +302,20 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
             rv[v.resource_type.resource_type] = v.value;
         });
         return rv;
+    }
+
+    _updatePrefixInformation(inst: SubscriptionInstance) {
+        const ipamId = this._findIpamId(inst);
+        if (!ipamId || this.prefixesLoaded.includes(ipamId.value)) {
+            return;
+        }
+        this.prefixesLoaded.push(ipamId.value);
+
+        prefixById(parseInt(ipamId.value)).then(prefixData => {
+            const oldState = this.state.prefix;
+            oldState[ipamId.value] = prefixData;
+            this.setState({ prefix: { ...oldState } });
+        });
     }
 
     _buildIP(): Topology {
@@ -271,6 +338,8 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
             if (sap!.product_block.tag === "IPSS") {
                 return;
             }
+            this._updatePrefixInformation(sap!);
+
             const values = this._condenseValues(sap!.values);
             const port = this.props.childSubscriptions.find(sub => sub.subscription_id === values.port_subscription_id);
             const portValues = this._condenseValues(port!.instances[0].values);
@@ -284,7 +353,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                 60 + point.y,
                 "hub"
             );
-            node.text = this._makeConnectionExplanation(endpoint!, port!);
+            node.text = this._makePrefixExplanation(endpoint!, port!, sap!);
             topology.names.push(node);
             topology.nodes.push(node);
         });
