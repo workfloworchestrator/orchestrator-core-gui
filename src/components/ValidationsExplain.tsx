@@ -18,6 +18,8 @@ import "components/ValidationsExplain.scss";
 import HighlightCode from "components/HighlightCode";
 import React from "react";
 
+import Explain from "./Explain";
+
 interface IProps {
     close: () => void;
     isVisible: boolean;
@@ -36,7 +38,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     }
 
     explanation = () => (
-        <section className="explanation">
+        <section>
             <h3>Explanation</h3>
             <p>
                 The Product Configuration in <span>core-db</span> must match the corresponding workflow implementation
@@ -51,7 +53,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     explanationSubscriptions = () => (
-        <section className="explanation">
+        <section>
             <h3>Explanation</h3>
             <p>
                 Subscriptions have <span className="code">subscription_instances</span> and{" "}
@@ -65,7 +67,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     explanationFixedInputs = () => (
-        <section className="explanation">
+        <section>
             <h3>Explanation</h3>
             <p>
                 <span className="code">FixedInputs</span> are fixed product characteristics and the allowed
@@ -75,7 +77,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     explainProductWorkflows = () => (
-        <section className="explanation">
+        <section>
             <h3>Explanation</h3>
             <p>
                 <span className="code">Workflows</span> are stored in the database to register the many-to-many
@@ -86,7 +88,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     details = () => (
-        <section className="details">
+        <section>
             <h3>Details</h3>
             <p>
                 The validations consist of each Product validated against the{" "}
@@ -104,7 +106,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     detailsSubscriptions = () => (
-        <section className="details">
+        <section>
             <h3>Details</h3>
             <p>
                 The Subscription validation consist of each Subscription validated against the{" "}
@@ -116,7 +118,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     detailsProductWorkflows = () => (
-        <section className="details">
+        <section>
             <h3>Details</h3>
             <p>
                 All the <span className="code">Workflow</span> - <span className="code">Product</span> relations are
@@ -146,7 +148,7 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
     );
 
     detailsFixedInputs = () => (
-        <section className="details">
+        <section>
             <h3>Details</h3>
             <p>
                 In the <span className="code">workflows/server/config/fixed_inputs.py</span> all of the allowed{" "}
@@ -190,7 +192,6 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
 
     render() {
         const { close, isVisible, isWorkFlows, isSubscriptions, isFixedInputs } = this.props;
-        const className = isVisible ? "" : "hide";
         const title = isWorkFlows
             ? "Product / Workflow Validations"
             : isSubscriptions
@@ -199,36 +200,25 @@ export default class ValidationsExplain extends React.PureComponent<IProps> {
             ? "Products / FixedInputs"
             : "Products / Workflows";
         return (
-            <div
-                className={`validation-explain ${className}`}
-                tabIndex={1}
-                onBlur={close}
-                ref={ref => (this.main = ref)}
-            >
-                <section className="container">
-                    <section className="title">
-                        <p>{title}</p>
-                        <button className="close" onClick={close}>
-                            <i className="fas fa-times" />
-                        </button>
-                    </section>
-                    {isWorkFlows
-                        ? this.explanation()
-                        : isSubscriptions
-                        ? this.explanationSubscriptions()
-                        : isFixedInputs
-                        ? this.explanationFixedInputs()
-                        : this.explainProductWorkflows()}
-                    {isWorkFlows
-                        ? this.details()
-                        : isSubscriptions
-                        ? this.detailsSubscriptions()
-                        : isFixedInputs
-                        ? this.detailsFixedInputs()
-                        : this.detailsProductWorkflows()}
-                    {isWorkFlows && this.example()}
-                </section>
-            </div>
+            <Explain close={close} isVisible={isVisible} title="Validations help">
+                <h1>{title}</h1>
+
+                {isWorkFlows
+                    ? this.explanation()
+                    : isSubscriptions
+                    ? this.explanationSubscriptions()
+                    : isFixedInputs
+                    ? this.explanationFixedInputs()
+                    : this.explainProductWorkflows()}
+                {isWorkFlows
+                    ? this.details()
+                    : isSubscriptions
+                    ? this.detailsSubscriptions()
+                    : isFixedInputs
+                    ? this.detailsFixedInputs()
+                    : this.detailsProductWorkflows()}
+                {isWorkFlows && this.example()}
+            </Explain>
         );
     }
 }
