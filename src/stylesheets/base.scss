@@ -23,10 +23,6 @@ body {
     color: vars.$dark-grey;
     -webkit-font-smoothing: antialiased;
     background-color: vars.$background;
-
-    &.ReactModal__Body--open {
-        overflow: hidden;
-    }
 }
 
 a {
