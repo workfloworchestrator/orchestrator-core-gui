@@ -18,8 +18,6 @@ import "components/Navigation.scss";
 import {
     EuiButton,
     EuiControlBar,
-    EuiIcon,
-    EuiLink,
     EuiLoadingSpinner,
     EuiModal,
     EuiModalBody,
@@ -32,7 +30,7 @@ import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
 import mySpinner from "lib/Spin";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
 
@@ -41,6 +39,7 @@ import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 const Navigation = () => {
     const [loading, setLoading] = useState(false);
     const location = useLocation();
+    const history = useHistory();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
     const navItems = ["processes", "subscriptions", "metadata", "validations", "tasks", "prefixes", "settings"];
@@ -71,14 +70,18 @@ const Navigation = () => {
         }
     });
 
+    const navs: any = {};
+
     const getControls = (): Control[] => {
         const controls: Control[] = [];
 
         navItems.forEach(navItem => {
+            navs[navItem] = () => history.push(`/${navItem}`);
             controls.push({
-                controlType: "text",
+                controlType: "tab",
                 id: `main-navigation-${navItem}-tab`,
-                text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
+                onClick: navs[navItem],
+                label: I18n.t(`navigation.${navItem}`),
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
                     : "navigation__item"
@@ -87,20 +90,9 @@ const Navigation = () => {
 
         controls.push({
             id: "main-navigation-filters-tab",
-            controlType: "text",
-            className: "navigation__item",
-            text: (
-                <EuiLink onClick={showModal} id="main-navigation-filters-link">
-                    <EuiIcon
-                        id="main-navigation-filters-icon"
-                        title="Manage favorites"
-                        type="filter"
-                        size="m"
-                        aria-label={I18n.t(`favorites.manage`)}
-                        color="ghost"
-                    ></EuiIcon>
-                </EuiLink>
-            )
+            controlType: "icon",
+            iconType: "filter",
+            onClick: showModal
         });
 
         return [
@@ -113,7 +105,13 @@ const Navigation = () => {
                 id: "main-navigation-new-process-tab",
                 text: (
                     <Link to="/new-process">
-                        <EuiButton id="main-navigation-new-process-tab-button" iconType="plusInCircle" size="s">
+                        <EuiButton
+                            id="main-navigation-new-process-tab-button"
+                            iconType="plusInCircle"
+                            size="s"
+                            color="secondary"
+                            fill
+                        >
                             {I18n.t(`navigation.new_process`)}
                         </EuiButton>
                     </Link>
