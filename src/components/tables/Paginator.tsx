@@ -15,9 +15,17 @@
 
 import "components/tables/Paginator.scss";
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
-import React from "react";
-import NumericInput from "react-numeric-input";
+import {
+    EuiButton,
+    EuiButtonEmpty,
+    EuiContextMenuItem,
+    EuiContextMenuPanel,
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiPagination,
+    EuiPopover
+} from "@elastic/eui";
+import React, { useState } from "react";
 
 interface IPaginatorProps {
     canNextPage: boolean;
@@ -42,6 +50,39 @@ function Paginator({
     previousPage,
     setPageSize
 }: IPaginatorProps) {
+    // page switchint
+    const [activePage, setActivePage] = useState(0);
+    const switchPage = (pageNumber: number) => {
+        setActivePage(pageNumber);
+        gotoPage(pageNumber);
+    };
+
+    // popover
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const onButtonClick = () => setIsPopoverOpen(isPopoverOpen => !isPopoverOpen);
+    const closePopover = () => setIsPopoverOpen(false);
+    const getIconType = (size: number) => {
+        return size === pageSize ? "check" : "empty";
+    };
+
+    const button = (
+        <EuiButtonEmpty size="s" color="text" iconType="arrowDown" iconSide="right" onClick={onButtonClick}>
+            Rows per page: {pageSize}
+        </EuiButtonEmpty>
+    );
+    const items = [5, 10, 25, 50, 100].map(newSize => (
+        <EuiContextMenuItem
+            key={`${newSize}_rows`}
+            icon={getIconType(newSize)}
+            onClick={() => {
+                closePopover();
+                setPageSize(newSize);
+            }}
+        >
+            {newSize}
+        </EuiContextMenuItem>
+    ));
+
     return (
         <EuiFlexGroup className="paginator">
             <EuiFlexItem grow={1}>
@@ -67,39 +108,30 @@ function Paginator({
                 </EuiFlexGroup>
             </EuiFlexItem>
             <EuiFlexItem grow={10} className="paginator-center">
-                <div className="pagination-center-wrapper">
-                    <div className="paginator-center">
-                        <span className="page-info">
-                            Page{" "}
-                            <strong>
-                                {pageIndex + 1} of {pageOptions.length}
-                            </strong>{" "}
-                        </span>
-                        <span>
-                            | Go to page:{" "}
-                            <NumericInput
-                                min={1}
-                                max={pageOptions.length}
-                                value={pageIndex + 1}
-                                onChange={valueAsNumber => {
-                                    valueAsNumber && gotoPage(valueAsNumber - 1);
-                                }}
-                            />
-                        </span>{" "}
-                        <select
-                            value={pageSize}
-                            onChange={e => {
-                                setPageSize(Number(e.target.value));
-                            }}
-                        >
-                            {[5, 10, 25, 50, 100].map(pageSize => (
-                                <option key={pageSize} value={pageSize}>
-                                    Show {pageSize}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
+                <EuiFlexGroup justifyContent="spaceAround">
+                    <EuiFlexItem grow={false}>
+                        <EuiFlexGroup>
+                            <EuiFlexItem>
+                                <EuiPagination
+                                    aria-label="pagination"
+                                    pageCount={pageOptions.length}
+                                    activePage={activePage}
+                                    onPageClick={activePage => switchPage(activePage)}
+                                />
+                            </EuiFlexItem>
+                            <EuiFlexItem>
+                                <EuiPopover
+                                    button={button}
+                                    isOpen={isPopoverOpen}
+                                    closePopover={closePopover}
+                                    panelPaddingSize="none"
+                                >
+                                    <EuiContextMenuPanel items={items} />
+                                </EuiPopover>
+                            </EuiFlexItem>
+                        </EuiFlexGroup>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
             </EuiFlexItem>
             <EuiFlexItem grow={1}>
                 <EuiFlexGroup>

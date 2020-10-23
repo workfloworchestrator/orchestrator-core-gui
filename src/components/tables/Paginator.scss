@@ -21,27 +21,6 @@
     margin: 14px 0px;
 }
 
-.pagination-center-wrapper {
-    width: 100%;
-    display: flex;
-    .paginator-center {
-        width: fit-content;
-        display: inline-block;
-        margin: auto;
-        input[type="text"] {
-            width: 4em;
-            height: 30px;
-        }
-        select {
-            margin-top: -2px;
-            font-size: 1em;
-            background: transparent;
-            height: 30px;
-        }
-        b {
-            // styles the arrows of numeric input
-            margin-top: 4px;
-            margin-left: 1px;
-        }
-    }
+.euiPagination {
+    height: 32px; // to align with the rows-per-page selector.
 }
