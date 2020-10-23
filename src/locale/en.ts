@@ -404,6 +404,12 @@ I18n.translations.en = {
             removed_service_ports: "Remove ports",
             removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             removed_service_ports_info: "Select some ports to remove them from this subscription",
+            removed_customer_ipv4_ptp_prefixes: "Please select an IPv4 ptp prefix to remove.",
+            removed_customer_ipv6_ptp_prefixes: "Please select an IPv6 ptp prefix to remove (if applicable).",
+            removed_customer_ipv4_ptp_prefixes_fields:
+                "The form will make sure the amount of IPv4 prefixes are the same as the amount of customer saps",
+            removed_customer_ipv6_ptp_prefixes_fields:
+                "The form will make sure the amount of IPv6 prefixes are the same as the amount of customer saps",
             sap_migration_summary: "Summary of SAP migration changes",
             sap_migration_summary_info:
                 "Please check the summary for any inconsistencies in the port that will be removed",
