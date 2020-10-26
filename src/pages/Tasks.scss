@@ -22,7 +22,7 @@
 
 .actions-buttons {
     justify-content: end;
-    transform: translateY(-20px);
+    transform: translateY(-20px) !important;
 
     .explain {
         transform: translateY(-5px);
