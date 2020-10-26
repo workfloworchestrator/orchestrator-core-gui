@@ -28,6 +28,8 @@ import { renderDateTime } from "utils/Lookups";
 import { ProductBlock, SortOption } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
+import ActionContainer from "./ActionContainer";
+
 interface Action {
     show: boolean;
     id: string;
@@ -177,16 +179,19 @@ export default class ProductBlocks extends React.Component<{}, IState> {
         }
         const view = {
             icon: "fa fa-search-plus",
+            euiIcon: "search",
             label: "view",
             action: this.editProductBlock(productBlock, true, false)
         };
         const edit = {
             icon: "fa fa-edit",
+            euiIcon: "pencil",
             label: "edit",
             action: this.editProductBlock(productBlock, false, false)
         };
         const _delete = {
             icon: "fas fa-trash-alt",
+            euiIcon: "trash",
             label: "delete",
             action: this.handleDeleteProductBlock(productBlock),
             danger: true
@@ -279,10 +284,22 @@ export default class ProductBlocks extends React.Component<{}, IState> {
                                     className="actions"
                                     onClick={this.toggleActions(productBlock, actions)}
                                     tabIndex={1}
-                                    onBlur={() => this.setState({ actions: { show: false, id: "" } })}
+                                    // onBlur={() => this.setState({ actions: { show: false, id: "" } })}
                                 >
-                                    <i className="fa fa-ellipsis-h" />
-                                    {this.renderActions(productBlock, actions)}
+                                    <ActionContainer
+                                        title={"Actions"}
+                                        renderButtonContent={active => {
+                                            const classes = ["dropdown-button-content", active ? "active" : ""].join(
+                                                " "
+                                            );
+                                            return (
+                                                <span className={classes}>
+                                                    <i className={"fa fa-bars"} />
+                                                </span>
+                                            );
+                                        }}
+                                        renderContent={disabled => this.renderActions(productBlock, actions)}
+                                    />
                                 </td>
                             </tr>
                         ))}

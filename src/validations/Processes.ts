@@ -29,27 +29,32 @@ export function actionOptions(
     //TODO scope on the context of logged in-user
     const details = {
         icon: "fa fa-search-plus",
+        euiIcon: "search",
         label: "details",
         action: showAction
     };
     const userInput = {
         icon: "fa fa-edit",
+        euiIcon: "edit",
         label: "user_input",
         action: showAction
     };
     const retry = {
         icon: "fa fa-sync",
+        euiIcon: "refresh",
         label: "retry",
         action: retryAction
     };
     const _delete = {
         icon: "fa fa-trash",
+        euiIcon: "trash",
         label: "delete",
         action: deleteAction,
         danger: true
     };
     const abort = {
         icon: "fa fa-window-close",
+        euiIcon: "crossInACircleFilled",
         label: "abort",
         action: abortAction,
         danger: true

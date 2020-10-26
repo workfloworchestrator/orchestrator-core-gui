@@ -1,3 +1,5 @@
+import "components/ActionContainer.scss";
+
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,8 +14,7 @@
  * limitations under the License.
  *
  */
-import "components/ActionContainer.scss";
-
+import { EuiButtonIcon, EuiPopover } from "@elastic/eui";
 import React, { useState } from "react";
 
 function ActionContainer({
@@ -25,33 +26,17 @@ function ActionContainer({
     renderButtonContent: (active: boolean) => React.ReactNode;
     renderContent: (disabled: boolean) => React.ReactNode;
 }) {
-    const [active, setActive] = useState(false);
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+    const onButtonClick = () => setIsPopoverOpen(isPopoverOpen => !isPopoverOpen);
+    const closePopover = () => setIsPopoverOpen(false);
+
+    const button = <EuiButtonIcon className={"action-button"} iconType="menu" onClick={onButtonClick} />;
     return (
         <div className={"action-container"}>
-            <button
-                className={"action-button"}
-                onClick={e => {
-                    e.stopPropagation();
-                    if (active) {
-                        setActive(false);
-                    } else {
-                        setActive(true);
-                    }
-                }}
-            >
-                {renderButtonContent(active)}
-            </button>
-            <div
-                className={active ? "action-dialog open" : "action-dialog"}
-                onClick={e => {
-                    e.stopPropagation();
-                    if (!active) {
-                        setActive(true);
-                    }
-                }}
-            >
-                {active && renderContent(!active)}
-            </div>
+            <EuiPopover ownFocus button={button} isOpen={isPopoverOpen} closePopover={closePopover}>
+                {renderContent(true)}
+            </EuiPopover>
         </div>
     );
 }

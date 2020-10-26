@@ -29,6 +29,8 @@ import { renderDateTime } from "utils/Lookups";
 import { Filter, SortOption, Product as iProduct } from "utils/types";
 import { isEmpty, stop } from "utils/Utils";
 
+import ActionContainer from "./ActionContainer";
+
 type Column = "name" | "description" | "tag" | "product_type" | "status" | "product_blocks_string" | "created_at";
 
 interface ProductWithExtra extends iProduct {
@@ -230,22 +232,26 @@ export default class Products extends React.Component<{}, IState> {
         }
         const view = {
             icon: "fa fa-search-plus",
+            euiIcon: "search",
             label: "view",
             action: this.editProduct(product, true, false)
         };
         const edit = {
             icon: "fa fa-edit",
+            euiIcon: "pencil",
             label: "edit",
             action: this.editProduct(product, false, false)
         };
         const _delete = {
             icon: "fas fa-trash-alt",
+            euiIcon: "trash",
             label: "delete",
             action: this.handleDeleteProduct(product),
             danger: true
         };
         const clone = {
             icon: "far fa-clone",
+            euiIcon: "copy",
             label: "clone",
             action: this.editProduct(product, false, true, true)
         };
@@ -364,10 +370,22 @@ export default class Products extends React.Component<{}, IState> {
                                     className="actions"
                                     onClick={this.toggleActions(product, actions)}
                                     tabIndex={1}
-                                    onBlur={() => this.setState({ actions: { show: false, id: "" } })}
+                                    //onBlur={() => this.setState({ actions: { show: false, id: "" } })}
                                 >
-                                    <i className="fa fa-ellipsis-h" />
-                                    {this.renderActions(product, actions)}
+                                    <ActionContainer
+                                        title={"Actions"}
+                                        renderButtonContent={active => {
+                                            const classes = ["dropdown-button-content", active ? "active" : ""].join(
+                                                " "
+                                            );
+                                            return (
+                                                <span className={classes}>
+                                                    <i className={"fa fa-bars"} />
+                                                </span>
+                                            );
+                                        }}
+                                        renderContent={disabled => this.renderActions(product, actions)}
+                                    />
                                 </td>
                             </tr>
                         ))}

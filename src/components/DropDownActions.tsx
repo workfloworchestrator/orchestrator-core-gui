@@ -13,8 +13,9 @@
  *
  */
 
-import "components/DropDownActions.scss";
+// import "components/DropDownActions.scss";
 
+import { EuiContextMenu } from "@elastic/eui";
 import I18n from "i18n-js";
 import React from "react";
 import { Action } from "utils/types";
@@ -26,14 +27,27 @@ interface IProps {
 }
 
 export default function DropDownActions({ options, i18nPrefix, className }: IProps) {
-    return (
-        <section className={className || "drop-down-actions"}>
-            {options.map((option, index) => (
-                <span key={index} onClick={option.action} className={option.danger ? "danger" : ""}>
-                    <i className={option.icon} />
-                    {I18n.t(`${i18nPrefix}.${option.label}`)}
-                </span>
-            ))}
-        </section>
-    );
+    const panel: any = {
+        id: 0,
+        title: "Actions",
+        items: []
+    };
+    panel.items = options.map((option, index) => {
+        return {
+            name: option.label,
+            icon: option.euiIcon,
+            onClick: option.action
+        };
+    });
+    // return (
+    //     <section className={className || "drop-down-actions"}>
+    //         {options.map((option, index) => (
+    //             <span key={index} onClick={option.action} className={option.danger ? "danger" : ""}>
+    //                 <i className={option.icon} />
+    //                 {I18n.t(`${i18nPrefix}.${option.label}`)}
+    //             </span>
+    //         ))}
+    //     </section>
+    // );
+    return <EuiContextMenu initialPanelId={0} panels={[panel]} />;
 }

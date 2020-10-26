@@ -448,6 +448,7 @@ export interface SortOption<nameStrings = string> {
 
 export interface Action {
     icon: string;
+    euiIcon: string;
     label: string;
     action: (e: React.MouseEvent<HTMLButtonElement>) => void;
     danger?: boolean;
