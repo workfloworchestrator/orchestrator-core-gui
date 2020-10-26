@@ -26,7 +26,6 @@ import ProductPage from "components/Product";
 import ProductBlock from "components/ProductBlock";
 import ProtectedRoute from "components/ProtectedRoute";
 import { createBrowserHistory } from "history";
-import Diagram from "pages/Diagram";
 import MetaData from "pages/MetaData";
 import MetaDataPage from "pages/MetaDataPage";
 import ModifySubscription from "pages/ModifySubscription";
@@ -243,7 +242,6 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={props => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={props => <StyleGuide {...props} />} />
-                                <Route path="/diagram" render={props => <Diagram {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>

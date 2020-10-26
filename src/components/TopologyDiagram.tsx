@@ -1,4 +1,4 @@
-import { EuiButton, EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
+import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
 import { prefixById, subscriptionsDetail } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
@@ -484,7 +484,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         };
         return (
             <EuiFlexGroup>
-                <EuiFlexItem grow={4}>
+                <EuiFlexItem grow={7}>
                     {topology.names.length > 0 && (
                         <TrafficMap
                             key="traffic-map"
@@ -510,9 +510,6 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                 </EuiFlexItem>
                 <EuiFlexItem grow={3}>
                     <EuiPanel betaBadgeLabel={"Details"}>{this.state.panelText}</EuiPanel>
-                </EuiFlexItem>
-                <EuiFlexItem grow={3}>
-                    <EuiButton onClick={this._toggleMapMode}>Switch mapmode</EuiButton>
                 </EuiFlexItem>
             </EuiFlexGroup>
         );
