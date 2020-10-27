@@ -39,7 +39,7 @@ import Processes from "pages/Processes";
 import ServerError from "pages/ServerError";
 import Settings from "pages/Settings";
 import StyleGuide from "pages/StyleGuide";
-import SubscriptionDetail from "pages/SubscriptionDetail";
+import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import SubscriptionsPage from "pages/Subscriptions";
 import Tasks from "pages/Tasks";
 import TerminateSubscription from "pages/TerminateSubscription";
@@ -220,7 +220,10 @@ class App extends React.PureComponent<{}, IState> {
                                     path="/subscription/:id"
                                     render={props => <Redirect to={`/subscriptions/${props.match.params.id}`} />}
                                 />
-                                <Route path="/subscriptions/:id" render={props => <SubscriptionDetail {...props} />} />
+                                <Route
+                                    path="/subscriptions/:id"
+                                    render={props => <SubscriptionDetailPage {...props} />}
+                                />
                                 <Route path="/subscriptions" render={props => <SubscriptionsPage {...props} />} />
                                 <Route exact path="/metadata" render={() => <Redirect to="/metadata/products" />} />
                                 <ProtectedRoute path="/metadatapage" render={props => <MetaDataPage {...props} />} />

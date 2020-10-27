@@ -1,6 +1,3 @@
-import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
-import mount from "lib/uniforms-surfnet/__tests__/_mount";
-import { LocationCodeField, SelectField } from "lib/uniforms-surfnet/src";
 /*
  * Copyright 2019-2020 SURF.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,59 +12,57 @@ import { LocationCodeField, SelectField } from "lib/uniforms-surfnet/src";
  * limitations under the License.
  *
  */
+
+import createContext from "lib/uniforms-surfnet/__tests__/_createContext";
+import mount from "lib/uniforms-surfnet/__tests__/_mount";
+import { LocationCodeField, SelectField } from "lib/uniforms-surfnet/src";
 import React from "react";
 import ApplicationContext, { ApplicationContextInterface } from "utils/ApplicationContext";
 
+jest.mock("lib/uniforms-surfnet/src/SelectField", () => {
+    return { __esModule: true, default: jest.fn(() => <br />) };
+});
+
 describe("<LocationCodeField>", () => {
     test("<LocationCodeField> - calls selectField with all locationCodes", () => {
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
         const element = (
             <ApplicationContext.Provider value={{ locationCodes: ["aaa", "bbb"] } as ApplicationContextInterface}>
-                <LocationCodeField name="x" inputComponent={mockSelectField} />
+                <LocationCodeField name="x" />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(1);
-        expect(mockSelectField).toHaveBeenCalledWith(
-            expect.objectContaining({
-                allowedValues: ["aaa", "bbb"],
-                disabled: false,
-                error: null,
-                errorMessage: "",
-                required: true,
-                showInlineError: false,
-                value: undefined,
-                placeholder: "Search and select a location code..."
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            allowedValues: ["aaa", "bbb"],
+            disabled: false,
+            error: null,
+            errorMessage: "",
+            required: true,
+            showInlineError: false,
+            value: undefined,
+            placeholder: "Search and select a location code..."
+        });
     });
 
     test("<LocationCodeField> - calls selectField with specified locationCodes", () => {
-        const mockSelectField = (jest.fn(() => <br />) as any) as typeof SelectField;
-
         const element = (
             <ApplicationContext.Provider value={{ locationCodes: ["aaa", "bbb"] } as ApplicationContextInterface}>
-                <LocationCodeField name="x" inputComponent={mockSelectField} locationCodes={["ccc", "ddd"]} />
+                <LocationCodeField name="x" locationCodes={["ccc", "ddd"]} />
             </ApplicationContext.Provider>
         );
         const wrapper = mount(element, createContext({ x: { type: String } }));
         expect(wrapper.html()).toBe("<br>");
-        expect(mockSelectField).toHaveBeenCalledTimes(1);
-        expect(mockSelectField).toHaveBeenCalledWith(
-            expect.objectContaining({
-                allowedValues: ["ccc", "ddd"],
-                disabled: false,
-                error: null,
-                errorMessage: "",
-                required: true,
-                showInlineError: false,
-                value: undefined,
-                placeholder: "Search and select a location code..."
-            }),
-            {}
-        );
+        expect(wrapper.find(SelectField)).toHaveLength(1);
+        expect(wrapper.find(SelectField).props()).toMatchObject({
+            allowedValues: ["ccc", "ddd"],
+            disabled: false,
+            error: null,
+            errorMessage: "",
+            required: true,
+            showInlineError: false,
+            value: undefined,
+            placeholder: "Search and select a location code..."
+        });
     });
 });

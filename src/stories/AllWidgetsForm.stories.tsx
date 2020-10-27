@@ -87,6 +87,15 @@ function prepare() {
     mock.onGet("ims/nodes/Asd001a/PL").reply(200, imsNodes);
     mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("subscriptions/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, SUBSCRIPTION_JSON);
+    mock.onGet("v2/subscriptions/workflows/e89776be-16c3-4bee-af98-8e73bf6492a7").reply(200, {
+        create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
+        modify: [
+            { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
+            { description: "Change a SN8 IP BGP subscription", name: "modify_sn8_ip_bgp" }
+        ],
+        terminate: [{ description: "Terminate SN8 IP BGP", name: "terminate_sn8_ip_bgp" }],
+        system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
+    });
     mock.onGet("subscriptions/product/2b2125f2-a074-4e44-8d4b-edc677381d46").reply(200, imsNodes);
     mock.onGet("subscriptions/tag/IPS/").reply(200, []);
     mock.onGet("subscriptions/tag/IPBGP/").reply(200, []);

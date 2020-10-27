@@ -113,10 +113,10 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
                     </Link>
                     <EuiHeaderSectionItem border="right">
                         <EuiText grow={false}>
-                            <h2 className={`header__app-title ${environment}`}>
+                            <h1 className={`header__app-title ${environment}`}>
                                 {I18n.t("header.title")}
                                 {environment !== "production" && ` ${environment}`}
-                            </h2>
+                            </h1>
                         </EuiText>
                     </EuiHeaderSectionItem>
                 </EuiHeaderSectionItem>

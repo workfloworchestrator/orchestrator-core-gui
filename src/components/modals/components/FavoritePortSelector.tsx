@@ -10,10 +10,10 @@ import {
     EuiSpacer,
     EuiText
 } from "@elastic/eui";
-import { subscriptionsDetail } from "api";
+import { subscriptionsDetailWithModel } from "api";
 import I18n from "i18n-js";
 import React, { MouseEvent } from "react";
-import { FavoriteSubscriptionStorage, Subscription } from "utils/types";
+import { FavoriteSubscriptionStorage, Subscription, SubscriptionModel } from "utils/types";
 
 export const FAVORITE_STORAGE_KEY = "favoritePortsArray-v4";
 
@@ -33,7 +33,7 @@ interface IState {
     // ports
     portsLoaded: boolean;
     portSubscriptionsIds: string[];
-    ports: Subscription[];
+    ports: SubscriptionModel[];
     selectedPort?: string;
     selectedSubscription?: string;
 }
@@ -63,13 +63,13 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
     };
 
     loadData = () => {
-        let ports: Subscription[] = [];
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
-        let promises = portSubscriptionIds.map(subscription => subscriptionsDetail(subscription.subscription_id));
-        Promise.all(promises).then((result: [...Subscription[]]) => {
-            result.map(r => ports.push(r));
-            this.setState({ ports: ports, portsLoaded: true });
+        let promises = portSubscriptionIds.map(subscription =>
+            subscriptionsDetailWithModel(subscription.subscription_id)
+        );
+        Promise.all(promises).then(result => {
+            this.setState({ ports: result, portsLoaded: true });
         });
     };
 
@@ -79,7 +79,11 @@ export default class FavoritePortSelector extends React.PureComponent<IProps, IS
         let portSubscriptionIds: FavoriteSubscriptionStorage[];
         portSubscriptionIds = JSON.parse(localStorage.getItem(FAVORITE_STORAGE_KEY) as string) || [];
         const editName = portSubscriptionIds.find(item => item.subscription_id === subscription_id)?.customName ?? "";
-        this.setState({ selectedSubscription: subscription_id, editMode: !editMode, editName: editName });
+        this.setState({
+            selectedSubscription: subscription_id,
+            editMode: !editMode,
+            editName: editName
+        });
     };
 
     onDelete = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>, subscription_id: string) => {

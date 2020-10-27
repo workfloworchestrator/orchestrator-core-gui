@@ -116,20 +116,9 @@ export interface SubscriptionWithDetails extends Subscription {
     start_date_epoch: number;
     customer_descriptions: CustomerDescription[];
 }
-
-export interface SubscriptionModel {
-    name: string;
-    subscription_id: string;
-    description: string;
-    product: Product;
-    product_id: string;
-    status: string;
-    insync: boolean;
-    customer_id: string;
-    start_date: number;
-    end_date: number;
-    note: string;
-    vc?: any;
+export interface SubscriptionModel extends Subscription {
+    customer_descriptions: CustomerDescription[];
+    [index: string]: any;
 }
 export interface IpPrefixSubscription extends Subscription {
     id: number;
@@ -462,4 +451,10 @@ export interface Filter {
 export interface FixedInputConfiguration {
     by_tag: { [index: string]: { [index: string]: boolean }[] };
     fixed_inputs: { name: string; description: string; values: string[] }[];
+}
+
+export interface Dienstafname {
+    guid: string;
+    code: string;
+    status: string;
 }

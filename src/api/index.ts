@@ -17,6 +17,7 @@ import { setFlash } from "utils/Flash";
 import {
     CodedWorkflow,
     ContactPerson,
+    Dienstafname,
     EngineStatus,
     FixedInputConfiguration,
     FixedInputValidation,
@@ -37,12 +38,12 @@ import {
     ServicePortSubscription,
     Subscription,
     SubscriptionModel,
+    SubscriptionProcesses,
     Workflow,
     WorkflowReasons,
     WorkflowWithProductTags
 } from "utils/types";
 import { isEmpty } from "utils/Utils";
-import { absent, child_subscriptions, ims_port_id } from "validations/Subscriptions";
 
 import axiosInstance from "./axios";
 
@@ -187,12 +188,8 @@ export function paginatedSubscriptions(
     return fetchJson(`v2/subscriptions?range=${range}&sort=${sort}&filter=${filter}`);
 }
 
-export function subscriptionsDetail(subscription_id: string): Promise<Subscription> {
-    return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/${subscription_id}`);
-}
-
 export function subscriptionsDetailWithModel(subscription_id: string): Promise<SubscriptionModel> {
-    return fetchJsonWithCustomErrorHandling<Subscription>(`subscriptions/domain-model/${subscription_id}`);
+    return fetchJsonWithCustomErrorHandling<SubscriptionModel>(`subscriptions/domain-model/${subscription_id}`);
 }
 
 export function subscriptionsByTags(tagList: string[], statusList: string[] = []) {
@@ -324,61 +321,10 @@ export function parentSubscriptions(childSubscriptionId: string): Promise<Subscr
     return fetchJson(`subscriptions/parent_subscriptions/${childSubscriptionId}`);
 }
 
-export function childSubscriptions(parentSubscriptionId: string) {
-    return fetchJson(`subscriptions/child_subscriptions/${parentSubscriptionId}`).then(json => {
-        return { type: child_subscriptions, json: json };
-    });
-}
-
-export function getResourceTypeInfo(type: string, identifier: string) {
-    let promise;
-    switch (type) {
-        case ims_port_id:
-            promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_port/${identifier}`);
-            break;
-        case "ims_circuit_id":
-        case "ims_corelink_trunk_id":
-            promise = fetchJsonWithCustomErrorHandling(`ims/service_by_ims_service_id/${identifier}`);
-            break;
-        case "node_subscription_id":
-        case "port_subscription_id":
-        case "ip_prefix_subscription_id":
-        case "internetpinnen_prefix_subscription_id":
-        case "parent_ip_prefix_subscription_id":
-            promise = subscriptionsDetail(identifier);
-            break;
-        case "ptp_ipv4_ipam_id":
-        case "ptp_ipv6_ipam_id":
-        case "ipam_prefix_id":
-            promise = fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${identifier}`);
-            break;
-        case "node_ipv4_ipam_id":
-        case "node_ipv6_ipam_id":
-        case "corelink_ipv4_ipam_id":
-        case "corelink_ipv6_ipam_id":
-            promise = fetchJsonWithCustomErrorHandling(`ipam/address_by_id/${identifier}`);
-            break;
-        default:
-            promise = Promise.resolve({});
-    }
-    return (
-        promise
-            // IMS service is recorded in subscription_instance_value but removed from IMS - prevent error
-            .then(json => ({ type: type, json: json }))
-            .catch(err =>
-                Promise.resolve({
-                    type: absent,
-                    requestedType: type,
-                    identifier: identifier
-                })
-            )
-    );
-}
-
-export function processSubscriptionsBySubscriptionId(subscriptionId: string) {
-    return fetchJsonWithCustomErrorHandling(
+export function processSubscriptionsBySubscriptionId(subscriptionId: string): Promise<SubscriptionProcesses[]> {
+    return fetchJsonWithCustomErrorHandling<SubscriptionProcesses[]>(
         `processes/process-subscriptions-by-subscription-id/${subscriptionId}`
-    ).catch(err => Promise.resolve({}));
+    ).catch(err => Promise.resolve([]));
 }
 
 export function processSubscriptionsByProcessId(processId: string): Promise<ProcessSubscription[]> {
@@ -464,6 +410,10 @@ export function prefixById(prefixId: number) {
     return fetchJsonWithCustomErrorHandling(`ipam/prefix_by_id/${prefixId}`);
 }
 
+export function addressById(addressId: number) {
+    return fetchJsonWithCustomErrorHandling(`ipam/address_by_id/${addressId}`);
+}
+
 export function freeSubnets(supernet: string): Promise<string[]> {
     return fetchJson(`ipam/free_subnets/${supernet}`);
 }
@@ -546,6 +496,8 @@ export function ping() {
     return fetchJson("user/ping");
 }
 
-export function dienstafnameBySubscription(subscriptionId: string) {
-    return fetchJson(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err => Promise.resolve(undefined));
+export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
+    return fetchJson<Dienstafname>(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
+        Promise.resolve(undefined)
+    );
 }
