@@ -346,6 +346,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <div
                   className="form-input"
+                  maximum={1000000}
+                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -381,8 +383,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth1"
-                            max={1000000}
-                            min={0}
                             name="bandwidth1"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -609,6 +609,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-contact_persons"
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -810,7 +811,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -4268,6 +4269,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <div
                   className="form-input"
+                  multipleOf={null}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4319,6 +4321,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </div>
                 <div
                   className="form-input"
+                  maximum={1500}
+                  multipleOf={null}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4354,7 +4358,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-numeric2"
-                            max={1500}
                             name="numeric2"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4645,6 +4648,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports1"
+                  maxItems={2}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5176,7 +5180,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -5185,6 +5189,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports2"
+                  maxItems={2}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5716,7 +5721,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -5725,6 +5730,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports3"
+                  maxItems={2}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5988,6 +5994,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports4"
+                  maxItems={99}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6255,7 +6262,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <div
                           className="euiFlexItem"
                         >
-                          <div>
+                          <div
+                            maximum={1000000}
+                            minimum={0}
+                          >
                             <div
                               className="euiFormRow euiFormRow--fullWidth"
                               id="input-service_ports4.0.bandwidth-row"
@@ -6290,8 +6300,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       className="euiFieldNumber"
                                       disabled={false}
                                       id="input-service_ports4.0.bandwidth"
-                                      max={1000000}
-                                      min={0}
                                       name="service_ports4.0.bandwidth"
                                       onBlur={[Function]}
                                       onChange={[Function]}
@@ -6559,7 +6567,10 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         <div
                           className="euiFlexItem"
                         >
-                          <div>
+                          <div
+                            maximum={1000000}
+                            minimum={0}
+                          >
                             <div
                               className="euiFormRow euiFormRow--fullWidth"
                               id="input-service_ports4.1.bandwidth-row"
@@ -6594,8 +6605,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                                       className="euiFieldNumber"
                                       disabled={false}
                                       id="input-service_ports4.1.bandwidth"
-                                      max={1000000}
-                                      min={0}
                                       name="service_ports4.1.bandwidth"
                                       onBlur={[Function]}
                                       onChange={[Function]}
@@ -6638,6 +6647,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports5"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6909,7 +6920,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -6920,7 +6931,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -6929,6 +6940,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports6"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -7192,6 +7205,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports7"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -7455,6 +7470,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports8"
+                  maxItems={6}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9334,6 +9351,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn82"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9629,7 +9648,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -9640,7 +9659,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -9649,6 +9668,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn83"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -9944,7 +9965,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -9955,7 +9976,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -9964,6 +9985,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn84"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10259,7 +10282,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -10270,7 +10293,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus disabled"
+                        className="fa fa-plus "
                       />
                       <label />
                     </div>
@@ -10279,6 +10302,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn85"
+                  maxItems={1}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10542,6 +10567,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports_sn86"
+                  maxItems={6}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -10837,7 +10864,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus disabled"
+                          className="fa fa-minus "
                         />
                         <label />
                       </div>
@@ -11684,6 +11711,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-subscriptions1"
+                  maxItems={99}
+                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -12086,6 +12115,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 <section
                   className="list-field"
                   id="input-subscriptions2"
+                  maxItems={99}
+                  minItems={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -12695,6 +12726,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </section>
                 <div
                   className="form-input"
+                  maximum={1000000}
+                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -12730,8 +12763,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth2"
-                            max={1000000}
-                            min={0}
                             name="bandwidth2"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -12748,6 +12779,8 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                 </div>
                 <div
                   className="form-input"
+                  maximum={1000000}
+                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -12783,8 +12816,6 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                             className="euiFieldNumber"
                             disabled={true}
                             id="input-bandwidth3"
-                            max={1000000}
-                            min={0}
                             name="bandwidth3"
                             onBlur={[Function]}
                             onChange={[Function]}
