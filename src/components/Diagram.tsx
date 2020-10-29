@@ -1,18 +1,11 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
-import {
-    internalPortByImsPortId,
-    portByImsPortId,
-    portByImsServiceId,
-    serviceByImsServiceId,
-    subscriptionWorkflows
-} from "api";
+import { internalPortByImsPortId, portByImsPortId, portByImsServiceId, serviceByImsServiceId } from "api";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
 import {
     IMSEndpoint,
     IMSService,
-    InstanceValue,
     SubscriptionInstance,
     SubscriptionInstanceParentRelation,
     SubscriptionModel,
@@ -33,6 +26,7 @@ interface IState {
     isTableOn: boolean;
     imsServices: any[];
     imsEndpoints: any[];
+    isLoading: boolean;
 }
 
 export interface SubscriptionInstanceExtended extends SubscriptionInstance {
@@ -100,7 +94,7 @@ const circuitTypeProperties = {
 
 const graphList: Graph[] = [];
 
-export default class NetworkDiagram extends React.PureComponent<IProps, IState> {
+export default class NetworkDiagram extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
@@ -108,7 +102,8 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
             _selectedCircuit: {},
             isTableOn: false,
             imsEndpoints: [],
-            imsServices: []
+            imsServices: [],
+            isLoading: false
         };
     }
 
@@ -166,9 +161,15 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
             this.setState({ imsEndpoints: imsEndpoints });
             // forceUpdate is a bit rough, but this.setState() does not
             // trigger a re-render, so we have to.
-            this.forceUpdate();
+            // console.log(`all done.`);
+            // this.forceUpdate();
         });
     };
+
+    shouldComponentUpdate(nextProps: IProps, nextState: IState): boolean {
+        // console.log(`should we really update?`);
+        return true;
+    }
 
     _findImsEndpoint = (imsIndex: number, id: number) => {
         return this.state.imsServices[imsIndex].endpoints.find((e: any) => e.id === id);
@@ -267,8 +268,6 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
         if (imsEndpoints.length === 0 || imsEndpoints.length < vcs.length || !subscription) {
             return;
         }
-        console.log(imsEndpoints);
-        console.log(vcs);
 
         const makeObject = (
             expl: string | JSX.Element,
@@ -293,6 +292,9 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
             const memberList: GraphMember[] = [];
             const graphTitle = circuit.label !== null ? ` - ${circuit.label}` : "";
             let { subscription } = this.props;
+            if (!imsEndpoints[graphIndex]) {
+                return;
+            }
             imsEndpoints[graphIndex].forEach((imsEndpoint: IMSEndpoint) => {
                 const endpointFromService = this._findImsEndpoint(graphIndex, imsEndpoint.serviceId);
                 if (!endpointFromService || endpointFromService.endpointType === "trunk") {
@@ -359,10 +361,11 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
 
     render() {
         const { subscription } = this.props;
-        const { imsServices, imsEndpoints } = this.state;
+        const { imsServices, imsEndpoints, isLoading } = this.state;
 
         const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
-        if (vcs.length > 0 && isEmpty(imsServices)) {
+        if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
+            this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
                 serviceByImsServiceId(vc.ims_circuit_id).then(result => {
                     imsServices[vcIndex] = result;

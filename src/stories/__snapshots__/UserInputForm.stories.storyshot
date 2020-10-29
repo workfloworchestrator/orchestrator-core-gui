@@ -175,7 +175,6 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                 <section
                   className="list-field"
                   id="input-contact_persons"
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -377,7 +376,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -2222,8 +2221,6 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -2259,6 +2256,8 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -2276,8 +2275,6 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -2549,7 +2546,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -2798,8 +2795,6 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -2835,6 +2830,8 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -2852,8 +2849,6 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3125,7 +3120,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -3236,8 +3231,6 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={2}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3509,7 +3502,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -3528,8 +3521,6 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3565,6 +3556,8 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-current_bandwidth"
+                            max={1000000}
+                            min={0}
                             name="current_bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3581,8 +3574,6 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                 </div>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3618,6 +3609,8 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-new_bandwidth"
+                            max={1000000}
+                            min={0}
                             name="new_bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3864,8 +3857,6 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -3901,6 +3892,8 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -3918,8 +3911,6 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4191,7 +4182,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -4440,8 +4431,6 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4477,6 +4466,8 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -4494,8 +4485,6 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={2}
-                  minItems={2}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -4791,7 +4780,280 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
+                        id="input-service_ports.1"
+                      >
+                        
+                        <div
+                          className="euiFlexItem"
+                        >
+                          <section
+                            className=" subscription-field"
+                          >
+                            <div
+                              className="euiFormRow euiFormRow--fullWidth"
+                              id="input-service_ports.1.subscription_id-row"
+                            >
+                              <div
+                                className="euiFormRow__labelWrapper"
+                              >
+                                <label
+                                  aria-invalid={null}
+                                  className="euiFormLabel euiFormRow__label"
+                                  htmlFor="input-service_ports.1.subscription_id"
+                                >
+                                  
+                                </label>
+                                 
+                                <div
+                                  className="euiText euiText--medium"
+                                >
+                                  
+                                </div>
+                              </div>
+                              <div
+                                className="euiFormRow__fieldWrapper"
+                              >
+                                <div
+                                  id="input-service_ports.1.subscription_id"
+                                  onBlur={[Function]}
+                                  onFocus={[Function]}
+                                >
+                                  <button
+                                    aria-label="reload-"
+                                    className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    id="refresh-icon-input-service_ports.1.subscription_id"
+                                    onClick={[Function]}
+                                    type="button"
+                                  >
+                                    <svg
+                                      aria-hidden={true}
+                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      focusable="false"
+                                      height={16}
+                                      role="img"
+                                      style={null}
+                                      viewBox="0 0 16 16"
+                                      width={16}
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    aria-label="service-port-modal-service_ports.1.subscription_id"
+                                    className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    id="filter-icon-input-service_ports.1.subscription_id"
+                                    onClick={[Function]}
+                                    type="button"
+                                  >
+                                    <svg
+                                      aria-hidden={true}
+                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      focusable="false"
+                                      height={16}
+                                      role="img"
+                                      style={null}
+                                      viewBox="0 0 16 16"
+                                      width={16}
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                        fillRule="evenodd"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div
+                                    className="subscription-field-select css-2b097c-container"
+                                    id="input-service_ports.1.subscription_id"
+                                    onKeyDown={[Function]}
+                                  >
+                                    <div
+                                      className=" css-yk16xz-control"
+                                      onMouseDown={[Function]}
+                                      onTouchEnd={[Function]}
+                                    >
+                                      <div
+                                        className=" css-g1d714-ValueContainer"
+                                      >
+                                        <div
+                                          className=" css-1wa3eu0-placeholder"
+                                        >
+                                          Search and select a subscription...
+                                        </div>
+                                        <div
+                                          className="css-b8ldur-Input"
+                                        >
+                                          <div
+                                            className=""
+                                            style={
+                                              Object {
+                                                "display": "inline-block",
+                                              }
+                                            }
+                                          >
+                                            <input
+                                              aria-autocomplete="list"
+                                              autoCapitalize="none"
+                                              autoComplete="off"
+                                              autoCorrect="off"
+                                              disabled={false}
+                                              id="input-service_ports.1.subscription_id.search"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              spellCheck="false"
+                                              style={
+                                                Object {
+                                                  "background": 0,
+                                                  "border": 0,
+                                                  "boxSizing": "content-box",
+                                                  "color": "inherit",
+                                                  "fontSize": "inherit",
+                                                  "label": "input",
+                                                  "opacity": 1,
+                                                  "outline": 0,
+                                                  "padding": 0,
+                                                  "width": "1px",
+                                                }
+                                              }
+                                              tabIndex="0"
+                                              type="text"
+                                              value=""
+                                            />
+                                            <div
+                                              style={
+                                                Object {
+                                                  "height": 0,
+                                                  "left": 0,
+                                                  "overflow": "scroll",
+                                                  "position": "absolute",
+                                                  "top": 0,
+                                                  "visibility": "hidden",
+                                                  "whiteSpace": "pre",
+                                                }
+                                              }
+                                            >
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div
+                                        className=" css-1hb7zxy-IndicatorsContainer"
+                                      >
+                                        <span
+                                          className=" css-1okebmr-indicatorSeparator"
+                                        />
+                                        <div
+                                          aria-hidden="true"
+                                          className=" css-tlfecz-indicatorContainer"
+                                          onMouseDown={[Function]}
+                                          onTouchEnd={[Function]}
+                                        >
+                                          <svg
+                                            aria-hidden="true"
+                                            className="css-6q0nyr-Svg"
+                                            focusable="false"
+                                            height={20}
+                                            viewBox="0 0 20 20"
+                                            width={20}
+                                          >
+                                            <path
+                                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                            />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <input
+                                      name="service_ports.1.subscription_id"
+                                      type="hidden"
+                                      value=""
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                        <div
+                          className="euiFlexItem"
+                        >
+                          <section>
+                            <div
+                              className="euiFormRow euiFormRow--fullWidth"
+                              id="input-service_ports.1.vlan-row"
+                            >
+                              <div
+                                className="euiFormRow__labelWrapper"
+                              >
+                                <label
+                                  aria-invalid={null}
+                                  className="euiFormLabel euiFormRow__label"
+                                  htmlFor="input-service_ports.1.vlan"
+                                >
+                                  
+                                </label>
+                                 
+                                <div
+                                  className="euiText euiText--medium"
+                                >
+                                  
+                                </div>
+                              </div>
+                              <div
+                                className="euiFormRow__fieldWrapper"
+                              >
+                                <div
+                                  className="euiFormControlLayout euiFormControlLayout--fullWidth"
+                                >
+                                  <div
+                                    className="euiFormControlLayout__childrenWrapper"
+                                  >
+                                    <input
+                                      aria-describedby="input-service_ports.1.vlan-help"
+                                      className="euiFieldText euiFieldText--fullWidth"
+                                      disabled={true}
+                                      id="input-service_ports.1.vlan"
+                                      name="service_ports.1.vlan"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      placeholder="First select a Service Port..."
+                                      type="text"
+                                      value=""
+                                    />
+                                  </div>
+                                </div>
+                                <div
+                                  className="euiFormHelpText euiFormRow__text"
+                                  id="input-service_ports.1.vlan-help"
+                                >
+                                  This service port has no VLANs in use (yet).
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                      <div
+                        className="del-item"
+                        id="input-service_ports.1.remove"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -4802,7 +5064,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                       onClick={[Function]}
                     >
                       <i
-                        className="fa fa-plus "
+                        className="fa fa-plus disabled"
                       />
                       <label />
                     </div>
@@ -5040,8 +5302,6 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5077,6 +5337,8 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5094,8 +5356,6 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5391,7 +5651,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -5640,8 +5900,6 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5677,6 +5935,8 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -5694,8 +5954,6 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={2}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -5991,7 +6249,280 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
+                        />
+                        <label />
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive  nest-field"
+                        id="input-service_ports.1"
+                      >
+                        
+                        <div
+                          className="euiFlexItem"
+                        >
+                          <section
+                            className=" subscription-field"
+                          >
+                            <div
+                              className="euiFormRow euiFormRow--fullWidth"
+                              id="input-service_ports.1.subscription_id-row"
+                            >
+                              <div
+                                className="euiFormRow__labelWrapper"
+                              >
+                                <label
+                                  aria-invalid={null}
+                                  className="euiFormLabel euiFormRow__label"
+                                  htmlFor="input-service_ports.1.subscription_id"
+                                >
+                                  
+                                </label>
+                                 
+                                <div
+                                  className="euiText euiText--medium"
+                                >
+                                  
+                                </div>
+                              </div>
+                              <div
+                                className="euiFormRow__fieldWrapper"
+                              >
+                                <div
+                                  id="input-service_ports.1.subscription_id"
+                                  onBlur={[Function]}
+                                  onFocus={[Function]}
+                                >
+                                  <button
+                                    aria-label="reload-"
+                                    className="euiButtonIcon euiButtonIcon--primary reload-subscriptions-icon-button"
+                                    id="refresh-icon-input-service_ports.1.subscription_id"
+                                    onClick={[Function]}
+                                    type="button"
+                                  >
+                                    <svg
+                                      aria-hidden={true}
+                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      focusable="false"
+                                      height={16}
+                                      role="img"
+                                      style={null}
+                                      viewBox="0 0 16 16"
+                                      width={16}
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M11.228 2.942a.5.5 0 11-.538.842A5 5 0 1013 8a.5.5 0 111 0 6 6 0 11-2.772-5.058zM14 1.5v3A1.5 1.5 0 0112.5 6h-3a.5.5 0 010-1h3a.5.5 0 00.5-.5v-3a.5.5 0 111 0z"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    aria-label="service-port-modal-service_ports.1.subscription_id"
+                                    className="euiButtonIcon euiButtonIcon--primary show-service-port-modal-icon-button"
+                                    id="filter-icon-input-service_ports.1.subscription_id"
+                                    onClick={[Function]}
+                                    type="button"
+                                  >
+                                    <svg
+                                      aria-hidden={true}
+                                      className="euiIcon euiIcon--large euiButtonIcon__icon"
+                                      focusable="false"
+                                      height={16}
+                                      role="img"
+                                      style={null}
+                                      viewBox="0 0 16 16"
+                                      width={16}
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M7.999 15.999a8 8 0 110-16 8 8 0 010 16zM8 15A7 7 0 108 1a7 7 0 000 14zM3.5 5h9a.5.5 0 110 1h-9a.5.5 0 010-1zm2 3h5a.5.5 0 110 1h-5a.5.5 0 010-1zm2 3h1a.5.5 0 110 1h-1a.5.5 0 110-1z"
+                                        fillRule="evenodd"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div
+                                    className="subscription-field-select css-2b097c-container"
+                                    id="input-service_ports.1.subscription_id"
+                                    onKeyDown={[Function]}
+                                  >
+                                    <div
+                                      className=" css-yk16xz-control"
+                                      onMouseDown={[Function]}
+                                      onTouchEnd={[Function]}
+                                    >
+                                      <div
+                                        className=" css-g1d714-ValueContainer"
+                                      >
+                                        <div
+                                          className=" css-1wa3eu0-placeholder"
+                                        >
+                                          Search and select a subscription...
+                                        </div>
+                                        <div
+                                          className="css-b8ldur-Input"
+                                        >
+                                          <div
+                                            className=""
+                                            style={
+                                              Object {
+                                                "display": "inline-block",
+                                              }
+                                            }
+                                          >
+                                            <input
+                                              aria-autocomplete="list"
+                                              autoCapitalize="none"
+                                              autoComplete="off"
+                                              autoCorrect="off"
+                                              disabled={false}
+                                              id="input-service_ports.1.subscription_id.search"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              spellCheck="false"
+                                              style={
+                                                Object {
+                                                  "background": 0,
+                                                  "border": 0,
+                                                  "boxSizing": "content-box",
+                                                  "color": "inherit",
+                                                  "fontSize": "inherit",
+                                                  "label": "input",
+                                                  "opacity": 1,
+                                                  "outline": 0,
+                                                  "padding": 0,
+                                                  "width": "1px",
+                                                }
+                                              }
+                                              tabIndex="0"
+                                              type="text"
+                                              value=""
+                                            />
+                                            <div
+                                              style={
+                                                Object {
+                                                  "height": 0,
+                                                  "left": 0,
+                                                  "overflow": "scroll",
+                                                  "position": "absolute",
+                                                  "top": 0,
+                                                  "visibility": "hidden",
+                                                  "whiteSpace": "pre",
+                                                }
+                                              }
+                                            >
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div
+                                        className=" css-1hb7zxy-IndicatorsContainer"
+                                      >
+                                        <span
+                                          className=" css-1okebmr-indicatorSeparator"
+                                        />
+                                        <div
+                                          aria-hidden="true"
+                                          className=" css-tlfecz-indicatorContainer"
+                                          onMouseDown={[Function]}
+                                          onTouchEnd={[Function]}
+                                        >
+                                          <svg
+                                            aria-hidden="true"
+                                            className="css-6q0nyr-Svg"
+                                            focusable="false"
+                                            height={20}
+                                            viewBox="0 0 20 20"
+                                            width={20}
+                                          >
+                                            <path
+                                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                                            />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <input
+                                      name="service_ports.1.subscription_id"
+                                      type="hidden"
+                                      value=""
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                        <div
+                          className="euiFlexItem"
+                        >
+                          <section>
+                            <div
+                              className="euiFormRow euiFormRow--fullWidth"
+                              id="input-service_ports.1.vlan-row"
+                            >
+                              <div
+                                className="euiFormRow__labelWrapper"
+                              >
+                                <label
+                                  aria-invalid={null}
+                                  className="euiFormLabel euiFormRow__label"
+                                  htmlFor="input-service_ports.1.vlan"
+                                >
+                                  
+                                </label>
+                                 
+                                <div
+                                  className="euiText euiText--medium"
+                                >
+                                  
+                                </div>
+                              </div>
+                              <div
+                                className="euiFormRow__fieldWrapper"
+                              >
+                                <div
+                                  className="euiFormControlLayout euiFormControlLayout--fullWidth"
+                                >
+                                  <div
+                                    className="euiFormControlLayout__childrenWrapper"
+                                  >
+                                    <input
+                                      aria-describedby="input-service_ports.1.vlan-help"
+                                      className="euiFieldText euiFieldText--fullWidth"
+                                      disabled={true}
+                                      id="input-service_ports.1.vlan"
+                                      name="service_ports.1.vlan"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      placeholder="First select a Service Port..."
+                                      type="text"
+                                      value=""
+                                    />
+                                  </div>
+                                </div>
+                                <div
+                                  className="euiFormHelpText euiFormRow__text"
+                                  id="input-service_ports.1.vlan-help"
+                                >
+                                  This service port has no VLANs in use (yet).
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                      <div
+                        className="del-item"
+                        id="input-service_ports.1.remove"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>
@@ -6240,8 +6771,6 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 </section>
                 <div
                   className="form-input"
-                  maximum={1000000}
-                  minimum={0}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6277,6 +6806,8 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                             className="euiFieldNumber"
                             disabled={false}
                             id="input-bandwidth"
+                            max={1000000}
+                            min={0}
                             name="bandwidth"
                             onBlur={[Function]}
                             onChange={[Function]}
@@ -6294,8 +6825,6 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                 <section
                   className="list-field"
                   id="input-service_ports"
-                  maxItems={6}
-                  minItems={1}
                 >
                   <div
                     className="euiFormRow euiFormRow--fullWidth"
@@ -6591,7 +7120,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                         onClick={[Function]}
                       >
                         <i
-                          className="fa fa-minus "
+                          className="fa fa-minus disabled"
                         />
                         <label />
                       </div>

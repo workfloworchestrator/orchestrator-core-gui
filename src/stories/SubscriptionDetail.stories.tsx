@@ -104,8 +104,58 @@ export const Subscription = () => {
         speed: "10GBASE-SR",
         status: "3"
     });
+    mock.onGet("ims/service_by_ims_service_id/62409").reply(200, {
+        customer_descriptions: [],
+        aliases: ["SUBSCRIPTION_ID=86AB6D33-C06F-4C3F-9614-36F6171475C1"],
+        customer_id: "88503161-0911-E511-80D0-005056956C1A",
+        domain: "SURFNET8",
+        endpoints: [
+            {
+                id: 45045,
+                type: "service",
+                vlanranges: [
+                    {
+                        end: 0,
+                        start: 0,
+                        sub_circuit_id: null
+                    }
+                ]
+            },
+            {
+                id: 31420,
+                type: "internet",
+                vlanranges: [
+                    {
+                        end: 0,
+                        start: 0,
+                        sub_circuit_id: null
+                    }
+                ]
+            },
+            {
+                id: 44835,
+                type: "service",
+                vlanranges: [
+                    {
+                        end: 0,
+                        start: 0,
+                        sub_circuit_id: null
+                    }
+                ]
+            }
+        ],
+        extra_info: "1 Gbit/s SN8 SURFinternet BGP in EINDHOVEN en MAASTRICHT van Design Academy Eindhoven",
+        id: 62409,
+        location: null,
+        name: "MT007A_EHV001B_IP_BGP_DESIGNACADEMY_86AB6D33",
+        order_id: "SN8 PROCESS 89A28434-D570-4C04-B87C-210C7465A0C5",
+        product: "IP",
+        speed: "SERVICE",
+        status: "IS"
+    });
 
-    mock.onGet("ims/service_by_ims_service_id/31420").reply(200, {
+    mock.onGet(/ims\/service_by_ims_service_id\/(31420|44835|45045)/).reply(200, {
+        customer_descriptions: [],
         aliases: [],
         customer_id: "C9B5E717-0B11-E511-80D0-005056956C1A",
         domain: null,
@@ -130,6 +180,18 @@ export const Subscription = () => {
         patchposition: "DTC001A_ODF01/02 ()",
         port: "0/1/1",
         status: "3"
+    });
+    mock.onGet("ims/port_by_ims_port/683015").reply(200, {
+        connector_type: "LC/PC",
+        fiber_type: "multi-mode",
+        id: 683015,
+        iface_type: "10GBASE-SR",
+        line_name: "DTC001A_SP_UNTAGGED_GRAAFSCHAP_F9ACBF45",
+        location: "DTC001A",
+        node: "DTC001A-JNX-02",
+        patchposition: "DTC001A_ODF01/02 ()",
+        port: "0/1/1",
+        status: "IS"
     });
     mock.onGet("subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653").reply(200, SN8PortSubscriptions[0]);
     mock.onGet("ipam/prefix_by_id/166").reply(200, {

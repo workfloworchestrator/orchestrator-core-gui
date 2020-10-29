@@ -212,6 +212,18 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                 </tr>
                 <tr>
                   <td
+                    id="subscriptions-customer-descriptions-k"
+                  >
+                    Customer description(s)
+                  </td>
+                  <td
+                    id="subscriptions-customer-descriptions-v"
+                  >
+                    <dl />
+                  </td>
+                </tr>
+                <tr>
+                  <td
                     id="subscriptions-stats_in_grafana-k"
                   >
                     Stats (SN8/NL8 products only)
@@ -260,6 +272,1080 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
             </table>
           </div>
         </section>
+        <div
+          className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionRow euiFlexGroup--responsive"
+        >
+          <div
+            className="euiFlexItem euiFlexItem--flexGrow7"
+          >
+            <svg
+              className="circuit-container"
+              style={
+                Object {
+                  "borderBottomColor": "#EFEFEF",
+                  "borderBottomStyle": "solid",
+                  "borderTopColor": "#FFFFFF",
+                  "borderTopStyle": "solid",
+                  "borderWidth": 1,
+                  "height": 250,
+                  "width": "100%",
+                }
+              }
+            >
+              <text
+                className="circuit-title"
+                style={
+                  Object {
+                    "fill": "#9D9D9D",
+                    "fontFamily": "verdana, sans-serif",
+                    "fontSize": 14,
+                    "textAnchor": "left",
+                  }
+                }
+                x={10}
+                y={15}
+              >
+                Network diagram
+              </text>
+              <g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={100}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={232.75}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                    <text
+                      className="map-node-label map-node-label-circle"
+                      style={
+                        Object {
+                          "fill": "#9D9D9D",
+                          "fontFamily": "verdana, sans-serif",
+                          "fontSize": 10,
+                        }
+                      }
+                      textAnchor="end"
+                      transform="rotate(-45 234.75, 100.5)"
+                      x={234.75}
+                      y={100.5}
+                    >
+                      0-0
+                    </text>
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={272.75}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={405.5}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={445.5}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                    <text
+                      className="map-node-label map-node-label-circle"
+                      style={
+                        Object {
+                          "fill": "#9D9D9D",
+                          "fontFamily": "verdana, sans-serif",
+                          "fontSize": 10,
+                        }
+                      }
+                      textAnchor="end"
+                      transform="rotate(-45 447.5, 100.5)"
+                      x={447.5}
+                      y={100.5}
+                    >
+                      0-0
+                    </text>
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={578.25}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={618.25}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                    <text
+                      className="map-node-label map-node-label-circle"
+                      style={
+                        Object {
+                          "fill": "#9D9D9D",
+                          "fontFamily": "verdana, sans-serif",
+                          "fontSize": 10,
+                        }
+                      }
+                      textAnchor="end"
+                      transform="rotate(-45 620.25, 100.5)"
+                      x={620.25}
+                      y={100.5}
+                    >
+                      0-0
+                    </text>
+                  </g>
+                </g>
+                <g>
+                  <g
+                    onClick={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <circle
+                      className="map-node map-node-shape-circle"
+                      cx={751}
+                      cy={62.5}
+                      r={7}
+                      style={
+                        Object {
+                          "fill": "none",
+                          "shape": "square",
+                          "stroke": "#DBDBDB",
+                          "strokeWidth": 4,
+                        }
+                      }
+                    />
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        opacity={1}
+                        stroke="#1f77b4"
+                        strokeWidth={3}
+                      >
+                        <path
+                          className="edge-linear edge circuit"
+                          d="M100,62.5 L 108 62.5 L 224.75 62.5 L 232.75 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 166.375, 62.5)"
+                        >
+                          <tspan
+                            x={169.035}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <path
+                          className="edge-linear edge-event-region edge circuit"
+                          d="M100,62.5 L 108 62.5 L 224.75 62.5 L 232.75 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 166.375, 62.5)"
+                        >
+                          <tspan
+                            x={169.035}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={100}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={232.75}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={1}
+                        stroke="#737373"
+                        strokeWidth={1}
+                      >
+                        <rect
+                          className="edge-square edge circuit edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 232.75, 62.5)"
+                          width={40}
+                          x={232.75}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge circuit edge circuit"
+                          d="M252.75,77.5 L 252.75 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <rect
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 232.75, 62.5)"
+                          width={40}
+                          x={232.75}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          d="M252.75,77.5 L 252.75 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={232.75}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={272.75}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        opacity={1}
+                        stroke="#1f77b4"
+                        strokeWidth={3}
+                      >
+                        <path
+                          className="edge-linear edge circuit"
+                          d="M272.75,62.5 L 280.75 62.5 L 397.5 62.5 L 405.5 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 339.125, 62.5)"
+                        >
+                          <tspan
+                            x={341.785}
+                            y={55.5}
+                          >
+                            1000
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <path
+                          className="edge-linear edge-event-region edge circuit"
+                          d="M272.75,62.5 L 280.75 62.5 L 397.5 62.5 L 405.5 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 339.125, 62.5)"
+                        >
+                          <tspan
+                            x={341.785}
+                            y={55.5}
+                          >
+                            1000
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={272.75}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={405.5}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={1}
+                        stroke="#737373"
+                        strokeWidth={1}
+                      >
+                        <rect
+                          className="edge-square edge circuit edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 405.5, 62.5)"
+                          width={40}
+                          x={405.5}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge circuit edge circuit"
+                          d="M425.5,77.5 L 425.5 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <rect
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 405.5, 62.5)"
+                          width={40}
+                          x={405.5}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          d="M425.5,77.5 L 425.5 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={405.5}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={445.5}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        opacity={1}
+                        stroke="#1f77b4"
+                        strokeWidth={3}
+                      >
+                        <path
+                          className="edge-linear edge circuit"
+                          d="M445.5,62.5 L 453.5 62.5 L 570.25 62.5 L 578.25 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 511.875, 62.5)"
+                        >
+                          <tspan
+                            x={514.535}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <path
+                          className="edge-linear edge-event-region edge circuit"
+                          d="M445.5,62.5 L 453.5 62.5 L 570.25 62.5 L 578.25 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 511.875, 62.5)"
+                        >
+                          <tspan
+                            x={514.535}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={445.5}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={578.25}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={1}
+                        stroke="#737373"
+                        strokeWidth={1}
+                      >
+                        <rect
+                          className="edge-square edge circuit edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 578.25, 62.5)"
+                          width={40}
+                          x={578.25}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge circuit edge circuit"
+                          d="M598.25,77.5 L 598.25 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        onClick={[Function]}
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <rect
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          fill="#E8E8E8"
+                          height={30}
+                          rx={5}
+                          ry={5}
+                          transform="rotate(0 578.25, 62.5)"
+                          width={40}
+                          x={578.25}
+                          y={47.5}
+                        />
+                        <path
+                          className="edge-square edge-event-region edge circuit edge-event-region edge circuit"
+                          d="M598.25,77.5 L 598.25 47.5"
+                          fill="none"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={578.25}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={618.25}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "#F8F8F8",
+                                "stroke": "#737373",
+                                "strokeWidth": 1,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <g>
+                      <g
+                        opacity={1}
+                        stroke="#1f77b4"
+                        strokeWidth={3}
+                      >
+                        <path
+                          className="edge-linear edge circuit"
+                          d="M618.25,62.5 L 626.25 62.5 L 743 62.5 L 751 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 684.625, 62.5)"
+                        >
+                          <tspan
+                            x={687.285}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g
+                    onMouseOut={[Function]}
+                    onMouseOver={[Function]}
+                  >
+                    <g>
+                      <g
+                        opacity={0}
+                        stroke="#FFF"
+                        strokeWidth={8}
+                      >
+                        <path
+                          className="edge-linear edge-event-region edge circuit"
+                          d="M618.25,62.5 L 626.25 62.5 L 743 62.5 L 751 62.5"
+                          fill="none"
+                          onClick={[Function]}
+                        />
+                      </g>
+                      <g>
+                        <text
+                          style={
+                            Object {
+                              "fill": "#9D9D9D",
+                              "fontFamily": "verdana, sans-serif",
+                              "fontSize": 10,
+                            }
+                          }
+                          textAnchor="middle"
+                          transform="rotate(0 684.625, 62.5)"
+                        >
+                          <tspan
+                            x={687.285}
+                            y={55.5}
+                          >
+                            1000 @ undefined
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={618.25}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                      <g>
+                        <g
+                          onClick={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseOver={[Function]}
+                        >
+                          <circle
+                            className="map-node map-node-shape-circle"
+                            cx={751}
+                            cy={62.5}
+                            r={2}
+                            style={
+                              Object {
+                                "fill": "none",
+                                "stroke": "#737373",
+                                "strokeWidth": 4,
+                              }
+                            }
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div
+            className="euiFlexItem euiFlexItem--flexGrow3"
+          />
+        </div>
         <section
           className="details"
         >
