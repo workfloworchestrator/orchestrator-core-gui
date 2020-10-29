@@ -43,7 +43,7 @@ interface IProps {
 
 interface IState {
     sorted: SortOption;
-    subscriptions: SubscriptionWithDetails[];
+    subscriptions?: SubscriptionWithDetails[];
     confirmationDialogOpen: boolean;
     confirmationDialogAction: () => void;
     confirm: () => void;
@@ -51,19 +51,13 @@ interface IState {
 }
 
 export default class SubscriptionValidation extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-        const { subscriptions } = this.props;
-        const { organisations, products } = this.context;
-        this.state = {
-            sorted: { name: "status", descending: false },
-            subscriptions: subscriptions.map(subscription => enrichSubscription(subscription, organisations, products)),
-            confirmationDialogOpen: false,
-            confirmationDialogAction: () => this,
-            confirm: () => this,
-            confirmationDialogQuestion: ""
-        };
-    }
+    state: IState = {
+        sorted: { name: "status", descending: false },
+        confirmationDialogOpen: false,
+        confirmationDialogAction: () => this,
+        confirm: () => this,
+        confirmationDialogQuestion: ""
+    };
 
     componentDidUpdate(prevProps: IProps) {
         const { subscriptions } = this.props;
@@ -91,7 +85,7 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
     sort = (name: Column) => (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
         stop(e);
         const sorted = { ...this.state.sorted };
-        const subscriptions = [...this.state.subscriptions].sort(this.sortBy(name));
+        const subscriptions = [...(this.state.subscriptions ?? [])].sort(this.sortBy(name));
 
         sorted.descending = sorted.name === name ? !sorted.descending : false;
         sorted.name = name;
@@ -239,7 +233,9 @@ export default class SubscriptionValidation extends React.Component<IProps, ISta
                     question={confirmationDialogQuestion}
                 />
                 <h3>{I18n.t("validations.workflow_key", { workflow: workflow })}</h3>
-                <section className="subscriptions">{this.renderSubscriptionsTable(subscriptions, sorted)}</section>
+                <section className="subscriptions">
+                    {this.renderSubscriptionsTable(subscriptions ?? [], sorted)}
+                </section>
             </section>
         );
     }

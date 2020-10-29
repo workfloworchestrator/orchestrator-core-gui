@@ -4,13 +4,12 @@ exports[`<ContactPersonNameField> - selects item with keystrokes 1`] = `
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000y-row",
         },
         "children": Array [
@@ -1122,7 +1121,7 @@ initialize {
         "parent": [Circular],
         "prev": Object {
           "attribs": Object {
-            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+            "class": "euiFormRow euiFormRow--fullWidth",
             "id": "uniforms-0000-000y-row",
           },
           "children": Array [
@@ -1658,11 +1657,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },
@@ -1681,13 +1678,12 @@ exports[`<ContactPersonNameField> - selects item with keystrokes 2`] = `
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000y-row",
         },
         "children": Array [
@@ -2221,7 +2217,7 @@ initialize {
         "parent": [Circular],
         "prev": Object {
           "attribs": Object {
-            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+            "class": "euiFormRow euiFormRow--fullWidth",
             "id": "uniforms-0000-000y-row",
           },
           "children": Array [
@@ -2757,11 +2753,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },

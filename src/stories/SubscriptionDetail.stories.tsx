@@ -14,16 +14,15 @@
  */
 
 import mock from "axios-mock";
-import SubscriptionDetail from "pages/SubscriptionDetail";
+import SubscriptionDetailPage from "pages/SubscriptionDetailPage";
 import React from "react";
 import PRODUCTS from "stories/data/products.json";
 import SUBSCRIPTION_MODEL_JSON from "stories/data/subscription-model.json";
-import SUBSCRIPTION_JSON from "stories/data/subscription.json";
 import SN8PortSubscriptions from "stories/data/subscriptions-sn8-ports.json";
 import StoryRouter from "storybook-react-router";
 
 export default {
-    title: "SubscriptionDetail",
+    title: "SubscriptionDetailPage",
     decorators: [StoryRouter()],
     // Needed to match snapshot file to story, should be done by injectFileNames but that does not work
     parameters: {
@@ -33,9 +32,8 @@ export default {
 
 export const Subscription = () => {
     mock.reset();
-    mock.onGet("subscriptions/pid").reply(200, SUBSCRIPTION_JSON);
     mock.onGet("subscriptions/domain-model/pid").reply(200, SUBSCRIPTION_MODEL_JSON);
-    mock.onGet("processes/process-subscriptions-by-subscription-id/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, [
+    mock.onGet("processes/process-subscriptions-by-subscription-id/pid").reply(200, [
         {
             created_at: 1574768649,
             id: "bfe5050d-0d1c-4149-baaf-834610d1d450",
@@ -64,7 +62,7 @@ export const Subscription = () => {
         PRODUCTS.filter(p => p.product_id === "a3bf8b26-50a6-4586-8e58-ad552cb39798")[0]
     );
 
-    mock.onGet("v2/subscriptions/workflows/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
+    mock.onGet("v2/subscriptions/workflows/pid").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
@@ -74,7 +72,7 @@ export const Subscription = () => {
         system: [{ description: "Validate SN8 IP BGP", name: "validate_sn8_ip_bgp" }]
     });
 
-    mock.onGet("subscriptions/parent_subscriptions/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, []);
+    mock.onGet("subscriptions/parent_subscriptions/pid").reply(200, []);
     mock.onGet("ims/service_by_ims_service_id/36261").reply(200, {
         aliases: ["SUBSCRIPTION_ID=9C8C13D5-6954-461A-A931-32894C193AA0"],
         customer_id: "5203E539-0A11-E511-80D0-005056956C1A",
@@ -189,5 +187,5 @@ export const Subscription = () => {
     });
 
     //@ts-ignore
-    return <SubscriptionDetail match={{ params: { id: "pid" } }} />;
+    return <SubscriptionDetailPage match={{ params: { id: "pid" } }} />;
 };

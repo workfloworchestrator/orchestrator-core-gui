@@ -17,11 +17,10 @@ import { EuiFieldText, EuiFormRow, EuiText } from "@elastic/eui";
 import { contacts } from "api";
 import Autocomplete from "components/inputForms/Autocomplete";
 import I18n from "i18n-js";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import { isFunction } from "lodash";
 import get from "lodash/get";
-import React, { ReactNode, Ref, useEffect, useState } from "react";
+import React, { Ref, useEffect, useState } from "react";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import { ContactPerson } from "utils/types";
 import { stop } from "utils/Utils";
@@ -155,19 +154,15 @@ function ContactPersonName({
         setTimeout(() => setDisplayAutocomplete(false), 350);
     }
 
-    const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: ReactNode = isRepeated ? "" : label;
-
     return (
-        <section {...filterDOMProps(props)} className={`${isRepeated ? "repeated" : ""}`}>
+        <section {...filterDOMProps(props)}>
             <EuiFormRow
-                label={labelRender}
+                label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
-                hasEmptyLabelSpace
             >
                 <EuiFieldText
                     disabled={disabled}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots SubscriptionDetail Subscription 1`] = `
+exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
 <section
   className="storybook-container"
 >
@@ -8,18 +8,20 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
     className="euiPage"
   >
     <div
-      className="euiPageBody mod-subscription-detail card"
+      className="euiPageBody"
     >
       <div
         className="confirmation-dialog-overlay"
       />
-      <div>
+      <div
+        className="mod-subscription-detail"
+      >
         <section
           className="details"
         >
-          <h3>
+          <h2>
             Subscription
-          </h3>
+          </h2>
           <div
             className="subscription-details"
           >
@@ -123,7 +125,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   <td
                     id="subscriptions-startdate-v"
                   >
-                    26-11-2019 CET
+                    29-5-2020 CET
                   </td>
                 </tr>
                 <tr>
@@ -210,37 +212,6 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                 </tr>
                 <tr>
                   <td
-                    id="subscriptions-customer-descriptions-k"
-                  >
-                    Customer description(s)
-                  </td>
-                  <td
-                    id="subscriptions-customer-descriptions-v"
-                  >
-                    <dl>
-                      <dt>
-                        5203e539-0a11-e511-80d0-005056956c1a
-                      </dt>
-                      <dd>
-                        Some description
-                      </dd>
-                      <dt>
-                        Workaround solutionsi B.V.
-                      </dt>
-                      <dd>
-                        Some description 2
-                      </dd>
-                      <dt>
-                        Portal Test Universiteit
-                      </dt>
-                      <dd>
-                        Some description 3, some verrrrrrrry long long long long long long description
-                      </dd>
-                    </dl>
-                  </td>
-                </tr>
-                <tr>
-                  <td
                     id="subscriptions-stats_in_grafana-k"
                   >
                     Stats (SN8/NL8 products only)
@@ -283,9 +254,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                   </td>
                   <td
                     id="subscriptions-note-v"
-                  >
-                    Some text
-                  </td>
+                  />
                 </tr>
               </tbody>
             </table>
@@ -294,51 +263,9 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
         <section
           className="details"
         >
-          <h3>
-            Dienstafname
-          </h3>
-          <div
-            className="subscription-service"
-          >
-            <table
-              className="detail-block"
-            >
-              <thead />
-              <tbody>
-                <tr>
-                  <td>
-                    Dienstafname Guid
-                  </td>
-                  <td>
-                    d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Dienstafname Code
-                  </td>
-                  <td>
-                    MSP
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Dienstafname Status
-                  </td>
-                  <td>
-                    _Opgezegd
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-        <section
-          className="details"
-        >
-          <h3>
+          <h2>
             Fixed Inputs
-          </h3>
+          </h2>
           <div
             className="subscription-fixed-inputs"
           >
@@ -378,302 +305,20 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
         <section
           className="details"
         >
-          <h3>
+          <h2>
             Product Blocks
-          </h3>
+          </h2>
           <div
             className="subscription-product-blocks"
           >
             <section
               className="product-block"
             >
-              <h2>
-                IPSS - IP Service Settings
-              </h2>
+              <h3 />
               <p
                 className="label"
               >
-                Instance ID: a2532b1a-934b-4490-93ab-6db9a5805293
-              </p>
-              <table
-                className="detail-block multiple-tbody"
-              >
-                <thead />
-                <tbody>
-                  <tr>
-                    <td>
-                      ASN
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          65380
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      INTERNETPINNEN
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          False
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      MULTICAST
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          False
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      SURFCERT_FILTER
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          default
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-            <section
-              className="product-block"
-            >
-              <h2>
-                SAP - Service Attach Point
-              </h2>
-              <p
-                className="label"
-              >
-                Instance ID: d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26
-              </p>
-              <table
-                className="detail-block multiple-tbody"
-              >
-                <thead />
-                <tbody>
-                  <tr>
-                    <td>
-                      BFD
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          False
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      BGP_EXPORT_POLICY
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          default
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      BGP_HASH_ALGORITHM
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          MD5
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      BGP_PASSWORD
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          zoSUWUv8
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      BGP_SESSION_PRIORITY
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          secondary
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      CUSTOMER_IPV4_MTU
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          1500
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      PORT_SUBSCRIPTION_ID
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <i
-                          className="fa fa-plus-circle"
-                          onClick={[Function]}
-                        />
-                        <a
-                          href="/subscriptions/b7ed368f-f6d5-497e-9118-2daeb5d06653"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          b7ed368f-f6d5-497e-9118-2daeb5d06653
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      PTP_IPV4_IPAM_ID
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <i
-                          className="fa fa-plus-circle"
-                          onClick={[Function]}
-                        />
-                        <span>
-                          166
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                      VLANRANGE
-                    </td>
-                    <td
-                      colSpan={2}
-                    >
-                      <div
-                        className="resource-type"
-                      >
-                        <span>
-                          0
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-            <section
-              className="product-block"
-            >
-              <h2>
-                VC - Virtual Circuit
-              </h2>
-              <p
-                className="label"
-              >
-                Instance ID: fdf3c275-ccc6-48bb-8011-24ded1a31405
+                Instance ID: 5414e6f2-e9a2-47a6-94ef-20f426bf65a2
               </p>
               <table
                 className="detail-block multiple-tbody"
@@ -695,7 +340,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                           onClick={[Function]}
                         />
                         <span>
-                          36261
+                          62409
                         </span>
                       </div>
                     </td>
@@ -713,7 +358,7 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                         className="resource-type"
                       >
                         <span>
-                          8beaeb1b-e4ff-4bae-a1f8-6a58d7f37b08
+                          436b4833-7593-4751-8158-a90adfc3dd2c
                         </span>
                       </div>
                     </td>
@@ -731,22 +376,591 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
                         className="resource-type"
                       >
                         <span>
-                          10000
+                          1000
                         </span>
                       </div>
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <section
+                className="product-block"
+              >
+                <h3 />
+                <p
+                  className="label"
+                >
+                  Instance ID: 705a2c48-383a-419f-81b3-fcc49244dfb2
+                </p>
+                <table
+                  className="detail-block multiple-tbody"
+                >
+                  <thead />
+                  <tbody>
+                    <tr>
+                      <td>
+                        ASN
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            2324
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        INTERNETPINNEN
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            false
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        MULTICAST
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            true
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        SURFCERT_FILTER
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            default
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <section
+                className="product-block"
+              >
+                <h3 />
+                <p
+                  className="label"
+                >
+                  Instance ID: 4b6d3259-f97b-42ca-8465-c97a9f7cf448
+                </p>
+                <table
+                  className="detail-block multiple-tbody"
+                >
+                  <thead />
+                  <tbody>
+                    <tr>
+                      <td>
+                        BFD
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            false
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_EXPORT_POLICY
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            default
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_HASH_ALGORITHM
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            no
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_SESSION_PRIORITY
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            primary
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        CUSTOMER_IPV4_MTU
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            1500
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        CUSTOMER_IPV6_MTU
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            1500
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        IP_PREFIX_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/2d58c52e-db35-4bd9-882d-5b4deb7a697b"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            2d58c52e-db35-4bd9-882d-5b4deb7a697b
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        IP_PREFIX_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            6fd8aae2-37f6-481e-81cd-0e17a15f5494
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        PORT_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            07cf8b2a-7602-4ca8-b3c9-9ff6ec0aee5d
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        PTP_IPV4_IPAM_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <span>
+                            26208
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        VLANRANGE
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            0
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <section
+                className="product-block"
+              >
+                <h3 />
+                <p
+                  className="label"
+                >
+                  Instance ID: 2cf6cf3d-6aa6-4b8d-9f05-b676fdf40c59
+                </p>
+                <table
+                  className="detail-block multiple-tbody"
+                >
+                  <thead />
+                  <tbody>
+                    <tr>
+                      <td>
+                        BFD
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            false
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_EXPORT_POLICY
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            default
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_HASH_ALGORITHM
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            no
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        BGP_SESSION_PRIORITY
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            primary
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        CUSTOMER_IPV4_MTU
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            1500
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        CUSTOMER_IPV6_MTU
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            1500
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        IP_PREFIX_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/2d58c52e-db35-4bd9-882d-5b4deb7a697b"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            2d58c52e-db35-4bd9-882d-5b4deb7a697b
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        IP_PREFIX_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/6fd8aae2-37f6-481e-81cd-0e17a15f5494"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            6fd8aae2-37f6-481e-81cd-0e17a15f5494
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        PORT_SUBSCRIPTION_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <a
+                            href="/subscriptions/2b0d8128-4dce-42da-a3a3-b97deddf9ae2"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            2b0d8128-4dce-42da-a3a3-b97deddf9ae2
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        PTP_IPV4_IPAM_ID
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <i
+                            className="fa fa-plus-circle"
+                            onClick={[Function]}
+                          />
+                          <span>
+                            26209
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr>
+                      <td>
+                        VLANRANGE
+                      </td>
+                      <td
+                        colSpan={2}
+                      >
+                        <div
+                          className="resource-type"
+                        >
+                          <span>
+                            0
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
             </section>
           </div>
         </section>
         <section
           className="details"
         >
-          <h3>
+          <h2>
             Actions
-          </h3>
+          </h2>
           <div
             className="subscription-actions"
           >
@@ -814,9 +1028,9 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
         <section
           className="details"
         >
-          <h3>
+          <h2>
             Product
-          </h3>
+          </h2>
           <div
             className="subscription-product-information"
           >
@@ -922,9 +1136,9 @@ exports[`Storyshots SubscriptionDetail Subscription 1`] = `
         <section
           className="details"
         >
-          <h3>
+          <h2>
             Processes
-          </h3>
+          </h2>
           <div
             className="subscription-processes"
           >

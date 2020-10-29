@@ -20,10 +20,9 @@ import ServicePortSelectorModal from "components/modals/ServicePortSelectorModal
 import { SubscriptionsContext } from "components/subscriptionContext";
 import I18n from "i18n-js";
 import { ListFieldProps } from "lib/uniforms-surfnet/src/ListField";
-import { isRepeatedField } from "lib/uniforms-surfnet/src/logic/LabelLogic";
 import { FieldProps } from "lib/uniforms-surfnet/src/types";
 import get from "lodash/get";
-import React, { ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { connectField, filterDOMProps, joinName, useField, useForm } from "uniforms";
 import ApplicationContext from "utils/ApplicationContext";
@@ -227,43 +226,34 @@ function Subscription({
         closeModal();
     };
 
-    const isRepeated: boolean = isRepeatedField(name);
-    const labelRender: ReactNode = isRepeated ? "" : label;
-
     return (
-        <section
-            {...filterDOMProps(props)}
-            className={`${className} ${isRepeated ? "repeated" : ""} subscription-field${disabled ? "-disabled" : ""}`}
-        >
+        <section {...filterDOMProps(props)} className={`${className} subscription-field${disabled ? "-disabled" : ""}`}>
             <EuiFormRow
-                label={labelRender}
+                label={label}
                 labelAppend={<EuiText size="m">{description}</EuiText>}
                 error={showInlineError ? errorMessage : false}
                 isInvalid={error}
                 id={id}
                 fullWidth
-                hasEmptyLabelSpace
             >
                 <div>
                     {!disabled && (
                         <>
-                            {!isRepeatedField(name) && (
-                                <EuiButtonIcon
-                                    className="reload-subscriptions-icon-button"
-                                    id={`refresh-icon-${id}`}
-                                    aria-label={`reload-${label}`}
-                                    iconType="refresh"
-                                    iconSize="l"
-                                    onClick={() => {
-                                        setLoading(true);
-                                        clearSubscriptions();
-                                        getSubscriptions(tags, statuses).then(result => {
-                                            updateSubscriptions(result);
-                                            setLoading(false);
-                                        });
-                                    }}
-                                />
-                            )}
+                            <EuiButtonIcon
+                                className="reload-subscriptions-icon-button"
+                                id={`refresh-icon-${id}`}
+                                aria-label={`reload-${label}`}
+                                iconType="refresh"
+                                iconSize="l"
+                                onClick={() => {
+                                    setLoading(true);
+                                    clearSubscriptions();
+                                    getSubscriptions(tags, statuses).then(result => {
+                                        updateSubscriptions(result);
+                                        setLoading(false);
+                                    });
+                                }}
+                            />
                             {tags?.includes("SP") && (
                                 <EuiButtonIcon
                                     className="show-service-port-modal-icon-button"

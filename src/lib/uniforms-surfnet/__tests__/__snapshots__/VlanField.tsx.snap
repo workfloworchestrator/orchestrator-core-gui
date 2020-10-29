@@ -364,13 +364,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000m-row",
                       },
                       "children": Array [
@@ -1144,11 +1143,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -1162,13 +1159,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000o-row",
                         },
                         "children": Array [
@@ -1942,11 +1938,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -1960,13 +1954,12 @@ initialize {
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "repeated",
                         "required": "",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
-                            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                            "class": "euiFormRow euiFormRow--fullWidth",
                             "id": "uniforms-0000-000q-row",
                           },
                           "children": Array [
@@ -2740,11 +2733,9 @@ initialize {
                       "prev": null,
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                     },
@@ -2868,13 +2859,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000o-row",
                       },
                       "children": Array [
@@ -3648,11 +3638,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -3666,13 +3654,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000q-row",
                         },
                         "children": Array [
@@ -4446,11 +4433,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -4555,13 +4540,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000m-row",
                         },
                         "children": Array [
@@ -5335,11 +5319,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -5372,13 +5354,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000q-row",
                       },
                       "children": Array [
@@ -6152,11 +6133,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -6251,13 +6230,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000o-row",
                         },
                         "children": Array [
@@ -7031,11 +7009,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -7051,13 +7027,12 @@ initialize {
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "",
                         "required": "",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
-                            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                            "class": "euiFormRow euiFormRow--fullWidth",
                             "id": "uniforms-0000-000m-row",
                           },
                           "children": Array [
@@ -7831,11 +7806,9 @@ initialize {
                       "prev": null,
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                     },
@@ -7945,13 +7918,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000q-row",
                         },
                         "children": Array [
@@ -8725,11 +8697,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -8745,13 +8715,12 @@ initialize {
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "repeated",
                         "required": "",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
-                            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                            "class": "euiFormRow euiFormRow--fullWidth",
                             "id": "uniforms-0000-000o-row",
                           },
                           "children": Array [
@@ -9525,11 +9494,9 @@ initialize {
                       "prev": null,
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                     },
@@ -9545,13 +9512,12 @@ initialize {
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "",
                           "required": "",
                         },
                         "children": Array [
                           Object {
                             "attribs": Object {
-                              "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                              "class": "euiFormRow euiFormRow--fullWidth",
                               "id": "uniforms-0000-000m-row",
                             },
                             "children": Array [
@@ -10325,11 +10291,9 @@ initialize {
                         "prev": null,
                         "type": "tag",
                         "x-attribsNamespace": Object {
-                          "class": undefined,
                           "required": undefined,
                         },
                         "x-attribsPrefix": Object {
-                          "class": undefined,
                           "required": undefined,
                         },
                       },
@@ -10405,13 +10369,12 @@ initialize {
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "",
                   "required": "",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                      "class": "euiFormRow euiFormRow--fullWidth",
                       "id": "uniforms-0000-000m-row",
                     },
                     "children": Array [
@@ -11185,11 +11148,9 @@ initialize {
                 "prev": null,
                 "type": "tag",
                 "x-attribsNamespace": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
                 "x-attribsPrefix": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
               },
@@ -11203,13 +11164,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000o-row",
                       },
                       "children": Array [
@@ -11983,11 +11943,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -12001,13 +11959,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000q-row",
                         },
                         "children": Array [
@@ -12781,11 +12738,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -12909,13 +12864,12 @@ initialize {
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "repeated",
                   "required": "",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                      "class": "euiFormRow euiFormRow--fullWidth",
                       "id": "uniforms-0000-000o-row",
                     },
                     "children": Array [
@@ -13689,11 +13643,9 @@ initialize {
                 "prev": null,
                 "type": "tag",
                 "x-attribsNamespace": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
                 "x-attribsPrefix": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
               },
@@ -13707,13 +13659,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000q-row",
                       },
                       "children": Array [
@@ -14487,11 +14438,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -14596,13 +14545,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000m-row",
                       },
                       "children": Array [
@@ -15376,11 +15324,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -15413,13 +15359,12 @@ initialize {
             "children": Array [
               Object {
                 "attribs": Object {
-                  "class": "repeated",
                   "required": "",
                 },
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                      "class": "euiFormRow euiFormRow--fullWidth",
                       "id": "uniforms-0000-000q-row",
                     },
                     "children": Array [
@@ -16193,11 +16138,9 @@ initialize {
                 "prev": null,
                 "type": "tag",
                 "x-attribsNamespace": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
                 "x-attribsPrefix": Object {
-                  "class": undefined,
                   "required": undefined,
                 },
               },
@@ -16292,13 +16235,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000o-row",
                       },
                       "children": Array [
@@ -17072,11 +17014,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -17092,13 +17032,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000m-row",
                         },
                         "children": Array [
@@ -17872,11 +17811,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -17986,13 +17923,12 @@ initialize {
               "children": Array [
                 Object {
                   "attribs": Object {
-                    "class": "repeated",
                     "required": "",
                   },
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                        "class": "euiFormRow euiFormRow--fullWidth",
                         "id": "uniforms-0000-000q-row",
                       },
                       "children": Array [
@@ -18766,11 +18702,9 @@ initialize {
                   "prev": null,
                   "type": "tag",
                   "x-attribsNamespace": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                   "x-attribsPrefix": Object {
-                    "class": undefined,
                     "required": undefined,
                   },
                 },
@@ -18786,13 +18720,12 @@ initialize {
                 "children": Array [
                   Object {
                     "attribs": Object {
-                      "class": "repeated",
                       "required": "",
                     },
                     "children": Array [
                       Object {
                         "attribs": Object {
-                          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                          "class": "euiFormRow euiFormRow--fullWidth",
                           "id": "uniforms-0000-000o-row",
                         },
                         "children": Array [
@@ -19566,11 +19499,9 @@ initialize {
                     "prev": null,
                     "type": "tag",
                     "x-attribsNamespace": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                     "x-attribsPrefix": Object {
-                      "class": undefined,
                       "required": undefined,
                     },
                   },
@@ -19586,13 +19517,12 @@ initialize {
                   "children": Array [
                     Object {
                       "attribs": Object {
-                        "class": "",
                         "required": "",
                       },
                       "children": Array [
                         Object {
                           "attribs": Object {
-                            "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+                            "class": "euiFormRow euiFormRow--fullWidth",
                             "id": "uniforms-0000-000m-row",
                           },
                           "children": Array [
@@ -20366,11 +20296,9 @@ initialize {
                       "prev": null,
                       "type": "tag",
                       "x-attribsNamespace": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                       "x-attribsPrefix": Object {
-                        "class": undefined,
                         "required": undefined,
                       },
                     },
@@ -20828,13 +20756,12 @@ exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/di
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000i-row",
         },
         "children": Array [
@@ -21622,11 +21549,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },
@@ -21645,13 +21570,12 @@ exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/di
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000h-row",
         },
         "children": Array [
@@ -22439,11 +22363,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },
@@ -22462,13 +22384,12 @@ exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/di
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000g-row",
         },
         "children": Array [
@@ -23268,11 +23189,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },
@@ -23291,13 +23210,12 @@ exports[`<VlanField> <VlanField> - renders an input that is correctly enabled/di
 initialize {
   "0": Object {
     "attribs": Object {
-      "class": "",
       "required": "",
     },
     "children": Array [
       Object {
         "attribs": Object {
-          "class": "euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth",
+          "class": "euiFormRow euiFormRow--fullWidth",
           "id": "uniforms-0000-000f-row",
         },
         "children": Array [
@@ -24097,11 +24015,9 @@ initialize {
     },
     "type": "tag",
     "x-attribsNamespace": Object {
-      "class": undefined,
       "required": undefined,
     },
     "x-attribsPrefix": Object {
-      "class": undefined,
       "required": undefined,
     },
   },

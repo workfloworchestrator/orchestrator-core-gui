@@ -404,6 +404,12 @@ I18n.translations.en = {
             removed_service_ports: "Remove ports",
             removed_service_ports_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             removed_service_ports_info: "Select some ports to remove them from this subscription",
+            removed_customer_ipv4_ptp_prefixes: "Please select an IPv4 ptp prefix to remove.",
+            removed_customer_ipv6_ptp_prefixes: "Please select an IPv6 ptp prefix to remove (if applicable).",
+            removed_customer_ipv4_ptp_prefixes_fields:
+                "The form will make sure the amount of IPv4 prefixes are the same as the amount of customer saps",
+            removed_customer_ipv6_ptp_prefixes_fields:
+                "The form will make sure the amount of IPv6 prefixes are the same as the amount of customer saps",
             sap_migration_summary: "Summary of SAP migration changes",
             sap_migration_summary_info:
                 "Please check the summary for any inconsistencies in the port that will be removed",
@@ -688,9 +694,9 @@ I18n.translations.en = {
     subscription: {
         acquiring_insync_info_about_relations: "Acquiring 'insync' info of related subscriptions...",
         notFound: "No Subscription found (e.g. 404)",
-        subscription: "Subscription",
+        subscription_title: "Subscription",
         child_subscriptions: "Child Subscriptions related to {{product}}",
-        parent_subscriptions: "Parent Subscriptions related to {{product}}",
+        parent_subscriptions: "Parent Subscriptions",
         resource_types: "Subscription Instance Values",
         resource_types_info: "The resource types of the associated product block(s) of this subscription",
         product_title: "Product",
@@ -719,7 +725,7 @@ I18n.translations.en = {
             modified_at: "Modified at"
         },
         ims_service: {
-            id: "IMS service ID ({{index}})",
+            id: "IMS service ID ({{id}})",
             identifier: "IMS service ID",
             customer: "Customer",
             extra_info: "Extra info",
@@ -729,19 +735,42 @@ I18n.translations.en = {
             status: "Status",
             order_id: "Order ID",
             aliases: "Aliases",
-            endpoints: "Endpoints"
+            endpoints: "Endpoints",
+            removed: "This circuit ID has been removed from IMS"
         },
         ims_port: {
             connector_type: "Connector type",
             fiber_type: "Fiber type",
-            id: "IMS Port ID {{id}}",
+            id: "IMS Port ID ({{id}})",
             iface_type: "Interface type",
             line_name: "Line name",
             location: "Location",
             node: "Node",
             patchposition: "Patch position",
             port: "Port",
-            status: "Status"
+            status: "Status",
+            removed: "This port ID has been removed from IMS"
+        },
+        ipam_address: {
+            id: "Assigned IP Address ID",
+            fqdn: "FQDN",
+            state: "State",
+            address: "IP Address",
+            tags: "Tags",
+            removed: "This address ID has been removed from IPAM"
+        },
+        ipam_prefix: {
+            description: "Description",
+            prefix: "IP Prefix",
+            afi: "IP Family",
+            asn: "Autonomous System Number",
+            state: "State",
+            address: "Address ({{id}})",
+            tags: "Tags",
+            removed: "This prefix ID has been removed from IPAM"
+        },
+        subscription: {
+            removed: "This subscription does not exist anymore"
         },
         fetchingImsData: "Please wait until we have loaded all IMS information...",
         terminate: "Terminate Subscription",
@@ -1021,16 +1050,7 @@ I18n.translations.en = {
         old_endpoint: "The old endpoint",
         new_endpoint: "The new endpoint"
     },
-    ipam: {
-        description: "Description",
-        prefix: "IP Prefix",
-        afi: "IP Family",
-        asn: "Autonomous System Number",
-        state: "State",
-        ipaddress: "IP Address",
-        fqdn: "FQDN",
-        assigned_address_id: "Assigned IP Address ID"
-    },
+
     workflow: {
         migrate_sn7_ip_bgp_ipss_to_sn8: "Migrate to SN8",
         migrate_sn7_ip_static_ipss_to_sn8: "Migrate to SN8",
@@ -1041,6 +1061,7 @@ I18n.translations.en = {
         modify_core_link_remove_link: "Remove a Link from an existing core link",
         modify_core_link_isis_metric: "Modify Corelink ISIS metric",
         modify_core_link_modify_link: "Modify a link of an existing Corelink",
+        modify_firewall: "Modify Firewall",
         modify_firewall_speed: "Modify Firewall Speed",
         modify_ip_prefix: "Modify IP Prefix",
         modify_node_in_service: "Set a planned node in service",

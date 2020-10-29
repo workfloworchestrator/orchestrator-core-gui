@@ -16,10 +16,6 @@
 @use "../../../stylesheets/vars.scss";
 
 .subscription-field {
-    // &.repeated {
-    //     padding-top: 22px;
-    // }
-
     > div {
         display: flex;
 
@@ -48,9 +44,4 @@
 
 .reload-subscriptions-icon-button {
     margin-left: -7px;
-    // margin-top: 6px;
 }
-
-// .show-service-port-modal-icon-button {
-//     margin-top: 6px;
-// }

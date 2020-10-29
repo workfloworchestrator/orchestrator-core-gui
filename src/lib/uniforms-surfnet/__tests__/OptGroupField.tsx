@@ -87,14 +87,13 @@ test("<OptGroupField> - renders a label", () => {
         })
     );
 
-    expect(wrapper.find("label")).toHaveLength(3);
-    expect(
-        wrapper
-            .find("label")
-            .at(0)
-            .text()
-    ).toBe('[missing "en.forms.fields.x.title" translation]');
-    expect(wrapper.contains('[missing "en.forms.fields.x.info" translation]')).toBe(true);
+    expect(wrapper.find("label")).toHaveLength(2);
+    expect(wrapper.find("span.euiDescribedFormGroup__title").text()).toBe(
+        '[missing "en.forms.fields.x.title" translation]'
+    );
+    expect(wrapper.find("div.euiDescribedFormGroup__description").text()).toBe(
+        '[missing "en.forms.fields.x.info" translation]'
+    );
 });
 
 test("<OptGroupField> - renders a wrapper with unknown props", () => {
@@ -110,19 +109,19 @@ test("<OptGroupField> - renders a wrapper with unknown props", () => {
 
     expect(
         wrapper
-            .find("section")
+            .find(".optgroup-field")
             .at(0)
             .prop("data-x")
     ).toBe("x");
     expect(
         wrapper
-            .find("section")
+            .find(".optgroup-field")
             .at(0)
             .prop("data-y")
     ).toBe("y");
     expect(
         wrapper
-            .find("section")
+            .find(".optgroup-field")
             .at(0)
             .prop("data-z")
     ).toBe("z");

@@ -34,10 +34,10 @@ exports[`Storyshots NewProcess Default 1`] = `
             >
               <section>
                 <section
-                  className=""
+                  className="form-input"
                 >
                   <div
-                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--fullWidth"
                     id="input-product-row"
                   >
                     <div
@@ -264,10 +264,10 @@ exports[`Storyshots NewProcess Preselected 1`] = `
             >
               <section>
                 <section
-                  className=""
+                  className="form-input"
                 >
                   <div
-                    className="euiFormRow euiFormRow--hasEmptyLabelSpace euiFormRow--fullWidth"
+                    className="euiFormRow euiFormRow--fullWidth"
                     id="input-organisation-row"
                   >
                     <div
