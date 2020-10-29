@@ -24,6 +24,7 @@ import {
     subscriptionsDetailWithModel
 } from "api";
 import CheckBox from "components/CheckBox";
+import NetworkDiagram from "components/Diagram";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
 import I18n from "i18n-js";
@@ -482,6 +483,13 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
+    renderDiagram = (subscription: SubscriptionModel) => {
+        const { organisations, products } = this.context;
+        const enrichedSubscription = enrichSubscription(subscription, organisations, products);
+
+        return <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />;
+    };
+
     render() {
         const { notFound, subscription, subscriptionProcesses, product, parentSubscriptions, workflows } = this.state;
 
@@ -512,6 +520,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     ></SubscriptionDetails>
                 </SubscriptionDetailSection>
 
+                {this.renderDiagram(subscription)}
                 {this.renderDienstafname()}
                 {this.renderFixedInputs(product)}
 

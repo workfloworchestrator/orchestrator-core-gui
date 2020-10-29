@@ -1,5 +1,5 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
-import { prefixById, subscriptionsDetail } from "api";
+import { prefixById, subscriptionsDetailWithModel } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
 import {
@@ -209,7 +209,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
             const f = this.state.nodes.find((node: Subscription) => node.subscription_id === nodeIdValue!.value);
             if (!f && nodeIdValue) {
                 try {
-                    const node = await subscriptionsDetail(nodeIdValue!.value);
+                    const node = await subscriptionsDetailWithModel(nodeIdValue!.value);
                     nodes.push(node);
                 } catch (e) {
                     console.error(e);

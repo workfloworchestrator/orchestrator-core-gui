@@ -1,4 +1,11 @@
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
+import {
+    internalPortByImsPortId,
+    portByImsPortId,
+    portByImsServiceId,
+    serviceByImsServiceId,
+    subscriptionWorkflows
+} from "api";
 import React from "react";
 import { ConcatenatedCircuit } from "react-network-diagrams";
 import { Link } from "react-router-dom";
@@ -8,22 +15,24 @@ import {
     InstanceValue,
     SubscriptionInstance,
     SubscriptionInstanceParentRelation,
+    SubscriptionModel,
     SubscriptionWithDetails
 } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 import { lineShapeMap, stylesMap } from "./DiagramStyles";
 
 interface IProps {
     type: "patchpanel" | "combined";
-    subscription?: SubscriptionWithDetails;
-    imsServices?: IMSService[];
-    imsEndpoints?: IMSEndpoint[];
+    subscription: SubscriptionModel;
     childSubscriptions?: SubscriptionWithDetails[];
 }
 
 interface IState {
     _selectedCircuit: any;
     isTableOn: boolean;
+    imsServices: any[];
+    imsEndpoints: any[];
 }
 
 export interface SubscriptionInstanceExtended extends SubscriptionInstance {
@@ -97,15 +106,75 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
 
         this.state = {
             _selectedCircuit: {},
-            isTableOn: false
+            isTableOn: false,
+            imsEndpoints: [],
+            imsServices: []
         };
     }
 
-    _findImsEndpoint = (id: number) => {
-        return this.props.imsEndpoints?.find(e => e.serviceId === id);
+    populateEndpoints = ({
+        service,
+        recursive = false,
+        vc = 0
+    }: {
+        service: IMSService;
+        recursive?: boolean;
+        vc: number;
+    }) => {
+        if (isEmpty(service) || !recursive) {
+            return;
+        }
+
+        const uniquePortPromises = (service.endpoints || []).map(async endpoint => {
+            if (endpoint.type === "port") {
+                return portByImsPortId(endpoint.id).then(result =>
+                    Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    })
+                );
+            } else if (endpoint.type === "internal_port") {
+                return internalPortByImsPortId(endpoint.id).then(result =>
+                    Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    })
+                );
+            } else {
+                return serviceByImsServiceId(endpoint.id).then(result => {
+                    if (["SP", "MSP", "SSP"].includes(result.product)) {
+                        // In case of port product we just resolve the underlying port
+                        return portByImsServiceId(endpoint.id).then(result =>
+                            Object.assign(result, {
+                                serviceId: endpoint.id,
+                                endpointType: "port"
+                            })
+                        );
+                    }
+                    // Return all services that are not actually port services
+                    return (Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    }) as unknown) as IMSEndpoint;
+                });
+            }
+        });
+        //@ts-ignore
+        Promise.all(uniquePortPromises).then(result => {
+            const { imsEndpoints } = this.state;
+            imsEndpoints[vc] = result.flat();
+            this.setState({ imsEndpoints: imsEndpoints });
+            // forceUpdate is a bit rough, but this.setState() does not
+            // trigger a re-render, so we have to.
+            this.forceUpdate();
+        });
     };
 
-    _makeConnectionExplanation = (endpoint: IMSEndpoint, subscription?: SubscriptionWithDetails) => {
+    _findImsEndpoint = (imsIndex: number, id: number) => {
+        return this.state.imsServices[imsIndex].endpoints.find((e: any) => e.id === id);
+    };
+
+    _makeConnectionExplanation = (endpoint: IMSEndpoint, subscription?: SubscriptionModel) => {
         return (
             <EuiCodeBlock>
                 {subscription && (
@@ -157,16 +226,16 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
         );
     };
 
-    _makeCircuitExplanation = (values: InstanceValue[], subscription?: SubscriptionWithDetails) => {
+    _makeCircuitExplanation = (circuit: any, subscription?: SubscriptionModel) => {
         return (
             <EuiCodeBlock>
-                <strong>speed:</strong> {this._findValue(values, "service_speed")?.value || ""}
+                <strong>speed:</strong> {circuit.service_speed}
                 <br />
-                <strong>remote shutdown:</strong> {this._findValue(values, "remote_port_shutdown")?.value || ""}
+                <strong>remote shutdown:</strong> {circuit.remote_port_shutdown ? "yes" : "no"}
                 <br />
-                <strong>speed policer:</strong> {this._findValue(values, "speed_policer")?.value || ""}
+                <strong>speed policer:</strong> {circuit.speed_policer ? "yes" : "no"}
                 <br />
-                <strong>NSO service ID:</strong> {this._findValue(values, "nso_service_id")?.value || ""}
+                <strong>NSO service ID:</strong> {circuit.nso_service_id}
                 <br />
                 {subscription && (
                     <>
@@ -188,25 +257,18 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
         );
     };
 
-    _findValue = (values: InstanceValue[], key: string) => {
-        return values.find(v => v.resource_type.resource_type === key);
-    };
-
-    _findImsServiceEndpoint = (id: number): IMSEndpointValues | null => {
-        let r = null;
-        this.props.imsServices?.forEach((service: IMSService) => {
-            const e = service.endpoints.find(endpoint => endpoint.id === id);
-            if (e !== undefined) r = e;
-        });
-        return r;
-    };
-
     _buildTreeFromEndpoints() {
         // empty the graphList
         graphList.splice(0, graphList.length);
-        if (this.props.childSubscriptions?.length === 0 || this.props.imsEndpoints?.length === 0) {
+        const { subscription } = this.props;
+        const { imsEndpoints } = this.state;
+        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+
+        if (imsEndpoints.length === 0 || imsEndpoints.length < vcs.length || !subscription) {
             return;
         }
+        console.log(imsEndpoints);
+        console.log(vcs);
 
         const makeObject = (
             expl: string | JSX.Element,
@@ -227,37 +289,25 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
             };
         };
 
-        this.props.imsServices?.forEach((imsService: IMSService, graphIndex: number) => {
-            const imsServiceId = imsService.id;
+        vcs.forEach((circuit: any, graphIndex: number) => {
             const memberList: GraphMember[] = [];
-            const circuitSubscription = this.props.subscription?.instances.find((instance: SubscriptionInstance) => {
-                return instance.values.find(
-                    v => v.resource_type.resource_type === "ims_circuit_id" && parseInt(v.value) === imsServiceId
-                );
-            });
-            const graphTitle = circuitSubscription!.label !== null ? ` - ${circuitSubscription!.label}` : "";
-            let { childSubscriptions } = this.props;
-            imsService.endpoints.forEach((_endpoint: IMSEndpointValues) => {
-                const endpoint = this._findImsEndpoint(_endpoint.id);
-                if (!endpoint || endpoint.endpointType === "trunk") {
+            const graphTitle = circuit.label !== null ? ` - ${circuit.label}` : "";
+            let { subscription } = this.props;
+            imsEndpoints[graphIndex].forEach((imsEndpoint: IMSEndpoint) => {
+                const endpointFromService = this._findImsEndpoint(graphIndex, imsEndpoint.serviceId);
+                if (!endpointFromService || endpointFromService.endpointType === "trunk") {
                     return;
                 }
-                const serviceSpeed = this._findValue(circuitSubscription!.values, "service_speed");
+                const serviceSpeed = circuit.service_speed;
                 let connectionAdded = false;
-
-                let vlanRange = _endpoint.vlanranges.map(v => `${v.start}-${v.end}`).join(", ");
-
-                debugger;
-                const childSubscription = childSubscriptions?.length
-                    ? childSubscriptions[memberList.length ? 0 : 1]
-                    : undefined;
+                let vlanRange = endpointFromService.vlanranges.map((v: any) => `${v.start}-${v.end}`).join(", ");
                 // left-most connection
                 const connection = makeObject(
-                    this._makeConnectionExplanation(endpoint, childSubscription),
+                    this._makeConnectionExplanation(imsEndpoint, subscription),
                     circuitTypeProperties.optical,
                     "",
                     memberList.length === 0 ? vlanRange : "",
-                    `${serviceSpeed?.value} @ ${endpoint.port}`,
+                    `${serviceSpeed} @ ${imsEndpoint.port}`,
                     `${graphIndex},${memberList.length}`
                 );
 
@@ -268,29 +318,29 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
                     connectionAdded = true;
                 }
 
-                if (circuitSubscription) {
-                    const circuit = makeObject(
-                        this._makeCircuitExplanation(circuitSubscription.values),
-                        circuitTypeProperties.panelCoupler,
-                        "",
-                        !connectionAdded ? vlanRange : "",
-                        endpoint.node,
-                        `${graphIndex},${memberList.length}`
+                const circuitMember = makeObject(
+                    this._makeCircuitExplanation(circuit),
+                    circuitTypeProperties.panelCoupler,
+                    "",
+                    !connectionAdded ? vlanRange : "",
+                    imsEndpoint.node,
+                    `${graphIndex},${memberList.length}`
+                );
+                memberList.push(circuitMember);
+
+                if (connectionAdded) {
+                    memberList.push(
+                        makeObject(
+                            this._makeCircuitExplanation(circuit, subscription),
+                            circuitTypeProperties.optical,
+                            "",
+                            "",
+                            serviceSpeed,
+                            `${graphIndex},${memberList.length}`
+                        )
                     );
-                    memberList.push(circuit);
-                    if (connectionAdded) {
-                        memberList.push(
-                            makeObject(
-                                this._makeCircuitExplanation(circuitSubscription.values, this.props.subscription),
-                                circuitTypeProperties.optical,
-                                "",
-                                "",
-                                serviceSpeed!.value,
-                                `${graphIndex},${memberList.length}`
-                            )
-                        );
-                    }
                 }
+
                 if (!connectionAdded) {
                     connection.navTo = `${graphIndex},${memberList.length}`;
                     memberList.push(connection);
@@ -307,13 +357,22 @@ export default class NetworkDiagram extends React.PureComponent<IProps, IState> 
         this.setState({ isTableOn: this.state._selectedCircuit !== {} });
     };
 
-    _onMouseDown = (e: any) => {
-        console.log(e);
-    };
-
-    _closePopover = () => {};
-
     render() {
+        const { subscription } = this.props;
+        const { imsServices, imsEndpoints } = this.state;
+
+        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+        if (vcs.length > 0 && isEmpty(imsServices)) {
+            vcs.forEach((vc: any, vcIndex: number) => {
+                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
+                    imsServices[vcIndex] = result;
+                    this.setState({ imsServices: imsServices });
+                    if (isEmpty(imsEndpoints[vcIndex])) {
+                        this.populateEndpoints({ service: result, recursive: true, vc: vcIndex });
+                    }
+                });
+            });
+        }
         this._buildTreeFromEndpoints();
 
         return (
