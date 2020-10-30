@@ -564,10 +564,10 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                         />
                     )}
                 </EuiFlexItem>
-                <EuiFlexItem grow={3}>
+                <EuiFlexItem grow={3} style={{ minWidth: 300 }}>
                     <EuiPanel betaBadgeLabel={"Details"}>{this.state.panelText}</EuiPanel>
                 </EuiFlexItem>
-                <EuiFlexItem grow={2}></EuiFlexItem>
+                <EuiFlexItem grow={2} style={{ minWidth: 100 }}></EuiFlexItem>
             </EuiFlexGroup>
         );
     }
