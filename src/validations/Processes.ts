@@ -35,7 +35,7 @@ export function actionOptions(
     };
     const userInput = {
         icon: "fa fa-edit",
-        euiIcon: "edit",
+        euiIcon: "pencil",
         label: "user_input",
         action: showAction
     };

@@ -78,6 +78,7 @@ const Navigation = () => {
         navItems.forEach(navItem => {
             navs[navItem] = () => history.push(`/${navItem}`);
             controls.push({
+                "aria-label": "create process",
                 controlType: "tab",
                 id: `main-navigation-${navItem}-tab`,
                 onClick: navs[navItem],
@@ -89,6 +90,7 @@ const Navigation = () => {
         });
 
         controls.push({
+            "aria-label": "manage filters",
             id: "main-navigation-filters-tab",
             controlType: "icon",
             iconType: "filter",
@@ -106,6 +108,7 @@ const Navigation = () => {
                 text: (
                     <Link to="/new-process">
                         <EuiButton
+                            aria-label="create process"
                             id="main-navigation-new-process-tab-button"
                             iconType="plusInCircle"
                             size="s"
@@ -123,7 +126,7 @@ const Navigation = () => {
 
     return (
         <>
-            <EuiControlBar controls={getControls()} position="relative" showOnMobile />
+            <EuiControlBar aria-label="navigationbar" controls={getControls()} position="relative" showOnMobile />
             {loading && (
                 <EuiToast className="sync" color="primary">
                     <EuiLoadingSpinner size="m" />

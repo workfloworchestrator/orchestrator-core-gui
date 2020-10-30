@@ -31,7 +31,14 @@ function ActionContainer({
     const onButtonClick = () => setIsPopoverOpen(isPopoverOpen => !isPopoverOpen);
     const closePopover = () => setIsPopoverOpen(false);
 
-    const button = <EuiButtonIcon className={"action-button"} iconType="menu" onClick={onButtonClick} />;
+    const button = (
+        <EuiButtonIcon
+            aria-label={"actionbutton"}
+            className={"action-button"}
+            iconType="menu"
+            onClick={onButtonClick}
+        />
+    );
     return (
         <div className={"action-container"}>
             <EuiPopover ownFocus button={button} isOpen={isPopoverOpen} closePopover={closePopover}>
