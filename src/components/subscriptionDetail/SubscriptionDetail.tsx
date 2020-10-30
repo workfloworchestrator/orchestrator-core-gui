@@ -24,8 +24,10 @@ import {
     subscriptionsDetailWithModel
 } from "api";
 import CheckBox from "components/CheckBox";
+import NetworkDiagram from "components/Diagram";
 import SubscriptionDetails from "components/subscriptionDetail/SubscriptionDetails";
 import SubscriptionInstance from "components/subscriptionDetail/SubscriptionInstance";
+import TopologyDiagram from "components/TopologyDiagram";
 import I18n from "i18n-js";
 import { isArray } from "lodash";
 import React from "react";
@@ -482,6 +484,17 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         );
     };
 
+    renderDiagram = (subscription: SubscriptionModel) => {
+        const { organisations, products } = this.context;
+        const enrichedSubscription = enrichSubscription(subscription, organisations, products);
+
+        if (subscription.product.product_type === "LightPath") {
+            return <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />;
+        } else if (["L2VPN", "IP"].includes(subscription.product.product_type)) {
+            return <TopologyDiagram subscription={subscription} />;
+        }
+    };
+
     render() {
         const { notFound, subscription, subscriptionProcesses, product, parentSubscriptions, workflows } = this.state;
 
@@ -512,6 +525,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
                     ></SubscriptionDetails>
                 </SubscriptionDetailSection>
 
+                {this.renderDiagram(subscription)}
                 {this.renderDienstafname()}
                 {this.renderFixedInputs(product)}
 

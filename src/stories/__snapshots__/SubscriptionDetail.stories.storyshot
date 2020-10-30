@@ -212,6 +212,18 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
                 </tr>
                 <tr>
                   <td
+                    id="subscriptions-customer-descriptions-k"
+                  >
+                    Customer description(s)
+                  </td>
+                  <td
+                    id="subscriptions-customer-descriptions-v"
+                  >
+                    <dl />
+                  </td>
+                </tr>
+                <tr>
+                  <td
                     id="subscriptions-stats_in_grafana-k"
                   >
                     Stats (SN8/NL8 products only)
@@ -260,6 +272,44 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
             </table>
           </div>
         </section>
+        <div
+          className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--justifyContentSpaceAround euiFlexGroup--directionRow euiFlexGroup--responsive"
+        >
+          <div
+            className="euiFlexItem euiFlexItem--flexGrow5"
+          />
+          <div
+            className="euiFlexItem euiFlexItem--flexGrow3"
+            style={
+              Object {
+                "minWidth": 300,
+              }
+            }
+          >
+            <div
+              className="euiPanel euiPanel--paddingMedium euiPanel--hasBetaBadge"
+            >
+              <span
+                className="euiPanel__betaBadgeWrapper"
+              >
+                <span
+                  className="euiBetaBadge euiPanel__betaBadge"
+                  title="Details"
+                >
+                  Details
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="euiFlexItem euiFlexItem--flexGrow2"
+            style={
+              Object {
+                "minWidth": 100,
+              }
+            }
+          />
+        </div>
         <section
           className="details"
         >

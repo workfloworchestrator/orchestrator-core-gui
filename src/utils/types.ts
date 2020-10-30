@@ -53,6 +53,9 @@ export interface SubscriptionProcesses {
 }
 
 export interface SubscriptionInstance {
+    subscription_id: string;
+    parent_relations: SubscriptionInstanceParentRelation[];
+    children_relations: SubscriptionInstanceParentRelation[];
     subscription_instance_id: string;
     product_block: ProductBlock;
     label: string;
@@ -109,12 +112,20 @@ export interface FavoriteSubscriptionStorage {
     customName: string;
 }
 
+export interface SubscriptionInstanceParentRelation {
+    child_id: string;
+    domain_model_attr: string;
+    order_id: number;
+    parent_id: string;
+}
+
 export interface SubscriptionWithDetails extends Subscription {
     customer_name: string;
     instances: SubscriptionInstance[];
     end_date_epoch: number;
     start_date_epoch: number;
     customer_descriptions: CustomerDescription[];
+    tag: string;
 }
 export interface SubscriptionModel extends Subscription {
     customer_descriptions: CustomerDescription[];
