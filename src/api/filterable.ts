@@ -72,7 +72,7 @@ export function filterableEndpoint<T>(
     return axiosInstance
         .get(path, {
             headers: requestHeaders,
-            baseURL: ENV.BACKEND_URL + "/api/v2/",
+            baseURL: ENV.BACKEND_URL + "/api/", // TODO 740 RD: removed v2 to start clean with FastAPI
             params,
             validateStatus: (status: number) => (status >= 200 && status < 300) || status === 304,
             cancelToken: cancel.token

@@ -296,7 +296,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
                     columns={columns}
                     initialState={initialState as TableState<Subscription>}
                     persistSettings={persistSettings}
-                    endpoint={"subscriptions"}
+                    endpoint={"subscriptions/"}
                     initialTableSettings={initialTableSettings}
                     extraRowPropGetter={extraRowPropGetter}
                     renderSubComponent={renderSubComponent}

@@ -104,7 +104,7 @@ function axiosFetch<R = {}>(
 
 //API metadata
 export function products(): Promise<Product[]> {
-    return fetchJson("products");
+    return fetchJson("products/");
 }
 
 export function productTags(): Promise<string[]> {
@@ -349,11 +349,11 @@ export function locationCodes(): Promise<string[] | undefined> {
 }
 
 export function assignees(): Promise<string[]> {
-    return fetchJson("v2/processes/assignees");
+    return fetchJson("processes/assignees");
 }
 
 export function processStatuses(): Promise<string[]> {
-    return axiosFetch("v2/processes/statuses");
+    return axiosFetch("processes/statuses");
 }
 
 export function allWorkflows(): Promise<Workflow[]> {
