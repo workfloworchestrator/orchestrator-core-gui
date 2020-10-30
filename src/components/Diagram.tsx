@@ -107,6 +107,25 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         };
     }
 
+    componentDidMount = () => {
+        const { subscription } = this.props;
+        const { imsServices, imsEndpoints, isLoading } = this.state;
+
+        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+        if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
+            this.setState({ isLoading: true });
+            vcs.forEach((vc: any, vcIndex: number) => {
+                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
+                    imsServices[vcIndex] = result;
+                    this.setState({ imsServices: imsServices });
+                    if (isEmpty(imsEndpoints[vcIndex])) {
+                        this.populateEndpoints({ service: result, recursive: true, vc: vcIndex });
+                    }
+                });
+            });
+        }
+    };
+
     populateEndpoints = ({
         service,
         recursive = false,
@@ -360,22 +379,6 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
     };
 
     render() {
-        const { subscription } = this.props;
-        const { imsServices, imsEndpoints, isLoading } = this.state;
-
-        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
-        if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
-            this.setState({ isLoading: true });
-            vcs.forEach((vc: any, vcIndex: number) => {
-                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
-                    imsServices[vcIndex] = result;
-                    this.setState({ imsServices: imsServices });
-                    if (isEmpty(imsEndpoints[vcIndex])) {
-                        this.populateEndpoints({ service: result, recursive: true, vc: vcIndex });
-                    }
-                });
-            });
-        }
         this._buildTreeFromEndpoints();
 
         return (

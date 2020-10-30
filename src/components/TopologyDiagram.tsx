@@ -1,5 +1,14 @@
+import { toUnicode } from "punycode";
+
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
-import { prefixById, subscriptionsDetailWithModel } from "api";
+import {
+    internalPortByImsPortId,
+    portByImsPortId,
+    portByImsServiceId,
+    prefixById,
+    serviceByImsServiceId,
+    subscriptionsDetailWithModel
+} from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
 import {
@@ -8,22 +17,26 @@ import {
     InstanceValue,
     Subscription,
     SubscriptionInstance,
+    SubscriptionModel,
     SubscriptionWithDetails
 } from "utils/types";
+import { isEmpty } from "utils/Utils";
 
 import { stylesMap } from "./DiagramStyles";
 
 interface IProps {
-    subscription: SubscriptionWithDetails;
-    imsServices: IMSService[];
-    imsEndpoints: IMSEndpoint[];
-    childSubscriptions: SubscriptionWithDetails[];
+    subscription: SubscriptionModel;
 }
 
 interface IState {
     mapMode: number;
+    imsServices: any[];
+    imsEndpoints: any[];
+    isLoading: boolean;
     nodesLoaded: boolean;
     nodes: Subscription[];
+    portSubscriptions: SubscriptionModel[];
+    portsLoaded: boolean;
     ipss?: Subscription;
     selectionType: string | null;
     selection: any;
@@ -129,11 +142,16 @@ interface Point {
 let topology: Topology;
 const radius = 50;
 
-export default class TopologyDiagram extends React.PureComponent<IProps, IState> {
+export default class TopologyDiagram extends React.Component<IProps, IState> {
     state: IState = {
         mapMode: 0,
+        imsServices: [],
+        imsEndpoints: [],
+        isLoading: false,
         nodesLoaded: false,
         nodes: [],
+        portSubscriptions: [],
+        portsLoaded: false,
         selectionType: null,
         selection: null,
         panelText: null,
@@ -142,6 +160,130 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
     };
 
     prefixesLoaded: string[] = [];
+
+    componentDidMount = async () => {
+        const { subscription } = this.props;
+        const { imsServices, imsEndpoints, isLoading, portsLoaded } = this.state;
+
+        if (!portsLoaded) {
+            const rv = await this.getPortSubscriptions();
+            this.setState({ portsLoaded: true });
+        }
+
+        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+        // console.log(`loading=${isLoading?'yes':'no'}, vcs=${vcs.length} serv=${isEmpty(imsServices)?'empty':'filled'}`);
+        if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
+            this.setState({ isLoading: true });
+            // console.log('on to the ims things');
+            vcs.forEach((vc: any, vcIndex: number) => {
+                serviceByImsServiceId(vc.ims_circuit_id).then(result => {
+                    // console.log('received ims service');
+                    imsServices[vcIndex] = result;
+                    this.setState({ imsServices: imsServices });
+                    if (isEmpty(imsEndpoints[vcIndex])) {
+                        // console.log('getting endpoints');
+                        this.populateEndpoints({ service: result, recursive: true, vc: vcIndex });
+                    }
+                });
+            });
+        }
+    };
+
+    shouldComponentUpdate = (newProps: IProps, newState: IState) => {
+        const { portSubscriptions, imsEndpoints } = newState;
+        return portSubscriptions.length > 0 && imsEndpoints.length > 0;
+    };
+
+    getPortSubscriptions = async () => {
+        const { subscription } = this.props;
+        const promises: Promise<SubscriptionModel>[] = [];
+        (subscription.vc.esis || []).forEach((esi: any) => {
+            (esi.saps || []).forEach((sap: any) => {
+                promises.push(
+                    subscriptionsDetailWithModel(sap.port_subscription_id).then((result: SubscriptionModel) => {
+                        if (result.product.tag === "AGGSP") {
+                            return subscriptionsDetailWithModel(
+                                result.aggsp.port_subscription_id[0]
+                            ).then((port: SubscriptionModel) => Object.assign(result, { sp: port.sp }));
+                        }
+                        return result;
+                    })
+                );
+            });
+        });
+        return Promise.all(promises).then((result: any) => this.setState({ portSubscriptions: result.flat() }));
+    };
+
+    populateEndpoints = ({
+        service,
+        recursive = false,
+        vc = 0
+    }: {
+        service: IMSService;
+        recursive?: boolean;
+        vc: number;
+    }) => {
+        if (isEmpty(service) || !recursive) {
+            return;
+        }
+
+        const uniquePortPromises = (service.endpoints || []).map(async endpoint => {
+            if (endpoint.type === "port") {
+                return portByImsPortId(endpoint.id).then(result =>
+                    Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    })
+                );
+            } else if (endpoint.type === "internal_port") {
+                return internalPortByImsPortId(endpoint.id).then(result =>
+                    Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    })
+                );
+            } else {
+                return serviceByImsServiceId(endpoint.id).then(result => {
+                    if (["SP", "MSP", "SSP"].includes(result.product)) {
+                        // In case of port product we just resolve the underlying port
+                        return portByImsServiceId(endpoint.id).then(result =>
+                            Object.assign(result, {
+                                serviceId: endpoint.id,
+                                endpointType: "port"
+                            })
+                        );
+                    } else if (result.product === "AGGSP") {
+                        const internalPortId = result.endpoints.find(e => e.type === "service");
+                        if (internalPortId) {
+                            console.log("discard", result);
+                            return portByImsServiceId(internalPortId.id).then((port: any) =>
+                                Object.assign(port, {
+                                    serviceId: endpoint.id
+                                })
+                            );
+                        } else {
+                            return result;
+                        }
+                    }
+                    // Return all services that are not actually port services
+                    return (Object.assign(result, {
+                        serviceId: endpoint.id,
+                        endpointType: endpoint.type
+                    }) as unknown) as IMSEndpoint;
+                });
+            }
+        });
+        //@ts-ignore
+        Promise.all(uniquePortPromises).then(result => {
+            const { imsEndpoints } = this.state;
+            imsEndpoints[vc] = result.flat();
+            this.setState({ imsEndpoints: imsEndpoints });
+            // forceUpdate is a bit rough, but this.setState() does not
+            // trigger a re-render, so we have to.
+            console.log(`all done.`);
+            // this.forceUpdate();
+        });
+    };
 
     handleSelectionChanged(selectionType: string, selection: string) {
         this.setState({ selectionType, selection });
@@ -170,75 +312,74 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         };
     }
 
-    _findEndpoint(imsServiceId: number): IMSEndpoint | undefined {
-        return this.props.imsEndpoints?.find(e => e.serviceId === imsServiceId);
-    }
+    // _findEndpoint(imsServiceId: number): IMSEndpoint | undefined {
+    //     return this.props.imsEndpoints?.find(e => e.serviceId === imsServiceId);
+    // }
 
-    _findValueForKey(sub: SubscriptionWithDetails, key: string) {
-        return this._findValue(sub.instances[0].values, key);
-    }
+    // _findValueForKey(sub: SubscriptionWithDetails, key: string) {
+    //     return this._findValue(sub.instances[0].values, key);
+    // }
 
-    _findIMSServiceEndpoint(id: number) {
-        return this.props.imsServices![0].endpoints.find(e => e.id === id);
-    }
+    // _findIMSServiceEndpoint(id: number) {
+    //     return this.props.imsServices![0].endpoints.find(e => e.id === id);
+    // }
 
-    _findValue = (values: InstanceValue[], key: string) => {
-        return values.find(v => v.resource_type.resource_type === key);
-    };
+    // _findValue = (values: InstanceValue[], key: string) => {
+    //     return values.find(v => v.resource_type.resource_type === key);
+    // };
 
-    _findIpamId(inst: SubscriptionInstance) {
-        const test = this._findValue(inst.values, "ip_prefix_subscription_id");
-        if (!test) {
-            return;
-        }
-        const prefixService = this.props.childSubscriptions.find(s => s.subscription_id === test!.value);
-        if (!prefixService) {
-            return;
-        }
-        return this._findValue(prefixService.instances[0].values, "ipam_prefix_id");
-    }
+    // _findIpamId(inst: SubscriptionInstance) {
+    //     const test = this._findValue(inst.values, "ip_prefix_subscription_id");
+    //     if (!test) {
+    //         return;
+    //     }
+    //     const prefixService = this.props.childSubscriptions.find(s => s.subscription_id === test!.value);
+    //     if (!prefixService) {
+    //         return;
+    //     }
+    //     return this._findValue(prefixService.instances[0].values, "ipam_prefix_id");
+    // }
 
     _getNode(id: string): Subscription | undefined {
         return this.state.nodes.find(node => node.subscription_id === id);
     }
 
-    async _loadNodes() {
-        let nodes = [];
-        for (let sub of this.props.childSubscriptions!) {
-            const nodeIdValue = this._findValueForKey(sub, "node_subscription_id");
-            const f = this.state.nodes.find((node: Subscription) => node.subscription_id === nodeIdValue!.value);
-            if (!f && nodeIdValue) {
-                try {
-                    const node = await subscriptionsDetailWithModel(nodeIdValue!.value);
-                    nodes.push(node);
-                } catch (e) {
-                    console.error(e);
-                    // supply a node object that indicates
-                    // we couldn't load this particular
-                    // node.
-                    nodes.push({
-                        subscription_id: nodeIdValue!.value,
-                        description: "node did-not-load",
-                        product: sub.product,
-                        name: "",
-                        insync: false,
-                        product_id: sub.product.product_id,
-                        customer_id: "none",
-                        status: "IS",
-                        start_date: 0,
-                        end_date: 0,
-                        note: "dnf"
-                    });
-                }
-            }
-        }
-        return Promise.resolve(nodes);
-    }
+    // async _loadNodes() {
+    //     let nodes = [];
+    //     for (let sub of this.props.childSubscriptions!) {
+    //         const nodeIdValue = this._findValueForKey(sub, "node_subscription_id");
+    //         const f = this.state.nodes.find((node: Subscription) => node.subscription_id === nodeIdValue!.value);
+    //         if (!f && nodeIdValue) {
+    //             try {
+    //                 const node = await subscriptionsDetailWithModel(nodeIdValue!.value);
+    //                 nodes.push(node);
+    //             } catch (e) {
+    //                 console.error(e);
+    //                 // supply a node object that indicates
+    //                 // we couldn't load this particular
+    //                 // node.
+    //                 nodes.push({
+    //                     subscription_id: nodeIdValue!.value,
+    //                     description: "node did-not-load",
+    //                     product: sub.product,
+    //                     name: "",
+    //                     insync: false,
+    //                     product_id: sub.product.product_id,
+    //                     customer_id: "none",
+    //                     status: "IS",
+    //                     start_date: 0,
+    //                     end_date: 0,
+    //                     note: "dnf"
+    //                 });
+    //             }
+    //         }
+    //     }
+    //     return Promise.resolve(nodes);
+    // }
 
-    _makeConnectionExplanation = (endpoint: IMSEndpoint, sub: SubscriptionWithDetails): JSX.Element => {
-        const portmode = this._findValueForKey(sub, "port_mode");
-        const imsServiceEndpoint = this._findIMSServiceEndpoint(endpoint.serviceId);
-        const vlanRange = `${imsServiceEndpoint?.vlanranges[0].start}-${imsServiceEndpoint?.vlanranges[0].end}`;
+    _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
+        const portmode = sub.sp.port_mode;
+        const vlanRange = sap.vlanrange;
         return (
             <EuiCodeBlock>
                 <strong>interface :</strong> {endpoint.iface_type}
@@ -253,7 +394,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                 <br />
                 <strong>patch :</strong> {endpoint.patchposition}
                 <br />
-                <strong>port mode :</strong> {portmode?.value}
+                <strong>port mode :</strong> {portmode}
                 <br />
                 <strong>vlan :</strong> {vlanRange}
                 <br />
@@ -269,33 +410,33 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         );
     };
 
-    _makePrefixExplanation = (
-        endpoint: IMSEndpoint,
-        sub: SubscriptionWithDetails,
-        inst: SubscriptionInstance
-    ): JSX.Element => {
-        const ipamId = this._findIpamId(inst);
-        const prefix = this.state.prefix[ipamId!.value];
-        if (!ipamId || !this.prefixesLoaded.includes(ipamId.value) || !prefix) {
-            return <EuiCodeBlock></EuiCodeBlock>;
-        }
+    // _makePrefixExplanation = (
+    //     endpoint: IMSEndpoint,
+    //     sub: SubscriptionWithDetails,
+    //     inst: SubscriptionInstance
+    // ): JSX.Element => {
+    //     const ipamId = this._findIpamId(inst);
+    //     const prefix = this.state.prefix[ipamId!.value];
+    //     if (!ipamId || !this.prefixesLoaded.includes(ipamId.value) || !prefix) {
+    //         return <EuiCodeBlock></EuiCodeBlock>;
+    //     }
 
-        return (
-            <div>
-                {endpoint && this._makeConnectionExplanation(endpoint!, sub!)}
-                <EuiCodeBlock>
-                    <strong>asn :</strong> {prefix.asn__label}
-                    <br />
-                    <strong>prefix :</strong> {prefix.prefix}
-                    <br />
-                    <strong>state :</strong> {prefix.state__label}
-                    <br />
-                    <strong>tags :</strong> {prefix.tags?.join(",")}
-                    <br />
-                </EuiCodeBlock>
-            </div>
-        );
-    };
+    //     return (
+    //         <div>
+    //             {endpoint && this._makeConnectionExplanation(endpoint!, sub!)}
+    //             <EuiCodeBlock>
+    //                 <strong>asn :</strong> {prefix.asn__label}
+    //                 <br />
+    //                 <strong>prefix :</strong> {prefix.prefix}
+    //                 <br />
+    //                 <strong>state :</strong> {prefix.state__label}
+    //                 <br />
+    //                 <strong>tags :</strong> {prefix.tags?.join(",")}
+    //                 <br />
+    //             </EuiCodeBlock>
+    //         </div>
+    //     );
+    // };
 
     _calculatePositionFor(radius: number, index: number, n: number): Point {
         return {
@@ -304,138 +445,132 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         };
     }
 
-    _condenseValues(values: InstanceValue[]): any {
-        const rv: any = {};
-        values.forEach((v: InstanceValue) => {
-            rv[v.resource_type.resource_type] = v.value;
-        });
-        return rv;
-    }
+    // _condenseValues(values: InstanceValue[]): any {
+    //     const rv: any = {};
+    //     values.forEach((v: InstanceValue) => {
+    //         rv[v.resource_type.resource_type] = v.value;
+    //     });
+    //     return rv;
+    // }
 
-    _updatePrefixInformation(inst: SubscriptionInstance) {
-        const ipamId = this._findIpamId(inst);
-        if (!ipamId || this.prefixesLoaded.includes(ipamId.value)) {
-            return;
-        }
-        this.prefixesLoaded.push(ipamId.value);
+    // _updatePrefixInformation(inst: SubscriptionInstance) {
+    //     const ipamId = this._findIpamId(inst);
+    //     if (!ipamId || this.prefixesLoaded.includes(ipamId.value)) {
+    //         return;
+    //     }
+    //     this.prefixesLoaded.push(ipamId.value);
 
-        prefixById(parseInt(ipamId.value)).then(prefixData => {
-            const oldState = this.state.prefix;
-            oldState[ipamId.value] = prefixData;
-            this.setState({ prefix: { ...oldState } });
-        });
-    }
+    //     prefixById(parseInt(ipamId.value)).then(prefixData => {
+    //         const oldState = this.state.prefix;
+    //         oldState[ipamId.value] = prefixData;
+    //         this.setState({ prefix: { ...oldState } });
+    //     });
+    // }
 
     _buildIP(): Topology {
         const topology: Topology = { names: [], nodes: [], edges: [], paths: [] };
-        pathColorMap = {};
-        if (this.props.childSubscriptions?.length === 0 || this.props.imsEndpoints?.length === 0) {
-            return topology;
-        }
-        const vc = this.props.subscription.instances.find(i => i.product_block.tag === "VC");
-        const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
-        topology.names.push(wolk);
-        topology.nodes.push(wolk);
-
-        if (!vc!.children_relations) {
-            // nothing to do here.
-            return topology;
-        }
-        vc!.children_relations.forEach((child, index: number) => {
-            const sap = this.props.subscription.instances.find(i => i.subscription_instance_id === child.child_id);
-            if (sap!.product_block.tag === "IPSS") {
-                return;
-            }
-            this._updatePrefixInformation(sap!);
-
-            const values = this._condenseValues(sap!.values);
-            const port = this.props.childSubscriptions.find(sub => sub.subscription_id === values.port_subscription_id);
-            const portValues = this._condenseValues(port!.instances[0].values);
-            const endpoint = this._findEndpoint(parseInt(portValues.ims_circuit_id));
-            const label = `${endpoint?.node}__${endpoint?.port.replaceAll("/", "_")}`;
-            const point = this._calculatePositionFor(radius, index, vc!.children_relations.length);
-            const node = this._makeNode(
-                child.child_id,
-                `${sap?.product_block.tag}_${label}`,
-                120 + point.x,
-                60 + point.y,
-                "hub"
-            );
-            node.text = this._makePrefixExplanation(endpoint!, port!, sap!);
-            topology.names.push(node);
-            topology.nodes.push(node);
-        });
-
         return topology;
+        //     pathColorMap = {};
+        //     if (this.props.childSubscriptions?.length === 0 || this.props.imsEndpoints?.length === 0) {
+        //         return topology;
+        //     }
+        //     const vc = this.props.subscription.instances.find(i => i.product_block.tag === "VC");
+        //     const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
+        //     topology.names.push(wolk);
+        //     topology.nodes.push(wolk);
+
+        //     if (!vc!.children_relations) {
+        //         // nothing to do here.
+        //         return topology;
+        //     }
+        //     vc!.children_relations.forEach((child, index: number) => {
+        //         const sap = this.props.subscription.instances.find(i => i.subscription_instance_id === child.child_id);
+        //         if (sap!.product_block.tag === "IPSS") {
+        //             return;
+        //         }
+        //         this._updatePrefixInformation(sap!);
+
+        //         const values = this._condenseValues(sap!.values);
+        //         const port = this.props.childSubscriptions.find(sub => sub.subscription_id === values.port_subscription_id);
+        //         const portValues = this._condenseValues(port!.instances[0].values);
+        //         const endpoint = this._findEndpoint(parseInt(portValues.ims_circuit_id));
+        //         const label = `${endpoint?.node}__${endpoint?.port.replaceAll("/", "_")}`;
+        //         const point = this._calculatePositionFor(radius, index, vc!.children_relations.length);
+        //         const node = this._makeNode(
+        //             child.child_id,
+        //             `${sap?.product_block.tag}_${label}`,
+        //             120 + point.x,
+        //             60 + point.y,
+        //             "hub"
+        //         );
+        //         node.text = this._makePrefixExplanation(endpoint!, port!, sap!);
+        //         topology.names.push(node);
+        //         topology.nodes.push(node);
+        //     });
+
+        //     return topology;
     }
 
     _build(): Topology {
         const topology: Topology = { names: [], nodes: [], edges: [], paths: [] };
+        const { imsEndpoints, portSubscriptions } = this.state;
+        const { subscription } = this.props;
         pathColorMap = {};
-        if (this.props.childSubscriptions?.length === 0 || this.props.imsEndpoints?.length === 0) {
+
+        if (portSubscriptions.length === 0 || imsEndpoints.length === 0) {
             return topology;
         }
 
-        if (!this.state.nodesLoaded) {
-            this._loadNodes().then(res => {
-                this.setState({ nodesLoaded: true, nodes: res });
-            });
-        } else {
-            const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
+        const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
 
-            const vc = this.props.subscription.instances.find(i => i.product_block.tag === "VC");
-            if (vc) {
-                // get ESI's
-                const esiList = this.props.subscription.instances.filter(i => i.product_block.tag === "ESI");
+        const vc = subscription.vc;
+        if (vc) {
+            // get ESI's
+            const esiList = vc.esis;
 
-                // for each ESI's children: draw.
-                esiList.forEach((esi: SubscriptionInstance, esiIndex: number) => {
-                    const childCount = esi.children_relations.length;
-                    esi.children_relations.forEach((child, index: number) => {
-                        // find instance in instances
-                        const sap = this.props.subscription.instances.find(
-                            i => i.subscription_instance_id === child.child_id
-                        );
-                        const portSubscriptionId = this._findValue(sap!.values, "port_subscription_id");
-                        const portSubscription = this.props.childSubscriptions.find(
-                            s => s.subscription_id === portSubscriptionId?.value
-                        );
-                        const nodeIdValue = this._findValueForKey(portSubscription!, "node_subscription_id");
-                        const endpointValue = this._findValueForKey(portSubscription!, "ims_circuit_id");
-                        const endpoint = this._findEndpoint(parseInt(endpointValue!.value));
+            // for each ESI's children: draw.
+            esiList.forEach((esi: any, esiIndex: number) => {
+                const childCount = esi.saps.length;
+                esi.saps.forEach((sap: any, index: number) => {
+                    // find instance in instances
+                    const portSubscriptionId = sap.port_subscription_id;
+                    const portSubscription = portSubscriptions.find(s => s.subscription_id === portSubscriptionId);
+                    if (!portSubscription) {
+                        console.log("failed to find subscription", portSubscriptionId);
+                        return;
+                    }
 
-                        let nodeName = `unknown_${index}`;
-                        if (nodeIdValue) {
-                            const imsNode = this._getNode(nodeIdValue!.value);
-                            nodeName = imsNode!.description.substr(
-                                imsNode!.description.lastIndexOf(" ") + 1,
-                                imsNode!.description.length
-                            );
-                        }
-                        const label = `${nodeName}__${endpoint?.port.replaceAll("/", "_")}`;
-                        const point = this._calculatePositionFor(radius, esiIndex, esiList.length);
-                        if (childCount > 1) {
-                            // space nodes with 10px;
-                            point.y = point.y - 10 * index;
-                            pathColorMap[`${label}__WOLK`] = "cyan";
-                            pathWidthMap[`${label}__WOLK`] = 2;
-                        }
-                        const graphNode = this._makeNode(
-                            portSubscriptionId!.value,
-                            label,
-                            120 + point.x,
-                            60 + point.y,
-                            "hub"
-                        );
-                        graphNode.text = this._makeConnectionExplanation(endpoint!, portSubscription!);
-                        if (graphNode.y < 60) {
-                            graphNode.label_position = "top";
-                        }
-                        topology.nodes.push(graphNode);
-                        topology.names.push(graphNode);
-                    });
+                    let endpointId: number;
+                    endpointId = portSubscription.aggsp
+                        ? portSubscription.aggsp.ims_circuit_id
+                        : portSubscription.sp.ims_circuit_id;
+                    //console.log(`find service ${endpointId}`, portSubscription);
+                    const endpoint = imsEndpoints[0].find((e: IMSEndpoint) => e.serviceId === endpointId);
+                    const portName = endpoint.port ? endpoint.port.replaceAll("/", "_") : "AGGSP";
+
+                    let nodeName = `unknown_${index}`;
+                    if (endpoint) {
+                        //console.log(endpoint);
+                        nodeName = endpoint.node;
+                    }
+                    const label = `${nodeName}__${portName}`;
+                    const point = this._calculatePositionFor(radius, esiIndex, esiList.length);
+                    if (childCount > 1) {
+                        // space nodes with 10px;
+                        point.y = point.y - 10 * index;
+                        pathColorMap[`${label}__WOLK`] = "cyan";
+                        pathWidthMap[`${label}__WOLK`] = 2;
+                    }
+                    const graphNode = this._makeNode(portSubscriptionId, label, 120 + point.x, 60 + point.y, "hub");
+                    graphNode.text = this._makeConnectionExplanation(endpoint!, sap, portSubscription!);
+                    if (graphNode.y < 60) {
+                        graphNode.label_position = "top";
+                    }
+                    topology.nodes.push(graphNode);
+                    topology.names.push(graphNode);
                 });
-            }
+            });
+
             topology.names.push(wolk);
             topology.nodes.push(wolk);
         }
@@ -470,10 +605,6 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
         });
     }
 
-    _toggleMapMode = () => {
-        this.setState({ mapMode: 1 - this.state.mapMode });
-    };
-
     render() {
         topology = this.props.subscription.product.product_type === "L2VPN" ? this._build() : this._buildIP();
         this._makePaths();
@@ -483,8 +614,8 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
             edges: this.state.selectionType === "edge" ? [this.state.selection] : []
         };
         return (
-            <EuiFlexGroup>
-                <EuiFlexItem grow={7}>
+            <EuiFlexGroup justifyContent="spaceAround">
+                <EuiFlexItem grow={5}>
                     {topology.names.length > 0 && (
                         <TrafficMap
                             key="traffic-map"
@@ -511,6 +642,7 @@ export default class TopologyDiagram extends React.PureComponent<IProps, IState>
                 <EuiFlexItem grow={3}>
                     <EuiPanel betaBadgeLabel={"Details"}>{this.state.panelText}</EuiPanel>
                 </EuiFlexItem>
+                <EuiFlexItem grow={2}></EuiFlexItem>
             </EuiFlexGroup>
         );
     }
