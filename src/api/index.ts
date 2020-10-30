@@ -132,7 +132,7 @@ export function deleteProduct(id: string): Promise<null> {
 }
 
 export function productBlocks(): Promise<ProductBlock[]> {
-    return fetchJson("product_blocks");
+    return fetchJson("product_blocks/");
 }
 
 export function productBlockById(id: string): Promise<ProductBlock> {
@@ -154,7 +154,7 @@ export function deleteProductBlock(id: string) {
 }
 
 export function resourceTypes(): Promise<ResourceType[]> {
-    return fetchJson("resource_types");
+    return fetchJson("resource_types/");
 }
 
 export function resourceType(id: string) {
