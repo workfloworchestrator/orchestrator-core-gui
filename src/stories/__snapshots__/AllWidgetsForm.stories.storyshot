@@ -12810,7 +12810,7 @@ exports[`Storyshots Complete Input widgets form new All Widgets Form 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"

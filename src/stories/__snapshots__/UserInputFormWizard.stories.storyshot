@@ -171,7 +171,7 @@ exports[`Storyshots UserInputFormWizard Wizard 1`] = `
               className="euiFlexItem"
             >
               <button
-                className="euiButton euiButton--ghost euiButton--fill"
+                className="euiButton euiButton--warning"
                 id="button-cancel-form-submit"
                 onClick={[Function]}
                 type="button"

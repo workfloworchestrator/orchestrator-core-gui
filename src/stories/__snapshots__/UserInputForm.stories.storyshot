@@ -404,7 +404,7 @@ exports[`Storyshots UserInputForm Contactpersons 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -1087,7 +1087,7 @@ exports[`Storyshots UserInputForm Corelink 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -1770,7 +1770,7 @@ exports[`Storyshots UserInputForm Corelink add link 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -2000,7 +2000,7 @@ exports[`Storyshots UserInputForm Nodes 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -2574,7 +2574,7 @@ exports[`Storyshots UserInputForm SN7 Portselect MSP only 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -3148,7 +3148,7 @@ exports[`Storyshots UserInputForm SN7 Portselect all organisations 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -3636,7 +3636,7 @@ exports[`Storyshots UserInputForm SN7 Portselect bandwidth 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -4210,7 +4210,7 @@ exports[`Storyshots UserInputForm SN7 Portselect selected organisation 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -5081,7 +5081,7 @@ exports[`Storyshots UserInputForm SN8 Portselect all organisations 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -5679,7 +5679,7 @@ exports[`Storyshots UserInputForm SN8 Portselect selected organisation 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -6550,7 +6550,7 @@ exports[`Storyshots UserInputForm SN8 Portselect tagged 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -7148,7 +7148,7 @@ exports[`Storyshots UserInputForm SN8 Portselect untagged 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
@@ -7535,7 +7535,7 @@ exports[`Storyshots UserInputForm Service Port 1`] = `
                     className="euiFlexItem"
                   >
                     <button
-                      className="euiButton euiButton--ghost euiButton--fill"
+                      className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
                       type="button"
