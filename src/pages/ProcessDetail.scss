@@ -19,9 +19,6 @@
 @use "../stylesheets/vars";
 
 .mod-process-detail {
-    .card {
-        @include mixins.card;
-    }
     section.not-found {
         h1 {
             font-size: 24px;

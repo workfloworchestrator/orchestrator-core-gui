@@ -118,7 +118,7 @@ section.process-state-detail {
             display: flex;
 
             section.state-delta {
-                @include mixins.card;
+                // @include mixins.card;
                 box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
                 background-color: vars.$lightest-grey;
                 margin-bottom: 25px;

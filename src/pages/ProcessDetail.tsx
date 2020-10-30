@@ -15,8 +15,7 @@
 
 import "pages/ProcessDetail.scss";
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPage, EuiPageBody, EuiPanel, EuiText } from "@elastic/eui";
 import { process, resumeProcess } from "api";
 import { abortProcess, deleteProcess, processSubscriptionsByProcessId, retryProcess } from "api/index";
 import UserInputFormWizard from "components/inputForms/UserInputFormWizard";
@@ -337,39 +336,43 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
         const productName = product && product.name;
         if (!step || !stepUserInput || selectedTab === "process") {
             return (
-                <section className="card">
-                    {this.renderActions(process)}
-                    <ProcessStateDetails
-                        process={process}
-                        subscriptionProcesses={subscriptionProcesses}
-                        collapsed={this.props.query.collapsed}
-                        onChangeCollapsed={this.handleCollapse}
-                        isProcess={!process.is_task}
-                    />
+                <section>
+                    <EuiPanel>
+                        {this.renderActions(process)}
+                        <ProcessStateDetails
+                            process={process}
+                            subscriptionProcesses={subscriptionProcesses}
+                            collapsed={this.props.query.collapsed}
+                            onChangeCollapsed={this.handleCollapse}
+                            isProcess={!process.is_task}
+                        />
+                    </EuiPanel>
                 </section>
             );
         } else {
             return (
-                <section className="card">
-                    <section className="header-info">
-                        <EuiText>
-                            <h3>
-                                {I18n.t(`${process.is_task ? "task" : "process"}.workflow`, {
-                                    name: process.workflow_name
-                                })}
-                                {I18n.t(`${process.is_task ? "task" : "process"}.userInput`, {
-                                    name: step.name,
-                                    product: productName || ""
-                                })}
-                            </h3>
-                        </EuiText>
-                    </section>
-                    <UserInputFormWizard
-                        stepUserInput={stepUserInput}
-                        validSubmit={this.validSubmit}
-                        hasNext={false}
-                        cancel={() => this.context.redirect(`/${process.is_task ? "tasks" : "processes"}`)}
-                    />
+                <section>
+                    <EuiPanel>
+                        <section className="header-info">
+                            <EuiText>
+                                <h3>
+                                    {I18n.t(`${process.is_task ? "task" : "process"}.workflow`, {
+                                        name: process.workflow_name
+                                    })}
+                                    {I18n.t(`${process.is_task ? "task" : "process"}.userInput`, {
+                                        name: step.name,
+                                        product: productName || ""
+                                    })}
+                                </h3>
+                            </EuiText>
+                        </section>
+                        <UserInputFormWizard
+                            stepUserInput={stepUserInput}
+                            validSubmit={this.validSubmit}
+                            hasNext={false}
+                            cancel={() => this.context.redirect(`/${process.is_task ? "tasks" : "processes"}`)}
+                        />
+                    </EuiPanel>
                 </section>
             );
         }
@@ -416,8 +419,10 @@ class ProcessDetail extends React.PureComponent<IProps, IState> {
                     {renderContent &&
                         this.renderTabContent(selectedTab, process, step, stepUserInput, subscriptionProcesses)}
                     {renderNotFound && (
-                        <section className="not-found card">
-                            <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+                        <section className="not-found">
+                            <EuiPanel>
+                                <h1>{I18n.t(`${process.is_task ? "task" : "process"}.notFound`)}</h1>
+                            </EuiPanel>
                         </section>
                     )}
                     <ScrollUpButton />
