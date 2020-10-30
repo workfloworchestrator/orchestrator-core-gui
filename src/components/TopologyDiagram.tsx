@@ -1,5 +1,3 @@
-import { toUnicode } from "punycode";
-
 import { EuiCodeBlock, EuiFlexGroup, EuiFlexItem, EuiLink, EuiPanel } from "@elastic/eui";
 import {
     internalPortByImsPortId,
@@ -11,15 +9,7 @@ import {
 } from "api";
 import React from "react";
 import { TrafficMap } from "react-network-diagrams";
-import {
-    IMSEndpoint,
-    IMSService,
-    InstanceValue,
-    Subscription,
-    SubscriptionInstance,
-    SubscriptionModel,
-    SubscriptionWithDetails
-} from "utils/types";
+import { IMSEndpoint, IMSService, Subscription, SubscriptionModel } from "utils/types";
 import { isEmpty } from "utils/Utils";
 
 import { stylesMap } from "./DiagramStyles";
@@ -166,22 +156,22 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         const { imsServices, imsEndpoints, isLoading, portsLoaded } = this.state;
 
         if (!portsLoaded) {
-            const rv = await this.getPortSubscriptions();
+            try {
+                await this.getPortSubscriptions();
+            } catch (e) {
+                console.log("failed to get a subscription", e.config.url);
+            }
             this.setState({ portsLoaded: true });
         }
 
         const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
-        // console.log(`loading=${isLoading?'yes':'no'}, vcs=${vcs.length} serv=${isEmpty(imsServices)?'empty':'filled'}`);
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
-            // console.log('on to the ims things');
             vcs.forEach((vc: any, vcIndex: number) => {
                 serviceByImsServiceId(vc.ims_circuit_id).then(result => {
-                    // console.log('received ims service');
                     imsServices[vcIndex] = result;
                     this.setState({ imsServices: imsServices });
                     if (isEmpty(imsEndpoints[vcIndex])) {
-                        // console.log('getting endpoints');
                         this.populateEndpoints({ service: result, recursive: true, vc: vcIndex });
                     }
                 });
@@ -197,7 +187,8 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     getPortSubscriptions = async () => {
         const { subscription } = this.props;
         const promises: Promise<SubscriptionModel>[] = [];
-        (subscription.vc.esis || []).forEach((esi: any) => {
+        const backlog = subscription.product.product_type === "IP" ? [subscription.vc] : subscription.vc.esis;
+        (backlog || []).forEach((esi: any) => {
             (esi.saps || []).forEach((sap: any) => {
                 promises.push(
                     subscriptionsDetailWithModel(sap.port_subscription_id).then((result: SubscriptionModel) => {
@@ -288,6 +279,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
     handleSelectionChanged(selectionType: string, selection: string) {
         this.setState({ selectionType, selection });
         let n;
+
         if (selectionType === "edge") {
             // const [from, to] = selection.split("--");
         } else {
@@ -312,70 +304,9 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         };
     }
 
-    // _findEndpoint(imsServiceId: number): IMSEndpoint | undefined {
-    //     return this.props.imsEndpoints?.find(e => e.serviceId === imsServiceId);
-    // }
-
-    // _findValueForKey(sub: SubscriptionWithDetails, key: string) {
-    //     return this._findValue(sub.instances[0].values, key);
-    // }
-
-    // _findIMSServiceEndpoint(id: number) {
-    //     return this.props.imsServices![0].endpoints.find(e => e.id === id);
-    // }
-
-    // _findValue = (values: InstanceValue[], key: string) => {
-    //     return values.find(v => v.resource_type.resource_type === key);
-    // };
-
-    // _findIpamId(inst: SubscriptionInstance) {
-    //     const test = this._findValue(inst.values, "ip_prefix_subscription_id");
-    //     if (!test) {
-    //         return;
-    //     }
-    //     const prefixService = this.props.childSubscriptions.find(s => s.subscription_id === test!.value);
-    //     if (!prefixService) {
-    //         return;
-    //     }
-    //     return this._findValue(prefixService.instances[0].values, "ipam_prefix_id");
-    // }
-
     _getNode(id: string): Subscription | undefined {
         return this.state.nodes.find(node => node.subscription_id === id);
     }
-
-    // async _loadNodes() {
-    //     let nodes = [];
-    //     for (let sub of this.props.childSubscriptions!) {
-    //         const nodeIdValue = this._findValueForKey(sub, "node_subscription_id");
-    //         const f = this.state.nodes.find((node: Subscription) => node.subscription_id === nodeIdValue!.value);
-    //         if (!f && nodeIdValue) {
-    //             try {
-    //                 const node = await subscriptionsDetailWithModel(nodeIdValue!.value);
-    //                 nodes.push(node);
-    //             } catch (e) {
-    //                 console.error(e);
-    //                 // supply a node object that indicates
-    //                 // we couldn't load this particular
-    //                 // node.
-    //                 nodes.push({
-    //                     subscription_id: nodeIdValue!.value,
-    //                     description: "node did-not-load",
-    //                     product: sub.product,
-    //                     name: "",
-    //                     insync: false,
-    //                     product_id: sub.product.product_id,
-    //                     customer_id: "none",
-    //                     status: "IS",
-    //                     start_date: 0,
-    //                     end_date: 0,
-    //                     note: "dnf"
-    //                 });
-    //             }
-    //         }
-    //     }
-    //     return Promise.resolve(nodes);
-    // }
 
     _makeConnectionExplanation = (endpoint: IMSEndpoint, sap: any, sub: SubscriptionModel): JSX.Element => {
         const portmode = sub.sp.port_mode;
@@ -410,33 +341,34 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         );
     };
 
-    // _makePrefixExplanation = (
-    //     endpoint: IMSEndpoint,
-    //     sub: SubscriptionWithDetails,
-    //     inst: SubscriptionInstance
-    // ): JSX.Element => {
-    //     const ipamId = this._findIpamId(inst);
-    //     const prefix = this.state.prefix[ipamId!.value];
-    //     if (!ipamId || !this.prefixesLoaded.includes(ipamId.value) || !prefix) {
-    //         return <EuiCodeBlock></EuiCodeBlock>;
-    //     }
+    _makePrefixExplanation = (endpoint: IMSEndpoint, sub: SubscriptionModel, sap: any): JSX.Element => {
+        if (isEmpty(sap.ip_prefix_subscription_id)) {
+            return <EuiCodeBlock />;
+        }
+        const { prefix } = this.state;
+        const subscriptionId = sap.ip_prefix_subscription_id[0];
+        const prefixInstance = prefix[subscriptionId];
 
-    //     return (
-    //         <div>
-    //             {endpoint && this._makeConnectionExplanation(endpoint!, sub!)}
-    //             <EuiCodeBlock>
-    //                 <strong>asn :</strong> {prefix.asn__label}
-    //                 <br />
-    //                 <strong>prefix :</strong> {prefix.prefix}
-    //                 <br />
-    //                 <strong>state :</strong> {prefix.state__label}
-    //                 <br />
-    //                 <strong>tags :</strong> {prefix.tags?.join(",")}
-    //                 <br />
-    //             </EuiCodeBlock>
-    //         </div>
-    //     );
-    // };
+        if (!prefixInstance) {
+            return <EuiCodeBlock>Not found</EuiCodeBlock>;
+        }
+
+        return (
+            <div>
+                {endpoint && this._makeConnectionExplanation(endpoint, sap, sub!)}
+                <EuiCodeBlock>
+                    <strong>asn :</strong> {prefixInstance.asn__label}
+                    <br />
+                    <strong>prefix :</strong> {prefixInstance.prefix}
+                    <br />
+                    <strong>state :</strong> {prefixInstance.state__label}
+                    <br />
+                    <strong>tags :</strong> {prefixInstance.tags?.join(",")}
+                    <br />
+                </EuiCodeBlock>
+            </div>
+        );
+    };
 
     _calculatePositionFor(radius: number, index: number, n: number): Point {
         return {
@@ -445,70 +377,63 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
         };
     }
 
-    // _condenseValues(values: InstanceValue[]): any {
-    //     const rv: any = {};
-    //     values.forEach((v: InstanceValue) => {
-    //         rv[v.resource_type.resource_type] = v.value;
-    //     });
-    //     return rv;
-    // }
+    _updatePrefixInformation(sap: any) {
+        if (isEmpty(sap.ip_prefix_subscription_id) || this.prefixesLoaded.includes(sap.ip_prefix_subscription_id[0])) {
+            return;
+        }
 
-    // _updatePrefixInformation(inst: SubscriptionInstance) {
-    //     const ipamId = this._findIpamId(inst);
-    //     if (!ipamId || this.prefixesLoaded.includes(ipamId.value)) {
-    //         return;
-    //     }
-    //     this.prefixesLoaded.push(ipamId.value);
+        const prefixSubscriptionId = sap.ip_prefix_subscription_id[0];
 
-    //     prefixById(parseInt(ipamId.value)).then(prefixData => {
-    //         const oldState = this.state.prefix;
-    //         oldState[ipamId.value] = prefixData;
-    //         this.setState({ prefix: { ...oldState } });
-    //     });
-    // }
+        this.prefixesLoaded.push(prefixSubscriptionId);
+        subscriptionsDetailWithModel(prefixSubscriptionId).then((result: SubscriptionModel) => {
+            prefixById(result.ip_prefix.ipam_prefix_id).then((prefixData: any) => {
+                const { prefix } = this.state;
+                prefix[prefixSubscriptionId] = prefixData;
+                this.setState({ prefix: prefix });
+            });
+        });
+    }
 
     _buildIP(): Topology {
         const topology: Topology = { names: [], nodes: [], edges: [], paths: [] };
+        const { imsEndpoints, portSubscriptions } = this.state;
+        const { subscription } = this.props;
+
+        pathColorMap = {};
+        if (imsEndpoints.length === 0) {
+            return topology;
+        }
+
+        const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
+        topology.names.push(wolk);
+        topology.nodes.push(wolk);
+
+        subscription.vc.saps.forEach((sap: any, index: number) => {
+            const portSubscription = portSubscriptions.find(s => s.subscription_id === sap.port_subscription_id);
+            this._updatePrefixInformation(sap);
+
+            if (!portSubscription) {
+                return;
+            }
+
+            const endpoint = imsEndpoints[0].find(
+                (e: IMSEndpoint) => e.serviceId === portSubscription!.sp.ims_circuit_id
+            );
+            const label = `${endpoint?.node}__${endpoint?.port.replaceAll("/", "_")}`;
+            const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
+            const node = this._makeNode(
+                sap.port_subscription_id,
+                `${portSubscription.product.tag}_${label}`,
+                120 + point.x,
+                60 + point.y,
+                "hub"
+            );
+            node.text = this._makePrefixExplanation(endpoint!, portSubscription!, sap!);
+            topology.names.push(node);
+            topology.nodes.push(node);
+        });
+
         return topology;
-        //     pathColorMap = {};
-        //     if (this.props.childSubscriptions?.length === 0 || this.props.imsEndpoints?.length === 0) {
-        //         return topology;
-        //     }
-        //     const vc = this.props.subscription.instances.find(i => i.product_block.tag === "VC");
-        //     const wolk: TopologyName = this._makeNode("wolk", "WOLK", 120, 60, "cloud");
-        //     topology.names.push(wolk);
-        //     topology.nodes.push(wolk);
-
-        //     if (!vc!.children_relations) {
-        //         // nothing to do here.
-        //         return topology;
-        //     }
-        //     vc!.children_relations.forEach((child, index: number) => {
-        //         const sap = this.props.subscription.instances.find(i => i.subscription_instance_id === child.child_id);
-        //         if (sap!.product_block.tag === "IPSS") {
-        //             return;
-        //         }
-        //         this._updatePrefixInformation(sap!);
-
-        //         const values = this._condenseValues(sap!.values);
-        //         const port = this.props.childSubscriptions.find(sub => sub.subscription_id === values.port_subscription_id);
-        //         const portValues = this._condenseValues(port!.instances[0].values);
-        //         const endpoint = this._findEndpoint(parseInt(portValues.ims_circuit_id));
-        //         const label = `${endpoint?.node}__${endpoint?.port.replaceAll("/", "_")}`;
-        //         const point = this._calculatePositionFor(radius, index, vc!.children_relations.length);
-        //         const node = this._makeNode(
-        //             child.child_id,
-        //             `${sap?.product_block.tag}_${label}`,
-        //             120 + point.x,
-        //             60 + point.y,
-        //             "hub"
-        //         );
-        //         node.text = this._makePrefixExplanation(endpoint!, port!, sap!);
-        //         topology.names.push(node);
-        //         topology.nodes.push(node);
-        //     });
-
-        //     return topology;
     }
 
     _build(): Topology {

@@ -344,7 +344,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                     circuitTypeProperties.panelCoupler,
                     "",
                     !connectionAdded ? vlanRange : "",
-                    imsEndpoint.node,
+                    `${imsEndpoint.node}`,
                     `${graphIndex},${memberList.length}`
                 );
                 memberList.push(circuitMember);
@@ -356,7 +356,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                             circuitTypeProperties.optical,
                             "",
                             "",
-                            serviceSpeed,
+                            `${serviceSpeed}`,
                             `${graphIndex},${memberList.length}`
                         )
                     );
