@@ -78,7 +78,7 @@ const Navigation = () => {
         navItems.forEach(navItem => {
             navs[navItem] = () => history.push(`/${navItem}`);
             controls.push({
-                "aria-label": "create process",
+                "aria-label": `${navItem}-tab`,
                 controlType: "tab",
                 id: `main-navigation-${navItem}-tab`,
                 onClick: navs[navItem],

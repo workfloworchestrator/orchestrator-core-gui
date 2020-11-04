@@ -39,8 +39,6 @@ interface IState {
 }
 
 export default class FavoritePortSelector extends React.PureComponent<IProps, IState> {
-    //Todo: we might need some default props here (depending on how we feed in the subscriptions
-
     constructor(props: IProps) {
         super(props);
 
