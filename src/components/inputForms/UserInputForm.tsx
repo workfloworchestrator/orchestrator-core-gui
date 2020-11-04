@@ -306,7 +306,7 @@ class UserInputForm extends React.Component<IProps, IState> {
         const { hasNext, hasPrev } = this.props;
 
         const prevButton = hasPrev ? (
-            <EuiButton id="button-prev-form-submit" fill color="primary" onClick={this.props.previous}>
+            <EuiButton id="button-prev-form-submit" fill onClick={this.props.previous}>
                 {I18n.t("process.previous")}
             </EuiButton>
         ) : (

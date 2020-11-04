@@ -24,3 +24,8 @@
 .euiPagination {
     height: 32px; // to align with the rows-per-page selector.
 }
+
+/* Style "rows per page" text */
+.euiButtonEmpty__text {
+    font-size: 0.9em;
+}

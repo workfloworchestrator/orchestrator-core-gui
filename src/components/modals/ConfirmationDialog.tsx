@@ -17,7 +17,6 @@ import "components/modals/ConfirmationDialog.scss";
 
 import {
     EuiButton,
-    EuiButtonEmpty,
     EuiModal,
     EuiModalBody,
     EuiModalFooter,
@@ -73,9 +72,9 @@ export default function ConfirmationDialog({
                     <EuiModalBody>{modalContent}</EuiModalBody>
 
                     <EuiModalFooter>
-                        <EuiButtonEmpty onClick={cancel} id="dialog-cancel">
+                        <EuiButton onClick={cancel} color="warning" id="dialog-cancel">
                             {leavePage ? I18n.t("confirmation_dialog.leave") : I18n.t("confirmation_dialog.cancel")}
-                        </EuiButtonEmpty>
+                        </EuiButton>
 
                         <EuiButton onClick={confirm} fill id="dialog-confirm">
                             {leavePage ? I18n.t("confirmation_dialog.stay") : I18n.t("confirmation_dialog.confirm")}
