@@ -130,7 +130,7 @@ class Header extends React.PureComponent<AuthContextProps, IState> {
 
                         <EuiHeaderLink
                             iconType="popout"
-                            href="https://wiki.surfnet.nl/display/SNM/SURFnet+Netwerk+Management+Home"
+                            href="https://docs.dev.automation.surf.net/static/html/workflows.html"
                             target="_blank"
                         >
                             {I18n.t("header.links.help")}
