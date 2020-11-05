@@ -76,13 +76,11 @@ const Navigation = () => {
         const controls: Control[] = [];
 
         navItems.forEach(navItem => {
-            navs[navItem] = () => history.push(`/${navItem}`);
             controls.push({
                 "aria-label": `${navItem}-tab`,
-                controlType: "tab",
+                controlType: "text",
                 id: `main-navigation-${navItem}-tab`,
-                onClick: navs[navItem],
-                label: I18n.t(`navigation.${navItem}`),
+                text: <Link to={`/${navItem}`}>{I18n.t(`navigation.${navItem}`)}</Link>,
                 className: location.pathname.startsWith(`/${navItem.replace("_", "-")}`)
                     ? "navigation__active navigation__item"
                     : "navigation__item"
