@@ -30,7 +30,7 @@ import { Control } from "@elastic/eui/src/components/control_bar/control_bar";
 import I18n from "i18n-js";
 import mySpinner from "lib/Spin";
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Spinner } from "spin.js";
 
@@ -39,7 +39,6 @@ import FavoritesManagementModal from "./modals/FavoritesManagementModal";
 const Navigation = () => {
     const [loading, setLoading] = useState(false);
     const location = useLocation();
-    const history = useHistory();
     const spinnerTarget = useRef();
     const spinnerElement = useRef<Spinner>();
     const navItems = ["processes", "subscriptions", "metadata", "validations", "tasks", "prefixes", "settings"];
@@ -69,8 +68,6 @@ const Navigation = () => {
             spinnerElement.current = undefined;
         }
     });
-
-    const navs: any = {};
 
     const getControls = (): Control[] => {
         const controls: Control[] = [];
