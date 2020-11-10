@@ -349,11 +349,11 @@ export function locationCodes(): Promise<string[] | undefined> {
 }
 
 export function assignees(): Promise<string[]> {
-    return fetchJson("processes/assignees");
+    return fetchJson("v2/processes/assignees");
 }
 
 export function processStatuses(): Promise<string[]> {
-    return axiosFetch("processes/statuses");
+    return axiosFetch("v2/processes/statuses");
 }
 
 export function allWorkflows(): Promise<Workflow[]> {
