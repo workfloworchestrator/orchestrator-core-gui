@@ -111,7 +111,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         const { subscription } = this.props;
         const { imsServices, imsEndpoints, isLoading } = this.state;
 
-        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+        const vcs = subscription.lrss?.vcs ? subscription.lrss.vcs : [subscription.vc];
         if (!isLoading && vcs.length > 0 && isEmpty(imsServices)) {
             this.setState({ isLoading: true });
             vcs.forEach((vc: any, vcIndex: number) => {
@@ -282,7 +282,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
         graphList.splice(0, graphList.length);
         const { subscription } = this.props;
         const { imsEndpoints } = this.state;
-        const vcs = subscription.vcs ? subscription.vcs : [subscription.vc];
+        const vcs = subscription.lrss?.vcs ? subscription.lrss.vcs : [subscription.vc];
 
         if (imsEndpoints.length === 0 || imsEndpoints.length < vcs.length || !subscription) {
             return;
