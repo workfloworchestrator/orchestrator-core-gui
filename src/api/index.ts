@@ -473,7 +473,8 @@ export function contacts(organisationId: string): Promise<ContactPerson[]> {
 }
 
 export function reportError(error: {}) {
-    return postPutJson("user/error", error, "post", false);
+    // TODO: enable when backend isn't flooded anymore
+    // return postPutJson("user/error", error, "post", false);
 }
 
 export function clearCache(name: string) {
