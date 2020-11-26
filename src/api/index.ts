@@ -481,11 +481,11 @@ export function clearCache(name: string) {
 }
 
 export function getGlobalStatus(): Promise<EngineStatus> {
-    return fetchJson("v2/settings/status", {}, {}, false, true);
+    return fetchJson("settings/status", {}, {}, false, true);
 }
 
 export function setGlobalStatus(new_global_lock: boolean) {
-    return postPutJson("v2/settings/status", { global_lock: new_global_lock }, "put");
+    return postPutJson("settings/status", { global_lock: new_global_lock }, "put");
 }
 
 export function logUserInfo(username: string, message: string) {
@@ -497,7 +497,7 @@ export function ping() {
 }
 
 export function dienstafnameBySubscription(subscriptionId: string): Promise<Dienstafname | undefined> {
-    return fetchJson<Dienstafname>(`v2/crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
+    return fetchJson<Dienstafname>(`crm/dienstafname/${subscriptionId}`, {}, {}, false).catch(err =>
         Promise.resolve(undefined)
     );
 }
