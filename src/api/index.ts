@@ -20,7 +20,6 @@ import {
     Dienstafname,
     EngineStatus,
     FixedInputConfiguration,
-    FixedInputValidation,
     IMSNode,
     IMSPort,
     IMSService,
@@ -376,14 +375,6 @@ export function invalidSubscriptions(workflowKey: string): Promise<Subscription[
     return fetchJson(`subscriptions/invalid_subscriptions/${workflowKey}`);
 }
 
-export function fetchPortSpeedBySubscription(subscriptionId: string): Promise<string> {
-    return fetchJson(`fixed_inputs/port_speed_by_subscription_id/${subscriptionId}`);
-}
-
-export function fetchServiceSpeedByProduct(productId: string) {
-    return fetchJson(`fixed_inputs/service_speed_by_product_id/${productId}`);
-}
-
 export function deleteSubscription(subscriptionId: string) {
     return fetchJson(`subscriptions/${subscriptionId}`, { method: "DELETE" }, {}, true, false);
 }
@@ -456,10 +447,6 @@ export function fixedInputConfiguration(): Promise<FixedInputConfiguration> {
 
 export function validations(): Promise<ProductValidation[]> {
     return fetchJson("products/validations");
-}
-
-export function fixedInputValidations(): Promise<FixedInputValidation[]> {
-    return fetchJson("fixed_inputs/validations");
 }
 
 export function validation(productId: string): Promise<ProductValidation> {
