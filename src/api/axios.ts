@@ -16,13 +16,12 @@
 import axios from "axios";
 import { User } from "oidc-client";
 
+import { ENV } from "../env";
 import mySpinner from "../lib/Spin";
 import { setFlash } from "../utils/Flash";
 
 let calls = 0;
-// TODO 740: remove this before merge
-// const apiPath = ENV.BACKEND_URL + "/api/";
-const apiPath = "http://127.0.0.1:8080/api/";
+const apiPath = ENV.BACKEND_URL + "/api/";
 
 // basic configuration for axios.
 // the 'Authorization' header is set in
