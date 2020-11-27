@@ -14,7 +14,6 @@
  */
 
 import axios from "axios";
-import { ENV } from "env";
 import { SortingRule } from "react-table";
 import { setFlash } from "utils/Flash";
 import { CommaSeparatedNumericArrayParam, CommaSeparatedStringArrayParam } from "utils/QueryParameters";

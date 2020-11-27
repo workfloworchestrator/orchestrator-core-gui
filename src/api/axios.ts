@@ -14,7 +14,6 @@
  */
 
 import axios from "axios";
-import { ENV } from "env";
 import { User } from "oidc-client";
 
 import mySpinner from "../lib/Spin";
