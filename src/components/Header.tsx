@@ -20,7 +20,7 @@ import { getGlobalStatus, logUserInfo } from "api";
 import UserProfile from "components/UserProfile";
 import { ENV } from "env";
 import I18n from "i18n-js";
-import logo from "images/network-automation.png";
+import logo from "images/orchestrator-logo.png";
 import { Profile } from "oidc-client";
 import { AuthContextProps, withAuth } from "oidc-react";
 import React from "react";

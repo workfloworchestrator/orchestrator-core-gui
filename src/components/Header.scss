@@ -38,21 +38,24 @@
     &__logo {
     }
     &__logo-img {
+        //padding-right: 0.5rem;
+        //margin-top: 1.5rem;
+        //width: 16rem;
+        width: 5rem;
         padding-right: 0.5rem;
-        margin-top: 1.5rem;
-        width: 16rem;
+        margin-top: 0.1rem;
     }
     &__status {
         font-size: 115%;
         margin-left: 5px;
         &.paused {
-            color: #e61e19;
+            color: vars.$danger;
         }
         &.pausing {
-            color: #fea501;
+            color: vars.$warning;
         }
         &.running {
-            color: #33cd2e;
+            color: vars.$success;
         }
     }
 }

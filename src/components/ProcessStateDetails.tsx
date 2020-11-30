@@ -15,7 +15,7 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiIcon, EuiText } from "@elastic/eui";
+import { EuiButton, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
@@ -108,38 +108,39 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <ul>
                     {!raw && (
                         <li className="toggle-details">
-                            <CheckBox
+                            <EuiSwitch
                                 name="details"
-                                value={details}
-                                info={I18n.t(`process_state.details`)}
+                                checked={details}
+                                label={I18n.t(`process_state.details`)}
                                 onChange={() => this.setState({ details: !details })}
+                                style={{ marginBottom: "20px" }}
                             />
                         </li>
                     )}
                     {!raw && (
                         <li className="toggle-state-changes">
-                            <CheckBox
+                            <EuiSwitch
                                 name="state-changes"
-                                value={stateChanges}
-                                info={I18n.t(`process_state.stateChanges`)}
+                                checked={stateChanges}
+                                label={I18n.t(`process_state.stateChanges`)}
                                 onChange={() => this.setState({ stateChanges: !stateChanges })}
                             />
                         </li>
                     )}
                     <li>
-                        <CheckBox
+                        <EuiSwitch
                             name="raw"
-                            value={raw}
-                            info={I18n.t(`process_state.raw`)}
+                            checked={raw}
+                            label={I18n.t(`process_state.raw`)}
                             onChange={() => this.setState({ raw: !raw })}
                         />
                     </li>
                     {process.traceback && (
                         <li>
-                            <CheckBox
+                            <EuiSwitch
                                 name="traceback"
-                                value={traceback}
-                                info={I18n.t(`process_state.traceback`)}
+                                checked={traceback}
+                                label={I18n.t(`process_state.traceback`)}
                                 onChange={() => this.setState({ traceback: !traceback })}
                             />
                         </li>
@@ -179,7 +180,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             id="to-subscription"
                             href={`/subscriptions/${ps.subscription_id}`}
                             fill
-                            color="secondary"
+                            // color="secondary"
                             iconType="link"
                         >
                             {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
@@ -204,7 +205,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             return "";
         }
         return (
-            <EuiText size={"s"}>
+            <EuiText size="s">
                 <h4>To</h4>
                 <p>
                     {value.to.map((v: { email: String; name: String }) => (
