@@ -272,43 +272,48 @@ exports[`Storyshots SubscriptionDetailPage Subscription 1`] = `
             </table>
           </div>
         </section>
-        <div
-          className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--justifyContentSpaceAround euiFlexGroup--directionRow euiFlexGroup--responsive"
-        >
+        <div>
+          <h2>
+            Networkdiagram
+          </h2>
           <div
-            className="euiFlexItem euiFlexItem--flexGrow5"
-          />
-          <div
-            className="euiFlexItem euiFlexItem--flexGrow3"
-            style={
-              Object {
-                "minWidth": 300,
-              }
-            }
+            className="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--justifyContentSpaceAround euiFlexGroup--directionRow euiFlexGroup--responsive"
           >
             <div
-              className="euiPanel euiPanel--paddingMedium euiPanel--hasBetaBadge"
+              className="euiFlexItem euiFlexItem--flexGrow5"
+            />
+            <div
+              className="euiFlexItem euiFlexItem--flexGrow3"
+              style={
+                Object {
+                  "minWidth": 300,
+                }
+              }
             >
-              <span
-                className="euiPanel__betaBadgeWrapper"
+              <div
+                className="euiPanel euiPanel--paddingMedium euiPanel--hasBetaBadge"
               >
                 <span
-                  className="euiBetaBadge euiPanel__betaBadge"
-                  title="Details"
+                  className="euiPanel__betaBadgeWrapper"
                 >
-                  Details
+                  <span
+                    className="euiBetaBadge euiPanel__betaBadge"
+                    title="Details"
+                  >
+                    Details
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
-          </div>
-          <div
-            className="euiFlexItem euiFlexItem--flexGrow2"
-            style={
-              Object {
-                "minWidth": 100,
+            <div
+              className="euiFlexItem euiFlexItem--flexGrow2"
+              style={
+                Object {
+                  "minWidth": 100,
+                }
               }
-            }
-          />
+            />
+          </div>
         </div>
         <section
           className="details"
