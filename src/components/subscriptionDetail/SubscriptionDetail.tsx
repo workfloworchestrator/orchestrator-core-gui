@@ -486,12 +486,25 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
 
     renderDiagram = (subscription: SubscriptionModel) => {
         const { organisations, products } = this.context;
-        const enrichedSubscription = enrichSubscription(subscription, organisations, products);
 
-        if (subscription.product.product_type === "LightPath") {
-            return <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />;
-        } else if (["L2VPN", "IP"].includes(subscription.product.product_type)) {
-            return <TopologyDiagram subscription={subscription} />;
+        if (subscription.status === "active" && subscription.insync) {
+            const header = <h2>Networkdiagram</h2>;
+            const enrichedSubscription = enrichSubscription(subscription, organisations, products);
+            if (subscription.product.product_type === "LightPath") {
+                return (
+                    <div>
+                        {header}
+                        <NetworkDiagram type="patchpanel" subscription={enrichedSubscription} />
+                    </div>
+                );
+            } else if (["L2VPN", "IP"].includes(subscription.product.product_type)) {
+                return (
+                    <div>
+                        {header}
+                        <TopologyDiagram subscription={subscription} />
+                    </div>
+                );
+            }
         }
     };
 

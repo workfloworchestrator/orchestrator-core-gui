@@ -367,7 +367,7 @@ export default class NetworkDiagram extends React.Component<IProps, IState> {
                     memberList.push(connection);
                 }
             });
-            graphList.push({ title: `Network diagram${graphTitle}`, members: memberList });
+            graphList.push({ title: graphTitle, members: memberList });
         });
     }
 
