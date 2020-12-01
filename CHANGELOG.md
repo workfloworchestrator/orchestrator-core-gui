@@ -9,4 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.2] - 2020-12-01
+
+### Fixed
+
+-   Fixed network diagram crashing the page for sn7 lightpath subscriptions
+
+### Added
+
 -   Added the Changelog file.
