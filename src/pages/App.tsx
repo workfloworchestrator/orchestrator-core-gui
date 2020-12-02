@@ -52,6 +52,7 @@ import { getParameterByName, getQueryParameters } from "utils/QueryParameters";
 import { AppError } from "utils/types";
 
 import { assignees, locationCodes, organisations, processStatuses, products, reportError } from "../api";
+import FormTestPage from "./FormTestPage";
 
 export const history = createBrowserHistory();
 
@@ -233,6 +234,7 @@ class App extends React.PureComponent<{}, IState> {
                                 <Route path="/not-allowed" render={() => <NotAllowed />} />
                                 <Route path="/error" render={(props) => <ServerError {...props} />} />
                                 <Route path="/styleguide" render={(props) => <StyleGuide {...props} />} />
+                                <Route path="/test-form" render={props => <FormTestPage {...props} />} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>
