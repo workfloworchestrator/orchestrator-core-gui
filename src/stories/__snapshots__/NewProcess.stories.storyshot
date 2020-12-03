@@ -186,6 +186,11 @@ exports[`Storyshots NewProcess Default 1`] = `
                       className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
+                      style={
+                        Object {
+                          "minWidth": undefined,
+                        }
+                      }
                       type="button"
                     >
                       <span
@@ -206,6 +211,11 @@ exports[`Storyshots NewProcess Default 1`] = `
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
                     id="button-next-form-submit"
+                    style={
+                      Object {
+                        "minWidth": undefined,
+                      }
+                    }
                     tabIndex={0}
                     type="submit"
                   >
@@ -416,6 +426,11 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                       className="euiButton euiButton--warning"
                       id="button-cancel-form-submit"
                       onClick={[Function]}
+                      style={
+                        Object {
+                          "minWidth": undefined,
+                        }
+                      }
                       type="button"
                     >
                       <span
@@ -436,6 +451,11 @@ exports[`Storyshots NewProcess Preselected 1`] = `
                   <button
                     className="euiButton euiButton--primary euiButton--fill"
                     id="button-submit-form-submit"
+                    style={
+                      Object {
+                        "minWidth": undefined,
+                      }
+                    }
                     tabIndex={0}
                     type="submit"
                   >
