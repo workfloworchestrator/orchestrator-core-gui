@@ -32,7 +32,7 @@ $success: #016936;
 $light-success: #d0ffd9;
 $lightest-success: #e5ffed;
 
-$warning: #f5a700;
+$warning: #c94e22;
 $light-warning: #ffe4ab;
 
 $background: #f9f9f9;
@@ -67,3 +67,7 @@ $z-index: (
     "flash": 1020,
     "explain": 1010
 );
+
+.euiButton--warning.euiButton--fill {
+    color: #fff !important;
+}
