@@ -15,7 +15,7 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiCopy, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
+import { EuiButton, EuiCheckbox, EuiCopy, EuiFormRow, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import I18n from "i18n-js";
@@ -96,7 +96,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <ul>
                     {!raw && (
                         <li className="toggle-details">
-                            <EuiSwitch
+                            <EuiCheckbox
+                                id="show-details-toggle"
+                                aria-label="toggle-details"
                                 name="details"
                                 checked={details}
                                 label={I18n.t(`process_state.details`)}
@@ -106,7 +108,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                     )}
                     {!raw && (
                         <li className="toggle-state-changes">
-                            <EuiSwitch
+                            <EuiCheckbox
+                                id="show-state-delta-toggle"
+                                aria-label="toggle-state-delta"
                                 name="state-changes"
                                 checked={stateChanges}
                                 label={I18n.t(`process_state.stateChanges`)}
@@ -115,7 +119,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                         </li>
                     )}
                     <li>
-                        <EuiSwitch
+                        <EuiCheckbox
+                            id="show-raw-json-toggle"
+                            aria-label="toggle-raw-json"
                             name="raw"
                             checked={raw}
                             label={I18n.t(`process_state.raw`)}
@@ -124,7 +130,9 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                     </li>
                     {process.traceback && (
                         <li>
-                            <EuiSwitch
+                            <EuiCheckbox
+                                id="show-traceback-toggle"
+                                aria-label="toggle-traceback"
                                 name="traceback"
                                 checked={traceback}
                                 label={I18n.t(`process_state.traceback`)}
