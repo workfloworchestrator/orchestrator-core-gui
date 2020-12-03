@@ -263,7 +263,7 @@ export const contactPersons = [
 
 // WIth Tag mocks: have extra info (port_mode and crm_port_id?
 
-// remaining fixtures can be used to deliver subscriptions as returned by v2/subscriptions
+// remaining fixtures can be used to deliver subscriptions as returned by subscriptions
 export const allNodeSubscriptions = [
     {
         customer_id: "c9b5e717-0b11-e511-80d0-005056956c1a",

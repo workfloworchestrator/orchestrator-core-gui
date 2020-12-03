@@ -25,7 +25,7 @@ import { IMSPort, Subscription } from "utils/types";
 describe("<ImsPortIdField>", () => {
     test("<ImsPortIdField> - renders inputs legacy", async () => {
         mock.onGet(/ims\/nodes\/MT001A\/IS/).reply(200, [{ id: 1, name: "name", status: "IS" }]);
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [{}]);
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [{}]);
         const element = (
             <ImsPortIdField
                 name="x"
@@ -60,7 +60,7 @@ describe("<ImsPortIdField>", () => {
 
     test("<ImsPortIdField> - reacts on change inputs legacy", async () => {
         mock.onGet("ims/nodes/MT001A/IS").reply(200, [{ id: 1, name: "name", status: "IS" }]);
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [{}]);
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [{}]);
         mock.onGet("ims/free_ports_ims_node/1/1000BASE-LX/patched").reply(200, [
             { id: 1, iface_type: "iface_type", port: "0/0/0", status: "IS" }
         ] as IMSPort[]);
@@ -106,7 +106,7 @@ describe("<ImsPortIdField>", () => {
     });
 
     test("<ImsPortIdField> - renders inputs", async () => {
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
             { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
         ] as Subscription[]);
         const element = <ImsPortIdField name="x" interfaceSpeed={1000} nodeStatuses={["active", "provisioning"]} />;
@@ -135,7 +135,7 @@ describe("<ImsPortIdField>", () => {
     });
 
     test("<ImsPortIdField> - reacts on change inputs", async () => {
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
             { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
         ] as Subscription[]);
         mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [
@@ -176,7 +176,7 @@ describe("<ImsPortIdField>", () => {
     });
 
     test("<ImsPortIdField> - renders inputs node set", async () => {
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, [
             { subscription_id: "abcdefghij", name: "name", status: "active", description: "description" }
         ] as Subscription[]);
         mock.onGet("ims/free_ports/abcdefghij/1000/all").reply(200, [

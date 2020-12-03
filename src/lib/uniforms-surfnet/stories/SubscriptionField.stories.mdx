@@ -12,7 +12,7 @@ import { SubscriptionField } from "../src";
 <Story name="SubscriptionField">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",
@@ -50,7 +50,7 @@ See Filters for extra filter that can be added
 <Story name="SubscriptionFieldInList">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",
@@ -88,7 +88,7 @@ See Filters for extra filter that can be added
 <Story name="SubscriptionFieldInUniqueList">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",

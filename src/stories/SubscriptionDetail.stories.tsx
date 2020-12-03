@@ -62,7 +62,7 @@ export const Subscription = () => {
         PRODUCTS.filter(p => p.product_id === "a3bf8b26-50a6-4586-8e58-ad552cb39798")[0]
     );
 
-    mock.onGet("v2/subscriptions/workflows/pid").reply(200, {
+    mock.onGet("subscriptions/workflows/pid").reply(200, {
         create: [{ description: "Create SN8 IP BGP", name: "create_sn8_ip_bgp" }],
         modify: [
             { description: "Change port", name: "modify_sn8_ip_bgp_change_port" },
@@ -242,7 +242,7 @@ export const Subscription = () => {
         vrf: 1,
         vrf__label: "global"
     });
-    mock.onGet("v2/crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
+    mock.onGet("crm/dienstafname/9c8c13d5-6954-461a-a931-32894c193aa0").reply(200, {
         guid: "d9713a9f-bab6-4e78-b56e-5c5cc2c1fb26",
         code: "MSP",
         status: "_Opgezegd"
