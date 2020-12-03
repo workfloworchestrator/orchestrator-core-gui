@@ -504,8 +504,6 @@ I18n.translations.en = {
         workflow: "Process instance of workflow {{name}}"
     },
     process_state: {
-        copy: "Copy to clipboard",
-        copied: "Copied",
         raw: "Show raw JSON",
         details: "Show details",
         stateChanges: "Show state input",

@@ -258,128 +258,268 @@ exports[`Storyshots ProcessDetail Process 1`] = `
                   className="toggle-details"
                 >
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={true}
-                      disabled={false}
-                      id="details"
+                    <button
+                      aria-checked={true}
+                      aria-labelledby="icd1ba483-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icd1ba481-35ac-11eb-890f-7bc5d77bb291"
                       name="details"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="details"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="details"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icd1ba483-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show details
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li
                   className="toggle-state-changes"
                 >
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={true}
-                      disabled={false}
-                      id="state-changes"
+                    <button
+                      aria-checked={true}
+                      aria-labelledby="icd1bf2a1-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icd1bcb91-35ac-11eb-890f-7bc5d77bb291"
                       name="state-changes"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="state-changes"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="state-changes"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icd1bf2a1-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show state input
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={false}
-                      disabled={false}
-                      id="raw"
+                    <button
+                      aria-checked={false}
+                      aria-labelledby="icd1bf2a5-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icd1bf2a3-35ac-11eb-890f-7bc5d77bb291"
                       name="raw"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="raw"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="raw"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icd1bf2a5-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show raw JSON
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={false}
-                      disabled={false}
-                      id="traceback"
+                    <button
+                      aria-checked={false}
+                      aria-labelledby="icd1bf2a9-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icd1bf2a7-35ac-11eb-890f-7bc5d77bb291"
                       name="traceback"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="traceback"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiIcon-isLoaded euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="traceback"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icd1bf2a9-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show traceback
-                    </label>
+                    </span>
                   </div>
                 </li>
               </ul>
@@ -2992,128 +3132,268 @@ exports[`Storyshots ProcessDetail Task 1`] = `
                   className="toggle-details"
                 >
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={true}
-                      disabled={false}
-                      id="details"
+                    <button
+                      aria-checked={true}
+                      aria-labelledby="icdb4d743-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icdb4d741-35ac-11eb-890f-7bc5d77bb291"
                       name="details"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="details"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="details"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icdb4d743-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show details
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li
                   className="toggle-state-changes"
                 >
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={true}
-                      disabled={false}
-                      id="state-changes"
+                    <button
+                      aria-checked={true}
+                      aria-labelledby="icdb4fe53-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icdb4fe51-35ac-11eb-890f-7bc5d77bb291"
                       name="state-changes"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="state-changes"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="state-changes"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icdb4fe53-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show state input
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={false}
-                      disabled={false}
-                      id="raw"
+                    <button
+                      aria-checked={false}
+                      aria-labelledby="icdb4fe57-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icdb4fe55-35ac-11eb-890f-7bc5d77bb291"
                       name="raw"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="raw"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="raw"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icdb4fe57-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show raw JSON
-                    </label>
+                    </span>
                   </div>
                 </li>
                 <li>
                   <div
-                    className="checkbox"
+                    className="euiSwitch"
                   >
-                    <input
-                      checked={false}
-                      disabled={false}
-                      id="traceback"
+                    <button
+                      aria-checked={false}
+                      aria-labelledby="icdb52563-35ac-11eb-890f-7bc5d77bb291"
+                      className="euiSwitch__button"
+                      id="icdb52561-35ac-11eb-890f-7bc5d77bb291"
                       name="traceback"
-                      onChange={[Function]}
-                      type="checkbox"
-                    />
-                    <label
-                      htmlFor="traceback"
+                      onClick={[Function]}
+                      role="switch"
+                      type="button"
                     >
                       <span
-                        tabIndex={0}
+                        className="euiSwitch__body"
                       >
-                        <i
-                          className="fa fa-check"
+                        <span
+                          className="euiSwitch__thumb"
                         />
+                        <span
+                          className="euiSwitch__track"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.293 8L3.146 3.854a.5.5 0 11.708-.708L8 7.293l4.146-4.147a.5.5 0 01.708.708L8.707 8l4.147 4.146a.5.5 0 01-.708.708L8 8.707l-4.146 4.147a.5.5 0 01-.708-.708L7.293 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden={true}
+                            className="euiIcon euiIcon--medium euiSwitch__icon euiSwitch__icon--checked"
+                            focusable="false"
+                            height={16}
+                            role="img"
+                            style={null}
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M6.5 12a.502.502 0 01-.354-.146l-4-4a.502.502 0 01.708-.708L6.5 10.793l6.646-6.647a.502.502 0 01.708.708l-7 7A.502.502 0 016.5 12"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
                       </span>
-                    </label>
-                    <label
-                      className="info"
-                      htmlFor="traceback"
+                    </button>
+                    <span
+                      className="euiSwitch__label"
+                      id="icdb52563-35ac-11eb-890f-7bc5d77bb291"
+                      onClick={[Function]}
                     >
                       Show traceback
-                    </label>
+                    </span>
                   </div>
                 </li>
               </ul>

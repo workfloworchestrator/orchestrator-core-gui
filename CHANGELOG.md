@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Upgraded React-Table to 7.6.2 and EUI to 30.5.1 version
 -   Added EUI Panel around Subscription detail
 -   Refactored copy raw JSON from Process Detail page to EUI and removed
+-   Removed react-copy-to-clipboard and refactored copy to clipboard functionality with EUI
+-   Replaced checkboxes with EuiSwitch on Process detail pageq
 
 ## [7.1.2] - 2020-12-01
 

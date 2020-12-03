@@ -15,16 +15,13 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
-import CheckBox from "components/CheckBox";
+import { EuiButton, EuiCopy, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import { CustomProcessWithDetails } from "pages/ProcessDetail";
 import React from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
-import ReactTooltip from "react-tooltip";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
@@ -41,7 +38,6 @@ interface IState {
     raw: boolean;
     details: boolean;
     stateChanges: boolean;
-    copiedToClipboard: boolean;
     traceback: boolean;
 }
 
@@ -54,30 +50,22 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         raw: false,
         details: true,
         stateChanges: true,
-        copiedToClipboard: false,
         traceback: false
     };
 
-    copiedToClipboard = () => {
-        this.setState({ copiedToClipboard: true });
-        setTimeout(() => this.setState({ copiedToClipboard: false }), 5000);
-    };
-
     renderRaw = (process: CustomProcessWithDetails) => {
-        const { copiedToClipboard } = this.state;
-        const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
-        const tooltip = I18n.t(copiedToClipboard ? `process_state.copied` : `process_state.copy`);
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
-                <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
-                    <span className="copy-to-clipboard-container">
-                        <button data-for="copy-to-clipboard" data-tip>
-                            <i className={`far fa-clone ${copiedToClipBoardClassName}`} />
-                        </button>
-                        <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
-                    </span>
-                </CopyToClipboard>
+                <EuiCopy textToCopy={json}>
+                    {copy => (
+                        <span className="copy-to-clipboard-container">
+                            <button data-for="copy-to-clipboard" onClick={copy}>
+                                <i className={`far fa-clone`} />
+                            </button>
+                        </span>
+                    )}
+                </EuiCopy>
                 <HighlightCode data={JSON.stringify(process, null, 2)} />
             </section>
         );
@@ -113,7 +101,6 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                                 checked={details}
                                 label={I18n.t(`process_state.details`)}
                                 onChange={() => this.setState({ details: !details })}
-                                style={{ marginBottom: "20px" }}
                             />
                         </li>
                     )}
