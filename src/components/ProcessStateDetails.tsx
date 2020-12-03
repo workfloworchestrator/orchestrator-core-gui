@@ -15,7 +15,7 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiCheckbox, EuiCopy, EuiFormRow, EuiIcon, EuiSwitch, EuiText } from "@elastic/eui";
+import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import I18n from "i18n-js";
