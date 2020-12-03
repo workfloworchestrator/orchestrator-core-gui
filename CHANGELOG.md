@@ -10,16 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 -   Made the client compatible with the FastAPI changes in orchestrator#740
--   Removed Validations page and api dependancies
--   Conditionally show network diagrams for "active" and "insync" subscriptions
--   Added a button to copy the subscription_id to your copy buffer on Subscription detail page
--   Finished a new theme (for GPL release)
--   Changed color of cancel buttons to be more inline with SURF theme
--   Upgraded React-Table to 7.6.2 and EUI to 30.5.1 version
--   Added EUI Panel around Subscription detail
--   Refactored copy raw JSON from Process Detail page to EUI and removed
--   Removed react-copy-to-clipboard and refactored copy to clipboard functionality with EUI
--   Replaced checkboxes with EuiSwitch on Process detail page
+-   Removed Validations page and api dependencies
+-   `#206`: Conditionally show network diagrams for "active" and "insync" subscriptions
+-   `#206`: Added a button to copy the subscription_id to your copy buffer on Subscription detail page
+-   `#206`: Finished a new theme (for GPL release)
+-   `#206`: Changed color of cancel buttons to be more inline with SURF theme
+-   `#206`: Upgraded React-Table to 7.6.2 and EUI to 30.5.1 version
+-   `#206`: Added EUI Panel around Subscription detail
+-   `#206`: Refactored copy raw JSON from Process Detail page to EUI and removed
+-   `#206`: Removed react-copy-to-clipboard and refactored copy to clipboard functionality with EUI
+-   `#206`: Replaced checkboxes with EuiSwitch on Process detail page
+-   `#206`: Replaced all colors in HTML with values from var.scss
 
 ## [7.1.2] - 2020-12-01
 
