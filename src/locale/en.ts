@@ -1114,6 +1114,7 @@ I18n.translations.en = {
         reset_subscription_description: "Reset description of a SURFnet7 subscription to default",
 
         validate_core_link: "Validate Core Link",
+        validate_firewall: "Validate Firewall",
         validate_ip_prefix: "Validate IP Prefix",
         validate_sn7_light_path: "Validate SN7 Light Path",
         validate_node: "Validate Node",
