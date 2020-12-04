@@ -41,6 +41,8 @@ import {
     useTable
 } from "react-table";
 
+import MiniPaginator from "./MiniPaginator";
+
 /*
  * Reusable NWA table implementation using react-table 7.
  *
@@ -328,6 +330,7 @@ export function NwaTable<T extends object>({
         <div id={name}>
             <Preferences<T> {...preferencesProps} />
             {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
+            {!minimized && <MiniPaginator {...paginatorProps} />}
             {!minimized && <TableRenderer {...TableRendererProps} />}
             {!minimized && data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}

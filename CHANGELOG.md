@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `#206`: Removed react-copy-to-clipboard and refactored copy to clipboard functionality with EUI
 -   `#206`: Replaced checkboxes with EuiSwitch on Process detail page
 -   `#206`: Replaced all colors in HTML with values from var.scss
+-   `#206`: Refactored + fixed paginator bugs for all tables
+-   `#206`: Introduced mini pagination above all tables
 
 ## [7.1.2] - 2020-12-01
 

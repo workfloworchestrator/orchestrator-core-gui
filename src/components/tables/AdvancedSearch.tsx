@@ -26,7 +26,7 @@ interface IProps<T extends object> {
 
 function AdvancedSearch<T extends object>({ state, dispatch }: IProps<T>) {
     return (
-        <EuiFlexGroup alignItems="center" className="advanced-search-container">
+        <EuiFlexGroup alignItems="center" className="advanced-search-container" style={{ marginRight: "260px" }}>
             <EuiFlexItem>
                 <b>Advanced search</b>
             </EuiFlexItem>
