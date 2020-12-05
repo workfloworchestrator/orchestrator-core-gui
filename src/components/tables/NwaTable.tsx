@@ -16,6 +16,7 @@
 import "stylesheets/buttons.scss";
 import "components/tables/NwaTable.scss";
 
+import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import AdvancedSearch from "components/tables/AdvancedSearch";
 import Paginator from "components/tables/Paginator";
 import Preferences from "components/tables/Preferences";
@@ -328,9 +329,17 @@ export function NwaTable<T extends object>({
 
     return (
         <div id={name}>
-            <Preferences<T> {...preferencesProps} />
+            <EuiFlexGroup>
+                <EuiFlexItem grow={false} component="span">
+                    <Preferences<T> {...preferencesProps} />
+                </EuiFlexItem>
+                {!minimized && (
+                    <EuiFlexItem grow={false} component="span">
+                        <MiniPaginator {...paginatorProps} />
+                    </EuiFlexItem>
+                )}
+            </EuiFlexGroup>
             {!minimized && advancedSearch && <AdvancedSearch {...advancedSearchProps} />}
-            {!minimized && <MiniPaginator {...paginatorProps} />}
             {!minimized && <TableRenderer {...TableRendererProps} />}
             {!minimized && data.length === 0 && <div className={"no-results"}>{I18n.t("table.no_results")}</div>}
             {!minimized && showPaginator && <Paginator {...paginatorProps} />}

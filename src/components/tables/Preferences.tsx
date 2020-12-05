@@ -40,7 +40,7 @@ function Preferences<T extends object>({
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
     return (
-        <React.Fragment key={`preferences_${name}`}>
+        <span key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span className="table-name">
                     {I18n.t(name)}
@@ -139,7 +139,7 @@ function Preferences<T extends object>({
                         })}
                 </div>
             )}
-        </React.Fragment>
+        </span>
     );
 }
 
