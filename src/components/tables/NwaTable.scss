@@ -82,8 +82,6 @@ table.nwa-table {
     th {
         text-align: left;
         vertical-align: middle;
-        border-left: solid vars.$light-primary 1px;
-        border-right: 1px solid rgba(0, 0, 0, 0.05);
     }
     th:first-child {
         border-radius: 10px 0 0 0;
