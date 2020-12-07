@@ -1140,7 +1140,7 @@ I18n.translations.en = {
         preferences: {
             edit: "Edit table preferences",
             reset: "Reset table preferences to defaults",
-            autorefresh: "Set autorefresh delay in milliseconds",
+            autorefresh: "Set autorefresh delay in milliseconds:",
             norefresh: "Autorefresh disabled",
             refresh: "Autorefresh for {{delay}}ms",
             hidden_columns: "Show/Hide columns:",

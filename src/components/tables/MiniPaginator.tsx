@@ -42,7 +42,7 @@ function MiniPaginator({
     setPageSize
 }: IPaginatorProps) {
     return (
-        <EuiFlexGroup>
+        <EuiFlexGroup className="mini-paginator">
             <EuiFlexItem>
                 <EuiButtonIcon
                     onClick={() => gotoPage(0)}

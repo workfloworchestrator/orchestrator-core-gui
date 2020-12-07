@@ -73,8 +73,16 @@ $z-index: (
 .euiButton--primary.euiButton--fill {
     color: #fff !important;
 }
+
 .euiButton--warning.euiButton--fill {
     color: #fff !important;
+}
+
+.euiButton--warning.euiButton {
+    background-color: #faf0e8 !important;
+}
+.euiButton--warning.euiButton--fill {
+    background-color: #e39846 !important;
 }
 
 .euiTitle {
