@@ -244,6 +244,10 @@ table.nwa-table {
             font-size: 18px;
             position: relative;
         }
+        td.subscription_id,
+        td.pid {
+            width: 80px;
+        }
     }
     .info i.fa-caret-right {
         color: vars.$primary;

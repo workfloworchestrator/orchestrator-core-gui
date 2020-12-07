@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `#206`: Finished a new theme (for GPL release)
 -   `#206`: Changed color of cancel buttons to be more inline with SURF theme
 -   `#206`: Upgraded React-Table to 7.6.2 and EUI to 30.5.1 version
+-   `#206`: Updated caniuse-lite
 -   `#206`: Added EUI Panel around Subscription detail
 -   `#206`: Refactored copy raw JSON from Process Detail page to EUI and removed
 -   `#206`: Removed react-copy-to-clipboard and refactored copy to clipboard functionality with EUI
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `#206`: Replaced all colors in HTML with values from var.scss
 -   `#206`: Refactored + fixed paginator bugs for all tables
 -   `#206`: Introduced mini pagination above all tables
+-   `#206`: Made "notes" a default Subscription table column
 
 ## [7.1.2] - 2020-12-01
 
