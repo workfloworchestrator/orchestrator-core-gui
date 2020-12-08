@@ -36,7 +36,7 @@ const APP_CONTEXT = {
 
 describe("<SubscriptionField>", () => {
     test("<SubscriptionField> - renders an input", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -46,7 +46,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct disabled state", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" disabled />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -57,7 +57,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct id (inherited)", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -68,7 +68,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct id (specified)", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" id="y" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -79,7 +79,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct name", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -412,7 +412,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct placeholder", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" placeholder="" />;
 
@@ -429,7 +429,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select with correct value (default)", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -466,7 +466,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -481,7 +481,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (empty)", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -496,7 +496,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a select which correctly reacts on change (same value)", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const onChange = jest.fn();
 
@@ -511,7 +511,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a label", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" label="y" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -523,7 +523,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a sync button", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));
@@ -537,7 +537,7 @@ describe("<SubscriptionField>", () => {
     });
 
     test("<SubscriptionField> - renders a wrapper with unknown props", async () => {
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, []);
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, []);
 
         const element = <SubscriptionField name="x" data-x="x" data-y="y" data-z="z" />;
         const wrapper = mount(element, createContext({ x: { type: String } }));

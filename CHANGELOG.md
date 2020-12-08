@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+-   Made the client compatible with the FastAPI changes in orchestrator#740
+-   Removed Validations page and api dependancies
+
 ## [7.1.2] - 2020-12-01
 
 ### Fixed

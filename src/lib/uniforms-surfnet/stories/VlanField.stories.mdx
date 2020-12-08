@@ -28,7 +28,7 @@ This component expects to be used in a list alongside a SubscriptionField.
 <Story name="VlanField Typical usage">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",
@@ -89,7 +89,7 @@ This component expects to be used in a list alongside a SubscriptionField.
 <Story name="VlanField ESI usage">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=statuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=statuses%2Cactive").reply(200, [
             {
                 subscription_id: "a",
                 customer_id: "c1",

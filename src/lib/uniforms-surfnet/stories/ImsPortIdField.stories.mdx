@@ -16,7 +16,7 @@ With this version you can choose a port based on an node subscription. Optionall
     {() => {
         mock.reset();
         mock.onGet(/ims\/nodes\/.*\/IS/).reply(200, []);
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(200, [
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive").reply(200, [
             {
                 subscription_id: "83a0d757-695f-440e-9530-fae87be96e12",
                 name: "Node",
@@ -77,7 +77,7 @@ In this version you choose a port based on an ims node
 <Story name="ImsPortIdFieldLegacy">
     {() => {
         mock.reset();
-        mock.onGet("v2/subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, []);
+        mock.onGet("subscriptions?filter=tags%2CNode%2Cstatuses%2Cactive-provisioning").reply(200, []);
         mock.onGet("ims/nodes/MT001A/IS").reply(200, [
             {
                 id: 1,
