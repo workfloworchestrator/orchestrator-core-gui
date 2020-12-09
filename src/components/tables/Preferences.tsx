@@ -15,7 +15,7 @@
 
 import "components/tables/Preferences.scss";
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiButton, EuiCheckbox, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
 import { ActionType, TableSettingsAction } from "components/tables/NwaTable";
 import I18n from "i18n-js";
 import React, { Dispatch } from "react";
@@ -40,7 +40,7 @@ function Preferences<T extends object>({
     const { name, minimized, refresh, delay, loading, showSettings, showPaginator } = state;
 
     return (
-        <React.Fragment key={`preferences_${name}`}>
+        <span key={`preferences_${name}`}>
             <div className={`table-preferences-icon-bar${minimized ? " minimized" : ""}`}>
                 <span className="table-name">
                     {I18n.t(name)}
@@ -99,7 +99,6 @@ function Preferences<T extends object>({
                                 onClick={() => dispatch({ type: ActionType.OVERRIDE, settings: initialTableSettings })}
                                 color="warning"
                                 iconType="refresh"
-                                fill
                             >
                                 {I18n.t("table.preferences.reset")}
                             </EuiButton>
@@ -107,8 +106,7 @@ function Preferences<T extends object>({
                         <EuiFlexItem>
                             <EuiButton
                                 onClick={() => dispatch({ type: ActionType.SHOW_PAGINATOR_TOGGLE })}
-                                color="ghost"
-                                fill
+                                color="primary"
                             >
                                 {showPaginator
                                     ? I18n.t("table.preferences.hide_paginator")
@@ -116,7 +114,9 @@ function Preferences<T extends object>({
                             </EuiButton>
                         </EuiFlexItem>
                     </EuiFlexGroup>
-                    <h1>{I18n.t("table.preferences.autorefresh")}</h1>
+                    <EuiText size="s">
+                        <h4>{I18n.t("table.preferences.autorefresh")}</h4>
+                    </EuiText>
                     <NumericInput
                         onChange={valueAsNumber => {
                             valueAsNumber && dispatch({ type: ActionType.REFRESH_DELAY, delay: valueAsNumber });
@@ -127,19 +127,21 @@ function Preferences<T extends object>({
                         value={state.delay}
                         strict={true}
                     />
-                    <h2>{I18n.t("table.preferences.hidden_columns")}</h2>
+                    <EuiText size="s">
+                        <h4>{I18n.t("table.preferences.hidden_columns")}</h4>
+                    </EuiText>
                     {allColumns
                         .filter(column => !excludeInFilter.includes(column.id))
                         .map(column => {
                             return (
-                                <label key={column.id}>
-                                    <input type="checkbox" {...column.getToggleHiddenProps()} /> {column.id}
-                                </label>
+                                <div key={column.id}>
+                                    <EuiCheckbox {...column.getToggleHiddenProps()} label={column.id} />
+                                </div>
                             );
                         })}
                 </div>
             )}
-        </React.Fragment>
+        </span>
     );
 }
 

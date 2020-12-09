@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Please add a line to the unrelease section for every feature. If possible
+Please add a line to the unreleased section for every feature. If possible
 reference the gitlab/github issue that is related to the change.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -10,7 +10,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 -   Made the client compatible with the FastAPI changes in orchestrator#740
--   Removed Validations page and api dependancies
+-   Removed Validations page and api dependencies
+-   `#206`: Conditionally show network diagrams for "active" and "insync" subscriptions
+-   `#206`: Added a button to copy the subscription_id to your copy buffer on Subscription detail page
+-   `#206`: Finished a new theme (for GPL release)
+-   `#206`: Changed color of cancel buttons to be more inline with SURF theme
+-   `#206`: Upgraded React-Table to 7.6.2 and EUI to 30.5.1 version
+-   `#206`: Updated caniuse-lite
+-   `#206`: Added EUI Panel around Subscription detail
+-   `#206`: Refactored copy raw JSON from Process Detail page to EUI
+-   `#206`: Removed react-copy-to-clipboard
+-   `#206`: Replaced checkboxes with EuiCheckbox on Process detail page
+-   `#206`: Replaced checkboxes with EuiCheckbox for Table preference
+-   `#206`: Replaced all colors in HTML with values from var.scss
+-   `#206`: Refactored + fixed paginator bugs for all tables
+-   `#206`: Introduced mini pagination above all tables
+-   `#206`: Made "notes" a default Subscription table column
+-   `#206`: Main navigation/tabs are now keyboard accessible
 
 ## [7.1.2] - 2020-12-01
 

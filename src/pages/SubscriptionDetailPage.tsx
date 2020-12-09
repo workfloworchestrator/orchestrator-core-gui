@@ -15,7 +15,7 @@
 
 import {} from "api";
 
-import { EuiPage, EuiPageBody } from "@elastic/eui";
+import { EuiPage, EuiPageBody, EuiPanel } from "@elastic/eui";
 import ConfirmationDialog from "components/modals/ConfirmationDialog";
 import SubscriptionDetail from "components/subscriptionDetail/SubscriptionDetail";
 import React from "react";
@@ -60,14 +60,15 @@ export default class SubscriptionDetailPage extends React.PureComponent<IProps, 
         return (
             <EuiPage>
                 <EuiPageBody component="div">
-                    <ConfirmationDialog
-                        isOpen={confirmationDialogOpen}
-                        cancel={cancelConfirmation}
-                        confirm={confirmationDialogAction}
-                        question={confirmationDialogQuestion}
-                    />
-
-                    <SubscriptionDetail subscriptionId={this.props.match!.params.id} confirmation={confirmation} />
+                    <EuiPanel>
+                        <ConfirmationDialog
+                            isOpen={confirmationDialogOpen}
+                            cancel={cancelConfirmation}
+                            confirm={confirmationDialogAction}
+                            question={confirmationDialogQuestion}
+                        />
+                        <SubscriptionDetail subscriptionId={this.props.match!.params.id} confirmation={confirmation} />
+                    </EuiPanel>
                 </EuiPageBody>
             </EuiPage>
         );

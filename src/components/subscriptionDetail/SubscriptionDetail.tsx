@@ -488,7 +488,7 @@ export default class SubscriptionDetail extends React.PureComponent<IProps, ISta
         const { organisations, products } = this.context;
 
         if (subscription.status === "active" && subscription.insync) {
-            const header = <h2>Networkdiagram</h2>;
+            const header = <h2>{I18n.t("subscription.network_diagrams")}</h2>;
             const enrichedSubscription = enrichSubscription(subscription, organisations, products);
             if (subscription.product.product_type === "LightPath") {
                 return (

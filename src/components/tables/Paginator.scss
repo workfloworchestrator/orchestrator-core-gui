@@ -18,7 +18,7 @@
 @use "../../stylesheets/vars";
 
 .paginator {
-    margin: 14px 0px;
+    margin: 14px 0;
 }
 
 .euiPagination {
@@ -28,4 +28,8 @@
 /* Style "rows per page" text */
 .euiButtonEmpty__text {
     font-size: 0.9em;
+}
+
+.mini-paginator {
+    margin-top: 8px;
 }

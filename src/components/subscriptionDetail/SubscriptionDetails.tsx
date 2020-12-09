@@ -13,7 +13,7 @@
  *
  */
 
-import { EuiButton, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiButton, EuiCopy, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import CheckBox from "components/CheckBox";
 import { FAVORITE_STORAGE_KEY } from "components/modals/components/FavoritePortSelector";
 import { ENV } from "env";
@@ -127,6 +127,20 @@ export default function SubscriptionDetails({ subscription, className = "", subs
                                 >
                                     {subscription.subscription_id}
                                 </a>
+                            </EuiFlexItem>
+                            <EuiFlexItem grow={false}>
+                                <EuiCopy textToCopy={subscription.subscription_id}>
+                                    {copy => (
+                                        <EuiButton
+                                            id="subscriptions-copy-button"
+                                            iconType="copyClipboard"
+                                            size="s"
+                                            onClick={copy}
+                                        >
+                                            Copy ID
+                                        </EuiButton>
+                                    )}
+                                </EuiCopy>
                             </EuiFlexItem>
                             <EuiFlexItem grow={false}>
                                 <EuiButton

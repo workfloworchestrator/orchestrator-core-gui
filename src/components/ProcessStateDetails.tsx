@@ -15,16 +15,13 @@
 
 import "components/ProcessStateDetails.scss";
 
-import { EuiButton, EuiIcon, EuiText } from "@elastic/eui";
-import CheckBox from "components/CheckBox";
+import { EuiButton, EuiCheckbox, EuiCopy, EuiIcon, EuiText } from "@elastic/eui";
 import HighlightCode from "components/HighlightCode";
 import StepDetails from "components/Step";
 import I18n from "i18n-js";
 import isEqual from "lodash/isEqual";
 import { CustomProcessWithDetails } from "pages/ProcessDetail";
 import React from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
-import ReactTooltip from "react-tooltip";
 import { capitalize, renderDateTime } from "utils/Lookups";
 import { ProcessSubscription, ProcessWithDetails, State, Step, prop } from "utils/types";
 import { applyIdNamingConvention, isEmpty } from "utils/Utils";
@@ -41,7 +38,6 @@ interface IState {
     raw: boolean;
     details: boolean;
     stateChanges: boolean;
-    copiedToClipboard: boolean;
     traceback: boolean;
 }
 
@@ -54,30 +50,22 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
         raw: false,
         details: true,
         stateChanges: true,
-        copiedToClipboard: false,
         traceback: false
     };
 
-    copiedToClipboard = () => {
-        this.setState({ copiedToClipboard: true });
-        setTimeout(() => this.setState({ copiedToClipboard: false }), 5000);
-    };
-
     renderRaw = (process: CustomProcessWithDetails) => {
-        const { copiedToClipboard } = this.state;
-        const copiedToClipBoardClassName = copiedToClipboard ? "copied" : "";
-        const tooltip = I18n.t(copiedToClipboard ? `process_state.copied` : `process_state.copy`);
         const json = JSON.stringify(process, null, 4);
         return (
             <section>
-                <CopyToClipboard text={json} onCopy={this.copiedToClipboard}>
-                    <span className="copy-to-clipboard-container">
-                        <button data-for="copy-to-clipboard" data-tip>
-                            <i className={`far fa-clone ${copiedToClipBoardClassName}`} />
-                        </button>
-                        <ReactTooltip id="copy-to-clipboard" place="right" getContent={[() => tooltip, 500]} />
-                    </span>
-                </CopyToClipboard>
+                <EuiCopy textToCopy={json}>
+                    {copy => (
+                        <span className="copy-to-clipboard-container">
+                            <button data-for="copy-to-clipboard" onClick={copy}>
+                                <i className={`far fa-clone`} />
+                            </button>
+                        </span>
+                    )}
+                </EuiCopy>
                 <HighlightCode data={JSON.stringify(process, null, 2)} />
             </section>
         );
@@ -108,38 +96,46 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                 <ul>
                     {!raw && (
                         <li className="toggle-details">
-                            <CheckBox
+                            <EuiCheckbox
+                                id="show-details-toggle"
+                                aria-label="toggle-details"
                                 name="details"
-                                value={details}
-                                info={I18n.t(`process_state.details`)}
+                                checked={details}
+                                label={I18n.t(`process_state.details`)}
                                 onChange={() => this.setState({ details: !details })}
                             />
                         </li>
                     )}
                     {!raw && (
                         <li className="toggle-state-changes">
-                            <CheckBox
+                            <EuiCheckbox
+                                id="show-state-delta-toggle"
+                                aria-label="toggle-state-delta"
                                 name="state-changes"
-                                value={stateChanges}
-                                info={I18n.t(`process_state.stateChanges`)}
+                                checked={stateChanges}
+                                label={I18n.t(`process_state.stateChanges`)}
                                 onChange={() => this.setState({ stateChanges: !stateChanges })}
                             />
                         </li>
                     )}
                     <li>
-                        <CheckBox
+                        <EuiCheckbox
+                            id="show-raw-json-toggle"
+                            aria-label="toggle-raw-json"
                             name="raw"
-                            value={raw}
-                            info={I18n.t(`process_state.raw`)}
+                            checked={raw}
+                            label={I18n.t(`process_state.raw`)}
                             onChange={() => this.setState({ raw: !raw })}
                         />
                     </li>
                     {process.traceback && (
                         <li>
-                            <CheckBox
+                            <EuiCheckbox
+                                id="show-traceback-toggle"
+                                aria-label="toggle-traceback"
                                 name="traceback"
-                                value={traceback}
-                                info={I18n.t(`process_state.traceback`)}
+                                checked={traceback}
+                                label={I18n.t(`process_state.traceback`)}
                                 onChange={() => this.setState({ traceback: !traceback })}
                             />
                         </li>
@@ -179,7 +175,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
                             id="to-subscription"
                             href={`/subscriptions/${ps.subscription_id}`}
                             fill
-                            color="secondary"
+                            // color="secondary"
                             iconType="link"
                         >
                             {I18n.t(`${this.props.isProcess ? "process" : "task"}.subscription_link_txt`, {
@@ -204,7 +200,7 @@ class ProcessStateDetails extends React.PureComponent<IProps, IState> {
             return "";
         }
         return (
-            <EuiText size={"s"}>
+            <EuiText size="s">
                 <h4>To</h4>
                 <p>
                     {value.to.map((v: { email: String; name: String }) => (

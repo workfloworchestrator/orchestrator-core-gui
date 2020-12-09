@@ -157,7 +157,7 @@ export function SubscriptionsTable({ initialTableSettings, renderActions }: Subs
         const { subscription_id } = row.values;
         return (
             <div className={"expanded-row"}>
-                <SubscriptionDetail subscriptionId={subscription_id}></SubscriptionDetail>
+                <SubscriptionDetail subscriptionId={subscription_id} />
             </div>
         );
     }, []);

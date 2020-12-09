@@ -46,13 +46,13 @@
         font-size: 115%;
         margin-left: 5px;
         &.paused {
-            color: #e61e19;
+            color: vars.$danger;
         }
         &.pausing {
-            color: #fea501;
+            color: vars.$warning;
         }
         &.running {
-            color: #33cd2e;
+            color: vars.$success;
         }
     }
 }

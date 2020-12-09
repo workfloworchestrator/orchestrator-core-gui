@@ -419,7 +419,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
             const endpoint = imsEndpoints[0].find(
                 (e: IMSEndpoint) => e.serviceId === portSubscription!.sp.ims_circuit_id
             );
-            const label = `${endpoint?.node}__${endpoint?.port.replaceAll("/", "_")}`;
+            const label = `${endpoint?.node}__${endpoint?.port.replace(/\//g, "_")}`;
             const point = this._calculatePositionFor(radius, index, subscription.vc.saps.length);
             const node = this._makeNode(
                 sap.port_subscription_id,
@@ -471,7 +471,7 @@ export default class TopologyDiagram extends React.Component<IProps, IState> {
                         : portSubscription.sp.ims_circuit_id;
                     //console.log(`find service ${endpointId}`, portSubscription);
                     const endpoint = imsEndpoints[0].find((e: IMSEndpoint) => e.serviceId === endpointId);
-                    const portName = endpoint.port ? endpoint.port.replaceAll("/", "_") : "AGGSP";
+                    const portName = endpoint.port ? endpoint.port.replace(/\//g, "_") : "AGGSP";
 
                     let nodeName = `unknown_${index}`;
                     if (endpoint) {

@@ -82,8 +82,6 @@ table.nwa-table {
     th {
         text-align: left;
         vertical-align: middle;
-        border-left: solid vars.$light-primary 1px;
-        border-right: 1px solid rgba(0, 0, 0, 0.05);
     }
     th:first-child {
         border-radius: 10px 0 0 0;
@@ -245,6 +243,10 @@ table.nwa-table {
             text-align: right;
             font-size: 18px;
             position: relative;
+        }
+        td.subscription_id,
+        td.pid {
+            width: 80px;
         }
     }
     .info i.fa-caret-right {
