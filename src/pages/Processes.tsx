@@ -153,10 +153,6 @@ export default class Processes extends React.PureComponent<IProps, IState> {
                             The processes are split into 2 different tables. The upper one shows all active processes
                             and the lower one shows processes that are done/complete.
                         </p>
-                        <p>
-                            Note: if you need pagination for completed processes you can toggle it from the table
-                            settings, via the gear icon.
-                        </p>
                         <h2>Settings storage</h2>
                         <p>
                             The tables will store the setting for your filters and columns in the local storage of your

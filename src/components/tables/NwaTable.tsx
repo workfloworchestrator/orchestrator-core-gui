@@ -333,7 +333,7 @@ export function NwaTable<T extends object>({
                 <EuiFlexItem grow={false} component="span">
                     <Preferences<T> {...preferencesProps} />
                 </EuiFlexItem>
-                {!minimized && (
+                {!minimized && !showSettings && (
                     <EuiFlexItem grow={false} component="span">
                         <MiniPaginator {...paginatorProps} />
                     </EuiFlexItem>

@@ -40,7 +40,7 @@ export default class Explain extends React.PureComponent<IProps> {
 
         if (isVisible) {
             flyout = (
-                <EuiFlyout onClose={() => close()} ownFocus size="s">
+                <EuiFlyout onClose={() => close()} ownFocus size="l">
                     <EuiFlyoutHeader hasBorder>
                         <EuiTitle size="m">
                             <h2 id="flyoutTitle">{title}</h2>
