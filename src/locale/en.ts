@@ -242,6 +242,8 @@ I18n.translations.en = {
             internetpinnen_prefix_subscriptions: "Internet pinnen prefix",
             internetpinnen_prefix_subscriptions_info:
                 "Please select an Internet Pinnen prefix from the IPv4 subnet 145.98.0.0/16. Leave blank to disable.",
+            ip_peer_port_name: "Peer Port Name",
+            ip_peer_port_type: "Peer Port Type",
             ip_prefix: "Select a free subnet",
             ip_prefix_info: "In the next step you can allocate any prefix under the subnet you select here",
             ip_prefix_subscriptions: "IP Prefix subscriptions",
@@ -249,6 +251,8 @@ I18n.translations.en = {
             ip_static_service_port: "IP Service Port",
             ip_static_service_port_fields: { subscription_id: "Service Port", vlan: "Port Vlan" },
             ip_static_service_port_info: "The Service Port used at customer side for IP service using static routing",
+            ipv4_address: "IPv4 address",
+            ipv6_address: "IPv6 address",
             ipv4_prefixlen: "IPv4 Prefix length",
             ipv4_prefixlen_info: "Set to /30 only if customer equipment does not support /31.",
             isis_metric: "IS-IS metric",
@@ -333,6 +337,7 @@ I18n.translations.en = {
             service_speed_info:
                 "Speed in MBit/sec. Note that the speed of the service cannot be higher than that of the lowest speed of all connected ports.",
             speed_policer: "Speed policer",
+            subnet_mask: "Subnet mask",
             subscription_id: "Subscription",
             subscription_id_info: "The subscription for this action",
             subscription_summary: "Redundant LP Subscription",
@@ -350,6 +355,7 @@ I18n.translations.en = {
             vlan_retagging:
                 "Enable VLAN retagging. When selected only one VLAN ID per SAP is allowed. Modify this checkbox only during a maintenance window for active L2VPN services!!",
             select_task: "Select a task to start",
+            way_to_select_ip_address: "Way to select IP address",
             zone: "Zone",
             zone_info: "DNS Zone to check",
         },
