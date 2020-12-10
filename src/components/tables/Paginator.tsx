@@ -80,8 +80,6 @@ function Paginator({
         </EuiContextMenuItem>
     ));
 
-    console.log(pageIndex);
-
     return (
         <EuiFlexGroup className="paginator">
             <EuiFlexItem grow={10} className="paginator-center">

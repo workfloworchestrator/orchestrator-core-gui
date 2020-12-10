@@ -133,7 +133,6 @@ function Preferences<T extends object>({
                     {allColumns
                         .filter(column => !excludeInFilter.includes(column.id))
                         .map(column => {
-                            console.log("hallo");
                             return <EuiCheckbox id={column.id} {...column.getToggleHiddenProps()} label={column.id} />;
                         })}
                 </div>
